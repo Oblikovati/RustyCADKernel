@@ -44,19 +44,19 @@ The toolkit test inventory maps these suites (430 declarations):
 | BRepGraph_RefId_Test.cxx | brep_graph_ref_id | 19 | pass | pass |
 | BRepGraph_VersionStamp_Test.cxx | brep_graph_version_stamp | 22 | pass | pass |
 | BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for BRepGProp, BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
-| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepGraph_Compact (wave 2c) |
+| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh) |
 | BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepBuilderAPI_Copy (TKTopAlgo) |
 | BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for BRepGraph_Validate (wave 2c), TKPrim sphere, cylinder, cone, torus and wedge, BRepBuilderAPI_MakeFace |
-| BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c), BRepGProp, TKPrim cylinder and sphere, BRepBuilderAPI_MakeFace and Transform |
-| BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c), TKPrim sphere, BRepBuilderAPI_Copy |
+| BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for BRepGraph_Validate (area C2), BRepGProp, TKPrim cylinder and sphere, BRepBuilderAPI_MakeFace and Transform |
+| BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for BRepGraph_Validate (area C2), TKPrim sphere, BRepBuilderAPI_Copy |
 | BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for BRepGraph_Validate (wave 2c) |
 | BRepGraph_LayerIterator_Test.cxx | brep_graph_layer_iterator | 4 | pass | pass |
 | BRepGraph_CacheMesh_Test.cxx | brep_graph_cache_mesh_suite | 22 | pass | pass |
 | BRepGraph_Polygon_Test.cxx | not mapped (phase 2) | 7 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepPrimAPI_MakeCylinder (TKPrim) |
 | BRepGraph_Geometry_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
-| BRepGraph_Lock_Test.cxx | not mapped (phase 2) | 19 | not run | waits for BRepGraph_Compact (wave 2c) |
+| BRepGraph_Lock_Test.cxx | brep_graph_lock_suite | 19 | pass | pass |
 | BRepGraph_LayerHistory_Test.cxx | brep_graph_layer_history_suite | 39 | pass | pass |
-| BRepGraph_LayerTopoSupplement_Test.cxx | not mapped (phase 2) | 22 | not run | waits for BRepGraph_Copy (wave 2c) |
+| BRepGraph_LayerTopoSupplement_Test.cxx | brep_graph_layer_topo_supplement | 22 | pass | pass |
 | BRepGraph_CacheRegistry_Test.cxx | not mapped (phase 2) | 14 | not run | waits for BRepGraph_Transform (wave 2c) |
 | BRepGraph_MutGuard_Test.cxx | brep_graph_mut_guard | 11 | pass | pass |
 | BRepGraph_MutationGen_Test.cxx | brep_graph_mutation_gen | 14 | pass | pass |
@@ -66,16 +66,16 @@ The toolkit test inventory maps these suites (430 declarations):
 | BRepGraph_Assembly_Test.cxx | not mapped (phase 2) | 45 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
 | BRepGraph_EdgeCases_Test.cxx | not mapped (phase 2) | 12 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
 | BRepGraph_Convenience_Test.cxx | not mapped (phase 2) | 17 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim) |
-| BRepGraph_PermissionUpdate_Test.cxx | not mapped (phase 2) | 15 | not run | waits for BRepGraph_Copy and Transform (wave 2c) |
+| BRepGraph_PermissionUpdate_Test.cxx | not mapped (phase 2) | 15 | not run | waits for BRepGraph_Transform (area C2) |
 | BRepGraph_ReplaceVertex_Test.cxx | not mapped (phase 2) | 6 | not run | waits for BRepGraph_Validate (wave 2c) |
 | BRepGraph_Reverse_Test.cxx | not mapped (phase 2) | 16 | not run | waits for BRepGraph_Validate (wave 2c) |
 | BRepGraph_Sharing_Test.cxx | not mapped (phase 2) | 17 | not run | waits for BRepGraph_Validate (wave 2c) |
-| BRepGraph_Compact_Test.cxx | not mapped (phase 2) | 26 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c), BRepBuilderAPI_Copy, BRepCheck_Analyzer, BRepAlgoAPI_Cut (TKBO), TKPrim cylinder |
-| BRepGraph_Copy_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGraph_Copy (wave 2c), BRepGProp, TKPrim cylinder, BRepBuilderAPI_Copy, BRepAlgoAPI_Fuse (TKBO) |
-| BRepGraph_Deduplicate_Test.cxx | not mapped (phase 2) | 82 | not run | waits for BRepGraph_Deduplicate, Compact and Validate (wave 2c), BRepBuilderAPI_Copy and MakeFace, BRepCheck_Analyzer, TKPrim cylinder, sphere and cone |
-| BRepGraph_Transform_Test.cxx | not mapped (phase 2) | 19 | not run | waits for BRepGraph_Transform and Copy (wave 2c), BRepGProp |
-| BRepGraph_Validate_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGraph_Validate and Deduplicate (wave 2c), BRepBuilderAPI_Copy |
-| BRepGraph_SparseModel_Test.cxx | not mapped (phase 2) | 28 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c) |
+| BRepGraph_Compact_Test.cxx | not mapped (phase 2) | 26 | not run | waits for BRepGraph_Validate (area C2), BRepBuilderAPI_Copy, BRepCheck_Analyzer, BRepAlgoAPI_Cut (TKBO), TKPrim cylinder |
+| BRepGraph_Copy_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGProp, TKPrim cylinder and sphere, BRepBuilderAPI_Copy, BRepAlgoAPI_Fuse (TKBO) |
+| BRepGraph_Deduplicate_Test.cxx | not mapped (phase 2) | 82 | not run | waits for BRepGraph_Validate (area C2), BRepBuilderAPI_Copy and MakeFace, BRepCheck_Analyzer, TKPrim cylinder, sphere and cone |
+| BRepGraph_Transform_Test.cxx | not mapped (phase 2) | 19 | not run | waits for BRepGraph_Transform (area C2), BRepGProp |
+| BRepGraph_Validate_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGraph_Validate (area C2), BRepBuilderAPI_Copy |
+| BRepGraph_SparseModel_Test.cxx | not mapped (phase 2) | 28 | not run | waits for BRepGraph_Validate (area C2) |
 | BRepGraph_ScenarioMatrix_Test.cxx | not mapped (phase 2) | 18 | not run | waits for BRepGraph_Validate (wave 2c), BRepGProp, TKPrim cylinder and sphere |
 | BRepGraph_SeamRedesign_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepGraph_Validate (wave 2c), TKPrim cylinder and sphere |
 | BRepGraph_Fuzz_Test.cxx | not mapped (phase 2) | 2 | not run | waits for BRepGraph_Validate (wave 2c), BRepPrimAPI_MakeCylinder (TKPrim); its two TEST_P declarations are instantiated per seed |
@@ -209,6 +209,29 @@ with OCCT byte for byte. `tools/audit_api_rows.py` gives these classes 176 new r
 destructors map to the `Drop` impls, the guard move constructor and assignment to
 `move_from` and `move_assign`); the BRepGraph missing count falls from 199 to 23, the
 public members of Copy, Compact, Deduplicate, Transform and Validate, with 0 stale rows.
+
+Phase 2, wave 2c, area C1 ports the copy and rebuild algorithms whole
+(docs/topology-design.md section 11.12): BRepGraph_Copy (the identity fast path into an
+empty graph, the appended copy into a non-empty one, node copies and self copies under
+the geometry, mesh and cache policies), BRepGraph_Compact (the dense rebuild of the
+active definitions with the old generations and UIDs, root-product reachability, the
+validation gate, the in-place installation with the registry callbacks, the layer
+migration, the shape bindings and the `Compact:Remap` history batch) and
+BRepGraph_Deduplicate (the geometry rewrites and the vertex, wire-order, edge, wire and
+face merges with their history records). Compact's validation step calls
+BRepGraph_Validate, merged from area C2's commit 1626b60. Two upstream suites now build
+and are translated 1:1 (Lock, LayerTopoSupplement: 41 declarations, native and Rust
+pass); the Lock suite maps to `brep_graph_lock_suite`, since the wave-2b behaviour file
+owns `brep_graph_lock`. The Copy suite waits for TKPrim, BRepGProp, BRepBuilderAPI_Copy
+and BRepAlgoAPI; the Compact and Deduplicate suites also call BRepGraph_Validate, and
+the other suites that waited for these algorithms now wait for Validate or Transform
+(area C2) only, as the table lists. `crates/tkbrep/tests/brep_graph_copy_behavior.rs`,
+`brep_graph_compact_behavior.rs` and `brep_graph_dedup_behavior.rs` cover what those
+suites would check on editor-built and box graphs, and the `br_balgo` requests compare
+every copy, compaction and deduplication with OCCT byte for byte, the history records
+and remapped ids included. `tools/audit_api_rows.py` gives the three classes 10 rows;
+the BRepGraph missing count falls from 23 to 13, the public members of Transform and
+Validate (area C2), with 0 stale rows.
 
 The BRepTools and BRepAdaptor suites are translated 1:1 in
 `crates/tkbrep/tests/brep_tools_reshape.rs`, `brep_tools_trsf_modification.rs`,
@@ -552,6 +575,24 @@ supplement, the caches, the mesh cache and view and every node's shapes. A sette
 target id is out of range, and a child rebound out of range, are not probed: the release
 build writes or reads out of bounds there.
 
+The BRepGraph algorithm requests (`br_balgo`; 32 requests in
+`tools/tkbrep_brepgraph_algo_corpus.py`, probes
+`tools/oracle/tkbrep_probe_brepgraph_algo.cxx` and
+`crates/tkbrep/examples/br_probe/brep_graph_algo.rs`) run the `br_bedit` actions on one
+of two graphs and copy between them: the identity copy of the meshed solid scene under
+every geometry and mesh policy (with a logging layer, history, a lock owner, cache
+meshes and a removed edge), the self and empty-source copies, node copies of every kind
+into an empty and then a non-empty target followed by the full appended copy, self copies
+of a face, solid, compound, product, edge and vertex, compactions after removals (history
+on and off, both cache policies, a vertex added after the compaction, root products, a
+removed subgraph, nothing removed, an empty graph) and deduplications of two triangles
+built from equal but distinct geometry (analyzed and applied, with and without merges,
+other tolerances, the removed-edge raise, a compaction afterwards) and of the ingested
+scene. The probes print both graphs whole: every definition with its generations and
+UID, every reference, the node and reference UIDs and stamps, the layer registry with the
+logging layers' events, the history records with their mappings in map order, the
+supplement, the caches, the mesh cache and view and every node's shapes.
+
 The corpus has 667 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
 caches 22, the BRepGraph navigation 13, the BRepGraph lock and caches 14 and the BRepGraph
@@ -787,6 +828,29 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   promoted triangulation notifies the face, so the coedge polygons on that face's
   triangulation turn stale and are not promoted; a refused write stops the promotion.
 
+- `BRepGraph_Copy` copies a removed node as a node that is then marked removed, so the
+  editor refuses a parent over it: a face over a removed wire, or a compsolid over a
+  removed solid, is not created (its copy is the invalid id). A wire whose stored coedge
+  order is not connected is refused the same way, so its face is copied without it.
+  `CopyNode` of a coedge copies nothing (coedges are copied with their wire). The
+  occurrences and products it appends get no UID, as natively.
+- `BRepGraph_Compact` rebuilds the vertex references' orientations and the wire,
+  solid and compound references through guards, so the rebuilt references carry the
+  generations of those writes; the definitions take the old generations and UIDs, the
+  references and coedges keep the fresh UIDs, and the UID counters restart after the
+  largest surviving UID. A free coedge is matched to the first new coedge with its edge
+  and face whose id is not bound as an *old* key of the coedge map (the native check). A
+  rebuild that fails the mutation boundary or the validation keeps the graph as it was.
+- `BRepGraph_Deduplicate` takes each edge's guard before it checks the edge is removed
+  when it redirects merged vertices, so a graph with a removed edge and a vertex merge
+  raises Standard_ProgramError (the deferred scope still ends). Its edge and face groups
+  hash the curve and surface handle addresses (the process-dependent `std::hash` of a
+  handle), and it sorts the vertices with libstdc++'s `std::sort`, whose tie order it
+  follows. `NbNullifiedSurfaces`, `NbNullifiedCurves`, `NbRemovedSurfaces` and
+  `NbRemovedCurves` are never written.
+- The three algorithms restore the history's enabled state with plain statements on
+  their return paths, so after a raise the history keeps the run's `HistoryMode`.
+
 ## Deliberate Rust deviations
 
 - A null TShape dereference (null shape flags, `ShapeType`, a null explored shape in
@@ -914,3 +978,17 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   constructor for the aliasing case, and `items()` returns `None` for the identity
   mapping (a null map natively); an explicit mapping without a map maps nothing
   (natively a null dereference).
+- `BRepGraph_Copy`, `BRepGraph_Compact` and `BRepGraph_Deduplicate` are modules of free
+  functions returning `Result` (docs/topology-design.md section 11.12). A self copy (the
+  same graph as source and target) cannot be passed as a `&BRepGraph` and a
+  `&mut BRepGraph`, so it is `copy::perform_self` (the identity no-op) and
+  `copy::copy_node_in_place`; the copy reads each source record before it writes the
+  result, which natively sees the same values through references that stay valid. A
+  face or compsolid the editor refused (the invalid id) pairs no references (natively
+  its relations are read out of range).
+- The compaction keeps the graph's registries in place and swaps its storage with the
+  rebuilt graph's instead of moving the registries out and back; the callbacks of the
+  native moves are replayed (the fresh caches adopted under `CopyFresh`, the saved layers
+  re-attached, the kept caches cleared under `Drop`), and the rebuilt graph's own layers
+  and caches are detached when it is dropped. The part-occurrence lookup skips an
+  occurrence reference whose occurrence id is out of range (natively an unchecked read).
