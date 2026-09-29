@@ -457,3 +457,38 @@ constructor of section 11.6:
 Destructors, the `Allocator()` accessors (Rust vectors own their memory) and the
 `std::hash` call operators that are the same function as a ported `HashValue` or
 `HashCode` member get `excluded` rows with the reason.
+
+### 11.9 Iterators, explorers, Tool and CopyRemap
+
+The iterators and explorers borrow the graph (`&'g BRepGraph`) and keep the native
+`More`/`Next`/`Current` protocol with the native skip and resume rules; each also
+implements `Iterator` for the native range form. The templates over definition,
+reference and trait types become generics over the kind tags of section 11.1:
+`BRepGraph_Iterator<FaceDef, Full>` is `iterator::DefIterator<FaceTag, FULL>`, whose
+`NodeTraits` is one blanket trait over `NodeTag` (the reverse iterators' `DefTraits` is
+the same trait), and `RefIterator<FaceRef>` is `refs_iterator::RefIterator<FaceRefTag>`.
+The defs and refs namespaces declare the same parent traits twice natively; the port
+declares them once (`parent_traits`, a `ParentTraits` trait with one struct per
+relation) and shares the skip loop in a private cursor (`parent_cursor`), so
+`DefsOfParent` and `RefsOfParent` differ only in what they return. The kind containment
+table the two explorers repeat natively is written once (`explorer_kinds`).
+
+The explorers keep the native stack layout (frames above the top stay allocated, the
+top index is an `i32`, a push past the node count is refused) so the path queries and
+the cycle guard answer as natively. Composing locations can raise natively, and the
+related iterator reaches `Tool::Face::OuterWire`, whose p-curve adaptors can raise, so
+their constructors and `next` return `Result`. The constructor overloads are named
+constructors taking `impl Into<NodeId>` where the native code has `ProductId` and
+typed-id overloads.
+
+`BRepGraph_Tool` is the module `tool` with one submodule per nested class (`vertex`,
+`edge`, `co_edge`, `face`, `wire`, `shell`); the phase-1 reads keep their paths. The
+derived flags go through `tool::derived_state`, the single place the caches area routes
+through the memoising `BRepGraph_CacheDerivedState` service.
+
+`BRepGraph_CopyRemap` owns the one mutable borrow of its target graph (the native
+context hands out the mutable target from a `const` reference): `new` and
+`with_mapping` take distinct graphs, `in_place` takes the one graph a compaction
+migrates into, and `target_graph` takes `&mut self`, so the layer and cache copy
+callbacks of the later waves receive `&mut CopyRemap`. Its item map is the TKernel
+`FlatDataMap<ItemId, ItemId>` hashed with `std::hash<BRepGraph_ItemId>`.
