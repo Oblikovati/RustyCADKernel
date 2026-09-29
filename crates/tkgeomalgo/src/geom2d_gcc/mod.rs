@@ -23,7 +23,7 @@
 //! circles, the geometric `*Geo` class (offset curves intersected with Geom2dInt)
 //! for a curve and a fixed radius or centre locus, and the iterative `*Iter` class
 //! (a tkmath root search from given parameters) otherwise. The `*Iter` and `*Geo`
-//! classes are concrete at the pinned commit (docs/geomalgo-design.md, section 6).
+//! classes are concrete at the pinned commit (docs/geomalgo-design.md, section 9).
 //! Every native constructor overload is a named constructor returning `Result`, as
 //! in GccAna, and output references become returned tuples.
 mod circ2d_2tan_on;
@@ -212,7 +212,7 @@ pub(crate) fn point_of(point: &Handle<dyn Geom2dPoint>) -> Result<Point2, Failur
 
 // The first failure of a curve evaluation inside a tkmath callback, which reports
 // only `false`: the solver that ran the function returns it afterwards, where the
-// native exception would have left it (docs/geomalgo-design.md, section 6).
+// native exception would have left it (docs/geomalgo-design.md, section 9).
 #[derive(Default)]
 pub(crate) struct EvalFailure {
     failure: Option<Failure>,

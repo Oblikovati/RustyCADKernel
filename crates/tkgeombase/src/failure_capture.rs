@@ -25,7 +25,7 @@ use rustycad_tkernel::standard::Failure;
 /// The first failure raised by the callbacks of one solver run;
 /// `let mut capture = FailureCapture::default();`.
 #[derive(Default)]
-pub(crate) struct FailureCapture {
+pub struct FailureCapture {
     failure: Option<Failure>,
 }
 

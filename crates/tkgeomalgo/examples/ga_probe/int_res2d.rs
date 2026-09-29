@@ -76,7 +76,7 @@ fn read_trans(r: &mut Reader<'_>) -> Transition {
         ),
     }
 }
-fn read_ipoint(r: &mut Reader<'_>) -> IntersectionPoint {
+pub fn read_ipoint(r: &mut Reader<'_>) -> IntersectionPoint {
     let (u1, u2) = (r.real(), r.real());
     let p: Point2 = r.pnt2d();
     let (t1, t2) = (read_trans(r), read_trans(r));

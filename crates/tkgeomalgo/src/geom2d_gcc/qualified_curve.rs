@@ -43,7 +43,7 @@ pub struct QualifiedCurve {
 
 /// `Geom2dGcc_QCurve`: the qualified curve of the iterative and geometric solvers.
 /// Its members and bodies are those of `Geom2dGcc_QualifiedCurve`, so it is the
-/// same type (docs/geomalgo-design.md, section 6).
+/// same type (docs/geomalgo-design.md, section 9).
 pub type QCurve = QualifiedCurve;
 
 impl QualifiedCurve {

@@ -2,10 +2,12 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
+use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, plate};
 use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
+use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -74,6 +76,51 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g2int_polypoly", ginter::polypoly_case),
     ("g2int_ginter", ginter::ginter_case),
     ("g2api_intercc", ginter::intercc_case),
+    // IntSurf (ga_probe/int_surf.rs)
+    ("intsurf_quadric_point", int_surf::quadric_point_case),
+    ("intsurf_quadric_uv", int_surf::quadric_uv_case),
+    ("intsurf_transition", int_surf::transition_case),
+    ("intsurf_same", int_surf::same_case),
+    // Law (ga_probe/law.rs)
+    ("law_bspline", law::bspline_case),
+    ("law_edit", law::edit_case),
+    ("law_function", law::function_case),
+    ("law_mix", law::mix_case),
+    ("law_interpolate", law::interpolate_case),
+    // Plate (ga_probe/plate.rs)
+    ("plate_solve", plate::solve_case),
+    ("plate_constraint", plate::constraint_case),
+    // LocalAnalysis (ga_probe/local_analysis.rs)
+    ("la_curve", local_analysis::curve_case),
+    ("la_surface", local_analysis::surface_case),
+    // FairCurve (ga_probe/fair_curve.rs)
+    ("fc_law", fair_curve::law_case),
+    ("fc_density", fair_curve::density_case),
+    ("fc_energy", fair_curve::energy_case),
+    ("fc_batten", fair_curve::batten_case),
+    // IntImp (ga_probe/int_imp.rs)
+    ("ii_choix", int_imp::choix_case),
+    ("ii_tangence", int_imp::tangence_case),
+    ("ii_zerpar", int_imp::zerpar_case),
+    ("ii_int2s", int_imp::int2s_case),
+    ("ii_zerimp", int_imp::zerimp_case),
+    ("ii_intcs", int_imp::intcs_case),
+    // AppBlend (ga_probe/app_blend.rs)
+    ("ab_appsurf", app_blend::appsurf_case),
+    ("ab_context", app_blend::context_case),
+    // HatchGen (ga_probe/hatch_gen.rs)
+    ("hgen_element", hatch_gen::element_case),
+    ("hgen_hatching", hatch_gen::hatching_case),
+    ("hgen_domain", hatch_gen::domain_case),
+    // Geom2dHatch (ga_probe/geom2d_hatch.rs, ga_probe/geom2d_hatcher.rs)
+    ("g2hatch_local", geom2d_hatch::local_case),
+    ("g2hatch_perform", geom2d_hatch::perform_case),
+    ("g2hatch_intersect", geom2d_hatch::intersect_case),
+    ("g2hatch_elements", geom2d_hatch::elements_case),
+    ("g2hatch_classify", geom2d_hatch::classify_case),
+    ("g2hatch_fclass", geom2d_hatch::fclass_case),
+    ("g2hatch_hatcher", geom2d_hatcher::hatcher_case),
+    ("g2hatch_hatching", geom2d_hatcher::hatching_case),
 ];
 
 fn main() {

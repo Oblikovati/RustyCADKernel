@@ -32,7 +32,7 @@ pub mod extrema;
 pub mod extrema_pc;
 pub mod extrema_pc2d;
 pub mod extrema_pc_core;
-mod failure_capture;
+pub mod failure_capture;
 pub mod fem_tool;
 pub mod gc;
 pub mod gce;

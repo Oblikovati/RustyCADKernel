@@ -22,7 +22,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (36 declarations):
+The toolkit test inventory maps these suites (48 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -34,6 +34,11 @@ The toolkit test inventory maps these suites (36 declarations):
 | Geom2dAPI_Interpolate_Test.cxx | geom2dapi_interpolate | 1 | pass | pass |
 | Geom2dAPI_PointsToBSpline_Test.cxx | geom2dapi_points_to_bspline | 2 | pass | pass |
 | Geom2dConvert_BSplineCurveToBezierCurve_Test.cxx | geom2dconvert_bspline_curve_to_bezier_curve | 1 | pass | pass |
+| IntSurf_LineOn2S_Test.cxx | int_surf_line_on2s | 3 | pass | pass |
+| IntSurf_Quadric_Test.cxx | int_surf_quadric | 1 | pass | pass |
+| Plate_Plate_Test.cxx | plate_plate | 2 | pass | pass |
+| Geom2dHatch_Elements_Test.cxx | geom2dhatch_elements | 3 | pass | pass |
+| Geom2dHatch_Intersector_Test.cxx | geom2dhatch_intersector | 3 | pass | pass |
 
 ## API mapping
 
@@ -58,6 +63,12 @@ The toolkit test inventory maps these suites (36 declarations):
   `TheSame`/point/parameter arrays of one argument. The consultation members keep the
   checks each native class writes (some skip the `WellDone` test, `Circ2d2TanOn`'s
   `ThisSolution` tests nothing), and output references become returned tuples.
+
+- HatchGen, TopClass, Geom2dHatch: see the section below; overloads take distinct names
+  (`Domain::bounded`/`semi_infinite`, `Hatcher::trim`/`trim_curve`/`trim_hatching`,
+  `compute_domains`/`compute_domains_of`, `add_element`/`add_element_curve`), and the protected
+  `Element(IndE)` and `Hatching(IndH)` of the hatcher are public as `element_mut` and
+  `hatching_mut`.
 
 ## Verification
 
@@ -190,6 +201,75 @@ Preserved native behaviour and deliberate differences:
   reads out of bounds if the current distance exceeds sqrt(RealLast); the port reads the
   first sample.
 
+## HatchGen, TopClass and Geom2dHatch
+
+HatchGen (`hatch_gen`), TopClass (`topclass`) and Geom2dHatch (`geom2d_hatch`) are ported in
+full: `tools/audit_api_rows.py` reports 0 missing and 0 stale rows for each (TopClass has no
+header; its six template functions have rows on the `.pxx` files). The abstract
+`HatchGen_IntersectionPoint` is embedded in `PointOnElement` and `PointOnHatching` and reached
+through `Deref`; its pure virtual `Dump` is the trait `IntersectionPointDump`. The TopClass
+templates are the generics `Classifier2d` and `FaceClassifier` (docs/geomalgo-design.md
+section 6); `Geom2dHatch_FClass2dOfClassifier` and `Geom2dHatch_Classifier` are their aliases.
+Curves are `Geom2dAdaptor_Curve` values that the elements and hatchings own; the Rust
+constructors take them by value, and `Elements::current_edge` returns a shallow copy (the
+native `CurrentEdge` assigns a copy). Setters that share the getter's name take a `set_`
+prefix, output references become returned tuples, and the `Dump` members write the native
+`std::cout` text to a `fmt::Write`. The GTest suites Geom2dHatch_Elements_Test and
+Geom2dHatch_Intersector_Test are translated 1:1.
+
+Preserved native behaviour:
+
+- `HatchGen_PointOnElement(IntRes2d_IntersectionPoint)` reads `IsOpposite` of the element's
+  transition when the hatching's transition is a TOUCH, which raises Standard_DomainError when
+  the element's transition is not a TOUCH; the constructor returns `Result`.
+- `HatchGen_Domain::SetPoints()`, `SetFirstPoint()` and `SetSecondPoint()` without argument clear
+  only the flags; the stored points stay (they are not observable through the accessors).
+- `HatchGen_PointOnHatching::AddPoint` drops a point on element that is identical to a stored
+  one (same fields, parameters within the confusion).
+- `Geom2dHatch_Hatcher::Trim(IndH, IndE)` handles an intersection segment only when it has both
+  ends: the treatments of the first and of the last end are inside the test of both ends, so
+  a half-bounded segment adds no point. It writes " Intersector -> Done = False " on std::cout
+  when the intersection is not done; the port does not print (the probe discards std::cout).
+- `RemElement` scans copies of the hatching points: a point is removed when all its points on
+  element belong to the removed element (or when it has none), but a point kept keeps its
+  points on that element; the domains are cleared when such a point was seen.
+- `GlobalTransition` computes the element parameter from the point position, then overwrites
+  it with the point's parameter (upstream finding #25, kept because removing it caused blend
+  regressions).
+- `ComputeDomains`: with two points, OUT-OUT becomes OUT-IN at the first point and IN-OUT at
+  the second (lbr, 1997); an IN-IN point without an opened segment and without a saved point
+  sets IncoherentParity (or marks the hatching done when a domain exists) and goes on to the
+  next point, skipping the domain and last-point steps (its `return` is commented out); a
+  hatching without intersection point is one infinite domain when its classification point
+  (at the last parameter, else the first, else 0) is IN.
+- `Geom2dHatch_Hatching::TrimFailed(false)` and `ClrPoints` keep the status; `TrimFailed(true)`
+  sets TrimFailure.
+- The copy constructor of `Geom2dHatch_Elements` copies nothing: the copy is empty, with the
+  probing at element 0 and fraction 0 (`Elements::copy_of`). Its `OtherSegment` probes each
+  FORWARD or REVERSED element at fractions 0.123 + k 0.2111 below 0.8 and rejects a probe whose
+  segment is nearly tangent to the element unless it is the element's last probe.
+- `Geom2dHatch_Hatcher::IsDone()` (without index) is declared but never defined natively; it
+  has an excluded row, as the inline destructor of `Geom2dHatch_Elements` (it only clears).
+- `Geom2dHatch_Intersector::LocalGeometry` evaluates the adaptor's Geom2d curve (the basis of
+  a trimmed curve) whatever the adaptor's bounds; an undefined tangent gives (1, 0) and a zero
+  curvature. `Perform(L, P, Tol, E)` intersects on a fresh Geom2dInt_GInter with the
+  parametric tolerances and copies its results (SetValues); `Intersect` uses the stored
+  tolerances. The copy constructor keeps the results without the done and reversed flags, the
+  assignment (`Hatcher::Intersector(I)`) copies both.
+
+Deliberate Rust deviations:
+
+- The native default constructors of `Geom2dHatch_Element` (orientation) and
+  `Geom2dHatch_Classifier` (edge position) leave a member uninitialized; the port starts them at
+  FORWARD and `IntRes2d_Head`. The classifier probe primes the classifier on a square first, so
+  that the position it reads is defined natively.
+- `Geom2dHatch_Elements` keeps its edge iterator as a rank in the map's bucket order, since a
+  Rust iterator cannot borrow the map it lives beside; a map changed during an edge iteration
+  invalidates the native iterator.
+- The implicit copy and assignment of Geom2dInt_GInter (which the hatcher uses) copy the inner
+  intersectors with their copy constructor, so their done and reversed flags are not copied;
+  every Perform sets those flags before reading them.
+
 ## Numeric comparison policy
 
 `tools/verify_tkgeomalgo_numeric.py` uses the shared driver `tools/toolkit_numeric.py`.
@@ -203,9 +283,11 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 10082 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 13181 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2670, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
-Geom2dAPI 962, and the curve-curve classes 1077.
+Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
+LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, and Geom2dHatch
+with TopClass 1116.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -295,6 +377,91 @@ conic-curve classes (whole, inner and unbounded domains, the reversed flag);
 four Geom2dAPI classes, with out-of-range indices, reversed ranges, periodic and
 non-periodic interpolations with parameters and tangents, and every PointsToBSpline Init.
 
+IntSurf: 334 requests. `intsurf_quadric_point` and `intsurf_quadric_uv` evaluate every
+`IntSurf_Quadric` member and `IntSurf_QuadricTool::Tolerance` for the five quadric
+kinds (including a cylinder and a cone of radius 0) and the undefined quadric, on
+direct, indirect and oblique frames, at the frame origin, on the axis, on the torus
+core circle and at seeded random points; `intsurf_transition` drives
+`IntSurf::MakeTransition` through its four branches and `intsurf_same` compares
+`IntSurf_PntOn2S::IsSame` with and without the 2d tolerance.
+
+Law: 266 requests. `law_bspline` builds scalar B-spline laws (clamped, rational,
+periodic, piecewise Bezier, uniform, C0, quintic and invalid data) and compares every
+query and evaluator at the knots, inside, at the ends and outside the range;
+`law_edit` applies each editing member (degree elevation, knot insertion and removal,
+reversal, segmentation, periodicity, origin, weights, knots, poles,
+MovePointAndTangent, Copy) to five laws; `law_function` drives the constant, linear,
+S, B-spline, interpolated and composite laws through every `Law_Function` member for
+every `GeomAbs_Shape`; `law_mix` covers `MixBnd`, `MixTgt`, `Scale`, `ScaleCub`,
+`Reparametrize` (on a circle adaptor) and `Law_BSplineKnotSplitting`;
+`law_interpolate` covers `Law_Interpolate` with and without parameters and tangents.
+
+Plate: 106 requests. `plate_solve` loads pinpoint (values and derivatives up to order
+2), linear XYZ and linear scalar constraints, solves orders 1 to 10 (the three `SolveTI`
+systems and the refused orders, anisotropies, empty and degenerate boxes) and compares
+`IsDone`, `Continuity`, `UVBox`, `Evaluate`, four `EvaluateDerivative`s, `CoefPol` and
+`UVConstraints` for the plate, its copy and an assigned plate. `plate_constraint`
+builds the line, plane, global translation, sampled curve, GtoC (G1/G2/G3, with and
+without projection) and FreeGtoC (G1/G2/G3, incremental loads, orientations and the
+degenerate normals) constraints, compares their content and the plate that loads them.
+
+LocalAnalysis: 406 requests. `la_curve` compares every query of
+`LocalAnalysis_CurveContinuity` and its `Dump` text for the seven `GeomAbs_Shape` orders
+and two tolerance sets on joined and broken pairs of lines, circles and Bezier curves
+(tangent and reversed joins, curvature jumps, null first and second derivatives,
+undefined tangents, straight pieces); `la_surface` does the same for
+`LocalAnalysis_SurfaceContinuity` at points, on two 2d lines and through
+`ComputeAnalysis`, on planes, cylinders, spheres and tori (tangent and broken joins,
+poles, umbilics).
+
+FairCurve: 178 requests. `fc_law` evaluates `FairCurve_BattenLaw` before and after its
+setters, with heights that turn negative. `fc_density` compares the tension, sagging
+and jerk densities with their gradients and packed Hessians (derivative orders 0 to 2,
+with and without the free-sliding value, uniform tension, a vanishing law) on a Bezier
+and a two-span B-spline of degree 9. `fc_energy` compares `Variable`, `Value`,
+`Values` and the Hessian of `FairCurve_EnergyOfBatten` and `FairCurve_EnergyOfMVC` for
+every pair of end-constraint orders, at the initial and at perturbed variables (the
+clamped and the infinite sliding), and minimizes them with `FairCurve_Newton`.
+`fc_batten` computes batten and minimal-variation curves (end angles that need several
+homotopy steps, free and imposed slidings, end curvatures, physical ratios, null
+heights, invalid heights and ratios, confused points), moves their end points and
+computes again, comparing every getter, the curve and the `Dump` text.
+
+IntImp: 146 requests. `ii_choix` covers `ChoixRef` inside and outside 0..3;
+`ii_tangence` drives `IntImp_ComputeTangence` through its early exits (null
+derivatives and normals), tangent patches and the sorted isoparametrics, with seeded
+random derivatives. The templates run through their native TKGeomAlgo instances and
+the Rust generics: `ii_zerpar` (`IntWalk_TheFunctionOfTheInt2S`), `ii_int2s`
+(`IntWalk_TheInt2S` from a start point and on each isoparametric, inside and beyond
+the patch bounds, on tangent patches), `ii_zerimp` (`IntPatch_TheSurfFunction` on
+patches against quadrics) and `ii_intcs` (`IntCurveSurface_TheExactHInter` on lines and
+circles against planes, cylinders, spheres and tori, with and without margin).
+
+AppBlend: 115 requests. `ab_appsurf` instantiates `AppBlend_AppSurf.gxx` on a probe
+line and section generator (rational quadratic sections with 0 to 2 extra 2d curves,
+with or without derivatives) and compares every query after `Perform`,
+`Perform(SpApprox)`, `PerformSmoothing` and `Perform(NbMaxP)`, each run twice, with
+known parameters, every parametrization and continuity, the no-tangent switch,
+invalid criterion weights and a null line; `ab_context` covers the two switches of
+`AppBlend_Debug.cxx`.
+
+HatchGen, TopClass, Geom2dHatch: `tkgeomalgo_corpus_hatchgen.py` and
+`tkgeomalgo_corpus_geom2dhatch.py` add 1548 requests (432 and 1116). `hgen_element` builds the
+point on element of every pair of hatching and element transitions (including the raising
+TOUCH-against-crossing pair), changes one field of a copy and compares both ways within zero,
+small and huge confusions; `hgen_hatching` and `hgen_domain` cover the point merges, the
+order tests, every domain setter and the dumps. `g2hatch_local`, `g2hatch_perform` and
+`g2hatch_intersect` run LocalGeometry (a degenerate B-spline included), the segment Perform
+(bounded and to RealLast) and Intersect with the copy and assignment of the intersector;
+`g2hatch_elements`, `g2hatch_classify` and `g2hatch_fclass` run the explorer, its probing
+segments, the classifier and FClass2d on polygons of both orientations, a disc, an annulus, a
+half disc, regions closed by Bezier and B-spline arcs, an open boundary, INTERNAL and EXTERNAL
+edges, an infinite line and collinear split edges, from points inside, outside, on edges, on
+vertices and near them; `g2hatch_hatcher` hatches every such region with lines crossing it,
+through its vertices, along its edges and tangent to it, with every keep-flag pair and
+operation sequences (removals, tolerance and flag changes, clears, the protected members);
+`g2hatch_hatching` runs every Hatching member.
+
 ## Preserved native behaviour
 
 - TopTrans: a `CurveTransition` that was never reset answers the states of its
@@ -372,3 +539,186 @@ non-periodic interpolations with parameters and tangents, and every PointsToBSpl
   diameter). The port starts every slot at zero (default positions and circles), which
   is deterministic; the numeric corpus avoids reading those slots, since their native
   value is whatever the allocator returned.
+
+### IntSurf
+
+- `IntSurf_Transition::SetValue(Tangent, Type)` and `SetValue()` change only the type
+  (and tangent flag): the situation and opposite flag of an earlier TOUCH transition
+  stay. `IntSurf::MakeTransition` writes its results with them, so the Rust
+  `make_transition` updates two `&mut IntSurfTransition` in place instead of returning
+  fresh values.
+- `IntSurf_Quadric::Normale(U, V)` of a cone is the unnormalized `D1u ^ D1v` (null when
+  `|D1u| < 1e-7`) and ignores the frame handedness, unlike every other normal of the
+  class. The plane constructor leaves the axis line at its default (the Z axis).
+- `IntSurf_Quadric::D1`, `ValAndGrad` and `Parameters` of the undefined quadric leave
+  their output arguments unchanged; the Rust members return `None` there.
+  `Normale(P)` raises `Standard_ConstructionError` on a cylinder axis and at a sphere
+  centre (the `gp_Dir` of a null vector), and so does `Normale(U, V)` on a cylinder of
+  radius 0.
+- `IntSurf_LineOn2S::Split` gives the new line the default allocator, not the
+  allocator of the split line, and keeps the (possibly stale) boxes of the split line.
+- A default-constructed `IntSurf_PathPoint` holds a null parameter sequence that
+  `Value2d`, `AddUV`, `Multiplicity` and `Parameters` dereference natively; the port
+  returns `Standard_NullObject` there instead of crashing. A copy of a path point
+  shares the parameter sequence, as the native copy of the handle does.
+
+### Law
+
+- `Law_BSpline` is an older copy of `Geom_BSplineCurve` with real poles, and keeps its
+  differences: `DN` evaluates at the given parameter while `D0` to `D3` normalize a
+  periodic parameter first; `LocateU` tests the given, not the normalized, parameter
+  against the first and last knots; `IncreaseMultiplicity` inserts with `Add = false`.
+  `InsertKnots` and `RemoveKnot` natively pass the stored knots and multiplicities as
+  their own outputs when the knot count does not change; the port writes fresh arrays,
+  which gives the same result because BSplCLib reads each entry before rewriting it
+  and `NbPoles` forces equal first and last multiplicities on a periodic law.
+- `Law_BSpline::MovePointAndTangent` on a periodic law makes BSplCLib write past the
+  new pole array (undefined behaviour natively); the port raises
+  `Standard_OutOfRange`. The `Local*` evaluators pass knot indices to the flat-knot
+  `LocateParameter`; when the located flat index exceeds the knot count,
+  `BSplCLib::FlatIndex` reads past the multiplicities natively and the port raises
+  `Standard_OutOfRange`. The corpus avoids both undefined cases.
+- `Law_BSpFunc::NbIntervals` tests the first split knot against the range, but
+  `Intervals` first overwrites it with the start index, so the two can disagree;
+  `Intervals` writes `T(1..n+1)` at absolute indices, then `T(Lower)` and
+  `T(Lower + n)`. `Law_Composite::Intervals` writes `T(1)`, `T(2)` and the following
+  entries at absolute indices too, and `Law_Composite::Continuity` raises
+  `Standard_NotImplemented`.
+- `Law_Composite::ChangeElementaryLaw` and `ChangeLaws` return references natively;
+  the port lends the current law and the list to a closure.
+- `Law_Interpolate` builds chord-length parameters reading `Parameters(ii)` with the
+  point index `ii` (correct for one-based points only), stores the tangent flags that
+  `Load` receives before it checks their length, shares that flag array (Perform marks
+  the end tangents it computes in it) and never reads its tolerance.
+  `Law_Interpolate::ClearTangents` is declared but never defined at this commit, so its
+  row is excluded.
+- `rustycad_tkgeombase::geom2d_convert::split_knots` (the split table of the knot
+  splittings) is public so that `Law_BSplineKnotSplitting` shares it.
+
+### Plate
+
+- `SolEm`'s derivative table (the closed forms of the fundamental solution for every
+  `(IU, IV)` with `IU + IV <= 7`) is generated from the native switch into
+  `plate/sol_em_terms.rs`: integer factors become the equal `f64` literals and the
+  products keep their left-to-right order, so every value is bit-identical (the probe
+  compares it through all the solves). `SolEm` keeps the native point cache
+  (`Uold`, `Vold`, `U2`, `R`, `L`) behind a lock; a fresh cache holds `(1e20, 1e20)` with
+  `R = 0`, so a first call at exactly that scaled point returns 0, as natively.
+- `SolveTI2` allocates its right-hand side once, so the linear XYZ rows accumulate the X,
+  then Y, then Z terms with `+=`; the port keeps the accumulation. `SolveTI` sets the
+  order before it refuses an invalid request, so `CoefPol` of a refused plate reads a
+  missing solution: the port raises `Standard_NullObject` (a null dereference natively).
+  `IsDone` is true after `Init`, as the native test documents.
+- `Plate_Plate::UVBox` (and so `SolveTI`) reads the first pinpoint constraint: without
+  one the port raises `Standard_OutOfRange`, as the native checked sequence access.
+  Derivative orders past the ten scale factors `ddu`, `ddv` (undefined natively) raise
+  `Standard_OutOfRange`.
+- The linear constraints share their arrays through handles, so `SetPPC` and `SetCoeff`
+  on a copy (or on the constraint after `Load`) are seen by the loaded plate; a
+  default-constructed linear constraint has no arrays and `Load` raises
+  `Standard_NullObject`. `Plate_SampledCurveConstraint` builds its arrays before it
+  raises `Standard_DimensionMismatch` for `n > m`.
+- `Plate_GtoCConstraint` with `D3` and `nP` ignores `nP`, as natively. The GtoC and
+  FreeGtoC constructors stop with the constraints built so far on a degenerate or
+  orthogonal normal; a FreeGtoC incremental load between parallel normals raises
+  `Standard_ConstructionError` (the null rotation axis). `GetPPC` and `LSC` beyond their
+  fixed arrays raise `Standard_OutOfRange` (undefined natively). The G1/G2/G3 blocks,
+  which the native constructors repeat verbatim, are written once in `gtoc_math.rs`.
+
+### LocalAnalysis
+
+- `StatusError` is uninitialized natively until an analysis fails, and
+  `ContinuityStatus` of a surface analysis built from tolerances only is uninitialized
+  until `ComputeAnalysis`: the port returns `None` and `Standard_NoSuchObject` there.
+  The surface analysis on two 2d curves fails without a reason when the parameter is
+  outside either curve, so its `Dump` prints only its first line.
+- The two `Dump` reports keep their native texts, including the two spaces of
+  "one of the  second derivatives is null", the blank line after the surface G1 values
+  and the reasons each report omits (TangentNotDefined for surfaces,
+  CurvatureNotDefined for curves). Reals are written as the default `std::ostream`
+  (`%g`).
+- Every angle is folded into `[0, PI/2]` when it is measured, so the curve tests'
+  second clause `|angle - PI| <= eps` never holds; it is kept, as natively. `IsG2` of a
+  curve compares the fractional part of `(G2Angle + EpsG2) / PI` with `EpsG2`.
+
+### FairCurve
+
+- The densities keep copies of the batten law: the energies' own `SetSliding` reaches
+  no density, and only the tension receives the sliding length (`SetLengthSliding`), so
+  the sagging and jerk heights use the sliding of the step's law. The uniform tension
+  of the minimal-variation energy freezes the middle height at construction, whatever
+  its sign.
+- `FairCurve_EnergyOfBatten::Compute` records a failed sagging integral as
+  `Ok = false` and goes on; a later interval can set it back. The minimal-variation
+  energy returns at the first failed integral.
+- The sliding guard of both energies reports `InfiniteSliding` beyond ten times the
+  original length and clamps it below one hundredth; the clamped length is what
+  `Variable` writes back.
+- `FairCurve_Energy::Hessian1` reads the intermediate values `Vect(5)` and `Vect(6)`
+  for the start G2 term and `Vect(jj)` for the end one; the jerk Hessian omits the
+  `ProduitV` and `HNumRho` terms in its XiXj and YiYj entries and mixes the (ii, ii-1)
+  and (ii-1, ii) orders in its diagonal XiYi entry. All are kept.
+- `SlidingOfReference` tests the requested (`New`) angle of the opposite end, not its
+  argument, before halving it for an unconstrained end.
+- After a successful minimization the batten keeps the poles of the last energy
+  evaluation (not of the returned location), and reloads the variables from the energy
+  before the convergence and infinite-sliding checks. A failed minimization returns
+  false with the energy status as the code, or true with `NullHeight` when the law
+  vanishes at an end.
+- `FairCurve_MinimalVariation` does not check its physical ratio at construction; the
+  first `Compute` raises the `Standard_DomainError` of `FairCurve_EnergyOfMVC`. NaN
+  passes both checks.
+- `Dump` pads only the old value to 7 characters (`o.width(7)`), writes flags as 0/1
+  and reals as the default `std::ostream`.
+- The FairCurve sources define `No_Standard_RangeError` and `No_Standard_OutOfRange`:
+  an index out of range is undefined natively; the port panics there. The knot
+  refinement computes its native `int` products in `i64` (their overflow is undefined
+  natively and unreachable with finite angles).
+- The batten constructor passes a 2-entry weight array to a non-rational
+  `BSplCLib::IncreaseDegree`, which never writes it; the port passes none.
+
+### NLPlate
+
+- NLPlate has no sources at this commit: `PACKAGES.cmake` lists it, but its
+  `FILES.cmake` is empty since OCCT commit caad597813 ("Clean up dead headers #1442")
+  deleted every NLPlate file. Only two deprecated aliases under
+  `src/Deprecated/NCollectionAliases` refer to it: `NLPlate_StackOfPlate.hxx` (a
+  typedef of `NCollection_List<Plate_Plate>`) and
+  `NLPlate_SequenceOfHGPPConstraint.hxx`, which includes the deleted
+  `NLPlate_HGPPConstraint.hxx`. The audit finds no public member;
+  `crates/tkgeomalgo/src/nl_plate` stays an empty module.
+
+### IntImp
+
+- The five `.gxx` templates are generics (docs/geomalgo-design.md, "IntImp
+  templates"); their tool calls can raise, and the failure reaches the caller of
+  `IntImpInt2S`/`IntImpIntCS` as the native exception would.
+- `IntImp_IntCS::Perform` is declared with the bounds `u0, v0, u1, v1` but defined
+  (and called) with `u0, u1, v0, v1`; the port follows the definition.
+- The bound check of `IntImp_Int2S::Perform` re-reads the moved start parameters, not
+  the new solution, when it checks the reciprocal patch, and compares the second
+  parameter there without the resolution. It then restarts on `ChoixRef` of the
+  1-based index of the moved parameter (4 wraps to 0): the isoparametric of the next
+  parameter, where the first check fixes the moved one.
+- `IntImp_ZerImpFunc::IsTangent` uses the gradient of the last `Derivatives`/`Values`
+  (zero before any): after `Value` alone it reuses a stale one. `Direction2d` of a
+  vanishing 2d tangent raises `Standard_ConstructionError` from `IsTangent`.
+- `IntImp_ZerParFunc` reads its isoparametric before `ComputeParameters` sets it
+  (uninitialized natively; U on the first patch here), and the second
+  `IntImp_Int2S` constructor leaves `tangent` uninitialized (false here).
+
+### AppBlend
+
+- Two sections narrow the stored degrees (`dmin = 1`, and `dmax = 1` without
+  tangents): later computations of the same object keep them.
+- `Perform` without `SpApprox` computes the reached tolerances but does not store
+  them (`TolReached` keeps its earlier values), and with known parameters it raises
+  `StdFail_NotDone` from `AppDef_Compute::SplineValue`.
+- The continuity chain of the B-spline approximation turns C0 into continuity 3
+  (`if C0 ...; if C1 ... else if C2 ... else 3`).
+- `Perform(NbMaxP)` measures the pole distances of each Bezier piece on the curve of
+  the piece's own index, and `NbMaxP = 0` divides by zero (a crash natively; a
+  `Standard_DivideByZero` error here, not in the corpus). The native `scal` switch of
+  its box scaling is a constant true.
+- `Curves2dShape` returns the U pole count of the surface as the 2d pole count.
+- The `AppBlend_Debug.cxx` switches are process-wide, as the native file statics.
