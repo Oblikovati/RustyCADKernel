@@ -185,58 +185,75 @@ impl Variational {
         a: &mut Assembly,
         ecarts: &mut Array1<'_, f64>,
     ) -> Result<bool, Failure> {
-        let nbr_pnt: i32 = self.last_point - self.first_point + 1;
         let (mut lestim, mut nb_est) = (true, 0);
         st.lconst = true;
         j.set_curve(&st.c_current)?;
         while lestim {
-            // (1.1) Curve's Optimization.
-            self.optimize_new_curve(j, st, a)?;
-            st.lconst = false;
-            // (1.2) calculation of quality criteria and improvement of estimation.
-            let quality = j.quality_values(st.j_min[0], st.j_min[1], st.j_min[2])?;
-            st.valcri = quality.criteria;
-            if quality.icdana > 0 {
-                st.lconst = true;
-            }
-            let errors = j.error_values()?;
-            (st.errors.max_err, st.errors.qua_err, st.errors.ave_err) = (
-                errors.max_error,
-                errors.quadratic_error,
-                errors.average_error,
-            );
-            st.isnear = (st.errors.qua_err / f64::from(nbr_pnt)).sqrt() < 2. * st.w_quality
-                && self.options.nb_iterations > 1;
-            // (1.3) Optimization of ti by orthogonal projection.
-            if st.isnear {
-                let c_new: Handle<Curve> = st.c_new.clone();
-                self.project_new_ti(&c_new, st, ecarts, 2)?;
-            } else {
-                st.new_ti = st.current_ti.clone();
-            }
-            // (1.4) Progression's test
-            let iprog: i32 = progression(st);
+            let (iprog, icdana) = self.estimate_once(j, st, a, ecarts)?;
             if iprog < 2 && nb_est == 0 {
                 // (1.5) Invalidation of new knots.
-                st.valcri = st.vocri;
-                st.errors.max_err = st.erold;
-                st.cblong = st.lnold;
-                st.c_current = st.c_old.clone();
-                st.current_ti = st.old_ti.clone();
+                invalidate_new_knots(st);
                 return Ok(true);
             }
-            (st.vocri, st.lnold, st.erold) = (st.valcri, st.cblong, st.errors.max_err);
-            st.c_current = st.c_new.clone();
-            st.current_ti = st.new_ti.clone();
+            accept_estimation(st);
             // (1.6) Test if the Estimations seems OK, else repeat
             nb_est += 1;
-            lestim = nb_est < 5 && quality.icdana == 2 && iprog > 0;
+            lestim = nb_est < 5 && icdana == 2 && iprog > 0;
             if lestim && st.isnear {
                 // (1.7) Optimization of ti by ACR.
                 self.arc_length_step(j, st)?;
             }
         }
         Ok(false)
+    }
+
+    // The (1.1) to (1.4) steps of one estimation: returns the progression IPROG and
+    // the ICDANA of the quality criteria.
+    fn estimate_once(
+        &self,
+        j: &dyn SmoothCriterion,
+        st: &mut MotorState,
+        a: &mut Assembly,
+        ecarts: &mut Array1<'_, f64>,
+    ) -> Result<(i32, i32), Failure> {
+        // (1.1) Curve's Optimization.
+        self.optimize_new_curve(j, st, a)?;
+        st.lconst = false;
+        // (1.2) calculation of quality criteria and improvement of estimation.
+        let icdana: i32 = self.estimation_quality(j, st)?;
+        // (1.3) Optimization of ti by orthogonal projection.
+        if st.isnear {
+            let c_new: Handle<Curve> = st.c_new.clone();
+            self.project_new_ti(&c_new, st, ecarts, 2)?;
+        } else {
+            st.new_ti = st.current_ti.clone();
+        }
+        // (1.4) Progression's test
+        Ok((progression(st), icdana))
+    }
+
+    // (1.2): the quality criteria, the errors and whether the curve is near the
+    // points; returns ICDANA.
+    fn estimation_quality(
+        &self,
+        j: &dyn SmoothCriterion,
+        st: &mut MotorState,
+    ) -> Result<i32, Failure> {
+        let nbr_pnt: i32 = self.last_point - self.first_point + 1;
+        let quality = j.quality_values(st.j_min[0], st.j_min[1], st.j_min[2])?;
+        st.valcri = quality.criteria;
+        if quality.icdana > 0 {
+            st.lconst = true;
+        }
+        let errors = j.error_values()?;
+        (st.errors.max_err, st.errors.qua_err, st.errors.ave_err) = (
+            errors.max_error,
+            errors.quadratic_error,
+            errors.average_error,
+        );
+        st.isnear = (st.errors.qua_err / f64::from(nbr_pnt)).sqrt() < 2. * st.w_quality
+            && self.options.nb_iterations > 1;
+        Ok(quality.icdana)
     }
 
     // (2.1) Save current results.
@@ -401,6 +418,23 @@ impl Variational {
         };
         Ok(())
     }
+}
+
+// (1.5): the new knots are dropped and the state before the estimation restored.
+fn invalidate_new_knots(st: &mut MotorState) {
+    st.valcri = st.vocri;
+    st.errors.max_err = st.erold;
+    st.cblong = st.lnold;
+    st.c_current = st.c_old.clone();
+    st.current_ti = st.old_ti.clone();
+}
+
+// The estimation is kept: its criteria, length and error become the reference, its
+// curve and parameters the current ones.
+fn accept_estimation(st: &mut MotorState) {
+    (st.vocri, st.lnold, st.erold) = (st.valcri, st.cblong, st.errors.max_err);
+    st.c_current = st.c_new.clone();
+    st.current_ti = st.new_ti.clone();
 }
 
 // (1.4) Progression's test.
