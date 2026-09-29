@@ -106,7 +106,10 @@ pub(super) fn merge(
         // ReplaceEdge rewrites the edge's wire list, so the wires are copied first.
         let wires: Vec<WireId> = graph.topo().edges().wires_of(old).collect();
         for wire in wires {
-            graph.editor().wires().replace_edge(wire, old, canon, reversed)?;
+            graph
+                .editor()
+                .wires()
+                .replace_edge(wire, old, canon, reversed)?;
         }
         redirect_generic_parents(graph, old.into(), canon.into())?;
         replace_and_record(graph, history, &label, old.into(), canon.into())?;

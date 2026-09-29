@@ -55,7 +55,10 @@ mod tests {
     fn active_ids_skip_removed_slots_full_ids_do_not() {
         let mut graph = BRepGraph::new();
         for _ in 0..3 {
-            graph.editor().vertices().add(Point3::new(0.0, 0.0, 0.0), 1e-7);
+            graph
+                .editor()
+                .vertices()
+                .add(Point3::new(0.0, 0.0, 0.0), 1e-7);
         }
         graph.inc_storage_mut().set_removed(VertexId::new(1), true);
         let active = active_ids::<VertexTag>(&graph);

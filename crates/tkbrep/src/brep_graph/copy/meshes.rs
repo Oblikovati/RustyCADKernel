@@ -43,7 +43,10 @@ pub(crate) fn ensure_triangulation_rep(
     if !is_copyable(context, rep) {
         return Ok(());
     }
-    let source = &context.src_storage().face_triangulation_rep(rep).triangulation;
+    let source = &context
+        .src_storage()
+        .face_triangulation_rep(rep)
+        .triangulation;
     let copied = copy_mesh(source, context.mesh)?;
     context
         .target_mut()
@@ -102,7 +105,10 @@ pub(crate) fn ensure_polygon_on_tri_rep(
         return Ok(());
     }
     let copied = copy_mesh(
-        &context.src_storage().co_edge_polygon_on_tri_rep(rep).polygon,
+        &context
+            .src_storage()
+            .co_edge_polygon_on_tri_rep(rep)
+            .polygon,
         context.mesh,
     )?;
     context

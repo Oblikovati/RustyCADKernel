@@ -32,7 +32,12 @@ pub(crate) fn ensure_pcurves_for_face(
     new_face: FaceId,
 ) -> Result<(), Failure> {
     for co_edge in face_co_edges(context, source_face) {
-        let def = context.source().topo().co_edges().definition(co_edge).clone();
+        let def = context
+            .source()
+            .topo()
+            .co_edges()
+            .definition(co_edge)
+            .clone();
         if def.face_id != source_face {
             continue;
         }
@@ -75,7 +80,9 @@ fn copy_co_edge_pcurve(
 ) -> Result<(), Failure> {
     let rep = source.curve2d_rep_id;
     let storage = context.src_storage();
-    if !rep.is_valid() || !rep.is_valid_for(storage.nb_co_edge_curves2d()) || storage.is_removed(rep)
+    if !rep.is_valid()
+        || !rep.is_valid_for(storage.nb_co_edge_curves2d())
+        || storage.is_removed(rep)
     {
         return Ok(());
     }

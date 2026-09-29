@@ -44,9 +44,10 @@ pub(crate) fn ensure_occurrence_ref(
     if child.is_valid() {
         new_occurrence = ensure_occurrence(context, child)?;
     }
-    let copied = context
-        .dst_storage()
-        .attach_occurrence_to_product(parent, new_occurrence, &location);
+    let copied =
+        context
+            .dst_storage()
+            .attach_occurrence_to_product(parent, new_occurrence, &location);
     context.bind_occurrence_ref(source, copied);
     context.bind_item(ref_item(source), ref_item(copied));
     context.copy_removed(source, copied);
@@ -69,7 +70,10 @@ pub(crate) fn ensure_occurrence(
     if child.is_valid() {
         ensure_node(context, child)?;
         let mapped = context.mapped_node(child);
-        context.dst_storage().change_occurrence(copied).child_node_id = mapped;
+        context
+            .dst_storage()
+            .change_occurrence(copied)
+            .child_node_id = mapped;
     }
     Ok(copied)
 }
@@ -87,7 +91,11 @@ pub(crate) fn ensure_product(
     let copied = context.dst_storage().append_product();
     context.copy_removed(source, copied);
     context.bind_node(source, copied);
-    let refs = context.src_storage().product_relations(source).occurrence_ref_ids.clone();
+    let refs = context
+        .src_storage()
+        .product_relations(source)
+        .occurrence_ref_ids
+        .clone();
     for reference in refs {
         let new_ref = ensure_occurrence_ref(context, reference, copied)?;
         if !new_ref.is_valid() {
@@ -115,7 +123,10 @@ pub(crate) fn append_root_products(context: &mut CopyContext<'_>) {
             !target.inc_storage().is_removed(*product) && !referenced.contains(product)
         })
         .collect();
-    context.dst_storage().change_root_product_ids().extend(roots);
+    context
+        .dst_storage()
+        .change_root_product_ids()
+        .extend(roots);
 }
 
 // The products an active occurrence of the graph points at.

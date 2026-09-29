@@ -100,7 +100,9 @@ pub(super) fn merge(
 fn face_wire_hash(graph: &BRepGraph, face: FaceId) -> usize {
     face_wires(graph, face)
         .into_iter()
-        .fold(0, |accumulated, wire| accumulated ^ hash::<usize, u32>(&wire.index))
+        .fold(0, |accumulated, wire| {
+            accumulated ^ hash::<usize, u32>(&wire.index)
+        })
 }
 
 // The children of the face's active wire references.
@@ -164,7 +166,11 @@ fn sorted_live_wires(graph: &BRepGraph, face: FaceId) -> Vec<WireId> {
 
 // Every active face reference (of the full reference store) that points at `old`
 // points at `canon`.
-fn redirect_shell_face_refs(graph: &mut BRepGraph, old: FaceId, canon: FaceId) -> Result<(), Failure> {
+fn redirect_shell_face_refs(
+    graph: &mut BRepGraph,
+    old: FaceId,
+    canon: FaceId,
+) -> Result<(), Failure> {
     for index in 0..graph.refs().faces().nb() {
         let reference = FaceRefId::new(index);
         let child = graph.refs().faces().entry(reference).child_face_id;
@@ -178,7 +184,11 @@ fn redirect_shell_face_refs(graph: &mut BRepGraph, old: FaceId, canon: FaceId) -
 }
 
 // Every active coedge bound to `old` is bound to `canon`.
-fn redirect_co_edge_faces(graph: &mut BRepGraph, old: FaceId, canon: FaceId) -> Result<(), Failure> {
+fn redirect_co_edge_faces(
+    graph: &mut BRepGraph,
+    old: FaceId,
+    canon: FaceId,
+) -> Result<(), Failure> {
     for co_edge in full_ids::<CoEdgeTag>(graph) {
         if NodeId::from(co_edge).is_removed(graph) {
             continue;

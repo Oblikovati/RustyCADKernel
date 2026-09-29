@@ -44,14 +44,22 @@ fn part_occurrence_ref(graph: &BRepGraph, product: ProductId) -> Option<Occurren
         .iter()
         .copied()
         .find(|&reference| {
-            let occurrence = graph.refs().occurrences().entry(reference).child_occurrence_id;
+            let occurrence = graph
+                .refs()
+                .occurrences()
+                .entry(reference)
+                .child_occurrence_id;
             if storage.is_removed(reference)
                 || !occurrence.is_valid_in(&graph.topo().occurrences())
                 || storage.is_removed(occurrence)
             {
                 return false;
             }
-            let child = graph.topo().occurrences().definition(occurrence).child_node_id;
+            let child = graph
+                .topo()
+                .occurrences()
+                .definition(occurrence)
+                .child_node_id;
             child.is_valid() && NodeKind::is_topology_kind(child.kind)
         })
 }
@@ -69,9 +77,15 @@ fn rebuild_product(
     if root.is_valid() && NodeKind::is_topology_kind(root.kind) {
         let new_root = maps.remap(root);
         if new_root.is_valid() {
-            let placement = part_occurrence_ref(graph, product).map_or_else(Location::default, |reference| {
-                graph.refs().occurrences().entry(reference).local_location.clone()
-            });
+            let placement =
+                part_occurrence_ref(graph, product).map_or_else(Location::default, |reference| {
+                    graph
+                        .refs()
+                        .occurrences()
+                        .entry(reference)
+                        .local_location
+                        .clone()
+                });
             new = fresh.editor().products().add(new_root, &placement);
             fresh.editor().products().append_document_root(new)?;
         }
@@ -104,9 +118,17 @@ pub(super) fn rebuild_products(
         let Some(old_ref) = part_occurrence_ref(graph, old) else {
             continue;
         };
-        let old_occurrence = graph.refs().occurrences().entry(old_ref).child_occurrence_id;
+        let old_occurrence = graph
+            .refs()
+            .occurrences()
+            .entry(old_ref)
+            .child_occurrence_id;
         if let Some(new_ref) = part_occurrence_ref(fresh, new) {
-            let new_occurrence = fresh.refs().occurrences().entry(new_ref).child_occurrence_id;
+            let new_occurrence = fresh
+                .refs()
+                .occurrences()
+                .entry(new_ref)
+                .child_occurrence_id;
             maps.occurrences.bind(old_occurrence, new_occurrence);
             refs.occurrence_refs.bind(old_ref, new_ref);
         }
@@ -130,7 +152,12 @@ pub(super) fn restore_product_links(
         let Some(&new_parent) = maps.products.seek(&old_parent) else {
             continue;
         };
-        let old_refs = graph.topo().products().relations(old_parent).occurrence_ref_ids.clone();
+        let old_refs = graph
+            .topo()
+            .products()
+            .relations(old_parent)
+            .occurrence_ref_ids
+            .clone();
         for old_ref in old_refs {
             restore_link(graph, fresh, maps, refs, new_parent, old_ref)?;
         }
@@ -152,7 +179,11 @@ fn restore_link(
     if storage.is_removed(old_ref) || !old_occurrence.is_valid_in(&graph.topo().occurrences()) {
         return Ok(());
     }
-    let child = graph.topo().occurrences().definition(old_occurrence).child_node_id;
+    let child = graph
+        .topo()
+        .occurrences()
+        .definition(old_occurrence)
+        .child_node_id;
     if storage.is_removed(old_occurrence) || !child.is_valid() || child.kind != NodeKind::PRODUCT {
         return Ok(());
     }
@@ -160,11 +191,12 @@ fn restore_link(
         return Ok(());
     };
     let location = entry.local_location.clone();
-    let (new_occurrence, _) =
-        fresh
-            .editor()
-            .products()
-            .append(new_parent, new_child, &location, OccurrenceId::invalid())?;
+    let (new_occurrence, _) = fresh.editor().products().append(
+        new_parent,
+        new_child,
+        &location,
+        OccurrenceId::invalid(),
+    )?;
     if !new_occurrence.is_valid() {
         return Ok(());
     }
@@ -173,9 +205,19 @@ fn restore_link(
     }
     // Occurrence refs are usage records: the identity moves with the exact
     // parent-owned slot, not only with the occurrence definition.
-    let new_refs = fresh.topo().products().relations(new_parent).occurrence_ref_ids.clone();
+    let new_refs = fresh
+        .topo()
+        .products()
+        .relations(new_parent)
+        .occurrence_ref_ids
+        .clone();
     let found = new_refs.into_iter().find(|&reference| {
-        fresh.refs().occurrences().entry(reference).child_occurrence_id == new_occurrence
+        fresh
+            .refs()
+            .occurrences()
+            .entry(reference)
+            .child_occurrence_id
+            == new_occurrence
     });
     if let Some(new_ref) = found {
         refs.occurrence_refs.bind(old_ref, new_ref);

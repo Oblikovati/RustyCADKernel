@@ -15,7 +15,9 @@
 
 //! `BRepGraph_CacheRegistry`: the GUID-keyed registry of a graph's cache services.
 use crate::brep_graph::BRepGraph;
-use crate::brep_graph::cache::{BRepGraphCache, CacheType, attach_graph, detach_graph, rebind_graph};
+use crate::brep_graph::cache::{
+    BRepGraphCache, CacheType, attach_graph, detach_graph, rebind_graph,
+};
 use crate::brep_graph::copy_remap::{CopyRemap, ItemMap, MappingKind, Mode};
 use crate::brep_graph::registry_iterator::CacheIterator;
 use rustycad_tkernel::standard::{Failure, Guid, Handle, SharedState};

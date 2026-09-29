@@ -30,7 +30,10 @@ use rustycad_tkernel::standard::Failure;
 
 /// `ensureShell(theCtx, theSrcId)`: the copy of a source shell, bound before its faces
 /// are appended in reference order.
-pub(crate) fn ensure_shell(context: &mut CopyContext<'_>, source: ShellId) -> Result<ShellId, Failure> {
+pub(crate) fn ensure_shell(
+    context: &mut CopyContext<'_>,
+    source: ShellId,
+) -> Result<ShellId, Failure> {
     if !source.is_valid_in(&context.source().topo().shells()) {
         return Ok(ShellId::invalid());
     }
@@ -45,11 +48,12 @@ pub(crate) fn ensure_shell(context: &mut CopyContext<'_>, source: ShellId) -> Re
         let entry = context.source().refs().faces().entry(reference);
         let (face, orientation) = (entry.child_face_id, entry.orientation);
         let new_face = ensure_face(context, face)?;
-        let new_ref = context
-            .target_mut()
-            .editor()
-            .shells()
-            .append(copied, new_face, orientation)?;
+        let new_ref =
+            context
+                .target_mut()
+                .editor()
+                .shells()
+                .append(copied, new_face, orientation)?;
         context.copy_removed(reference, new_ref);
         context.bind_item(ref_item(reference), ref_item(new_ref));
     }
@@ -58,7 +62,10 @@ pub(crate) fn ensure_shell(context: &mut CopyContext<'_>, source: ShellId) -> Re
 
 /// `ensureSolid(theCtx, theSrcId)`: the copy of a source solid, bound before its shells
 /// are appended in reference order.
-pub(crate) fn ensure_solid(context: &mut CopyContext<'_>, source: SolidId) -> Result<SolidId, Failure> {
+pub(crate) fn ensure_solid(
+    context: &mut CopyContext<'_>,
+    source: SolidId,
+) -> Result<SolidId, Failure> {
     if !source.is_valid_in(&context.source().topo().solids()) {
         return Ok(SolidId::invalid());
     }
@@ -73,11 +80,12 @@ pub(crate) fn ensure_solid(context: &mut CopyContext<'_>, source: SolidId) -> Re
         let entry = context.source().refs().shells().entry(reference);
         let (shell, orientation) = (entry.child_shell_id, entry.orientation);
         let new_shell = ensure_shell(context, shell)?;
-        let new_ref = context
-            .target_mut()
-            .editor()
-            .solids()
-            .append(copied, new_shell, orientation)?;
+        let new_ref =
+            context
+                .target_mut()
+                .editor()
+                .solids()
+                .append(copied, new_shell, orientation)?;
         context.copy_removed(reference, new_ref);
         context.bind_item(ref_item(reference), ref_item(new_ref));
     }
@@ -128,11 +136,12 @@ pub(crate) fn ensure_compound(
         if !mapped.is_valid() {
             continue;
         }
-        let new_ref = context
-            .target_mut()
-            .editor()
-            .compounds()
-            .append(copied, mapped, orientation)?;
+        let new_ref =
+            context
+                .target_mut()
+                .editor()
+                .compounds()
+                .append(copied, mapped, orientation)?;
         if !new_ref.is_valid() {
             return Err(program_error(
                 "BRepGraph_Copy: failed to copy compound child ref",
@@ -168,7 +177,13 @@ pub(crate) fn ensure_comp_solid(
     let copied = context.target_mut().editor().comp_solids().add(&new_solids);
     context.copy_removed(source, copied);
     context.bind_node(source, copied);
-    let old_refs = context.source().topo().comp_solids().relations(source).solid_ref_ids.clone();
+    let old_refs = context
+        .source()
+        .topo()
+        .comp_solids()
+        .relations(source)
+        .solid_ref_ids
+        .clone();
     let new_refs = relations_solid_refs(context, copied);
     for (old, new) in old_refs.into_iter().zip(new_refs) {
         context.copy_removed(old, new);
@@ -188,5 +203,10 @@ fn relations_solid_refs(
     if !comp_solid.is_valid_in(&target.topo().comp_solids()) {
         return Vec::new();
     }
-    target.topo().comp_solids().relations(comp_solid).solid_ref_ids.clone()
+    target
+        .topo()
+        .comp_solids()
+        .relations(comp_solid)
+        .solid_ref_ids
+        .clone()
 }

@@ -145,7 +145,11 @@ fn rewrite_surfaces(
     for (&face, &canon) in rewrites.items() {
         let surface = tool::face::surface(graph, canon);
         let mut guard = graph.editor().faces().mutate(face)?;
-        guard.graph_mut().editor().faces().set_surface(face, &surface)?;
+        guard
+            .graph_mut()
+            .editor()
+            .faces()
+            .set_surface(face, &surface)?;
         drop(guard);
         result.nb_surface_rewrites += 1;
         result.affected_faces.push(face);
@@ -171,7 +175,10 @@ fn rewrite_curves(
             continue;
         }
         let (first, last) = tool::edge::range(graph, edge);
-        graph.editor().edges().set_curve(edge, &curve, first, last)?;
+        graph
+            .editor()
+            .edges()
+            .set_curve(edge, &curve, first, last)?;
         result.nb_curve_rewrites += 1;
         result.affected_edges.push(edge);
         let canon: NodeId = canon.into();

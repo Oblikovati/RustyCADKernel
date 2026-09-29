@@ -118,7 +118,13 @@ pub fn copy_node(
     if source.is_empty() {
         return Ok(NodeId::default());
     }
-    copy_node_with(CopyGraphs::Distinct { source, target }, node, geom, mesh, cache)
+    copy_node_with(
+        CopyGraphs::Distinct { source, target },
+        node,
+        geom,
+        mesh,
+        cache,
+    )
 }
 
 /// `CopyNode(theGraph, theGraph, theNodeId, ...)`: the self-copy duplicates the node's
@@ -177,18 +183,44 @@ fn copy_every_entity(context: &mut CopyContext<'_>) -> Result<(), Failure> {
         full_ids::<ShellTag>(source),
         full_ids::<SolidTag>(source),
     );
-    let (compounds, comp_solids) = (full_ids::<CompoundTag>(source), full_ids::<CompSolidTag>(source));
-    let (products, occurrences) = (full_ids::<ProductTag>(source), full_ids::<OccurrenceTag>(source));
-    vertices.into_iter().try_for_each(|id| ensure_vertex(context, id).map(drop))?;
-    edges.into_iter().try_for_each(|id| ensure_edge(context, id).map(drop))?;
-    wires.into_iter().try_for_each(|id| ensure_wire(context, id).map(drop))?;
-    faces.into_iter().try_for_each(|id| ensure_face(context, id).map(drop))?;
-    shells.into_iter().try_for_each(|id| ensure_shell(context, id).map(drop))?;
-    solids.into_iter().try_for_each(|id| ensure_solid(context, id).map(drop))?;
-    compounds.into_iter().try_for_each(|id| ensure_compound(context, id).map(drop))?;
-    comp_solids.into_iter().try_for_each(|id| ensure_comp_solid(context, id).map(drop))?;
-    products.into_iter().try_for_each(|id| ensure_product(context, id).map(drop))?;
-    occurrences.into_iter().try_for_each(|id| ensure_occurrence(context, id).map(drop))
+    let (compounds, comp_solids) = (
+        full_ids::<CompoundTag>(source),
+        full_ids::<CompSolidTag>(source),
+    );
+    let (products, occurrences) = (
+        full_ids::<ProductTag>(source),
+        full_ids::<OccurrenceTag>(source),
+    );
+    vertices
+        .into_iter()
+        .try_for_each(|id| ensure_vertex(context, id).map(drop))?;
+    edges
+        .into_iter()
+        .try_for_each(|id| ensure_edge(context, id).map(drop))?;
+    wires
+        .into_iter()
+        .try_for_each(|id| ensure_wire(context, id).map(drop))?;
+    faces
+        .into_iter()
+        .try_for_each(|id| ensure_face(context, id).map(drop))?;
+    shells
+        .into_iter()
+        .try_for_each(|id| ensure_shell(context, id).map(drop))?;
+    solids
+        .into_iter()
+        .try_for_each(|id| ensure_solid(context, id).map(drop))?;
+    compounds
+        .into_iter()
+        .try_for_each(|id| ensure_compound(context, id).map(drop))?;
+    comp_solids
+        .into_iter()
+        .try_for_each(|id| ensure_comp_solid(context, id).map(drop))?;
+    products
+        .into_iter()
+        .try_for_each(|id| ensure_product(context, id).map(drop))?;
+    occurrences
+        .into_iter()
+        .try_for_each(|id| ensure_occurrence(context, id).map(drop))
 }
 
 // The tail of `Perform` and `CopyNode`: the UID reverse indexes marked dirty, the

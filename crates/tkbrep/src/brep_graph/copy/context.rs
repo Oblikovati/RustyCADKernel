@@ -145,7 +145,10 @@ impl<'a> CopyContext<'a> {
     }
 
     /// `OccurrenceRefs.Seek`.
-    pub(crate) fn existing_occurrence_ref(&self, source: OccurrenceRefId) -> Option<OccurrenceRefId> {
+    pub(crate) fn existing_occurrence_ref(
+        &self,
+        source: OccurrenceRefId,
+    ) -> Option<OccurrenceRefId> {
         self.occurrence_refs.get(&source).copied()
     }
 

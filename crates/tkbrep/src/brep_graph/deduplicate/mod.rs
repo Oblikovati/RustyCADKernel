@@ -142,7 +142,10 @@ pub fn perform(graph: &mut BRepGraph) -> Result<DeduplicateResult, Failure> {
 /// let options = Options { merge_entities_when_safe: true, ..Options::default() };
 /// assert_eq!(perform_with(&mut graph, &options).unwrap().nb_merged_vertices, 1);
 /// ```
-pub fn perform_with(graph: &mut BRepGraph, options: &Options) -> Result<DeduplicateResult, Failure> {
+pub fn perform_with(
+    graph: &mut BRepGraph,
+    options: &Options,
+) -> Result<DeduplicateResult, Failure> {
     let mut result = DeduplicateResult::default();
     if graph.is_empty() {
         return Ok(result);

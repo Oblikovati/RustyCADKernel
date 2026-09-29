@@ -62,11 +62,21 @@ pub(super) fn redirect_occurrence_children(
         if !reference.is_valid() || graph.refs().generic().is_removed(reference.into()) {
             continue;
         }
-        let occurrence = graph.refs().occurrences().entry(reference).child_occurrence_id;
+        let occurrence = graph
+            .refs()
+            .occurrences()
+            .entry(reference)
+            .child_occurrence_id;
         if !occurrence.is_valid() || occurrence.is_removed(graph) {
             continue;
         }
-        if graph.topo().occurrences().definition(occurrence).child_node_id == old {
+        if graph
+            .topo()
+            .occurrences()
+            .definition(occurrence)
+            .child_node_id
+            == old
+        {
             graph
                 .editor()
                 .occurrences()

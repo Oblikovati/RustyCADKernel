@@ -84,7 +84,10 @@ fn canonical_vertices(graph: &BRepGraph, tolerance: f64) -> RewriteMap<VertexId>
     let vertices = sorted_active_vertices(graph);
     let mut tree = KDTree::<[f64; 3], 3>::default();
     if !vertices.is_empty() {
-        let points: Vec<[f64; 3]> = vertices.iter().map(|(p, _)| [p.x(), p.y(), p.z()]).collect();
+        let points: Vec<[f64; 3]> = vertices
+            .iter()
+            .map(|(p, _)| [p.x(), p.y(), p.z()])
+            .collect();
         tree.build(&points);
     }
     let mut canonical = rewrite_map(graph.topo().vertices().nb());
@@ -132,7 +135,11 @@ fn resolve_canonical(canonical: &RewriteMap<VertexId>, candidate: VertexId) -> V
 // Every edge's vertex references that point at `old` point at `canon`. The edge guard
 // is taken before the removed check, so a removed edge raises Standard_ProgramError
 // ("invalid node id"), as natively.
-fn redirect_edge_vertices(graph: &mut BRepGraph, old: VertexId, canon: VertexId) -> Result<(), Failure> {
+fn redirect_edge_vertices(
+    graph: &mut BRepGraph,
+    old: VertexId,
+    canon: VertexId,
+) -> Result<(), Failure> {
     for edge in full_ids::<EdgeTag>(graph) {
         let mut guard = graph.editor().edges().mutate(edge)?;
         if edge.is_removed(guard.graph()) {
@@ -175,6 +182,9 @@ mod tests {
         let end = resolve_canonical(&canonical, VertexId::new(0));
         assert_eq!(end, VertexId::new(0));
         canonical.bind(VertexId::new(2), VertexId::new(2));
-        assert_eq!(resolve_canonical(&canonical, VertexId::new(2)), VertexId::new(2));
+        assert_eq!(
+            resolve_canonical(&canonical, VertexId::new(2)),
+            VertexId::new(2)
+        );
     }
 }

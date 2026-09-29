@@ -215,9 +215,7 @@ pub(super) fn bind_active_index_map<T: NodeTag>(
 /// `collectReachableNodesFromRootProducts(theGraph, theReachableNodes)`: each valid root
 /// product and every definition its child explorer visits (the explorer's location
 /// composition raises through the error).
-pub(super) fn reachable_from_root_products(
-    graph: &BRepGraph,
-) -> Result<HashSet<NodeId>, Failure> {
+pub(super) fn reachable_from_root_products(graph: &BRepGraph) -> Result<HashSet<NodeId>, Failure> {
     let mut reachable = HashSet::new();
     let mut roots = RootProductIterator::new(graph);
     while roots.more() {

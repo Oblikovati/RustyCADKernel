@@ -28,7 +28,11 @@ use rustycad_tkernel::standard::Failure;
 
 /// "Copy OwnGen/SubtreeGen" of one kind: every mapped active node takes its old
 /// `OwnGen`, `SubtreeGen` and `UID`.
-pub(super) fn copy_generations<T: NodeTag>(graph: &BRepGraph, fresh: &mut BRepGraph, map: &IdMap<T>) {
+pub(super) fn copy_generations<T: NodeTag>(
+    graph: &BRepGraph,
+    fresh: &mut BRepGraph,
+    map: &IdMap<T>,
+) {
     for old in active_ids::<T>(graph) {
         let Some(&new) = map.seek(&old) else {
             continue;
@@ -50,7 +54,11 @@ fn unexpected_id(what: &str, got: impl std::fmt::Debug, expected: impl std::fmt:
 }
 
 /// The vertices, in active order, at their precomputed ids.
-pub(super) fn rebuild_vertices(graph: &BRepGraph, fresh: &mut BRepGraph, maps: &NodeMaps) -> Result<(), Failure> {
+pub(super) fn rebuild_vertices(
+    graph: &BRepGraph,
+    fresh: &mut BRepGraph,
+    maps: &NodeMaps,
+) -> Result<(), Failure> {
     for old in active_ids::<VertexTag>(graph) {
         let Some(&expected) = maps.vertices.seek(&old) else {
             continue;
@@ -119,7 +127,11 @@ pub(super) fn rebuild_edges(
 
 /// The wires, each created empty at its precomputed id, then a coedge use per coedge
 /// whose edge is mapped (face unset); the coedges are mapped pairwise.
-pub(super) fn rebuild_wires(graph: &BRepGraph, fresh: &mut BRepGraph, maps: &mut NodeMaps) -> Result<(), Failure> {
+pub(super) fn rebuild_wires(
+    graph: &BRepGraph,
+    fresh: &mut BRepGraph,
+    maps: &mut NodeMaps,
+) -> Result<(), Failure> {
     for old in active_ids::<WireTag>(graph) {
         let Some(&expected) = maps.wires.seek(&old) else {
             continue;
@@ -150,7 +162,11 @@ pub(super) fn rebuild_wires(graph: &BRepGraph, fresh: &mut BRepGraph, maps: &mut
 
 // The remapped wires of a face's active references, the outer one first, with the old
 // references they come from.
-fn remapped_face_wires(graph: &BRepGraph, maps: &NodeMaps, face: FaceId) -> (WireId, Vec<WireId>, Vec<WireRefId>) {
+fn remapped_face_wires(
+    graph: &BRepGraph,
+    maps: &NodeMaps,
+    face: FaceId,
+) -> (WireId, Vec<WireId>, Vec<WireRefId>) {
     let mut outer = WireId::invalid();
     let (mut inner, mut old_refs) = (Vec::new(), Vec::new());
     for reference in RefsWireOfFace::new(graph, face) {
@@ -185,9 +201,18 @@ pub(super) fn rebuild_faces(
         let tolerance = graph.topo().faces().definition(old).tolerance;
         let surface = tool::face::surface(graph, old);
         let (outer, inner, old_refs) = remapped_face_wires(graph, maps, old);
-        let new = fresh.editor().faces().add(&surface, outer, &inner, tolerance);
+        let new = fresh
+            .editor()
+            .faces()
+            .add(&surface, outer, &inner, tolerance);
         let mut guard = fresh.editor().faces().mutate(new)?;
-        let new_refs = guard.graph().topo().faces().relations(new).wire_ref_ids.clone();
+        let new_refs = guard
+            .graph()
+            .topo()
+            .faces()
+            .relations(new)
+            .wire_ref_ids
+            .clone();
         for (new_ref, old_ref) in new_refs.into_iter().zip(old_refs) {
             let orientation = graph.refs().wires().entry(old_ref).orientation;
             let mut ref_guard = guard.graph_mut().editor().wires().mutate_ref(new_ref)?;

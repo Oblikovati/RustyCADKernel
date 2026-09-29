@@ -99,7 +99,11 @@ fn save_bindings(storage: &Storage) -> Bindings {
 }
 
 // The bindings of the surviving nodes, their ids remapped; dropped nodes lose theirs.
-fn restore_bindings(storage: &Storage, bindings: &Bindings, remap: &DataMap<NodeId, NodeId, DefaultHashPolicy>) {
+fn restore_bindings(
+    storage: &Storage,
+    bindings: &Bindings,
+    remap: &DataMap<NodeId, NodeId, DefaultHashPolicy>,
+) {
     for (shape, old) in &bindings.shapes {
         if let Some(new) = remap.seek(old) {
             storage.set_definition_shape_binding(shape, *new);
@@ -160,7 +164,10 @@ fn node_remap(graph: &BRepGraph, nodes: &NodeMaps) -> DataMap<NodeId, NodeId, De
 }
 
 // The history layer after the migration (a new instance), enabled, records the pairs.
-fn record_remap(graph: &BRepGraph, remap: &DataMap<NodeId, NodeId, DefaultHashPolicy>) -> Result<(), Failure> {
+fn record_remap(
+    graph: &BRepGraph,
+    remap: &DataMap<NodeId, NodeId, DefaultHashPolicy>,
+) -> Result<(), Failure> {
     let history = graph.layer_registry().ensure::<LayerHistory>()?;
     history.set_enabled(true);
     let (originals, replacements): (Vec<NodeId>, Vec<NodeId>) =

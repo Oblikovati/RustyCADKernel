@@ -127,7 +127,11 @@ fn bind_equal_wires(graph: &BRepGraph, bucket: &[WireId], canonical: &mut Rewrit
 }
 
 // Every active face's active wire references that point at `old` point at `canon`.
-fn redirect_face_wire_refs(graph: &mut BRepGraph, old: WireId, canon: WireId) -> Result<(), Failure> {
+fn redirect_face_wire_refs(
+    graph: &mut BRepGraph,
+    old: WireId,
+    canon: WireId,
+) -> Result<(), Failure> {
     for face in full_ids::<FaceTag>(graph) {
         if face.is_removed(graph) {
             continue;

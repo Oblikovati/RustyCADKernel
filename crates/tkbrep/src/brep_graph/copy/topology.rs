@@ -66,7 +66,10 @@ fn vertex_of(graph: &BRepGraph, reference: VertexRefId) -> VertexId {
 
 /// `ensureEdge(theCtx, theSrcId)`: the copy of a source edge with its vertices, 3D curve
 /// (under the geometry policy) and polygon; the vertex references follow the edge's.
-pub(crate) fn ensure_edge(context: &mut CopyContext<'_>, source: EdgeId) -> Result<EdgeId, Failure> {
+pub(crate) fn ensure_edge(
+    context: &mut CopyContext<'_>,
+    source: EdgeId,
+) -> Result<EdgeId, Failure> {
     if !source.is_valid_in(&context.source().topo().edges()) {
         return Ok(EdgeId::invalid());
     }
@@ -118,7 +121,10 @@ pub(crate) fn ref_item(reference: impl Into<RefId>) -> ItemId {
 
 /// `ensureWire(theCtx, theSrcId)`: the copy of a source wire: each coedge's edge, a new
 /// free coedge per use, then the wire over them; the coedges bind after the wire.
-pub(crate) fn ensure_wire(context: &mut CopyContext<'_>, source: WireId) -> Result<WireId, Failure> {
+pub(crate) fn ensure_wire(
+    context: &mut CopyContext<'_>,
+    source: WireId,
+) -> Result<WireId, Failure> {
     if !source.is_valid_in(&context.source().topo().wires()) {
         return Ok(WireId::invalid());
     }
@@ -151,7 +157,10 @@ pub(crate) fn ensure_wire(context: &mut CopyContext<'_>, source: WireId) -> Resu
 /// `ensureFace(theCtx, theSrcId)`: the copy of a source face: its wires, surface (under
 /// the geometry policy) and triangulation, the wire references following the source's
 /// pairwise, then the p-curves of its coedges.
-pub(crate) fn ensure_face(context: &mut CopyContext<'_>, source: FaceId) -> Result<FaceId, Failure> {
+pub(crate) fn ensure_face(
+    context: &mut CopyContext<'_>,
+    source: FaceId,
+) -> Result<FaceId, Failure> {
     if !source.is_valid_in(&context.source().topo().faces()) {
         return Ok(FaceId::invalid());
     }
@@ -175,12 +184,11 @@ pub(crate) fn ensure_face(context: &mut CopyContext<'_>, source: FaceId) -> Resu
     }
     let surface = tool::face::surface(context.source(), source);
     let surface = copy_geometry(&surface, context.geom)?;
-    let copied =
-        context
-            .target_mut()
-            .editor()
-            .faces()
-            .add(&surface, outer, &inner, face.tolerance);
+    let copied = context
+        .target_mut()
+        .editor()
+        .faces()
+        .add(&surface, outer, &inner, face.tolerance);
     context.copy_removed(source, copied);
     if context.mesh != MeshPolicy::Drop && face.triangulation_rep_id.is_valid() {
         ensure_triangulation_rep(context, face.triangulation_rep_id, copied)?;
@@ -196,7 +204,13 @@ pub(crate) fn ensure_face(context: &mut CopyContext<'_>, source: FaceId) -> Resu
 // removed flags and item remap follow. A face the editor refused (a removed wire) is
 // the invalid id, whose relations the native code reads out of bounds; it has none here.
 fn bind_wire_refs(context: &mut CopyContext<'_>, source: FaceId, copied: FaceId) {
-    let old_refs = context.source().topo().faces().relations(source).wire_ref_ids.clone();
+    let old_refs = context
+        .source()
+        .topo()
+        .faces()
+        .relations(source)
+        .wire_ref_ids
+        .clone();
     let target = context.target();
     if !copied.is_valid_in(&target.topo().faces()) {
         return;

@@ -172,7 +172,8 @@ pub fn perform_with(graph: &mut BRepGraph, options: &Options) -> Result<CompactR
     let (mut nodes, mut refs) = (NodeMaps::new(graph), RefMaps::new(graph));
     bind_topology_maps(graph, &mut nodes, reachable.as_ref());
     if reachable.is_some() {
-        result.nb_unmapped_active_defs = count_active_topology(graph) - nodes.nb_mapped_topology() as u32;
+        result.nb_unmapped_active_defs =
+            count_active_topology(graph) - nodes.nb_mapped_topology() as u32;
     }
     let history = graph.layer_registry().ensure::<LayerHistory>()?;
     let was_enabled = history.is_enabled();
@@ -191,7 +192,10 @@ pub fn perform_with(graph: &mut BRepGraph, options: &Options) -> Result<CompactR
     swap::install(graph, fresh, &nodes, &refs, options)?;
     graph.editor().commit_mutation();
     // Re-acquired: the layer migration replaced the history instance.
-    graph.layer_registry().ensure::<LayerHistory>()?.set_enabled(was_enabled);
+    graph
+        .layer_registry()
+        .ensure::<LayerHistory>()?
+        .set_enabled(was_enabled);
     Ok(result)
 }
 
@@ -205,7 +209,8 @@ fn count_removed(graph: &BRepGraph, result: &mut CompactResult) {
     result.nb_removed_faces = removed(topo.faces().nb(), count_active::<FaceTag>(graph));
     result.nb_removed_shells = removed(topo.shells().nb(), count_active::<ShellTag>(graph));
     result.nb_removed_solids = removed(topo.solids().nb(), count_active::<SolidTag>(graph));
-    result.nb_removed_compounds = removed(topo.compounds().nb(), count_active::<CompoundTag>(graph));
+    result.nb_removed_compounds =
+        removed(topo.compounds().nb(), count_active::<CompoundTag>(graph));
     result.nb_removed_comp_solids =
         removed(topo.comp_solids().nb(), count_active::<CompSolidTag>(graph));
 }
@@ -223,7 +228,11 @@ fn count_active_topology(graph: &BRepGraph) -> u32 {
 }
 
 // The dense old-to-new numbering of every topology kind but the coedges.
-fn bind_topology_maps(graph: &BRepGraph, nodes: &mut NodeMaps, reachable: Option<&HashSet<NodeId>>) {
+fn bind_topology_maps(
+    graph: &BRepGraph,
+    nodes: &mut NodeMaps,
+    reachable: Option<&HashSet<NodeId>>,
+) {
     bind_active_index_map(graph, &mut nodes.vertices, reachable);
     bind_active_index_map(graph, &mut nodes.edges, reachable);
     bind_active_index_map(graph, &mut nodes.wires, reachable);
@@ -236,11 +245,17 @@ fn bind_topology_maps(graph: &BRepGraph, nodes: &mut NodeMaps, reachable: Option
 
 // The fresh graph (with the source's generation and GUID) rebuilt bottom up, its
 // derived relations rebuilt from the final incidence.
-fn rebuild(graph: &BRepGraph, nodes: &mut NodeMaps, refs: &mut RefMaps) -> Result<BRepGraph, Failure> {
+fn rebuild(
+    graph: &BRepGraph,
+    nodes: &mut NodeMaps,
+    refs: &mut RefMaps,
+) -> Result<BRepGraph, Failure> {
     let mut fresh = BRepGraph::new();
     let storage = graph.inc_storage();
     fresh.inc_storage().set_generation(storage.generation());
-    fresh.inc_storage_mut().set_graph_guid(*storage.graph_guid());
+    fresh
+        .inc_storage_mut()
+        .set_graph_guid(*storage.graph_guid());
     topology::rebuild_vertices(graph, &mut fresh, nodes)?;
     topology::rebuild_edges(graph, &mut fresh, nodes, refs)?;
     topology::rebuild_wires(graph, &mut fresh, nodes)?;

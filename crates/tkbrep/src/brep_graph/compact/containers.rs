@@ -45,7 +45,10 @@ pub(super) fn rebuild_shells(
             if !face.is_valid() {
                 continue;
             }
-            let new_ref = fresh.editor().shells().append(new, face, entry.orientation)?;
+            let new_ref = fresh
+                .editor()
+                .shells()
+                .append(new, face, entry.orientation)?;
             if new_ref.is_valid() {
                 refs.face_refs.bind(reference, new_ref);
             }
@@ -73,7 +76,10 @@ pub(super) fn rebuild_solids(
             if !shell.is_valid() {
                 continue;
             }
-            let new_ref = fresh.editor().solids().append(new, shell, entry.orientation)?;
+            let new_ref = fresh
+                .editor()
+                .solids()
+                .append(new, shell, entry.orientation)?;
             if new_ref.is_valid() {
                 refs.shell_refs.bind(reference, new_ref);
             }
@@ -129,7 +135,10 @@ fn append_compound_children(
         if !child.is_valid() {
             continue;
         }
-        let new_ref = fresh.editor().compounds().append(new, child, entry.orientation)?;
+        let new_ref = fresh
+            .editor()
+            .compounds()
+            .append(new, child, entry.orientation)?;
         if new_ref.is_valid() {
             let location = &entry.local_location;
             fresh
@@ -156,7 +165,8 @@ pub(super) fn rebuild_comp_solids(
         }
         let (mut solids, mut old_refs) = (Vec::new(), Vec::new());
         for reference in RefsSolidOfCompSolid::new(graph, old) {
-            let solid: SolidId = maps.remap_typed(graph.refs().solids().entry(reference).child_solid_id);
+            let solid: SolidId =
+                maps.remap_typed(graph.refs().solids().entry(reference).child_solid_id);
             if solid.is_valid() {
                 solids.push(solid);
                 old_refs.push(reference);
@@ -166,7 +176,12 @@ pub(super) fn rebuild_comp_solids(
         if !new.is_valid() {
             continue;
         }
-        let new_refs = fresh.topo().comp_solids().relations(new).solid_ref_ids.clone();
+        let new_refs = fresh
+            .topo()
+            .comp_solids()
+            .relations(new)
+            .solid_ref_ids
+            .clone();
         for (old_ref, new_ref) in old_refs.into_iter().zip(new_refs) {
             let orientation = graph.refs().solids().entry(old_ref).orientation;
             let mut guard = fresh.editor().solids().mutate_ref(new_ref)?;
