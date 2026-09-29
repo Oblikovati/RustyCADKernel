@@ -96,6 +96,34 @@ fn not_parallel(t: Vector3) -> Option<Vector3> {
     (v.cross_magnitude(t) > 1.0e-12).then_some(v)
 }
 
+// The unit normals of `t`: theta1 = (V ^ T) / |V ^ T| with V = Z in 2D and
+// NotParallel(T) in 3D, and in 3D theta2 = (T ^ theta1) / |T ^ theta1|; None when
+// every NotParallel attempt is parallel.
+fn normal_frames(ndimen: i32, t: Vector3) -> Result<Option<Vec<Vector3>>, Failure> {
+    let v: Vector3 = if ndimen == 2 {
+        Vector3::new(0., 0., 1.)
+    } else {
+        let Some(v) = not_parallel(t) else {
+            return Ok(None);
+        };
+        v
+    };
+    let theta1: Vector3 = (v ^ t).normalized()?;
+    let mut frames: Vec<Vector3> = vec![theta1];
+    if ndimen == 3 {
+        frames.push((t ^ theta1).normalized()?);
+    }
+    Ok(Some(frames))
+}
+
+// The images of the normal frames by the curvature projector of `t`.
+fn curvature_frames(ndimen: i32, t: Vector3, frames: &[Vector3]) -> Vec<Vector3> {
+    frames
+        .iter()
+        .map(|&theta| curvature_frame(ndimen, t, theta))
+        .collect()
+}
+
 // F = (|T|^2 I - T T^t) theta for the curvature frames; the 2D formula has no z
 // terms at all (adding the zero ones could flip the sign of a zero result).
 fn curvature_frame(ndimen: i32, t: Vector3, theta: Vector3) -> Vector3 {
@@ -322,34 +350,30 @@ impl Variational {
         ) {
             return Ok(true);
         }
+        let t: Vector3 = self.tabulated_tangent(ndimen, jndex)?;
+        let Some(frames) = normal_frames(ndimen, t)? else {
+            return Ok(false);
+        };
+        self.store_frames(ndimen, begin, &frames, false)?;
+        if typcon == Constraint::CurvaturePoint {
+            let images: Vec<Vector3> = curvature_frames(ndimen, t, &frames);
+            self.store_frames(ndimen, begin, &images, true)?;
+        }
+        Ok(true)
+    }
+
+    // The tangent at `myTabConstraints(jndex)` (z = 0 in 2D).
+    fn tabulated_tangent(&self, ndimen: i32, jndex: i32) -> Result<Vector3, Failure> {
         let z: f64 = if ndimen == 3 {
             self.tables.value(jndex + 2)?
         } else {
             0.
         };
-        let t = Vector3::new(self.tables.value(jndex)?, self.tables.value(jndex + 1)?, z);
-        let v: Vector3 = if ndimen == 2 {
-            Vector3::new(0., 0., 1.)
-        } else {
-            let Some(v) = not_parallel(t) else {
-                return Ok(false);
-            };
-            v
-        };
-        let theta1: Vector3 = (v ^ t).normalized()?;
-        let mut frames: Vec<Vector3> = vec![theta1];
-        if ndimen == 3 {
-            frames.push((t ^ theta1).normalized()?);
-        }
-        self.store_frames(ndimen, begin, &frames, false)?;
-        if typcon == Constraint::CurvaturePoint {
-            let images: Vec<Vector3> = frames
-                .iter()
-                .map(|&theta| curvature_frame(ndimen, t, theta))
-                .collect();
-            self.store_frames(ndimen, begin, &images, true)?;
-        }
-        Ok(true)
+        Ok(Vector3::new(
+            self.tables.value(jndex)?,
+            self.tables.value(jndex + 1)?,
+            z,
+        ))
     }
 
     // The frames at `begin`: x and y in 2D, x, y, z of each frame in 3D.
