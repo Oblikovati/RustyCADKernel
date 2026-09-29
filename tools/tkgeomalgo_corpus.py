@@ -19,3 +19,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_gccint').append_gccint_requests(requests)
     # Hatch (tkgeomalgo_corpus_hatch.py)
     __import__('tkgeomalgo_corpus_hatch').append_hatch_requests(requests)
+    # GccAna (tkgeomalgo_corpus_gccana.py)
+    __import__('tkgeomalgo_corpus_gccana').append_gccana_requests(requests)

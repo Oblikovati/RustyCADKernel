@@ -6,7 +6,7 @@ use rustycad_tkgeomalgo::gcc_int::{BCirc, BElips, BHyper, BLine, BParab, Bisec};
 use rustycad_tkmath::gp::{Axis22d, Circle2, Ellipse2, Hyperbola2, Line2, Parabola2};
 
 // Every accessor of a bisector: its geometry or the raised exception type.
-fn accessors(bisec: &Handle<dyn Bisec>) {
+pub fn accessors(bisec: &Handle<dyn Bisec>) {
     int(bisec.arc_type() as i32);
     print!("{} ", bisec.dynamic_type().expect("bisector").name());
     flag(bisec.is_kind(<dyn Bisec as RuntimeTyped>::static_type()));
