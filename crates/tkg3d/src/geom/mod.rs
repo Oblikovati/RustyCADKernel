@@ -99,6 +99,7 @@ pub use surface_of_revolution::GeomSurfaceOfRevolution;
 mod bezier_curve;
 pub use bezier_curve::GeomBezierCurve;
 mod bspline_curve;
+mod spline_kind;
 pub use bspline_curve::GeomBSplineCurve;
 mod offset_curve;
 pub use offset_curve::GeomOffsetCurve;

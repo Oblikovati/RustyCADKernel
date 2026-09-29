@@ -10,18 +10,19 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the weight checks of the GeomEval_TBezierCurve and GeomEval_AHTBezierCurve constructors (ModelingData/TKG3d/GeomEval) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of the weight checks of the Geom2dEval_TBezierCurve, Geom2dEval_AHTBezierCurve (ModelingData/TKG2d/Geom2dEval), GeomEval_TBezierCurve and GeomEval_AHTBezierCurve (ModelingData/TKG3d/GeomEval) constructors at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! The pole and weight storage shared by the T-Bezier and AHT-Bezier curves: the
-//! owning array copy of `myPoles(thePoles)` and the weight checks of the rational
-//! constructors, which both classes run in the same order.
-use crate::geom::errors;
+//! The pole and weight storage shared by the T-Bezier and AHT-Bezier curves of
+//! Geom2dEval and GeomEval: the owning array copy of `myPoles(thePoles)` and the
+//! weight checks of the rational constructors, which the four classes run in the
+//! same order.
+use crate::geom2d::errors;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 
 /// An owning copy that keeps the source bounds, as the NCollection_Array1 copy
 /// constructor; `let stored: Array1<'static, f64> = owned(&weights);`.
-pub(crate) fn owned<T: Clone>(source: &Array1<'_, T>) -> Array1<'static, T> {
+pub fn owned<T: Clone>(source: &Array1<'_, T>) -> Array1<'static, T> {
     let mut copy: Array1<'static, T> = Array1::default();
     copy.assign(source);
     copy
@@ -29,11 +30,7 @@ pub(crate) fn owned<T: Clone>(source: &Array1<'_, T>) -> Array1<'static, T> {
 
 /// Standard_ConstructionError unless there is one weight per pole and every weight
 /// is > 0, checked from `Lower()` upwards; `check_weights("GeomEval_TBezierCurve", &w, 3)?`.
-pub(crate) fn check_weights(
-    class: &str,
-    weights: &Array1<'_, f64>,
-    count: usize,
-) -> Result<(), Failure> {
+pub fn check_weights(class: &str, weights: &Array1<'_, f64>, count: usize) -> Result<(), Failure> {
     if weights.len() != count {
         return Err(errors::construction(&format!(
             "{class}: {} weights; expected {count} (one per pole)",

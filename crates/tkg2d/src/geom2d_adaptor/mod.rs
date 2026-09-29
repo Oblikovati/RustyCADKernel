@@ -21,6 +21,8 @@ mod curve_eval_order;
 mod curve_query;
 mod curve_shape;
 mod curve_state;
+pub mod knot_continuity;
 mod make_curve;
+pub mod span_cache;
 pub use curve::Geom2dAdaptorCurve;
 pub use make_curve::make_curve;

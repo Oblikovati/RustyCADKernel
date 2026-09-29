@@ -11,10 +11,10 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx and ModelingData/TKG3d/Geom/Geom_BSplineCurve.cxx (Segment) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! `Geom2d_BSplineCurve::Segment`: restrict the curve to `[U1, U2]`.
-use super::state::BSplineState;
+//! `Segment`: restrict the curve to `[U1, U2]`.
+use super::{BSplineCurveCore, BSplineCurveKind};
 use crate::geom2d::arrays::{at, one_based, put};
 use crate::geom2d::errors;
 use crate::geom2d::native::{std_max, std_min};
@@ -23,8 +23,6 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, real};
 use rustycad_tkmath::bsplclib;
-use rustycad_tkmath::gp::Point2;
-
 // The parameters that the steps of Segment pass to each other.
 struct SegmentPlan {
     u1: f64,
@@ -38,7 +36,7 @@ struct SegmentPlan {
     was_periodic: bool,
 }
 
-impl BSplineState {
+impl<K: BSplineCurveKind> BSplineCurveCore<K> {
     fn locate_in_knots(&self, u: f64) -> Result<(i32, f64), Failure> {
         let (mut index, mut new_u): (i32, f64) = (0, 0.0);
         let (lower, upper) = (self.knots.lower(), self.knots.upper());
@@ -56,13 +54,16 @@ impl BSplineState {
         Ok((index, new_u))
     }
     /// `Segment(U1, U2, theTolerance)`; Standard_DomainError when `U2 < U1` or, on a
-    /// periodic curve, when `U2 - U1` exceeds the period by more than PConfusion.
-    pub(super) fn segment(&mut self, u1: f64, u2: f64, tolerance: f64) -> Result<(), Failure> {
+    /// periodic curve, when `U2 - U1` exceeds the period by more than PConfusion;
+    /// `core.segment(0.2, 0.8, precision::p_confusion())?`.
+    pub fn segment(&mut self, u1: f64, u2: f64, tolerance: f64) -> Result<(), Failure> {
         if u2 < u1 {
             return Err(errors::domain(&format!(
-                "Geom2d_BSplineCurve::Segment: U1 = {u1}, U2 = {u2}; expected U1 <= U2"
+                "{}::Segment: U1 = {u1}, U2 = {u2}; expected U1 <= U2",
+                K::BSPLINE_CLASS
             )));
         }
+        self.clear_eval_rep_on_edit();
         let mut plan: SegmentPlan = self.segment_plan(u1, u2, tolerance)?;
         let mut knots: Array1<'static, f64> = one_based(2)?;
         put(&mut knots, 1, std_min(plan.new_u1, plan.new_u2))?;
@@ -82,7 +83,8 @@ impl BSplineState {
             du = u2 - u1;
             if du - period > precision::p_confusion() {
                 return Err(errors::domain(&format!(
-                    "Geom2d_BSplineCurve::Segment: U2 - U1 = {du}; expected <= the period {period}"
+                    "{}::Segment: U2 - U1 = {du}; expected <= the period {period}",
+                    K::BSPLINE_CLASS
                 )));
             }
             if du > period {
@@ -132,7 +134,7 @@ impl BSplineState {
         let pindex2: i32 = (bsplclib::pole_index(self.deg, index2, self.periodic, &self.mults)?
             + 1)
         .min(self.poles.len() as i32);
-        let poles: Array1<'static, Point2> = slice(&self.poles, pindex1, pindex2)?;
+        let poles: Array1<'static, K::Point> = slice(&self.poles, pindex1, pindex2)?;
         let weights: Option<Array1<'static, f64>> = match self.rational {
             true => Some(slice(&self.weights, pindex1, pindex2)?),
             false => None,

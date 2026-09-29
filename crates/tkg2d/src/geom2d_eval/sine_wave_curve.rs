@@ -22,7 +22,6 @@ use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2d, Point2, Transform2, Vector2, Xy};
 use std::io;
 
@@ -52,56 +51,9 @@ impl Clone for Geom2dEvalSineWaveCurve {
     }
 }
 impl Geom2dEvalSineWaveCurve {
-    /// Sine wave (`Geom2dEval_SineWaveCurve(Position, Amplitude, Omega, Phase = 0)`);
-    /// Standard_ConstructionError unless `amplitude > 0` and `omega > 0`;
-    /// `Geom2dEvalSineWaveCurve::new(axis, 2.0, 3.0, 0.0)?`.
-    pub fn new(position: Axis2d, amplitude: f64, omega: f64, phase: f64) -> Result<Self, Failure> {
-        if amplitude <= 0.0 {
-            return Err(errors::construction(&format!(
-                "{CLASS}: amplitude = {amplitude}; expected > 0"
-            )));
-        }
-        if omega <= 0.0 {
-            return Err(errors::construction(&format!(
-                "{CLASS}: omega = {omega}; expected > 0"
-            )));
-        }
-        Ok(Self {
-            parent: StandardTransient::default(),
-            position,
-            amplitude,
-            omega,
-            phase,
-        })
-    }
-    // The native Copy() reruns the constructor on valid stored values.
-    fn copied(&self) -> Self {
-        Self {
-            parent: StandardTransient::default(),
-            ..*self
-        }
-    }
-    /// The local coordinate system (`Position`); `curve.position()`.
-    pub fn position(&self) -> Axis2d {
-        self.position
-    }
-    /// The amplitude (`Amplitude`); `curve.amplitude()`.
-    pub fn amplitude(&self) -> f64 {
-        self.amplitude
-    }
-    /// The angular frequency (`Omega`); `curve.omega()`.
-    pub fn omega(&self) -> f64 {
-        self.omega
-    }
-    /// The phase shift (`Phase`); `curve.phase()`.
-    pub fn phase(&self) -> f64 {
-        self.phase
-    }
+    crate::sine_wave_members!(Axis2d);
     fn frame(&self) -> LocalFrame {
         LocalFrame::new(self.position)
-    }
-    fn argument(&self, u: f64) -> f64 {
-        self.omega * u + self.phase
     }
     // `anO + U * aXD + A * sin(aArg) * aYD`.
     fn point_at(&self, frame: &LocalFrame, u: f64) -> Point2 {
@@ -139,34 +91,9 @@ impl Geom2dGeometry for Geom2dEvalSineWaveCurve {
     }
 }
 impl Geom2dCurve for Geom2dEvalSineWaveCurve {
-    fn reverse(&self) -> Result<(), Failure> {
-        Err(unsupported("Geom2dEval_SineWaveCurve::Reverse", ""))
-    }
-    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
-        let detail: String = format!("(U = {u})");
-        Err(unsupported(
-            "Geom2dEval_SineWaveCurve::ReversedParameter",
-            &detail,
-        ))
-    }
-    fn first_parameter(&self) -> f64 {
-        -precision::infinite()
-    }
-    fn last_parameter(&self) -> f64 {
-        precision::infinite()
-    }
-    fn is_closed(&self) -> Result<bool, Failure> {
-        Ok(false)
-    }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    crate::unsupported_curve_reversal!(unsupported, "Geom2dEval_SineWaveCurve");
+    crate::open_curve_range!(-precision::infinite(), precision::infinite());
+    crate::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
         Ok(self.point_at(&self.frame(), u))
     }

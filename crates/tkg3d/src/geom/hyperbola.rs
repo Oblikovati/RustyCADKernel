@@ -27,7 +27,6 @@ use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::elclib;
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis1, Axis2, Hyperbola3, Point3, Transform3, Vector3};
 use std::io;
 
@@ -213,24 +212,8 @@ impl GeomCurve for GeomHyperbola {
     fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         Ok(-u)
     }
-    fn first_parameter(&self) -> f64 {
-        -precision::infinite()
-    }
-    fn last_parameter(&self) -> f64 {
-        precision::infinite()
-    }
-    fn is_closed(&self) -> Result<bool, Failure> {
-        Ok(false)
-    }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    rustycad_tkg2d::open_curve_range!(-precision::infinite(), precision::infinite());
+    rustycad_tkg2d::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
         let s: HyperbolaState = *self.state.read();
         Ok(elclib::hyperbola_value(

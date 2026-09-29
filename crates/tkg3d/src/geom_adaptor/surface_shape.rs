@@ -30,7 +30,7 @@ use crate::geom::{GeomBSplineSurface, GeomCurve, GeomSurface, GeomSweptSurface};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkmath::bsplclib;
+use rustycad_tkg2d::geom2d_adaptor::knot_continuity::{KnotSpans, locate_knot, max_multiplicity};
 use rustycad_tkmath::geom_abs::{CurveType, Shape};
 
 /// A parametric direction of the surface.
@@ -66,8 +66,14 @@ fn local_continuity(
     periodic: bool,
 ) -> Result<Shape, Failure> {
     let count: i32 = knots.len() as i32;
-    let (mut index1, new_first) = locate(degree, (knots, mults), first, periodic)?;
-    let (mut index2, new_last) = locate(degree, (knots, mults), last, periodic)?;
+    let spans = KnotSpans {
+        knots,
+        mults,
+        degree,
+        periodic,
+    };
+    let (mut index1, new_first) = locate_knot(&spans, first)?;
+    let (mut index2, new_last) = locate_knot(&spans, last)?;
     let eps_knot: f64 = precision::p_confusion();
     if (new_first - *knots.value(index1 + 1).map_err(array_bounds)?).abs() < eps_knot {
         index1 += 1;
@@ -82,10 +88,7 @@ fn local_continuity(
     if index2 == index1 {
         return Ok(Shape::CN);
     }
-    let mut mult_max: i32 = *mults.value(index1 + 1).map_err(array_bounds)?;
-    for i in index1 + 1..=index2 {
-        mult_max = mult_max.max(*mults.value(i).map_err(array_bounds)?);
-    }
+    let mult_max: i32 = max_multiplicity(mults, index1, index2)?;
     Ok(match degree - mult_max {
         i32::MIN..=0 => Shape::C0,
         1 => Shape::C1,
@@ -93,28 +96,6 @@ fn local_continuity(
         3 => Shape::C3,
         _ => Shape::CN,
     })
-}
-
-fn locate(
-    degree: i32,
-    (knots, mults): (&Array1<'_, f64>, &Array1<'_, i32>),
-    parameter: f64,
-    periodic: bool,
-) -> Result<(i32, f64), Failure> {
-    let (mut index, mut located): (i32, f64) = (0, 0.0);
-    let count: i32 = knots.len() as i32;
-    bsplclib::locate_parameter(
-        degree,
-        knots,
-        mults,
-        parameter,
-        periodic,
-        1,
-        count,
-        &mut index,
-        &mut located,
-    )?;
-    Ok((index, located))
 }
 
 /// `UContinuity` / `VContinuity`; Standard_NoSuchObject for an unknown kind;
