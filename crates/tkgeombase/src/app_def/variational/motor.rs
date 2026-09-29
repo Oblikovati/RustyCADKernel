@@ -366,6 +366,13 @@ impl Variational {
         j.set_est_length(st.cblong);
         let values: Array1<'static, f64> = st.new_ti.array1().clone();
         self.parameters.change_array1().assign(&values);
+        self.store_motor_results(&st);
+        Ok(())
+    }
+
+    // (5) The criteria, the maximal error and its point, and the average error over
+    // the unconstrained points (over the constraints when every point is one).
+    fn store_motor_results(&mut self, st: &MotorState) {
         let r = &mut self.results;
         r.criterium = [
             st.errors.qua_err,
@@ -384,6 +391,5 @@ impl Variational {
         } else {
             st.errors.ave_err / f64::from(nbr_constraint)
         };
-        Ok(())
     }
 }
