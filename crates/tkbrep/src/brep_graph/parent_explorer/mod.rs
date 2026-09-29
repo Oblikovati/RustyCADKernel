@@ -245,6 +245,7 @@ impl<'g> ParentExplorer<'g> {
     }
 
     /// `Next()`.
+    #[allow(clippy::should_implement_trait)] // OCCT's More/Next protocol, fallible; Iterator is implemented too.
     pub fn next(&mut self) -> Result<(), Failure> {
         self.advance()
     }

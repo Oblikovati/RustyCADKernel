@@ -27,9 +27,9 @@
 //! The derived edge, coedge, wire and shell flags (`Degenerated`, `SameRange`,
 //! `IsClosed`...) read `BRepGraph_CacheDerivedState` natively, which memoises the
 //! computations of [`cache_derived_state`](crate::brep_graph::cache_derived_state) per
-//! OwnGen. Until the caches area installs that service, [`derived_state`] computes the
-//! value on each call with the cache's answer for an inactive entity; the result is the
-//! same as long as no mutation leaves an OwnGen unchanged.
+//! OwnGen. Until the caches area installs that service, the private `derived_state`
+//! module computes the value on each call with the cache's answer for an inactive
+//! entity; the result is the same as long as no mutation leaves an OwnGen unchanged.
 pub mod co_edge;
 mod derived_state;
 pub mod edge;

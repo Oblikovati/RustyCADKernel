@@ -81,6 +81,12 @@ fn parent_frame(node: NodeId, step_to_child: i32, ref_to_child: RefId) -> StackF
 
 // The switch of `nextParentFrame` for one parent index.
 fn parent_at(graph: &BRepGraph, node: NodeId, index: u32) -> ParentLookup {
+    // A start node out of its kind's range has no parent: the native Wire, Face,
+    // Shell, Solid and Occurrence cases read its relations unchecked (undefined), and
+    // every checked case finds nothing for it.
+    if !graph.topo().generic().is_valid(node) {
+        return ParentLookup::Exhausted;
+    }
     match node.kind {
         NodeKind::VERTEX => vertex_parent(graph, VertexId::new(node.index), index),
         NodeKind::EDGE => edge_parent(graph, EdgeId::new(node.index), index),

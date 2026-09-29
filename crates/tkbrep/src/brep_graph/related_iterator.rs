@@ -115,6 +115,7 @@ impl<'g> RelatedIterator<'g> {
     }
 
     /// `Next()`: nothing once exhausted.
+    #[allow(clippy::should_implement_trait)] // OCCT's More/Next protocol, fallible; Iterator is implemented too.
     pub fn next(&mut self) -> Result<(), Failure> {
         if !self.has_current {
             return Ok(());
