@@ -197,27 +197,8 @@ impl Variational {
         let mults: Array1<'static, i32> = converter.multiplicities()?.clone();
         let mut tabs: PointTabs = PointTabs::new([self.nb_p3d, self.nb_p2d])?;
         for ipole in poles.lower_row()..=poles.upper_row() {
-            let mut index: i32 = poles.lower_col();
-            let mut next = || -> Result<f64, Failure> {
-                let value: f64 = *poles.value(ipole, index).map_err(array_error)?;
-                index += 1;
-                Ok(value)
-            };
-            for jp3d in 1..=self.nb_p3d {
-                let point = Point3::new(next()?, next()?, next()?);
-                tabs.p3d.set_value(jp3d, point).map_err(array_error)?;
-            }
-            for jp2d in 1..=self.nb_p2d {
-                let point = Point2::new(next()?, next()?);
-                tabs.p2d.set_value(jp2d, point).map_err(array_error)?;
-            }
-            let point: MultiPoint = if self.nb_p2d != 0 && self.nb_p3d != 0 {
-                MultiPoint::from_points_and_2d(&tabs.p3d, &tabs.p2d)
-            } else if self.nb_p2d != 0 {
-                MultiPoint::from_points2d(&tabs.p2d)
-            } else {
-                MultiPoint::from_points(&tabs.p3d)
-            };
+            self.read_pole_row(poles, ipole, &mut tabs)?;
+            let point: MultiPoint = self.multi_point_of(&tabs);
             tab_mu.set_value(ipole, point).map_err(array_error)?;
         }
         // A new array: handles from an earlier Knots() keep the old knots.
@@ -225,6 +206,41 @@ impl Variational {
         self.results.mbsp_curve = MultiBSpCurve::from_multi_points(&tab_mu, &knots, &mults);
         self.is_done = true;
         Ok(())
+    }
+
+    // Row `ipole` of the poles read into the 3D points then the 2D points of `tabs`.
+    fn read_pole_row(
+        &self,
+        poles: &Array2<'_, f64>,
+        ipole: i32,
+        tabs: &mut PointTabs,
+    ) -> Result<(), Failure> {
+        let mut index: i32 = poles.lower_col();
+        let mut next = || -> Result<f64, Failure> {
+            let value: f64 = *poles.value(ipole, index).map_err(array_error)?;
+            index += 1;
+            Ok(value)
+        };
+        for jp3d in 1..=self.nb_p3d {
+            let point = Point3::new(next()?, next()?, next()?);
+            tabs.p3d.set_value(jp3d, point).map_err(array_error)?;
+        }
+        for jp2d in 1..=self.nb_p2d {
+            let point = Point2::new(next()?, next()?);
+            tabs.p2d.set_value(jp2d, point).map_err(array_error)?;
+        }
+        Ok(())
+    }
+
+    // The MultiPoint of the points of `tabs`, of the kinds the line has.
+    fn multi_point_of(&self, tabs: &PointTabs) -> MultiPoint {
+        if self.nb_p2d != 0 && self.nb_p3d != 0 {
+            MultiPoint::from_points_and_2d(&tabs.p3d, &tabs.p2d)
+        } else if self.nb_p2d != 0 {
+            MultiPoint::from_points2d(&tabs.p2d)
+        } else {
+            MultiPoint::from_points(&tabs.p3d)
+        }
     }
 
     /// `Distance(mat)`: `mat(k, LowerCol + ipoint - FirstPoint)` is the distance of
