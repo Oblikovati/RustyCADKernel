@@ -175,14 +175,20 @@ impl FuncCylinderLSDist {
         self.capture.take()
     }
 
-    // F and G(1..4) before the final scaling: sum d^2 and sum d * dD2/dX.
-    fn sums(&self, x: &Vector<'_>, g: &mut Vector<'_>, member: &str) -> Result<f64, Failure> {
+    // F = sum d^2 and G = 2 sum d * dD2/dX (G(4) not yet scaled by -2R); F is reset
+    // once the variables are read, as natively (Gradient passes a scratch F).
+    fn sums(
+        &self,
+        x: &Vector<'_>,
+        (f, g): (&mut f64, &mut Vector<'_>),
+        member: &str,
+    ) -> Result<(), Failure> {
         let [x1, x2, x3, radius] = variables::<4>(x)?;
         let (loc, r2): (Xyz, f64) = (Xyz::new(x1, x2, x3), radius * radius);
         let (dx, dy, dz): (f64, f64, f64) = (self.my_dir.x(), self.my_dir.y(), self.my_dir.z());
         let dir_xyz: Xyz = Xyz::new(dx, dy, dz);
+        *f = 0.0;
         g.init(0.0);
-        let mut f: f64 = 0.0;
         for point in cloud(&self.my_points, member)?.iter() {
             let v: Xyz = *point - loc;
             let d: f64 = v.cross_square_magnitude(dir_xyz) - r2;
@@ -191,10 +197,10 @@ impl FuncCylinderLSDist {
             let dy0: f64 = -2. * (vy * dz - vz * dy) * dz + 2. * (vx * dy - vy * dx) * dx;
             let dz0: f64 = 2. * (vy * dz - vz * dy) * dy - 2. * (vz * dx - vx * dz) * dx;
             accumulate(g, [d * dx0, d * dy0, d * dz0, d])?;
-            f += d * d;
+            *f += d * d;
         }
         g.multiply(2.0);
-        Ok(f)
+        Ok(())
     }
 
     fn try_value(&self, x: &Vector<'_>) -> Result<f64, Failure> {
@@ -228,20 +234,21 @@ impl MultipleVarFunction for FuncCylinderLSDist {
 
 impl MultipleVarFunctionWithGradient for FuncCylinderLSDist {
     fn gradient(&mut self, x: &Vector<'_>, g: &mut Vector<'_>) -> bool {
+        let mut scratch: f64 = 0.0;
         let computed = self
-            .sums(x, g, "GeomConvert_FuncCylinderLSDist::Gradient")
-            .and_then(|_| scale_component(g, 6, -2.0 * *x.value(4)?));
+            .sums(
+                x,
+                (&mut scratch, g),
+                "GeomConvert_FuncCylinderLSDist::Gradient",
+            )
+            .and_then(|()| scale_component(g, 6, -2.0 * *x.value(4)?));
         self.capture.keep(computed).is_some()
     }
 
     fn values(&mut self, x: &Vector<'_>, f: &mut f64, g: &mut Vector<'_>) -> bool {
-        *f = 0.0;
         let computed = self
-            .sums(x, g, "GeomConvert_FuncCylinderLSDist::Values")
-            .and_then(|sum| {
-                *f = sum;
-                scale_component(g, 4, -2.0 * *x.value(4)?)
-            });
+            .sums(x, (f, g), "GeomConvert_FuncCylinderLSDist::Values")
+            .and_then(|()| scale_component(g, 4, -2.0 * *x.value(4)?));
         self.capture.keep(computed).is_some()
     }
 }
@@ -275,22 +282,27 @@ impl FuncSphereLSDist {
         self.capture.take()
     }
 
-    // F and G = -4 * sum d * (P - C) (and -4 R * sum d for G(4)).
-    fn sums(&self, x: &Vector<'_>, g: &mut Vector<'_>, member: &str) -> Result<f64, Failure> {
+    // F = sum d^2 and G = -4 * sum d * (P - C) (and -4 R * sum d for G(4)); F is
+    // reset after G, once the variables are read (Gradient passes a scratch F).
+    fn sums(
+        &self,
+        x: &Vector<'_>,
+        (f, g): (&mut f64, &mut Vector<'_>),
+        member: &str,
+    ) -> Result<(), Failure> {
         let [x1, x2, x3, radius] = variables::<4>(x)?;
         let loc = Xyz::new(x1, x2, x3);
         let r2: f64 = radius * radius;
         g.init(0.0);
-        let mut f: f64 = 0.0;
+        *f = 0.0;
         for point in cloud(&self.my_points, member)?.iter() {
             let d_loc: Xyz = *point - loc;
             let d: f64 = d_loc.square_modulus() - r2;
             accumulate(g, [d * d_loc.x(), d * d_loc.y(), d * d_loc.z(), d])?;
-            f += d * d;
+            *f += d * d;
         }
         g.multiply(-4.0);
-        scale_component(g, 4, radius)?;
-        Ok(f)
+        scale_component(g, 4, radius)
     }
 
     fn try_value(&self, x: &Vector<'_>) -> Result<f64, Failure> {
@@ -323,17 +335,17 @@ impl MultipleVarFunction for FuncSphereLSDist {
 
 impl MultipleVarFunctionWithGradient for FuncSphereLSDist {
     fn gradient(&mut self, x: &Vector<'_>, g: &mut Vector<'_>) -> bool {
-        let computed = self.sums(x, g, "GeomConvert_FuncSphereLSDist::Gradient");
+        let mut scratch: f64 = 0.0;
+        let computed = self.sums(
+            x,
+            (&mut scratch, g),
+            "GeomConvert_FuncSphereLSDist::Gradient",
+        );
         self.capture.keep(computed).is_some()
     }
 
     fn values(&mut self, x: &Vector<'_>, f: &mut f64, g: &mut Vector<'_>) -> bool {
-        *f = 0.0;
-        let computed = self.sums(x, g, "GeomConvert_FuncSphereLSDist::Values");
-        let Some(sum) = self.capture.keep(computed) else {
-            return false;
-        };
-        *f = sum;
-        true
+        let computed = self.sums(x, (f, g), "GeomConvert_FuncSphereLSDist::Values");
+        self.capture.keep(computed).is_some()
     }
 }

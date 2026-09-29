@@ -17,6 +17,7 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `GeomLib_PolyFunc`: the derivative of a polynomial as a math function.
+use crate::failure_capture::FailureCapture;
 use crate::native_failure::failure;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::math::{Function, FunctionWithDerivative, Vector};
@@ -25,10 +26,14 @@ use rustycad_tkmath::plib;
 /// The polynomial `P'(x)` of a polynomial `P` given by its coefficients (constant
 /// first); its value and derivative through PLib::EvalPolynomial.
 ///
+/// The `math` callbacks return a bool; the Standard_OutOfRange that the native
+/// callbacks raise for a constant polynomial (no derivative coefficient) is recorded,
+/// the callback returns false, and [`PolyFunc::take_failure`] gives it back.
+///
 /// `let mut f = PolyFunc::new(&coeffs)?; let mut v = 0.0; f.value(0.5, &mut v);`
-#[derive(Clone, Debug)]
 pub struct PolyFunc {
     my_coeffs: Vec<f64>,
+    capture: FailureCapture,
 }
 
 impl PolyFunc {
@@ -43,7 +48,15 @@ impl PolyFunc {
         for ii in 1..=count {
             my_coeffs.push(f64::from(ii) * *coeffs.value(ii + 1)?);
         }
-        Ok(Self { my_coeffs })
+        Ok(Self {
+            my_coeffs,
+            capture: FailureCapture::default(),
+        })
+    }
+
+    /// The failure a callback raised natively, if any; `f.take_failure()?`.
+    pub fn take_failure(&mut self) -> Result<(), Failure> {
+        self.capture.take()
     }
 
     // PLib::EvalPolynomial of the derivative polynomial up to `request`.
@@ -81,38 +94,35 @@ impl PolyFunc {
 }
 
 impl Function for PolyFunc {
-    /// `Value(X, F)`: always true natively.
+    /// `Value(X, F)`: true natively, unless it raises (see [`PolyFunc`]).
     fn value(&mut self, x: f64, f: &mut f64) -> bool {
-        match self.value_of(x) {
-            Ok(value) => {
-                *f = value;
-                true
-            }
-            Err(_) => false,
-        }
+        let computed = self.value_of(x);
+        let Some(value) = self.capture.keep(computed) else {
+            return false;
+        };
+        *f = value;
+        true
     }
 }
 
 impl FunctionWithDerivative for PolyFunc {
-    /// `Derivative(X, D)`: always true natively.
+    /// `Derivative(X, D)`: true natively, unless it raises (see [`PolyFunc`]).
     fn derivative(&mut self, x: f64, d: &mut f64) -> bool {
-        match self.values_of(x) {
-            Ok((_, derivative)) => {
-                *d = derivative;
-                true
-            }
-            Err(_) => false,
-        }
+        let computed = self.values_of(x);
+        let Some((_, derivative)) = self.capture.keep(computed) else {
+            return false;
+        };
+        *d = derivative;
+        true
     }
 
-    /// `Values(X, F, D)`: always true natively.
+    /// `Values(X, F, D)`: true natively, unless it raises (see [`PolyFunc`]).
     fn values(&mut self, x: f64, f: &mut f64, d: &mut f64) -> bool {
-        match self.values_of(x) {
-            Ok((value, derivative)) => {
-                (*f, *d) = (value, derivative);
-                true
-            }
-            Err(_) => false,
-        }
+        let computed = self.values_of(x);
+        let Some((value, derivative)) = self.capture.keep(computed) else {
+            return false;
+        };
+        (*f, *d) = (value, derivative);
+        true
     }
 }
