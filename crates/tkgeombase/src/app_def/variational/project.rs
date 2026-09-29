@@ -52,6 +52,15 @@ struct Evaluation {
     second: Array1<'static, f64>,
 }
 
+/// The running Newton projection of one point: the parameter, its distance, the
+/// count of converged steps and the iteration count.
+struct NewtonRun {
+    t: f64,
+    dist: f64,
+    n_it_cv: i32,
+    iter: i32,
+}
+
 impl Variational {
     // |C(t) - P| for the point at offset `i0` of myTabPoints.
     fn distance_at(&self, val: &Array1<'_, f64>, i0: i32) -> Result<f64, Failure> {
@@ -69,43 +78,79 @@ impl Variational {
     fn newton(
         &self,
         c: &Curve,
-        (mut t_new, i0): (f64, i32),
+        (t_new, i0): (f64, i32),
         ev: &mut Evaluation,
         nb_iterations: i32,
     ) -> Result<(f64, f64), Failure> {
-        let (seuil, eps) = (1.0e-9, 1.0e-12);
         c.d0(t_new, &mut ev.val)?;
-        let mut dist: f64 = self.distance_at(&ev.val, i0)?;
-        let (mut n_it_cv, mut iter) = (0, 0);
+        let dist: f64 = self.distance_at(&ev.val, i0)?;
+        let mut run = NewtonRun {
+            t: t_new,
+            dist,
+            n_it_cv: 0,
+            iter: 0,
+        };
         loop {
-            iter += 1;
-            let (t0, dist0) = (t_new, dist);
-            c.d2(t_new, &mut ev.second)?;
-            c.d1(t_new, &mut ev.first)?;
-            let (mut f1, mut f2) = (0., 0.);
-            for i in 1..=self.dimension {
-                let aux: f64 = at(&ev.val, i)? - self.tab_point(i0 + i)?;
-                let df: f64 = at(&ev.first, i)?;
-                f1 += aux * df;
-                f2 += df * df + aux * at(&ev.second, i)?;
-            }
-            if f2.abs() < eps {
-                return Ok((t_new, dist));
-            }
-            // Formula of Newton x(k+1) = x(k) - F(x(k))/F'(x(k))
-            t_new = clamp_unit(t_new - f1 / f2);
-            c.d0(t_new, &mut ev.val)?;
-            dist = self.distance_at(&ev.val, i0)?;
-            let ecart: f64 = dist0 - dist;
-            if ecart <= -seuil {
-                // No improvement, stop here
-                return Ok((t0, dist0));
-            }
-            n_it_cv = if ecart <= seuil { n_it_cv + 1 } else { 0 };
-            if n_it_cv >= 2 || iter >= nb_iterations {
-                return Ok((t_new, dist));
+            if let Some(result) = self.newton_iteration(c, i0, ev, (&mut run, nb_iterations))? {
+                return Ok(result);
             }
         }
+    }
+
+    // One Newton iteration from `run`: the `(t, distance)` result when it stops (a
+    // null derivative, no improvement, convergence or the last iteration).
+    fn newton_iteration(
+        &self,
+        c: &Curve,
+        i0: i32,
+        ev: &mut Evaluation,
+        (run, nb_iterations): (&mut NewtonRun, i32),
+    ) -> Result<Option<(f64, f64)>, Failure> {
+        let seuil: f64 = 1.0e-9;
+        run.iter += 1;
+        let (t0, dist0) = (run.t, run.dist);
+        let Some(t_next) = self.newton_step(c, (run.t, i0), ev)? else {
+            return Ok(Some((run.t, run.dist)));
+        };
+        run.t = t_next;
+        run.dist = self.distance_at(&ev.val, i0)?;
+        let ecart: f64 = dist0 - run.dist;
+        if ecart <= -seuil {
+            // No improvement, stop here
+            return Ok(Some((t0, dist0)));
+        }
+        run.n_it_cv = if ecart <= seuil { run.n_it_cv + 1 } else { 0 };
+        if run.n_it_cv >= 2 || run.iter >= nb_iterations {
+            return Ok(Some((run.t, run.dist)));
+        }
+        Ok(None)
+    }
+
+    // The Newton step from `t` (C evaluated there in `ev.val`), with C evaluated at
+    // the new parameter; None on a null derivative.
+    fn newton_step(
+        &self,
+        c: &Curve,
+        (t, i0): (f64, i32),
+        ev: &mut Evaluation,
+    ) -> Result<Option<f64>, Failure> {
+        let eps: f64 = 1.0e-12;
+        c.d2(t, &mut ev.second)?;
+        c.d1(t, &mut ev.first)?;
+        let (mut f1, mut f2) = (0., 0.);
+        for i in 1..=self.dimension {
+            let aux: f64 = at(&ev.val, i)? - self.tab_point(i0 + i)?;
+            let df: f64 = at(&ev.first, i)?;
+            f1 += aux * df;
+            f2 += df * df + aux * at(&ev.second, i)?;
+        }
+        if f2.abs() < eps {
+            return Ok(None);
+        }
+        // Formula of Newton x(k+1) = x(k) - F(x(k))/F'(x(k))
+        let t_new: f64 = clamp_unit(t - f1 / f2);
+        c.d0(t_new, &mut ev.val)?;
+        Ok(Some(t_new))
     }
 
     /// `Project(C, Ti, ProjTi, Distance, NumPoints, MaxErr, QuaErr, AveErr,
