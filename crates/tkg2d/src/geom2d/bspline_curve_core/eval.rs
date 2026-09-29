@@ -14,9 +14,10 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve_1.cxx and ModelingData/TKG3d/Geom/Geom_BSplineCurve_1.cxx (evaluation, continuity, end points) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Evaluation, local evaluation, continuity and end points.
-use super::{BSplineCurveCore, BSplineCurveKind, KindD1, KindD2, KindD3, KindVector};
+use super::{BSplineCurveCore, BSplineCurveKind};
 use crate::geom2d::arrays::at;
 use crate::geom2d::errors;
+use crate::geom2d::spline_curve_kind::{KindD1, KindD2, KindD3, KindVector};
 use crate::geom2d::spline_data::spline_is_cn;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bsplclib::{self, CurveSpan};
@@ -87,7 +88,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
         if n < 1 {
             return Err(K::undefined_derivative(&format!(
                 "{}::EvalDN: N = {n}; expected N >= 1",
-                K::CLASS
+                K::BSPLINE_CLASS
             )));
         }
         if let Some(vector) = K::rep_dn(&self.eval_rep, u, n)? {
@@ -106,7 +107,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
         if from_k1 == to_k2 {
             return Err(errors::domain(&format!(
                 "{}::{member}: FromK1 = ToK2 = {from_k1}; expected distinct knots",
-                K::CLASS
+                K::BSPLINE_CLASS
             )));
         }
         let (mut local_u, mut index): (f64, i32) = (u, 0);
@@ -160,7 +161,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
         if n < 0 {
             return Err(errors::range(&format!(
                 "{}::IsCN: N = {n}; expected N >= 0",
-                K::CLASS
+                K::BSPLINE_CLASS
             )));
         }
         spline_is_cn(self.smooth, n, self.deg, &self.mults)

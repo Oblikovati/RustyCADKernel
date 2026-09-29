@@ -16,7 +16,6 @@
 //! `Geom2d_BSplineCurve`: rational or non-rational, periodic or not, B-spline curves.
 mod access;
 mod poles;
-mod state;
 mod traits;
 use super::arrays::at;
 use super::bounded_curve::Geom2dBoundedCurve;
@@ -25,13 +24,13 @@ use super::curve::Geom2dCurve;
 use super::errors;
 use super::geometry::Geom2dGeometry;
 use super::spline_data::check_curve_data;
+use super::spline_kind::BSplineState;
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point2, Vector2, resolution};
-use state::BSplineState;
 
 /// A B-spline curve; `Handle::new(Geom2dBSplineCurve::new(&poles, &knots, &mults, 3, false)?)`.
 pub struct Geom2dBSplineCurve {

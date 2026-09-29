@@ -14,8 +14,8 @@
 // Rust translation of ModelingData/TKG3d/Geom/Geom_BSplineCurve.cxx (SetOrigin(U, Tol)) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `SetOrigin(U, Tol)`, which only Geom_BSplineCurve declares.
-use super::state::BSplineState;
 use crate::geom::errors;
+use crate::geom::spline_kind::BSplineState;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::arrays::{at, one_based, put};

@@ -14,21 +14,19 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_BezierCurve`: a rational or non-rational Bezier curve on `[0, 1]`.
-mod state;
 use super::arrays::at;
 use super::bounded_curve::{Geom2dBoundedCurve, dump_bounded_curve};
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
-use super::errors;
-use super::geometry::{Geom2dGeometry, dump_base, dump_class_name, dump_flag};
+use super::geometry::{Geom2dGeometry, dump_base, dump_class_name};
+use super::spline_kind::BezierState;
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::standard::dump::{self, DumpStream};
+use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::geom_abs::Shape;
-use rustycad_tkmath::gp::{Point2, Transform2, Vector2, resolution};
-use state::BezierState;
+use rustycad_tkmath::gp::{Point2, Transform2, Vector2};
 use std::io;
 
 /// A Bezier curve; `Handle::new(Geom2dBezierCurve::new(&poles)?)`.
@@ -44,54 +42,17 @@ impl_transient!(
     interfaces: [dyn Geom2dGeometry, dyn Geom2dCurve, dyn Geom2dBoundedCurve]
 );
 
-fn check_pole_count(count: usize) -> Result<(), Failure> {
-    let max: usize = bsplclib::max_degree() as usize + 1;
-    if count < 2 || count > max {
-        return Err(errors::construction(&format!(
-            "Geom2d_BezierCurve: {count} poles; expected 2..={max}"
-        )));
-    }
-    Ok(())
-}
-
-// The native constructor reads Weights(1)..Weights(nbpoles) with one-based indices.
-fn check_weights(weights: &Array1<'_, f64>, nbpoles: usize) -> Result<(), Failure> {
-    if weights.len() != nbpoles {
-        return Err(errors::construction(&format!(
-            "Geom2d_BezierCurve: {} weights; expected {nbpoles}",
-            weights.len()
-        )));
-    }
-    for i in 1..=nbpoles as i32 {
-        let weight: f64 = at(weights, i)?;
-        if weight <= resolution() {
-            return Err(errors::construction(&format!(
-                "Geom2d_BezierCurve: Weights({i}) = {weight}; expected > gp::Resolution()"
-            )));
-        }
-    }
-    Ok(())
-}
-
 impl Geom2dBezierCurve {
-    // The member initialization of the native copy constructor: unit weights for a
-    // non-rational curve and a reset resolution cache (`myMaxDerivInv` keeps 0).
-    fn from_copied(mut state: BezierState) -> Result<Self, Failure> {
-        if !state.rational {
-            state.weights = bsplclib::unit_weights(state.poles.len() as i32)?;
-        }
-        state.max_deriv_inv = 0.0;
-        state.max_deriv_inv_ok = false;
-        Ok(Self {
+    fn from_state(state: BezierState) -> Self {
+        Self {
             parent: StandardTransient::default(),
             state: SharedState::new(state),
-        })
+        }
     }
     /// Non-rational curve (`Geom2d_BezierCurve(CurvePoles)`); 2 to MaxDegree()+1 poles;
     /// `Geom2dBezierCurve::new(&poles)?`.
     pub fn new(poles: &Array1<'_, Point2>) -> Result<Self, Failure> {
-        check_pole_count(poles.len())?;
-        Self::from_copied(BezierState::initialized(poles, None)?)
+        Ok(Self::from_state(BezierState::checked(poles, None)?))
     }
     /// Rational curve (`Geom2d_BezierCurve(CurvePoles, PoleWeights)`); equal weights give a
     /// non-rational curve; `Geom2dBezierCurve::with_weights(&poles, &weights)?`.
@@ -99,17 +60,18 @@ impl Geom2dBezierCurve {
         poles: &Array1<'_, Point2>,
         weights: &Array1<'_, f64>,
     ) -> Result<Self, Failure> {
-        check_pole_count(poles.len())?;
-        check_weights(weights, poles.len())?;
-        let used: Option<&Array1<'_, f64>> = state::rational(weights)?.then_some(weights);
-        Self::from_copied(BezierState::initialized(poles, used)?)
+        Ok(Self::from_state(BezierState::checked(
+            poles,
+            Some(weights),
+        )?))
     }
     /// The native copy constructor with its failures (`Geom2d_BezierCurve(const Geom2d_BezierCurve&)`);
     /// `Geom2dBezierCurve::copy_of(&curve)?`.
     pub fn copy_of(other: &Geom2dBezierCurve) -> Result<Self, Failure> {
         let mut copy: BezierState = other.state.snapshot();
         copy.eval_rep = rep_utils::clone_curve_desc(&copy.eval_rep)?;
-        Self::from_copied(copy)
+        copy.reset_copied()?;
+        Ok(Self::from_state(copy))
     }
     /// Whether an evaluation representation is set (`HasEvalRepresentation`); `curve.has_eval_representation()`.
     pub fn has_eval_representation(&self) -> bool {
@@ -195,34 +157,12 @@ impl Geom2dBezierCurve {
     }
     /// Weight at `index`; 1 for a non-rational curve (`Weight`); `curve.weight(1)?`.
     pub fn weight(&self, index: i32) -> Result<f64, Failure> {
-        let state = self.state.read();
-        super::arrays::check_one_based(index, state.poles.len(), "Geom2d_BezierCurve::Weight")?;
-        if !state.rational {
-            return Ok(1.);
-        }
-        at(&state.weights, index)
+        self.state.read().weight(index)
     }
     /// Copy the weights into `target` of equal length, writing `target(1..=n)` for a
     /// non-rational curve (deprecated `Weights(W)`); `curve.weights_into(&mut w)?`.
     pub fn weights_into(&self, target: &mut Array1<'_, f64>) -> Result<(), Failure> {
-        let state = self.state.read();
-        let nbpoles: usize = state.poles.len();
-        if target.len() != nbpoles {
-            return Err(errors::dimension(&format!(
-                "Geom2d_BezierCurve::Weights: length {}; expected {nbpoles}",
-                target.len()
-            )));
-        }
-        if state.rational {
-            target
-                .as_mut_slice()
-                .copy_from_slice(state.weights.as_slice());
-            return Ok(());
-        }
-        for i in 1..=nbpoles as i32 {
-            super::arrays::put(target, i, 1.)?;
-        }
-        Ok(())
+        self.state.read().weights_into(target)
     }
     /// The weights of a rational curve, `None` otherwise (`Weights()`); `curve.weights()`.
     pub fn weights(&self) -> Option<Array1<'static, f64>> {
@@ -249,16 +189,18 @@ impl Geom2dBezierCurve {
     }
     /// The multiplicities `{Degree+1, Degree+1}` (`Multiplicities`); `curve.multiplicities()?`.
     pub fn multiplicities(&self) -> Result<Array1<'static, i32>, Failure> {
-        state::multiplicities(self.degree())
+        self.state.read().multiplicities()
     }
     /// The flat knots (`KnotSequence`); `curve.knot_sequence()?`.
     pub fn knot_sequence(&self) -> Result<Array1<'static, f64>, Failure> {
-        state::knot_sequence(self.degree())
+        self.state.read().knot_sequence()
     }
 }
 impl Geom2dGeometry for Geom2dBezierCurve {
     fn transform(&self, transform: Transform2) -> Result<(), Failure> {
-        self.state.write().transform(transform);
+        self.state
+            .write()
+            .transform_poles(|pole| pole.transform(transform));
         Ok(())
     }
     fn copy(&self) -> Result<Handle<dyn Geom2dGeometry>, Failure> {
@@ -268,14 +210,7 @@ impl Geom2dGeometry for Geom2dBezierCurve {
         let state = self.state.read();
         dump_class_name(stream, "Geom2d_BezierCurve")?;
         dump_base(stream, depth, dump_bounded_curve)?;
-        dump_flag(stream, "Rational", state.rational)?;
-        dump_flag(stream, "Closed", state.closed)?;
-        dump::dump_integer(stream, "Poles.Length", state.poles.len() as i32)?;
-        if state.rational {
-            dump::dump_integer(stream, "Weights.Length", state.weights.len() as i32)?;
-        }
-        dump::dump_real(stream, "MaxDerivInv", state.max_deriv_inv)?;
-        dump_flag(stream, "MaxDerivInvOk", state.max_deriv_inv_ok)
+        state.dump_fields(stream)
     }
 }
 impl Geom2dCurve for Geom2dBezierCurve {
@@ -308,13 +243,16 @@ impl Geom2dCurve for Geom2dBezierCurve {
         self.state.read().eval_d0(u)
     }
     fn eval_d1(&self, u: f64) -> Result<Geom2dCurveD1, Failure> {
-        self.state.read().eval_d1(u)
+        let (point, d1) = self.state.read().eval_d1(u)?;
+        Ok(Geom2dCurveD1 { point, d1 })
     }
     fn eval_d2(&self, u: f64) -> Result<Geom2dCurveD2, Failure> {
-        self.state.read().eval_d2(u)
+        let (point, d1, d2) = self.state.read().eval_d2(u)?;
+        Ok(Geom2dCurveD2 { point, d1, d2 })
     }
     fn eval_d3(&self, u: f64) -> Result<Geom2dCurveD3, Failure> {
-        self.state.read().eval_d3(u)
+        let (point, d1, d2, d3) = self.state.read().eval_d3(u)?;
+        Ok(Geom2dCurveD3 { point, d1, d2, d3 })
     }
     fn eval_dn(&self, u: f64, n: i32) -> Result<Vector2, Failure> {
         self.state.read().eval_dn(u, n)

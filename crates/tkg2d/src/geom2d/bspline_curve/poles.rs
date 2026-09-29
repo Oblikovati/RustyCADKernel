@@ -14,12 +14,12 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx (InsertPoleAfter, RemovePole) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The pole insertion and removal that only Geom2d_BSplineCurve declares.
-use super::state::BSplineState;
 use crate::geom2d::arrays::{
     at, check_one_based, insert_at, one_based, put, remove_at, stored_or_unit_weights,
 };
 use crate::geom2d::errors;
 use crate::geom2d::spline_data::bspline_rational as rational;
+use crate::geom2d::spline_kind::BSplineState;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bsplclib;

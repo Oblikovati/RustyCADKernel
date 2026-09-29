@@ -175,7 +175,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
             return Err(errors::construction(&format!(
                 "{}::InsertKnots: {} knots rejected by BSplCLib::PrepareInsertKnots \
                  (tolerance {epsilon}); expected knots inside the curve range with valid multiplicities",
-                K::CLASS,
+                K::BSPLINE_CLASS,
                 knots.len()
             )));
         }

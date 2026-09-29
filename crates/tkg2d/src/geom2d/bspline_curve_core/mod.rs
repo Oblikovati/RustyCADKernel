@@ -27,27 +27,21 @@ mod segment;
 
 use super::arrays::{one_based, rebased};
 use super::dump_flag;
+use super::spline_curve_kind::{KindVector, SplineCurveKind};
 use super::spline_data::{KnotData, bspline_rational, knot_data};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkmath::bsplclib::{self, CurvePoint};
+use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::geom_abs::{BSplKnotDistribution, Shape};
 use std::io;
 
-/// A curve derivative vector of the kind's point type.
-pub type KindVector<K> = <<K as BSplineCurveKind>::Point as CurvePoint>::Vector;
-
 /// The members where `Geom_BSplineCurve` departs from `Geom2d_BSplineCurve`; each
-/// curve crate implements it on a marker type, e.g.
-/// `impl BSplineCurveKind for Geom2dBSplineKind { type Point = Point2; ... }`.
-pub trait BSplineCurveKind: Sized + 'static {
-    /// The pole type (`gp_Pnt2d` or `gp_Pnt`).
-    type Point: CurvePoint;
-    /// The evaluation representation handle of the class.
-    type EvalRep: Clone + Default;
+/// curve crate implements it on its [`SplineCurveKind`] marker, e.g.
+/// `impl BSplineCurveKind for Geom2dSplineKind { const BSPLINE_CLASS: &str = ...; }`.
+pub trait BSplineCurveKind: SplineCurveKind {
     /// The native class name used in messages; `"Geom2d_BSplineCurve"`.
-    const CLASS: &'static str;
+    const BSPLINE_CLASS: &'static str;
     /// `ClearEvalRepresentation` at the points where an edit calls it: Geom clears
     /// the representation, Geom2d edits keep it; `K::clear_eval_rep_on_edit(&mut rep)`.
     fn clear_eval_rep_on_edit(eval_rep: &mut Self::EvalRep);
@@ -59,8 +53,6 @@ pub trait BSplineCurveKind: Sized + 'static {
     ) -> Result<f64, Failure>;
     /// The index check of `RemoveKnot`; `K::check_removable_index(&core, 2)?`.
     fn check_removable_index(core: &BSplineCurveCore<Self>, index: i32) -> Result<(), Failure>;
-    /// The package `UndefinedDerivative` exception; `K::undefined_derivative("EvalDN")`.
-    fn undefined_derivative(message: &str) -> Failure;
     /// Both tangents non-null and within `ang_tol` of each other (`IsG1`);
     /// `K::tangents_agree(v1, v2, 1e-9)?`.
     fn tangents_agree(
@@ -68,28 +60,7 @@ pub trait BSplineCurveKind: Sized + 'static {
         v2: KindVector<Self>,
         ang_tol: f64,
     ) -> Result<bool, Failure>;
-    /// `TryEvalCurveD0` of the class's RepUtils; `K::rep_d0(&rep, 0.5)?`.
-    fn rep_d0(eval_rep: &Self::EvalRep, u: f64) -> Result<Option<Self::Point>, Failure>;
-    /// `TryEvalCurveD1`; `K::rep_d1(&rep, 0.5)?`.
-    fn rep_d1(eval_rep: &Self::EvalRep, u: f64) -> Result<Option<KindD1<Self>>, Failure>;
-    /// `TryEvalCurveD2`; `K::rep_d2(&rep, 0.5)?`.
-    fn rep_d2(eval_rep: &Self::EvalRep, u: f64) -> Result<Option<KindD2<Self>>, Failure>;
-    /// `TryEvalCurveD3`; `K::rep_d3(&rep, 0.5)?`.
-    fn rep_d3(eval_rep: &Self::EvalRep, u: f64) -> Result<Option<KindD3<Self>>, Failure>;
-    /// `TryEvalCurveDN`; `K::rep_dn(&rep, 0.5, 4)?`.
-    fn rep_dn(
-        eval_rep: &Self::EvalRep,
-        u: f64,
-        n: i32,
-    ) -> Result<Option<KindVector<Self>>, Failure>;
 }
-
-/// A point and its first derivative.
-pub type KindD1<K> = (<K as BSplineCurveKind>::Point, KindVector<K>);
-/// A point and its first two derivatives.
-pub type KindD2<K> = (<K as BSplineCurveKind>::Point, KindVector<K>, KindVector<K>);
-/// A point and its first three derivatives.
-pub type KindD3<K> = bsplclib::CurveD3<<K as BSplineCurveKind>::Point>;
 
 /// The fields of a B-spline curve (`myPoles`, `myWeights`, `myKnots`, `myFlatKnots`,
 /// `myMults`, `myEvalRep`, `myDeg`, `myPeriodic`, `myRational`, `myKnotSet`, `mySmooth`,

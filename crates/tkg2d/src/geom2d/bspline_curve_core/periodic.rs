@@ -62,7 +62,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
         if !self.periodic {
             return Err(errors::no_such_object(&format!(
                 "{}::SetOrigin: the curve is not periodic",
-                K::CLASS
+                K::BSPLINE_CLASS
             )));
         }
         self.clear_eval_rep_on_edit();
@@ -70,7 +70,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
         if index < first || index > last {
             return Err(errors::domain(&format!(
                 "{}::SetOrigin: Index = {index}; expected in [{first}, {last}]",
-                K::CLASS
+                K::BSPLINE_CLASS
             )));
         }
         let (knots, mults) = self.rotated_knots(index, first, last)?;

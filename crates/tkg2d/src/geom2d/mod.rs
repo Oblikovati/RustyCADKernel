@@ -15,10 +15,12 @@
 
 //! The Geom2d package: transient 2D points, vectors, axes, transformations and curves.
 pub mod arrays;
+pub mod bezier_curve_core;
 pub mod bspline_curve_core;
 pub mod errors;
 pub mod native;
 pub mod protected;
+pub mod spline_curve_kind;
 pub mod spline_data;
 
 mod geometry;
@@ -62,6 +64,7 @@ pub use trimmed_curve::Geom2dTrimmedCurve;
 mod bezier_curve;
 pub use bezier_curve::Geom2dBezierCurve;
 mod bspline_curve;
+mod spline_kind;
 pub use bspline_curve::Geom2dBSplineCurve;
 mod offset_curve;
 pub mod offset_curve_utils;

@@ -14,9 +14,10 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx, Geom2d_BSplineCurve_1.cxx and ModelingData/TKG3d/Geom/Geom_BSplineCurve.cxx, Geom_BSplineCurve_1.cxx (poles, weights, moves) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Pole and weight edition, point moves, reversal and transformation.
-use super::{BSplineCurveCore, BSplineCurveKind, KindVector};
+use super::{BSplineCurveCore, BSplineCurveKind};
 use crate::geom2d::arrays::{check_one_based, one_based, put, rebased};
 use crate::geom2d::errors;
+use crate::geom2d::spline_curve_kind::KindVector;
 use crate::geom2d::spline_data::bspline_rational;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;

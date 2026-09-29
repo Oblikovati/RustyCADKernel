@@ -11,33 +11,70 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingData/TKG3d/Geom/Geom_BSplineCurve.cxx, Geom_BSplineCurve_1.cxx (PeriodicNormalization, RemoveKnot index check, evaluation representation) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKG3d/Geom/Geom_BSplineCurve.cxx, Geom_BSplineCurve_1.cxx and Geom_BezierCurve.cxx (PeriodicNormalization, RemoveKnot index check, closure test, evaluation representation) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! The Geom members of the B-spline curve state that Geom2d shares: edits clear the
-//! GeomEval evaluation representation, `PeriodicNormalization` is a closed form and
-//! `RemoveKnot` keeps the end knots of a non-periodic curve.
+//! The Geom members of the spline curve states that Geom2d shares: B-spline edits
+//! clear the GeomEval evaluation representation, `PeriodicNormalization` is a closed
+//! form, `RemoveKnot` keeps the end knots of a non-periodic curve and the Bezier
+//! closure test uses Precision::Confusion (Geom2d: gp::Resolution).
 use crate::geom::errors;
 use crate::geom_eval::{RepCurveDesc, rep_utils};
+use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle, real};
 use rustycad_tkg2d::geom2d::arrays::at;
-use rustycad_tkg2d::geom2d::bspline_curve_core::{
-    BSplineCurveCore, BSplineCurveKind, KindD1, KindD2, KindD3,
-};
+use rustycad_tkg2d::geom2d::bezier_curve_core::{BezierCurveCore, BezierCurveKind};
+use rustycad_tkg2d::geom2d::bspline_curve_core::{BSplineCurveCore, BSplineCurveKind};
+use rustycad_tkg2d::geom2d::spline_curve_kind::{KindD1, KindD2, KindD3, SplineCurveKind};
 use rustycad_tkmath::gp::{Point3, Vector3, resolution};
 
-/// The Geom_BSplineCurve variant of [`BSplineCurveKind`].
+/// The Geom variant of the spline curve kinds.
 #[derive(Clone, Copy, Debug)]
-pub(super) struct GeomBSplineKind;
+pub(super) struct GeomSplineKind;
 
 /// The fields of Geom_BSplineCurve.
-pub(super) type BSplineState = BSplineCurveCore<GeomBSplineKind>;
+pub(super) type BSplineState = BSplineCurveCore<GeomSplineKind>;
+/// The fields of Geom_BezierCurve.
+pub(super) type BezierState = BezierCurveCore<GeomSplineKind>;
 
 type RepHandle = Handle<dyn RepCurveDesc>;
 
-impl BSplineCurveKind for GeomBSplineKind {
+impl SplineCurveKind for GeomSplineKind {
     type Point = Point3;
     type EvalRep = RepHandle;
-    const CLASS: &'static str = "Geom_BSplineCurve";
+    fn undefined_derivative(message: &str) -> Failure {
+        errors::undefined_derivative(message)
+    }
+    fn rep_d0(eval_rep: &RepHandle, u: f64) -> Result<Option<Point3>, Failure> {
+        rep_utils::try_eval_curve_d0(eval_rep, u)
+    }
+    fn rep_d1(eval_rep: &RepHandle, u: f64) -> Result<Option<KindD1<Self>>, Failure> {
+        Ok(rep_utils::try_eval_curve_d1(eval_rep, u)?.map(|r| (r.point, r.d1)))
+    }
+    fn rep_d2(eval_rep: &RepHandle, u: f64) -> Result<Option<KindD2<Self>>, Failure> {
+        Ok(rep_utils::try_eval_curve_d2(eval_rep, u)?.map(|r| (r.point, r.d1, r.d2)))
+    }
+    fn rep_d3(eval_rep: &RepHandle, u: f64) -> Result<Option<KindD3<Self>>, Failure> {
+        Ok(rep_utils::try_eval_curve_d3(eval_rep, u)?.map(|r| (r.point, r.d1, r.d2, r.d3)))
+    }
+    fn rep_dn(eval_rep: &RepHandle, u: f64, n: i32) -> Result<Option<Vector3>, Failure> {
+        rep_utils::try_eval_curve_dn(eval_rep, u, n)
+    }
+}
+
+impl BezierCurveKind for GeomSplineKind {
+    const BEZIER_CLASS: &'static str = "Geom_BezierCurve";
+    fn point_distance(first: Point3, last: Point3) -> f64 {
+        first.distance(&last)
+    }
+    // Unlike Geom2d_BezierCurve (gp::Resolution), the 3D class tests closure against
+    // Precision::Confusion in init, Segment and SetPole.
+    fn closure_tolerance() -> f64 {
+        precision::confusion()
+    }
+}
+
+impl BSplineCurveKind for GeomSplineKind {
+    const BSPLINE_CLASS: &'static str = "Geom_BSplineCurve";
     // `ClearEvalRepresentation`, which most 3D edits call (unlike Geom2d).
     fn clear_eval_rep_on_edit(eval_rep: &mut RepHandle) {
         *eval_rep = Handle::default();
@@ -85,29 +122,11 @@ impl BSplineCurveKind for GeomBSplineKind {
         }
         Ok(())
     }
-    fn undefined_derivative(message: &str) -> Failure {
-        errors::undefined_derivative(message)
-    }
     fn tangents_agree(v1: Vector3, v2: Vector3, ang_tol: f64) -> Result<bool, Failure> {
         if v1.square_magnitude() <= resolution() || v2.square_magnitude() <= resolution() {
             return Ok(false);
         }
         Ok(v1.angle(v2)?.abs() <= ang_tol)
-    }
-    fn rep_d0(eval_rep: &RepHandle, u: f64) -> Result<Option<Point3>, Failure> {
-        rep_utils::try_eval_curve_d0(eval_rep, u)
-    }
-    fn rep_d1(eval_rep: &RepHandle, u: f64) -> Result<Option<KindD1<Self>>, Failure> {
-        Ok(rep_utils::try_eval_curve_d1(eval_rep, u)?.map(|r| (r.point, r.d1)))
-    }
-    fn rep_d2(eval_rep: &RepHandle, u: f64) -> Result<Option<KindD2<Self>>, Failure> {
-        Ok(rep_utils::try_eval_curve_d2(eval_rep, u)?.map(|r| (r.point, r.d1, r.d2)))
-    }
-    fn rep_d3(eval_rep: &RepHandle, u: f64) -> Result<Option<KindD3<Self>>, Failure> {
-        Ok(rep_utils::try_eval_curve_d3(eval_rep, u)?.map(|r| (r.point, r.d1, r.d2, r.d3)))
-    }
-    fn rep_dn(eval_rep: &RepHandle, u: f64, n: i32) -> Result<Option<Vector3>, Failure> {
-        rep_utils::try_eval_curve_dn(eval_rep, u, n)
     }
 }
 

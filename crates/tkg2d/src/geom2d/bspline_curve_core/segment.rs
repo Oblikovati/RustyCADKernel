@@ -60,7 +60,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
         if u2 < u1 {
             return Err(errors::domain(&format!(
                 "{}::Segment: U1 = {u1}, U2 = {u2}; expected U1 <= U2",
-                K::CLASS
+                K::BSPLINE_CLASS
             )));
         }
         self.clear_eval_rep_on_edit();
@@ -84,7 +84,7 @@ impl<K: BSplineCurveKind> BSplineCurveCore<K> {
             if du - period > precision::p_confusion() {
                 return Err(errors::domain(&format!(
                     "{}::Segment: U2 - U1 = {du}; expected <= the period {period}",
-                    K::CLASS
+                    K::BSPLINE_CLASS
                 )));
             }
             if du > period {
