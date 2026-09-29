@@ -192,13 +192,13 @@ Hand-built byte strings read by every reader cover the version lines (CRLF, junk
 line over 100 characters), missing and substring-matched tags, unknown shape,
 representation, curve, surface and location codes, out-of-range indices, singular
 matrices, the shape-reader references (known, unread with a jump back, zero delta,
-before the start) and truncated records; `br_bin_truncate` reads every prefix of eight
-written shape sets. Failure messages are compared in full for Standard_Failure, whose
-nested lines keep only the type of a failure of another class (other packages word
-their messages differently), and with bytes from 0x80 on shown as `?`. The probe
-never reads what is undefined natively: a shape-reference record never ends where a
-byte is read without a check, and a truncation never ends between a table tag and its
-count.
+before the start) and truncated records; `br_bin_truncate` reads the prefixes (all, or
+one in 3 or 5) of eight written shape sets. Failure messages are compared in full for
+Standard_Failure, whose nested lines keep only the type of a failure of another class
+(other packages word their messages differently), and with bytes from 0x80 on shown as
+`?`. The probe never reads what is undefined natively: a shape-reference record never
+ends where a byte is read without a check, and a truncation never ends between a table
+tag and its count.
 
 ## Dependency gap
 
