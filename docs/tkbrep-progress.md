@@ -8,8 +8,8 @@ Packages are added one module at a time. The `TopoDS`, `TopExp`, `TopTools`, `BR
 ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for
 each of them. `BRepGraph` is being ported in waves (docs/topology-design.md section 11):
 the core, the iterators, explorers, Tool and CopyRemap, and the layers, registries and
-caches are ported; the editor, the lock, mesh and derived-state caches and the algorithms
-follow, and its audit lists their members as missing until then.
+caches, the lock and the derived-state and mesh caches are ported; the editor and the
+algorithms follow, and its audit lists their members as missing until then.
 
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
@@ -498,9 +498,9 @@ the deferred entries, every derived answer, the slot states and every face, edge
 coedge entry of three slots with `Needs` of every face and compound, and every
 persistent, cache and effective mesh-view query; then the drivers' Fill logs.
 
-The corpus has 635 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
+The corpus has 649 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
-caches 22 and the BRepGraph navigation 13.
+caches 22, the BRepGraph navigation 13 and the BRepGraph lock and caches 14.
 
 ## Dependency gap
 
