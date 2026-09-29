@@ -79,6 +79,7 @@
 #include "tkgeombase_probe_appdef_variational.cxx"
 #include "tkgeombase_probe_projlib.cxx"
 #include "tkgeombase_probe_projlib_curves.cxx"
+#include "tkgeombase_probe_geomprojlib.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -434,6 +435,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"pl_polar", gb_pl_polar_case},
  {"pl_projected", gb_pl_projected_case},
  {"pl_comp", gb_pl_comp_case},
+ // GeomProjLib (tkgeombase_probe_geomprojlib.cxx)
+ {"gpl_curve2d", gb_gpl_curve2d_case},
+ {"gpl_project", gb_gpl_project_case},
+ {"gpl_on_plane", gb_gpl_on_plane_case},
 };
 int main() {
  std::string line;

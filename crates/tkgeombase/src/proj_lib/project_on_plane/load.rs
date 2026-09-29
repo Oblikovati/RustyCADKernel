@@ -117,7 +117,34 @@ impl OnPlaneState {
             return Ok(());
         }
         self.curve_type = CurveType::BSplineCurve;
+        self.refuse_nan_segment(line)?;
         self.load_reparametrized_line(&geom_line, first, last)
+    }
+
+    // Rust deviation: a projection direction parallel to the plane (the default
+    // direction X with the default plane XOY, for example) makes every projected
+    // parameter NaN. Natively Geom_TrimmedCurve::SetTrim then calls Reverse, which
+    // calls SetTrim again, without end (the program never returns); the port
+    // overflowed its stack. Refuse the degenerate input instead, with the
+    // Standard_ConstructionError of the commented-out native constructor check.
+    fn refuse_nan_segment(&self, line: Line3) -> Result<(), Failure> {
+        if !self.first_par.is_nan() && !self.last_par.is_nan() {
+            return Ok(());
+        }
+        Err(failure(
+            "Standard_ConstructionError",
+            &format!(
+                "ProjLib_ProjectOnPlane: the direction {} is parallel to the plane of \
+                 normal {}, so the line of direction {} projects to the NaN segment \
+                 [{}, {}]; expected a direction not parallel to the plane to keep the \
+                 parametrization",
+                triple(self.direction),
+                triple(self.plane.direction()),
+                triple(line.direction()),
+                self.first_par,
+                self.last_par
+            ),
+        ))
     }
 
     // The two-pole degree-1 B-spline of a line projected to the point `origin`.
@@ -152,6 +179,11 @@ impl OnPlaneState {
         self.result = Handle::new(GeomAdaptorCurve::with_curve(&converted.cast())?);
         Ok(())
     }
+}
+
+// `(x, y, z)` of a direction, for the failure messages.
+fn triple(direction: Direction3) -> String {
+    format!("({}, {}, {})", direction.x(), direction.y(), direction.z())
 }
 
 fn null_curve() -> Failure {

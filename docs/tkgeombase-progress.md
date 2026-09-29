@@ -85,6 +85,7 @@ passes (828 declarations):
 | GeomLib_CheckCurveOnSurface_Test.cxx | geom_lib_check_curve_on_surface | 7 |
 | ProjLib_Cone_Test.cxx | proj_lib_cone | 3 |
 | ProjLib_ComputeApproxOnPolarSurface_Test.cxx | proj_lib_compute_approx_on_polar_surface | 1 |
+| GeomProjLib_Test.cxx | geom_proj_lib | 2 |
 
 `bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
 `geom2d_convert_behavior.rs` covers the Geom2dConvert quirks below.
@@ -96,8 +97,8 @@ quirks below. GeomTools has no upstream GoogleTest suite; `geom_tools_behavior/`
 covers its layouts, reader contract, sets, handler and quirks with named fakes for the
 console, the text streams, the progress indicator and a custom handler.
 `extrema_behavior.rs` covers the Extrema quirks below. `proj_lib_behavior.rs` covers the
-ProjLib quirks below. The three ExtremaPC suites that
-compare ExtremaPC with the classic `Extrema_ExtPC` share the random points of
+ProjLib quirks below, and `geom_proj_lib_behavior.rs` the GeomProjLib ones. The three
+ExtremaPC suites that compare ExtremaPC with the classic `Extrema_ExtPC` share the random points of
 `tests/fixtures/extrema_pc_random_points.txt`, which
 `tools/oracle/tkgeombase_extrema_random_points.cxx` draws with the libstdc++
 `std::mt19937` and distributions of the native fixtures.
@@ -593,6 +594,25 @@ typedef (`HCompProjectedCurve`).
   copies they carried before (`plane_projection.rs` and a `ProjLib::Project(gp_Pln,
   gp_Lin)` copy) are deleted, and their suites and probes stay bit-exact.
 
+## GeomProjLib
+
+GeomProjLib (`geom_proj_lib`) ports the whole package, the last TKGeomBase package;
+`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for it (8 implemented).
+OCCT 8.1 declares only the six `Curve2d` overloads, `Project` and `ProjectOnPlane`: it
+has no `Curve3d` and no `UseFirstAndLastParameters` or `SetBSplineApprox` options.
+
+- The overloads are free functions with distinct names: `curve2d_range_bounds_tolerance`
+  (C, First, Last, S, UFirst, ULast, VFirst, VLast, Tolerance), `curve2d_range_tolerance`
+  (C, First, Last, S, Tolerance), `curve2d_range` (C, First, Last, S), `curve2d` (C, S),
+  `curve2d_bounds` (C, S, UDeb, UFin, VDeb, VFin) and `curve2d_bounds_tolerance` (the same
+  with Tolerance). `First`/`Last` and the four bounds are tuples; the in-out
+  `Tolerance` is an input and the second value of the returned `Curve2dWithTolerance`.
+- `Curve2d` builds on `ProjLib_ProjectedCurve`, `Project` on `ProjLib_ProjectOnPlane`
+  (a plane) or on `ProjLib_CompProjectedCurve` and `Approx_CurveOnSurface` (other
+  surfaces), `ProjectOnPlane` on `ProjLib_ProjectOnPlane`. A failed projection returns a
+  null handle, as natively; exceptions and the native null dereferences (a null curve,
+  surface or plane) are `Failure` values.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -935,12 +955,32 @@ constructor and option) and CompProjectedCurve (every constructor, the parts, th
 evaluation and intervals, Perform with 2D and 3D results) on elementary, swept,
 trimmed, offset, Bezier and B-spline surfaces, across seams and periodic ranges,
 through poles, leaving bounded surfaces, far from them and degenerate (point and iso
-projections); 2225 requests. The given initial curves of the polar projection rotate
-over the curves and the ComputeApprox constructor runs once per surface: the far initial
-curves and the 1e-7 fits dominate the debug Rust twin, and the numeric verifier has a
-900 s budget. Left out: the projection of a line normal to the plane by
+projections); 2313 requests. Every given initial curve of the polar projection runs on
+every curve and the ComputeApprox constructor on every curve and surface; the far
+initial curves and the 1e-7 fits dominate the debug Rust twin (about 435 s for these
+requests), inside the one-hour budget of the numeric verifier. Left out: the projection of a line with the parametrization kept by
 the default ProjectOnPlane (a direction in the plane, all values NaN), whose native
-reparametrization never returns.
+trim never returns; the port refuses it (see the Rust deviation below).
+
+The GeomProjLib requests (`tkgeombase_corpus_geomprojlib.py`, probe
+`tkgeombase_probe_geomprojlib.cxx`) run the six Curve2d overloads, Project and
+ProjectOnPlane on every Geom curve kind (lines, conics, Bezier and B-spline curves,
+rational, periodic and C0 ones, trimmed ones in both senses, offset curves and the
+GeomEval helix) and every Geom surface kind (planes, cylinders, cones, spheres and tori
+in direct, tilted and indirect frames, extrusions, revolutions, Bezier and B-spline
+surfaces, rectangular trimmed and offset surfaces and the GeomEval ellipsoid): curves
+lying on the surface (exact cases, seams, poles, swept and free-form surfaces) and curves
+off it, with given, sub-, reversed and zero-length ranges, surface bounds inside and
+around the surface and zero, negative and wide tolerances; ProjectOnPlane runs normal,
+oblique and in-plane directions with and without the parametrization kept. Project runs
+the whole curve-surface cross product; Curve2d runs every other pair of it and rotates
+its whole-curve overloads over the curves lying on the surfaces, as its free-form
+projections dominate the debug Rust twin; 911 requests. Left out, as the native call
+never returns: a line along a direction in the plane with the parametrization kept, a
+trimmed line along such a direction (both reach the NaN trim the port refuses, see the
+Rust deviations), and Curve2d of the zero-length segment of a line on a sphere (the
+ProjLib_ComputeApprox of a zero-length range never returns on a sphere or a cylinder,
+natively and in the port).
 
 The corpus has 44476 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -1707,3 +1747,31 @@ ProjLib:
   commented out) and gives NaN values; the default constructor projects along X onto
   the XOY plane. `Period` returns `false` (0.0) for an approximation, which
   `IsPeriodic` makes unreachable.
+- Rust deviation, `ProjLib_ProjectOnPlane::Load` of a line with the parametrization
+  kept, along a direction parallel to the plane (the default constructor's X onto
+  XOY, for a line normal to the plane or any other line): the projected end parameters
+  are NaN, and the native `Geom_TrimmedCurve(line, NaN, NaN)` calls `Reverse`, which
+  calls `SetTrim` again, without end (the native probe never returns; the port
+  overflowed its stack). The port sets the BSplineCurve type, as natively at that point,
+  and returns a Standard_ConstructionError (the class of the commented-out constructor
+  check) that names the direction, the plane normal, the line direction and the NaN
+  segment. Without the kept parametrization the NaN line is returned as natively.
+
+GeomProjLib:
+
+- `Curve2d` raises the tolerance to PConfusion (then `ProjLib_ProjectedCurve` raises it
+  to Confusion) and returns the tolerance the projection reached; when the projection
+  kind is not a curve kind it returns a null curve with the raised input tolerance. The
+  Bezier and B-spline results are the handles the ProjectedCurve stores. A trimmed 3D
+  curve gives a `Geom2d_TrimmedCurve` over the 3D trim parameters (not the given range),
+  clamped to the range of a non-periodic result.
+- `Project` on a plane projects along the normal with PApproximation and the default
+  `KeepParametrization = true` of `ProjLib_ProjectOnPlane::Load`, so an ellipse or a
+  circle whose projection changes its parametrization becomes an approximated B-spline,
+  and a trimmed input is trimmed again over its own 3D parameters. On any other surface it keeps only
+  the first CompProjectedCurve part (Standard_OutOfRange when there is none), with the
+  fixed tolerance 1e-4 and the parametric tolerances `pow(1e-4, 2/3)`, and its result is
+  always the Approx_CurveOnSurface B-spline (or a null handle).
+- `ProjectOnPlane` uses the tolerance Approximation; a trimmed input is trimmed over the
+  projection's own parameters. A direction parallel to the plane is not refused; a
+  trimmed line along it reaches the NaN trim that `Geom_TrimmedCurve` refuses in the port.
