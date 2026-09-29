@@ -16,7 +16,7 @@
 
 //! `BRepGraph`: the topology-geometry graph over TopoDS / BRep.
 use super::data::Data;
-use super::hooks::{CacheHooks, LayerHooks};
+use super::hooks::{CacheHooks, LayerHooks, TopoSupplementHooks};
 use crate::brep_graph::{
     NodeId, NodeTag, NodeVisitor, ProductId, RefId, RefTag, RefUid, RefVisitor, TypedId, Uid,
 };
@@ -110,6 +110,15 @@ impl BRepGraph {
     /// The mutable graph data.
     pub(crate) fn data_mut(&mut self) -> &mut Data {
         &mut self.data
+    }
+
+    /// `LayerRegistry().FindLayer<BRepGraph_LayerTopoSupplement>()`: the registered
+    /// topology supplement layer, `None` without layer hooks.
+    pub(crate) fn topo_supplement(&self) -> Option<&dyn TopoSupplementHooks> {
+        self.data
+            .layers
+            .as_deref()
+            .and_then(|layers| layers.topo_supplement())
     }
 
     /// Installs the layer registry: the layers area of phase 2 calls it from `new`

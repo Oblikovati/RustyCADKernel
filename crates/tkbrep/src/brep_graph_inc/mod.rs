@@ -26,6 +26,7 @@ mod instance;
 mod load;
 mod parity_orientation;
 pub mod populate;
+pub mod reconstruct;
 mod reference;
 mod relations;
 mod representation;

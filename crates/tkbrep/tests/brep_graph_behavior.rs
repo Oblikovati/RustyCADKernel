@@ -2,9 +2,13 @@
 //! reconstruction and views over the hand-built shapes of the test support module
 //! (TKPrim is not ported), and the Rust `Result` errors of native exceptions.
 mod support;
-use rustycad_tkbrep::brep_graph::BRepGraph;
+use rustycad_tkbrep::brep_graph::{BRepGraph, FaceId, NodeId, NodeKind, SolidId};
 use rustycad_tkbrep::brep_graph_inc::populate::{self, BuildStatus, Options};
+use rustycad_tkbrep::brep_graph_inc::reconstruct::{self, Cache};
+use rustycad_tkbrep::topexp;
 use rustycad_tkbrep::topods::{Builder, Compound};
+use rustycad_tkbrep::toptools::IndexedMapOfShape;
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Transform3, Vector3};
 use rustycad_tkmath::toploc::Location;
 use support::make_box;
@@ -65,4 +69,36 @@ fn populate_append_keeps_existing_definitions() {
     populate::append_flattened(&mut graph, &solid, false, &mut roots, &Options).unwrap();
     assert_eq!(roots.len(), 6);
     assert_eq!(graph.topo().faces().nb(), 6);
+}
+
+fn count_of(shape: &rustycad_tkbrep::topods::Shape, kind: ShapeEnum) -> usize {
+    let mut map = IndexedMapOfShape::default();
+    topexp::map_shapes_of_type(shape, kind, &mut map).unwrap();
+    map.extent()
+}
+
+#[test]
+fn reconstruct_box_shares_sub_shapes_and_round_trips() {
+    let graph = populated(&make_box(10.0, 20.0, 30.0));
+    let solid = reconstruct::node(&graph, SolidId::new(0).into()).unwrap();
+    assert_eq!(solid.shape_type().unwrap(), ShapeEnum::Solid);
+    assert_eq!(count_of(&solid, ShapeEnum::Face), 6);
+    assert_eq!(count_of(&solid, ShapeEnum::Edge), 12);
+    assert_eq!(count_of(&solid, ShapeEnum::Vertex), 8);
+    let again = populated(&solid);
+    assert_eq!(again.topo().co_edges().nb(), 24);
+    assert_eq!(again.topo().edges().nb(), 12);
+}
+
+#[test]
+fn reconstruct_cache_reuses_shapes_and_skips_non_shapes() {
+    let graph = populated(&make_box(1.0, 1.0, 1.0));
+    let mut cache = Cache::new();
+    let face = reconstruct::face_with_cache(&graph, FaceId::new(0), &mut cache).unwrap();
+    let same = reconstruct::node_with_cache(&graph, FaceId::new(0).into(), &mut cache).unwrap();
+    assert!(face.is_same(&same));
+    let co_edge = reconstruct::node(&graph, NodeId::new(NodeKind::CO_EDGE, 0)).unwrap();
+    assert!(co_edge.is_null());
+    let error = reconstruct::node(&graph, NodeId::new(NodeKind::EDGE, 99)).unwrap_err();
+    assert_eq!(error.exception_type(), "Standard_OutOfRange");
 }
