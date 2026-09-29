@@ -157,7 +157,10 @@ Preserved native behaviour and deliberate differences:
 - `ApproxParamOnCurve` with an index past the last point prints "OutOfRange
   Polygon2d::ApproxParamOnCurve" on std::cout natively; the port does not print (the probe
   discards std::cout). The polygon index slots past the sample count are uninitialized
-  natively and 0 in the port; no algorithm reads them.
+  natively and 0 in the port, where reading one raises Standard_OutOfRange. Only a chord
+  index past the last point reads them (for example a seat given to
+  IntCurve_ExactIntersectionPoint by the caller); the intersectors pass only the chords of
+  the interference, so the corpus leaves that undefined case out.
 - `GetIntersection` leaves its sample indices at -1 when every distance is NaN and then
   reads out of bounds if the current distance exceeds sqrt(RealLast); the port reads the
   first sample.
@@ -217,7 +220,7 @@ covers Interval and PeriodicInterval; `imppar_transition` and `imppar_domain` th
 transition, position and normalisation helpers; `intres2d_*` the domain accessors,
 Insert and the composite Append.
 
-Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve: `tkgeomalgo_corpus_ginter.py` adds 1097
+Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve: `tkgeomalgo_corpus_ginter.py` adds 1077
 requests: `g2int_polygon` builds polygons of every parametric curve with 2 to 40 samples,
 refines them in overlapping, far and touching boxes and closes them; `g2int_exact` runs
 IntCurve_ExactIntersectionPoint from inner, first, last and out-of-range polygon seats and

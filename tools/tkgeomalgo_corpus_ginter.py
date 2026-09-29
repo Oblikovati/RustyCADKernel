@@ -68,7 +68,7 @@ def append_exact_requests(requests: list[str]) -> None:
         (ca, a0, a1), (cb, b0, b1) = PCURVES[a], PCURVES[b]
         for n in (6, 20):
             for seg1, par1, seg2, par2 in ((1, 0.0, 1, 0.0), (3, 0.5, 4, 0.25), (n - 1, 0.0, n - 1, 1.0),
-                                           (n, 0.0, 2, 0.3), (0, 0.7, -1, 0.2), (n + 3, 0.5, 2, 0.5)):
+                                           (n, 0.0, 2, 0.3), (0, 0.7, -1, 0.2)):
                 requests.append('g2int_exact ' + fmt([*ca, *dom(a0, a1), n, *cb, *dom(b0, b1), n, 1e-7, seg1, par1,
                                                       seg2, par2, 0.5 * (a0 + a1), 0.5 * (b0 + b1), a0, b0, a1, b1]))
         requests.append('g2int_exact ' + fmt([*ca, *dom(a0, a1), 10, *cb, *dom(b0, b1), 10, 1e-2, 5, 0.5, 5, 0.5,
