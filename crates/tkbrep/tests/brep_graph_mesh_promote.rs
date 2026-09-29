@@ -91,3 +91,38 @@ fn a_co_edge_promotes_its_polygon2d_and_polygon_on_triangulation() {
     // from the start (CacheMesh snapshot 0 against mesh generation 0) and stays behind.
     assert!(!persistent.has_polygon_on_triangulation(co_edge));
 }
+
+#[test]
+fn a_promoted_face_leaves_its_coedge_polygons_on_triangulation_behind() {
+    let mut graph = box_graph();
+    let (co_edge, face) = first_co_edge(&graph);
+    let tri = triangulation();
+    let on_tri = Handle::new(PolygonOnTriangulation::new(2, false).unwrap());
+    let cache = graph.mesh().editor();
+    cache.faces().set_cached_triangulation(face, &tri).unwrap();
+    cache
+        .co_edges()
+        .append_cached_polygon_on_tri(co_edge, &on_tri)
+        .unwrap();
+    assert!(
+        graph
+            .mesh()
+            .cache()
+            .co_edges()
+            .find_polygon_on_tri(co_edge)
+            .is_some()
+    );
+
+    EditorView::promote_to_persistent(&mut graph).unwrap();
+
+    // The face write came first and notified the face, which made the coedge entry
+    // stale before the coedge loop read it (as natively).
+    assert!(graph.mesh().persistent().faces().triangulation(face) == tri);
+    assert!(
+        !graph
+            .mesh()
+            .persistent()
+            .co_edges()
+            .has_polygon_on_triangulation(co_edge)
+    );
+}
