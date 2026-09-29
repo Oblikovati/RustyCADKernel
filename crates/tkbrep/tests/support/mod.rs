@@ -9,6 +9,7 @@
 //! edges and eight vertices as BRepPrim does. They are replaced by the real builders
 //! when those toolkits are ported.
 #![allow(dead_code)]
+pub mod ref_test_tools;
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topods::{Edge, Face, Shell, Solid, Vertex, Wire};
 use rustycad_tkernel::precision;

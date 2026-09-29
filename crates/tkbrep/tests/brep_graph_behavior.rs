@@ -12,6 +12,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Transform3, Vector3};
 use rustycad_tkmath::toploc::Location;
 use support::make_box;
+use support::ref_test_tools as tools;
 
 fn populated(shape: &rustycad_tkbrep::topods::Shape) -> BRepGraph {
     let mut graph = BRepGraph::new();
@@ -101,4 +102,24 @@ fn reconstruct_cache_reuses_shapes_and_skips_non_shapes() {
     assert!(co_edge.is_null());
     let error = reconstruct::node(&graph, NodeId::new(NodeKind::EDGE, 99)).unwrap_err();
     assert_eq!(error.exception_type(), "Standard_OutOfRange");
+}
+
+#[test]
+fn ref_test_tools_read_the_populated_box() {
+    let graph = populated(&make_box(1.0, 1.0, 1.0));
+    let (shell, solid) = (
+        rustycad_tkbrep::brep_graph::ShellId::new(0),
+        SolidId::new(0),
+    );
+    assert_eq!(tools::count_face_refs_of_shell(&graph, shell), 6);
+    assert_eq!(tools::count_shell_refs_of_solid(&graph, solid), 1);
+    assert_eq!(tools::count_wire_refs_of_face(&graph, FaceId::new(0)), 1);
+    let wire = graph
+        .refs()
+        .wires()
+        .entry(tools::wire_refs_of_face(&graph, FaceId::new(0))[0])
+        .child_wire_id;
+    assert!(tools::face_uses_wire(&graph, FaceId::new(0), wire));
+    assert_eq!(tools::count_co_edges_of_wire(&graph, wire), 4);
+    assert_eq!(tools::count_child_refs_of_parent(&graph, solid.into()), 0);
 }
