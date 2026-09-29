@@ -41,20 +41,29 @@ impl LayerDeferred {
         target.reserve_deferred_items(graph, entries.len())?;
         target.begin_bulk_registration();
         for (item, entry) in &entries {
-            let target_item = copy.target_item(*item);
-            if !target_item.is_valid() {
-                continue;
-            }
-            let representations = entry.representations.as_slice();
-            let (provider, key) = (&entry.provider, &entry.source_key);
-            target.register_deferred_representations_direct(
-                graph,
-                target_item,
-                provider,
-                key,
-                representations,
-            )?;
+            copy_entry(copy, target, *item, entry)?;
         }
         target.end_bulk_registration(graph)
     }
+}
+
+// One entry of `CopyTo`: registered directly under the target item, when mapped.
+fn copy_entry(
+    copy: &CopyRemap<'_>,
+    target: &LayerDeferred,
+    item: ItemId,
+    entry: &DeferredEntry,
+) -> Result<(), Failure> {
+    let target_item = copy.target_item(item);
+    if !target_item.is_valid() {
+        return Ok(());
+    }
+    let representations = entry.representations.as_slice();
+    target.register_deferred_representations_direct(
+        copy.target_graph_const(),
+        target_item,
+        &entry.provider,
+        &entry.source_key,
+        representations,
+    )
 }

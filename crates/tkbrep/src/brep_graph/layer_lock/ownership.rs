@@ -83,27 +83,44 @@ impl LayerLock {
         if !item.is_valid() {
             return Ok(false);
         }
-        let existing = self.owners.read().map_of(item).seek(&item).copied();
-        if let Some(existing) = existing {
-            self.reaffirm_if_same(graph, item, existing == *owner, update_revision);
-            return Ok(false);
-        }
-        if let Some(ancestor_owner) = self.is_covered_by_ancestor(graph, item)? {
-            self.reaffirm_if_same(graph, item, ancestor_owner == *owner, update_revision);
+        if let Some(covering) = self.covering_owner(graph, item)? {
+            self.reaffirm_if_same(graph, item, covering == *owner, update_revision);
             return Ok(false);
         }
         let DescendantRoots::Absorbed(absorbed) = self.descendant_roots(graph, item, owner)? else {
             return Ok(false);
         };
-        self.bind_root(item, owner, &absorbed);
-        self.set_item_owned(Some(graph), item, true);
-        if item.item_domain() == ItemDomain::Node {
-            self.expand_ownership(Some(graph), item.node_id(), true)?;
-        }
+        self.store_root(graph, item, owner, &absorbed)?;
         if update_revision {
             self.base.touch();
         }
         Ok(true)
+    }
+
+    // The owner of the item's own root entry, else of an ancestor root covering it.
+    fn covering_owner(&self, graph: &BRepGraph, item: ItemId) -> Result<Option<Guid>, Failure> {
+        let existing = self.owners.read().map_of(item).seek(&item).copied();
+        if existing.is_some() {
+            return Ok(existing);
+        }
+        self.is_covered_by_ancestor(graph, item)
+    }
+
+    // A new root: the absorbed roots unbound, the root bound, its bit and (for a node)
+    // its subtree's bits set.
+    fn store_root(
+        &self,
+        graph: &BRepGraph,
+        item: ItemId,
+        owner: &Guid,
+        absorbed: &[ItemId],
+    ) -> Result<(), Failure> {
+        self.bind_root(item, owner, absorbed);
+        self.set_item_owned(Some(graph), item, true);
+        if item.item_domain() == ItemDomain::Node {
+            self.expand_ownership(Some(graph), item.node_id(), true)?;
+        }
+        Ok(())
     }
 
     // An idempotent re-registration by the same owner re-sets the bit.
@@ -133,20 +150,29 @@ impl LayerLock {
         let mut explorer = ChildExplorer::new(graph, item.node_id())?;
         while explorer.more() {
             let reference = explorer.current_ref();
-            let mut candidates = vec![ItemId::from(explorer.current().def_id)];
-            if reference.is_valid() {
-                candidates.push(reference.into());
-            }
-            for candidate in candidates {
-                match self.owners.read().map_of(candidate).seek(&candidate) {
-                    Some(found) if found != owner => return Ok(DescendantRoots::Conflict),
-                    Some(_) => absorbed.push(candidate),
-                    None => {}
+            let node = Some(ItemId::from(explorer.current().def_id));
+            let link = reference.is_valid().then(|| ItemId::from(reference));
+            for candidate in [node, link].into_iter().flatten() {
+                if !self.absorb_if_same(candidate, owner, &mut absorbed) {
+                    return Ok(DescendantRoots::Conflict);
                 }
             }
             explorer.next()?;
         }
         Ok(DescendantRoots::Absorbed(absorbed))
+    }
+
+    // A descendant item's root entry: none, the same owner (kept for absorption), or
+    // another owner (false: the new root is rejected).
+    fn absorb_if_same(&self, candidate: ItemId, owner: &Guid, absorbed: &mut Vec<ItemId>) -> bool {
+        match self.owners.read().map_of(candidate).seek(&candidate) {
+            Some(found) if found != owner => false,
+            Some(_) => {
+                absorbed.push(candidate);
+                true
+            }
+            None => true,
+        }
     }
 
     // Unbinds the absorbed descendant roots, then binds the new root.

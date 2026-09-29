@@ -144,18 +144,30 @@ impl CacheDerivedState {
         let mut computed = EdgeEntry::default();
         let (status, closed) = edge_status(graph, edge);
         computed.set(status, closed);
+        Ok(self.store_edge_entry(graph, node, edge.index, computed))
+    }
+
+    // The locked tail of `ensureEdgeEntry`: a fresh computed stored entry wins, else the
+    // computed one is stored and bound (reset and `None` when the bind fails).
+    fn store_edge_entry(
+        &self,
+        graph: &BRepGraph,
+        node: NodeId,
+        index: u32,
+        computed: EdgeEntry,
+    ) -> Option<EdgeEntry> {
         let mut entries = self.entries.write();
-        ensure_size(&mut entries.edges, edge.index);
-        let stored = &mut entries.edges[edge.index as usize];
+        ensure_size(&mut entries.edges, index);
+        let stored = &mut entries.edges[index as usize];
         if stored.node.is_fresh_own(&self.base, graph, node) && stored.is_computed() {
-            return Ok(Some(*stored));
+            return Some(*stored);
         }
         *stored = computed;
         if !stored.node.bind_own_gen(&self.base, graph, node) {
             stored.node.reset();
-            return Ok(None);
+            return None;
         }
-        Ok(Some(*stored))
+        Some(*stored)
     }
 
     // The lock-free read path of `ensureEdgeEntry`.
@@ -258,14 +270,12 @@ impl CacheDerivedState {
     // a 2^32-entry allocation); the answer is the same.
     fn store_wire(&self, graph: &BRepGraph, wire: WireId, closed: bool) -> bool {
         let node = NodeId::from(wire);
+        let mut entries = self.entries.write();
         if self.base.node_own_gen(graph, node).is_none() {
-            let mut entries = self.entries.write();
-            if let Some(stored) = entries.wires.get_mut(wire.index as usize) {
-                stored.node.reset();
-            }
+            let stored = entries.wires.get_mut(wire.index as usize);
+            reset_node(stored.map(|stored| &mut stored.node));
             return false;
         }
-        let mut entries = self.entries.write();
         ensure_size(&mut entries.wires, wire.index);
         let stored = &mut entries.wires[wire.index as usize];
         if !stored.node.bind_own_gen(&self.base, graph, node) {
@@ -307,9 +317,12 @@ impl CacheDerivedState {
         let node = NodeId::from(shell);
         let mut entries = self.entries.write();
         if self.base.node_own_gen(graph, node).is_none() {
-            if let Some(stored) = entries.shells.get_mut(shell.index as usize) {
-                stored.node.reset();
-            }
+            reset_node(
+                entries
+                    .shells
+                    .get_mut(shell.index as usize)
+                    .map(|stored| &mut stored.node),
+            );
             return None;
         }
         ensure_size(&mut entries.shells, shell.index);
@@ -325,6 +338,13 @@ impl CacheDerivedState {
         }
         stored.status = status;
         Some(status)
+    }
+}
+
+// The failed bind of an entity the graph cannot bind: an existing entry is unbound.
+fn reset_node(entry: Option<&mut crate::brep_graph::cache::NodeEntry>) {
+    if let Some(entry) = entry {
+        entry.reset();
     }
 }
 

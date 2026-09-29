@@ -141,6 +141,14 @@ fn copy_co_edges(ends: &MeshCopy<'_>, source: &Slot, target: &mut Slot) -> Resul
     Ok(())
 }
 
+// Which sides of a source coedge entry are fresh (the 2D polygon, the polygons on
+// triangulation).
+#[derive(Clone, Copy)]
+struct FreshSides {
+    polygon2d: bool,
+    on_tri: bool,
+}
+
 // One coedge: its fresh 2D polygon, and its fresh polygons on triangulation when the
 // target coedge's face has a cached triangulation in the slot.
 fn copy_co_edge(
@@ -152,37 +160,20 @@ fn copy_co_edge(
     let Some(raw) = source.co_edge_raw(co_edge) else {
         return Ok(());
     };
-    let source_graph = ends.source_graph();
-    let fresh_2d = ends
-        .source
-        .is_co_edge_polygon2d_fresh(source_graph, raw, source);
-    let mut fresh_on_tri = ends
-        .source
-        .is_co_edge_polygon_on_tri_fresh(source_graph, raw, source);
-    if !fresh_2d && !fresh_on_tri {
+    let Some(mut sides) = fresh_sides(ends, source, raw) else {
         return Ok(());
-    }
+    };
     let target_graph = ends.target_graph();
     let target_co_edge = remapped_node(ends.copy, co_edge);
     if !target_co_edge.is_valid_for(target_graph.topo().co_edges().nb()) {
         return Ok(());
     }
-    if fresh_on_tri {
+    if sides.on_tri {
         let face = target_graph.inc_storage().co_edge(target_co_edge).face_id;
-        fresh_on_tri = face.is_valid() && target.face_raw(face).is_some();
+        sides.on_tri = face.is_valid() && target.face_raw(face).is_some();
     }
-    let mut copied: CoEdgeMeshEntry =
-        ensure_size(&mut target.co_edge_meshes, target_co_edge.index)?.clone();
-    if fresh_2d {
-        copied.polygon2d = raw.polygon2d.clone();
-    }
-    if fresh_on_tri {
-        let polygons = raw
-            .polygons_on_tri
-            .iter()
-            .filter(|polygon| polygon.is_some());
-        copied.polygons_on_tri.extend(polygons.cloned());
-    }
+    let mut copied = ensure_size(&mut target.co_edge_meshes, target_co_edge.index)?.clone();
+    merge_sides(&mut copied, raw, sides);
     if copied.is_present() {
         ends.target
             .bind_co_edge_entry(target_graph, &mut copied, target_co_edge, target);
@@ -191,4 +182,31 @@ fn copy_co_edge(
     }
     target.co_edge_meshes[target_co_edge.index as usize] = copied;
     Ok(())
+}
+
+// The fresh sides of a source entry; `None` when neither is fresh.
+fn fresh_sides(ends: &MeshCopy<'_>, source: &Slot, raw: &CoEdgeMeshEntry) -> Option<FreshSides> {
+    let graph = ends.source_graph();
+    let sides = FreshSides {
+        polygon2d: ends.source.is_co_edge_polygon2d_fresh(graph, raw, source),
+        on_tri: ends
+            .source
+            .is_co_edge_polygon_on_tri_fresh(graph, raw, source),
+    };
+    (sides.polygon2d || sides.on_tri).then_some(sides)
+}
+
+// The fresh sides copied into the target entry (the non-null polygons on triangulation
+// are appended).
+fn merge_sides(copied: &mut CoEdgeMeshEntry, raw: &CoEdgeMeshEntry, sides: FreshSides) {
+    if sides.polygon2d {
+        copied.polygon2d = raw.polygon2d.clone();
+    }
+    if sides.on_tri {
+        let polygons = raw
+            .polygons_on_tri
+            .iter()
+            .filter(|polygon| polygon.is_some());
+        copied.polygons_on_tri.extend(polygons.cloned());
+    }
 }

@@ -186,12 +186,21 @@ fn replay_items(replay: Replay<'_>, original: ItemId, durable: ItemUid, images: 
         record_deletion(replay, target_original, durable);
         return;
     }
-    if image_uids.is_empty() {
-        return;
+    if !image_uids.is_empty() {
+        record_images(replay, target_original, &image_uids, image_nodes);
     }
-    let graph = replay.copy.target_graph_const();
+}
+
+// The record of a mapped original with images: by node when every item is a node, else
+// by item UID (when the original has one).
+fn record_images(
+    replay: Replay<'_>,
+    target_original: ItemId,
+    image_uids: &[ItemUid],
+    image_nodes: Option<Vec<NodeId>>,
+) {
     if let Some(nodes) = image_nodes {
-        let original = target_original.node_id();
+        let (graph, original) = (replay.copy.target_graph_const(), target_original.node_id());
         replay
             .target
             .record(graph, replay.label, original, &nodes, replay.kind);
@@ -201,7 +210,7 @@ fn replay_items(replay: Replay<'_>, original: ItemId, durable: ItemUid, images: 
     if original_uid.is_valid() {
         replay
             .target
-            .record_item_uid(replay.label, original_uid, &image_uids, replay.kind);
+            .record_item_uid(replay.label, original_uid, image_uids, replay.kind);
     }
 }
 
