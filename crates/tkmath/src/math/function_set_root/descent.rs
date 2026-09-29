@@ -26,7 +26,7 @@ impl FunctionSetRoot {
             if !self.evaluate_or_finish(function) {
                 return false;
             }
-            self.run.slope = self.gradient.dot(&self.direction).unwrap();
+            self.run.slope = self.gradient.dot_unchecked(&self.direction);
             if self.run.slope.abs() <= 1e-32 {
                 if self.run.objective > self.run.old_objective {
                     self.sol.initialized(&self.saved).unwrap();

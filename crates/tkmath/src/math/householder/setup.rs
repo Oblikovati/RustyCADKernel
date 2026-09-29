@@ -32,7 +32,7 @@ impl Householder {
         for row in 1..=rows {
             result.copy_input_row(matrix, rhs, &mut transformed, row, rl, cl)?;
         }
-        result.reduce(&mut transformed, epsilon);
+        result.reduce(&mut transformed, epsilon)?;
         Ok(result)
     }
     fn copy_input_row(
@@ -54,6 +54,5 @@ impl Householder {
     }
 }
 fn allocate(rl: i32, ru: i32, cl: i32, cu: i32) -> Result<Matrix<'static>, Failure> {
-    Matrix::with_bounds(rl, ru, cl, cu)
-        .map_err(|_| Failure::with_type("Standard_RangeError", "NCollection_Array2::Create", ""))
+    Matrix::with_bounds(rl, ru, cl, cu).map_err(|error| error.into_failure("math_Householder"))
 }

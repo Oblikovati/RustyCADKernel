@@ -193,7 +193,9 @@ impl Matrix<'_> {
             ));
         }
         let mut result = Vector::with_bounds(self.lower_row(), self.upper_row())?;
-        result.set_matrix_vector(self, right)?;
+        // Native Multiplied(math_Vector) indexes cell by cell, so an empty matrix or
+        // vector gives an empty or zero result instead of the pointer walk's raise.
+        result.store_product(self, right, false, false);
         Ok(result)
     }
 }

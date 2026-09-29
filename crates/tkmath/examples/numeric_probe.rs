@@ -516,6 +516,8 @@ fn main() {
             "int_vector" => vector_base_probe::int_vector_case(&values),
             "real_vector_extra" => vector_base_probe::real_vector_extra_case(&values),
             "matrix_extra" => vector_base_probe::matrix_extra_case(&values),
+            "empty_bounds" => empty_bounds_probe::empty_bounds_case(&values),
+            "empty_solvers" => empty_bounds_probe::empty_solvers_case(&values),
             "recipes_lu" => recipes_probe::lu_case(&values),
             "progress_lu" => progress_probe::lu_case(&values),
             "progress_gauss" => progress_probe::gauss_case(&values),
@@ -609,6 +611,7 @@ mod bsps_probe;
 mod convert_probe;
 mod cslib_probe;
 mod elementary_probe;
+mod empty_bounds_probe;
 mod plib_probe;
 mod progress_probe;
 mod recipes_probe;

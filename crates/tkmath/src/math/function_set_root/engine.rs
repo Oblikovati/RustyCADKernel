@@ -77,7 +77,7 @@ impl FunctionSetRoot {
             }
         } else {
             self.run.lambda = 1.0;
-            self.run.lambda2 = 0.5 * self.run.lambda / self.direction.norm().unwrap();
+            self.run.lambda2 = 0.5 * self.run.lambda / self.direction.norm_unchecked();
         }
     }
     pub(super) fn advance(&mut self) {
@@ -86,7 +86,7 @@ impl FunctionSetRoot {
         }
     }
     fn progress(&mut self, function: &mut impl FunctionSetWithDerivatives) -> bool {
-        self.run.slope = self.gradient.dot(&self.direction).unwrap();
+        self.run.slope = self.gradient.dot_unchecked(&self.direction);
         self.run.old_objective = self.run.previous_minimum;
         self.run.stop = false;
         self.run.good = false;

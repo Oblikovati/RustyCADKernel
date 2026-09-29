@@ -23,7 +23,7 @@ impl FunctionSetRoot {
                 return false;
             }
         }
-        self.run.objective = 0.5 * self.residual.norm2().unwrap();
+        self.run.objective = 0.5 * self.residual.norm2_unchecked();
         self.gradient
             .set_transpose_matrix_vector(&self.jacobian, &self.residual)
             .unwrap();
@@ -32,7 +32,7 @@ impl FunctionSetRoot {
                 return false;
             }
         }
-        self.run.gradient_norm = self.gradient.norm2().unwrap();
+        self.run.gradient_norm = self.gradient.norm2_unchecked();
         true
     }
     pub(super) fn evaluate_or_finish(

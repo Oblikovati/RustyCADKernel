@@ -51,10 +51,8 @@ pub const STATUS_NO_CONVERGENCE: i32 = 3;
 
 /// Refuses a matrix whose bounds do not contain rows `1..=rows` and columns `1..=cols`.
 fn require_matrix(matrix: &Matrix<'_>, rows: i32, cols: i32, kernel: &str) -> Result<(), Failure> {
-    let covers = matrix.lower_row() <= 1.min(rows)
-        && matrix.upper_row() >= rows
-        && matrix.lower_col() <= 1.min(cols)
-        && matrix.upper_col() >= cols;
+    let covers = covers_one_based(matrix.lower_row(), matrix.upper_row(), rows)
+        && covers_one_based(matrix.lower_col(), matrix.upper_col(), cols);
     if covers {
         return Ok(());
     }
@@ -72,7 +70,7 @@ fn require_vector<T: VectorItem>(
     length: i32,
     kernel: &str,
 ) -> Result<(), Failure> {
-    if vector.lower() <= 1.min(length) && vector.upper() >= length {
+    if covers_one_based(vector.lower(), vector.upper(), length) {
         return Ok(());
     }
     Err(out_of_range(&format!(
@@ -80,6 +78,11 @@ fn require_vector<T: VectorItem>(
         vector.lower(),
         vector.upper()
     )))
+}
+/// Whether `lower..=upper` holds the indices `1..=count` a kernel reads; an empty
+/// `count` reads nothing, so any bounds (an empty table included) cover it.
+fn covers_one_based(lower: i32, upper: i32, count: i32) -> bool {
+    count <= 0 || (lower <= 1 && upper >= count)
 }
 fn out_of_range(message: &str) -> Failure {
     Failure::with_type("Standard_OutOfRange", message, "")

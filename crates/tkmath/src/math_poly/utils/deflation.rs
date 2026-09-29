@@ -13,13 +13,27 @@
 
 //! `DeflateReal` and `DeflateComplex`: checked synthetic division that leaves the
 //! polynomial untouched when the remainder is not small.
+use super::preconditions::bounded_degree;
 use crate::math_poly::{Complex, MAX_POLY_DEGREE};
+use rustycad_tkernel::standard::Failure;
 type Quotient = [f64; MAX_POLY_DEGREE + 1];
 /// `DeflateReal`: divides `c[0..=degree]` by `(x - root)` when the remainder is within
-/// `32 * tolerance * max(1, sum |c_i| |root|^i)`, then decrements `degree`. The degree
-/// must be at least 1; `utils::deflate_real(&mut c, &mut degree, 1.0, 1e-12)`.
-pub fn deflate_real(coefficients: &mut [f64], degree: &mut i32, root: f64, tolerance: f64) -> bool {
-    let n: usize = *degree as usize;
+/// `32 * tolerance * max(1, sum |c_i| |root|^i)`, then decrements `degree`.
+/// Standard_OutOfRange unless `1 <= degree <= MAX_POLY_DEGREE` with `degree + 1`
+/// coefficients (native code writes `aQuotient[degree - 1]`);
+/// `utils::deflate_real(&mut c, &mut degree, 1.0, 1e-12)?`.
+pub fn deflate_real(
+    coefficients: &mut [f64],
+    degree: &mut i32,
+    root: f64,
+    tolerance: f64,
+) -> Result<bool, Failure> {
+    let n: usize = bounded_degree(
+        "MathPoly::Utils::DeflateReal",
+        coefficients.len(),
+        *degree,
+        1,
+    )?;
     let c: &mut [f64] = &mut coefficients[..=n];
     let mut quotient: Quotient = [0.0; MAX_POLY_DEGREE + 1];
     quotient[n - 1] = c[n];
@@ -32,11 +46,11 @@ pub fn deflate_real(coefficients: &mut [f64], degree: &mut i32, root: f64, toler
         magnitude = magnitude * root.abs() + c[i].abs();
     }
     if !remainder.is_finite() || remainder.abs() > 32.0 * tolerance * 1.0_f64.max(magnitude) {
-        return false;
+        return Ok(false);
     }
     c[..n].copy_from_slice(&quotient[..n]);
     *degree -= 1;
-    true
+    Ok(true)
 }
 /// Quotient of the division by `x^2 + b x + q`, returned with both remainders.
 fn quadratic_division(c: &[f64], n: usize, b: f64, q: f64) -> (Quotient, f64, f64) {
@@ -59,19 +73,26 @@ fn native_max(a: f64, b: f64) -> f64 {
 }
 /// `DeflateComplex`: divides by the conjugate-pair factor `x^2 - 2 Re(r) x + |r|^2` when
 /// both remainders are within `64 * tolerance * max(1, max |c_i|)`, then subtracts 2 from
-/// `degree`, which must be at least 2; `utils::deflate_complex(&mut c, &mut degree, root, 1e-12)`.
+/// `degree`. After the finiteness check of the factor, Standard_OutOfRange unless
+/// `2 <= degree <= MAX_POLY_DEGREE` with `degree + 1` coefficients (native code writes
+/// `aQuotient[degree - 2]`); `utils::deflate_complex(&mut c, &mut degree, root, 1e-12)?`.
 pub fn deflate_complex(
     coefficients: &mut [f64],
     degree: &mut i32,
     root: Complex,
     tolerance: f64,
-) -> bool {
+) -> Result<bool, Failure> {
     let b: f64 = -2.0 * root.real();
     let q: f64 = root.norm();
     if !b.is_finite() || !q.is_finite() {
-        return false;
+        return Ok(false);
     }
-    let n: usize = *degree as usize;
+    let n: usize = bounded_degree(
+        "MathPoly::Utils::DeflateComplex",
+        coefficients.len(),
+        *degree,
+        2,
+    )?;
     let c: &mut [f64] = &mut coefficients[..=n];
     let (quotient, remainder0, remainder1) = quadratic_division(c, n, b, q);
     let norm: f64 = c.iter().fold(0.0_f64, |m, x| native_max(m, x.abs()));
@@ -80,9 +101,9 @@ pub fn deflate_complex(
         || !remainder1.is_finite()
         || remainder > 64.0 * tolerance * 1.0_f64.max(norm)
     {
-        return false;
+        return Ok(false);
     }
     c[..=n - 2].copy_from_slice(&quotient[..=n - 2]);
     *degree -= 2;
-    true
+    Ok(true)
 }

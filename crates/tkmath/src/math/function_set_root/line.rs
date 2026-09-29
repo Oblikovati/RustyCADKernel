@@ -51,7 +51,7 @@ impl<F: FunctionSetWithDerivatives> Function for Line<'_, F> {
                 return false;
             }
         }
-        *value = 0.5 * self.residual.norm2().unwrap();
+        *value = 0.5 * self.residual.norm2_unchecked();
         true
     }
 }

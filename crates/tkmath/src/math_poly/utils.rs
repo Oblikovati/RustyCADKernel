@@ -17,21 +17,25 @@
 //!
 //! Native pointers become slices plus the native `int` degree; a slice shorter than
 //! `degree + 1`, a degree outside `0..=MAX_POLY_DEGREE` and root buffers that would
-//! overflow are undefined behavior upstream and panic on a bounds check here.
+//! overflow are undefined behavior upstream and raise Standard_OutOfRange here, with the
+//! offending sizes and the expected shape.
 //! `long double` is [`LongDouble`], the pinned x87 profile. Output references become
 //! return values or `&mut` parameters.
 use super::extended::{LongDouble, exponent};
 use super::{Complex, MAX_POLY_DEGREE};
+use rustycad_tkernel::standard::Failure;
 mod consolidate;
 mod deflation;
 mod direct;
 mod isolation;
 mod iteration;
 mod multiplicity;
+mod preconditions;
 pub use consolidate::{consolidate_complex_roots, consolidate_real_roots};
 pub use deflation::{deflate_complex, deflate_real};
 pub use direct::solve_direct;
 pub use isolation::{append_unique, solve_distinct_real};
+pub(super) use iteration::small_complex_residual;
 pub use iteration::{
     ComplexEvaluation, IterationResult, LAGUERRE_NB_STARTS, evaluate_complex, find_root,
     has_small_complex_residual, laguerre_iteration,
@@ -39,6 +43,7 @@ pub use iteration::{
 pub use multiplicity::{
     MULTIPLICITY_REFINEMENT_MAX_ITERATIONS, has_complex_multiplicity, has_multiplicity,
 };
+use preconditions::{bounded_degree, fixed_degree};
 /// `THE_DISTINCT_ROOT_BISECTION_ITERATIONS`: bisection steps per bracketed root.
 pub const DISTINCT_ROOT_BISECTION_ITERATIONS: u32 = 200;
 /// `LongCoefficients`: ascending long-double coefficients, `THE_MAX_POLY_DEGREE + 1` slots.
@@ -87,8 +92,22 @@ pub fn validate(coefficients: Option<&[f64]>, degree: i32, tolerance: f64) -> bo
 /// `ScalePolynomial`: substitutes `x = 2^e * y` and normalizes by a common power of two so
 /// the coefficient exponents are balanced. `None` when the leading coefficient is zero.
 /// Integer exponent arithmetic wraps for non-finite input, which native code leaves
-/// undefined; `utils::scale_polynomial(&[1.0, 0.0, 4.0], 2)`.
-pub fn scale_polynomial(coefficients: &[f64], degree: i32) -> Option<(LongCoefficients, i32)> {
+/// undefined. Standard_OutOfRange for a degree outside `0..=MAX_POLY_DEGREE` or fewer than
+/// `degree + 1` coefficients; `utils::scale_polynomial(&[1.0, 0.0, 4.0], 2)?`.
+pub fn scale_polynomial(
+    coefficients: &[f64],
+    degree: i32,
+) -> Result<Option<(LongCoefficients, i32)>, Failure> {
+    bounded_degree(
+        "MathPoly::Utils::ScalePolynomial",
+        coefficients.len(),
+        degree,
+        0,
+    )?;
+    Ok(scaled(coefficients, degree))
+}
+/// [`scale_polynomial`] on a degree the caller has validated.
+pub(super) fn scaled(coefficients: &[f64], degree: i32) -> Option<(LongCoefficients, i32)> {
     let c: &[f64] = &coefficients[..=degree as usize];
     if c[degree as usize] == 0.0 {
         return None;
@@ -121,8 +140,18 @@ fn variable_exponent(c: &[f64]) -> i32 {
     scale.ceil_integer().clamp(-1000, 1000)
 }
 /// `Evaluate`: Horner value, first derivative and the absolute magnitude bound
-/// `sum |c_i| |x|^i`; `utils::evaluate(&c, 2, LongDouble::new(1.0))`.
+/// `sum |c_i| |x|^i`; Standard_OutOfRange for a degree outside `0..=MAX_POLY_DEGREE`;
+/// `utils::evaluate(&c, 2, LongDouble::new(1.0))?`.
 pub fn evaluate(
+    coefficients: &LongCoefficients,
+    degree: i32,
+    x: LongDouble,
+) -> Result<(LongDouble, LongDouble, LongDouble), Failure> {
+    fixed_degree("MathPoly::Utils::Evaluate", degree, 0)?;
+    Ok(horner(coefficients, degree, x))
+}
+/// [`evaluate`] on a degree the caller has validated.
+pub(super) fn horner(
     coefficients: &LongCoefficients,
     degree: i32,
     x: LongDouble,
@@ -140,18 +169,35 @@ pub fn evaluate(
     (value, derivative, magnitude)
 }
 /// `HasSmallResidual(LongCoefficients, ...)`: `|p(root)| <= tolerance * max(1, magnitude)`
-/// with a finite value; `utils::has_small_residual(&c, 2, root, tolerance)`.
+/// with a finite value; Standard_OutOfRange for a degree outside `0..=MAX_POLY_DEGREE`;
+/// `utils::has_small_residual(&c, 2, root, tolerance)?`.
 pub fn has_small_residual(
     coefficients: &LongCoefficients,
     degree: i32,
     root: LongDouble,
     tolerance: LongDouble,
+) -> Result<bool, Failure> {
+    fixed_degree("MathPoly::Utils::HasSmallResidual", degree, 0)?;
+    Ok(small_residual(coefficients, degree, root, tolerance))
+}
+/// [`has_small_residual`] on a degree the caller has validated.
+pub(super) fn small_residual(
+    coefficients: &LongCoefficients,
+    degree: i32,
+    root: LongDouble,
+    tolerance: LongDouble,
 ) -> bool {
-    let (value, _, magnitude) = evaluate(coefficients, degree, root);
+    let (value, _, magnitude) = horner(coefficients, degree, root);
     value.is_finite() && value.abs() <= tolerance * LongDouble::new(1.0).max(magnitude)
 }
-/// `RootBound`: Cauchy bound `1 + max |c_i / c_degree|`; `utils::root_bound(&c, 2)`.
-pub fn root_bound(coefficients: &LongCoefficients, degree: i32) -> LongDouble {
+/// `RootBound`: Cauchy bound `1 + max |c_i / c_degree|`; Standard_OutOfRange for a degree
+/// outside `0..=MAX_POLY_DEGREE`; `utils::root_bound(&c, 2)?`.
+pub fn root_bound(coefficients: &LongCoefficients, degree: i32) -> Result<LongDouble, Failure> {
+    fixed_degree("MathPoly::Utils::RootBound", degree, 0)?;
+    Ok(cauchy_bound(coefficients, degree))
+}
+/// [`root_bound`] on a degree the caller has validated.
+pub(super) fn cauchy_bound(coefficients: &LongCoefficients, degree: i32) -> LongDouble {
     let d: usize = degree as usize;
     let leading: LongDouble = coefficients[d].abs();
     let ratio: LongDouble = coefficients[..d]

@@ -17,6 +17,12 @@ impl<T: VectorItem> VectorBase<'_, T> {
     /// Returns the four-accumulator native squared norm; `vector.norm2()`.
     pub fn norm2(&self) -> Result<f64, Failure> {
         self.value(self.lower())?;
+        Ok(self.norm2_unchecked())
+    }
+    /// `Norm2()` as compiled in the math TUs that define No_Standard_OutOfRange
+    /// (math_BFGS.cxx, math_FunctionSetRoot.cxx, ...): the unchecked `&Array(Lower())`
+    /// of an empty vector is never read, so its squared norm is 0.
+    pub(crate) fn norm2_unchecked(&self) -> f64 {
         let mut sums = [0.0; 4];
         let (chunks, tail) = self.values().as_chunks::<4>();
         // Each element is widened to double before squaring, as the template does.
@@ -30,11 +36,15 @@ impl<T: VectorItem> VectorBase<'_, T> {
             let value = value.to_real();
             sums[0] += value * value;
         }
-        Ok((sums[0] + sums[1]) + (sums[2] + sums[3]))
+        (sums[0] + sums[1]) + (sums[2] + sums[3])
     }
     /// Returns the Euclidean norm in native arithmetic order; `vector.norm()`.
     pub fn norm(&self) -> Result<f64, Failure> {
         Ok(self.norm2()?.sqrt())
+    }
+    /// `Norm()` as compiled in the unchecked math TUs: 0 for an empty vector.
+    pub(crate) fn norm_unchecked(&self) -> f64 {
+        self.norm2_unchecked().sqrt()
     }
     /// Returns the first strictly greatest element index; `vector.max_index()`.
     pub fn max_index(&self) -> i32 {
@@ -142,11 +152,20 @@ impl<T: VectorItem> VectorBase<'_, T> {
     /// Computes a sequential dot product with positional alignment; `left.dot(&right)?`.
     pub fn dot(&self, right: &VectorBase<'_, T>) -> Result<T, Failure> {
         self.check_length(right, "Multiplied")?;
+        // Native takes `&Array(Lower())` of both operands (checked), so an empty dot
+        // product raises Standard_OutOfRange instead of returning zero.
+        self.value(self.lower())?;
+        right.value(right.lower())?;
+        Ok(self.dot_unchecked(right))
+    }
+    /// The dot product as compiled in the unchecked math TUs: 0 for empty operands;
+    /// the lengths are the caller's invariant there (No_Standard_DimensionError).
+    pub(crate) fn dot_unchecked(&self, right: &VectorBase<'_, T>) -> T {
         let mut result = T::ZERO;
         for (left, right) in self.values().iter().zip(right.values()) {
             result = result.item_add(left.item_mul(*right));
         }
-        Ok(result)
+        result
     }
     /// Adds equal-length vectors by position; `left.add(&right)?`.
     pub fn add(&mut self, right: &VectorBase<'_, T>) -> Result<(), Failure> {

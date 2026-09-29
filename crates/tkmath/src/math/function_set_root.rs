@@ -97,7 +97,9 @@ impl FunctionSetRoot {
         }
         Ok(Self {
             sol: vector(n)?,
-            jacobian: Matrix::with_bounds(1, m, 1, n).unwrap(),
+            // A negative equation count overruns the stack buffer natively (undefined).
+            jacobian: Matrix::with_bounds(1, m, 1, n)
+                .map_err(|error| error.into_failure("math_FunctionSetRoot"))?,
             tol: vector(n)?,
             delta: vector(n)?,
             gradient: vector(n)?,

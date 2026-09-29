@@ -340,7 +340,7 @@ fn td2d_body(r: &mut Reader) -> Result<(), Failure> {
         Ok(())
     });
     attempt(|| {
-        let values = rustycad_tkgeombase::probe_support::defl_curv_intervals_2d(&adaptor)?;
+        let values = <rustycad_tkgeombase::extrema::Curve2dTool as rustycad_tkgeombase::extrema::ExtremaCurveTool>::defl_curv_intervals(&adaptor)?;
         int(values.len() as i32);
         values.iter().for_each(|x| real(*x));
         Ok(())

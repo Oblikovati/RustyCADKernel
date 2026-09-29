@@ -3,19 +3,19 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Xy, Xyz};
 use rustycad_tkmath::math::{IntegerVector, Matrix, Vector, VectorBase, VectorItem};
 use std::fmt::Display;
-fn values<T: VectorItem + Display>(vector: &VectorBase<'_, T>) {
+pub(super) fn values<T: VectorItem + Display>(vector: &VectorBase<'_, T>) {
     print!("{} {} {} ", vector.lower(), vector.upper(), vector.length());
     for index in vector.lower()..=vector.upper() {
         print!("{} ", vector[index]);
     }
 }
-fn reals(vector: &Vector<'_>) {
+pub(super) fn reals(vector: &Vector<'_>) {
     print!("{} {} {} ", vector.lower(), vector.upper(), vector.length());
     for index in vector.lower()..=vector.upper() {
         print!("{} ", vector[index].to_bits());
     }
 }
-fn cells(matrix: &Matrix<'_>) {
+pub(super) fn cells(matrix: &Matrix<'_>) {
     let bounds = [
         matrix.lower_row(),
         matrix.upper_row(),
@@ -29,10 +29,10 @@ fn cells(matrix: &Matrix<'_>) {
         }
     }
 }
-fn dumped(value: &impl Display) {
+pub(super) fn dumped(value: &impl Display) {
     print!("{} ", value.to_string().replace('\n', "|"));
 }
-fn guarded(body: impl FnOnce() -> Result<(), Failure>) {
+pub(super) fn guarded(body: impl FnOnce() -> Result<(), Failure>) {
     if let Err(error) = body() {
         print!("{} ", error.exception_type());
     }

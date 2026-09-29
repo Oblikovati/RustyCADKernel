@@ -13,9 +13,11 @@
 
 //! `ConsolidateRealRoots` / `ConsolidateComplexRoots`: merge root clusters closer than
 //! `tolerance^(1/degree)` into one root with verified algebraic multiplicity.
+use super::preconditions::{free_slot, stored_count};
 use super::{has_complex_multiplicity, has_multiplicity};
 use crate::math_poly::extended::{LongDouble, scale_double};
 use crate::math_poly::{Complex, MAX_POLY_DEGREE, PolyResult};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::stl;
 /// The undeflated scaled polynomial and its variable exponent.
 struct Original<'a> {
@@ -39,27 +41,35 @@ fn real_mean(roots: &[f64]) -> f64 {
     (sum / LongDouble::from_usize(roots.len())).narrow()
 }
 /// Largest verified multiplicity of a real cluster, with its representative root.
-fn real_cluster(p: &Original, cluster: &[f64]) -> (f64, usize) {
+fn real_cluster(p: &Original, cluster: &[f64]) -> Result<(f64, usize), Failure> {
     let mut multiplicity: usize = cluster.len();
     while multiplicity > 1 {
         let mut scaled: f64 = scale_double(real_mean(&cluster[..multiplicity]), -p.exponent);
-        if has_multiplicity(p.coefficients, p.degree, &mut scaled, multiplicity) {
-            return (scale_double(scaled, p.exponent), multiplicity);
+        if has_multiplicity(p.coefficients, p.degree, &mut scaled, multiplicity)? {
+            return Ok((scale_double(scaled, p.exponent), multiplicity));
         }
         multiplicity -= 1;
     }
-    (cluster[0], 1)
+    Ok((cluster[0], 1))
 }
 /// `ConsolidateRealRoots`: sorts `result.roots[..nb_roots]` with libstdc++'s `std::sort`
-/// and merges clusters in place; `original` is the undeflated scaled polynomial;
-/// `utils::consolidate_real_roots(&mut result, 1e-12, &c, 3, exponent)`.
+/// and merges clusters in place; `original` is the undeflated scaled polynomial.
+/// Standard_OutOfRange for more than `MAX_POLY_DEGREE` roots, or when a cluster check
+/// breaks the [`has_multiplicity`] preconditions;
+/// `utils::consolidate_real_roots(&mut result, 1e-12, &c, 3, exponent)?`.
 pub fn consolidate_real_roots(
     result: &mut PolyResult,
     tolerance: f64,
     original: &[f64],
     degree: i32,
     variable_exponent: i32,
-) {
+) -> Result<(), Failure> {
+    stored_count(
+        "MathPoly::Utils::ConsolidateRealRoots",
+        result.nb_roots,
+        MAX_POLY_DEGREE,
+        "real roots",
+    )?;
     let p: Original = Original {
         coefficients: original,
         degree,
@@ -75,13 +85,14 @@ pub fn consolidate_real_roots(
             (scale_double(roots[k], -p.exponent) - scale_double(roots[k - 1], -p.exponent)).abs()
                 <= merge
         });
-        let (root, multiplicity) = real_cluster(&p, &roots[source..end]);
+        let (root, multiplicity) = real_cluster(&p, &roots[source..end])?;
         result.roots[written] = root;
         result.multiplicities[written] = multiplicity;
         written += 1;
         source += multiplicity;
     }
     result.nb_roots = written;
+    Ok(())
 }
 fn complex_mean(roots: &[Complex]) -> Complex {
     let n: LongDouble = LongDouble::from_usize(roots.len());
@@ -93,25 +104,34 @@ fn complex_mean(roots: &[Complex]) -> Complex {
         .fold(LongDouble::ZERO, |s, z| s + LongDouble::new(z.imag()));
     Complex::new((re / n).narrow(), (im / n).narrow())
 }
-fn complex_cluster(p: &Original, cluster: &[Complex]) -> (Complex, usize) {
+fn complex_cluster(p: &Original, cluster: &[Complex]) -> Result<(Complex, usize), Failure> {
     let mut multiplicity: usize = cluster.len();
     while multiplicity > 1 {
         let mut scaled: Complex =
             complex_mean(&cluster[..multiplicity]) * scale_double(1.0, -p.exponent);
-        if has_complex_multiplicity(p.coefficients, p.degree, &mut scaled, multiplicity) {
-            return (scaled * scale_double(1.0, p.exponent), multiplicity);
+        if has_complex_multiplicity(p.coefficients, p.degree, &mut scaled, multiplicity)? {
+            return Ok((scaled * scale_double(1.0, p.exponent), multiplicity));
         }
         multiplicity -= 1;
     }
-    (cluster[0], 1)
+    Ok((cluster[0], 1))
 }
 /// Upper-half-plane roots in (real, imaginary) lexicographic order, sorted by libstdc++'s
-/// `std::sort` into a `THE_MAX_POLY_DEGREE / 2` buffer as native code does.
-fn positive_roots(result: &PolyResult) -> ([Complex; MAX_POLY_DEGREE / 2], usize) {
+/// `std::sort` into a `THE_MAX_POLY_DEGREE / 2` buffer as native code does; more
+/// upper-half-plane roots overrun it natively and raise Standard_OutOfRange here.
+fn positive_roots(result: &PolyResult) -> Result<([Complex; MAX_POLY_DEGREE / 2], usize), Failure> {
+    const MEMBER: &str = "MathPoly::Utils::ConsolidateComplexRoots";
+    stored_count(
+        MEMBER,
+        result.nb_complex_roots,
+        MAX_POLY_DEGREE,
+        "complex roots",
+    )?;
     let mut roots: [Complex; MAX_POLY_DEGREE / 2] = [Complex::default(); MAX_POLY_DEGREE / 2];
     let mut count: usize = 0;
     for &root in &result.complex_roots[..result.nb_complex_roots] {
         if root.imag() > 0.0 {
+            free_slot(MEMBER, count, MAX_POLY_DEGREE / 2, "upper-half-plane roots")?;
             roots[count] = root;
             count += 1;
         }
@@ -119,7 +139,7 @@ fn positive_roots(result: &PolyResult) -> ([Complex; MAX_POLY_DEGREE / 2], usize
     stl::sort_by(&mut roots[..count], |l, r| {
         l.real() < r.real() || (l.real() == r.real() && l.imag() < r.imag())
     });
-    (roots, count)
+    Ok((roots, count))
 }
 fn complex_near(roots: &[Complex], k: usize, resolution: f64) -> bool {
     let bound: f64 = [roots[k].abs(), roots[k - 1].abs()]
@@ -128,20 +148,23 @@ fn complex_near(roots: &[Complex], k: usize, resolution: f64) -> bool {
     (roots[k] - roots[k - 1]).abs() <= resolution * bound
 }
 /// `ConsolidateComplexRoots`: rebuilds the conjugate-pair list from the upper-half-plane
-/// roots with merged clusters; `utils::consolidate_complex_roots(&mut result, 1e-12, &c, 4, 0)`.
+/// roots with merged clusters. Standard_OutOfRange for more than `MAX_POLY_DEGREE` complex
+/// roots, more than `MAX_POLY_DEGREE / 2` in the upper half plane, or when a cluster check
+/// breaks the [`has_complex_multiplicity`] preconditions;
+/// `utils::consolidate_complex_roots(&mut result, 1e-12, &c, 4, 0)?`.
 pub fn consolidate_complex_roots(
     result: &mut PolyResult,
     tolerance: f64,
     original: &[f64],
     degree: i32,
     variable_exponent: i32,
-) {
+) -> Result<(), Failure> {
     let p: Original = Original {
         coefficients: original,
         degree,
         exponent: variable_exponent,
     };
-    let (roots, count) = positive_roots(result);
+    let (roots, count) = positive_roots(result)?;
     let positive: &[Complex] = &roots[..count];
     let resolution: f64 = tolerance.powf(1.0 / degree as f64);
     let (mut source, mut written): (usize, usize) = (0, 0);
@@ -149,7 +172,7 @@ pub fn consolidate_complex_roots(
         let end: usize = cluster_end(source, positive.len(), |k| {
             complex_near(positive, k, resolution)
         });
-        let (root, multiplicity) = complex_cluster(&p, &positive[source..end]);
+        let (root, multiplicity) = complex_cluster(&p, &positive[source..end])?;
         for value in [root, root.conj()] {
             result.complex_roots[written] = value;
             result.complex_multiplicities[written] = multiplicity;
@@ -158,4 +181,5 @@ pub fn consolidate_complex_roots(
         source += multiplicity;
     }
     result.nb_complex_roots = written;
+    Ok(())
 }
