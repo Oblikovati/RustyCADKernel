@@ -64,6 +64,7 @@ pub mod tool;
 pub mod topo_view;
 pub mod uids_view;
 mod usage_path;
+pub mod validate;
 mod version_stamp;
 
 pub use data::Data;
