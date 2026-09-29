@@ -16,14 +16,16 @@
 //!
 //! The native overloads on `BRepGraph` and on `BRepGraphInc_Storage` share names; the
 //! storage overloads here carry the `_in_storage` suffix. The graph overload of
-//! `OuterWireOfFace` calls `BRepGraph_Tool::Face::OuterWire` (the algorithms area of
-//! phase 2) and waits for it; its storage overload is translated.
+//! `OuterWireOfFace` is `BRepGraph_Tool::Face::OuterWire`, whose p-curve adaptors can
+//! raise, so it returns `Result`.
 #![allow(dead_code)]
 use rustycad_tkbrep::brep_graph::{
     BRepGraph, ChildRefId, CoEdgeId, CompSolidId, CompoundId, FaceId, FaceRefId, NodeId, NodeKind,
     ShellId, ShellRefId, SolidId, SolidRefId, WireId, WireRefId,
 };
+use rustycad_tkbrep::brep_graph::tool;
 use rustycad_tkbrep::brep_graph_inc::Storage;
+use rustycad_tkernel::standard::Failure;
 
 /// `SeamPairFromStorage`: the partner coedge when `co_edge` is one half of a seam pair
 /// on its face, else an invalid id.
@@ -203,6 +205,11 @@ pub fn child_refs_of_parent_in_storage(storage: &Storage, parent: NodeId) -> &[C
 /// `CountChildRefsOfParent(theStorage, theParentId)`.
 pub fn count_child_refs_of_parent_in_storage(storage: &Storage, parent: NodeId) -> u32 {
     child_refs_of_parent_in_storage(storage, parent).len() as u32
+}
+
+/// `OuterWireOfFace(theGraph, theFaceId)`: `BRepGraph_Tool::Face::OuterWire`.
+pub fn outer_wire_of_face(graph: &BRepGraph, face: FaceId) -> Result<WireId, Failure> {
+    tool::face::outer_wire(graph, face)
 }
 
 /// `OuterWireOfFace(theStorage, theFaceId)`: the child wire of the first wire reference.
