@@ -177,7 +177,7 @@ pub fn desc(g: &Graph, s: &Shape) {
     chain(g, s.location());
 }
 
-fn orientation(o: i32) -> Orientation {
+pub fn orientation(o: i32) -> Orientation {
     Orientation::ALL[o as usize]
 }
 

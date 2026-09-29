@@ -103,7 +103,7 @@ fn view_effective(s: &Scene, g: &BRepGraph) {
 }
 
 /// `bc_view_report`.
-fn view_report(s: &Scene, g: &BRepGraph) {
+pub fn view_report(s: &Scene, g: &BRepGraph) {
     let p = g.mesh().poly();
     let counts = [
         p.nb_face_triangulations(),

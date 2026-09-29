@@ -27,6 +27,7 @@ use rustycad_tkernel::precision;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::{Transform3, Vector3};
 use rustycad_tkmath::toploc::Location;
+use std::collections::hash_map::Entry;
 use std::collections::{HashMap, HashSet};
 use support::make_box;
 
@@ -719,8 +720,8 @@ fn BRepGraph_ChildExplorerTest__DirectChildren_ChainedTraversal_ParityWithRecurs
         ChildExplorer::with_target(&aGraph, CompoundId::start(), NodeKind::FACE).unwrap();
     while anExp.more() {
         let aFaceIdx = anExp.current().def_id.index;
-        if !aExpectedLoc.contains_key(&aFaceIdx) {
-            aExpectedLoc.insert(aFaceIdx, anExp.current().location);
+        if let Entry::Vacant(aSlot) = aExpectedLoc.entry(aFaceIdx) {
+            aSlot.insert(anExp.current().location);
             aExpectedOri.insert(aFaceIdx, anExp.current().orientation);
         }
         anExp.next().unwrap();

@@ -27,7 +27,7 @@ pub fn ascii(t: &AsciiString) {
 }
 
 /// `bl_registry`.
-fn registry(g: &BRepGraph, st: &State) {
+pub fn registry(g: &BRepGraph, st: &State) {
     let reg = g.layer_registry();
     long(u64::from(reg.nb_layers()));
     for i in 0..=reg.nb_layers() {
@@ -147,7 +147,7 @@ fn node_queries(g: &BRepGraph, h: &LayerHistory) {
 }
 
 /// `bl_history_report`.
-fn history(g: &BRepGraph) {
+pub fn history(g: &BRepGraph) {
     let handle = g.layer_registry().find::<LayerHistory>();
     let Some(h) = handle.get() else {
         return word("N");
@@ -186,7 +186,7 @@ fn event_uid_queries(g: &BRepGraph, h: &LayerHistory, e: &HistoryEvent) {
 }
 
 /// `bl_supplement_report`.
-fn supplement(s: &Scene, g: &BRepGraph) {
+pub fn supplement(s: &Scene, g: &BRepGraph) {
     let handle = g.layer_registry().find::<LayerTopoSupplement>();
     let Some(l) = handle.get() else {
         return word("N");
@@ -221,7 +221,7 @@ fn supplement(s: &Scene, g: &BRepGraph) {
 }
 
 /// `bl_cache_report`.
-fn caches(g: &BRepGraph, st: &State) {
+pub fn caches(g: &BRepGraph, st: &State) {
     let reg = g.cache_registry();
     long(u64::from(reg.nb_caches()));
     let mut it = reg.cache_iter();

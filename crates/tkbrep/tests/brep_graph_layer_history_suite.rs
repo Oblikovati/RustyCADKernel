@@ -235,7 +235,7 @@ fn BRepGraph_LayerHistoryTest__ApplyModification_EmptyReplacements() {
     assert_eq!(nb_records(&myGraph), aNbBefore + 1);
     let aHistory = history(&myGraph);
     let (aName, _) = record_name_and_kind(aHistory.get().unwrap(), nb_records(&myGraph) - 1);
-    assert!(aName.is_equal(&label("Delete")));
+    assert!(aName.is_equal(label("Delete")));
 }
 
 #[test]
@@ -302,7 +302,7 @@ fn BRepGraph_LayerHistoryTest__HistoryRecord_OperationName_Stored() {
 
     let aHistory = history(&myGraph);
     let (aName, _) = record_name_and_kind(aHistory.get().unwrap(), nb_records(&myGraph) - 1);
-    assert!(aName.is_equal(&label("MyCustomOp")));
+    assert!(aName.is_equal(label("MyCustomOp")));
 }
 
 #[test]
@@ -823,7 +823,7 @@ fn BRepGraph_LayerHistoryTest__RecordUid_Modified_AppendsAuditRecord() {
     assert_eq!(aHist.nb_records(), 1);
     aHist
         .record_at(0, |aRecord| {
-            assert!(aRecord.operation_name.is_equal(&label("UidMod")));
+            assert!(aRecord.operation_name.is_equal(label("UidMod")));
             assert_eq!(aRecord.record_kind, HistoryKind::Modified);
             assert!(aRecord.uid_mapping.is_bound(&anOrig));
             let aMapped = aRecord.uid_mapping.find(&anOrig).unwrap();
@@ -855,7 +855,7 @@ fn BRepGraph_LayerHistoryTest__RecordDeletedUid_AppendsAuditRecord() {
     assert_eq!(aHist.nb_records(), 1);
     aHist
         .record_at(0, |aRecord| {
-            assert!(aRecord.operation_name.is_equal(&label("UidDelete")));
+            assert!(aRecord.operation_name.is_equal(label("UidDelete")));
             assert_eq!(aRecord.record_kind, HistoryKind::Deleted);
             assert!(aRecord.uid_mapping.is_bound(&anOrigA));
             assert!(aRecord.uid_mapping.is_bound(&anOrigB));

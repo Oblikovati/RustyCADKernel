@@ -16,7 +16,7 @@ use rustycad_tkbrep::topods::{self, Shape, ShapeIterator};
 use rustycad_tkernel::standard::{Failure, Guid};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
-fn ref_entries(s: &Scene, g: &BRepGraph) {
+pub fn ref_entries(s: &Scene, g: &BRepGraph) {
     let refs = g.refs();
     long(u64::from(refs.shells().nb()));
     long(u64::from(refs.shells().nb_active()));
@@ -96,7 +96,7 @@ fn nodes(g: &BRepGraph) -> Vec<NodeId> {
         .flat_map(|kind| (0..ops.nb(kind)).map(move |i| NodeId::new(kind, i)))
         .collect()
 }
-fn ref_groups(g: &BRepGraph) {
+pub fn ref_groups(g: &BRepGraph) {
     let (refs, t) = (g.refs(), g.topo());
     (0..t.solids().nb()).for_each(|i| list(refs.shells().ids_of(SolidId::new(i))));
     (0..t.shells().nb()).for_each(|i| list(refs.faces().ids_of(ShellId::new(i))));
