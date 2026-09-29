@@ -21,6 +21,7 @@
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use super::native::{std_max, std_min};
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Direction2, Point2, Vector2, Xy, resolution};
 
 /// Offset point: `value` enters as the basis point (`CalculateD0`);
@@ -404,4 +405,18 @@ pub fn evaluate_d3_aliased<C: OffsetBasisCurve + ?Sized>(
     let derivatives = [&mut first, &mut second, &mut d3];
     let computed: bool = calculate_d3(&mut point, derivatives, d4, is_direction_change, offset);
     Ok(computed.then_some(d3))
+}
+
+/// The `Continuity` switch of the offset curves: offsetting loses one order of
+/// continuity of the basis (Geom2d_OffsetCurve and Geom_OffsetCurve alike);
+/// `offset_curve_continuity(Shape::C2) == Shape::C1`.
+pub fn offset_curve_continuity(basis: Shape) -> Shape {
+    match basis {
+        Shape::C0 | Shape::C1 => Shape::C0,
+        Shape::C2 => Shape::C1,
+        Shape::C3 => Shape::C2,
+        Shape::CN => Shape::CN,
+        Shape::G1 => Shape::G1,
+        Shape::G2 => Shape::G2,
+    }
 }

@@ -53,54 +53,7 @@ impl Clone for GeomEvalSineWaveCurve {
     }
 }
 impl GeomEvalSineWaveCurve {
-    /// Sine wave (`GeomEval_SineWaveCurve(Position, Amplitude, Omega, Phase = 0)`);
-    /// Standard_ConstructionError unless `amplitude > 0` and `omega > 0`;
-    /// `GeomEvalSineWaveCurve::new(axis, 2.0, 3.0, 0.0)?`.
-    pub fn new(position: Axis2, amplitude: f64, omega: f64, phase: f64) -> Result<Self, Failure> {
-        if amplitude <= 0.0 {
-            return Err(errors::construction(&format!(
-                "{CLASS}: amplitude = {amplitude}; expected > 0"
-            )));
-        }
-        if omega <= 0.0 {
-            return Err(errors::construction(&format!(
-                "{CLASS}: omega = {omega}; expected > 0"
-            )));
-        }
-        Ok(Self {
-            parent: StandardTransient::default(),
-            position,
-            amplitude,
-            omega,
-            phase,
-        })
-    }
-    // The native Copy() reruns the constructor on valid stored values.
-    fn copied(&self) -> Self {
-        Self {
-            parent: StandardTransient::default(),
-            ..*self
-        }
-    }
-    /// The local coordinate system (`Position`); `curve.position()`.
-    pub fn position(&self) -> Axis2 {
-        self.position
-    }
-    /// The amplitude (`Amplitude`); `curve.amplitude()`.
-    pub fn amplitude(&self) -> f64 {
-        self.amplitude
-    }
-    /// The angular frequency (`Omega`); `curve.omega()`.
-    pub fn omega(&self) -> f64 {
-        self.omega
-    }
-    /// The phase shift (`Phase`); `curve.phase()`.
-    pub fn phase(&self) -> f64 {
-        self.phase
-    }
-    fn argument(&self, u: f64) -> f64 {
-        self.omega * u + self.phase
-    }
+    rustycad_tkg2d::sine_wave_members!(Axis2);
     // `anO + U * aXD + A * sin(aArg) * aYD`.
     fn point_at(&self, frame: &AxisFrame, u: f64) -> Point3 {
         let wave: f64 = self.amplitude * self.argument(u).sin();

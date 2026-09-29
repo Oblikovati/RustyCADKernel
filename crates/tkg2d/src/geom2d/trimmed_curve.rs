@@ -149,12 +149,7 @@ impl Geom2dCurve for Geom2dTrimmedCurve {
         let basis: Handle<dyn Geom2dCurve> = self.state.read().basis.clone();
         basis.reversed_parameter(u)
     }
-    fn transformed_parameter(&self, u: f64, transform: Transform2) -> f64 {
-        self.state.read().basis.transformed_parameter(u, transform)
-    }
-    fn parametric_transformation(&self, transform: Transform2) -> f64 {
-        self.state.read().basis.parametric_transformation(transform)
-    }
+    crate::basis_parameter_members!(Transform2);
     fn first_parameter(&self) -> f64 {
         self.state.read().u_trim1
     }

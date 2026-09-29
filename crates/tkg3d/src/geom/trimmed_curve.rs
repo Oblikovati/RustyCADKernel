@@ -153,12 +153,7 @@ impl GeomCurve for GeomTrimmedCurve {
     fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.state.read().basis.reversed_parameter(u)
     }
-    fn transformed_parameter(&self, u: f64, transform: Transform3) -> f64 {
-        self.state.read().basis.transformed_parameter(u, transform)
-    }
-    fn parametric_transformation(&self, transform: Transform3) -> f64 {
-        self.state.read().basis.parametric_transformation(transform)
-    }
+    rustycad_tkg2d::basis_parameter_members!(Transform3);
     fn first_parameter(&self) -> f64 {
         self.state.read().u_trim1
     }

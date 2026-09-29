@@ -259,3 +259,59 @@ macro_rules! scaled_parameter_members {
         }
     };
 }
+
+/// `TransformedParameter` and `ParametricTransformation` of a curve that keeps a
+/// basis curve (offset, trimmed): both forward to the basis over the locked
+/// `state.basis`; `rustycad_tkg2d::basis_parameter_members!(Transform3);`.
+#[macro_export]
+macro_rules! basis_parameter_members {
+    ($transform:ty) => {
+        fn transformed_parameter(&self, u: f64, transform: $transform) -> f64 {
+            self.state.read().basis.transformed_parameter(u, transform)
+        }
+        fn parametric_transformation(&self, transform: $transform) -> f64 {
+            self.state.read().basis.parametric_transformation(transform)
+        }
+    };
+}
+
+/// `FirstParameter` and `LastParameter` of an offset curve, which are its basis
+/// curve's; `rustycad_tkg2d::basis_range_members!();`.
+#[macro_export]
+macro_rules! basis_range_members {
+    () => {
+        fn first_parameter(&self) -> f64 {
+            self.state.read().basis.first_parameter()
+        }
+        fn last_parameter(&self) -> f64 {
+            self.state.read().basis.last_parameter()
+        }
+    };
+}
+
+/// `EvalDN` of an offset curve: the evaluation representation first, orders 1 to 3
+/// through the explicit evaluators and higher orders from the basis, as natively;
+/// `errors`, `rep_utils` and the curve trait must be in scope;
+/// `rustycad_tkg2d::offset_curve_eval_dn!(Vector3, "Geom_OffsetCurve");`.
+#[macro_export]
+macro_rules! offset_curve_eval_dn {
+    ($vector:ty, $class:literal) => {
+        fn eval_dn(&self, u: f64, n: i32) -> Result<$vector, Failure> {
+            if n < 1 {
+                return Err(errors::undefined_derivative(&format!(
+                    concat!($class, "::EvalDN: N = {}; expected N >= 1"),
+                    n
+                )));
+            }
+            if let Some(vector) = rep_utils::try_eval_curve_dn(&self.state.read().eval_rep, u, n)? {
+                return Ok(vector);
+            }
+            match n {
+                1 => Ok(self.eval_d1(u)?.d1),
+                2 => Ok(self.eval_d2(u)?.d2),
+                3 => Ok(self.eval_d3(u)?.d3),
+                _ => self.state.read().basis.eval_dn(u, n),
+            }
+        }
+    };
+}

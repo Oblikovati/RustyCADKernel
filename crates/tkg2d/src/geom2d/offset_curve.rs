@@ -22,6 +22,7 @@ use super::offset_curve_utils::{
     adjust_derivative, calculate_d0, calculate_d1, calculate_d2, calculate_d3,
 };
 use super::trimmed_curve::Geom2dTrimmedCurve;
+use crate::geom2d::offset_curve_utils::offset_curve_continuity;
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
@@ -238,18 +239,6 @@ impl Geom2dGeometry for Geom2dOffsetCurve {
     }
 }
 
-// The Continuity switch: offsetting loses one order of continuity of the basis.
-fn offset_continuity(basis: Shape) -> Shape {
-    match basis {
-        Shape::C0 | Shape::C1 => Shape::C0,
-        Shape::C2 => Shape::C1,
-        Shape::C3 => Shape::C2,
-        Shape::CN => Shape::CN,
-        Shape::G1 => Shape::G1,
-        Shape::G2 => Shape::G2,
-    }
-}
-
 fn undefined(member: &str) -> Failure {
     errors::undefined_derivative(&format!(
         "Geom2d_OffsetCurve::{member}: the offset normal is undefined; expected a non-degenerate basis tangent"
@@ -268,18 +257,8 @@ impl Geom2dCurve for Geom2dOffsetCurve {
         let basis: Handle<dyn Geom2dCurve> = self.state.read().basis.clone();
         basis.reversed_parameter(u)
     }
-    fn transformed_parameter(&self, u: f64, transform: Transform2) -> f64 {
-        self.state.read().basis.transformed_parameter(u, transform)
-    }
-    fn parametric_transformation(&self, transform: Transform2) -> f64 {
-        self.state.read().basis.parametric_transformation(transform)
-    }
-    fn first_parameter(&self) -> f64 {
-        self.state.read().basis.first_parameter()
-    }
-    fn last_parameter(&self) -> f64 {
-        self.state.read().basis.last_parameter()
-    }
+    crate::basis_parameter_members!(Transform2);
+    crate::basis_range_members!();
     fn is_closed(&self) -> Result<bool, Failure> {
         let first: Point2 = self.d0(self.first_parameter())?;
         let last: Point2 = self.d0(self.last_parameter())?;
@@ -292,7 +271,7 @@ impl Geom2dCurve for Geom2dOffsetCurve {
         self.state.read().basis.period()
     }
     fn continuity(&self) -> Shape {
-        offset_continuity(self.state.read().basis_continuity)
+        offset_curve_continuity(self.state.read().basis_continuity)
     }
     fn is_cn(&self, n: i32) -> Result<bool, Failure> {
         if n < 0 {
@@ -378,20 +357,5 @@ impl Geom2dCurve for Geom2dOffsetCurve {
         }
         Ok(Geom2dCurveD3 { point, d1, d2, d3 })
     }
-    fn eval_dn(&self, u: f64, n: i32) -> Result<Vector2, Failure> {
-        if n < 1 {
-            return Err(errors::undefined_derivative(&format!(
-                "Geom2d_OffsetCurve::EvalDN: N = {n}; expected N >= 1"
-            )));
-        }
-        if let Some(vector) = rep_utils::try_eval_curve_dn(&self.state.read().eval_rep, u, n)? {
-            return Ok(vector);
-        }
-        match n {
-            1 => Ok(self.eval_d1(u)?.d1),
-            2 => Ok(self.eval_d2(u)?.d2),
-            3 => Ok(self.eval_d3(u)?.d3),
-            _ => self.state.read().basis.eval_dn(u, n),
-        }
-    }
+    crate::offset_curve_eval_dn!(Vector2, "Geom2d_OffsetCurve");
 }

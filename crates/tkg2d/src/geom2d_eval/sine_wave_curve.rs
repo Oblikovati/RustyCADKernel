@@ -51,56 +51,9 @@ impl Clone for Geom2dEvalSineWaveCurve {
     }
 }
 impl Geom2dEvalSineWaveCurve {
-    /// Sine wave (`Geom2dEval_SineWaveCurve(Position, Amplitude, Omega, Phase = 0)`);
-    /// Standard_ConstructionError unless `amplitude > 0` and `omega > 0`;
-    /// `Geom2dEvalSineWaveCurve::new(axis, 2.0, 3.0, 0.0)?`.
-    pub fn new(position: Axis2d, amplitude: f64, omega: f64, phase: f64) -> Result<Self, Failure> {
-        if amplitude <= 0.0 {
-            return Err(errors::construction(&format!(
-                "{CLASS}: amplitude = {amplitude}; expected > 0"
-            )));
-        }
-        if omega <= 0.0 {
-            return Err(errors::construction(&format!(
-                "{CLASS}: omega = {omega}; expected > 0"
-            )));
-        }
-        Ok(Self {
-            parent: StandardTransient::default(),
-            position,
-            amplitude,
-            omega,
-            phase,
-        })
-    }
-    // The native Copy() reruns the constructor on valid stored values.
-    fn copied(&self) -> Self {
-        Self {
-            parent: StandardTransient::default(),
-            ..*self
-        }
-    }
-    /// The local coordinate system (`Position`); `curve.position()`.
-    pub fn position(&self) -> Axis2d {
-        self.position
-    }
-    /// The amplitude (`Amplitude`); `curve.amplitude()`.
-    pub fn amplitude(&self) -> f64 {
-        self.amplitude
-    }
-    /// The angular frequency (`Omega`); `curve.omega()`.
-    pub fn omega(&self) -> f64 {
-        self.omega
-    }
-    /// The phase shift (`Phase`); `curve.phase()`.
-    pub fn phase(&self) -> f64 {
-        self.phase
-    }
+    crate::sine_wave_members!(Axis2d);
     fn frame(&self) -> LocalFrame {
         LocalFrame::new(self.position)
-    }
-    fn argument(&self, u: f64) -> f64 {
-        self.omega * u + self.phase
     }
     // `anO + U * aXD + A * sin(aArg) * aYD`.
     fn point_at(&self, frame: &LocalFrame, u: f64) -> Point2 {
