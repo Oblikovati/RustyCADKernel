@@ -610,3 +610,34 @@ set under the cache lock and calls the driver after releasing it.
 editor writes only the cache, so it borrows the graph shared. `PromoteToPersistent`
 writes the persistent representations through the graph editor's `SetPersistent*`
 setters and is added with them.
+
+### 11.12 Validate and Transform (phase 2, wave 2c, area C2)
+
+**Validate.** `BRepGraph_Validate` is the read-only module `brep_graph::validate`
+(`perform`, `perform_with_mode`, `perform_with_options`, with `Severity`, `Mode`,
+`Issue`, `Options` and `ValidationResult` for the native `Result`). Each check is one
+function over `&BRepGraph` that appends to the issue vector in its native traversal
+order, grouped by family (bounds, relations, representations, owned uses, isolation
+and wire connectivity, counts and roots, UIDs and the supplement layer, cycles,
+ownership), and `perform_with_options` runs them in the native sequence, so a report
+is the native report issue for issue. The seven per-kind owner tallies of
+`CheckOwnedUseReferences` are one generic tally over the representation tag, the
+assembly and compound cycle searches one generic breadth-first search, and the seven
+reference-ownership loops one generic count over the reference tag. The per-kind
+active counts reuse the editor boundary's `cachedActiveByKind` and
+`countActiveByKind`.
+
+**Transform.** `BRepGraph_Transform` is the module `brep_graph::transform`. The two
+`MoveRef` overloads are `move_child_ref` and `move_occurrence_ref`. The in-graph steps
+are crate functions over `&mut BRepGraph`: `transform_whole_graph` is the
+self-transform branch of `Perform`, and `transform_copied_range` the steps after a copy
+into the target, with the native `GraphCounts` as `CopiedRange` (the default range is
+the whole graph, so the whole-graph and copied-range variants of each native loop are
+one function). The loops collect the live ids before they write, since the editor
+borrows the graph mutably; no step adds or removes a node, so the native lazy
+iteration visits the same ids. `Perform(source, target, ...)` and `TransformNode`
+take the `BRepGraph_Copy` policies and call `BRepGraph_Copy::Perform`/`CopyNode`; they
+are added with BRepGraph_Copy (area C1), as thin compositions of the copy and these
+steps. A self transform in Rust cannot pass one graph as `&BRepGraph` and
+`&mut BRepGraph` at once, so the self branch will be its own entry point taking the
+graph mutably.
