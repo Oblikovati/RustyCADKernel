@@ -67,6 +67,34 @@ fn rotation(k: usize) -> [usize; 3] {
     [k, (k + 1) % 3, (k + 2) % 3]
 }
 
+// The chords `|P2 - P1|` and `|P3 - P2|` of the three end points; the second is 0
+// (not computed) when the first is below `eps1`.
+fn chord_lengths([p1, p2, p3]: [&[f64]; 3], eps1: f64) -> Result<[f64; 2], Failure> {
+    let v1: f64 = norm2(&subtracted(p2, p1))?.sqrt();
+    let v2: f64 = if v1 > eps1 {
+        norm2(&subtracted(p3, p2))?.sqrt()
+    } else {
+        0.
+    };
+    Ok([v1, v2])
+}
+
+// The tangent of the parabola through the three end points `p` at the first (or
+// the last) one, from the chord ratio `d`.
+fn parabolic_tangent([p1, p2, p3]: [&[f64]; 3], mut d: f64, last: bool) -> EstVector {
+    let d1: f64 = 1. / (d * (1. - d));
+    if last {
+        d *= d - 2.;
+        return (0..p1.len())
+            .map(|i| ((d + 1.) * p1[i] - p2[i] - d * p3[i]) * d1)
+            .collect();
+    }
+    d *= d;
+    (0..p1.len())
+        .map(|i| ((d - 1.) * p1[i] + p2[i] - d * p3[i]) * d1)
+        .collect()
+}
+
 /// The running estimation state: the three tangents and second derivatives.
 struct Estimation {
     tang: [EstVector; 3],
@@ -195,12 +223,7 @@ impl Variational {
             self.tab_vector(adr1 + dim)?,
             self.tab_vector(adr1 + 2 * dim)?,
         );
-        let v1: f64 = norm2(&subtracted(&p2, &p1))?.sqrt();
-        let v2: f64 = if v1 > eps1 {
-            norm2(&subtracted(&p3, &p2))?.sqrt()
-        } else {
-            0.
-        };
+        let [v1, v2] = chord_lengths([&p1, &p2, &p3], eps1)?;
         if v2 <= eps1 {
             return Ok(if last {
                 subtracted(&p3, &p2)
@@ -208,18 +231,7 @@ impl Variational {
                 subtracted(&p2, &p1)
             });
         }
-        let mut d: f64 = v1 / (v1 + v2);
-        let d1: f64 = 1. / (d * (1. - d));
-        if last {
-            d *= d - 2.;
-            return Ok((0..p1.len())
-                .map(|i| ((d + 1.) * p1[i] - p2[i] - d * p3[i]) * d1)
-                .collect());
-        }
-        d *= d;
-        Ok((0..p1.len())
-            .map(|i| ((d - 1.) * p1[i] + p2[i] - d * p3[i]) * d1)
-            .collect())
+        Ok(parabolic_tangent([&p1, &p2, &p3], v1 / (v1 + v2), last))
     }
 
     /// `EstTangent(ipnt, VTang)`: the unit tangent the points suggest, averaged with
