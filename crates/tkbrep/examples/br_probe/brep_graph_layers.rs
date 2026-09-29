@@ -6,13 +6,14 @@ use super::common::{Reader, flag, int, long};
 use rustycad_tkbrep::brep_graph::cache::{
     BRepGraphCache, CacheBase, CacheType, ItemEntry, NodeEntry, RefEntry,
 };
+use rustycad_tkbrep::brep_graph::copy_remap::CopyRemap;
 use rustycad_tkbrep::brep_graph::layer::{AttachedGraph, BRepGraphLayer, LayerBase};
 use rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred;
 use rustycad_tkbrep::brep_graph::{
     BRepGraph, ItemId, ItemUid, NodeId, NodeKind, RefId, RefKind, Uid,
 };
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Guid, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Guid, Handle, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::sync::Mutex;
 
@@ -168,6 +169,9 @@ impl BRepGraphLayer for EventLayer {
     fn on_ref_modified(&self, _: AttachedGraph<'_>, x: RefId) {
         self.push(6);
         self.reference(x);
+    }
+    fn copy_to(&self, _: &CopyRemap<'_>) -> Result<(), Failure> {
+        Ok(())
     }
     fn on_refs_modified(&self, _: AttachedGraph<'_>, v: &[RefId]) {
         self.push(7);

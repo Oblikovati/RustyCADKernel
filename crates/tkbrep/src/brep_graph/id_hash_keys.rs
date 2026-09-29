@@ -22,10 +22,18 @@
 //! layer maps whose iteration order reaches a result use the TKernel map ports, so
 //! the ids hash as natively (docs/topology-design.md section 11.10). CopyRemap keys its
 //! item map with the `ItemId` key here.
-use crate::brep_graph::{ItemId, ItemUid, NodeId, Uid};
+use crate::brep_graph::{ItemId, ItemUid, KindTag, NodeId, TypedId, Uid};
 use rustycad_tkernel::ncollection::HashKey;
 
 impl HashKey for NodeId {
+    fn occt_hash(&self) -> usize {
+        self.hash_code()
+    }
+}
+
+// `std::hash<BRepGraph_NodeId::Typed<K>>` (the typed ids of `NCollection_FlatMap<
+// BRepGraph_FaceId>` in the mesh cache's dirty collection).
+impl<T: KindTag> HashKey for TypedId<T> {
     fn occt_hash(&self) -> usize {
         self.hash_code()
     }

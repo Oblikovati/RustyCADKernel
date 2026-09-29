@@ -171,15 +171,24 @@ impl Storage {
     where
         T::Store: OwnershipPlanes,
     {
-        self.test_plane(id, FlagPlane::Owned)
+        self.is_in_range(id) && T::store(self).owned_plane().test(id.index)
     }
 
-    /// `SetOwned(theId, theVal)`.
-    pub fn set_owned<T: StoredTag>(&mut self, id: TypedId<T>, value: bool)
+    /// `SetOwned(theId, theVal)`: takes `&self`, since `BRepGraph_LayerLock` writes the
+    /// plane through the shared graph it is attached to (docs/topology-design.md 11.10).
+    pub fn set_owned<T: StoredTag>(&self, id: TypedId<T>, value: bool)
     where
         T::Store: OwnershipPlanes,
     {
-        self.update_plane(id, FlagPlane::Owned, value);
+        if !self.is_in_range(id) {
+            return;
+        }
+        let plane = T::store(self).owned_plane();
+        if value {
+            plane.set(id.index);
+        } else {
+            plane.clear(id.index);
+        }
     }
 
     /// `IsGuarded(theId)`: an active MutGuard.

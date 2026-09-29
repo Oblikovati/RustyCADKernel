@@ -14,7 +14,9 @@
 // BRepGraph_CacheRegistry.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepGraph_CacheRegistry`: the GUID-keyed registry of a graph's cache services.
+use crate::brep_graph::BRepGraph;
 use crate::brep_graph::cache::{BRepGraphCache, CacheType, attach_graph, detach_graph};
+use crate::brep_graph::copy_remap::{CopyRemap, ItemMap, MappingKind, Mode};
 use crate::brep_graph::registry_iterator::CacheIterator;
 use rustycad_tkernel::standard::{Failure, Guid, Handle, SharedState};
 use std::collections::HashMap;
@@ -229,6 +231,69 @@ impl CacheRegistry {
             };
             cache.clear();
         }
+    }
+
+    /// `CopyFreshCachesTo(theTargetGraph, theItemRemap, theMode)`: `CopyFreshTo` on every
+    /// service of `source` (whose registry this is natively) in slot order, into a
+    /// distinct target graph.
+    ///
+    /// ```
+    /// use rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry;
+    /// use rustycad_tkbrep::brep_graph::copy_remap::{ItemMap, Mode};
+    /// use rustycad_tkbrep::brep_graph::BRepGraph;
+    /// let (source, mut target) = (BRepGraph::new(), BRepGraph::new());
+    /// CacheRegistry::copy_fresh_caches_to(&source, &mut target, &ItemMap::default(), Mode::Copy)
+    ///     .unwrap();
+    /// assert_eq!(target.cache_registry().nb_caches(), 0);
+    /// ```
+    pub fn copy_fresh_caches_to(
+        source: &BRepGraph,
+        target: &mut BRepGraph,
+        items: &ItemMap,
+        mode: Mode,
+    ) -> Result<(), Failure> {
+        let copy = CopyRemap::new(source, target, items, mode);
+        source.cache_registry().copy_each_slot(&copy)
+    }
+
+    /// `CopyFreshCachesTo(theTargetGraph, theMappingKind, theMode)`: the identity (or
+    /// empty explicit) mapping.
+    pub fn copy_fresh_caches_to_with_mapping(
+        source: &BRepGraph,
+        target: &mut BRepGraph,
+        mapping_kind: MappingKind,
+        mode: Mode,
+    ) -> Result<(), Failure> {
+        let copy = CopyRemap::with_mapping(source, target, mapping_kind, mode);
+        source.cache_registry().copy_each_slot(&copy)
+    }
+
+    /// `CopyFreshCachesTo(theGraph, theItemRemap, theMode)` called on the registry of
+    /// `theGraph` itself: the services copy onto their own graph through the item map.
+    pub fn copy_fresh_caches_in_place(
+        graph: &mut BRepGraph,
+        items: &ItemMap,
+        mode: Mode,
+    ) -> Result<(), Failure> {
+        let copy = CopyRemap::in_place(graph, Some(items), MappingKind::Explicit, mode);
+        copy.source_graph().cache_registry().copy_each_slot(&copy)
+    }
+
+    // The copy loop: one slot read per service until the first empty slot. A
+    // standalone registry has no source graph and copies nothing, as natively; a Rust
+    // registry reached from a graph is always attached.
+    fn copy_each_slot(&self, copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        if self.graph_token == 0 {
+            return Ok(());
+        }
+        for slot in 0_u32.. {
+            let cache = self.cache(slot);
+            let Some(cache) = cache.get() else {
+                return Ok(());
+            };
+            cache.copy_fresh_to(copy)?;
+        }
+        Ok(())
     }
 
     /// `Clear()`: detaches and unregisters every service.

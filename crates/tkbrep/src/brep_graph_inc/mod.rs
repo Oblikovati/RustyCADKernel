@@ -30,6 +30,7 @@ pub mod reconstruct;
 mod reference;
 mod relations;
 mod representation;
+mod shared_bit_flags;
 mod storage;
 
 pub use bit_flags::BitFlags;
@@ -55,6 +56,7 @@ pub use representation::{
     CoEdgeCurve2DRep, CoEdgePolygon2DRep, CoEdgePolygonOnTriRep, EdgeCurve3DRep, EdgePolygon3DRep,
     FaceSurfaceRep, FaceTriangulationRep,
 };
+pub use shared_bit_flags::SharedBitFlags;
 pub use storage::{
     CachedShape, EntityStore, FlagPlane, NodeTag, OwnershipPlanes, RefTag, RemovalPlanes, RepStore,
     RepTag, ShapeBindings, Storage, StoredTag, WireCoEdgeOrderStatus,

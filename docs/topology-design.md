@@ -538,11 +538,43 @@ whose order never shows (GUID to slot) are `HashMap`s. Getters that return a
 `AttachedTo`) return copies.
 
 **Dependencies on later waves.** `CopyTo`, `CopyFreshTo`, `CopyLayersTo`,
-`CopyFreshCachesTo` and `RemappedItem` take `BRepGraph_CopyRemap` (area A); they are
-added with it. `BRepGraph_LayerDeferred` and `BRepGraph_LayerParametric` lock items
-through `BRepGraph_LayerLock`, which needs the explorers: until it is ported, the
-members that must `Ensure` the lock layer on an attached layer (item registration
-and `ReserveDeferredItems`) return a Standard_NotImplemented error that names
-`BRepGraph_LayerLock`, after the steps that natively come first; the `FindLayer`
-paths (unlocking, `EndBulkRegistration`) find no lock layer, which is exact, since
-no layer of that class can exist yet. A detached layer behaves exactly as natively.
+`CopyFreshCachesTo` and `RemappedItem` take `BRepGraph_CopyRemap` (area A), and
+`BRepGraph_LayerDeferred` and `BRepGraph_LayerParametric` lock items through
+`BRepGraph_LayerLock`; wave 2b adds them (section 11.11).
+
+### 11.11 Lock, derived-state and mesh caches (phase 2, wave 2b)
+
+**The owned plane.** `BRepGraph_LayerLock` sets and clears the storage's owned bits from
+`const` members (`setItemOwned` is `const` natively and writes through the attached
+`BRepGraph*`) and from noexcept callbacks, which receive `&BRepGraph` in Rust. The owned
+plane of each definition and reference store is therefore a `SharedBitFlags`: the
+`BRepGraphInc_BitFlags` layout over atomic blocks, whose `set`, `clear` and `test` take
+`&self`, so `Storage::set_owned` takes `&self`. The other planes stay plain.
+
+**Layer copies.** `BRepGraph_Layer::CopyTo` is a required trait member
+`copy_to(&self, &CopyRemap) -> Result`; the targets are written through
+`CopyRemap::target_graph_const()`, since registries, layers and the owned plane lock
+themselves. A registry cannot reach its graph, so `CopyLayersTo` and
+`CopyFreshCachesTo` are associated functions taking the source graph and the target,
+with `*_in_place` variants for the compaction, which copies a graph's layers onto the
+graph itself (the old layers are detached and unregistered first, as natively).
+`RemappedItem` is the pair of free functions `layer::remapped_node` and
+`layer::remapped_ref`, which the caches reuse for their own `remappedNode`.
+
+**Caches.** `BRepGraph_CacheDerivedState` keeps its four entry arrays behind one lock;
+the native packed atomic bytes are plain bytes under it, with the same flag layout and
+the same coedge merge. `tool::derived_state` obtains the service with
+`CacheRegistry().Ensure` and routes every derived Tool read through it, and
+reconstruction ensures it before its per-coedge loop, so both register it as OCCT does.
+`BRepGraph_CacheMesh` keeps its slots behind one lock; its getters return entry copies
+and its `Change*` members lend the entry to a closure. The native pattern "change the
+entry, then `BindFresh` it" is `write_*_fresh` inside the crate (one lock) and, for
+other callers, a bound copy stored back. The driver is the Transient interface trait
+`CacheMeshDriver`, whose `fill` receives `&mut BRepGraph`: `Ensure` collects the dirty
+set under the cache lock and calls the driver after releasing it.
+
+**Mesh view.** `graph.mesh()` returns `MeshView<'_>` with the `cache()`,
+`persistent()`, `effective()`, `editor()` and `poly()` sub-views as Copy structs; the
+editor writes only the cache, so it borrows the graph shared. `PromoteToPersistent`
+writes the persistent representations through the graph editor's `SetPersistent*`
+setters and is added with them.

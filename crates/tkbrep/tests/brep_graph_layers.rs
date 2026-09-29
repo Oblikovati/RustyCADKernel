@@ -2,13 +2,15 @@
 //! layers: registration, replacement, detachment, event dispatch from graph mutations,
 //! the supplement route of `Shapes().Add` and the supplement iterator.
 mod support;
+use rustycad_tkbrep::brep_graph::copy_remap::CopyRemap;
 use rustycad_tkbrep::brep_graph::layer::{
-    AttachedGraph, BRepGraphLayer, LayerBase, as_layer, kind_bit, ref_kind_bit,
+    AttachedGraph, BRepGraphLayer, LayerBase, LayerType, as_layer, kind_bit, ref_kind_bit,
 };
 use rustycad_tkbrep::brep_graph::layer_deferred::{
     DeferredRepresentation, LayerDeferred, RepresentationKind,
 };
 use rustycad_tkbrep::brep_graph::layer_history::LayerHistory;
+use rustycad_tkbrep::brep_graph::layer_lock::LayerLock;
 use rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry;
 use rustycad_tkbrep::brep_graph::layer_topo_supplement::{AttachmentKind, LayerTopoSupplement};
 use rustycad_tkbrep::brep_graph::shapes_view::Options;
@@ -18,7 +20,7 @@ use rustycad_tkbrep::brep_graph::{
 };
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Guid, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Guid, Handle, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkmath::gp::Point3;
 use std::sync::Mutex;
@@ -91,6 +93,10 @@ impl BRepGraphLayer for EventLog {
     }
     fn on_detached(&self) {
         self.push("detached".into());
+    }
+    fn copy_to(&self, _copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        self.push("copy".into());
+        Ok(())
     }
     fn invalidate_all(&self, _attached: AttachedGraph<'_>) {
         self.push("invalidate".into());
@@ -267,7 +273,7 @@ fn deferred_layer_registers_merges_and_moves_entries() {
         )
         .unwrap();
     assert_eq!(layer.revision(), 0);
-    layer.end_bulk_registration().unwrap();
+    layer.end_bulk_registration(&graph).unwrap();
     assert_eq!(layer.revision(), 1);
     assert_eq!(
         layer
@@ -282,7 +288,7 @@ fn deferred_layer_registers_merges_and_moves_entries() {
     assert!(!layer.has_deferred_node(face) && layer.has_deferred_node(other));
     let (item, _) = layer.find_first_deferred(RepresentationKind::Mesh).unwrap();
     assert_eq!(item, ItemId::from(other));
-    assert!(layer.end_bulk_registration().is_err());
+    assert!(layer.end_bulk_registration(&graph).is_err());
     let too_many = vec![DeferredRepresentation::default(); 1];
     for index in 0..8 {
         let representation = DeferredRepresentation {
@@ -301,23 +307,31 @@ fn deferred_layer_registers_merges_and_moves_entries() {
 }
 
 #[test]
-fn an_attached_deferred_layer_needs_the_lock_layer() {
+fn an_attached_deferred_layer_locks_its_items() {
     let graph = BRepGraph::new();
     let layer = graph.layer_registry().ensure::<LayerDeferred>().unwrap();
     let layer = layer.get().unwrap();
     let text = AsciiString::new("x");
-    let error = layer
+    let face = NodeId::new(NodeKind::FACE, 0);
+    layer
         .register_deferred_node(
             &graph,
-            NodeId::new(NodeKind::FACE, 0),
+            face,
             &text,
             &text,
             RepresentationKind::Geometry,
             &text,
             0,
         )
-        .unwrap_err();
-    assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(layer.reserve_deferred_items(&graph, 4).is_err());
+        .unwrap();
+    let lock = graph.layer_registry().find::<LayerLock>();
+    let lock = lock.get().expect("registration ensures the lock layer");
+    let owner = lock.find_owner_id_node(&graph, face).unwrap();
+    assert_eq!(owner, Some(LayerDeferred::get_id()));
+    let revision = lock.revision();
+    layer.reserve_deferred_items(&graph, 4).unwrap();
+    layer.unregister_deferred_node(&graph, face);
+    assert!(!lock.has_owners());
+    assert_eq!(lock.revision(), revision + 1);
     assert!(layer.reserve_deferred_items(&BRepGraph::new(), 4).is_ok());
 }

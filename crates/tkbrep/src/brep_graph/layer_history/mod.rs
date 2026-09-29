@@ -16,6 +16,7 @@
 
 //! `BRepGraph_LayerHistory`: the append-only log of modification events of a graph,
 //! with per-kind lookup maps keyed by node id, UID and item UID.
+use crate::brep_graph::copy_remap::CopyRemap;
 use crate::brep_graph::layer::{AttachedGraph, BRepGraphLayer, LayerBase, LayerType};
 use crate::brep_graph::{ItemUid, NodeId, Uid};
 use rustycad_tkernel::impl_transient;
@@ -25,7 +26,9 @@ use rustycad_tkernel::tcollection::AsciiString;
 use std::sync::OnceLock;
 
 mod absorb;
+mod copy;
 mod queries;
+mod rebuild;
 mod record;
 mod record_uid;
 
@@ -284,6 +287,10 @@ impl BRepGraphLayer for LayerHistory {
     }
 
     /// `Clear()`: collected history is the layer's only data.
+    fn copy_to(&self, copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        self.copy_history_to(copy)
+    }
+
     fn invalidate_all(&self, attached: AttachedGraph<'_>) {
         self.clear(attached);
     }

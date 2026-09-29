@@ -13,6 +13,7 @@ from tkbrep_bintools_corpus import append_tkbrep_bintools_requests
 from tkbrep_brep_corpus import append_tkbrep_brep_requests
 from tkbrep_brepgraph_corpus import append_tkbrep_brepgraph_requests
 from tkbrep_brepgraph_walk_corpus import append_tkbrep_brepgraph_walk_requests
+from tkbrep_brepgraph_cache_corpus import append_tkbrep_brepgraph_cache_requests
 from tkbrep_brepgraph_layers_corpus import append_tkbrep_brepgraph_layer_requests
 from tkbrep_breptools_corpus import append_tkbrep_breptools_requests
 
@@ -318,3 +319,4 @@ def append_tkbrep_requests(requests: list[str]) -> None:
     append_tkbrep_brepgraph_requests(requests)
     append_tkbrep_brepgraph_walk_requests(requests)
     append_tkbrep_brepgraph_layer_requests(requests)
+    append_tkbrep_brepgraph_cache_requests(requests)

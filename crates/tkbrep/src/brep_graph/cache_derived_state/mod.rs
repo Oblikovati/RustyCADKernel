@@ -17,11 +17,10 @@
 //! The derived edge, wire and shell state of `BRepGraph_CacheDerivedState`, computed
 //! from the current graph.
 //!
-//! Phase 1 ports the static `ComputeEdgeProperties`, `ComputeWireIsClosed` and
-//! `ComputeShellIsClosed` members and the per-coedge SameRange/SameParameter
-//! computations that reconstruction reads. The cache service that memoises them per
-//! OwnGen (`IsDegenerated`, `SameParameter`, `SameRange`...) is added by the caches area
-//! of phase 2 on top of these functions, which is why they are public.
+//! The static `ComputeEdgeProperties`, `ComputeWireIsClosed` and `ComputeShellIsClosed`
+//! members and the per-coedge SameRange/SameParameter computations are free functions
+//! here; the cache service [`CacheDerivedState`] memoises them per OwnGen
+//! (`IsDegenerated`, `SameParameter`, `SameRange`...).
 use crate::brep_graph::tool;
 use crate::brep_graph::*;
 use crate::brep_graph_inc::EdgeDef;
@@ -34,8 +33,16 @@ use rustycad_tkg3d::geom::GeomCurve;
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use std::collections::BTreeMap;
 
-/// `EdgeEntry::GeomStatus`: the geometric status of an edge.
+mod copy;
+mod entries;
+mod service;
+
+pub use service::CacheDerivedState;
+
+/// `EdgeEntry::GeomStatus`: the geometric status of an edge (the native `Invalid`
+/// value is never stored).
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(u8)]
 pub enum EdgeGeomStatus {
     /// `HasCurve3D`.
     HasCurve3D,
@@ -46,7 +53,8 @@ pub enum EdgeGeomStatus {
 }
 
 /// `ShellEntry::ClosureStatus`: the closure of a shell.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[repr(u8)]
 pub enum ShellClosureStatus {
     /// `Empty`.
     Empty,
@@ -56,7 +64,8 @@ pub enum ShellClosureStatus {
     Closed,
     /// `NonManifold`: an edge used more than twice.
     NonManifold,
-    /// `Invalid`: the shell is invalid or removed.
+    /// `Invalid`: the shell is invalid or removed (also the unset cache value).
+    #[default]
     Invalid,
 }
 
@@ -164,6 +173,17 @@ fn is_co_edge_same_range(graph: &BRepGraph, co_edge: CoEdgeId, edge: EdgeId) -> 
 /// curve lie within the edge tolerance (plus Confusion) of the surface points of the
 /// p-curve. The adaptor loads raise as natively (a reversed range).
 pub fn compute_same_parameter(graph: &BRepGraph, co_edge: CoEdgeId) -> Result<bool, Failure> {
+    same_parameter_with_range(graph, co_edge, || compute_same_range(graph, co_edge))
+}
+
+/// The SameParameter computation given the coedge's SameRange answer (read only when
+/// the edge has a 3D curve): the cache service passes the SameRange flag of its entry,
+/// as `computeSameParameter` does.
+pub(crate) fn same_parameter_with_range(
+    graph: &BRepGraph,
+    co_edge: CoEdgeId,
+    same_range: impl FnOnce() -> bool,
+) -> Result<bool, Failure> {
     let Some(edge) = active_edge_of(graph, co_edge) else {
         return Ok(true);
     };
@@ -172,7 +192,7 @@ pub fn compute_same_parameter(graph: &BRepGraph, co_edge: CoEdgeId) -> Result<bo
     if curve.is_null() {
         return Ok(closed_without_curve(graph, def));
     }
-    if !compute_same_range(graph, co_edge) {
+    if !same_range() {
         return Ok(false);
     }
     is_co_edge_same_parameter(graph, co_edge, def, &curve, tool::edge::range(graph, edge))

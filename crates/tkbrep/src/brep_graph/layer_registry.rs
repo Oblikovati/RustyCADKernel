@@ -20,6 +20,7 @@ use rustycad_tkernel::standard::{Failure, Guid, Handle, SharedState};
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU32, Ordering};
 
+mod copy;
 mod dispatch;
 
 /// The slot vector and the GUID-to-slot map (`myLayers`, `myGuidToSlot`), behind the

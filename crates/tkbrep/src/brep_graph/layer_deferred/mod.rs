@@ -17,14 +17,16 @@
 //! `BRepGraph_LayerDeferred`: provider-neutral records of graph items whose
 //! representations are loaded later; registration locks the item through
 //! `BRepGraph_LayerLock` (docs/topology-design.md 11.9).
+use crate::brep_graph::copy_remap::CopyRemap;
 use crate::brep_graph::layer::{AttachedGraph, BRepGraphLayer, LayerBase, LayerType};
 use crate::brep_graph::{ItemId, NodeId, RefId};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::DataMap;
-use rustycad_tkernel::standard::{Guid, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Guid, SharedState, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::sync::OnceLock;
 
+mod copy;
 mod register;
 mod representation;
 
@@ -187,13 +189,13 @@ impl LayerDeferred {
         records.bulk_depth += 1;
     }
 
-    /// `removeItem(theItem)` (private): drops the entry and unlocks the item. The
-    /// unlock finds no `BRepGraph_LayerLock` (none can be registered before that class
-    /// is ported), which is the native no-op of a missing lock layer.
-    fn remove_item(&self, item: ItemId) {
-        if self.records.write().entries.unbind(&item) {
-            self.base.touch();
+    /// `removeItem(theItem)` (private): drops the entry, then unlocks the item.
+    fn remove_item(&self, attached: AttachedGraph<'_>, item: ItemId) {
+        if !self.records.write().entries.unbind(&item) {
+            return;
         }
+        unlock_item(attached, item);
+        self.base.touch();
     }
 
     // `OnNodeReplaced`: moves the old item's entry to the new item, appending its
@@ -237,16 +239,20 @@ impl BRepGraphLayer for LayerDeferred {
         NAME.get_or_init(|| AsciiString::new("Deferred"))
     }
 
-    fn on_node_removed(&self, _attached: AttachedGraph<'_>, node: NodeId) {
-        self.remove_item(node.into());
+    fn on_node_removed(&self, attached: AttachedGraph<'_>, node: NodeId) {
+        self.remove_item(attached, node.into());
     }
 
     fn on_node_replaced(&self, _attached: AttachedGraph<'_>, old: NodeId, new: NodeId) {
         self.move_entry(old.into(), new.into());
     }
 
-    fn on_ref_removed(&self, _attached: AttachedGraph<'_>, reference: RefId) {
-        self.remove_item(reference.into());
+    fn on_ref_removed(&self, attached: AttachedGraph<'_>, reference: RefId) {
+        self.remove_item(attached, reference.into());
+    }
+
+    fn copy_to(&self, copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        self.copy_entries_to(copy)
     }
 
     /// `Clear()`.
@@ -254,10 +260,30 @@ impl BRepGraphLayer for LayerDeferred {
         self.clear(attached);
     }
 
-    /// Unlocks every item (no lock layer can be found yet, see `remove_item`) and drops
-    /// the entries and their buckets.
-    fn clear(&self, _attached: AttachedGraph<'_>) {
+    /// Unlocks every item (in map order), then drops the entries and their buckets.
+    fn clear(&self, attached: AttachedGraph<'_>) {
+        let items: Vec<ItemId> = self
+            .records
+            .read()
+            .entries
+            .items()
+            .map(|(item, _)| *item)
+            .collect();
+        for item in items {
+            unlock_item(attached, item);
+        }
         self.records.write().entries.clear(true);
         self.base.touch();
     }
+}
+
+/// `unlockItem(theItem)` (private): the attached graph's lock layer, when registered,
+/// drops the item's root entry if this layer owns it. Errors of the ownership walks
+/// cannot leave the noexcept callers (natively the process terminates); they stop the
+/// unlock.
+fn unlock_item(attached: AttachedGraph<'_>, item: ItemId) {
+    let (Some(graph), Some(lock)) = (attached, register::find_lock_layer(attached)) else {
+        return;
+    };
+    let _walk = lock.unset_owner_matching(graph, item, &LAYER_DEFERRED_ID);
 }

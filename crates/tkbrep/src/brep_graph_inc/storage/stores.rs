@@ -15,7 +15,7 @@
 // BRepGraphInc_Storage.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The per-kind stores of the storage: records plus their bit-flag planes.
-use super::super::BitFlags;
+use super::super::{BitFlags, SharedBitFlags};
 use std::sync::atomic::{AtomicU32, Ordering};
 
 /// `DefStore<T>` and `RefStore<T>` (the same fields natively): the records of one kind,
@@ -24,7 +24,8 @@ use std::sync::atomic::{AtomicU32, Ordering};
 pub struct EntityStore<T> {
     pub(crate) items: Vec<T>,
     pub(crate) removed: BitFlags,
-    pub(crate) owned: BitFlags,
+    // Written by BRepGraph_LayerLock through `&BRepGraph` (docs/topology-design.md 11.10).
+    pub(crate) owned: SharedBitFlags,
     pub(crate) guard: BitFlags,
     pub(crate) has_compound_parent: BitFlags,
     pub(crate) has_occurrence_parent: BitFlags,
@@ -38,7 +39,7 @@ impl<T> Default for EntityStore<T> {
         Self {
             items: Vec::new(),
             removed: BitFlags::new(),
-            owned: BitFlags::new(),
+            owned: SharedBitFlags::new(),
             guard: BitFlags::new(),
             has_compound_parent: BitFlags::new(),
             has_occurrence_parent: BitFlags::new(),
@@ -192,17 +193,18 @@ pub trait RemovalPlanes {
 
 /// The ownership, guard and parent planes of the definition and reference stores.
 pub trait OwnershipPlanes: RemovalPlanes {
+    /// `OwnedFlags`, which the lock layer writes through a shared reference.
+    fn owned_plane(&self) -> &SharedBitFlags;
     /// The plane selected by `plane`.
     fn plane(&self, plane: FlagPlane) -> &BitFlags;
     /// The mutable plane selected by `plane`.
     fn plane_mut(&mut self, plane: FlagPlane) -> &mut BitFlags;
 }
 
-/// The non-removal planes of a definition or reference store.
+/// The non-removal planes of a definition or reference store other than the owned
+/// plane ([`OwnershipPlanes::owned_plane`]).
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum FlagPlane {
-    /// `OwnedFlags`.
-    Owned,
     /// `GuardFlags`.
     Guard,
     /// `HasCompoundParentFlags`.
@@ -224,9 +226,11 @@ impl<T> RemovalPlanes for EntityStore<T> {
 }
 
 impl<T> OwnershipPlanes for EntityStore<T> {
+    fn owned_plane(&self) -> &SharedBitFlags {
+        &self.owned
+    }
     fn plane(&self, plane: FlagPlane) -> &BitFlags {
         match plane {
-            FlagPlane::Owned => &self.owned,
             FlagPlane::Guard => &self.guard,
             FlagPlane::HasCompoundParent => &self.has_compound_parent,
             FlagPlane::HasOccurrenceParent => &self.has_occurrence_parent,
@@ -234,7 +238,6 @@ impl<T> OwnershipPlanes for EntityStore<T> {
     }
     fn plane_mut(&mut self, plane: FlagPlane) -> &mut BitFlags {
         match plane {
-            FlagPlane::Owned => &mut self.owned,
             FlagPlane::Guard => &mut self.guard,
             FlagPlane::HasCompoundParent => &mut self.has_compound_parent,
             FlagPlane::HasOccurrenceParent => &mut self.has_occurrence_parent,
