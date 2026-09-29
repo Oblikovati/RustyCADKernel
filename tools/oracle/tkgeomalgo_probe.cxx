@@ -21,9 +21,14 @@
 #include <gp_XYZ.hxx>
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkgeomalgo_probe_intf.cxx"
+#include "tkgeomalgo_probe_toptrans.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf.cxx)
  {"intf_triangle", ga_intf_triangle_case},
+ // TopTrans (tkgeomalgo_probe_toptrans.cxx)
+ {"tt_curve", ga_tt_curve_case},
+ {"tt_surface", ga_tt_surface_case},
+ {"tt_states", ga_tt_states_case},
 };
 int main() {
  std::string line;

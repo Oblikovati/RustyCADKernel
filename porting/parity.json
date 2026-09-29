@@ -145250,6 +145250,126 @@
       "rust_item": "rustycad_tkbrep::brep_graph::transform::transform_node",
       "status": "implemented",
       "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.13): the native policy checks, then BRepGraph_Copy (copy::perform or copy::copy_node, default cache policy), then the copied-range transform; a self transform (the same source and target graph) is the separate function transform::transform_node_in_place taking the graph mutably; C++ exceptions are Failure errors. Compared with OCCT by the br_balgo transform requests."
+    },
+    {
+      "upstream_id": "TopTrans_CurveTransition()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_CurveTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::CurveTransition::new",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the default gp_Dir members are +X. Compared with OCCT by the tt_curve probe."
+    },
+    {
+      "upstream_id": "TopTrans_CurveTransition::Reset(const gp_Dir&,const gp_Dir&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_CurveTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::CurveTransition::reset",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping. Compared with OCCT by the tt_curve probe."
+    },
+    {
+      "upstream_id": "TopTrans_CurveTransition::Reset(const gp_Dir&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_CurveTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::CurveTransition::reset_line",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the straight-line overload keeps the previous normal, as natively. Compared with OCCT by the tt_curve probe."
+    },
+    {
+      "upstream_id": "TopTrans_CurveTransition::Compare(double,const gp_Dir&,const gp_Dir&,double,TopAbs_Orientation,TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_CurveTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::CurveTransition::compare",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the private IsBefore and angle Compare are private methods and a private function. Compared with OCCT by the tt_curve probe."
+    },
+    {
+      "upstream_id": "TopTrans_CurveTransition::StateBefore() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_CurveTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::CurveTransition::state_before",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping. Compared with OCCT by the tt_curve probe."
+    },
+    {
+      "upstream_id": "TopTrans_CurveTransition::StateAfter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_CurveTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::CurveTransition::state_after",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping. Compared with OCCT by the tt_curve probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::SurfaceTransition::new",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the sector arrays are uninitialized natively and only read after a write, the port starts them at 0 and FORWARD. Compared with OCCT by the tt_surface probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::Reset(const gp_Dir&,const gp_Dir&,const gp_Dir&,const gp_Dir&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::SurfaceTransition::reset",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the Standard_ConstructionError of the gp_Dir cross product (parallel tangent and normal) is a Failure, raised after the frame is stored as natively. Compared with OCCT by the tt_surface probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::Reset(const gp_Dir&,const gp_Dir&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::SurfaceTransition::reset_line",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; raises Standard_ConstructionError as a Failure for a parallel tangent and normal. Compared with OCCT by the tt_surface probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::Compare(double,const gp_Dir&,const gp_Dir&,const gp_Dir&,double,double,TopAbs_Orientation,TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::SurfaceTransition::compare",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the file-static FUN_* helpers are private functions of toptrans::nearest. Compared with OCCT by the tt_surface probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::Compare(double,const gp_Dir&,TopAbs_Orientation,TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::SurfaceTransition::compare_plane",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the plane overload leaves the sector curvature unwritten, as natively. Compared with OCCT by the tt_surface probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::StateBefore() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::SurfaceTransition::state_before",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping. Compared with OCCT by the tt_surface probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::StateAfter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::SurfaceTransition::state_after",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping. Compared with OCCT by the tt_surface probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::GetBefore(TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::get_before",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the static member is a module function, also used by CurveTransition::state_before. Compared with OCCT by the tt_states probe."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition::GetAfter(TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopTrans/TopTrans_SurfaceTransition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::toptrans::get_after",
+      "status": "implemented",
+      "notes": "Manual TopTrans mapping; the static member is a module function, also used by CurveTransition::state_after. Compared with OCCT by the tt_states probe."
     }
   ],
   "tests": [
@@ -231507,6 +231627,34 @@
         "linux-gcc-c-locale"
       ],
       "native_expected_failure": "Fails in native OCCT itself on the pinned profile (GCC, glibc): the test inlines ElCLib::Value(-0.7, hyperbola), and GCC folds sinh(-0.7) at compile time to a value one ulp from the glibc run-time sinh that ExtremaPC2d_Hyperbola::Value calls, so the EXPECT_EQ(..., 0.0) distance is 1 ulp natively. The Rust port calls the run-time sinh on both sides, as the native library does, and passes. Approved by the maintainer on 2026-09-29."
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition_Test.UndefinedStateStaysInstanceLocal",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/TopTrans_SurfaceTransition_Test.cxx",
+      "source_sha256": "23aabe94d1fea8839a975c92fb7a222a16a1e1fcff09bc80fbe6aba54212edce",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "toptrans_surface_transition",
+      "rust_test": "TopTrans_SurfaceTransition_Test__UndefinedStateStaysInstanceLocal",
+      "rust_source": "crates/tkgeomalgo/tests/toptrans_surface_transition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopTrans_SurfaceTransition_Test.CompareUsesProvidedTolerance",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/TopTrans_SurfaceTransition_Test.cxx",
+      "source_sha256": "23aabe94d1fea8839a975c92fb7a222a16a1e1fcff09bc80fbe6aba54212edce",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "toptrans_surface_transition",
+      "rust_test": "TopTrans_SurfaceTransition_Test__CompareUsesProvidedTolerance",
+      "rust_source": "crates/tkgeomalgo/tests/toptrans_surface_transition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }

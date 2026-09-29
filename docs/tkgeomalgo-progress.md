@@ -26,6 +26,7 @@ The toolkit test inventory maps these suites (0 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
+| TopTrans_SurfaceTransition_Test.cxx | toptrans_surface_transition | 2 | pass | pass |
 
 ## Verification
 
@@ -35,6 +36,16 @@ Rust targets, checks exact runtime names, then runs `tools/verify_tkgeomalgo_num
 While no suite is mapped it runs the numeric verifier alone and reports 0 mapped
 declarations. Evidence is in `target/oracle-tkgeomalgo/`. CI runs it like the TKBRep
 verifier.
+
+## Deliberate Rust deviations
+
+- TopTrans: the sector arrays of `TopTrans_SurfaceTransition` (NCollection_Array2 of
+  trivial types) are uninitialized natively. The angles are reset before any read; the
+  orientations and curvatures are read only after a write, except the curvature of a
+  sector that only the plane `Compare` wrote, which the curved `Compare` then reads
+  (indeterminate natively). The port starts them at 0 and FORWARD.
+- TopTrans: `SurfaceTransition::reset`, `reset_line`, `compare` and `compare_plane`
+  return `Result`, carrying the native Standard_ConstructionError.
 
 ## Numeric comparison policy
 
@@ -56,7 +67,29 @@ triangles: both orientations, coincident and collinear vertices, a normal that
 underflows below `gp::Resolution`, huge coordinates, points on edges and vertices,
 outside and off the plane, and 40 seeded random cases.
 
+TopTrans (981 requests): `tt_curve` and `tt_surface` run a command sequence (resets
+and compares) on one fresh transition and compare the exception type and both states
+after every command; `tt_states` compares the static state tables. Directions come
+from discrete fans (multiples of 45 and 30 degrees, near-tolerance tilts), so equal
+angles, tangent faces, the touch case, the incoherent sectors and the parallel-frame
+exceptions all occur; the hand-made sequences cover the upstream scenarios and the
+curved ties at a null cosine. A surface request uses only one Compare overload (see
+the uninitialized sector curvature in the deviations above).
+
 ## Preserved native behaviour
 
+- TopTrans: a `CurveTransition` that was never reset answers the states of its
+  stored FORWARD transitions (OUT before, IN after), not UNKNOWN: natively `Init` is
+  false after construction. `Reset(Tgt)` of a straight line keeps the previous
+  normal. The default `gp_Dir` members are +X.
+- TopTrans: `SurfaceTransition::Reset` stores the tangent and the normal before the
+  cross product that raises Standard_ConstructionError for parallel ones; the
+  transition then stays undefined. A tangent that follows no principal direction
+  leaves it undefined (not implemented natively, "NYIxpu"). A non-positive `Tole`
+  means `Precision::Angular`. The curved `FUN_refnearest` compares curvatures with a
+  fixed `1.e-4`, not with the tolerance. The second pass of an INTERNAL curve takes
+  the opposite sector of the indices that the first pass left behind, as natively.
+- TopTrans: the header declares the private `UpdateReference` and `ComputeCos`, which
+  have no definition in OCCT; they have no Rust counterpart.
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
   `gp::Resolution`) returns the undivided normal and a polar distance of 0.
