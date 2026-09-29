@@ -139,19 +139,20 @@ impl<'g> GenOps<'g> {
     /// let shell = graph.editor().shells().add();
     /// let label = AsciiString::from("noop");
     /// graph.editor().generic()
-    ///     .apply_modification(shell.into(), |_, target| vec![target], &label)
+    ///     .apply_modification(shell.into(), |_, target| Ok(vec![target]), &label)
     ///     .unwrap();
     /// ```
     pub fn apply_modification<R>(
         &mut self,
         target: NodeId,
-        modifier: impl FnOnce(&mut BRepGraph, NodeId) -> R,
+        modifier: impl FnOnce(&mut BRepGraph, NodeId) -> Result<R, Failure>,
         label: &AsciiString,
     ) -> Result<(), Failure>
     where
         R: IntoIterator<Item = NodeId>,
     {
-        let replacements: Vec<NodeId> = modifier(self.graph, target).into_iter().collect();
+        // A modifier that fails (throws natively) leaves no history record.
+        let replacements: Vec<NodeId> = modifier(self.graph, target)?.into_iter().collect();
         self.apply_modification_impl(target, &replacements, label)
     }
 
