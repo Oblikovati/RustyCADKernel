@@ -41,6 +41,11 @@ pub use bindings::{CachedShape, ShapeBindings};
 pub use stores::{EntityStore, FlagPlane, OwnershipPlanes, RemovalPlanes, RepStore};
 pub use tags::{NodeTag, RefTag, RepTag, StoredTag};
 pub use validate::WireCoEdgeOrderStatus;
+// The private `BRepGraphInc_WireOrder.pxx` helpers that the BRepGraph editor includes.
+pub(crate) use relation_sets::append_unique;
+pub(crate) use wire_order::{
+    build_co_edge_order, co_edge_ids_are_unique, co_edge_oriented_vertices,
+};
 
 use super::definition::{
     CoEdgeDef, CompSolidDef, CompoundDef, EdgeDef, FaceDef, OccurrenceDef, ProductDef, ShellDef,

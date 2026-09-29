@@ -59,6 +59,9 @@ pub use storage::{
     CachedShape, EntityStore, FlagPlane, NodeTag, OwnershipPlanes, RefTag, RemovalPlanes, RepStore,
     RepTag, ShapeBindings, Storage, StoredTag, WireCoEdgeOrderStatus,
 };
+pub(crate) use storage::{
+    append_unique, build_co_edge_order, co_edge_ids_are_unique, co_edge_oriented_vertices,
+};
 
 /// `std::max(a, b)`: `b` only when `a < b`, so a NaN in `b` keeps `a` and a NaN in `a` is
 /// kept, unlike `f64::max` (the ported code compares tolerances with `std::max`).
