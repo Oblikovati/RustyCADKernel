@@ -97,7 +97,13 @@ impl Walk<'_> {
         }
         let point: Point3 = self.pair.curve.value(self.triple.x())?;
         let pconf: f64 = precision::p_confusion();
-        let found = initial_point(point, self.triple.x(), self.pair, (pconf, pconf), self.state.max_dist)?;
+        let found = initial_point(
+            point,
+            self.triple.x(),
+            self.pair,
+            (pconf, pconf),
+            self.state.max_dist,
+        )?;
         let Some((mut u, mut v)) = found else {
             return Ok(());
         };
@@ -120,7 +126,8 @@ impl Walk<'_> {
         let mut possible: bool = false;
         if kind == SurfaceType::SurfaceOfRevolution {
             // The maximal deviation from 3D.
-            let max_tol: f64 = precision::p_confusion().max(s.v_resolution(precision::confusion())?);
+            let max_tol: f64 =
+                precision::p_confusion().max(s.v_resolution(precision::confusion())?);
             if (self.triple.z() - s.first_v_parameter()?).abs() < max_tol
                 || (self.triple.z() - s.last_v_parameter()?).abs() < max_tol
             {

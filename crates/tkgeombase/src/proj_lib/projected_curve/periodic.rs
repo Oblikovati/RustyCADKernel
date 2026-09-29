@@ -65,7 +65,12 @@ impl ProjectedState {
 // The number of the period containing coordinate `idx` of each of `deg + 1` samples
 // per knot span; the translation by the most frequent one, the first met in the
 // NCollection_DataMap iteration order winning a tie.
-fn translate_home(res: &Handle<Geom2dBSplineCurve>, idx: usize, first: f64, period: f64) -> Result<(), Failure> {
+fn translate_home(
+    res: &Handle<Geom2dBSplineCurve>,
+    idx: usize,
+    first: f64,
+    period: f64,
+) -> Result<(), Failure> {
     let Some(spline) = res.get() else {
         return Ok(());
     };
@@ -74,7 +79,8 @@ fn translate_home(res: &Handle<Geom2dBSplineCurve>, idx: usize, first: f64, peri
     for knot in spline.first_u_knot_index()?..spline.last_u_knot_index()? {
         let (first_param, last_param) = (spline.knot(knot)?, spline.knot(knot + 1)?);
         for int_idx in 0..=degree {
-            let param: f64 = first_param + (last_param - first_param) * f64::from(int_idx) / (f64::from(degree) + 1.0);
+            let param: f64 = first_param
+                + (last_param - first_param) * f64::from(int_idx) / (f64::from(degree) + 1.0);
             let coord: f64 = coordinate(spline.value(param)?, idx);
             let mut key: i32 = ((coord - first) / period) as i32;
             if coord - first < 0.0 {
@@ -98,7 +104,10 @@ fn translate_home(res: &Handle<Geom2dBSplineCurve>, idx: usize, first: f64, peri
     }
     let first_pnt: Point2 = spline.value(spline.first_parameter())?;
     let mut second_pnt: Point2 = first_pnt;
-    second_pnt.set_coord(idx as i32, coordinate(first_pnt, idx) - period * f64::from(max_idx))?;
+    second_pnt.set_coord(
+        idx as i32,
+        coordinate(first_pnt, idx) - period * f64::from(max_idx),
+    )?;
     spline.translate(Vector2::between(first_pnt, second_pnt))
 }
 

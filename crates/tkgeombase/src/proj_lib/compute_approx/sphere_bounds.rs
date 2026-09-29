@@ -31,7 +31,11 @@ use std::f64::consts::PI;
 const TOL: f64 = 1.0e-10;
 
 /// The sphere case of `Function_SetUVBounds`.
-pub(super) fn sphere_bounds(p: &Projection<'_>, s: &Samples, b: &mut UvBounds) -> Result<(), Failure> {
+pub(super) fn sphere_bounds(
+    p: &Projection<'_>,
+    s: &Samples,
+    b: &mut UvBounds,
+) -> Result<(), Failure> {
     b.v_couture = false;
     let sphere: Sphere3 = p.surface.sphere()?;
     if p.curve.get_type()? == CurveType::Circle {
@@ -63,7 +67,11 @@ fn seam_crossings(a: f64, c: f64, d: f64, r: f64) -> i32 {
         if (r - (d / a).abs()) > TOL {
             return 2;
         }
-        return if (r - (d / a).abs()).abs() < TOL { 1 } else { 0 };
+        return if (r - (d / a).abs()).abs() < TOL {
+            1
+        } else {
+            0
+        };
     }
     let mut delta: f64 = r * r * (a * a + c * c) - d * d;
     delta *= c * c;
@@ -86,7 +94,12 @@ fn seam_crossings(a: f64, c: f64, d: f64, r: f64) -> i32 {
 
 // A U at the seam (0 or 2 PI) is flipped to the other side when the point at
 // `probe` lies more than PI away.
-fn seam_fixed_u(p: &Projection<'_>, sphere: &Sphere3, mut u: f64, probe: f64) -> Result<f64, Failure> {
+fn seam_fixed_u(
+    p: &Projection<'_>,
+    sphere: &Sphere3,
+    mut u: f64,
+    probe: f64,
+) -> Result<f64, Failure> {
     let eps: f64 = 10. * epsilon(1.);
     if u.abs() < eps {
         let (ud, _) = elslib::parameters(sphere, p.curve.value(probe)?);
@@ -108,7 +121,12 @@ fn centre_u(circle: &Circle3) -> f64 {
     u
 }
 
-fn circle_bounds(p: &Projection<'_>, sphere: &Sphere3, s: &Samples, b: &mut UvBounds) -> Result<(), Failure> {
+fn circle_bounds(
+    p: &Projection<'_>,
+    sphere: &Sphere3,
+    s: &Samples,
+    b: &mut UvBounds,
+) -> Result<(), Failure> {
     b.u_couture = true;
     let mut circle: Circle3 = p.curve.circle()?;
     let trsf: Transform3 = Transform3::transformation_to(sphere.position());
@@ -142,7 +160,11 @@ fn circle_bounds(p: &Projection<'_>, sphere: &Sphere3, s: &Samples, b: &mut UvBo
 fn one_crossing_window(u1: f64, u2: f64) -> (f64, f64) {
     if (u1 - u2).abs() > PI {
         // Crossing the seam.
-        if u1 > PI { (u1, u1 + 2. * PI) } else { (u1 - 2. * PI, u1) }
+        if u1 > PI {
+            (u1, u1 + 2. * PI)
+        } else {
+            (u1 - 2. * PI, u1)
+        }
     } else if u1 > u2 {
         (u1 - 2. * PI, u1)
     } else {
@@ -152,7 +174,14 @@ fn one_crossing_window(u1: f64, u2: f64) -> (f64, f64) {
 
 // A circle through a pole (its plane tangent to the sphere): the V seam is crossed,
 // unless the first point is itself on the sphere.
-fn pole_window(circle: &Circle3, trsf: &Transform3, p1: Point3, r: f64, cd: [f64; 2], b: &mut UvBounds) {
+fn pole_window(
+    circle: &Circle3,
+    trsf: &Transform3,
+    p1: Point3,
+    r: f64,
+    cd: [f64; 2],
+    b: &mut UvBounds,
+) {
     let (c, d) = (cd[0], cd[1]);
     if (c == 0.) || ((d / c).abs() - r).abs() > 1.0e-10 {
         b.v_couture = false;
@@ -160,7 +189,11 @@ fn pole_window(circle: &Circle3, trsf: &Transform3, p1: Point3, r: f64, cd: [f64
     }
     b.v_couture = true;
     b.u_couture = true;
-    (b.v1, b.v2) = if d / c < 0. { (-PI / 2., 3. * PI / 2.) } else { (-3. * PI / 2., PI / 2.) };
+    (b.v1, b.v2) = if d / c < 0. {
+        (-PI / 2., 3. * PI / 2.)
+    } else {
+        (-3. * PI / 2., PI / 2.)
+    };
     // If P1.Z() equals +/- R we are at the vertex: not significant.
     let pp: Point3 = p1.transformed(*trsf);
     if (pp.x() * pp.x() + pp.y() * pp.y() + pp.z() * pp.z() - r * r).abs() < TOL {

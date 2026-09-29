@@ -125,7 +125,8 @@ impl ComputeApproxOnPolarSurface {
         tol: f64,
     ) -> Result<Self, Failure> {
         let mut polar: Self = Self::with_tolerance(tol);
-        let bsc: Handle<Geom2dBSplineCurve> = polar.perform_with_initial(init_curve2d, curve, surface)?;
+        let bsc: Handle<Geom2dBSplineCurve> =
+            polar.perform_with_initial(init_curve2d, curve, surface)?;
         if polar.proj_is_done {
             polar.split_seam(&bsc, init_curve2d, init_curve2d_bis)?;
         }
@@ -139,7 +140,10 @@ impl ComputeApproxOnPolarSurface {
         init_bis: &Handle<dyn Adaptor2dCurve2d>,
     ) -> Result<(), Failure> {
         let spline: &Geom2dBSplineCurve = bsc.get().ok_or_else(|| {
-            failure("Standard_NullObject", "ProjLib_ComputeApproxOnPolarSurface: the projection is null")
+            failure(
+                "Standard_NullObject",
+                "ProjLib_ComputeApproxOnPolarSurface: the projection is null",
+            )
         })?;
         let p2dproj: Point2 = spline.start_point()?;
         let p2d: Point2 = start_of(init)?;
@@ -158,7 +162,10 @@ impl ComputeApproxOnPolarSurface {
 // The start point of an initial 2D curve.
 fn start_of(curve: &Handle<dyn Adaptor2dCurve2d>) -> Result<Point2, Failure> {
     let adaptor: &dyn Adaptor2dCurve2d = curve.get().ok_or_else(|| {
-        failure("Standard_NullObject", "ProjLib_ComputeApproxOnPolarSurface: null initial 2D curve")
+        failure(
+            "Standard_NullObject",
+            "ProjLib_ComputeApproxOnPolarSurface: null initial 2D curve",
+        )
     })?;
     adaptor.value(adaptor.first_parameter()?)
 }
@@ -196,7 +203,10 @@ impl ComputeApproxOnPolarSurface {
     /// `polar.curve2d()?`.
     pub fn curve2d(&self) -> Result<Handle<dyn Geom2dCurve>, Failure> {
         if !self.proj_is_done {
-            return Err(failure("Standard_NoSuchObject", "ProjLib_ComputeApproxOnPolarSurface:2ndCurve2d"));
+            return Err(failure(
+                "Standard_NoSuchObject",
+                "ProjLib_ComputeApproxOnPolarSurface:2ndCurve2d",
+            ));
         }
         Ok(self.second_curve.clone())
     }

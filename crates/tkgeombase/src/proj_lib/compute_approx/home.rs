@@ -38,7 +38,11 @@ struct HomeShift {
 // The V shift: whole V windows, after the sphere mirror when U is more than PI away.
 fn v_shift(f: &ProjectionFunction<'_>, sphere: bool, u: f64, mut v: f64) -> HomeShift {
     let b = &f.bounds;
-    let mut shift = HomeShift { du: 0., dv: 0., to_mirror: false };
+    let mut shift = HomeShift {
+        du: 0.,
+        dv: 0.,
+        to_mirror: false,
+    };
     if sphere && (u - b.u1).abs() > PI {
         shift.to_mirror = true;
         shift.dv = -PI;
@@ -55,7 +59,11 @@ fn v_shift(f: &ProjectionFunction<'_>, sphere: bool, u: f64, mut v: f64) -> Home
 fn u_shift(f: &ProjectionFunction<'_>, u: f64, umid: f64) -> Result<f64, Failure> {
     let p2d: Point2 = f.point(umid)?;
     let mut du: f64 = u - p2d.x();
-    du = if du < 0. { du - precision::p_confusion() } else { du + precision::p_confusion() };
+    du = if du < 0. {
+        du - precision::p_confusion()
+    } else {
+        du + precision::p_confusion()
+    };
     let number: i32 = (du / PI).trunc() as i32;
     Ok(f64::from(number) * PI)
 }
@@ -70,7 +78,11 @@ pub(super) fn bring_home(
     let p3d = projection.curve.value(umid)?;
     let (u, v) = elementary_parameters(projection.surface, p3d, "ProjLib_ComputeApprox::Value")?;
     let sphere: bool = projection.surface.get_type()? == SurfaceType::Sphere;
-    let mut shift = HomeShift { du: 0., dv: 0., to_mirror: false };
+    let mut shift = HomeShift {
+        du: 0.,
+        dv: 0.,
+        to_mirror: false,
+    };
     if f.bounds.v_couture {
         shift = v_shift(f, sphere, u, v);
     }
@@ -84,7 +96,10 @@ pub(super) fn bring_home(
         spline.translate(Vector2::new(shift.du, shift.dv))?;
     }
     if shift.to_mirror {
-        let axis = Axis2d::new(Point2::new(0., 0.), Direction2::from_standard(StandardDirection2::X));
+        let axis = Axis2d::new(
+            Point2::new(0., 0.),
+            Direction2::from_standard(StandardDirection2::X),
+        );
         spline.mirror_axis(axis)?;
     }
     Ok(())

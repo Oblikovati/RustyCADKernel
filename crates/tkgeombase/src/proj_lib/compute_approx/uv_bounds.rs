@@ -84,7 +84,13 @@ impl AngleTrack {
     /// Widens the range by half the largest step at an extreme found inside the
     /// curve (not at an end).
     pub(super) fn widen(&mut self, w1: f64, w2: f64) {
-        widen_range(&mut self.min, &mut self.max, [self.pmin, self.pmax], self.dmax, [w1, w2]);
+        widen_range(
+            &mut self.min,
+            &mut self.max,
+            [self.pmin, self.pmax],
+            self.dmax,
+            [w1, w2],
+        );
     }
 
     /// The window: the range itself inside `[0, 2 PI]`, otherwise the period
@@ -149,7 +155,9 @@ pub(super) fn set_uv_bounds(projection: &Projection<'_>) -> Result<UvBounds, Fai
     match projection.surface.get_type()? {
         SurfaceType::Cone => super::cone_bounds::cone_bounds(projection, samples, &mut bounds)?,
         SurfaceType::Cylinder => cylinder_bounds(projection, &samples, &mut bounds)?,
-        SurfaceType::Sphere => super::sphere_bounds::sphere_bounds(projection, &samples, &mut bounds)?,
+        SurfaceType::Sphere => {
+            super::sphere_bounds::sphere_bounds(projection, &samples, &mut bounds)?
+        }
         SurfaceType::Torus => torus_bounds(projection, &samples, &mut bounds)?,
         _ => (bounds.u_couture, bounds.v_couture) = (false, false),
     }
@@ -197,7 +205,11 @@ fn cylinder_ellipse_bounds(
             (b.u1, b.u2) = (u - PI, u + PI);
         } else {
             u = (b.u1 + b.u2) / 2.;
-            (b.u1, b.u2) = if b.u1 < u { (u - 2. * PI, u) } else { (u, u + 2. * PI) };
+            (b.u1, b.u2) = if b.u1 < u {
+                (u - 2. * PI, u)
+            } else {
+                (u, u + 2. * PI)
+            };
         }
         return Ok(());
     }

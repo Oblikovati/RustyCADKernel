@@ -151,8 +151,16 @@ impl<'a> ProjectionFunction<'a> {
         let bounds: UvBounds = super::uv_bounds::set_uv_bounds(&projection)?;
         let surface: &dyn Adaptor3dSurface = projection.surface;
         let periodic: [bool; 2] = [surface.is_u_periodic()?, surface.is_v_periodic()?];
-        let u_period: f64 = if periodic[0] { surface.u_period()? } else { 0.0 };
-        let v_period: f64 = if periodic[1] { surface.v_period()? } else { 0.0 };
+        let u_period: f64 = if periodic[0] {
+            surface.u_period()?
+        } else {
+            0.0
+        };
+        let v_period: f64 = if periodic[1] {
+            surface.v_period()?
+        } else {
+            0.0
+        };
         Ok(Self {
             base,
             projection,
@@ -180,10 +188,12 @@ impl Function for ProjectionFunction<'_> {
         &self.base
     }
     fn first_parameter(&self) -> f64 {
-        self.keep(self.projection.curve.first_parameter()).unwrap_or(f64::NAN)
+        self.keep(self.projection.curve.first_parameter())
+            .unwrap_or(f64::NAN)
     }
     fn last_parameter(&self) -> f64 {
-        self.keep(self.projection.curve.last_parameter()).unwrap_or(f64::NAN)
+        self.keep(self.projection.curve.last_parameter())
+            .unwrap_or(f64::NAN)
     }
     fn value(&self, t: f64, pnt2d: &mut Array1<'_, Point2>, _pnt: &mut Array1<'_, Point3>) -> bool {
         let Some(point) = self.keep(self.point(t)) else {
@@ -219,7 +229,10 @@ pub(in crate::proj_lib) fn live_curve(
     curve: &Handle<dyn Adaptor3dCurve>,
 ) -> Result<&dyn Adaptor3dCurve, Failure> {
     curve.get().ok_or_else(|| {
-        failure("Standard_NullObject", "ProjLib: null curve adaptor; expected a curve")
+        failure(
+            "Standard_NullObject",
+            "ProjLib: null curve adaptor; expected a curve",
+        )
     })
 }
 
@@ -228,6 +241,9 @@ pub(in crate::proj_lib) fn live_surface(
     surface: &Handle<dyn Adaptor3dSurface>,
 ) -> Result<&dyn Adaptor3dSurface, Failure> {
     surface.get().ok_or_else(|| {
-        failure("Standard_NullObject", "ProjLib: null surface adaptor; expected a surface")
+        failure(
+            "Standard_NullObject",
+            "ProjLib: null surface adaptor; expected a surface",
+        )
     })
 }

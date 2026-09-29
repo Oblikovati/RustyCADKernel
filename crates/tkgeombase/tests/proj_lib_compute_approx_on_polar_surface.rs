@@ -38,20 +38,32 @@ fn checkProjectionAtParam(
 fn ProjLib_ComputeApproxOnPolarSurfaceTest__BuildInitialCurveAndProjectOnCylinder_Done() {
     let z = Direction3::new(0.0, 0.0, 1.0).unwrap();
     let x = Direction3::new(1.0, 0.0, 0.0).unwrap();
-    let aCurve = Handle::new(GeomCircle::new(Axis2::with_x_direction(Point3::new(0.0, 0.0, 2.0), z, x).unwrap(), 5.0).unwrap());
+    let aCurve = Handle::new(
+        GeomCircle::new(
+            Axis2::with_x_direction(Point3::new(0.0, 0.0, 2.0), z, x).unwrap(),
+            5.0,
+        )
+        .unwrap(),
+    );
     let aSurface = Handle::new(
-        GeomCylindricalSurface::new(Axis3::new(Point3::new(0.0, 0.0, 0.0), z, x).unwrap(), 5.0).unwrap(),
+        GeomCylindricalSurface::new(Axis3::new(Point3::new(0.0, 0.0, 0.0), z, x).unwrap(), 5.0)
+            .unwrap(),
     );
 
     let aCurveAdaptor: Handle<dyn Adaptor3dCurve> =
-        Handle::new(GeomAdaptorCurve::with_curve(&aCurve.clone().cast::<dyn GeomCurve>()).unwrap()).cast();
-    let aSurfAdaptor: Handle<dyn Adaptor3dSurface> =
-        Handle::new(GeomAdaptorSurface::with_surface(&aSurface.clone().cast::<dyn GeomSurface>()).unwrap()).cast();
+        Handle::new(GeomAdaptorCurve::with_curve(&aCurve.clone().cast::<dyn GeomCurve>()).unwrap())
+            .cast();
+    let aSurfAdaptor: Handle<dyn Adaptor3dSurface> = Handle::new(
+        GeomAdaptorSurface::with_surface(&aSurface.clone().cast::<dyn GeomSurface>()).unwrap(),
+    )
+    .cast();
 
     let mut aProjector = ComputeApproxOnPolarSurface::new();
     aProjector.set_tolerance(1.0e-6);
 
-    let anInitCurve2d = aProjector.build_initial_curve2d(&aCurveAdaptor, &aSurfAdaptor).unwrap();
+    let anInitCurve2d = aProjector
+        .build_initial_curve2d(&aCurveAdaptor, &aSurfAdaptor)
+        .unwrap();
     assert!(aProjector.is_done());
     assert!(!anInitCurve2d.is_null());
 

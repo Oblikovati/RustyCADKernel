@@ -44,7 +44,12 @@ impl InverseRows {
 }
 
 // dE/du and dE/dv, then the inverse; Standard_ConstructionError when singular.
-fn inverse(s_d1u: Vector3, s_d1v: Vector3, ort: Vector3, d2: [Vector3; 3]) -> Result<InverseRows, Failure> {
+fn inverse(
+    s_d1u: Vector3,
+    s_d1v: Vector3,
+    ort: Vector3,
+    d2: [Vector3; 3],
+) -> Result<InverseRows, Failure> {
     let [d2u, d2v, d2uv] = d2;
     let de_du: Xy = Xy::new(s_d1u * s_d1u + ort * d2u, s_d1u * s_d1v + ort * d2uv);
     let de_dv: Xy = Xy::new(s_d1v * s_d1u + ort * d2uv, s_d1v * s_d1v + ort * d2v);
@@ -52,7 +57,9 @@ fn inverse(s_d1u: Vector3, s_d1v: Vector3, ort: Vector3, d2: [Vector3; 3]) -> Re
     if det.abs() < gp::resolution() {
         return Err(failure(
             "Standard_ConstructionError",
-            &format!("ProjLib_CompProjectedCurve: singular projection Jacobian (determinant {det})"),
+            &format!(
+                "ProjLib_CompProjectedCurve: singular projection Jacobian (determinant {det})"
+            ),
         ));
     }
     Ok(InverseRows {
@@ -94,7 +101,11 @@ fn second(t: f64, u: f64, v: f64, pair: Pair<'_>) -> Result<Second, Failure> {
     let s2: Vector2 = 2. * Vector2::new(d2e1_dtdx * v1, d2e2_dtdx * v1);
     let s3: Vector2 = hessian_term(&s, ort, v1);
     let sum: Vector2 = d2e_dt + s2 + s3;
-    Ok(Second { v1, v2: m.solve(sum), s })
+    Ok(Second {
+        v1,
+        v2: m.solve(sum),
+        s,
+    })
 }
 
 // (d2E/dX2)(dX/dt)^2 = S3, from the rows of the second derivatives of E1 and E2.
@@ -105,7 +116,10 @@ fn hessian_term(s: &GeomSurfaceD3, ort: Vector3, v1: Vector2) -> Vector2 {
     let tmp2: f64 = 2. * s.d2uv * s.d1v + s.d1u * s.d2v + ort * s.d3uvv;
     let row21: Vector2 = Vector2::new(s.d2u * s.d1v + 2. * s.d1u * s.d2uv + ort * s.d3uuv, tmp2);
     let row22: Vector2 = Vector2::new(tmp2, 3. * s.d1v * s.d2v + ort * s.d3v);
-    Vector2::new(v1 * Vector2::new(row11 * v1, row12 * v1), v1 * Vector2::new(row21 * v1, row22 * v1))
+    Vector2::new(
+        v1 * Vector2::new(row11 * v1, row12 * v1),
+        v1 * Vector2::new(row21 * v1, row22 * v1),
+    )
 }
 
 /// `d2(t, u, v, V1, V2, Curve, Surface)`: the first and second derivatives.
@@ -116,8 +130,17 @@ pub(super) fn d2(t: f64, u: f64, v: f64, pair: Pair<'_>) -> Result<(Vector2, Vec
 
 /// `d2CurvOnSurf(t, u, v, V1, V2, Curve, Surface)`: the first and second
 /// derivatives of the projected curve in 3D, `S(u(t), v(t))`.
-pub(super) fn d2_curv_on_surf(t: f64, u: f64, v: f64, pair: Pair<'_>) -> Result<(Vector3, Vector3), Failure> {
-    let Second { v1: v12d, v2: v22d, s } = second(t, u, v, pair)?;
+pub(super) fn d2_curv_on_surf(
+    t: f64,
+    u: f64,
+    v: f64,
+    pair: Pair<'_>,
+) -> Result<(Vector3, Vector3), Failure> {
+    let Second {
+        v1: v12d,
+        v2: v22d,
+        s,
+    } = second(t, u, v, pair)?;
     let v1: Vector3 = s.d1u * v12d.x() + s.d1v * v12d.y();
     let v2: Vector3 = s.d2u * v12d.x() * v12d.x()
         + s.d1u * v22d.x()

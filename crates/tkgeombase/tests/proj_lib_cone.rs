@@ -30,13 +30,22 @@ fn cone() -> Cone3 {
 }
 
 fn circle(location: Point3, normal: Direction3, x: Direction3, radius: f64) -> Circle3 {
-    Circle3::new(Axis2::with_x_direction(location, normal, x).unwrap(), radius).unwrap()
+    Circle3::new(
+        Axis2::with_x_direction(location, normal, x).unwrap(),
+        radius,
+    )
+    .unwrap()
 }
 
 #[test]
 fn ProjLib_ConeTest__ProjectCircle_ParallelAxes_DoneLine() {
     let aCone = cone();
-    let aCircle = circle(Point3::new(0.0, 0.0, 10.0), dir(0.0, 0.0, 1.0), dir(1.0, 0.0, 0.0), 2.0);
+    let aCircle = circle(
+        Point3::new(0.0, 0.0, 10.0),
+        dir(0.0, 0.0, 1.0),
+        dir(1.0, 0.0, 0.0),
+        2.0,
+    );
 
     let aProjector = Cone::with_circle(&aCone, &aCircle).unwrap();
     assert!(aProjector.is_done());
@@ -47,7 +56,12 @@ fn ProjLib_ConeTest__ProjectCircle_ParallelAxes_DoneLine() {
 #[test]
 fn ProjLib_ConeTest__ProjectCircle_NonParallelAxes_NotDone() {
     let aCone = cone();
-    let aCircle = circle(Point3::new(0.0, 0.0, 10.0), dir(1.0, 0.0, 0.0), dir(0.0, 1.0, 0.0), 2.0);
+    let aCircle = circle(
+        Point3::new(0.0, 0.0, 10.0),
+        dir(1.0, 0.0, 0.0),
+        dir(0.0, 1.0, 0.0),
+        2.0,
+    );
 
     let aProjector = Cone::with_circle(&aCone, &aCircle).unwrap();
     assert!(!aProjector.is_done());
@@ -56,7 +70,12 @@ fn ProjLib_ConeTest__ProjectCircle_NonParallelAxes_NotDone() {
 #[test]
 fn ProjLib_ConeTest__ProjectCircle_OppositeNormal_DoneLineWithNegativeDirection() {
     let aCone = cone();
-    let aCircle = circle(Point3::new(0.0, 0.0, 6.0), dir(0.0, 0.0, -1.0), dir(1.0, 0.0, 0.0), 2.0);
+    let aCircle = circle(
+        Point3::new(0.0, 0.0, 6.0),
+        dir(0.0, 0.0, -1.0),
+        dir(1.0, 0.0, 0.0),
+        2.0,
+    );
 
     let aProjector = Cone::with_circle(&aCone, &aCircle).unwrap();
     assert!(aProjector.is_done());

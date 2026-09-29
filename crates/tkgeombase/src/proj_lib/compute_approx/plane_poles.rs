@@ -35,7 +35,11 @@ struct PlaneProjector {
 impl PlaneProjector {
     fn new(plane: &Plane3) -> Self {
         let position = plane.position();
-        let (o, x, y) = (position.location(), position.x_direction(), position.y_direction());
+        let (o, x, y) = (
+            position.location(),
+            position.x_direction(),
+            position.y_direction(),
+        );
         Self {
             origin: [o.x(), o.y(), o.z()],
             dx: [x.x(), x.y(), x.z()],
@@ -44,7 +48,11 @@ impl PlaneProjector {
     }
     // X = (P - O) . XDirection, Y = (P - O) . YDirection, summed left to right.
     fn project(&self, p: Point3) -> Point2 {
-        let (dx, dy, dz) = (p.x() - self.origin[0], p.y() - self.origin[1], p.z() - self.origin[2]);
+        let (dx, dy, dz) = (
+            p.x() - self.origin[0],
+            p.y() - self.origin[1],
+            p.z() - self.origin[2],
+        );
         Point2::new(
             dx * self.dx[0] + dy * self.dx[1] + dz * self.dx[2],
             dx * self.dy[0] + dy * self.dy[1] + dz * self.dy[2],
@@ -60,7 +68,10 @@ impl PlaneProjector {
 }
 
 fn null_spline(member: &str) -> Failure {
-    failure("Standard_NullObject", &format!("ProjLib_ComputeApprox: {member} returned a null curve"))
+    failure(
+        "Standard_NullObject",
+        &format!("ProjLib_ComputeApprox: {member} returned a null curve"),
+    )
 }
 
 /// The B-spline case: the whole B-spline of the adaptor (not its trimmed range),

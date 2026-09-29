@@ -134,7 +134,11 @@ fn eval_pnt2d(direction: Vector3, torus: &Torus3) -> Point2 {
     let x: f64 = direction.dot(Vector3::from(torus.position().x_direction()));
     let y: f64 = direction.dot(Vector3::from(torus.position().y_direction()));
     let pconf: f64 = precision::p_confusion();
-    let u: f64 = if x.abs() > pconf || y.abs() > pconf { y.atan2(x) } else { 0. };
+    let u: f64 = if x.abs() > pconf || y.abs() > pconf {
+        y.atan2(x)
+    } else {
+        0.
+    };
     Point2::new(u, 0.)
 }
 

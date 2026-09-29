@@ -239,7 +239,11 @@ impl OnPlaneState {
 
     // The circle when the radii agree, the ellipse when Major > Minor, otherwise
     // the approximation.
-    fn build_conic(&mut self, p: Point3, axes: ProjectedAxes) -> Result<Handle<dyn GeomCurve>, Failure> {
+    fn build_conic(
+        &mut self,
+        p: Point3,
+        axes: ProjectedAxes,
+    ) -> Result<Handle<dyn GeomCurve>, Failure> {
         let (dx, dy, major, minor) = axes;
         let axe: Axis2 = Axis2::with_x_direction(p, dx.crossed(dy)?, dx)?;
         if (major - minor).abs() < precision::confusion() {
@@ -281,7 +285,10 @@ impl OnPlaneState {
         let mut in_plane: Transform2 = Transform2::default();
         in_plane.set_values(ev[(1, 2)], ev[(1, 1)], 0.0, ev[(2, 2)], ev[(2, 1)], 0.0)?;
         let mut rotation: Transform3 = Transform3::default();
-        rotation.set_rotation(Axis1::new(p, self.plane.direction()), in_plane.rotation_part())?;
+        rotation.set_rotation(
+            Axis1::new(p, self.plane.direction()),
+            in_plane.rotation_part(),
+        )?;
         let dx: Direction3 = self.plane.x_direction().transformed(rotation);
         let dy: Direction3 = self.plane.y_direction().transformed(rotation);
         Ok(Some((dx, dy, major, minor)))

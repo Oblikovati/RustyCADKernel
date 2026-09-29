@@ -148,7 +148,10 @@ pub fn make_pcurve_of_type(projected: &ProjectedCurve) -> Result<Handle<dyn Geom
             Ok(Handle::new(Geom2dHyperbola::from_hypr2d(projected.hyperbola()?)).cast())
         }
         CurveType::BSplineCurve => Ok(projected.bspline()?.cast()),
-        _ => Err(failure("Standard_NotImplemented", "ProjLib::MakePCurveOfType")),
+        _ => Err(failure(
+            "Standard_NotImplemented",
+            "ProjLib::MakePCurveOfType",
+        )),
     }
 }
 
@@ -156,7 +159,10 @@ pub fn make_pcurve_of_type(projected: &ProjectedCurve) -> Result<Handle<dyn Geom
 /// sphere or torus; `is_ana_surf(&surface)?`.
 pub fn is_ana_surf(surface: &Handle<dyn Adaptor3dSurface>) -> Result<bool, Failure> {
     let adaptor = surface.get().ok_or_else(|| {
-        failure("Standard_NullObject", "ProjLib::IsAnaSurf: the surface handle is null")
+        failure(
+            "Standard_NullObject",
+            "ProjLib::IsAnaSurf: the surface handle is null",
+        )
     })?;
     Ok(matches!(
         adaptor.get_type()?,

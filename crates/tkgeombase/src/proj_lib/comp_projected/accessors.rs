@@ -30,7 +30,10 @@ fn check_part(state: &CompState, index: i32) -> Result<(), Failure> {
     if index < 1 || index > state.nb_curves {
         return Err(failure(
             "Standard_NoSuchObject",
-            &format!("ProjLib_CompProjectedCurve: part {index}; expected 1..{}", state.nb_curves),
+            &format!(
+                "ProjLib_CompProjectedCurve: part {index}; expected 1..{}",
+                state.nb_curves
+            ),
         ));
     }
     Ok(())
@@ -40,12 +43,18 @@ fn check_part(state: &CompState, index: i32) -> Result<(), Failure> {
 // Standard_OutOfRange outside 1..N.
 fn array_value<T: Clone>(array: &Option<Vec<T>>, index: i32, name: &str) -> Result<T, Failure> {
     let values: &Vec<T> = array.as_ref().ok_or_else(|| {
-        failure("Standard_NullObject", &format!("ProjLib_CompProjectedCurve::{name}: not computed"))
+        failure(
+            "Standard_NullObject",
+            &format!("ProjLib_CompProjectedCurve::{name}: not computed"),
+        )
     })?;
     if index < 1 || index as usize > values.len() {
         return Err(failure(
             "Standard_OutOfRange",
-            &format!("ProjLib_CompProjectedCurve::{name}: index {index}; expected 1..{}", values.len()),
+            &format!(
+                "ProjLib_CompProjectedCurve::{name}: index {index}; expected 1..{}",
+                values.len()
+            ),
         ));
     }
     Ok(values[(index - 1) as usize].clone())
@@ -169,15 +178,27 @@ impl CompProjectedCurve {
     }
     /// `GetResult2dUApproxError(theIndex)`; `projection.get_result_2d_u_approx_error(1)?`.
     pub fn get_result_2d_u_approx_error(&self, index: i32) -> Result<f64, Failure> {
-        array_value(&self.state.read().results.error_2d_u, index, "GetResult2dUApproxError")
+        array_value(
+            &self.state.read().results.error_2d_u,
+            index,
+            "GetResult2dUApproxError",
+        )
     }
     /// `GetResult2dVApproxError(theIndex)`; `projection.get_result_2d_v_approx_error(1)?`.
     pub fn get_result_2d_v_approx_error(&self, index: i32) -> Result<f64, Failure> {
-        array_value(&self.state.read().results.error_2d_v, index, "GetResult2dVApproxError")
+        array_value(
+            &self.state.read().results.error_2d_v,
+            index,
+            "GetResult2dVApproxError",
+        )
     }
     /// `GetResult3dApproxError(theIndex)`; `projection.get_result_3d_approx_error(1)?`.
     pub fn get_result_3d_approx_error(&self, index: i32) -> Result<f64, Failure> {
-        array_value(&self.state.read().results.error_3d, index, "GetResult3dApproxError")
+        array_value(
+            &self.state.read().results.error_3d,
+            index,
+            "GetResult3dApproxError",
+        )
     }
     /// `GetResult2dC(theIndex)`: the 2D curve of the part (null for a point);
     /// `projection.get_result_2d_c(1)?`.
@@ -194,7 +215,10 @@ impl CompProjectedCurve {
     pub fn get_result_2d_p(&self, index: i32) -> Result<Point2, Failure> {
         let results = self.state.read().results.clone();
         if !array_value(&results.is_point, index, "GetResult2dP")? {
-            return Err(failure("Standard_TypeMismatch", "ProjLib_CompProjectedCurve : result is not a point 2d"));
+            return Err(failure(
+                "Standard_TypeMismatch",
+                "ProjLib_CompProjectedCurve : result is not a point 2d",
+            ));
         }
         array_value(&results.point_2d, index, "GetResult2dP")
     }
@@ -203,7 +227,10 @@ impl CompProjectedCurve {
     pub fn get_result_3d_p(&self, index: i32) -> Result<Point3, Failure> {
         let results = self.state.read().results.clone();
         if !array_value(&results.is_point, index, "GetResult3dP")? {
-            return Err(failure("Standard_TypeMismatch", "ProjLib_CompProjectedCurve : result is not a point 3d"));
+            return Err(failure(
+                "Standard_TypeMismatch",
+                "ProjLib_CompProjectedCurve : result is not a point 3d",
+            ));
         }
         array_value(&results.point_3d, index, "GetResult3dP")
     }

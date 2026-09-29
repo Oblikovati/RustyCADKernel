@@ -82,11 +82,21 @@ impl CompProjectedCurve {
         Ok(())
     }
 
-    fn perform_part(&self, state: &CompState, k: i32, lp: &mut PerformLoop, results: &mut PerformResults) -> Result<(), Failure> {
+    fn perform_part(
+        &self,
+        state: &CompState,
+        k: i32,
+        lp: &mut PerformLoop,
+        results: &mut PerformResults,
+    ) -> Result<(), Failure> {
         let index: usize = (k - 1) as usize;
         let (single, p2d) = self.is_single_pnt(k)?;
         if single {
-            let point: Point3 = state.surface.get().ok_or_else(null_surface)?.d0(p2d.x(), p2d.y())?;
+            let point: Point3 = state
+                .surface
+                .get()
+                .ok_or_else(null_surface)?
+                .d0(p2d.x(), p2d.y())?;
             if let Some(points) = results.point_2d.as_mut() {
                 points[index] = p2d;
             }
@@ -122,16 +132,26 @@ impl CompProjectedCurve {
 
     // A shallow copy of this projection on the surface extended by ten parametric
     // tolerances beyond each non-periodic bound (cumulatively, part after part).
-    fn extended_copy(&self, state: &CompState, lp: &mut PerformLoop) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
+    fn extended_copy(
+        &self,
+        state: &CompState,
+        lp: &mut PerformLoop,
+    ) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
         let surface: &dyn Adaptor3dSurface = state.surface.get().ok_or_else(null_surface)?;
         if !surface.is_u_periodic()? {
             let du: f64 = 10. * state.tol_u;
-            let (u1, u2) = (surface.first_u_parameter()? - du, surface.last_u_parameter()? + du);
+            let (u1, u2) = (
+                surface.first_u_parameter()? - du,
+                surface.last_u_parameter()? + du,
+            );
             lp.hs = lp.hs.get().ok_or_else(null_surface)?.u_trim(u1, u2, 0.0)?;
         }
         if !surface.is_v_periodic()? {
             let dv: f64 = 10. * state.tol_v;
-            let (v1, v2) = (surface.first_v_parameter()? - dv, surface.last_v_parameter()? + dv);
+            let (v1, v2) = (
+                surface.first_v_parameter()? - dv,
+                surface.last_v_parameter()? + dv,
+            );
             lp.hs = lp.hs.get().ok_or_else(null_surface)?.v_trim(v1, v2, 0.0)?;
         }
         let hp: CompProjectedCurve = self.shallow_projection()?;
@@ -141,26 +161,49 @@ impl CompProjectedCurve {
 }
 
 fn null_surface() -> Failure {
-    failure("Standard_NullObject", "ProjLib_CompProjectedCurve::Perform: null surface")
+    failure(
+        "Standard_NullObject",
+        "ProjLib_CompProjectedCurve::Perform: null surface",
+    )
 }
 
 // The trimmed 2D line of an iso part (`u_iso` for a U iso at `value`, else a V iso)
 // over the other coordinate of its end points, reversed when decreasing.
-fn iso_line(state: &CompState, (udeb, ufin): (f64, f64), value: f64, u_iso: bool) -> Result<(f64, f64, Handle<dyn Geom2dCurve>), Failure> {
+fn iso_line(
+    state: &CompState,
+    (udeb, ufin): (f64, f64),
+    value: f64,
+    u_iso: bool,
+) -> Result<(f64, f64, Handle<dyn Geom2dCurve>), Failure> {
     let (pdeb, pfin) = (eval_d0(state, udeb)?, eval_d0(state, ufin)?);
-    let (mut first, mut last) = if u_iso { (pdeb.y(), pfin.y()) } else { (pdeb.x(), pfin.x()) };
+    let (mut first, mut last) = if u_iso {
+        (pdeb.y(), pfin.y())
+    } else {
+        (pdeb.x(), pfin.x())
+    };
     let direction: StandardDirection2 = if first > last {
         first = -first;
         last = -last;
-        if u_iso { StandardDirection2::NegY } else { StandardDirection2::NegX }
+        if u_iso {
+            StandardDirection2::NegY
+        } else {
+            StandardDirection2::NegX
+        }
     } else if u_iso {
         StandardDirection2::Y
     } else {
         StandardDirection2::X
     };
-    let origin: Point2 = if u_iso { Point2::new(value, 0.) } else { Point2::new(0., value) };
-    let line: Handle<dyn Geom2dCurve> =
-        Handle::new(Geom2dLine::from_point(origin, Direction2::from_standard(direction))).cast();
+    let origin: Point2 = if u_iso {
+        Point2::new(value, 0.)
+    } else {
+        Point2::new(0., value)
+    };
+    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::from_point(
+        origin,
+        Direction2::from_standard(direction),
+    ))
+    .cast();
     let trimmed = Geom2dTrimmedCurve::new(&line, first, last, true, true)?;
     Ok((first, last, Handle::new(trimmed).cast()))
 }

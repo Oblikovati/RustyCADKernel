@@ -124,7 +124,9 @@ fn check_type(actual: CurveType, expected: CurveType, member: &str) -> Result<()
     }
     Err(failure(
         "Standard_NoSuchObject",
-        &format!("ProjLib_Projector::{member}: the projection is {actual:?}; expected {expected:?}"),
+        &format!(
+            "ProjLib_Projector::{member}: the projection is {actual:?}; expected {expected:?}"
+        ),
     ))
 }
 

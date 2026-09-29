@@ -112,7 +112,11 @@ impl CompState {
             results: PerformResults::default(),
         }
     }
-    fn with_data(surface: &Handle<dyn Adaptor3dSurface>, curve: &Handle<dyn Adaptor3dCurve>, max_dist: f64) -> Self {
+    fn with_data(
+        surface: &Handle<dyn Adaptor3dSurface>,
+        curve: &Handle<dyn Adaptor3dCurve>,
+        max_dist: f64,
+    ) -> Self {
         Self {
             surface: surface.clone(),
             curve: curve.clone(),
@@ -129,7 +133,9 @@ impl CompState {
     }
     /// The sequence of parts; Standard_NullObject for a default-constructed curve.
     fn parts(&self) -> Result<&SequenceOfSequenceOfPnt, Failure> {
-        self.sequence.get().ok_or_else(|| null("the sequence of projected points"))
+        self.sequence
+            .get()
+            .ok_or_else(|| null("the sequence of projected points"))
     }
 }
 
@@ -204,7 +210,11 @@ impl CompProjectedCurve {
         tol_v: f64,
         max_dist: f64,
     ) -> Result<Self, Failure> {
-        let state = CompState { tol_u, tol_v, ..CompState::with_data(surface, curve, max_dist) };
+        let state = CompState {
+            tol_u,
+            tol_v,
+            ..CompState::with_data(surface, curve, max_dist)
+        };
         let projection: Self = Self::from_state(state);
         projection.init()?;
         Ok(projection)
@@ -218,7 +228,10 @@ impl CompProjectedCurve {
         curve: &Handle<dyn Adaptor3dCurve>,
         max_dist: f64,
     ) -> Result<Self, Failure> {
-        let mut state = CompState { tol3d, ..CompState::with_data(surface, curve, max_dist) };
+        let mut state = CompState {
+            tol3d,
+            ..CompState::with_data(surface, curve, max_dist)
+        };
         let s: &dyn Adaptor3dSurface = surface.get().ok_or_else(|| null("the surface"))?;
         state.tol_u = precision::p_confusion().max(s.u_resolution(tol3d)?);
         state.tol_v = precision::p_confusion().max(s.v_resolution(tol3d)?);

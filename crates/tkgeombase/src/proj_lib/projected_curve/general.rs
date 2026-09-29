@@ -45,25 +45,48 @@ impl ProjectedState {
         }
         let s: &dyn Adaptor3dSurface = live_surface(self)?;
         let (tol_u, tol_v) = compute_tol_uv(s, self.tolerance)?;
-        let (tol_u, tol_v) = (tol_u.max(precision::confusion()), tol_v.max(precision::confusion()));
+        let (tol_u, tol_v) = (
+            tol_u.max(precision::confusion()),
+            tol_v.max(precision::confusion()),
+        );
         let tol_2d: f64 = (tol_u * tol_u + tol_v * tol_v).sqrt();
-        let max_dist: f64 = if self.max_dist > 0. { self.max_dist } else { 100. * self.tolerance };
-        let projector = CompProjectedCurve::with_max_dist(&self.surface, &self.curve, tol_u, tol_v, max_dist)?;
+        let max_dist: f64 = if self.max_dist > 0. {
+            self.max_dist
+        } else {
+            100. * self.tolerance
+        };
+        let projector =
+            CompProjectedCurve::with_max_dist(&self.surface, &self.curve, tol_u, tol_v, max_dist)?;
         // Within ProjLib the result must be one and only one curve, not a point.
         if projector.nb_curves() <= 0 {
             return Ok(false);
         }
         let (udeb, ufin) = projector.bounds(1)?;
-        let continuity: Shape = if self.bnd_pnt == Constraint::PassPoint { Shape::C0 } else { Shape::C1 };
+        let continuity: Shape = if self.bnd_pnt == Constraint::PassPoint {
+            Shape::C0
+        } else {
+            Shape::C1
+        };
         let options = CurveOnSurfaceOptions {
-            max_segments: if self.max_segments > 0 { self.max_segments } else { 16 },
+            max_segments: if self.max_segments > 0 {
+                self.max_segments
+            } else {
+                16
+            },
             max_degree: if self.deg_max > 0 { self.deg_max } else { 14 },
             continuity,
             only_3d: false,
             only_2d: true,
         };
         let hprojector: Handle<dyn Adaptor2dCurve2d> = Handle::new(projector).cast();
-        let appr = CurveOnSurface::new(&hprojector, &self.surface, udeb, ufin, self.tolerance, options)?;
+        let appr = CurveOnSurface::new(
+            &hprojector,
+            &self.surface,
+            udeb,
+            ufin,
+            self.tolerance,
+            options,
+        )?;
         let mut res: Handle<Geom2dBSplineCurve> = appr.curve_2d();
         if res.is_null() {
             return Ok(true);
@@ -91,7 +114,13 @@ impl ProjectedState {
         let (u1, u2) = (s.first_u_parameter()?, s.last_u_parameter()?);
         let (v1, v2) = (s.first_v_parameter()?, s.last_v_parameter()?);
         let boxes = [[u1, u2, vsingular[0], v2], [u1, u2, v1, vsingular[1]]];
-        extend_ends(res, &data.trims, boxes, [3, 4], (data.first_par, data.last_par))?;
+        extend_ends(
+            res,
+            &data.trims,
+            boxes,
+            [3, 4],
+            (data.first_par, data.last_par),
+        )?;
         if continuity != Shape::C0 {
             return Ok(());
         }
@@ -114,7 +143,11 @@ impl ProjectedState {
     // A curve end on the axis of revolution: trimmed by 1% of the range, and the V
     // of the end point on the basis curve (nearest minimum), or its parameter on
     // the axis when the extrema fails. Returns the trimmed bounds.
-    fn trim_on_axis(&mut self, data: &mut PerformData, vsingular: &mut [f64; 2]) -> Result<(f64, f64), Failure> {
+    fn trim_on_axis(
+        &mut self,
+        data: &mut PerformData,
+        vsingular: &mut [f64; 2],
+    ) -> Result<(f64, f64), Failure> {
         let s: &dyn Adaptor3dSurface = live_surface(self)?;
         let axis: Axis1 = s.axe_of_revolution()?;
         let lin: Line3 = Line3::new(axis.location(), axis.direction());

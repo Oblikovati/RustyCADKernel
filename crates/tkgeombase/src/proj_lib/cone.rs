@@ -112,8 +112,11 @@ impl Project for Cone {
             point.translate(Vector3::from(line.direction()));
             delta_v = 1.0; // == ||L.Direction()|| == 1.0
         }
-        let (position, radius, angle) =
-            (self.cone.position(), self.cone.ref_radius(), self.cone.semi_angle());
+        let (position, radius, angle) = (
+            self.cone.position(),
+            self.cone.ref_radius(),
+            self.cone.semi_angle(),
+        );
         let (u, v) = elslib::cone_parameters(position, radius, angle, point);
         let (_, _, vv) = elslib::cone_d1(u, v, position, radius, angle);
         let dv: Direction3 = Direction3::from_vector(vv)?;
@@ -134,7 +137,10 @@ impl Project for Cone {
         self.base.my_type = CurveType::Line;
         let cone_pos: Axis3 = self.cone.position();
         let circ_pos: Axis3 = Axis3::from_axis2(circle.position());
-        if !cone_pos.direction().is_parallel(circ_pos.direction(), precision::angular()) {
+        if !cone_pos
+            .direction()
+            .is_parallel(circ_pos.direction(), precision::angular())
+        {
             self.base.is_done = false;
             return Ok(());
         }

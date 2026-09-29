@@ -193,8 +193,6 @@ fn smooth(
 }
 
 /// A 1-based array of `length` default values.
-pub(crate) fn new_array<T: Clone + Default>(
-    length: i32,
-) -> Result<Array1<'static, T>, Failure> {
+pub(crate) fn new_array<T: Clone + Default>(length: i32) -> Result<Array1<'static, T>, Failure> {
     Array1::with_bounds(1, length).map_err(|error| array_failure(error, "ProjLib"))
 }

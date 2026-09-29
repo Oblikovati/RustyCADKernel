@@ -88,7 +88,10 @@ impl Parts for SequenceOfSequenceOfPnt {
     }
     fn last_point(&self, i: i32) -> Result<Point3, Failure> {
         let points: Vec<Point3> = self.points(i)?;
-        points.last().copied().ok_or_else(|| out_of_range("empty part", i, 0))
+        points
+            .last()
+            .copied()
+            .ok_or_else(|| out_of_range("empty part", i, 0))
     }
     fn set_first_x(&self, i: i32, x: f64) -> Result<(), Failure> {
         let part: Handle<HSequence<Point3>> = self.part(i)?;

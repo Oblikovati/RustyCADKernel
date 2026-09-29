@@ -20,7 +20,10 @@ use super::ProjectedState;
 use super::singular::{Box2d, Trims, extend_ends, iso_is_deg, trim_c3d};
 use crate::geom2d_convert::curve_to_bspline_curve;
 use crate::native_failure::failure;
-use crate::proj_lib::{ComputeApprox, ComputeApproxOnPolarSurface, Cone, Cylinder, Plane, Project, Projector, Sphere, Torus};
+use crate::proj_lib::{
+    ComputeApprox, ComputeApproxOnPolarSurface, Cone, Cylinder, Plane, Project, Projector, Sphere,
+    Torus,
+};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
@@ -56,11 +59,20 @@ fn project_curve(projector: &mut dyn Project, curve: &dyn Adaptor3dCurve) -> Res
 }
 
 pub(super) fn live_surface(state: &ProjectedState) -> Result<&dyn Adaptor3dSurface, Failure> {
-    state.surface.get().ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: no surface is loaded"))
+    state.surface.get().ok_or_else(|| {
+        failure(
+            "Standard_NullObject",
+            "ProjLib_ProjectedCurve: no surface is loaded",
+        )
+    })
 }
 
-pub(super) fn live_curve(curve: &Handle<dyn Adaptor3dCurve>) -> Result<&dyn Adaptor3dCurve, Failure> {
-    curve.get().ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: null curve"))
+pub(super) fn live_curve(
+    curve: &Handle<dyn Adaptor3dCurve>,
+) -> Result<&dyn Adaptor3dCurve, Failure> {
+    curve
+        .get()
+        .ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: null curve"))
 }
 
 impl ProjectedState {
@@ -71,7 +83,12 @@ impl ProjectedState {
         let c: &dyn Adaptor3dCurve = live_curve(curve)?;
         let (first_par, last_par) = (c.first_parameter()?, c.last_parameter()?);
         let s: &dyn Adaptor3dSurface = live_surface(self)?;
-        let bounds: Box2d = [s.first_u_parameter()?, s.last_u_parameter()?, s.first_v_parameter()?, s.last_v_parameter()?];
+        let bounds: Box2d = [
+            s.first_u_parameter()?,
+            s.last_u_parameter()?,
+            s.first_v_parameter()?,
+            s.last_v_parameter()?,
+        ];
         let mut data = PerformData {
             first_par,
             last_par,
@@ -105,7 +122,10 @@ impl ProjectedState {
     }
 
     // An exact projector on an elementary surface; the result is its base object.
-    fn elementary<P: Project + Into<Projector>>(&mut self, mut projector: P) -> Result<bool, Failure> {
+    fn elementary<P: Project + Into<Projector>>(
+        &mut self,
+        mut projector: P,
+    ) -> Result<bool, Failure> {
         project_curve(&mut projector, live_curve(&self.curve)?)?;
         self.result = projector.into();
         Ok(true)
@@ -133,14 +153,34 @@ impl ProjectedState {
         let sphere = s.sphere()?;
         let r: f64 = sphere.radius();
         let c: &dyn Adaptor3dCurve = live_curve(&self.curve)?;
-        let (pf, pl) = (c.value(c.first_parameter()?)?, c.value(c.last_parameter()?)?);
+        let (pf, pl) = (
+            c.value(c.first_parameter()?)?,
+            c.value(c.last_parameter()?)?,
+        );
         let location: Point3 = sphere.position().location();
         let maxdist: f64 = pf.distance(&location).max(pl.distance(&location));
         let tol_conf: f64 = (r * minang).max((r - maxdist).abs());
         // The surface has poles at V = Vmin and Vmax.
-        let (pole_min, pole_max) = (s.value(data.bounds[0], -vmax)?, s.value(data.bounds[0], vmax)?);
-        trim_c3d(&mut self.curve, &mut data.trims, data.dt, pole_min, 3, tol_conf)?;
-        trim_c3d(&mut self.curve, &mut data.trims, data.dt, pole_max, 4, tol_conf)?;
+        let (pole_min, pole_max) = (
+            s.value(data.bounds[0], -vmax)?,
+            s.value(data.bounds[0], vmax)?,
+        );
+        trim_c3d(
+            &mut self.curve,
+            &mut data.trims,
+            data.dt,
+            pole_min,
+            3,
+            tol_conf,
+        )?;
+        trim_c3d(
+            &mut self.curve,
+            &mut data.trims,
+            data.dt,
+            pole_max,
+            4,
+            tol_conf,
+        )?;
         Ok(())
     }
 
@@ -151,7 +191,12 @@ impl ProjectedState {
         let (f, l) = (c.first_parameter()?, c.last_parameter()?);
         data.dt = (l - f) * 0.01;
         let surface: Handle<dyn Adaptor3dSurface> = self.surface.clone();
-        let s: &dyn Adaptor3dSurface = surface.get().ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: no surface is loaded"))?;
+        let s: &dyn Adaptor3dSurface = surface.get().ok_or_else(|| {
+            failure(
+                "Standard_NullObject",
+                "ProjLib_ProjectedCurve: no surface is loaded",
+            )
+        })?;
         let [u1, u2, v1, v2] = data.bounds;
         let tol: f64 = self.tolerance;
         let conf: f64 = precision::confusion();
@@ -164,7 +209,14 @@ impl ProjectedState {
         for (param, iso, pole, case) in checks {
             if iso_is_deg(s, param, iso, 0., tol)? {
                 let pole_point: Point3 = s.value(pole.0, pole.1)?;
-                trim_c3d(&mut self.curve, &mut data.trims, data.dt, pole_point, case, conf)?;
+                trim_c3d(
+                    &mut self.curve,
+                    &mut data.trims,
+                    data.dt,
+                    pole_point,
+                    case,
+                    conf,
+                )?;
             }
         }
         let mut polar: ComputeApproxOnPolarSurface = ComputeApproxOnPolarSurface::new();
@@ -181,7 +233,13 @@ impl ProjectedState {
         self.tolerance = polar.tolerance();
         if data.trims.is_trimmed[0] || data.trims.is_trimmed[1] {
             let cases = data.trims.singular_case;
-            extend_ends(&mut res, &data.trims, [data.bounds; 2], cases, (data.first_par, data.last_par))?;
+            extend_ends(
+                &mut res,
+                &data.trims,
+                [data.bounds; 2],
+                cases,
+                (data.first_par, data.last_par),
+            )?;
         }
         self.set_bspline_result(res);
         Ok(())
@@ -214,7 +272,13 @@ impl ProjectedState {
         };
         if data.trims.is_trimmed[0] || data.trims.is_trimmed[1] {
             let cases = data.trims.singular_case;
-            extend_ends(&mut res, &data.trims, [data.bounds; 2], cases, (data.first_par, data.last_par))?;
+            extend_ends(
+                &mut res,
+                &data.trims,
+                [data.bounds; 2],
+                cases,
+                (data.first_par, data.last_par),
+            )?;
             self.result.set_bspline(&res);
             self.result.set_type(CurveType::BSplineCurve);
         } else if data.s_type == SurfaceType::Plane && data.c_type == CurveType::BezierCurve {
@@ -225,7 +289,10 @@ impl ProjectedState {
             self.result.set_bspline(&comp.bspline());
         }
         // The periodicity flag.
-        if data.s_type == SurfaceType::Plane && data.c_type == CurveType::BSplineCurve && live_curve(&self.curve)?.is_periodic()? {
+        if data.s_type == SurfaceType::Plane
+            && data.c_type == CurveType::BSplineCurve
+            && live_curve(&self.curve)?.is_periodic()?
+        {
             self.result.set_periodic();
         }
         self.tolerance = comp.tolerance();

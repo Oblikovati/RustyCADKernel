@@ -7,7 +7,7 @@ use gb_probe::{
     approx as ax, bndlib, extrema_cc, extrema_cs, extrema_el, extrema_el_surf, extrema_pc,
     extrema_ps, extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts, geom_convert as gcv,
     geom_lib as gl, geom_tools, geom2d_convert as g2c, gprop, hermit, int_ana, int_ana2d, lprop,
-    pc2d, pc3d,
+    pc2d, pc3d, proj_lib as pl,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -354,6 +354,16 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("axa_curvilinear", ax::curvilinear_case),
     ("axa_same", ax::same_case),
     ("axs_sweep", ax::sweep_case),
+    // ProjLib (gb_probe/proj_lib)
+    ("pl_elem", pl::elem_case),
+    ("pl_static", pl::static_case),
+    ("pl_prjfunc", pl::prjfunc_case),
+    ("pl_prjresolve", pl::prjresolve_case),
+    ("pl_on_plane", pl::on_plane_case),
+    ("pl_approx", pl::approx_case),
+    ("pl_polar", pl::polar_case),
+    ("pl_projected", pl::projected_case),
+    ("pl_comp", pl::comp_case),
 ];
 
 fn main() {

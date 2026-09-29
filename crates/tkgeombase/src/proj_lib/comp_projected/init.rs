@@ -72,7 +72,11 @@ pub(super) enum WalkEnd {
 impl<'a> Walk<'a> {
     /// The PrjResolve box of the free (u, v) search.
     pub(super) fn uv_box(&self) -> PrjResolveBox {
-        PrjResolveBox { tol: Point2::new(self.state.tol_u, self.state.tol_v), inf: self.low, sup: self.upp }
+        PrjResolveBox {
+            tol: Point2::new(self.state.tol_u, self.state.tol_v),
+            inf: self.low,
+            sup: self.upp,
+        }
     }
     /// A fresh `ProjLib_PrjResolve(C, S, 1)`.
     pub(super) fn resolver(&self) -> Result<PrjResolve<'a>, Failure> {
@@ -87,7 +91,9 @@ impl<'a> Walk<'a> {
         if magn_d2 < precision::confusion() {
             return Ok(self.max_step);
         }
-        Ok(self.max_step.min(self.min_step.max(0.1 * magn_d1 / magn_d2)))
+        Ok(self
+            .max_step
+            .min(self.min_step.max(0.1 * magn_d1 / magn_d2)))
     }
     /// The exact bound between the current triple and `not_sol`, by ExactBound or
     /// by dichotomy; sets `tol`.
@@ -125,11 +131,17 @@ impl CompProjectedCurve {
 
 // The extrema curve-surface, the MaxDist early exit, then the walk; None for the
 // early exit (nothing is changed).
-fn run_walk(state: &CompState, pair: Pair<'_>, nb_curves: &mut i32) -> Result<Option<WalkEnd>, Failure> {
+fn run_walk(
+    state: &CompState,
+    pair: Pair<'_>,
+    nb_curves: &mut i32,
+) -> Result<Option<WalkEnd>, Failure> {
     let tol_ext: f64 = precision::p_confusion();
     let ext = ExtCS::with_curve(pair.curve, pair.surface, tol_ext, tol_ext)?;
     let mut nend: i32 = 0;
-    if ext.is_done() && ext.nb_ext()? != 0 && state.max_dist > 0.
+    if ext.is_done()
+        && ext.nb_ext()? != 0
+        && state.max_dist > 0.
         && pair.surface.get_type()? != SurfaceType::SurfaceOfExtrusion
     {
         // The minimum solution; the extrema of an extrusion can be wrong.
@@ -157,7 +169,12 @@ impl NativeMin for f64 {
 }
 
 impl<'a> Walk<'a> {
-    fn new(state: &'a CompState, pair: Pair<'a>, ext: ExtCS<'a>, nend: i32) -> Result<Self, Failure> {
+    fn new(
+        state: &'a CompState,
+        pair: Pair<'a>,
+        ext: ExtCS<'a>,
+        nend: i32,
+    ) -> Result<Self, Failure> {
         let (first_u, last_u) = (pair.curve.first_parameter()?, pair.curve.last_parameter()?);
         let (min_step, max_step) = (0.01 * (last_u - first_u), 0.1 * (last_u - first_u));
         let s = pair.surface;

@@ -135,7 +135,8 @@ impl ComputeApproxOnPolarSurface {
             }
             let span: Handle<dyn Adaptor3dCurve> =
                 Handle::new(GeomAdaptorCurve::with_curve(&spans.gtc.clone().cast())?).cast();
-            let ahc2d: Handle<dyn Adaptor2dCurve2d> = self.span_initial(spans, init, c, surface, &span, i)?;
+            let ahc2d: Handle<dyn Adaptor2dCurve2d> =
+                self.span_initial(spans, init, c, surface, &span, i)?;
             if !self.proj_is_done {
                 return Ok(None);
             }
@@ -175,7 +176,13 @@ impl ComputeApproxOnPolarSurface {
             return Ok(built);
         }
         if i == 1 {
-            spans.g2dtc = Handle::new(Geom2dTrimmedCurve::new(&spans.g2dc, first, last, true, true)?);
+            spans.g2dtc = Handle::new(Geom2dTrimmedCurve::new(
+                &spans.g2dc,
+                first,
+                last,
+                true,
+                true,
+            )?);
         } else {
             let trimmed: &Geom2dTrimmedCurve = spans.g2dtc.get().ok_or_else(null_init)?;
             trimmed.set_trim(first, last, true, true)?;
@@ -237,13 +244,23 @@ fn join_spans(
 }
 
 fn live(curve: &Handle<Geom2dBSplineCurve>) -> Result<&Geom2dBSplineCurve, Failure> {
-    curve.get().ok_or_else(|| failure("Standard_NullObject", "ProjLib_ComputeApproxOnPolarSurface: null piece"))
+    curve.get().ok_or_else(|| {
+        failure(
+            "Standard_NullObject",
+            "ProjLib_ComputeApproxOnPolarSurface: null piece",
+        )
+    })
 }
 
 /// `Concat(C1, C2, theUJump, theVJump)`: the two curves raised to the same degree
 /// (in place) and joined with multiplicity `deg` at the junction; the first pole of
 /// C2 is dropped and its others shifted by the jump. Weights are not carried over.
-fn concat(c1: &Geom2dBSplineCurve, c2: &Geom2dBSplineCurve, u_jump: f64, v_jump: f64) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
+fn concat(
+    c1: &Geom2dBSplineCurve,
+    c2: &Geom2dBSplineCurve,
+    u_jump: f64,
+    v_jump: f64,
+) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
     let (deg1, deg2) = (c1.degree(), c2.degree());
     let deg: i32 = if deg1 < deg2 {
         c1.increase_degree(deg2)?;
@@ -274,5 +291,7 @@ fn concat(c1: &Geom2dBSplineCurve, c2: &Geom2dBSplineCurve, u_jump: f64, v_jump:
     for i in 2..=np2 {
         p[np1 + i - 1] = Point2::new(p2[i].x() + u_jump, p2[i].y() + v_jump);
     }
-    Ok(Handle::new(Geom2dBSplineCurve::new(&p, &k, &m, deg, false)?))
+    Ok(Handle::new(Geom2dBSplineCurve::new(
+        &p, &k, &m, deg, false,
+    )?))
 }

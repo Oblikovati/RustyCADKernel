@@ -18,10 +18,10 @@
 //! point projects; on a periodic surface a start on the seam is moved to the side
 //! the projection goes to, and a start after the curve start is moved back to the
 //! exact bound where the projection enters the surface.
+use super::FUNC_TOL;
 use super::bounds::initial_point;
 use super::derivatives::d1;
 use super::init::Walk;
-use super::FUNC_TOL;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
@@ -78,7 +78,9 @@ impl Walk<'_> {
     // projects (it moves `t`), else the nearest normal projection of `C(t)`.
     fn initial_candidate(&mut self) -> Result<Option<(f64, f64, Point3)>, Failure> {
         if self.nend != 0 && !self.ext.is_parallel()? {
-            let lower: f64 = self.first_u.max(self.t - self.step + precision::p_confusion());
+            let lower: f64 = self
+                .first_u
+                .max(self.t - self.step + precision::p_confusion());
             for i in 1..=self.nend {
                 let (p1, p2) = self.ext.points(i)?;
                 let par_t: f64 = p1.parameter();
@@ -103,8 +105,10 @@ impl Walk<'_> {
     fn off_seam(&self, mut u: f64, mut v: f64) -> Result<(f64, f64), Failure> {
         let s: &dyn Adaptor3dSurface = self.pair.surface;
         let (low, upp) = (self.low, self.upp);
-        let u_seam: bool = s.is_u_periodic()? && (upp.x() - low.x() - s.u_period()?).abs() < precision::confusion();
-        let v_seam: bool = s.is_v_periodic()? && (upp.y() - low.y() - s.v_period()?).abs() < precision::confusion();
+        let u_seam: bool = s.is_u_periodic()?
+            && (upp.x() - low.x() - s.u_period()?).abs() < precision::confusion();
+        let v_seam: bool = s.is_v_periodic()?
+            && (upp.y() - low.y() - s.v_period()?).abs() < precision::confusion();
         if !(u_seam || v_seam) {
             return Ok((u, v));
         }
@@ -113,7 +117,9 @@ impl Walk<'_> {
             if self.direction(u, v)?.x() < 0. {
                 u = upp.x();
             }
-        } else if (u - upp.x()).abs() < s.u_resolution(precision::p_confusion())? && s.is_u_periodic()? {
+        } else if (u - upp.x()).abs() < s.u_resolution(precision::p_confusion())?
+            && s.is_u_periodic()?
+        {
             if self.direction(u, v)?.x() > 0. {
                 u = low.x();
             }
@@ -123,7 +129,9 @@ impl Walk<'_> {
             if self.direction(u, v)?.y() < 0. {
                 v = upp.y();
             }
-        } else if (v - upp.y()).abs() <= s.v_resolution(precision::p_confusion())? && s.is_v_periodic()? {
+        } else if (v - upp.y()).abs() <= s.v_resolution(precision::p_confusion())?
+            && s.is_v_periodic()?
+        {
             if self.direction(u, v)?.y() > 0. {
                 v = low.y();
             }

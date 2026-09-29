@@ -47,7 +47,11 @@ impl ProjectOnPlane {
         ))
     }
     // The spline kinds answer from the approximation or from the original curve.
-    fn spline_source(&self, expected: &[CurveType], member: &str) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
+    fn spline_source(
+        &self,
+        expected: &[CurveType],
+        member: &str,
+    ) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
         let state: OnPlaneState = self.require_type(expected, member)?;
         if state.is_approx {
             return Ok(state.result.cast());
@@ -60,7 +64,10 @@ const SPLINES: [CurveType; 2] = [CurveType::BSplineCurve, CurveType::BezierCurve
 
 fn live(curve: &Handle<dyn Adaptor3dCurve>) -> Result<&dyn Adaptor3dCurve, Failure> {
     curve.get().ok_or_else(|| {
-        failure("Standard_NullObject", "ProjLib_ProjectOnPlane: null curve; expected a loaded curve")
+        failure(
+            "Standard_NullObject",
+            "ProjLib_ProjectOnPlane: null curve; expected a loaded curve",
+        )
     })
 }
 
@@ -92,7 +99,12 @@ impl Adaptor3dCurve for ProjectOnPlane {
     fn intervals(&self, bounds: &mut Array1<'_, f64>, shape: Shape) -> Result<(), Failure> {
         self.snapshot().curve()?.intervals(bounds, shape)
     }
-    fn trim(&self, first: f64, last: f64, tolerance: f64) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
+    fn trim(
+        &self,
+        first: f64,
+        last: f64,
+        tolerance: f64,
+    ) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
         let state: OnPlaneState = self.snapshot();
         if state.curve_type == CurveType::OtherCurve {
             return Err(failure(
@@ -116,7 +128,10 @@ impl Adaptor3dCurve for ProjectOnPlane {
     // IsPeriodic is then false.
     fn period(&self) -> Result<f64, Failure> {
         if !self.is_periodic()? {
-            return Err(failure("Standard_NoSuchObject", "ProjLib_ProjectOnPlane::Period"));
+            return Err(failure(
+                "Standard_NoSuchObject",
+                "ProjLib_ProjectOnPlane::Period",
+            ));
         }
         let state: OnPlaneState = self.snapshot();
         if state.is_approx {
@@ -173,19 +188,29 @@ impl Adaptor3dCurve for ProjectOnPlane {
         Ok(self.snapshot().curve_type)
     }
     fn line(&self) -> Result<Line3, Failure> {
-        self.require_type(&[CurveType::Line], "Line")?.result()?.line()
+        self.require_type(&[CurveType::Line], "Line")?
+            .result()?
+            .line()
     }
     fn circle(&self) -> Result<Circle3, Failure> {
-        self.require_type(&[CurveType::Circle], "Circle")?.result()?.circle()
+        self.require_type(&[CurveType::Circle], "Circle")?
+            .result()?
+            .circle()
     }
     fn ellipse(&self) -> Result<Ellipse3, Failure> {
-        self.require_type(&[CurveType::Ellipse], "Ellipse")?.result()?.ellipse()
+        self.require_type(&[CurveType::Ellipse], "Ellipse")?
+            .result()?
+            .ellipse()
     }
     fn hyperbola(&self) -> Result<Hyperbola3, Failure> {
-        self.require_type(&[CurveType::Hyperbola], "Hyperbola")?.result()?.hyperbola()
+        self.require_type(&[CurveType::Hyperbola], "Hyperbola")?
+            .result()?
+            .hyperbola()
     }
     fn parabola(&self) -> Result<Parabola3, Failure> {
-        self.require_type(&[CurveType::Parabola], "Parabola")?.result()?.parabola()
+        self.require_type(&[CurveType::Parabola], "Parabola")?
+            .result()?
+            .parabola()
     }
     fn degree(&self) -> Result<i32, Failure> {
         live(&self.spline_source(&SPLINES, "Degree")?)?.degree()
@@ -200,9 +225,13 @@ impl Adaptor3dCurve for ProjectOnPlane {
         live(&self.spline_source(&[CurveType::BSplineCurve], "NbKnots")?)?.nb_knots()
     }
     fn bezier(&self) -> Result<Handle<GeomBezierCurve>, Failure> {
-        self.require_type(&[CurveType::BezierCurve], "Bezier")?.result()?.bezier()
+        self.require_type(&[CurveType::BezierCurve], "Bezier")?
+            .result()?
+            .bezier()
     }
     fn bspline(&self) -> Result<Handle<GeomBSplineCurve>, Failure> {
-        self.require_type(&[CurveType::BSplineCurve], "BSpline")?.result()?.bspline()
+        self.require_type(&[CurveType::BSplineCurve], "BSpline")?
+            .result()?
+            .bspline()
     }
 }

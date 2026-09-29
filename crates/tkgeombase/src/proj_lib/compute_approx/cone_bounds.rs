@@ -33,12 +33,18 @@ fn near(check: f64, with: f64, toler: f64) -> bool {
 }
 
 /// The cone case of `Function_SetUVBounds`.
-pub(super) fn cone_bounds(p: &Projection<'_>, mut s: Samples, b: &mut UvBounds) -> Result<(), Failure> {
+pub(super) fn cone_bounds(
+    p: &Projection<'_>,
+    mut s: Samples,
+    b: &mut UvBounds,
+) -> Result<(), Failure> {
     let cone: Cone3 = p.surface.cone()?;
     b.v_couture = false;
     move_off_apex(p, &cone, &mut s)?;
     match p.curve.get_type()? {
-        CurveType::Parabola | CurveType::Hyperbola | CurveType::Ellipse => conic_window(p, &cone, &s, b),
+        CurveType::Parabola | CurveType::Hyperbola | CurveType::Ellipse => {
+            conic_window(p, &cone, &s, b)
+        }
         _ => scan_window(p, &cone, &s, b),
     }
 }
@@ -65,7 +71,12 @@ fn move_off_apex(p: &Projection<'_>, cone: &Cone3, s: &mut Samples) -> Result<()
 
 // Open conics: the ends give the window, a full period when the middle is outside
 // or the curve is closed.
-fn conic_window(p: &Projection<'_>, cone: &Cone3, s: &Samples, b: &mut UvBounds) -> Result<(), Failure> {
+fn conic_window(
+    p: &Projection<'_>,
+    cone: &Cone3,
+    s: &Samples,
+    b: &mut UvBounds,
+) -> Result<(), Failure> {
     let (u1, _) = elslib::parameters(cone, s.p1);
     let (u2, _) = elslib::parameters(cone, s.p2);
     let (u, _) = elslib::parameters(cone, s.p);
@@ -154,7 +165,12 @@ impl ConeScan {
 
 // Other curves: the U of samples every `Step` (two steps for a closed or periodic
 // curve), unwrapped across the seam.
-fn scan_window(p: &Projection<'_>, cone: &Cone3, s: &Samples, b: &mut UvBounds) -> Result<(), Failure> {
+fn scan_window(
+    p: &Projection<'_>,
+    cone: &Cone3,
+    s: &Samples,
+    b: &mut UvBounds,
+) -> Result<(), Failure> {
     let (u1, _) = elslib::parameters(cone, s.p1);
     let (ul, _) = elslib::parameters(cone, s.p2);
     let axis: Line3 = Line3::from(cone.axis());
@@ -188,7 +204,13 @@ fn scan_window(p: &Projection<'_>, cone: &Cone3, s: &Samples, b: &mut UvBounds) 
         scan.push(par, u, step, s.w2);
         par += step;
     }
-    widen_range(&mut scan.min, &mut scan.max, [scan.pmin, scan.pmax], scan.dmax, [s.w1, s.w2]);
+    widen_range(
+        &mut scan.min,
+        &mut scan.max,
+        [scan.pmin, scan.pmax],
+        scan.dmax,
+        [s.w1, s.w2],
+    );
     (b.u1, b.u2, b.u_couture) = centred_window(scan.min, scan.max);
     Ok(())
 }

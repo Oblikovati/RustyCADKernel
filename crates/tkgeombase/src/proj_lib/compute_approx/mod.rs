@@ -144,7 +144,13 @@ impl ComputeApprox {
             self.bezier = plane_poles::bezier_on_plane(c, &s.plane()?)?;
             return Ok(());
         }
-        self.fit(Projection { curve: c, surface: s }, simplecase)
+        self.fit(
+            Projection {
+                curve: c,
+                surface: s,
+            },
+            simplecase,
+        )
     }
 }
 
@@ -158,12 +164,19 @@ fn simple_case(
     let surf_is_anal: bool = is_ana_surf(surface)?;
     let curv_is_anal: bool = !matches!(
         c_type,
-        CurveType::BSplineCurve | CurveType::BezierCurve | CurveType::OffsetCurve | CurveType::OtherCurve
+        CurveType::BSplineCurve
+            | CurveType::BezierCurve
+            | CurveType::OffsetCurve
+            | CurveType::OtherCurve
     );
     let mut simplecase: bool = surf_is_anal && curv_is_anal;
     if matches!(c_type, CurveType::BSplineCurve | CurveType::BezierCurve) {
         let c: &dyn Adaptor3dCurve = live_curve(curve)?;
-        let nb_knots: i32 = if c_type == CurveType::BSplineCurve { c.nb_knots()? } else { 1 };
+        let nb_knots: i32 = if c_type == CurveType::BSplineCurve {
+            c.nb_knots()?
+        } else {
+            1
+        };
         simplecase = simplecase && c.degree()? <= 2 && nb_knots <= 2;
     }
     Ok(simplecase)
@@ -191,7 +204,11 @@ impl ComputeApprox {
     fn fit_options(&self, simplecase: bool, tol_2d: f64) -> ComputeCLineOptions {
         let deg1: i32 = if self.deg_min > 0 { self.deg_min } else { 5 };
         let default_deg2: i32 = if simplecase { 8 } else { 10 };
-        let deg2: i32 = if self.deg_max > 0 { self.deg_max } else { default_deg2 };
+        let deg2: i32 = if self.deg_max > 0 {
+            self.deg_max
+        } else {
+            default_deg2
+        };
         // Both bounds take myBndPnt (TangencyPoint by default).
         let bound: Constraint = self.bnd_pnt;
         ComputeCLineOptions {
@@ -210,10 +227,16 @@ impl ComputeApprox {
     fn fit(&mut self, projection: Projection<'_>, simplecase: bool) -> Result<(), Failure> {
         let function: ProjectionFunction<'_> = ProjectionFunction::new(projection)?;
         let (tol_u, tol_v) = compute_tol_uv(projection.surface, self.tolerance)?;
-        let tol_2d: f64 = (tol_u * tol_u + tol_v * tol_v).sqrt().max(precision::p_confusion());
+        let tol_2d: f64 = (tol_u * tol_u + tol_v * tol_v)
+            .sqrt()
+            .max(precision::p_confusion());
         let options: ComputeCLineOptions = self.fit_options(simplecase, tol_2d);
         let mut fit: FitAndDivide2d = FitAndDivide2d::new(options);
-        fit.set_max_segments(if self.max_segments > 0 { self.max_segments } else { 1000 });
+        fit.set_max_segments(if self.max_segments > 0 {
+            self.max_segments
+        } else {
+            1000
+        });
         if simplecase {
             fit.set_hang_checking(false);
         }
@@ -244,7 +267,8 @@ impl ComputeApprox {
         options: &ComputeCLineOptions,
         curve: &dyn Adaptor3dCurve,
     ) -> Result<Option<f64>, Failure> {
-        let mut conv: CompBezierCurves2dToBSplineCurve2d = CompBezierCurves2dToBSplineCurve2d::new(1.0e-4);
+        let mut conv: CompBezierCurves2dToBSplineCurve2d =
+            CompBezierCurves2dToBSplineCurve2d::new(1.0e-4);
         let mut new_tol_2d: f64 = 0.;
         for i in 1..=fit.nb_multi_curves() {
             new_tol_2d = new_tol_2d.max(fit.error(i)?.1);
@@ -263,7 +287,11 @@ impl ComputeApprox {
         let mut mults: Array1<'static, i32> = super::new_array(nb_knots)?;
         conv.knots_and_mults(&mut knots, &mut mults)?;
         conv.poles(&mut poles)?;
-        bsplclib::reparametrize(curve.first_parameter()?, curve.last_parameter()?, &mut knots)?;
+        bsplclib::reparametrize(
+            curve.first_parameter()?,
+            curve.last_parameter()?,
+            &mut knots,
+        )?;
         // The last knot is exactly the curve's last parameter, for a later trim.
         knots[nb_knots] = curve.last_parameter()?;
         let spline = Geom2dBSplineCurve::new(&poles, &knots, &mults, conv.degree(), false)?;

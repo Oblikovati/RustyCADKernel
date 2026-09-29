@@ -17,12 +17,14 @@
 //! Curves through a pole of the surface: the pole is detected (a degenerated iso
 //! line), the curve is trimmed by 1% of its range at that end, and the projection
 //! of the trimmed curve is extended by a segment to the singular bound.
-use crate::geom2d_convert::CompCurveToBSplineCurve;
 use crate::geom_lib::same_range;
+use crate::geom2d_convert::CompCurveToBSplineCurve;
 use crate::native_failure::failure;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dBoundedCurve, Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve};
+use rustycad_tkg2d::geom2d::{
+    Geom2dBSplineCurve, Geom2dBoundedCurve, Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve,
+};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkmath::convert::ParameterisationType;
 use rustycad_tkmath::elclib;
@@ -32,10 +34,20 @@ use rustycad_tkmath::gp::{Direction2, Line2, Point2, Point3, Vector2};
 /// `IsoIsDeg(S, Param, IT, TolMin, TolMax)`: whether the iso line of the surface at
 /// `param` is degenerated (the largest first derivative along it, sampled in ten
 /// steps, within `[tol_min, tol_max]`).
-pub(super) fn iso_is_deg(s: &dyn Adaptor3dSurface, param: f64, iso: IsoType, tol_min: f64, tol_max: f64) -> Result<bool, Failure> {
+pub(super) fn iso_is_deg(
+    s: &dyn Adaptor3dSurface,
+    param: f64,
+    iso: IsoType,
+    tol_min: f64,
+    tol_max: f64,
+) -> Result<bool, Failure> {
     let (u1, u2) = (s.first_u_parameter()?, s.last_u_parameter()?);
     let (v1, v2) = (s.first_v_parameter()?, s.last_v_parameter()?);
-    let (first, last) = if iso == IsoType::IsoV { (u1, u2) } else { (v1, v2) };
+    let (first, last) = if iso == IsoType::IsoV {
+        (u1, u2)
+    } else {
+        (v1, v2)
+    };
     let step: f64 = (last - first) / 10.;
     let mut d1_norm_max: f64 = 0.;
     let mut t: f64 = first;
@@ -60,7 +72,14 @@ pub(super) struct Trims {
 
 /// `TrimC3d(myCurve, IsTrimmed, dt, Pole, SingularCase, N, TolConf)`: an end of
 /// the curve within `tol_conf` of the pole is moved by `dt` inside.
-pub(super) fn trim_c3d(curve: &mut Handle<dyn Adaptor3dCurve>, trims: &mut Trims, dt: f64, pole: Point3, case: i32, tol_conf: f64) -> Result<(), Failure> {
+pub(super) fn trim_c3d(
+    curve: &mut Handle<dyn Adaptor3dCurve>,
+    trims: &mut Trims,
+    dt: f64,
+    pole: Point3,
+    case: i32,
+    tol_conf: f64,
+) -> Result<(), Failure> {
     let c: &dyn Adaptor3dCurve = live(curve)?;
     let (mut f, mut l) = (c.first_parameter()?, c.last_parameter()?);
     if c.value(f)?.distance(&pole) <= tol_conf {
@@ -80,7 +99,9 @@ pub(super) fn trim_c3d(curve: &mut Handle<dyn Adaptor3dCurve>, trims: &mut Trims
 }
 
 fn live(curve: &Handle<dyn Adaptor3dCurve>) -> Result<&dyn Adaptor3dCurve, Failure> {
-    curve.get().ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: null curve"))
+    curve
+        .get()
+        .ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: null curve"))
 }
 
 /// The parameter bounds of the extension: `(u1, u2, v1, v2)`.
@@ -102,9 +123,23 @@ fn singular_bound(case: i32, b: Box2d) -> (Point2, Direction2) {
 /// `ExtendC2d(aRes, t, dt, u1, u2, v1, v2, FirstOrLast, NumberOfSingularCase)`: the
 /// 2D curve extended from its first (`first_or_last` 0) or last end, along its
 /// tangent, to the singular bound of `case`.
-pub(super) fn extend_c2d(res: &mut Handle<Geom2dBSplineCurve>, b: Box2d, first_or_last: i32, case: i32) -> Result<(), Failure> {
-    let spline: &Geom2dBSplineCurve = res.get().ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: null 2D curve"))?;
-    let param: f64 = if first_or_last == 0 { spline.first_parameter() } else { spline.last_parameter() };
+pub(super) fn extend_c2d(
+    res: &mut Handle<Geom2dBSplineCurve>,
+    b: Box2d,
+    first_or_last: i32,
+    case: i32,
+) -> Result<(), Failure> {
+    let spline: &Geom2dBSplineCurve = res.get().ok_or_else(|| {
+        failure(
+            "Standard_NullObject",
+            "ProjLib_ProjectedCurve: null 2D curve",
+        )
+    })?;
+    let param: f64 = if first_or_last == 0 {
+        spline.first_parameter()
+    } else {
+        spline.last_parameter()
+    };
     let bounded: Handle<dyn Geom2dBoundedCurve> = res.clone().cast();
     let mut comp = CompCurveToBSplineCurve::with_curve(&bounded, ParameterisationType::RationalC1)?;
     let (p_bnd, v_bnd): (Point2, Vector2) = spline.d1(param)?;
@@ -123,8 +158,13 @@ pub(super) fn extend_c2d(res: &mut Handle<Geom2dBSplineCurve>, b: Box2d, first_o
         (uo21y * u1x - uo21x * u1y) / d
     };
     let seg_line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::from_lin2d(lin)).cast();
-    let (s1, s2) = if first_or_last == 0 { (par_on_lin, 0.) } else { (0., par_on_lin) };
-    let segment: Handle<dyn Geom2dBoundedCurve> = Handle::new(Geom2dTrimmedCurve::new(&seg_line, s1, s2, true, true)?).cast();
+    let (s1, s2) = if first_or_last == 0 {
+        (par_on_lin, 0.)
+    } else {
+        (0., par_on_lin)
+    };
+    let segment: Handle<dyn Geom2dBoundedCurve> =
+        Handle::new(Geom2dTrimmedCurve::new(&seg_line, s1, s2, true, true)?).cast();
     comp.add(&segment, precision::confusion(), first_or_last != 0)?;
     *res = comp.bspline_curve();
     Ok(())
@@ -132,7 +172,13 @@ pub(super) fn extend_c2d(res: &mut Handle<Geom2dBSplineCurve>, b: Box2d, first_o
 
 /// The extensions of the trimmed ends, then `GeomLib::SameRange` back to the
 /// range of the original curve.
-pub(super) fn extend_ends(res: &mut Handle<Geom2dBSplineCurve>, trims: &Trims, boxes: [Box2d; 2], cases: [i32; 2], range: (f64, f64)) -> Result<(), Failure> {
+pub(super) fn extend_ends(
+    res: &mut Handle<Geom2dBSplineCurve>,
+    trims: &Trims,
+    boxes: [Box2d; 2],
+    cases: [i32; 2],
+    range: (f64, f64),
+) -> Result<(), Failure> {
     if trims.is_trimmed[0] {
         // Add a segment before the start of the curve.
         extend_c2d(res, boxes[0], 0, cases[0])?;
@@ -141,10 +187,21 @@ pub(super) fn extend_ends(res: &mut Handle<Geom2dBSplineCurve>, trims: &Trims, b
         // Add a segment after the end of the curve.
         extend_c2d(res, boxes[1], 1, cases[1])?;
     }
-    let spline: &Geom2dBSplineCurve = res.get().ok_or_else(|| failure("Standard_NullObject", "ProjLib_ProjectedCurve: null 2D curve"))?;
+    let spline: &Geom2dBSplineCurve = res.get().ok_or_else(|| {
+        failure(
+            "Standard_NullObject",
+            "ProjLib_ProjectedCurve: null 2D curve",
+        )
+    })?;
     let bounds: (f64, f64) = (spline.first_parameter(), spline.last_parameter());
     let mut new_curve: Handle<dyn Geom2dCurve> = Handle::default();
-    same_range(precision::p_confusion(), &res.clone().cast(), bounds, range, &mut new_curve)?;
+    same_range(
+        precision::p_confusion(),
+        &res.clone().cast(),
+        bounds,
+        range,
+        &mut new_curve,
+    )?;
     *res = new_curve.cast();
     Ok(())
 }

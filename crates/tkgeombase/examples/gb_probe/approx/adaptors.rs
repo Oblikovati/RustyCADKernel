@@ -29,7 +29,7 @@ use rustycad_tkgeombase::approx::{
     CurvilinearParameter, CurvlinFunc, SameParameter,
 };
 
-fn adapted_curve(r: &mut Reader<'_>) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
+pub fn adapted_curve(r: &mut Reader<'_>) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
     let kind = r.integer();
     let range = if kind == 1 {
         Some((r.real(), r.real()))
@@ -43,11 +43,11 @@ fn adapted_curve(r: &mut Reader<'_>) -> Result<Handle<dyn Adaptor3dCurve>, Failu
     })
 }
 
-fn adapted_curve2d(r: &mut Reader<'_>) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
+pub fn adapted_curve2d(r: &mut Reader<'_>) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
     Ok(Handle::new(Geom2dAdaptorCurve::with_curve(&curve2d(r)?)?).cast())
 }
 
-fn adapted_surface(r: &mut Reader<'_>) -> Result<Handle<dyn Adaptor3dSurface>, Failure> {
+pub fn adapted_surface(r: &mut Reader<'_>) -> Result<Handle<dyn Adaptor3dSurface>, Failure> {
     Ok(Handle::new(GeomAdaptorSurface::with_surface(&surface(r)?)?).cast())
 }
 

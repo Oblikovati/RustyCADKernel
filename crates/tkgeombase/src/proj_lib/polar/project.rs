@@ -45,10 +45,22 @@ pub(super) struct Tolerances {
 impl ComputeApproxOnPolarSurface {
     fn tolerances(&self, surf: &dyn Adaptor3dSurface) -> Result<Tolerances, Failure> {
         let tol3d: f64 = self.tolerance;
-        let dist_tol3d: f64 = if self.max_dist > 0. { self.max_dist } else { 100.0 * tol3d };
+        let dist_tol3d: f64 = if self.max_dist > 0. {
+            self.max_dist
+        } else {
+            100.0 * tol3d
+        };
         let (tol_u, tol_v) = (surf.u_resolution(tol3d)?, surf.v_resolution(tol3d)?);
-        let tol2d: f64 = (tol_u * tol_u + tol_v * tol_v).sqrt().max(precision::p_confusion());
-        Ok(Tolerances { tol3d, dist_tol3d2: dist_tol3d * dist_tol3d, tol_u, tol_v, tol2d })
+        let tol2d: f64 = (tol_u * tol_u + tol_v * tol_v)
+            .sqrt()
+            .max(precision::p_confusion());
+        Ok(Tolerances {
+            tol3d,
+            dist_tol3d2: dist_tol3d * dist_tol3d,
+            tol_u,
+            tol_v,
+            tol2d,
+        })
     }
 
     /// `ProjectUsingInitialCurve2d(Curve, S, InitCurve2d)`: the projected 2D
@@ -68,13 +80,19 @@ impl ComputeApproxOnPolarSurface {
                 return Ok(spline);
             }
         }
-        if matches!(s_type, SurfaceType::BSplineSurface | SurfaceType::BezierSurface) {
+        if matches!(
+            s_type,
+            SurfaceType::BSplineSurface | SurfaceType::BezierSurface
+        ) {
             if let Some(spline) = super::poles::poles_on_bilinear(self, c, s, s_type, &tols)? {
                 return Ok(spline);
             }
         }
         let init: &dyn Adaptor2dCurve2d = init_curve2d.get().ok_or_else(|| {
-            failure("Standard_NullObject", "ProjLib_ComputeApproxOnPolarSurface: null initial 2D curve")
+            failure(
+                "Standard_NullObject",
+                "ProjLib_ComputeApproxOnPolarSurface: null initial 2D curve",
+            )
         })?;
         self.fit_polar(c, s, init, tols)
     }
@@ -109,7 +127,11 @@ impl ComputeApproxOnPolarSurface {
     ) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
         let function = PolarFunction::new(c, s, init, tols.tol3d)?;
         let mut fit: FitAndDivide2d = FitAndDivide2d::new(self.polar_options(&tols));
-        fit.set_max_segments(if self.max_segments > 0 { self.max_segments } else { 1000 });
+        fit.set_max_segments(if self.max_segments > 0 {
+            self.max_segments
+        } else {
+            1000
+        });
         if init.get_type()? == CurveType::Line {
             fit.set_inv_order(false);
         }
@@ -125,14 +147,20 @@ impl ComputeApproxOnPolarSurface {
     // All pieces raised to the highest degree and joined with interior multiplicity
     // MaxDeg, then smoothed to C1 where the error allows (ten times more with pass
     // points), stopping at the first refused knot.
-    fn join_polar(&mut self, fit: &FitAndDivide2d, old_tol2d: f64) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
+    fn join_polar(
+        &mut self,
+        fit: &FitAndDivide2d,
+        old_tol2d: f64,
+    ) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
         let nb_curves: i32 = fit.nb_multi_curves();
         let (mut max_deg, mut new_tol2d): (i32, f64) = (0, 0.);
         for j in 1..=nb_curves {
             max_deg = max_deg.max(fit.value(j)?.degree()?);
             new_tol2d = new_tol2d.max(fit.error(j)?.1);
         }
-        self.tol_reached = self.tol_reached.max(self.tolerance * (new_tol2d / old_tol2d));
+        self.tol_reached = self
+            .tol_reached
+            .max(self.tolerance * (new_tol2d / old_tol2d));
         let mut poles: Array1<'static, Point2> = new_array(max_deg * nb_curves + 1)?;
         let mut knots: Array1<'static, f64> = new_array(nb_curves + 1)?;
         let mut compt: i32 = 1;
@@ -166,7 +194,11 @@ impl ComputeApproxOnPolarSurface {
 }
 
 // The poles of piece `i`, raised to `max_deg` when its degree is lower.
-fn raised_piece(fit: &FitAndDivide2d, i: i32, max_deg: i32) -> Result<Array1<'static, Point2>, Failure> {
+fn raised_piece(
+    fit: &FitAndDivide2d,
+    i: i32,
+    max_deg: i32,
+) -> Result<Array1<'static, Point2>, Failure> {
     let mc = fit.value(i)?;
     let degree: i32 = mc.degree()?;
     let mut poles: Array1<'static, Point2> = new_array(degree + 1)?;

@@ -90,7 +90,11 @@ impl Cylinder {
         if p2d.x() < 0. {
             p2d.set_x(p2d.x() + 2. * PI);
         }
-        let signe: f64 = if line.direction().dot(axis) > 0. { 1. } else { -1. };
+        let signe: f64 = if line.direction().dot(axis) > 0. {
+            1.
+        } else {
+            -1.
+        };
         self.base.lin = Line2::new(p2d, unit_direction(0., signe));
         self.base.is_done = true;
     }
@@ -100,16 +104,25 @@ impl Cylinder {
         let cyl_pos: Axis3 = self.cylinder.position();
         let circ_pos: Axis2 = circle.position();
         let angular: f64 = precision::angular();
-        let cross: f64 = cyl_pos.direction().xyz().cross_square_magnitude(circ_pos.direction().xyz());
+        let cross: f64 = cyl_pos
+            .direction()
+            .xyz()
+            .cross_square_magnitude(circ_pos.direction().xyz());
         if cross > angular * angular {
             return Ok(());
         }
         self.base.my_type = CurveType::Line;
         let z_cyl: Direction3 = frame_normal(&cyl_pos)?;
-        let u: f64 = cyl_pos.x_direction().angle_with_ref(circ_pos.x_direction(), z_cyl);
+        let u: f64 = cyl_pos
+            .x_direction()
+            .angle_with_ref(circ_pos.x_direction(), z_cyl);
         let op: Vector3 = Vector3::between(self.cylinder.location(), circle.location());
         let v: f64 = op.dot(Vector3::from(cyl_pos.direction()));
-        let sense: f64 = if z_cyl.dot(circ_pos.direction()) > 0. { 1. } else { -1. };
+        let sense: f64 = if z_cyl.dot(circ_pos.direction()) > 0. {
+            1.
+        } else {
+            -1.
+        };
         self.base.lin = Line2::new(Point2::new(u, v), unit_direction(sense, 0.));
         self.base.is_done = true;
         Ok(())
@@ -135,7 +148,11 @@ fn eval_pnt2d(point: Point3, cylinder: &Cylinder3) -> Point2 {
     let y: f64 = op.dot(Vector3::from(position.y_direction()));
     let z: f64 = op.dot(Vector3::from(position.direction()));
     let pconf: f64 = precision::p_confusion();
-    let u: f64 = if x.abs() > pconf || y.abs() > pconf { y.atan2(x) } else { 0. };
+    let u: f64 = if x.abs() > pconf || y.abs() > pconf {
+        y.atan2(x)
+    } else {
+        0.
+    };
     Point2::new(u, z)
 }
 

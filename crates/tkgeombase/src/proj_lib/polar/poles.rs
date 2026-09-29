@@ -29,7 +29,9 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::Geom2dBSplineCurve;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
-use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomBSplineSurface, GeomBezierCurve, GeomBezierSurface, GeomCurve};
+use rustycad_tkg3d::geom::{
+    GeomBSplineCurve, GeomBSplineSurface, GeomBezierCurve, GeomBezierSurface, GeomCurve,
+};
 use rustycad_tkmath::elslib;
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 use rustycad_tkmath::gp::{Plane3, Point2, Point3, Vector3};
@@ -47,7 +49,10 @@ struct PoleCurve {
 }
 
 fn null_curve() -> Failure {
-    failure("Standard_NullObject", "ProjLib_ComputeApproxOnPolarSurface: null spline curve")
+    failure(
+        "Standard_NullObject",
+        "ProjLib_ComputeApproxOnPolarSurface: null spline curve",
+    )
 }
 
 impl PoleCurve {
@@ -88,12 +93,26 @@ impl PoleCurve {
         }
     }
     // The 2D B-spline with `poles2d` and the curve's weights, knots and degree.
-    fn with_poles(&self, poles2d: &Array1<'_, Point2>) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
+    fn with_poles(
+        &self,
+        poles2d: &Array1<'_, Point2>,
+    ) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
         let spline = match &self.weights {
             Some(weights) => Geom2dBSplineCurve::with_weights(
-                poles2d, weights, &self.knots, &self.mults, self.degree, self.periodic,
+                poles2d,
+                weights,
+                &self.knots,
+                &self.mults,
+                self.degree,
+                self.periodic,
             )?,
-            None => Geom2dBSplineCurve::new(poles2d, &self.knots, &self.mults, self.degree, self.periodic)?,
+            None => Geom2dBSplineCurve::new(
+                poles2d,
+                &self.knots,
+                &self.mults,
+                self.degree,
+                self.periodic,
+            )?,
         };
         Ok(Handle::new(spline))
     }
@@ -121,10 +140,14 @@ pub(super) fn poles_on_plane(
 }
 
 /// The four corner poles of a 2x2 surface, when `MaxDegree() == 1`.
-fn bilinear_corners(surf: &dyn Adaptor3dSurface, kind: SurfaceType) -> Result<Option<[Point3; 4]>, Failure> {
-    let corners = |pole: &dyn Fn(i32, i32) -> Result<Point3, Failure>| -> Result<[Point3; 4], Failure> {
-        Ok([pole(1, 1)?, pole(1, 2)?, pole(2, 1)?, pole(2, 2)?])
-    };
+fn bilinear_corners(
+    surf: &dyn Adaptor3dSurface,
+    kind: SurfaceType,
+) -> Result<Option<[Point3; 4]>, Failure> {
+    let corners =
+        |pole: &dyn Fn(i32, i32) -> Result<Point3, Failure>| -> Result<[Point3; 4], Failure> {
+            Ok([pole(1, 1)?, pole(1, 2)?, pole(2, 1)?, pole(2, 2)?])
+        };
     if kind == SurfaceType::BSplineSurface {
         let source: Handle<GeomBSplineSurface> = surf.bspline()?;
         let bss: &GeomBSplineSurface = source.get().ok_or_else(null_curve)?;
@@ -170,7 +193,15 @@ pub(super) fn poles_on_bilinear(
     } else {
         (0.5, 0.5)
     };
-    let poles2d = locate_poles(polar, surf, curve.nb_poles()?, &pole_curve, start, tols, c_type)?;
+    let poles2d = locate_poles(
+        polar,
+        surf,
+        curve.nb_poles()?,
+        &pole_curve,
+        start,
+        tols,
+        c_type,
+    )?;
     let Some(poles2d) = poles2d else {
         return Ok(None);
     };

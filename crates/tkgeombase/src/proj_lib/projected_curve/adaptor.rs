@@ -41,7 +41,10 @@ impl ProjectedCurve {
     fn spline_state(&self, kinds: &[CurveType], member: &str) -> Result<ProjectedState, Failure> {
         let state: ProjectedState = self.snapshot();
         if !kinds.contains(&state.result.get_type()) {
-            return Err(failure("Standard_NoSuchObject", &format!("ProjLib_ProjectedCurve:{member}")));
+            return Err(failure(
+                "Standard_NoSuchObject",
+                &format!("ProjLib_ProjectedCurve:{member}"),
+            ));
         }
         Ok(state)
     }
@@ -52,7 +55,10 @@ const SPLINES: [CurveType; 2] = [CurveType::BSplineCurve, CurveType::BezierCurve
 fn bspline_of(state: &ProjectedState) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
     let spline = state.result.bspline();
     if spline.is_null() {
-        return Err(failure("Standard_NullObject", "ProjLib_ProjectedCurve: the B-spline result is null"));
+        return Err(failure(
+            "Standard_NullObject",
+            "ProjLib_ProjectedCurve: the B-spline result is null",
+        ));
     }
     Ok(spline)
 }
@@ -60,7 +66,10 @@ fn bspline_of(state: &ProjectedState) -> Result<Handle<Geom2dBSplineCurve>, Fail
 fn bezier_of(state: &ProjectedState) -> Result<Handle<Geom2dBezierCurve>, Failure> {
     let bezier = state.result.bezier();
     if bezier.is_null() {
-        return Err(failure("Standard_NullObject", "ProjLib_ProjectedCurve: the Bezier result is null"));
+        return Err(failure(
+            "Standard_NullObject",
+            "ProjLib_ProjectedCurve: the Bezier result is null",
+        ));
     }
     Ok(bezier)
 }
@@ -84,7 +93,12 @@ impl Adaptor2dCurve2d for ProjectedCurve {
     fn intervals(&self, _bounds: &mut Array1<'_, f64>, _shape: Shape) -> Result<(), Failure> {
         Err(not_implemented("Intervals"))
     }
-    fn trim(&self, _first: f64, _last: f64, _tol: f64) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
+    fn trim(
+        &self,
+        _first: f64,
+        _last: f64,
+        _tol: f64,
+    ) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
         Err(not_implemented("Trim"))
     }
     fn is_closed(&self) -> Result<bool, Failure> {

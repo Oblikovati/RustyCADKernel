@@ -77,7 +77,11 @@ impl Adaptor2dCurve2d for CompProjectedCurve {
         if bounds.len() != values.len() {
             return Err(failure(
                 "Standard_DimensionMismatch",
-                &format!("ProjLib_CompProjectedCurve::Intervals: array of {} values; expected {}", bounds.len(), values.len()),
+                &format!(
+                    "ProjLib_CompProjectedCurve::Intervals: array of {} values; expected {}",
+                    bounds.len(),
+                    values.len()
+                ),
             ));
         }
         for (index, value) in values.iter().enumerate() {
@@ -87,7 +91,12 @@ impl Adaptor2dCurve2d for CompProjectedCurve {
     }
     /// A copy of the projection (every field, as the native copy constructor) on
     /// the curve trimmed to `[first, last]`.
-    fn trim(&self, first: f64, last: f64, tol: f64) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
+    fn trim(
+        &self,
+        first: f64,
+        last: f64,
+        tol: f64,
+    ) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
         let state: CompState = self.snapshot();
         let trimmed = state.pair()?.curve.trim(first, last, tol)?;
         let copy: CompProjectedCurve = CompProjectedCurve::from_state(state);

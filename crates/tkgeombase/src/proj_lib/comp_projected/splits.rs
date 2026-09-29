@@ -75,11 +75,20 @@ fn split_on_direction<'a>(
     } else {
         s.last_v_parameter()? - s.first_v_parameter()?
     };
-    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::from_point(start, direction)).cast();
-    let bound2d: Handle<dyn Adaptor2dCurve2d> = Handle::new(Geom2dAdaptorCurve::with_range(&line, 0., last_2d)?).cast();
+    let line: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dLine::from_point(start, direction)).cast();
+    let bound2d: Handle<dyn Adaptor2dCurve2d> =
+        Handle::new(Geom2dAdaptorCurve::with_range(&line, 0., last_2d)?).cast();
     let bound = Adaptor3dCurveOnSurface::with_curve(&bound2d, surface)?;
     let (first, last) = (pair.curve.first_parameter()?, pair.curve.last_parameter()?);
-    find_split_point(pair, (dir, per_min, per_max, last_2d), &bound, splits, ext_ps, (first, last))
+    find_split_point(
+        pair,
+        (dir, per_min, per_max, last_2d),
+        &bound,
+        splits,
+        ext_ps,
+        (first, last),
+    )
 }
 
 /// `FindSplitPoint(DS, MinParam, MaxParam)`: the single extremum of the bound
@@ -125,10 +134,24 @@ fn find_split_point<'a>(
         let delta: f64 = (max_param - min_param + cl - cf) * 0.01;
         let data = (dir, per_min, per_max, last_2d);
         if param - delta > min_param + pconf {
-            find_split_point(pair, data, bound, splits, ext_ps, (min_param, param - delta))?;
+            find_split_point(
+                pair,
+                data,
+                bound,
+                splits,
+                ext_ps,
+                (min_param, param - delta),
+            )?;
         }
         if param + delta < max_param - pconf {
-            find_split_point(pair, data, bound, splits, ext_ps, (param + delta, max_param))?;
+            find_split_point(
+                pair,
+                data,
+                bound,
+                splits,
+                ext_ps,
+                (param + delta, max_param),
+            )?;
         }
     }
     Ok(())

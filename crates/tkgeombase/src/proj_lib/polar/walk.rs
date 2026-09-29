@@ -61,7 +61,13 @@ impl ComputeApproxOnPolarSurface {
             return Ok(());
         };
         let WalkStart { u, v, dist2_min } = start;
-        let mut walk = Walk { u0: u, v0: v, usens: 0, vsens: 0, dist: dist2_min };
+        let mut walk = Walk {
+            u0: u,
+            v0: v,
+            usens: 0,
+            vsens: 0,
+            dist: dist2_min,
+        };
         for i in 2..=s.nb_of_pnts {
             if !self.proj_is_done {
                 break;
@@ -93,7 +99,12 @@ fn walk_step(w: &mut Walk, s: &mut Sampling<'_>, i: i32) -> Result<bool, Failure
 
 // The local search from the previous point; when its extremum is too far, the
 // global search, which also detects a period jump.
-fn local_then_global(w: &mut Walk, s: &mut Sampling<'_>, i: i32, point: Point3) -> Result<bool, Failure> {
+fn local_then_global(
+    w: &mut Walk,
+    s: &mut Sampling<'_>,
+    i: i32,
+    point: Point3,
+) -> Result<bool, Failure> {
     let mut locate = GenLocateExtPS::new(s.surf, s.tol_u, s.tol_v);
     locate.perform(point, w.u0, w.v0, false)?;
     if !locate.is_done() {
@@ -175,14 +186,26 @@ fn mirrored_search(
     dirs: (bool, bool),
 ) -> Result<bool, Failure> {
     let both: bool = dirs.0 && dirs.1;
-    let (uinf, usup) = if both { (s.bounds[0], s.bounds[1]) } else {
+    let (uinf, usup) = if both {
+        (s.bounds[0], s.bounds[1])
+    } else {
         (s.surf.first_u_parameter()?, s.surf.last_u_parameter()?)
     };
-    let (vinf, vsup) = if both { (s.bounds[2], s.bounds[3]) } else {
+    let (vinf, vsup) = if both {
+        (s.bounds[2], s.bounds[3])
+    } else {
         (s.surf.first_v_parameter()?, s.surf.last_v_parameter()?)
     };
-    let (uaux, du) = if dirs.0 { mirror(w.u0, uinf, usup, s.uperiod) } else { (w.u0, 0) };
-    let (vaux, dv) = if dirs.1 { mirror(w.v0, vinf, vsup, s.vperiod) } else { (w.v0, 0) };
+    let (uaux, du) = if dirs.0 {
+        mirror(w.u0, uinf, usup, s.uperiod)
+    } else {
+        (w.u0, 0)
+    };
+    let (vaux, dv) = if dirs.1 {
+        mirror(w.v0, vinf, vsup, s.vperiod)
+    } else {
+        (w.v0, 0)
+    };
     let mut locate = GenLocateExtPS::new(s.surf, s.tol_u, s.tol_v);
     locate.perform(point, uaux, vaux, false)?;
     if !locate.is_done() || !(locate.square_distance()? < s.dist_tol3d2) {

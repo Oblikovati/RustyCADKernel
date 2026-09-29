@@ -31,9 +31,7 @@ use rustycad_tkg3d::geom::{
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::CurveType;
-use rustycad_tkmath::gp::{
-    Axis2, Direction3, Hyperbola3, Line3, Parabola3, Point3, Vector3,
-};
+use rustycad_tkmath::gp::{Axis2, Direction3, Hyperbola3, Line3, Parabola3, Point3, Vector3};
 use rustycad_tkmath::math::{BrentMinimum, Function};
 
 // The parameter range an infinite parabola or hyperbola is cut to before the
@@ -74,7 +72,8 @@ impl OnPlaneState {
             self.curve_type = CurveType::Parabola;
             let focal: f64 = parab.focal() / c.xc.magnitude();
             let normal: Direction3 = Direction3::from_vector(c.xc.crossed(c.yc))?;
-            let frame: Axis2 = Axis2::with_x_direction(c.p, normal, Direction3::from_vector(c.xc)?)?;
+            let frame: Axis2 =
+                Axis2::with_x_direction(c.p, normal, Direction3::from_vector(c.xc)?)?;
             projected = Handle::new(GeomParabola::from_parab(Parabola3::new(frame, focal)?)).cast();
         } else if c.yc.magnitude() < conf || c.yc.is_parallel(c.xc, precision::angular())? {
             self.is_approx = true;
@@ -113,7 +112,8 @@ impl OnPlaneState {
         } else if c.xc.is_normal(c.yc, precision::angular())? {
             self.curve_type = CurveType::Hyperbola;
             let normal: Direction3 = Direction3::from_vector(c.xc.crossed(c.yc))?;
-            let frame: Axis2 = Axis2::with_x_direction(c.p, normal, Direction3::from_vector(c.xc)?)?;
+            let frame: Axis2 =
+                Axis2::with_x_direction(c.p, normal, Direction3::from_vector(c.xc)?)?;
             projected = hyperbola(frame, r1 * c.xc.magnitude(), r2 * c.yc.magnitude())?;
         } else if c.yc.magnitude() < conf || c.yc.is_parallel(c.xc, precision::angular())? {
             self.is_approx = true;
@@ -170,7 +170,10 @@ impl OnPlaneState {
 }
 
 fn hyperbola(frame: Axis2, major: f64, minor: f64) -> Result<Handle<dyn GeomCurve>, Failure> {
-    Ok(Handle::new(GeomHyperbola::from_hypr(Hyperbola3::new(frame, major, minor)?)).cast())
+    Ok(Handle::new(GeomHyperbola::from_hypr(Hyperbola3::new(
+        frame, major, minor,
+    )?))
+    .cast())
 }
 
 fn null_curve() -> Failure {
@@ -197,25 +200,42 @@ impl OnPlaneState {
         if !precision::is_infinite(last) {
             self.last_par = self.projected_parameter(projected, last)?;
         }
-        self.result = Handle::new(GeomAdaptorCurve::with_range(projected, self.first_par, self.last_par)?);
+        self.result = Handle::new(GeomAdaptorCurve::with_range(
+            projected,
+            self.first_par,
+            self.last_par,
+        )?);
         Ok(())
     }
 
     // The ElCLib parameter of the projected point of parameter `u` on the result.
-    fn projected_parameter(&self, projected: &Handle<dyn GeomCurve>, u: f64) -> Result<f64, Failure> {
+    fn projected_parameter(
+        &self,
+        projected: &Handle<dyn GeomCurve>,
+        u: f64,
+    ) -> Result<f64, Failure> {
         let point: Point3 = self.oblique().project_point(self.curve()?.value(u)?);
         match self.curve_type {
             CurveType::Line => {
                 let line: Handle<GeomLine> = projected.cast();
-                Ok(elclib::parameter(&line.get().ok_or_else(null_curve)?.lin(), point)?)
+                Ok(elclib::parameter(
+                    &line.get().ok_or_else(null_curve)?.lin(),
+                    point,
+                )?)
             }
             CurveType::Parabola => {
                 let parab: Handle<GeomParabola> = projected.cast();
-                Ok(elclib::parameter(&parab.get().ok_or_else(null_curve)?.parab()?, point)?)
+                Ok(elclib::parameter(
+                    &parab.get().ok_or_else(null_curve)?.parab()?,
+                    point,
+                )?)
             }
             _ => {
                 let hypr: Handle<GeomHyperbola> = projected.cast();
-                Ok(elclib::parameter(&hypr.get().ok_or_else(null_curve)?.hypr()?, point)?)
+                Ok(elclib::parameter(
+                    &hypr.get().ok_or_else(null_curve)?.hypr()?,
+                    point,
+                )?)
             }
         }
     }
@@ -236,7 +256,10 @@ impl OnPlaneState {
         let adaptor: &dyn Adaptor3dCurve = source.get().ok_or_else(null_curve)?;
         let approximated = perform_approx(adaptor, self.oblique())?;
         let spline: &GeomBSplineCurve = approximated.get().ok_or_else(|| {
-            failure("Standard_NullObject", "ProjLib_ProjectOnPlane::BuildByApprox: the approximation failed")
+            failure(
+                "Standard_NullObject",
+                "ProjLib_ProjectOnPlane::BuildByApprox: the approximation failed",
+            )
         })?;
         self.first_par = spline.first_parameter();
         self.last_par = spline.last_parameter();
@@ -254,7 +277,10 @@ struct MaxCurvature<'a> {
 
 impl Function for MaxCurvature<'_> {
     fn value(&mut self, x: f64, result: &mut f64) -> bool {
-        let curvature = self.props.set_parameter(x).and_then(|()| self.props.curvature());
+        let curvature = self
+            .props
+            .set_parameter(x)
+            .and_then(|()| self.props.curvature());
         let Some(curvature) = self.failure.keep(curvature) else {
             return false;
         };
@@ -269,14 +295,22 @@ impl OnPlaneState {
     fn apex_props(&self) -> Result<CLProps3d, Failure> {
         let mut copy: OnPlaneState = self.shallow_copy()?;
         copy.curve_type = CurveType::OtherCurve;
-        let adaptor: Handle<dyn Adaptor3dCurve> = Handle::new(ProjectOnPlane::from_state(copy)).cast();
+        let adaptor: Handle<dyn Adaptor3dCurve> =
+            Handle::new(ProjectOnPlane::from_state(copy)).cast();
         CLProps3d::new(adaptor, 2, precision::confusion())
     }
 
     // The Brent location of the curvature maximum in `[a, c]` from `b`, with the
     // properties left at it; None when the search fails.
-    fn curvature_apex(&self, props: &mut CLProps3d, bounds: [f64; 3]) -> Result<Option<f64>, Failure> {
-        let mut function = MaxCurvature { props, failure: FailureCapture::default() };
+    fn curvature_apex(
+        &self,
+        props: &mut CLProps3d,
+        bounds: [f64; 3],
+    ) -> Result<Option<f64>, Failure> {
+        let mut function = MaxCurvature {
+            props,
+            failure: FailureCapture::default(),
+        };
         let mut solver: BrentMinimum = BrentMinimum::new(precision::p_confusion());
         solver.perform(&mut function, bounds[0], bounds[1], bounds[2]);
         function.failure.take()?;

@@ -90,7 +90,11 @@ impl Oblique {
     ) -> Result<(Point3, Vector3, Vector3), Failure> {
         let (point, v1, v2) = curve.d2(u)?;
         let point: Point3 = self.project_point(point);
-        Ok((point, self.project_derivative(v1), self.project_derivative(v2)))
+        Ok((
+            point,
+            self.project_derivative(v1),
+            self.project_derivative(v2),
+        ))
     }
 
     /// `OnPlane_D3(U, P, V1, V2, V3, C, Pl, D)`; `oblique.d3(curve, 0.5)?`.
@@ -106,7 +110,12 @@ impl Oblique {
     }
 
     /// `OnPlane_DN(U, N, C, Pl, D)`; `oblique.dn(curve, 0.5, 2)?`.
-    pub(super) fn dn(&self, curve: &dyn Adaptor3dCurve, u: f64, n: i32) -> Result<Vector3, Failure> {
+    pub(super) fn dn(
+        &self,
+        curve: &dyn Adaptor3dCurve,
+        u: f64,
+        n: i32,
+    ) -> Result<Vector3, Failure> {
         Ok(self.project_derivative(curve.dn(u, n)?))
     }
 }

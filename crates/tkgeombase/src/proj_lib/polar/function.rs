@@ -57,7 +57,10 @@ pub(in crate::proj_lib) fn compute_periodicity(
 ) -> Result<(f64, f64), Failure> {
     let untrimmed: Handle<dyn GeomSurface> = make_surface(surface, false)?;
     let basis: &dyn GeomSurface = untrimmed.get().ok_or_else(|| {
-        failure("Standard_NullObject", "ProjLib_ComputeApproxOnPolarSurface: no Geom surface")
+        failure(
+            "Standard_NullObject",
+            "ProjLib_ComputeApproxOnPolarSurface: no Geom surface",
+        )
     })?;
     let (base_u1, base_u2, base_v1, base_v2) = basis.bounds();
     let mut u_period: f64 = 0.;
@@ -90,7 +93,12 @@ fn unless_reduced(period: f64, trim: (f64, f64), base: (f64, f64)) -> f64 {
 
 /// `anOrthogSqValue(P, S, U, V)`: the squared components of `S(u,v) - P` along the
 /// unit tangents (the unnormalized tangent when almost null).
-fn orthog_sq_value(base: Point3, surf: &dyn Adaptor3dSurface, u: f64, v: f64) -> Result<f64, Failure> {
+fn orthog_sq_value(
+    base: Point3,
+    surf: &dyn Adaptor3dSurface,
+    u: f64,
+    v: f64,
+) -> Result<f64, Failure> {
     let d: GeomSurfaceD1 = surf.d1(u, v)?;
     let base_vec: Vector3 = Vector3::between(base, d.point);
     let (mut su, mut sv) = (d.d1u, d.d1v);
@@ -162,11 +170,20 @@ impl FuncData<'_> {
     }
 
     // The ElSLib parameters of the curve point, moved by whole turns near (U0, V0).
-    fn analytic_value(&self, kind: SurfaceType, p: Point3, p2d: Point2, b: [f64; 4]) -> Result<Point2, Failure> {
+    fn analytic_value(
+        &self,
+        kind: SurfaceType,
+        p: Point3,
+        p2d: Point2,
+        b: [f64; 4],
+    ) -> Result<Point2, Failure> {
         let (u0, v0) = (p2d.x(), p2d.y());
         let [uinf, usup, vinf, vsup] = b;
         let member: &str = "ProjLib_ComputeApproxOnPolarSurface::Value";
-        if !matches!(kind, SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Torus) {
+        if !matches!(
+            kind,
+            SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Torus
+        ) {
             return Err(failure("Standard_NoSuchObject", member));
         }
         let (mut s, mut t) = elementary_parameters(self.surf, p, member)?;
@@ -236,7 +253,12 @@ fn little_range(x: f64, inf: f64, sup: f64) -> (f64, f64) {
 
 impl FuncData<'_> {
     // The surface patch around (U0, V0) as a GeomAdaptor_Surface.
-    fn little_surface(&self, kind: SurfaceType, u: (f64, f64), v: (f64, f64)) -> Result<GeomAdaptorSurface, Failure> {
+    fn little_surface(
+        &self,
+        kind: SurfaceType,
+        u: (f64, f64),
+        v: (f64, f64),
+    ) -> Result<GeomAdaptorSurface, Failure> {
         let geom: Handle<dyn GeomSurface> = match kind {
             SurfaceType::BSplineSurface => self.surf.bspline()?.cast(),
             SurfaceType::BezierSurface => self.surf.bezier()?.cast(),
@@ -247,14 +269,26 @@ impl FuncData<'_> {
 
     // Non-analytic surfaces: a local search from (U0, V0) on the patch, then a global
     // one; a result is kept only when orthogonal and nearer than the initial point.
-    fn patch_value(&self, kind: SurfaceType, p: Point3, p2d: Point2, surf_pnt_dist: f64) -> Result<Point2, Failure> {
+    fn patch_value(
+        &self,
+        kind: SurfaceType,
+        p: Point3,
+        p2d: Point2,
+        surf_pnt_dist: f64,
+    ) -> Result<Point2, Failure> {
         let [uinf, usup, vinf, vsup] = surface_bounds(self.surf)?;
         let (u0, decal_u) = into_period(p2d.x(), uinf, usup, self.period[0]);
         let (v0, decal_v) = into_period(p2d.y(), vinf, vsup, self.period[1]);
-        let little: GeomAdaptorSurface =
-            self.little_surface(kind, little_range(u0, uinf, usup), little_range(v0, vinf, vsup))?;
+        let little: GeomAdaptorSurface = self.little_surface(
+            kind,
+            little_range(u0, uinf, usup),
+            little_range(v0, vinf, vsup),
+        )?;
         let shift = |(u, v): (f64, f64)| {
-            Point2::new(u - f64::from(decal_u) * self.period[0], v - f64::from(decal_v) * self.period[1])
+            Point2::new(
+                u - f64::from(decal_u) * self.period[0],
+                v - f64::from(decal_v) * self.period[1],
+            )
         };
         let limit: f64 = surf_pnt_dist + precision::square_confusion();
         let mut locext = GenLocateExtPS::new(&little, self.tol_u, self.tol_v);
@@ -266,7 +300,14 @@ impl FuncData<'_> {
                 return Ok(shift(uv));
             }
         }
-        let ext = ExtPS::with_surface(p, &little, self.tol_u, self.tol_v, ExtFlag::Min, ExtAlgo::Grad)?;
+        let ext = ExtPS::with_surface(
+            p,
+            &little,
+            self.tol_u,
+            self.tol_v,
+            ExtFlag::Min,
+            ExtAlgo::Grad,
+        )?;
         if ext.is_done() && ext.nb_ext()? >= 1 {
             let good: i32 = nearest(&ext)?;
             let uv: (f64, f64) = ext.point(good)?.parameter();
@@ -320,7 +361,11 @@ impl<'a> PolarFunction<'a> {
             tol_v: surf.v_resolution(tol3d)?,
             period: [u_period, v_period],
         };
-        Ok(Self { base, data, failure: RefCell::new(FailureCapture::default()) })
+        Ok(Self {
+            base,
+            data,
+            failure: RefCell::new(FailureCapture::default()),
+        })
     }
     /// The first failure a callback kept, after the fit.
     pub(super) fn take_failure(&self) -> Result<(), Failure> {
@@ -336,10 +381,12 @@ impl Function for PolarFunction<'_> {
         &self.base
     }
     fn first_parameter(&self) -> f64 {
-        self.keep(self.data.curve.first_parameter()).unwrap_or(f64::NAN)
+        self.keep(self.data.curve.first_parameter())
+            .unwrap_or(f64::NAN)
     }
     fn last_parameter(&self) -> f64 {
-        self.keep(self.data.curve.last_parameter()).unwrap_or(f64::NAN)
+        self.keep(self.data.curve.last_parameter())
+            .unwrap_or(f64::NAN)
     }
     fn value(&self, t: f64, pnt2d: &mut Array1<'_, Point2>, _pnt: &mut Array1<'_, Point3>) -> bool {
         let Some(point) = self.keep(self.data.value(t)) else {
@@ -348,7 +395,12 @@ impl Function for PolarFunction<'_> {
         pnt2d[1] = point;
         true
     }
-    fn d1(&self, _t: f64, _vec2d: &mut Array1<'_, Vector2>, _vec: &mut Array1<'_, Vector3>) -> bool {
+    fn d1(
+        &self,
+        _t: f64,
+        _vec2d: &mut Array1<'_, Vector2>,
+        _vec: &mut Array1<'_, Vector3>,
+    ) -> bool {
         false
     }
 }

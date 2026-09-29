@@ -87,7 +87,11 @@ impl ComputeApproxOnPolarSurface {
     ) -> Result<Sampling<'a>, Failure> {
         let tol3d: f64 = self.tolerance;
         let (tol_u, tol_v) = (surf.u_resolution(tol3d)?, surf.v_resolution(tol3d)?);
-        let dist_tol3d: f64 = if self.max_dist > 0. { self.max_dist } else { 100.0 * tol3d };
+        let dist_tol3d: f64 = if self.max_dist > 0. {
+            self.max_dist
+        } else {
+            100.0 * tol3d
+        };
         let (uperiod, vperiod) = compute_periodicity(surf)?;
         let qua = QuasiUniformAbscissa::with_nb_points(curve, 61)?;
         let nb_of_pnts: i32 = qua.nb_points()?;
@@ -122,7 +126,8 @@ impl ComputeApproxOnPolarSurface {
         mult[1] = 2;
         mult[s.nb_of_pnts] = 2;
         let spline = Geom2dBSplineCurve::new(&s.pts2d, &s.param, &mult, 1, false)?;
-        let mid: Point2 = spline.value(0.5 * (spline.first_parameter() + spline.last_parameter()))?;
+        let mid: Point2 =
+            spline.value(0.5 * (spline.first_parameter() + spline.last_parameter()))?;
         let [uinf, usup, vinf, vsup] = s.bounds;
         let test_u: f64 = into_range(mid.x(), uinf - s.tol_u, usup + s.tol_u, s.uperiod);
         let test_v: f64 = into_range(mid.y(), vinf - s.tol_v, vsup + s.tol_v, s.vperiod);
@@ -214,7 +219,10 @@ fn unwrap_torus(uv: &[(f64, f64)]) -> Vec<Point2> {
         usens += turn_step(pair[0].0, pair[1].0);
         vsens += turn_step(pair[0].1, pair[1].1);
         let (s, t) = pair[1];
-        points.push(Point2::new(s + f64::from(usens * 2) * PI, t + f64::from(vsens * 2) * PI));
+        points.push(Point2::new(
+            s + f64::from(usens * 2) * PI,
+            t + f64::from(vsens * 2) * PI,
+        ));
     }
     points
 }
@@ -235,10 +243,18 @@ fn unwrap_sphere(uv: &[(f64, f64)], bounds: [f64; 4]) -> Vec<Point2> {
         if 1.6 * PI > jump && jump > 0.4 * PI {
             vparit = !vparit;
             usens += if sloc > s { 1 } else { -1 };
-            vsens += if (tloc - vsup).abs() < (vsup - vinf) / 5. { 1 } else { -1 };
+            vsens += if (tloc - vsup).abs() < (vsup - vinf) / 5. {
+                1
+            } else {
+                -1
+            };
         }
         let u: f64 = s + f64::from(usens) * PI;
-        let v: f64 = if vparit { (PI - t) * f64::from(vsens - 1) } else { t + f64::from(vsens) * PI };
+        let v: f64 = if vparit {
+            (PI - t) * f64::from(vsens - 1)
+        } else {
+            t + f64::from(vsens) * PI
+        };
         points.push(Point2::new(u, v));
     }
     points

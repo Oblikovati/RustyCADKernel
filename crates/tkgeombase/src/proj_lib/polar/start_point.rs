@@ -44,7 +44,8 @@ pub(super) struct WalkStart {
 // The first ExtPS, redone with PConfusion tolerances when no extremum is near.
 fn first_extrema<'a>(s: &mut Sampling<'a>) -> Result<ExtPS<'a>, Failure> {
     let point = s.pts[1];
-    let mut ext = ExtPS::with_surface(point, s.surf, s.tol_u, s.tol_v, ExtFlag::Min, ExtAlgo::Grad)?;
+    let mut ext =
+        ExtPS::with_surface(point, s.surf, s.tol_u, s.tol_v, ExtFlag::Min, ExtAlgo::Grad)?;
     let mut min_sq_dist: f64 = f64::MAX;
     if ext.is_done() {
         for i in 1..=ext.nb_ext()? {
@@ -76,7 +77,11 @@ impl NativeMin for f64 {
 // The distinct exact solutions (within 1e-9) and the nearest extremum within the
 // distance tolerance.
 fn collect(ext: &ExtPS<'_>, dist_tol3d2: f64) -> Result<FirstProjection, Failure> {
-    let mut first = FirstProjection { sols: Vec::new(), dist2_min: 1.0e+200, good_value: 1 };
+    let mut first = FirstProjection {
+        sols: Vec::new(),
+        dist2_min: 1.0e+200,
+        good_value: 1,
+    };
     for i in 1..=ext.nb_ext()? {
         let sq: f64 = ext.square_distance(i)?;
         if !(sq < dist_tol3d2) {
@@ -85,7 +90,11 @@ fn collect(ext: &ExtPS<'_>, dist_tol3d2: f64) -> Result<FirstProjection, Failure
         if sq <= 1.0e-18 {
             let (u, v) = ext.point(i)?.parameter();
             let p2d: Point2 = Point2::new(u, v);
-            if !first.sols.iter().any(|sol| p2d.square_distance(*sol) <= 1.0e-18) {
+            if !first
+                .sols
+                .iter()
+                .any(|sol| p2d.square_distance(*sol) <= 1.0e-18)
+            {
                 first.sols.push(p2d);
             }
         }
@@ -100,13 +109,20 @@ fn collect(ext: &ExtPS<'_>, dist_tol3d2: f64) -> Result<FirstProjection, Failure
 impl ComputeApproxOnPolarSurface {
     /// The first point of the extremum chain; None when the first ExtPS gives no
     /// extremum (the chain is then not started).
-    pub(super) fn start_point(&mut self, s: &mut Sampling<'_>) -> Result<Option<WalkStart>, Failure> {
+    pub(super) fn start_point(
+        &mut self,
+        s: &mut Sampling<'_>,
+    ) -> Result<Option<WalkStart>, Failure> {
         let ext = first_extrema(s)?;
         if !(ext.is_done() && ext.nb_ext()? >= 1) {
             return Ok(None);
         }
         let first: FirstProjection = collect(&ext, s.dist_tol3d2)?;
-        let mut start = WalkStart { u: 0., v: 0., dist2_min: first.dist2_min };
+        let mut start = WalkStart {
+            u: 0.,
+            v: 0.,
+            dist2_min: first.dist2_min,
+        };
         if first.dist2_min <= s.dist_tol3d2 {
             let good: (f64, f64) = ext.point(first.good_value)?.parameter();
             let uv: (f64, f64) = if first.sols.len() > 1 {
@@ -172,10 +188,20 @@ impl NativeMax for f64 {
 
 // The first of five samples (at fifths of the curve) with exactly one extremum
 // within the distance tolerance, and its projection.
-fn single_solution_sample(s: &Sampling<'_>, dist2_min: &mut f64) -> Result<Option<(i32, Point2)>, Failure> {
+fn single_solution_sample(
+    s: &Sampling<'_>,
+    dist2_min: &mut f64,
+) -> Result<Option<(i32, Point2)>, Failure> {
     for i in 1..=5 {
         let i_t: i32 = 1 + (s.nb_of_pnts - 1) / 5 * i;
-        let ext = ExtPS::with_surface(s.pts[i_t], s.surf, s.tol_u, s.tol_v, ExtFlag::Min, ExtAlgo::Grad)?;
+        let ext = ExtPS::with_surface(
+            s.pts[i_t],
+            s.surf,
+            s.tol_u,
+            s.tol_v,
+            ExtFlag::Min,
+            ExtAlgo::Grad,
+        )?;
         *dist2_min = 1.0e+200;
         let (mut nb_ext_ok, mut ind_ext): (i32, i32) = (0, 0);
         if ext.is_done() && ext.nb_ext()? >= 1 {
@@ -198,9 +224,20 @@ fn single_solution_sample(s: &Sampling<'_>, dist2_min: &mut f64) -> Result<Optio
 }
 
 // The projection of the first later sample with an extremum within the tolerance.
-fn next_projection(s: &Sampling<'_>, t_pp: i32, dist2_min: &mut f64) -> Result<Option<Point2>, Failure> {
+fn next_projection(
+    s: &Sampling<'_>,
+    t_pp: i32,
+    dist2_min: &mut f64,
+) -> Result<Option<Point2>, Failure> {
     for j in t_pp + 1..=s.nb_of_pnts {
-        let ext = ExtPS::with_surface(s.pts[j], s.surf, s.tol_u, s.tol_v, ExtFlag::Min, ExtAlgo::Grad)?;
+        let ext = ExtPS::with_surface(
+            s.pts[j],
+            s.surf,
+            s.tol_u,
+            s.tol_v,
+            ExtFlag::Min,
+            ExtAlgo::Grad,
+        )?;
         *dist2_min = f64::MAX;
         if !(ext.is_done() && ext.nb_ext()? >= 1) {
             continue;

@@ -101,12 +101,19 @@ impl Sphere {
         } else if ((p1.x() - p2.x()).abs() - PI).abs() < pconf {
             // U2 = U1 + PI: assume U1 = U2, so V2 = PI - V2.
             p2.set_x(p1.x());
-            let mirrored: f64 = if p2.y() < 0. { -PI - p2.y() } else { PI - p2.y() };
+            let mirrored: f64 = if p2.y() < 0. {
+                -PI - p2.y()
+            } else {
+                PI - p2.y()
+            };
             p2.set_y(mirrored);
         } else {
             p2.set_x(p1.x());
         }
-        Ok(Line2::new(p1, Direction2::from_vector(Vector2::between(p1, p2))?))
+        Ok(Line2::new(
+            p1,
+            Direction2::from_vector(Vector2::between(p1, p2))?,
+        ))
     }
 
     // A parallel: U is the angle of the circle's X direction, V its latitude.
@@ -120,7 +127,10 @@ impl Sphere {
             .dot(Vector3::from(frames.zs));
         let v: f64 = (z / self.sphere.radius()).asin();
         let normal_c: Direction3 = frames.xc.crossed(frames.yc)?;
-        Ok(Line2::new(Point2::new(u, v), Direction2::new(normal_c.dot(normal_s), 0.)?))
+        Ok(Line2::new(
+            Point2::new(u, v),
+            Direction2::new(normal_c.dot(normal_s), 0.)?,
+        ))
     }
 }
 
@@ -130,7 +140,9 @@ fn eval_pnt2d(point: Vector3, sphere: &Sphere3) -> Point2 {
     let position: Axis3 = sphere.position();
     let x: f64 = point.dot(Vector3::from(position.x_direction()));
     let y: f64 = point.dot(Vector3::from(position.y_direction()));
-    let z: f64 = point.dot(Vector3::from(position.direction())).clamp(-1., 1.);
+    let z: f64 = point
+        .dot(Vector3::from(position.direction()))
+        .clamp(-1., 1.);
     let pconf: f64 = precision::p_confusion();
     let u: f64 = if x.abs() > pconf || y.abs() > pconf {
         elclib::in_period(y.atan2(x), 0., 2. * PI)
@@ -153,8 +165,10 @@ impl Project for Sphere {
         let origin: Point3 = self.sphere.location();
         let tol: f64 = precision::confusion();
         let zc: Direction3 = frames.xc.crossed(frames.yc)?;
-        let is_iso_u: bool = zc.is_normal(frames.zs, tol) && origin.is_equal(&circle.location(), tol);
-        let is_iso_v: bool = frames.xc.is_normal(frames.zs, tol) && frames.yc.is_normal(frames.zs, tol);
+        let is_iso_u: bool =
+            zc.is_normal(frames.zs, tol) && origin.is_equal(&circle.location(), tol);
+        let is_iso_v: bool =
+            frames.xc.is_normal(frames.zs, tol) && frames.yc.is_normal(frames.zs, tol);
         let mut line: Line2 = Line2::default();
         if is_iso_u {
             self.base.my_type = CurveType::Line;

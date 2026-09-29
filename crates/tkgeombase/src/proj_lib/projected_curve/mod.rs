@@ -127,7 +127,8 @@ impl ProjectedCurve {
         curve: &Handle<dyn Adaptor3dCurve>,
         tol: f64,
     ) -> Result<Self, Failure> {
-        let projected: Self = Self::from_state(ProjectedState::new(tol.max(precision::confusion())));
+        let projected: Self =
+            Self::from_state(ProjectedState::new(tol.max(precision::confusion())));
         projected.load_surface(surface);
         projected.perform(curve)?;
         Ok(projected)

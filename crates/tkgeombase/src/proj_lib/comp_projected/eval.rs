@@ -47,7 +47,10 @@ fn locate(state: &CompState, u: f64) -> Result<(Vec<Point3>, usize), Failure> {
             return Ok((points, j));
         }
     }
-    Err(failure("Standard_DomainError", &format!("ProjLib_CompProjectedCurve::D0: parameter {u} is outside every part")))
+    Err(failure(
+        "Standard_DomainError",
+        &format!("ProjLib_CompProjectedCurve::D0: parameter {u} is outside every part"),
+    ))
 }
 
 // Newton's divided differences over four triples around `j`, clamped to the
@@ -91,7 +94,12 @@ pub(super) fn eval_d0(state: &CompState, u: f64) -> Result<Point2, Failure> {
     let pair: Pair<'_> = state.pair()?;
     let (points, j) = locate(state, u)?;
     let s = pair.surface;
-    let b: [f64; 4] = [s.first_u_parameter()?, s.last_u_parameter()?, s.first_v_parameter()?, s.last_v_parameter()?];
+    let b: [f64; 4] = [
+        s.first_u_parameter()?,
+        s.last_u_parameter()?,
+        s.first_v_parameter()?,
+        s.last_v_parameter()?,
+    ];
     let pconf: f64 = precision::p_confusion();
     let (u0, v0) = if points.len() < 4 || (u - points[j - 1].x()).abs() <= pconf {
         (points[j - 1].y(), points[j - 1].z())
@@ -114,9 +122,21 @@ pub(super) fn eval_d0(state: &CompState, u: f64) -> Result<Point2, Failure> {
 }
 
 // The nearest ExtPS minimum of `C(u)`, or the start point when there is none.
-fn global_projection(state: &CompState, pair: Pair<'_>, u: f64, start: (f64, f64)) -> Result<Point2, Failure> {
+fn global_projection(
+    state: &CompState,
+    pair: Pair<'_>,
+    u: f64,
+    start: (f64, f64),
+) -> Result<Point2, Failure> {
     let point: Point3 = pair.curve.value(u)?;
-    let ext = ExtPS::with_surface(point, pair.surface, state.tol_u, state.tol_v, ExtFlag::Min, ExtAlgo::Grad)?;
+    let ext = ExtPS::with_surface(
+        point,
+        pair.surface,
+        state.tol_u,
+        state.tol_v,
+        ExtFlag::Min,
+        ExtAlgo::Grad,
+    )?;
     if !(ext.is_done() && ext.nb_ext()? != 0) {
         return Ok(Point2::new(start.0, start.1));
     }
@@ -141,17 +161,27 @@ pub(super) fn eval_d1(state: &CompState, t: f64) -> Result<Geom2dCurveD1, Failur
 pub(super) fn eval_d2(state: &CompState, t: f64) -> Result<Geom2dCurveD2, Failure> {
     let point: Point2 = eval_d0(state, t)?;
     let (v1, v2) = d2(t, point.x(), point.y(), state.pair()?)?;
-    Ok(Geom2dCurveD2 { point, d1: v1, d2: v2 })
+    Ok(Geom2dCurveD2 {
+        point,
+        d1: v1,
+        d2: v2,
+    })
 }
 
 /// `EvalDN(t, N)`: Standard_OutOfRange for N < 1, Standard_NotImplemented above 2.
 pub(super) fn eval_dn(state: &CompState, t: f64, n: i32) -> Result<Vector2, Failure> {
     if n < 1 {
-        return Err(failure("Standard_OutOfRange", "ProjLib_CompProjectedCurve : N must be greater than 0"));
+        return Err(failure(
+            "Standard_OutOfRange",
+            "ProjLib_CompProjectedCurve : N must be greater than 0",
+        ));
     }
     match n {
         1 => Ok(eval_d1(state, t)?.d1),
         2 => Ok(eval_d2(state, t)?.d2),
-        _ => Err(failure("Standard_NotImplemented", "ProjLib_CompProjectedCurve::EvalDN")),
+        _ => Err(failure(
+            "Standard_NotImplemented",
+            "ProjLib_CompProjectedCurve::EvalDN",
+        )),
     }
 }

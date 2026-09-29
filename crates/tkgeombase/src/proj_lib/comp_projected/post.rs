@@ -52,7 +52,9 @@ fn max_distance(points: &[Point3], pair: Pair<'_>) -> Result<f64, Failure> {
 fn is_single_point(points: &[Point3], tol: f64) -> bool {
     let (ave_u, ave_v) = average(points);
     let pmoy: Point2 = Point2::new(ave_u, ave_v);
-    !points.iter().any(|p| Point2::new(p.y(), p.z()).distance(pmoy) > tol)
+    !points
+        .iter()
+        .any(|p| Point2::new(p.y(), p.z()).distance(pmoy) > tol)
 }
 
 // Whether all the U (or V, `coord` 2) of a part are within `tol` of their average.
@@ -90,7 +92,9 @@ impl CompProjectedCurve {
                 parts.set_first_x(i + 1, last + 1.0e-12)?;
             }
         }
-        let all: Vec<Vec<Point3>> = (1..=nb_curves).map(|i| parts.points(i)).collect::<Result<_, _>>()?;
+        let all: Vec<Vec<Point3>> = (1..=nb_curves)
+            .map(|i| parts.points(i))
+            .collect::<Result<_, _>>()?;
         self.store_flags(&state, &all)
     }
 
@@ -101,8 +105,15 @@ impl CompProjectedCurve {
         for points in all {
             distances.push(max_distance(points, pair)?);
         }
-        let tol: f64 = if state.tol_u < state.tol_v { state.tol_v } else { state.tol_u };
-        let sngl: Vec<bool> = all.iter().map(|points| is_single_point(points, tol)).collect();
+        let tol: f64 = if state.tol_u < state.tol_v {
+            state.tol_v
+        } else {
+            state.tol_u
+        };
+        let sngl: Vec<bool> = all
+            .iter()
+            .map(|points| is_single_point(points, tol))
+            .collect();
         let (mut u_iso, mut v_iso) = (vec![true; all.len()], vec![true; all.len()]);
         for (i, points) in all.iter().enumerate() {
             if sngl[i] || points.len() <= 2 {

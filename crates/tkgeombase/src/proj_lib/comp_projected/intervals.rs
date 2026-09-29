@@ -36,7 +36,12 @@ fn surface_shape(shape: Shape) -> Result<Shape, Failure> {
         Shape::C1 => Ok(Shape::C2),
         Shape::C2 => Ok(Shape::C3),
         Shape::C3 | Shape::CN => Ok(Shape::CN),
-        _ => Err(failure("Standard_OutOfRange", &format!("ProjLib_CompProjectedCurve::BuildIntervals: continuity {shape:?}; expected C0, C1, C2, C3 or CN"))),
+        _ => Err(failure(
+            "Standard_OutOfRange",
+            &format!(
+                "ProjLib_CompProjectedCurve::BuildIntervals: continuity {shape:?}; expected C0, C1, C2, C3 or CN"
+            ),
+        )),
     }
 }
 
@@ -65,14 +70,24 @@ impl Direction {
 
 // The parameters where the parts cross the cut values `cuts` (indices 2..n) of
 // one surface direction, duplicates within PConfusion removed.
-fn discontinuities(state: &CompState, pair: Pair<'_>, parts: &[Vec<Point3>], cuts: &[f64], dir: Direction) -> Result<Vec<f64>, Failure> {
+fn discontinuities(
+    state: &CompState,
+    pair: Pair<'_>,
+    parts: &[Vec<Point3>],
+    cuts: &[f64],
+    dir: Direction,
+) -> Result<Vec<f64>, Failure> {
     let mut found: Vec<f64> = Vec::new();
     for cut in cuts.iter().skip(1) {
         for points in parts {
             for pair_of in points.windows(2) {
                 let (left, right) = (&pair_of[0], &pair_of[1]);
                 let (l, r) = (dir.coord(left), dir.coord(right));
-                let tol: f64 = if dir.fix == 2 { state.tol_u } else { state.tol_v };
+                let tol: f64 = if dir.fix == 2 {
+                    state.tol_u
+                } else {
+                    state.tol_v
+                };
                 if (l - cut).abs() <= tol {
                     found.push(left.x());
                 } else if (r - cut).abs() <= tol {
@@ -97,21 +112,51 @@ fn discontinuities(state: &CompState, pair: Pair<'_>, parts: &[Vec<Point3>], cut
 }
 
 // The curve parameter where the projection crosses `cut` between two triples.
-fn crossing(state: &CompState, pair: Pair<'_>, (left, right): (&Point3, &Point3), cut: f64, dir: Direction) -> Result<Option<f64>, Failure> {
+fn crossing(
+    state: &CompState,
+    pair: Pair<'_>,
+    (left, right): (&Point3, &Point3),
+    cut: f64,
+    dir: Direction,
+) -> Result<Option<f64>, Failure> {
     let other: f64 = (dir.other(left) + dir.other(right)) / 2.;
     let mut solver = PrjResolve::new(pair.curve, pair.surface, dir.fix)?;
     let d: Vector2 = d1(left.x(), left.y(), left.z(), pair)?;
     let (tl, tr) = (left.x(), right.x());
     let s = pair.surface;
     let (tol, inf, sup, u, v) = if dir.fix == 2 {
-        let tol: f64 = if d.x().abs() < precision::confusion() { state.tol_u } else { state.tol_u.min(state.tol_u / d.x().abs()) };
-        (tol, s.first_v_parameter()?, s.last_v_parameter()?, cut, other)
+        let tol: f64 = if d.x().abs() < precision::confusion() {
+            state.tol_u
+        } else {
+            state.tol_u.min(state.tol_u / d.x().abs())
+        };
+        (
+            tol,
+            s.first_v_parameter()?,
+            s.last_v_parameter()?,
+            cut,
+            other,
+        )
     } else {
-        let tol: f64 = if d.y().abs() < precision::confusion() { state.tol_v } else { state.tol_v.min(state.tol_v / d.y().abs()) };
-        (tol, s.first_u_parameter()?, s.last_u_parameter()?, other, cut)
+        let tol: f64 = if d.y().abs() < precision::confusion() {
+            state.tol_v
+        } else {
+            state.tol_v.min(state.tol_v / d.y().abs())
+        };
+        (
+            tol,
+            s.first_u_parameter()?,
+            s.last_u_parameter()?,
+            other,
+            cut,
+        )
     };
     // Both directions pass (Tol, TolV) as the tolerances, as natively.
-    let bounds = PrjResolveBox { tol: Point2::new(tol, state.tol_v), inf: Point2::new(tl, inf), sup: Point2::new(tr, sup) };
+    let bounds = PrjResolveBox {
+        tol: Point2::new(tol, state.tol_v),
+        inf: Point2::new(tl, inf),
+        sup: Point2::new(tr, sup),
+    };
     solver.perform((tl + tr) / 2., u, v, bounds, FUNC_TOL, false)?;
     if !solver.is_done() {
         return Ok(None);
@@ -138,15 +183,39 @@ pub(super) fn build_intervals(state: &CompState, shape: Shape) -> Result<Vec<f64
         b_arr.push(points[0].x());
         b_arr.push(points[points.len() - 1].x());
     }
-    let c_arr: Vec<f64> = cut_t.as_slice().iter().skip(1).take((nb_int_cur - 1).max(0) as usize).copied().collect();
-    let u_disc: Vec<f64> = discontinuities(state, pair, &parts, &cut_u.as_slice()[..nb_int_sur_u as usize], Direction { fix: 2 })?;
-    let v_disc: Vec<f64> = discontinuities(state, pair, &parts, &cut_v.as_slice()[..nb_int_sur_v as usize], Direction { fix: 3 })?;
+    let c_arr: Vec<f64> = cut_t
+        .as_slice()
+        .iter()
+        .skip(1)
+        .take((nb_int_cur - 1).max(0) as usize)
+        .copied()
+        .collect();
+    let u_disc: Vec<f64> = discontinuities(
+        state,
+        pair,
+        &parts,
+        &cut_u.as_slice()[..nb_int_sur_u as usize],
+        Direction { fix: 2 },
+    )?;
+    let v_disc: Vec<f64> = discontinuities(
+        state,
+        pair,
+        &parts,
+        &cut_v.as_slice()[..nb_int_sur_v as usize],
+        Direction { fix: 3 },
+    )?;
     for extra in [c_arr, u_disc, v_disc] {
         if extra.is_empty() {
             continue;
         }
         let mut fusion: LinearVector<f64> = LinearVector::default();
-        fuse_intervals(&array_of(&b_arr)?, &array_of(&extra)?, &mut fusion, precision::p_confusion(), false);
+        fuse_intervals(
+            &array_of(&b_arr)?,
+            &array_of(&extra)?,
+            &mut fusion,
+            precision::p_confusion(),
+            false,
+        );
         b_arr = fusion.as_slice().to_vec();
     }
     Ok(b_arr)

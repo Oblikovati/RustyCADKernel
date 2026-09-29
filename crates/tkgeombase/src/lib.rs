@@ -48,8 +48,8 @@ pub mod hermit;
 pub mod int_ana;
 pub mod int_ana2d;
 pub mod lprop;
-pub mod proj_lib;
 mod native_failure;
 mod native_text;
 #[doc(hidden)]
 pub mod probe_support;
+pub mod proj_lib;

@@ -28,7 +28,12 @@ use rustycad_tkmath::gp::{self, Point2, Point3, Vector2};
 /// The surface bounds `(FirstU, LastU, FirstV, LastV)`.
 pub(super) fn surface_box(pair: Pair<'_>) -> Result<[f64; 4], Failure> {
     let s = pair.surface;
-    Ok([s.first_u_parameter()?, s.last_u_parameter()?, s.first_v_parameter()?, s.last_v_parameter()?])
+    Ok([
+        s.first_u_parameter()?,
+        s.last_u_parameter()?,
+        s.first_v_parameter()?,
+        s.last_v_parameter()?,
+    ])
 }
 
 /// A bound candidate: the bound value, its distance along the projection
@@ -60,16 +65,38 @@ fn bound_distances(u0: f64, v0: f64, d2d: Vector2, b: [f64; 4]) -> [f64; 4] {
 /// `ExactBound(Sol, NotSol, Tol, TolU, TolV, Curve, Surface)`: the point where the
 /// projection crosses the nearest surface bound between `Sol.X` and `not_sol`; the
 /// bounds are tried from the nearest; false when none is found.
-pub(super) fn exact_bound(sol: &mut Point3, not_sol: f64, tol: f64, tol_uv: (f64, f64), pair: Pair<'_>) -> Result<bool, Failure> {
+pub(super) fn exact_bound(
+    sol: &mut Point3,
+    not_sol: f64,
+    tol: f64,
+    tol_uv: (f64, f64),
+    pair: Pair<'_>,
+) -> Result<bool, Failure> {
     let (u0, v0) = (sol.y(), sol.z());
     let b: [f64; 4] = surface_box(pair)?;
     let d2d: Vector2 = d1(sol.x(), u0, v0, pair)?;
     let r: [f64; 4] = bound_distances(u0, v0, d2d, b);
     let mut seq: Vec<Candidate> = vec![
-        Candidate { value: b[0], distance: r[0], fix: 2 },
-        Candidate { value: b[1], distance: r[1], fix: 2 },
-        Candidate { value: b[2], distance: r[2], fix: 3 },
-        Candidate { value: b[3], distance: r[3], fix: 3 },
+        Candidate {
+            value: b[0],
+            distance: r[0],
+            fix: 2,
+        },
+        Candidate {
+            value: b[1],
+            distance: r[1],
+            fix: 2,
+        },
+        Candidate {
+            value: b[2],
+            distance: r[2],
+            fix: 3,
+        },
+        Candidate {
+            value: b[3],
+            distance: r[3],
+            fix: 3,
+        },
     ];
     // The native bubble sort, largest distance first.
     for i in 1..=3 {
@@ -84,7 +111,11 @@ pub(super) fn exact_bound(sol: &mut Point3, not_sol: f64, tol: f64, tol_uv: (f64
     while let Some(p) = seq.pop() {
         let mut resolve = PrjResolve::new(pair.curve, pair.surface, p.fix)?;
         if p.fix == 2 {
-            let bounds = PrjResolveBox { tol: Point2::new(tol, tol_uv.1), inf: Point2::new(t1, b[2]), sup: Point2::new(t2, b[3]) };
+            let bounds = PrjResolveBox {
+                tol: Point2::new(tol, tol_uv.1),
+                inf: Point2::new(t1, b[2]),
+                sup: Point2::new(t2, b[3]),
+            };
             resolve.perform(t, p.value, v0, bounds, FUNC_TOL, false)?;
             if !resolve.is_done() {
                 continue;
@@ -93,7 +124,11 @@ pub(super) fn exact_bound(sol: &mut Point3, not_sol: f64, tol: f64, tol_uv: (f64
             *sol = Point3::new(pons.x(), p.value, pons.y());
             return Ok(true);
         }
-        let bounds = PrjResolveBox { tol: Point2::new(tol, tol_uv.0), inf: Point2::new(t1, b[0]), sup: Point2::new(t2, b[1]) };
+        let bounds = PrjResolveBox {
+            tol: Point2::new(tol, tol_uv.0),
+            inf: Point2::new(t1, b[0]),
+            sup: Point2::new(t2, b[1]),
+        };
         resolve.perform(t, u0, p.value, bounds, FUNC_TOL, false)?;
         if !resolve.is_done() {
             continue;
@@ -107,7 +142,13 @@ pub(super) fn exact_bound(sol: &mut Point3, not_sol: f64, tol: f64, tol_uv: (f64
 
 /// `DichExactBound(Sol, NotSol, Tol, TolU, TolV, Curve, Surface)`: halves the
 /// parameter interval towards `not_sol` while the projection exists.
-pub(super) fn dich_exact_bound(sol: &mut Point3, not_sol: f64, tol: f64, tol_uv: (f64, f64), pair: Pair<'_>) -> Result<(), Failure> {
+pub(super) fn dich_exact_bound(
+    sol: &mut Point3,
+    not_sol: f64,
+    tol: f64,
+    tol_uv: (f64, f64),
+    pair: Pair<'_>,
+) -> Result<(), Failure> {
     let (mut u0, mut v0) = (sol.y(), sol.z());
     let mut resolve = PrjResolve::new(pair.curve, pair.surface, 1)?;
     let b: [f64; 4] = surface_box(pair)?;
@@ -134,10 +175,23 @@ pub(super) fn dich_exact_bound(sol: &mut Point3, not_sol: f64, tol: f64, tol_uv:
 /// `InitialPoint(Point, t, C, S, TolU, TolV, U, V, theMaxDist)`: the nearest
 /// ExtPS minimum (within `max_dist` when positive) from which the orthogonal
 /// projection of `C(t)` converges; None when there is none.
-pub(super) fn initial_point(point: Point3, t: f64, pair: Pair<'_>, tol_uv: (f64, f64), max_dist: f64) -> Result<Option<(f64, f64)>, Failure> {
+pub(super) fn initial_point(
+    point: Point3,
+    t: f64,
+    pair: Pair<'_>,
+    tol_uv: (f64, f64),
+    max_dist: f64,
+) -> Result<Option<(f64, f64)>, Failure> {
     let mut resolve = PrjResolve::new(pair.curve, pair.surface, 1)?;
     let b: [f64; 4] = surface_box(pair)?;
-    let ext = ExtPS::with_range(point, pair.surface, (b[0], b[1]), (b[2], b[3]), tol_uv, (ExtFlag::Min, ExtAlgo::Grad))?;
+    let ext = ExtPS::with_range(
+        point,
+        pair.surface,
+        (b[0], b[1]),
+        (b[2], b[3]),
+        tol_uv,
+        (ExtFlag::Min, ExtAlgo::Grad),
+    )?;
     let mut sq_max: f64 = max_dist;
     if sq_max > 0. {
         sq_max *= sq_max;
@@ -155,7 +209,9 @@ pub(super) fn initial_point(point: Point3, t: f64, pair: Pair<'_>, tol_uv: (f64,
             }
             let (par_u, par_v) = ext.point(i)?.parameter();
             resolve.perform(t, par_u, par_v, bounds, FUNC_TOL, true)?;
-            if resolve.is_done() && (argmin == 0 || ext.square_distance(i)? < ext.square_distance(argmin)?) {
+            if resolve.is_done()
+                && (argmin == 0 || ext.square_distance(i)? < ext.square_distance(argmin)?)
+            {
                 argmin = i;
             }
         }
