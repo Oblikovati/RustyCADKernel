@@ -256,6 +256,17 @@ BRepGraph missing count falls from 23 to 12: the ten public members of Copy, Com
 and Deduplicate (area C1) and `Transform::Perform` and `TransformNode`, with 0 stale
 rows.
 
+After the C1 merge, `Transform::Perform` and `TransformNode` are `transform::perform` and
+`transform_node` (the policy checks, `copy::perform` or `copy::copy_node`, then the
+copied range) with the self overloads `perform_in_place` and `transform_node_in_place`
+(docs/topology-design.md section 11.13). Two more suites now build and are translated
+1:1 (PermissionUpdate, which calls `Copy::CopyNode`, `TransformNode` and `MoveRef`, and
+SparseModel, which calls Compact, Deduplicate and Validate: 43 declarations, native and
+Rust pass). `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for
+BRepGraph. Every BRepGraph suite still unmapped calls a toolkit that is not ported
+(TKPrim solids other than the box, BRepGProp, BRepMesh, BRepBuilderAPI, BRepCheck,
+BRepAlgoAPI, BRepBndLib), as the table lists.
+
 The BRepTools and BRepAdaptor suites are translated 1:1 in
 `crates/tkbrep/tests/brep_tools_reshape.rs`, `brep_tools_trsf_modification.rs`,
 `brep_tools_gtrsf_modification.rs` (two included suite files) and
@@ -642,7 +653,7 @@ product, and an edge and a face in place, plus an empty source; both graphs are 
 printed whole, their geometry, persistent meshes and mesh cache included. A
 location-only `TransformNode` of a product or occurrence is not probed: its first step,
 `BRepGraph_Copy::CopyNode` of that node, crashes the pinned native build on these scenes
-(as the bare `CopyNode` does); the unit tests and PermissionUpdate cover it.
+(as the bare `CopyNode` does); the transform unit tests cover the location-only step.
 
 The corpus has 667 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
