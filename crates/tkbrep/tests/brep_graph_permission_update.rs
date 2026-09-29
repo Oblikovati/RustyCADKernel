@@ -44,7 +44,11 @@ fn makeBoxGraph() -> BRepGraph {
 }
 
 fn xLine() -> Handle<dyn GeomCurve> {
-    Handle::new(GeomLine::new(Axis1::new(Point3::new(0.0, 0.0, 0.0), Direction3::X))).into_cast()
+    Handle::new(GeomLine::new(Axis1::new(
+        Point3::new(0.0, 0.0, 0.0),
+        Direction3::X,
+    )))
+    .into_cast()
 }
 
 fn makeSelfLoopEdge(theGraph: &mut BRepGraph) -> EdgeId {
@@ -123,7 +127,12 @@ fn BRepGraph_PermissionUpdateTest__RemoveRef_FaceRef_InvalidatesOwningShellBefor
     );
 
     assert!(aFaceRefId.is_removed(&aGraph));
-    let aAfter = aGraph.topo().shells().definition(ShellId::start()).base.subtree_gen;
+    let aAfter = aGraph
+        .topo()
+        .shells()
+        .definition(ShellId::start())
+        .base
+        .subtree_gen;
     assert!(aAfter > aShellSubtreeGenBefore);
     assert!(aGraph.validate_relations());
 }
@@ -147,7 +156,11 @@ fn BRepGraph_PermissionUpdateTest__RemoveShell_SameSolidSiblingRef_PreservesRela
     assert!(aSecondRefId.is_valid());
     assert_ne!(aSecondRefId, aFirstRefId);
     let solidsOf = |theGraph: &BRepGraph| {
-        let aParents = &theGraph.topo().shells().relations(aShellId).parent_shell_ref_ids;
+        let aParents = &theGraph
+            .topo()
+            .shells()
+            .relations(aShellId)
+            .parent_shell_ref_ids;
         containsCurrentId(SolidsOfShell::new(theGraph, aParents), aSolidId)
     };
     assert!(solidsOf(&aGraph));
@@ -263,8 +276,9 @@ fn BRepGraph_PermissionUpdateTest__RemoveRef_CoEdge_PreservesEdgeToWireWhenSibli
     let aFirstCoEdge = aWireRelations[0];
     assert!(aFirstCoEdge.is_valid());
 
-    let containsWire =
-        |theGraph: &BRepGraph, theE: EdgeId| containsCurrentId(theGraph.topo().edges().wires_of(theE), aWireId);
+    let containsWire = |theGraph: &BRepGraph, theE: EdgeId| {
+        containsCurrentId(theGraph.topo().edges().wires_of(theE), aWireId)
+    };
     assert!(
         containsWire(&aGraph, aEdge),
         "Edge->Wire reverse must be present before removal"
@@ -421,7 +435,11 @@ fn BRepGraph_PermissionUpdateTest__LinkProducts_OutOccurrenceRefId_Populated() {
     assert!(aOccId.is_valid());
     assert!(aOccRefId.is_valid());
     assert_eq!(
-        aGraph.refs().occurrences().entry(aOccRefId).child_occurrence_id,
+        aGraph
+            .refs()
+            .occurrences()
+            .entry(aOccRefId)
+            .child_occurrence_id,
         aOccId
     );
 
