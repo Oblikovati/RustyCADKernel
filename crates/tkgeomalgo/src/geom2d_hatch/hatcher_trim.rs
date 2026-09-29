@@ -16,7 +16,7 @@
 
 //! The trimming of the hatchings by the elements: the intersection points of each
 //! hatching and their global transitions.
-use super::{Hatcher, Hatching};
+use super::{Hatcher, Hatching, Intersector};
 use crate::hatch_gen::{ErrorStatus, IntersectionType, PointOnElement, PointOnHatching};
 use crate::int_res2d::{IntersectionPoint, IntersectionSegment, Position, TypeTrans};
 use rustycad_tkernel::standard::Failure;
@@ -95,19 +95,14 @@ impl Hatcher {
         if self.my_intersector.is_empty()? {
             return Ok(true);
         }
-        let points: Vec<IntersectionPoint> = (1..=self.my_intersector.nb_points()?)
-            .map(|index| self.my_intersector.point(index))
-            .collect::<Result<_, _>>()?;
-        let segments: Vec<IntersectionSegment> = (1..=self.my_intersector.nb_segments()?)
-            .map(|index| self.my_intersector.segment(index))
-            .collect::<Result<_, _>>()?;
-        let (confusion2d, confusion3d) = (self.my_confusion2d, self.my_confusion3d);
-        let hatching: &mut Hatching = self.hatching_mut(ind_h)?;
+        let (points, segments) = intersection_results(&self.my_intersector)?;
         let marks = Marks {
             ind_h,
             ind_e,
-            confusion2d,
+            confusion2d: self.my_confusion2d,
         };
+        let confusion3d: f64 = self.my_confusion3d;
+        let hatching: &mut Hatching = self.hatching_mut(ind_h)?;
         for point in &points {
             marks.add_point(hatching, point, (false, false))?;
         }
@@ -116,6 +111,19 @@ impl Hatcher {
         }
         Ok(true)
     }
+}
+
+// The points and the segments of a done intersection.
+fn intersection_results(
+    intersector: &Intersector,
+) -> Result<(Vec<IntersectionPoint>, Vec<IntersectionSegment>), Failure> {
+    let points = (1..=intersector.nb_points()?)
+        .map(|index| intersector.point(index))
+        .collect::<Result<_, _>>()?;
+    let segments = (1..=intersector.nb_segments()?)
+        .map(|index| intersector.segment(index))
+        .collect::<Result<_, _>>()?;
+    Ok((points, segments))
 }
 
 // The indices of the hatching and of the element of one trimming, and the 2d
@@ -211,14 +219,30 @@ fn confused_points(
     ind_h: i32,
     ind_e: i32,
 ) -> (PointOnHatching, PointOnElement) {
+    let pnt_e = confused_element_point(pnt1, pnt2, ind_e);
     let (trs1_h, trs2_h) = (pnt1.transition_of_first(), pnt2.transition_of_first());
+    let mut pnt_h = PointOnHatching::new();
+    pnt_h.set_index(ind_h);
+    pnt_h.set_parameter((pnt1.param_on_first() + pnt2.param_on_first()) / 2.0);
+    let (first, second) = (trs1_h.position_on_curve(), trs2_h.position_on_curve());
+    set_merged_position(&mut pnt_h, first, second);
+    (pnt_h, pnt_e)
+}
+
+// The point on element of a confused segment: TRUE inside the element, TOUCH at
+// its ends.
+fn confused_element_point(
+    pnt1: &IntersectionPoint,
+    pnt2: &IntersectionPoint,
+    ind_e: i32,
+) -> PointOnElement {
     let mut pnt_e = PointOnElement::new();
     pnt_e.set_index(ind_e);
     pnt_e.set_parameter((pnt1.param_on_second() + pnt2.param_on_second()) / 2.0);
-    let position_e = pnt1.transition_of_second().position_on_curve();
+    let first = pnt1.transition_of_second().position_on_curve();
     set_merged_position(
         &mut pnt_e,
-        position_e,
+        first,
         pnt2.transition_of_second().position_on_curve(),
     );
     let kind = if pnt_e.position() == Orientation::Internal {
@@ -227,17 +251,9 @@ fn confused_points(
         IntersectionType::Touch
     };
     pnt_e.set_intersection_type(kind);
-    pnt_e.set_state_before(state_of(trs1_h.transition_type()));
-    pnt_e.set_state_after(state_of(trs2_h.transition_type()));
-    let mut pnt_h = PointOnHatching::new();
-    pnt_h.set_index(ind_h);
-    pnt_h.set_parameter((pnt1.param_on_first() + pnt2.param_on_first()) / 2.0);
-    set_merged_position(
-        &mut pnt_h,
-        trs1_h.position_on_curve(),
-        trs2_h.position_on_curve(),
-    );
-    (pnt_h, pnt_e)
+    pnt_e.set_state_before(state_of(pnt1.transition_of_first().transition_type()));
+    pnt_e.set_state_after(state_of(pnt2.transition_of_first().transition_type()));
+    pnt_e
 }
 
 // OUT for an IN type, IN otherwise (the native ternaries of the confused segment).

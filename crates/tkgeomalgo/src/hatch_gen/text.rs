@@ -19,6 +19,7 @@
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::storage::format_general;
 use rustycad_tkg3d::top_abs::{Orientation, State};
+use std::fmt;
 
 /// `std::cout << double` with the default stream flags: C's `%g` with six
 /// significant digits; `stream_real(0.5) == "0.5"`.
@@ -33,6 +34,20 @@ pub(crate) fn index_title(index: i32, fill: &str) -> String {
         return format!("# {index:>3} ");
     }
     fill.to_string()
+}
+
+/// Writes each `label = value` line of a dump with `indent`, the labels padded to
+/// `width` columns as the native literals are.
+pub(super) fn write_fields(
+    out: &mut dyn fmt::Write,
+    indent: &str,
+    width: usize,
+    fields: &[(String, String)],
+) -> fmt::Result {
+    for (label, value) in fields {
+        writeln!(out, "{indent}{label:<width$} = {value}")?;
+    }
+    Ok(())
 }
 
 /// The native spelling of a position on a curve in the point dumps.

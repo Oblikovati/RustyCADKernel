@@ -16,6 +16,7 @@
 
 //! `HatchGen_IntersectionPoint`: the data shared by the points on a hatching and on
 //! an element.
+use super::text::{flag_text, position_text, state_text, stream_real};
 use rustycad_tkernel::standard::real::real_last;
 use rustycad_tkg3d::top_abs::{Orientation, State};
 use std::fmt;
@@ -117,6 +118,41 @@ impl IntersectionPoint {
     /// SegmentEnd: the point ends a segment; `point.segment_end()`.
     pub fn segment_end(&self) -> bool {
         self.my_seg_end
+    }
+}
+
+impl IntersectionPoint {
+    // The labelled fields that both native dumps write, `noun` naming the curve; a
+    // point on element writes its intersection type after its position.
+    pub(super) fn dump_fields(&self, noun: &str, kind: Option<&str>) -> Vec<(String, String)> {
+        let mut fields = vec![
+            (format!("Index of the {noun}"), self.my_index.to_string()),
+            (format!("Parameter on {noun}"), stream_real(self.my_param)),
+            (
+                format!("Position  on {noun}"),
+                position_text(self.my_posit).to_string(),
+            ),
+        ];
+        if let Some(kind) = kind {
+            fields.push(("Intersection Type".to_string(), kind.to_string()));
+        }
+        fields.push((
+            "State Before".to_string(),
+            state_text(self.my_before).to_string(),
+        ));
+        fields.push((
+            "State After".to_string(),
+            state_text(self.my_after).to_string(),
+        ));
+        fields.push((
+            "Beginning of segment".to_string(),
+            flag_text(self.my_seg_beg).to_string(),
+        ));
+        fields.push((
+            "End       of segment".to_string(),
+            flag_text(self.my_seg_end).to_string(),
+        ));
+        fields
     }
 }
 

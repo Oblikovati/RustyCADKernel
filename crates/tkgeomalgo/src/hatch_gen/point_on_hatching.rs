@@ -17,7 +17,7 @@
 //! `HatchGen_PointOnHatching`: an intersection point seen on a hatching, with the
 //! points on the elements that meet the hatching there.
 use super::point_on_element::position_orientation;
-use super::text::{flag_text, index_title, position_text, sequence_slot, state_text, stream_real};
+use super::text::{index_title, sequence_slot, write_fields};
 use super::{IntersectionPoint, IntersectionPointDump, PointOnElement};
 use crate::int_res2d;
 use rustycad_tkernel::standard::Failure;
@@ -151,43 +151,9 @@ impl PointOnHatching {
 impl IntersectionPointDump for PointOnHatching {
     /// Dump(Index): the native text of the point and of its points on element.
     fn dump(&self, index: i32, out: &mut dyn fmt::Write) -> fmt::Result {
-        let b = &self.base;
-        writeln!(
-            out,
-            "--- Point on hatching {}------------------",
-            index_title(index, "------")
-        )?;
-        writeln!(out, "    Index of the hatching = {}", b.my_index)?;
-        writeln!(
-            out,
-            "    Parameter on hatching = {}",
-            stream_real(b.my_param)
-        )?;
-        writeln!(
-            out,
-            "    Position  on hatching = {}",
-            position_text(b.my_posit)
-        )?;
-        writeln!(
-            out,
-            "    State Before          = {}",
-            state_text(b.my_before)
-        )?;
-        writeln!(
-            out,
-            "    State After           = {}",
-            state_text(b.my_after)
-        )?;
-        writeln!(
-            out,
-            "    Beginning of segment  = {}",
-            flag_text(b.my_seg_beg)
-        )?;
-        writeln!(
-            out,
-            "    End       of segment  = {}",
-            flag_text(b.my_seg_end)
-        )?;
+        let title = index_title(index, "------");
+        writeln!(out, "--- Point on hatching {title}------------------")?;
+        write_fields(out, "    ", 21, &self.base.dump_fields("hatching", None))?;
         self.dump_element_points(out)?;
         writeln!(out, "----------------------------------------------")
     }

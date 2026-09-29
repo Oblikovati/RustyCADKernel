@@ -215,9 +215,8 @@ impl Probe {
         Ok(None)
     }
 
-    // One probe at `param`; Some with the segment when it is acceptable. The
-    // negated comparisons reject a NaN length as the native `>` tests do.
-    #[allow(clippy::neg_cmp_op_on_partial_ord)]
+    // One probe at `param`; Some with the segment when it is acceptable (the
+    // negated comparisons reject a NaN length as the native `>` tests do).
     fn probe_at(
         &mut self,
         curve: &Geom2dAdaptorCurve,
@@ -225,6 +224,31 @@ impl Probe {
         param: f64,
         (f_par, l_par): (f64, f64),
     ) -> Result<Option<(Line2, f64)>, Failure> {
+        let Some((lin_dir, square_length)) = self.probe_direction(curve, point, param)? else {
+            return Ok(None);
+        };
+        let line = Line2::new(*point, lin_dir);
+        if !ends_off_line(curve, &line, (f_par, l_par))? {
+            return Ok(None);
+        }
+        self.my_cur_edge_par += PROBING_STEP;
+        if self.my_cur_edge_par >= PROBING_END {
+            self.my_cur_edge += 1;
+            self.my_cur_edge_par = PROBING_START;
+        }
+        Ok(Some((line, square_length.sqrt())))
+    }
+
+    // The direction from the point to the probe and the squared length, unless the
+    // probe is at the point, its tangent is degenerate, or the segment is nearly
+    // tangent to the element (allowed at the last probe of the element).
+    #[allow(clippy::neg_cmp_op_on_partial_ord)]
+    fn probe_direction(
+        &self,
+        curve: &Geom2dAdaptorCurve,
+        point: &Point2,
+        param: f64,
+    ) -> Result<Option<(Direction2, f64)>, Failure> {
         let (p_on_c, mut tan_vec) = curve.d1(param)?;
         let lin_vec = Vector2::between(*point, p_on_c);
         let square_length: f64 = lin_vec.square_magnitude();
@@ -239,20 +263,11 @@ impl Probe {
         tan_vec /= tan_mod.sqrt();
         let sin_a: f64 = tan_vec.crossed(Vector2::from(lin_dir));
         // Too small an angle: the line and the edge may be taken as tangent, which is
-        // bad for the classifier; unless it is the last probe of the element.
+        // bad for the classifier.
         if sin_a.abs() < 0.001 && self.my_cur_edge_par + PROBING_STEP < PROBING_END {
             return Ok(None);
         }
-        let line = Line2::new(*point, lin_dir);
-        if !ends_off_line(curve, &line, (f_par, l_par))? {
-            return Ok(None);
-        }
-        self.my_cur_edge_par += PROBING_STEP;
-        if self.my_cur_edge_par >= PROBING_END {
-            self.my_cur_edge += 1;
-            self.my_cur_edge_par = PROBING_START;
-        }
-        Ok(Some((line, square_length.sqrt())))
+        Ok(Some((lin_dir, square_length)))
     }
 }
 

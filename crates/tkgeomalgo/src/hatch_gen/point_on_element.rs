@@ -15,7 +15,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `HatchGen_PointOnElement`: an intersection point seen on an element.
-use super::text::{flag_text, index_title, position_text, state_text, stream_real};
+use super::text::{index_title, write_fields};
 use super::{IntersectionPoint, IntersectionPointDump, IntersectionType};
 use crate::int_res2d::{self, Position, Situation, Transition, TypeTrans};
 use rustycad_tkernel::standard::Failure;
@@ -190,48 +190,12 @@ fn type_text(kind: IntersectionType) -> &'static str {
 impl IntersectionPointDump for PointOnElement {
     /// Dump(Index): the native text of the point on element.
     fn dump(&self, index: i32, out: &mut dyn fmt::Write) -> fmt::Result {
-        let b = &self.base;
-        writeln!(
-            out,
-            "    --- Point on element {}---------------",
-            index_title(index, "------")
-        )?;
-        writeln!(out, "        Index of the element = {}", b.my_index)?;
-        writeln!(
-            out,
-            "        Parameter on element = {}",
-            stream_real(b.my_param)
-        )?;
-        writeln!(
-            out,
-            "        Position  on element = {}",
-            position_text(b.my_posit)
-        )?;
-        writeln!(
-            out,
-            "        Intersection Type    = {}",
-            type_text(self.my_type)
-        )?;
-        writeln!(
-            out,
-            "        State Before         = {}",
-            state_text(b.my_before)
-        )?;
-        writeln!(
-            out,
-            "        State After          = {}",
-            state_text(b.my_after)
-        )?;
-        writeln!(
-            out,
-            "        Beginning of segment = {}",
-            flag_text(b.my_seg_beg)
-        )?;
-        writeln!(
-            out,
-            "        End       of segment = {}",
-            flag_text(b.my_seg_end)
-        )?;
+        let title = index_title(index, "------");
+        writeln!(out, "    --- Point on element {title}---------------")?;
+        let fields = self
+            .base
+            .dump_fields("element", Some(type_text(self.my_type)));
+        write_fields(out, "        ", 20, &fields)?;
         writeln!(out, "    ------------------------------------------")
     }
 }

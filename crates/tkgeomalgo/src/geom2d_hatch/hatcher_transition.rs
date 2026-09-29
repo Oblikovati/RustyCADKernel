@@ -52,18 +52,7 @@ impl Hatcher {
         &self,
         point: &PointOnHatching,
     ) -> Result<Option<GlobalStates>, Failure> {
-        let curve_h = self.hatching_curve(point.index())?;
-        let (tang2d, norm2d, curv) = self
-            .my_intersector
-            .local_geometry(curve_h, point.parameter())?;
-        let tangent = Direction3::new(tang2d.x(), tang2d.y(), 0.0)?;
-        let normal = if curv < precision::confusion() {
-            Direction3::new(-tang2d.y(), tang2d.x(), 0.0)?
-        } else {
-            Direction3::new(norm2d.x(), norm2d.y(), 0.0)?
-        };
-        let mut complex = CurveTransition::new();
-        complex.reset(tangent, normal, curv);
+        let mut complex = self.hatching_transition(point)?;
         let (mut segment_begin, mut segment_end) = (false, false);
         for pnt_e in point.element_points() {
             segment_begin = segment_begin || pnt_e.segment_beginning();
@@ -78,6 +67,24 @@ impl Hatcher {
                 segment_begin,
                 segment_end,
             }))
+    }
+
+    // The complex transition reset with the hatching's tangent, normal (the tangent
+    // turned left under a Confusion curvature) and curvature at the point.
+    fn hatching_transition(&self, point: &PointOnHatching) -> Result<CurveTransition, Failure> {
+        let curve_h = self.hatching_curve(point.index())?;
+        let (tang2d, norm2d, curv) = self
+            .my_intersector
+            .local_geometry(curve_h, point.parameter())?;
+        let tangent = Direction3::new(tang2d.x(), tang2d.y(), 0.0)?;
+        let normal = if curv < precision::confusion() {
+            Direction3::new(-tang2d.y(), tang2d.x(), 0.0)?
+        } else {
+            Direction3::new(norm2d.x(), norm2d.y(), 0.0)?
+        };
+        let mut complex = CurveTransition::new();
+        complex.reset(tangent, normal, curv);
+        Ok(complex)
     }
 
     // One element meeting the point, compared in the complex transition.
