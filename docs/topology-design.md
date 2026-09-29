@@ -273,3 +273,187 @@ follows section 8 for the virtual shape set and adds:
   byte, an object type byte) keep the raw integer (`ObjectType(u8)`, an `i32` shape
   type); values that the native code only stores (an orientation or continuity byte)
   are checked when converted, and an out-of-range one raises Standard_OutOfRange.
+
+## 11. BRepGraph and BRepGraphInc
+
+`BRepGraphInc` (module `brep_graph_inc`) is the incidence-table backend and `BRepGraph`
+(module `brep_graph`) the facade over it. The port is split in two phases. Phase 1 fixes
+the storage, the ids, the graph value, the population and reconstruction pipelines and
+the four read views; phase 2 adds the iterators, the editor, the algorithms and the
+layers and caches on top, each in its own modules (section 11.7).
+
+### 11.1 Ids are values with an explicit kind
+
+`BRepGraph_NodeId`, `BRepGraph_RefId` and `BRepGraph_RepId` are `(Kind, Index)` pairs.
+Their `enum class Kind` may hold any `int` natively (the tests build
+`static_cast<Kind>(9)`, the reserved slot, and expect `IsValid()` to be false), so the
+Rust kinds are transparent newtypes over `i32` with one associated constant per
+enumerator (`NodeKind::FACE`, `RefKind::WIRE`, `RepKind::FACE_SURFACE`), and
+`is_valid_kind` checks the value as the native `switch` does. `NodeId`, `RefId` and
+`RepId` are `Copy` structs with public `kind` and `index` fields; the default is the
+invalid id (index `u32::MAX`, kind 0).
+
+The typed wrappers `Typed<Kind::Face>` are one generic value `TypedId<T>` where `T` is a
+zero-sized kind tag (`FaceTag`, `WireRefTag`, `FaceSurfaceTag`...). The tag trait
+`KindTag` names the family (node, reference or representation) and the raw kind, so the
+conversions into the untyped id, the kind check of `FromNodeId`/`FromRefId` and the hash
+are written once per family. The aliases keep the OCCT names without the prefix:
+`FaceId`, `ShellRefId`, `EdgeCurve3DRepId`... A typed id of another kind does not
+convert, which is the deleted cross-kind constructor. `++id`, `id + n`, `id - n` are
+`increment`, `offset` and `retreat`. The native `Standard_ASSERT_*` checks are debug
+assertions only; release builds, which the oracle runs, skip them, so the Rust port keeps
+their release behaviour (a kind mismatch in `FromNodeId` returns the invalid typed id, a
+retreat below zero wraps).
+
+`BRepGraph_ItemId`, `BRepGraph_UID`, `BRepGraph_RefUID` and `BRepGraph_ItemUID` keep the
+native field layout (`ItemId` stores the raw kind byte, so an item built from an invalid
+node id is the invalid item), and the hashes (`std::hash` and `HashValue`) are the native
+Murmur combinations over the same bytes (`opencascade::hash` of each field, then
+`hashBytes` of the `size_t` array), so the oracle compares them bit for bit.
+`BRepGraph_VersionStamp::ToGUID` packs the same 37-byte buffer (the `Standard_UUID`
+bytes, the domain byte, the 8-byte counter, the kind, the two generations) and hashes
+its four slices as natively.
+
+### 11.2 Storage is plain vectors, owned by value
+
+`BRepGraphInc_Storage` is `brep_graph_inc::Storage`. The native `DefStore<T>` and
+`RefStore<T>` have the same fields, so both are one generic `EntityStore<T>`: a `Vec<T>`
+of definitions or reference entries, five `BitFlags` planes (removed, owned, guarded,
+has-compound-parent, has-occurrence-parent), the active count and the per-kind UID
+counter. `RepStore<T>` has the vector, the removed plane and the active count. The
+relation tables are vectors parallel to the stores, and the sparse incoming maps
+`myNodeToCompounds`/`myNodeToOccurrences` are `BTreeMap`s keyed by `NodeId` (their
+iteration order never reaches an output natively; a sorted map keeps it
+deterministic). `NCollection_DynamicArray` and `NCollection_LinearVector` are `Vec`; the
+`NCollection_IncAllocator` that backs them natively has no Rust counterpart, so
+`Allocator()` is excluded (section 11.8).
+
+The native `TypedStorePlanes<T>` specialisations become one trait implemented on each
+kind tag: `StoredTag` gives the store of the tag's kind, so `is_removed`, `set_removed`,
+`is_owned`, `set_guarded`... are generic methods written once over
+`TypedId<T: StoredTag>`. A representation store has no owned or guard plane, so calling
+`is_owned` on a representation id does not compile, as natively.
+
+Definitions and references keep the native inheritance as composition: each `*Def`
+embeds a `BaseDef` (UID, OwnGen, SubtreeGen, LastPropWave) and each reference entry a
+`BaseRef` (UID), read through the `HasBaseDef`/`HasBaseRef` traits, which is what
+`TopoEntity` and `BaseRef` return. The geometry and mesh handles in the representation
+records are the TKG3d, TKG2d and Poly handles, shared as natively.
+
+The storage members that are `const` natively but update a cache (the lazily rebuilt UID
+reverse indexes, the shape bindings, the reconstructed-shape cache) keep their
+`shared_mutex` as a `RwLock` and their dirty flags and counters as atomics, so they take
+`&self` like the native `const` members and the graph stays `Sync`.
+
+`Standard_ProgramError`, raised by `ParityOrientation` for an INTERNAL or EXTERNAL
+orientation, is a `Result` error; every storage member that converts an orientation
+(and the population that reaches it through an INTERNAL wire or edge) returns it.
+
+### 11.3 The graph owns its data; views borrow it
+
+`BRepGraph` owns one `Data` value (the native `BRepGraph_Data` PIMPL): the storage and
+the extension slots of section 11.6. The native views hold a `BRepGraph*`; the Rust
+views are small `Copy` structs that borrow the graph: `graph.topo()` returns
+`TopoView<'_>`, whose `faces()`, `edges()`... return `topo_view::FaceOps<'_>`... with the
+native members. `refs()`, `uids()` and `shapes()` work the same way. Every query takes
+`&self`, so any number of views can be alive at once and a graph can be read from
+several threads, as the native `const` API allows. The members that change the graph
+take `&mut BRepGraph`: `graph.shapes_mut()` returns `ShapesViewMut<'_>`, which holds the
+only mutable borrow (`Add`, `ClearCached`). `Shapes().Shape()` is `const` natively and
+fills the reconstructed-shape cache under its mutex; it takes `&self` and the storage
+`RwLock`.
+
+The private `BRepGraph` members that later phases need (`allocateUID`, `markModified`,
+`markRefModified`, `markParentSubtreeGen`, `propagateSubtreeGen`, `topoEntity`,
+`changeTopoEntity`, `refEntity`, `incStorage`) are `pub(crate)` methods of `BRepGraph`,
+so the phase-2 modules of this crate call them directly, as the native `friend` classes
+do.
+
+### 11.4 Mutation without `unsafe`: the editor and MutGuard
+
+`EditorView` is a view that holds `&mut BRepGraph` (`graph.editor()`); its nested
+operation groups (`products()`, `compounds()`...) reborrow it. `BRepGraph_MutGuard<T>`
+becomes `MutGuard<'g, T>` holding the editor's mutable borrow and the typed id: `Deref`
+and `DerefMut` reach the definition or reference entry through the storage, and `Drop`
+clears the guard plane and calls `mark_modified`/`mark_ref_modified`. Because the guard
+holds the only mutable borrow, a second guard cannot exist while one is alive; the guard
+plane is still set and cleared, so that `IsGuarded` and the editor's
+`requireNoActiveGuard` checks behave as natively. No raw pointer, cell or `unsafe` is
+needed: the only shared mutable state is behind the storage locks of section 11.2.
+
+Phase 1 already ports the editor operations that `Shapes().Add` calls (section 11.7):
+`Products().Add`, `Products().AppendDocumentRoot`, `Products().Append`, the
+`Compounds/Shells/Solids/CompSolids().Append` and `Gen().SetChildRefLocalLocation`,
+with the lock and guard checks `requireUnlocked` and `requireNoActiveGuard`.
+
+### 11.5 Population and reconstruction
+
+`BRepGraphInc_Populate` and `BRepGraphInc_Reconstruct` are the modules
+`brep_graph_inc::populate` and `brep_graph_inc::reconstruct` with free functions
+(`populate::perform`, `populate::append`, `populate::append_flattened`,
+`reconstruct::node`, `reconstruct::node_with_cache`, `reconstruct::face_with_cache`).
+Population traverses the shape exactly as natively, then extracts the face data
+(parallel through `OSD_Parallel` when `BRepGraph_ParallelPolicy` allows it; every face is
+independent, so the storage content does not depend on the thread count), then
+registers the faces in order and synthesises the natural-restriction boundaries
+(`BoundaryBuilder`). The per-build `LocatedNodeIndex` is keyed by TShape address, as
+natively, and only searched. Reconstruction reads the derived edge, wire and shell state
+through `brep_graph::cache_derived_state`, whose static `Compute*` members and per-coedge
+SameRange/SameParameter computations are ported in phase 1; the cache service that
+memoises them is a phase-2 addition that must return the same values.
+
+### 11.6 Where layers and caches attach
+
+`BRepGraph_LayerRegistry` and `BRepGraph_CacheRegistry` are phase 2. The core calls them
+in a few places only: `markModified`/`markRefModified` dispatch modification events,
+`Clear` clears both registries, population attaches supplement shapes to the
+`BRepGraph_LayerTopoSupplement` layer and reconstruction replays them. These calls go
+through two object-safe traits in `brep_graph::hooks`, stored in `Data` as
+`Option<Box<dyn LayerHooks>>` and `Option<Box<dyn CacheHooks>>`:
+
+- `LayerHooks`: `has_modification_subscribers`, `dispatch_node_modified`,
+  `has_ref_modification_subscribers`, `dispatch_ref_modified`, `clear_all` and
+  `topo_supplement`, which returns the registered `TopoSupplementHooks` (the
+  `AddAttachment` and `AttachedTo`/`FindByUid` members that the pipelines call, with the
+  native `AttachmentKind`), and `ensure_topo_supplement`, the `Ensure` that the
+  supplement route of `Shapes().Add(shape, parent)` calls. Without hooks that route
+  attaches nothing and its result stays `Failed`.
+- `CacheHooks`: `clear_all`.
+
+A graph without hooks is a graph with no registered layer or cache, which is what the
+pipelines observe natively (the layer history that the native constructor registers
+records nothing during `Add`). The dispatching members take the hook out of its slot
+while they call it with `&BRepGraph`, so a hook may read the whole graph. The phase-2
+registries implement these traits and install themselves in `BRepGraph::new`; nothing
+else in the core changes.
+
+### 11.7 Module ownership
+
+Phase 1: `brep_graph_inc::*`; `brep_graph::{ids, version_stamp, usage_path, graph, data,
+hooks, marks, topo_view, refs_view, uids_view, shapes_view, parallel_policy}`; and the
+seed modules `brep_graph::tool` (the `Edge::Curve`, `Edge::Range`, `CoEdge::PCurve`,
+`CoEdge::Range` and `Face::Surface` reads that the derived state needs),
+`brep_graph::cache_derived_state` (the pure computations) and `brep_graph::editor` (the
+operations of section 11.4).
+
+Phase 2 owns and adds, without editing the phase-1 modules beyond one `mod` line and the
+constructor of section 11.6:
+
+- iterators and explorers: `brep_graph::{iterator, defs_iterator, refs_iterator,
+  reverse_iterator, child_explorer, parent_explorer, related_iterator}` and the
+  `TopoView` members that return iterators (`Edges().WiresOf/FacesOf`);
+- editor and mutation: the rest of `brep_graph::editor`,
+  `brep_graph::{mut_guard, deferred_scope, supplement_editor}`, the private
+  `invalidateSubgraphImpl` and `Shapes().RemoveShape`;
+- algorithms: `brep_graph::{copy, copy_remap, compact, deduplicate, validate,
+  transform}` and the rest of `brep_graph::tool`;
+- layers, caches and mesh view: `brep_graph::{layer, layer_registry, layer_history,
+  layer_lock, layer_deferred, layer_parametric, layer_topo_supplement, layer_iterator,
+  cache, cache_registry, cache_iterator, cache_mesh, mesh_view, supplement_iterator}`,
+  the cache service part of `cache_derived_state` and `Shapes().AddWithHistory`.
+
+### 11.8 Excluded members
+
+Destructors, the `Allocator()` accessors (Rust vectors own their memory) and the
+`std::hash` call operators that are the same function as a ported `HashValue` or
+`HashCode` member get `excluded` rows with the reason.

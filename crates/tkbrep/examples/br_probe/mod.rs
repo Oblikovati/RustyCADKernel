@@ -8,6 +8,8 @@ pub mod bintools_shape;
 pub mod brep;
 pub mod brep_adaptor;
 pub mod brep_commands;
+pub mod brep_graph;
+pub mod brep_graph_views;
 pub mod brep_report;
 pub mod brep_tools;
 pub mod brep_tools_modif;

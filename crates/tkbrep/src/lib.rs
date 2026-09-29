@@ -25,6 +25,8 @@
 pub mod bintools;
 pub mod brep;
 pub mod brep_adaptor;
+pub mod brep_graph;
+pub mod brep_graph_inc;
 pub mod brep_lprop;
 pub mod brep_tools;
 pub mod topexp;

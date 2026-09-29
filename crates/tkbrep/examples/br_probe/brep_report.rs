@@ -17,12 +17,12 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Point2, Point3};
 use rustycad_tkmath::toploc::Location;
 
-fn pnt(p: Point3) {
+pub fn pnt(p: Point3) {
     real(p.x());
     real(p.y());
     real(p.z());
 }
-fn pnt2d(p: Point2) {
+pub fn pnt2d(p: Point2) {
     real(p.x());
     real(p.y());
 }
@@ -96,7 +96,7 @@ fn point_representation(s: &Scene, p: &dyn BRepPointRepresentation) {
     show(p.surface(), |h| int(id(&g.surfaces, &h)));
 }
 
-fn vertex_report(s: &Scene, v: &Vertex) {
+pub fn vertex_report(s: &Scene, v: &Vertex) {
     show(BRepTool::pnt(v), pnt);
     real(BRepTool::vertex_tolerance(v).unwrap());
     let tv = v.tshape().cast::<BRepTVertex>();
@@ -191,7 +191,7 @@ fn edge_curves(s: &Scene, e: &Edge) {
     chain(&s.graph, &l);
 }
 
-fn edge_report(s: &Scene, e: &Edge) {
+pub fn edge_report(s: &Scene, e: &Edge) {
     let te = e.tshape().cast::<BRepTEdge>();
     let te = te.get().unwrap();
     real(BRepTool::edge_tolerance(e).unwrap());
@@ -214,7 +214,7 @@ fn edge_report(s: &Scene, e: &Edge) {
     }
 }
 
-fn face_report(s: &Scene, f: &Face) {
+pub fn face_report(s: &Scene, f: &Face) {
     let g = &s.geometry;
     let tf = f.tshape().cast::<BRepTFace>();
     let tf = tf.get().unwrap();
