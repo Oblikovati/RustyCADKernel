@@ -231,6 +231,42 @@ fn checked_options(options: VariationalOptions) -> Result<VariationalOptions, Fa
     })
 }
 
+/// What the constructor reads from the line before any field is set: the point
+/// kinds, the range, the linear criterion and the parameter array.
+struct LineParts {
+    nb_p2d: i32,
+    nb_p3d: i32,
+    first_point: i32,
+    last_point: i32,
+    criterion: LinearCriteria,
+    parameters: HArray1<f64>,
+}
+
+impl LineParts {
+    // The parts of `ssp` over `[first_point, last_point]`; Standard_ConstructionError
+    // for an empty range (after the criterion and the parameters, as natively).
+    fn read(ssp: &MultiLine, first_point: i32, last_point: i32) -> Result<Self, Failure> {
+        let (nb_p2d, nb_p3d) = (ssp.nb_p2d()?, ssp.nb_p3d()?);
+        let criterion: LinearCriteria = LinearCriteria::new(ssp, first_point, last_point)?;
+        let parameters: HArray1<f64> = HArray1::with_bounds(first_point, last_point)
+            .map_err(|error| allocation_failure(error, "AppDef_Variational"))?;
+        let nb_points: i32 = last_point - first_point + 1;
+        if nb_points <= 0 {
+            return Err(construction(&format!(
+                "{nb_points} points; expected FirstPoint <= LastPoint"
+            )));
+        }
+        Ok(Self {
+            nb_p2d,
+            nb_p3d,
+            first_point,
+            last_point,
+            criterion,
+            parameters,
+        })
+    }
+}
+
 impl Variational {
     /// `AppDef_Variational(SSP, FirstPoint, LastPoint, TheConstraints, MaxDegree,
     /// MaxSegment, Continuity, WithMinMax, WithCutting, Tolerance, NbIterations)`:
@@ -249,42 +285,46 @@ impl Variational {
     ) -> Result<Self, Failure> {
         let options: VariationalOptions = checked_options(options)?;
         let niv_cont: i32 = niv_cont_of(options.continuity)?;
-        let (nb_p2d, nb_p3d) = (ssp.nb_p2d()?, ssp.nb_p3d()?);
+        let line: LineParts = LineParts::read(ssp, first_point, last_point)?;
+        let mut variational: Self =
+            Self::from_parts(ssp, line, the_constraints, (options, niv_cont));
+        variational.tab_points = variational.read_points()?;
+        variational.init()?;
+        Ok(variational)
+    }
+
+    // The fields of a new smoothing before its points and constraint tables are read:
+    // the default weights, the knots [0, 1] and no result.
+    fn from_parts(
+        ssp: &MultiLine,
+        line: LineParts,
+        the_constraints: &Constraints,
+        (options, niv_cont): (VariationalOptions, i32),
+    ) -> Self {
+        let (nb_p2d, nb_p3d) = (line.nb_p2d, line.nb_p3d);
         let knots: Array1<'static, f64> = Array1::from_shared(&[0., 1.], 1).clone();
-        let criterion: LinearCriteria = LinearCriteria::new(ssp, first_point, last_point)?;
-        let parameters: HArray1<f64> = HArray1::with_bounds(first_point, last_point)
-            .map_err(|error| allocation_failure(error, "AppDef_Variational"))?;
-        let nb_points: i32 = last_point - first_point + 1;
-        if nb_points <= 0 {
-            return Err(construction(&format!(
-                "{nb_points} points; expected FirstPoint <= LastPoint"
-            )));
-        }
-        let mut variational: Self = Self {
+        Self {
             ssp: ssp.clone(),
             nb_p3d,
             nb_p2d,
             dimension: 2 * nb_p2d + 3 * nb_p3d,
-            first_point,
-            last_point,
-            nb_points,
+            first_point: line.first_point,
+            last_point: line.last_point,
+            nb_points: line.last_point - line.first_point + 1,
             tab_points: Array1::default(),
             constraints: the_constraints.clone(),
             tables: ConstraintTables::default(),
             options,
             niv_cont,
             percent: [0.4, 0.2, 0.4],
-            smooth_criterion: Handle::new(criterion).cast(),
-            parameters: Handle::new(parameters),
+            smooth_criterion: Handle::new(line.criterion).cast(),
+            parameters: Handle::new(line.parameters),
             knots: Handle::new(HArray1::from_owned(knots)),
             results: VariationalResults::default(),
             is_created: false,
             is_done: false,
             is_over_constr: false,
-        };
-        variational.tab_points = variational.read_points()?;
-        variational.init()?;
-        Ok(variational)
+        }
     }
 
     // Table of Points initialization: the 3D then 2D coordinates of every point.
