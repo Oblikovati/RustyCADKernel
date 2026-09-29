@@ -37,7 +37,7 @@ pub(super) fn copy_generations<T: NodeTag>(
         let Some(&new) = map.seek(&old) else {
             continue;
         };
-        let source = graph.inc_storage().def(old).base().clone();
+        let source = *graph.inc_storage().def(old).base();
         let target = fresh.inc_storage_mut().change_def(new).base_mut();
         target.own_gen = source.own_gen;
         target.subtree_gen = source.subtree_gen;
