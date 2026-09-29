@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod br_probe;
 use br_probe::{
-    bintools, bintools_sets, bintools_shape, brep_adaptor, brep_graph_views, brep_report,
-    brep_tools, brep_tools_modif, brep_tools_reshape, topexp, topods, toptools,
+    bintools, bintools_sets, bintools_shape, brep_adaptor, brep_graph_tool, brep_graph_views,
+    brep_report, brep_tools, brep_tools_modif, brep_tools_reshape, topexp, topods, toptools,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -52,6 +52,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("br_adaptor", brep_adaptor::adaptor_case),
     // BRepGraph and BRepGraphInc (br_probe/brep_graph*.rs)
     ("br_bgraph", brep_graph_views::bgraph_case),
+    ("br_bgraph_walk", brep_graph_tool::bgraph_walk_case),
 ];
 
 fn main() {

@@ -28,16 +28,25 @@ The toolkit test inventory maps these suites (28 declarations):
 | BRepTools_Test.cxx | brep_tools (not mapped) | 11 | not built (TKBO, TKMesh) | pass (3 translated) |
 | BRepGraph_RepId_Test.cxx | brep_graph_rep_id | 10 | pass | pass |
 | BRepGraph_ItemId_Test.cxx | brep_graph_item_id | 4 | pass | pass |
-| BRepGraph_NodeId_Test.cxx | not mapped (phase 2) | 15 | not run | waits for RelatedIterator, MakeBox |
-| BRepGraph_RefId_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView, iterators, MakeBox |
-| BRepGraph_VersionStamp_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView, Tool, MakeBox |
-| BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for EditorView, Tool, Iterator, BRepGProp |
+| BRepGraph_NodeId_Test.cxx | brep_graph_node_id | 15 | pass | pass |
+| BRepGraph_TypedIdDispatch_Test.cxx | brep_graph_typed_id_dispatch | 2 | pass | pass |
+| BRepGraph_Iterator_Test.cxx | not mapped (phase 2) | 14 | not run | waits for EditorView Gen().RemoveNode |
+| BRepGraph_DefsIterator_Test.cxx | not mapped (phase 2) | 11 | not run | waits for EditorView Vertices/Compounds/Solids/CompSolids().Add, Gen().MutChildRef, RemoveNode, RemoveRef |
+| BRepGraph_RefsIterator_Test.cxx | not mapped (phase 2) | 8 | not run | waits for EditorView Vertices/Compounds().Add, Gen().MutChildRef, RemoveNode, RemoveRef |
+| BRepGraph_ReverseIterator_Test.cxx | not mapped (phase 2) | 20 | not run | waits for EditorView Add of every kind, Gen().RemoveNode |
+| BRepGraph_RelatedIterator_Test.cxx | not mapped (phase 2) | 15 | not run | waits for EditorView Gen().RemoveNode, BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_ChildExplorer_Test.cxx | not mapped (phase 2) | 37 | not run | waits for EditorView Gen().RemoveRef, Occurrences().MutRef/SetRefLocalLocation (MutGuard) |
+| BRepGraph_ParentExplorer_Test.cxx | not mapped (phase 2) | 23 | not run | waits for EditorView Vertices/Compounds().Add, Occurrences().SetRefChildOccurrenceId, BRepGraph_Validate |
+| BRepGraph_Tool_Test.cxx | not mapped (phase 2) | 16 | not run | waits for MeshView and CacheMesh (Mesh()), EditorView Faces/CoEdges mesh setters, BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_RefId_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView (Vertices/Edges().Add, Faces().MutRef/SetRefOrientation, Gen().RemoveRef) |
+| BRepGraph_VersionStamp_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView setters and Gen().RemoveNode |
+| BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for EditorView (Vertices().Add, Mut), BRepGProp, TKPrim cylinder and sphere |
 | BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for CacheMesh, MeshView, BRepMesh, Compact |
-| BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for LayerHistory, explorers, iterators |
-| BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for Validate, Tool, iterators, TKPrim solids |
+| BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for LayerHistory, EditorView, TKPrim cylinder and sphere, BRepBuilderAPI_Copy |
+| BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for Validate, LayerRegistry, TKPrim solids, BRepBuilderAPI_MakeFace/MakeWire |
 | BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for Compact, Deduplicate, Validate, BRepGProp |
 | BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for caches, layers, Compact, Deduplicate |
-| BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for EditorView, explorers, LayerHistory |
+| BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for EditorView, LayerHistory, Validate, CacheRegistry |
 
 The suites build their inputs with BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge
 (TKTopAlgo) and BRepPrimAPI_MakeBox (TKPrim). Those toolkits are not ported, so the Rust
@@ -82,6 +91,23 @@ destructor, the move constructor and assignment, the allocator and the `std::has
 operators that repeat a `HashValue` or `HashCode` member); every rust item was checked
 to resolve by compiling a reference to it. The members of the phase-1 classes that are
 still missing are the phase-2 ones listed under Deliberate Rust deviations.
+
+Phase 2, wave 2a, area A ports the navigation classes and the first algorithms whole:
+BRepGraph_Iterator (with RootProductIterator), DefsIterator, RefsIterator,
+ReverseIterator, RelatedIterator, ChildExplorer, ParentExplorer, BRepGraph_Tool (all
+77 members, the five phase-1 reads included), BRepGraph_CopyRemap and
+`Topo().Edges().WiresOf/FacesOf` (docs/topology-design.md section 11.9). The eight
+upstream suites of these classes each also call an editor operation that a later wave
+ports (and two call TKPrim cylinders or the mesh view), so they wait, as the table
+lists; `BRepGraph_NodeId_Test.cxx` needed only the related iterator and the box, and
+`BRepGraph_TypedIdDispatch_Test.cxx` only the phase-1 ids, so both are translated 1:1
+(17 declarations, native and Rust pass). `crates/tkbrep/tests/brep_graph_navigation.rs`
+pins the box invariants (iteration counts, reverse parents, related nodes, explorer
+paths and Tool answers), the module unit tests cover removed entries (which the probe
+cannot create before the editor lands), and the `br_bgraph_walk` requests compare
+everything else with OCCT byte for byte. `tools/audit_api_rows.py` has rows for every
+public member of these classes (377 rows, 28 excluded: the `begin()`/`end()` range
+members); the BRepGraph missing list shrank from 967 to 590 members, with 0 stale rows.
 
 The BRepTools and BRepAdaptor suites are translated 1:1 in
 `crates/tkbrep/tests/brep_tools_reshape.rs`, `brep_tools_trsf_modification.rs`,
@@ -196,6 +222,20 @@ api rows for BinTools (152 rows, 5 excluded: the four destructors and
   `add_under_with_options`. `BRepGraphInc_Populate` and `BRepGraphInc_Reconstruct` are
   the modules `populate` (`perform`, `append`, `append_flattened`) and `reconstruct`
   (`node`, `node_with_cache`, `face_with_cache`, `Cache`).
+- BRepGraph iterators, explorers and Tool (docs/topology-design.md section 11.9):
+  `BRepGraph_Iterator<FaceDef, Full>` is `iterator::DefIterator<FaceTag, FULL>` with
+  every native alias (`FaceIterator`, `FullFaceIterator`...); the defs and refs
+  iterators share the `parent_traits` structs (`ShellOfSolidTraits`...);
+  `BRepGraph_ReverseIterator` is the `reverse_iterator` module with the native aliases
+  (`FacesOfEdge`, `RefsEdgesOfVertex`...). Each keeps `more`, `next`, `current`...
+  and also implements `Iterator` (the native range). The explorer constructor overloads
+  are `new`, `with_config`, `with_mode`, `with_avoid`, `with_target`,
+  `with_target_mode`, `with_target_avoid`, `with_accumulation` and `with_start`;
+  `GetConfig` is `config`. `BRepGraph_Tool::Edge` and its siblings are the modules
+  `tool::vertex`, `tool::edge`, `tool::co_edge`, `tool::face`, `tool::wire` and
+  `tool::shell`; overloads by reference or usage carry `_ref` or `_usage`, the oriented
+  coedge lookups `_oriented`, the UV-bounded adaptors `_bounded`, and the
+  `Bounds(..., double&...)` out-parameters are a returned tuple.
 
 ## Verification
 
@@ -330,6 +370,26 @@ edges, vertices and faces, an EXTERNAL edge in a wire and a face with an INTERNA
 (both raise Standard_ProgramError midway, and the partial storage is compared). No
 request routes a shape to the topology supplement layer (see Deliberate Rust
 deviations).
+
+The BRepGraph navigation requests (`br_bgraph_walk`; 13 requests in
+`tools/tkbrep_brepgraph_walk_corpus.py`) build a graph with the `br_bgraph` actions and
+then edit products (a part placed twice in an assembly, a nested sub-assembly, a
+compound root, and refused appends of a product under itself and of an invalid root).
+They print every dense definition and reference walk (with a start id), the defs and
+refs walks of every parent (the first index past each kind's end included), every
+reverse walk (vertex edges, edge coedges, wires and faces from three start indices,
+wire, face, shell, solid and occurrence parents, compound and occurrence parents of
+every node, the ref-based lookups), the related nodes of every node, the child
+explorer from every node under 19 configurations (all, direct, nine targets, three
+direct targets, avoid kinds with and without emission, no accumulation, a start
+transform) with the parent, link, reference, usage path, depth and the
+`LocationOf`/`NodeOf`/`LocationAt`/`NodeAt` queries of every match, the parent
+explorer under 14 configurations with the child, link, reference, leaf transform and
+branch-root flag of every match, and every `BRepGraph_Tool` member over every vertex,
+edge, coedge, face, wire and shell and their references, with usages placed at the
+scene's last location (a scale in the solid scene). The scenes are the solid scene
+under products, the cylinder (seam), mesh, Bezier, natural-restriction, degenerated
+and free scenes, and the `br_brep` edge and face scenes with every shape appended.
 
 ## Dependency gap
 
@@ -492,6 +552,38 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   0; a product or occurrence has none, so its shape is a reconstruction with new
   TShapes. The debug-only `ValidateMutationBoundary` assertion after `Add` is not run,
   as in a release build.
+- The BRepGraph iterators keep their release-build answers past the end:
+  `DefsOfParent::CurrentId` returns the last child found, and `RefsVertexOfEdge` and
+  `DefsVertexOfEdge` read the end vertex reference. `EdgeParentsOf` (`WiresOf`,
+  `FacesOf`) resumed at a start index reports a parent only at its first coedge, so a
+  parent whose first coedge precedes the start index is not reported at all.
+- `BRepGraph_RelatedIterator` does not deduplicate (a face adjacent through two edges
+  is reported twice), resumes each relation from saved indices, and ends a relation at
+  its first inactive node even when later ones are active (the native `setCurrent`
+  returns false and the stage moves on).
+- `BRepGraph_ChildExplorer` pops a frame when a child reference names an invalid node,
+  so later siblings of that frame are skipped. An occurrence explored without an
+  incoming reference takes the location of the first live reference to it in id order.
+  A push past the node count (the cycle guard) is refused, and the emitted frame is
+  then the parent's. The CoEdge to Edge, Wire to CoEdge and Occurrence to child steps
+  are structural (no reference, step -1).
+- `BRepGraph_ParentExplorer` emits a branch bottom-up once it reaches its root, with
+  the transforms prepared from the root down. A reference step records its position
+  among the parent's active references, while its transform reads `RefAtStep`, which
+  indexes the raw relation list; the two differ after a removed reference. The CoEdge
+  to Wire step is found by position but recorded as structural. The compound parents
+  are counted before their step is checked, so a compound that does not list the child
+  still consumes an ordinal.
+- `BRepGraph_Tool`: the derived flags (`Degenerated`, `IsClosed`, `SameRange`,
+  `SameParameter`, `Wire::IsClosed`, `Shell::IsClosed`) answer false for an inactive
+  entity, as the cache does, even where the static computation says true (an inactive
+  coedge is same-range there). `Face::OuterWire` keeps the last wire whose UV box
+  contains the candidate's within PConfusion, starting from the first wire with a box.
+  `Wire::FaceOf` returns the parent face of the first reference that is not removed
+  without checking the face. `CoEdge::PCurveAdaptor` projects on a plane or a
+  rectangular trimmed plane only (one trim level). `Edge::IsSeamOnFace` compares the
+  orientations of the edge's coedges on the face; `CoEdge::SeamPair` also requires the
+  opposite orientation. `CurveOnSurface` takes the face argument, not the coedge's.
 
 ## Deliberate Rust deviations
 
@@ -550,6 +642,32 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
 - Phase 2 still has to port these members of the phase-1 classes: `BRepGraph::Editor()
   const`, `Mesh()`, `LayerRegistry()` and `CacheRegistry()`;
   `Shapes().AddWithHistory` (LayerHistory) and `Shapes().RemoveShape` (the editor's
-  `RemoveNode`); `Topo().Edges().WiresOf` and `FacesOf` (they return iterators). The
-  editor, Tool and CacheDerivedState classes are partly ported: only the members that
-  phase 1 calls have api rows.
+  `RemoveNode`). The editor and CacheDerivedState classes are partly ported: only the
+  members that phase 1 calls have api rows. `Topo().Edges().WiresOf/FacesOf` and
+  `BRepGraph_Tool` are whole.
+- The BRepGraph iterators and explorers keep the native `More`/`Next`/`Current`
+  protocol and implement `Iterator` for the range form. The child and parent explorers
+  and the related iterator compose locations or build p-curve adaptors while they
+  advance, which raises natively in degenerate cases, so their constructors and `next`
+  return `Result` and their `Iterator` yields `Result` items (an error ends the
+  iteration). `BRepGraph_Tool` members that construct adaptors, transform a curve,
+  evaluate a p-curve or compute the outer wire return `Result` for the same reason.
+- Reads the native code leaves unchecked give a defined answer or panic in Rust:
+  `RefsOfParent::CurrentId` past the end returns the invalid id (natively a read past
+  the list); `ChildExplorer::LocationAt/NodeAt` below level -1 return identity and the
+  invalid id (natively a read before the stack); a parent exploration from a node out
+  of its kind's range yields nothing (natively the Wire, Face, Shell, Solid and
+  Occurrence cases read its relations unchecked); a `BRepGraph_Tool` member given an id
+  out of range panics, as `Definition()` does.
+- `BRepGraph_Tool` reads its derived flags through the phase-1 cache-derived-state
+  computations with the cache's answer for inactive entities, computing them on each
+  call. The native `BRepGraph_CacheDerivedState` memoises them per OwnGen (and
+  registers itself in the cache registry on the first read); the answers agree while no
+  mutation leaves an OwnGen unchanged, and the caches area routes the reads through the
+  memoising service in one module (`tool::derived_state`).
+- `BRepGraph_CopyRemap` holds the one mutable borrow of its target: the native context
+  gives the mutable target from a `const` reference and lets source and target alias
+  during compaction, so the Rust context has `target_graph(&mut self)`, an `in_place`
+  constructor for the aliasing case, and `items()` returns `None` for the identity
+  mapping (a null map natively); an explicit mapping without a map maps nothing
+  (natively a null dereference).

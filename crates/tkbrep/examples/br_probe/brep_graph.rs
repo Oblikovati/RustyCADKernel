@@ -43,21 +43,21 @@ fn base(b: &BaseDef) {
         long(u64::from(v));
     }
 }
-fn curve(s: &Scene, c: &Handle<dyn GeomCurve>) {
+pub fn curve(s: &Scene, c: &Handle<dyn GeomCurve>) {
     let i = id(&s.geometry.curves, c);
     int(i);
     if i == -2 {
         show(c.get().unwrap().value(0.5), pnt);
     }
 }
-fn surface(s: &Scene, c: &Handle<dyn GeomSurface>) {
+pub fn surface(s: &Scene, c: &Handle<dyn GeomSurface>) {
     let i = id(&s.geometry.surfaces, c);
     int(i);
     if i == -2 {
         show(c.get().unwrap().value(0.25, 0.75), pnt);
     }
 }
-fn pcurve(s: &Scene, c: &Handle<dyn Geom2dCurve>) {
+pub fn pcurve(s: &Scene, c: &Handle<dyn Geom2dCurve>) {
     let i = id(&s.geometry.pcurves, c);
     int(i);
     if i == -2 {

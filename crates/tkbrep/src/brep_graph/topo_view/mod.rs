@@ -20,6 +20,7 @@
 //! nodes (callers check `is_removed` when needed). Every group is a `Copy` view that
 //! borrows the graph.
 mod assembly;
+mod edge_parents;
 mod generic;
 mod geometry;
 
