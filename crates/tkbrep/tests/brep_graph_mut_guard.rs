@@ -49,7 +49,11 @@ fn BRepGraph_MutGuardTest__OperatorBool_TrueWhenOwned_FalseAfterMove() {
     let mut aGraph = makeBoxGraph();
     assert!(!aGraph.is_empty());
 
-    let mut aGuard = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+    let mut aGuard = aGraph
+        .editor()
+        .vertices()
+        .mutate(VertexId::start())
+        .unwrap();
     assert!(aGuard.is_active());
 
     let aMoved = MutGuard::move_from(&mut aGuard);
@@ -62,7 +66,11 @@ fn BRepGraph_MutGuardTest__DereferenceAfterMove_Throws() {
     let mut aGraph = makeBoxGraph();
     assert!(!aGraph.is_empty());
 
-    let mut aGuard = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+    let mut aGuard = aGraph
+        .editor()
+        .vertices()
+        .mutate(VertexId::start())
+        .unwrap();
 
     let aMoved = MutGuard::move_from(&mut aGuard);
     let _ = &aMoved;
@@ -85,7 +93,11 @@ fn BRepGraph_MutGuardTest__MoveAssignmentFlushesThenTransfers() {
     let aGenBefore = vertex_own_gen(&aGraph, VertexId::start());
 
     {
-        let mut aFirst = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+        let mut aFirst = aGraph
+            .editor()
+            .vertices()
+            .mutate(VertexId::start())
+            .unwrap();
         VertexOps::set_point_guarded(&mut aFirst, Point3::new(1.0, 2.0, 3.0));
 
         let mut aSecond = aFirst
@@ -119,7 +131,11 @@ fn BRepGraph_MutGuardTest__ExceptionInsideScope_StillNotifies() {
     let aGenBefore = vertex_own_gen(&aGraph, VertexId::start());
 
     let aScope = |aGraph: &mut BRepGraph| -> Result<(), String> {
-        let mut aGuard = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+        let mut aGuard = aGraph
+            .editor()
+            .vertices()
+            .mutate(VertexId::start())
+            .unwrap();
         VertexOps::set_point_guarded(&mut aGuard, Point3::new(9.0, 9.0, 9.0));
         Err("test: throw mid-scope".to_owned())
     };
@@ -142,7 +158,11 @@ fn BRepGraph_MutGuardTest__MovedFrom_DoesNotDoubleNotify() {
     let aGenBefore = vertex_own_gen(&aGraph, VertexId::start());
 
     {
-        let mut aSrc = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+        let mut aSrc = aGraph
+            .editor()
+            .vertices()
+            .mutate(VertexId::start())
+            .unwrap();
         aSrc.mark_dirty();
         let _aDst = MutGuard::move_from(&mut aSrc);
         // Only aDst's destructor should notify; aSrc's destructor must be a no-op.
@@ -176,7 +196,11 @@ fn BRepGraph_MutGuardTest__DuplicateGuard_Rejected() {
     let mut aGraph = makeBoxGraph();
     assert!(!aGraph.is_empty());
 
-    let mut aGuard1 = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+    let mut aGuard1 = aGraph
+        .editor()
+        .vertices()
+        .mutate(VertexId::start())
+        .unwrap();
     assert!(aGuard1.is_active());
 
     // Attempting to acquire a second guard on the same vertex must throw.
@@ -209,7 +233,11 @@ fn BRepGraph_MutGuardTest__GuardBlocksStructuralRemoval() {
     let mut aGraph = makeBoxGraph();
     assert!(!aGraph.is_empty());
 
-    let mut aGuard = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+    let mut aGuard = aGraph
+        .editor()
+        .vertices()
+        .mutate(VertexId::start())
+        .unwrap();
     assert!(aGuard.is_active());
 
     // Structural removal must throw while a guard is active on the item.
@@ -230,11 +258,19 @@ fn BRepGraph_MutGuardTest__GuardReleasedOnDestruction_CanReacquire() {
     assert!(!aGraph.is_empty());
 
     {
-        let aGuard = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+        let aGuard = aGraph
+            .editor()
+            .vertices()
+            .mutate(VertexId::start())
+            .unwrap();
         assert!(aGuard.is_active());
     }
     // Guard destroyed - should be able to acquire again.
-    let aGuard2 = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+    let aGuard2 = aGraph
+        .editor()
+        .vertices()
+        .mutate(VertexId::start())
+        .unwrap();
     assert!(aGuard2.is_active());
 }
 
@@ -244,7 +280,11 @@ fn BRepGraph_MutGuardTest__ClearRejectsActiveGuard() {
     assert!(!aGraph.is_empty());
 
     {
-        let mut aGuard = aGraph.editor().vertices().mutate(VertexId::start()).unwrap();
+        let mut aGuard = aGraph
+            .editor()
+            .vertices()
+            .mutate(VertexId::start())
+            .unwrap();
         assert!(aGuard.is_active());
         assert_eq!(
             aGuard.graph_mut().clear().unwrap_err().exception_type(),

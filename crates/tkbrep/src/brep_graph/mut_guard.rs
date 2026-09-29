@@ -68,7 +68,6 @@ guard_tags! {
     OccurrenceRefTag,
 }
 
-
 /// `BRepGraph_MutGuard<T>`: registered on its item (the guard plane) for its whole
 /// life; the typed setters of the editor write through [`internal`](Self::internal),
 /// which flags it dirty, and releasing a dirty guard (dropping it, or assigning over
