@@ -145914,6 +145914,974 @@
       "rust_item": "rustycad_tkgeomalgo::hatch::Parameter::new",
       "status": "implemented",
       "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::circ_circ_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedLin&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::circ_lin_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedLin&,const GccEnt_QualifiedLin&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::lin_lin_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedCirc&,const gp_Pnt2d&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::circ_pnt_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedLin&,const gp_Pnt2d&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::lin_pnt_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::pnt_pnt_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,const gp_Circ2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::circ_circ_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedLin&,const gp_Circ2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::circ_lin_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedCirc&,const gp_Pnt2d&,const gp_Circ2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::circ_pnt_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedLin&,const GccEnt_QualifiedLin&,const gp_Circ2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::lin_lin_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const GccEnt_QualifiedLin&,const gp_Pnt2d&,const gp_Circ2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::lin_pnt_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Circ2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::pnt_pnt_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::WhichQualifier(int,GccEnt_Position&,GccEnt_Position&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::which_qualifier",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::Tangency1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::tangency1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::Tangency2(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::tangency2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::CenterOn3(int,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::center_on3",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::IsTheSame1(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::is_the_same1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanOn::IsTheSame2(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanOn.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanOn::is_the_same2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::circ_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedLin&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::circ_lin",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad(const GccEnt_QualifiedCirc&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::circ_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad(const GccEnt_QualifiedLin&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::lin_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad(const GccEnt_QualifiedLin&,const GccEnt_QualifiedLin&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::lin_lin",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad(const gp_Pnt2d&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::pnt_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::WhichQualifier(int,GccEnt_Position&,GccEnt_Position&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::which_qualifier",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::Tangency1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::tangency1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::Tangency2(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::tangency2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::IsTheSame1(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::is_the_same1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d2TanRad::IsTheSame2(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d2TanRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d2TanRad::is_the_same2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::circ_circ_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,const GccEnt_QualifiedLin&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::circ_circ_lin",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedLin&,const GccEnt_QualifiedLin&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::circ_lin_lin",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedLin&,const GccEnt_QualifiedLin&,const GccEnt_QualifiedLin&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::lin_lin_lin",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::circ_circ_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedLin&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::circ_lin_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedLin&,const GccEnt_QualifiedLin&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::lin_lin_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedCirc&,const gp_Pnt2d&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::circ_pnt_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const GccEnt_QualifiedLin&,const gp_Pnt2d&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::lin_pnt_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::pnt_pnt_pnt",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::WhichQualifier(int,GccEnt_Position&,GccEnt_Position&,GccEnt_Position&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::which_qualifier",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::Tangency1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::tangency1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::Tangency2(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::tangency2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::Tangency3(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::tangency3",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::IsTheSame1(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::is_the_same1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::IsTheSame2(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::is_the_same2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3Tan::IsTheSame3(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2d3Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2d3Tan::is_the_same3",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dBisec(const gp_Circ2d&,const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dBisec::new",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dBisec::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dBisec::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dBisec::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dBisec::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dBisec::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dBisec::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen(const GccEnt_QualifiedCirc&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::tangent_to_circle",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen(const gp_Lin2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::tangent_to_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen(const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::through_point",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen::WhichQualifier(int,GccEnt_Position&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::which_qualifier",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen::Tangency1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::tangency1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanCen::IsTheSame1(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanCen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanCen::is_the_same1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad(const GccEnt_QualifiedCirc&,const gp_Lin2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::circ_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad(const GccEnt_QualifiedLin&,const gp_Lin2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::lin_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad(const gp_Pnt2d&,const gp_Lin2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::pnt_on_line",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad(const GccEnt_QualifiedCirc&,const gp_Circ2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::circ_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad(const GccEnt_QualifiedLin&,const gp_Circ2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::lin_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad(const gp_Pnt2d&,const gp_Circ2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::pnt_on_circ",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad::WhichQualifier(int,GccEnt_Position&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::which_qualifier",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad::Tangency1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::tangency1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad::CenterOn3(int,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::center_on3",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Circ2dTanOnRad::IsTheSame1(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Circ2dTanOnRad.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Circ2dTanOnRad::is_the_same1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircLin2dBisec(const gp_Circ2d&,const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircLin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircLin2dBisec::new",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircLin2dBisec::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircLin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircLin2dBisec::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircLin2dBisec::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircLin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircLin2dBisec::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircLin2dBisec::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircLin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircLin2dBisec::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircPnt2dBisec(const gp_Circ2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircPnt2dBisec::new",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircPnt2dBisec(const gp_Circ2d&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircPnt2dBisec::with_tolerance",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircPnt2dBisec::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircPnt2dBisec::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircPnt2dBisec::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircPnt2dBisec::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_CircPnt2dBisec::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_CircPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::CircPnt2dBisec::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan(const gp_Pnt2d&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::through_points",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan(const GccEnt_QualifiedCirc&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::tangent_through_point",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan(const GccEnt_QualifiedCirc&,const GccEnt_QualifiedCirc&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::tangent_to_circles",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan::WhichQualifier(int,GccEnt_Position&,GccEnt_Position&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::which_qualifier",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan::Tangency1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::tangency1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2d2Tan::Tangency2(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2d2Tan.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2d2Tan::tangency2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dBisec(const gp_Lin2d&,const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dBisec::new",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dBisec::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dBisec::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dBisec::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dBisec::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dBisec::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dBisec::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dBisec::Intersection1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dBisec::intersection1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dBisec::Intersection2(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dBisec::intersection2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl(const gp_Pnt2d&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::through_point",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl(const GccEnt_QualifiedCirc&,const gp_Lin2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::tangent_to_circle",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl::NbSolutions() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::nb_solutions",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl::ThisSolution(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl::WhichQualifier(int,GccEnt_Position&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::which_qualifier",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl::Tangency1(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::tangency1",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Lin2dTanObl::Intersection2(int,double&,double&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Lin2dTanObl.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Lin2dTanObl::intersection2",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_LinPnt2dBisec(const gp_Lin2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_LinPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::LinPnt2dBisec::new",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_LinPnt2dBisec::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_LinPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::LinPnt2dBisec::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_LinPnt2dBisec::ThisSolution() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_LinPnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::LinPnt2dBisec::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_NoSolution",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_NoSolution.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::no_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Pnt2dBisec(const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Pnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Pnt2dBisec::new",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Pnt2dBisec::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Pnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Pnt2dBisec::is_done",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Pnt2dBisec::HasSolution() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Pnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Pnt2dBisec::has_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccAna_Pnt2dBisec::ThisSolution() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccAna/GccAna_Pnt2dBisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ana::Pnt2dBisec::this_solution",
+      "status": "implemented",
+      "notes": "GccAna mapping (docs/tkgeomalgo-progress.md): each native constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue...), named after its argument kinds (circ/lin/pnt) and locus (on_line/on_circ); output references become returned tuples; the fixed-size solution arrays and their consultation checks are kept with the native solution order, so an index past an array raises Standard_OutOfRange; GccAna_NoSolution is a Failure of that exception type."
     }
   ],
   "tests": [
@@ -232171,6 +233139,258 @@
         "linux-gcc-c-locale"
       ],
       "native_expected_failure": "Fails in native OCCT itself on the pinned profile (GCC, glibc): the test inlines ElCLib::Value(-0.7, hyperbola), and GCC folds sinh(-0.7) at compile time to a value one ulp from the glibc run-time sinh that ExtremaPC2d_Hyperbola::Value calls, so the EXPECT_EQ(..., 0.0) distance is 1 ulp natively. The Rust port calls the run-time sinh on both sides, as the native library does, and passes. Approved by the maintainer on 2026-09-29."
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CircleCircleCircle_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CircleCircleCircle_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CircleCirclePoint_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CircleCirclePoint_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CircleCirclePoint_12",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CircleCirclePoint_12",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CircleLinLin_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CircleLinLin_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_21",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_21",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.LinLinLin_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__LinLinLin_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.LinLinPoint_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__LinLinPoint_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.LinPointPoint_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__LinPointPoint_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CircleCirclePoint_14",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CircleCirclePoint_14",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_12",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_12",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_13",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_13",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_14",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_14",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_15",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_15",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_22",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_22",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_24",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_24",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.CirclePointPoint_31",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__CirclePointPoint_31",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GccAna_Circ2d3TanTest.PointPointPoint_11",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx",
+      "source_sha256": "7f6ae8f8a8ed4c71fb9a1678287014e45c0b7cd04185d46066989cb4c5c8619e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "gcc_ana_circ2d_3tan",
+      "rust_test": "GccAna_Circ2d3TanTest__PointPointPoint_11",
+      "rust_source": "crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }

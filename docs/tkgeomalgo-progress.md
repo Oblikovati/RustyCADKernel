@@ -26,6 +26,7 @@ The toolkit test inventory maps these suites (0 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
+| src/ModelingAlgorithms/TKGeomAlgo/GTests/GccAna_Circ2d3Tan_Test.cxx | `crates/tkgeomalgo/tests/gcc_ana_circ2d_3tan.rs` | 18 | pass | pass |
 
 ## API mapping
 
@@ -41,6 +42,15 @@ The toolkit test inventory maps these suites (0 declarations):
   `trim_segment`, `nb_intervals_on`, `set_tolerance`), output references become returned
   tuples, and the friend-only data of `Hatch_Parameter` and `Hatch_Line` stays private
   to the `hatch` module.
+- GccAna: each native constructor overload is a named constructor returning `Result`,
+  named after its argument kinds and locus (`Circ2d3Tan::circ_lin_pnt`,
+  `Circ2d2TanOn::lin_pnt_on_circ`, `Lin2d2Tan::tangent_to_circles`...); each
+  `GccAna_<Class>_<n>.cxx` file is one submodule. The fixed-size `NCollection_Array1`
+  fields are `solutions::Slots`, 1-based with the native bounds check, so a solver that
+  overruns its arrays raises Standard_OutOfRange as natively; `Tangencies` holds the
+  `TheSame`/point/parameter arrays of one argument. The consultation members keep the
+  checks each native class writes (some skip the `WellDone` test, `Circ2d2TanOn`'s
+  `ThisSolution` tests nothing), and output references become returned tuples.
 
 ## Verification
 
@@ -86,6 +96,16 @@ and infinite intervals, polygon vertices on hatching lines, two intersections cl
 the tolerance, parallel and identical trimming lines, degenerate segments, segments near
 and beyond RealLast, a negative tolerance, and 24 seeded random polygons (38 requests).
 
+GccAna: `gccana_circ3tan`, `gccana_2tanrad`, `gccana_2tanon` and `gccana_tanonrad` run
+every constructor overload of Circ2d3Tan, Circ2d2TanRad, Circ2d2TanOn and Circ2dTanOnRad
+on hand-built configurations (tangent, nested, concentric, secant, parallel, coincident
+and far arguments, each qualifier including the rejected ones, the upstream suite's
+cases) and on seeded random arguments; `gccana_tancen`, `gccana_lin2tan`,
+`gccana_lintanobl`, `gccana_linbisec` and `gccana_bisec` do the same for Circ2dTanCen,
+Lin2d2Tan, Lin2dTanObl, Lin2dBisec and the five bisector classes. Each request prints
+the solution count and order and, from index 0 to NbSolutions + 1, every solution and
+the consultations its detail mask selects (2670 requests).
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
@@ -104,3 +124,26 @@ and beyond RealLast, a negative tolerance, and 24 seeded random polygons (38 req
 - `Hatch_Hatcher::Trim(P1, P2)` scales a segment vector whose X (else Y) exceeds
   0.9 RealLast by the inverse of that component; a vector that overflowed to infinity
   becomes NaN and the segment is ignored.
+- The GccAna solvers keep their native slips: Circ2d3Tan(circle, circle, line) tests
+  Qualified2 instead of Qualified3 for its outside and unqualified lines; the
+  three-circle solver measures the qualifier distances of circles 2 and 3 from the
+  centre of circle 1; Circ2d3Tan(line, line, line) compacts its solutions without
+  moving their qualifiers; Lin2d2Tan(circle, circle) stores some qualifiers in slot 1
+  again and copies Qualified1 into qualifier2; Lin2dTanObl(circle) intersects the first
+  solution for the second; Circ2d2TanOn(circle, circle, line) qualifies its general
+  solutions with the radius at the bisector index (a third bisector raises
+  Standard_OutOfRange) and computes the first argument parameter at the second tangency
+  point; Circ2d2TanOn(line, line, circle) builds its circles at intersection point `i`;
+  Circ2dTanOnRad(line, circle) truncates its side test to an integer; the `CenterOn3`
+  members return the tangency point, not the centre; Circ2dTanOnRad(circle, circle)
+  raises Standard_OutOfRange in its single-centre case (it writes qualifier slot 0).
+- Some native paths leave array slots uninitialized and later read them (the Rbid(2)
+  radius of an unqualified first circle in Circ2d2TanOn, TheSame1 of the nbsol 3 case of
+  Circ2d2TanRad(circle, line), TheSame2 of an enclosing and an unqualified circle in
+  Circ2d2TanRad, the side cote3(2) of two unqualified-line triples in
+  Circ2d3Tan(line, line, line), the slot-2 data of Circ2dTanOnRad(point, circle), the
+  argument parameters of Circ2d2TanOn(circle, point, line), the qualifier-2 slots of
+  Lin2d2Tan(circle, circle) and the qualifier of Circ2d2TanRad(line, point) beyond the
+  diameter). The port starts every slot at zero (default positions and circles), which
+  is deterministic; the numeric corpus avoids reading those slots, since their native
+  value is whatever the allocator returned.
