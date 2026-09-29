@@ -16,9 +16,10 @@
 //! `BRepGraph_LayerParametric`: the base of the graph-owned parametric generators
 //! (the BRepGraphPrim box, plane or loft layers build on it).
 use crate::brep_graph::layer::BRepGraphLayer;
+use crate::brep_graph::layer_lock::LayerLock;
 use crate::brep_graph::{BRepGraph, NodeId};
 use rustycad_tkernel::impl_transient_interface;
-use rustycad_tkernel::standard::Failure;
+use rustycad_tkernel::standard::{Failure, Handle};
 
 /// `BRepGraph_LayerParametric::GenerationFlag`: the graph artifacts a generator
 /// creates or refreshes.
@@ -101,7 +102,7 @@ pub const fn mesh_quality_value(quality: MeshQuality, ladder: [u32; 5]) -> u32 {
 
 /// `BRepGraph_LayerParametric`: the abstract base of parametric generator layers,
 /// with the shared instance identity, generation flags and mesh quality controls. The
-/// protected `lockLayer` waits for `BRepGraph_LayerLock` (docs/topology-design.md 11.9).
+/// protected members are provided methods.
 pub trait LayerParametric: BRepGraphLayer {
     /// `graphForMutation()` (protected): the attached graph; Standard_ProgramError when
     /// the layer is detached (or `graph` is not its graph).
@@ -118,6 +119,12 @@ pub trait LayerParametric: BRepGraphLayer {
             ));
         }
         Ok(graph)
+    }
+
+    /// `lockLayer(theGraph)` (protected): the ownership layer of the graph, registered
+    /// first when absent (`Ensure<BRepGraph_LayerLock>()`).
+    fn lock_layer(&self, graph: &BRepGraph) -> Result<Handle<LayerLock>, Failure> {
+        graph.layer_registry().ensure::<LayerLock>()
     }
 }
 impl_transient_interface!(

@@ -38,6 +38,7 @@ pub mod iterator;
 pub mod layer;
 pub mod layer_deferred;
 pub mod layer_history;
+pub mod layer_lock;
 pub mod layer_parametric;
 pub mod layer_registry;
 pub mod layer_topo_supplement;

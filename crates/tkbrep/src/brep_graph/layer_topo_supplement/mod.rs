@@ -15,6 +15,7 @@
 
 //! `BRepGraph_LayerTopoSupplement`: runtime storage for the TopoDS fragments the core
 //! model does not keep, attached to core owner nodes.
+use crate::brep_graph::copy_remap::CopyRemap;
 use crate::brep_graph::hooks::TopoSupplementHooks;
 use crate::brep_graph::layer::{AttachedGraph, BRepGraphLayer, LayerBase, LayerType};
 use crate::brep_graph::{BRepGraph, NodeId, NodeKind};
@@ -24,6 +25,8 @@ use rustycad_tkernel::ncollection::DataMap;
 use rustycad_tkernel::standard::{Failure, Guid, SharedState, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::sync::OnceLock;
+
+mod copy;
 
 pub use crate::brep_graph::hooks::AttachmentKind;
 
@@ -375,6 +378,10 @@ impl BRepGraphLayer for LayerTopoSupplement {
     }
 
     /// `Clear()`.
+    fn copy_to(&self, copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        self.copy_attachments_to(copy)
+    }
+
     fn invalidate_all(&self, attached: AttachedGraph<'_>) {
         self.clear(attached);
     }

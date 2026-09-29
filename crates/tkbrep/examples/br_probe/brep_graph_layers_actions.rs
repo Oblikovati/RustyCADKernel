@@ -317,9 +317,9 @@ fn deferred_action(
                 d.register_deferred_representations_direct(g, i, &p, &k, &v)?;
             }
         }
-        52 => d.unregister_deferred(read_item(r)),
+        52 => d.unregister_deferred(g, read_item(r)),
         53 => d.begin_bulk_registration(),
-        54 => d.end_bulk_registration()?,
+        54 => d.end_bulk_registration(g)?,
         55 => {
             let old = read_node(r);
             d.on_node_replaced(None, old, read_node(r));

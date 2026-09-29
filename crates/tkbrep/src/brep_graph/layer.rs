@@ -14,7 +14,10 @@
 // BRepGraph_Layer.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepGraph_Layer`: the base of the named attribute layers a graph notifies.
-use crate::brep_graph::{BRepGraph, ItemDomain, ItemId, NodeId, NodeKind, RefId, RefKind};
+use crate::brep_graph::copy_remap::CopyRemap;
+use crate::brep_graph::{
+    BRepGraph, ItemDomain, ItemId, NodeId, NodeKind, NodeTag, RefId, RefKind, RefTag, TypedId,
+};
 use rustycad_tkernel::impl_transient_interface;
 use rustycad_tkernel::standard::{
     Failure, Guid, Handle, RuntimeTyped, StandardTransient, Transient,
@@ -100,8 +103,7 @@ impl LayerBase {
 /// `BRepGraph_Layer`: per-node and per-reference metadata under a unique GUID and
 /// name, with the lifecycle callbacks the graph dispatches (removal, replacement,
 /// modification). Every callback defaults to a no-op; `SubscribedKinds` and
-/// `SubscribedRefKinds` default to 0 (no modification event). `CopyTo` waits for
-/// `BRepGraph_CopyRemap` (docs/topology-design.md 11.9).
+/// `SubscribedRefKinds` default to 0 (no modification event); `CopyTo` is required.
 ///
 /// ```
 /// use rustycad_tkbrep::brep_graph::layer::{BRepGraphLayer, kind_bit};
@@ -127,6 +129,11 @@ pub trait BRepGraphLayer: Transient {
 
     /// `OnNodeReplaced(theOldNode, theNewNode)`: a node was removed and replaced.
     fn on_node_replaced(&self, _attached: AttachedGraph<'_>, _old: NodeId, _new: NodeId) {}
+
+    /// `CopyTo(theCopy)`: copy this source layer's data into the copy's target graph
+    /// (for `Mode::Compact`, migrate it into the rebuilt graph through the item map,
+    /// dropping stale entries). Not noexcept natively: it may raise.
+    fn copy_to(&self, copy: &CopyRemap<'_>) -> Result<(), Failure>;
 
     /// `InvalidateAll()`: mark every cached value dirty.
     fn invalidate_all(&self, attached: AttachedGraph<'_>);
@@ -234,6 +241,43 @@ pub(crate) fn detach_context(layer: &dyn BRepGraphLayer) {
     }
     layer.on_detached();
     layer.layer_base().set_graph_token(0);
+}
+
+/// `RemappedItem(theCopy, theId)` (protected static, node overload): the target node
+/// of a typed source node, or the invalid id when it is invalid, unmapped or mapped to
+/// a node of another kind or to a reference.
+///
+/// ```
+/// use rustycad_tkbrep::brep_graph::copy_remap::{CopyRemap, MappingKind, Mode};
+/// use rustycad_tkbrep::brep_graph::layer::remapped_node;
+/// use rustycad_tkbrep::brep_graph::{BRepGraph, FaceId};
+/// let (source, mut target) = (BRepGraph::new(), BRepGraph::new());
+/// let copy = CopyRemap::with_mapping(&source, &mut target, MappingKind::Identity, Mode::Copy);
+/// assert_eq!(remapped_node(&copy, FaceId::new(2)), FaceId::new(2));
+/// assert!(!remapped_node(&copy, FaceId::invalid()).is_valid());
+/// ```
+pub fn remapped_node<T: NodeTag>(copy: &CopyRemap<'_>, id: TypedId<T>) -> TypedId<T> {
+    if !id.is_valid() {
+        return TypedId::invalid();
+    }
+    let mapped = copy.target_item(NodeId::from(id).into());
+    if !mapped.is_node() {
+        return TypedId::invalid();
+    }
+    TypedId::from_node_id(mapped.node_id())
+}
+
+/// `RemappedItem(theCopy, theId)` (protected static, reference overload): the target
+/// reference of a typed source reference, invalid as for [`remapped_node`].
+pub fn remapped_ref<T: RefTag>(copy: &CopyRemap<'_>, id: TypedId<T>) -> TypedId<T> {
+    if !id.is_valid() {
+        return TypedId::invalid();
+    }
+    let mapped = copy.target_item(RefId::from(id).into());
+    if !mapped.is_reference() {
+        return TypedId::invalid();
+    }
+    TypedId::from_ref_id(mapped.ref_id())
 }
 
 /// Views a handle of a concrete layer as the base layer handle the registry stores.
