@@ -16,6 +16,7 @@
 
 //! The state of `TheMotor` across its phases and its transitions: the start, the
 //! acceptance or the restore of an estimation or an iteration, and the progression.
+use super::super::smooth_criterion::SmoothCriterion;
 use super::motor_support::copy_of;
 use super::project::ProjectErrors;
 use crate::fem_tool::Curve;
@@ -77,6 +78,21 @@ impl MotorState {
             ..Self::default()
         })
     }
+}
+
+// The quality criteria of J above the minima into VALCRI (the (1.2) and (2.4)
+// steps); an improved estimation (ICDANA > 0) makes the next assembly rebuild the
+// Hessian. Returns ICDANA.
+pub(super) fn quality_criteria(
+    j: &dyn SmoothCriterion,
+    st: &mut MotorState,
+) -> Result<i32, Failure> {
+    let quality = j.quality_values(st.j_min[0], st.j_min[1], st.j_min[2])?;
+    st.valcri = quality.criteria;
+    if quality.icdana > 0 {
+        st.lconst = true;
+    }
+    Ok(quality.icdana)
 }
 
 // (3.1): the criteria, the error, the curve and the parameters saved before the

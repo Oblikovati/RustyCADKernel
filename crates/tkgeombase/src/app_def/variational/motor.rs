@@ -21,7 +21,7 @@ use super::super::smooth_criterion::SmoothCriterion;
 use super::Variational;
 use super::motor_state::{
     MotorState, SMALL_VALUE, accept_estimation, accept_iteration, invalidate_new_knots,
-    progression, restore_previous_iteration, save_before_cutting,
+    progression, quality_criteria, restore_previous_iteration, save_before_cutting,
 };
 use super::motor_support::{at, copy_of, curve_of, fresh, put, raise_estimations, stable_sort};
 use crate::fem_tool::{Assembly, Curve};
@@ -198,11 +198,7 @@ impl Variational {
         st: &mut MotorState,
     ) -> Result<i32, Failure> {
         let nbr_pnt: i32 = self.last_point - self.first_point + 1;
-        let quality = j.quality_values(st.j_min[0], st.j_min[1], st.j_min[2])?;
-        st.valcri = quality.criteria;
-        if quality.icdana > 0 {
-            st.lconst = true;
-        }
+        let icdana: i32 = quality_criteria(j, st)?;
         let errors = j.error_values()?;
         (st.errors.max_err, st.errors.qua_err, st.errors.ave_err) = (
             errors.max_error,
@@ -211,7 +207,7 @@ impl Variational {
         );
         st.isnear = (st.errors.qua_err / f64::from(nbr_pnt)).sqrt() < 2. * st.w_quality
             && self.options.nb_iterations > 1;
-        Ok(quality.icdana)
+        Ok(icdana)
     }
 
     // (2.1) Save current results.
@@ -261,11 +257,7 @@ impl Variational {
         self.optimize_new_curve(j, st, a)?;
         st.c_current = st.c_new.clone();
         // (2.4) calculation of quality criteria and improvement of estimation.
-        let quality = j.quality_values(st.j_min[0], st.j_min[1], st.j_min[2])?;
-        st.valcri = quality.criteria;
-        if quality.icdana > 0 {
-            st.lconst = true;
-        }
+        quality_criteria(j, st)?;
         // (2.5) Optimization of ti by orthogonal projection
         let c_current: Handle<Curve> = st.c_current.clone();
         self.project_new_ti(&c_current, st, ecarts, 2)?;
