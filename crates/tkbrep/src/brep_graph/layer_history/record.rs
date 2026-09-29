@@ -89,7 +89,7 @@ impl NodeMaps {
     }
 
     // One original-to-derived link: the reverse map, then the forward images.
-    fn link(&mut self, kind: HistoryKind, original: NodeId, derived: NodeId) {
+    pub(super) fn link(&mut self, kind: HistoryKind, original: NodeId, derived: NodeId) {
         append_derived_origin(&mut self.derived_to_originals, derived, original);
         append_forward(self.forward_mut(kind), original, derived);
     }

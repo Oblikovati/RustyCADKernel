@@ -15,11 +15,11 @@
 //! 3d097a0328e71b826377d4814ab05ec3c3d23871. `BRepPrimAPI_MakeBox` is the box of the
 //! test support module (TKPrim is not ported); the suite includes BRepGraph_Compact
 //! but calls none. The test layers keep their records behind a lock, as a Rust layer
-//! is shared through a handle; their no-op `CopyTo` overrides have no Rust member yet
-//! (it takes BRepGraph_CopyRemap, docs/topology-design.md 11.10).
-#![allow(non_snake_case)]
+//! is shared through a handle; their no-op `CopyTo` overrides are no-op `copy_to`s.
+#![allow(non_snake_case, non_camel_case_types)]
 mod support;
 use rustycad_tkbrep::brep_graph::LayerIterator;
+use rustycad_tkbrep::brep_graph::copy_remap::CopyRemap;
 use rustycad_tkbrep::brep_graph::deferred_scope::DeferredScope;
 use rustycad_tkbrep::brep_graph::editor::EdgeOps;
 use rustycad_tkbrep::brep_graph::layer::{
@@ -131,6 +131,9 @@ impl BRepGraphLayer for BRepGraph_LayerModTracking {
     fn subscribed_ref_kinds(&self) -> i32 {
         self.mySubscribedRefKinds
     }
+    fn copy_to(&self, _copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        Ok(())
+    }
     fn on_ref_removed(&self, _attached: AttachedGraph<'_>, theRef: RefId) {
         let mut s = self.s();
         s.myRefRemovedEvents.push(theRef);
@@ -210,6 +213,9 @@ impl BRepGraphLayer for BRepGraph_LayerDefault {
         &self.myName
     }
     fn on_node_removed(&self, _attached: AttachedGraph<'_>, _node: NodeId) {}
+    fn copy_to(&self, _copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        Ok(())
+    }
     fn invalidate_all(&self, _attached: AttachedGraph<'_>) {}
     fn clear(&self, _attached: AttachedGraph<'_>) {}
 }

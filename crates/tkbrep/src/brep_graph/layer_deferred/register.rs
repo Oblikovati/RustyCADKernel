@@ -12,14 +12,15 @@
 // commercial license or contractual agreement.
 // Rust translation of the registration members of BRepGraph_LayerDeferred
 // (RegisterDeferred*, UnregisterDeferred, ReserveDeferredItems, Begin/End bulk
-// registration, lockItem) of ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.cxx
+// registration, lockItem, unlockItem) of ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.cxx
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Registering and unregistering deferred representations.
 use super::{DeferredEntry, DeferredRepresentation, LayerDeferred, RepresentationKind};
-use crate::brep_graph::layer::AttachedGraph;
+use crate::brep_graph::layer::{AttachedGraph, LayerType};
+use crate::brep_graph::layer_lock::LayerLock;
 use crate::brep_graph::{BRepGraph, ItemId, NodeId, RefId};
-use rustycad_tkernel::standard::Failure;
+use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::AsciiString;
 
 // The identity of an item's deferred source: the provider and its key.
@@ -196,42 +197,48 @@ impl LayerDeferred {
         self.base.touch();
     }
 
-    /// `UnregisterDeferred(theItem)`: drops the item's entry and unlocks it.
-    pub fn unregister_deferred(&self, item: ItemId) {
+    /// `UnregisterDeferred(theItem)`: drops the item's entry and unlocks it in the
+    /// attached graph's lock layer.
+    pub fn unregister_deferred(&self, graph: &BRepGraph, item: ItemId) {
         if !item.is_valid() {
             return;
         }
-        self.remove_item(item);
+        self.remove_item(self.base.attached_graph(graph), item);
     }
 
     /// `UnregisterDeferred(theNode)`.
-    pub fn unregister_deferred_node(&self, node: NodeId) {
-        self.unregister_deferred(node.into());
+    pub fn unregister_deferred_node(&self, graph: &BRepGraph, node: NodeId) {
+        self.unregister_deferred(graph, node.into());
     }
 
     /// `UnregisterDeferred(theRef)`.
-    pub fn unregister_deferred_ref(&self, reference: RefId) {
-        self.unregister_deferred(reference.into());
+    pub fn unregister_deferred_ref(&self, graph: &BRepGraph, reference: RefId) {
+        self.unregister_deferred(graph, reference.into());
     }
 
-    /// `ReserveDeferredItems(theNbItems)`: grows the entry map, then reserves the lock
-    /// layer's owners in the attached graph.
+    /// `ReserveDeferredItems(theNbItems)`: grows the entry map, then reserves the owners
+    /// of the attached graph's lock layer (`Ensure`d).
     pub fn reserve_deferred_items(&self, graph: &BRepGraph, count: usize) -> Result<(), Failure> {
         {
             let mut records = self.records.write();
             let extent = records.entries.extent();
             records.entries.resize(extent + count);
         }
-        match self.base.attached_graph(graph) {
-            Some(_) => Err(lock_layer_missing("ReserveDeferredItems")),
-            None => Ok(()),
+        let Some(graph) = self.base.attached_graph(graph) else {
+            return Ok(());
+        };
+        let lock = graph.layer_registry().ensure::<LayerLock>()?;
+        if let Some(lock) = lock.get() {
+            lock.reserve_owners(count);
         }
+        Ok(())
     }
 
     /// `EndBulkRegistration()`: closes one bulk level; the outermost publishes one
-    /// revision update when something changed (the lock layer's `TouchOwners` finds no
-    /// lock layer yet). Standard_ProgramError without a matching begin.
-    pub fn end_bulk_registration(&self) -> Result<(), Failure> {
+    /// revision update when something changed, and `TouchOwners` on the attached
+    /// graph's lock layer when there is one. Standard_ProgramError without a matching
+    /// begin.
+    pub fn end_bulk_registration(&self, graph: &BRepGraph) -> Result<(), Failure> {
         let mut records = self.records.write();
         if records.bulk_depth == 0 {
             return Err(Failure::with_type(
@@ -248,28 +255,35 @@ impl LayerDeferred {
         records.has_bulk_changes = false;
         drop(records);
         self.base.touch();
+        if let Some(lock) = find_lock_layer(self.base.attached_graph(graph)) {
+            lock.touch_owners();
+        }
         Ok(())
     }
 
-    /// `lockItem(theItem)` (private): an attached layer locks the item through the
-    /// graph's `BRepGraph_LayerLock` (`Ensure`d), which is not ported yet: that path
-    /// fails with Standard_NotImplemented (docs/topology-design.md 11.9). A detached
-    /// layer locks nothing, as natively.
-    fn lock_item(&self, attached: AttachedGraph<'_>, _item: ItemId) -> Result<(), Failure> {
-        match attached {
-            Some(_) => Err(lock_layer_missing("RegisterDeferred")),
-            None => Ok(()),
+    /// `lockItem(theItem)` (private): the attached graph's lock layer (`Ensure`d) owns
+    /// the item under this layer's GUID, publishing the change at once outside bulk
+    /// mode; a bulk change is remembered. A detached layer locks nothing.
+    fn lock_item(&self, attached: AttachedGraph<'_>, item: ItemId) -> Result<(), Failure> {
+        let Some(graph) = attached else {
+            return Ok(());
+        };
+        let lock = graph.layer_registry().ensure::<LayerLock>()?;
+        let Some(lock) = lock.get() else {
+            return Ok(());
+        };
+        let bulk = self.records.read().bulk_depth != 0;
+        let changed = lock.set_owner_with_revision(graph, item, &LayerDeferred::get_id(), !bulk)?;
+        if bulk && changed {
+            self.records.write().has_bulk_changes = true;
         }
+        Ok(())
     }
 }
 
-fn lock_layer_missing(member: &str) -> Failure {
-    Failure::with_type(
-        "Standard_NotImplemented",
-        &format!(
-            "BRepGraph_LayerDeferred::{member} on an attached layer needs BRepGraph_LayerLock, \
-             which is not ported yet (expected a detached layer)"
-        ),
-        "",
-    )
+/// `FindLayer<BRepGraph_LayerLock>()` of the attached graph: `None` when detached or
+/// when no lock layer is registered.
+pub(super) fn find_lock_layer(attached: AttachedGraph<'_>) -> Option<Handle<LayerLock>> {
+    let lock = attached?.layer_registry().find::<LayerLock>();
+    lock.is_some().then_some(lock)
 }

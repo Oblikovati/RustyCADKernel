@@ -141144,40 +141144,40 @@
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred",
-      "status": "partial",
-      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The item lock goes through the attached graph's BRepGraph_LayerLock (Ensure), as natively."
     },
     {
       "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferredRepresentations(BRepGraph_ItemId,const TCollection_AsciiString&,const TCollection_AsciiString&,const Representation*,size_t)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_representations",
-      "status": "partial",
-      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The item lock goes through the attached graph's BRepGraph_LayerLock (Ensure), as natively."
     },
     {
       "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferredRepresentationsDirect(BRepGraph_ItemId,const TCollection_AsciiString&,const TCollection_AsciiString&,const Representation*,size_t)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_representations_direct",
-      "status": "partial",
-      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The item lock goes through the attached graph's BRepGraph_LayerLock (Ensure), as natively."
     },
     {
       "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferred(BRepGraph_NodeId,const TCollection_AsciiString&,const TCollection_AsciiString&,RepresentationKind,const TCollection_AsciiString&,uint32_t)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_node",
-      "status": "partial",
-      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The item lock goes through the attached graph's BRepGraph_LayerLock (Ensure), as natively."
     },
     {
       "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferred(BRepGraph_RefId,const TCollection_AsciiString&,const TCollection_AsciiString&,RepresentationKind,const TCollection_AsciiString&,uint32_t)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_ref",
-      "status": "partial",
-      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The item lock goes through the attached graph's BRepGraph_LayerLock (Ensure), as natively."
     },
     {
       "upstream_id": "BRepGraph_LayerDeferred::UnregisterDeferred(BRepGraph_ItemId)",
@@ -141224,8 +141224,8 @@
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::reserve_deferred_items",
-      "status": "partial",
-      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The item lock goes through the attached graph's BRepGraph_LayerLock (Ensure), as natively."
     },
     {
       "upstream_id": "BRepGraph_LayerDeferred::BeginBulkRegistration()",
@@ -142218,6 +142218,1446 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for SupplementIterator`."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::ScopedOwnerEdit(BRepGraph_LayerLock&,BRepGraph_ItemId,const Standard_GUID&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::ScopedOwnerEdit::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::ScopedOwnerEdit::~ScopedOwnerEdit()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::ScopedOwnerEdit",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::GetID()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerType::get_id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::FindOwnerId(BRepGraph_ItemId,Standard_GUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::find_owner_id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::FindOwnerId(BRepGraph_NodeId,Standard_GUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::find_owner_id_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::FindOwnerId(BRepGraph_RefId,Standard_GUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::find_owner_id_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::HasOwner(BRepGraph_ItemId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::has_owner",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::HasOwner(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::has_owner_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::HasOwner(BRepGraph_RefId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::has_owner_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::SetOwner(BRepGraph_ItemId,const Standard_GUID&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::set_owner",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::SetOwner(BRepGraph_ItemId,const Standard_GUID&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::set_owner_with_revision",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::SetOwner(BRepGraph_NodeId,const Standard_GUID&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::set_owner_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::SetOwner(BRepGraph_RefId,const Standard_GUID&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::set_owner_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::UnsetOwner(BRepGraph_ItemId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::unset_owner",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::UnsetOwner(BRepGraph_ItemId,const Standard_GUID&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::unset_owner_matching",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::UnsetOwner(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::unset_owner_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::UnsetOwner(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::unset_owner_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::HasOwners() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::has_owners",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::ReserveOwners(size_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::reserve_owners",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::TouchOwners()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock::touch_owners",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::OnNodeRemoved(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::OnNodeReplaced(BRepGraph_NodeId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_replaced",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::CopyTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::copy_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::OnRefRemoved(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_ref_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::InvalidateAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::invalidate_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::DEFINE_STANDARD_RTTIEXT(BRepGraph_LayerLock,BRepGraph_Layer)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::LayerLock",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. The lock writes the storage owned plane, an atomic bit plane, through the shared attached graph; the parent and child walks can raise as the explorers do, so the members that walk return Result, and the noexcept callbacks stop walking on an error. impl_transient! registers the class descriptor (RuntimeTyped::static_type)."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::ScopedOwnerEdit(ScopedOwnerEdit&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::ScopedOwnerEdit",
+      "status": "excluded",
+      "notes": "C++ move constructor/assignment: a Rust scope moves by value, and assigning over a live scope drops it first, which restores its bit as the native move assignment does."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::ScopedOwnerEdit::operator=(ScopedOwnerEdit&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::ScopedOwnerEdit",
+      "status": "excluded",
+      "notes": "C++ move constructor/assignment: a Rust scope moves by value, and assigning over a live scope drops it first, which restores its bit as the native move assignment does."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::GetID()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheType::get_id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::CopyFreshTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::copy_fresh_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::IsDegenerated(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState::is_degenerated",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::SameParameter(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState::same_parameter",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::SameRange(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState::same_range",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::IsClosed(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState::is_closed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::GetWireIsClosed(BRepGraph_WireId,bool&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState::get_wire_is_closed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::SetWireIsClosed(BRepGraph_WireId,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState::set_wire_is_closed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::IsShellClosed(BRepGraph_ShellId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState::is_shell_closed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheDerivedState::DEFINE_STANDARD_RTTIEXT(BRepGraph_CacheDerivedState,BRepGraph_Cache)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheDerivedState.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_derived_state::CacheDerivedState",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Entries live behind the service lock; the native lock-free packed-byte reads are plain reads under it, with the same freshness rules. impl_transient! registers the class descriptor (RuntimeTyped::static_type)."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::EntryStamp::Reset()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::EntryStamp::reset",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FaceMeshEntry::IsPresent() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::FaceMeshEntry::is_present",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FaceMeshEntry::ClearRepresentation()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::FaceMeshEntry::clear_representation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FaceMeshEntry::Reset()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::FaceMeshEntry::reset",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::CoEdgeMeshEntry::IsPresent() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CoEdgeMeshEntry::is_present",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::CoEdgeMeshEntry::Reset()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CoEdgeMeshEntry::reset",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::EdgeMeshEntry::IsPresent() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::EdgeMeshEntry::is_present",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::EdgeMeshEntry::Reset()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::EdgeMeshEntry::reset",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::DirtySet::IsEmpty() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::DirtySet::is_empty",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::DirtySet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::DirtySet::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Driver::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMeshDriver::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Driver::RecipeHash() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMeshDriver::recipe_hash",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Driver::Fill(BRepGraph&,SlotId,const DirtySet&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMeshDriver::fill",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::GetID()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheType::get_id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::CopyFreshTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::copy_fresh_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ActiveDisplaySlot() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::active_display_slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::SetActiveDisplaySlot(SlotId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::set_active_display_slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::RegisterDriver(SlotId,const occ::handle<Driver>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::register_driver",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::UnregisterDriver(SlotId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::unregister_driver",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::DriverOf(SlotId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::driver_of",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::State(SlotId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::state",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Ensure(BRepGraph&,SlotId,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::ensure",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Ensure(BRepGraph&,BRepGraph_NodeId,SlotId,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::ensure_root",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Ensure(BRepGraph&,const NCollection_Array1<BRepGraph_NodeId>&,SlotId,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::ensure_nodes",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Needs(BRepGraph&,BRepGraph_NodeId,SlotId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::needs",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::HasFaceMesh(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::has_face_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindFaceMesh(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_face_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ChangeFaceMesh(BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::change_face_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ClearFaceMesh(BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::clear_face_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::HasCoEdgeMesh(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::has_co_edge_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ChangeCoEdgeMesh(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::change_co_edge_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ClearCoEdgeMesh(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::clear_co_edge_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::HasEdgeMesh(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::has_edge_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindEdgeMesh(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_edge_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ChangeEdgeMesh(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::change_edge_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ClearEdgeMesh(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::clear_edge_mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::HasFaceMesh(SlotId,BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::has_face_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindFaceMesh(SlotId,BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_face_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ChangeFaceMesh(SlotId,BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::change_face_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ClearFaceMesh(SlotId,BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::clear_face_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::HasCoEdgeMesh(SlotId,BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::has_co_edge_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ChangeCoEdgeMesh(SlotId,BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::change_co_edge_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ClearCoEdgeMesh(SlotId,BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::clear_co_edge_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::HasEdgeMesh(SlotId,BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::has_edge_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindEdgeMesh(SlotId,BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_edge_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ChangeEdgeMesh(SlotId,BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::change_edge_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::ClearEdgeMesh(SlotId,BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::clear_edge_mesh_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::BindFresh(FaceMeshEntry&,BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::bind_fresh_face",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::BindFresh(CoEdgeMeshEntry&,BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::bind_fresh_co_edge",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::BindFresh(EdgeMeshEntry&,BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::bind_fresh_edge",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::BumpFaceMeshGeneration(BRepGraph_FaceId,SlotId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::bump_face_mesh_generation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::findFaceEntryRaw(SlotId,BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_face_entry_raw",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::findCoEdgeEntryRaw(SlotId,BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_co_edge_entry_raw",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindCoEdgePolygon2D(SlotId,BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_co_edge_polygon2d_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindCoEdgePolygonOnTri(SlotId,BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_co_edge_polygon_on_tri_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindCoEdgePolygon2D(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_co_edge_polygon2d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::FindCoEdgePolygonOnTri(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh::find_co_edge_polygon_on_tri",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::Driver::DEFINE_STANDARD_RTTIEXT(Driver,Standard_Transient)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMeshDriver",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds. The abstract driver is the Transient interface trait CacheMeshDriver (impl_transient_interface!)."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMesh::DEFINE_STANDARD_RTTIEXT(BRepGraph_CacheMesh,BRepGraph_Cache)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::CacheMesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. Getters return copies of the entries (natively pointers into the slot); the Change* members lend the entry to a closure under the cache lock and refuse the invalid id (natively a 2^32-entry allocation) with Standard_OutOfRange; BindFresh binds an entry the caller holds. impl_transient! registers the class descriptor (RuntimeTyped::static_type)."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::FaceOps::Has(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::FaceOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::FaceOps::Triangulation(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::FaceOps::triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::FaceOps::Entry(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::FaceOps::entry",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::EdgeOps::Has(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::EdgeOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::EdgeOps::Polygon3D(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::EdgeOps::polygon3d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::EdgeOps::Entry(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::EdgeOps::entry",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::CoEdgeOps::Has(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::CoEdgeOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::CoEdgeOps::FindPolygon2D(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::CoEdgeOps::find_polygon2d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::CoEdgeOps::FindPolygonOnTri(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::CoEdgeOps::find_polygon_on_tri",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::CoEdgeOps::FindRaw(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::CoEdgeOps::find_raw",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::Faces() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::CacheView::faces",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::Edges() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::CacheView::edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::CacheView::CoEdges() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::cache_view::CacheView::co_edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::FaceOps::Has(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::FaceOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::FaceOps::Triangulation(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::FaceOps::triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::EdgeOps::Has(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::EdgeOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::EdgeOps::Polygon3D(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::EdgeOps::polygon3d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::EdgeOps::HasPolygonOnTriangulation(BRepGraph_EdgeId,BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::EdgeOps::has_polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::EdgeOps::PolygonOnTriangulation(BRepGraph_EdgeId,BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::EdgeOps::polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::CoEdgeOps::Has(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::CoEdgeOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::CoEdgeOps::PolygonOnSurface(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::CoEdgeOps::polygon_on_surface",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::CoEdgeOps::HasPolygonOnTriangulation(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::CoEdgeOps::has_polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::CoEdgeOps::PolygonOnTriangulation(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::CoEdgeOps::polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::Faces() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::PersistentView::faces",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::Edges() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::PersistentView::edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PersistentView::CoEdges() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::persistent_view::PersistentView::co_edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::FaceOps::Has(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::FaceOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::FaceOps::Triangulation(BRepGraph_FaceId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::FaceOps::triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::EdgeOps::Has(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::EdgeOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::EdgeOps::Polygon3D(BRepGraph_EdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::EdgeOps::polygon3d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::CoEdgeOps::Has(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::CoEdgeOps::has",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::CoEdgeOps::HasPolygonOnSurface(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::CoEdgeOps::has_polygon_on_surface",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::CoEdgeOps::PolygonOnSurface(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::CoEdgeOps::polygon_on_surface",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::CoEdgeOps::HasPolygonOnTriangulation(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::CoEdgeOps::has_polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::CoEdgeOps::PolygonOnTriangulation(BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::CoEdgeOps::polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::Faces() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::EffectiveView::faces",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::Edges() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::EffectiveView::edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EffectiveView::CoEdges() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::effective_view::EffectiveView::co_edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::FaceOps::SetCachedTriangulation(BRepGraph_FaceId,const occ::handle<Poly_Triangulation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::FaceOps::set_cached_triangulation",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::FaceOps::Clear(BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::FaceOps::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::EdgeOps::SetCachedPolygon3D(BRepGraph_EdgeId,const occ::handle<Poly_Polygon3D>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EdgeOps::set_cached_polygon3d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::EdgeOps::Clear(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EdgeOps::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::CoEdgeOps::AppendCachedPolygonOnTri(BRepGraph_CoEdgeId,const occ::handle<Poly_PolygonOnTriangulation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::CoEdgeOps::append_cached_polygon_on_tri",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::CoEdgeOps::SetCachedPolygon2D(BRepGraph_CoEdgeId,const occ::handle<Poly_Polygon2D>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::CoEdgeOps::set_cached_polygon2d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::CoEdgeOps::Clear(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::CoEdgeOps::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::Faces()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EditorView::faces",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::Edges()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EditorView::edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::CoEdges()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EditorView::co_edges",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbFaceTriangulations() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_face_triangulations",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbEdgePolygons3D() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_edge_polygons3d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbCoEdgePolygons2D() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_co_edge_polygons2d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbCoEdgePolygonsOnTri() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_co_edge_polygons_on_tri",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbActiveTriangulations() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_active_triangulations",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbActivePolygons3D() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_active_polygons3d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbActivePolygons2D() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_active_polygons2d",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::PolyOps::NbActivePolygonsOnTri() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::poly::PolyOps::nb_active_polygons_on_tri",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::Cache() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::MeshView::cache",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::Persistent() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::MeshView::persistent",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::Effective() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::MeshView::effective",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::Editor()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::MeshView::editor",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::Poly() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::MeshView::poly",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::Mesh() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph::mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph::Mesh()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph::mesh",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11.3): BRepGraph::Mesh() returns a Copy view borrowing the graph; the cache locks itself, so the const and non-const accessors are one; handles are returned by value (a null handle when absent). Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::CopyFreshTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::copy_fresh_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::CopyFreshCachesTo(BRepGraph&,const NCollection_FlatDataMap<BRepGraph_ItemId,BRepGraph_ItemId>&,BRepGraph_CopyRemap::Mode) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::copy_fresh_caches_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. A registry cannot reach its graph, so CopyLayersTo/CopyFreshCachesTo are associated functions taking the source graph (whose registry they use) and the target; copy_layers_in_place/copy_fresh_caches_in_place are the calls with the graph itself as target (the compaction)."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::CopyFreshCachesTo(BRepGraph&,BRepGraph_CopyRemap::MappingKind,BRepGraph_CopyRemap::Mode) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::copy_fresh_caches_to_with_mapping",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. A registry cannot reach its graph, so CopyLayersTo/CopyFreshCachesTo are associated functions taking the source graph (whose registry they use) and the target; copy_layers_in_place/copy_fresh_caches_in_place are the calls with the graph itself as target (the compaction)."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::CopyTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::copy_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::CopyTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::copy_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::CopyTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::copy_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::CopyTo(const BRepGraph_CopyRemap&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::copy_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::CopyLayersTo(BRepGraph&,const NCollection_FlatDataMap<BRepGraph_ItemId,BRepGraph_ItemId>&,BRepGraph_CopyRemap::Mode) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::copy_layers_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. A registry cannot reach its graph, so CopyLayersTo/CopyFreshCachesTo are associated functions taking the source graph (whose registry they use) and the target; copy_layers_in_place/copy_fresh_caches_in_place are the calls with the graph itself as target (the compaction)."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::CopyLayersTo(BRepGraph&,BRepGraph_CopyRemap::MappingKind,BRepGraph_CopyRemap::Mode) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::copy_layers_to_with_mapping",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes. A registry cannot reach its graph, so CopyLayersTo/CopyFreshCachesTo are associated functions taking the source graph (whose registry they use) and the target; copy_layers_in_place/copy_fresh_caches_in_place are the calls with the graph itself as target (the compaction)."
     },
     {
       "upstream_id": "BRepGraph::Editor() const",

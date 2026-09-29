@@ -19,6 +19,7 @@
 use super::{Cache, active_record, node_with_cache};
 use crate::brep::BRepBuilder;
 use crate::brep_graph::cache_derived_state;
+use crate::brep_graph::tool::derived_state;
 use crate::brep_graph::{BRepGraph, EdgeId, VertexRefId};
 use crate::brep_graph_inc::{EdgeDef, Storage};
 use crate::topods::Edge;
@@ -88,16 +89,19 @@ fn make_edge_geometry(
 }
 
 // SameRange/SameParameter are per-coedge properties: the edge flag is true only when
-// every active coedge agrees (every coedge is evaluated, as natively).
+// every active coedge agrees (every coedge is evaluated, as natively). The answers
+// come from the graph's CacheDerivedState service, registered before the loop as the
+// native `Ensure` does.
 fn set_same_flags(graph: &BRepGraph, edge: EdgeId, result: &Edge) -> Result<(), Failure> {
     let storage = graph.inc_storage();
+    let _service = derived_state::derived_state_cache(graph);
     let (mut same_range, mut same_parameter) = (true, true);
     for &co_edge in &storage.edge_relations(edge).co_edge_ids {
         if !co_edge.is_valid_for(storage.nb_co_edges()) || storage.is_removed(co_edge) {
             continue;
         }
-        same_range &= cache_derived_state::compute_same_range(graph, co_edge);
-        same_parameter &= cache_derived_state::compute_same_parameter(graph, co_edge)?;
+        same_range &= derived_state::co_edge_same_range(graph, co_edge);
+        same_parameter &= derived_state::co_edge_same_parameter(graph, co_edge)?;
     }
     let builder = BRepBuilder::default();
     builder.same_parameter(result, same_parameter)?;

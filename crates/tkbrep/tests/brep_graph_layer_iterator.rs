@@ -15,10 +15,11 @@
 #![allow(non_snake_case)]
 use rustycad_tkbrep::brep_graph::LayerIterator;
 use rustycad_tkbrep::brep_graph::NodeId;
+use rustycad_tkbrep::brep_graph::copy_remap::CopyRemap;
 use rustycad_tkbrep::brep_graph::layer::{AttachedGraph, BRepGraphLayer, LayerBase, as_layer};
 use rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry;
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Guid, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Guid, Handle, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 
 /// Minimal concrete layer for testing the iterator.
@@ -53,6 +54,9 @@ impl BRepGraphLayer for TestLayer {
         &self.name
     }
     fn on_node_removed(&self, _attached: AttachedGraph<'_>, _node: NodeId) {}
+    fn copy_to(&self, _copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        Ok(())
+    }
     fn invalidate_all(&self, _attached: AttachedGraph<'_>) {}
     fn clear(&self, _attached: AttachedGraph<'_>) {}
 }

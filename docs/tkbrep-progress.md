@@ -8,8 +8,8 @@ Packages are added one module at a time. The `TopoDS`, `TopExp`, `TopTools`, `BR
 ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for
 each of them. `BRepGraph` is being ported in waves (docs/topology-design.md section 11):
 the core, the iterators, explorers, Tool and CopyRemap, and the layers, registries and
-caches are ported; the editor, the lock, mesh and derived-state caches and the algorithms
-follow, and its audit lists their members as missing until then.
+caches, the lock and the derived-state and mesh caches are ported; the editor and the
+algorithms follow, and its audit lists their members as missing until then.
 
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
@@ -40,17 +40,21 @@ The toolkit test inventory maps these suites (139 declarations):
 | BRepGraph_RelatedIterator_Test.cxx | not mapped (phase 2) | 15 | not run | waits for EditorView Gen().RemoveNode, BRepPrimAPI_MakeCylinder (TKPrim) |
 | BRepGraph_ChildExplorer_Test.cxx | not mapped (phase 2) | 37 | not run | waits for EditorView Gen().RemoveRef, Occurrences().MutRef/SetRefLocalLocation (MutGuard) |
 | BRepGraph_ParentExplorer_Test.cxx | not mapped (phase 2) | 23 | not run | waits for EditorView Vertices/Compounds().Add, Occurrences().SetRefChildOccurrenceId, BRepGraph_Validate |
-| BRepGraph_Tool_Test.cxx | not mapped (phase 2) | 16 | not run | waits for MeshView and CacheMesh (Mesh()), EditorView Faces/CoEdges mesh setters, BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_Tool_Test.cxx | not mapped (phase 2) | 16 | not run | waits for EditorView Faces().SetPersistentTriangulation and CoEdges().SetPersistentPolygonOnTri, BRepPrimAPI_MakeCylinder (TKPrim) |
 | BRepGraph_RefId_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView (Vertices/Edges().Add, Faces().MutRef/SetRefOrientation, Gen().RemoveRef) |
 | BRepGraph_VersionStamp_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView setters and Gen().RemoveNode |
 | BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for EditorView (Vertices().Add, Mut), BRepGProp, TKPrim cylinder and sphere |
-| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for CacheMesh, MeshView, BRepMesh, Compact |
+| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepBndLib, BRepBuilderAPI_MakeFace, Compact, EditorView Gen().RemoveSubgraph |
 | BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for LayerHistory, EditorView, TKPrim cylinder and sphere, BRepBuilderAPI_Copy |
 | BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for Validate, LayerRegistry, TKPrim solids, BRepBuilderAPI_MakeFace/MakeWire |
 | BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for Compact, Deduplicate, Validate, BRepGProp |
 | BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for caches, layers, Compact, Deduplicate |
 | BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for EditorView, LayerHistory, Validate, CacheRegistry |
 | BRepGraph_LayerIterator_Test.cxx | brep_graph_layer_iterator | 4 | pass | pass |
+| BRepGraph_CacheMesh_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView (Faces/Edges/Vertices/CoEdges Mut and MutGuard, SetTolerance, SetOrientation, Faces().ClearSurface and SetPersistentTriangulation) |
+| BRepGraph_Polygon_Test.cxx | not mapped (phase 2) | 7 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_Geometry_Test.cxx | not mapped (phase 2) | 44 | not run | waits for EditorView curve, p-curve, surface and persistent mesh setters and Faces().Add, BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
+| BRepGraph_Lock_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView (Gen().RemoveNode, Vertices().Mut/MutRef/SetPoint/SetRefOrientation), BRepGraph_Compact |
 | BRepGraph_LayerHistory_Test.cxx | not mapped (phase 2) | 39 | not run | waits for EditorView (ApplyModification, RemoveNode), ReverseIterator, Tool, BRepBuilderAPI_MakeVertex |
 | BRepGraph_LayerTopoSupplement_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView, SupplementEditor, RefsIterator, Copy, Compact |
 | BRepGraph_CacheRegistry_Test.cxx | not mapped (phase 2) | 14 | not run | waits for EditorView, MutGuard, Transform |
@@ -58,7 +62,7 @@ The toolkit test inventory maps these suites (139 declarations):
 | BRepGraph_RefId_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView, iterators, MakeBox |
 | BRepGraph_VersionStamp_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView, Tool, MakeBox |
 | BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for EditorView, Tool, Iterator, BRepGProp |
-| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for CacheMesh, MeshView, BRepMesh, Compact |
+| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepBndLib, BRepBuilderAPI_MakeFace, Compact, EditorView Gen().RemoveSubgraph |
 | BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for EditorView, explorers, iterators, Tool, TKPrim solids |
 | BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for Validate, Tool, iterators, TKPrim solids |
 | BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for Compact, Deduplicate, Validate, BRepGProp |
@@ -146,6 +150,30 @@ iterators; 6 partial: the LayerDeferred members that lock through BRepGraph_Laye
 the BRepGraph missing count falls from 967 to 756. The 9 members of these classes still
 missing all take `BRepGraph_CopyRemap` (area A): the five `CopyTo`/`CopyFreshTo`
 overrides, `CopyLayersTo` and `CopyFreshCachesTo`.
+
+Phase 2, wave 2b ports the lock and cache classes whole (docs/topology-design.md
+section 11.11): BRepGraph_LayerLock (with ScopedOwnerEdit), the
+BRepGraph_CacheDerivedState cache service, BRepGraph_CacheMesh (with its driver, slots
+and entries), BRepGraph::MeshView and `BRepGraph::Mesh()`. With CopyRemap ported, the
+five layer `CopyTo` overrides, `BRepGraph_Cache::CopyFreshTo`, the two
+`CopyLayersTo` and `CopyFreshCachesTo`, `RemappedItem` (`layer::remapped_node` and
+`remapped_ref`) and the history's private `rebuildCaches` are ported; the six
+LayerDeferred members that locked through BRepGraph_LayerLock and the protected
+`LayerParametric::lockLayer` are complete. `BRepGraph_Tool` and reconstruction read the
+derived flags through the memoising service, as OCCT does. No upstream suite of these
+classes builds yet: CacheMesh, Geometry and Lock also call the editor (another wave)
+and Polygon calls BRepMesh (TKMesh), as the table lists.
+`crates/tkbrep/tests/brep_graph_lock.rs` and `brep_graph_mesh_cache.rs` cover the lock
+roots, overlaps, scopes, dispatch and copies, the memoised derived answers and their
+invalidation, the mesh freshness stamps, the effective view and a mesh driver, and the
+`br_bcache` requests compare everything with OCCT byte for byte.
+`tools/audit_api_rows.py` gives these classes and members 180 new rows (2 excluded: the
+ScopedOwnerEdit move constructor and assignment); the only member of them without a row
+is `MeshView::EditorView::PromoteToPersistent`, which writes the persistent mesh through
+the graph editor's `SetPersistent*` setters and waits for them. The BRepGraph missing
+count falls from 379 to 199 (the editor, MutGuard, DeferredScope, SupplementEditor, the
+algorithms, `Editor() const`, `Shapes().RemoveShape` and `PromoteToPersistent`), with 0
+stale rows.
 
 The BRepTools and BRepAdaptor suites are translated 1:1 in
 `crates/tkbrep/tests/brep_tools_reshape.rs`, `brep_tools_trsf_modification.rs`,
@@ -449,9 +477,30 @@ scene's last location (a scale in the solid scene). The scenes are the solid sce
 under products, the cylinder (seam), mesh, Bezier, natural-restriction, degenerated
 and free scenes, and the `br_brep` edge and face scenes with every shape appended.
 
-The corpus has 635 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
+The BRepGraph lock and cache requests (`br_bcache`; 14 requests in
+`tools/tkbrep_brepgraph_cache_corpus.py`, probes
+`tools/oracle/tkbrep_probe_brepgraph_cache*.cxx` and
+`crates/tkbrep/examples/br_probe/brep_graph_cache*.rs`) ingest the solid, cylinder, mesh
+and a free-edge scene and then: set owners on nodes and references (roots, ancestor
+overlaps with the same and another owner, same-owner descendants absorbed, conflicting
+descendants rejected, the asserting overload), unset them (by item and by owner), scope
+an owner edit, dispatch removals and replacements, invalidate and clear, and use a
+detached lock layer; register, bulk-register, reserve and unregister items of an
+attached deferred layer (which locks them); query every derived-state answer, seed a
+wrong wire closure and read it back through the cache and `BRepGraph_Tool`, invalidate it
+by `Clear` and by `Add` under the wire or shell; write, clear and bump the mesh cache
+through the mesh editor and the slot members of three slots, register, replace and
+unregister logging drivers with `Ensure` over the graph, a node and a node list, and
+`Needs`; and copy every layer and cache into a second graph with the identity and an
+explicit item map (in copy and compaction mode) or migrate the layers in place. Both
+graphs print their layer and cache registries, the owner of every node and reference,
+the deferred entries, every derived answer, the slot states and every face, edge and
+coedge entry of three slots with `Needs` of every face and compound, and every
+persistent, cache and effective mesh-view query; then the drivers' Fill logs.
+
+The corpus has 649 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
-caches 22 and the BRepGraph navigation 13.
+caches 22, the BRepGraph navigation 13 and the BRepGraph lock and caches 14.
 
 ## Dependency gap
 
@@ -706,9 +755,24 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   deferred triangulations own their input.
 - `br_tools_read` leaves out a text that ends right after the version line: the native
   location reader then compares a `char` buffer the failed `>>` left uninitialized.
-- Reconstruction reads SameRange and SameParameter from the derived-state computations
-  directly; the native cache service (CacheDerivedState, a later wave) returns the same
-  values on an unchanged graph.
+- Reconstruction and `BRepGraph_Tool` read SameRange, SameParameter, the edge flags and
+  the wire and shell closures through `BRepGraph_CacheDerivedState`, which the first read
+  registers in the graph's cache registry. An entry is kept while the entity's OwnGen is
+  unchanged, so a stored `SetWireIsClosed` value is served until the wire changes, and a
+  coedge's SameParameter reuses the SameRange flag of its entry. `Clear()` resets only
+  the node binding of each entry (the packed flags stay, unread).
+- `BRepGraph_LayerLock::SetOwner` refuses a root under an ancestor root or above a root
+  of another owner and absorbs same-owner descendant roots; a re-registration by the
+  same owner only re-sets the item's bit (and bumps the revision). `UnsetOwner` clears the
+  root's subtree bits and then sets the bits of every remaining root again.
+  `OnNodeReplaced` moves only the two nodes' own bits. The native `removeRootEntry` is
+  called nowhere; it is ported for completeness.
+- `BRepGraph_CacheMesh::Clear` bumps every slot's generation and keeps the drivers;
+  `RegisterDriver` with the same ID and recipe keeps the slot. `CopyFreshTo` clears each
+  target slot, bumps the mesh generation of every copied face entry and copies polygons
+  on triangulation only when the target coedge's face has a cached triangulation. A
+  coedge entry bound for a coedge without face keeps its previous face stamp. A face
+  entry is bound to the SubtreeGen (not the OwnGen) of its face.
 - A BRepGraph layer or cache cannot point back into the graph that owns it: the members
   that read `AttachedGraph()` or `Graph()` natively (history recording and `Absorb`,
   supplement attachment and removal, deferred registration, the cache generation reads
@@ -720,23 +784,40 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   entries before visiting them, and `SupplementIterator` copies the owner's uid list at
   construction (natively both walk the live containers); its `Value()` is `None` past the
   end, where the native reference is undefined.
-- `BRepGraph_LayerDeferred` locks its items through `BRepGraph_LayerLock`, which needs the
-  explorers (a later wave): on an attached layer, registering an item and
-  `ReserveDeferredItems` return Standard_NotImplemented where they would `Ensure` the lock
-  layer; the unlock and `TouchOwners` steps find no lock layer, which is exact while no
-  such layer can exist. A detached deferred layer is exact. `OnNodeReplaced` stops
-  appending at eight representations where the native noexcept callback terminates the
-  process.
+- `BRepGraph_LayerDeferred::OnNodeReplaced` stops appending at eight representations
+  where the native noexcept callback terminates the process. `UnregisterDeferred` and
+  `EndBulkRegistration` take the graph, since they unlock or touch the attached graph's
+  lock layer.
+- `BRepGraph_LayerLock` writes the owned bits from `const` members and noexcept
+  callbacks through the graph it is attached to, so the storage owned plane is an atomic
+  bit plane whose `SetOwned` takes `&self` (docs/topology-design.md 11.11). The members
+  that walk the parents or children (`FindOwnerId`, `SetOwner`, `UnsetOwner`, the
+  scope) return `Result`, as the explorers raise; the noexcept callbacks (`OnNodeRemoved`,
+  `Clear`...) stop walking on an error where the native process terminates.
+- `BRepGraph_LayerRegistry::CopyLayersTo` and `BRepGraph_CacheRegistry::CopyFreshCachesTo`
+  are associated functions taking the source graph (whose registry they use) and the
+  target; `copy_layers_in_place` and `copy_fresh_caches_in_place` are the calls with the
+  graph itself as the target (the compaction). A layer's `CopyTo` and a cache's
+  `CopyFreshTo` return `Result` (the native assertions and nested registrations raise).
+  The caches copy their source entries before they lock the target, so a copy into the
+  same service cannot deadlock (natively both mutexes are taken).
+- The mesh-cache getters return copies of the entries (natively pointers into the slot);
+  the `Change*Mesh` members lend the entry to a closure under the cache lock, so the
+  native "change then `BindFresh`" sequence binds a copy and stores it back (the mesh
+  editor does both under one lock). `Change*Mesh` and `BumpFaceMeshGeneration` refuse
+  the invalid id with Standard_OutOfRange (natively a 2^32-entry allocation), and the
+  derived-state wire and shell stores refuse an entity they cannot bind before growing
+  (the answer is the same). A coedge out of range binds no face stamp (natively an
+  unchecked read). When another class holds the derived-state or mesh-cache GUID
+  (natively a null dereference), the Tool reads compute without the cache and the mesh
+  views find no cache.
 - `BRepGraphInc_Reconstruct::Node` with a node index out of its kind's range raises
   Standard_OutOfRange (natively an unchecked vector read). Parallel face extraction
   returns the error of the failing face with the lowest queue index, so a parallel and
   a sequential population fail the same way.
 - Phase 2 still has to port these members of the phase-1 classes: `BRepGraph::Editor()
-  const`, `Mesh()`, `LayerRegistry()` and `CacheRegistry()`;
-  `Shapes().AddWithHistory` (LayerHistory) and `Shapes().RemoveShape` (the editor's
-  `RemoveNode`). The editor and CacheDerivedState classes are partly ported: only the
-  members that phase 1 calls have api rows. `Topo().Edges().WiresOf/FacesOf` and
-  `BRepGraph_Tool` are whole.
+  const` and `Shapes().RemoveShape` (the editor's `RemoveNode`). The editor is partly
+  ported: only the members that phase 1 calls have api rows.
 - The BRepGraph iterators and explorers keep the native `More`/`Next`/`Current`
   protocol and implement `Iterator` for the range form. The child and parent explorers
   and the related iterator compose locations or build p-curve adaptors while they
@@ -751,19 +832,9 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   of its kind's range yields nothing (natively the Wire, Face, Shell, Solid and
   Occurrence cases read its relations unchecked); a `BRepGraph_Tool` member given an id
   out of range panics, as `Definition()` does.
-- `BRepGraph_Tool` reads its derived flags through the phase-1 cache-derived-state
-  computations with the cache's answer for inactive entities, computing them on each
-  call. The native `BRepGraph_CacheDerivedState` memoises them per OwnGen (and
-  registers itself in the cache registry on the first read); the answers agree while no
-  mutation leaves an OwnGen unchanged, and the caches area routes the reads through the
-  memoising service in one module (`tool::derived_state`).
 - `BRepGraph_CopyRemap` holds the one mutable borrow of its target: the native context
   gives the mutable target from a `const` reference and lets source and target alias
   during compaction, so the Rust context has `target_graph(&mut self)`, an `in_place`
   constructor for the aliasing case, and `items()` returns `None` for the identity
   mapping (a null map natively); an explicit mapping without a map maps nothing
   (natively a null dereference).
-  const` and `Mesh()`; `Shapes().RemoveShape` (the editor's `RemoveNode`);
-  `Topo().Edges().WiresOf` and `FacesOf` (they return iterators). The
-  editor, Tool and CacheDerivedState classes are partly ported: only the members that
-  phase 1 calls have api rows.
