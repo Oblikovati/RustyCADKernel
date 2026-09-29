@@ -23,10 +23,15 @@
 //! and the tension, flexion and jerk criteria of a [`LinearCriteria`], an
 //! [`SmoothCriterion`].
 mod instantiations;
+mod linear_criteria;
 mod multi_line;
 mod multi_point_constraint;
 mod my_line_tool;
+mod point_tabs;
+mod smooth_criterion;
 
 pub use instantiations::*;
+pub use linear_criteria::LinearCriteria;
 pub use multi_line::MultiLine;
 pub use multi_point_constraint::MultiPointConstraint;
+pub use smooth_criterion::{QualityValues, SmoothCriterion, SmoothErrors};
