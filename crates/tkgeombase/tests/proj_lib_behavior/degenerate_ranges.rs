@@ -16,7 +16,7 @@
 //! advance over (a zero-length range, or one shorter than the rounding step at its
 //! ends), where the native `Function_SetUVBounds` loop never ends
 //! (docs/tkgeombase-progress.md, Rust deviations).
-use super::support::{cone, cylinder, dir, line, ranged, sphere, torus};
+use super::support::{cone, cylinder, dir, flat_patch_within, line, ranged, sphere, torus};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkgeombase::proj_lib::{ComputeApprox, ProjectedCurve};
@@ -83,5 +83,33 @@ fn projected_curve_reports_the_refused_zero_length_range() {
     assert_endless_scan_refused(
         &result.err().expect("the endless scan is refused"),
         "[1, 1]",
+    );
+}
+
+#[test]
+fn projected_curve_refuses_a_zero_width_surface_range_in_the_pole_check() {
+    // Regression: IsoIsDeg samples the U range of the patch in steps of a tenth of it;
+    // with U1 == U2 the step is 0 and the native `for (T = U1; T <= U2; T += Step)`
+    // never ends. The call must return, with the stalled scan named.
+    let patch = flat_patch_within((0.5, 0.5, 0.0, 1.0));
+    let result = ProjectedCurve::with_tolerance(&patch, &segment(0.0, 1.0), 1e-7);
+    let failure: Failure = result.err().expect("the endless scan is refused");
+    assert_endless_scan_refused(&failure, "[0.5, 0.5]");
+    assert!(
+        failure.message().contains("IsoIsDeg"),
+        "{}",
+        failure.message()
+    );
+}
+
+#[test]
+fn projected_curve_refuses_a_one_ulp_surface_range_in_the_pole_check() {
+    // A range of one ulp gives a step of a tenth of an ulp, which rounds back.
+    let high: f64 = 0.5 + f64::EPSILON / 2.;
+    let patch = flat_patch_within((0.5, high, 0.0, 1.0));
+    let result = ProjectedCurve::with_tolerance(&patch, &segment(0.0, 1.0), 1e-7);
+    assert_endless_scan_refused(
+        &result.err().expect("the endless scan is refused"),
+        "[0.5, ",
     );
 }

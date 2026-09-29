@@ -15,6 +15,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The degenerated boundary isos of Extrema_ExtPS.
+use crate::scan_step::next_scan_parameter;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::native::std_max;
@@ -23,7 +24,8 @@ use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 /// `IsoIsDeg(S, Param, IT, TolMin, TolMax)`: the largest first derivative along the
 /// U iso (`is_u`) or V iso at `param`, sampled at ten steps over a finite range, is
 /// within `[tol_min, tol_max]` (true as well over an infinite range; false for a
-/// step below PConfusion); `iso_is_deg(&surface, 0.0, true, 0., 1e-9)?`.
+/// step below PConfusion; Standard_DomainError for a step that cannot advance, see
+/// `crate::scan_step`); `iso_is_deg(&surface, 0.0, true, 0., 1e-9)?`.
 pub(super) fn iso_is_deg(
     surface: &dyn Adaptor3dSurface,
     param: f64,
@@ -52,7 +54,9 @@ pub(super) fn iso_is_deg(
         };
         let derivative = if is_u { d1.d1v } else { d1.d1u };
         d1_norm_max = std_max(d1_norm_max, derivative.magnitude());
-        t += step;
+        // A step of PConfusion (1e-9) is below the half ulp of a parameter beyond about
+        // 1e7, where it rounds back to `T` and the native `T += Step` never ends.
+        t = next_scan_parameter("Extrema_ExtPS IsoIsDeg", t, step, [first, last])?;
     }
     Ok(!(d1_norm_max > tol_max || d1_norm_max < tol_min))
 }

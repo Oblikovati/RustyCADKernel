@@ -690,3 +690,45 @@ A self transform cannot pass one graph as `&BRepGraph` and `&mut BRepGraph` at o
 the self overloads are `perform_in_place` (no copy; `transform_whole_graph`) and
 `transform_node_in_place` (`copy::copy_node_in_place`, then the copied range), as
 section 11.12 does for the self copies.
+
+### 11.14 Ids out of range
+
+**What OCCT does.** The record accessors of `BRepGraphInc_Storage` (`Vertex()`,
+`ChangeEdge()`, `ShellRef()`, `EdgeCurve3DRep()`, `FaceRelations()`...) and every
+view member built on them (`Topo().Faces().Definition()`, `Relations()`,
+`Refs().Faces().Entry()`) read `NCollection_DynamicArray::Value`/`ChangeValue`, which
+are `noexcept` and do not check the index. The `BRepGraph_Tool` members that take a
+definition id (`Vertex::Pnt`, `Edge::Range`, `CoEdge::Orientation`, `Face::NbWires`,
+`Wire::FaceOf`...), the immediate editor setters (`SetTolerance`, `SetRefOrientation`,
+`ReplaceChild`...), `RemoveRef` (through `detachRefRelations`) and the product and
+occurrence steps of `BRepGraph_Copy::CopyNode` (`ensureProduct`, `ensureOccurrence`)
+index the same arrays with the caller's id. In the pinned build, an id past the store
+is undefined behaviour: no `Standard_OutOfRange`, no assertion. The members that check
+natively (`IsValid(Nb())` guards, `Standard_ProgramError_Raise_if` in `Mut()`) keep their
+native answer here.
+
+**Policy.** Library code does not panic on caller input, and the fast accessors keep
+the native cost. So each family has two forms:
+
+- The fast form keeps the native signature and indexes directly; an id past the store
+  panics with the index (the Rust form of the native undefined behaviour).
+- The checked form returns `Result` with Standard_OutOfRange whose message names the
+  id kind, the index and the valid range (`BRepGraph: BRepGraph_FaceId index 6 is out
+  of range; expected 0..6`): `Storage::try_def`, `try_change_def`, `try_entry`,
+  `try_change_entry`, `try_record`, `try_change_record` and the `try_*_relations`;
+  `try_definition` and `try_relations` on each `TopoView` kind group; `try_entry` on
+  each `RefsView` kind group; `check_in_range` on the node and reference `GenOps` for
+  untyped ids; and `tool::checked_member(graph, id, member)`, one wrapper that gives
+  every definition-id Tool member its checked form instead of a second copy of each.
+
+Every checked form goes through one helper, `brep_graph_inc::check_index` (with the
+typed and untyped name wrappers `check_typed_index` and `check_untyped_index`), which
+formats the message only on failure. The library members that take a caller id and
+write or copy through it use the checked form: the setters through the editor helper
+`require_settable` (the native `requireUnlocked`, then the range check), `ReplaceChild`,
+`ReplaceSolid` and `RemoveRef` through `try_entry` and `check_in_range`, and the copy
+through `check_id`/`try_def` before it appends anything, so a refused `CopyNode` leaves
+the target unchanged and `TransformNode` of such an id returns the same error. Ids read
+from the graph's own records are not re-checked: the relation invariants
+(`Validate`) guarantee them. The regression tests are
+`crates/tkbrep/tests/brep_graph_out_of_range.rs`.

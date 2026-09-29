@@ -14,21 +14,38 @@
 #include <cstring>
 #include <cstdint>
 #include <Standard_Failure.hxx>
+#include <array>
 #include <gp_Dir.hxx>
+#include <gp_Dir2d.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Pnt2d.hxx>
 #include <gp_XY.hxx>
 #include <gp_XYZ.hxx>
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkgeomalgo_probe_intf.cxx"
+#include "tkgeomalgo_probe_intf_tool.cxx"
+#include "tkgeomalgo_probe_intf_poly.cxx"
+#include "tkgeomalgo_probe_toptrans.cxx"
 #include "tkgeomalgo_probe_intres2d.cxx"
 #include "tkgeomalgo_probe_intimppargen.cxx"
 #include "tkgeomalgo_probe_intcurve.cxx"
 #include "tkgeomalgo_probe_geom2dint.cxx"
 #include "tkgeomalgo_probe_geom2dapi.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
- // Intf (tkgeomalgo_probe_intf.cxx)
+ // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
+ {"intf_spoint", ga_intf_spoint_case},
+ {"intf_sline", ga_intf_sline_case},
+ {"intf_tzone", ga_intf_tzone_case},
+ {"intf_interference", ga_intf_interference_case},
+ {"intf_tool2d", ga_intf_tool2d_case},
+ {"intf_tool3d", ga_intf_tool3d_case},
+ {"intf_ipoly2d", ga_intf_ipoly2d_case},
+ {"intf_ipp", ga_intf_ipp_case},
+ // TopTrans (tkgeomalgo_probe_toptrans.cxx)
+ {"tt_curve", ga_tt_curve_case},
+ {"tt_surface", ga_tt_surface_case},
+ {"tt_states", ga_tt_states_case},
  // IntRes2d (tkgeomalgo_probe_intres2d.cxx)
  {"intres2d_domain", ga_intres2d_domain_case},
  {"intres2d_insert", ga_intres2d_insert_case},

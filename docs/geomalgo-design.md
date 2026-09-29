@@ -25,7 +25,38 @@ body is included by one or more `_0.cxx` files after macros name the concrete ty
 
 The sections below record each template as it is ported.
 
-## 2. IntImpParGen_Intersector.gxx
+## 2. Intf_InterferencePolygonPolyhedron.gxx
+
+The template computes the interference between a 3d polygon (or straight lines) and a
+triangulated polyhedron. Its `.gxx` names four macro types: `Polygon3d` and
+`Polyhedron` (the data) and `ToolPolygon3d` and `ToolPolyh` (classes of static members
+over the data). OCCT instantiates it twice, as
+`IntCurveSurface_TheInterferenceOfHInter` (TKGeomAlgo) and
+`HLRBRep_TheInterferenceOfInterCSurf` (TKHLR).
+
+- The body is `intf::InterferencePolygonPolyhedron<PT, HT>` in
+  `crates/tkgeomalgo/src/intf/interference_polygon_polyhedron`, generic over two
+  traits of static functions that mirror the tool classes: `intf::Polygon3dTool`
+  (`Bounding`, `DeflectionOverEstimation`, `Closed`, `NbSegments`, `BeginOfSeg`,
+  `EndOfSeg`) and `intf::PolyhedronTool` (`Bounding`, `ComponentsBounding`,
+  `DeflectionOverEstimation`, `Triangle`, `Point`, `TriConnex`, `IsOnBound`,
+  `GetBorderDeflection`). Each trait has an associated type for its data
+  (`Polygon`, `Polyhedron`), so the data types stay free of the traits, as the
+  native tools are separate classes.
+- An instantiating package declares its tool classes as unit structs that implement
+  the traits (for example `IntCurveSurface_ThePolygonToolOfHInter`) and the
+  interference as a type alias:
+  `type TheInterferenceOfHInter = InterferencePolygonPolyhedron<ThePolygonToolOfHInter, ThePolyhedronToolOfHInter>;`.
+  Its api rows map the members of the instance header to the generic's methods.
+- Tool members that index arrays can raise natively (Standard_OutOfRange), so the
+  trait members that take an index return `Result`, and so do the constructors and
+  `Perform` overloads of the generic.
+- `Intf_Interference` is the protected base of every interference; the generic and
+  `InterferencePolygon2d` hold one and expose it through `Deref`.
+- The two private `Intersect` overloads have the same body after the plane equation;
+  the five-argument one computes the plane equation and the distances and calls the
+  nine-argument one, so the body exists once.
+## 3. IntImpParGen_Intersector.gxx
 
 `IntImpParGen_Intersector` intersects an implicit curve with a bounded parametric one
 through the roots of the signed distance (`IntImpParGen_MyImpParTool`, expanded natively
@@ -50,7 +81,7 @@ in each `_0.cxx`). It is ported once in `int_imp_par_gen` as
   `IntCurve_MyImpParToolOfIntImpConicParConic` as aliases; Geom2dInt declares the
   Adaptor2d_Curve2d instantiation (`Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter`).
 
-## 3. The IntCurve curve templates and their Geom2dInt instances
+## 4. The IntCurve curve templates and their Geom2dInt instances
 
 IntCurve owns the templates that Geom2dInt instantiates on `Adaptor2d_Curve2d`; each is a
 generic in `int_curve`, and Geom2dInt declares the native classes as aliases:

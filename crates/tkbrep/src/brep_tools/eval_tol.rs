@@ -29,6 +29,7 @@ use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dCurveOnSurface, Adaptor
 use rustycad_tkg3d::geom::{GeomCurve, GeomSurface};
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkgeombase::geom_lib::CheckCurveOnSurface;
+use rustycad_tkgeombase::scan_step::next_scan_parameter;
 
 /// The three curves the tolerance is measured on.
 struct CurvesOnSurface<'a> {
@@ -121,7 +122,8 @@ fn measured_deviation(
 }
 
 /// 1.2 times the largest distance between the curves at 22 steps over the range
-/// (steps of at least `Precision::Confusion()`), the last parameter included.
+/// (steps of at least `Precision::Confusion()`), the last parameter included;
+/// Standard_DomainError where the native scan stalls (`rustycad_tkgeombase::scan_step`).
 fn sampled_deviation(
     curves: &CurvesOnSurface<'_>,
     (first, last): (f64, f64),
@@ -134,7 +136,9 @@ fn sampled_deviation(
     while t <= last {
         count += 1;
         max_square = f64::max(max_square, square_gap(curves, t)?);
-        t += step;
+        // A step of Confusion is below the half ulp of a parameter beyond about 1e9,
+        // where the native `t += aStep` never moves `t` and the loop never ends.
+        t = next_scan_parameter("BRepTools::EvalAndUpdateTol", t, step, [first, last])?;
     }
     if count < NB_INTERVALS + 1 {
         let square = square_gap(curves, last)?;

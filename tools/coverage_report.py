@@ -22,7 +22,7 @@ from pathlib import Path
 from typing import Callable
 
 from porting import ROOT
-from probe_shards import ProbeCommand, ShardRunner, run_shard, run_sharded
+from probe_shards import SHARD_COUNT, ProbeCommand, ShardRunner, run_shard, run_sharded
 from verify_tkmath_numeric import compare
 
 Runner = Callable[[list[str], str | None], str]
@@ -37,6 +37,9 @@ class ProbeCorpus:
     native_name: str = 'native.txt'
     # TKernel's verifier requires identical text; the numeric verifiers compare NaN by class.
     exact: bool = False
+    # The TKernel probe creates fixed-name files and directories (OSD requests), so two
+    # processes collide; its verifier runs it as one process too.
+    shard_count: int = SHARD_COUNT
 
     def inputs(self) -> Path:
         """The saved request corpus; corpus.inputs()."""
@@ -48,7 +51,7 @@ class ProbeCorpus:
 
 
 PROBE_CORPORA: tuple[ProbeCorpus, ...] = (
-    ProbeCorpus('rustycad-tkernel', 'oracle_probe', 'target/oracle-tkernel', 'occt-output.txt', True),
+    ProbeCorpus('rustycad-tkernel', 'oracle_probe', 'target/oracle-tkernel', 'occt-output.txt', True, 1),
     ProbeCorpus('rustycad-tkmath', 'numeric_probe', 'target/oracle-tkmath/numeric'),
     ProbeCorpus('rustycad-tkg2d', 'numeric_probe', 'target/oracle-tkg2d/numeric'),
     ProbeCorpus('rustycad-tkg3d', 'numeric_probe', 'target/oracle-tkg3d/numeric'),
@@ -90,10 +93,10 @@ def build_probe(corpus: ProbeCorpus, run: Runner) -> Path:
     """Build the instrumented probe of one corpus and return its path.
 
     `cargo llvm-cov run` builds the example with the coverage flags; the empty input
-    makes the run itself a no-op. build_probe(PROBE_CORPORA[1], run_command)
+    makes the run itself a no-op. `--no-report` also skips the clean step, so the test
+    profiles stay (cargo-llvm-cov refuses an explicit `--no-clean` beside it).
+    build_probe(PROBE_CORPORA[1], run_command)
     """
-    # --no-report already keeps the earlier artifacts and profiles; cargo-llvm-cov 0.9.1
-    # rejects it together with --no-clean.
     run(['cargo', 'llvm-cov', 'run', '--no-report', '--locked', '-p', corpus.package,
          '--example', corpus.example], '')
     return ROOT/'target/llvm-cov-target/debug/examples'/corpus.example
@@ -110,7 +113,7 @@ def replay_probe(corpus: ProbeCorpus, run: Runner, shard_runner: ShardRunner = r
     requests: str = corpus.inputs().read_text()
     environment: dict[str, str] = dict(verifier_environment(), LLVM_PROFILE_FILE=profile_pattern())
     command = ProbeCommand([str(build_probe(corpus, run))], environment, ROOT)
-    rust: str = run_sharded(command, requests, runner=shard_runner).stdout
+    rust: str = run_sharded(command, requests, runner=shard_runner, shard_count=corpus.shard_count).stdout
     check_output(corpus, corpus.native().read_text(), rust, requests)
     return len(requests.splitlines())
 
