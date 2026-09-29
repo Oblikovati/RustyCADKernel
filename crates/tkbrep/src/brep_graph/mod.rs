@@ -21,10 +21,13 @@
 //! [`RepId`], their typed aliases, [`ItemId`] and the UIDs). docs/topology-design.md
 //! section 11 fixes the mapping and names the modules the second phase of the port adds.
 pub mod cache_derived_state;
+pub mod child_explorer;
 mod child_refs;
+pub mod copy_remap;
 mod data;
 pub mod defs_iterator;
 pub mod editor;
+mod explorer_kinds;
 mod graph;
 pub mod hooks;
 pub(crate) mod ids;
@@ -32,6 +35,7 @@ pub mod iterator;
 mod marks;
 pub mod parallel_policy;
 mod parent_cursor;
+pub mod parent_explorer;
 pub mod parent_traits;
 pub mod refs_iterator;
 pub mod refs_view;
