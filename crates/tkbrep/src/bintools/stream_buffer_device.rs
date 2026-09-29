@@ -27,14 +27,14 @@ use std::io::{self, Read, Seek, SeekFrom, Write};
 /// The `std::streambuf` of an opened OSD stream, as the byte device of a storage
 /// stream: reads are `sgetn`, writes `sputn`, positions `pubseekoff` on the side
 /// (`in` or `out`) the stream was opened for, and `flush` is `pubsync`.
-pub(super) struct StreamBufDevice {
+pub(crate) struct StreamBufDevice {
     buffer: SharedStreamBuf,
     side: IosOpenMode,
 }
 
 impl StreamBufDevice {
     /// A device over `buffer`, positioned on `side`.
-    pub(super) fn new(buffer: SharedStreamBuf, side: IosOpenMode) -> Self {
+    pub(crate) fn new(buffer: SharedStreamBuf, side: IosOpenMode) -> Self {
         Self { buffer, side }
     }
 

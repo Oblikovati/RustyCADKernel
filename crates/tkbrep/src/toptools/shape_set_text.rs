@@ -69,7 +69,7 @@ pub(super) fn shape_enum_of(word: &[u8]) -> ShapeEnum {
 /// `atoi(text)`: optional spaces and sign, then decimal digits; 0 without digits.
 /// Overflow is undefined natively; glibc's `strtol` saturates, then the value is
 /// truncated to `int`, which the port reproduces.
-pub(super) fn c_atoi(text: &[u8]) -> i32 {
+pub(crate) fn c_atoi(text: &[u8]) -> i32 {
     let start = text
         .iter()
         .position(|byte| !is_c_space(*byte))

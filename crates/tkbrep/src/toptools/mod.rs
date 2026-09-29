@@ -28,7 +28,7 @@ mod shape_map_hasher;
 mod shape_set;
 pub mod shape_set_io;
 mod shape_set_read;
-mod shape_set_text;
+pub(crate) mod shape_set_text;
 
 pub use location_set::LocationSet;
 pub use shape_map_hasher::{
