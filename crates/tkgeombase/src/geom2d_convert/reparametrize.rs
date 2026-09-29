@@ -32,12 +32,29 @@ use rustycad_tkmath::gp::{Point2, Vector2};
 use rustycad_tkmath::plib;
 use std::cell::RefCell;
 
-/// `Geom2dConvert_law_evaluator`: the ordinate of a 2D law curve, inside the
-/// evaluation range and for the value only (error code 1 otherwise).
-struct LawEvaluator {
+/// `Geom2dConvert_law_evaluator` (and its GeomConvert twin
+/// `GeomConvert_law_evaluator`, word for word the same): the ordinate of a 2D law
+/// curve, inside the evaluation range and for the value only (error code 1
+/// otherwise).
+pub(crate) struct LawEvaluator {
     ancore: Handle<Geom2dBSplineCurve>,
     // A failed D0 would unwind natively; it is carried to the end of the product.
     capture: RefCell<FailureCapture>,
+}
+
+impl LawEvaluator {
+    /// The evaluator of the law `ancore`.
+    pub(crate) fn new(ancore: Handle<Geom2dBSplineCurve>) -> Self {
+        Self {
+            ancore,
+            capture: RefCell::default(),
+        }
+    }
+
+    /// The failure a D0 of the law raised during the product, if any.
+    pub(crate) fn take_failure(&self) -> Result<(), Failure> {
+        self.capture.borrow_mut().take()
+    }
 }
 
 impl EvaluatorFunction for LawEvaluator {
@@ -93,10 +110,7 @@ pub(super) fn mult_num_and_denom(
     let degree: i32 = bs.degree() + law.degree();
     let mut res_flat_knots: Array1<'static, f64> = one_based(res_nb_poles + degree + 1)?;
     bsplclib::knot_sequence(&res_knots, &res_mults, &mut res_flat_knots, false)?;
-    let law = LawEvaluator {
-        ancore: Handle::new(ancore),
-        capture: RefCell::default(),
-    };
+    let law = LawEvaluator::new(Handle::new(ancore));
     let product = SplineProduct {
         bs,
         flat_knots: &res_flat_knots,
@@ -104,7 +118,7 @@ pub(super) fn mult_num_and_denom(
         nb_poles: res_nb_poles,
     };
     let (num_poles, den_poles) = product.multiply(&law)?;
-    law.capture.borrow_mut().take()?;
+    law.take_failure()?;
     let res_poles: Array1<'static, Point2> = divided_poles(&num_poles, &den_poles)?;
     let res = Geom2dBSplineCurve::with_weights(
         &res_poles, &den_poles, &res_knots, &res_mults, degree, false,
@@ -169,11 +183,11 @@ fn divided_poles(
     Ok(result)
 }
 
-/// `Geom2dConvert_reparameterise_evaluator`: the polynomial `c + b t + a t^2` whose
-/// coefficients it copies; the native code writes the value and every requested
-/// derivative through a pointer to one double, and FunctionReparameterise only
-/// requests the value.
-struct ReparameteriseEvaluator {
+/// `Geom2dConvert_reparameterise_evaluator` (and `GeomConvert_reparameterise_evaluator`,
+/// the same): the polynomial `c + b t + a t^2` whose coefficients it copies; the
+/// native code writes the value and every requested derivative through a pointer to
+/// one double, and FunctionReparameterise only requests the value.
+pub(crate) struct ReparameteriseEvaluator {
     coefficients: [f64; 3],
 }
 
@@ -260,7 +274,8 @@ fn reparameterise(
 
 // The law u(t) = c + b t + a t^2 with u(0) = umin, u'(0) = 1 / lambda (the speed
 // ratio at the start junction) and the matching speed ratio lambda2 at the end.
-struct QuadraticLaw {
+// GeomConvert's ConcatG1 and ConcatC1 compute the same law from 3D speeds.
+pub(crate) struct QuadraticLaw {
     a: f64,
     b: f64,
     c: f64,
@@ -278,17 +293,27 @@ impl QuadraticLaw {
         let (_, vec2): (Point2, Vector2) = c1.d1(c1.last_parameter())?;
         let (_, vec1): (Point2, Vector2) = c0.d1(c0.first_parameter())?;
         let lambda2: f64 = vec1.magnitude() / vec2.magnitude();
-        let (umin, umax): (f64, f64) = (c1.first_parameter(), c1.last_parameter());
+        Ok(Self::from_speeds(
+            lambda,
+            lambda2,
+            c1.first_parameter(),
+            c1.last_parameter(),
+        ))
+    }
+
+    /// The law of the speed ratios `lambda` (start) and `lambda2` (end) of the curve
+    /// of range `[umin, umax]`.
+    pub(crate) fn from_speeds(lambda: f64, lambda2: f64, umin: f64, umax: f64) -> Self {
         let tmax: f64 = 2.0 * lambda * (umax - umin) / (1.0 + lambda * lambda2);
-        Ok(Self {
+        Self {
             a: (lambda * lambda2 - 1.0) / (2.0 * lambda * tmax),
             b: 1.0 / lambda,
             c: umin,
-        })
+        }
     }
 
     // The knots t_i = u^-1(u_i), the first one 0 (ifv 17.05.00 buc60667).
-    fn invert_knots(&self, knots: &mut Array1<'static, f64>) {
+    pub(crate) fn invert_knots(&self, knots: &mut Array1<'static, f64>) {
         let (a, b, c): (f64, f64, f64) = (self.a, self.b, self.c);
         knots[1] = 0.0;
         for ii in 2..=knots.length() {
@@ -296,7 +321,7 @@ impl QuadraticLaw {
         }
     }
 
-    fn evaluator(&self) -> ReparameteriseEvaluator {
+    pub(crate) fn evaluator(&self) -> ReparameteriseEvaluator {
         ReparameteriseEvaluator {
             coefficients: [self.c, self.b, self.a],
         }
