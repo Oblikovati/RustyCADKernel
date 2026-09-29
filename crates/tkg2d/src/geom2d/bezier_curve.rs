@@ -25,7 +25,6 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::bsplclib;
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Transform2, Vector2};
 use std::io;
 
@@ -230,15 +229,7 @@ impl Geom2dCurve for Geom2dBezierCurve {
     fn is_closed(&self) -> Result<bool, Failure> {
         Ok(self.state.read().closed)
     }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    crate::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
         self.state.read().eval_d0(u)
     }

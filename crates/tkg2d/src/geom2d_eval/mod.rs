@@ -23,6 +23,7 @@ pub use rep_curve_desc::{
 pub mod rep_utils;
 
 mod analytic_dump;
+pub mod bezier_curve_data;
 pub mod eval_basis;
 mod eval_math;
 

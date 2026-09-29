@@ -64,3 +64,35 @@ pub(crate) fn check_derivative_order(member: &str, n: i32) -> Result<(), Failure
     }
     Ok(())
 }
+
+/// `EvalD0`..`EvalD3` of an analytic eval curve whose `terms(u)` value evaluates the
+/// point and the first three derivatives in the curve's `LocalFrame`; the frame is
+/// built first, then the terms, then the point before each derivative, as the native
+/// members run; `local_frame_evaluators!(SpiralTerms);` inside `impl Geom2dCurve`.
+macro_rules! local_frame_evaluators {
+    ($terms:ty) => {
+        fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
+            Ok(self.terms(u).point(&LocalFrame::new(self.position)))
+        }
+        fn eval_d1(&self, u: f64) -> Result<Geom2dCurveD1, Failure> {
+            let frame = LocalFrame::new(self.position);
+            let terms: $terms = self.terms(u);
+            let (point, d1) = (terms.point(&frame), terms.d1(&frame));
+            Ok(Geom2dCurveD1 { point, d1 })
+        }
+        fn eval_d2(&self, u: f64) -> Result<Geom2dCurveD2, Failure> {
+            let frame = LocalFrame::new(self.position);
+            let terms: $terms = self.terms(u);
+            let (point, d1, d2) = (terms.point(&frame), terms.d1(&frame), terms.d2(&frame));
+            Ok(Geom2dCurveD2 { point, d1, d2 })
+        }
+        fn eval_d3(&self, u: f64) -> Result<Geom2dCurveD3, Failure> {
+            let frame = LocalFrame::new(self.position);
+            let terms: $terms = self.terms(u);
+            let (point, d1, d2) = (terms.point(&frame), terms.d1(&frame), terms.d2(&frame));
+            let d3: Vector2 = terms.d3(&frame);
+            Ok(Geom2dCurveD3 { point, d1, d2, d3 })
+        }
+    };
+}
+pub(crate) use local_frame_evaluators;

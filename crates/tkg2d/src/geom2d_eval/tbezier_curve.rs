@@ -14,6 +14,7 @@
 
 //! `Geom2dEval_TBezierCurve`: a trigonometric Bezier curve over the basis
 //! `{1, sin(alpha t), cos(alpha t), ..., sin(n alpha t), cos(n alpha t)}` on `[0, Pi/alpha]`.
+use super::bezier_curve_data::{check_weights, owned};
 use super::eval_basis::sums::BasisSums;
 use super::eval_basis::tbezier::{
     TBezierView, curve_basis, non_rational_dn, rational_derivatives, rational_dn, rational_point,
@@ -29,7 +30,6 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Transform2, Vector2, Xy};
 use std::f64::consts::PI;
 use std::io;
@@ -74,32 +74,6 @@ fn check_poles_and_alpha(count: usize, alpha: f64) -> Result<(), Failure> {
     Ok(())
 }
 
-fn check_weights(weights: &Array1<'_, f64>, count: usize) -> Result<(), Failure> {
-    if weights.len() != count {
-        return Err(errors::construction(&format!(
-            "{CLASS}: {} weights; expected {count} (one per pole)",
-            weights.len()
-        )));
-    }
-    let lower: i32 = weights.lower();
-    for (offset, &weight) in weights.as_slice().iter().enumerate() {
-        if weight <= 0.0 {
-            let index: i64 = i64::from(lower) + offset as i64;
-            return Err(errors::construction(&format!(
-                "{CLASS}: weight({index}) = {weight}; expected every weight > 0"
-            )));
-        }
-    }
-    Ok(())
-}
-
-// An owning copy that keeps the source bounds, as the NCollection_Array1 copy constructor.
-fn owned<T: Clone>(source: &Array1<'_, T>) -> Array1<'static, T> {
-    let mut copy: Array1<'static, T> = Array1::default();
-    copy.assign(source);
-    copy
-}
-
 impl Geom2dEvalTBezierCurve {
     /// Non-rational curve (`Geom2dEval_TBezierCurve(Poles, Alpha)`); Standard_ConstructionError
     /// unless the pole count is odd and >= 3 and `alpha > 0`;
@@ -123,7 +97,7 @@ impl Geom2dEvalTBezierCurve {
         alpha: f64,
     ) -> Result<Self, Failure> {
         check_poles_and_alpha(poles.len(), alpha)?;
-        check_weights(weights, poles.len())?;
+        check_weights(CLASS, weights, poles.len())?;
         Ok(Self {
             parent: StandardTransient::default(),
             poles: owned(poles),
@@ -201,16 +175,7 @@ impl Geom2dGeometry for Geom2dEvalTBezierCurve {
     }
 }
 impl Geom2dCurve for Geom2dEvalTBezierCurve {
-    fn reverse(&self) -> Result<(), Failure> {
-        Err(unsupported("Geom2dEval_TBezierCurve::Reverse", ""))
-    }
-    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
-        let detail: String = format!("(U = {u})");
-        Err(unsupported(
-            "Geom2dEval_TBezierCurve::ReversedParameter",
-            &detail,
-        ))
-    }
+    crate::unsupported_curve_reversal!(unsupported, "Geom2dEval_TBezierCurve");
     fn first_parameter(&self) -> f64 {
         0.0
     }
@@ -221,15 +186,7 @@ impl Geom2dCurve for Geom2dEvalTBezierCurve {
         let distance: f64 = self.start_point()?.distance(self.end_point()?);
         Ok(distance <= precision::confusion())
     }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    crate::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
         Ok(self.evaluate::<0>(u).0)
     }

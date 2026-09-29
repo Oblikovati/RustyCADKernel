@@ -28,7 +28,6 @@ use rustycad_tkg2d::geom2d::arrays::{at, check_one_based, copy_same_length};
 use rustycad_tkg2d::geom2d::spline_data::bezier_knots;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::bsplclib;
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
 use std::io;
 
@@ -257,15 +256,7 @@ impl GeomCurve for GeomBezierCurve {
     fn is_closed(&self) -> Result<bool, Failure> {
         Ok(self.state.read().closed)
     }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    rustycad_tkg2d::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
         self.state.read().eval_d0(u)
     }

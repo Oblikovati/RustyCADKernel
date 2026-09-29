@@ -17,7 +17,6 @@
 //!
 //! The evaluation is the Geom2dEval algorithm with `gp_XYZ` sums; both run
 //! `rustycad_tkg2d::geom2d_eval::eval_basis::{aht, aht_dn}`.
-use super::bezier_curve_data::{check_weights, owned};
 use super::curve_support::check_derivative_order;
 use super::eval_failures::unsupported;
 use crate::geom::errors;
@@ -31,12 +30,12 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_field, dump_flag};
+use rustycad_tkg2d::geom2d_eval::bezier_curve_data::{check_weights, owned};
 use rustycad_tkg2d::geom2d_eval::eval_basis::aht::{
     AhtView, basis_dimension, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3,
 };
 use rustycad_tkg2d::geom2d_eval::eval_basis::aht_dn;
 use rustycad_tkg2d::geom2d_eval::eval_basis::sums::BasisSums;
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3, Xyz};
 use std::io;
 
@@ -233,16 +232,7 @@ impl GeomGeometry for GeomEvalAHTBezierCurve {
     }
 }
 impl GeomCurve for GeomEvalAHTBezierCurve {
-    fn reverse(&self) -> Result<(), Failure> {
-        Err(unsupported("GeomEval_AHTBezierCurve::Reverse", ""))
-    }
-    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
-        let detail: String = format!("(U = {u})");
-        Err(unsupported(
-            "GeomEval_AHTBezierCurve::ReversedParameter",
-            &detail,
-        ))
-    }
+    rustycad_tkg2d::unsupported_curve_reversal!(unsupported, "GeomEval_AHTBezierCurve");
     fn first_parameter(&self) -> f64 {
         0.0
     }
@@ -253,15 +243,7 @@ impl GeomCurve for GeomEvalAHTBezierCurve {
         let distance: f64 = self.start_point()?.distance(&self.end_point()?);
         Ok(distance <= precision::confusion())
     }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    rustycad_tkg2d::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
         let sums: BasisSums<Xyz> = self.sums::<0>(u);
         if !self.rational {

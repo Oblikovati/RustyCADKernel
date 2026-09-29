@@ -14,6 +14,7 @@
 
 //! `Geom2dEval_AHTBezierCurve`: an algebraic-hyperbolic-trigonometric Bezier curve
 //! over `{1, t, ..., t^k, sinh(alpha t), cosh(alpha t), sin(beta t), cos(beta t)}` on `[0, 1]`.
+use super::bezier_curve_data::{check_weights, owned};
 use super::eval_basis::aht::{
     AhtView, basis_dimension, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3,
 };
@@ -30,7 +31,6 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Transform2, Vector2, Xy};
 use std::io;
 
@@ -87,31 +87,6 @@ fn check_basis(count: usize, alg_degree: i32, alpha: f64, beta: f64) -> Result<(
     Ok(())
 }
 
-fn check_weights(weights: &Array1<'_, f64>, count: usize) -> Result<(), Failure> {
-    if weights.len() != count {
-        return Err(errors::construction(&format!(
-            "{CLASS}: {} weights; expected {count} (one per pole)",
-            weights.len()
-        )));
-    }
-    let lower: i32 = weights.lower();
-    for (offset, &weight) in weights.as_slice().iter().enumerate() {
-        if weight <= 0.0 {
-            let index: i64 = i64::from(lower) + offset as i64;
-            return Err(errors::construction(&format!(
-                "{CLASS}: weight({index}) = {weight}; expected every weight > 0"
-            )));
-        }
-    }
-    Ok(())
-}
-
-fn owned<T: Clone>(source: &Array1<'_, T>) -> Array1<'static, T> {
-    let mut copy: Array1<'static, T> = Array1::default();
-    copy.assign(source);
-    copy
-}
-
 impl Geom2dEvalAHTBezierCurve {
     /// Non-rational curve (`Geom2dEval_AHTBezierCurve(Poles, AlgDegree, Alpha, Beta)`);
     /// Standard_ConstructionError unless `alg_degree >= 0`, `alpha >= 0`, `beta >= 0` and
@@ -146,7 +121,7 @@ impl Geom2dEvalAHTBezierCurve {
         beta: f64,
     ) -> Result<Self, Failure> {
         check_basis(poles.len(), alg_degree, alpha, beta)?;
-        check_weights(weights, poles.len())?;
+        check_weights(CLASS, weights, poles.len())?;
         Ok(Self::stored(
             poles,
             owned(weights),
@@ -252,16 +227,7 @@ impl Geom2dGeometry for Geom2dEvalAHTBezierCurve {
     }
 }
 impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
-    fn reverse(&self) -> Result<(), Failure> {
-        Err(unsupported("Geom2dEval_AHTBezierCurve::Reverse", ""))
-    }
-    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
-        let detail: String = format!("(U = {u})");
-        Err(unsupported(
-            "Geom2dEval_AHTBezierCurve::ReversedParameter",
-            &detail,
-        ))
-    }
+    crate::unsupported_curve_reversal!(unsupported, "Geom2dEval_AHTBezierCurve");
     fn first_parameter(&self) -> f64 {
         0.0
     }
@@ -272,15 +238,7 @@ impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
         let distance: f64 = self.start_point()?.distance(self.end_point()?);
         Ok(distance <= precision::confusion())
     }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    crate::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
         let sums: BasisSums<Xy> = self.sums::<0>(u);
         if !self.rational {
