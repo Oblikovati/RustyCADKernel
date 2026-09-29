@@ -62,6 +62,7 @@ pub mod supplement_editor;
 pub mod supplement_iterator;
 pub mod tool;
 pub mod topo_view;
+pub mod transform;
 pub mod uids_view;
 mod usage_path;
 pub mod validate;
