@@ -26,6 +26,7 @@ pub mod approx;
 mod array_access;
 pub mod bnd_lib;
 pub mod cpnts;
+mod curve_approx_eval;
 pub mod extrema;
 pub mod extrema_pc;
 pub mod extrema_pc2d;
