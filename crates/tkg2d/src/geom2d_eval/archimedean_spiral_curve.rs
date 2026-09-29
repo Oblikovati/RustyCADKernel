@@ -15,14 +15,13 @@
 //! `Geom2dEval_ArchimedeanSpiralCurve`: `C(t) = O + (a + b*t)*(cos(t)*XDir + sin(t)*YDir)`.
 use super::analytic_dump::dump_analytic_curve;
 use super::eval_basis::trig_shift;
-use super::eval_math::{LocalFrame, check_derivative_order, unsupported};
+use super::eval_math::{LocalFrame, check_derivative_order, local_frame_evaluators, unsupported};
 use crate::geom2d::errors;
 use crate::geom2d::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, Geom2dGeometry};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2d, Point2, Transform2, Vector2};
 use std::io;
 
@@ -150,59 +149,10 @@ impl Geom2dGeometry for Geom2dEvalArchimedeanSpiralCurve {
     }
 }
 impl Geom2dCurve for Geom2dEvalArchimedeanSpiralCurve {
-    fn reverse(&self) -> Result<(), Failure> {
-        Err(unsupported(
-            "Geom2dEval_ArchimedeanSpiralCurve::Reverse",
-            "",
-        ))
-    }
-    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
-        let detail: String = format!("(U = {u})");
-        Err(unsupported(
-            "Geom2dEval_ArchimedeanSpiralCurve::ReversedParameter",
-            &detail,
-        ))
-    }
-    fn first_parameter(&self) -> f64 {
-        0.0
-    }
-    fn last_parameter(&self) -> f64 {
-        precision::infinite()
-    }
-    fn is_closed(&self) -> Result<bool, Failure> {
-        Ok(false)
-    }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
-    fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
-        Ok(self.terms(u).point(&LocalFrame::new(self.position)))
-    }
-    fn eval_d1(&self, u: f64) -> Result<Geom2dCurveD1, Failure> {
-        let frame = LocalFrame::new(self.position);
-        let terms: SpiralTerms = self.terms(u);
-        let (point, d1) = (terms.point(&frame), terms.d1(&frame));
-        Ok(Geom2dCurveD1 { point, d1 })
-    }
-    fn eval_d2(&self, u: f64) -> Result<Geom2dCurveD2, Failure> {
-        let frame = LocalFrame::new(self.position);
-        let terms: SpiralTerms = self.terms(u);
-        let (point, d1, d2) = (terms.point(&frame), terms.d1(&frame), terms.d2(&frame));
-        Ok(Geom2dCurveD2 { point, d1, d2 })
-    }
-    fn eval_d3(&self, u: f64) -> Result<Geom2dCurveD3, Failure> {
-        let frame = LocalFrame::new(self.position);
-        let terms: SpiralTerms = self.terms(u);
-        let (point, d1, d2) = (terms.point(&frame), terms.d1(&frame), terms.d2(&frame));
-        let d3: Vector2 = terms.d3(&frame);
-        Ok(Geom2dCurveD3 { point, d1, d2, d3 })
-    }
+    crate::unsupported_curve_reversal!(unsupported, "Geom2dEval_ArchimedeanSpiralCurve");
+    crate::open_curve_range!(0.0, precision::infinite());
+    crate::non_periodic_cn_curve!();
+    local_frame_evaluators!(SpiralTerms);
     // Leibniz on (a + b t) f(t): only the k = 0 and k = 1 terms survive,
     // `r f^(N) + N b f^(N-1)`.
     fn eval_dn(&self, u: f64, n: i32) -> Result<Vector2, Failure> {

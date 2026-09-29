@@ -150,26 +150,11 @@ impl GeomOffsetSurface {
         }
         self.set_eval_representation(full_rep(self.surface()?))
     }
-    /// Whether an evaluation representation is set (`HasEvalRepresentation`);
-    /// `s.has_eval_representation()`.
-    pub fn has_eval_representation(&self) -> bool {
-        self.state.read().eval_rep.is_some()
-    }
-    /// The evaluation representation, possibly null (`EvalRepresentation`); `s.eval_representation()`.
-    pub fn eval_representation(&self) -> Handle<dyn RepSurfaceDesc> {
-        self.state.read().eval_rep.clone()
-    }
-    /// Validate and set the evaluation representation (`SetEvalRepresentation`);
-    /// `s.set_eval_representation(desc)?`.
-    pub fn set_eval_representation(&self, desc: Handle<dyn RepSurfaceDesc>) -> Result<(), Failure> {
-        rep_utils::validate_surface_desc(&desc, std::ptr::from_ref(self).cast())?;
-        self.state.write().eval_rep = desc;
-        Ok(())
-    }
-    /// Remove the evaluation representation (`ClearEvalRepresentation`); `s.clear_eval_representation()`.
-    pub fn clear_eval_representation(&self) {
-        self.state.write().eval_rep = Handle::default();
-    }
+    rustycad_tkg2d::eval_representation_members!(
+        dyn RepSurfaceDesc,
+        rep_utils::validate_surface_desc,
+        "s"
+    );
     /// The offset distance (`Offset`); `s.offset()`.
     pub fn offset(&self) -> f64 {
         self.state.read().offset_value

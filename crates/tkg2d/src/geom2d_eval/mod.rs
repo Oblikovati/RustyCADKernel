@@ -22,9 +22,12 @@ pub use rep_curve_desc::{
 };
 pub mod rep_utils;
 
+pub mod aht_bezier_data;
 mod analytic_dump;
+pub mod bezier_curve_data;
 pub mod eval_basis;
 mod eval_math;
+pub mod tbezier_data;
 
 mod aht_bezier_curve;
 pub use aht_bezier_curve::Geom2dEvalAHTBezierCurve;

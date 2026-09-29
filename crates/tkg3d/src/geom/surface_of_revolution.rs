@@ -91,28 +91,11 @@ impl GeomSurfaceOfRevolution {
         copy.state.write().eval_rep = rep_utils::clone_surface_desc(&eval_rep)?;
         Ok(copy)
     }
-    /// Whether an evaluation representation is set (`HasEvalRepresentation`);
-    /// `surface.has_eval_representation()`.
-    pub fn has_eval_representation(&self) -> bool {
-        self.state.read().eval_rep.is_some()
-    }
-    /// The evaluation representation, possibly null (`EvalRepresentation`);
-    /// `surface.eval_representation()`.
-    pub fn eval_representation(&self) -> Handle<dyn RepSurfaceDesc> {
-        self.state.read().eval_rep.clone()
-    }
-    /// Validate and set the evaluation representation (`SetEvalRepresentation`);
-    /// `surface.set_eval_representation(desc)?`.
-    pub fn set_eval_representation(&self, desc: Handle<dyn RepSurfaceDesc>) -> Result<(), Failure> {
-        rep_utils::validate_surface_desc(&desc, std::ptr::from_ref(self).cast())?;
-        self.state.write().eval_rep = desc;
-        Ok(())
-    }
-    /// Remove the evaluation representation (`ClearEvalRepresentation`);
-    /// `surface.clear_eval_representation()`.
-    pub fn clear_eval_representation(&self) {
-        self.state.write().eval_rep = Handle::default();
-    }
+    rustycad_tkg2d::eval_representation_members!(
+        dyn RepSurfaceDesc,
+        rep_utils::validate_surface_desc,
+        "surface"
+    );
     /// Replace the axis of revolution (`SetAxis`); `surface.set_axis(axis)`.
     pub fn set_axis(&self, axis: Axis1) {
         let mut state = self.state.write();

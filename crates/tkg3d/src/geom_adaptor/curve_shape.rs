@@ -23,11 +23,14 @@ use super::curve::GeomAdaptorCurve;
 use super::curve_query::resolution;
 use super::curve_state::{AdaptorState, BSplineData, CurveData};
 use crate::adaptor3d::Adaptor3dCurve;
-use crate::geom::errors::{array_bounds, domain, no_such_object};
+use crate::geom::errors::{array_bounds, no_such_object};
 use crate::geom::{GeomBSplineCurve, GeomCurve, GeomOffsetCurve};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d_adaptor::knot_continuity::{
+    self, KnotSpans, interval_order, offset_basis_shape,
+};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::geom_abs::Shape;
 
@@ -35,7 +38,7 @@ use rustycad_tkmath::geom_abs::Shape;
 /// `continuity(&state)?`.
 pub(super) fn continuity(state: &AdaptorState) -> Result<Shape, Failure> {
     match &state.data {
-        CurveData::BSpline(data) => local_continuity(&data.curve, state.first, state.last),
+        CurveData::BSpline(data) => bspline_continuity(&data.curve, state.first, state.last),
         CurveData::Offset(_) => offset_continuity(state),
         // The native message misspells "Contunuity".
         CurveData::None => Err(no_such_object("GeomAdaptor_Curve::Contunuity")),
@@ -46,86 +49,19 @@ pub(super) fn continuity(state: &AdaptorState) -> Result<Shape, Failure> {
 // An offset loses one order: C1 becomes C0; G1 and G2 stay, C0 has no continuity.
 fn offset_continuity(state: &AdaptorState) -> Result<Shape, Failure> {
     let offset_curve: Handle<GeomOffsetCurve> = state.curve.cast();
-    Ok(match offset_curve.basis_curve_continuity() {
-        Shape::CN => Shape::CN,
-        Shape::C3 => Shape::C2,
-        Shape::C2 => Shape::C1,
-        Shape::C1 => Shape::C0,
-        Shape::G1 => Shape::G1,
-        Shape::G2 => Shape::G2,
-        Shape::C0 => return Err(no_such_object("GeomAdaptor_Curve::Continuity")),
-    })
+    knot_continuity::offset_continuity(offset_curve.basis_curve_continuity(), "GeomAdaptor_Curve")
 }
 
-// The knot index of `u` and the parameter brought into the knot range (LocateParameter).
-fn locate(
-    curve: &GeomBSplineCurve,
-    knots: &Array1<'_, f64>,
-    mults: &Array1<'_, i32>,
-    u: f64,
-) -> Result<(i32, f64), Failure> {
-    let (mut index, mut new_u): (i32, f64) = (0, 0.0);
-    let count: i32 = curve.nb_knots();
-    bsplclib::locate_parameter(
-        curve.degree(),
-        knots,
-        mults,
-        u,
-        curve.is_periodic(),
-        1,
-        count,
-        &mut index,
-        &mut new_u,
-    )?;
-    Ok((index, new_u))
-}
-
-/// `LocalContinuity`: `C(Degree - m)` with `m` the highest multiplicity of the knots
-/// strictly inside `[u1, u2]`, CN between two consecutive knots of a non-periodic
-/// curve; `local_continuity(&curve, 0.0, 1.0)?`.
-pub(super) fn local_continuity(
-    curve: &GeomBSplineCurve,
-    u1: f64,
-    u2: f64,
-) -> Result<Shape, Failure> {
+/// `LocalContinuity` over the knots of `curve`; `bspline_continuity(&curve, 0.0, 1.0)?`.
+fn bspline_continuity(curve: &GeomBSplineCurve, u1: f64, u2: f64) -> Result<Shape, Failure> {
     let (knots, mults) = (curve.knots(), curve.multiplicities());
-    let count: i32 = curve.nb_knots();
-    let (mut index1, new_first) = locate(curve, &knots, &mults, u1)?;
-    let (mut index2, new_last) = locate(curve, &knots, &mults, u2)?;
-    if (new_first - *knots.value(index1 + 1).map_err(array_bounds)?).abs()
-        < precision::p_confusion()
-        && index1 < count
-    {
-        index1 += 1;
-    }
-    if (new_last - *knots.value(index2).map_err(array_bounds)?).abs() < precision::p_confusion() {
-        index2 -= 1;
-    }
-    // Beware of periodic curves.
-    if curve.is_periodic() && index1 == count {
-        index1 = 1;
-    }
-    let mult_max: i32 = if index2 - index1 <= 0 && !curve.is_periodic() {
-        100 // CN between two consecutive knots.
-    } else {
-        curve.degree() - max_multiplicity(&mults, index1, index2)?
+    let spans = KnotSpans {
+        knots: &knots,
+        mults: &mults,
+        degree: curve.degree(),
+        periodic: curve.is_periodic(),
     };
-    Ok(match mult_max {
-        i32::MIN..=0 => Shape::C0,
-        1 => Shape::C1,
-        2 => Shape::C2,
-        3 => Shape::C3,
-        _ => Shape::CN,
-    })
-}
-
-// The native loop: TM(Index1 + 1), then TM(Index1 + 1..=Index2).
-fn max_multiplicity(mults: &Array1<'_, i32>, index1: i32, index2: i32) -> Result<i32, Failure> {
-    let mut max: i32 = *mults.value(index1 + 1).map_err(array_bounds)?;
-    for i in index1 + 1..=index2 {
-        max = max.max(*mults.value(i).map_err(array_bounds)?);
-    }
-    Ok(max)
+    knot_continuity::local_continuity(&spans, u1, u2)
 }
 
 // Whether a B-spline answers one interval: non-periodic and already `shape` over the
@@ -141,13 +77,7 @@ fn bspline_order(
     shape: Shape,
     member: &str,
 ) -> Result<(i32, f64), Failure> {
-    let order: i32 = match shape {
-        Shape::C1 => 1,
-        Shape::C2 => 2,
-        Shape::C3 => 3,
-        Shape::CN => data.curve.degree(),
-        _ => return Err(domain(&format!("GeomAdaptor_Curve::{member}()"))),
-    };
+    let order: i32 = interval_order(shape, data.curve.degree(), "GeomAdaptor_Curve", member)?;
     let tolerance: f64 = resolution(state, precision::confusion())?.min(precision::p_confusion());
     Ok((order, tolerance))
 }
@@ -173,18 +103,6 @@ fn bspline_intervals(
         tolerance,
         out,
     )
-}
-
-// The basis continuity of an offset's intervals; G1 and G2 have none (the native
-// message names GeomAdaptor_Curve).
-fn offset_basis_shape(shape: Shape) -> Result<Shape, Failure> {
-    Ok(match shape {
-        Shape::G1 | Shape::G2 => return Err(domain("GeomAdaptor_Curve::NbIntervals")),
-        Shape::C0 => Shape::C1,
-        Shape::C1 => Shape::C2,
-        Shape::C2 => Shape::C3,
-        Shape::C3 | Shape::CN => Shape::CN,
-    })
 }
 
 // The interval bounds of the offset basis (a temporary adaptor over the same range,
