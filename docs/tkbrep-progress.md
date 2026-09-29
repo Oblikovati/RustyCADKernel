@@ -627,7 +627,7 @@ UID, every reference, the node and reference UIDs and stamps, the layer registry
 logging layers' events, the history records with their mappings in map order, the
 supplement, the caches, the mesh cache and view and every node's shapes.
 
-The BRepGraph validation and transform requests (27 requests in
+The BRepGraph validation and transform requests (33 requests in
 `tools/tkbrep_brepgraph_validate_corpus.py`, probes
 `tools/oracle/tkbrep_probe_brepgraph_validate.cxx` and
 `crates/tkbrep/examples/br_probe/brep_graph_validate_transform.rs`; action codes 260-273,
@@ -664,10 +664,10 @@ a range check (a segmentation fault, undefined behaviour at the pinned commit). 
 the product present the native and Rust answers agree; the Rust port refuses the
 out-of-range ids with Standard_OutOfRange (docs/topology-design.md, section 11.14).
 
-The corpus has 726 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
+The corpus has 732 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
 caches 22, the BRepGraph navigation 13, the BRepGraph lock and caches 14, the BRepGraph
-editor 18, the BRepGraph algorithms 32 and the BRepGraph validation and transform 27.
+editor 18, the BRepGraph algorithms 32 and the BRepGraph validation and transform 33.
 
 ## Dependency gap
 
