@@ -1777,6 +1777,23 @@ ProjLib:
   that ends natively advances at every increment, so every other result is unchanged.
   The request stays out of the corpus (the native probe never returns); the regression
   tests are in `tests/proj_lib_behavior/degenerate_ranges.rs`.
+- Rust deviation, the other float-step scans that can stall: the guard above is the
+  crate module `scan_step` (`next_scan_parameter`, and `advanced_scan_parameter` for a
+  loop that stops instead), shared by every scan of the shape `T += Step` while
+  `T <= Last`. An increment moves `T` or leaves it unchanged (rounding is monotone), and
+  a NaN ends each of these loops at once, so the guard fires only where the native loop
+  never ends. It covers `IsoIsDeg` of `ProjLib_ProjectedCurve` (the pole check of a
+  Bezier or B-spline surface samples a bound iso in tenths of the range; a zero-width
+  or one-ulp surface range, or an infinite bound, never advances), `IsoIsDeg` of
+  `Extrema_ExtPS` (a step of PConfusion rounds back at a parameter beyond about 1e7),
+  the period shift of the polar initial curve (a parameter beyond about 1e17 is not
+  moved by one period; the port also refuses a shift that jumps over a window narrower
+  than the period, which natively then moves away forever) and the period loop of
+  `ProjLib_ProjectOnPlane::Load`. Each raises Standard_DomainError naming the owner,
+  the range, the step and the parameter. Samples of every scan that ends natively are
+  bit-identical (the numeric oracle is unchanged); the regression tests are in
+  `tests/proj_lib_behavior/degenerate_ranges.rs` and the module tests of `scan_step`
+  and `proj_lib::polar::initial`.
 
 GeomProjLib:
 

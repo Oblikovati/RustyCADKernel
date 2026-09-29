@@ -21,6 +21,7 @@ use super::approx::{new_array, perform_approx};
 use crate::geom_convert::curve_to_bspline_curve;
 use crate::geom_lib::Tool as GeomLibTool;
 use crate::native_failure::failure;
+use crate::scan_step::next_scan_parameter;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -355,8 +356,12 @@ impl OnPlaneState {
             self.last_par = u;
         }
         let period: f64 = self.result()?.period()?;
+        let range: [f64; 2] = [self.first_par, self.last_par];
         while self.last_par <= self.first_par {
-            self.last_par += period;
+            // A zero period, or one below the half ulp of the parameter, never moves
+            // it, and the native loop never ends.
+            self.last_par =
+                next_scan_parameter("ProjLib_ProjectOnPlane", self.last_par, period, range)?;
         }
         Ok(())
     }

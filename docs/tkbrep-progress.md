@@ -959,8 +959,14 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   stream before setting its precision (the native code dereferences it first).
 - BRepTools: a shape record or edge representation list read from a failed stream
   stops at the failure (natively the loop never ends); the periodicity test of
-  `UVBounds` stops after its first sample when the across range is empty (natively it
-  never advances). A null curve, p-curve or surface given to `EvalAndUpdateTol`,
+  `UVBounds` stops at the sample whose increment does not move the across parameter (an
+  empty or few-ulp range, or an infinite bound; natively it never advances). The
+  sampled estimate of `EvalAndUpdateTol` (steps of at least Confusion, which round back
+  at a parameter beyond about 1e9) and the step search of `BRepTools_WireExplorer`
+  (`GetNextParamOnPC`, a thousandth of a range of a few ulps) raise
+  Standard_DomainError where the native scan stalls, through the TKGeomBase
+  `scan_step` guard (docs/tkgeombase-progress.md); every scan that ends natively takes
+  the same samples. A null curve, p-curve or surface given to `EvalAndUpdateTol`,
   `AddUVBounds` on a face without surface, a NurbsConvert seam without 3D curve and
   `Update` of a null shape raise Standard_NullObject instead of crashing, and the
   shape set's unchecked TShape casts raise Standard_TypeMismatch. The load members of
