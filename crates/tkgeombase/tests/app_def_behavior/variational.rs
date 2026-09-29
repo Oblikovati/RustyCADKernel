@@ -55,17 +55,9 @@ fn bad_arguments_are_refused_by_the_constructor() {
         }),
         "Standard_ConstructionError"
     );
-    // MaxDegree is clamped to 30 by the constructor only (then refused by the element
-    // criteria, whose reference integrals stop at 14).
-    let v = smoothing(
-        8,
-        VariationalOptions {
-            max_degree: 50,
-            with_cutting: false,
-            ..o
-        },
-    );
-    assert_eq!(kind(v), "Standard_ConstructionError");
+    // MaxDegree 50 (clamped to 30 by the constructor) is pinned by the single-test
+    // binary app_def_reference_cache.rs: its exception depends on the process-wide
+    // reference cache that the other tests of this binary fill in parallel.
 }
 
 #[test]

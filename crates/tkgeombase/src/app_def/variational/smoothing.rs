@@ -40,20 +40,7 @@ impl Variational {
     /// Standard_ConstructionError when the length is below Precision::Confusion() / 100.
     pub(super) fn init_parameters(&self) -> Result<f64, Failure> {
         let eps1: f64 = precision::confusion() * 0.01;
-        let mut length: f64 = 0.;
-        self.set_parameter(self.first_point, length)?;
-        let mut i1: i32 = 0;
-        for ipoint in self.first_point + 1..=self.last_point {
-            let i0: i32 = i1;
-            i1 += self.dimension;
-            let mut dist: f64 = 0.;
-            for i in 1..=self.dimension {
-                let aux: f64 = self.tab_point(i1 + i)? - self.tab_point(i0 + i)?;
-                dist += aux * aux;
-            }
-            length += dist.sqrt();
-            self.set_parameter(ipoint, length)?;
-        }
+        let mut length: f64 = self.cumulative_chords()?;
         if length <= eps1 {
             return Err(construction(&format!(
                 "InitParameters: chord length {length}; expected > {eps1}"
@@ -67,6 +54,31 @@ impl Variational {
             length *= 1. + 0.1 / f64::from(self.nb_points - 1);
         }
         Ok(length)
+    }
+
+    // The cumulated chord lengths from the first point stored as the parameters;
+    // returns the total length.
+    fn cumulative_chords(&self) -> Result<f64, Failure> {
+        let mut length: f64 = 0.;
+        self.set_parameter(self.first_point, length)?;
+        let mut i1: i32 = 0;
+        for ipoint in self.first_point + 1..=self.last_point {
+            let i0: i32 = i1;
+            i1 += self.dimension;
+            length += self.chord(i0, i1)?;
+            self.set_parameter(ipoint, length)?;
+        }
+        Ok(length)
+    }
+
+    // The distance between the points at offsets `i0` and `i1` of myTabPoints.
+    fn chord(&self, i0: i32, i1: i32) -> Result<f64, Failure> {
+        let mut dist: f64 = 0.;
+        for i in 1..=self.dimension {
+            let aux: f64 = self.tab_point(i1 + i)? - self.tab_point(i0 + i)?;
+            dist += aux * aux;
+        }
+        Ok(dist.sqrt())
     }
 
     // The quality weight: the tolerance as size error, 1 for a zero tolerance, or

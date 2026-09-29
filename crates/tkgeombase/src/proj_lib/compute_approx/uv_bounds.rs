@@ -18,6 +18,7 @@
 //! is sampled, the parameter angle unwrapped across the seam, and the window is
 //! either the natural range or a period centred on the sampled range.
 use super::function::{Projection, UvBounds, compute_step};
+use crate::native_failure::failure;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::geom::GeomSurfaceD1;
@@ -121,6 +122,33 @@ pub(super) fn centred_window(min: f64, max: f64) -> (f64, f64, bool) {
     (u - PI, u + PI, true)
 }
 
+/// The next sample `par + step` of a window scan over `range`;
+/// `par = next_scan_parameter(par, step, [s.w1, s.w2])?`.
+///
+/// Rust deviation: natively the scans are `for (par = W1 + Step; par <= W2; par +=
+/// Step)`, which never end when the increment does not move `par` forward: a
+/// zero-length range gives `Step = 0` (GeomProjLib::Curve2d of a line trimmed to
+/// `[1, 1]` on a sphere never returns), and a range of a few ulps gives a step that
+/// rounds back to `par`. The loop state is then unchanged (or only goes down), so the
+/// first increment that does not advance is where the endless loop starts; the port
+/// refuses it there with a Standard_DomainError naming the range. Every scan that ends
+/// natively advances at each increment, so its samples are unchanged.
+pub(super) fn next_scan_parameter(par: f64, step: f64, range: [f64; 2]) -> Result<f64, Failure> {
+    let next: f64 = par + step;
+    if next > par {
+        return Ok(next);
+    }
+    Err(failure(
+        "Standard_DomainError",
+        &format!(
+            "ProjLib_ComputeApprox: the window scan of the curve range [{}, {}] with the \
+             step {step} does not move past the parameter {par}, so the native sampling \
+             loop never ends; expected a range long enough for the step to advance",
+            range[0], range[1]
+        ),
+    ))
+}
+
 /// The curve ends and middle sampled by the window search.
 pub(super) struct Samples {
     pub(super) w1: f64,
@@ -178,7 +206,7 @@ fn cylinder_bounds(p: &Projection<'_>, s: &Samples, b: &mut UvBounds) -> Result<
     while par <= plim {
         let (u, _) = elslib::parameters(&cylinder, p.curve.value(par)?);
         track.push(par, u);
-        par += step;
+        par = next_scan_parameter(par, step, [s.w1, s.w2])?;
     }
     track.widen(s.w1, s.w2);
     (b.u1, b.u2, b.u_couture) = track.window();
@@ -237,7 +265,7 @@ fn torus_bounds(p: &Projection<'_>, s: &Samples, b: &mut UvBounds) -> Result<(),
         let (u, v) = elslib::parameters(&torus, p.curve.value(par)?);
         track_u.push(par, u);
         track_v.push(par, v);
-        par += step;
+        par = next_scan_parameter(par, step, [s.w1, s.w2])?;
     }
     track_u.widen(s.w1, s.w2);
     track_v.widen(s.w1, s.w2);

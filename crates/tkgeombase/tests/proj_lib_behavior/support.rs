@@ -17,8 +17,9 @@ use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped, Transient};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{
-    GeomBezierSurface, GeomCircle, GeomCurve, GeomCylindricalSurface, GeomLine, GeomParabola,
-    GeomPlane, GeomSphericalSurface, GeomSurface, GeomSurfaceOfLinearExtrusion,
+    GeomBezierSurface, GeomCircle, GeomConicalSurface, GeomCurve, GeomCylindricalSurface, GeomLine,
+    GeomParabola, GeomPlane, GeomSphericalSurface, GeomSurface, GeomSurfaceOfLinearExtrusion,
+    GeomToroidalSurface,
 };
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkmath::gp::{Axis2, Axis3, Direction3, Point3};
@@ -76,6 +77,16 @@ pub fn cylinder(radius: f64) -> Handle<dyn Adaptor3dSurface> {
 
 pub fn sphere(radius: f64) -> Handle<dyn Adaptor3dSurface> {
     surface(GeomSphericalSurface::new(xoy(), radius).unwrap())
+}
+
+/// The cone of XOY with the given semi-angle and the reference radius 1.
+pub fn cone(semi_angle: f64) -> Handle<dyn Adaptor3dSurface> {
+    surface(GeomConicalSurface::new(xoy(), semi_angle, 1.0).unwrap())
+}
+
+/// The torus of XOY with the major radius 5 and the minor radius 1.
+pub fn torus() -> Handle<dyn Adaptor3dSurface> {
+    surface(GeomToroidalSurface::new(xoy(), 5.0, 1.0).unwrap())
 }
 
 /// The extrusion along Z of the circle of radius 2.5 in XOY.
