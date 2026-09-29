@@ -68,19 +68,23 @@ guard_tags! {
     OccurrenceRefTag,
 }
 
+
 /// `BRepGraph_MutGuard<T>`: registered on its item (the guard plane) for its whole
 /// life; the typed setters of the editor write through [`internal`](Self::internal),
-/// which flags it dirty, and dropping a dirty guard fires one `markModified` or
+/// which flags it dirty, and releasing a dirty guard (dropping it, or assigning over
+/// it with [`move_assign`](Self::move_assign)) fires one `markModified` or
 /// `markRefModified`, after the guard plane is cleared.
 ///
 /// The guard holds the graph's only mutable borrow, so no second guard can be taken
-/// on any item from outside it; [`graph_mut`](Self::graph_mut) reaches the editor
-/// from inside, where a second guard on the same item raises Standard_ProgramError
-/// as natively. The record is read through the storage by id, never through a held
-/// reference, so no `unsafe` is needed.
+/// from outside it; [`graph_mut`](Self::graph_mut) reaches the editor from inside,
+/// where a second guard on the same item raises Standard_ProgramError as natively.
+/// The record is read through the storage by id, never through a held reference, so
+/// no `unsafe` is needed. The C++ move constructor is [`move_from`](Self::move_from):
+/// it leaves the source inert (it owns nothing and releases nothing), as natively.
 ///
 /// ```
-/// use rustycad_tkbrep::brep_graph::{BRepGraph, editor::EdgeOps};
+/// use rustycad_tkbrep::brep_graph::BRepGraph;
+/// use rustycad_tkbrep::brep_graph::mut_guard::MutGuard;
 /// use rustycad_tkmath::gp::Point3;
 /// let mut graph = BRepGraph::new();
 /// let vertex = graph.editor().vertices().add(Point3::new(0.0, 0.0, 0.0), 1.0e-7);
@@ -88,15 +92,19 @@ guard_tags! {
 /// assert!(!guard.is_dirty());
 /// guard.internal().tolerance = 0.5;
 /// assert!(guard.is_dirty() && guard.tolerance == 0.5);
-/// drop(guard);
+/// let moved = MutGuard::move_from(&mut guard);
+/// assert!(!guard.is_active() && moved.is_active());
+/// drop((guard, moved));
 /// assert_eq!(graph.topo().vertices().definition(vertex).base.own_gen, 2);
 /// ```
 #[derive(Debug)]
 pub struct MutGuard<'g, T: GuardTag> {
-    graph: &'g mut BRepGraph,
+    graph: Option<&'g mut BRepGraph>,
     id: TypedId<T>,
     dirty: bool,
 }
+
+const INERT_GUARD: &str = "BRepGraph_MutGuard: guard is empty or moved-from";
 
 impl<'g, T: GuardTag> MutGuard<'g, T> {
     /// `BRepGraph_MutGuard(theGraph, theStorage, theEntity, theId)`: registers the
@@ -115,16 +123,46 @@ impl<'g, T: GuardTag> MutGuard<'g, T> {
         }
         graph.inc_storage_mut().set_guarded(id);
         Ok(Self {
-            graph,
+            graph: Some(graph),
             id,
             dirty: false,
         })
     }
 
-    /// `operator bool()`: the guard owns its item. A Rust guard cannot be moved from,
-    /// so a live guard always does.
+    /// `BRepGraph_MutGuard(BRepGraph_MutGuard&&)`: takes over the source's item, scope
+    /// and dirty flag; the source becomes inert.
+    pub fn move_from(source: &mut Self) -> Self {
+        let dirty = std::mem::replace(&mut source.dirty, false);
+        Self {
+            graph: source.graph.take(),
+            id: source.id,
+            dirty,
+        }
+    }
+
+    /// `operator=(BRepGraph_MutGuard&&)`: releases this guard's item (notifying it when
+    /// dirty), then takes over the source's; the source becomes inert.
+    pub fn move_assign(&mut self, source: &mut Self) {
+        self.release();
+        *self = Self::move_from(source);
+    }
+
+    /// `operator bool()`: the guard still owns its item (false once moved from).
     pub fn is_active(&self) -> bool {
-        true
+        self.graph.is_some()
+    }
+
+    /// `operator->()` / `operator*()`: the record, or Standard_ProgramError for an
+    /// inert guard. `Deref` is the unchecked form, which panics with the same text.
+    pub fn try_get(&self) -> Result<&T::Target, Failure> {
+        match &self.graph {
+            Some(graph) => Ok(T::target(graph.inc_storage(), self.id)),
+            None => Err(Failure::with_type(
+                "Standard_ProgramError",
+                &format!("{INERT_GUARD} ({} {})", T::NAME, self.id.index),
+                "",
+            )),
+        }
     }
 
     /// `Id()`: the guarded item.
@@ -132,14 +170,15 @@ impl<'g, T: GuardTag> MutGuard<'g, T> {
         self.id
     }
 
-    /// `Graph()`: the owning graph, for reads.
+    /// `Graph()`: the owning graph, for reads (an inert guard has none: a panic, a null
+    /// dereference natively).
     pub fn graph(&self) -> &BRepGraph {
-        self.graph
+        self.graph.as_deref().expect(INERT_GUARD)
     }
 
     /// `Graph()`: the owning graph, for the editor calls made inside the scope.
     pub fn graph_mut(&mut self) -> &mut BRepGraph {
-        self.graph
+        self.graph.as_deref_mut().expect(INERT_GUARD)
     }
 
     /// `MarkDirty()`: flags a modification the guard did not see (an in-place change of
@@ -157,16 +196,30 @@ impl<'g, T: GuardTag> MutGuard<'g, T> {
     /// through the editor's typed setters.
     pub fn internal(&mut self) -> &mut T::Target {
         self.dirty = true;
-        T::target_mut(self.graph.inc_storage_mut(), self.id)
+        let id = self.id;
+        T::target_mut(self.graph_mut().inc_storage_mut(), id)
+    }
+
+    // The release of `~BRepGraph_MutGuard` and `operator=`: the guard plane cleared,
+    // then one notification when dirty; nothing for an inert guard.
+    fn release(&mut self) {
+        let Some(graph) = self.graph.take() else {
+            return;
+        };
+        graph.inc_storage_mut().clear_guarded(self.id);
+        if std::mem::replace(&mut self.dirty, false) {
+            T::notify(graph, self.id);
+        }
     }
 }
 
 impl<T: GuardTag> Deref for MutGuard<'_, T> {
     type Target = T::Target;
 
-    /// `operator->()` / `operator*()`: read-only access to the record.
+    /// `operator->()` / `operator*()` of an active guard (see
+    /// [`try_get`](MutGuard::try_get)).
     fn deref(&self) -> &T::Target {
-        T::target(self.graph.inc_storage(), self.id)
+        self.try_get().expect(INERT_GUARD)
     }
 }
 
@@ -174,9 +227,6 @@ impl<T: GuardTag> Drop for MutGuard<'_, T> {
     /// `~BRepGraph_MutGuard()`: clears the guard plane, then notifies once if dirty,
     /// so the propagation does not see its own registration.
     fn drop(&mut self) {
-        self.graph.inc_storage_mut().clear_guarded(self.id);
-        if self.dirty {
-            T::notify(self.graph, self.id);
-        }
+        self.release();
     }
 }
