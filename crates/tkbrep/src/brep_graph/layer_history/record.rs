@@ -17,7 +17,7 @@
 
 //! The node-keyed recording members: every event also records the item UIDs of its
 //! nodes when the layer is attached to the graph.
-use super::{HistoryEvent, HistoryKind, KeyedMaps, LayerHistory, NodeMaps};
+use super::{HistoryEvent, HistoryKind, HistoryState, KeyedMaps, LayerHistory, NodeMaps};
 use crate::brep_graph::layer::AttachedGraph;
 use crate::brep_graph::{BRepGraph, ItemId, ItemUid, NodeId};
 use rustycad_tkernel::ncollection::{DataMap, HashKey};
@@ -106,6 +106,68 @@ impl<K: HistoryKey> KeyedMaps<K> {
     }
 }
 
+impl HistoryState {
+    // The deleted-set update of a node event: the node and its valid item UID.
+    fn mark_deleted(&mut self, node: NodeId, uid: ItemUid) {
+        self.nodes.deleted.add(node);
+        if uid.is_valid() {
+            self.item_uids.deleted.add(uid);
+        }
+    }
+
+    // The map updates of a `Record` event with images: every image other than the
+    // original is linked (reverse and forward maps, then the item-UID images). The
+    // native assertion that `kind` is not Deleted is compiled out in release builds, so
+    // a Deleted event with images feeds the Modified map. Replaced marks the original.
+    fn link_images(
+        &mut self,
+        kind: HistoryKind,
+        (original, original_uid): (NodeId, ItemUid),
+        (images, item_images): (&[NodeId], &[ItemUid]),
+    ) {
+        for &derived in images.iter().filter(|&&derived| derived != original) {
+            self.nodes.link(kind, original, derived);
+        }
+        if original_uid.is_valid() {
+            let forward = self.item_uids.forward_mut(kind);
+            for &derived in item_images.iter().filter(|&&uid| uid != original_uid) {
+                append_forward(forward, original_uid, derived);
+            }
+        }
+        if kind == HistoryKind::Replaced {
+            self.mark_deleted(original, original_uid);
+        }
+    }
+
+    // One pair of the second `RecordBatch` loop (a pair mapping a node to itself is
+    // skipped).
+    fn link_pair(
+        &mut self,
+        kind: HistoryKind,
+        (original, replacement): (NodeId, NodeId),
+        (original_uid, replacement_uid): (ItemUid, ItemUid),
+    ) {
+        if replacement == original {
+            return;
+        }
+        self.nodes.link(kind, original, replacement);
+        if kind == HistoryKind::Replaced {
+            self.nodes.deleted.add(original);
+        }
+        let valid = original_uid.is_valid() && replacement_uid.is_valid();
+        if valid && replacement_uid != original_uid {
+            append_forward(
+                self.item_uids.forward_mut(kind),
+                original_uid,
+                replacement_uid,
+            );
+        }
+        if kind == HistoryKind::Replaced && original_uid.is_valid() {
+            self.item_uids.deleted.add(original_uid);
+        }
+    }
+}
+
 // The new event of a recording member.
 pub(super) fn new_event(
     label: &AsciiString,
@@ -165,39 +227,15 @@ impl LayerHistory {
         event.mapping.bind(original, replacements.to_vec());
         if original_uid.is_valid() {
             state.item_uids.known_inputs.add(original_uid);
-            event
-                .item_uid_mapping
-                .bind(original_uid, item_replacements.clone());
+            let images = item_replacements.clone();
+            event.item_uid_mapping.bind(original_uid, images);
         }
         state.records.push(event);
         if replacements.is_empty() {
-            state.nodes.deleted.add(original);
-            if original_uid.is_valid() {
-                state.item_uids.deleted.add(original_uid);
-            }
-            drop(state);
-            self.base.touch();
-            return;
-        }
-        // The native assertion that `kind` is not Deleted is compiled out in release
-        // builds: a Deleted event with replacements feeds the Modified map.
-        for &derived in replacements.iter().filter(|&&derived| derived != original) {
-            state.nodes.link(kind, original, derived);
-        }
-        if original_uid.is_valid() {
-            let forward = state.item_uids.forward_mut(kind);
-            for &derived in item_replacements
-                .iter()
-                .filter(|&&derived| derived != original_uid)
-            {
-                append_forward(forward, original_uid, derived);
-            }
-        }
-        if kind == HistoryKind::Replaced {
-            state.nodes.deleted.add(original);
-            if original_uid.is_valid() {
-                state.item_uids.deleted.add(original_uid);
-            }
+            state.mark_deleted(original, original_uid);
+        } else {
+            let images = (replacements, item_replacements.as_slice());
+            state.link_images(kind, (original, original_uid), images);
         }
         drop(state);
         self.base.touch();
@@ -256,28 +294,8 @@ impl LayerHistory {
             .nodes
             .forward_mut(kind)
             .resize(extent + originals.len());
-        for (&(original, replacement), &(original_uid, replacement_uid)) in pairs.iter().zip(&uids)
-        {
-            if replacement == original {
-                continue;
-            }
-            state.nodes.link(kind, original, replacement);
-            if kind == HistoryKind::Replaced {
-                state.nodes.deleted.add(original);
-            }
-            if original_uid.is_valid()
-                && replacement_uid.is_valid()
-                && replacement_uid != original_uid
-            {
-                append_forward(
-                    state.item_uids.forward_mut(kind),
-                    original_uid,
-                    replacement_uid,
-                );
-            }
-            if kind == HistoryKind::Replaced && original_uid.is_valid() {
-                state.item_uids.deleted.add(original_uid);
-            }
+        for (&pair, &pair_uids) in pairs.iter().zip(&uids) {
+            state.link_pair(kind, pair, pair_uids);
         }
         drop(state);
         self.base.touch();
