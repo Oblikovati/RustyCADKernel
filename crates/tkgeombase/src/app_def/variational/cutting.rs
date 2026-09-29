@@ -206,19 +206,7 @@ impl Variational {
                 max_degree - niv_cont
             )));
         }
-        let mut n_libre: i32 = (max_degree - niv_cont - (max_degree + 1) / 4).max(niv_cont + 1);
-        let count = |n_libre: i32| {
-            if n_cont % n_libre == 0 {
-                n_cont / n_libre
-            } else {
-                n_cont / n_libre + 1
-            }
-        };
-        let mut nb_elem: i32 = count(n_libre);
-        while nb_elem > self.options.max_segment && n_libre < max_degree - niv_cont {
-            n_libre += 1;
-            nb_elem = count(n_libre);
-        }
+        let nb_elem: i32 = self.spread_constraints(n_cont);
         if nb_elem > self.options.max_segment {
             return Err(construction(&format!(
                 "InitCutting: {nb_elem} elements; expected <= MaxSegment {}",
@@ -226,6 +214,20 @@ impl Variational {
             )));
         }
         Ok((nb_elem, n_cont))
+    }
+
+    // The element count for `n_cont` constraint counts: NLibre free coefficients
+    // per element from about three quarters of the degree on, raised until the
+    // elements fit MaxSegment or NLibre reaches MaxDegree - Continuity.
+    fn spread_constraints(&self, n_cont: i32) -> i32 {
+        let (max_degree, niv_cont) = (self.options.max_degree, self.niv_cont);
+        let mut n_libre: i32 = (max_degree - niv_cont - (max_degree + 1) / 4).max(niv_cont + 1);
+        let mut nb_elem: i32 = elements_of(n_cont, n_libre);
+        while nb_elem > self.options.max_segment && n_libre < max_degree - niv_cont {
+            n_libre += 1;
+            nb_elem = elements_of(n_cont, n_libre);
+        }
+        nb_elem
     }
 
     /// `InitCutting(aBase, CurvTol, aCurve)`: a curve with an element per group of
@@ -344,6 +346,15 @@ impl Variational {
             }
         };
         put(knot, index, value)
+    }
+}
+
+// The elements of `n_libre` coefficients `n_cont` constraint counts need.
+fn elements_of(n_cont: i32, n_libre: i32) -> i32 {
+    if n_cont % n_libre == 0 {
+        n_cont / n_libre
+    } else {
+        n_cont / n_libre + 1
     }
 }
 
