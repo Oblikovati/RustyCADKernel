@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from tkbrep_corpus import EDGE, REVERSED, VERTEX, Script, append_tkbrep_requests
 from tkbrep_brep_corpus import FORWARD, BRepScript
+from tkbrep_bintools_bytes_corpus import append_tkbrep_bintools_bytes_requests, shape_set
+from tkbrep_bintools_scene_corpus import NORMALS, numbers as scene_numbers
 from native_build import LINKED_TOOLKITS, closure_flags
 from verify_toolkit import NUMERIC_VERIFIERS
 
@@ -72,6 +74,35 @@ class BRepScriptTests(unittest.TestCase):
         self.assertEqual(script.numbers(), [1, 0, 1.0, 0.0, 0.0, 2, 0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
                                             10, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 3, 4, line, t, 1e-7,
                                             1, 0.0, 0.0, 0.0, 1e-7, 102, edge, vertex, FORWARD, 0])
+
+
+class BinToolsCorpusTests(unittest.TestCase):
+    def test_scene_numbers_put_the_tweaks_between_geometries_and_commands(self):
+        script = BRepScript()
+        tri = script.triangulation([(0.0, 0.0, 0.0), (1.0, 0.0, 0.0), (0.0, 1.0, 0.0)], [(1, 2, 3)], 0)
+        face = script.new(7, tri)
+        numbers = scene_numbers(script, [[NORMALS, tri]], face)
+        self.assertEqual(numbers[:2], [0, 1])
+        tweaks_at = 2+len(script.geometries[0])
+        self.assertEqual(numbers[tweaks_at:tweaks_at+3], [1, NORMALS, tri])
+        self.assertEqual(numbers[tweaks_at+3:], [1, 7, tri, face])
+
+    def test_byte_requests_hold_bytes_and_reader_arguments(self):
+        requests: list[str] = []
+        append_tkbrep_bintools_bytes_requests(requests)
+        for request in requests:
+            op, reader, zeros, count, *rest = request.split()
+            self.assertEqual(op, 'br_bin_read')
+            data = [int(v) for v in rest[:int(count)]]
+            self.assertTrue(all(0 <= byte <= 255 for byte in data))
+            extra = rest[int(count):]
+            self.assertEqual(len(extra), 2 if reader == '1' else 0, request[:80])
+            self.assertEqual(zeros, '0')
+
+    def test_grouped_file_is_header_tables_shapes_and_root(self):
+        data = shape_set(3, [b'V'], root=b'R')
+        self.assertTrue(data.startswith(b'\nOpen CASCADE Topology V3 (c)\nLocations 0\nCurve2ds 0\n'))
+        self.assertTrue(data.endswith(b'Triangulations 0\n\nTShapes 1\nVR'))
 
 
 if __name__ == '__main__':

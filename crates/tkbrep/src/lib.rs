@@ -21,6 +21,7 @@
 //! `toptools` (maps, hashers and the shape set) and `brep` (the geometric shapes,
 //! their builder and their queries). docs/topology-design.md fixes the Rust mapping
 //! and docs/tkbrep-progress.md lists the ported packages.
+pub mod bintools;
 pub mod brep;
 pub mod topexp;
 pub mod topods;

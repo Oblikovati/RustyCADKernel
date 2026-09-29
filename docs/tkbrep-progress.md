@@ -50,6 +50,14 @@ below, the builder errors, the identity levels and hash, the iterator and explor
 protocols, the maps and the location and shape set texts, with the same fakes and a
 recording console for the readers.
 
+BinTools has no upstream GoogleTest suite. `tests/bintools_behavior` (named fakes: a
+recording console, an in-memory OSD file system with a controllable flush, a refusing
+file system and a breaking progress indicator) covers the encodings, both formats,
+the file variants and the quirks below; the byte-exact comparison is the `br_bin_*`
+requests of the numeric oracle. `tools/audit_api_rows.py` reports 0 missing and 0 stale
+api rows for BinTools (152 rows, 5 excluded: the four destructors and
+`BinTools_Curve2dSet::Dump`, which is declared but defined nowhere).
+
 ## Class mapping
 
 - `TopoDS_Shape` is the value `topods::Shape` (TShape handle, location, orientation);
@@ -87,6 +95,22 @@ recording console for the readers.
   evaluates the p-curves.
 - The vertex-only `brep` module that the TKernel TopLoc legacy test and the TKTopAlgo
   `MakeVertex` used before this port is replaced: both use `BRepBuilder` and `BRepTool`.
+- BinTools (docs/topology-design.md section 10): the static `BinTools` members are the
+  free functions of `bintools` (`put_real`, `get_bool`, `write`, `read`, `write_file`...;
+  the three write options are `WriteOptions`, and `read_with_console`, `write_file_on`
+  and `read_file_on` inject the console and the OSD file system). `BinTools_ShapeSetBase`
+  is the trait `BinShapeSetBase` over `ShapeSetBaseData` (also the base class instance);
+  `BinShapeSet`, `BinShapeWriter` and `BinShapeReader` implement it. The overloads
+  `Write(OS, range)`/`Write(S, OS)` and `Read(IS, range)`/`Read(IS, S)` are `write`/
+  `write_shape` and `read`/`read_shape`; the shape set's own `WriteShape`/`ReadShape`
+  are `write_shape_geometry`/`read_shape_geometry`. No OCCT class derives from
+  `BinTools_ShapeSet`, so its virtual members are inherent methods. The sets are
+  `BinCurveSet`, `BinCurve2dSet`, `BinSurfaceSet` and `BinLocationSet`; the streams
+  are `BinOStream` and `BinIStream` over the TKernel `IoStream`, whose operators are
+  named by type (`write_point3`, `read_bools7`...). `BinTools_FormatVersion` is the
+  `format_version` constants and `BinTools_ObjectType` the byte newtype `ObjectType`.
+  The file variants put the storage stream on the `std::streambuf` of the stream the
+  OSD file system opens, as the native `std::iostream` sits on it.
 
 ## Verification
 
@@ -148,6 +172,34 @@ reaches the unported planar projection prints `P` on both sides: natively when i
 returns a projected curve, in Rust for its Standard_NotImplemented, so the gap is pinned
 to exactly the native projection cases (92 of them in the corpus).
 
+The BinTools requests (`br_bin_scalars`, `br_bin_ostream`, `br_bin_istream`,
+`br_bin_geometry`, `br_bin_shape`, `br_bin_read`, `br_bin_truncate`; 281 requests in
+`tools/tkbrep_bintools_corpus.py` and its scene and byte-string modules) compare the
+written bytes as `t<hex>` tokens (a string over 4096 bytes as its length and FNV-1a
+hash). They cover the scalar encodings and their failures, every BinTools_OStream
+writer and BinTools_IStream reader with references of every width (8 to 64 bits, zero
+and pre-start deltas), every Geom curve, Geom surface and Geom2d curve class (rational
+and periodic splines, indirect frames, nested trimmed and offset curves, failing
+constructions) through the three sets, read back, evaluated and written again, and
+eight BRep scenes (a shelled square face with located and reversed instances,
+triangulations with normals and UV nodes, triangulation-only faces, polygons on
+triangulations and 3D polygons with parameters, point representations with the tiny
+parameter, a location algebra scene, and the four `br_brep` scenarios) written in the
+four versions, with and without triangles and normals, by `BinTools::Write` and
+`BinTools_ShapeWriter` (twice, for the top-level reference), read back, described
+(type, orientation, TShape sharing, flags, location matrix) and written again.
+Hand-built byte strings read by every reader cover the version lines (CRLF, junk, a
+line over 100 characters), missing and substring-matched tags, unknown shape,
+representation, curve, surface and location codes, out-of-range indices, singular
+matrices, the shape-reader references (known, unread with a jump back, zero delta,
+before the start) and truncated records; `br_bin_truncate` reads the prefixes (all, or
+one in 3 or 5) of eight written shape sets. Failure messages are compared in full for
+Standard_Failure, whose nested lines keep only the type of a failure of another class
+(other packages word their messages differently), and with bytes from 0x80 on shown as
+`?`. The probe never reads what is undefined natively: a shape-reference record never
+ends where a byte is read without a check, and a truncation never ends between a table
+tag and its count.
+
 ## Dependency gap
 
 `BRep_Tool::CurveOnPlane` projects the 3D curve of an edge on a plane with
@@ -160,6 +212,11 @@ packages, at the projection itself. The api rows of `CurveOnPlane`, both
 `CurveOnSurface(E, S, L, ...)` and `CurveOnSurface(E, F, ...)`, and
 `Parameter(V, E, F)` and `Parameter(V, E, S, L)` (which call `CurveOnSurface` for an
 internal vertex) are `partial`. Two `BRep_Tool_Test.cxx` declarations wait for it.
+
+BinTools reads a version 1 file with `BRepTools::Update(Face)`, which resets the UV
+points of the edges of each face. BRepTools is not ported, so `bintools::face_uv_update`
+is a temporary private copy of `BRepTools::Update(const TopoDS_Face&)` and
+`BRepTools::UpdateFaceUVPoints`; it is deleted when BRepTools lands.
 
 ## Preserved native behaviour
 
@@ -230,6 +287,48 @@ internal vertex) are `partial`. Two `BRep_Tool_Test.cxx` declarations wait for i
   number; `BRep_PointOnCurveOnSurface` dumps the `BRep_PointRepresentation` base, not
   `BRep_PointsOnSurface`, and `BRep_PointOnSurface` dumps as `BRep_PointsOnSurface`.
 - `BRep_CurveOn2Surfaces::D0` always raises Standard_NullObject.
+- BinTools writes every value in the platform byte order: `DO_INVERSE` is tested by
+  BinTools.cxx, BinTools_OStream.cxx and BinTools_IStream.cxx but defined by no header
+  at the pinned revision, so no FSD_BinaryFile swapping happens.
+- `BinTools::GetBool` is `IS.get() != 0`: past the end it reads true. The shape readers
+  read the flags this way, so a truncated flag list reads set flags.
+- A point on a surface is written with its second parameter first and read with the
+  first value as the first parameter, in both formats: a round trip swaps U and V.
+- Versions 1, 2 and 4 first try the pre-6.2.1 vertex layout (parameter, then type): a
+  parameter whose last byte is 1, 2 or 3 (a double below about 1e-290, such as
+  2^-1000) is misread, and a following record of type 2 is then read as type 1, whose
+  location index is the surface index (Standard_OutOfRange when there is no such
+  location). Version 3 reads the type first.
+- Version 1 files are read with Checked forced off, and each face then goes through
+  `BRepTools::Update`, which marks it Checked: a version 1 round trip sets the
+  Checked flag of every face. Versions 2 and 3 store the UV points of each p-curve
+  (of the second one for a seam, `UVPoints2`, which the reader restores with the seam
+  `UpdateEdge`); versions 1 and 4 store none.
+- `BinTools_Curve2dSet` and `BinTools_SurfaceSet` store a null handle like any key and
+  have no index 0 (Standard_OutOfRange), while `BinTools_CurveSet` refuses a null curve
+  and returns a null curve for 0. The set `Read` members do not clear the set.
+- `BinTools_ShapeReader` keeps a point on a p-curve only when its surface is null
+  (`!aCurve2d.IsNull() && aSurface.IsNull()`), so every written one is dropped.
+- A face without a surface always has its triangulation written, with its normals in
+  version 4 whatever `IsWithNormals`; a triangulation first reached from an edge is
+  stored without normals. The shape writer writes a triangulation met again as a back
+  reference whatever the normal flag of the second use.
+- The mesh section headers are matched as substrings (`strstr`), the table tags
+  exactly; the messages keep the native wording and typos (`BinTools_LocatioSet`,
+  "BinTools_ShapeSet::Triangulation: Not a Triangulation section", and the vertex
+  record error naming `BinTools_SurfaceSet::ReadGeometry`). The 2D polygons of edges
+  are collected with triangles but never written.
+- The shape reader follows a reference to a position it has not read by jumping to
+  it, reading the object there (recorded at that position) and jumping back; a
+  shape's record is recorded before its own orientation and location are applied. A
+  reference before the start of the stream fails the stream; the next type read is
+  then 255.
+- The sub-shape references of the grouped format are read with `IS >> char`, which
+  skips spaces, and count the TShape index from the end of the announced table, so a
+  forward reference is out of range.
+- `BinTools_ShapeSetBase::SetFormatNb` ignores a number outside 1..4
+  (`Standard_ASSERT_RETURN` in a release build); `BinTools::Write` with version 9
+  writes the current version.
 
 ## Deliberate Rust deviations
 
@@ -254,3 +353,11 @@ internal vertex) are `partial`. Two `BRep_Tool_Test.cxx` declarations wait for i
   edge transferred onto itself does not iterate over the representations it adds.
 - The planar projection of `BRep_Tool::CurveOnPlane` raises Standard_NotImplemented
   ("Dependency gap").
+- BinTools: a byte the native reader leaves uninitialised (`ReadByte` and the float
+  normals of the shape reader past the end, a table count when the stream ends between
+  the tag and the count) reads 0; an orientation or continuity byte outside its
+  enumeration raises Standard_OutOfRange where the native code stores the value; a null
+  geometry handle given to a writer raises Standard_NullObject (a crash natively). A
+  message byte from 0x80 on (`aMsg << (uint8_t)value`) is the Latin-1 character of that
+  code, since Rust messages are UTF-8. `BinTools::Write(S, theFile)` checks the opened
+  stream before setting its precision (the native code dereferences it first).

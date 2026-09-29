@@ -2,7 +2,7 @@
 //! `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod br_probe;
-use br_probe::{brep_report, topexp, topods, toptools};
+use br_probe::{bintools, bintools_sets, bintools_shape, brep_report, topexp, topods, toptools};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -25,6 +25,14 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // BRep (br_probe/brep.rs, br_probe/brep_report.rs)
     ("br_brep", brep_report::brep_case),
     ("br_brep_dump", brep_report::brep_dump_case),
+    // BinTools (br_probe/bintools*.rs)
+    ("br_bin_scalars", bintools::scalars_case),
+    ("br_bin_ostream", bintools::ostream_case),
+    ("br_bin_istream", bintools::istream_case),
+    ("br_bin_geometry", bintools_sets::geometry_case),
+    ("br_bin_shape", bintools_shape::shape_case),
+    ("br_bin_read", bintools_shape::read_case),
+    ("br_bin_truncate", bintools_shape::truncate_case),
 ];
 
 fn main() {

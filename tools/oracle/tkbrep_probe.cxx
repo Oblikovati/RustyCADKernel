@@ -39,6 +39,9 @@
 #include "tkbrep_probe_toptools.cxx"
 #include "tkbrep_probe_brep.cxx"
 #include "tkbrep_probe_brep_report.cxx"
+#include "tkbrep_probe_bintools.cxx"
+#include "tkbrep_probe_bintools_geometry.cxx"
+#include "tkbrep_probe_bintools_shape.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopoDS (tkbrep_probe_topods.cxx)
  {"br_topods", br_topods_case},
@@ -55,6 +58,14 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRep (tkbrep_probe_brep.cxx, tkbrep_probe_brep_report.cxx)
  {"br_brep", br_brep_case},
  {"br_brep_dump", br_brep_dump_case},
+ // BinTools (tkbrep_probe_bintools*.cxx)
+ {"br_bin_scalars", br_bin_scalars_case},
+ {"br_bin_ostream", br_bin_ostream_case},
+ {"br_bin_istream", br_bin_istream_case},
+ {"br_bin_geometry", br_bin_geometry_case},
+ {"br_bin_shape", br_bin_shape_case},
+ {"br_bin_read", br_bin_read_case},
+ {"br_bin_truncate", br_bin_truncate_case},
 };
 int main() {
  std::string line;
