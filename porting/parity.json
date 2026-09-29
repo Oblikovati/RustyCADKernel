@@ -145370,6 +145370,726 @@
       "rust_item": "rustycad_tkgeomalgo::toptrans::get_after",
       "status": "implemented",
       "notes": "Manual TopTrans mapping; the static member is a module function, also used by CurveTransition::state_after. Compared with OCCT by the tt_states probe."
+    },
+    {
+      "upstream_id": "Intf::PlaneEquation(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,gp_XYZ&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::plane_equation",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The output references are the returned (normal, distance). Compared with OCCT by the intf_triangle probe."
+    },
+    {
+      "upstream_id": "Intf::Contain(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::contain",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_triangle probe."
+    },
+    {
+      "upstream_id": "Intf_PIType",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_PIType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::PIType",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The enumerators keep their native order, which Merge compares. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::Pnt() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::pnt",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::ParamOnFirst() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::param_on_first",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::ParamOnSecond() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::param_on_second",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::TypeOnFirst() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::type_on_first",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::TypeOnSecond() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::type_on_second",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::InfoFirst(Intf_PIType&,int&,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::info_first",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The outputs are the returned tuple. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::InfoFirst(Intf_PIType&,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::info_first_address",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The outputs are the returned tuple. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::InfoSecond(Intf_PIType&,int&,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::info_second",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The outputs are the returned tuple. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::InfoSecond(Intf_PIType&,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::info_second_address",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The outputs are the returned tuple. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::Incidence() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::incidence",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::IsEqual(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::is_equal",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::operator==(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::is_equal",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. operator== is PartialEq, through IsEqual. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::IsOnSameEdge(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::is_on_same_edge",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The vertex-vertex case of the first argument compares the second argument addresses, as natively. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::Merge(Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::merge",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::dump",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Prints nothing, as natively (DEBUG_INTFSECTIONPOINT is 0). Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::new",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint(const gp_Pnt&,Intf_PIType,int,int,double,Intf_PIType,int,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::with_data",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionPoint(const gp_Pnt2d&,Intf_PIType,int,double,Intf_PIType,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionPoint::with_data_2d",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_spoint probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::NumberOfPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::number_of_points",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::GetPoint(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::get_point",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Raises Standard_OutOfRange as a Failure. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::IsClosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::is_closed",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compares the first and last points; an empty line raises Standard_NoSuchObject. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Contains(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::contains",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::IsEnd(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::is_end",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Returns the number of points (not 2) for the last point, as natively. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::IsEqual(const Intf_SectionLine&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::is_equal",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::operator==(const Intf_SectionLine&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::is_equal",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. operator== is PartialEq, through IsEqual. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::operator=(const Intf_SectionLine&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::assign",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Copies the points and keeps the closed flag, as natively. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Append(const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::append",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Append(Intf_SectionLine&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::append_line",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Moves the points out of the argument, as NCollection_Sequence::Append does. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Prepend(const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::prepend",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Prepend(Intf_SectionLine&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::prepend_line",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Moves the points out of the argument. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Reverse()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::reverse",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Close()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::close",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The flag is never read, as natively. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::dump",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Writes to the given fmt::Write where native code writes to std::cout. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::new",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_SectionLine(const Intf_SectionLine&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::SectionLine::clone",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Clone copies the points, not the closed flag, as the copy constructor. Compared with OCCT by the intf_sline probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::NumberOfPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::number_of_points",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::GetPoint(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::get_point",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Raises Standard_OutOfRange as a Failure. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::IsEqual(const Intf_TangentZone&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::is_equal",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::operator==(const Intf_TangentZone&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::is_equal",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. operator== is PartialEq, through IsEqual. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::Contains(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::contains",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::ParamOnFirst(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::param_on_first",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The outputs are the returned pair. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::ParamOnSecond(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::param_on_second",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The outputs are the returned pair. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::InfoFirst(int&,double&,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::info_first",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. An empty zone casts RealLast to int as x86-64 does (INT_MIN), where the native cast is undefined. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::InfoSecond(int&,double&,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::info_second",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. As InfoFirst. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::RangeContains(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::range_contains",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::HasCommonRange(const Intf_TangentZone&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::has_common_range",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::Append(const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::append",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::Append(const Intf_TangentZone&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::append_zone",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Inserts each point with PolygonInsert. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::Insert(const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::insert",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Returns false without inserting; its native body is commented out. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::PolygonInsert(const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::polygon_insert",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::InsertBefore(int,const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::insert_before",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Raises Standard_OutOfRange as a Failure. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::InsertAfter(int,const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::insert_after",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Raises Standard_OutOfRange as a Failure. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::dump",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Prints nothing, as natively (DEBUG_TANGENTZONE is 0). Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_TangentZone()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_TangentZone.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::TangentZone::new",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tzone probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::NbSectionPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::nb_section_points",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::PntValue(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::pnt_value",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::NbSectionLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::nb_section_lines",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::LineValue(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::line_value",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::NbTangentZones() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::nb_tangent_zones",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::ZoneValue(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::zone_value",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::GetTolerance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::get_tolerance",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::Contains(const Intf_SectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::contains",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::Insert(const Intf_TangentZone&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::insert_zone",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::Insert(const Intf_SectionPoint&,const Intf_SectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::insert_points",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_Interference::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::dump",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
+    },
+    {
+      "upstream_id": "Intf_InterferencePolygon2d()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygon2d::new",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The polygons are &dyn Polygon2d. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_InterferencePolygon2d(const Intf_Polygon2d&,const Intf_Polygon2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygon2d::between",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The polygons are &dyn Polygon2d. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_InterferencePolygon2d(const Intf_Polygon2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygon2d::of_self",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The polygons are &dyn Polygon2d. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_InterferencePolygon2d::Perform(const Intf_Polygon2d&,const Intf_Polygon2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygon2d::perform",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The polygons are &dyn Polygon2d. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_InterferencePolygon2d::Perform(const Intf_Polygon2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygon2d::perform_self",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The polygons are &dyn Polygon2d. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_InterferencePolygon2d::Pnt2dValue(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygon2d::pnt2d_value",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The polygons are &dyn Polygon2d. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_Polygon2d::Bounding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Polygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Polygon2d::bounding",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Intf_Polygon2d is the trait Polygon2d. A required trait method returning the implementor-held box (the protected myBox). Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_Polygon2d::Closed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Polygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Polygon2d::closed",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Intf_Polygon2d is the trait Polygon2d. A provided trait method returning false, as the native base. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_Polygon2d::DeflectionOverEstimation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Polygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Polygon2d::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Intf_Polygon2d is the trait Polygon2d. A required trait method. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_Polygon2d::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Polygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Polygon2d::nb_segments",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Intf_Polygon2d is the trait Polygon2d. A required trait method. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_Polygon2d::Segment(int,gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Polygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Polygon2d::segment",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Intf_Polygon2d is the trait Polygon2d. A required trait method returning the two points or the implementation error. Compared with OCCT by the intf_ipoly2d probe."
+    },
+    {
+      "upstream_id": "Intf_Polygon2d::~Intf_Polygon2d()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Polygon2d.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Polygon2d",
+      "status": "excluded",
+      "notes": "Intf_Polygon2d is a trait; a Rust implementor is dropped by its owner, so the virtual destructor has no counterpart."
+    },
+    {
+      "upstream_id": "Intf_Tool()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::new",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::Lin2dBox(const gp_Lin2d&,const Bnd_Box2d&,Bnd_Box2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::lin2d_box",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::Hypr2dBox(const gp_Hypr2d&,const Bnd_Box2d&,Bnd_Box2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::hypr2d_box",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. IntAna2d errors propagate as Failure. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::Parab2dBox(const gp_Parab2d&,const Bnd_Box2d&,Bnd_Box2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::parab2d_box",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. IntAna2d errors propagate as Failure. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::LinBox(const gp_Lin&,const Bnd_Box&,Bnd_Box&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::lin_box",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::HyprBox(const gp_Hypr&,const Bnd_Box&,Bnd_Box&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::hypr_box",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. A seventh segment raises Standard_OutOfRange where native code writes past its six-entry arrays. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::ParabBox(const gp_Parab&,const Bnd_Box&,Bnd_Box&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::parab_box",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. IntAna errors propagate as Failure. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::nb_segments",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::BeginParam(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::begin_param",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Raises Standard_OutOfRange as a Failure. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
+    },
+    {
+      "upstream_id": "Intf_Tool::EndParam(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Tool::end_param",
+      "status": "implemented",
+      "notes": "Manual Intf mapping; C++ exceptions become Failure errors. Raises Standard_OutOfRange as a Failure. Compared with OCCT by the intf_tool2d and intf_tool3d probe."
     }
   ],
   "tests": [
@@ -231651,6 +232371,76 @@
       "rust_target": "toptrans_surface_transition",
       "rust_test": "TopTrans_SurfaceTransition_Test__CompareUsesProvidedTolerance",
       "rust_source": "crates/tkgeomalgo/tests/toptrans_surface_transition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Intf_Tool.Hypr2dBox_ProducesValidSegments",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Intf_Tool_Test.cxx",
+      "source_sha256": "3bb9958cc5092af6d9282bb4643e2c20b3e4e4c4ba193ae8f6ed0a398ff1769c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "intf_tool",
+      "rust_test": "Intf_Tool__Hypr2dBox_ProducesValidSegments",
+      "rust_source": "crates/tkgeomalgo/tests/intf_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Intf_Tool.Parab2dBox_ProducesValidSegments",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Intf_Tool_Test.cxx",
+      "source_sha256": "3bb9958cc5092af6d9282bb4643e2c20b3e4e4c4ba193ae8f6ed0a398ff1769c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "intf_tool",
+      "rust_test": "Intf_Tool__Parab2dBox_ProducesValidSegments",
+      "rust_source": "crates/tkgeomalgo/tests/intf_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Intf_Tool.ParabBox_ProducesValidSegments",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Intf_Tool_Test.cxx",
+      "source_sha256": "3bb9958cc5092af6d9282bb4643e2c20b3e4e4c4ba193ae8f6ed0a398ff1769c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "intf_tool",
+      "rust_test": "Intf_Tool__ParabBox_ProducesValidSegments",
+      "rust_source": "crates/tkgeomalgo/tests/intf_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Intf_Tool.HyprBox_ProducesValidSegments",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Intf_Tool_Test.cxx",
+      "source_sha256": "3bb9958cc5092af6d9282bb4643e2c20b3e4e4c4ba193ae8f6ed0a398ff1769c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "intf_tool",
+      "rust_test": "Intf_Tool__HyprBox_ProducesValidSegments",
+      "rust_source": "crates/tkgeomalgo/tests/intf_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Intf_Tool.Hypr2dBox_NoIntersection_ZeroSegments",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Intf_Tool_Test.cxx",
+      "source_sha256": "3bb9958cc5092af6d9282bb4643e2c20b3e4e4c4ba193ae8f6ed0a398ff1769c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "intf_tool",
+      "rust_test": "Intf_Tool__Hypr2dBox_NoIntersection_ZeroSegments",
+      "rust_source": "crates/tkgeomalgo/tests/intf_tool.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
