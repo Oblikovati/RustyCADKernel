@@ -34,6 +34,21 @@ impl Variational {
     /// chained output: 4098 for a stream with the default flags) and the errors and
     /// criteria when done; `smoothing.dump(&mut text)?`.
     pub fn dump(&self, o: &mut impl fmt::Write) -> fmt::Result {
+        self.dump_sizes(o)?;
+        self.dump_tolerance(o)?;
+        if !self.is_done {
+            let text: &str = if self.is_over_constr {
+                " The problem is overconstraint"
+            } else {
+                " Error in approximation"
+            };
+            return writeln!(o, "{text}");
+        }
+        self.dump_results(o)
+    }
+
+    // The multipoint and constraint counts.
+    fn dump_sizes(&self, o: &mut impl fmt::Write) -> fmt::Result {
         let t = &self.tables;
         writeln!(o, " \nVariational Smoothing ")?;
         writeln!(
@@ -45,7 +60,11 @@ impl Variational {
         writeln!(o, " Number of 3d per multipoint {}", self.nb_p3d)?;
         writeln!(o, " Number of PassagePoint      {}", t.nb_pass_points)?;
         writeln!(o, " Number of TangencyPoints    {}", t.nb_tang_points)?;
-        writeln!(o, " Number of CurvaturePoints   {}", t.nb_curv_points)?;
+        writeln!(o, " Number of CurvaturePoints   {}", t.nb_curv_points)
+    }
+
+    // The tolerance (after the flags `o.setf` returns) and the criterion weights.
+    fn dump_tolerance(&self, o: &mut impl fmt::Write) -> fmt::Result {
         write!(
             o,
             " \nTolerance {DEFAULT_STREAM_FLAGS}{}",
@@ -58,16 +77,7 @@ impl Variational {
         };
         writeln!(o, "  as {size} Error.")?;
         let [p1, p2, p3] = self.percent.map(|p| stream_scientific(p, 3));
-        writeln!(o, "CriteriumWeights : {p1} , {p2} , {p3}")?;
-        if !self.is_done {
-            let text: &str = if self.is_over_constr {
-                " The problem is overconstraint"
-            } else {
-                " Error in approximation"
-            };
-            return writeln!(o, "{text}");
-        }
-        self.dump_results(o)
+        writeln!(o, "CriteriumWeights : {p1} , {p2} , {p3}")
     }
 
     fn dump_results(&self, o: &mut impl fmt::Write) -> fmt::Result {
