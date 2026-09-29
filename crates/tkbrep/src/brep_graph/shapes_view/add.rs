@@ -89,6 +89,11 @@ fn populate_shape_for(
 }
 
 impl ShapesViewMut<'_> {
+    /// The graph this view mutates, read-only.
+    pub(super) fn graph(&self) -> &BRepGraph {
+        self.graph
+    }
+
     /// `Add(theShape)`: `Add` with the default options (an auto product).
     pub fn add(&mut self, shape: &Shape) -> Result<AddResult, Failure> {
         self.add_with_options(shape, &Options::default())
@@ -175,7 +180,7 @@ impl ShapesViewMut<'_> {
         match classify_shape_to_parent(shape.shape_type()?, shape.orientation(), parent) {
             ShapeParentRoute::Reject => Ok(result),
             ShapeParentRoute::Supplement => {
-                if attach_supplement_to_parent(self.graph, shape, parent) != 0 {
+                if attach_supplement_to_parent(self.graph, shape, parent)? != 0 {
                     result.status = AddStatus::Success;
                 }
                 Ok(result)
@@ -305,10 +310,7 @@ impl ShapesViewMut<'_> {
 
     /// `ClearCached(theNode)`: drops the cached reconstruction of an active node.
     pub fn clear_cached(&mut self, node: NodeId) {
-        if !node.is_valid() || self.graph.topo().generic().is_removed(node) {
-            return;
-        }
-        self.graph.inc_storage().unbind_current_shape(node);
+        self.graph.shapes().clear_cached(node);
     }
 
     /// `ClearCached(theRef)`: `ClearCached` of an active reference's child node.

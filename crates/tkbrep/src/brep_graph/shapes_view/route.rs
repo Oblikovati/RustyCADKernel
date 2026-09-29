@@ -20,6 +20,7 @@
 //! supplement layer, or nowhere.
 use super::Options;
 use crate::brep_graph::hooks::AttachmentKind;
+use crate::brep_graph::layer_topo_supplement::LayerTopoSupplement;
 use crate::brep_graph::{BRepGraph, NodeId, NodeKind};
 use crate::topods::Shape;
 use rustycad_tkernel::standard::Failure;
@@ -107,23 +108,24 @@ fn parent_attachment_kind(parent: NodeKind) -> Option<AttachmentKind> {
     }
 }
 
-/// `attachSupplementToParent(theGraph, theShape, theParent)`: the attachment uid in the
-/// (ensured) supplement layer, 0 when refused (a removed owner, a null shape, or no
-/// layer registry to ensure the layer in).
+/// `attachSupplementToParent(theGraph, theShape, theParent)` (through
+/// `Editor().Supplement().AttachTo*`): the attachment uid in the ensured supplement
+/// layer, 0 when refused (a removed owner or a null shape).
 pub(super) fn attach_supplement_to_parent(
     graph: &mut BRepGraph,
     shape: &Shape,
     parent: NodeId,
-) -> u64 {
+) -> Result<u64, Failure> {
     let Some(kind) = parent_attachment_kind(parent.kind) else {
-        return 0;
+        return Ok(0);
     };
     if graph.topo().generic().is_removed(parent) || shape.is_null() {
-        return 0;
+        return Ok(0);
     }
-    let layers = graph.data_mut().layers.as_deref_mut();
-    let layer = layers.and_then(|layers| layers.ensure_topo_supplement());
-    layer.map_or(0, |layer| layer.add_attachment(parent, kind, shape))
+    let layer = graph.layer_registry().ensure::<LayerTopoSupplement>()?;
+    Ok(layer
+        .get()
+        .map_or(0, |layer| layer.add_attachment(graph, parent, kind, shape)))
 }
 
 #[cfg(test)]

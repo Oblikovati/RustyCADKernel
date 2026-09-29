@@ -30,6 +30,7 @@ mod supplement;
 mod synthesize;
 mod traverse;
 
+use crate::brep_graph::hooks::TopoSupplementHooks;
 use crate::brep_graph::parallel_policy::{ParallelPolicy, Workload};
 use crate::brep_graph::{BRepGraph, NodeId};
 use crate::topods::Shape;
@@ -151,8 +152,7 @@ pub fn append(
 }
 
 // `buildTopology`: the build context over the storage, with the registered topology
-// supplement layer (none until the layers area attaches one). The native captured
-// counts and options are unused.
+// supplement layer, if any. The native captured counts and options are unused.
 fn build_topology(
     graph: &mut BRepGraph,
     shape: &Shape,
@@ -161,16 +161,14 @@ fn build_topology(
     _options: &Options,
     appended_roots: Option<&mut Vec<NodeId>>,
 ) -> Result<BuildStatus, Failure> {
-    let data = graph.data_mut();
-    let supplement = data
-        .layers
-        .as_deref()
-        .and_then(|layers| layers.topo_supplement());
+    let supplement = graph.topo_supplement();
     let mut build = BuildContext::new(
-        &mut data.inc_storage,
+        graph.inc_storage_mut(),
         parallel,
         mode,
-        supplement,
+        supplement
+            .get()
+            .map(|layer| layer as &dyn TopoSupplementHooks),
         appended_roots,
     );
     run_topology_build(&mut build, shape)

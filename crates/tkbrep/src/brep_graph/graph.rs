@@ -15,14 +15,17 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepGraph`: the topology-geometry graph over TopoDS / BRep.
+use super::cache_registry::CacheRegistry;
 use super::data::Data;
-use super::hooks::{CacheHooks, LayerHooks, TopoSupplementHooks};
+use super::layer_history::LayerHistory;
+use super::layer_registry::LayerRegistry;
+use super::layer_topo_supplement::LayerTopoSupplement;
 use crate::brep_graph::{
     NodeId, NodeTag, NodeVisitor, ProductId, RefId, RefTag, RefUid, RefVisitor, TypedId, Uid,
 };
 use crate::brep_graph_inc::{BaseDef, BaseRef, HasBaseDef, HasBaseRef, Storage};
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkernel::standard::{Guid, Uuid};
+use rustycad_tkernel::standard::{Guid, Handle, Uuid};
 use rustycad_tkmath::math_utils::RandomGenerator;
 use std::hash::{BuildHasher, Hasher};
 
@@ -36,16 +39,28 @@ use std::hash::{BuildHasher, Hasher};
 /// graph.clear().unwrap();
 /// assert_eq!(graph.uids().generation(), 1);
 /// ```
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct BRepGraph {
     data: Data,
 }
 
+impl Default for BRepGraph {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BRepGraph {
-    /// `BRepGraph()`: an empty graph (docs/topology-design.md section 11.6 explains why
-    /// no layer is registered until the layer registry is attached).
+    /// `BRepGraph()`: an empty graph whose layer registry holds the history layer, as
+    /// natively (docs/topology-design.md section 11.9).
     pub fn new() -> Self {
-        Self::default()
+        let graph = Self {
+            data: Data::default(),
+        };
+        // `(void)Ensure<BRepGraph_LayerHistory>()`: registering the first layer of an
+        // empty registry cannot exceed the slot range, the only failure of `Ensure`.
+        let _history = graph.data.layers.ensure::<LayerHistory>();
+        graph
     }
 
     /// `Clear()`: empties the storage and the registries, increments the generation and
@@ -60,14 +75,10 @@ impl BRepGraph {
             ));
         }
         self.data.inc_storage.clear();
-        if let Some(caches) = self.data.caches.as_mut() {
-            caches.clear_all();
-        }
+        self.data.caches.clear_all();
         self.data.inc_storage.increment_generation();
         self.data.inc_storage.set_graph_guid(random_guid());
-        if let Some(layers) = self.data.layers.as_mut() {
-            layers.clear_all();
-        }
+        self.data.layers.clear_all(Some(&*self));
         Ok(())
     }
 
@@ -107,29 +118,27 @@ impl BRepGraph {
         &mut self.data.inc_storage
     }
 
-    /// The mutable graph data.
-    pub(crate) fn data_mut(&mut self) -> &mut Data {
-        &mut self.data
+    /// `LayerRegistry()` (both overloads): the registry of this graph's layers, which
+    /// locks itself, so the `const` and mutable accessors are one.
+    pub fn layer_registry(&self) -> &LayerRegistry {
+        &self.data.layers
+    }
+
+    /// `CacheRegistry()` (both overloads): the registry of this graph's cache services.
+    pub fn cache_registry(&self) -> &CacheRegistry {
+        &self.data.caches
+    }
+
+    /// The identity this graph gives its registries (the native `BRepGraph*` a layer or
+    /// cache keeps), docs/topology-design.md 11.9.
+    pub(crate) fn attachment_token(&self) -> u64 {
+        self.data.layers.graph_token()
     }
 
     /// `LayerRegistry().FindLayer<BRepGraph_LayerTopoSupplement>()`: the registered
-    /// topology supplement layer, `None` without layer hooks.
-    pub(crate) fn topo_supplement(&self) -> Option<&dyn TopoSupplementHooks> {
-        self.data
-            .layers
-            .as_deref()
-            .and_then(|layers| layers.topo_supplement())
-    }
-
-    /// Installs the layer registry: the layers area of phase 2 calls it from `new`
-    /// (docs/topology-design.md section 11.6); a later call replaces the hooks.
-    pub fn attach_layer_hooks(&mut self, hooks: Box<dyn LayerHooks>) {
-        self.data.layers = Some(hooks);
-    }
-
-    /// Installs the cache registry: the caches area of phase 2 calls it from `new`.
-    pub fn attach_cache_hooks(&mut self, hooks: Box<dyn CacheHooks>) {
-        self.data.caches = Some(hooks);
+    /// topology supplement layer, a null handle when there is none.
+    pub(crate) fn topo_supplement(&self) -> Handle<LayerTopoSupplement> {
+        self.data.layers.find::<LayerTopoSupplement>()
     }
 
     /// `allocateUID(theNodeId)` (private natively).

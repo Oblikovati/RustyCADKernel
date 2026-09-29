@@ -1,70 +1,15 @@
 //! `BRepGraph::ShapesView` behaviour over the hand-built shapes of the test support
 //! module: `Add` with and without a parent, the auto product, the shape cache, the
-//! source-shape aliases and the supplement route through a named fake layer registry.
+//! source-shape aliases and the supplement route into the topology supplement layer.
 mod support;
-use rustycad_tkbrep::brep_graph::hooks::{AttachmentKind, LayerHooks, TopoSupplementHooks};
+use rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement;
 use rustycad_tkbrep::brep_graph::shapes_view::{AddStatus, Options};
 use rustycad_tkbrep::brep_graph::{BRepGraph, NodeId, NodeKind, RefId};
 use rustycad_tkbrep::topods::{Builder, Compound, Shape};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
 use rustycad_tkmath::toploc::Location;
-use std::sync::Mutex;
 use support::{make_box, make_vertex};
-
-/// A supplement layer that records every attachment in order.
-#[derive(Default)]
-struct RecordingSupplementLayer {
-    attachments: Mutex<Vec<(NodeId, AttachmentKind, Shape)>>,
-}
-
-impl TopoSupplementHooks for RecordingSupplementLayer {
-    fn add_attachment(&self, owner: NodeId, kind: AttachmentKind, shape: &Shape) -> u64 {
-        let mut attachments = self.attachments.lock().unwrap();
-        attachments.push((owner, kind, shape.clone()));
-        attachments.len() as u64
-    }
-
-    fn attached_shapes(&self, owner: NodeId) -> Vec<Shape> {
-        let attachments = self.attachments.lock().unwrap();
-        attachments
-            .iter()
-            .filter(|entry| entry.0 == owner)
-            .map(|entry| entry.2.clone())
-            .collect()
-    }
-}
-
-/// A layer registry holding only the supplement layer, registered on first `Ensure`.
-#[derive(Default)]
-struct SupplementOnlyRegistry {
-    supplement: Option<RecordingSupplementLayer>,
-}
-
-impl LayerHooks for SupplementOnlyRegistry {
-    fn has_modification_subscribers(&self) -> bool {
-        false
-    }
-    fn dispatch_node_modified(&self, _graph: &BRepGraph, _node: NodeId) {}
-    fn has_ref_modification_subscribers(&self) -> bool {
-        false
-    }
-    fn dispatch_ref_modified(&self, _graph: &BRepGraph, _reference: RefId) {}
-    fn clear_all(&mut self) {
-        self.supplement = None;
-    }
-    fn topo_supplement(&self) -> Option<&dyn TopoSupplementHooks> {
-        self.supplement
-            .as_ref()
-            .map(|layer| layer as &dyn TopoSupplementHooks)
-    }
-    fn ensure_topo_supplement(&mut self) -> Option<&dyn TopoSupplementHooks> {
-        Some(
-            self.supplement
-                .get_or_insert_with(RecordingSupplementLayer::default),
-        )
-    }
-}
 
 fn translation(dx: f64) -> Location {
     let mut transform = Transform3::default();
@@ -182,9 +127,16 @@ fn add_under_rejects_and_routes_supplements() {
         .topology_root;
     let face = NodeId::new(NodeKind::FACE, 0);
     let vertex: Shape = make_vertex(Point3::new(0.5, 0.5, 0.0)).into();
-    assert!(!graph.shapes_mut().add_under(&vertex, face).unwrap().is_ok());
-    graph.attach_layer_hooks(Box::new(SupplementOnlyRegistry::default()));
+    // The supplement route ensures the supplement layer, as natively.
+    assert!(
+        graph
+            .layer_registry()
+            .find::<LayerTopoSupplement>()
+            .is_null()
+    );
     assert!(graph.shapes_mut().add_under(&vertex, face).unwrap().is_ok());
+    let layer = graph.layer_registry().find::<LayerTopoSupplement>();
+    assert_eq!(layer.get().unwrap().attached_to(face), vec![1]);
     let rebuilt_face = graph.shapes().reconstruct(face).unwrap();
     assert!(
         rebuilt_face.shape_type().unwrap() == ShapeEnum::Face && rebuilt_face.nb_children() == 2

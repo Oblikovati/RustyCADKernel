@@ -457,3 +457,58 @@ constructor of section 11.6:
 Destructors, the `Allocator()` accessors (Rust vectors own their memory) and the
 `std::hash` call operators that are the same function as a ported `HashValue` or
 `HashCode` member get `excluded` rows with the reason.
+
+### 11.9 Layers and caches (phase 2, area B)
+
+The layers and caches are transient classes, so they follow docs/geom-design.md
+sections 2 and 3: `BRepGraph_Layer` is the trait `BRepGraphLayer` and
+`BRepGraph_Cache` the trait `BRepGraphCache` (both `Transient` interfaces), a
+registry stores `Handle<dyn BRepGraphLayer>` values, and every concrete layer
+keeps its maps behind one `SharedState`, so each member takes `&self` as the
+native handle calls do. The protected state of the bases (`myGraph`,
+`myRevision`) is the embedded `LayerBase` or `CacheBase`, read through a required
+accessor.
+
+**Registries.** `BRepGraph_LayerRegistry` and `BRepGraph_CacheRegistry` keep their
+slot vector and GUID map behind a lock and the subscription masks in atomics, as
+natively, so every member takes `&self`: `graph.layer_registry()` and
+`graph.cache_registry()` are the `const` and non-`const` accessors at once, and a
+layer can `Ensure` another layer from `&BRepGraph`. Since the registries lock
+themselves, `Data` holds them by value in the two slots of section 11.6, which
+replaces the phase-1 `LayerHooks`/`CacheHooks` trait objects (only
+`TopoSupplementHooks` stays, for the BRepGraphInc pipelines); `BRepGraph::new`
+creates them for the graph and ensures `BRepGraph_LayerHistory`, as the native
+constructor does. The event dispatch of `markModified` reads the registry in place,
+so a layer callback sees it.
+
+**The attached graph.** A native layer or cache keeps a `BRepGraph*` that its
+registry sets; a Rust layer cannot point back into the graph that owns it. Each
+graph draws a unique non-zero *attachment token* from a process counter and gives it
+to its two registries; a standalone registry (`LayerRegistry::new()`) has token 0,
+the null graph pointer, so its layers stay detached. Attaching stores the token in
+the layer (`attachGraph`, `OnAttached`); detaching, unregistering and dropping the
+graph clear it (`detachContext`, `OnDetached`). The members that read
+`AttachedGraph()` or `Graph()` natively take the graph explicitly
+(`history.record(&graph, ...)`) and use it only when its token is the stored one;
+any other graph is ignored, which is the native detached behaviour, and `Graph()`
+raises Standard_ProgramError. The callbacks (`OnNodeRemoved`, `Clear`...) receive
+the attached graph, or `None`, from the registry that dispatches them.
+
+**Iteration order.** The maps whose order reaches a result (a history event's
+mappings, the deleted sets, the deferred entries) are the TKernel `DataMap` and
+`FlatMap` ports with the native hashes of the ids (`std::hash<BRepGraph_NodeId>`
+and friends, the `HashKey` impls of `brep_graph::id_hash_keys`), sized as natively
+(`ReSize` calls included), so they iterate in the native bucket order. Lookups
+whose order never shows (GUID to slot) are `HashMap`s. Getters that return a
+`const&` into a locked map (`FindModified`, `Record(i)`, `DeletedNodes`,
+`AttachedTo`) return copies.
+
+**Dependencies on later waves.** `CopyTo`, `CopyFreshTo`, `CopyLayersTo`,
+`CopyFreshCachesTo` and `RemappedItem` take `BRepGraph_CopyRemap` (area A); they are
+added with it. `BRepGraph_LayerDeferred` and `BRepGraph_LayerParametric` lock items
+through `BRepGraph_LayerLock`, which needs the explorers: until it is ported, the
+members that must `Ensure` the lock layer on an attached layer (item registration
+and `ReserveDeferredItems`) return a Standard_NotImplemented error that names
+`BRepGraph_LayerLock`, after the steps that natively come first; the `FindLayer`
+paths (unlocking, `EndBulkRegistration`) find no lock layer, which is exact, since
+no layer of that class can exist yet. A detached layer behaves exactly as natively.

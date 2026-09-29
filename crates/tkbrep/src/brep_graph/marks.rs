@@ -45,26 +45,20 @@ impl BRepGraph {
         self.propagate_subtree_gen(node);
     }
 
-    // The layer dispatch of `markModified`: the hook is taken out of its slot while it
-    // reads the graph.
+    // The layer dispatch of `markModified`: the registry reads the graph in place, so
+    // a layer callback sees the registry too.
     fn dispatch_node_modified(&mut self, node: NodeId) {
-        let Some(layers) = self.data_mut().layers.take() else {
-            return;
-        };
+        let layers = self.layer_registry();
         if layers.has_modification_subscribers() {
-            layers.dispatch_node_modified(self, node);
+            layers.dispatch_node_modified(Some(&*self), node);
         }
-        self.data_mut().layers = Some(layers);
     }
 
     fn dispatch_ref_modified(&mut self, reference: RefId) {
-        let Some(layers) = self.data_mut().layers.take() else {
-            return;
-        };
+        let layers = self.layer_registry();
         if layers.has_ref_modification_subscribers() {
-            layers.dispatch_ref_modified(self, reference);
+            layers.dispatch_ref_modified(Some(&*self), reference);
         }
-        self.data_mut().layers = Some(layers);
     }
 
     /// `markRefModified(theRefId)`: queues or dispatches an active reference, then marks
@@ -94,29 +88,7 @@ impl BRepGraph {
         if reference.kind == RefKind::VERTEX {
             return self.vertex_ref_edges(VertexRefId::from_ref_id(reference));
         }
-        let parent: NodeId = match reference.kind {
-            RefKind::WIRE => ref_parent(storage, WireRefId::from_ref_id(reference), |e| {
-                e.parent_face_id
-            }),
-            RefKind::FACE => ref_parent(storage, FaceRefId::from_ref_id(reference), |e| {
-                e.parent_shell_id
-            }),
-            RefKind::SHELL => ref_parent(storage, ShellRefId::from_ref_id(reference), |e| {
-                e.parent_solid_id
-            }),
-            RefKind::SOLID => ref_parent(storage, SolidRefId::from_ref_id(reference), |e| {
-                e.parent_comp_solid_id
-            }),
-            RefKind::CHILD => ref_parent(storage, ChildRefId::from_ref_id(reference), |e| {
-                e.parent_compound_id
-            }),
-            RefKind::OCCURRENCE => {
-                ref_parent(storage, OccurrenceRefId::from_ref_id(reference), |e| {
-                    e.parent_product_id
-                })
-            }
-            _ => NodeId::default(),
-        };
+        let parent = ref_parent_node(storage, reference);
         if parent.is_valid() && !parent.is_removed(self) {
             return vec![parent];
         }
@@ -211,6 +183,36 @@ impl BRepGraph {
             }
             _ => occurrences_of_node(storage, node),
         }
+    }
+}
+
+/// The parent definition of a non-vertex reference in range (its parent face, shell,
+/// solid, compsolid, compound or product), invalid otherwise; shared by
+/// `markRefModified` and the cache generations.
+pub(crate) fn ref_parent_node(
+    storage: &crate::brep_graph_inc::Storage,
+    reference: RefId,
+) -> NodeId {
+    match reference.kind {
+        RefKind::WIRE => ref_parent(storage, WireRefId::from_ref_id(reference), |e| {
+            e.parent_face_id
+        }),
+        RefKind::FACE => ref_parent(storage, FaceRefId::from_ref_id(reference), |e| {
+            e.parent_shell_id
+        }),
+        RefKind::SHELL => ref_parent(storage, ShellRefId::from_ref_id(reference), |e| {
+            e.parent_solid_id
+        }),
+        RefKind::SOLID => ref_parent(storage, SolidRefId::from_ref_id(reference), |e| {
+            e.parent_comp_solid_id
+        }),
+        RefKind::CHILD => ref_parent(storage, ChildRefId::from_ref_id(reference), |e| {
+            e.parent_compound_id
+        }),
+        RefKind::OCCURRENCE => ref_parent(storage, OccurrenceRefId::from_ref_id(reference), |e| {
+            e.parent_product_id
+        }),
+        _ => NodeId::default(),
     }
 }
 

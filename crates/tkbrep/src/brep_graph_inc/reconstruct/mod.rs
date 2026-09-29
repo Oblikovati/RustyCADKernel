@@ -151,7 +151,7 @@ pub fn node_with_cache(
         NodeKind::CO_EDGE | NodeKind::PRODUCT | NodeKind::OCCURRENCE => return Ok(Shape::default()),
         _ => build_node(graph, node, cache)?,
     };
-    replay_supplement(graph.topo_supplement(), node, &mut result)?;
+    replay_supplement(graph, node, &mut result)?;
     cache.bind(node, &result);
     Ok(result)
 }
@@ -192,11 +192,12 @@ pub(super) fn active_record<T: RepTag>(storage: &Storage, rep: TypedId<T>) -> Op
 /// `replaySupplementAttachments(theSupplement, theOwner, theOwnerShape)`: adds the
 /// attached shapes of the owner to its reconstructed shape.
 pub(super) fn replay_supplement(
-    supplement: Option<&dyn TopoSupplementHooks>,
+    graph: &BRepGraph,
     owner: NodeId,
     owner_shape: &mut Shape,
 ) -> Result<(), Failure> {
-    let Some(supplement) = supplement else {
+    let layer = graph.topo_supplement();
+    let Some(supplement) = layer.get() else {
         return Ok(());
     };
     if owner_shape.is_null() {
