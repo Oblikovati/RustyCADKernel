@@ -53,6 +53,36 @@ pub(super) struct MotorState {
     w_quality: f64,
 }
 
+impl MotorState {
+    // The state at (0) Init, from the curve, the working copy of the parameters and
+    // the estimated length. The fields left to the default: VALCRI at 0, no new
+    // curve or parameters yet, not near, and the minima and the quality weight the
+    // caller sets.
+    fn start(
+        the_curve: &Handle<Curve>,
+        current_ti: Handle<HArray1<f64>>,
+        cblong: f64,
+    ) -> Result<Self, Failure> {
+        Ok(Self {
+            vocri: [BIG_VALUE; 3],
+            erold: BIG_VALUE,
+            errors: ProjectErrors {
+                max_err: BIG_VALUE,
+                ..ProjectErrors::default()
+            },
+            cblong,
+            lnold: cblong,
+            c_current: the_curve.clone(),
+            c_old: the_curve.clone(),
+            old_ti: copy_of(&current_ti)?,
+            current_ti,
+            eps_length: SMALL_VALUE,
+            lconst: true,
+            ..Self::default()
+        })
+    }
+}
+
 impl Variational {
     /// `TheMotor(J, WQuadratic, WQuality, TheCurve, Ecarts)`: smooths from `the_curve`
     /// and the current parameters, then stores the best curve in `the_curve`, the
@@ -91,27 +121,9 @@ impl Variational {
         let j_min: [f64; 3] = raise_estimations(j);
         let current_ti: Handle<HArray1<f64>> = copy_of(&self.parameters)?;
         let cblong: f64 = j.est_length();
-        // The fields left to the default: VALCRI at 0, no new curve or parameters yet,
-        // and not near.
-        Ok(MotorState {
-            vocri: [BIG_VALUE; 3],
-            erold: BIG_VALUE,
-            errors: ProjectErrors {
-                max_err: BIG_VALUE,
-                ..ProjectErrors::default()
-            },
-            cblong,
-            lnold: cblong,
-            c_current: the_curve.clone(),
-            c_old: the_curve.clone(),
-            old_ti: copy_of(&current_ti)?,
-            current_ti,
-            eps_length: SMALL_VALUE,
-            lconst: true,
-            j_min,
-            w_quality,
-            ..MotorState::default()
-        })
+        let mut st: MotorState = MotorState::start(the_curve, current_ti, cblong)?;
+        (st.j_min, st.w_quality) = (j_min, w_quality);
+        Ok(st)
     }
 
     // A new curve on the knots of the current one, optimized for the current
