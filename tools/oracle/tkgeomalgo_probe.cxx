@@ -26,6 +26,7 @@
 #include "tkgeomalgo_probe_plate.cxx"
 #include "tkgeomalgo_probe_localanalysis.cxx"
 #include "tkgeomalgo_probe_faircurve.cxx"
+#include "tkgeomalgo_probe_intimp.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -51,6 +52,13 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fc_density", ga_fc_density_case},
  {"fc_energy", ga_fc_energy_case},
  {"fc_batten", ga_fc_batten_case},
+ // IntImp (tkgeomalgo_probe_intimp.cxx)
+ {"ii_choix", ga_ii_choix_case},
+ {"ii_tangence", ga_ii_tangence_case},
+ {"ii_zerpar", ga_ii_zerpar_case},
+ {"ii_int2s", ga_ii_int2s_case},
+ {"ii_zerimp", ga_ii_zerimp_case},
+ {"ii_intcs", ga_ii_intcs_case},
 };
 int main() {
  std::string line;

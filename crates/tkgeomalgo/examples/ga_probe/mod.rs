@@ -4,6 +4,7 @@
 #[allow(dead_code, unused_imports)]
 pub mod common;
 pub mod fair_curve;
+pub mod int_imp;
 pub mod int_surf;
 pub mod intf;
 pub mod law;

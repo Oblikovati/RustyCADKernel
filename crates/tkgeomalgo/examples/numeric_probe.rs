@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
-use ga_probe::{fair_curve, int_surf, intf, law, local_analysis, plate};
+use ga_probe::{fair_curve, int_imp, int_surf, intf, law, local_analysis, plate};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -34,6 +34,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fc_density", fair_curve::density_case),
     ("fc_energy", fair_curve::energy_case),
     ("fc_batten", fair_curve::batten_case),
+    // IntImp (ga_probe/int_imp.rs)
+    ("ii_choix", int_imp::choix_case),
+    ("ii_tangence", int_imp::tangence_case),
+    ("ii_zerpar", int_imp::zerpar_case),
+    ("ii_int2s", int_imp::int2s_case),
+    ("ii_zerimp", int_imp::zerimp_case),
+    ("ii_intcs", int_imp::intcs_case),
 ];
 
 fn main() {

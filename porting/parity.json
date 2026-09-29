@@ -148906,6 +148906,30 @@
       "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveNewton::is_converged",
       "status": "implemented",
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "IntImp_ComputeTangence::ChoixRef(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ComputeTangence.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::choix_ref",
+      "status": "implemented",
+      "notes": "IntImp mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 2): ComputeTangence takes fixed-size arrays; ChoixRef raises Standard_OutOfRange as a Result error. The .gxx templates (ZerParFunc, ZerImpFunc, ZerCSParFunc, Int2S, IntCS) are the generics IntImpZerParFunc, IntImpZerImpFunc, IntImpZerCSParFunc, IntImpInt2S and IntImpIntCS over the ThePSurfaceTool, TheISurfaceTool and TheCurveTool traits."
+    },
+    {
+      "upstream_id": "IntImp_ComputeTangence(const gp_Vec*,const double*,double*,IntImp_ConstIsoparametric*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ComputeTangence.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::compute_tangence",
+      "status": "implemented",
+      "notes": "IntImp mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 2): ComputeTangence takes fixed-size arrays; ChoixRef raises Standard_OutOfRange as a Result error. The .gxx templates (ZerParFunc, ZerImpFunc, ZerCSParFunc, Int2S, IntCS) are the generics IntImpZerParFunc, IntImpZerImpFunc, IntImpZerCSParFunc, IntImpInt2S and IntImpIntCS over the ThePSurfaceTool, TheISurfaceTool and TheCurveTool traits."
+    },
+    {
+      "upstream_id": "IntImp_ConstIsoparametric",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ConstIsoparametric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpConstIsoparametric",
+      "status": "implemented",
+      "notes": "IntImp mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 2): ComputeTangence takes fixed-size arrays; ChoixRef raises Standard_OutOfRange as a Result error. The .gxx templates (ZerParFunc, ZerImpFunc, ZerCSParFunc, Int2S, IntCS) are the generics IntImpZerParFunc, IntImpZerImpFunc, IntImpZerCSParFunc, IntImpInt2S and IntImpIntCS over the ThePSurfaceTool, TheISurfaceTool and TheCurveTool traits."
     }
   ],
   "tests": [

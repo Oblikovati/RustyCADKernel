@@ -24,3 +24,38 @@ body is included by one or more `_0.cxx` files after macros name the concrete ty
   monomorphized Rust generic executes the same operations as each C++ instance.
 
 The sections below record each template as it is ported.
+
+## 2. IntImp templates
+
+IntImp (`crates/tkgeomalgo/src/int_imp`) holds five generic bodies. Each is one Rust
+generic over the tool traits of `int_imp/tools.rs`, which carry the native macro names
+and exactly the calls the bodies make:
+
+| Template | Rust generic | Tool traits | TKGeomAlgo instances |
+| --- | --- | --- | --- |
+| `IntImp_ZerParFunc.gxx/.lxx` | `IntImpZerParFunc<T>` | `ThePSurfaceTool` | `IntWalk_TheFunctionOfTheInt2S`, `GeomInt_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfWLApprox` |
+| `IntImp_Int2S.gxx/.lxx` | `IntImpInt2S<T>` | `ThePSurfaceTool` | `IntWalk_TheInt2S`, `GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox` |
+| `IntImp_ZerImpFunc.gxx/.lxx` | `IntImpZerImpFunc<P, I>` | `ThePSurfaceTool`, `TheISurfaceTool` | `IntPatch_TheSurfFunction`, `GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox` |
+| `IntImp_ZerCSParFunc.gxx` | `IntImpZerCSParFunc<P, C>` | `ThePSurfaceTool`, `TheCurveTool` | `IntCurveSurface_TheCSFunctionOfHInter` |
+| `IntImp_IntCS.gxx` | `IntImpIntCS<F>` | `TheFunction` (with its `ThePSurfaceTool` and `TheCurveTool`) | `IntCurveSurface_TheExactHInter` (on `IntCurveSurface_TheCSFunctionOfHInter`), `IntPatch_CurvIntSurf` (on `IntPatch_CSFunction`) |
+
+- Every TKGeomAlgo instance uses `Adaptor3d_HSurfaceTool` as `ThePSurfaceTool` and
+  `IntSurf_QuadricTool` as `TheISurfaceTool`. Both implementations live once in
+  `int_imp/tools.rs` (`HSurfaceTool`, and the trait implemented for
+  `IntSurfQuadricTool`), since one type can implement a trait only once; the
+  instantiating packages declare their instances as aliases, e.g.
+  `type IntWalkTheInt2S = IntImpInt2S<HSurfaceTool>`. `TheCurveTool` is implemented by
+  the package that owns the curve tool (`IntCurveSurface_TheHCurveTool`,
+  `IntPatch_HCurve2dTool`), and `TheFunction` by the package of a hand-written
+  function (`IntPatch_CSFunction`); `IntImpZerCSParFunc` implements it here.
+- The functions hold their surfaces and curves by value (a cloned handle) where the
+  native classes keep `void*` pointers to the caller's objects.
+- The tool calls can raise natively, and the exception unwinds through
+  `math_FunctionSetRoot`. The functions keep the first failure of their
+  `math::FunctionSetWithDerivatives` callbacks
+  (`rustycad_tkgeombase::failure_capture::FailureCapture`), answer false, and
+  `IntImpInt2S`/`IntImpIntCS` raise it as soon as the solver returns. Their inherent
+  `value`, `derivatives` and `values` return the failure directly.
+- The probe (`tools/oracle/tkgeomalgo_probe_intimp.cxx`) drives the native instances
+  above and the Rust generics with the same tools, so the numeric corpus checks the
+  template bodies.

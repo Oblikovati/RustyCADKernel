@@ -15,7 +15,7 @@ fn transition(t: &IntSurfTransition) {
 }
 
 /// `kind loc dir xdir r1 r2`: the quadric of ga_intsurf_quadric.
-fn quadric(r: &mut Reader) -> IntSurfQuadric {
+pub fn quadric(r: &mut Reader) -> IntSurfQuadric {
     let kind = r.integer();
     let (loc, dir, xdir) = (r.pnt(), r.dir(), r.dir());
     let (r1, r2) = (r.real(), r.real());

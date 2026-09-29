@@ -109,6 +109,16 @@ homotopy steps, free and imposed slidings, end curvatures, physical ratios, null
 heights, invalid heights and ratios, confused points), moves their end points and
 computes again, comparing every getter, the curve and the `Dump` text.
 
+IntImp: 146 requests. `ii_choix` covers `ChoixRef` inside and outside 0..3;
+`ii_tangence` drives `IntImp_ComputeTangence` through its early exits (null
+derivatives and normals), tangent patches and the sorted isoparametrics, with seeded
+random derivatives. The templates run through their native TKGeomAlgo instances and
+the Rust generics: `ii_zerpar` (`IntWalk_TheFunctionOfTheInt2S`), `ii_int2s`
+(`IntWalk_TheInt2S` from a start point and on each isoparametric, inside and beyond
+the patch bounds, on tangent patches), `ii_zerimp` (`IntPatch_TheSurfFunction` on
+patches against quadrics) and `ii_intcs` (`IntCurveSurface_TheExactHInter` on lines and
+circles against planes, cylinders, spheres and tori, with and without margin).
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
@@ -261,3 +271,22 @@ computes again, comparing every getter, the curve and the `Dump` text.
   `NLPlate_SequenceOfHGPPConstraint.hxx`, which includes the deleted
   `NLPlate_HGPPConstraint.hxx`. The audit finds no public member;
   `crates/tkgeomalgo/src/nl_plate` stays an empty module.
+
+### IntImp
+
+- The five `.gxx` templates are generics (docs/geomalgo-design.md, "IntImp
+  templates"); their tool calls can raise, and the failure reaches the caller of
+  `IntImpInt2S`/`IntImpIntCS` as the native exception would.
+- `IntImp_IntCS::Perform` is declared with the bounds `u0, v0, u1, v1` but defined
+  (and called) with `u0, u1, v0, v1`; the port follows the definition.
+- The bound check of `IntImp_Int2S::Perform` re-reads the moved start parameters, not
+  the new solution, when it checks the reciprocal patch, and compares the second
+  parameter there without the resolution. It then restarts on `ChoixRef` of the
+  1-based index of the moved parameter (4 wraps to 0): the isoparametric of the next
+  parameter, where the first check fixes the moved one.
+- `IntImp_ZerImpFunc::IsTangent` uses the gradient of the last `Derivatives`/`Values`
+  (zero before any): after `Value` alone it reuses a stale one. `Direction2d` of a
+  vanishing 2d tangent raises `Standard_ConstructionError` from `IsTangent`.
+- `IntImp_ZerParFunc` reads its isoparametric before `ComputeParameters` sets it
+  (uninitialized natively; U on the first patch here), and the second
+  `IntImp_Int2S` constructor leaves `tangent` uninitialized (false here).
