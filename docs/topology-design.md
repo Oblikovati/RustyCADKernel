@@ -415,7 +415,9 @@ through two object-safe traits in `brep_graph::hooks`, stored in `Data` as
   `has_ref_modification_subscribers`, `dispatch_ref_modified`, `clear_all` and
   `topo_supplement`, which returns the registered `TopoSupplementHooks` (the
   `AddAttachment` and `AttachedTo`/`FindByUid` members that the pipelines call, with the
-  native `AttachmentKind`).
+  native `AttachmentKind`), and `ensure_topo_supplement`, the `Ensure` that the
+  supplement route of `Shapes().Add(shape, parent)` calls. Without hooks that route
+  attaches nothing and its result stays `Failed`.
 - `CacheHooks`: `clear_all`.
 
 A graph without hooks is a graph with no registered layer or cache, which is what the

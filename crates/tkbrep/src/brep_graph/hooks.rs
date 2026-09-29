@@ -69,6 +69,10 @@ pub trait LayerHooks: Send + Sync {
     fn clear_all(&mut self);
     /// `Find<BRepGraph_LayerTopoSupplement>()`: the registered supplement layer, if any.
     fn topo_supplement(&self) -> Option<&dyn TopoSupplementHooks>;
+    /// `Ensure<BRepGraph_LayerTopoSupplement>()`: the supplement layer, registered first
+    /// when absent (what `Editor().Supplement().Attach*` calls); `None` only for a
+    /// registry that cannot hold one.
+    fn ensure_topo_supplement(&mut self) -> Option<&dyn TopoSupplementHooks>;
 }
 
 /// The `BRepGraph_CacheRegistry` calls of the graph core.

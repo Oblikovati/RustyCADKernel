@@ -30,6 +30,7 @@ pub(crate) mod ids;
 mod marks;
 pub mod parallel_policy;
 pub mod refs_view;
+pub mod shapes_view;
 pub mod tool;
 pub mod topo_view;
 pub mod uids_view;
