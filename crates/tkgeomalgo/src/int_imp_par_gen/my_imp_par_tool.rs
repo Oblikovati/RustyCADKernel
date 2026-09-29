@@ -106,9 +106,8 @@ impl<T: IntersectorTypes> FunctionWithDerivative for MyImpParTool<'_, T> {
         self.keep(value, derivative)
     }
     fn values(&mut self, param: f64, approx_distance: &mut f64, deriv: &mut f64) -> bool {
-        // The native Values ignores both results and returns true.
-        self.value(param, approx_distance);
-        self.derivative(param, deriv);
-        true
+        // The native Values ignores both results (always true) and returns true; a
+        // false here is a kept curve failure, which natively leaves at once.
+        self.value(param, approx_distance) && self.derivative(param, deriv)
     }
 }

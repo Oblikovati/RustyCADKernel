@@ -24,6 +24,8 @@
 #include "tkgeomalgo_probe_intres2d.cxx"
 #include "tkgeomalgo_probe_intimppargen.cxx"
 #include "tkgeomalgo_probe_intcurve.cxx"
+#include "tkgeomalgo_probe_geom2dint.cxx"
+#include "tkgeomalgo_probe_geom2dapi.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -41,6 +43,16 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"intcurve_ptool", ga_intcurve_ptool_case},
  {"intcurve_function", ga_intcurve_function_case},
  {"intcurve_interval", ga_intcurve_interval_case},
+ // Geom2dInt (tkgeomalgo_probe_geom2dint.cxx)
+ {"g2int_tool", ga_g2int_tool_case},
+ {"g2int_proj", ga_g2int_proj_case},
+ {"g2int_conic_curve", ga_g2int_conic_curve_case},
+ {"g2int_functions", ga_g2int_functions_case},
+ // Geom2dAPI (tkgeomalgo_probe_geom2dapi.cxx)
+ {"g2api_extrema", ga_g2api_extrema_case},
+ {"g2api_project", ga_g2api_project_case},
+ {"g2api_interpolate", ga_g2api_interpolate_case},
+ {"g2api_points_to_bspline", ga_g2api_points_to_bspline_case},
 };
 int main() {
  std::string line;

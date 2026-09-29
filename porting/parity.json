@@ -146522,6 +146522,918 @@
       "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_hyperbolas",
       "status": "implemented",
       "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::GetType(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::get_type",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::IsComposite(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool",
+      "status": "excluded",
+      "notes": "Declared in Geom2dInt_Geom2dCurveTool.hxx but never defined natively (no body in the .lxx or .cxx, so a call would not link); there is nothing to port."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Line(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::line",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Circle(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::circle",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Ellipse(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::ellipse",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Parabola(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::parabola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Hyperbola(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::hyperbola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::EpsX(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::eps_x",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::EpsX(const Adaptor2d_Curve2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::eps_x_of",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::NbSamples(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::nb_samples",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::NbSamples(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::nb_samples_in",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::FirstParameter(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::first_parameter",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::LastParameter(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::last_parameter",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Value(const Adaptor2d_Curve2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::value",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::D0(const Adaptor2d_Curve2d&,double,gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::d0",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::D1(const Adaptor2d_Curve2d&,double,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::d1",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::D2(const Adaptor2d_Curve2d&,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::d2",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::D3(const Adaptor2d_Curve2d&,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::d3",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::DN(const Adaptor2d_Curve2d&,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::dn",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::NbIntervals(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::nb_intervals",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Intervals(const Adaptor2d_Curve2d&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::intervals",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::GetInterval(const Adaptor2d_Curve2d&,int,const NCollection_Array1<double>&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::get_interval",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_Geom2dCurveTool::Degree(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_Geom2dCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::Geom2dCurveTool::degree",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::new",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter(const gp_Lin2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::line",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::perform_line",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter(const gp_Circ2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::circle",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::perform_circle",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter(const gp_Elips2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::ellipse",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter::Perform(const gp_Elips2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::perform_ellipse",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter(const gp_Parab2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::parabola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter::Perform(const gp_Parab2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::perform_parabola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter(const gp_Hypr2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::hyperbola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_IntConicCurveOfGInter::Perform(const gp_Hypr2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_IntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::IntConicCurveOfGInter::perform_hyperbola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::new",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter(const gp_Lin2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::line",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::perform_line",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter(const gp_Circ2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::circle",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::perform_circle",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter(const gp_Elips2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::ellipse",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter::Perform(const gp_Elips2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::perform_ellipse",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter(const gp_Parab2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::parabola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter::Perform(const gp_Parab2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::perform_parabola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter(const gp_Hypr2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::hyperbola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntConicCurveOfGInter::Perform(const gp_Hypr2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntConicCurveOfGInter::perform_hyperbola",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter(const IntCurve_IConicTool&,const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter::new",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter::Value(double,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter::value",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter::Derivative(double,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter::derivative",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter::Values(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter::values",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter(const Adaptor2d_Curve2d&,const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::new",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::NbVariables() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::nb_variables",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::NbEquations() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::nb_equations",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::value",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::Derivatives(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::derivatives",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::Values(const math_Vector&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter::values",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntersectorOfTheIntConicCurveOfGInter::new",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter(const IntCurve_IConicTool&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntersectorOfTheIntConicCurveOfGInter::with_curves",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter::Perform(const IntCurve_IConicTool&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntersectorOfTheIntConicCurveOfGInter::perform",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter::FindU(double,gp_Pnt2d&,const Adaptor2d_Curve2d&,const IntCurve_IConicTool&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntersectorOfTheIntConicCurveOfGInter::find_u",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter::FindV(double,gp_Pnt2d&,const IntCurve_IConicTool&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntersectorOfTheIntConicCurveOfGInter::find_v",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter::And_Domaine_Objet1_Intersections(const IntCurve_IConicTool&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,const IntRes2d_Domain&,int&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheIntersectorOfTheIntConicCurveOfGInter::and_domaine_objet1_intersections",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheProjPCurOfGInter::FindParameter(const Adaptor2d_Curve2d&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheProjPCurOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheProjPCurOfGInter::find_parameter",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheProjPCurOfGInter::FindParameter(const Adaptor2d_Curve2d&,const gp_Pnt2d&,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheProjPCurOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheProjPCurOfGInter::find_parameter_in",
+      "status": "implemented",
+      "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve and IntImpParGen templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md); adaptor exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::new",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::NbExtrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::nb_extrema",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::operator int() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::as_int",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::Points(int,gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::points",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::parameters",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::Distance(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::distance",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::NearestPoints(gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::nearest_points",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::LowerDistanceParameters(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::lower_distance_parameters",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::LowerDistance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::lower_distance",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::operator double() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::as_real",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurve::Extrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ExtremaCurveCurve::extrema",
+      "status": "implemented",
+      "notes": "Extrema_ExtCC2d borrows its curves, which this object owns: the Rust accessor rebuilds the (deterministic) Extrema_ExtCC2d on the stored adaptors; the results are those of the construction."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate(const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::new",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate(const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,const occ::handle<NCollection_HArray1<double>>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::with_parameters",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate::Load(const gp_Vec2d&,const gp_Vec2d&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::load_ends",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate::Load(const NCollection_Array1<gp_Vec2d>&,const occ::handle<NCollection_HArray1<bool>>&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::load",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate::ClearTangents()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate",
+      "status": "excluded",
+      "notes": "Declared in Geom2dAPI_Interpolate.hxx but never defined natively (no body in Geom2dAPI_Interpolate.cxx, so a call would not link); there is nothing to port."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate::Perform()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::perform",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::curve",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate::operator occ::handle<Geom2d_BSplineCurve>() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::as_curve",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_Interpolate::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::is_done",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::new",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt2d>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::with_points",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline(const NCollection_Array1<double>&,double,double,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::with_y_values",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt2d>&,Approx_ParametrizationType,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::with_parametrization",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::with_parameters",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt2d>&,double,double,double,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::with_weights",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt2d>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::init",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::Init(const NCollection_Array1<double>&,double,double,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::init_y_values",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt2d>&,Approx_ParametrizationType,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::init_parametrization",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::init_parameters",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt2d>&,double,double,double,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::init_weights",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::curve",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::operator occ::handle<Geom2d_BSplineCurve>() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::as_curve",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::is_done",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::new",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve(const gp_Pnt2d&,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::with_curve",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve(const gp_Pnt2d&,const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::with_range",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::Init(const gp_Pnt2d&,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::init",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::Init(const gp_Pnt2d&,const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::init_range",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::nb_points",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::operator int() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::as_int",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::point",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::Parameter(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::parameter",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::Parameter(int,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::parameter",
+      "status": "implemented",
+      "notes": "The output-reference overload returns the same value as Parameter(int); both map to parameter()."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::Distance(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::distance",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::NearestPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::nearest_point",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::operator gp_Pnt2d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::as_point",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::LowerDistanceParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::lower_distance_parameter",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::LowerDistance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::lower_distance",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::operator double() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::as_real",
+      "status": "implemented",
+      "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ProjectPointOnCurve::Extrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_api::ProjectPointOnCurve::extrema",
+      "status": "implemented",
+      "notes": "Extrema_ExtPC2d borrows its curve, which this object owns: the Rust accessor rebuilds the (deterministic) Extrema_ExtPC2d on the stored adaptor; the results are those of the Init."
     }
   ],
   "tests": [
@@ -232779,6 +233691,76 @@
         "linux-gcc-c-locale"
       ],
       "native_expected_failure": "Fails in native OCCT itself on the pinned profile (GCC, glibc): the test inlines ElCLib::Value(-0.7, hyperbola), and GCC folds sinh(-0.7) at compile time to a value one ulp from the glibc run-time sinh that ExtremaPC2d_Hyperbola::Value calls, so the EXPECT_EQ(..., 0.0) distance is 1 ulp natively. The Rust port calls the run-time sinh on both sides, as the native library does, and passes. Approved by the maintainer on 2026-09-29."
+    },
+    {
+      "upstream_id": "Geom2dAPI_ExtremaCurveCurveTest.ModDataBug_27467_IntersectingTrimmedLines",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "a615a6bc55b7bde7b9f9609645ea6131ef42b1624e0dbefb1d32eca1335b39d3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dapi_extrema_curve_curve",
+      "rust_test": "Geom2dAPI_ExtremaCurveCurveTest__ModDataBug_27467_IntersectingTrimmedLines",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAPI_InterpolateTest.OCC28594_InterpolateWithAndWithoutTangentScale",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dAPI_Interpolate_Test.cxx",
+      "source_sha256": "041ec1eb0e90c2ff303974263937eb82d545f849621bc719b46542819e4e838d",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dapi_interpolate",
+      "rust_test": "Geom2dAPI_InterpolateTest__OCC28594_InterpolateWithAndWithoutTangentScale",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dapi_interpolate.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline_Test.DegenerateXRangeFallsBackToUniformParameters",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dAPI_PointsToBSpline_Test.cxx",
+      "source_sha256": "b456ef55da71dc62627b591c487033a21e3731e6a5f092e41ed613a6e45be9e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dapi_points_to_bspline",
+      "rust_test": "Geom2dAPI_PointsToBSpline_Test__DegenerateXRangeFallsBackToUniformParameters",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dapi_points_to_bspline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAPI_PointsToBSpline_Test.DegenerateExplicitParametersResetDoneState",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dAPI_PointsToBSpline_Test.cxx",
+      "source_sha256": "b456ef55da71dc62627b591c487033a21e3731e6a5f092e41ed613a6e45be9e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dapi_points_to_bspline",
+      "rust_test": "Geom2dAPI_PointsToBSpline_Test__DegenerateExplicitParametersResetDoneState",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dapi_points_to_bspline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveToBezierCurveTest.OCC7372_PeriodicBSplineToBeziersAfterIncreaseDegree",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dConvert_BSplineCurveToBezierCurve_Test.cxx",
+      "source_sha256": "a61b34f6681b1ce31c9af85cffe4dfbd30d0a66fb674403fff0bc39daf08f0e4",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dconvert_bspline_curve_to_bezier_curve",
+      "rust_test": "Geom2dConvert_BSplineCurveToBezierCurveTest__OCC7372_PeriodicBSplineToBeziersAfterIncreaseDegree",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dconvert_bspline_curve_to_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }

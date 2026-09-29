@@ -26,6 +26,10 @@ The toolkit test inventory maps these suites (0 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
+| GTests/Geom2dAPI_ExtremaCurveCurve_Test.cxx | geom2dapi_extrema_curve_curve | 1 | pass | pass |
+| GTests/Geom2dAPI_Interpolate_Test.cxx | geom2dapi_interpolate | 1 | pass | pass |
+| GTests/Geom2dAPI_PointsToBSpline_Test.cxx | geom2dapi_points_to_bspline | 2 | pass | pass |
+| GTests/Geom2dConvert_BSplineCurveToBezierCurve_Test.cxx | geom2dconvert_bspline_curve_to_bezier_curve | 1 | pass | pass |
 
 ## Verification
 
@@ -79,6 +83,35 @@ Preserved native behaviour:
 - `IntCurve_IConicTool(gp_Lin2d)` and `IntCurve_PConic(gp_Lin2d)` return `Result` because
   the port's `gp_Ax22d` constructor does; a line direction cannot make it fail.
 
+## Geom2dInt and Geom2dAPI
+
+Geom2dInt (`geom2d_int`) holds the curve tool `Geom2dCurveTool`, the projection
+`TheProjPCurOfGInter` and the IntImpParGen instantiation `Geom2dTypes`; its other classes
+are aliases of the IntCurve and Extrema generics (docs/geomalgo-design.md section 3). The
+classes built on Intf (`GInter`, `TheIntPCurvePCurveOfGInter`, `ThePolygon2dOfTheIntPCurvePCurveOfGInter`,
+`ExactIntersectionPointOfTheIntPCurvePCurveOfGInter`) and `Geom2dAPI_InterCurveCurve` wait
+for the Intf port. Geom2dAPI (`geom2d_api`) ports `ExtremaCurveCurve`,
+`ProjectPointOnCurve`, `Interpolate` and `PointsToBSpline`; the conversion operators are
+`as_int`, `as_real`, `as_point` and `as_curve`.
+
+Preserved native behaviour and deliberate differences:
+
+- `Geom2dInt_Geom2dCurveTool::IsComposite` and `Geom2dAPI_Interpolate::ClearTangents` are
+  declared but never defined natively; they have excluded rows.
+- Extrema_ExtCC2d and Extrema_ExtPC2d borrow their curves, which the Geom2dAPI objects own:
+  the objects keep the results of their construction (with the exception each Extrema
+  accessor raised) and `extrema()` rebuilds the deterministic Extrema object on the stored
+  adaptors.
+- `Geom2dAPI_Interpolate::Load(Tangents, TangentFlags)` shares the caller's flag array,
+  which Perform completes (the end tangents it builds are flagged there, visible to the
+  caller); BuildParameters reads the previous parameter at the point index, so a point
+  array not starting at 1 raises Standard_OutOfRange; `Load(InitialTangent, FinalTangent)`
+  writes the flags and tangents at 1 and NbPoints whatever the bounds. PLib::EvalLagrange
+  leaves its result unset natively when two parameters are too close; the port reads 0.
+- `Geom2dAPI_PointsToBSpline::Init(Points, Params, ...)` reads `Params(i)` for i in
+  `2..Nbp-1` whatever the lower bound of `Params`; the variational Init swallows the
+  exception of AppDef_Variational::Approximate, as natively.
+
 ## Numeric comparison policy
 
 `tools/verify_tkgeomalgo_numeric.py` uses the shared driver `tools/toolkit_numeric.py`.
@@ -110,6 +143,16 @@ including the centre of a circle or ellipse and the default tool; `intcurve_inte
 covers Interval and PeriodicInterval; `imppar_transition` and `imppar_domain` the
 transition, position and normalisation helpers; `intres2d_*` the domain accessors,
 Insert and the composite Append.
+
+Geom2dInt, Geom2dAPI: `tkgeomalgo_corpus_geom2d.py` adds 962 requests: `g2int_tool` and
+`g2int_proj` run the curve tool and the projection on lines, conics, rational and
+polynomial Bezier and B-spline curves (several C1 intervals, periodic), trimmed and offset
+curves; `g2int_conic_curve` intersects every conic with every such curve through both
+conic-curve classes (whole, inner and unbounded domains, the reversed flag);
+`g2int_functions` evaluates the distance and conic functions; `g2api_extrema`,
+`g2api_project`, `g2api_interpolate` and `g2api_points_to_bspline` call every member of the
+four Geom2dAPI classes, with out-of-range indices, reversed ranges, periodic and
+non-periodic interpolations with parameters and tangents, and every PointsToBSpline Init.
 
 ## Preserved native behaviour
 

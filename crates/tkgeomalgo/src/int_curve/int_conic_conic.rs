@@ -15,8 +15,8 @@
 
 //! `IntCurve_IntConicConic`: the intersection of two gp conics; each Perform
 //! overload lives in the module of its native source.
-use super::IntImpConicParConic;
-use crate::int_res2d::{Domain, Intersection};
+use super::{GpConic, IntImpConicParConic};
+use crate::int_res2d::{Domain, Intersection, construction_error};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Circle2, Ellipse2, Hyperbola2, Line2, Parabola2};
 use std::ops::{Deref, DerefMut};
@@ -159,4 +159,43 @@ impl IntConicConic {
         /// `IntConicConic::hyperbolas(h1, &d1, h2, &d2, 1e-9, 1e-9)?`.
         hyperbolas, perform_hyperbolas, Hyperbola2, Hyperbola2
     );
+
+    /// The Perform overload of an ordered pair of conics (the rank of `first` at
+    /// most that of `second`); Standard_ConstructionError for a pair out of order,
+    /// which has no native overload.
+    /// `inter.perform_ordered(&GpConic::Line(l), &d1, &GpConic::Circle(c), &d2, 1e-9, 1e-9)?`.
+    pub fn perform_ordered(
+        &mut self,
+        first: &GpConic,
+        d1: &Domain,
+        second: &GpConic,
+        d2: &Domain,
+        tol_conf: f64,
+        tol: f64,
+    ) -> Result<(), Failure> {
+        use GpConic::{Circle, Ellipse, Hyperbola, Line, Parabola};
+        let (tc, t) = (tol_conf, tol);
+        match (*first, *second) {
+            (Line(a), Line(b)) => self.perform_lines(a, d1, b, d2, tc, t),
+            (Line(a), Circle(b)) => self.perform_line_circle(a, d1, b, d2, tc, t),
+            (Line(a), Ellipse(b)) => self.perform_line_ellipse(a, d1, b, d2, tc, t),
+            (Line(a), Parabola(b)) => self.perform_line_parabola(a, d1, b, d2, tc, t),
+            (Line(a), Hyperbola(b)) => self.perform_line_hyperbola(a, d1, b, d2, tc, t),
+            (Circle(a), Circle(b)) => self.perform_circles(a, d1, b, d2, tc, t),
+            (Circle(a), Ellipse(b)) => self.perform_circle_ellipse(a, d1, b, d2, tc, t),
+            (Circle(a), Parabola(b)) => self.perform_circle_parabola(a, d1, b, d2, tc, t),
+            (Circle(a), Hyperbola(b)) => self.perform_circle_hyperbola(a, d1, b, d2, tc, t),
+            (Ellipse(a), Ellipse(b)) => self.perform_ellipses(a, d1, b, d2, tc, t),
+            (Ellipse(a), Parabola(b)) => self.perform_ellipse_parabola(a, d1, b, d2, tc, t),
+            (Ellipse(a), Hyperbola(b)) => self.perform_ellipse_hyperbola(a, d1, b, d2, tc, t),
+            (Parabola(a), Parabola(b)) => self.perform_parabolas(a, d1, b, d2, tc, t),
+            (Parabola(a), Hyperbola(b)) => self.perform_parabola_hyperbola(a, d1, b, d2, tc, t),
+            (Hyperbola(a), Hyperbola(b)) => self.perform_hyperbolas(a, d1, b, d2, tc, t),
+            (a, b) => Err(construction_error(&format!(
+                "IntCurve_IntConicConic::Perform() - conic ranks {} then {}; expected a non-decreasing pair",
+                a.rank(),
+                b.rank()
+            ))),
+        }
+    }
 }

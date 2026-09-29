@@ -49,3 +49,31 @@ in each `_0.cxx`). It is ported once in `int_imp_par_gen` as
   ProjectOnPConicTool) gives `IntCurve_IntImpConicParConic` and
   `IntCurve_MyImpParToolOfIntImpConicParConic` as aliases; Geom2dInt declares the
   Adaptor2d_Curve2d instantiation (`Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter`).
+
+## 3. The IntCurve curve templates and their Geom2dInt instances
+
+IntCurve owns the templates that Geom2dInt instantiates on `Adaptor2d_Curve2d`; each is a
+generic in `int_curve`, and Geom2dInt declares the native classes as aliases:
+
+- `IntCurve_IntConicCurveGen.gxx` is `IntConicCurveGen<T: IntersectorTypes<Imp =
+  IConicTool>>` (the `TheImpTool` is fixed to IConicTool natively, the `ThePCurve`,
+  `ThePCurveTool`, `TheProjPCur` and `IntCurve_TheIntersector` macros come from the
+  IntImpParGen instantiation `T`): `Geom2dInt_TheIntConicCurveOfGInter`.
+- `IntCurve_UserIntConicCurveGen.gxx` is `UserIntConicCurveGen<T>`, which also needs the
+  curve tool members of the trait `PCurveTool` (GetType, the conics, the intervals):
+  `Geom2dInt_IntConicCurveOfGInter`. Its five InternalPerform overloads differ only by the
+  pair order of IntCurve_IntConicConic; the port dispatches on the conic ranks
+  (`IntConicConic::perform_ordered`), reversing the parameters when the curve's kind comes
+  first, as each native case does.
+- `IntCurve_DistBetweenPCurvesGen.gxx` is `DistBetweenPCurvesGen<'a, T: PCurveTool>`, a
+  tkmath `FunctionSetWithDerivatives` (a curve exception is kept and reported as `false`):
+  `Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter`.
+- `Geom2dInt_Geom2dCurveTool` implements `ParTool` and `PCurveTool`; `Geom2dTypes` is the
+  IntImpParGen instantiation (`Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter` and its
+  `MyImpParTool`).
+- The three Extrema aliases of Geom2dInt (`TheCurveLocator`, `TheLocateExtPC`, `PCLocF`)
+  instantiate TKGeomBase templates with Geom2dInt_Geom2dCurveTool. Those templates call
+  only Value, D0-D2, DN, GetType and the parameter bounds, which forward to the adaptor
+  in Geom2dInt_Geom2dCurveTool and Extrema_Curve2dTool alike, so the aliases reuse the
+  Extrema_Curve2dTool instantiations of the Extrema port instead of implementing the whole
+  `ExtremaCurveTool` trait for a second tool.

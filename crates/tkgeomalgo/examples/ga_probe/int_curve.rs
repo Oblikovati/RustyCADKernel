@@ -122,7 +122,7 @@ fn conic_domain(s: &DomainSpec, c: &Conic) -> Result<Domain, Failure> {
     domain(s, |u| c.value(u))
 }
 
-fn itool(c: &Conic) -> Result<IConicTool, Failure> {
+pub fn itool_of(c: &Conic) -> Result<IConicTool, Failure> {
     Ok(match c.kind {
         0 => IConicTool::from_line(c.lin())?,
         1 => IConicTool::from_circle(c.circ()?),
@@ -200,7 +200,7 @@ pub fn imppar_case(values: &[f64]) {
         pc.set_eps_x(epsx);
         let mut result = IntImpConicParConic::new();
         result.set_reversed_parameters(rev);
-        result.perform(&itool(&a)?, &da, &pc, &db, tc, t)?;
+        result.perform(&itool_of(&a)?, &da, &pc, &db, tc, t)?;
         inter(&result)
     });
     end();
@@ -213,7 +213,7 @@ pub fn itool_case(values: &[f64]) {
     let u = r.real();
     let p = r.pnt2d();
     attempt(|| {
-        let tool = itool(&c)?;
+        let tool = itool_of(&c)?;
         let copy = tool;
         pnt2d(copy.value(u));
         let (mut q, mut t, mut n) = (
@@ -291,7 +291,7 @@ pub fn function_case(values: &[f64]) {
     let u = r.real();
     attempt(|| {
         let pc = pconic(&b)?;
-        let tool = itool(&a)?;
+        let tool = itool_of(&a)?;
         let mut f = MyImpParToolOfIntImpConicParConic::new(&tool, &pc);
         let (mut v, mut d) = (-1.0, -2.0);
         flag(f.value(u, &mut v));

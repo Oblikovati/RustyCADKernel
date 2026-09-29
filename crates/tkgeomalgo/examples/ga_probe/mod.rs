@@ -3,6 +3,9 @@
 // uses a subset of them, so unused ones are expected in these two modules.
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod curve2d;
+pub mod geom2d_api;
+pub mod geom2d_int;
 pub mod int_curve;
 pub mod int_imp_par_gen;
 pub mod int_res2d;
