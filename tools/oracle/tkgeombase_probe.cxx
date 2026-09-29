@@ -60,6 +60,7 @@
 #include "tkgeombase_probe_advapp2var_f2var.cxx"
 #include "tkgeombase_probe_advapp2var_f2var2.cxx"
 #include "tkgeombase_probe_advapp2var_class.cxx"
+#include "tkgeombase_probe_geom2dconvert.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -273,6 +274,17 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"aa_grid", gb_aa_grid_case},
  {"aa_patch", gb_aa_patch_case},
  {"aa_approx", gb_aa_approx_case},
+ // Geom2dConvert (tkgeombase_probe_geom2dconvert.cxx)
+ {"g2c_to_bspline", gb_g2c_to_bspline_case},
+ {"g2c_split", gb_g2c_split_case},
+ {"g2c_knot_split", gb_g2c_knot_split_case},
+ {"g2c_bezier", gb_g2c_bezier_case},
+ {"g2c_comp", gb_g2c_comp_case},
+ {"g2c_concat", gb_g2c_concat_case},
+ {"g2c_c0c1", gb_g2c_c0c1_case},
+ {"g2c_approx", gb_g2c_approx_case},
+ {"g2c_arcs", gb_g2c_arcs_case},
+ {"g2c_ppoint", gb_g2c_ppoint_case},
 };
 int main() {
  std::string line;

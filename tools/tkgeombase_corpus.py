@@ -37,3 +37,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_appcont').append_appcont_requests(requests)
     # AdvApp2Var (tkgeombase_corpus_advapp2var.py)
     __import__('tkgeombase_corpus_advapp2var').append_advapp2var_requests(requests)
+    # Geom2dConvert (tkgeombase_corpus_geom2dconvert.py)
+    __import__('tkgeombase_corpus_geom2dconvert').append_geom2dconvert_requests(requests)
