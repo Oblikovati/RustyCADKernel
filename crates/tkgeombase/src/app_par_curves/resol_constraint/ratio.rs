@@ -81,7 +81,7 @@ impl ResolConstraint {
         t: &mut Tangent,
         tabs: &mut TangentTables,
     ) -> Result<(), Failure> {
-        let nb_cu: i32 = ssp.nb_p3d() + ssp.nb_p2d();
+        let nb_cu: i32 = ssp.nb_p3d()? + ssp.nb_p2d()?;
         for i in 1..=self.inc_tan {
             let npt: i32 = self.i_tan[(i - 1) as usize];
             let mut inc_col: i32 = 0;

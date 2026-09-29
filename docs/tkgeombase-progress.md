@@ -6,15 +6,15 @@ depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
 `GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
-`GCPnts`, `AdvApp2Var`, `Geom2dConvert`, `Extrema`, `GeomConvert` and `GeomLib` packages
-are ported in full, and
-`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
+`GCPnts`, `AdvApp2Var`, `Geom2dConvert`, `Extrema`, `GeomConvert`, `GeomLib`, `Approx`,
+`AppDef` and `ProjLib` packages are ported in full, and `tools/audit_api_rows.py` reports
+0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (824 declarations):
+passes (828 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -83,6 +83,8 @@ passes (824 declarations):
 | GeomConvert_CompCurveToBSplineCurve_Test.cxx | geom_convert_comp_curve_to_bspline_curve | 8 |
 | GeomLib_Test.cxx | geom_lib | 15 |
 | GeomLib_CheckCurveOnSurface_Test.cxx | geom_lib_check_curve_on_surface | 7 |
+| ProjLib_Cone_Test.cxx | proj_lib_cone | 3 |
+| ProjLib_ComputeApproxOnPolarSurface_Test.cxx | proj_lib_compute_approx_on_polar_surface | 1 |
 
 `bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
 `geom2d_convert_behavior.rs` covers the Geom2dConvert quirks below.
@@ -93,7 +95,8 @@ StdFail_NotDone results, the conversion operators, the GCE2d aliases and the nat
 quirks below. GeomTools has no upstream GoogleTest suite; `geom_tools_behavior/`
 covers its layouts, reader contract, sets, handler and quirks with named fakes for the
 console, the text streams, the progress indicator and a custom handler.
-`extrema_behavior.rs` covers the Extrema quirks below. The three ExtremaPC suites that
+`extrema_behavior.rs` covers the Extrema quirks below. `proj_lib_behavior.rs` covers the
+ProjLib quirks below. The three ExtremaPC suites that
 compare ExtremaPC with the classic `Extrema_ExtPC` share the random points of
 `tests/fixtures/extrema_pc_random_points.txt`, which
 `tools/oracle/tkgeombase_extrema_random_points.cxx` draws with the libstdc++
@@ -282,7 +285,9 @@ by `MultiCurve` (Bezier evaluation) and `MultiBSpCurve`, which reaches the non-v
 members of its base through `Deref`; the slicing copy `(AppParCurves_MultiCurve)` is
 `MultiBSpCurve::as_multi_curve`. The `MultiLine`/`ToolLine` template parameters of the
 generics are the `LineTool` trait (implemented by the line: `ToolLine::NbP3d(SSP)` is
-`ssp.nb_p3d()`); `LeastSquare` and `ResolConstraint` read the line in their
+`ssp.nb_p3d()?`; `LastPoint`, `NbP2d` and `NbP3d` return a `Result`, since
+AppDef_MyLineTool reads the line's array and first multipoint, which raise on a null or
+empty line); `LeastSquare` and `ResolConstraint` read the line in their
 constructors only and are plain structs with generic constructors, `Function<L>` and
 `BSpFunction<L>` keep a copy of the line. The `Squares`, `ResolCons` and
 `*_BFGS` parameters are the ported classes themselves; the BFGS subclass the AppDef,
@@ -469,6 +474,125 @@ member; `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for bot
 - Every native `std::min` and `std::max` keeps its argument order (`std_min`,
   `std_max`), so NaN and signed zero operands give the native result.
 
+## Approx
+
+Approx (`approx`) ports every class, generic and enumeration of the package;
+`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for it. OCCT 8.1 has
+no `Approx_BSplineApproxInterp`: no header, source or reference names it, so there is
+nothing to port.
+
+- The generics are trait-based. `Approx_ComputeLine.gxx` is `ComputeLine`,
+  `Approx_BSplComputeLine.gxx` is `BSplComputeLine`; both take any
+  `app_par_curves::LineTool` (the MultiLine and its tool are one type), and the
+  instantiations of AppDef, GeomInt and BRepApprox are aliases of them. The least
+  squares, gradient and BFGS generics come from the AppParCurves port.
+  `Approx_ComputeCLine.gxx` is `ComputeCLine` over `app_cont::Function`;
+  `Approx_FitAndDivide` and `Approx_FitAndDivide2d` are its aliases.
+- `LineTool` has the Approx members `what_status`, `make_ml_between` and
+  `make_ml_one_more_point` (`None` for a native null MultiLine); AppDef_MyLineTool
+  answers them as natively (NoPointsAdded, the same line, no extra point).
+- The native constructor overloads are named constructors (`with_line`,
+  `with_line_and_parameters`, `from_parameters`; `CurvlinFunc::from_curve`,
+  `from_curve_on_surface`, `from_two_curves_on_surfaces`; `SameParameter::from_geometry`,
+  `from_adaptors_and_pcurve`, `from_adaptors`), and the long argument lists with
+  defaults are options structs with the native defaults (`ComputeLineOptions`,
+  `ComputeCLineOptions`, `CurveOnSurfaceOptions`, `CurvilinearOptions`,
+  `SweepOptions`).
+- `Approx_CurvlinFunc` and `Approx_SweepFunction` are transients: `CurvlinFunc` keeps
+  its state behind a lock (its const members record the previous point, as the native
+  const_cast does), and `SweepFunction` is a trait whose native-bodied members (D1, D2,
+  Resolution, BarycentreOfSurf, MaximalSection, GetMinimalWeight) raise
+  Standard_NotImplemented by default.
+- The AdvApprox evaluators of Curve3d, Curve2d, CurveOnSurface, CurvilinearParameter,
+  SameParameter and SweepApproximation keep an evaluator exception and return it after
+  the approximation, as the native exception propagates. The Curve3d and Curve2d
+  evaluators and cut points are shared with GeomConvert_ApproxCurve and
+  Geom2dConvert_ApproxCurve (`curve_approx_eval.rs`), which use the same code natively.
+- `Dump` members write into a `fmt::Write`; `Status` and `ParametrizationType` keep the
+  native values (`code`, `from_code`).
+- AppDef maps `AppDef_Compute` and `AppDef_BSplineCompute` onto these generics (type
+  aliases over its MultiLine); ProjLib, ported after Approx, does the same with its
+  instantiations.
+
+## AppDef
+
+AppDef (`app_def`) ports every class of the package; `tools/audit_api_rows.py` reports 0
+missing and 0 stale api rows for it (389 implemented and 5 excluded:
+`AppDef_MultiLine::SetParameter` and the four `ResConstraintOf*::Error()` are declared
+but never defined natively).
+
+- `AppDef_MultiPointConstraint` is an `AppParCurves_MultiPoint` (reached through
+  `Deref`) with four optional shared vector arrays (`Handle<HArray1<...>>`, null until
+  a constructor or a setter allocates them). A copy shares every allocated array, as
+  the native copy shares its handles; the constructor overloads are named
+  (`with_tangents`, `with_tangents_and_curvatures`, `with_tangents_3d`, ...).
+- `AppDef_MultiLine` holds its multipoints in one shared array (a copy shares it; the
+  default line has none). `AppDef_MyLineTool` is the `LineTool` implementation of
+  `MultiLine` (`AppDef_MyLineTool::NbP3d(ML)` is `ml.nb_p3d()?`); `MultiLine::value`
+  is `AppDef_MultiLine::Value`, the three-array `AppDef_MyLineTool::Value` is
+  `LineTool::value`.
+- The instantiation classes are type aliases of the ported generics
+  (`instantiations.rs`): `Compute` = `approx::ComputeLine`, `BSplineCompute` =
+  `approx::BSplComputeLine`, `TheLeastSquares` and the four `*ParLeastSquareOf*` =
+  `LeastSquare`, `TheResol` and the `ResConstraintOf*` = `ResolConstraint`,
+  `TheFunction` and the `ParFunctionOf*` = `Function<MultiLine>`,
+  `BSpParFunctionOfMyBSplGradientOfBSplineCompute` = `BSpFunction<MultiLine>`,
+  `TheGradient` and the `MyGradient*` = `Gradient`, `MyBSplGradientOfBSplineCompute` =
+  `BSpGradient`, and the four `*_BFGSOf*` = `GradientBfgs`.
+- `AppDef_SmoothCriterion` is a transient trait (`Handle<dyn SmoothCriterion>` is the
+  native base handle) whose members take `&self`: `LinearCriteria` keeps its state
+  behind a lock, so every handle sees it. `double& EstLength()` is `est_length` /
+  `set_est_length`, `SetWeight(Array1)` is `set_point_weights`, and the output
+  references are returned values (`QualityValues`, `SmoothErrors`).
+- `AppDef_Variational` takes its defaulted constructor arguments in
+  `VariationalOptions`; `SetCriteriumWeight(Order, Percent)` is
+  `set_criterium_weight_of`. Its translation unit defines `No_Standard_OutOfRange` and
+  the other range macros after the headers that already expanded them, so every
+  NCollection and math access stays checked natively; the port checks the same
+  accesses. The engine (TheMotor, Optimization, Project, ACR, SplitCurve, Adjusting)
+  shares the parameter and curve handles as natively: the parameters the criterion
+  reads are the arrays the motor sorts and remaps in place.
+- The null dereferences of the native code (a vector array never allocated, the
+  default line, a criterion before SetCurve for InputVector, a null curve given to the
+  first SetCurve, a gradient before any basis cache) are Standard_NullObject errors.
+
+## ProjLib
+
+ProjLib (`proj_lib`) ports every class of the package; `tools/audit_api_rows.py`
+reports 0 missing and 0 stale api rows for it (253 implemented, and the destructor of
+ProjLib_Projector excluded). OCCT 8.1 has no `ProjLib_ProjectOnSurface` and no
+`ProjLib_HSequenceOfHSequenceOfPnt`: CompProjectedCurve spells its sequence type inline
+(`SequenceOfSequenceOfPnt` in the port), and `ProjLib_HCompProjectedCurve` is a
+typedef (`HCompProjectedCurve`).
+
+- The static `ProjLib::Project` overloads are free functions named after the element
+  and the surface (`project_line_on_plane`, `project_circle_on_torus`, ...); they build
+  the elementary projector and return its typed result, as natively.
+  `MakePCurveOfType` returns the curve, `IsAnaSurf` takes the adaptor handle.
+- `ProjLib_Projector` is a struct holding the protected result. The elementary
+  projectors (`Plane`, `Cylinder`, `Cone`, `Sphere`, `Torus`) embed it and reach it
+  through `Deref`/`DerefMut`; the virtual `Project` overloads are the `Project` trait
+  (`project_line` ... `project_hyperbola`), implemented by `Projector` itself with the
+  native base behaviour. The native slicing `myResult = P` is `Projector::from(p)`.
+- `PrjFunc` and `PrjResolve` borrow the adaptors (the native raw pointers);
+  `PrjResolve::perform` takes the `Tol`, `Inf` and `Sup` points in a `PrjResolveBox`.
+  PrjFunc keeps an adaptor failure raised inside a math callback and PrjResolve
+  returns it after the solver, as the native exception unwinds.
+- `ProjectOnPlane` (an `Adaptor3d_Curve`), `ProjectedCurve` and `CompProjectedCurve`
+  (`Adaptor2d_Curve2d`) are `Handle`-shared adaptors whose fields sit behind one lock.
+  `Load`, `Perform` and `Init` compute on a copy of the fields and store it back, also
+  when they fail part way, so the observable state matches the native partial update.
+  Their `ShallowCopy` is also available as a concrete value (`shallow_projection`), so
+  GeomProjLib and `BRep_Tool::CurveOnPlane` can keep the concrete type.
+- `ComputeApprox` and `ComputeApproxOnPolarSurface` are plain structs. Their
+  `AppCont_Function` implementations keep the first adaptor failure and return it after
+  `Approx_FitAndDivide2d`, as the native exception propagates. The approximations reuse
+  the Approx, AppParCurves, Extrema, GCPnts, Geom2dConvert, GeomConvert, GeomLib and
+  LProp ports.
+- ExtremaPC and the EstimDist of IntAna_QuadQuadGeo call these functions; the private
+  copies they carried before (`plane_projection.rs` and a `ProjLib::Project(gp_Pln,
+  gp_Lin)` copy) are deleted, and their suites and probes stay bit-exact.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -604,8 +728,8 @@ B-spline basis functions inside, at and outside their ranges, down to 2 poles an
 interior multiplicities up to C0; every MultiPoint, MultiCurve and MultiBSpCurve
 constructor and member with valid and invalid indexes, the transformations, the Dump
 text and the sharing of copies; and the generics through the native AppDef
-instantiations (the Rust probe implements `LineTool` with the AppDef_MultiLine and
-AppDef_MyLineTool semantics): least-squares fits of 3D, 2D and mixed lines (smooth,
+instantiations (both probes read an AppDef_MultiLine through AppDef_MyLineTool; the
+Rust one uses the AppDef port): least-squares fits of 3D, 2D and mixed lines (smooth,
 noisy, collinear, with a repeated point) for every pair of extremity constraints each
 Perform overload accepts, too few poles, tangents against the chord and missing
 tangents or curvatures, Bezier and B-spline bases; the Uzawa correction with inner
@@ -753,11 +877,76 @@ the empty arrays of `RemovePointsFromArray` and `DensifyArray1OfReal` (read unch
 crash), the MakeCurvefromApprox members of an absent subspace kind (a null table) and
 DenominatorMultiplier flat knot vectors other than 8 to 10 values (read out of bounds).
 
-The corpus has 39699 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The Approx requests come from two corpora. The drivers (`tkgeombase_corpus_approx.py`,
+probes `tkgeombase_probe_approx.cxx` and `tkgeombase_probe_approx_line.cxx`, which
+instantiates `Approx_ComputeLine.gxx` over AppDef_MultiLine with a scripted line tool)
+run ComputeLine and BSplComputeLine on 3D, 2D and mixed lines (smooth, clustered, noisy,
+collinear, looping, with and without end tangents) with every parametrization,
+constraint pair, degree range, cutting and squares mode, given parameters and knots, the
+scripted WhatStatus/MakeMLBetween/MakeMLOneMorePoint answers, ComputeCLine on AppCont
+functions with and without cutting, inverse order and hang checking, and
+MCurvesToBSpCurve on sequences of mixed degrees; 1324 requests. The adaptors
+(`tkgeombase_corpus_approx_adaptors.py`, probes `tkgeombase_probe_approx_adaptors.cxx`
+and `tkgeombase_probe_approx_sweep.cxx`) run Curve3d, Curve2d, CurveOnSurface (every
+surface kind, the iso-line paths, only3d and only2d), CurvlinFunc command scripts in its
+three cases, CurvilinearParameter, SameParameter from each constructor (already same
+parameter, reparametrized, C0 and off-surface pcurves) and SweepApproximation on
+polynomial and rational sections with and without 2D curves, with implemented and
+missing D1, D2 and Resolution; 673 requests. Left out, as the native result is undefined
+there: ComputeLine given fewer parameters than points, BSplComputeLine user
+multiplicities with several degrees and cutting after a failed first fit (uninitialized
+multiplicities, heap corruption).
+
+The AppDef requests (`tkgeombase_corpus_appdef.py` and
+`tkgeombase_corpus_appdef_variational.py`, probes `tkgeombase_probe_appdef.cxx` and
+`tkgeombase_probe_appdef_variational.cxx`) run every MultiPointConstraint constructor on
+3D, 2D, mixed and empty point sets with the vector setters and getters inside and
+outside their ranges, every MultiLine constructor with the AppDef_MyLineTool members
+on arrays of every size and lower bound, AppDef_Compute's four constructors,
+AppDef_LinearCriteria's members on curves of one to three elements (C0 to C2, matching
+and mismatching dimensions, every SetCurve path), and AppDef_Variational on 3D, 2D and
+mixed lines (smooth, noisy, collinear, with a repeated point, scaled) without and with
+pass, tangency and curvature constraints, every continuity, over-constrained to
+generous degrees and segment counts, size and max-error tolerances (Adjusting), every
+criterion weight, every query, Distance, Dump and setter, and the degenerate inputs
+(one, two and coincident points, FirstPoint above 1, constraints before the last point,
+missing or non-normal constraint vectors, zero tangents); 555 requests. Left out, as
+the native result reads uninitialized or unowned memory there: vector reads of a point
+without them, a default line, SetCurve of a null curve, point ranges whose allocation
+size wraps, NoConstraint couples whose uninitialized table entries a search reaches,
+InitCutting runs whose back scan compares with the knot it is about to set (the
+corpus simulates the scan), a smoothing after a SetConstraints that raised inside Init,
+negative tolerances in the max-error mode and C0 smoothings that reduce an element to
+degree 1.
+
+The ProjLib requests (`tkgeombase_corpus_projlib.py` and
+`tkgeombase_corpus_projlib_curves.py`, probes `tkgeombase_probe_projlib.cxx` and
+`tkgeombase_probe_projlib_curves.cxx`) run the elementary projectors on every line and
+conic kind over planes, cylinders, cones, spheres and tori in direct, tilted and
+indirect frames (generatrices, lines through the cone apex, parallels, meridians,
+circles through the poles, torus iso circles, rejected and off-surface curves,
+default-constructed projectors, SetInBounds, UFrame and VFrame), the static Project
+overloads on points at axes, apexes and poles, PrjFunc and PrjResolve with every fixed
+variable, invalid ones and bounded searches, ProjectOnPlane on every curve kind along
+normal, oblique and in-plane directions with and without the parametrization kept, and
+ComputeApprox, ComputeApproxOnPolarSurface (every constructor, BuildInitialCurve2d,
+initial and seam curves, C0 B-splines split into C1 spans), ProjectedCurve (every
+constructor and option) and CompProjectedCurve (every constructor, the parts, their
+evaluation and intervals, Perform with 2D and 3D results) on elementary, swept,
+trimmed, offset, Bezier and B-spline surfaces, across seams and periodic ranges,
+through poles, leaving bounded surfaces, far from them and degenerate (point and iso
+projections); 2225 requests. The given initial curves of the polar projection rotate
+over the curves and the ComputeApprox constructor runs once per surface: the far initial
+curves and the 1e-7 fits dominate the debug Rust twin, and the numeric verifier has a
+900 s budget. Left out: the projection of a line normal to the plane by
+the default ProjectOnPlane (a direction in the plane, all values NaN), whose native
+reparametrization never returns.
+
+The corpus has 44476 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
 FEmTool, 2045 AppParCurves, 3831 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts and
-GCPnts, 325 AdvApp2Var, 908 Geom2dConvert, 1934 Extrema, 1844 GeomConvert and 1146
-GeomLib.
+GCPnts, 325 AdvApp2Var, 908 Geom2dConvert, 1934 Extrema, 1844 GeomConvert, 1146 GeomLib,
+1997 Approx, 555 AppDef and 2225 ProjLib.
 
 ## Preserved native behaviour
 
@@ -1308,6 +1497,85 @@ Extrema:
 - Every native comparison keeps its form where a NaN operand changes the branch, and
   `std::min`/`std::max` keep their argument order.
 
+Approx:
+
+- `Approx_ComputeLine` never initializes `tolreached` and the current errors in its
+  constructors, and a first fit on fewer points than parameters leaves `TheParam`
+  uninitialized; the port starts from false and 0.
+- ComputeLine's CheckMultiCurve divides the first leg of a 2D curve by
+  `Epsilon(1.)` instead of its length, and records the bad indices in a three-slot
+  array that overflows past three curves (a vector in the port).
+- ComputeLine's ComputeCurve stores the interpolated piece and then halves the range,
+  so consecutive pieces overlap; the MakeMLBetween test `nbpdsotherligne` is
+  `FirstPoint - LastPoint`, which is 0 only for one point.
+- `Approx_BSplComputeLine::FindRealConstraints` queries the tangents a second time for
+  a curvature end, so a line with tangents and no curvatures keeps curvature
+  constraints; `ComputeCurve` is declared and never defined; `Parameters()` before a
+  Perform dereferences a null table (Standard_NullObject in the port); user
+  multiplicities are read past their bounds for several degrees (left out).
+- `Approx_ComputeCLine` never clears its pieces: a second Perform appends to the first.
+- `Approx_MCurvesToBSpCurve` keeps its pole counter across spans, and an empty sequence
+  raises Standard_OutOfRange.
+- `Approx_Curve2d` discards the result of its trim.
+- `Approx_CurvilinearParameter` in the one-curve-on-surface case never assigns
+  `myMaxError2d2` (the port reads 0).
+- `Approx_CurvlinFunc`: in the two-curve case Trim builds the second curve's tables
+  with the first curve's, `GetUParameter` uses the tables of the curve number whatever
+  curve it is given, and one Adaptor3d_CurveOnSurface is reloaded for both curves, so
+  its interval cache survives the Load (the port reuses one adaptor the same way).
+- `Approx_SameParameter` leaves `TolReached` unassigned when the distribution fails,
+  returns a null Curve2d when the pcurve is already same parameter and a null
+  CurveOnSurface on the early returns; the fallback CurveOnSurface uses the approximated
+  pcurve even when it is not kept; its Interpolate raises instead of returning false.
+- `Approx_SweepApproximation::Dump` writes its parts to `std::cout` (the port to the
+  given stream), and the 2D poles are appended across Performs, so `Curve2dPoles(1)`
+  keeps the first run's poles.
+
+AppDef:
+
+- `AppDef_MultiPointConstraint::SetTang` (and the three other setters) allocates its
+  array before the index check, so a failing call still makes the point a tangency
+  (curvature) point; `Tang` and the other getters dereference the array unchecked
+  (Standard_NullObject in the port when it was never allocated). The six-array
+  constructor copies the curvatures over the tangent count (equal after its check).
+- `AppDef_MultiLine::NbPoints`, `AppDef_MyLineTool::NbP2d` and `NbP3d` read the first
+  multipoint: Standard_OutOfRange on an empty line. `Dump` prints only the count.
+- `AppDef_LinearCriteria::Gradient` and its dimension check raise with the message of
+  ErrorValues; `SetWeight(Array1)` takes the bounds of its argument; the element cache
+  survives SetCurve (only SetParameters invalidates it), and an element without points
+  leaves the previous cache and the point range `IL..=IL - 1`.
+- `AppDef_Variational` estimates the last tangent from the points at
+  `(LastPoint - 3) * Dimension + 1` (not relative to FirstPoint), so any FirstPoint
+  above 1 reads past the points (Standard_OutOfRange); two points read past them too.
+  The constraint searches of EstTangent, EstSecnd and ACR evaluate the table entry
+  before their count test, so constraints ending before the last point raise
+  Standard_OutOfRange; with NoConstraint couples the table is longer and the entry read
+  is uninitialized natively (0 in the port).
+- `Init` counts a constraint before reading its vectors: a SetConstraints that raises
+  leaves the counters and freshly allocated (uninitialized natively, zero in the port)
+  tables behind, and `IsOverConstrained` is never cleared by a later valid Init
+  (SetConstraints then answers false although the criterion is rebuilt).
+- `SetMaxDegree` neither checks nor clamps the degree (the constructor clamps to 30),
+  `SetWithCutting(false)` tests the over-constraint with the knot count as segment
+  count, and no setter clears the done flag; `Approximate` never clears it either, so a
+  failed conversion keeps the previous result. Approximate stores its knots in a new
+  array (earlier `Knots()` handles keep the old ones) and rebases the parameters on 1.
+- `Adjusting` restores the errors and criteria of a rejected pass but keeps its
+  parameters, distances and worst point index. `Project` shifts the worst point index
+  by FirstPoint - 1 even when no distance exceeds 0 (the index is then the caller's
+  uninitialized value natively, 0 in the port).
+- `InitCutting` can compare a constrained parameter with the knot it is about to set,
+  which FEmTool_Curve leaves uninitialized natively (0 in the port).
+- `Dump` prints the flags `o.setf(std::ios::scientific)` returns before the tolerance
+  (4098 for a stream with the default flags, the port's assumption), then leaves the
+  stream in scientific mode with precision 3.
+- A C0 smoothing can reduce an element to degree 1, whose second derivative
+  FEmTool_Curve::D2 evaluates as a polynomial of degree -1, reading outside the element
+  natively; the port raises Standard_OutOfRange.
+- A point range with `LastPoint < FirstPoint - 1` wraps the allocation size of the
+  point weights; the native allocation fails and the first write crashes, the port
+  raises Standard_OutOfMemory.
+
 GeomConvert:
 
 - The 3D `SplitBSplineCurve` raises Standard_DomainError for both of its index
@@ -1378,3 +1646,64 @@ GeomLib:
   input unchecked (Standard_OutOfRange in the port); the MakeCurvefromApprox members of
   a subspace kind the approximation does not have pass their index check at 0 and
   dereference a null pole table.
+
+ProjLib:
+
+- `ProjLib_Projector()` sets the BSplineCurve type, not the OtherCurve its comment
+  announces, with null curves. `ProjLib_ProjectedCurve` keeps that result when a
+  Bezier or B-spline surface gives no polar projection or another surface gives no
+  CompProjectedCurve part; `Degree`, `IsRational`, `NbPoles` and `NbKnots` then
+  dereference the null B-spline natively (Standard_NullObject in the port). These two
+  branches never reset the result, so a second `Perform` keeps the previous one.
+- `ProjLib_Cone::Project(gp_Circ)` sets the Line type before its axis test, so a
+  circle not normal to the axis leaves a Line type over the previous line, and
+  `ProjLib::Project(gp_Cone, gp_Circ)` returns that line instead of raising.
+- `ProjLib_Cylinder::Project(gp_Elips)` does nothing (the ellipse is left to the
+  approximation, for periodicity reasons). `ProjLib_Sphere::Project(gp_Circ)` of a
+  circle that is neither a meridian nor a parallel keeps its type and stores the
+  default `gp_Lin2d`. `ProjLib_Torus` does not check that the circle lies on the torus;
+  a U iso whose centre is on the axis raises gp_VectorWithNullMagnitude from the
+  angle of a null reference vector.
+- `ProjLib_Sphere::SetInBounds` mirrors across a pole with a 1e-7 tolerance (OCC13116)
+  and raises StdFail_NotDone before a successful projection.
+- `ProjLib_ProjectedCurve` does not override the point evaluators, so `Value`, `D0` to
+  `DN` raise the Standard_NotImplemented of `Adaptor2d_Curve2d`; `Continuity`,
+  `NbIntervals`, `Intervals`, `Trim`, `IsClosed`, `Period` and `Resolution` raise it
+  too. Its `GetCurve` is the curve after the pole trims.
+- `ProjLib_ComputeApprox`: a B-spline or Bezier curve on a plane projects the poles of
+  the adaptor's whole curve (its trimmed range is ignored) and keeps the tolerance.
+  `Function_SetUVBounds` evaluates the cylinder at `(U1, U2)` for a closed ellipse, and
+  tests `S > U1 || S < U2` (almost always true) before the sphere U period; the
+  "return curve home" step moves U by whole multiples of PI, not 2 PI. The smoothing
+  loops of ComputeApprox and ComputeApproxOnPolarSurface run over the knot count taken
+  before the removals, the one of ProjectedCurve reads it at each step; all stop at the
+  first refused removal.
+- `ProjLib_ComputeApproxOnPolarSurface`: `BuildInitialCurve2d` stores the initial curve
+  as the B-spline result and raises Standard_NoSuchObject for a plane or a swept
+  surface, so `Perform` without an initial curve raises there. The bilinear-patch pole
+  case compares the static `MaxDegree()` of the surface class (25) with 1, so it never
+  applies; its Bezier loop would clear the done flag after each pole and its distance
+  test truncates the squared distance to an int. The iso-line test of the projection
+  evaluates the surface at `(U, t)` and `(t, V)` with the curve parameter `t`, and the
+  sphere V period test compares with `Vsup + (Vsup - Vinf)`. The C1-span split raises
+  the degree of the span projections in place and joins them without their weights.
+  The seam constructor keeps the B-spline of `BuildInitialCurve2d` when the projection
+  is not done.
+- `ProjLib_CompProjectedCurve`: `Init` appends to the existing parts (a second `Init`
+  adds them again). The extrema curve-surface start the parts only when MaxDist is
+  positive and the surface is not an extrusion. The default constructor has a null
+  sequence and leaves the approximation options uninitialized (the port gives them the
+  values of the other constructors); `ShallowCopy` copies neither those options nor
+  the results. `Perform` clears the 2D approximation for every part after an iso part
+  (those parts then store the previous part's curve) and widens the non-periodic
+  surface bounds by ten tolerances again at each non-iso part. `BuildIntervals` passes
+  `(Tol, TolV)` for both surface directions and raises Standard_OutOfRange for G1 and
+  G2; `EvalDN` raises Standard_NotImplemented above order 2.
+- `ProjLib_ProjectOnPlane`: a parabola that projects on a line (its X direction along
+  the projection) trims the null parabola handle, which it dereferences
+  (Standard_NullObject in the port), and a failed B-spline approximation dereferences the null
+  curve the same way. A projected end `GeomLib_Tool::Parameter` does not find keeps the
+  previous bound. A direction parallel to the plane is not refused (the check is
+  commented out) and gives NaN values; the default constructor projects along X onto
+  the XOY plane. `Period` returns `false` (0.0) for an approximation, which
+  `IsPeriodic` makes unreachable.

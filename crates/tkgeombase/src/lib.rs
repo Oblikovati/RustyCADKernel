@@ -21,10 +21,13 @@
 //! ported; docs/tkgeombase-progress.md lists the ported packages.
 pub mod adv_app2var;
 pub mod app_cont;
+pub mod app_def;
 pub mod app_par_curves;
+pub mod approx;
 mod array_access;
 pub mod bnd_lib;
 pub mod cpnts;
+mod curve_approx_eval;
 pub mod extrema;
 pub mod extrema_pc;
 pub mod extrema_pc2d;
@@ -48,6 +51,6 @@ pub mod int_ana2d;
 pub mod lprop;
 mod native_failure;
 mod native_text;
-mod plane_projection;
 #[doc(hidden)]
 pub mod probe_support;
+pub mod proj_lib;

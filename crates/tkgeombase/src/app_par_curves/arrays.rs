@@ -36,7 +36,7 @@ pub(crate) fn line_points(
     points: &mut Array1<'_, Point3>,
     points2d: &mut Array1<'_, Point2>,
 ) -> Result<(), Failure> {
-    let (nb_p, nb_p2d) = (ssp.nb_p3d(), ssp.nb_p2d());
+    let (nb_p, nb_p2d) = (ssp.nb_p3d()?, ssp.nb_p2d()?);
     if nb_p != 0 && nb_p2d != 0 {
         return ssp.value(index, points, points2d);
     }

@@ -20,6 +20,7 @@ use rustycad_tkgeombase::app_par_curves::{
     self as apc, Constraint, ConstraintCouple, Constraints, Function, Gradient, LeastSquare,
     LineTool, MultiBSpCurve, MultiCurve, MultiCurveEval, MultiPoint, ResolConstraint,
 };
+use rustycad_tkgeombase::approx::Status;
 use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
 use rustycad_tkmath::math::{Matrix, Vector};
 
@@ -61,14 +62,14 @@ impl LineTool for FakeMultiLine {
     fn first_point(&self) -> i32 {
         1
     }
-    fn last_point(&self) -> i32 {
-        self.n
+    fn last_point(&self) -> Result<i32, Failure> {
+        Ok(self.n)
     }
-    fn nb_p2d(&self) -> i32 {
-        self.nb2d
+    fn nb_p2d(&self) -> Result<i32, Failure> {
+        Ok(self.nb2d)
     }
-    fn nb_p3d(&self) -> i32 {
-        self.nb3d
+    fn nb_p3d(&self) -> Result<i32, Failure> {
+        Ok(self.nb3d)
     }
     fn value_3d(&self, index: i32, points: &mut Array1<'_, Point3>) -> Result<(), Failure> {
         self.check(index)?;
@@ -138,6 +139,16 @@ impl LineTool for FakeMultiLine {
         _: &mut Array1<'_, Vector2>,
     ) -> Result<bool, Failure> {
         Ok(false)
+    }
+    // AppDef_MyLineTool: the line is never cut or refined.
+    fn what_status(&self, _: i32, _: i32) -> Result<Status, Failure> {
+        Ok(Status::NoPointsAdded)
+    }
+    fn make_ml_between(&self, _: i32, _: i32, _: i32) -> Result<Self, Failure> {
+        Ok(self.clone())
+    }
+    fn make_ml_one_more_point(&self, _: i32, _: i32, _: i32) -> Result<Option<Self>, Failure> {
+        Ok(None)
     }
 }
 

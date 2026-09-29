@@ -57,3 +57,62 @@ impl<P: CurvePoint + 'static> BezierCurveArrays<P> {
         bsplclib::dn(&span, n, &self.poles, self.weights.as_ref())
     }
 }
+
+/// `EvaluateGrid`..`EvaluateGridD3` of the Bezier grid evaluators, through the span
+/// cache of `self.cache(params)` (`None` gives an empty result); `empty` and
+/// `try_map_grid` must be in scope;
+/// `rustycad_tkg2d::bezier_grid_methods!(Point3, GeomGridEvalCurveD1, GeomGridEvalCurveD2, GeomGridEvalCurveD3);`.
+#[macro_export]
+macro_rules! bezier_grid_methods {
+    ($point:ty, $d1:ident, $d2:ident, $d3:ident) => {
+        /// Points at every parameter (`EvaluateGrid`); `evaluator.evaluate_grid(&params)?`.
+        pub fn evaluate_grid(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, $point>, Failure> {
+            let Some(cache) = self.cache(params)? else {
+                return Ok(empty());
+            };
+            try_map_grid(params, |u| cache.d0::<$point>(u))
+        }
+        /// Points and D1 (`EvaluateGridD1`); `evaluator.evaluate_grid_d1(&params)?`.
+        pub fn evaluate_grid_d1(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, $d1>, Failure> {
+            let Some(cache) = self.cache(params)? else {
+                return Ok(empty());
+            };
+            try_map_grid(params, |u| {
+                let (point, d1) = cache.d1::<$point>(u)?;
+                Ok($d1 { point, d1 })
+            })
+        }
+        /// Points, D1 and D2 (`EvaluateGridD2`); `evaluator.evaluate_grid_d2(&params)?`.
+        pub fn evaluate_grid_d2(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, $d2>, Failure> {
+            let Some(cache) = self.cache(params)? else {
+                return Ok(empty());
+            };
+            try_map_grid(params, |u| {
+                let (point, d1, d2) = cache.d2::<$point>(u)?;
+                Ok($d2 { point, d1, d2 })
+            })
+        }
+        /// Points, D1, D2 and D3 (`EvaluateGridD3`); `evaluator.evaluate_grid_d3(&params)?`.
+        pub fn evaluate_grid_d3(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, $d3>, Failure> {
+            let Some(cache) = self.cache(params)? else {
+                return Ok(empty());
+            };
+            try_map_grid(params, |u| {
+                let (point, d1, d2, d3) = cache.d3::<$point>(u)?;
+                Ok($d3 { point, d1, d2, d3 })
+            })
+        }
+    };
+}

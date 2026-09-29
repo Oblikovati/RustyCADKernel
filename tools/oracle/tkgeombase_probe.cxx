@@ -71,6 +71,14 @@
 #include "tkgeombase_probe_geomconvert_ana.cxx"
 #include "tkgeombase_probe_geomlib.cxx"
 #include "tkgeombase_probe_geomlib_classes.cxx"
+#include "tkgeombase_probe_approx_line.cxx"
+#include "tkgeombase_probe_approx.cxx"
+#include "tkgeombase_probe_approx_adaptors.cxx"
+#include "tkgeombase_probe_approx_sweep.cxx"
+#include "tkgeombase_probe_appdef.cxx"
+#include "tkgeombase_probe_appdef_variational.cxx"
+#include "tkgeombase_probe_projlib.cxx"
+#include "tkgeombase_probe_projlib_curves.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -397,6 +405,35 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gl_tool", gb_gl_tool_case},
  {"gl_deviation", gb_gl_deviation_case},
  {"gl_make_curve", gb_gl_make_curve_case},
+ // Approx drivers (tkgeombase_probe_approx_line.cxx, tkgeombase_probe_approx.cxx)
+ {"ax_compute", gb_ax_compute_case},
+ {"ax_bspl", gb_ax_bspl_case},
+ {"ax_fit", gb_ax_fit_case},
+ {"ax_mcurves", gb_ax_mcurves_case},
+ // Approx adaptor classes and sweeps (tkgeombase_probe_approx_adaptors.cxx, _sweep.cxx)
+ {"axa_curve3d", gb_axa_curve3d_case},
+ {"axa_curve2d", gb_axa_curve2d_case},
+ {"axa_cos", gb_axa_cos_case},
+ {"axa_curvlin", gb_axa_curvlin_case},
+ {"axa_curvilinear", gb_axa_curvilinear_case},
+ {"axa_same", gb_axa_same_case},
+ {"axs_sweep", gb_axs_sweep_case},
+ // AppDef (tkgeombase_probe_appdef.cxx, tkgeombase_probe_appdef_variational.cxx)
+ {"ad_mpc", gb_ad_mpc_case},
+ {"ad_line", gb_ad_line_case},
+ {"ad_compute", gb_ad_compute_case},
+ {"ad_criteria", gb_ad_criteria_case},
+ {"ad_var", gb_ad_var_case},
+ // ProjLib (tkgeombase_probe_projlib.cxx, tkgeombase_probe_projlib_curves.cxx)
+ {"pl_elem", gb_pl_elem_case},
+ {"pl_static", gb_pl_static_case},
+ {"pl_prjfunc", gb_pl_prjfunc_case},
+ {"pl_prjresolve", gb_pl_prjresolve_case},
+ {"pl_on_plane", gb_pl_on_plane_case},
+ {"pl_approx", gb_pl_approx_case},
+ {"pl_polar", gb_pl_polar_case},
+ {"pl_projected", gb_pl_projected_case},
+ {"pl_comp", gb_pl_comp_case},
 };
 int main() {
  std::string line;

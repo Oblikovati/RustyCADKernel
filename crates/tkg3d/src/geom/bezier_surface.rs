@@ -29,7 +29,7 @@ use grid::at2;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::SharedState;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, StandardTransient};
 use rustycad_tkg2d::geom2d::spline_data::bezier_knots;
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point3, resolution};
@@ -118,27 +118,11 @@ impl GeomBezierSurface {
         copy.max_deriv_inv_ok = false;
         Ok(Self::stored(copy))
     }
-    /// Whether an evaluation representation is set (`HasEvalRepresentation`);
-    /// `surface.has_eval_representation()`.
-    pub fn has_eval_representation(&self) -> bool {
-        self.state.read().eval_rep.is_some()
-    }
-    /// The evaluation representation, possibly null (`EvalRepresentation`); `surface.eval_representation()`.
-    pub fn eval_representation(&self) -> Handle<dyn RepSurfaceDesc> {
-        self.state.read().eval_rep.clone()
-    }
-    /// Validate and set the evaluation representation (`SetEvalRepresentation`);
-    /// `surface.set_eval_representation(desc)?`.
-    pub fn set_eval_representation(&self, desc: Handle<dyn RepSurfaceDesc>) -> Result<(), Failure> {
-        rep_utils::validate_surface_desc(&desc, std::ptr::from_ref(self).cast())?;
-        self.state.write().eval_rep = desc;
-        Ok(())
-    }
-    /// Remove the evaluation representation (`ClearEvalRepresentation`);
-    /// `surface.clear_eval_representation()`.
-    pub fn clear_eval_representation(&self) {
-        self.state.write().eval_rep = Handle::default();
-    }
+    rustycad_tkg2d::eval_representation_members!(
+        dyn RepSurfaceDesc,
+        rep_utils::validate_surface_desc,
+        "surface"
+    );
     /// Exchange the U and V directions (`ExchangeUV`); `surface.exchange_uv()?`.
     pub fn exchange_uv(&self) -> Result<(), Failure> {
         self.state.write().exchange_uv()

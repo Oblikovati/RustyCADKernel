@@ -20,50 +20,17 @@ use crate::geom::{
     dump_bounded_curve,
 };
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_flag};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
-use std::io;
 
 impl GeomGeometry for GeomBSplineCurve {
-    fn transform(&self, transform: Transform3) -> Result<(), Failure> {
-        self.state.write().transform(transform);
-        Ok(())
-    }
-    fn copy(&self) -> Result<Handle<dyn GeomGeometry>, Failure> {
-        Ok(Handle::new(Self::copy_of(self)?).cast())
-    }
-    fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
-        let state = self.state.read();
-        dump_class_name(stream, "Geom_BSplineCurve")?;
-        dump_base(stream, depth, dump_bounded_curve)?;
-        dump_flag(stream, "Rational", state.rational)?;
-        dump_flag(stream, "Periodic", state.periodic)?;
-        dump::dump_integer(stream, "KnotSet", state.knot_set as i32)?;
-        dump::dump_integer(stream, "Smooth", state.smooth as i32)?;
-        dump::dump_integer(stream, "Deg", state.deg)?;
-        // Array sizes are dumped when non-zero; the weights only for a rational curve.
-        let sizes = [
-            ("Poles.Size", state.poles.len(), !state.poles.is_empty()),
-            ("Weights.Size", state.weights.len(), state.rational),
-            (
-                "FlatKnots.Size",
-                state.flat_knots.len(),
-                !state.flat_knots.is_empty(),
-            ),
-            ("Knots.Size", state.knots.len(), !state.knots.is_empty()),
-            ("Mults.Size", state.mults.len(), !state.mults.is_empty()),
-        ];
-        for (name, size, shown) in sizes {
-            if shown {
-                dump::dump_integer(stream, name, size as i32)?;
-            }
-        }
-        dump::dump_real(stream, "MaxDerivInv", state.max_deriv_inv)?;
-        dump_flag(stream, "MaxDerivInvOk", state.max_deriv_inv_ok)
-    }
+    rustycad_tkg2d::spline_geometry_members!(
+        Transform3,
+        dyn GeomGeometry,
+        "Geom_BSplineCurve",
+        dump_bounded_curve
+    );
 }
 impl GeomCurve for GeomBSplineCurve {
     fn reverse(&self) -> Result<(), Failure> {
@@ -92,21 +59,13 @@ impl GeomCurve for GeomBSplineCurve {
     fn is_cn(&self, n: i32) -> Result<bool, Failure> {
         self.state.read().is_cn(n)
     }
-    fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
-        self.state.read().eval_d0(u)
-    }
-    fn eval_d1(&self, u: f64) -> Result<GeomCurveD1, Failure> {
-        self.state.read().eval_d1(u)
-    }
-    fn eval_d2(&self, u: f64) -> Result<GeomCurveD2, Failure> {
-        self.state.read().eval_d2(u)
-    }
-    fn eval_d3(&self, u: f64) -> Result<GeomCurveD3, Failure> {
-        self.state.read().eval_d3(u)
-    }
-    fn eval_dn(&self, u: f64, n: i32) -> Result<Vector3, Failure> {
-        self.state.read().eval_dn(u, n)
-    }
+    rustycad_tkg2d::spline_state_evaluators!(
+        Point3,
+        Vector3,
+        GeomCurveD1,
+        GeomCurveD2,
+        GeomCurveD3
+    );
 }
 impl GeomBoundedCurve for GeomBSplineCurve {
     fn end_point(&self) -> Result<Point3, Failure> {

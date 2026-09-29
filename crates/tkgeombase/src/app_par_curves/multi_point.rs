@@ -59,8 +59,9 @@ fn new_array<T: Default + Send + Sync + 'static>(
     Ok(Handle::new(array))
 }
 
-// A shared copy of `values` reindexed from 1.
-fn copy_array<T: Clone + Default + Send + Sync + 'static>(
+/// A shared copy of `values` reindexed from 1 (the native `SetValue(i, tab.Value(Lower + i - 1))`
+/// copies of AppParCurves_MultiPoint and AppDef_MultiPointConstraint).
+pub(crate) fn copy_array<T: Clone + Default + Send + Sync + 'static>(
     values: &Array1<'_, T>,
 ) -> Handle<HArray1<T>> {
     let mut copy: Array1<'static, T> = Array1::with_size(values.len());

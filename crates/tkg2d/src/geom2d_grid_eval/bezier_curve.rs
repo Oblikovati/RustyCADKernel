@@ -65,55 +65,12 @@ impl Geom2dGridEvalBezierCurve {
         }
         Ok(Some(read_arrays(bezier)?.cache()?))
     }
-    /// Points at every parameter (`EvaluateGrid`); `evaluator.evaluate_grid(&params)?`.
-    pub fn evaluate_grid(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Point2>, Failure> {
-        let Some(cache) = self.cache(params)? else {
-            return Ok(empty());
-        };
-        try_map_grid(params, |u| cache.d0::<Point2>(u))
-    }
-    /// Points and D1 (`EvaluateGridD1`); `evaluator.evaluate_grid_d1(&params)?`.
-    pub fn evaluate_grid_d1(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Geom2dGridEvalCurveD1>, Failure> {
-        let Some(cache) = self.cache(params)? else {
-            return Ok(empty());
-        };
-        try_map_grid(params, |u| {
-            let (point, d1) = cache.d1::<Point2>(u)?;
-            Ok(Geom2dGridEvalCurveD1 { point, d1 })
-        })
-    }
-    /// Points, D1 and D2 (`EvaluateGridD2`); `evaluator.evaluate_grid_d2(&params)?`.
-    pub fn evaluate_grid_d2(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Geom2dGridEvalCurveD2>, Failure> {
-        let Some(cache) = self.cache(params)? else {
-            return Ok(empty());
-        };
-        try_map_grid(params, |u| {
-            let (point, d1, d2) = cache.d2::<Point2>(u)?;
-            Ok(Geom2dGridEvalCurveD2 { point, d1, d2 })
-        })
-    }
-    /// Points, D1, D2 and D3 (`EvaluateGridD3`); `evaluator.evaluate_grid_d3(&params)?`.
-    pub fn evaluate_grid_d3(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Geom2dGridEvalCurveD3>, Failure> {
-        let Some(cache) = self.cache(params)? else {
-            return Ok(empty());
-        };
-        try_map_grid(params, |u| {
-            let (point, d1, d2, d3) = cache.d3::<Point2>(u)?;
-            Ok(Geom2dGridEvalCurveD3 { point, d1, d2, d3 })
-        })
-    }
+    crate::bezier_grid_methods!(
+        Point2,
+        Geom2dGridEvalCurveD1,
+        Geom2dGridEvalCurveD2,
+        Geom2dGridEvalCurveD3
+    );
     /// Derivative of order `n` through `BSplCLib::DN`, zero above the degree; empty for
     /// `n < 1` (`EvaluateGridDN`); `evaluator.evaluate_grid_dn(&params, 2)?`.
     pub fn evaluate_grid_dn(

@@ -21,6 +21,11 @@ from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
 from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
 
+# The whole numeric verifier of one toolkit (both probes over its full corpus) may run this
+# long. It is a hang guard, not a budget: a corpus must never be trimmed to fit it. The
+# debug-build Rust probe dominates, and TKGeomBase passed 900 s once ProjLib landed.
+NUMERIC_TIMEOUT_SECONDS = 3600
+
 # The numeric differential verifier of each toolkit: script, evidence directory.
 NUMERIC_VERIFIERS = {
     'TKMath': ('tools/verify_tkmath_numeric.py', 'target/oracle-tkmath/numeric'),
@@ -128,7 +133,7 @@ def main() -> None:
         print(f'PARTIAL PASS (--only {args.only}): {len(rows)} declarations; not a toolkit gate')
         return
     script, evidence = NUMERIC_VERIFIERS[args.toolkit]
-    run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment)
+    run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment,timeout=NUMERIC_TIMEOUT_SECONDS)
     numeric = json.loads((ROOT/evidence/'report.json').read_text())
     record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric)
 

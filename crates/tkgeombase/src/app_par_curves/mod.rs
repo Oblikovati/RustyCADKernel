@@ -23,7 +23,7 @@
 //!
 //! The native `.gxx` generics take a `MultiLine` and its `ToolLine`; the port takes
 //! any type implementing [`LineTool`].
-mod arrays;
+pub(crate) mod arrays;
 mod bernstein;
 mod bsp_function;
 mod bsp_gradient;
@@ -52,6 +52,7 @@ pub use line_tool::LineTool;
 pub use multi_bsp_curve::MultiBSpCurve;
 pub use multi_curve::{MultiCurve, MultiCurveEval};
 pub use multi_point::MultiPoint;
+pub(crate) use multi_point::copy_array;
 pub use resol_constraint::ResolConstraint;
 pub use spline_function::spline_function;
 

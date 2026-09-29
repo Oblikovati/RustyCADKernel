@@ -21,7 +21,7 @@ use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use crate::extrema_pc_core::conic_roots::{PolynomialRoots, add_polynomial_extrema};
 use crate::extrema_pc_core::{NeighborStep, ValueFn};
 use crate::extrema_pc2d;
-use crate::plane_projection as projlib;
+use crate::proj_lib as projlib;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Axis3, Hyperbola3, Plane3, Point3};
 use rustycad_tkmath::math_poly::{PolyResult, quartic};
@@ -117,9 +117,9 @@ impl Hyperbola {
         mode: SearchMode,
     ) -> Result<bool, Failure> {
         let plane = Plane3::from_position(Axis3::from_axis2(self.hyperbola.position()));
-        let hyperbola2d = projlib::project_hyperbola(&plane, &self.hyperbola)?;
+        let hyperbola2d = projlib::project_hyperbola_on_plane(&plane, &self.hyperbola)?;
         let query = PlanarQuery {
-            point2d: projlib::project_point(&plane, point),
+            point2d: projlib::project_point_on_plane(&plane, point),
             point3d: point,
             plane: &plane,
             tol,

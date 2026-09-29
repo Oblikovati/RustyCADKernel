@@ -44,10 +44,30 @@ use rustycad_tkmath::math::{IntegerVector, Matrix, Vector};
 /// tangency constraint: the port reads 0 where the native code reads indeterminate
 /// values.
 ///
-/// ```ignore
-/// let mut fit = LeastSquare::new(&line, 1, 10, Constraint::PassPoint, Constraint::PassPoint, &parameters, 4)?;
+/// ```
+/// use rustycad_tkgeombase::app_def::MultiLine;
+/// use rustycad_tkgeombase::app_par_curves::{LeastSquare, MultiCurveEval};
+/// # use rustycad_tkgeombase::app_par_curves::{Constraint, ConstraintCouple};
+/// # use rustycad_tkernel::ncollection::{Array1, HArray1};
+/// # use rustycad_tkernel::standard::Handle;
+/// # use rustycad_tkmath::gp::Point3;
+/// # use rustycad_tkmath::math::Vector;
+/// // Six points of the parabola y = x^2, AppDef_MultiLine read by AppDef_MyLineTool.
+/// let points: Vec<Point3> = (0..6).map(|i| {
+///     let t = f64::from(i) / 5.0;
+///     Point3::new(t, t * t, 0.0)
+/// }).collect();
+/// let line = MultiLine::from_points(&Array1::from_shared(&points, 1));
+/// # let ends = [ConstraintCouple::new(1, Constraint::PassPoint), ConstraintCouple::new(6, Constraint::PassPoint)];
+/// # let constraints = Handle::new(HArray1::from_array(&Array1::from_shared(&ends, 1)));
+/// # let mut u = Vector::with_bounds(1, 6)?;
+/// # (1..=6).for_each(|i| u[i] = f64::from(i - 1) / 5.0);
+/// let mut fit = LeastSquare::new(&line, 1, 6, Constraint::PassPoint, Constraint::PassPoint, &u, 3)?;
 /// assert!(fit.is_done());
-/// let curve = fit.bezier_value()?;
+/// assert_eq!(fit.bezier_value()?.nb_poles(), 3);
+/// let (_, max3d, _) = fit.error()?;
+/// assert!(max3d < 1e-12);
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 pub struct LeastSquare {
     first_constraint: Constraint,
@@ -114,9 +134,9 @@ pub fn the_last_point(last_cons: Constraint, last_point: i32) -> i32 {
 }
 
 /// `NbBColumns(SSP)`: `3 NbP3d + 2 NbP2d`, the columns of the right-hand side;
-/// `nb_b_columns(&line)`.
-pub fn nb_b_columns(ssp: &impl LineTool) -> i32 {
-    ssp.nb_p3d() * 3 + ssp.nb_p2d() * 2
+/// `nb_b_columns(&line)?`.
+pub fn nb_b_columns(ssp: &impl LineTool) -> Result<i32, Failure> {
+    Ok(ssp.nb_p3d()? * 3 + ssp.nb_p2d()? * 2)
 }
 
 impl LeastSquare {
@@ -128,7 +148,7 @@ impl LeastSquare {
         nb_pol: i32,
         flat_length: i32,
     ) -> Result<Self, Failure> {
-        let columns: i32 = nb_b_columns(ssp);
+        let columns: i32 = nb_b_columns(ssp)?;
         let first_row: i32 = the_first_point(first_cons, first_point);
         let b2_rows: [i32; 2] = [
             first_row,
@@ -152,7 +172,7 @@ impl LeastSquare {
             vec2c: Vector::filled(1, columns, 0.)?,
             the_error: matrix(
                 [first_point, last_point],
-                [1, ssp.nb_p3d() + ssp.nb_p2d()],
+                [1, ssp.nb_p3d()? + ssp.nb_p2d()?],
                 0.,
             )?,
             myindex: IntegerVector::filled(first_point, last_point, 0)?,

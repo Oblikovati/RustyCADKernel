@@ -128,8 +128,8 @@ impl LeastSquare {
         self.mylastp = last_point;
         self.first_p = super::the_first_point(self.first_constraint, first_point);
         self.last_p = super::the_last_point(self.last_constraint, last_point);
-        self.nb_p2d = ssp.nb_p2d();
-        self.nb_p = ssp.nb_p3d();
+        self.nb_p2d = ssp.nb_p2d()?;
+        self.nb_p = ssp.nb_p3d()?;
         self.deg = self.nbpoles - 1;
         self.flatten_knots()?;
         let (mut vt, mut vc) = (self.vec1t.clone(), self.vec1c.clone());
@@ -315,7 +315,7 @@ impl LeastSquare {
         tab_v: &mut Array1<'_, Vector3>,
         tab_v2d: &mut Array1<'_, Vector2>,
     ) -> Result<(), Failure> {
-        let chord: [i32; 2] = if index < ssp.last_point() {
+        let chord: [i32; 2] = if index < ssp.last_point()? {
             [index, index + 1]
         } else {
             [index - 1, index]

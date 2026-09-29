@@ -19,7 +19,7 @@ use super::{CurveEvaluator, Domain1D, ExtremaResult, ExtremumResult, SearchMode,
 use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use crate::extrema_pc_core::{NeighborStep, ValueFn};
 use crate::extrema_pc2d;
-use crate::plane_projection as projlib;
+use crate::proj_lib as projlib;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::elclib;
@@ -108,14 +108,14 @@ impl Circle {
     ) -> Result<bool, Failure> {
         let plane = Plane3::from_position(Axis3::from_axis2(self.circle.position()));
         let query = PlanarQuery {
-            point2d: projlib::project_point(&plane, point),
+            point2d: projlib::project_point_on_plane(&plane, point),
             point3d: point,
             plane: &plane,
             tol,
             mode,
             with_endpoints: false,
         };
-        let circle2d = projlib::project_circle(&plane, &self.circle)?;
+        let circle2d = projlib::project_circle_on_plane(&plane, &self.circle)?;
         let circle = self.circle;
         let evaluator = ValueFn(|u| Ok::<Point3, Infallible>(elclib::value(u, &circle)));
         let Ok(done) = perform_planar::<extrema_pc2d::Circle, _>(

@@ -8,7 +8,9 @@ pub mod adv_f2var2;
 pub mod adv_math;
 pub mod adv_math2;
 pub mod app_cont;
+pub mod app_def;
 pub mod app_par_curves;
+pub mod approx;
 pub mod bndlib;
 #[allow(dead_code, unused_imports)]
 pub mod common;
@@ -38,3 +40,4 @@ pub mod pc3d;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
+pub mod proj_lib;

@@ -22,7 +22,6 @@ use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2, Point3, Transform3, Vector3, Xyz};
 use std::f64::consts::PI;
 use std::io;
@@ -144,34 +143,9 @@ impl GeomGeometry for GeomEvalCircularHelixCurve {
     }
 }
 impl GeomCurve for GeomEvalCircularHelixCurve {
-    fn reverse(&self) -> Result<(), Failure> {
-        Err(unsupported("GeomEval_CircularHelixCurve::Reverse", ""))
-    }
-    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
-        let detail: String = format!("(U = {u})");
-        Err(unsupported(
-            "GeomEval_CircularHelixCurve::ReversedParameter",
-            &detail,
-        ))
-    }
-    fn first_parameter(&self) -> f64 {
-        -precision::infinite()
-    }
-    fn last_parameter(&self) -> f64 {
-        precision::infinite()
-    }
-    fn is_closed(&self) -> Result<bool, Failure> {
-        Ok(false)
-    }
-    fn is_periodic(&self) -> bool {
-        false
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    rustycad_tkg2d::unsupported_curve_reversal!(unsupported, "GeomEval_CircularHelixCurve");
+    rustycad_tkg2d::open_curve_range!(-precision::infinite(), precision::infinite());
+    rustycad_tkg2d::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
         Ok(self.point_at(&self.at(u), u))
     }

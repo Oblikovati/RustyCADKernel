@@ -246,7 +246,7 @@ fn curve_commands(r: &mut Reader<'_>, c: &mut dyn ProbeCurve) {
     }
 }
 
-fn read_points(r: &mut Reader<'_>) -> Result<Array1<'static, MultiPoint>, Failure> {
+pub fn read_points(r: &mut Reader<'_>) -> Result<Array1<'static, MultiPoint>, Failure> {
     let n = r.integer();
     let points: Vec<MultiPoint> = (0..n).map(|_| read_point(r)).collect::<Result<_, _>>()?;
     let mut array: Array1<'static, MultiPoint> = Array1::with_bounds(1, n).unwrap();

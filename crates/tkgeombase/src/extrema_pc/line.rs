@@ -19,7 +19,7 @@ use super::{CurveEvaluator, Domain1D, ExtremaResult, ExtremumResult, SearchMode,
 use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use crate::extrema_pc_core::{NeighborStep, ValueFn};
 use crate::extrema_pc2d;
-use crate::plane_projection as projlib;
+use crate::proj_lib as projlib;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Line3, Plane3, Point3, Vector3};
 use std::convert::Infallible;
@@ -110,14 +110,14 @@ impl Line {
     ) -> Result<bool, Failure> {
         let plane: Plane3 = super::line_plane(&self.line)?;
         let query = PlanarQuery {
-            point2d: projlib::project_point(&plane, point),
+            point2d: projlib::project_point_on_plane(&plane, point),
             point3d: point,
             plane: &plane,
             tol,
             mode,
             with_endpoints: false,
         };
-        let line2d = projlib::project_line(&plane, &self.line)?;
+        let line2d = projlib::project_line_on_plane(&plane, &self.line)?;
         let line = self.line;
         let evaluator = ValueFn(|u| Ok::<Point3, Infallible>(line_value(&line, u)));
         let Ok(done) = perform_planar::<extrema_pc2d::Line, _>(

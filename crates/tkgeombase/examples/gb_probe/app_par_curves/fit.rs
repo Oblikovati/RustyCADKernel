@@ -15,13 +15,14 @@
 //! The Rust twin of tools/oracle/tkgeombase_probe_appparcurves_fit.cxx.
 use super::super::common::{self as p, Reader, attempt, end};
 use super::super::fem_tool::{read_vector, vector};
-use super::line::ProbeLine;
+use super::line::read_line;
 use super::{curve, ivector, matrix};
 use rustycad_tkernel::ncollection::{Array1, HArray1};
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkgeombase::app_def::MultiLine;
 use rustycad_tkgeombase::app_par_curves::{
     BSpFunction, BSpGradient, BSpGradientInput, Constraint, ConstraintCouple, Constraints,
-    Function, Gradient, LeastSquare, LineTool, MultiCurveEval, ResolConstraint,
+    Function, Gradient, LeastSquare, MultiCurveEval, ResolConstraint,
 };
 use rustycad_tkmath::math::Vector;
 
@@ -29,7 +30,8 @@ fn constraint(code: i32) -> Constraint {
     Constraint::from_code(code).expect("probe constraint")
 }
 
-fn read_constraints(r: &mut Reader<'_>) -> Constraints {
+/// `gb_apc_read_constraints`: `n` then `index constraint` couples.
+pub fn read_constraints(r: &mut Reader<'_>) -> Constraints {
     let n = r.integer();
     let mut couples = Array1::with_bounds(1, n).unwrap();
     for i in 1..=n {
@@ -95,7 +97,7 @@ fn ls_results(ls: &mut LeastSquare, bspline: bool, lambdas: i32) {
 }
 
 struct LsRequest {
-    line: ProbeLine,
+    line: MultiLine,
     points: [i32; 2],
     cons: [Constraint; 2],
     nbpol: i32,
@@ -109,7 +111,7 @@ struct LsRequest {
 }
 
 fn read_ls(r: &mut Reader<'_>) -> LsRequest {
-    let line = ProbeLine::read(r);
+    let line = read_line(r);
     let points = [r.integer(), r.integer()];
     let cons = [constraint(r.integer()), constraint(r.integer())];
     let (nbpol, mode) = (r.integer(), r.integer());
@@ -186,7 +188,7 @@ pub fn ls_case(values: &[f64]) {
 
 pub fn resol_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    let line = ProbeLine::read(&mut r);
+    let line = read_line(&mut r);
     let (fp, lp) = (r.integer(), r.integer());
     let (fc, lc) = (constraint(r.integer()), constraint(r.integer()));
     let cons = read_constraints(&mut r);
@@ -231,7 +233,7 @@ trait ProbeFunction {
     fn extra(&mut self, code: i32) -> Result<(), Failure>;
 }
 
-impl ProbeFunction for Function<ProbeLine> {
+impl ProbeFunction for Function<MultiLine> {
     fn value(&mut self, x: &Vector<'_>, f: &mut f64) -> Result<bool, Failure> {
         self.evaluate(x, f)
     }
@@ -258,7 +260,7 @@ impl ProbeFunction for Function<ProbeLine> {
     }
 }
 
-impl ProbeFunction for BSpFunction<ProbeLine> {
+impl ProbeFunction for BSpFunction<MultiLine> {
     fn value(&mut self, x: &Vector<'_>, f: &mut f64) -> Result<bool, Failure> {
         self.evaluate(x, f)
     }
@@ -342,12 +344,12 @@ fn function_calls(r: &mut Reader<'_>, f: &mut dyn ProbeFunction, bounds: [i32; 3
 
 pub fn function_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    let line = ProbeLine::read(&mut r);
+    let line = read_line(&mut r);
     let (fp, lp) = (r.integer(), r.integer());
     let cons = read_constraints(&mut r);
     let u = read_vector(&mut r);
     let deg = r.integer();
-    let curves = line.nb_p3d() + line.nb_p2d();
+    let curves = line.nb_points().expect("probe line");
     attempt(|| {
         let mut f = Function::new(&line, fp, lp, &cons, &u, deg)?;
         p::int(f.nb_variables());
@@ -359,14 +361,14 @@ pub fn function_case(values: &[f64]) {
 
 pub fn bspfunction_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    let line = ProbeLine::read(&mut r);
+    let line = read_line(&mut r);
     let (fp, lp) = (r.integer(), r.integer());
     let cons = read_constraints(&mut r);
     let u = read_vector(&mut r);
     let (knots, mults) = (read_knots(&mut r), read_mults(&mut r));
     let nbpol = r.integer();
     let (l1, l2) = (r.real(), r.real());
-    let curves = line.nb_p3d() + line.nb_p2d();
+    let curves = line.nb_points().expect("probe line");
     attempt(|| {
         let mut f = BSpFunction::new(&line, fp, lp, &cons, &u, &knots, &mults, nbpol)?;
         p::int(f.nb_variables());
@@ -380,7 +382,7 @@ pub fn bspfunction_case(values: &[f64]) {
 
 pub fn gradient_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    let line = ProbeLine::read(&mut r);
+    let line = read_line(&mut r);
     let (fp, lp) = (r.integer(), r.integer());
     let cons = read_constraints(&mut r);
     let mut u = read_vector(&mut r);
@@ -404,7 +406,7 @@ pub fn gradient_case(values: &[f64]) {
 
 pub fn bspgradient_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    let line = ProbeLine::read(&mut r);
+    let line = read_line(&mut r);
     let (fp, lp) = (r.integer(), r.integer());
     let cons = read_constraints(&mut r);
     let mut u = read_vector(&mut r);

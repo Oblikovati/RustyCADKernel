@@ -24,9 +24,7 @@ use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::elclib;
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2, Circle3, Point3, Transform3, Vector3};
-use std::f64::consts::PI;
 use std::io;
 
 #[derive(Clone, Copy)]
@@ -124,27 +122,7 @@ impl GeomCurve for GeomCircle {
     fn reverse(&self) -> Result<(), Failure> {
         reverse_conic_position(&mut self.state.write().pos)
     }
-    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
-        Ok(2. * PI - u)
-    }
-    fn first_parameter(&self) -> f64 {
-        0.0
-    }
-    fn last_parameter(&self) -> f64 {
-        2.0 * PI
-    }
-    fn is_closed(&self) -> Result<bool, Failure> {
-        Ok(true)
-    }
-    fn is_periodic(&self) -> bool {
-        true
-    }
-    fn continuity(&self) -> Shape {
-        Shape::CN
-    }
-    fn is_cn(&self, _n: i32) -> Result<bool, Failure> {
-        Ok(true)
-    }
+    rustycad_tkg2d::full_turn_curve_members!();
     fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
         let state: CircleState = *self.state.read();
         Ok(elclib::circle_value(u, state.pos, state.radius))

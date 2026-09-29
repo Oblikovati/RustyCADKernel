@@ -42,7 +42,7 @@ impl ResolConstraint {
         deg: i32,
         da: &Matrix<'_>,
     ) -> Result<&Matrix<'static>, Failure> {
-        let (nb3d, nb2d) = (ssp.nb_p3d(), ssp.nb_p2d());
+        let (nb3d, nb2d) = (ssp.nb_p3d()?, ssp.nb_p2d()?);
         let (npol, ccol) = (deg + 1, nb3d * 3 + nb2d * 2);
         let mut ibont: Array2<'static, i32> = Array2::with_bounds(1, nb3d + nb2d, 1, self.inc_tan)
             .map_err(|error| array_failure(error, "AppParCurves_ResolConstraint"))?;
@@ -128,7 +128,7 @@ impl ResolConstraint {
         [nb3d, npol, mut inc3]: [i32; 3],
         (tab_v, tab_v2d): &mut (Array1<'static, Vector3>, Array1<'static, Vector2>),
     ) -> Result<(), Failure> {
-        let nb_cu: i32 = ssp.nb_p3d() + ssp.nb_p2d();
+        let nb_cu: i32 = ssp.nb_p3d()? + ssp.nb_p2d()?;
         let mut dda: Vector<'static> = Vector::filled(1, npol, 0.)?;
         for i in 1..=self.inc_tan {
             let npt: i32 = self.i_tan[(i - 1) as usize];

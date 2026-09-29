@@ -3,10 +3,11 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_par_curves as apc,
-    bndlib, extrema_cc, extrema_cs, extrema_el, extrema_el_surf, extrema_pc, extrema_ps,
-    extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts, geom_convert as gcv, geom_lib as gl,
-    geom_tools, geom2d_convert as g2c, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
+    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_def as ad,
+    app_par_curves as apc, approx as ax, bndlib, extrema_cc, extrema_cs, extrema_el,
+    extrema_el_surf, extrema_pc, extrema_ps, extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts,
+    geom_convert as gcv, geom_lib as gl, geom_tools, geom2d_convert as g2c, gprop, hermit, int_ana,
+    int_ana2d, lprop, pc2d, pc3d, proj_lib as pl,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -340,6 +341,35 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gl_tool", gl::tool_case),
     ("gl_deviation", gl::deviation_case),
     ("gl_make_curve", gl::make_curve_case),
+    // Approx drivers (gb_probe/approx)
+    ("ax_compute", ax::compute_case),
+    ("ax_bspl", ax::bspl_case),
+    ("ax_fit", ax::fit_case),
+    ("ax_mcurves", ax::mcurves_case),
+    // Approx adaptor classes and sweeps (gb_probe/approx/adaptors.rs, sweep.rs)
+    ("axa_curve3d", ax::curve3d_case),
+    ("axa_curve2d", ax::curve2d_case),
+    ("axa_cos", ax::cos_case),
+    ("axa_curvlin", ax::curvlin_case),
+    ("axa_curvilinear", ax::curvilinear_case),
+    ("axa_same", ax::same_case),
+    ("axs_sweep", ax::sweep_case),
+    // AppDef (gb_probe/app_def)
+    ("ad_mpc", ad::mpc_case),
+    ("ad_line", ad::line_case),
+    ("ad_compute", ad::compute_case),
+    ("ad_criteria", ad::criteria_case),
+    ("ad_var", ad::var_case),
+    // ProjLib (gb_probe/proj_lib)
+    ("pl_elem", pl::elem_case),
+    ("pl_static", pl::static_case),
+    ("pl_prjfunc", pl::prjfunc_case),
+    ("pl_prjresolve", pl::prjresolve_case),
+    ("pl_on_plane", pl::on_plane_case),
+    ("pl_approx", pl::approx_case),
+    ("pl_polar", pl::polar_case),
+    ("pl_projected", pl::projected_case),
+    ("pl_comp", pl::comp_case),
 ];
 
 fn main() {
