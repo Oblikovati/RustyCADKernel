@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (430 declarations):
+The toolkit test inventory maps these suites (685 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -655,10 +655,10 @@ location-only `TransformNode` of a product or occurrence is not probed: its firs
 `BRepGraph_Copy::CopyNode` of that node, crashes the pinned native build on these scenes
 (as the bare `CopyNode` does); the transform unit tests cover the location-only step.
 
-The corpus has 667 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
+The corpus has 726 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
-caches 22, the BRepGraph navigation 13, the BRepGraph lock and caches 14 and the BRepGraph
-editor 18.
+caches 22, the BRepGraph navigation 13, the BRepGraph lock and caches 14, the BRepGraph
+editor 18, the BRepGraph algorithms 32 and the BRepGraph validation and transform 27.
 
 ## Dependency gap
 
