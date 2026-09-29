@@ -39,9 +39,16 @@ see [TKernel progress](tkernel-progress.md) and [TKMath progress](tkmath-progres
 
 `cargo coverage` writes `target/lcov.info`. Stable LLVM instrumentation measures
 Rust source coverage; branch instrumentation and doctest instrumentation are not
-part of this setup. Doctests still run normally. There is no artificial line
-coverage threshold on this initial port. Establish per-module thresholds as modules
-are ported, without confusing those thresholds with API coverage.
+part of this setup. Doctests still run normally. `cargo coverage` counts only the
+`cargo test` runs.
+
+`python3 tools/coverage_report.py` is the coverage gate (minimum 80% of lines). It runs
+the tests under coverage, then replays each toolkit's Rust probe over the corpus its
+verifier last used, and fails unless the probe output still equals the saved native
+OCCT output (with that verifier's comparison). Lines that only the differential probes
+reach are therefore counted only when their results were checked against OCCT. Run
+the verifiers first; they write the corpora and native outputs it replays. Line
+coverage is not API coverage: the api ledger audit measures that.
 
 Workspace code denies unsafe Rust. The NCollection allocator adapter explicitly
 allows the allocator-api2 trait implementation, with local ownership and alignment
