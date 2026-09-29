@@ -142,3 +142,36 @@ Geom2dInt declares the native classes as aliases:
 - The template reads the curve tool's D2 outputs only after D2 writes them for every curve
   kind of the one instantiation (Geom2dInt_Geom2dCurveTool), so the normals start at zero
   for each transition instead of persisting across calls as the native locals do.
+
+## 6. TopClass_Classifier2d.pxx and TopClass_FaceClassifier.pxx
+
+TopClass holds two header-only templates: namespaces of inline functions that take every
+field of the instantiating class by reference. Geom2dHatch instantiates both
+(`Geom2dHatch_FClass2dOfClassifier` and `Geom2dHatch_Classifier`); BRepClass and
+IntTools will instantiate them again. The port keeps the fields in the generic and the
+namespace functions as its methods, so each instance class is an alias:
+
+- `TopClass_Classifier2d` is `topclass::Classifier2d<I: Classifier2dIntersector>`. The
+  struct holds the fields the native instance class passes to `Reset` and `Compare`
+  (`myIsSet`, `myFirstCompare`, `myFirstTrans`, `myLin`, `myParam`, `myTolerance`,
+  `myTrans`, `myIntersector`, `myClosest`, `myState`, `myIsHeadOrEnd`, with their
+  native initial values); `reset` and `compare` are the template bodies. The trait
+  `Classifier2dIntersector` holds the `TheIntersector` operations: the segment Perform,
+  the IntRes2d results and LocalGeometry, with the edge type as an associated type.
+- `TopClass_FaceClassifier` is `topclass::FaceClassifier<X: FaceExplorer>`. It holds the
+  fields of the native instance class (the `Classifier2d<X::Intersector>`, the closest edge,
+  its parameter and position, the rejected and no-wires flags); `perform`, `state`, `edge`
+  and `edge_parameter` are the template bodies. The trait `FaceExplorer` holds the
+  `TheFaceExplorer` operations (CheckPoint, Reject, Segment, OtherSegment, the wire and
+  edge iteration, RejectWire, RejectEdge, CurrentEdge); the native `FClass2d` parameter is
+  always the Classifier2d instance over the explorer's intersector, as in every OCCT
+  instantiation.
+- The C++ output references (`Segment(P, L, Par)`, `CurrentEdge(E, Or)`,
+  `LocalGeometry(E, U, T, N, C)`) become returned tuples; members that evaluate a curve
+  return `Result`, and the templates propagate the error where the native exception would
+  leave them, after the same field writes.
+- The closest intersection point is kept as a copy (the native code keeps a pointer into
+  the intersector's result list, which the next Perform replaces).
+- Instantiations: Geom2dHatch declares `FClass2dOfClassifier = Classifier2d<Intersector>`
+  and `Classifier = FaceClassifier<Elements>`, with `Geom2dHatch_Intersector` and
+  `Geom2dHatch_Elements` implementing the traits.
