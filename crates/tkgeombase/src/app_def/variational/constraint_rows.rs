@@ -153,10 +153,28 @@ impl Variational {
         a: &mut Assembly,
     ) -> Result<(), Failure> {
         let t = &self.tables;
+        let mut rows: ConstraintRows = self.constraint_rows();
+        let intervals: Array1<'static, f64> = c.knots().clone();
+        let p0: i32 = parameters.lower() - self.first_point;
+        let mut curel: i32 = 1;
+        a.nullify_constraint();
+        for i in 1..=t.nb_constr() {
+            let (point, typ) = (t.typ(2 * i - 1)?, t.typ(2 * i)?);
+            let param: f64 = at(parameters, p0 + point)?;
+            curel = Self::constraint_element(&intervals, param, curel, c.nb_elements())?;
+            let forms: BasisForms = Self::element_forms(c.base(), (&intervals, curel), typ, param)?;
+            self.add_constraint_rows(a, (&forms, curel), &mut rows, (i, point, typ, cb_long))?;
+        }
+        Ok(())
+    }
+
+    // The row numbering of the constraint system, before the first constraint.
+    fn constraint_rows(&self) -> ConstraintRows {
+        let t = &self.tables;
         let (nb_constr, nb_tang, nb_curv) = (t.nb_constr(), t.nb_tang_points, t.nb_curv_points);
         let ngpc1: i32 = nb_constr + nb_tang + nb_curv;
         let ng3d: i32 = 3 * nb_constr + 3 * nb_tang + 5 * nb_curv;
-        let mut rows = ConstraintRows {
+        ConstraintRows {
             ng3d,
             ng2d: 2 * nb_constr + 2 * nb_tang + 3 * nb_curv,
             nbeg2d: ng3d * self.nb_p3d,
@@ -164,27 +182,39 @@ impl Variational {
             npass: 0,
             ntang3d: 3 * ngpc1,
             ntang2d: 2 * ngpc1,
-        };
-        let intervals: Array1<'static, f64> = c.knots().clone();
-        let p0: i32 = parameters.lower() - self.first_point;
-        let mut curel: i32 = 1;
-        a.nullify_constraint();
-        for i in 1..=nb_constr {
-            let (point, typ) = (t.typ(2 * i - 1)?, t.typ(2 * i)?);
-            let param: f64 = at(parameters, p0 + point)?;
-            curel = Self::constraint_element(&intervals, param, curel, c.nb_elements())?;
-            let (u_first, u_last) = (at(&intervals, curel)?, at(&intervals, curel + 1)?);
-            let (coeff, c0) = ((u_last - u_first) / 2., (u_last + u_first) / 2.);
-            let forms: BasisForms = Self::basis_forms(c.base(), typ, (param - c0) / coeff, coeff)?;
+        }
+    }
+
+    // The basis forms of kind `typ` at `param` in element `curel` of `intervals`,
+    // reduced to the element's [-1, 1].
+    fn element_forms(
+        base: &HermitJacobi,
+        (intervals, curel): (&Array1<'_, f64>, i32),
+        typ: i32,
+        param: f64,
+    ) -> Result<BasisForms, Failure> {
+        let (u_first, u_last) = (at(intervals, curel)?, at(intervals, curel + 1)?);
+        let (coeff, c0) = ((u_last - u_first) / 2., (u_last + u_first) / 2.);
+        Self::basis_forms(base, typ, (param - c0) / coeff, coeff)
+    }
+
+    // The rows of constraint `i` on `point`: the pass rows, then the tangency rows
+    // (tangency and curvature points) and the curvature rows (curvature points).
+    fn add_constraint_rows(
+        &self,
+        a: &mut Assembly,
+        (forms, curel): (&BasisForms, i32),
+        rows: &mut ConstraintRows,
+        (i, point, typ, cb_long): (i32, i32, i32, f64),
+    ) -> Result<(), Failure> {
+        rows.npass += 1;
+        self.pass_rows(a, (forms, curel), rows, point)?;
+        if typ == 1 || typ == 2 {
             rows.npass += 1;
-            self.pass_rows(a, (&forms, curel), &rows, point)?;
-            if typ == 1 || typ == 2 {
-                rows.npass += 1;
-                self.tangent_rows(a, (&forms, curel), &rows, (i, cb_long))?;
-            }
-            if typ == 2 {
-                self.curvature_rows(a, (&forms, curel), &mut rows, (i, cb_long))?;
-            }
+            self.tangent_rows(a, (forms, curel), rows, (i, cb_long))?;
+        }
+        if typ == 2 {
+            self.curvature_rows(a, (forms, curel), rows, (i, cb_long))?;
         }
         Ok(())
     }
