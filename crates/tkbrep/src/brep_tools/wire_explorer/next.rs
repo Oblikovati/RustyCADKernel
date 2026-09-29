@@ -53,6 +53,7 @@ impl WireExplorer {
     /// candidates, without a face: a degenerated edge, then an edge used twice, then the
     /// first other one; with a face: the one whose p-curve leaves the vertex closest in
     /// UV and at the smallest angle, degenerated edges first; `explorer.next()?`.
+    #[allow(clippy::should_implement_trait)] // OCCT's More/Next protocol, fallible
     pub fn next(&mut self) -> Result<(), Failure> {
         self.vertex = topexp::last_vertex(&self.edge, true);
         if self.vertex.is_null() || !self.map.is_bound(&self.vertex) {

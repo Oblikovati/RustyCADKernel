@@ -145,7 +145,7 @@ fn transform_normals(mesh: &Triangulation, matrix: &Matrix3) -> Result<(), Failu
             // A collapsed tangent plane has no transformed normal; the source value stays.
             continue;
         }
-        normal = normal / scale;
+        normal /= scale;
         mesh.set_normal(index, Direction3::from_xyz(normal)?)?;
     }
     Ok(())

@@ -352,12 +352,15 @@ pub(super) fn copy_2d(curve: &Handle<dyn Geom2dCurve>) -> Result<Handle<dyn Geom
     Ok(stored.copy()?.cast())
 }
 
+/// A p-curve basis and its range.
+type TrimmedBasis = (Handle<dyn Geom2dCurve>, (f64, f64));
+
 /// The basis of a trimmed p-curve (exact type), the range narrowed to a non-periodic
 /// basis, and the basis trimmed to it.
 fn trimmed_basis(
     base: &Handle<dyn Geom2dCurve>,
     (mut f, mut l): (f64, f64),
-) -> Result<(Handle<dyn Geom2dCurve>, (f64, f64)), Failure> {
+) -> Result<TrimmedBasis, Failure> {
     let mut c2d = base.clone();
     if let Some(trimmed) = c2d.cast::<Geom2dTrimmedCurve>().get() {
         c2d = trimmed.basis_curve();

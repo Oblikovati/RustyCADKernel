@@ -172,15 +172,14 @@ fn propagate_sequentially(
         let source = relation(h23, kind);
         let mut cursor = source.cursor();
         while cursor.more() {
-            if let (Ok(shape), Ok(list)) = (cursor.key(), cursor.value()) {
-                if !propagated.contains(shape) {
-                    let target =
-                        relation_mut(fields, kind).try_bound(shape.clone(), List::default());
-                    for item in list.iter() {
-                        target.append(item.clone());
-                    }
-                    fields.removed.remove(shape);
+            if let (Ok(shape), Ok(list)) = (cursor.key(), cursor.value())
+                && !propagated.contains(shape)
+            {
+                let target = relation_mut(fields, kind).try_bound(shape.clone(), List::default());
+                for item in list.iter() {
+                    target.append(item.clone());
                 }
+                fields.removed.remove(shape);
             }
             cursor.next();
         }
@@ -194,10 +193,10 @@ fn unbind_empty(fields: &mut HistoryFields) {
             let mut keys = Vec::new();
             let mut cursor = relation(fields, kind).cursor();
             while cursor.more() {
-                if let (Ok(shape), Ok(list)) = (cursor.key(), cursor.value()) {
-                    if list.is_empty() {
-                        keys.push(shape.clone());
-                    }
+                if let (Ok(shape), Ok(list)) = (cursor.key(), cursor.value())
+                    && list.is_empty()
+                {
+                    keys.push(shape.clone());
                 }
                 cursor.next();
             }

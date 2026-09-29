@@ -91,10 +91,10 @@ impl Quilt {
             cursor.next();
         }
         for other in build.other_shapes.iter() {
-            if !build.edges_of_faces.contains(other) {
-                if let Ok(bound) = self.bounds.find_from_key(other) {
-                    builder.add(&mut build.result, bound)?;
-                }
+            if !build.edges_of_faces.contains(other)
+                && let Ok(bound) = self.bounds.find_from_key(other)
+            {
+                builder.add(&mut build.result, bound)?;
             }
         }
         Ok(build.result.into_shape())

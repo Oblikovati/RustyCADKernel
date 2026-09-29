@@ -210,7 +210,7 @@ impl BRepToolsShapeSet {
     }
 }
 
-fn polygon_of<'a>(polygon: &'a Handle<Polygon3D>) -> Result<&'a Polygon3D, Failure> {
+fn polygon_of(polygon: &Handle<Polygon3D>) -> Result<&Polygon3D, Failure> {
     polygon.get().ok_or_else(|| {
         crate::brep::errors::null_object("BRepTools_ShapeSet::WritePolygon3D: null polygon")
     })

@@ -74,6 +74,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"br_tools_text", br_tools_text_case},
  {"br_tools_query", br_tools_query_case},
  {"br_tools_mutate", br_tools_mutate_case},
+ {"br_tools_read", br_tools_read_case},
  {"br_tools_modif", br_tools_modif_case},
  {"br_tools_wire", br_tools_wire_case},
  {"br_tools_reshape", br_tools_reshape_case},

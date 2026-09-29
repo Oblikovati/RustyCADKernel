@@ -131,7 +131,7 @@ pub fn read_with_console(
     progress: &ProgressRange<'_>,
     console: Arc<dyn ConsoleOutput>,
 ) -> Result<(), Failure> {
-    let mut set = BRepToolsShapeSet::with_console(builder.clone(), true, false, console);
+    let mut set = BRepToolsShapeSet::with_console(*builder, true, false, console);
     set.read(stream, progress)?;
     *shape = set.read_shape(stream)?;
     Ok(())
@@ -248,7 +248,7 @@ pub fn read_file_on(
         .rdbuf();
     let device = StreamBufDevice::new(buffer, IosOpenMode::IN);
     let mut stream = IoStream::with_device(Box::new(device), true, false);
-    let mut set = BRepToolsShapeSet::with_console(builder.clone(), true, false, console);
+    let mut set = BRepToolsShapeSet::with_console(*builder, true, false, console);
     set.read(&mut stream, progress)?;
     if set.nb_shapes() == 0 {
         return Ok(false);

@@ -196,3 +196,55 @@ def append_tkbrep_breptools_requests(requests: list[str]) -> None:
         for kind, params, mutable in MODIFICATIONS:
             requests.append(f'br_tools_modif {numbers} {kind} {text(params)} {mutable}'.replace('  ', ' '))
     append_tkbrep_breptools_edit_requests(requests, solid_scene, [cylinder_scene(), bezier_scene()])
+    append_tkbrep_breptools_read_requests(requests)
+
+
+# A written square face in the current format (br_tools_text of the solid scene), the
+# base of the malformed texts read by `br_tools_read`.
+BASE_TEXT = (
+    '\nCASCADE Topology V3, (c) Open Cascade\nLocations 0\nCurve2ds 4\n1 0 0 1 0 \n1 1 0 0 1 \n'
+    '1 1 1 -1 0 \n1 0 1 0 -1 \nCurves 4\n1 0 0 0 1 0 0 \n1 1 0 0 0 1 0 \n1 1 1 0 -1 0 0 \n'
+    '1 0 1 0 0 -1 0 \nPolygon3D 1\n3 0\n0\n0 0 0 0.5 0 0 1 0 0 \nPolygonOnTriangulations 1\n'
+    '2 2 3 \np 0 0 \nSurfaces 1\n1 0 0 0 0 0 1 1 0 -0 -0 1 0 \nTriangulations 1\n4 2 0 0 0\n'
+    '0 0 0 1 0 0 1 1 0 0 1 0 1 2 3 1 3 4 \n\nTShapes 12\nVe\n1e-07\n0 0 0\n0 0\n\n0101101\n*\n'
+    'Ve\n1e-07\n1 0 0\n0 0\n\n0101101\n*\nEd\n 1e-07 1 1 0\n1  1 0 0 1\n2  1 1 0 0 1\n5  1 0\n0\n\n'
+    '0101000\n+12 0 -11 0 *\nVe\n1e-07\n1 1 0\n0 0\n\n0101101\n*\nEd\n 1e-07 1 1 0\n1  2 0 0 1\n'
+    '2  2 1 0 0 1\n6  1 1 0\n0\n\n0101000\n+11 0 -9 0 *\nVe\n1e-07\n0 1 0\n0 0\n\n0101101\n*\nVe\n'
+    '1e-07\n0.5 1 0\n0.5 1 3 0\n0.5 2 3 1 0\n0 0\n\n0101101\n*\nEd\n 1e-07 1 1 0\n1  3 0 0 1\n'
+    '2  3 1 0 0 1\n0\n\n0101000\n+9 0 -7 0 i6 0 *\nEd\n 1e-07 1 1 0\n1  4 0 0 1\n2  4 1 0 0 1\n0\n\n'
+    '0101000\n+7 0 -12 0 *\nWi\n\n0101000\n+10 0 +8 0 +5 0 +4 0 *\nVe\n1e-07\n0.5 0.5 0\n0 0\n\n'
+    '0101101\n*\nFa\n0  1e-07 1 0\n2  1\n0101000\n+3 0 i2 0 *\n\n+1 0 '
+)
+
+
+def read_texts() -> list[str]:
+    """The base text and variants that each section reader must survive: other and
+    unknown versions, a renamed section, polygon parameters, a bad surface type, bad
+    counts, truncations before the shapes, and empty input. The shape records stay
+    whole: a sub-shape list without its `*` loops forever natively. A text that ends
+    right after the version line is left out: the location reader then compares a
+    `char` buffer the failed `>>` left uninitialized (undefined natively)."""
+    before_shapes = BASE_TEXT[:BASE_TEXT.index('TShapes')]
+    return [
+        BASE_TEXT,
+        BASE_TEXT.replace('V3, (c) Open Cascade', 'V2, (c) Matra-Datavision'),
+        BASE_TEXT.replace('V3, (c) Open Cascade', 'V9, (c) Open Cascade'),
+        BASE_TEXT.replace('Curve2ds 4', 'Curve2dz 4'),
+        BASE_TEXT.replace('Polygon3D 1\n3 0\n0\n0 0 0 0.5 0 0 1 0 0 ',
+                          'Polygon3D 1\n3 1\n0.25\n0 0 0 0.5 0 0 1 0 0 \n0 0.5 1 '),
+        BASE_TEXT.replace('Surfaces 1\n1 0 0 0', 'Surfaces 1\n99 0 0 0'),
+        BASE_TEXT.replace('Triangulations 1\n4 2 0 0 0', 'Triangulations 1\n4 2 1 1 0.5'),
+        BASE_TEXT.replace('PolygonOnTriangulations 1\n2 2 3 \np 0 0 ',
+                          'PolygonOnTriangulations 1\n2 2 3 \np 0.5 1 0 1 '),
+        BASE_TEXT.replace('Triangulations 1', 'Triangulations -1'),
+        before_shapes,
+        before_shapes[:before_shapes.index('Surfaces')],
+        '',
+    ]
+
+
+def append_tkbrep_breptools_read_requests(requests: list[str]) -> None:
+    """Append one `br_tools_read` request per read text."""
+    for data in read_texts():
+        codes = list(data.encode())
+        requests.append(f'br_tools_read {len(codes)} {text(codes)}'.rstrip())

@@ -104,3 +104,8 @@ void br_tools_mutate_case(std::istream& in){
  for(TopoDS_Shape& sh:s.graph.shapes){if(sh.IsNull())continue;BR_TRY(bt_mutate(sh,code);br_word("-"));}
  for(const TopoDS_Shape& sh:s.graph.shapes)BR_TRY(br_text(bt_written(sh,true,true,3)));
  br_end();}
+// `br_tools_read count byte...`: BRepTools::Read of a given text (malformed sections,
+// unknown versions and shapes): the console output, then the shape or the exception.
+void br_tools_read_case(std::istream& in){
+ BrReader r{in};std::string data=r.bytes();BR_TRY(bt_reread(data));
+ br_end();}

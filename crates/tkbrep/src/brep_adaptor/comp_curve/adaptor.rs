@@ -203,7 +203,7 @@ impl Adaptor3dCurve for BRepAdaptorCompCurve {
         let state = self.snapshot();
         let located = state.prepare(u, state.cur_index)?;
         let mut result = state.curve(located.index)?.eval_d1(located.parameter)?;
-        result.d1 = result.d1 * located.delta;
+        result.d1 *= located.delta;
         Ok(result)
     }
     fn eval_d2(&self, u: f64) -> Result<GeomCurveD2, Failure> {
@@ -211,8 +211,8 @@ impl Adaptor3dCurve for BRepAdaptorCompCurve {
         let located = state.prepare(u, state.cur_index)?;
         let d = located.delta;
         let mut result = state.curve(located.index)?.eval_d2(located.parameter)?;
-        result.d1 = result.d1 * d;
-        result.d2 = result.d2 * (d * d);
+        result.d1 *= d;
+        result.d2 *= d * d;
         Ok(result)
     }
     fn eval_d3(&self, u: f64) -> Result<GeomCurveD3, Failure> {
@@ -220,9 +220,9 @@ impl Adaptor3dCurve for BRepAdaptorCompCurve {
         let located = state.prepare(u, state.cur_index)?;
         let d = located.delta;
         let mut result = state.curve(located.index)?.eval_d3(located.parameter)?;
-        result.d1 = result.d1 * d;
-        result.d2 = result.d2 * (d * d);
-        result.d3 = result.d3 * (d * d * d);
+        result.d1 *= d;
+        result.d2 *= d * d;
+        result.d3 *= d * d * d;
         Ok(result)
     }
     fn eval_dn(&self, u: f64, n: i32) -> Result<Vector3, Failure> {

@@ -164,7 +164,7 @@ fn purge_location(shape: &Shape) -> Result<(Shape, bool), Failure> {
     while !remaining.is_identity() {
         let datum = remaining.first_datum()?.clone();
         let power = remaining.first_power()?;
-        let bad = datum.get().is_some_and(|d| is_bad(&d.trsf()));
+        let bad = datum.get().is_some_and(|d| is_bad(d.trsf()));
         let location = Location::from_datum(datum).powered(power)?;
         if bad {
             let modification: Handle<dyn BRepToolsModification> =

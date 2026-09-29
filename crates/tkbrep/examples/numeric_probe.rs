@@ -40,6 +40,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("br_tools_text", brep_tools::text_case),
     ("br_tools_query", brep_tools::query_case),
     ("br_tools_mutate", brep_tools::mutate_case),
+    ("br_tools_read", brep_tools::read_case),
     ("br_tools_modif", brep_tools_modif::modif_case),
     ("br_tools_wire", brep_tools_modif::wire_case),
     ("br_tools_reshape", brep_tools_reshape::reshape_case),

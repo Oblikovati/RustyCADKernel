@@ -315,3 +315,11 @@ pub fn mutate_case(values: &[f64]) {
     }
     end();
 }
+
+/// `br_tools_read count byte...`.
+pub fn read_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let data = r.bytes();
+    attempt(|| reread(&data));
+    end();
+}
