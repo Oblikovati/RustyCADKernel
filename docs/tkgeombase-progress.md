@@ -15,7 +15,7 @@ The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (830 declarations):
+passes (839 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -55,6 +55,7 @@ passes (830 declarations):
 | ExtremaPC_Curve_Test.cxx | extrema_pc_curve | 47 |
 | ExtremaPC_Ellipse_Test.cxx | extrema_pc_ellipse | 30 |
 | ExtremaPC_Hyperbola_Test.cxx | extrema_pc_hyperbola | 24 |
+| ExtremaPC2d_Hyperbola_Test.cxx | extrema_pc2d_hyperbola | 9 (1 approved native failure) |
 | ExtremaPC_Line_Test.cxx | extrema_pc_line | 31 |
 | ExtremaPC_OffsetCurve_Test.cxx | extrema_pc_offset_curve | 13 |
 | ExtremaPC_Parabola_Test.cxx | extrema_pc_parabola | 24 |
@@ -104,10 +105,13 @@ ExtremaPC suites that compare ExtremaPC with the classic `Extrema_ExtPC` share t
 `tools/oracle/tkgeombase_extrema_random_points.cxx` draws with the libstdc++
 `std::mt19937` and distributions of the native fixtures.
 
-One upstream suite is not mapped: `ExtremaPC2d_Hyperbola_Test.cxx` (9 declarations)
-is translated as `extrema_pc2d_hyperbola` and passes in Rust, but
-`SingletonInvalidAndValueAccessor` fails natively (see Preserved native behaviour), and
-the verifier maps whole suites whose native run passes.
+`ExtremaPC2d_Hyperbola_Test.cxx` (9 declarations, `extrema_pc2d_hyperbola`) is mapped
+with one approved native failure: `SingletonInvalidAndValueAccessor` fails in native OCCT
+itself on the pinned profile (see Preserved native behaviour), and the maintainer approved
+recording it as such on 2026-09-29. Its ledger row carries the reason in
+`native_expected_failure`; `verify_toolkit.py` then requires that exact case to fail
+natively (any other native failure or skip, or the approved case passing, fails the gate)
+and all nine Rust tests to pass.
 
 ## Class mapping
 

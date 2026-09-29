@@ -82,8 +82,40 @@ def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, enviro
     return locked_cmake(source,build,closure_flags(inventory['modules']),CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
 
 
-def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict) -> list[Path]:
-    """Run complete native suites and reject every failure or skip; native_tests(...)."""
+def approved_native_failures(rows: list[dict]) -> dict[str, str]:
+    """Upstream ids whose unchanged test fails in native OCCT itself, with the approved
+    reason; approved_native_failures(rows) == {'Suite.Case': 'reason'}."""
+    approved = {row['upstream_id']: row['native_expected_failure'] for row in rows if 'native_expected_failure' in row}
+    if any(not reason.strip() for reason in approved.values()): raise ValueError('An approved native failure needs a reason')
+    return approved
+
+
+def check_native_cases(cases: list, approved: dict[str, str]) -> list[str]:
+    """Reject every skip or unexecuted case, and every native failure outside `approved`.
+
+    An approved case must still fail natively, so the approval lapses (and the gate fails)
+    once OCCT or the toolchain changes; check_native_cases(cases, {'Suite.Case': 'why'}).
+    """
+    if any(case.find('skipped') is not None or case.attrib.get('status') != 'run' for case in cases):
+        raise ValueError('Skipped or unexecuted native test')
+    failed = {case.attrib['classname']+'.'+case.attrib['name'] for case in cases if case.find('failure') is not None}
+    if failed - set(approved): raise ValueError(f'Unapproved native failures: {sorted(failed - set(approved))}')
+    if set(approved) - failed: raise ValueError(f'Approved native failures now pass; remove the approval: {sorted(set(approved) - failed)}')
+    return sorted(failed)
+
+
+def run_native_suites(command: list, log: Path, environment: dict, has_approved_failures: bool) -> None:
+    """Run the native GoogleTest binary. GoogleTest exits with 1 when any test fails, so with
+    approved native failures the XML results decide (check_native_cases); a crash still fails,
+    because its XML is missing or incomplete; run_native_suites(cmd, log, env, False)."""
+    try:
+        run(command, log, env=environment)
+    except RuntimeError:
+        if not has_approved_failures: raise
+
+
+def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict, approved: dict[str, str]) -> list[Path]:
+    """Run complete native suites; only the approved native failures may fail; native_tests(...)."""
     compiler = re.search(r'^CMAKE_CXX_COMPILER:FILEPATH=(.*)$',(build/'CMakeCache.txt').read_text(),re.M)[1]
     common = [compiler,'-std=c++17','-O2','-pthread','-I'+str(build/'include/opencascade'),
               '-I'+str(build/'_deps/googletest-src/googletest/include')]
@@ -93,11 +125,10 @@ def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs
     run([*common,*objects,*libraries,'-Wl,-rpath,'+str(libraries[0].parent),'-o',executable],output/'link.log',env=environment)
     listing = run([executable,'--gtest_list_tests'],output/'native-list.txt',env=environment)
     if listed_runtime_cases(listing) != expected: raise ValueError('Native runtime enumeration differs from mappings')
-    run([executable,f'--gtest_output=xml:{output/"native.xml"}'],output/'native-run.log',env=environment)
+    run_native_suites([executable,f'--gtest_output=xml:{output/"native.xml"}'],output/'native-run.log',environment,bool(approved))
     cases = ET.parse(output/'native.xml').findall('.//testcase')
     if {case.attrib['classname']+'.'+case.attrib['name'] for case in cases} != expected: raise ValueError('Incomplete native results')
-    if any(case.find('failure') is not None or case.find('skipped') is not None or case.attrib.get('status') != 'run' for case in cases):
-        raise ValueError('Failed, skipped, or unexecuted native test')
+    check_native_cases(cases, approved)
     return libraries
 
 
@@ -133,7 +164,8 @@ def main() -> None:
     environment = dict(os.environ,LC_ALL='C',LANG='C')
     environment['PATH'] = str(Path.home()/'.cargo/bin')+os.pathsep+environment['PATH']
     build = prepare_build(source,output,inventory,args.jobs,environment,args.native_build)
-    libraries = native_tests(source,output,build,paths,args.jobs,native,environment)
+    approved = approved_native_failures(rows)
+    libraries = native_tests(source,output,build,paths,args.jobs,native,environment,approved)
     rust_tests(output,rows,rust,environment)
     numeric = None
     if args.only:
@@ -142,23 +174,25 @@ def main() -> None:
     script, evidence = NUMERIC_VERIFIERS[args.toolkit]
     run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment,timeout=NUMERIC_TIMEOUT_SECONDS)
     numeric = json.loads((ROOT/evidence/'report.json').read_text())
-    record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric)
+    record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric,approved)
 
 
-def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict], native: set, rust: set, libraries: list[Path], numeric: dict | None) -> None:
+def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict], native: set, rust: set, libraries: list[Path], numeric: dict | None, approved: dict[str, str]) -> None:
     """Record hashes and scope without inferring whole-toolkit acceptance; record_report(...)."""
     inputs = [p for p in (ROOT/'crates').rglob('*') if p.is_file()]
     inputs += list((ROOT/'tools/oracle').glob('*.cxx'))
     inputs += sorted((ROOT/'tools').rglob('*.py'))
     inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py',ROOT/'tools/native_build.py']
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
-              'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native),
+              'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native)-len(approved),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,
+              'native_expected_failures':approved,
               'scope':'Mapped GoogleTest suites only; full toolkit API and test inventories pending',
               'source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
               'oracle_libraries_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in libraries}}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(f'PASS: {toolkit}: {len(rows)} mapped declarations, {len(native)} native and {len(rust)} Rust runtime cases')
+    failures = f' ({len(approved)} approved native failures)' if approved else ''
+    print(f'PASS: {toolkit}: {len(rows)} mapped declarations, {len(native)-len(approved)} native and {len(rust)} Rust runtime cases{failures}')
 
 
 if __name__ == '__main__':
