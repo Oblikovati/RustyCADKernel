@@ -51,6 +51,6 @@ pub mod int_ana2d;
 pub mod lprop;
 mod native_failure;
 mod native_text;
-mod plane_projection;
 #[doc(hidden)]
 pub mod probe_support;
+pub mod proj_lib;

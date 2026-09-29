@@ -11,17 +11,18 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the file-local EstimDist of IntAna_QuadQuadGeo.cxx and of the
-// line case of ProjLib_Plane.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of the file-local EstimDist of IntAna_QuadQuadGeo.cxx
+// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! EstimDist: the minimal distance from the apexes of two cones with parallel,
 //! coplanar axes to their intersection.
 use crate::gce::{MakePln, Root};
 use crate::int_ana2d::AnaIntersection;
+use crate::proj_lib::project_line_on_plane;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::native::{std_max, std_min};
-use rustycad_tkmath::gp::{Cone3, Direction2, Line2, Line3, Plane3, Point2, Point3, Vector3};
+use rustycad_tkmath::gp::{Cone3, Line2, Line3, Plane3, Point3, Vector3};
 
 /// EstimDist: in the plane of the two axes, the generatrices of both cones
 /// (the axes rotated by ± the semi-angle) are intersected pairwise; the result
@@ -66,24 +67,9 @@ pub(super) fn estim_dist(first: Cone3, second: Cone3) -> Result<f64, Failure> {
 /// The two generatrices of a cone in `plane`: the projected axis rotated by
 /// `angle` and by `-angle` around its location.
 fn generatrices(plane: Plane3, axis: Line3, angle: f64) -> Result<[Line2; 2], Failure> {
-    let axis2d: Line2 = project_line(plane, axis)?;
+    let axis2d: Line2 = project_line_on_plane(&plane, &axis)?;
     Ok([
         axis2d.rotated(axis2d.location(), angle),
         axis2d.rotated(axis2d.location(), -angle),
     ])
-}
-
-/// ProjLib::Project(gp_Pln, gp_Lin) (ProjLib_Plane::Project(gp_Lin)): the line
-/// in the plane coordinates. ProjLib is not ported yet; this is the one line case
-/// EstimDist needs, in the native operation order, until the ProjLib port
-/// replaces it.
-fn project_line(plane: Plane3, line: Line3) -> Result<Line2, Failure> {
-    let (x_dir, y_dir) = (
-        plane.position().x_direction(),
-        plane.position().y_direction(),
-    );
-    let op = Vector3::between(plane.location(), line.location());
-    let origin = Point2::new(op.dot(Vector3::from(x_dir)), op.dot(Vector3::from(y_dir)));
-    let direction = Direction2::new(line.direction().dot(x_dir), line.direction().dot(y_dir))?;
-    Ok(Line2::new(origin, direction))
 }

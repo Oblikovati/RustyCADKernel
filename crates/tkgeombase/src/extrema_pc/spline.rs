@@ -21,7 +21,7 @@
 use super::{Domain1D, ExtremaResult, GridEvaluator, SearchMode, Status, add_endpoint_extrema};
 use crate::extrema_pc_core::{CurveEvaluator, is_valid_tolerance};
 use crate::extrema_pc2d;
-use crate::plane_projection as projlib;
+use crate::proj_lib as projlib;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
 use rustycad_tkg3d::geom::GeomCurve;
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
@@ -155,7 +155,7 @@ impl<K: SplineKind> SplineExtrema<K> {
         let Some(mut planar) = K::project(&self.shape.0, &mut plane, domain)? else {
             return Ok(false);
         };
-        let point2d = projlib::project_point(&plane, point);
+        let point2d = projlib::project_point_on_plane(&plane, point);
         let mode2d: SearchMode = super::to_search_mode_2d(mode);
         let result2d = K::run_planar(&mut planar, point2d, tol, mode2d, ends)?;
         super::convert_planar_result(

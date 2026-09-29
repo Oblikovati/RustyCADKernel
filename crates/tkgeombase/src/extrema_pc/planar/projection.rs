@@ -17,7 +17,7 @@
 //! The exact, parameter-preserving projections of planar spline and offset curves.
 //! A control polygon is planar only when every pole's triple product with two
 //! spanning vectors is exactly zero, computed in `long double` as natively.
-use crate::plane_projection as projlib;
+use crate::proj_lib as projlib;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{
@@ -110,7 +110,7 @@ fn projected_poles(
     let mut projected: Array1<'static, Point2> = Array1::with_bounds(poles.lower(), poles.upper())
         .map_err(|error| error.into_failure("ExtremaPC::ProjectBezier"))?;
     for index in poles.lower()..=poles.upper() {
-        projected[index] = projlib::project_point(plane, poles[index]);
+        projected[index] = projlib::project_point_on_plane(plane, poles[index]);
     }
     Ok(projected)
 }
@@ -266,7 +266,7 @@ fn project_basis_line(
         return Ok(false);
     }
     *plane = Plane3::from_position(Axis3::new(lin.location(), normal, lin.direction())?);
-    let projected = projlib::project_line(plane, &lin)?;
+    let projected = projlib::project_line_on_plane(plane, &lin)?;
     *curve2d = Handle::new(Geom2dLine::new(projected.position())).cast();
     Ok(true)
 }
@@ -282,7 +282,7 @@ fn project_basis_conic(
         let circ = circle.circ()?;
         if is_parallel(circ.axis().direction(), normal) {
             *plane = Plane3::from_position(Axis3::from_axis2(circ.position()));
-            let c = projlib::project_circle(plane, &circ)?;
+            let c = projlib::project_circle_on_plane(plane, &circ)?;
             return Ok(Some(
                 Handle::new(Geom2dCircle::new(c.position(), c.radius())?).cast(),
             ));
@@ -292,7 +292,7 @@ fn project_basis_conic(
         let elips = ellipse.elips()?;
         if is_parallel(elips.axis().direction(), normal) {
             *plane = Plane3::from_position(Axis3::from_axis2(elips.position()));
-            let e = projlib::project_ellipse(plane, &elips)?;
+            let e = projlib::project_ellipse_on_plane(plane, &elips)?;
             let geom = Geom2dEllipse::new(e.axis(), e.major_radius(), e.minor_radius())?;
             return Ok(Some(Handle::new(geom).cast()));
         }
@@ -310,7 +310,7 @@ fn project_basis_open_conic(
         let hypr = hyperbola.hypr()?;
         if is_parallel(hypr.axis().direction(), normal) {
             *plane = Plane3::from_position(Axis3::from_axis2(hypr.position()));
-            let h = projlib::project_hyperbola(plane, &hypr)?;
+            let h = projlib::project_hyperbola_on_plane(plane, &hypr)?;
             let geom = Geom2dHyperbola::new(h.axis(), h.major_radius(), h.minor_radius())?;
             return Ok(Some(Handle::new(geom).cast()));
         }
@@ -319,7 +319,7 @@ fn project_basis_open_conic(
         let parab = parabola.parab()?;
         if is_parallel(parab.axis().direction(), normal) {
             *plane = Plane3::from_position(Axis3::from_axis2(parab.position()));
-            let p = projlib::project_parabola(plane, &parab)?;
+            let p = projlib::project_parabola_on_plane(plane, &parab)?;
             return Ok(Some(
                 Handle::new(Geom2dParabola::new(p.axis(), p.focal())?).cast(),
             ));

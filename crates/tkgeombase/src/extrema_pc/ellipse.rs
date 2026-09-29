@@ -22,7 +22,7 @@ use super::{
 use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use crate::extrema_pc_core::{NeighborStep, ValueFn};
 use crate::extrema_pc2d::{self, EllipseFrame, canonical_roots, lift};
-use crate::plane_projection as projlib;
+use crate::proj_lib as projlib;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{self, Axis3, Direction3, Ellipse3, Plane3, Point3, Vector3};
@@ -117,14 +117,14 @@ impl Ellipse {
     ) -> Result<bool, Failure> {
         let plane = Plane3::from_position(Axis3::from_axis2(self.ellipse.position()));
         let query = PlanarQuery {
-            point2d: projlib::project_point(&plane, point),
+            point2d: projlib::project_point_on_plane(&plane, point),
             point3d: point,
             plane: &plane,
             tol,
             mode,
             with_endpoints: false,
         };
-        let ellipse2d = projlib::project_ellipse(&plane, &self.ellipse)?;
+        let ellipse2d = projlib::project_ellipse_on_plane(&plane, &self.ellipse)?;
         let ellipse = self.ellipse;
         let evaluator = ValueFn(|u| Ok::<Point3, Infallible>(elclib::value(u, &ellipse)));
         let Ok(done) = perform_planar::<extrema_pc2d::Ellipse, _>(
