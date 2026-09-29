@@ -34,24 +34,36 @@ use rustycad_tkmath::geom_abs::Shape as Continuity;
 use rustycad_tkmath::gp::{GeneralTransform3, Matrix3, Point3, Xyz};
 use rustycad_tkmath::toploc::Location;
 
-/// `maxAbsCoefficient`: the largest absolute coefficient of the vectorial part.
+/// The nine `Value(i, j)` coefficients of the vectorial part, row by row: the scale
+/// factor is applied for a similarity form, unlike `VectorialPart()`.
+fn vectorial_values(gtrsf: &GeneralTransform3) -> [[f64; 3]; 3] {
+    let mut values = [[0.0; 3]; 3];
+    for (row, line) in values.iter_mut().enumerate() {
+        for (column, value) in line.iter_mut().enumerate() {
+            let cell = gtrsf.value(row as i32 + 1, column as i32 + 1);
+            *value = cell.expect("the 3x3 cells of a gp_GTrsf are in range");
+        }
+    }
+    values
+}
+
+/// `maxAbsCoefficient`: the largest absolute coefficient `Value(i, j)` of the vectorial
+/// part, as `std::max({...})` (the first value, replaced by each larger one).
 fn max_abs_coefficient(gtrsf: &GeneralTransform3) -> f64 {
-    let matrix = gtrsf.vectorial_part();
-    let mut largest = f64::MIN;
-    for row in matrix.coefficients() {
-        for value in row {
-            // `std::max({...})` keeps the first of equal values; the magnitudes are equal then.
-            if value.abs() > largest {
-                largest = value.abs();
-            }
+    let values = vectorial_values(gtrsf);
+    let mut largest = values[0][0].abs();
+    for value in values.iter().flatten().skip(1) {
+        if largest < value.abs() {
+            largest = value.abs();
         }
     }
     largest
 }
 
-/// `normalizedVectorialPart`: the vectorial part divided by `scale` when it is positive.
+/// `normalizedVectorialPart`: the `Value(i, j)` matrix divided by `scale` when it is
+/// positive.
 pub(super) fn normalized_vectorial_part(gtrsf: &GeneralTransform3, scale: f64) -> Matrix3 {
-    let mut matrix = gtrsf.vectorial_part();
+    let mut matrix = Matrix3::new(vectorial_values(gtrsf));
     if scale > 0.0 {
         matrix *= 1.0 / scale;
     }
