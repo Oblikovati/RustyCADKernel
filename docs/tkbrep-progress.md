@@ -8,13 +8,13 @@ Packages are added one module at a time. The `TopoDS`, `TopExp`, `TopTools`, `BR
 ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for
 each of them. `BRepGraph` is being ported in waves (docs/topology-design.md section 11):
 the core, the iterators, explorers, Tool and CopyRemap, and the layers, registries and
-caches, the lock and the derived-state and mesh caches are ported; the editor and the
-algorithms follow, and its audit lists their members as missing until then.
+caches, the lock, the derived-state and mesh caches and the editor are ported; the
+algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its audit lists their members as missing until then.
 
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (139 declarations):
+The toolkit test inventory maps these suites (430 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -58,7 +58,6 @@ The toolkit test inventory maps these suites (139 declarations):
 | BRepGraph_LayerHistory_Test.cxx | brep_graph_layer_history_suite | 39 | pass | pass |
 | BRepGraph_LayerTopoSupplement_Test.cxx | not mapped (phase 2) | 22 | not run | waits for BRepGraph_Copy (wave 2c) |
 | BRepGraph_CacheRegistry_Test.cxx | not mapped (phase 2) | 14 | not run | waits for BRepGraph_Transform (wave 2c) |
-| BRepGraph_NodeId_Test.cxx | not mapped (phase 2) | 15 | not run | waits for RelatedIterator, MakeBox |
 | BRepGraph_MutGuard_Test.cxx | brep_graph_mut_guard | 11 | pass | pass |
 | BRepGraph_MutationGen_Test.cxx | brep_graph_mutation_gen | 14 | pass | pass |
 | BRepGraph_DeferredInvalidation_Test.cxx | brep_graph_deferred_invalidation | 16 | pass | pass |
@@ -553,9 +552,10 @@ supplement, the caches, the mesh cache and view and every node's shapes. A sette
 target id is out of range, and a child rebound out of range, are not probed: the release
 build writes or reads out of bounds there.
 
-The corpus has 649 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
+The corpus has 667 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
-caches 22, the BRepGraph navigation 13 and the BRepGraph lock and caches 14.
+caches 22, the BRepGraph navigation 13, the BRepGraph lock and caches 14 and the BRepGraph
+editor 18.
 
 ## Dependency gap
 
