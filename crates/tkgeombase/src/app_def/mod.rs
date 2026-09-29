@@ -29,9 +29,11 @@ mod multi_point_constraint;
 mod my_line_tool;
 mod point_tabs;
 mod smooth_criterion;
+mod variational;
 
 pub use instantiations::*;
 pub use linear_criteria::LinearCriteria;
 pub use multi_line::MultiLine;
 pub use multi_point_constraint::MultiPointConstraint;
 pub use smooth_criterion::{QualityValues, SmoothCriterion, SmoothErrors};
+pub use variational::{Variational, VariationalOptions};
