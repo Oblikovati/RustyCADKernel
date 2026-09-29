@@ -28,6 +28,7 @@ pub mod child_explorer;
 mod child_refs;
 pub mod copy;
 pub mod copy_remap;
+pub mod deduplicate;
 mod data;
 pub mod deferred_scope;
 pub mod defs_iterator;
