@@ -75,7 +75,7 @@ fn triangulation(s: &Scene, t: &Handle<Triangulation>) {
 }
 
 /// `bg_options`: 1 CreateAutoProduct, 2 Flatten, 4 Parallel, 8 TrackAddedNodes.
-fn options(bits: i32) -> Options {
+pub fn options(bits: i32) -> Options {
     Options {
         create_auto_product: bits & 1 != 0,
         flatten: bits & 2 != 0,
@@ -84,7 +84,7 @@ fn options(bits: i32) -> Options {
         ..Options::default()
     }
 }
-fn add_result(res: AddResult) {
+pub fn add_result(res: AddResult) {
     int(res.status as i32);
     node(res.topology_root);
     index(res.product);
@@ -101,7 +101,12 @@ pub fn action(g: &mut BRepGraph, s: &Scene, r: &mut Reader<'_>) {
         failure(&error);
     }
 }
-fn run_action(g: &mut BRepGraph, s: &Scene, r: &mut Reader<'_>, code: i32) -> Result<(), Failure> {
+pub fn run_action(
+    g: &mut BRepGraph,
+    s: &Scene,
+    r: &mut Reader<'_>,
+    code: i32,
+) -> Result<(), Failure> {
     let opts = populate::Options;
     match code {
         0 => {

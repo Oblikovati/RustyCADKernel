@@ -3,15 +3,18 @@
 **In progress; toolkit acceptance is not complete.** `crates/tkbrep`
 (`rustycad-tkbrep`) is the port of the ModelingData toolkit TKBRep. It depends on
 the TKernel, TKMath, TKG2d, TKG3d and TKGeomBase ports, as the native toolkit does.
-Packages are added one module at a time. The `TopoDS`, `TopExp` and `TopTools`
-packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0
-stale api rows for each of them (223 rows). BRep, BRepTools, BRepAdaptor, BRepLProp,
-BinTools, BRepGraph and BRepGraphInc are not ported.
+Packages are added one module at a time. The `TopoDS`, `TopExp`, `TopTools`, `BRep`,
+`BinTools`, `BRepTools`, `BRepAdaptor`, `BRepLProp` and `BRepGraphInc` packages are
+ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for
+each of them. `BRepGraph` is being ported in waves (docs/topology-design.md section 11):
+the core, the iterators, explorers, Tool and CopyRemap, and the layers, registries and
+caches are ported; the editor, the lock, mesh and derived-state caches and the algorithms
+follow, and its audit lists their members as missing until then.
 
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (28 declarations):
+The toolkit test inventory maps these suites (139 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -47,6 +50,20 @@ The toolkit test inventory maps these suites (28 declarations):
 | BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for Compact, Deduplicate, Validate, BRepGProp |
 | BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for caches, layers, Compact, Deduplicate |
 | BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for EditorView, LayerHistory, Validate, CacheRegistry |
+| BRepGraph_LayerIterator_Test.cxx | brep_graph_layer_iterator | 4 | pass | pass |
+| BRepGraph_LayerHistory_Test.cxx | not mapped (phase 2) | 39 | not run | waits for EditorView (ApplyModification, RemoveNode), ReverseIterator, Tool, BRepBuilderAPI_MakeVertex |
+| BRepGraph_LayerTopoSupplement_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView, SupplementEditor, RefsIterator, Copy, Compact |
+| BRepGraph_CacheRegistry_Test.cxx | not mapped (phase 2) | 14 | not run | waits for EditorView, MutGuard, Transform |
+| BRepGraph_NodeId_Test.cxx | not mapped (phase 2) | 15 | not run | waits for RelatedIterator, MakeBox |
+| BRepGraph_RefId_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView, iterators, MakeBox |
+| BRepGraph_VersionStamp_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView, Tool, MakeBox |
+| BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for EditorView, Tool, Iterator, BRepGProp |
+| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for CacheMesh, MeshView, BRepMesh, Compact |
+| BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for EditorView, explorers, iterators, Tool, TKPrim solids |
+| BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for Validate, Tool, iterators, TKPrim solids |
+| BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for Compact, Deduplicate, Validate, BRepGProp |
+| BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for iterators, Tool, Compact, Deduplicate, Validate |
+| BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for EditorView, explorers, iterators, Tool, Validate |
 
 The suites build their inputs with BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge
 (TKTopAlgo) and BRepPrimAPI_MakeBox (TKPrim). Those toolkits are not ported, so the Rust
@@ -83,7 +100,7 @@ translated once in `crates/tkbrep/tests/support/ref_test_tools.rs` (its graph
 `OuterWireOfFace` waits for `BRepGraph_Tool::Face::OuterWire`).
 `crates/tkbrep/tests/brep_graph_behavior.rs` and `brep_graph_shapes_view.rs` cover
 population, reconstruction and the shapes view over the support fakes, the supplement
-route through a named fake layer registry, and the Rust errors. `tools/audit_api_rows.py`
+route, and the Rust errors. `tools/audit_api_rows.py`
 reports 0 missing and 0 stale api rows for BRepGraphInc (317 rows, 4 excluded: the
 storage destructor and allocator and the reconstruction cache TempScope constructor
 and destructor). For BRepGraph it reports 0 stale rows (429 rows, 9 excluded: the
@@ -108,6 +125,27 @@ cannot create before the editor lands), and the `br_bgraph_walk` requests compar
 everything else with OCCT byte for byte. `tools/audit_api_rows.py` has rows for every
 public member of these classes (377 rows, 28 excluded: the `begin()`/`end()` range
 members); the BRepGraph missing list shrank from 967 to 590 members, with 0 stale rows.
+Phase 2 area B ports the layers and caches (docs/topology-design.md section 11.9):
+BRepGraph_Layer, LayerRegistry, LayerHistory, LayerDeferred, LayerParametric,
+LayerTopoSupplement, Cache, CacheRegistry, the layer, cache and supplement iterators,
+the `LayerRegistry()` and `CacheRegistry()` accessors and the four
+`Shapes().AddWithHistory` overloads. A graph now owns both registries and registers the
+history layer at construction, as natively, so `Shapes().Add(shape, parent)` on a
+supplement route ensures the supplement layer and succeeds, and a supplement layer
+registered before population receives the non-core children, which reconstruction
+replays. `BRepGraph_LayerIterator_Test.cxx` is translated 1:1 (4 declarations, native
+and Rust pass); the LayerHistory, LayerTopoSupplement and CacheRegistry suites also
+call the editor, iterators, Tool, Copy, Compact or Transform (area A and later waves),
+so they wait, as the table lists. `crates/tkbrep/tests/brep_graph_layers.rs`,
+`brep_graph_layer_history.rs` and `brep_graph_caches.rs` cover the registries, the event
+dispatch from graph mutations, every history record and query, the supplement route,
+the deferred layer and the cache entry freshness. `tools/audit_api_rows.py` gives these
+classes 211 rows (13 excluded: the registry move constructors and assignments, the
+representation storage move members and destructor, the STL `begin`/`end` of the three
+iterators; 6 partial: the LayerDeferred members that lock through BRepGraph_LayerLock);
+the BRepGraph missing count falls from 967 to 756. The 9 members of these classes still
+missing all take `BRepGraph_CopyRemap` (area A): the five `CopyTo`/`CopyFreshTo`
+overrides, `CopyLayersTo` and `CopyFreshCachesTo`.
 
 The BRepTools and BRepAdaptor suites are translated 1:1 in
 `crates/tkbrep/tests/brep_tools_reshape.rs`, `brep_tools_trsf_modification.rs`,
@@ -368,8 +406,28 @@ band, an infinite plane), a face with a degenerated edge in a compsolid of two s
 and a compound of a free wire listed out of chain order, located and repeated free
 edges, vertices and faces, an EXTERNAL edge in a wire and a face with an INTERNAL wire
 (both raise Standard_ProgramError midway, and the partial storage is compared). No
-request routes a shape to the topology supplement layer (see Deliberate Rust
-deviations).
+request routes a shape to the topology supplement layer; the layer requests below do.
+
+The BRepGraph layer and cache requests (`br_blayer`; 22 requests in
+`tools/tkbrep_brepgraph_layers_corpus.py`, probes
+`tools/oracle/tkbrep_probe_brepgraph_layers*.cxx` and
+`crates/tkbrep/examples/br_probe/brep_graph_layers*.rs`) run the `br_bgraph` ingestion
+actions on the solid and free scenes and then: every history record kind (with self
+images, duplicates, empty replacements, a Deleted kind with images, a short batch that
+raises Standard_OutOfRange, disabled recording and Clear), UID and item-UID records
+(invalid UIDs, reference item UIDs), registry dispatch to logging layers that subscribe
+to all, none or some kinds (with the modifications `Add` under a parent triggers,
+unregistration, `InvalidateAll`, `ClearAll` and graph `Clear`), supplement attachments
+through population, the `Add` route and the layer API (incompatible kinds, uid
+collisions, removal, replacement and removal callbacks), `AddWithHistory` and the
+cross-graph `Absorb` over BRepTools histories, a probe cache service (registration,
+replacement, `Ensure`, entries bound to node, reference and item generations before and
+after a mutation) and a standalone deferred layer (merging, the eight-representation
+limit, bulk mode, moves). The reports print the registry slots, names, GUIDs, revisions
+and masks, the logged events, every history event with its maps in map order and every
+node, UID and item-UID query, the deleted sets in set order, every owner's
+attachments, the cache entries and generations, the deferred entries in map order, every
+node's shapes, and, after the graph is dropped, the detachment events and cache clears.
 
 The BRepGraph navigation requests (`br_bgraph_walk`; 13 requests in
 `tools/tkbrep_brepgraph_walk_corpus.py`) build a graph with the `br_bgraph` actions and
@@ -390,6 +448,10 @@ edge, coedge, face, wire and shell and their references, with usages placed at t
 scene's last location (a scale in the solid scene). The scenes are the solid scene
 under products, the cylinder (seam), mesh, Bezier, natural-restriction, degenerated
 and free scenes, and the `br_brep` edge and face scenes with every shape appended.
+
+The corpus has 635 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
+BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
+caches 22 and the BRepGraph navigation 13.
 
 ## Dependency gap
 
@@ -585,6 +647,25 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   orientations of the edge's coedges on the face; `CoEdge::SeamPair` also requires the
   opposite orientation. `CurveOnSurface` takes the face argument, not the coedge's.
 
+- `BRepGraph_LayerHistory::Absorb` walks its input map, whose TopTools_ShapeMapHasher
+  order follows the TShape addresses, so the order of the records of several inputs
+  differs between runs, natively as in Rust; the corpus gives images to one input per
+  history. The removed inputs are recorded together after the loop.
+- `RecordBatch` with fewer replacements than originals raises Standard_OutOfRange from
+  the array read of its first loop, after the item-UID inputs of the earlier pairs were
+  registered; the release build skips its size, kind and duplicate assertions, so a
+  duplicated original keeps its last pair and a Deleted kind with images feeds the
+  Modified map (as `Record` does).
+- A supplement attachment clears the owner's cached reconstruction, but `Shapes().Shape`
+  of a node never mutated still answers its construction-time original; only
+  `Reconstruct` replays the attachments.
+- `BRepGraph_Cache::RefOwnGen` tests the removal plane of the reference before its range,
+  an unchecked read for a reference past the end (the probes query references in range
+  only).
+- The layer registry and the cache registry read one slot at a time under their lock
+  and call the layer or cache without it, so a callback may use the registry; the
+  registration callbacks (`OnAttached`, `OnDetached`) run under the lock, as natively.
+
 ## Deliberate Rust deviations
 
 - A null TShape dereference (null shape flags, `ShapeType`, a null explored shape in
@@ -625,16 +706,27 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   deferred triangulations own their input.
 - `br_tools_read` leaves out a text that ends right after the version line: the native
   location reader then compares a `char` buffer the failed `>>` left uninitialized.
-- BRepGraph phase 1 has no layer or cache registry: a graph carries optional
-  `LayerHooks` and `CacheHooks` that the phase-2 registries install, and a graph without
-  them behaves as one with no registered layer or cache. The native constructor
-  registers `BRepGraph_LayerHistory`, which records nothing during population, so the
-  results agree; but `Shapes().Add(shape, parent)` on a supplement route (a vertex under
-  a face or edge, a non-core child under a container) calls `Ensure` on the supplement
-  layer natively and attaches the shape, while the port attaches it only when a
-  registry is installed and otherwise leaves the result `Failed`. Reconstruction reads
-  SameRange and SameParameter from the derived-state computations directly; the native
-  cache service returns the same values on an unchanged graph.
+- Reconstruction reads SameRange and SameParameter from the derived-state computations
+  directly; the native cache service (CacheDerivedState, a later wave) returns the same
+  values on an unchanged graph.
+- A BRepGraph layer or cache cannot point back into the graph that owns it: the members
+  that read `AttachedGraph()` or `Graph()` natively (history recording and `Absorb`,
+  supplement attachment and removal, deferred registration, the cache generation reads
+  and entry binds) take the graph as a parameter and use it only when it is the graph
+  they are attached to (docs/topology-design.md section 11.9); the callbacks receive the
+  attached graph from the registry. `Record(i)` lends the event to a closure, and the
+  getters that return a `const&` into a map (`FindModified`, `DeletedNodes`,
+  `AttachedTo`, `FindByUid`, `FindDeferred`) return copies. `ForEachDeferred` copies the
+  entries before visiting them, and `SupplementIterator` copies the owner's uid list at
+  construction (natively both walk the live containers); its `Value()` is `None` past the
+  end, where the native reference is undefined.
+- `BRepGraph_LayerDeferred` locks its items through `BRepGraph_LayerLock`, which needs the
+  explorers (a later wave): on an attached layer, registering an item and
+  `ReserveDeferredItems` return Standard_NotImplemented where they would `Ensure` the lock
+  layer; the unlock and `TouchOwners` steps find no lock layer, which is exact while no
+  such layer can exist. A detached deferred layer is exact. `OnNodeReplaced` stops
+  appending at eight representations where the native noexcept callback terminates the
+  process.
 - `BRepGraphInc_Reconstruct::Node` with a node index out of its kind's range raises
   Standard_OutOfRange (natively an unchecked vector read). Parallel face extraction
   returns the error of the failing face with the lowest queue index, so a parallel and
@@ -671,3 +763,7 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   constructor for the aliasing case, and `items()` returns `None` for the identity
   mapping (a null map natively); an explicit mapping without a map maps nothing
   (natively a null dereference).
+  const` and `Mesh()`; `Shapes().RemoveShape` (the editor's `RemoveNode`);
+  `Topo().Edges().WiresOf` and `FacesOf` (they return iterators). The
+  editor, Tool and CacheDerivedState classes are partly ported: only the members that
+  phase 1 calls have api rows.

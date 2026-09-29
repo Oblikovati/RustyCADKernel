@@ -82,7 +82,7 @@ pub fn face_with_cache(
     add_face_wires(&mut build, face, &mut result)?;
     result.set_orientation(Orientation::Forward);
     let mut shape: Shape = result.into();
-    replay_supplement(graph.topo_supplement(), face.into(), &mut shape)?;
+    replay_supplement(graph, face.into(), &mut shape)?;
     build.cache.bind(face.into(), &shape);
     Ok(shape)
 }
@@ -171,7 +171,7 @@ fn get_or_build_edge(build: &mut FaceBuild<'_>, edge: EdgeId) -> Result<Edge, Fa
     }
     let result = build_edge(build.graph, edge, build.cache, false)?;
     let mut shape: Shape = result.into();
-    replay_supplement(build.graph.topo_supplement(), edge.into(), &mut shape)?;
+    replay_supplement(build.graph, edge.into(), &mut shape)?;
     build.cache.bind(edge.into(), &shape);
     Ok(Edge::unchecked(shape))
 }

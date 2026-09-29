@@ -18,8 +18,10 @@
 //! `BRepGraph::ShapesView`: the shapes of the nodes and the ingestion of shapes.
 //!
 //! [`ShapesView`] (`graph.shapes()`) answers the `const` queries; [`ShapesViewMut`]
-//! (`graph.shapes_mut()`) holds the mutable borrow for `Add` and `ClearCached`.
+//! (`graph.shapes_mut()`) holds the mutable borrow for `Add`, `AddWithHistory` and
+//! `ClearCached`.
 mod add;
+mod history;
 mod ingest;
 mod reconstruction;
 mod route;
@@ -219,6 +221,16 @@ impl ShapesView<'_> {
     /// `HasNode(theShape)`.
     pub fn has_node(self, shape: &Shape) -> bool {
         !shape.is_null() && self.find_node(shape).is_valid()
+    }
+
+    /// `ClearCached(theNode)` on the cache itself: the cached reconstruction lives
+    /// behind the storage lock, so the layers clear it from a shared graph (the
+    /// supplement layer after an attachment change).
+    pub(crate) fn clear_cached(self, node: NodeId) {
+        if !node.is_valid() || self.graph.topo().generic().is_removed(node) {
+            return;
+        }
+        self.graph.inc_storage().unbind_current_shape(node);
     }
 
     /// `CollectHistoryInputs(theRoots, theOutInputs)`: every sub-shape of the roots'

@@ -25,7 +25,7 @@
 //! [`CopyRemap::target_graph`] takes `&mut self`, so the copy callbacks receive
 //! `&mut CopyRemap`.
 use crate::brep_graph::{BRepGraph, ItemId, ItemUid};
-use rustycad_tkernel::ncollection::{FlatDataMap, HashKey};
+use rustycad_tkernel::ncollection::FlatDataMap;
 
 /// `BRepGraph_CopyRemap::Mode`: copy or compaction semantics.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
@@ -47,13 +47,6 @@ pub enum MappingKind {
     Explicit = 0,
     /// `Identity`: source and target ids are equal (a full identity copy).
     Identity = 1,
-}
-
-/// `NCollection_DefaultHasher<BRepGraph_ItemId>`: `std::hash<BRepGraph_ItemId>`.
-impl HashKey for ItemId {
-    fn occt_hash(&self) -> usize {
-        self.hash_code()
-    }
 }
 
 /// `BRepGraph_CopyRemap::ItemMap`: `NCollection_FlatDataMap<ItemId, ItemId>`.

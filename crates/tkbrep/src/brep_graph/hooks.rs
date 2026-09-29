@@ -10,17 +10,17 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the layer and cache registry calls made by BRepGraph.cxx,
-// BRepGraphInc_Populate.cxx and BRepGraphInc_Reconstruct.cxx, and of
+// Rust translation of the supplement-layer calls made by BRepGraphInc_Populate.cxx and
+// BRepGraphInc_Reconstruct.cxx, and of
 // BRepGraph_LayerTopoSupplement::AttachmentKind, at
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! The attachment points of the layer and cache registries (phase 2 of the port).
+//! The supplement-layer calls of the BRepGraphInc pipelines.
 //!
-//! The graph core calls the registries in a few places only; these traits are those
-//! calls. A graph without hooks behaves as a graph with no registered layer or cache
-//! (docs/topology-design.md section 11.6).
-use crate::brep_graph::{BRepGraph, NodeId, RefId};
+//! Population and reconstruction reach the topology supplement layer through this
+//! trait (docs/topology-design.md sections 11.6 and 11.9); the graph owns the layer
+//! and cache registries themselves.
+use crate::brep_graph::NodeId;
 use crate::topods::Shape;
 
 /// `BRepGraph_LayerTopoSupplement::AttachmentKind`: why a supplement shape is attached.
@@ -48,35 +48,12 @@ pub enum AttachmentKind {
 /// call. The layer keeps its records behind its own lock, as the native layer is
 /// reached through a handle from `const` code.
 pub trait TopoSupplementHooks: Send + Sync {
-    /// `AddAttachment(theOwner, theKind, theShape)`: the attachment uid, 0 when refused.
+    /// `AddAttachment(theOwner, theKind, theShape)` during population: the attachment
+    /// uid, 0 when refused. The `Shapes().ClearCached(theOwner)` of the native member is
+    /// a no-op there, since an owner created by the running build has no cached
+    /// reconstruction (the cache is only filled by `Shapes().Shape`).
     fn add_attachment(&self, owner: NodeId, kind: AttachmentKind, shape: &Shape) -> u64;
     /// The shapes of `AttachedTo(theOwner)` resolved through `FindByUid`, in attachment
     /// order, skipping missing or null entries (what `replaySupplementAttachments` adds).
     fn attached_shapes(&self, owner: NodeId) -> Vec<Shape>;
-}
-
-/// The `BRepGraph_LayerRegistry` calls of the graph core.
-pub trait LayerHooks: Send + Sync {
-    /// `HasModificationSubscribers()`.
-    fn has_modification_subscribers(&self) -> bool;
-    /// `DispatchNodeModified(theNode)`.
-    fn dispatch_node_modified(&self, graph: &BRepGraph, node: NodeId);
-    /// `HasRefModificationSubscribers()`.
-    fn has_ref_modification_subscribers(&self) -> bool;
-    /// `DispatchRefModified(theRef)`.
-    fn dispatch_ref_modified(&self, graph: &BRepGraph, reference: RefId);
-    /// `ClearAll()`.
-    fn clear_all(&mut self);
-    /// `Find<BRepGraph_LayerTopoSupplement>()`: the registered supplement layer, if any.
-    fn topo_supplement(&self) -> Option<&dyn TopoSupplementHooks>;
-    /// `Ensure<BRepGraph_LayerTopoSupplement>()`: the supplement layer, registered first
-    /// when absent (what `Editor().Supplement().Attach*` calls); `None` only for a
-    /// registry that cannot hold one.
-    fn ensure_topo_supplement(&mut self) -> Option<&dyn TopoSupplementHooks>;
-}
-
-/// The `BRepGraph_CacheRegistry` calls of the graph core.
-pub trait CacheHooks: Send + Sync {
-    /// `ClearAll()`.
-    fn clear_all(&mut self);
 }

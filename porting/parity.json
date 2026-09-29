@@ -140530,6 +140530,1694 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc::Instance::hash_code",
       "status": "implemented",
       "notes": "Manual BRepGraphInc mapping (docs/topology-design.md section 11): the storage tables are Vec-backed EntityStore/RepStore values; typed accessors keep the native names in snake_case; the relation, removal, ownership and guard planes are BitFlags; C++ exceptions become Failure errors. Compared with OCCT by the br_graph probes."
+    },
+    {
+      "upstream_id": "BRepGraph::LayerRegistry()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph::layer_registry",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph::LayerRegistry() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph::layer_registry",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph::CacheRegistry()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph::cache_registry",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph::CacheRegistry() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph::cache_registry",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::DEFINE_STANDARD_RTTIEXT(BRepGraph_Cache,Standard_Transient)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. impl_transient_interface! registers the BRepGraph_Cache descriptor."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator(const BRepGraph_CacheRegistry&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator::More() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::more",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator::Next()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::next_slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator::Value() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::value",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator::Slot() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator::NbCaches() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::nb_caches",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator::begin()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for CacheIterator`."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheIterator::end() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for CacheIterator`."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry(BRepGraph_CacheRegistry&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry",
+      "status": "excluded",
+      "notes": "C++ move constructor/assignment: a Rust registry moves by value and its Drop detaches the layers or caches a replaced registry held (the move-assignment detachAllLocked)."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::operator=(BRepGraph_CacheRegistry&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry",
+      "status": "excluded",
+      "notes": "C++ move constructor/assignment: a Rust registry moves by value and its Drop detaches the layers or caches a replaced registry held (the move-assignment detachAllLocked)."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::RegisterCache(const occ::handle<BRepGraph_Cache>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::register_cache",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::Register(const occ::handle<BRepGraph_Cache>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::register",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::UnregisterCache(const Standard_GUID&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::unregister_cache",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::FindCache(const Standard_GUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::find_cache",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::FindCache() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::find",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::Find() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::find",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::Ensure()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::ensure",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::FindSlot(const Standard_GUID&,uint32_t&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::find_slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::FindSlot(const occ::handle<BRepGraph_Cache>&,uint32_t&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::find_slot_of",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::Cache(uint32_t) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::cache",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::NbCaches() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::nb_caches",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::CacheIter() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::cache_iter",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::ClearAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::clear_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistry::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_registry::CacheRegistry::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnNodeRemoved(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnItemRemoved(BRepGraph_ItemId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_item_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnNodeReplaced(BRepGraph_NodeId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_replaced",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::InvalidateAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::invalidate_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::SubscribedKinds() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::subscribed_kinds",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnNodeModified(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnItemModified(BRepGraph_ItemId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_item_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnNodesModified(const NCollection_Array1<BRepGraph_NodeId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_nodes_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::KindBit(BRepGraph_NodeId::Kind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::kind_bit",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::SubscribedRefKinds() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::subscribed_ref_kinds",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnRefRemoved(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_ref_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnRefModified(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_ref_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::OnRefsModified(const NCollection_Array1<BRepGraph_RefId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_refs_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::RefKindBit(BRepGraph_RefId::Kind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::ref_kind_bit",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::Revision() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::revision",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::DEFINE_STANDARD_RTTIEXT(BRepGraph_Layer,Standard_Transient)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. impl_transient_interface! registers the BRepGraph_Layer descriptor."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::RepresentationKind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationKind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Default."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage(const RepresentationStorage&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Clone."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage(RepresentationStorage&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage",
+      "status": "excluded",
+      "notes": "C++ move constructor: a Rust value moves."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::operator=(const RepresentationStorage&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Clone::clone_from."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::operator=(RepresentationStorage&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage",
+      "status": "excluded",
+      "notes": "C++ move assignment: a Rust value moves."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::~RepresentationStorage()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage",
+      "status": "excluded",
+      "notes": "Destructor: the Vec drops its representations."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::Size() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::size",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::IsEmpty() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::is_empty",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::ContainsKind(RepresentationKind) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::contains_kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::Value(size_t) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::value",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::ChangeValue(size_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::change_value",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::First() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::first",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::Append(const Representation&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::append",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::RepresentationStorage::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::GetID()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerType::get_id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::FindDeferred(BRepGraph_ItemId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::find_deferred",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::FindDeferred(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::find_deferred_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::FindDeferred(BRepGraph_RefId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::find_deferred_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::HasDeferred(BRepGraph_ItemId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::has_deferred",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::HasDeferred(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::has_deferred_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::HasDeferred(BRepGraph_RefId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::has_deferred_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferred(BRepGraph_ItemId,const TCollection_AsciiString&,const TCollection_AsciiString&,RepresentationKind,const TCollection_AsciiString&,uint32_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred",
+      "status": "partial",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferredRepresentations(BRepGraph_ItemId,const TCollection_AsciiString&,const TCollection_AsciiString&,const Representation*,size_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_representations",
+      "status": "partial",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferredRepresentationsDirect(BRepGraph_ItemId,const TCollection_AsciiString&,const TCollection_AsciiString&,const Representation*,size_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_representations_direct",
+      "status": "partial",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferred(BRepGraph_NodeId,const TCollection_AsciiString&,const TCollection_AsciiString&,RepresentationKind,const TCollection_AsciiString&,uint32_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_node",
+      "status": "partial",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::RegisterDeferred(BRepGraph_RefId,const TCollection_AsciiString&,const TCollection_AsciiString&,RepresentationKind,const TCollection_AsciiString&,uint32_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::register_deferred_ref",
+      "status": "partial",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::UnregisterDeferred(BRepGraph_ItemId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::unregister_deferred",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::UnregisterDeferred(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::unregister_deferred_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::UnregisterDeferred(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::unregister_deferred_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::HasDeferredItems() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::has_deferred_items",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::FindFirstDeferred(RepresentationKind,BRepGraph_ItemId*) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::find_first_deferred",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::ReserveDeferredItems(size_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::reserve_deferred_items",
+      "status": "partial",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Partial: on an attached layer the item lock goes through BRepGraph_LayerLock (Ensure), which is not ported yet (it needs the explorers); that path returns Standard_NotImplemented after the steps that natively come first. A detached layer is exact."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::BeginBulkRegistration()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::begin_bulk_registration",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::EndBulkRegistration()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::end_bulk_registration",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::ForEachDeferred(VisitorT&&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::for_each_deferred",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The entries are copied before the visits."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::ForEachDeferred(RepresentationKind,VisitorT&&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred::for_each_deferred_of_kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The entries are copied before the visits."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::OnNodeRemoved(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::OnNodeReplaced(BRepGraph_NodeId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_replaced",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Past eight representations the port stops appending where the native noexcept callback terminates."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::OnRefRemoved(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_ref_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::InvalidateAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::invalidate_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The unlock/TouchOwners step finds no BRepGraph_LayerLock (none can be registered before that class is ported), which is the native no-op of a missing lock layer; revisit with LayerLock."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::DEFINE_STANDARD_RTTIEXT(BRepGraph_LayerDeferred,BRepGraph_Layer)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::LayerDeferred",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. impl_transient! registers the class descriptor (RuntimeTyped::static_type)."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Kind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryKind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Default."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::GetID()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerType::get_id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Record(const TCollection_AsciiString&,BRepGraph_NodeId,const NCollection_Array1<BRepGraph_NodeId>&,BRepGraph_LayerHistory::Kind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordBatch(const TCollection_AsciiString&,const NCollection_Array1<BRepGraph_NodeId>&,const NCollection_Array1<BRepGraph_NodeId>&,const TCollection_AsciiString&,BRepGraph_LayerHistory::Kind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_batch",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Fewer replacements than originals raise Standard_OutOfRange at the array read, as natively."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordDeleted(const TCollection_AsciiString&,const NCollection_Array1<BRepGraph_NodeId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_deleted",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordReplaced(const TCollection_AsciiString&,BRepGraph_NodeId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_replaced",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordReplacedBatch(const TCollection_AsciiString&,const NCollection_Array1<BRepGraph_NodeId>&,const NCollection_Array1<BRepGraph_NodeId>&,const TCollection_AsciiString&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_replaced_batch",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordUid(const TCollection_AsciiString&,const BRepGraph_UID&,const NCollection_Array1<BRepGraph_UID>&,BRepGraph_LayerHistory::Kind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordDeletedUid(const TCollection_AsciiString&,const NCollection_Array1<BRepGraph_UID>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_deleted_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordItemUid(const TCollection_AsciiString&,const BRepGraph_ItemUID&,const NCollection_Array1<BRepGraph_ItemUID>&,BRepGraph_LayerHistory::Kind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_item_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::RecordDeletedItemUid(const TCollection_AsciiString&,const NCollection_Array1<BRepGraph_ItemUID>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_deleted_item_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Absorb(const NCollection_DataMap<TopoDS_Shape,BRepGraph_NodeId,TopTools_ShapeMapHasher>&,const NCollection_DataMap<TopoDS_Shape,BRepGraph_NodeId,TopTools_ShapeMapHasher>&,const occ::handle<BRepTools_History>&,const TCollection_AsciiString&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::absorb",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Absorb(const BRepGraph&,const BRepGraph&,const NCollection_DataMap<TopoDS_Shape,BRepGraph_NodeId,TopTools_ShapeMapHasher>&,const NCollection_DataMap<TopoDS_Shape,BRepGraph_NodeId,TopTools_ShapeMapHasher>&,const occ::handle<BRepTools_History>&,const TCollection_AsciiString&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::absorb_between",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindOriginal(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_original",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindDerived(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_derived",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindModified(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindGenerated(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_generated",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::IsDeleted(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::is_deleted",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::DeletedNodes() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::deleted_nodes",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindModified(const BRepGraph_UID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_modified_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindOriginals(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_originals",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindGenerated(const BRepGraph_UID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_generated_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::IsDeleted(const BRepGraph_UID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::is_deleted_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::DeletedUids() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::deleted_uids",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::HasKnownInput(const BRepGraph_UID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::has_known_input_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindModified(const BRepGraph_ItemUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_modified_item_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindGenerated(const BRepGraph_ItemUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_generated_item_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::IsDeleted(const BRepGraph_ItemUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::is_deleted_item_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::DeletedItemUids() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::deleted_item_uids",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::HasKnownInput(const BRepGraph_ItemUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::has_known_input_item_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindModified(const BRepGraph&,const BRepGraph_UID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_modified_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::FindGenerated(const BRepGraph&,const BRepGraph_UID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::find_generated_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::IsDeleted(const BRepGraph&,const BRepGraph_UID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::is_deleted_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::DeletedUids(const BRepGraph&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::deleted_uids_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::NbRecords() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::nb_records",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Record(size_t) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::record_at",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The event is lent to a closure so its maps keep their order; Standard_OutOfRange past the end."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::SetEnabled(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::set_enabled",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::IsEnabled() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::is_enabled",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory::clear_records",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Also the BRepGraphLayer::clear callback."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::OnNodeRemoved(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::InvalidateAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::invalidate_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::DEFINE_STANDARD_RTTIEXT(BRepGraph_LayerHistory,BRepGraph_Layer)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::LayerHistory",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. impl_transient! registers the class descriptor (RuntimeTyped::static_type)."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator(const BRepGraph_LayerRegistry&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator::More() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::more",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator::Next()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::next_slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator::Value() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::value",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator::Slot() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator::NbLayers() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::registry_iterator::SlotIterator::nb_layers",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator::begin()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for LayerIterator`."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIterator::end() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for LayerIterator`."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::GenerationFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::GenerationFlag",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::MeshQuality",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::MeshQuality",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::GenerationMask(GenerationFlag)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::generation_mask",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::HasGenerationFlag(uint32_t,GenerationFlag)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::has_generation_flag",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::MeshQualityValue(MeshQuality,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::mesh_quality_value",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The five rung values are one [u32; 5] ladder."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::DEFINE_STANDARD_RTTIEXT(BRepGraph_LayerParametric,BRepGraph_Layer)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::LayerParametric",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. impl_transient_interface! registers the abstract class descriptor."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry(BRepGraph_LayerRegistry&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry",
+      "status": "excluded",
+      "notes": "C++ move constructor/assignment: a Rust registry moves by value and its Drop detaches the layers or caches a replaced registry held (the move-assignment detachAllLocked)."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::operator=(BRepGraph_LayerRegistry&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry",
+      "status": "excluded",
+      "notes": "C++ move constructor/assignment: a Rust registry moves by value and its Drop detaches the layers or caches a replaced registry held (the move-assignment detachAllLocked)."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::RegisterLayer(const occ::handle<BRepGraph_Layer>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::register_layer",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::UnregisterLayer(const Standard_GUID&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::unregister_layer",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::FindLayer(const Standard_GUID&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::find_layer",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::FindLayer() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::find",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::Find() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::find",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::Ensure()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::ensure",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::FindSlot(const Standard_GUID&,uint32_t&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::find_slot",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::Layer(uint32_t) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::layer",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::NbLayers() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::nb_layers",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::HasModificationSubscribers() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::has_modification_subscribers",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::SubscribedKindsMask() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::subscribed_kinds_mask",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchOnNodeRemoved(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_on_node_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchOnItemRemoved(BRepGraph_ItemId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_on_item_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchOnNodeReplaced(BRepGraph_NodeId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_on_node_replaced",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchNodeModified(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_node_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchItemModified(BRepGraph_ItemId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_item_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchNodesModified(const NCollection_Array1<BRepGraph_NodeId>&,int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_nodes_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::HasRefModificationSubscribers() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::has_ref_modification_subscribers",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::SubscribedRefKindsMask() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::subscribed_ref_kinds_mask",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchOnRefRemoved(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_on_ref_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchRefModified(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_ref_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::DispatchRefsModified(const NCollection_Array1<BRepGraph_RefId>&,int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::dispatch_refs_modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::ClearAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::clear_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerRegistry::InvalidateAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_registry::LayerRegistry::invalidate_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::AttachmentKind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::AttachmentKind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::GetID()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerType::get_id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::ID() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::id",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::Name() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::FindByUid(uint64_t) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement::find_by_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::AttachedTo(BRepGraph_NodeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement::attached_to",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::AddAttachment(BRepGraph_NodeId,AttachmentKind,const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement::add_attachment",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::AddAttachmentWithUid(BRepGraph_NodeId,uint64_t,AttachmentKind,const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement::add_attachment_with_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::RemoveAttachment(uint64_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement::remove_attachment",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::Validate() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement::validate",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::OnNodeRemoved(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_removed",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::OnNodeReplaced(BRepGraph_NodeId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_node_replaced",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::InvalidateAll()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::invalidate_all",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::clear",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::DEFINE_STANDARD_RTTIEXT(BRepGraph_LayerTopoSupplement,BRepGraph_Layer)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::LayerTopoSupplement",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. impl_transient! registers the class descriptor (RuntimeTyped::static_type)."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::AddWithHistory(const TopoDS_Shape&,const NCollection_DataMap<TopoDS_Shape,BRepGraph_NodeId,TopTools_ShapeMapHasher>&,const occ::handle<BRepTools_History>&,const TCollection_AsciiString&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::ShapesViewMut::add_with_history",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::AddWithHistory(const TopoDS_Shape&,const NCollection_DataMap<TopoDS_Shape,BRepGraph_NodeId,TopTools_ShapeMapHasher>&,const occ::handle<BRepTools_History>&,const TCollection_AsciiString&,const Options&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::ShapesViewMut::add_with_history_options",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::AddWithHistory(const TopoDS_Shape&,const NCollection_Array1<BRepGraph_NodeId>&,const occ::handle<BRepTools_History>&,const TCollection_AsciiString&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::ShapesViewMut::add_with_history_roots",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::AddWithHistory(const TopoDS_Shape&,const NCollection_Array1<BRepGraph_NodeId>&,const occ::handle<BRepTools_History>&,const TCollection_AsciiString&,const Options&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::ShapesViewMut::add_with_history_roots_options",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementIterator(const BRepGraph&,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_iterator::SupplementIterator::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. The owner uid list is copied at construction."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementIterator::More() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_iterator::SupplementIterator::more",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementIterator::Next()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_iterator::SupplementIterator::next_attachment",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementIterator::Uid() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_iterator::SupplementIterator::uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementIterator::Value() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_iterator::SupplementIterator::value",
+      "status": "implemented",
+      "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md section 11.9): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; the graph owns both registries, which lock themselves; the native attached-graph pointer is the graph attachment token, and members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it; getters returning a const& into a map return copies. Compared with OCCT by the br_blayer probes. Option<&SupplementEntry>: None past the end, where the native reference is undefined."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementIterator::begin()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for SupplementIterator`."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementIterator::end() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for SupplementIterator`."
     }
   ],
   "tests": [
@@ -218956,6 +220644,62 @@
       "rust_target": "brep_graph_typed_id_dispatch",
       "rust_test": "BRepGraph_TypedIdDispatchTest__VisitRefId_ConvertsToMatchingTypedId",
       "rust_source": "crates/tkbrep/tests/brep_graph_typed_id_dispatch.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIteratorTest.EmptyRegistry_IsEmpty",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerIterator_Test.cxx",
+      "source_sha256": "1efe8fea62038b59b6ee1ccb463125cbbcea4c72d9c652c8e81665ef5caab252",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_iterator",
+      "rust_test": "BRepGraph_LayerIteratorTest__EmptyRegistry_IsEmpty",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_iterator.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIteratorTest.SingleLayer_IteratesOnce",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerIterator_Test.cxx",
+      "source_sha256": "1efe8fea62038b59b6ee1ccb463125cbbcea4c72d9c652c8e81665ef5caab252",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_iterator",
+      "rust_test": "BRepGraph_LayerIteratorTest__SingleLayer_IteratesOnce",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_iterator.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIteratorTest.MultipleLayers_IteratesAll",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerIterator_Test.cxx",
+      "source_sha256": "1efe8fea62038b59b6ee1ccb463125cbbcea4c72d9c652c8e81665ef5caab252",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_iterator",
+      "rust_test": "BRepGraph_LayerIteratorTest__MultipleLayers_IteratesAll",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_iterator.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerIteratorTest.RangeFor_WorksCorrectly",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerIterator_Test.cxx",
+      "source_sha256": "1efe8fea62038b59b6ee1ccb463125cbbcea4c72d9c652c8e81665ef5caab252",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_iterator",
+      "rust_test": "BRepGraph_LayerIteratorTest__RangeFor_WorksCorrectly",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_iterator.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

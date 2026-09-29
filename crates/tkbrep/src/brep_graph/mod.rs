@@ -20,7 +20,9 @@
 //! [`BRepGraph::shapes_mut`] ingests shapes. The ids are values ([`NodeId`], [`RefId`],
 //! [`RepId`], their typed aliases, [`ItemId`] and the UIDs). docs/topology-design.md
 //! section 11 fixes the mapping and names the modules the second phase of the port adds.
+pub mod cache;
 pub mod cache_derived_state;
+pub mod cache_registry;
 pub mod child_explorer;
 mod child_refs;
 pub mod copy_remap;
@@ -30,8 +32,15 @@ pub mod editor;
 mod explorer_kinds;
 mod graph;
 pub mod hooks;
+mod id_hash_keys;
 pub(crate) mod ids;
 pub mod iterator;
+pub mod layer;
+pub mod layer_deferred;
+pub mod layer_history;
+pub mod layer_parametric;
+pub mod layer_registry;
+pub mod layer_topo_supplement;
 mod marks;
 pub mod parallel_policy;
 mod parent_cursor;
@@ -39,9 +48,11 @@ pub mod parent_explorer;
 pub mod parent_traits;
 pub mod refs_iterator;
 pub mod refs_view;
+pub mod registry_iterator;
 pub mod related_iterator;
 pub mod reverse_iterator;
 pub mod shapes_view;
+pub mod supplement_iterator;
 pub mod tool;
 pub mod topo_view;
 pub mod uids_view;
@@ -51,6 +62,7 @@ mod version_stamp;
 pub use data::Data;
 pub use graph::BRepGraph;
 pub use ids::*;
+pub use registry_iterator::{CacheIterator, LayerIterator};
 pub use usage_path::{UsagePath, UsageStep};
 pub use version_stamp::{StampDomain, VersionStamp};
 

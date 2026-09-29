@@ -35,9 +35,7 @@ void bg_add_result(const BRepGraph::ShapesView::Result& res){
 // Actions, each printing its result or the exception it raised: 0 Perform s par,
 // 1 Append s par, 2 AppendFlattened s par, 3 Shapes().Add s bits, 4 Shapes().Add s kind
 // index bits (under a parent), 5 Shapes().ClearCached kind index.
-void bg_action(BRepGraph& g,const BrScene& s,BrReader& r){
- int code=r.integer();
- try{
+void bg_run(BRepGraph& g,const BrScene& s,BrReader& r,int code){
   switch(code){
    case 0:{TopoDS_Shape sh=s.graph.shape(r.integer());br_int(int(BRepGraphInc_Populate::Perform(g,sh,r.flag())));break;}
    case 1:{TopoDS_Shape sh=s.graph.shape(r.integer());br_int(int(BRepGraphInc_Populate::Append(g,sh,r.flag())));break;}
@@ -46,8 +44,10 @@ void bg_action(BRepGraph& g,const BrScene& s,BrReader& r){
    case 3:{TopoDS_Shape sh=s.graph.shape(r.integer());bg_add_result(g.Shapes().Add(sh,bg_options(r.integer())));break;}
    case 4:{TopoDS_Shape sh=s.graph.shape(r.integer());int k=r.integer();BRepGraph_NodeId parent(BRepGraph_NodeId::Kind(k),r.integer());
     bg_add_result(g.Shapes().Add(sh,parent,bg_options(r.integer())));break;}
-   default:{int k=r.integer();g.Shapes().ClearCached(BRepGraph_NodeId(BRepGraph_NodeId::Kind(k),r.integer()));br_word("-");break;}}
- }catch(const Standard_Failure& e){br_word(e.ExceptionType());}}
+   default:{int k=r.integer();g.Shapes().ClearCached(BRepGraph_NodeId(BRepGraph_NodeId::Kind(k),r.integer()));br_word("-");break;}}}
+void bg_action(BRepGraph& g,const BrScene& s,BrReader& r){
+ int code=r.integer();
+ try{bg_run(g,s,r,code);}catch(const Standard_Failure& e){br_word(e.ExceptionType());}}
 // The per-kind definitions with their relations and derived queries.
 void bg_vertices(const BRepGraph& g){
  const auto& ops=g.Topo().Vertices();br_int(ops.Nb());br_int(ops.NbActive());
