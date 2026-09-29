@@ -22,6 +22,7 @@ pub mod native;
 pub mod protected;
 pub mod spline_curve_kind;
 pub mod spline_data;
+pub mod trim_bounds;
 
 mod geometry;
 pub use geometry::{

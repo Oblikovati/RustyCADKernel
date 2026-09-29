@@ -13,7 +13,9 @@
 // Rust translation of ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2dGridEval_Hyperbola`: `P(u) = C + MajR * cosh(u) * X + MinR * sinh(u) * Y` on a grid.
-use super::conic_grid::{ConicTerms, conic_grid, conic_grid_d1, conic_grid_d2, conic_grid_d3};
+use super::conic_grid::{
+    ConicTerms, conic_grid, conic_grid_d1, conic_grid_d2, conic_grid_d3, conic_grid_methods,
+};
 use super::grid::{GridFrame, RadiiFrame, empty, map_grid};
 use super::{Geom2dGridEvalCurveD1, Geom2dGridEvalCurveD2, Geom2dGridEvalCurveD3};
 use crate::geom2d::Geom2dHyperbola;
@@ -81,46 +83,7 @@ impl Geom2dGridEvalHyperbola {
             minor: hypr.minor_radius(),
         })))
     }
-    /// Points at every parameter (`EvaluateGrid`); `evaluator.evaluate_grid(&params)?`.
-    pub fn evaluate_grid(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Point2>, Failure> {
-        let Some(e) = self.coords(params)? else {
-            return Ok(empty());
-        };
-        Ok(conic_grid(&e, params))
-    }
-    /// Points and D1 (`EvaluateGridD1`); `evaluator.evaluate_grid_d1(&params)?`.
-    pub fn evaluate_grid_d1(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Geom2dGridEvalCurveD1>, Failure> {
-        let Some(e) = self.coords(params)? else {
-            return Ok(empty());
-        };
-        Ok(conic_grid_d1(&e, params))
-    }
-    /// Points, D1 and D2 (`EvaluateGridD2`); `evaluator.evaluate_grid_d2(&params)?`.
-    pub fn evaluate_grid_d2(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Geom2dGridEvalCurveD2>, Failure> {
-        let Some(e) = self.coords(params)? else {
-            return Ok(empty());
-        };
-        Ok(conic_grid_d2(&e, params))
-    }
-    /// Points, D1, D2 and D3 (`EvaluateGridD3`); `evaluator.evaluate_grid_d3(&params)?`.
-    pub fn evaluate_grid_d3(
-        &self,
-        params: &Array1<'_, f64>,
-    ) -> Result<Array1<'static, Geom2dGridEvalCurveD3>, Failure> {
-        let Some(e) = self.coords(params)? else {
-            return Ok(empty());
-        };
-        Ok(conic_grid_d3(&e, params))
-    }
+    conic_grid_methods!();
     /// Derivative of order `n >= 1`: `(sinh, cosh)` terms for odd `n`, `(cosh, sinh)`
     /// for even `n`; empty for `n < 1` (`EvaluateGridDN`); `evaluator.evaluate_grid_dn(&params, 3)?`.
     pub fn evaluate_grid_dn(

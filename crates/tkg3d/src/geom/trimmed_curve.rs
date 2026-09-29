@@ -23,17 +23,32 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::native::std_min;
+use rustycad_tkg2d::geom2d::trim_bounds::{TrimBasis, TrimmedBounds};
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_field};
-use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
 use std::io;
 
-struct TrimmedState {
-    basis: Handle<dyn GeomCurve>,
-    u_trim1: f64,
-    u_trim2: f64,
+type TrimmedState = TrimmedBounds<dyn GeomCurve>;
+
+const CLASS: &str = "Geom_TrimmedCurve";
+
+impl TrimBasis for dyn GeomCurve {
+    fn trim_basis_range(&self) -> (f64, f64) {
+        (self.first_parameter(), self.last_parameter())
+    }
+    fn trim_basis_periodic(&self) -> bool {
+        self.is_periodic()
+    }
+    fn trim_basis_period(&self) -> Result<f64, Failure> {
+        self.period()
+    }
+    fn trim_basis_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        self.reversed_parameter(u)
+    }
+    fn trim_basis_reverse(&self) -> Result<(), Failure> {
+        self.reverse()
+    }
 }
 
 /// A trimmed curve; `Handle::new(GeomTrimmedCurve::new(&circle.cast(), 0.0, PI, true, true)?)`.
@@ -50,87 +65,6 @@ impl_transient!(
     parent,
     interfaces: [dyn GeomGeometry, dyn GeomCurve, dyn GeomBoundedCurve]
 );
-
-// Geom_TrimmedCurve::Reverse on the locked state.
-fn reverse_state(state: &mut TrimmedState) -> Result<(), Failure> {
-    let u1: f64 = state.basis.reversed_parameter(state.u_trim2)?;
-    let u2: f64 = state.basis.reversed_parameter(state.u_trim1)?;
-    state.basis.reverse()?;
-    set_trim_state(state, u1, u2, true, false)
-}
-
-// Geom_TrimmedCurve::SetTrim on the locked state. Like the native code, the out
-// of range failure is raised after the new bounds are stored.
-fn set_trim_state(
-    state: &mut TrimmedState,
-    u1: f64,
-    u2: f64,
-    sense: bool,
-    adjust_periodic: bool,
-) -> Result<(), Failure> {
-    if u1 == u2 {
-        return Err(errors::construction(&format!(
-            "Geom_TrimmedCurve::U1 == U2 = {u1}; expected distinct parameters"
-        )));
-    }
-    let udeb: f64 = state.basis.first_parameter();
-    let ufin: f64 = state.basis.last_parameter();
-    let same_sense: bool = if state.basis.is_periodic() {
-        trim_periodic(state, [u1, u2], [udeb, ufin], adjust_periodic);
-        sense
-    } else {
-        trim_bounded(state, u1, u2, [udeb, ufin])?;
-        if u1 < u2 { sense } else { !sense }
-    };
-    if !same_sense {
-        reverse_state(state)?;
-    }
-    Ok(())
-}
-
-fn trim_periodic(state: &mut TrimmedState, trim: [f64; 2], range: [f64; 2], adjust: bool) {
-    state.u_trim1 = trim[0];
-    state.u_trim2 = trim[1];
-    if !adjust {
-        return;
-    }
-    let tolerance: f64 = std_min(
-        (state.u_trim2 - state.u_trim1).abs() / 2.0,
-        precision::p_confusion(),
-    );
-    (state.u_trim1, state.u_trim2) =
-        elclib::adjust_periodic(range[0], range[1], tolerance, state.u_trim1, state.u_trim2);
-}
-
-fn trim_bounded(
-    state: &mut TrimmedState,
-    u1: f64,
-    u2: f64,
-    range: [f64; 2],
-) -> Result<(), Failure> {
-    (state.u_trim1, state.u_trim2) = if u1 < u2 { (u1, u2) } else { (u2, u1) };
-    if (range[0] - state.u_trim1 > precision::p_confusion())
-        || (state.u_trim2 - range[1] > precision::p_confusion())
-    {
-        return Err(errors::construction(&format!(
-            "Geom_TrimmedCurve::parameters out of range: [{}, {}]; expected within [{}, {}]",
-            state.u_trim1, state.u_trim2, range[0], range[1]
-        )));
-    }
-    Ok(())
-}
-
-// Whether the trimmed length is a whole number of basis periods (the shared test
-// of IsClosed and IsPeriodic).
-fn spans_whole_periods(state: &TrimmedState) -> Result<bool, Failure> {
-    if !state.basis.is_periodic() {
-        return Ok(false);
-    }
-    let period: f64 = state.basis.period()?;
-    let length: f64 = state.u_trim2 - state.u_trim1;
-    Ok(length > precision::p_confusion()
-        && rustycad_cmath::remainder(length, period).abs() <= precision::p_confusion())
-}
 
 impl GeomTrimmedCurve {
     /// Trim a copy of `curve` to `[u1, u2]`; with `sense` false the result runs the
@@ -157,12 +91,12 @@ impl GeomTrimmedCurve {
             Some(inner) => inner.basis_curve().copy()?.cast(),
             None => source.copy()?.cast(),
         };
-        let mut state = TrimmedState {
+        let mut state = TrimmedBounds {
             basis,
             u_trim1: u1,
             u_trim2: u2,
         };
-        set_trim_state(&mut state, u1, u2, sense, adjust_periodic)?;
+        state.set_trim(u1, u2, sense, adjust_periodic, CLASS)?;
         Ok(Self {
             parent: StandardTransient::default(),
             state: SharedState::new(state),
@@ -177,7 +111,9 @@ impl GeomTrimmedCurve {
         sense: bool,
         adjust_periodic: bool,
     ) -> Result<(), Failure> {
-        set_trim_state(&mut self.state.write(), u1, u2, sense, adjust_periodic)
+        self.state
+            .write()
+            .set_trim(u1, u2, sense, adjust_periodic, CLASS)
     }
     /// The basis curve, shared with this object (`BasisCurve`); `trimmed.basis_curve()`.
     pub fn basis_curve(&self) -> Handle<dyn GeomCurve> {
@@ -190,7 +126,7 @@ impl GeomGeometry for GeomTrimmedCurve {
         state.basis.transform(transform)?;
         let u1: f64 = state.basis.transformed_parameter(state.u_trim1, transform);
         let u2: f64 = state.basis.transformed_parameter(state.u_trim2, transform);
-        set_trim_state(&mut state, u1, u2, true, false)
+        state.set_trim(u1, u2, true, false, CLASS)
     }
     fn copy(&self) -> Result<Handle<dyn GeomGeometry>, Failure> {
         // The native Copy runs the constructor with the default Sense and
@@ -212,7 +148,7 @@ impl GeomGeometry for GeomTrimmedCurve {
 }
 impl GeomCurve for GeomTrimmedCurve {
     fn reverse(&self) -> Result<(), Failure> {
-        reverse_state(&mut self.state.write())
+        self.state.write().reverse(CLASS)
     }
     fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.state.read().basis.reversed_parameter(u)
@@ -230,7 +166,7 @@ impl GeomCurve for GeomTrimmedCurve {
         self.state.read().u_trim2
     }
     fn is_closed(&self) -> Result<bool, Failure> {
-        if spans_whole_periods(&self.state.read())? {
+        if self.state.read().spans_whole_periods()? {
             return Ok(true);
         }
         let start: Point3 = self.start_point()?;
@@ -238,7 +174,7 @@ impl GeomCurve for GeomTrimmedCurve {
     }
     fn is_periodic(&self) -> bool {
         // Period() of a periodic basis cannot fail.
-        spans_whole_periods(&self.state.read()).unwrap_or(false)
+        self.state.read().spans_whole_periods().unwrap_or(false)
     }
     fn period(&self) -> Result<f64, Failure> {
         self.state.read().basis.period()

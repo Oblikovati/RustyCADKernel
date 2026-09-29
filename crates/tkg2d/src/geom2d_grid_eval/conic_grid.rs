@@ -90,3 +90,52 @@ pub(super) fn conic_grid_d3<T: ConicTerms>(
         }
     })
 }
+
+/// `EvaluateGrid`..`EvaluateGridD3` of a conic evaluator whose `coords(params)`
+/// gives its [`ConicTerms`], or `None` for a null curve or empty parameters (then
+/// the result is empty); `conic_grid_methods!();` inside the evaluator's `impl`.
+macro_rules! conic_grid_methods {
+    () => {
+        /// Points at every parameter (`EvaluateGrid`); `evaluator.evaluate_grid(&params)?`.
+        pub fn evaluate_grid(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, Point2>, Failure> {
+            let Some(terms) = self.coords(params)? else {
+                return Ok(empty());
+            };
+            Ok(conic_grid(&terms, params))
+        }
+        /// Points and D1 (`EvaluateGridD1`); `evaluator.evaluate_grid_d1(&params)?`.
+        pub fn evaluate_grid_d1(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, Geom2dGridEvalCurveD1>, Failure> {
+            let Some(terms) = self.coords(params)? else {
+                return Ok(empty());
+            };
+            Ok(conic_grid_d1(&terms, params))
+        }
+        /// Points, D1 and D2 (`EvaluateGridD2`); `evaluator.evaluate_grid_d2(&params)?`.
+        pub fn evaluate_grid_d2(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, Geom2dGridEvalCurveD2>, Failure> {
+            let Some(terms) = self.coords(params)? else {
+                return Ok(empty());
+            };
+            Ok(conic_grid_d2(&terms, params))
+        }
+        /// Points, D1, D2 and D3 (`EvaluateGridD3`); `evaluator.evaluate_grid_d3(&params)?`.
+        pub fn evaluate_grid_d3(
+            &self,
+            params: &Array1<'_, f64>,
+        ) -> Result<Array1<'static, Geom2dGridEvalCurveD3>, Failure> {
+            let Some(terms) = self.coords(params)? else {
+                return Ok(empty());
+            };
+            Ok(conic_grid_d3(&terms, params))
+        }
+    };
+}
+pub(super) use conic_grid_methods;
