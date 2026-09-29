@@ -15,9 +15,7 @@
 //! and residual verification of every reported root against the undeflated polynomial.
 use crate::math_poly::PolyResult;
 use crate::math_poly::extended::{LongDouble, scale_double};
-use crate::math_poly::utils::{
-    LongCoefficients, evaluate, has_small_complex_residual, has_small_residual,
-};
+use crate::math_poly::utils::{LongCoefficients, horner, small_complex_residual, small_residual};
 use crate::math_utils::Status;
 /// Fixed Newton step budget of the native polish loop.
 const POLISH_ITERATIONS: u32 = 12;
@@ -30,7 +28,7 @@ pub(super) struct Scaled<'a> {
 }
 fn polished(c: &LongCoefficients, degree: i32, mut root: LongDouble) -> LongDouble {
     for _ in 0..POLISH_ITERATIONS {
-        let (value, slope, _) = evaluate(c, degree, root);
+        let (value, slope, _) = horner(c, degree, root);
         if slope == LongDouble::ZERO || !slope.is_finite() {
             break;
         }
@@ -68,13 +66,13 @@ pub(super) fn verified_status(result: &PolyResult, scaled: &Scaled, tolerance: f
     let bound: LongDouble = LongDouble::new(128.0) * LongDouble::new(tolerance);
     let real_ok: bool = result.roots[..result.nb_roots].iter().all(|&root| {
         let scaled_root: LongDouble = LongDouble::new(root).scale(-scaled.exponent);
-        has_small_residual(scaled.long, scaled.degree, scaled_root, bound)
+        small_residual(scaled.long, scaled.degree, scaled_root, bound)
     });
     let unscale: f64 = scale_double(1.0, -scaled.exponent);
     let complex_ok: bool = result.complex_roots[..result.nb_complex_roots]
         .iter()
         .all(|&root| {
-            has_small_complex_residual(
+            small_complex_residual(
                 scaled.original,
                 scaled.degree,
                 root * unscale,

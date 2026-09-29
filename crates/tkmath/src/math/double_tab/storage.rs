@@ -91,11 +91,17 @@ impl TableShape {
         Ok(row * self.size[1] + col)
     }
 }
+// Native math_DoubleTab accepts the empty range `[lower, lower - 1]` (RangeSize 0, a
+// table whose loops never run). A range below it has a negative RangeSize that native
+// code sign-extends into a huge `size_t` over its 64-value stack buffer, so the first
+// Init or read runs past the buffer (undefined behaviour, AppCont at degree -2 crashes);
+// the port refuses it with Standard_RangeError instead, as NCollection_Array2 does.
 fn dimension(lower: i32, upper: i32) -> Result<usize, ArrayError> {
-    if upper < lower {
+    let size: i64 = i64::from(upper) - i64::from(lower) + 1;
+    if size < 0 {
         return Err(ArrayError::Bounds { lower, upper });
     }
-    Ok((i64::from(upper) - i64::from(lower) + 1) as usize)
+    Ok(size as usize)
 }
 fn bounded(index: i32, lower: i32, upper: i32) -> Result<usize, ArrayError> {
     if index < lower || index > upper {

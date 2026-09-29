@@ -26,7 +26,7 @@ pub(super) fn search(
         change = !newton_direction(jacobian, residual, direction);
     }
     limit_direction(direction, inverse_lengths);
-    let mut slope: f64 = direction.dot(gradient).unwrap();
+    let mut slope: f64 = direction.dot_unchecked(gradient);
     if slope >= -1e-32 {
         change = true;
     }
@@ -34,7 +34,7 @@ pub(super) fn search(
         for index in 1..=direction.length() {
             direction[index] = -gradient[index];
         }
-        slope = -gradient.norm2().unwrap();
+        slope = -gradient.norm2_unchecked();
     }
     slope
 }

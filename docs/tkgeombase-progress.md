@@ -523,7 +523,7 @@ internal helpers the upstream tests call are probed directly. The legacy `math_P
 `GeomBndLib_OtherCurve2d::BoxOptimal` is left out for reversed ranges: native reads an
 uninitialized value there.
 
-The AppCont requests (`tkgeombase_corpus_appcont.py`, 3587 requests) read every entry
+The AppCont requests (`tkgeombase_corpus_appcont.py`, 3831 requests) read every entry
 of the five tables directly from the native static arrays, run the four square
 providers over classe -1 to 28 and VBernstein over every classe x nbpoints pair (into
 matrices with shifted bounds and too small, where the partial writes are compared), and
@@ -531,11 +531,14 @@ fit 3D, 2D and mixed analytic functions (polynomial, trigonometric, constant) ov
 forward, reversed and tiny ranges with every pair of end constraints (CurvaturePoint
 included), degrees 1 to 25, 1 to 40 Gauss points, failing derivatives, singular ends
 around the 0.1 threshold and periodic coordinates that wrap (the first-sample, sample
-and end-pole fixes). Left out: VBernstein at classe 1 (degree 0), more than 61 Gauss
-points and periodic fits with fewer than 3 samples (undefined natively), and empty
-ranges (degree < 0, no Gauss point, no coordinate), where the native `math_Matrix`
-builds empty or negative-size tables on its stack buffer (degree -2 crashes) while the
-TKMath `Matrix` refuses them with Standard_RangeError.
+and end-pole fixes), and the empty ranges (244 requests): degree -1 (no pole), no
+Gauss point and no coordinate, where every native table is empty and its loops never
+run. Left out: VBernstein at classe 1 (degree 0), more than 61 Gauss points and
+periodic fits with fewer than 3 samples (undefined natively); degree -1 with a fixed
+end, which writes pole row 1 or 0 of the empty pole table into its stack buffer, and no
+coordinate with a fixed last end, which reads `myPerInfo(1..2)` of an empty array (a
+crash); and degree -2, whose negative-size tables native builds over the stack buffer
+and overruns (a crash; the TKMath `Matrix` refuses them with Standard_RangeError).
 
 The AdvApp2Var requests (`tkgeombase_corpus_advapp2var.py`,
 `tkgeombase_corpus_advapp2var_approx.py` and `tkgeombase_corpus_advapp2var_class.py`,
@@ -970,7 +973,11 @@ AppCont:
   Standard_OutOfRange where the fit would read past its samples (a periodic function
   with fewer than 3 Gauss points) and Standard_DimensionError, before sampling, for more
   than the 61 tabulated Gauss orders (natively read past the Gauss tables, then
-  rejected by VBernstein). The `int` offsets of the providers overflow natively past
+  rejected by VBernstein). At degree -1 a fixed end (pass or tangency) writes pole row
+  1 or 0 of the empty pole matrix; AppCont_LeastSquare.cxx compiles its range checks
+  out, so natively the write lands in the matrix's unused stack buffer. The port raises
+  Standard_OutOfRange at that write. The empty ranges themselves (degree -1, no Gauss
+  point, no coordinate) fit over empty tables as natively. The `int` offsets of the providers overflow natively past
   classe 1861; the port wraps.
 - `AppCont_Function::PeriodInformation` defaults to not periodic with period 0.
   `VBParam` is computed natively and never read; the port does not keep it.

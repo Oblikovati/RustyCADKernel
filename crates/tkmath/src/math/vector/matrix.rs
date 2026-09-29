@@ -55,8 +55,10 @@ impl<T: VectorItem> VectorBase<'_, T> {
                 "math_VectorBase::Multiplied() - input matrix has wrong dimensions",
             ));
         }
-        let mut result = Self::with_bounds(matrix.lower_col(), matrix.upper_col()).unwrap();
-        result.set_vector_matrix(self, matrix)?;
+        let mut result = Self::with_bounds(matrix.lower_col(), matrix.upper_col())?;
+        // Native Multiplied(math_Matrix) indexes element by element, so an empty operand
+        // is not refused, unlike the pointer-walking Multiply overloads.
+        result.store_product(matrix, self, true, true);
         Ok(result)
     }
     fn matrix_product(
@@ -80,7 +82,26 @@ impl<T: VectorItem> VectorBase<'_, T> {
                 ),
             ));
         }
-        for output in 0..outputs as usize {
+        // The native overloads walk raw pointers taken with the checked
+        // `&M(LowerRow, LowerCol)` and `&V.Array(V.Lower())`, which raise on an empty
+        // matrix, operand or result.
+        if outputs == 0 || inputs == 0 {
+            return Err(Failure::out_of_range(&format!(
+                "math_VectorBase::{operation}(): {outputs} outputs from {inputs} inputs; expected non-empty operands"
+            )));
+        }
+        self.store_product(matrix, vector, transpose, vector_first);
+        Ok(())
+    }
+    pub(crate) fn store_product(
+        &mut self,
+        matrix: &Matrix<'_>,
+        vector: &VectorBase<'_, T>,
+        transpose: bool,
+        vector_first: bool,
+    ) {
+        let inputs: i32 = vector.length();
+        for output in 0..self.length() as usize {
             self.values_mut()[output] = matrix_component(
                 matrix,
                 vector,
@@ -90,7 +111,6 @@ impl<T: VectorItem> VectorBase<'_, T> {
                 vector_first,
             );
         }
-        Ok(())
     }
 }
 // Operand order preserves the native overloads, including NaN representation choices.
@@ -107,12 +127,13 @@ fn matrix_component<T: VectorItem>(
     // converted back, which truncates every partial sum of an integer vector.
     let mut sum = T::ZERO;
     for input in 0..inputs {
-        let coefficient = *if transpose {
-            matrix.at(input, output)
+        let cell: usize = if transpose {
+            input * matrix.col_size() + output
         } else {
-            matrix.at(output, input)
-        }
-        .unwrap();
+            output * matrix.col_size() + input
+        };
+        // In range by construction: the caller matched both extents to the matrix.
+        let coefficient: f64 = matrix.cells()[cell];
         let value = vector.values()[input].to_real();
         let product = if vector_first {
             value * coefficient

@@ -14,6 +14,12 @@
 
 use super::{Crout, Matrix, Vector};
 pub(super) fn invert_lower(lower: &mut Matrix<'_>) {
+    // Native writes L(1, 1) unconditionally; for an empty matrix that cell is the first
+    // slot of L's unused 64-value stack buffer, which nothing reads again (Done is true,
+    // the inverse is empty), so skipping it is the only observable-equivalent port.
+    if lower.row_number() == 0 {
+        return;
+    }
     lower[(1, 1)] = 1.0 / lower[(1, 1)];
     for row in 2..=lower.row_number() {
         invert_row(lower, row);

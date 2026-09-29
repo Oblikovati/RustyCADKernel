@@ -8,12 +8,15 @@ The fit runs 3D, 2D and mixed analytic functions (polynomial, trigonometric,
 constant) over forward, reversed and tiny ranges, every pair of end constraints
 (including CurvaturePoint, which the fit treats as a constrained-but-unfixed end),
 degrees 1 to 25 with 1 to 40 Gauss points, failing derivatives, singular ends (jumps
-below and above the 0.1 threshold) and periodic coordinates that wrap. Left out:
-the paths that are undefined behavior natively (VBernstein at classe 1, i.e. degree
-0; more than 61 Gauss points; periodic functions with fewer than 3 samples), and
-empty ranges (degree < 0, no Gauss point, no coordinate), where the native
-math_Matrix builds empty or negative-size tables on its stack buffer (degree -2
-crashes) while the TKMath port refuses them with Standard_RangeError.
+below and above the 0.1 threshold) and periodic coordinates that wrap. The empty
+ranges run too: degree -1 (no pole), no Gauss point and no coordinate, where every
+native table is empty and its loops never run. Left out: the paths that are
+undefined behavior natively (VBernstein at classe 1, i.e. degree 0; more than 61
+Gauss points; periodic functions with fewer than 3 samples; degree -1 with a fixed
+end, which writes pole row 1 or 0 of the empty pole table into its stack buffer;
+no coordinate with a fixed last end, which reads myPerInfo(1..2) of an empty array)
+and degree -2, whose negative-size tables native builds over the stack buffer and
+then overruns (a crash; the TKMath port refuses it with Standard_RangeError).
 """
 from __future__ import annotations
 import math
@@ -133,6 +136,35 @@ def periodic_requests(rng: random.Random, requests: list[str]) -> None:
                 add(requests, 'acc_ls', *spec, first, last, deg, nbpoints)
 
 
+def empty_range_requests(rng: random.Random, requests: list[str]) -> None:
+    """Degree -1 (no pole), no Gauss point and no coordinate: empty native tables.
+
+    Only the combinations the native fit runs without reading or writing outside its
+    tables: at degree -1 no end may fix a pole (a fixed end writes pole row 1 or 0),
+    without coordinates the last end may not fix one either (its period fix reads
+    myPerInfo(1..2)), and periodic functions keep at least 3 samples.
+    """
+    free_ends = [(NO, NO), (CURVATURE, NO), (NO, CURVATURE), (CURVATURE, CURVATURE)]
+    specs = [function_spec(rng, 1, 0, 'trig'), function_spec(rng, 0, 1, 'poly'),
+             function_spec(rng, 1, 1, 'trig', u=(1.0, 0.0))]
+    for spec in specs:
+        for first, last in free_ends:
+            for nbpoints in (0, 1, 4, 24):
+                add(requests, 'acc_ls', *spec, first, last, -1, nbpoints)
+        for first, last in PAIRS:
+            for deg in (1, 2, 3, 5):
+                add(requests, 'acc_ls', *spec, first, last, deg, 0)
+    empty = function_spec(rng, 0, 0, 'trig')
+    for first in (NO, PASS, TANGENT, CURVATURE):
+        for last in (NO, CURVATURE):
+            for deg, nbpoints in [(-1, 0), (-1, 1), (-1, 4), (1, 0), (2, 3), (3, 0), (5, 12)]:
+                add(requests, 'acc_ls', *empty, first, last, deg, nbpoints)
+    periodic = function_spec(rng, 0, 1, 'poly', periods=[(1, 2*math.pi)])
+    for first, last in free_ends:
+        for nbpoints in (3, 12):
+            add(requests, 'acc_ls', *periodic, first, last, -1, nbpoints)
+
+
 def append_appcont_requests(requests: list[str]) -> None:
     """Append the AppCont requests in a fixed order."""
     rng = random.Random(19950314)
@@ -142,3 +174,4 @@ def append_appcont_requests(requests: list[str]) -> None:
     v_bernstein_requests(requests)
     fit_requests(rng, requests)
     periodic_requests(rng, requests)
+    empty_range_requests(rng, requests)

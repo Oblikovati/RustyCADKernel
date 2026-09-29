@@ -25,11 +25,11 @@ pub(super) fn initial_scale(
     direction: &Vector<'_>,
     gradient: &Vector<'_>,
 ) -> Option<f64> {
-    let slope: f64 = gradient.dot(direction).unwrap();
+    let slope: f64 = gradient.dot_unchecked(direction);
     if slope.abs() < f64::MIN_POSITIVE {
         return None;
     }
-    let norm: f64 = direction.norm2().unwrap();
+    let norm: f64 = direction.norm2_unchecked();
     let alpha: f64 = 0.7 * (-value) / slope;
     let scale: f64 = 0.015 / norm.sqrt();
     Some(if scale > alpha { alpha } else { scale })
