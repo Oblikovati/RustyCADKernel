@@ -355,74 +355,108 @@ impl Variational {
         rows: &mut ConstraintRows,
         (i, cb_long): (i32, f64),
     ) -> Result<(), Failure> {
-        let t = &self.tables;
-        let (mut j, mut jt) = (
-            2 * self.dimension * (i - 1) + 3,
-            (2 * self.nb_p2d + 6 * self.nb_p3d) * (i - 1),
-        );
+        let mut cursor = CurvatureCursor {
+            j: 2 * self.dimension * (i - 1) + 3,
+            jt: (2 * self.nb_p2d + 6 * self.nb_p3d) * (i - 1),
+            curdim: 0,
+        };
         let mut index: i32 = rows.ntang3d + 1;
-        let mut curdim: i32 = 0;
         for _ in 0..self.nb_p3d {
-            let (mut r1, mut r2) = (0., 0.);
-            for k in 1..=3 {
-                r1 += t.value(j + k)? * at(&t.ttheta, jt + k)?;
-                r2 += t.value(j + k)? * at(&t.ttheta, jt + 3 + k)?;
-            }
-            r1 *= cb_long * cb_long;
-            r2 *= cb_long * cb_long;
-            for k in 1..=3 {
-                curdim += 1;
-                if k > 1 {
-                    (r1, r2) = (0., 0.);
-                }
-                a.add_constraint(
-                    index,
-                    curel,
-                    curdim,
-                    &forms.form(2, Some(at(&t.tfthet, jt + k)?))?,
-                    r1,
-                )?;
-                a.add_constraint(
-                    index + 1,
-                    curel,
-                    curdim,
-                    &forms.form(2, Some(at(&t.tfthet, jt + 3 + k)?))?,
-                    r2,
-                )?;
-            }
+            let r: [f64; 2] = self.curvature_values_3d(&cursor, cb_long)?;
+            self.add_curvature_rows_3d(a, (forms, curel), index, r, &mut cursor)?;
             index += rows.ng3d;
-            j += 6;
-            jt += 6;
+            cursor.j += 6;
+            cursor.jt += 6;
         }
-        j -= 1;
+        cursor.j -= 1;
         index = rows.nbeg2d + rows.ntang2d + 1;
         for _ in 0..self.nb_p2d {
-            let mut r1: f64 = 0.;
-            for k in 1..=2 {
-                r1 += t.value(j + k)? * at(&t.ttheta, jt + k)?;
-            }
-            r1 *= cb_long * cb_long;
-            for k in 1..=2 {
-                curdim += 1;
-                if k > 1 {
-                    r1 = 0.;
-                }
-                a.add_constraint(
-                    index,
-                    curel,
-                    curdim,
-                    &forms.form(2, Some(at(&t.tfthet, jt + k)?))?,
-                    r1,
-                )?;
-            }
+            let r1: f64 = self.curvature_value_2d(&cursor, cb_long)?;
+            self.add_curvature_row_2d(a, (forms, curel), index, r1, &mut cursor)?;
             index += rows.ng2d;
-            j += 4;
-            jt += 2;
+            cursor.j += 4;
+            cursor.jt += 2;
         }
         rows.ntang3d += 2;
         rows.ntang2d += 1;
         Ok(())
     }
+
+    // The curvature of a 3D point on its two Ttheta directions, times CBLONG^2.
+    fn curvature_values_3d(&self, c: &CurvatureCursor, cb_long: f64) -> Result<[f64; 2], Failure> {
+        let t = &self.tables;
+        let (mut r1, mut r2) = (0., 0.);
+        for k in 1..=3 {
+            r1 += t.value(c.j + k)? * at(&t.ttheta, c.jt + k)?;
+            r2 += t.value(c.j + k)? * at(&t.ttheta, c.jt + 3 + k)?;
+        }
+        r1 *= cb_long * cb_long;
+        r2 *= cb_long * cb_long;
+        Ok([r1, r2])
+    }
+
+    // The two rows of a 3D point, one per coordinate: V2 on the Tfthet frames, the
+    // values only on the first coordinate.
+    fn add_curvature_rows_3d(
+        &self,
+        a: &mut Assembly,
+        (forms, curel): (&BasisForms, i32),
+        index: i32,
+        [mut r1, mut r2]: [f64; 2],
+        c: &mut CurvatureCursor,
+    ) -> Result<(), Failure> {
+        let t = &self.tables;
+        for k in 1..=3 {
+            c.curdim += 1;
+            if k > 1 {
+                (r1, r2) = (0., 0.);
+            }
+            let form1: Vector<'static> = forms.form(2, Some(at(&t.tfthet, c.jt + k)?))?;
+            a.add_constraint(index, curel, c.curdim, &form1, r1)?;
+            let form2: Vector<'static> = forms.form(2, Some(at(&t.tfthet, c.jt + 3 + k)?))?;
+            a.add_constraint(index + 1, curel, c.curdim, &form2, r2)?;
+        }
+        Ok(())
+    }
+
+    // The curvature of a 2D point on its Ttheta direction, times CBLONG^2.
+    fn curvature_value_2d(&self, c: &CurvatureCursor, cb_long: f64) -> Result<f64, Failure> {
+        let t = &self.tables;
+        let mut r1: f64 = 0.;
+        for k in 1..=2 {
+            r1 += t.value(c.j + k)? * at(&t.ttheta, c.jt + k)?;
+        }
+        r1 *= cb_long * cb_long;
+        Ok(r1)
+    }
+
+    // The row of a 2D point, one per coordinate, the value only on the first.
+    fn add_curvature_row_2d(
+        &self,
+        a: &mut Assembly,
+        (forms, curel): (&BasisForms, i32),
+        index: i32,
+        mut r1: f64,
+        c: &mut CurvatureCursor,
+    ) -> Result<(), Failure> {
+        for k in 1..=2 {
+            c.curdim += 1;
+            if k > 1 {
+                r1 = 0.;
+            }
+            let form: Vector<'static> = forms.form(2, Some(at(&self.tables.tfthet, c.jt + k)?))?;
+            a.add_constraint(index, curel, c.curdim, &form, r1)?;
+        }
+        Ok(())
+    }
+}
+
+/// The running positions of the curvature rows: the curvature values (`J`), the
+/// frames (`JT`) and the coordinate of the curve (`curdim`).
+struct CurvatureCursor {
+    j: i32,
+    jt: i32,
+    curdim: i32,
 }
 
 // G(k) *= mfact, checked.
