@@ -28,10 +28,11 @@ The toolkit test inventory maps these suites (7 declarations):
 | --- | --- | ---: | --- | --- |
 | TopTrans_SurfaceTransition_Test.cxx | toptrans_surface_transition | 2 | pass | pass |
 | Intf_Tool_Test.cxx | intf_tool | 5 | pass | pass |
-| GTests/Geom2dAPI_ExtremaCurveCurve_Test.cxx | geom2dapi_extrema_curve_curve | 1 | pass | pass |
-| GTests/Geom2dAPI_Interpolate_Test.cxx | geom2dapi_interpolate | 1 | pass | pass |
-| GTests/Geom2dAPI_PointsToBSpline_Test.cxx | geom2dapi_points_to_bspline | 2 | pass | pass |
-| GTests/Geom2dConvert_BSplineCurveToBezierCurve_Test.cxx | geom2dconvert_bspline_curve_to_bezier_curve | 1 | pass | pass |
+| Geom2dAPI_ExtremaCurveCurve_Test.cxx | geom2dapi_extrema_curve_curve | 1 | pass | pass |
+| Geom2dAPI_InterCurveCurve_Test.cxx | geom2dapi_inter_curve_curve | 6 | pass | pass |
+| Geom2dAPI_Interpolate_Test.cxx | geom2dapi_interpolate | 1 | pass | pass |
+| Geom2dAPI_PointsToBSpline_Test.cxx | geom2dapi_points_to_bspline | 2 | pass | pass |
+| Geom2dConvert_BSplineCurveToBezierCurve_Test.cxx | geom2dconvert_bspline_curve_to_bezier_curve | 1 | pass | pass |
 
 ## Verification
 
@@ -66,15 +67,16 @@ verifier.
 
 ## IntRes2d, IntImpParGen and IntCurve
 
-IntRes2d (`int_res2d`), IntImpParGen (`int_imp_par_gen`) and IntCurve (`int_curve`, the
-conic classes; the curve-curve templates follow with Geom2dInt) are ported in full:
+IntRes2d (`int_res2d`), IntImpParGen (`int_imp_par_gen`) and IntCurve (`int_curve`) are
+ported in full:
 `tools/audit_api_rows.py` reports 0 missing and 0 stale rows for each. The root class
 `IntRes2d_Intersection` is a struct that the algorithms embed and reach through `Deref`;
 its protected members (`Insert`, `Append`, `SetValues`, `ResetFields`, the `done` field)
 are public so that algorithms of later toolkits can derive from it. Every constructor
 overload is a named constructor and every `Perform` overload of IntCurve_IntConicConic a
 `perform_<pair>` method; accessors that raise return `Result` with the native exception
-type. IntImpParGen_Intersector.gxx is a generic (docs/geomalgo-design.md section 3).
+type. IntImpParGen_Intersector.gxx is a generic (docs/geomalgo-design.md section 3), and so
+are the IntCurve curve templates (sections 4 and 5).
 
 Preserved native behaviour:
 
@@ -111,12 +113,12 @@ Preserved native behaviour:
 
 Geom2dInt (`geom2d_int`) holds the curve tool `Geom2dCurveTool`, the projection
 `TheProjPCurOfGInter` and the IntImpParGen instantiation `Geom2dTypes`; its other classes
-are aliases of the IntCurve and Extrema generics (docs/geomalgo-design.md section 4). The
-classes built on Intf (`GInter`, `TheIntPCurvePCurveOfGInter`, `ThePolygon2dOfTheIntPCurvePCurveOfGInter`,
-`ExactIntersectionPointOfTheIntPCurvePCurveOfGInter`) and `Geom2dAPI_InterCurveCurve` wait
-for the Intf port. Geom2dAPI (`geom2d_api`) ports `ExtremaCurveCurve`,
-`ProjectPointOnCurve`, `Interpolate` and `PointsToBSpline`; the conversion operators are
-`as_int`, `as_real`, `as_point` and `as_curve`.
+are aliases of the IntCurve and Extrema generics (docs/geomalgo-design.md sections 4 and
+5), among them the curve-curve intersector `GInter`. Geom2dAPI (`geom2d_api`) ports
+`ExtremaCurveCurve`, `InterCurveCurve`, `ProjectPointOnCurve`, `Interpolate` and
+`PointsToBSpline`; the conversion operators are `as_int`, `as_real`, `as_point` and
+`as_curve`. Both packages are ported in full: `tools/audit_api_rows.py` reports 0
+missing and 0 stale rows for each.
 
 Preserved native behaviour and deliberate differences:
 
@@ -135,6 +137,30 @@ Preserved native behaviour and deliberate differences:
 - `Geom2dAPI_PointsToBSpline::Init(Points, Params, ...)` reads `Params(i)` for i in
   `2..Nbp-1` whatever the lower bound of `Params`; the variational Init swallows the
   exception of AppDef_Variational::Approximate, as natively.
+- IntCurve_IntPolyPolyGen recurses on a tangent zone with `Tol` as the confusion
+  tolerance and `TolConf` as the tolerance (the arguments are swapped natively), and
+  tests the full polygon representation as `NbSegments() == sample count`, which the
+  constructor never gives (a polygon of n samples has n - 1 segments), so the second
+  search on full polygons runs whenever the first one misses a root.
+- The error flag of IntCurve_ExactIntersectionPoint is never reset: once one solve fails,
+  IntPolyPolyGen skips every later section point of the same interference.
+- The self intersection keeps only the last of the section points on the same pair of
+  chords and gives nothing for a tangent zone whose ends are within EpsX (the pair
+  intersection inserts a point there). Its end scan (PosSegment) is computed and
+  discarded, as natively.
+- HeadOrEndPoint takes the transitions of an end point at the original parameters: the
+  second-order test replaces the snapped end point by the curve point there.
+- IntCurve_IntCurveCurveGen splits composite curves by the native tail recursion over the
+  intervals of the second curve (ported as a loop); a clipped interval of at most 1e-10
+  (or NaN) length is skipped. Its self intersection of a curve with both bounds infinite
+  returns not done without resetting the previous results.
+- `ApproxParamOnCurve` with an index past the last point prints "OutOfRange
+  Polygon2d::ApproxParamOnCurve" on std::cout natively; the port does not print (the probe
+  discards std::cout). The polygon index slots past the sample count are uninitialized
+  natively and 0 in the port; no algorithm reads them.
+- `GetIntersection` leaves its sample indices at -1 when every distance is NaN and then
+  reads out of bounds if the current distance exceeds sqrt(RealLast); the port reads the
+  first sample.
 
 ## Numeric comparison policy
 
@@ -190,6 +216,19 @@ including the centre of a circle or ellipse and the default tool; `intcurve_inte
 covers Interval and PeriodicInterval; `imppar_transition` and `imppar_domain` the
 transition, position and normalisation helpers; `intres2d_*` the domain accessors,
 Insert and the composite Append.
+
+Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve: `tkgeomalgo_corpus_ginter.py` adds 1097
+requests: `g2int_polygon` builds polygons of every parametric curve with 2 to 40 samples,
+refines them in overlapping, far and touching boxes and closes them; `g2int_exact` runs
+IntCurve_ExactIntersectionPoint from inner, first, last and out-of-range polygon seats and
+from explicit bounds; `g2int_polypoly` intersects crossing, tangent, overlapping,
+disjoint and self-crossing curves (a Bezier loop, a periodic figure eight) through the
+polygon intersector, its self intersection and its protected iterations (up to past the
+last one); `g2int_ginter` runs Geom2dInt_GInter on every pair of 22 curves (conics,
+Bezier, B-spline with C0 knots, periodic, rational, trimmed and offset curves) through
+every constructor and Perform, with ComputeDomain, inner, semi-infinite and infinite
+domains; `g2api_intercc` runs Geom2dAPI_InterCurveCurve with its points, trimmed
+segments and out-of-range indices, including the upstream OCC23706 and OCC29289 curves.
 
 Geom2dInt, Geom2dAPI: `tkgeomalgo_corpus_geom2d.py` adds 962 requests: `g2int_tool` and
 `g2int_proj` run the curve tool and the projection on lines, conics, rational and

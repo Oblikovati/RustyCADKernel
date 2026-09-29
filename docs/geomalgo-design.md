@@ -108,3 +108,37 @@ generic in `int_curve`, and Geom2dInt declares the native classes as aliases:
   in Geom2dInt_Geom2dCurveTool and Extrema_Curve2dTool alike, so the aliases reuse the
   Extrema_Curve2dTool instantiations of the Extrema port instead of implementing the whole
   `ExtremaCurveTool` trait for a second tool.
+
+## 5. The IntCurve curve-curve templates and Geom2dInt_GInter
+
+The templates that need the Intf polygon interference are generics in `int_curve`, and
+Geom2dInt declares the native classes as aliases:
+
+- `IntCurve_Polygon2dGen.gxx` is `Polygon2dGen<T: ParTool>`
+  (`Geom2dInt_ThePolygon2dOfTheIntPCurvePCurveOfGInter`); it implements the Intf
+  `Polygon2d` trait, which stands for the `Intf_Polygon2d` base class, and keeps the
+  protected `myBox` itself.
+- `IntCurve_ExactIntersectionPoint.gxx` is `ExactIntersectionPoint<'a, T: PCurveTool>`
+  (`Geom2dInt_ExactIntersectionPointOfTheIntPCurvePCurveOfGInter`): it borrows the curves
+  through its `DistBetweenPCurvesGen`, and the four in-out arguments of its polygon Perform
+  are two `(segment, parameter)` seats passed by `&mut`.
+- `IntCurve_IntPolyPolyGen.gxx` is `IntPolyPolyGen<T: IntersectorTypes>` with
+  `T::Par: PCurveTool` (`Geom2dInt_TheIntPCurvePCurveOfGInter`): the macros `TheCurve`,
+  `TheCurveTool` and `TheProjPCur` come from the IntImpParGen instantiation, and the
+  polygon and exact-point macros are the two generics above over `T::Par`. The body is
+  split by responsibility: the public Performs and HeadOrEndPoint
+  (`int_poly_poly_gen.rs`), findIntersect and GetIntersection (`int_poly_poly_find.rs`),
+  the self intersection (`int_poly_poly_self.rs`) and the steps both repeat
+  (`int_poly_poly_zone.rs`: positions, transitions and tangent-zone ends; the self
+  intersection passes its curve twice, which gives its native code exactly). The protected
+  Perform overloads are the public `perform_iter` and `perform_self_iter`.
+- `IntCurve_IntCurveCurveGen.gxx` is `IntCurveCurveGen<T: IntersectorTypes<Imp =
+  IConicTool>>` (`Geom2dInt_GInter`). Its 36 native cases of InternalPerform are one
+  classification of both curves as `GpConic` or not: two conics go to
+  `IntConicConic::perform_ordered` in pair order, reversed when the second kind ranks
+  first; a conic and another curve go to `IntConicCurveGen::perform_any_conic` with the
+  conic first, reversed when it is the second curve; two other curves go to
+  `IntPolyPolyGen`. The results merge as in UserIntConicCurveGen (`merge_result`).
+- The template reads the curve tool's D2 outputs only after D2 writes them for every curve
+  kind of the one instantiation (Geom2dInt_Geom2dCurveTool), so the normals start at zero
+  for each transition instead of persisting across calls as the native locals do.
