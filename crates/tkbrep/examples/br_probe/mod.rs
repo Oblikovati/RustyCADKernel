@@ -9,6 +9,7 @@ pub mod brep;
 pub mod brep_adaptor;
 pub mod brep_commands;
 pub mod brep_graph;
+pub mod brep_graph_algo;
 pub mod brep_graph_cache;
 pub mod brep_graph_cache_mesh;
 pub mod brep_graph_cache_report;

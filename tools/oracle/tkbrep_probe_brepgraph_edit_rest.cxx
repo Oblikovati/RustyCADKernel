@@ -1,5 +1,6 @@
 // The wire, face, reference, generic, deferred, guard and supplement actions of
 // `br_bedit`, its dispatch and its reports (tkbrep_probe_brepgraph_edit.cxx).
+#include "tkbrep_probe_brepgraph_algo.cxx"
 // 182-198: wires and faces. 182 CheckCoEdgeOrder(coedges), 183 CheckCoEdgeOrder(wire,
 // coedges), 184 CheckAppendCoEdge, 185 CheckReplaceEdge(wire, old, new, reversed), 186
 // ReplaceEdge, 187 RemoveCoEdge, 188 Wires().Reverse, 189 SetCoEdgeOrder, 190
@@ -124,8 +125,9 @@ bool be_supplement_action(BRepGraph& g,const BrScene& s,BrReader& r,int code){
   case 238:g.Mesh().Editor().PromoteToPersistent();br_word("-");return true;
   default:return false;}}
 // Codes 0-5 ingest (`bg_run`), 60 clears the graph, 98-104 are the mesh-cache writes of
-// `br_bcache`, 120-238 the editor actions above, the rest the `br_blayer` actions and the
-// `br_bcache` lock actions (61-73).
+// `br_bcache`, 120-238 the editor actions above, 244-252 the validation, transform and
+// corruption actions (tkbrep_probe_brepgraph_algo.cxx), the rest the `br_blayer` actions
+// and the `br_bcache` lock actions (61-73).
 void be_action(BRepGraph& g,const BrScene& s,BlState& st,BrReader& r){
  int code=r.integer();
  try{
@@ -134,7 +136,7 @@ void be_action(BRepGraph& g,const BrScene& s,BlState& st,BrReader& r){
   if(bc_mesh_editor_action(g,s,r,code)){br_word("-");return;}
   if(be_add_action(g,s,r,code)||be_container_action(g,r,code)||be_edge_action(g,s,r,code)||be_co_edge_action(g,s,r,code)
      ||be_wire_face_action(g,s,r,code)||be_ref_action(g,s,r,code)||be_deferred_action(g,s,st,r,code)
-     ||be_guard_action(g,s,r,code)||be_supplement_action(g,s,r,code))return;
+     ||be_guard_action(g,s,r,code)||be_supplement_action(g,s,r,code)||ba_algo_action(g,r,code))return;
   if(bl_history_action(g,r,code)||bl_registry_action(g,st,r,code)||bl_supplement_action(g,s,r,code)||bl_cache_action(g,st,r,code)
      ||bc_lock_action(g,r,code))return;
   br_word("?");

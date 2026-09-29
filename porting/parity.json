@@ -145066,6 +145066,94 @@
       "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EditorView::promote_to_persistent",
       "status": "implemented",
       "notes": "An associated function taking the graph mutably: the mesh editor view only borrows the graph, and the promotion writes through the graph editor (SetPersistentTriangulation, SetPersistentPolygon3D, SetPersistentPolygon2D, SetPersistentPolygonOnTri) in native order: faces, edges, then coedges by ascending id, re-reading each fresh cache entry. A refused write (lock, active guard) stops the promotion with its Standard_ProgramError."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Severity",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Severity",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Mode",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Mode",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Result::IsValid() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::ValidationResult::is_valid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Result::NbIssues(Severity) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::ValidationResult::nb_issues",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Options::Lightweight()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Options::lightweight",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Options::Audit()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Options::audit",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Perform(const BRepGraph&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::perform",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Perform(const BRepGraph&,Mode)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::perform_with_mode",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Perform(const BRepGraph&,const Options&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::perform_with_options",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Transform::MoveRef(BRepGraph&,BRepGraph_ChildRefId,const gp_Trsf&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Transform.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::transform::move_child_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): the MoveRef overloads are named functions of brep_graph::transform; a locked reference or a failed location composition raises, so they return Result. Compared with OCCT by the br_bedit MoveRef requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Transform::MoveRef(BRepGraph&,BRepGraph_OccurrenceRefId,const gp_Trsf&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Transform.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::transform::move_occurrence_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): the MoveRef overloads are named functions of brep_graph::transform; a locked reference or a failed location composition raises, so they return Result. Compared with OCCT by the br_bedit MoveRef requests."
     }
   ],
   "tests": [
@@ -227622,6 +227710,2400 @@
       "rust_target": "brep_graph_cache_mesh_suite",
       "rust_test": "BRepGraph_CacheMeshTest__FaceClear_PreservesCoEdgePolygon2D",
       "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.FaceParents_All_CountAndOrder",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__FaceParents_All_CountAndOrder",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.FaceParents_TypedSolid_OneResult",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__FaceParents_TypedSolid_OneResult",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.FaceParents_DirectParents_StopsAtImmediateShell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__FaceParents_DirectParents_StopsAtImmediateShell",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.FaceParents_DirectParents_ExposeChildAndRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__FaceParents_DirectParents_ExposeChildAndRef",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.AvoidKind_Solid_PrunesProducts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__AvoidKind_Solid_PrunesProducts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.AvoidKind_EmitBoundary_ReturnsSolidInsteadOfProducts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__AvoidKind_EmitBoundary_ReturnsSolidInsteadOfProducts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.AvoidKind_SameAsTarget_IsIgnored",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__AvoidKind_SameAsTarget_IsIgnored",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.AllParents_AvoidSolid_PrunesProducts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__AllParents_AvoidSolid_PrunesProducts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.AllParents_AvoidSolidEmitBoundary_ReturnsShellAndSolid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__AllParents_AvoidSolidEmitBoundary_ReturnsShellAndSolid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.SharedProduct_ProductParentsKeepDistinctContexts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__SharedProduct_ProductParentsKeepDistinctContexts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.DeepProductOccurrenceChain_ComposesToTopProduct",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__DeepProductOccurrenceChain_ComposesToTopProduct",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.DeepProductOccurrenceChain_ReachesNestedOccurrences",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__DeepProductOccurrenceChain_ReachesNestedOccurrences",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.DeepCompoundChain_ReachesTopCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__DeepCompoundChain_ReachesTopCompound",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.VertexChildOfDeepCompoundChain_ReachesTopCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__VertexChildOfDeepCompoundChain_ReachesTopCompound",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.MixedProductOccurrenceAndCompoundChain_PreservesLocations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__MixedProductOccurrenceAndCompoundChain_PreservesLocations",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.ShapeRootDirectParent_IsOccurrenceNotProductShortcut",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__ShapeRootDirectParent_IsOccurrenceNotProductShortcut",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.TargetProductAvoidCompound_StopsAtCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__TargetProductAvoidCompound_StopsAtCompound",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.OccurrenceParent_ExposeOccurrenceRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__OccurrenceParent_ExposeOccurrenceRef",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.OccurrenceParents_SetRefOccurrenceDefRejectsSharing",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__OccurrenceParents_SetRefOccurrenceDefRejectsSharing",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.ProductParents_ImmediateOccurrence_IsStructural",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__ProductParents_ImmediateOccurrence_IsStructural",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.CoEdgeParents_ImmediateWireIsVisible",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__CoEdgeParents_ImmediateWireIsVisible",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.CoEdgeChildOfCompound_ImmediateCompoundIsVisible",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__CoEdgeChildOfCompound_ImmediateCompoundIsVisible",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ParentExplorerTest.ProductRoot_HasNoParents",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ParentExplorer_Test.cxx",
+      "source_sha256": "b5bee4066b1dc6d1b7a39ca2161aea391bfc8b1cb5b2423b7ad47bab60ca4ba0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_parent_explorer",
+      "rust_test": "BRepGraph_ParentExplorerTest__ProductRoot_HasNoParents",
+      "rust_source": "crates/tkbrep/tests/brep_graph_parent_explorer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.Wire_OrderAndOrientationFlipped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__Wire_OrderAndOrientationFlipped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.WireOrder_SetCoEdgeOrderCanonicalizesUnorderedPermutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__WireOrder_SetCoEdgeOrderCanonicalizesUnorderedPermutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.WireOrder_CheckCoEdgeOrderReportsCurrentAndReordered",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__WireOrder_CheckCoEdgeOrderReportsCurrentAndReordered",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.WireOrder_SetCoEdgeOrderCanonicalizesOpenWirePermutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__WireOrder_SetCoEdgeOrderCanonicalizesOpenWirePermutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.WireOrder_CheckAppendCoEdgeReportsReadyAndAlreadyContained",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__WireOrder_CheckAppendCoEdgeReportsReadyAndAlreadyContained",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.WireOrder_CheckReplaceEdgeReportsReadyAndDisconnected",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__WireOrder_CheckReplaceEdgeReportsReadyAndDisconnected",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.WireOrder_RemoveInternalCoEdgeFromClosedWireKeepsConnectedOrder",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__WireOrder_RemoveInternalCoEdgeFromClosedWireKeepsConnectedOrder",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.Edge_StartEndVertexRefsSwapped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__Edge_StartEndVertexRefsSwapped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.Edge_RoundTripRestoresOriginal",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__Edge_RoundTripRestoresOriginal",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.LayerTopoSupplement_AddVertexToFaceGoesToSupplementLayer",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__LayerTopoSupplement_AddVertexToFaceGoesToSupplementLayer",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.LayerTopoSupplement_ShellStartsWithoutSupplementAttachments",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__LayerTopoSupplement_ShellStartsWithoutSupplementAttachments",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.Relations_SupplementLayerClearedOnGraphClear",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__Relations_SupplementLayerClearedOnGraphClear",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.ReversedShell_GraphStoresFaceRefOrientation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__ReversedShell_GraphStoresFaceRefOrientation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.ReversedShell_ParentExplorerReportsShell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__ReversedShell_ParentExplorerReportsShell",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.ReversedShell_ReconstructPreservesOrientation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__ReversedShell_ReconstructPreservesOrientation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseTest.ReversedShell_ReconstructShellPreservesFaceOrientations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Reverse_Test.cxx",
+      "source_sha256": "2fe42ba7ad5e801ebeb38b6dcf5ed3668be29993c077d33c44af22c7bb428d41",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_reverse",
+      "rust_test": "BRepGraph_ReverseTest__ReversedShell_ReconstructShellPreservesFaceOrientations",
+      "rust_source": "crates/tkbrep/tests/brep_graph_reverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReplaceVertexTest.StartVertex_SwappedToFreshVertex_AuditClean",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ReplaceVertex_Test.cxx",
+      "source_sha256": "cf33517d36aca2e4348857eb932fdb82f0668a071bbf5fe9051c7dbdb3191db1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_replace_vertex",
+      "rust_test": "BRepGraph_ReplaceVertexTest__StartVertex_SwappedToFreshVertex_AuditClean",
+      "rust_source": "crates/tkbrep/tests/brep_graph_replace_vertex.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReplaceVertexTest.EndVertex_SwappedToFreshVertex_PreservesOrientation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ReplaceVertex_Test.cxx",
+      "source_sha256": "cf33517d36aca2e4348857eb932fdb82f0668a071bbf5fe9051c7dbdb3191db1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_replace_vertex",
+      "rust_test": "BRepGraph_ReplaceVertexTest__EndVertex_SwappedToFreshVertex_PreservesOrientation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_replace_vertex.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReplaceVertexTest.SameVertex_Idempotent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ReplaceVertex_Test.cxx",
+      "source_sha256": "cf33517d36aca2e4348857eb932fdb82f0668a071bbf5fe9051c7dbdb3191db1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_replace_vertex",
+      "rust_test": "BRepGraph_ReplaceVertexTest__SameVertex_Idempotent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_replace_vertex.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReplaceVertexTest.InactiveEdge_Rejected",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ReplaceVertex_Test.cxx",
+      "source_sha256": "cf33517d36aca2e4348857eb932fdb82f0668a071bbf5fe9051c7dbdb3191db1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_replace_vertex",
+      "rust_test": "BRepGraph_ReplaceVertexTest__InactiveEdge_Rejected",
+      "rust_source": "crates/tkbrep/tests/brep_graph_replace_vertex.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReplaceVertexTest.WrongParent_Rejected",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ReplaceVertex_Test.cxx",
+      "source_sha256": "cf33517d36aca2e4348857eb932fdb82f0668a071bbf5fe9051c7dbdb3191db1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_replace_vertex",
+      "rust_test": "BRepGraph_ReplaceVertexTest__WrongParent_Rejected",
+      "rust_source": "crates/tkbrep/tests/brep_graph_replace_vertex.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_ReplaceVertexTest.Relations_Rebuilt_VertexToEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_ReplaceVertex_Test.cxx",
+      "source_sha256": "cf33517d36aca2e4348857eb932fdb82f0668a071bbf5fe9051c7dbdb3191db1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_replace_vertex",
+      "rust_test": "BRepGraph_ReplaceVertexTest__Relations_Rebuilt_VertexToEdge",
+      "rust_source": "crates/tkbrep/tests/brep_graph_replace_vertex.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.EdgeDef_EachSharedByTwoFaces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__EdgeDef_EachSharedByTwoFaces",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.FaceDef_EachHasValidSurface",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__FaceDef_EachHasValidSurface",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.SolidDef_HasOneShellRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__SolidDef_HasOneShellRef",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.ShellDef_HasSixFaceRefs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__ShellDef_HasSixFaceRefs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.SolidDef_ContainsOneShellRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__SolidDef_ContainsOneShellRef",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.ShellDef_ContainsSixFaceRefs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__ShellDef_ContainsSixFaceRefs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.FaceDef_OuterWireIdx_Valid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__FaceDef_OuterWireIdx_Valid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.WireDef_CoEdgesCount_FourPerBoxFace",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__WireDef_CoEdgesCount_FourPerBoxFace",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.EdgeDef_VertexDefs_BothValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__EdgeDef_VertexDefs_BothValid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.SharedEdge_IncidenceRefs_DifferentOrientation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__SharedEdge_IncidenceRefs_DifferentOrientation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.NonClosedEdge_StartEnd_Different",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__NonClosedEdge_StartEnd_Different",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.VertexDef_Points_MatchExpectedBoxCorners",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__VertexDef_Points_MatchExpectedBoxCorners",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.CompoundTwoIdenticalBoxes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__CompoundTwoIdenticalBoxes",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.SameReferenceRepresentationAcrossDifferentParents_UsesDistinctChildRefs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__SameReferenceRepresentationAcrossDifferentParents_UsesDistinctChildRefs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.CompoundTwoDistinctBoxes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__CompoundTwoDistinctBoxes",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.CompoundWithLocation_MoreUsagesThanDefs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__CompoundWithLocation_MoreUsagesThanDefs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_SharingTest.TranslatedCopy_SameTShape_SharedDefs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Sharing_Test.cxx",
+      "source_sha256": "d626368b9b027dd4b52be3d34f65dae327f83df29bf4779fcb8d1b55cd4d8365",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_sharing",
+      "rust_test": "BRepGraph_SharingTest__TranslatedCopy_SameTShape_SharedDefs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_sharing.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.Register_SameGUID_SameSlot",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__Register_SameGUID_SameSlot",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.Register_DifferentGUID_DifferentSlot",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__Register_DifferentGUID_DifferentSlot",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.FindSlot_ByGUID_ReturnsCorrectSlot",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__FindSlot_ByGUID_ReturnsCorrectSlot",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.FindCache_BySlot_ReturnsCorrectDescriptor",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__FindCache_BySlot_ReturnsCorrectDescriptor",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.Cache_InvalidSlot_ReturnsNull",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__Cache_InvalidSlot_ReturnsNull",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.SameCache_CanUseDifferentGraphLocalSlots",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__SameCache_CanUseDifferentGraphLocalSlots",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.Unregister_CompactsSlotsAndUpdatesIterator",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__Unregister_CompactsSlotsAndUpdatesIterator",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.ResolveActiveRefChild_RejectsInvalidAndRemovedRefs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__ResolveActiveRefChild_RejectsInvalidAndRemovedRefs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.NodeOwnEntry_MissesAfterOwnGenerationChange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__NodeOwnEntry_MissesAfterOwnGenerationChange",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.NodeSubtreeEntry_MissesAfterChildGenerationChange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__NodeSubtreeEntry_MissesAfterChildGenerationChange",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.RefOwnEntry_MissesAfterRefGenerationChange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__RefOwnEntry_MissesAfterRefGenerationChange",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.ItemOwnEntry_WorksForNodeAndRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__ItemOwnEntry_WorksForNodeAndRef",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.Unregister_DetachesAndClearsRepresentation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__Unregister_DetachesAndClearsRepresentation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheRegistryTest.GraphDestruction_DetachesAndClearsExternalCacheHandle",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheRegistry_Test.cxx",
+      "source_sha256": "c366d2e3412de6c9932be17333cc1927ca1c54975209b47bcd4ad8af875f3e7b",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_registry",
+      "rust_test": "BRepGraph_CacheRegistryTest__GraphDestruction_DetachesAndClearsExternalCacheHandle",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_registry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_SimpleBox_IsNotEmpty",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_SimpleBox_IsNotEmpty",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_SimpleBox_CorrectCounts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_SimpleBox_CorrectCounts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_SimpleBox_SurfaceCount",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_SimpleBox_SurfaceCount",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Face_Surface_IsValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Face_Surface_IsValid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Edge_CurveAndVertices_AreValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Edge_CurveAndVertices_AreValid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Wire_OuterWire_Exists",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Wire_OuterWire_Exists",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.FaceDef_HasValidSurface",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__FaceDef_HasValidSurface",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.FindPCurveCoEdgeId_ValidPair",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__FindPCurveCoEdgeId_ValidPair",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.UID_Unique",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__UID_Unique",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.UID_NodeIdRoundTrip",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__UID_NodeIdRoundTrip",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.SameDomainFaces_Box_Empty",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__SameDomainFaces_Box_Empty",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Decompose_TwoSeparateFaces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Decompose_TwoSeparateFaces",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReBuild_UIDMonotonic",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReBuild_UIDMonotonic",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.DetectMissingPCurves_ValidBox_Empty",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__DetectMissingPCurves_ValidBox_Empty",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.DetectDegenerateWires_ValidBox_Empty",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__DetectDegenerateWires_ValidBox_Empty",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.MutableEdge_ModifyTolerance",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__MutableEdge_ModifyTolerance",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.NbFacesOfEdge_SharedEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__NbFacesOfEdge_SharedEdge",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.FreeEdges_ClosedBox_Empty",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__FreeEdges_ClosedBox_Empty",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RecordHistory_BasicEntry",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RecordHistory_BasicEntry",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReplaceEdge_Substitution",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReplaceEdge_Substitution",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ParallelBuild_SameAsSequential",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ParallelBuild_SameAsSequential",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ParallelBuild_CompoundOfFaces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ParallelBuild_CompoundOfFaces",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReconstructFace_EachBoxFace_SameSubShapeCounts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReconstructFace_EachBoxFace_SameSubShapeCounts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReconstructFace_AfterEdgeReplace_ContainsNewEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReconstructFace_AfterEdgeReplace_ContainsNewEdge",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReconstructShape_SolidRoot_SameFaceCount",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReconstructShape_SolidRoot_SameFaceCount",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReconstructShape_FaceRoot_ReturnsSameShape",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReconstructShape_FaceRoot_ReturnsSameShape",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shape_Unmodified_ReturnsSameShape",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shape_Unmodified_ReturnsSameShape",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shape_AfterReplaceEdge_DiffersFromOriginal",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shape_AfterReplaceEdge_DiffersFromOriginal",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shape_WireKind_Valid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shape_WireKind_Valid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shape_EdgeKind_Valid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shape_EdgeKind_Valid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shape_VertexKind_Valid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shape_VertexKind_Valid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.OwnGen_MutableEdge_PropagatesSubtreeGenUp",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__OwnGen_MutableEdge_PropagatesSubtreeGenUp",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReconstructShape_WireKind_NoThrow",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReconstructShape_WireKind_NoThrow",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.HasOriginalShape_AfterBuild_True",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__HasOriginalShape_AfterBuild_True",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shape_CachedOnSecondCall",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shape_CachedOnSecondCall",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shape_InvalidatedAfterMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shape_InvalidatedAfterMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.DefaultBuild_AssignsValidUIDs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__DefaultBuild_AssignsValidUIDs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.UIDsGeneration_IncrementsAcrossBuilds",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__UIDsGeneration_IncrementsAcrossBuilds",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.StaleUID_HasReturnsFalseAfterRebuild",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__StaleUID_HasReturnsFalseAfterRebuild",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_UIDsViewTest.ReverseLookupStaysCurrentAfterProgrammaticAdd",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraph_UIDsViewTest__ReverseLookupStaysCurrentAfterProgrammaticAdd",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RecordHistory_MultipleRecords_SequenceNumbers",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RecordHistory_MultipleRecords_SequenceNumbers",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.FindOriginal_SingleHop_ReturnsSource",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__FindOriginal_SingleHop_ReturnsSource",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.FindDerived_SingleHop_ContainsTarget",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__FindDerived_SingleHop_ContainsTarget",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ApplyModification_MultiStepChain_FindOriginalTracesBack",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ApplyModification_MultiStepChain_FindOriginalTracesBack",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.AddPCurve_NewPCurve_RetrievableViaFindPCurveCoEdgeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__AddPCurve_NewPCurve_RetrievableViaFindPCurveCoEdgeId",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReplaceEdge_Reversed_OrientationFlipped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReplaceEdge_Reversed_OrientationFlipped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReplaceEdge_UpdatesEdgeToCoEdgeRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReplaceEdge_UpdatesEdgeToCoEdgeRelations",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveCoEdge_PrunesOrphanAndKeepsRelationsConsistent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveCoEdge_PrunesOrphanAndKeepsRelationsConsistent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.CleanupRemovedRefs_ManuallyRemovedEdge_UnbindsEdgeWireRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__CleanupRemovedRefs_ManuallyRemovedEdge_UnbindsEdgeWireRelations",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveChild_PreservesSharedChildAndKeepsRelationsConsistent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveChild_PreservesSharedChildAndKeepsRelationsConsistent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveChild_UsesDistinctRefsForSharedChild",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveChild_UsesDistinctRefsForSharedChild",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveFace_PrunesOrphanAndKeepsRelationsConsistent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveFace_PrunesOrphanAndKeepsRelationsConsistent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveShell_PrunesOrphanAndKeepsRelationsConsistent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveShell_PrunesOrphanAndKeepsRelationsConsistent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveWire_PrunesOrphanAndKeepsRelationsConsistent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveWire_PrunesOrphanAndKeepsRelationsConsistent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveOccurrence_PrunesOccurrenceSubtreeAndKeepsRelationsConsistent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveOccurrence_PrunesOccurrenceSubtreeAndKeepsRelationsConsistent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveShapeRoot_PrunesUniqueTopologyRoot",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveShapeRoot_PrunesUniqueTopologyRoot",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveVertex_ClearsBoundarySlotAndPrunesUniqueVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveVertex_ClearsBoundarySlotAndPrunesUniqueVertex",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RemoveNode_EdgeWithReplacement_ReparentsAllCoEdges",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RemoveNode_EdgeWithReplacement_ReparentsAllCoEdges",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.MutableVertex_ChangePoint_Verified",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__MutableVertex_ChangePoint_Verified",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.EdgeDef_HasValidCurve3d",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__EdgeDef_HasValidCurve3d",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.FreeEdges_SingleFace_AllEdgesFree",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__FreeEdges_SingleFace_AllEdgesFree",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Decompose_ThreeDisconnectedFaces_ThreeComponents",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Decompose_ThreeDisconnectedFaces_ThreeComponents",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.DetectToleranceConflicts_ManualConflict_Detected",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__DetectToleranceConflicts_ManualConflict_Detected",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_EmptyCompound_IsEmptyZeroCounts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_EmptyCompound_IsEmptyZeroCounts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.TopoNode_GenericLookup_MatchesTypedAccess",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__TopoNode_GenericLookup_MatchesTypedAccess",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.NbNodes_Box_TotalCount",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__NbNodes_Box_TotalCount",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.HasUID_ValidFace_ReturnsTrue",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__HasUID_ValidFace_ReturnsTrue",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.HasUID_InvalidUID_ReturnsFalse",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__HasUID_InvalidUID_ReturnsFalse",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.NodeIdFromUID_InvalidUID_ReturnsInvalid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__NodeIdFromUID_InvalidUID_ReturnsInvalid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Allocator_DefaultConstructor_NotNull",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Allocator_DefaultConstructor_NotNull",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_DefaultAllocator_IsNotEmpty",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_DefaultAllocator_IsNotEmpty",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Wire_IsClosed_BoxOuterWires",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Wire_IsClosed_BoxOuterWires",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Face_InnerWireRefs_BoxHasNone",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Face_InnerWireRefs_BoxHasNone",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Face_Orientation_ValidValue",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Face_Orientation_ValidValue",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Shell_ContainsSixFaces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Shell_ContainsSixFaces",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Solid_ContainsOneShell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Solid_ContainsOneShell",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Edge_ParamRange_ValidBounds",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Edge_ParamRange_ValidBounds",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Vertex_TolerancePositive",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Vertex_TolerancePositive",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Edge_TolerancePositive",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Edge_TolerancePositive",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Face_ToleranceNonNegative",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Face_ToleranceNonNegative",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Wire_IsClosed_DerivedFromCoedgeChain",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Wire_IsClosed_DerivedFromCoedgeChain",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_SingleFace_CorrectCounts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_SingleFace_CorrectCounts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_Shell_CorrectCounts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_Shell_CorrectCounts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Build_CompoundOfTwoSolids",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Build_CompoundOfTwoSolids",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ReconstructShape_ShellRoot_SameFaceCount",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ReconstructShape_ShellRoot_SameFaceCount",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.UID_FaceIsTopology",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__UID_FaceIsTopology",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.UID_AllTopoNodesHaveValidUIDs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__UID_AllTopoNodesHaveValidUIDs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Wire_OuterWireIdx_MatchesFaceDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Wire_OuterWireIdx_MatchesFaceDef",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.Wire_CoEdges_FourEdgesPerBoxFace",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__Wire_CoEdges_FourEdgesPerBoxFace",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.SetHistoryEnabled_DefaultTrue",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__SetHistoryEnabled_DefaultTrue",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.SetHistoryEnabled_DisableAndQuery",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__SetHistoryEnabled_DisableAndQuery",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RecordHistory_Disabled_NoRecordAdded",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RecordHistory_Disabled_NoRecordAdded",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.RecordHistory_ReEnabled_RecordsAgain",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__RecordHistory_ReEnabled_RecordsAgain",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ApplyModification_HistoryDisabled_NoHistoryNoDerivedEdges",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ApplyModification_HistoryDisabled_NoHistoryNoDerivedEdges",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraphTest.ApplyModification_HistoryDisabled_ModifierStillRuns",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Test.cxx",
+      "source_sha256": "313250c89f0e0d3ae8feb77edffde606a90542954d1a19ea7b57ece98e896ace",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_suite",
+      "rust_test": "BRepGraphTest__ApplyModification_HistoryDisabled_ModifierStillRuns",
+      "rust_source": "crates/tkbrep/tests/brep_graph_suite.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

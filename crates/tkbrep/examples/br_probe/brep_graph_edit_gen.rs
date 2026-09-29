@@ -3,6 +3,7 @@
 //! tools/oracle/tkbrep_probe_brepgraph_edit_rest.cxx.
 use super::brep::{Scene, point, scene};
 use super::brep_graph::{list, node, run_action, topo_report};
+use super::brep_graph_algo::algo_action;
 use super::brep_graph_cache::lock_action;
 use super::brep_graph_cache_mesh::editor_action as mesh_editor_action;
 use super::brep_graph_cache_report::mesh_report;
@@ -282,7 +283,8 @@ fn editor_actions(
         || ref_action(g, s, r, code)?
         || deferred_action(g, s, st, r, code)?
         || guard_action(g, s, r, code)?
-        || supplement_action(g, s, r, code)?)
+        || supplement_action(g, s, r, code)?
+        || algo_action(g, r, code)?)
 }
 
 fn run(

@@ -32,7 +32,7 @@ pub struct BoundaryIssue {
     pub description: AsciiString,
 }
 
-const BOUNDARY_KINDS: [NodeKind; 11] = [
+pub(crate) const BOUNDARY_KINDS: [NodeKind; 11] = [
     NodeKind::VERTEX,
     NodeKind::EDGE,
     NodeKind::CO_EDGE,
@@ -131,7 +131,7 @@ fn occurrence_kind_issues(storage: &Storage) -> Vec<BoundaryIssue> {
 }
 
 /// `cachedActiveByKind(theStorage, theKind)`: the stored active count.
-fn cached_active(storage: &Storage, kind: NodeKind) -> i32 {
+pub(crate) fn cached_active(storage: &Storage, kind: NodeKind) -> i32 {
     let counts = storage.active_counts();
     let count = match kind {
         NodeKind::VERTEX => counts.nb_vertices,
@@ -151,7 +151,7 @@ fn cached_active(storage: &Storage, kind: NodeKind) -> i32 {
 }
 
 /// `countActiveByKind(theGraph, theKind)`: the slots a `BRepGraph_Iterator` visits.
-fn actual_active(graph: &BRepGraph, kind: NodeKind) -> i32 {
+pub(crate) fn actual_active(graph: &BRepGraph, kind: NodeKind) -> i32 {
     let generic = graph.topo().generic();
     (0..generic.nb(kind))
         .filter(|index| !NodeId::new(kind, *index).is_removed(graph))

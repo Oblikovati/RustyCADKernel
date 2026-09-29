@@ -53,7 +53,7 @@ pub fn point(r: &mut Reader<'_>) -> Point3 {
     let (x, y) = (r.real(), r.real());
     Point3::new(x, y, r.real())
 }
-fn direction(r: &mut Reader<'_>) -> Result<Direction3, Failure> {
+pub fn direction(r: &mut Reader<'_>) -> Result<Direction3, Failure> {
     let (x, y) = (r.real(), r.real());
     Direction3::new(x, y, r.real())
 }
