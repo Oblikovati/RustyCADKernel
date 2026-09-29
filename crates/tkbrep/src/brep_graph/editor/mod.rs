@@ -51,12 +51,14 @@ mod wire_edits;
 mod wires;
 
 pub use boundary::BoundaryIssue;
+pub(crate) use boundary::{BOUNDARY_KINDS, actual_active, cached_active};
 pub use co_edges::CoEdgeOps;
 pub use compounds::{CompSolidOps, CompoundOps};
 pub use containers::{ShellOps, SolidOps};
 pub use edges::EdgeOps;
 pub use faces::FaceOps;
 pub use gen_ops::GenOps;
+pub(crate) use helpers::kind_name;
 pub use occurrences::OccurrenceOps;
 pub use products::ProductOps;
 pub use vertices::VertexOps;
