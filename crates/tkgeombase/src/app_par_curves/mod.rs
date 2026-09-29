@@ -23,7 +23,7 @@
 //!
 //! The native `.gxx` generics take a `MultiLine` and its `ToolLine`; the port takes
 //! any type implementing [`LineTool`].
-mod arrays;
+pub(crate) mod arrays;
 mod bernstein;
 mod bsp_function;
 mod bsp_gradient;

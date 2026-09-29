@@ -22,6 +22,7 @@
 pub mod adv_app2var;
 pub mod app_cont;
 pub mod app_par_curves;
+pub mod approx;
 mod array_access;
 pub mod bnd_lib;
 pub mod cpnts;

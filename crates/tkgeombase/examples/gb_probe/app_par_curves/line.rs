@@ -19,6 +19,7 @@ use super::super::common::Reader;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkgeombase::app_par_curves::LineTool;
+use rustycad_tkgeombase::approx::Status;
 use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
 
 #[derive(Clone)]
@@ -174,5 +175,15 @@ impl LineTool for ProbeLine {
         };
         fill(curvatures, c3)?;
         fill(curvatures2d, c2).map(|()| true)
+    }
+    // AppDef_MyLineTool: the line is never cut or refined.
+    fn what_status(&self, _: i32, _: i32) -> Result<Status, Failure> {
+        Ok(Status::NoPointsAdded)
+    }
+    fn make_ml_between(&self, _: i32, _: i32, _: i32) -> Result<Self, Failure> {
+        Ok(self.clone())
+    }
+    fn make_ml_one_more_point(&self, _: i32, _: i32, _: i32) -> Result<Option<Self>, Failure> {
+        Ok(None)
     }
 }
