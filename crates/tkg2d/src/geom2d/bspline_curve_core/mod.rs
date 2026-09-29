@@ -19,10 +19,12 @@
 //!
 //! Each curve class keeps one [`BSplineCurveCore`] behind its lock; the edits,
 //! evaluators and queries live in the submodules and run once for both dimensions.
+mod access;
 mod eval;
 mod knots;
 mod periodic;
 mod poles;
+mod public_members;
 mod segment;
 
 use super::arrays::{one_based, rebased};

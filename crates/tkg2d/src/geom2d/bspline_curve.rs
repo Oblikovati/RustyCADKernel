@@ -65,6 +65,7 @@ fn check_weights(weights: &Array1<'_, f64>, nbpoles: usize) -> Result<(), Failur
 }
 
 impl Geom2dBSplineCurve {
+    crate::bspline_curve_edits!(Point2, Vector2);
     fn from_state(state: BSplineState) -> Self {
         Self {
             parent: StandardTransient::default(),
@@ -118,25 +119,6 @@ impl Geom2dBSplineCurve {
         Ok(Self::from_state(copy))
     }
     crate::eval_representation_members!(dyn RepCurveDesc, rep_utils::validate_curve_desc, "curve");
-    /// Raise the degree (`IncreaseDegree`); `curve.increase_degree(5)?`.
-    pub fn increase_degree(&self, degree: i32) -> Result<(), Failure> {
-        self.state.write().increase_degree(degree)
-    }
-    /// Raise the multiplicity of knot `index` to `mult` (`IncreaseMultiplicity(Index, M)`);
-    /// `curve.increase_multiplicity(2, 3)?`.
-    pub fn increase_multiplicity(&self, index: i32, mult: i32) -> Result<(), Failure> {
-        self.state.write().increase_multiplicity(index, mult)
-    }
-    /// Raise the multiplicities of knots `i1..=i2` to `mult` (`IncreaseMultiplicity(I1, I2, M)`);
-    /// `curve.increase_multiplicity_range(2, 3, 3)?`.
-    pub fn increase_multiplicity_range(&self, i1: i32, i2: i32, mult: i32) -> Result<(), Failure> {
-        self.state.write().raise_multiplicities(i1, i2, mult, false)
-    }
-    /// Add `step` to the multiplicities of knots `i1..=i2` (`IncrementMultiplicity`);
-    /// `curve.increment_multiplicity(2, 3, 1)?`.
-    pub fn increment_multiplicity(&self, i1: i32, i2: i32, step: i32) -> Result<(), Failure> {
-        self.state.write().raise_multiplicities(i1, i2, step, true)
-    }
     /// Insert knot `u` with multiplicity `mult` (`InsertKnot(U, M, ParametricTolerance)`);
     /// `curve.insert_knot(0.5, 1, 0.0)?`.
     pub fn insert_knot(&self, u: f64, mult: i32, parametric_tolerance: f64) -> Result<(), Failure> {
@@ -145,25 +127,6 @@ impl Geom2dBSplineCurve {
         let mut mults: Array1<'static, i32> = super::arrays::one_based(1)?;
         super::arrays::put(&mut mults, 1, mult)?;
         self.insert_knots(&knots, &mults, parametric_tolerance, false)
-    }
-    /// Insert knots (`InsertKnots(Knots, Mults, ParametricTolerance, Add)`); with `add` the
-    /// multiplicities of existing knots are increased by `mults`, otherwise raised to them;
-    /// `curve.insert_knots(&knots, &mults, 0.0, false)?`.
-    pub fn insert_knots(
-        &self,
-        knots: &Array1<'_, f64>,
-        mults: &Array1<'_, i32>,
-        parametric_tolerance: f64,
-        add: bool,
-    ) -> Result<(), Failure> {
-        self.state
-            .write()
-            .insert_knots(knots, mults, parametric_tolerance, add)
-    }
-    /// Reduce knot `index` to multiplicity `mult` if the curve moves less than
-    /// `tolerance`; false when it would (`RemoveKnot`); `curve.remove_knot(2, 0, 1e-7)?`.
-    pub fn remove_knot(&self, index: i32, mult: i32, tolerance: f64) -> Result<bool, Failure> {
-        self.state.write().remove_knot(index, mult, tolerance)
     }
     /// Insert a pole after `index` on a uniform or quasi-uniform curve (`InsertPoleAfter`);
     /// `curve.insert_pole_after(2, p, 1.0)?`.
@@ -178,101 +141,5 @@ impl Geom2dBSplineCurve {
     /// `curve.remove_pole(2)?`.
     pub fn remove_pole(&self, index: i32) -> Result<(), Failure> {
         self.state.write().remove_pole(index)
-    }
-    /// Restrict to `[u1, u2]` (`Segment`); `curve.segment(0.2, 0.8, precision::p_confusion())?`.
-    pub fn segment(&self, u1: f64, u2: f64, tolerance: f64) -> Result<(), Failure> {
-        self.state.write().segment(u1, u2, tolerance)
-    }
-    /// Move knot `index` strictly between its neighbours (`SetKnot(Index, K)`); `curve.set_knot(2, 0.4)?`.
-    pub fn set_knot(&self, index: i32, knot: f64) -> Result<(), Failure> {
-        self.state.write().set_knot(index, knot)
-    }
-    /// Replace all knot values (`SetKnots`); `curve.set_knots(&knots)?`.
-    pub fn set_knots(&self, knots: &Array1<'_, f64>) -> Result<(), Failure> {
-        self.state.write().set_knots(knots)
-    }
-    /// Raise the multiplicity of knot `index` to `mult`, then move it (`SetKnot(Index, K, M)`);
-    /// `curve.set_knot_with_multiplicity(2, 0.4, 2)?`.
-    pub fn set_knot_with_multiplicity(
-        &self,
-        index: i32,
-        knot: f64,
-        mult: i32,
-    ) -> Result<(), Failure> {
-        let mut state = self.state.write();
-        state.increase_multiplicity(index, mult)?;
-        state.set_knot(index, knot)
-    }
-    /// Shift a parameter of a periodic curve into its range (`PeriodicNormalization`);
-    /// `curve.periodic_normalization(7.0)?`.
-    pub fn periodic_normalization(&self, u: f64) -> Result<f64, Failure> {
-        self.state.read().periodic_normalization(u)
-    }
-    /// Make the curve periodic (`SetPeriodic`); `curve.set_periodic()?`.
-    pub fn set_periodic(&self) -> Result<(), Failure> {
-        self.state.write().set_periodic()
-    }
-    /// Make knot `index` the origin of a periodic curve (`SetOrigin`); `curve.set_origin(2)?`.
-    pub fn set_origin(&self, index: i32) -> Result<(), Failure> {
-        self.state.write().set_origin(index)
-    }
-    /// Make the curve non-periodic (`SetNotPeriodic`); `curve.set_not_periodic()?`.
-    pub fn set_not_periodic(&self) -> Result<(), Failure> {
-        self.state.write().set_not_periodic()
-    }
-    /// Replace a pole (`SetPole(Index, P)`); `curve.set_pole(2, p)?`.
-    pub fn set_pole(&self, index: i32, pole: Point2) -> Result<(), Failure> {
-        self.state.write().set_pole(index, pole)
-    }
-    /// Replace a pole and its weight (`SetPole(Index, P, Weight)`); `curve.set_pole_weighted(2, p, 2.0)?`.
-    pub fn set_pole_weighted(&self, index: i32, pole: Point2, weight: f64) -> Result<(), Failure> {
-        let mut state = self.state.write();
-        state.set_pole(index, pole)?;
-        state.set_weight(index, weight)
-    }
-    /// Replace a weight (`SetWeight`); `curve.set_weight(2, 2.0)?`.
-    pub fn set_weight(&self, index: i32, weight: f64) -> Result<(), Failure> {
-        self.state.write().set_weight(index, weight)
-    }
-    /// Move the point of parameter `u` to `point` by changing poles `index1..=index2`; returns
-    /// `(FirstModifiedPole, LastModifiedPole)`, `(0, 0)` when nothing moved (`MovePoint`);
-    /// `curve.move_point(0.5, p, 2, 3)?`.
-    pub fn move_point(
-        &self,
-        u: f64,
-        point: Point2,
-        index1: i32,
-        index2: i32,
-    ) -> Result<(i32, i32), Failure> {
-        self.state.write().move_point(u, point, index1, index2)
-    }
-    /// Move the point and tangent of parameter `u`; returns `ErrorStatus`, 0 on success
-    /// (`MovePointAndTangent`); `curve.move_point_and_tangent(0.5, p, t, 1e-7, 1, 1)?`.
-    pub fn move_point_and_tangent(
-        &self,
-        u: f64,
-        point: Point2,
-        tangent: Vector2,
-        tolerance: f64,
-        starting_condition: i32,
-        ending_condition: i32,
-    ) -> Result<i32, Failure> {
-        let conditions: (i32, i32) = (starting_condition, ending_condition);
-        self.state
-            .write()
-            .move_point_and_tangent(u, point, tangent, tolerance, conditions)
-    }
-    /// Tangent continuity within `ang_tol` on `[tf, tl]` (`IsG1`); `curve.is_g1(0.0, 1.0, 1e-12)?`.
-    pub fn is_g1(&self, tf: f64, tl: f64, ang_tol: f64) -> Result<bool, Failure> {
-        self.state.read().is_g1(tf, tl, ang_tol)
-    }
-    /// `BSplCLib::MaxDegree()` (`MaxDegree`); `Geom2dBSplineCurve::max_degree() == 25`.
-    pub fn max_degree() -> i32 {
-        bsplclib::max_degree()
-    }
-    /// Parametric tolerance for a 2D tolerance, caching the inverse derivative bound
-    /// (`Resolution`); `curve.resolution(1e-7)?`.
-    pub fn resolution(&self, tolerance_uv: f64) -> Result<f64, Failure> {
-        self.state.write().resolution(tolerance_uv)
     }
 }

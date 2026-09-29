@@ -18,6 +18,7 @@
 //! evaluation representation and the closure test ([`BezierCurveKind`]) differ.
 mod edits;
 mod eval;
+mod public_members;
 
 use super::arrays::{at, rebased};
 use super::spline_curve_kind::SplineCurveKind;
@@ -181,6 +182,17 @@ impl<K: BezierCurveKind> BezierCurveCore<K> {
     /// The flat knots (`KnotSequence`); `core.knot_sequence()?`.
     pub fn knot_sequence(&self) -> Result<Array1<'static, f64>, Failure> {
         bezier_knot_sequence(self.degree(), K::BEZIER_CLASS)
+    }
+    /// `Pole(Index)`; `core.pole(1)?`.
+    pub fn pole(&self, index: i32) -> Result<K::Point, Failure> {
+        let member: String = format!("{}::Pole", K::BEZIER_CLASS);
+        super::arrays::check_one_based(index, self.poles.len(), &member)?;
+        at(&self.poles, index)
+    }
+    /// Deprecated `Poles(P)` into an array of equal length; `core.poles_into(&mut p)?`.
+    pub fn poles_into(&self, target: &mut Array1<'_, K::Point>) -> Result<(), Failure> {
+        let member: String = format!("{}::Poles", K::BEZIER_CLASS);
+        super::arrays::copy_same_length(&self.poles, target, &member)
     }
     /// `Weight(Index)`: 1 for a non-rational curve; `core.weight(1)?`.
     pub fn weight(&self, index: i32) -> Result<f64, Failure> {

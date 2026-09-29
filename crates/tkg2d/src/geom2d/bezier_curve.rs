@@ -42,6 +42,7 @@ impl_transient!(
 );
 
 impl Geom2dBezierCurve {
+    crate::bezier_curve_members!(Point2);
     fn from_state(state: BezierState) -> Self {
         Self {
             parent: StandardTransient::default(),
@@ -73,10 +74,6 @@ impl Geom2dBezierCurve {
         Ok(Self::from_state(copy))
     }
     crate::eval_representation_members!(dyn RepCurveDesc, rep_utils::validate_curve_desc, "curve");
-    /// Raise the degree (`Increase`); `curve.increase(5)?`.
-    pub fn increase(&self, degree: i32) -> Result<(), Failure> {
-        self.state.write().increase(degree)
-    }
     /// Insert a pole after position `index` in 0..=NbPoles (`InsertPoleAfter`);
     /// `curve.insert_pole_after(2, p, 1.0)?`.
     pub fn insert_pole_after(&self, index: i32, pole: Point2, weight: f64) -> Result<(), Failure> {
@@ -85,96 +82,6 @@ impl Geom2dBezierCurve {
     /// Insert a pole before position `index` (`InsertPoleBefore`); `curve.insert_pole_before(1, p, 1.0)?`.
     pub fn insert_pole_before(&self, index: i32, pole: Point2, weight: f64) -> Result<(), Failure> {
         self.insert_pole_after(index - 1, pole, weight)
-    }
-    /// Remove the pole at `index` (`RemovePole`); `curve.remove_pole(2)?`.
-    pub fn remove_pole(&self, index: i32) -> Result<(), Failure> {
-        self.state.write().remove_pole(index)
-    }
-    /// Restrict to `[u1, u2]` and reparameterize on `[0, 1]` (`Segment`); `curve.segment(0.25, 0.75)?`.
-    pub fn segment(&self, u1: f64, u2: f64) -> Result<(), Failure> {
-        self.state.write().segment(u1, u2)
-    }
-    /// Replace a pole (`SetPole(Index, P)`); `curve.set_pole(2, p)?`.
-    pub fn set_pole(&self, index: i32, pole: Point2) -> Result<(), Failure> {
-        self.state.write().set_pole(index, pole)
-    }
-    /// Replace a pole and its weight (`SetPole(Index, P, Weight)`); `curve.set_pole_weighted(2, p, 2.0)?`.
-    pub fn set_pole_weighted(&self, index: i32, pole: Point2, weight: f64) -> Result<(), Failure> {
-        let mut state = self.state.write();
-        state.set_pole(index, pole)?;
-        state.set_weight(index, weight)
-    }
-    /// Replace a weight (`SetWeight`); `curve.set_weight(2, 2.0)?`.
-    pub fn set_weight(&self, index: i32, weight: f64) -> Result<(), Failure> {
-        self.state.write().set_weight(index, weight)
-    }
-    /// Whether the weights differ (`IsRational`); `curve.is_rational()`.
-    pub fn is_rational(&self) -> bool {
-        self.state.read().rational
-    }
-    /// Number of poles minus one (`Degree`); `curve.degree()`.
-    pub fn degree(&self) -> i32 {
-        self.state.read().degree()
-    }
-    /// Number of poles (`NbPoles`); `curve.nb_poles()`.
-    pub fn nb_poles(&self) -> i32 {
-        self.state.read().poles.len() as i32
-    }
-    /// Pole at `index` (`Pole`); `curve.pole(1)?`.
-    pub fn pole(&self, index: i32) -> Result<Point2, Failure> {
-        let state = self.state.read();
-        super::arrays::check_one_based(index, state.poles.len(), "Geom2d_BezierCurve::Pole")?;
-        at(&state.poles, index)
-    }
-    /// Copy the poles into `target` of equal length (deprecated `Poles(P)`);
-    /// `curve.poles_into(&mut poles)?`.
-    pub fn poles_into(&self, target: &mut Array1<'_, Point2>) -> Result<(), Failure> {
-        let state = self.state.read();
-        super::arrays::copy_same_length(&state.poles, target, "Geom2d_BezierCurve::Poles")
-    }
-    /// The poles, indexed from 1 (`Poles()`); `curve.poles()`.
-    pub fn poles(&self) -> Array1<'static, Point2> {
-        self.state.read().poles.clone()
-    }
-    /// Weight at `index`; 1 for a non-rational curve (`Weight`); `curve.weight(1)?`.
-    pub fn weight(&self, index: i32) -> Result<f64, Failure> {
-        self.state.read().weight(index)
-    }
-    /// Copy the weights into `target` of equal length, writing `target(1..=n)` for a
-    /// non-rational curve (deprecated `Weights(W)`); `curve.weights_into(&mut w)?`.
-    pub fn weights_into(&self, target: &mut Array1<'_, f64>) -> Result<(), Failure> {
-        self.state.read().weights_into(target)
-    }
-    /// The weights of a rational curve, `None` otherwise (`Weights()`); `curve.weights()`.
-    pub fn weights(&self) -> Option<Array1<'static, f64>> {
-        self.state.read().weights_view().cloned()
-    }
-    /// Read the stored weights in place, unit weights (a non-owning shared view) for a
-    /// non-rational curve (`WeightsArray`, which natively returns a stable reference);
-    /// `curve.weights_array(|weights| weights.len())`.
-    pub fn weights_array<R>(&self, read: impl FnOnce(&Array1<'static, f64>) -> R) -> R {
-        read(&self.state.read().weights)
-    }
-    /// `BSplCLib::MaxDegree()` (`MaxDegree`); `Geom2dBezierCurve::max_degree() == 25`.
-    pub fn max_degree() -> i32 {
-        bsplclib::max_degree()
-    }
-    /// Parametric tolerance for a 2D tolerance, caching the inverse derivative bound
-    /// (`Resolution`); `curve.resolution(1e-7)?`.
-    pub fn resolution(&self, tolerance_uv: f64) -> Result<f64, Failure> {
-        self.state.write().resolution(tolerance_uv)
-    }
-    /// The knots `{0, 1}` (`Knots`); `curve.knots()`.
-    pub fn knots(&self) -> Array1<'static, f64> {
-        crate::geom2d::spline_data::bezier_knots()
-    }
-    /// The multiplicities `{Degree+1, Degree+1}` (`Multiplicities`); `curve.multiplicities()?`.
-    pub fn multiplicities(&self) -> Result<Array1<'static, i32>, Failure> {
-        self.state.read().multiplicities()
-    }
-    /// The flat knots (`KnotSequence`); `curve.knot_sequence()?`.
-    pub fn knot_sequence(&self) -> Result<Array1<'static, f64>, Failure> {
-        self.state.read().knot_sequence()
     }
 }
 impl Geom2dGeometry for Geom2dBezierCurve {
