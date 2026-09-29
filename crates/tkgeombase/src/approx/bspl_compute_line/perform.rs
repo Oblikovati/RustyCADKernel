@@ -32,7 +32,7 @@ impl BSplComputeLine {
     /// `Perform(Line)`: approximates `line`; `compute.perform(&line)?`.
     pub fn perform<L: LineTool + Clone>(&mut self, line: &L) -> Result<(), Failure> {
         self.find_real_constraints(line)?;
-        let (first, last) = (line.first_point(), line.last_point());
+        let (first, last) = (line.first_point(), line.last_point()?);
         self.couples = [
             ConstraintCouple::new(first, self.real_first_c),
             ConstraintCouple::new(last, self.real_last_c),
@@ -158,15 +158,15 @@ impl BSplComputeLine {
     fn find_real_constraints<L: LineTool>(&mut self, line: &L) -> Result<(), Failure> {
         self.real_first_c = self.first_c;
         self.real_last_c = self.last_c;
-        let mut tab_v: Array1<'static, Vector3> = scratch(line.nb_p3d())?;
-        let mut tab_v2d: Array1<'static, Vector2> = scratch(line.nb_p2d())?;
+        let mut tab_v: Array1<'static, Vector3> = scratch(line.nb_p3d()?)?;
+        let mut tab_v2d: Array1<'static, Vector2> = scratch(line.nb_p2d()?)?;
         if self.first_c >= Constraint::TangencyPoint {
             let first: i32 = line.first_point();
             self.real_first_c =
                 real_constraint(line, first, self.first_c, &mut tab_v, &mut tab_v2d)?;
         }
         if self.last_c >= Constraint::TangencyPoint {
-            let last: i32 = line.last_point();
+            let last: i32 = line.last_point()?;
             self.real_last_c = real_constraint(line, last, self.last_c, &mut tab_v, &mut tab_v2d)?;
         }
         Ok(())

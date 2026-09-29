@@ -81,9 +81,22 @@ impl Default for ComputeLineOptions {
 /// The native constructors leave `tolreached` and the current errors
 /// uninitialized; the port starts them at false and 0.
 ///
-/// ```ignore
+/// ```
+/// use rustycad_tkgeombase::app_def::MultiLine;
+/// use rustycad_tkgeombase::approx::{ComputeLine, ComputeLineOptions};
+/// use rustycad_tkernel::ncollection::Array1;
+/// use rustycad_tkmath::gp::Point2;
+/// let points: Vec<Point2> = (0..12).map(|i| {
+///     let t = f64::from(i) / 11.0;
+///     Point2::new(t, (3.0 * t).sin())
+/// }).collect();
+/// let line = MultiLine::from_points2d(&Array1::from_shared(&points, 1));
 /// let compute = ComputeLine::with_line(&line, ComputeLineOptions::default())?;
-/// let curve = compute.value(1)?;
+/// assert!(compute.is_all_approximated());
+/// assert!(compute.nb_multi_curves() >= 1);
+/// let (tol3d, _) = compute.error(1)?;
+/// assert_eq!(tol3d, 0.0); // no 3D curve
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 #[derive(Clone)]
 pub struct ComputeLine {

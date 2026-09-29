@@ -12,13 +12,14 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! The line of the Approx driver probes: the AppDef_MultiLine test double of the
-//! AppParCurves probe with the scripted Approx members of GbAxLineTool
+//! The line of the Approx driver probes: an AppDef_MultiLine read by the AppParCurves
+//! probe, with the scripted Approx members of GbAxLineTool
 //! (tools/oracle/tkgeombase_probe_approx_line.cxx).
-use super::super::app_par_curves::{ProbeLine, ProbePoint};
+use super::super::app_par_curves::{multi_point, read_line};
 use super::super::common::Reader;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkgeombase::app_def::{MultiLine, MultiPointConstraint};
 use rustycad_tkgeombase::app_par_curves::LineTool;
 use rustycad_tkgeombase::approx::Status;
 use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
@@ -58,23 +59,31 @@ pub struct Rules {
 /// An AppDef line with the parameter of each source point and the request's rules.
 #[derive(Clone)]
 pub struct AxLine {
-    line: ProbeLine,
+    line: MultiLine,
     params: Vec<Option<f64>>,
     rules: Rules,
 }
 
-fn source_point(nb3d: i32, nb2d: i32, t: f64, tangent: bool) -> ProbePoint {
-    ProbePoint {
-        p3: (1..=nb3d).map(|k| source_p3(k, t)).collect(),
-        p2: (1..=nb2d).map(|k| source_p2(k, t)).collect(),
-        tangents: tangent.then(|| {
-            (
-                (1..=nb3d).map(|k| source_d3(k, t)).collect(),
-                (1..=nb2d).map(|k| source_d2(k, t)).collect(),
-            )
-        }),
-        curvatures: None,
+// gb_ax_source_point: the multipoint at `t`, with the source tangents when flagged.
+fn source_point(nb3d: i32, nb2d: i32, t: f64, tangent: bool) -> MultiPointConstraint {
+    let p3: Vec<Point3> = (1..=nb3d).map(|k| source_p3(k, t)).collect();
+    let p2: Vec<Point2> = (1..=nb2d).map(|k| source_p2(k, t)).collect();
+    let mut m = multi_point(&p3, &p2);
+    if tangent {
+        for k in 1..=nb3d {
+            m.set_tang(k, source_d3(k, t)).expect("probe tangent");
+        }
+        for k in 1..=nb2d {
+            m.set_tang2d(nb3d + k, source_d2(k, t))
+                .expect("probe tangent");
+        }
     }
+    m
+}
+
+// The line of `points`, as `AppDef_MultiLine(n)` and SetValue.
+fn line_of(points: &[MultiPointConstraint]) -> MultiLine {
+    MultiLine::from_multi_points(&Array1::from_shared(points, 1))
 }
 
 impl AxLine {
@@ -82,8 +91,8 @@ impl AxLine {
     pub fn read(r: &mut Reader<'_>) -> Self {
         let kind: i32 = r.integer();
         let (line, params) = if kind == 0 {
-            let line = ProbeLine::read(r);
-            let n = line.nb_multi_points() as usize;
+            let line = read_line(r);
+            let n = line.nb_multi_points().expect("probe line") as usize;
             (line, vec![None; n])
         } else {
             let (nb3d, nb2d, n) = (r.integer(), r.integer(), r.integer());
@@ -94,7 +103,7 @@ impl AxLine {
                 points.push(source_point(nb3d, nb2d, t, r.flag()));
                 params.push(Some(t));
             }
-            (ProbeLine::new(nb3d, nb2d, points), params)
+            (line_of(&points), params)
         };
         let rules = Rules {
             mode: r.integer(),
@@ -110,18 +119,18 @@ impl AxLine {
 
     // gb_ax_param: the parameter of a source point.
     fn param(&self, index: i32) -> Result<f64, Failure> {
-        self.line.multi_point(index)?;
+        self.line.value(index)?;
         self.params[(index - 1) as usize]
             .ok_or_else(|| Failure::new("probe: a point without parameter"))
     }
 
     fn tangent(&self, index: i32) -> Result<bool, Failure> {
-        Ok(self.line.multi_point(index)?.tangents.is_some())
+        Ok(self.line.value(index)?.is_tangency_point())
     }
 
-    fn with_points(&self, points: Vec<ProbePoint>, params: Vec<Option<f64>>) -> Self {
+    fn with_points(&self, points: Vec<MultiPointConstraint>, params: Vec<Option<f64>>) -> Self {
         Self {
-            line: ProbeLine::new(self.nb_p3d(), self.nb_p2d(), points),
+            line: line_of(&points),
             params,
             rules: self.rules,
         }
@@ -132,13 +141,13 @@ impl LineTool for AxLine {
     fn first_point(&self) -> i32 {
         self.line.first_point()
     }
-    fn last_point(&self) -> i32 {
+    fn last_point(&self) -> Result<i32, Failure> {
         self.line.last_point()
     }
-    fn nb_p2d(&self) -> i32 {
+    fn nb_p2d(&self) -> Result<i32, Failure> {
         self.line.nb_p2d()
     }
-    fn nb_p3d(&self) -> i32 {
+    fn nb_p3d(&self) -> Result<i32, Failure> {
         self.line.nb_p3d()
     }
     fn value_3d(&self, index: i32, points: &mut Array1<'_, Point3>) -> Result<(), Failure> {
@@ -153,7 +162,7 @@ impl LineTool for AxLine {
         points: &mut Array1<'_, Point3>,
         points2d: &mut Array1<'_, Point2>,
     ) -> Result<(), Failure> {
-        self.line.value(index, points, points2d)
+        LineTool::value(&self.line, index, points, points2d)
     }
     fn tangency_3d(&self, index: i32, tangents: &mut Array1<'_, Vector3>) -> Result<bool, Failure> {
         self.line.tangency_3d(index, tangents)
@@ -188,7 +197,7 @@ impl LineTool for AxLine {
         self.line.curvature(index, c, c2d)
     }
     fn what_status(&self, i1: i32, i2: i32) -> Result<Status, Failure> {
-        let n: i32 = self.line.nb_multi_points();
+        let n: i32 = self.line.nb_multi_points()?;
         let added = if n < self.rules.cap {
             Status::PointsAdded
         } else {
@@ -209,7 +218,7 @@ impl LineTool for AxLine {
         let n: i32 = (2 * (i2 - i1) + 1).max(nb_p_min);
         let (t1, t2) = (self.param(i1)?, self.param(i2)?);
         let (tan1, tan2) = (self.tangent(i1)?, self.tangent(i2)?);
-        let (nb3d, nb2d) = (self.nb_p3d(), self.nb_p2d());
+        let (nb3d, nb2d) = (self.nb_p3d()?, self.nb_p2d()?);
         let mut points = Vec::new();
         let mut params = Vec::new();
         for k in 0..n {
@@ -230,7 +239,7 @@ impl LineTool for AxLine {
         i2: i32,
         index_bad: i32,
     ) -> Result<Option<Self>, Failure> {
-        let n: i32 = self.line.nb_multi_points();
+        let n: i32 = self.line.nb_multi_points()?;
         if !self.rules.source || n >= self.rules.cap || index_bad <= i1 || index_bad > i2 {
             return Ok(None);
         }
@@ -239,10 +248,10 @@ impl LineTool for AxLine {
         for i in i1..=i2 {
             if i == index_bad {
                 let t: f64 = 0.5 * (self.param(i - 1)? + self.param(i)?);
-                points.push(source_point(self.nb_p3d(), self.nb_p2d(), t, false));
+                points.push(source_point(self.nb_p3d()?, self.nb_p2d()?, t, false));
                 params.push(Some(t));
             }
-            points.push(self.line.multi_point(i)?.clone());
+            points.push(self.line.value(i)?);
             params.push(self.params[(i - 1) as usize]);
         }
         Ok(Some(self.with_points(points, params)))

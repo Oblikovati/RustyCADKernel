@@ -59,5 +59,7 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_approx').append_approx_requests(requests)
     # Approx adaptor classes and sweeps (tkgeombase_corpus_approx_adaptors.py)
     __import__('tkgeombase_corpus_approx_adaptors').append_approx_adaptor_requests(requests)
+    # AppDef (tkgeombase_corpus_appdef.py, tkgeombase_corpus_appdef_variational.py)
+    __import__('tkgeombase_corpus_appdef').append_appdef_requests(requests)
     # ProjLib (tkgeombase_corpus_projlib.py, tkgeombase_corpus_projlib_curves.py)
     __import__('tkgeombase_corpus_projlib').append_projlib_requests(requests)

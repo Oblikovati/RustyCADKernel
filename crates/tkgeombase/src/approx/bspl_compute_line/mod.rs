@@ -36,9 +36,21 @@ use rustycad_tkmath::math::Vector;
 /// `realfirstC`/`reallastC` and the lambdas are uninitialized natively until
 /// Perform; the port starts them at `NoConstraint` and 0.
 ///
-/// ```ignore
+/// ```
+/// use rustycad_tkgeombase::app_def::MultiLine;
+/// use rustycad_tkgeombase::app_par_curves::MultiCurveEval;
+/// use rustycad_tkgeombase::approx::{BSplComputeLine, ComputeLineOptions};
+/// use rustycad_tkernel::ncollection::Array1;
+/// use rustycad_tkmath::gp::Point2;
+/// let points: Vec<Point2> = (0..12).map(|i| {
+///     let t = f64::from(i) / 11.0;
+///     Point2::new(t, (3.0 * t).sin())
+/// }).collect();
+/// let line = MultiLine::from_points2d(&Array1::from_shared(&points, 1));
 /// let compute = BSplComputeLine::with_line(&line, ComputeLineOptions::default())?;
-/// let spline = compute.value();
+/// assert!(compute.is_all_approximated());
+/// assert!(compute.value().nb_poles() >= 2);
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 #[derive(Clone)]
 pub struct BSplComputeLine {

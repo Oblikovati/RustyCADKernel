@@ -20,10 +20,12 @@ use super::line::AxLine;
 use super::{array, bspline, constraint, read_options};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkgeombase::app_par_curves::LineTool;
 use rustycad_tkgeombase::approx::{BSplComputeLine, ComputeLine, ComputeLineOptions};
 use rustycad_tkmath::math::Vector;
 
-fn compute_results(c: &mut ComputeLine) -> Result<(), Failure> {
+/// Also printed for AppDef_Compute (`ad_compute`).
+pub fn compute_results(c: &mut ComputeLine) -> Result<(), Failure> {
     p::flag(c.is_all_approximated());
     p::flag(c.is_tolerance_reached());
     p::int(c.parametrization().code());
@@ -41,8 +43,9 @@ fn compute_results(c: &mut ComputeLine) -> Result<(), Failure> {
     Ok(())
 }
 
-fn build_compute(
-    line: &AxLine,
+/// The ComputeLine of a variant (also AppDef_Compute for `ad_compute`).
+pub fn build_compute<L: LineTool + Clone>(
+    line: &L,
     variant: i32,
     o: ComputeLineOptions,
     u: &Vector<'static>,

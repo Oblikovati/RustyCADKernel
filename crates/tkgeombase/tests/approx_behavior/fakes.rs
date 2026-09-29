@@ -75,14 +75,14 @@ impl LineTool for ParabolaLine {
     fn first_point(&self) -> i32 {
         self.first
     }
-    fn last_point(&self) -> i32 {
-        self.first + self.params.len() as i32 - 1
+    fn last_point(&self) -> Result<i32, Failure> {
+        Ok(self.first + self.params.len() as i32 - 1)
     }
-    fn nb_p2d(&self) -> i32 {
-        0
+    fn nb_p2d(&self) -> Result<i32, Failure> {
+        Ok(0)
     }
-    fn nb_p3d(&self) -> i32 {
-        1
+    fn nb_p3d(&self) -> Result<i32, Failure> {
+        Ok(1)
     }
     fn value_3d(&self, index: i32, points: &mut Array1<'_, Point3>) -> Result<(), Failure> {
         let low = points.lower();

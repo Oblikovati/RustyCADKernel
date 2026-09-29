@@ -102,7 +102,7 @@ pub(crate) fn check_multi_curve<L: LineTool>(
     [first, last]: [i32; 2],
     index_bad: &mut i32,
 ) -> Result<bool, Failure> {
-    if line.nb_p3d() > 1 {
+    if line.nb_p3d()? > 1 {
         return Ok(true);
     }
     *index_bad = 0;
@@ -140,7 +140,7 @@ fn check_3d<L: LineTool>(
 ) -> Result<bool, Failure> {
     let mut poles: Array1<'static, Point3> = scratch(curve.nb_poles())?;
     curve.curve_3d(1, &mut poles)?;
-    let mut tab: Array1<'static, Point3> = scratch(line.nb_p3d())?;
+    let mut tab: Array1<'static, Point3> = scratch(line.nb_p3d()?)?;
     if !polygon_turns_back_3d(&poles)? || !points_loop::<Point3, L>(line, range, &mut tab)? {
         return Ok(false);
     }
@@ -148,7 +148,7 @@ fn check_3d<L: LineTool>(
     if max_sq / min_sq < CHORD_RATIO {
         return Ok(false);
     }
-    let mut tab2d: Array1<'static, Point2> = scratch(line.nb_p2d())?;
+    let mut tab2d: Array1<'static, Point2> = scratch(line.nb_p2d()?)?;
     for indcur in 2..=curve.nb_curves()? {
         let mut bad: i32 = bads[indcur as usize];
         chord_extremes::<Point2, L>(line, range, indcur - 1, &mut tab2d, &mut bad)?;
@@ -261,7 +261,7 @@ fn check_2d<L: LineTool>(
         Ok(false) => return Ok(Some(false)),
         Ok(true) => {}
     }
-    let mut tab: Array1<'static, Point2> = scratch(line.nb_p2d())?;
+    let mut tab: Array1<'static, Point2> = scratch(line.nb_p2d()?)?;
     if !points_loop::<Point2, L>(line, [first, last], &mut tab)? {
         return Ok(Some(false));
     }

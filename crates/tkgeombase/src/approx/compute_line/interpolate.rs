@@ -44,7 +44,7 @@ struct Ends {
 // The extremities through the overloads ComputeCurve picks (the 3D ones when the
 // line has no 2D point, even without 3D points).
 fn read_ends<L: LineTool>(line: &L, [first, last]: [i32; 2]) -> Result<Ends, Failure> {
-    let (nb3d, nb2d) = (line.nb_p3d(), line.nb_p2d());
+    let (nb3d, nb2d) = (line.nb_p3d()?, line.nb_p2d()?);
     let mut e = Ends {
         p1: scratch(nb3d)?,
         p2: scratch(nb3d)?,
@@ -172,7 +172,7 @@ impl ComputeLine {
         let nbp: i32 = last - first + 1;
         let mut para: Vector<'static> = Vector::with_bounds(first, last)?;
         self.compute_parameters(line, first, last, &mut para)?;
-        let dims: [i32; 2] = [line.nb_p3d(), line.nb_p2d()];
+        let dims: [i32; 2] = [line.nb_p3d()?, line.nb_p2d()?];
         let ends: Ends = read_ends(line, [first, last])?;
         if nbp == 2 {
             check_parallel(&ends, dims, [ends.tangent1, ends.tangent2])?;

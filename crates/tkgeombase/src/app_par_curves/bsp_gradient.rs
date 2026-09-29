@@ -38,9 +38,40 @@ const BFGS_EPS: f64 = 1.0e-07;
 /// default is 1). With tangency extremities the lambdas come from a first
 /// least-squares fit unless given.
 ///
-/// ```ignore
-/// let gradient = BSpGradient::new(&line, 1, 10, &constraints, &mut u, &knots, &mults, 3, 1e-3, 1e-6, 1)?;
-/// let curve = gradient.value();
+/// ```
+/// use rustycad_tkgeombase::app_def::MultiLine;
+/// use rustycad_tkgeombase::app_par_curves::{BSpGradient, BSpGradientInput, MultiCurveEval};
+/// # use rustycad_tkgeombase::app_par_curves::{Constraint, ConstraintCouple};
+/// # use rustycad_tkernel::ncollection::{Array1, HArray1};
+/// # use rustycad_tkernel::standard::Handle;
+/// # use rustycad_tkmath::gp::Point3;
+/// # use rustycad_tkmath::math::Vector;
+/// // Six points of the parabola y = x^2, AppDef_MultiLine read by AppDef_MyLineTool.
+/// let points: Vec<Point3> = (0..6).map(|i| {
+///     let t = f64::from(i) / 5.0;
+///     Point3::new(t, t * t, 0.0)
+/// }).collect();
+/// let line = MultiLine::from_points(&Array1::from_shared(&points, 1));
+/// # let ends = [ConstraintCouple::new(1, Constraint::PassPoint), ConstraintCouple::new(6, Constraint::PassPoint)];
+/// # let constraints = Handle::new(HArray1::from_array(&Array1::from_shared(&ends, 1)));
+/// # let mut u = Vector::with_bounds(1, 6)?;
+/// # (1..=6).for_each(|i| u[i] = f64::from(i - 1) / 5.0);
+/// # let (k, m) = ([0.0, 1.0], [4, 4]);
+/// # let (knots, mults) = (Array1::from_shared(&k, 1), Array1::from_shared(&m, 1));
+/// let input = BSpGradientInput {
+///     ssp: &line,
+///     points: [1, 6],
+///     constraints: &constraints,
+///     knots: &knots,
+///     mults: &mults,
+///     deg: 3,
+///     tolerances: [1e-3, 1e-6],
+///     nb_iterations: 1,
+/// };
+/// let gradient = BSpGradient::new(&input, &mut u)?;
+/// assert!(gradient.is_done());
+/// assert_eq!(MultiCurveEval::degree(&gradient.value())?, 3);
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 pub struct BSpGradient {
     scu: MultiBSpCurve,
@@ -198,7 +229,7 @@ impl BSpGradient {
         f: &BSpFunction<L>,
     ) -> Result<(), Failure> {
         let ssp: &L = input.ssp;
-        let (nb3d, nb2d) = (ssp.nb_p3d(), ssp.nb_p2d());
+        let (nb3d, nb2d) = (ssp.nb_p3d()?, ssp.nb_p2d()?);
         let poles3d: Vec<Array1<'static, Point3>> = (1..=nb3d)
             .map(|k| self.curve_poles_3d(k, nbpoles))
             .collect::<Result<_, _>>()?;
@@ -267,7 +298,7 @@ impl BSpGradient {
         }
         self.scu = f.curve_value()?;
         let [first_point, last_point] = input.points;
-        let nb_p: i32 = input.ssp.nb_p3d() + input.ssp.nb_p2d();
+        let nb_p: i32 = input.ssp.nb_p3d()? + input.ssp.nb_p2d()?;
         self.av_error = 0.;
         for j in first_point..=last_point {
             *parameters.change_value(j)? = *f.new_parameters().value(j)?;
