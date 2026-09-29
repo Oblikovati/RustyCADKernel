@@ -17,3 +17,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intsurf').append_intsurf_requests(requests)
     # Law (tkgeomalgo_corpus_law.py)
     __import__('tkgeomalgo_corpus_law').append_law_requests(requests)
+    # Plate (tkgeomalgo_corpus_plate.py)
+    __import__('tkgeomalgo_corpus_plate').append_plate_requests(requests)

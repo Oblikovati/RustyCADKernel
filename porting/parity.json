@@ -147362,6 +147362,662 @@
       "rust_item": "rustycad_tkgeomalgo::law::LawS::static_type",
       "status": "implemented",
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Plate_D1(const gp_XYZ&,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateD1::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_D1(const Plate_D1&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D1.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::plate::PlateD1 as Clone>::clone",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_D1::DU() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateD1::du",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_D1::DV() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateD1::dv",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_D2(const gp_XYZ&,const gp_XYZ&,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateD2::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_D2(const Plate_D2&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D2.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::plate::PlateD2 as Clone>::clone",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_D3(const gp_XYZ&,const gp_XYZ&,const gp_XYZ&,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D3.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateD3::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_D3(const Plate_D3&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_D3.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::plate::PlateD3 as Clone>::clone",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_FreeGtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_FreeGtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateFreeGtoCConstraint::g1",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_FreeGtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,const Plate_D2&,const Plate_D2&,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_FreeGtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateFreeGtoCConstraint::g2",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_FreeGtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,const Plate_D2&,const Plate_D2&,const Plate_D3&,const Plate_D3&,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_FreeGtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateFreeGtoCConstraint::g3",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_FreeGtoCConstraint::nb_PPC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_FreeGtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateFreeGtoCConstraint::nb_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_FreeGtoCConstraint::GetPPC(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_FreeGtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateFreeGtoCConstraint::get_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_FreeGtoCConstraint::nb_LSC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_FreeGtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateFreeGtoCConstraint::nb_lsc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_FreeGtoCConstraint::LSC(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_FreeGtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateFreeGtoCConstraint::lsc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GlobalTranslationConstraint(const NCollection_Sequence<gp_XY>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GlobalTranslationConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGlobalTranslationConstraint::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GlobalTranslationConstraint::LXYZC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GlobalTranslationConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGlobalTranslationConstraint::lxyzc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint(const Plate_GtoCConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::plate::PlateGtoCConstraint as Clone>::clone",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::g1",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::g1_projected",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,const Plate_D2&,const Plate_D2&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::g2",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,const Plate_D2&,const Plate_D2&,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::g2_projected",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,const Plate_D2&,const Plate_D2&,const Plate_D3&,const Plate_D3&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::g3",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint(const gp_XY&,const Plate_D1&,const Plate_D1&,const Plate_D2&,const Plate_D2&,const Plate_D3&,const Plate_D3&,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::g3_projected",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint::nb_PPC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::nb_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint::GetPPC(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::get_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_GtoCConstraint::D1SurfInit() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_GtoCConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateGtoCConstraint::d1_surf_init",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LineConstraint(const gp_XY&,const gp_Lin&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LineConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLineConstraint::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LineConstraint::LSC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LineConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLineConstraint::lsc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint(const Plate_PinpointConstraint&,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::single",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint(const NCollection_Array1<Plate_PinpointConstraint>&,const NCollection_Array1<gp_XYZ>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::from_row",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint(const NCollection_Array1<Plate_PinpointConstraint>&,const NCollection_Array2<gp_XYZ>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::from_matrix",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::with_size",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint::GetPPC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::get_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint::Coeff() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::coeff",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint::SetPPC(int,const Plate_PinpointConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::set_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearScalarConstraint::SetCoeff(int,int,const gp_XYZ&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearScalarConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearScalarConstraint::set_coeff",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint(const NCollection_Array1<Plate_PinpointConstraint>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::from_row",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint(const NCollection_Array1<Plate_PinpointConstraint>&,const NCollection_Array2<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::from_matrix",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::with_size",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint::GetPPC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::get_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint::Coeff() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::coeff",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint::SetPPC(int,const Plate_PinpointConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::set_ppc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_LinearXYZConstraint::SetCoeff(int,int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_LinearXYZConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateLinearXYZConstraint::set_coeff",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PinpointConstraint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PinpointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePinpointConstraint::origin",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PinpointConstraint(const gp_XY&,const gp_XYZ&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PinpointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePinpointConstraint::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PinpointConstraint::Pnt2d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PinpointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePinpointConstraint::pnt2d",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PinpointConstraint::Idu() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PinpointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePinpointConstraint::idu",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PinpointConstraint::Idv() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PinpointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePinpointConstraint::idv",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PinpointConstraint::Value() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PinpointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePinpointConstraint::value",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PlaneConstraint(const gp_XY&,const gp_Pln&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PlaneConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlaneConstraint::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_PlaneConstraint::LSC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_PlaneConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlaneConstraint::lsc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate(const Plate_Plate&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::plate::PlatePlate as Clone>::clone",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Copy(const Plate_Plate&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::copy_from",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::operator=(const Plate_Plate&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::copy_from",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_PinpointConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_pinpoint",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_LinearXYZConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_linear_xyz",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_LinearScalarConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_linear_scalar",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_GlobalTranslationConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_global_translation",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_LineConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_line",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_PlaneConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_plane",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_SampledCurveConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_sampled_curve",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_GtoCConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_gtoc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Load(const Plate_FreeGtoCConstraint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::load_free_gtoc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::SolveTI(int,double,const Message_ProgressRange&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::solve_ti",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::is_done",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::destroy()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::destroy",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::~Plate_Plate()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor (it calls destroy, which is Init). Rust releases the plate's arrays through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Plate_Plate::Init()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::init",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Evaluate(const gp_XY&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::evaluate",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::EvaluateDerivative(const gp_XY&,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::evaluate_derivative",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::CoefPol() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::coef_pol",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::CoefPol(occ::handle<NCollection_HArray2<gp_XYZ>>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::coef_pol_into",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::SetPolynomialPartOnly(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::set_polynomial_part_only",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::continuity",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::UVBox(double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::uv_box",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_Plate::UVConstraints(NCollection_Sequence<gp_XY>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlatePlate::uv_constraints",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_SampledCurveConstraint(const NCollection_Sequence<Plate_PinpointConstraint>&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_SampledCurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateSampledCurveConstraint::new",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "Plate_SampledCurveConstraint::LXYZC() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_SampledCurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::plate::PlateSampledCurveConstraint::lxyzc",
+      "status": "implemented",
+      "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
     }
   ],
   "tests": [
@@ -233671,6 +234327,34 @@
       "rust_target": "int_surf_quadric",
       "rust_test": "IntSurf_Quadric_Test__ConeApexGradientRemainsFinite",
       "rust_source": "crates/tkgeomalgo/tests/int_surf_quadric.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Plate_Plate.Init_ClearsState",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Plate_Plate_Test.cxx",
+      "source_sha256": "1d41ac16a6025e2551b4b992cb3d3fb8f14fa61fbf0b5cc0170885573fa697d8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "plate_plate",
+      "rust_test": "Plate_Plate__Init_ClearsState",
+      "rust_source": "crates/tkgeomalgo/tests/plate_plate.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Plate_Plate.Init_EvaluateReturnsZero",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Plate_Plate_Test.cxx",
+      "source_sha256": "1d41ac16a6025e2551b4b992cb3d3fb8f14fa61fbf0b5cc0170885573fa697d8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "plate_plate",
+      "rust_test": "Plate_Plate__Init_EvaluateReturnsZero",
+      "rust_source": "crates/tkgeomalgo/tests/plate_plate.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

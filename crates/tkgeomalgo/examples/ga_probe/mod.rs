@@ -6,6 +6,7 @@ pub mod common;
 pub mod int_surf;
 pub mod intf;
 pub mod law;
+pub mod plate;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;

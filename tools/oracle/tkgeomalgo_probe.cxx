@@ -23,6 +23,7 @@
 #include "tkgeomalgo_probe_intf.cxx"
 #include "tkgeomalgo_probe_intsurf.cxx"
 #include "tkgeomalgo_probe_law.cxx"
+#include "tkgeomalgo_probe_plate.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -37,6 +38,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"law_function", ga_law_function_case},
  {"law_mix", ga_law_mix_case},
  {"law_interpolate", ga_law_interpolate_case},
+ // Plate (tkgeomalgo_probe_plate.cxx)
+ {"plate_solve", ga_plate_solve_case},
+ {"plate_constraint", ga_plate_constraint_case},
 };
 int main() {
  std::string line;

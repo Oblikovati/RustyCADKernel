@@ -28,6 +28,7 @@ The toolkit test inventory maps these suites (0 declarations):
 | --- | --- | ---: | --- | --- |
 | IntSurf_LineOn2S_Test.cxx | int_surf_line_on2s | 3 | pass | pass |
 | IntSurf_Quadric_Test.cxx | int_surf_quadric | 1 | pass | pass |
+| Plate_Plate_Test.cxx | plate_plate | 2 | pass | pass |
 
 ## Verification
 
@@ -76,6 +77,15 @@ S, B-spline, interpolated and composite laws through every `Law_Function` member
 every `GeomAbs_Shape`; `law_mix` covers `MixBnd`, `MixTgt`, `Scale`, `ScaleCub`,
 `Reparametrize` (on a circle adaptor) and `Law_BSplineKnotSplitting`;
 `law_interpolate` covers `Law_Interpolate` with and without parameters and tangents.
+
+Plate: 106 requests. `plate_solve` loads pinpoint (values and derivatives up to order
+2), linear XYZ and linear scalar constraints, solves orders 1 to 10 (the three `SolveTI`
+systems and the refused orders, anisotropies, empty and degenerate boxes) and compares
+`IsDone`, `Continuity`, `UVBox`, `Evaluate`, four `EvaluateDerivative`s, `CoefPol` and
+`UVConstraints` for the plate, its copy and an assigned plate. `plate_constraint`
+builds the line, plane, global translation, sampled curve, GtoC (G1/G2/G3, with and
+without projection) and FreeGtoC (G1/G2/G3, incremental loads, orientations and the
+degenerate normals) constraints, compares their content and the plate that loads them.
 
 ## Preserved native behaviour
 
@@ -136,3 +146,33 @@ every `GeomAbs_Shape`; `law_mix` covers `MixBnd`, `MixTgt`, `Scale`, `ScaleCub`,
   row is excluded.
 - `rustycad_tkgeombase::geom2d_convert::split_knots` (the split table of the knot
   splittings) is public so that `Law_BSplineKnotSplitting` shares it.
+
+### Plate
+
+- `SolEm`'s derivative table (the closed forms of the fundamental solution for every
+  `(IU, IV)` with `IU + IV <= 7`) is generated from the native switch into
+  `plate/sol_em_terms.rs`: integer factors become the equal `f64` literals and the
+  products keep their left-to-right order, so every value is bit-identical (the probe
+  compares it through all the solves). `SolEm` keeps the native point cache
+  (`Uold`, `Vold`, `U2`, `R`, `L`) behind a lock; a fresh cache holds `(1e20, 1e20)` with
+  `R = 0`, so a first call at exactly that scaled point returns 0, as natively.
+- `SolveTI2` allocates its right-hand side once, so the linear XYZ rows accumulate the X,
+  then Y, then Z terms with `+=`; the port keeps the accumulation. `SolveTI` sets the
+  order before it refuses an invalid request, so `CoefPol` of a refused plate reads a
+  missing solution: the port raises `Standard_NullObject` (a null dereference natively).
+  `IsDone` is true after `Init`, as the native test documents.
+- `Plate_Plate::UVBox` (and so `SolveTI`) reads the first pinpoint constraint: without
+  one the port raises `Standard_OutOfRange`, as the native checked sequence access.
+  Derivative orders past the ten scale factors `ddu`, `ddv` (undefined natively) raise
+  `Standard_OutOfRange`.
+- The linear constraints share their arrays through handles, so `SetPPC` and `SetCoeff`
+  on a copy (or on the constraint after `Load`) are seen by the loaded plate; a
+  default-constructed linear constraint has no arrays and `Load` raises
+  `Standard_NullObject`. `Plate_SampledCurveConstraint` builds its arrays before it
+  raises `Standard_DimensionMismatch` for `n > m`.
+- `Plate_GtoCConstraint` with `D3` and `nP` ignores `nP`, as natively. The GtoC and
+  FreeGtoC constructors stop with the constraints built so far on a degenerate or
+  orthogonal normal; a FreeGtoC incremental load between parallel normals raises
+  `Standard_ConstructionError` (the null rotation axis). `GetPPC` and `LSC` beyond their
+  fixed arrays raise `Standard_OutOfRange` (undefined natively). The G1/G2/G3 blocks,
+  which the native constructors repeat verbatim, are written once in `gtoc_math.rs`.
