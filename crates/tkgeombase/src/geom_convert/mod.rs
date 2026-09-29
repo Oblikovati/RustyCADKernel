@@ -33,6 +33,7 @@ mod comp_bezier_surfaces;
 mod comp_bezier_surfaces_perform;
 mod comp_curve;
 mod concat;
+mod concat_plan;
 mod concat_support;
 mod conv_type;
 mod curve_to_ana_conic;
@@ -80,6 +81,7 @@ use crate::native_failure::failure;
 use rustycad_tkernel::ncollection::HArray1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomBSplineSurface, GeomCurve, GeomGeometry};
 
 /// The shared array of B-splines the concatenation members fill
@@ -144,7 +146,7 @@ pub fn split_bspline_curve(
     same_orientation: bool,
 ) -> Result<Handle<GeomBSplineCurve>, Failure> {
     let source: &GeomBSplineCurve = live_bspline(curve)?;
-    let (first_u, last_u) = (from_u1.min(to_u2), from_u1.max(to_u2));
+    let (first_u, last_u) = (std_min(from_u1, to_u2), std_max(from_u1, to_u2));
     let c1: Handle<GeomBSplineCurve> = copy_bspline(source)?;
     live_bspline(&c1)?.segment(first_u, last_u, precision::p_confusion())?;
     // The native test is `FromU1 > ToU2`, false for NaN.

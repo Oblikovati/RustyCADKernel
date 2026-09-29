@@ -76,7 +76,9 @@ pub fn densify_array1_of_real(
     out_parameters: &mut Array1<'_, f64>,
 ) -> Result<(), Failure> {
     let values: &[f64] = in_parameters.as_slice();
-    let is_in_order: bool = values.windows(2).all(|pair| !(pair[1] < pair[0]));
+    let is_in_order: bool = values
+        .windows(2)
+        .all(|pair| pair[1].partial_cmp(&pair[0]) != Some(std::cmp::Ordering::Less));
     let num_points: i32 = if is_in_order {
         min_num_points.max(in_parameters.length())
     } else {

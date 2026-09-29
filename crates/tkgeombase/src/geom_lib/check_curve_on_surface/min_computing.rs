@@ -95,7 +95,8 @@ fn pso_perform(
         if let Some(val) = function.value_at(prm) {
             let particle = particles.worst_particle()?;
             // The native `if (aVal > BestDistance) continue;`, so a NaN value is kept.
-            if !(val > particle.best_distance) {
+            // NaN-faithful `!(val > best)` of the native comparison.
+            if val.partial_cmp(&particle.best_distance) != Some(std::cmp::Ordering::Greater) {
                 particle.position[0] = prm;
                 particle.best_position[0] = prm;
                 particle.distance = val;

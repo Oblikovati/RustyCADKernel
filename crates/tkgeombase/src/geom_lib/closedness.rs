@@ -23,6 +23,7 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::real::real_to_int;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::geom::{
     GeomBSplineCurve, GeomBSplineSurface, GeomBezierCurve, GeomBezierSurface, GeomCurve,
@@ -137,11 +138,11 @@ fn sampled_closedness(
         (u1, u2) = (unit(u1), unit(u2));
     }
     let tol2: f64 = tol * tol;
-    let u_res: f64 = gas.u_resolution(tol)?.max(precision::p_confusion());
+    let u_res: f64 = std_max(gas.u_resolution(tol)?, precision::p_confusion());
     let is_u_closed = sampled_match([v1, v2], u_res, |t| {
         Ok(gas.eval_d0(u1, t)?.square_distance(&gas.eval_d0(u2, t)?) <= tol2)
     })?;
-    let v_res: f64 = gas.v_resolution(tol)?.max(precision::p_confusion());
+    let v_res: f64 = std_max(gas.v_resolution(tol)?, precision::p_confusion());
     let is_v_closed = sampled_match([u1, u2], v_res, |t| {
         Ok(gas.eval_d0(t, v1)?.square_distance(&gas.eval_d0(t, v2)?) <= tol2)
     })?;

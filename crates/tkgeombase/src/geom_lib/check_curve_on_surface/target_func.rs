@@ -17,7 +17,7 @@
 //! The negated square distance between a 3D curve and a curve on surface at the
 //! same parameter, with its derivatives and the exact maximum of elementary pairs.
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkg2d::geom2d::native::std_max;
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::CurveType;
@@ -73,7 +73,7 @@ impl<'c> TargetFunc<'c> {
         }
         let p1: Point3 = self.my_curve1.value(x).ok()?;
         let p2: Point3 = self.my_curve2.value(x).ok()?;
-        Some(-1.0 * p1.square_distance(&p2))
+        Some(-p1.square_distance(&p2))
     }
 
     /// The first derivative, and the second one when `second` (`Derive`).
@@ -148,7 +148,7 @@ impl<'c> TargetFunc<'c> {
         let period: f64 = 2.0 * PI;
         let first: f64 = elclib::in_period(self.my_first, 0.0, period);
         let shift: f64 = first - self.my_first;
-        let last: f64 = first + (self.my_last - self.my_first).min(period);
+        let last: f64 = first + std_min(self.my_last - self.my_first, period);
         let scale: f64 = [cos_sin, cos, sin, constant]
             .iter()
             .fold(cos_cos.abs(), |m, v| std_max(m, v.abs()));
@@ -243,8 +243,7 @@ impl MultipleVarFunctionWithHessian for TargetFunc<'_> {
         let Some((d1, d2)) = x.value(1).ok().and_then(|x1| self.derive(*x1, true)) else {
             return false;
         };
-        let written = gradient.change_value(1).map(|g| *g = d1).is_ok()
-            && hessian.change_value(1, 1).map(|h| *h = d2).is_ok();
-        written
+        gradient.change_value(1).map(|g| *g = d1).is_ok()
+            && hessian.change_value(1, 1).map(|h| *h = d2).is_ok()
     }
 }

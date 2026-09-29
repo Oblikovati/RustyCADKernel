@@ -20,6 +20,7 @@ use super::{copy_bspline_surface, live_bspline_surface};
 use crate::native_failure::failure;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg3d::geom::{GeomBSplineSurface, GeomSurface};
 
 /// `GeomConvert::SplitBSplineSurface(S, FromUK1, ToUK2, FromVK1, ToVK2,
@@ -138,8 +139,8 @@ pub fn split_bspline_surface(
     let s: &GeomBSplineSurface = live_bspline_surface(surface)?;
     let new_surface: Handle<GeomBSplineSurface> = copy_bspline_surface(s)?;
     let copy: &GeomBSplineSurface = live_bspline_surface(&new_surface)?;
-    let u = (from_u1.min(to_u2), from_u1.max(to_u2));
-    let v = (from_v1.min(to_v2), from_v1.max(to_v2));
+    let u = (std_min(from_u1, to_u2), std_max(from_u1, to_u2));
+    let v = (std_min(from_v1, to_v2), std_max(from_v1, to_v2));
     segment(copy, u, v)?;
     orient_u(copy, s.is_u_periodic(), same_u_orientation, from_u1 > to_u2)?;
     orient_v(copy, s.is_v_periodic(), same_v_orientation, from_v1 > to_v2)?;
@@ -170,7 +171,10 @@ pub fn split_bspline_surface_one_direction(
     let s: &GeomBSplineSurface = live_bspline_surface(surface)?;
     let new_surface: Handle<GeomBSplineSurface> = copy_bspline_surface(s)?;
     let copy: &GeomBSplineSurface = live_bspline_surface(&new_surface)?;
-    let range = (from_param1.min(to_param2), from_param1.max(to_param2));
+    let range = (
+        std_min(from_param1, to_param2),
+        std_max(from_param1, to_param2),
+    );
     if u_split {
         let whole_v = (
             s.v_knot(s.first_v_knot_index()?)?,

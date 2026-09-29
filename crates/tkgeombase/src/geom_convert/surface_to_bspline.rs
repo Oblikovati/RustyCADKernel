@@ -26,6 +26,7 @@ use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::arrays::one_based;
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::geom::{
     GeomBSplineCurve, GeomBSplineSurface, GeomBezierSurface, GeomCurve, GeomOffsetSurface,
@@ -57,8 +58,8 @@ pub fn surface_to_bspline_surface(
         )
     })?;
     let (u1, u2, v1, v2) = source.bounds();
-    let (u_first, u_last) = (u1.min(u2), u1.max(u2));
-    let (v_first, v_last) = (v1.min(v2), v1.max(v2));
+    let (u_first, u_last) = (std_min(u1, u2), std_max(u1, u2));
+    let (v_first, v_last) = (std_min(v1, v2), std_max(v1, v2));
     // If the surface Sr is infinite stop the computation.
     if precision::is_negative_infinite(u_first)
         || precision::is_positive_infinite(u_last)

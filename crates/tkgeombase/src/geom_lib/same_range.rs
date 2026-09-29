@@ -23,6 +23,7 @@ use crate::native_failure::failure;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg2d::geom2d::{
     Geom2dBSplineCurve, Geom2dCircle, Geom2dConic, Geom2dCurve, Geom2dGeometry, Geom2dLine,
     Geom2dTrimmedCurve,
@@ -162,8 +163,8 @@ impl SameRangeRequest {
             (self.first_on_curve, self.last_on_curve)
         } else {
             (
-                source.first_parameter().max(self.first_on_curve),
-                source.last_parameter().min(self.last_on_curve),
+                std_max(source.first_parameter(), self.first_on_curve),
+                std_min(source.last_parameter(), self.last_on_curve),
             )
         };
         let (u1, u2) = if (u2 - u1).abs() > precision::p_confusion() {

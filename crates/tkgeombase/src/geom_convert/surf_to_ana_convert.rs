@@ -277,7 +277,7 @@ impl SurfToAnaSurf {
         candidates: &mut SurfCandidates,
     ) -> Result<Handle<dyn GeomSurface>, Failure> {
         let (mut imin, mut dmin): (Option<usize>, f64) = (None, REAL_LAST);
-        for isurf in 0..5 {
+        for (isurf, s_type) in S_TYPES.iter().enumerate() {
             if candidates.surfaces[isurf].is_null() {
                 continue;
             }
@@ -287,7 +287,7 @@ impl SurfToAnaSurf {
                 continue;
             }
             if self.my_conv_type == ConvType::Simplest
-                || (self.my_conv_type == ConvType::Target && self.my_target == S_TYPES[isurf])
+                || (self.my_conv_type == ConvType::Target && self.my_target == *s_type)
             {
                 self.my_gap = candidates.gaps[isurf];
                 return Ok(candidates.surfaces[isurf].clone());

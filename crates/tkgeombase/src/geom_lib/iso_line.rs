@@ -24,6 +24,7 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dBezierCurve};
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::geom::{
@@ -197,7 +198,7 @@ fn extracted_iso(
     let s: &dyn GeomSurface = live(surface, "GeomLib::buildC3dOnIsoLine")?;
     let (u1, u2, v1, v2) = s.bounds();
     let (lower, upper): (f64, f64) = if iso.is_u { (v1, v2) } else { (u1, u2) };
-    let (mut p1, mut p2): (f64, f64) = (a.min(b), a.max(b));
+    let (mut p1, mut p2): (f64, f64) = (std_min(a, b), std_max(a, b));
     if p2 < lower - tolerance || p1 > upper + tolerance {
         return Ok(Handle::default());
     }
@@ -219,8 +220,8 @@ fn extracted_iso(
             t.v_iso(iso.param)
         };
     }
-    p1 = p1.max(lower);
-    p2 = p2.min(upper);
+    p1 = std_max(p1, lower);
+    p2 = std_min(p2, upper);
     if (p2 - p1).abs() < precision::p_confusion() {
         return Ok(Handle::default());
     }
@@ -247,7 +248,7 @@ fn iso_deviation(
         let pnt_2d: Point2 = c2d.eval_d0(par)?;
         let pnt_c3d = curve_3d.eval_d0(par)?;
         let pnt_c2d = surf.eval_d0(pnt_2d.x(), pnt_2d.y())?;
-        error_3d = pnt_c3d.square_distance(&pnt_c2d).max(error_3d);
+        error_3d = std_max(pnt_c3d.square_distance(&pnt_c2d), error_3d);
     }
     Ok(error_3d.sqrt())
 }

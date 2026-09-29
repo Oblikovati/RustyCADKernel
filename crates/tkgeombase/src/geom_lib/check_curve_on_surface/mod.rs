@@ -24,6 +24,7 @@ use min_computing::min_computing;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dCurveOnSurface};
+use std::cmp::Ordering;
 use sub_intervals::{SubIntervals, fill_sub_intervals};
 use target_func::TargetFunc;
 
@@ -186,7 +187,7 @@ fn compute(
         let (dist, param) = min_computing(&mut func, an_epsilon_range, intervals.nb_particles)
             .unwrap_or((f64::MAX, func.first_parameter()));
         optimal = match optimal {
-            Some((min_dist, _)) if !(dist < min_dist) => optimal,
+            Some((min_dist, _)) if dist.partial_cmp(&min_dist) != Some(Ordering::Less) => optimal,
             _ => Some((dist, param)),
         };
     }

@@ -321,8 +321,8 @@ fn GeomLibTest__ParameterArrays_SupportArbitraryLowerBounds() {
     GeomLib::remove_points_from_array(4, &anInput, &mut aReduced).unwrap();
     let aReducedValues: [f64; 5] = [0.0, 0.1, 0.4, 0.8, 1.0];
     assert_eq!(aReduced.len(), aReducedValues.len());
-    for anIndex in 0..aReduced.len() {
-        EXPECT_DOUBLE_EQ(*aReduced.at(anIndex).unwrap(), aReducedValues[anIndex]);
+    for (anIndex, aValue) in aReducedValues.iter().enumerate() {
+        EXPECT_DOUBLE_EQ(*aReduced.at(anIndex).unwrap(), *aValue);
     }
 
     let mut aSparse: Array1<'static, f64> = Array1::with_bounds(-1, 1).unwrap();
@@ -331,8 +331,8 @@ fn GeomLibTest__ParameterArrays_SupportArbitraryLowerBounds() {
     GeomLib::densify_array1_of_real(5, &aSparse, &mut aDense).unwrap();
     let aDenseValues: [f64; 5] = [0.0, 1.0 / 3.0, 0.6, 2.0 / 3.0, 1.0];
     assert_eq!(aDense.len(), aDenseValues.len());
-    for anIndex in 0..aDense.len() {
-        EXPECT_DOUBLE_EQ(*aDense.at(anIndex).unwrap(), aDenseValues[anIndex]);
+    for (anIndex, aValue) in aDenseValues.iter().enumerate() {
+        EXPECT_DOUBLE_EQ(*aDense.at(anIndex).unwrap(), *aValue);
     }
 }
 
@@ -363,8 +363,8 @@ fn GeomLibTest__FuseIntervals_SupportsArbitraryLowerBounds() {
     GeomLib::fuse_intervals(&aFirst, &aSecond, &mut aResult, 1.0e-8, false);
     let anExpected: [f64; 5] = [0.0, 0.25, 0.50000000005, 0.75, 1.0];
     assert_eq!(aResult.len(), anExpected.len());
-    for anIndex in 0..aResult.len() {
-        EXPECT_DOUBLE_EQ(*aResult.value(anIndex).unwrap(), anExpected[anIndex]);
+    for (anIndex, aValue) in anExpected.iter().enumerate() {
+        EXPECT_DOUBLE_EQ(*aResult.value(anIndex).unwrap(), *aValue);
     }
 }
 

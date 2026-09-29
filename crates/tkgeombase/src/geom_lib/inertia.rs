@@ -20,6 +20,7 @@
 //! cloud.
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg2d::geom2d::native::std_min;
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3, Xyz};
 use rustycad_tkmath::math::{Jacobi, Matrix, Vector};
 
@@ -101,16 +102,16 @@ fn covariance(points: &Array1<'_, Point3>, gb: Xyz, nb: i32) -> Result<Matrix<'s
 // The indices of the smallest, middle and greatest eigenvalues, with the native
 // chain of `std::min` equality tests.
 fn eigen_order(n1: f64, n2: f64, n3: f64) -> [i32; 3] {
-    let r1: f64 = n1.min(n2).min(n3);
+    let r1: f64 = std_min(std_min(n1, n2), n3);
     if r1 == n1 {
-        let r2: f64 = n2.min(n3);
+        let r2: f64 = std_min(n2, n3);
         return if r2 == n2 { [1, 2, 3] } else { [1, 3, 2] };
     }
     if r1 == n2 {
-        let r2: f64 = n1.min(n3);
+        let r2: f64 = std_min(n1, n3);
         return if r2 == n1 { [2, 1, 3] } else { [2, 3, 1] };
     }
-    let r2: f64 = n1.min(n2);
+    let r2: f64 = std_min(n1, n2);
     if r2 == n1 { [3, 1, 2] } else { [3, 2, 1] }
 }
 
