@@ -16,38 +16,11 @@
 //! containers, the line tool, LinearCriteria and Variational. The package has no
 //! upstream GoogleTest suite; bit-exact parity with the native kernel is the numeric
 //! oracle's job (tools/verify_tkgeombase_numeric.py), these tests pin the documented
-//! behaviour.
+//! behaviour. The process-wide reference cache of the FEmTool criteria is pinned in
+//! its own binary (`app_def_reference_cache.rs`), as it depends on earlier calls.
 mod containers;
 mod criteria;
+mod support;
 mod variational;
 
-use rustycad_tkernel::ncollection::{Array1, HArray1};
-use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkgeombase::app_def::MultiLine;
-use rustycad_tkgeombase::app_par_curves::{Constraint, ConstraintCouple, Constraints};
-use rustycad_tkmath::gp::Point3;
-
-/// The exception class of a result, "none" on success.
-pub fn kind<T>(result: Result<T, Failure>) -> &'static str {
-    result.err().map_or("none", |error| error.exception_type())
-}
-
-/// `n` 3D points on a parabolic arc (smooth, not straight).
-pub fn arc_line(n: i32) -> MultiLine {
-    let points: Vec<Point3> = (0..n)
-        .map(|i| {
-            let t: f64 = f64::from(i) / f64::from(n - 1);
-            Point3::new(t, t * t, 0.1 * t * t * t)
-        })
-        .collect();
-    MultiLine::from_points(&Array1::from_shared(&points, 1))
-}
-
-/// The constraint couples `(index, constraint)`.
-pub fn constraints(pairs: &[(i32, Constraint)]) -> Constraints {
-    let couples: Vec<ConstraintCouple> = pairs
-        .iter()
-        .map(|&(index, c)| ConstraintCouple::new(index, c))
-        .collect();
-    Handle::new(HArray1::from_array(&Array1::from_shared(&couples, 1)))
-}
+pub use support::{arc_line, constraints, kind};
