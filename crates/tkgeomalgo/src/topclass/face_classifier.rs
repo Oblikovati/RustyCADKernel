@@ -28,6 +28,24 @@ use rustycad_tkmath::gp::{Line2, Point2};
 ///
 /// The position starts at `IntRes2d_Head`: natively it is uninitialized until a
 /// classification finds a closest edge.
+///
+/// ```
+/// use rustycad_tkernel::standard::Handle;
+/// use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve};
+/// use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
+/// use rustycad_tkg3d::top_abs::{Orientation, State};
+/// use rustycad_tkgeomalgo::geom2d_hatch::{Classifier, Element, Elements};
+/// use rustycad_tkmath::gp::{Axis2d, Point2};
+/// let circle = Geom2dCircle::from_axis(Axis2d::default(), 1.0, true).unwrap();
+/// let curve: Handle<dyn Geom2dCurve> = Handle::new(circle).cast();
+/// let mut disc = Elements::new();
+/// let edge = Geom2dAdaptorCurve::with_curve(&curve).unwrap();
+/// disc.bind(1, Element::new(edge, Orientation::Forward));
+/// let inside = Classifier::with_point(&mut disc, &Point2::new(0.2, 0.1), 1e-7).unwrap();
+/// assert_eq!(inside.state(), State::In);
+/// let outside = Classifier::with_point(&mut disc, &Point2::new(2.0, 0.1), 1e-7).unwrap();
+/// assert_eq!(outside.state(), State::Out);
+/// ```
 pub struct FaceClassifier<X: FaceExplorer> {
     my_classifier: Classifier2d<X::Intersector>,
     my_edge: X::Edge,

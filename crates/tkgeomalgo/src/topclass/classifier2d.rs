@@ -30,6 +30,25 @@ use rustycad_tkmath::gp::{Direction3, Line2};
 /// keeps the state given by the closest intersection, shortening the segment to it.
 /// At an end of an edge the state comes from the complex transition of the edges
 /// meeting there.
+///
+/// ```
+/// use rustycad_tkernel::standard::Handle;
+/// use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+/// use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
+/// use rustycad_tkg3d::top_abs::{Orientation, State};
+/// use rustycad_tkgeomalgo::geom2d_hatch::FClass2dOfClassifier;
+/// use rustycad_tkmath::gp::{Direction2, Line2, Point2};
+/// let up = Direction2::new(0.0, 1.0).unwrap();
+/// let edge: Handle<dyn Geom2dCurve> =
+///     Handle::new(Geom2dLine::from_point(Point2::new(1.0, -1.0), up)).cast();
+/// let edge = Geom2dAdaptorCurve::with_range(&edge, 0.0, 2.0).unwrap();
+/// let mut classifier = FClass2dOfClassifier::new();
+/// let x_axis = Direction2::new(1.0, 0.0).unwrap();
+/// classifier.reset(Line2::new(Point2::new(0.0, 0.0), x_axis), 10.0, 1e-7);
+/// classifier.compare(&edge, Orientation::Forward).unwrap();
+/// assert_eq!(classifier.state(), State::In);
+/// assert_eq!(classifier.parameter(), 1.0);
+/// ```
 pub struct Classifier2d<I: Classifier2dIntersector> {
     // Written by Reset and never read, as natively.
     #[allow(dead_code)]
