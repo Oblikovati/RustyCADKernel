@@ -73,6 +73,8 @@
 #include "tkgeombase_probe_geomlib_classes.cxx"
 #include "tkgeombase_probe_approx_line.cxx"
 #include "tkgeombase_probe_approx.cxx"
+#include "tkgeombase_probe_approx_adaptors.cxx"
+#include "tkgeombase_probe_approx_sweep.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -404,6 +406,14 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ax_bspl", gb_ax_bspl_case},
  {"ax_fit", gb_ax_fit_case},
  {"ax_mcurves", gb_ax_mcurves_case},
+ // Approx adaptor classes and sweeps (tkgeombase_probe_approx_adaptors.cxx, _sweep.cxx)
+ {"axa_curve3d", gb_axa_curve3d_case},
+ {"axa_curve2d", gb_axa_curve2d_case},
+ {"axa_cos", gb_axa_cos_case},
+ {"axa_curvlin", gb_axa_curvlin_case},
+ {"axa_curvilinear", gb_axa_curvilinear_case},
+ {"axa_same", gb_axa_same_case},
+ {"axs_sweep", gb_axs_sweep_case},
 };
 int main() {
  std::string line;

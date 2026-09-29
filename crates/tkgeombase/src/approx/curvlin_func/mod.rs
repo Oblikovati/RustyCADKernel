@@ -84,9 +84,19 @@ pub(crate) fn curve_on_surface(
     surf: &Handle<dyn Adaptor3dSurface>,
 ) -> Result<Adaptor3dCurveOnSurface, Failure> {
     let adaptor = Adaptor3dCurveOnSurface::default();
-    adaptor.load_curve(c2d)?;
-    adaptor.load_surface(surf)?;
+    reload(&adaptor, c2d, surf)?;
     Ok(adaptor)
+}
+
+/// `CurOnSur.Load(C2D); CurOnSur.Load(S);` on an adaptor already in use: the
+/// native members reuse one local adaptor for both curves of case 3.
+pub(crate) fn reload(
+    cons: &Adaptor3dCurveOnSurface,
+    c2d: &Handle<dyn Adaptor2dCurve2d>,
+    surf: &Handle<dyn Adaptor3dSurface>,
+) -> Result<(), Failure> {
+    cons.load_curve(c2d)?;
+    cons.load_surface(surf)
 }
 
 impl CurvlinFunc {

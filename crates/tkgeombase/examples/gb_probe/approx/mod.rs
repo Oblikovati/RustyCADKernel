@@ -14,12 +14,18 @@
 
 //! The Rust twin of tools/oracle/tkgeombase_probe_approx_line.cxx and
 //! tkgeombase_probe_approx.cxx.
+mod adaptors;
 mod compute;
 mod fit;
 mod line;
+mod sweep;
 
+pub use adaptors::{
+    cos_case, curve2d_case, curve3d_case, curvilinear_case, curvlin_case, same_case,
+};
 pub use compute::{bspl_case, compute_case};
 pub use fit::{fit_case, mcurves_case};
+pub use sweep::sweep_case;
 
 use super::app_par_curves::curve;
 use super::common::{self as p, Reader};
@@ -27,6 +33,20 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkgeombase::app_par_curves::{Constraint, MultiBSpCurve, MultiCurveEval};
 use rustycad_tkgeombase::approx::{ComputeLineOptions, ParametrizationType};
+use rustycad_tkmath::geom_abs::Shape;
+
+/// `GeomAbs_Shape(code)`: the native enumeration order.
+pub fn shape(code: i32) -> Shape {
+    [
+        Shape::C0,
+        Shape::G1,
+        Shape::C1,
+        Shape::G2,
+        Shape::C2,
+        Shape::C3,
+        Shape::CN,
+    ][code as usize]
+}
 
 pub fn constraint(code: i32) -> Constraint {
     Constraint::from_code(code).expect("probe constraint")

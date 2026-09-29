@@ -346,6 +346,14 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ax_bspl", ax::bspl_case),
     ("ax_fit", ax::fit_case),
     ("ax_mcurves", ax::mcurves_case),
+    // Approx adaptor classes and sweeps (gb_probe/approx/adaptors.rs, sweep.rs)
+    ("axa_curve3d", ax::curve3d_case),
+    ("axa_curve2d", ax::curve2d_case),
+    ("axa_cos", ax::cos_case),
+    ("axa_curvlin", ax::curvlin_case),
+    ("axa_curvilinear", ax::curvilinear_case),
+    ("axa_same", ax::same_case),
+    ("axs_sweep", ax::sweep_case),
 ];
 
 fn main() {

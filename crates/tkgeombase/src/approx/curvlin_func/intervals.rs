@@ -15,7 +15,7 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The continuity breaks in S, the restriction to an S range and the lengths.
-use super::{CurvlinFunc, CurvlinState, curve_on_surface, null_handle};
+use super::{CurvlinFunc, CurvlinState, curve_on_surface, null_handle, reload};
 use crate::geom_lib::fuse_intervals;
 use crate::native_failure::{array_failure, failure};
 use rustycad_tkernel::ncollection::{Array1, LinearVector};
@@ -100,10 +100,15 @@ impl CurvlinFunc {
         match st.case {
             1 => self.trim_curve(&st, [first, last], tol)?,
             3 => {
-                self.trim_on_surface(&st, 2, [first, last], tol)?;
-                self.trim_on_surface(&st, 1, [first, last], tol)?;
+                // One adaptor for both curves (the case 3 code falls through to case 2).
+                let cons = Adaptor3dCurveOnSurface::default();
+                self.trim_on_surface(&cons, &st, 2, [first, last], tol)?;
+                self.trim_on_surface(&cons, &st, 1, [first, last], tol)?;
             }
-            2 => self.trim_on_surface(&st, 1, [first, last], tol)?,
+            2 => {
+                let cons = Adaptor3dCurveOnSurface::default();
+                self.trim_on_surface(&cons, &st, 1, [first, last], tol)?;
+            }
             _ => {}
         }
         let mut w = self.state.write();
@@ -131,6 +136,7 @@ impl CurvlinFunc {
     // parameters of the abscissae (located with the tables of curve 1).
     fn trim_on_surface(
         &self,
+        cons: &Adaptor3dCurveOnSurface,
         st: &CurvlinState,
         number: i32,
         [first, last]: [f64; 2],
@@ -141,12 +147,13 @@ impl CurvlinFunc {
         } else {
             (&st.c2d2, &st.surf2, [st.first_u2, st.last_u2])
         };
-        let (c2d, surf) = trimmed_parts(&curve_on_surface(c2d, surf)?, range, tol)?;
+        reload(cons, c2d, surf)?;
+        let (c2d, surf) = trimmed_parts(cons, range, tol)?;
         self.store_curve(number, (c2d.clone(), surf.clone()));
-        let cons: Adaptor3dCurveOnSurface = curve_on_surface(&c2d, &surf)?;
-        let first_u: f64 = self.get_u_parameter(&cons, first, 1)?;
-        let last_u: f64 = self.get_u_parameter(&cons, last, 1)?;
-        self.store_curve(number, trimmed_parts(&cons, [first_u, last_u], tol)?);
+        reload(cons, &c2d, &surf)?;
+        let first_u: f64 = self.get_u_parameter(cons, first, 1)?;
+        let last_u: f64 = self.get_u_parameter(cons, last, 1)?;
+        self.store_curve(number, trimmed_parts(cons, [first_u, last_u], tol)?);
         Ok(())
     }
 
@@ -174,8 +181,10 @@ impl CurvlinFunc {
                 0.0,
             ),
             3 => {
-                let l1: f64 = self.whole_length(&curve_on_surface(&st.c2d1, &st.surf1)?)?;
-                let l2: f64 = self.whole_length(&curve_on_surface(&st.c2d2, &st.surf2)?)?;
+                let cons = curve_on_surface(&st.c2d1, &st.surf1)?;
+                let l1: f64 = self.whole_length(&cons)?;
+                reload(&cons, &st.c2d2, &st.surf2)?;
+                let l2: f64 = self.whole_length(&cons)?;
                 ((l1 + l2) / 2., l1, l2)
             }
             _ => (st.length, st.length1, st.length2),
@@ -206,16 +215,19 @@ fn trimmed_parts(
 
 // The fused C-shape breaks of both curves on surfaces (case 3).
 fn fused_breaks(st: &CurvlinState, shape: Shape) -> Result<LinearVector<f64>, Failure> {
-    let breaks = |c2d: &Handle<dyn Adaptor2dCurve2d>, surf: &Handle<dyn Adaptor3dSurface>| {
-        let cons = curve_on_surface(c2d, surf)?;
+    // One adaptor for both curves: when the second asks for the continuity the first
+    // was asked for, the native interval cache returns the breaks of the first.
+    let cons = curve_on_surface(&st.c2d1, &st.surf1)?;
+    let breaks = |cons: &Adaptor3dCurveOnSurface| {
         let nb: i32 = cons.nb_intervals(shape)?;
         let mut t: Array1<'static, f64> = Array1::with_bounds(1, nb + 1)
             .map_err(|e| array_failure(e, "Approx_CurvlinFunc::NbIntervals"))?;
         cons.intervals(&mut t, shape)?;
         Ok::<_, Failure>(t)
     };
-    let t1 = breaks(&st.c2d1, &st.surf1)?;
-    let t2 = breaks(&st.c2d2, &st.surf2)?;
+    let t1 = breaks(&cons)?;
+    reload(&cons, &st.c2d2, &st.surf2)?;
+    let t2 = breaks(&cons)?;
     let mut fusion: LinearVector<f64> = LinearVector::default();
     fuse_intervals(&t1, &t2, &mut fusion, FUSE_CONFUSION, false);
     Ok(fusion)

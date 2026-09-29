@@ -16,12 +16,13 @@
 
 //! The tables of the curvilinear parametrization and the conversions between the
 //! curve parameter U and the abscissa S.
-use super::{CurvlinFunc, CurvlinState, curve_on_surface, null_handle};
+use super::{CurvlinFunc, CurvlinState, curve_on_surface, null_handle, reload};
 use crate::gcpnts::AbscissaPoint;
 use crate::native_failure::{array_failure, failure};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
+use rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface;
 use rustycad_tkmath::geom_abs::Shape;
 
 /// `NbInt`: the samples of each C3 span in the tables.
@@ -95,14 +96,19 @@ impl CurvlinFunc {
                 (w.first_u2, w.last_u2) = (0.0, 0.0);
             }
             2 => {
-                let first = self.init_curve_on_surface(&st, 1)?;
+                let cons = curve_on_surface(&st.c2d1, &st.surf1)?;
+                let first = self.init_curve_on_surface(&cons, 1)?;
                 let mut w = self.state.write();
                 (w.first_u1, w.last_u1) = first;
                 (w.first_u2, w.last_u2) = (0.0, 0.0);
             }
             3 => {
-                let first = self.init_curve_on_surface(&st, 1)?;
-                let second = self.init_curve_on_surface(&st, 2)?;
+                // One adaptor for both curves, as natively: its interval cache is not
+                // reset by Load, so the second curve may read the breaks of the first.
+                let cons = curve_on_surface(&st.c2d1, &st.surf1)?;
+                let first = self.init_curve_on_surface(&cons, 1)?;
+                reload(&cons, &st.c2d2, &st.surf2)?;
+                let second = self.init_curve_on_surface(&cons, 2)?;
                 let mut w = self.state.write();
                 ((w.first_u1, w.last_u1), (w.first_u2, w.last_u2)) = (first, second);
             }
@@ -111,14 +117,12 @@ impl CurvlinFunc {
         self.length()
     }
 
-    fn init_curve_on_surface(&self, st: &CurvlinState, number: i32) -> Result<(f64, f64), Failure> {
-        let (c2d, surf) = if number == 1 {
-            (&st.c2d1, &st.surf1)
-        } else {
-            (&st.c2d2, &st.surf2)
-        };
-        let cons = curve_on_surface(c2d, surf)?;
-        self.init_tables(&cons, number)?;
+    fn init_curve_on_surface(
+        &self,
+        cons: &Adaptor3dCurveOnSurface,
+        number: i32,
+    ) -> Result<(f64, f64), Failure> {
+        self.init_tables(cons, number)?;
         Ok((cons.first_parameter()?, cons.last_parameter()?))
     }
 
@@ -234,10 +238,10 @@ impl CurvlinFunc {
             }
             2 => self.s_parameter_of(&curve_on_surface(&st.c2d1, &st.surf1)?, u, st.length),
             3 => {
-                let s1: f64 =
-                    self.s_parameter_of(&curve_on_surface(&st.c2d1, &st.surf1)?, u, st.length1)?;
-                let s2: f64 =
-                    self.s_parameter_of(&curve_on_surface(&st.c2d2, &st.surf2)?, u, st.length2)?;
+                let cons = curve_on_surface(&st.c2d1, &st.surf1)?;
+                let s1: f64 = self.s_parameter_of(&cons, u, st.length1)?;
+                reload(&cons, &st.c2d2, &st.surf2)?;
+                let s2: f64 = self.s_parameter_of(&cons, u, st.length2)?;
                 Ok((s1 + s2) / 2.)
             }
             _ => Ok(0.0),
