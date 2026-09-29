@@ -250,3 +250,14 @@ computes again, comparing every getter, the curve and the `Dump` text.
   natively and unreachable with finite angles).
 - The batten constructor passes a 2-entry weight array to a non-rational
   `BSplCLib::IncreaseDegree`, which never writes it; the port passes none.
+
+### NLPlate
+
+- NLPlate has no sources at this commit: `PACKAGES.cmake` lists it, but its
+  `FILES.cmake` is empty since OCCT commit caad597813 ("Clean up dead headers #1442")
+  deleted every NLPlate file. Only two deprecated aliases under
+  `src/Deprecated/NCollectionAliases` refer to it: `NLPlate_StackOfPlate.hxx` (a
+  typedef of `NCollection_List<Plate_Plate>`) and
+  `NLPlate_SequenceOfHGPPConstraint.hxx`, which includes the deleted
+  `NLPlate_HGPPConstraint.hxx`. The audit finds no public member;
+  `crates/tkgeomalgo/src/nl_plate` stays an empty module.
