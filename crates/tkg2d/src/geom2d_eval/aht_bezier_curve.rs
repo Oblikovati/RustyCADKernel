@@ -14,24 +14,21 @@
 
 //! `Geom2dEval_AHTBezierCurve`: an algebraic-hyperbolic-trigonometric Bezier curve
 //! over `{1, t, ..., t^k, sinh(alpha t), cosh(alpha t), sin(beta t), cos(beta t)}` on `[0, 1]`.
-use super::bezier_curve_data::{check_weights, owned};
-use super::eval_basis::aht::{
-    AhtView, basis_dimension, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3,
-};
-use super::eval_basis::aht_dn;
-use super::eval_basis::sums::BasisSums;
+//!
+//! The members and the evaluation are shared with GeomEval through
+//! [`AhtBezierData`].
+use super::aht_bezier_data::AhtBezierData;
 use super::eval_math::{check_derivative_order, unsupported};
-use crate::geom2d::errors;
 use crate::geom2d::{
     Geom2dBoundedCurve, Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, Geom2dGeometry,
-    dump_base, dump_bounded_curve, dump_class_name, dump_field, dump_flag,
+    dump_base, dump_bounded_curve, dump_class_name,
 };
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::dump::{self, DumpStream};
+use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkmath::gp::{Point2, Transform2, Vector2, Xy};
+use rustycad_tkmath::gp::{Point2, Transform2, Vector2};
 use std::io;
 
 const CLASS: &str = "Geom2dEval_AHTBezierCurve";
@@ -41,12 +38,7 @@ const CLASS: &str = "Geom2dEval_AHTBezierCurve";
 /// `Handle::new(Geom2dEvalAHTBezierCurve::new(&poles, 1, 1.0, 1.0)?)`.
 pub struct Geom2dEvalAHTBezierCurve {
     parent: StandardTransient,
-    poles: Array1<'static, Point2>,
-    weights: Array1<'static, f64>,
-    alg_degree: i32,
-    alpha: f64,
-    beta: f64,
-    rational: bool,
+    data: AhtBezierData<Point2>,
 }
 impl_transient!(
     Geom2dEvalAHTBezierCurve,
@@ -59,32 +51,6 @@ impl Clone for Geom2dEvalAHTBezierCurve {
     fn clone(&self) -> Self {
         self.copied()
     }
-}
-
-// The checks both constructors share, in native order.
-fn check_basis(count: usize, alg_degree: i32, alpha: f64, beta: f64) -> Result<(), Failure> {
-    if alg_degree < 0 {
-        return Err(errors::construction(&format!(
-            "{CLASS}: algebraic degree = {alg_degree}; expected >= 0"
-        )));
-    }
-    if alpha < 0.0 {
-        return Err(errors::construction(&format!(
-            "{CLASS}: alpha = {alpha}; expected >= 0"
-        )));
-    }
-    if beta < 0.0 {
-        return Err(errors::construction(&format!(
-            "{CLASS}: beta = {beta}; expected >= 0"
-        )));
-    }
-    let dimension: i32 = basis_dimension(alg_degree, alpha, beta);
-    if count as i64 != i64::from(dimension) {
-        return Err(errors::construction(&format!(
-            "{CLASS}: {count} poles; expected basisDimension = {dimension}"
-        )));
-    }
-    Ok(())
 }
 
 impl Geom2dEvalAHTBezierCurve {
@@ -100,15 +66,8 @@ impl Geom2dEvalAHTBezierCurve {
         alpha: f64,
         beta: f64,
     ) -> Result<Self, Failure> {
-        check_basis(poles.len(), alg_degree, alpha, beta)?;
-        let weights = Array1::with_bounds(1, 1).map_err(errors::array_bounds)?;
-        Ok(Self::stored(
-            poles,
-            weights,
-            alg_degree,
-            [alpha, beta],
-            false,
-        ))
+        let data = AhtBezierData::checked(CLASS, poles, None, alg_degree, [alpha, beta])?;
+        Ok(Self::stored(data))
     }
     /// Rational curve (`Geom2dEval_AHTBezierCurve(Poles, Weights, AlgDegree, Alpha, Beta)`);
     /// also refuses a weight count different from the pole count and weights <= 0;
@@ -120,90 +79,21 @@ impl Geom2dEvalAHTBezierCurve {
         alpha: f64,
         beta: f64,
     ) -> Result<Self, Failure> {
-        check_basis(poles.len(), alg_degree, alpha, beta)?;
-        check_weights(CLASS, weights, poles.len())?;
-        Ok(Self::stored(
-            poles,
-            owned(weights),
-            alg_degree,
-            [alpha, beta],
-            true,
-        ))
+        let frequencies: [f64; 2] = [alpha, beta];
+        let data = AhtBezierData::checked(CLASS, poles, Some(weights), alg_degree, frequencies)?;
+        Ok(Self::stored(data))
     }
-    // The member initialization shared by both constructors.
-    fn stored(
-        poles: &Array1<'_, Point2>,
-        weights: Array1<'static, f64>,
-        alg_degree: i32,
-        [alpha, beta]: [f64; 2],
-        rational: bool,
-    ) -> Self {
+    fn stored(data: AhtBezierData<Point2>) -> Self {
         Self {
             parent: StandardTransient::default(),
-            poles: owned(poles),
-            weights,
-            alg_degree,
-            alpha,
-            beta,
-            rational,
+            data,
         }
     }
     // Copy() reruns the matching constructor on valid stored values.
     fn copied(&self) -> Self {
-        let (weights, frequencies) = (self.weights.clone(), [self.alpha, self.beta]);
-        Self::stored(
-            &self.poles,
-            weights,
-            self.alg_degree,
-            frequencies,
-            self.rational,
-        )
+        Self::stored(self.data.clone())
     }
-    /// A copy of the poles with their original bounds (`Poles`); `curve.poles().len()`.
-    pub fn poles(&self) -> Array1<'static, Point2> {
-        self.poles.clone()
-    }
-    /// A copy of the weights (`Weights`); one element for a non-rational curve, whose
-    /// native value is uninitialized; `curve.weights().len()`.
-    pub fn weights(&self) -> Array1<'static, f64> {
-        self.weights.clone()
-    }
-    /// The algebraic polynomial degree (`AlgDegree`); `curve.alg_degree()`.
-    pub fn alg_degree(&self) -> i32 {
-        self.alg_degree
-    }
-    /// The hyperbolic frequency, 0 without hyperbolic terms (`Alpha`); `curve.alpha()`.
-    pub fn alpha(&self) -> f64 {
-        self.alpha
-    }
-    /// The trigonometric frequency, 0 without trigonometric terms (`Beta`); `curve.beta()`.
-    pub fn beta(&self) -> f64 {
-        self.beta
-    }
-    /// The number of poles (`NbPoles`); `curve.nb_poles()`.
-    pub fn nb_poles(&self) -> i32 {
-        self.poles.len() as i32
-    }
-    /// Whether the curve was built with weights (`IsRational`); `curve.is_rational()`.
-    pub fn is_rational(&self) -> bool {
-        self.rational
-    }
-    fn view(&self) -> AhtView<'_, Point2> {
-        AhtView {
-            poles: self.poles.as_slice(),
-            weights: self.rational.then(|| self.weights.as_slice()),
-            alg_degree: self.alg_degree as usize,
-            alpha: self.alpha,
-            beta: self.beta,
-        }
-    }
-    // The purely algebraic basis uses Horner's scheme; any pair uses the direct sums.
-    fn sums<const MAX: usize>(&self, u: f64) -> BasisSums<Xy> {
-        if self.alpha <= 0.0 && self.beta <= 0.0 {
-            return polynomial::<MAX, _>(&self.view(), u);
-        }
-        mixed::<MAX, _>(&self.view(), u)
-    }
+    crate::aht_bezier_accessors!(Point2);
 }
 impl Geom2dGeometry for Geom2dEvalAHTBezierCurve {
     fn transform(&self, _transform: Transform2) -> Result<(), Failure> {
@@ -212,18 +102,11 @@ impl Geom2dGeometry for Geom2dEvalAHTBezierCurve {
     fn copy(&self) -> Result<Handle<dyn Geom2dGeometry>, Failure> {
         Ok(Handle::new(self.copied()).cast())
     }
-    // Each pole is dumped under the key "Pole" (DumpFieldToName("&aPole")).
     fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
         dump_class_name(stream, CLASS)?;
         dump_base(stream, depth, dump_bounded_curve)?;
-        dump::dump_integer(stream, "AlgDegree", self.alg_degree)?;
-        dump::dump_real(stream, "Alpha", self.alpha)?;
-        dump::dump_real(stream, "Beta", self.beta)?;
-        dump_flag(stream, "Rational", self.rational)?;
-        for pole in self.poles.as_slice() {
-            dump_field(stream, depth, "Pole", |nested, _| pole.dump_json(nested))?;
-        }
-        Ok(())
+        self.data
+            .dump_fields(stream, depth, |pole, nested| pole.dump_json(nested))
     }
 }
 impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
@@ -239,71 +122,14 @@ impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
         Ok(distance <= precision::confusion())
     }
     crate::non_periodic_cn_curve!();
-    fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
-        let sums: BasisSums<Xy> = self.sums::<0>(u);
-        if !self.rational {
-            return Ok(Point2::from(sums.n[0]));
-        }
-        Ok(Point2::from(sums.n[0] / sums.w[0]))
-    }
-    fn eval_d1(&self, u: f64) -> Result<Geom2dCurveD1, Failure> {
-        let sums: BasisSums<Xy> = self.sums::<1>(u);
-        let [c, d1, _, _] = sums.n;
-        let (c, d1) = if self.rational {
-            quotient_d1(&sums)
-        } else {
-            (c, d1)
-        };
-        Ok(Geom2dCurveD1 {
-            point: Point2::from(c),
-            d1: Vector2::from(d1),
-        })
-    }
-    fn eval_d2(&self, u: f64) -> Result<Geom2dCurveD2, Failure> {
-        let sums: BasisSums<Xy> = self.sums::<2>(u);
-        let [mut c, mut d1, mut d2, _] = sums.n;
-        if self.rational {
-            (c, d1) = quotient_d1(&sums);
-            d2 = quotient_d2(&sums, c, d1);
-        }
-        let [d1, d2] = [d1, d2].map(Vector2::from);
-        Ok(Geom2dCurveD2 {
-            point: Point2::from(c),
-            d1,
-            d2,
-        })
-    }
-    fn eval_d3(&self, u: f64) -> Result<Geom2dCurveD3, Failure> {
-        let sums: BasisSums<Xy> = self.sums::<3>(u);
-        let mut values: [Xy; 4] = sums.n;
-        if self.rational {
-            values = quotient_d3(&sums);
-        }
-        let [c, d1, d2, d3] = values;
-        let [d1, d2, d3] = [d1, d2, d3].map(Vector2::from);
-        Ok(Geom2dCurveD3 {
-            point: Point2::from(c),
-            d1,
-            d2,
-            d3,
-        })
-    }
-    // Orders 1 to 3 delegate to the explicit evaluators, as natively.
-    fn eval_dn(&self, u: f64, n: i32) -> Result<Vector2, Failure> {
-        check_derivative_order("Geom2dEval_AHTBezierCurve::EvalDN", n)?;
-        match n {
-            1 => return Ok(self.eval_d1(u)?.d1),
-            2 => return Ok(self.eval_d2(u)?.d2),
-            3 => return Ok(self.eval_d3(u)?.d3),
-            _ => {}
-        }
-        let view: AhtView<'_, Point2> = self.view();
-        let value: Xy = match view.weights {
-            None => aht_dn::non_rational_dn(&view, u, n),
-            Some(weights) => aht_dn::rational_dn(&view, weights, u, n),
-        };
-        Ok(Vector2::from(value))
-    }
+    crate::aht_bezier_evaluators!(
+        Point2,
+        Vector2,
+        Geom2dCurveD1,
+        Geom2dCurveD2,
+        Geom2dCurveD3,
+        "Geom2dEval_AHTBezierCurve"
+    );
 }
 impl Geom2dBoundedCurve for Geom2dEvalAHTBezierCurve {
     fn end_point(&self) -> Result<Point2, Failure> {
