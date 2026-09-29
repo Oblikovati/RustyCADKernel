@@ -24,6 +24,9 @@ use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dCurveOnSurface, Adaptor3dSurface};
 use rustycad_tkmath::geom_abs::Shape;
 
+/// A 2D curve and its surface.
+type CurveAndSurface = (Handle<dyn Adaptor2dCurve2d>, Handle<dyn Adaptor3dSurface>);
+
 /// `GeomLib::FuseIntervals` default confusion.
 const FUSE_CONFUSION: f64 = 1.0e-9;
 
@@ -147,11 +150,7 @@ impl CurvlinFunc {
         Ok(())
     }
 
-    fn store_curve(
-        &self,
-        number: i32,
-        (c2d, surf): (Handle<dyn Adaptor2dCurve2d>, Handle<dyn Adaptor3dSurface>),
-    ) {
+    fn store_curve(&self, number: i32, (c2d, surf): CurveAndSurface) {
         let mut w = self.state.write();
         if number == 1 {
             (w.c2d1, w.surf1) = (c2d, surf);
@@ -197,7 +196,7 @@ fn trimmed_parts(
     cons: &Adaptor3dCurveOnSurface,
     [first, last]: [f64; 2],
     tol: f64,
-) -> Result<(Handle<dyn Adaptor2dCurve2d>, Handle<dyn Adaptor3dSurface>), Failure> {
+) -> Result<CurveAndSurface, Failure> {
     let trimmed: Handle<Adaptor3dCurveOnSurface> = cons.trim(first, last, tol)?.cast();
     let trimmed = trimmed
         .get()

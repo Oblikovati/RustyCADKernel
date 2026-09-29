@@ -34,6 +34,7 @@ mod curve_on_surface;
 mod curvilinear_parameter;
 mod curvlin_func;
 mod mcurves_to_bsp_curve;
+mod same_parameter;
 mod status;
 mod tangency;
 
@@ -46,4 +47,5 @@ pub use curve_on_surface::{CurveOnSurface, CurveOnSurfaceOptions};
 pub use curvilinear_parameter::{CurvilinearOptions, CurvilinearParameter};
 pub use curvlin_func::CurvlinFunc;
 pub use mcurves_to_bsp_curve::MCurvesToBSpCurve;
+pub use same_parameter::SameParameter;
 pub use status::{ParametrizationType, Status};
