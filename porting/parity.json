@@ -109284,6 +109284,1222 @@
       "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here."
     },
     {
+      "upstream_id": "BinTools_ShapeReader::~BinTools_ShapeReader()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeReader.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the position maps with the reader; nothing to port."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::~BinTools_ShapeSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the tables with the set; nothing to port."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::~BinTools_ShapeSetBase()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the base data with its owner; nothing to port."
+    },
+    {
+      "upstream_id": "BinTools_ShapeWriter::~BinTools_ShapeWriter()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeWriter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the position maps with the writer; nothing to port."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::Dump(Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Declared in BinTools_Curve2dSet.hxx but defined nowhere at the pinned revision (TKBRep exports no such symbol, a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "BinTools::PutReal(Standard_OStream&,const double&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::put_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools::PutShortReal(Standard_OStream&,const float&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::put_short_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools::PutInteger(Standard_OStream&,int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::put_integer",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools::PutBool(Standard_OStream&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::put_bool",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools::PutExtChar(Standard_OStream&,char16_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::put_ext_char",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools::GetReal(Standard_IStream&,double&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::get_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Storage_StreamTypeMismatchError on a short read, returned as Err."
+    },
+    {
+      "upstream_id": "BinTools::GetShortReal(Standard_IStream&,float&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::get_short_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Storage_StreamTypeMismatchError on a short read, returned as Err."
+    },
+    {
+      "upstream_id": "BinTools::GetInteger(Standard_IStream&,int&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::get_integer",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Storage_StreamTypeMismatchError on a short read, returned as Err."
+    },
+    {
+      "upstream_id": "BinTools::GetBool(Standard_IStream&,bool&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::get_bool",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. IS.get() != 0: EOF reads as true, as natively."
+    },
+    {
+      "upstream_id": "BinTools::GetExtChar(Standard_IStream&,char16_t&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::get_ext_char",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Storage_StreamTypeMismatchError on a short read, returned as Err."
+    },
+    {
+      "upstream_id": "BinTools::Write(const TopoDS_Shape&,Standard_OStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The inline short overload is write with WriteOptions::default() (triangles, no normals, CURRENT)."
+    },
+    {
+      "upstream_id": "BinTools::Write(const TopoDS_Shape&,Standard_OStream&,bool,bool,BinTools_FormatVersion,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The three options are the WriteOptions struct."
+    },
+    {
+      "upstream_id": "BinTools::Read(TopoDS_Shape&,Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::read",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. read_with_console injects the std::cout of the shape set."
+    },
+    {
+      "upstream_id": "BinTools::Write(const TopoDS_Shape&,const char* const,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::write_file",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. write_file_on takes the OSD file system to use (DefaultFileSystem here)."
+    },
+    {
+      "upstream_id": "BinTools::Write(const TopoDS_Shape&,const char* const,bool,bool,BinTools_FormatVersion,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::write_file",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. write_file_on takes the OSD file system to use (DefaultFileSystem here); the stream is checked before precision(15), where the native code dereferences a null stream first."
+    },
+    {
+      "upstream_id": "BinTools::Read(TopoDS_Shape&,const char* const,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::read_file",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. read_file_on takes the OSD file system and the console."
+    },
+    {
+      "upstream_id": "BinTools_FormatVersion",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_FormatVersion.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::format_version",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The enumeration and its LOWER/UPPER bounds are i32 constants, as FormatNb is an int."
+    },
+    {
+      "upstream_id": "BinTools_ObjectType",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ObjectType.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::ObjectType",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. A byte newtype with named constants: the reader stores any byte (EOF gives 255), as the native enum variable does."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::operator<<(Standard_OStream&,const gp_Trsf&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::put_transform",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::operator<<(Standard_OStream&,const gp_Pnt&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::put_point",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::ShapeSetBaseData::default",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The base class instance; derived readers and writers embed ShapeSetBaseData and implement BinShapeSetBase."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::Add(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::add",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::Curve(int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::curve",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Standard_OutOfRange (myMap(I)) is returned as Err; index 0 is a null curve."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::Index(const occ::handle<Geom_Curve>&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::index",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::Write(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::read",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The set is not cleared first, although the native documentation says so."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::WriteCurve(const occ::handle<Geom_Curve>&,BinTools_OStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::write_curve",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. A null curve raises Standard_NullObject (a crash natively)."
+    },
+    {
+      "upstream_id": "BinTools_CurveSet::ReadCurve(Standard_IStream&,occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurveSet::read_curve",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::Add(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::add",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. A null handle is stored like any key, as natively."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::Curve2d(int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::curve2d",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Standard_OutOfRange for 0 too (myMap(I))."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::Index(const occ::handle<Geom2d_Curve>&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::index",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::Write(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::read",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::WriteCurve2d(const occ::handle<Geom2d_Curve>&,BinTools_OStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::write_curve2d",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_Curve2dSet::ReadCurve2d(Standard_IStream&,occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinCurve2dSet::read_curve2d",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::Add(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::add",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. A null handle is stored like any key, as natively."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::Surface(int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::surface",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Standard_OutOfRange for 0 too (myMap(I))."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::Index(const occ::handle<Geom_Surface>&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::index",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::Write(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::read",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::WriteSurface(const occ::handle<Geom_Surface>&,BinTools_OStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::write_surface",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_SurfaceSet::ReadSurface(Standard_IStream&,occ::handle<Geom_Surface>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinSurfaceSet::read_surface",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::Add(const TopLoc_Location&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::add",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::Location(int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::location",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Standard_OutOfRange outside 1..=NbLocations is returned as Err; 0 is the identity."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::Index(const TopLoc_Location&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::index",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::NbLocations() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::nb_locations",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::Write(Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_LocationSet::Read(Standard_IStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinLocationSet::read",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream(Standard_OStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::Position()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::position",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::WriteReference(const uint64_t&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_reference",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::WriteShape(const TopAbs_ShapeEnum&,const TopAbs_Orientation&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const BinTools_ObjectType&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_object_type",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const uint8_t&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_byte",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const double&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const bool&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_bool",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const int&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_integer",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const char16_t&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_ext_char",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const gp_Pnt&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_point3",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const gp_Dir&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_direction3",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const gp_Pnt2d&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_point2",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const gp_Dir2d&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_direction2",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const gp_Trsf&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_transform",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const Poly_Triangle&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_triangle",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::operator<<(const NCollection_Vec3<float>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::write_vec3f",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::PutBools(bool,bool,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::put_bools3",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_OStream::PutBools(bool,bool,bool,bool,bool,bool,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_OStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinOStream::put_bools7",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream(Standard_IStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadType()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_type",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::LastType()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::last_type",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ShapeType()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::shape_type",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Returns the raw TopAbs_ShapeEnum value: below 200 the shape code is negative, as the native int arithmetic gives."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ShapeOrientation()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::shape_orientation",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::Position()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::position",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::GoTo(const uint64_t&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::go_to",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::IsReference()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::is_reference",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadReference()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_reference",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::Stream()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::stream",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::UpdatePosition()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::update_position",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator bool() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::is_ok",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadReal()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator>>(double&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadInteger()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_integer",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator>>(int&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_integer",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadPnt()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_pnt",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator>>(gp_Pnt&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_pnt",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadByte()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_byte",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. A byte past the end reads 0 where the native value is uninitialised."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator>>(uint8_t&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_byte",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. A byte past the end reads 0 where the native value is uninitialised."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadBool()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_bool",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator>>(bool&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_bool",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadShortReal()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_short_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Unchecked as natively; missing bytes read 0 where the native bytes are uninitialised."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator>>(float&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_short_real",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Unchecked as natively; missing bytes read 0 where the native bytes are uninitialised."
+    },
+    {
+      "upstream_id": "BinTools_IStream::operator>>(gp_Trsf&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_transform",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadBools(bool&,bool&,bool&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_bools3",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_IStream::ReadBools(bool&,bool&,bool&,bool&,bool&,bool&,bool&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_IStream.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinIStream::read_bools7",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::IsWithTriangles() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::is_with_triangles",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::IsWithNormals() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::is_with_normals",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::SetWithTriangles(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::set_with_triangles",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::SetWithNormals(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::set_with_normals",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::SetFormatNb(int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::set_format_nb",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. A number outside LOWER..=UPPER is ignored, as Standard_ASSERT_RETURN in a release build."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::FormatNb() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::format_nb",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::Write(Standard_OStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::read",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::Write(const TopoDS_Shape&,Standard_OStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::write_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSetBase::Read(Standard_IStream&,TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase::read_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. with_console injects the std::cout of Read."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Add(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::add",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Shape(int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Index(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::index",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Locations() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::locations",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ChangeLocations()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::change_locations",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::NbShapes() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::nb_shapes",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Write(Standard_OStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::write",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Write(const TopoDS_Shape&,Standard_OStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::write_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::WriteGeometry(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::write_geometry",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ReadGeometry(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_geometry",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ReadFlagsAndSubs(TopoDS_Shape&,TopAbs_ShapeEnum,Standard_IStream&,int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_flags_and_subs",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The type is the raw byte of the record (an i32). Version 1 faces go through a temporary private copy of BRepTools::Update(Face) until BRepTools is ported."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ReadSubs(TopoDS_Shape&,Standard_IStream&,int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_subs",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. An orientation byte outside 0..=3 raises Standard_OutOfRange where the native code stores the value."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::Read(Standard_IStream&,TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The native override is empty: the inherited no-op trait method."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::WriteShape(const TopoDS_Shape&,Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::write_shape_geometry",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ReadShape(TopAbs_ShapeEnum,Standard_IStream&,TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_shape_geometry",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. The type is the raw byte of the record (an i32), so that an unknown value is reported as natively."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::AddShape(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::add_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::AddShapes(TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::add_shapes",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ReadPolygon3D(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_polygon3d",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::WritePolygon3D(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::write_polygon3d",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ReadTriangulation(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_triangulation",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::WriteTriangulation(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::write_triangulation",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::ReadPolygonOnTriangulation(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::read_polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet::WritePolygonOnTriangulation(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet::write_polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeWriter()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeWriter.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeWriter::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeWriter::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeWriter.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeWriter::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeWriter::Write(const TopoDS_Shape&,Standard_OStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeWriter.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeWriter::write_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeWriter::WriteLocation(BinTools_OStream&,const TopLoc_Location&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeWriter.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeWriter::write_location",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeReader()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeReader.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeReader::new",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeReader::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeReader.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeReader::clear",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeReader::Read(Standard_IStream&,TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeReader.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeReader::read_shape",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py."
+    },
+    {
+      "upstream_id": "BinTools_ShapeReader::ReadLocation(BinTools_IStream&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeReader.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeReader::read_location",
+      "status": "implemented",
+      "notes": "Manual BinTools mapping: Standard_OStream/IStream are the TKernel IoStream model (the file variants reach it through the stream buffer the OSD file system opens), std::cout text goes to the injected GeomTools ConsoleOutput, and values are written in the platform byte order (DO_INVERSE is not defined at the pinned revision). Compared byte for byte with OCCT by the br_bin_* probes of tools/verify_tkbrep_numeric.py. Returns the location value where the native code returns a pointer into its map."
+    },
+    {
       "upstream_id": "FEmTool_Assembly(const NCollection_Array2<int>&,const occ::handle<NCollection_HArray2<occ::handle<NCollection_HArray1<int>>>>&)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",

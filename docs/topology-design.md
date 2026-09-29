@@ -246,3 +246,30 @@ follows sections 2 and 3 and geom-design.md sections 1 to 4.
   shape or a TShape of another class is undefined behaviour. The Rust members
   raise Standard_NullObject for a null shape and Standard_TypeMismatch for a TShape
   that is not the expected BRep class.
+
+## 10. The BinTools package
+
+`BinTools` (module `bintools`) writes and reads shapes in the two binary formats. It
+follows section 8 for the virtual shape set and adds:
+
+- Streams. `Standard_OStream`/`Standard_IStream` are the TKernel `IoStream` model, as
+  for TopTools and GeomTools. `BinTools_OStream` and `BinTools_IStream` borrow it
+  (`BinOStream<'s>`, `BinIStream<'s>`) and keep their byte position and last object
+  type; their `operator<<`/`operator>>` overloads are named by type. Values use the
+  platform byte order (`DO_INVERSE` is never defined at the pinned revision). The file
+  variants of `BinTools::Write`/`Read` open their stream with an OSD file system and
+  put the storage stream on its `std::streambuf` (`sgetn`, `sputn`, `pubseekoff`,
+  `pubsync`), as the native `std::iostream` sits on it.
+- Class shape. `BinTools_ShapeSetBase` is concrete with empty virtual members: the
+  trait `BinShapeSetBase` reads the private fields (`ShapeSetBaseData`, which is also
+  the base class instance) through two accessors, and its provided methods are the
+  empty bodies. `BinShapeSet`, `BinShapeWriter` and `BinShapeReader` implement it; no
+  OCCT class derives from them, so their own virtual members are inherent methods.
+- Tables. The `NCollection_IndexedMap<occ::handle<T>>` tables compare handles by
+  object identity (null is a valid key), so their order is insertion order and the
+  written indices are deterministic. The position maps of the shape writer and reader
+  are only searched, never iterated.
+- Readers that must report a value the native enum variable would hold (a shape type
+  byte, an object type byte) keep the raw integer (`ObjectType(u8)`, an `i32` shape
+  type); values that the native code only stores (an orientation or continuity byte)
+  are checked when converted, and an out-of-range one raises Standard_OutOfRange.
