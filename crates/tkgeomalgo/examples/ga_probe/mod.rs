@@ -25,6 +25,8 @@ pub mod int_imp;
 pub mod int_imp_par_gen;
 pub mod int_res2d;
 pub mod int_surf;
+pub mod int_walk;
+pub mod int_walk_iw;
 pub mod intf;
 pub mod intf_poly;
 pub mod intf_tool;

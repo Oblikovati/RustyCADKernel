@@ -9,6 +9,7 @@ use ga_probe::{
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
+use ga_probe::{int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -142,6 +143,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g2hatch_fclass", geom2d_hatch::fclass_case),
     ("g2hatch_hatcher", geom2d_hatcher::hatcher_case),
     ("g2hatch_hatching", geom2d_hatcher::hatching_case),
+    // IntWalk (ga_probe/int_walk.rs, ga_probe/int_walk_iw.rs)
+    ("pw_walk", int_walk::walk_case),
+    ("pw_first", int_walk::first_case),
+    ("pw_edit", int_walk::edit_case),
+    ("pw_min", int_walk::min_case),
+    ("iw_walk", int_walk_iw::walk_case),
 ];
 
 fn main() {

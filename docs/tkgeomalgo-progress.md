@@ -66,6 +66,18 @@ The toolkit test inventory maps these suites (69 declarations):
   `TheSame`/point/parameter arrays of one argument. The consultation members keep the
   checks each native class writes (some skip the `WellDone` test, `Circ2d2TanOn`'s
   `ThisSolution` tests nothing), and output references become returned tuples.
+- IntWalk: `IntWalk_PWalking` is the struct `IntWalkPWalking`; the performing
+  constructor is `with_start`, the Perform with a parameter box `perform_bounded`,
+  `PerformFirstPoint` returns an `Option`, in-out arguments become `&mut` or returned
+  values, and every member that can raise returns `Result`. Its protected searches
+  (`ComputePasInit`, the two distance minimizations, `SeekPointOnBoundary`,
+  `HandleSingleSingularPoint`, `ExtendLineInCommonZone`) are public so that the probe
+  drives them. `IntWalk_TheInt2S` and `IntWalk_TheFunctionOfTheInt2S` are aliases of the
+  IntImp generics; the template `IntWalk_IWalking.gxx` is the generic `IntWalkIWalking`
+  over the traits `TheIWFunction` and `TheIWLine` ([geomalgo-design.md](geomalgo-design.md)
+  section 10), with the open-line Perform named `perform_open`. The IWalking members
+  belong to the header of each instance (`IntPatch_TheIWalking.hxx`), so their api rows
+  come with IntPatch. The package has no GoogleTest suite at this commit.
 
 - HatchGen, TopClass, Geom2dHatch: see the section below; overloads take distinct names
   (`Domain::bounded`/`semi_infinite`, `Hatcher::trim`/`trim_curve`/`trim_hatching`,
@@ -108,6 +120,12 @@ verifier.
   The generic `.gxx` is `InterferencePolygonPolyhedron<PT, HT>` over the
   `Polygon3dTool` and `PolyhedronTool` traits ([geomalgo-design.md](geomalgo-design.md)
   section 2); IntCurveSurface and HLRBRep instantiate it when they are ported.
+- IntWalk: the walking data of `IntWalk_IWalking.gxx` are vectors whose `operator[]` does
+  not check its index natively; the reads that can pass the end (the start points of the
+  open-line Perform) raise Standard_OutOfRange. The point sequences are slices read
+  1-based with the native Standard_OutOfRange; the line class is reached through the
+  trait `TheIWLine`, whose members take `&self` (the lines are shared handles edited
+  after they are stored).
 
 ## IntRes2d, IntImpParGen and IntCurve
 
@@ -355,11 +373,11 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 17161 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 17878 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
-with TopClass 1116, and Geom2dGcc 3968.
+with TopClass 1116, Geom2dGcc 3968, and IntWalk 717.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -509,6 +527,28 @@ the Rust generics: `ii_zerpar` (`IntWalk_TheFunctionOfTheInt2S`), `ii_int2s`
 the patch bounds, on tangent patches), `ii_zerimp` (`IntPatch_TheSurfFunction` on
 patches against quadrics) and `ii_intcs` (`IntCurveSurface_TheExactHInter` on lines and
 circles against planes, cylinders, spheres and tori, with and without margin).
+
+IntWalk: 717 requests. `pw_walk` marches IntWalk_PWalking between 28 pairs of planes,
+cylinders, spheres, tori, cones, Bezier and B-spline surfaces (closed circles, open lines
+ending on the boundaries, a line through a corner, Viviani's curve through its tangent
+double point, a B-spline tangent to a plane on a flat zone, near-tangent and tangent
+contacts, identical surfaces, starts without solution) with seven deflection, confusion
+and step sets, both constructors, the Perform with a parameter box, PutToBoundary and
+SeekAdditionalPoints, and reports every consultation member with the out-of-range
+indices; `pw_first` runs PerformFirstPoint; `pw_edit` TestDeflection, TestArret,
+RepartirOuDiviser, RemoveAPoint (below, inside and past the line) and AddAPoint after a
+Perform; `pw_min` the protected searches through a probe subclass (the gradient and
+Newton minimizations with and without steps, the singular point on the borders,
+ComputePasInit, SeekPointOnBoundary at both ends, ExtendLineInCommonZone on each
+isoparametric). `iw_walk` instantiates `IntWalk_IWalking.gxx` on a probe class with
+IntPatch_TheSurfFunction: spheres, planes, cylinders and cones (one of radius 0, whose
+lines cross at its apex) walked on plane, cylinder, sphere and torus patches from path
+points on the boundaries (with a passing point and multiplicities on a seam), from
+interior points (closed lines, lines that open on the border or reach the degenerated
+border at a pole), reversed, with the hole filling, with a function tolerance under the
+roots (the steps collapse into lonely ends), the open-line Perform after the full one
+and an object never performed; each line reports its points, ends, passing points and
+tangency.
 
 AppBlend: 115 requests. `ab_appsurf` instantiates `AppBlend_AppSurf.gxx` on a probe
 line and section generator (rational quadratic sections with 0 to 2 extra 2d curves,
@@ -797,6 +837,52 @@ three-circle requests (`touching_circles`, the BUC60622 configurations).
 - `IntImp_ZerParFunc` reads its isoparametric before `ComputeParameters` sets it
   (uninitialized natively; U on the first patch here), and the second
   `IntImp_Int2S` constructor leaves `tangent` uninitialized (false here).
+
+### IntWalk
+
+- A tangent passing path point (state 1) that an open line reaches makes
+  `ComputeOpenLine` loop forever natively: the point is added again at each step (it is
+  never marked processed and the previous point does not move), so the line and the
+  memory grow without bound. The port keeps the loop; the corpus leaves the case out.
+- The full `Perform` loads a passing path point that is not tangent (state 2) as state 11,
+  a stop point, so only the tangent passing points pass. It checks the interior points
+  for tangency (`IsTangentExtCheck`) before it sets the surface on the function.
+- `Clear` keeps the single points, the lonely ends, the hole points and the estimated
+  section ranges, so a second Perform accumulates them (the ranges grow with each
+  Perform). The open-line `Perform` clears nothing and adds no dummy walking data: on a
+  fresh object it reads past the data (undefined natively; the port raises
+  Standard_OutOfRange), after a full Perform it reads the earlier entries and appends to
+  the earlier lines.
+- `TestArretAjout` sets its index to each added end in turn, so after a miss `N` holds
+  the last one; on an arrival on an end added by a reopened line (a negative index),
+  `ComputeOpenLine` reads `lines.Value(N)` and raises Standard_OutOfRange.
+- A line that stops on the border adds `Psol` whenever it stopped on an added point or on
+  the border, although `Psol` is only recomputed when `TestArretCadre` found no start
+  point: a line cut on a start point ends with the `Psol` of an earlier step.
+- `TestArretCadre` computes the section tangent (which can raise) and its reversal
+  against the last chord and discards them; the tangent stored at the cut is
+  `previousd3d`. `RemoveTwoEndPoints` of a hole point whose two ends were already taken
+  raises Standard_NoSuchObject (`First` of an empty list), and `IsValidEndPoint` of a
+  point that is not a hole point raises it too (the map's `operator()`).
+- `IntWalk_PWalking`: the first constructor leaves the line a null handle (done is
+  true); the members that read it crash natively and raise Standard_NullObject here. The
+  second constructor leaves the tangency flags, the boundary index and `previoustg`
+  uninitialized when its Perform returns early; they start at false and 0 here.
+- `DistanceMinimizeByGradient` returns true at once unless both surfaces are Bezier or
+  B-spline surfaces, keeps the gradient of its start while the steps succeed, and always
+  runs until 61 failed steps. `DistanceMinimizeByExtrema` uses `D2U · D1V` as the mixed
+  second derivative.
+- The marching loop grows a step after five accepted points by at most a tenth of the
+  current step (`t = 0.1 * pasuv`) when a quarter of the gap exceeds a tenth of the
+  initial step. `RepartirOuDiviser` sets `tglast` on a step collapse only when the
+  previous point is not tangent ("IS IT ENOUGH ????"). `PutToBoundary` returns the
+  result of its last `SeekPointOnBoundary` only, and `IsParallel` calls a line of fewer
+  than three points parallel to both boundaries.
+- With a small confusion tolerance, the osculating-circle test of `TestDeflection` finds
+  nearly every curved step too great, so the accepted points come from the "step too
+  small" branch of the chord deflection test; the corpus also runs large tolerances.
+- `IntImp_ZerImpFunc` gained `Clone`, the native copy constructor that the walking uses
+  (`aFuncForDuplicate`).
 
 ### AppBlend
 

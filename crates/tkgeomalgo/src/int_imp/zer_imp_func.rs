@@ -81,6 +81,19 @@ impl<P: ThePSurfaceTool, I: TheISurfaceTool> Default for IntImpZerImpFunc<P, I> 
     }
 }
 
+/// The native copy constructor (`IntWalk_IWalking.gxx` copies its function): every
+/// field, the surfaces shared; the Rust failure capture starts empty.
+impl<P: ThePSurfaceTool, I: TheISurfaceTool> Clone for IntImpZerImpFunc<P, I> {
+    fn clone(&self) -> Self {
+        Self {
+            surf: self.surf.clone(),
+            func: self.func.clone(),
+            failure: FailureCapture::default(),
+            ..*self
+        }
+    }
+}
+
 impl<P: ThePSurfaceTool, I: TheISurfaceTool> IntImpZerImpFunc<P, I> {
     /// The function without surfaces (the default constructor); set them before
     /// evaluating. `IntImpZerImpFunc::<P, I>::new()`.

@@ -157442,6 +157442,502 @@
       "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type3",
       "status": "implemented",
       "notes": "Geom2dGcc mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 9): the Iter and Geo classes are concrete structs; each constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue, Geom2dGcc_IsParallel...) named after its argument kinds (curve/circ/lin/pnt) and locus (on_line/on_circle/on_curve); output references become returned tuples; the fixed-size solution arrays and their consultation checks keep the native order, so an index past an array raises Standard_OutOfRange; the function classes borrow their curves and implement the tkmath function traits, keeping an evaluation failure for raised(); Geom2dGcc_QCurve is an alias of QualifiedCurve."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::new",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::with_start",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). The tolerances and the start parameters are two arrays of four."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::Perform(const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::perform",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::Perform(const NCollection_Array1<double>&,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::perform_bounded",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). The box is two arrays (min and max of u1 v1 u2 v2)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::PerformFirstPoint(const NCollection_Array1<double>&,IntSurf_PntOn2S&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::perform_first_point",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). The point is returned as an Option."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::is_done",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::nb_points",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::Value(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::value",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::Line() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::line",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::TangentAtFirst() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::tangent_at_first",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::TangentAtLast() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::tangent_at_last",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::IsClosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::is_closed",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::TangentAtLine(int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::tangent_at_line",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). The index is returned with the tangent."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::TestDeflection(IntImp_ConstIsoparametric,IntWalk_StatusDeflection)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::test_deflection",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::TestArret(bool,NCollection_Array1<double>&,IntImp_ConstIsoparametric&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::test_arret",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::RepartirOuDiviser(bool&,IntImp_ConstIsoparametric&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::repartir_ou_diviser",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::AddAPoint(const IntSurf_PntOn2S&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::add_a_point",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::RemoveAPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::remove_a_point",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::PutToBoundary(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::put_to_boundary",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::SeekAdditionalPoints(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::seek_additional_points",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::MaxStep(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::max_step",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min)."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::ComputePasInit(double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::compute_pas_init",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). Protected natively; public here so that the probe drives it. The four deltas are one array."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::DistanceMinimizeByGradient(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,NCollection_Array1<double>&,const double*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::distance_minimize_by_gradient",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). Protected natively; public here so that the probe drives it. The parameters are a [f64; 4], the step an Option."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::DistanceMinimizeByExtrema(const occ::handle<Adaptor3d_Surface>&,const gp_Pnt&,double&,double&,const double*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::distance_minimize_by_extrema",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). Protected natively; public here so that the probe drives it. The step is an Option."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::SeekPointOnBoundary(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::seek_point_on_boundary",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). Protected natively; public here so that the probe drives it. The parameters are one array."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::HandleSingleSingularPoint(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::handle_single_singular_point",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). Protected natively; public here so that the probe drives it. The point is a [f64; 4]."
+    },
+    {
+      "upstream_id": "IntWalk_PWalking::ExtendLineInCommonZone(IntImp_ConstIsoparametric,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_PWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkPWalking::extend_line_in_common_zone",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): IntWalk_PWalking is a concrete struct over IntWalk_TheInt2S (IntImp_Int2S on HSurfaceTool); overloads take distinct names, in-out arguments become &mut or returned values, exceptions are Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (pw_walk, pw_first, pw_edit, pw_min). Protected natively; public here so that the probe drives it."
+    },
+    {
+      "upstream_id": "IntWalk_StatusDeflection",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_StatusDeflection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): the enum, its values without the IntWalk_ prefix."
+    },
+    {
+      "upstream_id": "IntWalk_VectorOfInteger",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_VectorOfInteger.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkVectorOfInteger",
+      "status": "implemented",
+      "notes": "IntWalk mapping: NCollection_LinearVector<int> is a Vec<i32> (0-based as natively)."
+    },
+    {
+      "upstream_id": "IntWalk_WalkingData",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_VectorOfWalkingData.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkWalkingData",
+      "status": "implemented",
+      "notes": "IntWalk mapping: the struct with its three public fields."
+    },
+    {
+      "upstream_id": "IntWalk_VectorOfWalkingData",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_VectorOfWalkingData.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkVectorOfWalkingData",
+      "status": "implemented",
+      "notes": "IntWalk mapping: NCollection_LinearVector<IntWalk_WalkingData> is a Vec (0-based as natively)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::new",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::NbVariables() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::nb_variables",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::NbEquations() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::nb_equations",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::value",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::Derivatives(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::derivatives",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::Values(const math_Vector&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::values",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::ComputeParameters(IntImp_ConstIsoparametric,const NCollection_Array1<double>&,math_Vector&,math_Vector&,math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::compute_parameters",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*). The bounds and the tolerances are one array of three vectors."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::Root() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::root",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::Point() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::point",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::IsTangent(const math_Vector&,NCollection_Array1<double>&,IntImp_ConstIsoparametric&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::is_tangent",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::Direction() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::direction",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::DirectionOnS1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::direction_on_s1",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::DirectionOnS2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::direction_on_s2",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::AuxillarSurface1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::auxillar_surface1",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheFunctionOfTheInt2S::AuxillarSurface2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheFunctionOfTheInt2S::auxillar_surface2",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S(const NCollection_Array1<double>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::with_start",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::new",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::Perform(const NCollection_Array1<double>&,math_FunctionSetRoot&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::perform",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::Perform(const NCollection_Array1<double>&,math_FunctionSetRoot&,IntImp_ConstIsoparametric)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::perform_iso",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::is_done",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::is_empty",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::Point() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::point",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::IsTangent() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::is_tangent",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::Direction() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::direction",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::DirectionOnS1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::direction_on_s1",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::DirectionOnS2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::direction_on_s2",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::Function()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::function",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
+    },
+    {
+      "upstream_id": "IntWalk_TheInt2S::ChangePoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheInt2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkTheInt2S::change_point",
+      "status": "implemented",
+      "notes": "IntWalk mapping (docs/geomalgo-design.md sections 6 and 8): the IntImp instance is an alias of the IntImp generic on HSurfaceTool, whose member implements this one; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ii_zerpar, ii_int2s, pw_*)."
     }
   ],
   "tests": [

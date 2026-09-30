@@ -254,3 +254,51 @@ its own:
 - The fixed-size solution arrays reuse `gcc_ana::solutions` (`Slots`, `Tangencies`):
   the same bounds check and the same zero start for slots that native leaves
   uninitialized.
+
+## 10. IntWalk templates
+
+IntWalk (`crates/tkgeomalgo/src/int_walk`) holds one `.gxx` template, the implicit
+walking `IntWalk_IWalking.gxx/.lxx`, beside the concrete parametric walking
+`IntWalk_PWalking` and the IntImp instances `IntWalk_TheInt2S` and
+`IntWalk_TheFunctionOfTheInt2S`.
+
+- The IntImp instances are aliases of the IntImp generics on `HSurfaceTool`
+  (section 6): `type IntWalkTheInt2S = IntImpInt2S<HSurfaceTool>` and
+  `type IntWalkTheFunctionOfTheInt2S = IntImpZerParFunc<HSurfaceTool>`. Their api rows
+  map the instance headers to the generic members. `IntWalk_PWalking` holds an
+  `IntWalkTheInt2S`, as the native class holds its instance.
+- `IntWalk_IWalking.gxx` is `IntWalkIWalking<T: IWalkingTypes>`. OCCT instantiates it
+  as `IntPatch_TheIWalking` (TKGeomAlgo) and `Contap_TheIWalking` (TKHLR). The trait
+  `IWalkingTypes` of `int_walk/iwalking/tools.rs` names the macro types that vary:
+  `ThePSurfaceTool` (the IntImp trait), `TheIWFunction` (the trait `TheIWFunction`,
+  with the members the body calls: `Set`, `Value`, `Values`, `Derivatives`, `Root`,
+  `Tolerance`, `IsTangent`, `Point`, `Direction3d`, `Direction2d`, `PSurface()->Value`
+  and the copy) and `IntWalk_TheIWLine` (the trait `TheIWLine`, the members of the
+  line class that the body calls).
+- `ThePointOfPath`, `ThePointOfLoop` and their tools are `IntSurf_PathPoint`,
+  `IntSurf_InteriorPoint`, `IntSurf_PathPointTool` and `IntSurf_InteriorPointTool` in
+  both instances, and the body names `IntSurf_InteriorPoint` and `IntSurf_PntOn2S`
+  itself, so the generic uses the IntSurf types directly. `ThePOPIterator` and
+  `ThePOLIterator` are sequences of these points: slices, read 1-based with the
+  native Standard_OutOfRange.
+- The lines are transients reached through handles: the body keeps a line in its
+  sequence and goes on editing it through the handle. `TheIWLine` members therefore
+  take `&self`, as the members of other transients do (a `SharedState` inside the
+  implementation).
+- `TheIWFunction` is implemented here for `IntImpZerImpFunc<P, I>` (the function of
+  `IntPatch_TheSurfFunction`). The line class of the instances is
+  `IntPatch_TheIWLineOfTheIWalking` (a hand-written class of IntPatch); IntPatch
+  implements `TheIWLine` for it when it is ported.
+- The body is split by responsibility: the constructor, `Perform` and the
+  consultation (`iwalking/mod.rs`), the stop tests (`stop_tests.rs`), the holes and
+  the line tests (`holes.rs`), the open and the closed lines (`open_line.rs`,
+  `close_line.rs`), `TestDeflection` (`deflection.rs`) and the point helpers
+  (`points.rs`). The locals that the native `ComputeOpenLine` and `ComputeCloseLine`
+  keep across the iterations of their loops (`N`, `SaveN`, `Psol`, `aStatus`, the
+  flags) live in one state struct per loop, so every step reads what the native code
+  reads.
+- The probe (`tools/oracle/tkgeomalgo_probe_intwalk*.cxx`) includes the `.gxx` itself
+  on a probe class, as the `_0.cxx` files do, with `Adaptor3d_HSurfaceTool`,
+  `IntPatch_TheSurfFunction` and `IntPatch_TheIWLineOfTheIWalking`; its Rust twin
+  instantiates the generic with `HSurfaceTool`, `IntImpZerImpFunc` and a probe port of
+  that line class.
