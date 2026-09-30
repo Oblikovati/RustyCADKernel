@@ -25,6 +25,12 @@
 //! the constrained filling of boundaries (`GeomFill_ConstrainedFilling` with its
 //! boundaries, tangent fields, Coons patch and corner states). The sweep part holds
 //! the trihedron, location and section laws and the sweeps.
+//!
+//! The sweep part (docs/geomalgo-design.md section 14) holds the laws, their solver
+//! functions, `GeomFill_SectionPlacement`, `GeomFill_Sweep` with its sweep function,
+//! `GeomFill_CircularBlendFunc`, `GeomFill_NSections`, the old pipe sections
+//! (`GeomFill_SweepSectionGenerator`, `GeomFill_AppSweep`), `GeomFill_Pipe` and the
+//! static members of the `GeomFill` class.
 
 // Filling part (docs/geomalgo-design.md section 13).
 mod app_surf;
@@ -100,3 +106,121 @@ pub use gordon::{
     GeomFillGordon, GordonApproximationMode, GordonBuildReport, GordonBuildStage, GordonStatus,
 };
 pub use network_surface::{ClosedSeams, GeomFillNetworkSurface, NetworkSurfaceStatus};
+
+// Sweep classes (docs/geomalgo-design.md, section 14).
+mod app_sweep;
+mod arc_section;
+mod circle_spans;
+mod circular_blend_func;
+mod circular_blend_func_eval;
+mod constant_bi_normal;
+mod convertor_basis;
+mod corrected_frenet;
+mod corrected_frenet_init;
+mod corrected_frenet_mode;
+mod corrected_frenet_walk;
+mod curve_and_trihedron;
+mod darboux;
+mod darboux_normal;
+mod discrete_trihedron;
+mod draft_trihedron;
+mod evolved_section;
+mod fixed;
+mod frame_math;
+mod frenet;
+mod frenet_init;
+mod frenet_singular;
+mod function_draft;
+mod function_guide;
+mod geomfill;
+mod geomfill_circle;
+mod geomfill_surface;
+mod guide_plan_init;
+mod guide_trihedron_ac;
+mod guide_trihedron_ac_d2;
+mod guide_trihedron_plan;
+mod loc_function;
+mod location_draft;
+mod location_draft_eval;
+mod location_guide;
+mod location_guide_eval;
+mod location_guide_rotation;
+mod location_helpers;
+mod location_law;
+mod nsections;
+mod nsections_eval;
+mod nsections_law;
+mod pipe;
+mod pipe_error;
+mod pipe_init;
+mod pipe_kpart;
+mod pipe_perform;
+mod pipe_sections;
+mod plan_func;
+mod polynomial_convertor;
+mod quasi_angular_convertor;
+mod quasi_angular_terms;
+mod section_curve;
+mod section_law;
+mod section_placement;
+mod section_placement_axis;
+mod section_placement_frame;
+mod section_placement_search;
+mod snglr_func;
+mod sweep;
+mod sweep_build_all;
+mod sweep_failures;
+mod sweep_function;
+mod sweep_function_eval;
+mod sweep_kpart;
+mod sweep_kpart_rotation;
+mod sweep_section_generator;
+mod sweep_section_generator_section;
+mod tensor;
+mod trihedron_law;
+mod trihedron_with_guide;
+mod uniform_section;
+
+pub use app_sweep::GeomFillAppSweep;
+pub use arc_section::{ArcPolesD1, ArcPolesD2, ArcSectionD0, ArcSectionD1, ArcSectionD2};
+pub use circular_blend_func::GeomFillCircularBlendFunc;
+pub use constant_bi_normal::GeomFillConstantBiNormal;
+pub use corrected_frenet::GeomFillCorrectedFrenet;
+pub use curve_and_trihedron::GeomFillCurveAndTrihedron;
+pub use darboux::GeomFillDarboux;
+pub use discrete_trihedron::GeomFillDiscreteTrihedron;
+pub use draft_trihedron::GeomFillDraftTrihedron;
+pub use evolved_section::GeomFillEvolvedSection;
+pub use fixed::GeomFillFixed;
+pub use frenet::GeomFillFrenet;
+pub use function_draft::GeomFillFunctionDraft;
+pub use function_guide::GeomFillFunctionGuide;
+pub use geomfill::{get_minimal_weights, get_shape, get_tolerance, knots, mults};
+pub use geomfill_circle::{CircleD0, CircleD1, CircleD2, get_circle, get_circle_d1, get_circle_d2};
+pub use geomfill_surface::surface;
+pub use guide_trihedron_ac::GeomFillGuideTrihedronAC;
+pub use guide_trihedron_plan::GeomFillGuideTrihedronPlan;
+pub use loc_function::GeomFillLocFunction;
+pub use location_draft::GeomFillLocationDraft;
+pub use location_guide::GeomFillLocationGuide;
+pub use location_law::{GeomFillLocationLaw, LocationD0, LocationD1, LocationD2, LocationPoles2d};
+pub use nsections::GeomFillNSections;
+pub use pipe::GeomFillPipe;
+pub use pipe_error::{GeomFillPipeError, GeomFillTrihedron};
+pub use plan_func::GeomFillPlanFunc;
+pub use polynomial_convertor::GeomFillPolynomialConvertor;
+pub use quasi_angular_convertor::GeomFillQuasiAngularConvertor;
+pub use section_law::{GeomFillSectionLaw, SectionD1, SectionD2};
+pub use section_placement::GeomFillSectionPlacement;
+pub use snglr_func::GeomFillSnglrFunc;
+pub use sweep::GeomFillSweep;
+pub use sweep_function::GeomFillSweepFunction;
+pub use sweep_section_generator::GeomFillSweepSectionGenerator;
+pub use tensor::GeomFillTensor;
+pub use trihedron_law::{
+    GeomFillTrihedronLaw, GeomFillTrihedronLawBase, TrihedronD0, TrihedronD1, TrihedronD2,
+};
+pub use trihedron_with_guide::{
+    GeomFillTrihedronWithGuide, GeomFillTrihedronWithGuideBase, GuideFields,
+};
+pub use uniform_section::GeomFillUniformSection;
