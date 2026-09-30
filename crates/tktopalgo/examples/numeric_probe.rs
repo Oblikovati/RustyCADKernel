@@ -5,10 +5,11 @@ mod tp_probe;
 use tp_probe::{
     bisector, bisector_algo, brep_approx, brep_approx_parts, brep_approx_tool, brep_bnd_lib,
     brep_bnd_lib_obb, brep_builder_api, brep_builder_api_makers, brep_builder_api_modify,
-    brep_builder_api_on_mesh, brep_check, brep_class, brep_class3d, brep_gprop, brep_gprop_frames,
-    brep_gprop_tools, brep_int_curve_surface, brep_lib_edge, brep_lib_face, brep_lib_fuse,
-    brep_lib_package, brep_lib_point_cloud, brep_lib_wire, brep_mat2d, brep_top_adaptor,
-    brep_top_adaptor_domain, fast_sewing, int_curves_face, mat, mat_parts, sewing, sewing_helpers,
+    brep_builder_api_on_mesh, brep_check, brep_class, brep_class3d, brep_extrema, brep_extrema_ext,
+    brep_extrema_prox, brep_gprop, brep_gprop_frames, brep_gprop_tools, brep_int_curve_surface,
+    brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_point_cloud,
+    brep_lib_wire, brep_mat2d, brep_top_adaptor, brep_top_adaptor_domain, fast_sewing,
+    int_curves_face, mat, mat_parts, sewing, sewing_helpers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -186,6 +187,26 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bba_fastsew", fast_sewing::fastsew_request),
     ("bba_vertexinspector", sewing_helpers::vertexinspector_case),
     ("bba_boxselector", sewing_helpers::boxselector_case),
+    // BRepExtrema (tp_probe/brep_extrema.rs, tp_probe/brep_extrema_ext.rs and
+    // tp_probe/brep_extrema_prox.rs)
+    ("bxd_dist", brep_extrema::dist_case),
+    ("bxd_dump", brep_extrema::dump_case),
+    ("bxd_ss", brep_extrema::ss_case),
+    ("bxd_poly", brep_extrema::poly_case),
+    ("bxx_pc", brep_extrema_ext::pc_case),
+    ("bxx_pf", brep_extrema_ext::pf_case),
+    ("bxx_cc", brep_extrema_ext::cc_case),
+    ("bxx_cf", brep_extrema_ext::cf_case),
+    ("bxx_ff", brep_extrema_ext::ff_case),
+    ("bxp_tset", brep_extrema_prox::tset_case),
+    ("bxp_overlap", brep_extrema_prox::overlap_case),
+    ("bxp_self", brep_extrema_prox::self_case),
+    ("bxp_shared", brep_extrema_prox::shared_case),
+    ("bxp_pdist", brep_extrema_prox::pdist_case),
+    ("bxp_border", brep_extrema_prox::border_case),
+    ("bxp_pval", brep_extrema_prox::pval_case),
+    ("bxp_prox", brep_extrema_prox::prox_case),
+    ("bxp_insp", brep_extrema_prox::insp_case),
 ];
 
 fn main() {
