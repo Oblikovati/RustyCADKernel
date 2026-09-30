@@ -238,3 +238,61 @@ port follows geom-design.md (abstract classes with protected data):
 - `BRepLib_ValidateEdge` (a BRepLib class that BRepCheck_Edge uses) is the struct
   `BRepLibValidateEdge` in `brep_lib::validate_edge`; it owns handles to the two
   adaptors, as natively.
+
+## 9. BRepGProp: the derived frameworks, the face tool and the integrators
+
+BRepGProp computes global properties with six classes that derive from `GProp_GProps`
+of TKGeomBase and write its protected members, a face tool and a domain iterator that
+the integrators read, the Gauss integrator and the two Gauss-Kronrod integrand
+functions. No class of the package is a template (the FaceTool and DomainTool concepts
+that the headers mention come from the old GProp templates, which OCCT replaced by
+the concrete `BRepGProp_Face` and `BRepGProp_Domain`), so section 1 does not apply.
+
+- **Derived frameworks.** `BRepGProp_Cinert`, `_Sinert`, `_Vinert`, `_VinertGK`,
+  `_MeshCinert` and `_MeshProps` are structs that embed a `GProps` as their `base` field
+  and reach its members through `Deref`, as the GProp frameworks of TKGeomBase do. The
+  protected members of `GProp_GProps` (`g`, `loc`, `dim`, `inertia`) are public fields
+  of the TKGeomBase `GProps`, so that these derived frameworks in another crate write
+  them as the native classes do. `GProp_GProps::Add(Item)` takes the `GProps` of an item
+  (`props.add(&cinert, 1.0)`).
+- **The face tool.** `BRepGProp_Face` is the struct `BRepGPropFace`. Its
+  `BRepAdaptor_Surface` is shared (`Arc`) and re-initialized in place by `Load(F)`, as
+  natively (a null face is ignored, a face without surface keeps the previous surface).
+  A copy of the tool (the native copy constructor, which `BRepGProp_UFunction` and
+  `BRepGProp_TFunction` use) copies the boundary curve (`Geom2dAdaptor_Curve`, with its
+  range) and shares the adaptor: natively each copy owns its adaptor, so a copy sees a
+  later `Load(F)` of the original here. No BRepGProp path loads a face while a copy of
+  its tool lives (the integrand functions live inside one face's integration).
+  `Clone` is that copy. The overloads are `load_face`,
+  `load_edge` and `load_iso`; the reinterpret casts of the surface and pcurve to their
+  Bezier or B-spline classes are `Handle::cast` of the adaptor's basis geometry.
+- **The domain.** `BRepGProp_Domain` is `BRepGPropDomain` over a `TopExp_Explorer`.
+  `Value()` casts the current shape of the explorer with `topods::edge`: past the last
+  edge the explorer's current shape is the face and the cast raises
+  Standard_TypeMismatch, as natively (the explorer of an empty domain gives a null
+  edge).
+- **The Gauss integrator.** `BRepGProp_Gauss` is `BRepGPropGauss` with its native
+  `GaussType`. The two `std::function` members (`add`, `mult`) are the enum
+  `GaussArithmetic` (finite or infinite arithmetic), selected by `checkBounds` as
+  natively. The output references of the six `Compute` overloads are one
+  `GaussProps` value (`mass`, `gravity_center`, `inertia`) that the caller passes by
+  `&mut`: a `Compute` that returns early (a boundary edge without pcurve) leaves it as
+  it was, as the native references. The coefficient array (`const double theCoeff[]`,
+  null for the surface overloads) is a slice; the Sinert overloads pass an empty one.
+  The adaptive `Compute` keeps its interval arrays in `Vec`s of the native size
+  `SM = 32 * GaussPointsMax + 1`, grows them where `fillIntervalBounds` resizes them,
+  and searches the knots with the libstdc++ `upper_bound`/`lower_bound` and the maximal
+  error with `max_element` (first maximum), so an unsorted knot array (the `VKnots` of
+  a plane, which are U parameters) is searched as natively.
+- **Integrand functions.** `BRepGProp_UFunction` and `BRepGProp_TFunction` implement
+  the TKMath `math::Function` trait. Their `Value` cannot fail through the trait, so
+  an exception of an adaptor is kept by the function, `Value` answers false, and the
+  caller returns it once the integration ends (natively the exception leaves the
+  integration). The coefficient pointer is a copy of the caller's array (three
+  values by point, four by plane); nothing writes the array during an integration.
+- **The package.** `BRepGProp` is the unit struct `BRepGProp` with associated
+  functions; the overloads are `linear_properties`, `surface_properties`,
+  `surface_properties_eps`, `volume_properties`, `volume_properties_eps`,
+  `volume_properties_gk` and `volume_properties_gk_plane`. The file-local
+  `GPropTransformer` (the cache of shared solids) works on the public fields of
+  `GProps`. Every member that can raise returns `Result`.

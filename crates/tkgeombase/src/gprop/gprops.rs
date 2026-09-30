@@ -11,7 +11,9 @@ use rustycad_tkmath::math::{Jacobi, Matrix};
 /// system location; components are composed with [`GProps::add`].
 ///
 /// `g` is the centre of mass *relative to* the location (the native protected
-/// member), `inertia` the quadratic moments at the location.
+/// member), `inertia` the quadratic moments at the location. The protected members are
+/// public fields so that the derived frameworks of other toolkits can write them
+/// (docs/topalgo-design.md section 9).
 ///
 /// ```
 /// use rustycad_tkgeombase::gprop::{GProps, PGProps};
@@ -24,10 +26,16 @@ use rustycad_tkmath::math::{Jacobi, Matrix};
 /// ```
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct GProps {
-    pub(crate) g: Point3,
-    pub(crate) loc: Point3,
-    pub(crate) dim: f64,
-    pub(crate) inertia: Matrix3,
+    /// `g` (protected natively): the centre of mass relative to `loc`. The frameworks
+    /// that derive from `GProp_GProps` in other toolkits (BRepGProp) write it, so it is
+    /// public here.
+    pub g: Point3,
+    /// `loc` (protected natively): the point the inertia is accumulated at.
+    pub loc: Point3,
+    /// `dim` (protected natively): the mass.
+    pub dim: f64,
+    /// `inertia` (protected natively): the quadratic moments at `loc`.
+    pub inertia: Matrix3,
 }
 
 impl GProps {
