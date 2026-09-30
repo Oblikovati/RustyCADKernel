@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
-Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo, TKHelix)
+Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
+       TKHelix, TKShHealing)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -36,6 +37,7 @@ NUMERIC_VERIFIERS = {
     'TKGeomAlgo': ('tools/verify_tkgeomalgo_numeric.py', 'target/oracle-tkgeomalgo/numeric'),
     'TKTopAlgo': ('tools/verify_tktopalgo_numeric.py', 'target/oracle-tktopalgo/numeric'),
     'TKHelix': ('tools/verify_tkhelix_numeric.py', 'target/oracle-tkhelix/numeric'),
+    'TKShHealing': ('tools/verify_tkshhealing_numeric.py', 'target/oracle-tkshhealing/numeric'),
 }
 
 

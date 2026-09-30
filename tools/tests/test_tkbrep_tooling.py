@@ -30,8 +30,9 @@ class NativeClosureTests(unittest.TestCase):
     def test_closure_builds_and_links_tkprim_for_the_unchanged_tkbrep_suites(self):
         # TopExp_Test builds its shapes with BRepPrimAPI_MakeBox (TKPrim).
         flags = closure_flags(['FoundationClasses', 'ModelingData'])
+        # Other toolkits join the closure after these two (TKShHealing for its verifier).
         additional = next(flag for flag in flags if flag.startswith('-DBUILD_ADDITIONAL_TOOLKITS='))
-        self.assertIn('TKPrim', additional.split('=', 1)[1].split())
+        self.assertEqual(additional.split('=')[1].split()[:2], ['TKTopAlgo', 'TKPrim'])
         self.assertEqual(LINKED_TOOLKITS[0], 'TKPrim')
         self.assertEqual(LINKED_TOOLKITS[-1], 'TKernel')
 

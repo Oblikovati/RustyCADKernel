@@ -69,6 +69,7 @@ jobs:
       - run: python3 tools/verify_toolkit.py TKGeomAlgo --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKTopAlgo --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKHelix --source target/occt-source --jobs 2
+      - run: python3 tools/verify_toolkit.py TKShHealing --source target/occt-source --jobs 2
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

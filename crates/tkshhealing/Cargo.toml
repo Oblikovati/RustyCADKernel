@@ -1,0 +1,19 @@
+[package]
+name = "rustycad-tkshhealing"
+description = "OCCT TKShHealing toolkit: Shape Healing (analysis, fixing, conversion and division of shapes)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo" }
+rustycad-tktopalgo = { path = "../tktopalgo" }
