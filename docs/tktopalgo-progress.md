@@ -7,10 +7,10 @@ as the native toolkit does (its EXTERNLIB). Each of the 16 OCCT packages is one 
 of the crate, declared up front in `src/lib.rs`; a module whose package is not ported
 yet holds only its documentation. Ported so far: BRepClass, BRepTopAdaptor,
 IntCurvesFace, Bisector, MAT, MAT2d, BRepBndLib (without AddOBB), BRepClass3d, BRepCheck
-and BRepLib_ValidateEdge. The numeric corpus has 9414 requests: BRepClass 4779,
+and BRepLib (without PointCloudShape). The numeric corpus has 12102 requests: BRepClass 4779,
 BRepTopAdaptor 650, IntCurvesFace 424, Bisector 455, MAT and MAT2d 84, BRepBndLib 266,
 BRepClass3d 996, BRepCheck with BRepLib_ValidateEdge 981, the BRep domains of IntStart
-and IntPatch 752, and the MakeVertex stub pipeline 27.
+and IntPatch 752, BRepLib 2688, and the MakeVertex stub pipeline 27.
 
 `brep_builder_api::MakeVertex` is a **stub**, not the port of
 `BRepBuilderAPI_MakeVertex`: a minimal vertex builder that the TKernel test
@@ -38,7 +38,7 @@ BRepCheck_Edge includes BRepLib; BRepBuilderAPI includes BRepLib, which includes
 BRepBndLib, which includes BRepBuilderAPI), so they are ported class by class in an
 order that follows the includes of each file.
 
-The toolkit test inventory maps these suites (0 declarations):
+The toolkit test inventory maps these suites (1 declaration):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
