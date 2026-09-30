@@ -56,6 +56,8 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 }
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
+        "face_parameter" => face_parameter_case::case(v),
+        "face_analytic" => face_parameter_case::analytic_case(v),
         "face_distance" => face_surface_case::distance_case(v),
         "face_check" => face_pcurve_case::case(v),
         "face_bounds" => face_boundaries_case::case(v),
@@ -212,3 +214,9 @@ mod face_pcurve_checks;
 
 #[path = "../../src/int_tools/face_face/distance.rs"]
 mod face_distance;
+
+#[path = "../../src/int_tools/face_face/analytic.rs"]
+mod face_analytic;
+#[path = "../../src/int_tools/face_face/boundary_parameter.rs"]
+mod face_boundary_parameter;
+mod face_parameter_case;

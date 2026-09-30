@@ -23,6 +23,8 @@ def clip_requests() -> str:
         for (a,b,c,d), (x,y), (dx,dy), tol in product(bounds, points, directions, [0,1e-7,1,10]))+'\n'
     checks = [f"face_check {kind} {face} {u} {v}" for kind, face, u, v in product(range(5), [0,1,3,4,7,9], [-7,-6.283185307179586,-0.1,0,0.1,6.283185307179586,10], [-3,0,1])]
     checks += [f"face_distance {kind} {face} {a} {b}" for kind, face, (a,b) in product(range(7),[0,1,3],[(0,1),(-2,3)])]
+    checks += [f"face_parameter {kind} {a} {b} {p} {other} {increase} {tol}" for kind, a, b, p, other, increase, tol in product([0,2,6],[0,5,9],[0,5],[0,1,3],[-1,0.25,5],[0,1],[0,1e-5])]
+    checks += [f"face_analytic {dot} {height} {tol} {order}" for dot, height, tol, order in product([0,1e-8,1e-7,1e-5,0.01,1],[1,100,2e100],[1e-7,1e-5],range(4))]
     return clipped + plane_requests() + policy_requests() + boundary_requests() + "\n".join(checks)+"\n"
 
 
