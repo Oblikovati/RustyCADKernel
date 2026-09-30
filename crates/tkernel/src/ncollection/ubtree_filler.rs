@@ -1,7 +1,9 @@
 //! Fills a UBTree in a pseudo-random order, which keeps nearby objects from forming chains.
 use super::{BaseAllocator, BoundingVolume, DynamicArray, UBTree};
 mod balance;
+mod insertion;
 use crate::stl::MersenneTwister;
+pub use insertion::BoundingTreeInsertion;
 
 /// A pending object with its bound (native `ObjBnd`, public fields `myObj`/`myBnd`).
 #[derive(Clone, Default)]
@@ -21,21 +23,24 @@ impl<T, B> ObjBnd<T, B> {
 /// Collects objects, then adds them to the borrowed tree in `std::mt19937` order.
 /// Items still pending when the filler is dropped are added then, as the native destructor does.
 /// Example: `let mut filler = UBTreeFiller::new(&mut tree, None, true); filler.add(1, b); filler.fill();`
-pub struct UBTreeFiller<'t, T: Clone + Default, B: BoundingVolume> {
-    tree: &'t mut UBTree<T, B>,
+pub struct UBTreeFiller<
+    't,
+    T: Clone + Default,
+    B: BoundingVolume,
+    Tree: BoundingTreeInsertion<T, B> + ?Sized = UBTree<T, B>,
+> {
+    tree: &'t mut Tree,
     pending: DynamicArray<ObjBnd<T, B>>,
     generator: MersenneTwister,
     full_random: bool,
 }
-impl<'t, T: Clone + Default, B: BoundingVolume> UBTreeFiller<'t, T, B> {
+impl<'t, T: Clone + Default, B: BoundingVolume, Tree: BoundingTreeInsertion<T, B> + ?Sized>
+    UBTreeFiller<'t, T, B, Tree>
+{
     /// Fill `tree`; `allocator` backs the pending buffer (256-item blocks as natively) and
     /// `full_random` selects the better-balanced of the two native orders.
     /// Example: `UBTreeFiller::new(&mut tree, None, true)`.
-    pub fn new(
-        tree: &'t mut UBTree<T, B>,
-        allocator: Option<BaseAllocator>,
-        full_random: bool,
-    ) -> Self {
+    pub fn new(tree: &'t mut Tree, allocator: Option<BaseAllocator>, full_random: bool) -> Self {
         Self {
             tree,
             pending: DynamicArray::with_allocator(256, allocator),
@@ -55,7 +60,7 @@ impl<'t, T: Clone + Default, B: BoundingVolume> UBTreeFiller<'t, T, B> {
         for remaining in (1..=count).rev() {
             let index: i32 = self.draw_index(remaining);
             let item: ObjBnd<T, B> = self.pending.value(index).unwrap().clone();
-            self.tree.add(item.object, item.bounds);
+            self.tree.insert_bound(item.object, item.bounds);
             // The drawn slot takes the last live item, shrinking the pool by one.
             let last: ObjBnd<T, B> = self.pending.value(remaining - 1).unwrap().clone();
             *self.pending.change_value(index).unwrap() = last;
@@ -77,7 +82,9 @@ impl<'t, T: Clone + Default, B: BoundingVolume> UBTreeFiller<'t, T, B> {
         }
     }
 }
-impl<T: Clone + Default, B: BoundingVolume> Drop for UBTreeFiller<'_, T, B> {
+impl<T: Clone + Default, B: BoundingVolume, Tree: BoundingTreeInsertion<T, B> + ?Sized> Drop
+    for UBTreeFiller<'_, T, B, Tree>
+{
     fn drop(&mut self) {
         if !self.pending.is_empty() {
             self.fill();

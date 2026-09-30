@@ -51,6 +51,7 @@ def corpus() -> str:
     rows += ['mesh_geom_sampling ' + ' '.join(map(str, v)) for v in product(range(2), range(2), range(3), range(2))]
     rows += ['mesh_geom_cells ' + ' '.join(map(str, v)) for v in product(range(13), range(6), range(4))]
     rows += ['mesh_range_overflow']
+    rows += ['mesh_editable_tree ' + ' '.join(map(str, v)) for v in product((1,2,8,33,700), range(2), range(2))]
     return '\n'.join(rows) + '\n'
 
 
