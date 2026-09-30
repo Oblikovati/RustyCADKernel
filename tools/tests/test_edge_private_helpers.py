@@ -7,11 +7,11 @@ class EdgeHelperCorpusTests(unittest.TestCase):
     def test_deterministic_complete_numeric_requests(self) -> None:
         first=requests()
         self.assertEqual(first,requests())
-        self.assertEqual(len(first.splitlines()),9524)
+        self.assertEqual(len(first.splitlines()),10028)
         for row in first.splitlines():
             operation,*fields=row.split()
             values=[float(field) for field in fields]
-            self.assertEqual(len(values),{'edge_math':8,'edge_geometry':6,'edge_distance':7,'edge_parameters':9,'edge_pairs':8,'edge_lines':9}[operation])
+            self.assertEqual(len(values),{'edge_math':8,'edge_geometry':6,'edge_distance':7,'edge_parameters':9,'edge_pairs':8,'edge_lines':9,'edge_solutions':7}[operation])
             if operation=='edge_math' and values[3]<0 and values[2]>0:
                 self.assertLessEqual((values[1]-values[0])/values[2],10000)
 

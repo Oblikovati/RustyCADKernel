@@ -19,6 +19,8 @@ mod edge_parameters;
 mod edge_private;
 #[path = "../src/int_tools/edge_edge/resolution.rs"]
 mod edge_resolution;
+#[path = "../src/int_tools/edge_edge/solutions.rs"]
+mod edge_solutions;
 #[path = "bo_probe/tools_geometry.rs"]
 mod tools_geometry;
 use std::io::{self, BufRead};

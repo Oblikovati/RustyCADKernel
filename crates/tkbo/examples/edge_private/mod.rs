@@ -5,6 +5,7 @@ mod fixtures;
 mod lines;
 mod pairs;
 mod parameters;
+mod solutions;
 use rustycad_tkbo::int_tools::Range;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
 use rustycad_tkernel::standard::Failure;
@@ -67,6 +68,7 @@ fn geometry(values: &[f64]) -> Result<(), Failure> {
 }
 pub fn run(operation: &str, values: &[f64]) {
     match operation {
+        "edge_solutions" => attempt(solutions::case(values)),
         "edge_lines" => attempt(lines::case(values)),
         "edge_pairs" => attempt(pairs::case(values)),
         "edge_parameters" => attempt(parameters::case(values)),
