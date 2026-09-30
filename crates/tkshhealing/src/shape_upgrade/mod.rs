@@ -34,3 +34,13 @@ pub use split_surface::{
 mod split_curve_2d;
 mod split_curve_geometry;
 pub use split_curve_2d::{ShapeUpgradeSplitCurve2d, SplitCurves2d};
+
+mod edge_divide;
+pub use edge_divide::{
+    EdgeDivideData, EdgeDivideFields, EdgeDivider, EdgeSplitKnots, ShapeUpgradeEdgeDivide,
+};
+
+mod fix_small_curves;
+pub use fix_small_curves::{
+    FixSmallCurves, FixSmallCurvesData, FixSmallCurvesFields, ShapeUpgradeFixSmallCurves,
+};

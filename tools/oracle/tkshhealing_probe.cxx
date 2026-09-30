@@ -55,6 +55,8 @@
 #include "tkshhealing_probe_split_curve3d.cxx"
 #include "tkshhealing_probe_split_curve2d.cxx"
 #include "tkshhealing_probe_split_surface.cxx"
+#include "tkshhealing_probe_edge_divide.cxx"
+#include "tkshhealing_probe_fix_small_curves.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_analysis_projection",sh_analysis_curve_projection_case},
  {"sh_analysis_period",sh_analysis_period_case},
@@ -65,6 +67,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_analysis_samples3d",sh_analysis_samples3d_case},
  {"sh_analysis_closure",sh_analysis_closure_case},
  {"sh_analysis_samples2d",sh_analysis_samples2d_case},
+ {"sh_fix_small_curves", sh_fix_small_curves_case},
+ {"sh_edge_divide", sh_edge_divide_case},
  {"sh_split_surface", sh_split_surface_case},
  {"sh_split_curve2d", sh_split_curve2d_case},
  {"sh_split_curve3d", sh_split_curve3d_case},

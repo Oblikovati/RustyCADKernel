@@ -64,3 +64,7 @@ pub mod split_curve_3d;
 pub mod split_surface;
 
 pub mod split_curve_2d;
+
+pub mod edge_divide;
+
+pub mod fix_small_curves;

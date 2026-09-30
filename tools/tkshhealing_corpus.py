@@ -58,3 +58,7 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_split_surface').append_split_surface_requests(requests)
     # Offset recursion retains 70 crash divergences in verify_split_curve2d.py.
     __import__('tkshhealing_corpus_split_curve2d').append_split_curve2d_requests(requests)
+
+    # EdgeDivide criteria and FixSmallCurves base preserve real curve geometry.
+    __import__('tkshhealing_corpus_edge_divide').append_edge_divide_requests(requests)
+    __import__('tkshhealing_corpus_edge_divide').append_fix_small_curve_requests(requests)

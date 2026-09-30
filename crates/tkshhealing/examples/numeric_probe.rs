@@ -31,6 +31,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "sh_split_curve2d",
         sh_probe::split_curve_2d::split_curve_2d_case,
     ),
+    (
+        "sh_fix_small_curves",
+        sh_probe::fix_small_curves::fix_small_curves_case,
+    ),
+    ("sh_edge_divide", sh_probe::edge_divide::edge_divide_case),
     ("sh_free_bounds", sh_probe::free_bounds::free_bounds_case),
     ("sh_shell_sewing", sh_probe::shell_sewing::shell_sewing_case),
     (
