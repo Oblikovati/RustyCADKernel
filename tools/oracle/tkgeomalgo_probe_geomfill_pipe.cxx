@@ -47,3 +47,41 @@ void ga_gfg_sweepsec_case(std::istream& input){
  ga_gfg_app(g,withp);
  ga_end();
 }
+#include <GeomFill_Pipe.hxx>
+// A pipe of constructor `kind`: 0 none, 1 `path radius`, 2 `path sect option`, 3 `path2d
+// support sect`, 4 `path first last`, 5 `path n sections...`, 6 `path sect dir`, 7 `path c1
+// c2 radius` (geometric), 8 `path c1 c2 radius` (ga_gft_curve), 9 `path guide sect byACR
+// rotat`; the curves are geometric (ga_ics_geom_curve) unless noted.
+std::unique_ptr<GeomFill_Pipe> ga_gfp_pipe(GaReader& r){
+ int kind=r.integer();
+ if(kind==0)return std::make_unique<GeomFill_Pipe>();
+ if(kind==3){occ::handle<Geom2d_Curve> p=ga_curve2d(r);occ::handle<Geom_Surface> s=ga_ics_geom_surface(r);
+  occ::handle<Geom_Curve> c=ga_ics_geom_curve(r);return std::make_unique<GeomFill_Pipe>(p,s,c);}
+ if(kind==8){occ::handle<Adaptor3d_Curve> p=ga_gft_curve(r),c1=ga_gft_curve(r),c2=ga_gft_curve(r);double rad=r.real();
+  return std::make_unique<GeomFill_Pipe>(p,c1,c2,rad);}
+ occ::handle<Geom_Curve> p=ga_ics_geom_curve(r);
+ if(kind==1){double rad=r.real();return std::make_unique<GeomFill_Pipe>(p,rad);}
+ if(kind==2){occ::handle<Geom_Curve> c=ga_ics_geom_curve(r);int o=r.integer();return std::make_unique<GeomFill_Pipe>(p,c,GeomFill_Trihedron(o));}
+ if(kind==4){occ::handle<Geom_Curve> f=ga_ics_geom_curve(r),l=ga_ics_geom_curve(r);return std::make_unique<GeomFill_Pipe>(p,f,l);}
+ if(kind==5){int n=r.integer();NCollection_Sequence<occ::handle<Geom_Curve>> s;for(int i=0;i<n;++i)s.Append(ga_ics_geom_curve(r));
+  return std::make_unique<GeomFill_Pipe>(p,s);}
+ if(kind==6){occ::handle<Geom_Curve> c=ga_ics_geom_curve(r);gp_Dir d=r.dir();return std::make_unique<GeomFill_Pipe>(p,c,d);}
+ if(kind==7){occ::handle<Geom_Curve> c1=ga_ics_geom_curve(r),c2=ga_ics_geom_curve(r);double rad=r.real();return std::make_unique<GeomFill_Pipe>(p,c1,c2,rad);}
+ occ::handle<Adaptor3d_Curve> g=ga_gft_curve(r);occ::handle<Geom_Curve> c=ga_ics_geom_curve(r);bool acr=r.flag(),rot=r.flag();
+ return std::make_unique<GeomFill_Pipe>(p,g,c,acr,rot);
+}
+void ga_gfp_pipe_state(const GeomFill_Pipe& p){ga_flag(p.IsDone());ga_int(int(p.GetStatus()));ga_flag(p.GenerateParticularCase());}
+// `pipe ctor... kpart mode tol poly conti degmax nbseg withparams`: the pipe, then
+// Perform(Tol, Polynomial, Conti, DegMax, NbMaxSegment) (mode 0) or Perform(WithParameters,
+// Polynomial) (mode 1), and the result.
+void ga_gfp_pipe_case(std::istream& input){
+ GaReader r{input};std::unique_ptr<GeomFill_Pipe> p;
+ bool read=false;GA_TRY(p=ga_gfp_pipe(r);read=true);
+ if(!read||!p){ga_end();return;}
+ bool kpart=r.flag();int mode=r.integer();double tol=r.real();bool poly=r.flag();int conti=r.integer(),degmax=r.integer(),nbseg=r.integer();
+ bool withp=r.flag();
+ ga_gfp_pipe_state(*p);p->GenerateParticularCase(kpart);
+ if(mode==0){GA_TRY(p->Perform(tol,poly,GeomAbs_Shape(conti),degmax,nbseg));}else{GA_TRY(p->Perform(withp,poly));}
+ ga_gfp_pipe_state(*p);ga_flag(p->ExchangeUV());ga_real(p->ErrorOnSurf());ga_gfw_surface(p->Surface());
+ ga_end();
+}

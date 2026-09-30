@@ -1,10 +1,12 @@
 //! GeomFill_SweepSectionGenerator, GeomFill_AppSweep and GeomFill_Pipe probe
 //! operations, the Rust twin of tools/oracle/tkgeomalgo_probe_geomfill_pipe.cxx.
 use super::common::{Reader, attempt, end, flag, int, real, show};
+use super::curve2d::curve2d;
 use super::geom_fill_sweep::{filled, pnts, reals, vecs};
 use super::geom_fill_sweepalgo::surface;
+use super::geom_fill_trihedron::SHAPES;
 use super::geom_fill_trihedron::gft_curve;
-use super::ics_geometry::geom_curve;
+use super::ics_geometry::{geom_curve, geom_surface};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{GeomBSplineSurface, GeomSurface};
@@ -145,5 +147,98 @@ pub fn sweepsec_case(values: &[f64]) {
         .into_iter()
         .for_each(|i| gfg_trsf(&g, i));
     gfg_app(&mut g, withp);
+    end();
+}
+
+const TRIHEDRONS: [GeomFillTrihedron; 10] = [
+    GeomFillTrihedron::IsCorrectedFrenet,
+    GeomFillTrihedron::IsFixed,
+    GeomFillTrihedron::IsFrenet,
+    GeomFillTrihedron::IsConstantNormal,
+    GeomFillTrihedron::IsDarboux,
+    GeomFillTrihedron::IsGuideAC,
+    GeomFillTrihedron::IsGuidePlan,
+    GeomFillTrihedron::IsGuideACWithContact,
+    GeomFillTrihedron::IsGuidePlanWithContact,
+    GeomFillTrihedron::IsDiscreteTrihedron,
+];
+
+/// `ga_gfp_pipe`: the pipe of constructor `kind`.
+fn gfp_pipe(r: &mut Reader) -> Result<GeomFillPipe, Failure> {
+    let kind = r.integer();
+    match kind {
+        0 => return Ok(GeomFillPipe::new()),
+        3 => {
+            let p = curve2d(r)?;
+            let s = geom_surface(r);
+            return GeomFillPipe::on_surface(&p, &s, &geom_curve(r));
+        }
+        8 => {
+            let (p, c1, c2) = (gft_curve(r), gft_curve(r), gft_curve(r));
+            return Ok(GeomFillPipe::with_adaptor_rails(&p, &c1, &c2, r.real()));
+        }
+        _ => {}
+    }
+    let p = geom_curve(r);
+    match kind {
+        1 => GeomFillPipe::with_radius(&p, r.real()),
+        2 => {
+            let c = geom_curve(r);
+            GeomFillPipe::with_section(&p, &c, TRIHEDRONS[r.integer() as usize])
+        }
+        4 => {
+            let (f, l) = (geom_curve(r), geom_curve(r));
+            GeomFillPipe::with_two_sections(&p, &f, &l)
+        }
+        5 => {
+            let n = r.integer();
+            let sections: Vec<_> = (0..n).map(|_| geom_curve(r)).collect();
+            GeomFillPipe::with_sections(&p, &sections)
+        }
+        6 => {
+            let c = geom_curve(r);
+            GeomFillPipe::with_direction(&p, &c, r.dir())
+        }
+        7 => {
+            let (c1, c2) = (geom_curve(r), geom_curve(r));
+            GeomFillPipe::with_rails(&p, &c1, &c2, r.real())
+        }
+        _ => {
+            let (g, c) = (gft_curve(r), geom_curve(r));
+            let (acr, rot) = (r.flag(), r.flag());
+            GeomFillPipe::with_guide(&p, &g, &c, acr, rot)
+        }
+    }
+}
+
+fn pipe_state(p: &GeomFillPipe) {
+    flag(p.is_done());
+    int(p.get_status() as i32);
+    flag(p.generate_particular_case());
+}
+
+/// `ctor... kpart mode tol poly conti degmax nbseg withparams`.
+pub fn pipe_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let mut p = match gfp_pipe(&mut r) {
+        Ok(p) => p,
+        Err(error) => {
+            print!("{} ", error.exception_type());
+            return end();
+        }
+    };
+    let (kpart, mode, tol, poly) = (r.flag(), r.integer(), r.real(), r.flag());
+    let (conti, degmax, nbseg, withp) = (r.integer(), r.integer(), r.integer(), r.flag());
+    pipe_state(&p);
+    p.set_generate_particular_case(kpart);
+    if mode == 0 {
+        attempt(|| p.perform(tol, poly, SHAPES[conti as usize], degmax, nbseg));
+    } else {
+        attempt(|| p.perform_with_parameters(withp, poly));
+    }
+    pipe_state(&p);
+    flag(p.exchange_uv());
+    real(p.error_on_surf());
+    surface(&p.surface());
     end();
 }

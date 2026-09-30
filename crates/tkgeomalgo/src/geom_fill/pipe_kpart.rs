@@ -1,0 +1,211 @@
+// Copyright (c) 1994-1999 Matra Datavision
+// Copyright (c) 1999-2014 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+// Rust translation of GeomFill_Pipe::KPartT4 of
+// ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Pipe.cxx at
+// 3d097a0328e71b826377d4814ab05ec3c3d23871.
+
+//! The particular cases of the blend between two rails: a cylinder between three
+//! parallel lines of the same length, a torus between three coaxial circles of the
+//! same range.
+use super::pipe::GeomFillPipe;
+use super::pipe_error::GeomFillPipeError;
+use super::sweep_failures::live;
+use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
+use rustycad_tkg3d::geom::{
+    GeomCylindricalSurface, GeomRectangularTrimmedSurface, GeomSurface, GeomToroidalSurface,
+};
+use rustycad_tkmath::elclib;
+use rustycad_tkmath::geom_abs::CurveType;
+use rustycad_tkmath::gp::{Axis1, Axis3, Direction3, Line3, Point3, Torus3, Vector3};
+use std::f64::consts::PI;
+
+/// The path and the two rails.
+struct Rails<'a> {
+    path: &'a dyn Adaptor3dCurve,
+    first: &'a dyn Adaptor3dCurve,
+    last: &'a dyn Adaptor3dCurve,
+}
+
+impl Rails<'_> {
+    fn all(&self) -> [&dyn Adaptor3dCurve; 3] {
+        [self.path, self.first, self.last]
+    }
+
+    fn all_of(&self, kind: CurveType) -> Result<bool, Failure> {
+        for c in self.all() {
+            if c.get_type()? != kind {
+                return Ok(false);
+            }
+        }
+        Ok(true)
+    }
+
+    /// The start points of the curves.
+    fn starts(&self) -> Result<[Point3; 3], Failure> {
+        let mut p = [Point3::default(); 3];
+        for (slot, c) in p.iter_mut().zip(self.all()) {
+            *slot = c.value(c.first_parameter()?)?;
+        }
+        Ok(p)
+    }
+}
+
+/// `D0.IsEqual(D1) && D1.IsEqual(D2)` within Precision::Angular().
+fn same_directions(d: [Direction3; 3]) -> bool {
+    let ang = precision::angular();
+    d[0].is_equal(&d[1], ang) && d[1].is_equal(&d[2], ang)
+}
+
+/// The unit vectors from the path start to the rail starts.
+fn start_directions(p: [Point3; 3]) -> Result<(Direction3, Direction3), Failure> {
+    Ok((
+        Direction3::from_vector(Vector3::between(p[0], p[1]))?,
+        Direction3::from_vector(Vector3::between(p[0], p[2]))?,
+    ))
+}
+
+impl GeomFillPipe {
+    /// `KPartT4()`: true when the blend is a cylinder or a torus (then built). The
+    /// rails are read only when the path has the kind tested, as natively.
+    pub(crate) fn k_part_t4(&mut self) -> Result<bool, Failure> {
+        let member = "GeomFill_Pipe::KPartT4";
+        let (path, first, last) = (
+            self.my_adp_path.clone(),
+            self.my_adp_first_sect.clone(),
+            self.my_adp_last_sect.clone(),
+        );
+        let p = live(&path, member, "myAdpPath")?;
+        let kind = p.get_type()?;
+        if kind != CurveType::Line && kind != CurveType::Circle {
+            return Ok(false);
+        }
+        let rails = Rails {
+            path: p,
+            first: live(&first, member, "myAdpFirstSect")?,
+            last: live(&last, member, "myAdpLastSect")?,
+        };
+        if !rails.all_of(kind)? {
+            return Ok(false);
+        }
+        if kind == CurveType::Line {
+            return self.cylinder_between(&rails);
+        }
+        self.torus_between(&rails)
+    }
+
+    /// Three parallel lines of the same length, the rails normal to the path: the
+    /// cylinder of `myRadius` around the path between the rails.
+    fn cylinder_between(&mut self, rails: &Rails<'_>) -> Result<bool, Failure> {
+        let a0 = rails.path.line()?.position();
+        let d = [
+            a0.direction(),
+            rails.first.line()?.direction(),
+            rails.last.line()?.direction(),
+        ];
+        if !same_directions(d) {
+            return Ok(false);
+        }
+        let mut lengths = [0.0; 3];
+        for (l, c) in lengths.iter_mut().zip(rails.all()) {
+            *l = c.last_parameter()? - c.first_parameter()?;
+        }
+        let conf = precision::confusion();
+        if (lengths[1] - lengths[0]).abs() > conf || (lengths[2] - lengths[0]).abs() > conf {
+            return Ok(false);
+        }
+        let p = rails.starts()?;
+        let (v1, v2) = start_directions(p)?;
+        if v1.dot(d[0]).abs() > conf || v2.dot(d[0]).abs() > conf {
+            return Ok(false);
+        }
+        let z_ref = v1.crossed(v2)?;
+        let mut axis = Axis3::new(a0.location(), d[0], v1)?;
+        if z_ref.dot(d[0]) < 0.0 {
+            axis.y_reverse();
+        }
+        axis.rotate(Axis1::new(p[0], z_ref), -PI / 2.0)?;
+        let cylinder: Handle<dyn GeomSurface> =
+            Handle::new(GeomCylindricalSurface::new(axis, self.my_radius)?).cast();
+        // The native code stores the cylinder before trimming it.
+        self.my_surface = cylinder.clone();
+        let alpha = v1.angle_with_ref(v2, z_ref);
+        let range = (rails.path.first_parameter()?, rails.path.last_parameter()?);
+        let trimmed = GeomRectangularTrimmedSurface::new(
+            &cylinder,
+            (PI / 2.0, PI / 2.0 + alpha),
+            range,
+            (true, true),
+        )?;
+        self.my_surface = Handle::new(trimmed).cast();
+        self.my_status = GeomFillPipeError::PipeOk;
+        Ok(true)
+    }
+
+    /// Three coaxial circles of the same range, the rails in a plane of the axis
+    /// at the path start: the torus of `myRadius` around the path.
+    fn torus_between(&mut self, rails: &Rails<'_>) -> Result<bool, Failure> {
+        let mut alp = [0.0; 3];
+        for (a, c) in alp.iter_mut().zip(rails.all()) {
+            *a = c.first_parameter()? - c.last_parameter()?;
+        }
+        let ang = precision::angular();
+        if (alp[0] - alp[1]).abs() > ang || (alp[0] - alp[2]).abs() > ang {
+            return Ok(false);
+        }
+        let a = [
+            rails.path.circle()?.position(),
+            rails.first.circle()?.position(),
+            rails.last.circle()?.position(),
+        ];
+        let p = rails.starts()?;
+        if !same_directions([a[0].direction(), a[1].direction(), a[2].direction()]) {
+            return Ok(false);
+        }
+        let l = Line3::from_axis(a[0].axis());
+        let conf = precision::confusion();
+        if !l.contains(a[1].location(), conf) || !l.contains(a[2].location(), conf) {
+            return Ok(false);
+        }
+        let (v1, v2) = start_directions(p)?;
+        let ci = rails.path.circle()?;
+        let y_ref = Direction3::from_vector(elclib::circle_dn(
+            rails.path.first_parameter()?,
+            a[0],
+            ci.radius(),
+            1,
+        ))?;
+        if v1.dot(y_ref).abs() > conf || v2.dot(y_ref).abs() > conf {
+            return Ok(false);
+        }
+        let mut t = Torus3::new(Axis3::from_axis2(a[0]), ci.radius(), self.my_radius)?;
+        let x_ref = Direction3::from_vector(Vector3::between(a[0].location(), p[0]))?;
+        let mut vv1 = v1.angle_with_ref(x_ref, y_ref);
+        let mut vv2 = v2.angle_with_ref(x_ref, y_ref);
+        let delta_v = v2.angle_with_ref(v1, y_ref);
+        if delta_v < 0.0 {
+            t.v_reverse();
+            vv1 = -vv1;
+            vv2 = 2.0 * PI + vv1 - delta_v;
+        }
+        let torus: Handle<dyn GeomSurface> = Handle::new(GeomToroidalSurface::from_torus(t)).cast();
+        let range = (rails.path.first_parameter()?, rails.path.last_parameter()?);
+        let trimmed = GeomRectangularTrimmedSurface::new(&torus, range, (vv1, vv2), (true, true))?;
+        self.my_surface = Handle::new(trimmed).cast();
+        self.my_exch_uv = true;
+        self.my_status = GeomFillPipeError::PipeOk;
+        Ok(true)
+    }
+}

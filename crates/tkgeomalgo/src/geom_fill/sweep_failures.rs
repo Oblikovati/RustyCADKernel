@@ -50,14 +50,6 @@ pub(crate) fn domain_error(message: &str) -> Failure {
     sweep_failure("Standard_DomainError", message)
 }
 
-/// The StdFail_NotDone of a result read before the computation succeeded.
-pub(crate) fn not_done(member: &str) -> Failure {
-    sweep_failure(
-        "StdFail_NotDone",
-        &format!("{member}: the computation is not done; expected IsDone()"),
-    )
-}
-
 /// The object a native null handle dereference would crash on: here a
 /// Standard_NullObject naming the member and the handle.
 pub(crate) fn null_object(member: &str, handle: &str) -> Failure {

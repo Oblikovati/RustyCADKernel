@@ -236,6 +236,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gfs_sweep",ga_gfw_sweep_case},
  {"gfs_blendfunc",ga_gfw_blend_case},
  {"gfs_sweepsec",ga_gfg_sweepsec_case},
+ {"gfs_pipe",ga_gfp_pipe_case},
 };
 int main() {
  std::string line;
