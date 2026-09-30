@@ -11,7 +11,7 @@ use rustycad_tkmath::{bnd::BoundingBox2, gp::Point2};
 /// Live const-reference parameters with an explicit Rust owner; `Handle::new(Shared::new(SharedState::new(MeshParameters::default())))`.
 pub type FaceCheckerParameters = Handle<Shared<SharedState<MeshParameters>>>;
 /// Native non-owning pointer to a pcurve sample slot; `CurvePointReference::new(curve.downgrade(),0)`.
-#[derive(Clone)]
+#[derive(Clone, PartialEq, Eq)]
 pub struct CurvePointReference {
     curve: WeakHandle<dyn MeshPCurve>,
     index: i32,
