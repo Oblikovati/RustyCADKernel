@@ -22,7 +22,9 @@ use std::{any::TypeId, marker::PhantomData, sync::Arc};
 mod casts;
 mod traits;
 mod view;
+mod weak;
 pub use view::HandleView;
+pub use weak::WeakHandle;
 /// Nullable shared ownership with runtime checked base projection; `Handle::new(value)`.
 pub struct Handle<T: ?Sized + RuntimeTyped> {
     owner: Option<Arc<dyn Transient>>,
