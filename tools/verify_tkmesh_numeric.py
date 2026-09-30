@@ -68,6 +68,10 @@ def corpus() -> str:
     rows += [f'mesh_delaun_dump {mode}' for mode in range(3)]
     rows += ['mesh_selector ' + ' '.join(map(str, v)) for v in product((0,1,2,3,4,6,7), range(-1,10), range(8))]
     rows += ['mesh_selector ' + ' '.join(map(str, (5,index,mode))) for index,mode in product(range(1,4),range(8))]
+    rows += ['mesh_circle_inspector ' + ' '.join(map(str, v)) for v in product((0,2,3,4,7,8), (0,2,5,7), range(9), (-1,0,1,4), (0,2,4,5,7))]
+    rows += ['mesh_circle_tool ' + ' '.join(map(str, v)) for v in product((0,1,100), range(3), range(3), range(1,9), range(6))]
+    rows += ['mesh_circle_make ' + ' '.join(map(str, v)) for v in product(range(10), range(4), range(8))]
+    rows += ['mesh_circle_random']
     return '\n'.join(rows) + '\n'
 
 
@@ -84,3 +88,6 @@ if __name__ == '__main__':
     verify_delaun_undefined(use_existing=True)
     from verify_tkmesh_selector_undefined import verify_selector_undefined
     verify_selector_undefined(use_existing=True)
+
+    from verify_tkmesh_circle_undefined import verify_circle_undefined
+    verify_circle_undefined(use_existing=True)

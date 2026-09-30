@@ -6,7 +6,8 @@ pub(super) fn cell_coordinate(value: f64) -> i32 {
     } else {
         value
     };
-    wrapped as i32
+    // OCCT 3d097a03: preserve the pinned x86 cast after native modulus wrapping.
+    crate::ncollection::ElementCast::<i32>::cast(wrapped)
 }
 /// Inclusive cell range over the first `axes` axes, axis zero fastest; later axes keep
 /// the minimum corner's values, as the native recursion never touches them.
@@ -46,5 +47,23 @@ impl Iterator for CellIndices {
         let result: Vec<i32> = self.current.clone()?;
         self.advance();
         Some(result)
+    }
+}
+
+#[cfg(test)]
+mod conversion_tests {
+    use super::cell_coordinate;
+    #[test]
+    fn native_nonfinite_cell_indices_do_not_alias_origin() {
+        for value in [f64::NAN, f64::INFINITY, f64::NEG_INFINITY] {
+            assert_eq!(cell_coordinate(value), i32::MIN);
+        }
+        assert_eq!(cell_coordinate(0.), 0);
+        assert_eq!(cell_coordinate(-1.9), -1);
+    }
+    #[test]
+    fn finite_extremes_keep_native_modulus_before_truncation() {
+        assert_eq!(cell_coordinate(f64::from(i32::MAX) + 3.), 3);
+        assert_eq!(cell_coordinate(f64::from(i32::MIN) - 3.), -3);
     }
 }
