@@ -24,3 +24,5 @@ mod curve_range_localize;
 pub use curve_range_localize::CurveRangeLocalizeData;
 mod surface_range_localize;
 pub use surface_range_localize::SurfaceRangeLocalizeData;
+mod topol_tool;
+pub use topol_tool::TopolTool;

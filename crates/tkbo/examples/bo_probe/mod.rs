@@ -4,6 +4,8 @@ mod localize;
 mod marked;
 mod records;
 mod surface_localize;
+mod topol;
+mod topol_surfaces;
 use rustycad_tkbo::int_tools::*;
 use rustycad_tkg3d::top_abs::State;
 fn real(value: f64) {
@@ -40,6 +42,7 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 }
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
+        "topol" => topol::case(v),
         "range" => range_case(v),
         "marked" => marked::case(v),
         "root" => root_case(v),
