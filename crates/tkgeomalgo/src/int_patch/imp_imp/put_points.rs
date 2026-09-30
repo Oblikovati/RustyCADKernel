@@ -128,7 +128,7 @@ fn vertex_tolerance(
     mut tolerance: f64,
 ) -> Result<f64, Failure> {
     let vtx: TheVertex = current.vertex()?;
-    let vtx_tol: f64 = vtx.resolution(&current.arc());
+    let vtx_tol: f64 = vtx.resolution(&current.arc())?;
     let tol_ang: f64 = 0.01 * tolerance;
     tolerance = std_max(tolerance, vtx_tol);
     let norm1: Vector3 = input.quad_surf.normale_at(current.value())?;

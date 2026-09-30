@@ -98,7 +98,7 @@ impl IntPatchIntersection {
     ) -> Result<(), Failure> {
         let mut interpp = IntPatchPrmPrmIntersection::new();
         let t = self.prm_tolerances(tols);
-        let (inf1, inf2) = (pair.d1.domain_is_infinite(), pair.d2.domain_is_infinite());
+        let (inf1, inf2) = (pair.d1.domain_is_infinite()?, pair.d2.domain_is_infinite()?);
         let (s1, s2) = ((pair.s1, pair.d1), (pair.s2, pair.d2));
         if !inf1 && !inf2 {
             let mut clear_flag = true;

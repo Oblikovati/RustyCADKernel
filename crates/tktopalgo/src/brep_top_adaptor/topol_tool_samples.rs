@@ -2,9 +2,10 @@
 
 //! The sample points of `BRepTopAdaptor_TopolTool`: counts by surface kind (at
 //! least 10 each, the pole grid of a spline analysed above 10), on a regular grid
-//! strictly inside the (finite) surface range.
+//! strictly inside the (finite) surface range, and the inherited SamplePnts parameters.
 use super::errors::{c_int_cast, null_object};
 use super::topol_tool::BRepTopAdaptorTopolTool;
+use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision::{is_negative_infinite, is_positive_infinite};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dSurface, Adaptor3dTopolTool};
@@ -101,6 +102,77 @@ impl BRepTopAdaptorTopolTool {
         };
         let surface: Handle<dyn Adaptor3dSurface> = self.live_surface()?;
         Ok((Point2::new(u, v), surface.value(u, v)?))
+    }
+
+    /// `SamplePnts(theDefl, theNUmin, theNVmin)`: the inherited base member on the
+    /// base's protected samples: the B-spline analysis of `BSplSamplePnts`, else the
+    /// counts of the overriding [`Self::compute_sample_points`] (which also sets the
+    /// sample grid) spread over the (finite) box (docs/topalgo-design.md section 8);
+    /// `tool.sample_pnts(0.01, 10, 10)?`.
+    pub fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure> {
+        let surface: Handle<dyn Adaptor3dSurface> = self.live_surface()?;
+        let (u_pars, v_pars) = Adaptor3dTopolTool::sample_pnts_parameters(
+            &*surface,
+            (deflection, nu_min, nv_min),
+            || {
+                self.compute_sample_points()?;
+                let state = self.state.read();
+                Ok((state.nb_samples_u, state.nb_samples_v))
+            },
+        )?;
+        self.store_sample_parameters(u_pars, v_pars);
+        Ok(())
+    }
+
+    /// `BSplSamplePnts(theDefl, theNUmin, theNVmin)`: the inherited base member on the
+    /// base's protected samples (the B-spline analysis of the surface);
+    /// `tool.bspl_sample_pnts(0.01, 10, 10)?`.
+    pub fn bspl_sample_pnts(
+        &self,
+        deflection: f64,
+        nu_min: i32,
+        nv_min: i32,
+    ) -> Result<(), Failure> {
+        let surface: Handle<dyn Adaptor3dSurface> = self.live_surface()?;
+        let (u_pars, v_pars) =
+            Adaptor3dTopolTool::bspl_sample_parameters(&*surface, deflection, nu_min, nv_min)?;
+        self.store_sample_parameters(u_pars, v_pars);
+        Ok(())
+    }
+
+    // The protected myNbSamplesU/V and myUPars/myVPars that SamplePnts and BSplSamplePnts
+    // set: the counts are the numbers of parameters.
+    fn store_sample_parameters(&self, u_pars: Array1<'static, f64>, v_pars: Array1<'static, f64>) {
+        let mut state = self.state.write();
+        (state.nb_samples_u, state.nb_samples_v) = (u_pars.length(), v_pars.length());
+        (state.u_pars, state.v_pars) = (Some(u_pars), Some(v_pars));
+    }
+
+    /// `UParameters(theArray)`: the inherited base member, a copy of the U parameters of
+    /// [`Self::sample_pnts`]; Standard_NullObject before it (a null dereference
+    /// natively); `tool.u_parameters()?`.
+    pub fn u_parameters(&self) -> Result<Array1<'static, f64>, Failure> {
+        self.state.read().u_pars.clone().ok_or_else(|| {
+            null_object(
+                "BRepTopAdaptor_TopolTool::UParameters: no parameters; expected SamplePnts()",
+            )
+        })
+    }
+
+    /// `VParameters(theArray)`: the V parameters, as [`Self::u_parameters`];
+    /// `tool.v_parameters()?`.
+    pub fn v_parameters(&self) -> Result<Array1<'static, f64>, Failure> {
+        self.state.read().v_pars.clone().ok_or_else(|| {
+            null_object(
+                "BRepTopAdaptor_TopolTool::VParameters: no parameters; expected SamplePnts()",
+            )
+        })
+    }
+
+    /// `IsUniformSampling()`: the inherited base member, false for a B-spline surface;
+    /// `tool.is_uniform_sampling()?`.
+    pub fn is_uniform_sampling(&self) -> Result<bool, Failure> {
+        Adaptor3dTopolTool::uniform_sampling_of(&*self.live_surface()?)
     }
 
     /// `DomainIsInfinite()`: whether a bound of the surface range is infinite;

@@ -13,6 +13,7 @@ use rustycad_tkbrep::brep_adaptor::{BRepAdaptorCurve2d, BRepAdaptorSurface};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Edge, Face};
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dSurface, Adaptor3dTopolTool};
@@ -20,11 +21,14 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum, State};
 use rustycad_tkmath::gp::{Point2, Point3};
 
 /// The fields of one `BRepTopAdaptor_TopolTool` (its own and the base's protected
-/// `myS`, `myNbSamplesU` and `myNbSamplesV`).
+/// `myS`, `myNbSamplesU`, `myNbSamplesV`, `myUPars` and `myVPars`, which the inherited
+/// sample members read and write, docs/topalgo-design.md section 8).
 pub(super) struct BRepTopolState {
     pub(super) surface: Handle<dyn Adaptor3dSurface>,
     pub(super) nb_samples_u: i32,
     pub(super) nb_samples_v: i32,
+    pub(super) u_pars: Option<Array1<'static, f64>>,
+    pub(super) v_pars: Option<Array1<'static, f64>>,
     v_iterator: Explorer,
     face: Face,
     curve: Handle<BRepAdaptorCurve2d>,
@@ -41,7 +45,10 @@ pub(super) struct BRepTopolState {
 /// `BRepAdaptor_Surface` with the pcurves of its edges as arcs, its vertices as
 /// `BRepTopAdaptor_HVertex`, a lazily built `BRepTopAdaptor_FClass2d` for Classify
 /// and IsThePointOn, and sample counts by surface kind. Every member takes `&self`,
-/// as the base does; the base part (the parent field) only carries the RTTI chain.
+/// as the base does. The base part (the parent field) carries the RTTI chain and runs
+/// the inherited members that read no base state (`Identical`, `Orientation(V)`); the
+/// tool implements the IntStart `TheTopolTool` trait, so IntStart and IntPatch take it
+/// as a domain (docs/topalgo-design.md section 8).
 ///
 /// ```
 /// use rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool;
@@ -75,6 +82,8 @@ impl BRepTopAdaptorTopolTool {
             surface: Handle::default(),
             nb_samples_u: -1,
             nb_samples_v: -1,
+            u_pars: None,
+            v_pars: None,
             v_iterator: Explorer::default(),
             face: Face::default(),
             curve: Handle::default(),
@@ -236,7 +245,7 @@ impl BRepTopAdaptorTopolTool {
     /// `Vertex()`: a new BRepTopAdaptor_HVertex of the current vertex on the arc, as
     /// its base handle; Standard_TypeMismatch past the last vertex (the explorer's
     /// current shape is then the edge); `tool.vertex()?`.
-    pub fn vertex(&self) -> Result<Handle<Adaptor3dHVertex>, Failure> {
+    pub fn vertex(&self) -> Result<Handle<dyn Adaptor3dHVertex>, Failure> {
         let state = self.state.read();
         let vertex = topods::vertex(state.v_iterator.current())?;
         let hvertex = Handle::new(BRepTopAdaptorHVertex::new(&vertex, &state.curve));
@@ -311,22 +320,24 @@ impl BRepTopAdaptorTopolTool {
     }
 
     /// `Orientation(V)`: the base member, `V->Orientation()` (the TopoDS orientation of
-    /// a BRepTopAdaptor_HVertex); Standard_NullObject for a null handle;
-    /// `tool.vertex_orientation(&vertex)?`.
+    /// a BRepTopAdaptor_HVertex, through the vertex trait); Standard_NullObject for a
+    /// null handle; `tool.vertex_orientation(&vertex)?`.
     pub fn vertex_orientation(
         &self,
-        vertex: &Handle<Adaptor3dHVertex>,
+        vertex: &Handle<dyn Adaptor3dHVertex>,
     ) -> Result<Orientation, Failure> {
-        let brhv: Handle<BRepTopAdaptorHVertex> = vertex.cast();
-        if let Some(brep_vertex) = brhv.get() {
-            return Ok(brep_vertex.orientation());
-        }
-        vertex
-            .get()
-            .map(Adaptor3dHVertex::orientation)
-            .ok_or_else(|| {
-                null_object("BRepTopAdaptor_TopolTool::Orientation: null vertex; expected a vertex")
-            })
+        self.parent.vertex_orientation(vertex)
+    }
+
+    /// `Identical(V1, V2)`: the inherited base member, `V1->IsSame(V2)` through the
+    /// vertex trait (the TopoDS sameness of two BRepTopAdaptor_HVertex);
+    /// `tool.identical(&v1, &v2)?`.
+    pub fn identical(
+        &self,
+        first: &Handle<dyn Adaptor3dHVertex>,
+        second: &Handle<dyn Adaptor3dHVertex>,
+    ) -> Result<bool, Failure> {
+        self.parent.identical(first, second)
     }
 
     /// `Has3d()`: the arcs and vertices have 3d tolerances; `tool.has_3d()`.
@@ -349,20 +360,20 @@ impl BRepTopAdaptorTopolTool {
     /// `Tol3d(V)`: the tolerance of the TopoDS vertex; Standard_DomainError when the
     /// vertex is not a BRepTopAdaptor_HVertex or its vertex is null;
     /// `tool.vertex_tol_3d(&vertex)?`.
-    pub fn vertex_tol_3d(&self, vertex: &Handle<Adaptor3dHVertex>) -> Result<f64, Failure> {
+    pub fn vertex_tol_3d(&self, vertex: &Handle<dyn Adaptor3dHVertex>) -> Result<f64, Failure> {
         BRepTool::vertex_tolerance(&brep_vertex(vertex)?)
     }
 
     /// `Pnt(V)`: the point of the TopoDS vertex; Standard_DomainError as
     /// [`Self::vertex_tol_3d`]; `tool.pnt(&vertex)?`.
-    pub fn pnt(&self, vertex: &Handle<Adaptor3dHVertex>) -> Result<Point3, Failure> {
+    pub fn pnt(&self, vertex: &Handle<dyn Adaptor3dHVertex>) -> Result<Point3, Failure> {
         BRepTool::pnt(&brep_vertex(vertex)?)
     }
 }
 
 // The TopoDS vertex of a BRepTopAdaptor_HVertex handle, for Tol3d(V) and Pnt(V).
 fn brep_vertex(
-    vertex: &Handle<Adaptor3dHVertex>,
+    vertex: &Handle<dyn Adaptor3dHVertex>,
 ) -> Result<rustycad_tkbrep::topods::Vertex, Failure> {
     let no_3d = || domain_error("BRepTopAdaptor_TopolTool: vertex has no 3d representation");
     let brhv: Handle<BRepTopAdaptorHVertex> = vertex.cast();

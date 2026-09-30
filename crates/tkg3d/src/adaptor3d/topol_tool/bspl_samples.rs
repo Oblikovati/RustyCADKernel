@@ -272,39 +272,63 @@ impl Adaptor3dTopolTool {
         nv_min: i32,
     ) -> Result<(), Failure> {
         let surface: Handle<dyn Adaptor3dSurface> = self.live_surface()?;
-        let adapted: &dyn Adaptor3dSurface = &*surface;
-        let bspline = adapted.bspline()?;
-        let spline = bspline
-            .get()
-            .ok_or_else(|| null_object("Adaptor3d_TopolTool: BSpline() is null"))?;
-        let u_range = (adapted.first_u_parameter()?, adapted.last_u_parameter()?);
-        let v_range = (adapted.first_v_parameter()?, adapted.last_v_parameter()?);
-        let (u_line, v_line) = knot_lines(spline)?;
-        let (ui1, ui2) = u_line.span_range(u_range.0, u_range.1);
-        let (vi1, vi2) = v_line.span_range(v_range.0, v_range.1);
-        let nbsu: i32 = (ui2 - ui1) * u_line.degree + 1;
-        let nbsv: i32 = (vi2 - vi1) * v_line.degree + 1;
-        let (nbsu, nbsv, u_uniform, v_uniform) = balanced_counts(nbsu, nbsv, (nu_min, nv_min));
-        let (u_pars, mut u_flags) = direction_parameters(&u_line, u_range, nbsu, u_uniform)?;
-        let (v_pars, mut v_flags) = direction_parameters(&v_line, v_range, nbsv, v_uniform)?;
-        let deflection2: f64 = (deflection * deflection).max(1.0e-9);
-        let tolerance: f64 = (0.01 * deflection2).max(1.0e-9);
-        let pass = |along_u: bool| DeflectionPass {
-            surface: adapted,
-            along_u,
-            deflection2,
-            tolerance,
-        };
-        let nb_u: i32 = flag_direction(&pass(true), (&v_pars, &u_pars), &mut u_flags)?;
-        let nb_v: i32 = flag_direction(&pass(false), (&u_pars, &v_pars), &mut v_flags)?;
-        let u_selected = selected(&u_pars, &u_flags, nb_u, nu_min)?;
-        let v_selected = selected(&v_pars, &v_flags, nb_v, nv_min)?;
+        let (u_selected, v_selected) =
+            bspl_sample_parameters(&*surface, deflection, nu_min, nv_min)?;
         let mut state = self.state.write();
-        (state.nb_samples_u, state.nb_samples_v) =
-            (u_selected.len() as i32, v_selected.len() as i32);
+        (state.nb_samples_u, state.nb_samples_v) = (u_selected.length(), v_selected.length());
         (state.u_pars, state.v_pars) = (Some(u_selected), Some(v_selected));
         Ok(())
     }
+    /// The body of `BSplSamplePnts` on the protected surface `myS` of a tool: the U and V
+    /// sample parameters, whose lengths are the sample counts the tool stores (the
+    /// subclasses that keep their own state share it, docs/topalgo-design.md section 8);
+    /// `let (u, v) = Adaptor3dTopolTool::bspl_sample_parameters(&*s, 0.01, 10, 10)?;`.
+    pub fn bspl_sample_parameters(
+        surface: &dyn Adaptor3dSurface,
+        deflection: f64,
+        nu_min: i32,
+        nv_min: i32,
+    ) -> Result<(Array1<'static, f64>, Array1<'static, f64>), Failure> {
+        bspl_sample_parameters(surface, deflection, nu_min, nv_min)
+    }
+}
+
+/// The body of `BSplSamplePnts` on the surface `myS`: the selected U and V parameters,
+/// whose lengths are the sample counts; `bspl_sample_parameters(&*surface, 0.01, 10, 10)?`.
+pub(super) fn bspl_sample_parameters(
+    adapted: &dyn Adaptor3dSurface,
+    deflection: f64,
+    nu_min: i32,
+    nv_min: i32,
+) -> Result<(Array1<'static, f64>, Array1<'static, f64>), Failure> {
+    let bspline = adapted.bspline()?;
+    let spline = bspline
+        .get()
+        .ok_or_else(|| null_object("Adaptor3d_TopolTool: BSpline() is null"))?;
+    let u_range = (adapted.first_u_parameter()?, adapted.last_u_parameter()?);
+    let v_range = (adapted.first_v_parameter()?, adapted.last_v_parameter()?);
+    let (u_line, v_line) = knot_lines(spline)?;
+    let (ui1, ui2) = u_line.span_range(u_range.0, u_range.1);
+    let (vi1, vi2) = v_line.span_range(v_range.0, v_range.1);
+    let nbsu: i32 = (ui2 - ui1) * u_line.degree + 1;
+    let nbsv: i32 = (vi2 - vi1) * v_line.degree + 1;
+    let (nbsu, nbsv, u_uniform, v_uniform) = balanced_counts(nbsu, nbsv, (nu_min, nv_min));
+    let (u_pars, mut u_flags) = direction_parameters(&u_line, u_range, nbsu, u_uniform)?;
+    let (v_pars, mut v_flags) = direction_parameters(&v_line, v_range, nbsv, v_uniform)?;
+    let deflection2: f64 = (deflection * deflection).max(1.0e-9);
+    let tolerance: f64 = (0.01 * deflection2).max(1.0e-9);
+    let pass = |along_u: bool| DeflectionPass {
+        surface: adapted,
+        along_u,
+        deflection2,
+        tolerance,
+    };
+    let nb_u: i32 = flag_direction(&pass(true), (&v_pars, &u_pars), &mut u_flags)?;
+    let nb_v: i32 = flag_direction(&pass(false), (&u_pars, &v_pars), &mut v_flags)?;
+    Ok((
+        selected(&u_pars, &u_flags, nb_u, nu_min)?,
+        selected(&v_pars, &v_flags, nb_v, nv_min)?,
+    ))
 }
 
 // Flag the ends, run the pass along every line of the other direction, count the

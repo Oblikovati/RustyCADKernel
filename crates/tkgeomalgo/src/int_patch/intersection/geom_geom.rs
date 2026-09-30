@@ -186,7 +186,7 @@ impl IntPatchIntersection {
             self.my_fleche,
             self.my_uv_max_step,
         );
-        if pair.d1.domain_is_infinite() && pair.d2.domain_is_infinite() {
+        if pair.d1.domain_is_infinite()? && pair.d2.domain_is_infinite()? {
             if self.collinear_lines(pair, typs)? {
                 return Ok(());
             }

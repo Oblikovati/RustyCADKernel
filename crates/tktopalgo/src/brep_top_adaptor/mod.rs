@@ -17,6 +17,7 @@ mod fclass2d_refine;
 mod h_vertex;
 mod tool;
 mod topol_tool;
+mod topol_tool_domain;
 mod topol_tool_samples;
 
 pub use fclass2d::BRepTopAdaptorFClass2d;

@@ -139,7 +139,7 @@ pub(super) fn coincide_on_arc(
     let mut distmin: f64 = f64::MAX;
     let tolarc: f64 = std_max(toler, tol3d_arc(a, domain, 0.0)?);
     domain.initialize_arc(a)?;
-    domain.init_vertex_iterator();
+    domain.init_vertex_iterator()?;
     while domain.more_vertex() {
         let vtx1: TheVertex = domain.vertex()?;
         let prm: f64 = IntPatchHInterTool::parameter(&vtx1, a)?;
@@ -152,7 +152,7 @@ pub(super) fn coincide_on_arc(
             distmin = dist;
             *vtx = vtx1;
         }
-        domain.next_vertex();
+        domain.next_vertex()?;
     }
     Ok(distmin < f64::MAX)
 }

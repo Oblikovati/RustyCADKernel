@@ -245,7 +245,7 @@ impl IntPatchHInterTool {
         let vertex = v
             .get()
             .ok_or_else(|| null_object("IntPatch_HInterTool::Tolerance", "Adaptor3d_HVertex"))?;
-        Ok(vertex.resolution(c))
+        vertex.resolution(c)
     }
 
     /// `Parameter(V, C)`: the parameter of the vertex on the arc.

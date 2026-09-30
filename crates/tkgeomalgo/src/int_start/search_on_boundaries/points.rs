@@ -25,7 +25,7 @@ pub(super) fn find_vertex<T: SearchOnBoundariesTypes>(
     // `valf` is uninitialized natively; see `value_or_keep`.
     let mut valf: f64 = 0.0;
     domain.initialize_arc(arc)?;
-    domain.init_vertex_iterator();
+    domain.init_vertex_iterator()?;
     while domain.more_vertex() {
         let vtx: TheVertex = domain.vertex()?;
         let param: f64 = T::SOBTool::parameter(&vtx, arc)?;
@@ -35,7 +35,7 @@ pub(super) fn find_vertex<T: SearchOnBoundariesTypes>(
             let point: Point3 = func.valpoint(itemp)?;
             pnt.push(T::PathPoint::on_vertex(point, toler, &vtx, arc, param));
         }
-        domain.next_vertex();
+        domain.next_vertex()?;
     }
     Ok(())
 }
@@ -116,7 +116,7 @@ fn on_vertex<T: SearchOnBoundariesTypes>(
     (tol, ptsol): (f64, &mut T::PathPoint),
 ) -> Result<Option<i32>, Failure> {
     domain.initialize_arc(arc)?;
-    domain.init_vertex_iterator();
+    domain.init_vertex_iterator()?;
     while domain.more_vertex() {
         let vtx: TheVertex = domain.vertex()?;
         let dist: f64 = (para - T::SOBTool::parameter(&vtx, arc)?).abs();
@@ -132,7 +132,7 @@ fn on_vertex<T: SearchOnBoundariesTypes>(
             pnt.push(ptsol.clone());
             return Ok(Some(pnt.len() as i32));
         }
-        domain.next_vertex();
+        domain.next_vertex()?;
     }
     Ok(None)
 }

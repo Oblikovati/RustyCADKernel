@@ -91,8 +91,8 @@ impl TheTopolTool for WtDomain {
     fn initialize_arc(&self, arc: &TheArc) -> Result<(), Failure> {
         self.tool.initialize_arc(arc)
     }
-    fn init_vertex_iterator(&self) {
-        TheTopolTool::init_vertex_iterator(&self.tool);
+    fn init_vertex_iterator(&self) -> Result<(), Failure> {
+        TheTopolTool::init_vertex_iterator(&self.tool)
     }
     fn more_vertex(&self) -> bool {
         TheTopolTool::more_vertex(&self.tool)
@@ -100,14 +100,14 @@ impl TheTopolTool for WtDomain {
     fn vertex(&self) -> Result<TheVertex, Failure> {
         TheTopolTool::vertex(&self.tool)
     }
-    fn next_vertex(&self) {
-        TheTopolTool::next_vertex(&self.tool);
+    fn next_vertex(&self) -> Result<(), Failure> {
+        TheTopolTool::next_vertex(&self.tool)
     }
     fn identical(&self, first: &TheVertex, second: &TheVertex) -> Result<bool, Failure> {
         TheTopolTool::identical(&self.tool, first, second)
     }
-    fn edge(&self) -> Option<Edge> {
-        None
+    fn edge(&self) -> Result<Option<Edge>, Failure> {
+        Ok(None)
     }
     fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure> {
         TheTopolTool::is_the_point_on(&self.tool, point, tol, reframe)
@@ -121,7 +121,7 @@ impl TheTopolTool for WtDomain {
         }
         Ok(self.tol)
     }
-    fn domain_is_infinite(&self) -> bool {
+    fn domain_is_infinite(&self) -> Result<bool, Failure> {
         TheTopolTool::domain_is_infinite(&self.tool)
     }
     fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure> {

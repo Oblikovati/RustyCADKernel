@@ -33,7 +33,7 @@ pub(super) struct TopolState {
     pub(super) restr: [Handle<Adaptor2dLine2d>; 4],
     pub(super) nb_vtx: i32,
     pub(super) id_vtx: i32,
-    pub(super) vtx: [Handle<Adaptor3dHVertex>; 2],
+    pub(super) vtx: [Handle<dyn Adaptor3dHVertex>; 2],
 }
 impl TopolState {
     // The fields as the native allocation leaves them (zero-filled), then the
@@ -64,9 +64,10 @@ impl TopolState {
 /// restriction, point classification and sample points.
 ///
 /// Every member takes `&self`; the iterators and sample caches live behind one lock.
-/// The native class has virtual members that BRepTopAdaptor overrides; that
-/// subclass is not ported, so the members are inherent here;
-/// `Adaptor3dTopolTool::with_surface(&surface)?`.
+/// The native class is virtual; its members are inherent here, and the IntStart trait
+/// `TheTopolTool` of TKGeomAlgo is the interface that its subclasses implement
+/// (docs/topalgo-design.md section 8). The vertices dispatch through the
+/// `Adaptor3dHVertex` trait; `Adaptor3dTopolTool::with_surface(&surface)?`.
 pub struct Adaptor3dTopolTool {
     parent: StandardTransient,
     state: SharedState<TopolState>,
@@ -138,7 +139,7 @@ impl Adaptor3dTopolTool {
     }
     /// The current vertex; Standard_DomainError past the last one (`Vertex`);
     /// `tool.vertex()?`.
-    pub fn vertex(&self) -> Result<Handle<Adaptor3dHVertex>, Failure> {
+    pub fn vertex(&self) -> Result<Handle<dyn Adaptor3dHVertex>, Failure> {
         let state = self.state.read();
         if state.id_vtx >= state.nb_vtx {
             return Err(domain(&format!(
@@ -159,15 +160,15 @@ impl Adaptor3dTopolTool {
     /// The orientation of a vertex (`Orientation(V)`); `tool.vertex_orientation(&v)?`.
     pub fn vertex_orientation(
         &self,
-        vertex: &Handle<Adaptor3dHVertex>,
+        vertex: &Handle<dyn Adaptor3dHVertex>,
     ) -> Result<Orientation, Failure> {
         Ok(live_vertex(vertex)?.orientation())
     }
     /// Whether two vertices are the same (`Identical`); `tool.identical(&v1, &v2)?`.
     pub fn identical(
         &self,
-        first: &Handle<Adaptor3dHVertex>,
-        second: &Handle<Adaptor3dHVertex>,
+        first: &Handle<dyn Adaptor3dHVertex>,
+        second: &Handle<dyn Adaptor3dHVertex>,
     ) -> Result<bool, Failure> {
         live_vertex(first)?.is_same(second)
     }
@@ -180,11 +181,11 @@ impl Adaptor3dTopolTool {
         Err(no_3d())
     }
     /// Standard_DomainError: no 3D representation (`Tol3d(V)`); `tool.vertex_tol_3d(&v)`.
-    pub fn vertex_tol_3d(&self, _vertex: &Handle<Adaptor3dHVertex>) -> Result<f64, Failure> {
+    pub fn vertex_tol_3d(&self, _vertex: &Handle<dyn Adaptor3dHVertex>) -> Result<f64, Failure> {
         Err(no_3d())
     }
     /// Standard_DomainError: no 3D representation (`Pnt`); `tool.pnt(&v)`.
-    pub fn pnt(&self, _vertex: &Handle<Adaptor3dHVertex>) -> Result<Point3, Failure> {
+    pub fn pnt(&self, _vertex: &Handle<dyn Adaptor3dHVertex>) -> Result<Point3, Failure> {
         Err(no_3d())
     }
     /// Whether a bound of the rectangle is infinite (`DomainIsInfinite`);
@@ -261,7 +262,7 @@ fn no_3d() -> Failure {
 }
 
 // The vertex behind a handle; natively a null one is dereferenced.
-fn live_vertex(vertex: &Handle<Adaptor3dHVertex>) -> Result<&Adaptor3dHVertex, Failure> {
+fn live_vertex(vertex: &Handle<dyn Adaptor3dHVertex>) -> Result<&dyn Adaptor3dHVertex, Failure> {
     vertex
         .get()
         .ok_or_else(|| null_object("Adaptor3d_TopolTool: null vertex; expected a vertex"))

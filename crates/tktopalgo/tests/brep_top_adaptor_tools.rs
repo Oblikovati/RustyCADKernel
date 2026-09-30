@@ -19,7 +19,7 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::standard::real::real_first;
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
-use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dSurface};
+use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dHVertexBase, Adaptor3dSurface};
 use rustycad_tkg3d::top_abs::{Orientation, State};
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::Point2;
@@ -171,11 +171,12 @@ fn topol_tool_errors_follow_the_native_exceptions() {
         tool.init_vertex_iterator().err().unwrap().exception_type(),
         "Standard_NullObject"
     );
-    let base = Handle::new(Adaptor3dHVertex::new(
+    let base: Handle<dyn Adaptor3dHVertex> = Handle::new(Adaptor3dHVertexBase::new(
         Point2::new(1.0, 2.0),
         Orientation::Reversed,
         0.5,
-    ));
+    ))
+    .cast();
     assert_eq!(
         tool.vertex_orientation(&base).unwrap(),
         Orientation::Reversed

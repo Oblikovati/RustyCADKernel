@@ -37,6 +37,14 @@
 #include "tktopalgo_probe_shape.cxx"
 #include "tktopalgo_probe_brepbndlib.cxx"
 #include "tktopalgo_probe_brepclass3d.cxx"
+// The IntPatch line printers of the TKGeomAlgo probe (ga_ipl_*) with the readers they
+// need, for the BRepTopAdaptor domains of IntStart and IntPatch.
+#include "tkgeomalgo_probe_intsurf.cxx"
+#include "tkgeomalgo_probe_intwalk.cxx"
+#include "tkgeomalgo_probe_iwalk.cxx"
+#include "tkgeomalgo_probe_intpatch.cxx"
+#include "tkgeomalgo_probe_intpatch_report.cxx"
+#include "tktopalgo_probe_breptopadaptor_domain.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -107,6 +115,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bc3_uvpoint", tp_bc3_uvpoint_case},
  {"bc3_tree", tp_bc3_tree_case},
  {"bc3_inter3d", tp_bc3_inter3d_case},
+ // BRepTopAdaptor domains of IntStart and IntPatch (tktopalgo_probe_breptopadaptor_domain.cxx)
+ {"bta_sob", tp_bta_sob_case},
+ {"bta_inside", tp_bta_inside_case},
+ {"bta_intersection", tp_bta_intersection_case},
 };
 int main() {
  std::string line;

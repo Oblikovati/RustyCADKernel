@@ -8,26 +8,31 @@ use rustycad_tkbrep::brep_adaptor::{BRepAdaptorCurve2d, BRepAdaptorSurface};
 use rustycad_tkbrep::topods::Vertex;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::real::real_first;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dSurface};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::{Point2, Point3, Vector3};
 
-/// `BRepTopAdaptor_HVertex` (docs/topalgo-design.md section 4): a TopoDS vertex and
-/// the pcurve adaptor it was found on. Its parent field is a default
-/// `Adaptor3dHVertex` (the RTTI chain); the overrides are inherent methods.
+/// `BRepTopAdaptor_HVertex` (docs/topalgo-design.md sections 4 and 8): a TopoDS vertex
+/// and the pcurve adaptor it was found on. It implements the `Adaptor3dHVertex` trait
+/// with the overrides, so a `Handle<dyn Adaptor3dHVertex>` of it dispatches to them as
+/// the native virtual calls do; it keeps none of the base fields (they are private
+/// natively, and every member that reads them is overridden).
 ///
 /// ```
 /// use rustycad_tkbrep::topods::Vertex;
 /// use rustycad_tkernel::standard::Handle;
+/// use rustycad_tkg3d::adaptor3d::Adaptor3dHVertex;
 /// use rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex;
 /// let vertex = BRepTopAdaptorHVertex::new(&Vertex::default(), &Handle::default());
 /// assert!(vertex.vertex().is_null());
+/// let base: Handle<dyn Adaptor3dHVertex> = Handle::new(vertex).cast();
+/// assert_eq!(base.value().x(), f64::MIN);
 /// ```
 pub struct BRepTopAdaptorHVertex {
-    parent: Adaptor3dHVertex,
+    parent: StandardTransient,
     my_vtx: Vertex,
     // Kept as natively, although no member reads it.
     _my_curve: Handle<BRepAdaptorCurve2d>,
@@ -35,8 +40,9 @@ pub struct BRepTopAdaptorHVertex {
 impl_transient!(
     BRepTopAdaptorHVertex,
     "BRepTopAdaptor_HVertex",
-    Adaptor3dHVertex,
-    parent
+    dyn Adaptor3dHVertex,
+    parent,
+    interfaces: [dyn Adaptor3dHVertex]
 );
 
 /// The first-order data `Resolution` samples: the curve, the surface and the vertex.
@@ -55,7 +61,7 @@ impl BRepTopAdaptorHVertex {
     /// `BRepTopAdaptorHVertex::new(&vertex, &curve)`.
     pub fn new(vertex: &Vertex, curve: &Handle<BRepAdaptorCurve2d>) -> Self {
         Self {
-            parent: Adaptor3dHVertex::default(),
+            parent: StandardTransient::default(),
             my_vtx: vertex.clone(),
             _my_curve: curve.clone(),
         }
@@ -70,17 +76,19 @@ impl BRepTopAdaptorHVertex {
     pub fn change_vertex(&mut self) -> &mut Vertex {
         &mut self.my_vtx
     }
+}
 
+impl Adaptor3dHVertex for BRepTopAdaptorHVertex {
     /// `Value()`: always `(RealFirst, RealFirst)` (the native body does nothing);
     /// `hvertex.value()`.
-    pub fn value(&self) -> Point2 {
+    fn value(&self) -> Point2 {
         Point2::new(real_first(), real_first())
     }
 
     /// `Parameter(C)`: the parameter of the vertex on the edge of `curve` on its face;
     /// Standard_NullObject when `curve` is not a BRepAdaptor_Curve2d (a null
     /// dereference natively); `hvertex.parameter(&curve)?`.
-    pub fn parameter(&self, curve: &Handle<dyn Adaptor2dCurve2d>) -> Result<f64, Failure> {
+    fn parameter(&self, curve: &Handle<dyn Adaptor2dCurve2d>) -> Result<f64, Failure> {
         let brhc = brep_curve(curve, "BRepTopAdaptor_HVertex::Parameter")?;
         let pcurve = brhc.get().expect("checked BRepAdaptor_Curve2d");
         BRepTool::parameter_on_face(&self.my_vtx, &pcurve.edge(), &pcurve.face())
@@ -90,7 +98,7 @@ impl BRepTopAdaptorHVertex {
     /// refined by two chord estimates on the face surface (at most
     /// `max(C.Resolution(URes), C.Resolution(VRes))`); Standard_NullObject when `curve`
     /// is not a BRepAdaptor_Curve2d; `hvertex.resolution(&curve)?`.
-    pub fn resolution(&self, curve: &Handle<dyn Adaptor2dCurve2d>) -> Result<f64, Failure> {
+    fn resolution(&self, curve: &Handle<dyn Adaptor2dCurve2d>) -> Result<f64, Failure> {
         let brhc = brep_curve(curve, "BRepTopAdaptor_HVertex::Resolution")?;
         let pcurve = brhc.get().expect("checked BRepAdaptor_Curve2d");
         let surface = BRepAdaptorSurface::with_face(&pcurve.face(), false)?;
@@ -121,14 +129,14 @@ impl BRepTopAdaptorHVertex {
     }
 
     /// `Orientation()`: the orientation of the vertex; `hvertex.orientation()`.
-    pub fn orientation(&self) -> Orientation {
+    fn orientation(&self) -> Orientation {
         self.my_vtx.orientation()
     }
 
     /// `IsSame(Other)`: whether the vertex of `other` is the same TopoDS vertex;
     /// Standard_NullObject when `other` is not a BRepTopAdaptor_HVertex (a null
     /// dereference natively); `hvertex.is_same(&other)?`.
-    pub fn is_same(&self, other: &Handle<Adaptor3dHVertex>) -> Result<bool, Failure> {
+    fn is_same(&self, other: &Handle<dyn Adaptor3dHVertex>) -> Result<bool, Failure> {
         let brhv: Handle<BRepTopAdaptorHVertex> = other.cast();
         let Some(other) = brhv.get() else {
             return Err(null_object(

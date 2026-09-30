@@ -5,7 +5,7 @@
 use rustycad_tkbrep::topods::Edge;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dTopolTool};
+use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertexBase, Adaptor3dTopolTool};
 use rustycad_tkg3d::top_abs::{Orientation, State};
 use rustycad_tkgeomalgo::int_patch::IntPatchHInterTool;
 use rustycad_tkgeomalgo::int_start::{TheArc, TheSOBTool, TheTopolTool, TheVertex};
@@ -76,8 +76,8 @@ impl TheSOBTool for ProbeSeenTool {
     }
     fn vertex(_: &TheArc, index: i32) -> Result<TheVertex, Failure> {
         let k = known(index)?;
-        let v = Adaptor3dHVertex::new(Point2::new(k[4], 0.0), Orientation::Forward, k[3]);
-        Ok(Handle::new(v))
+        let v = Adaptor3dHVertexBase::new(Point2::new(k[4], 0.0), Orientation::Forward, k[3]);
+        Ok(Handle::new(v).cast())
     }
     fn nb_segments(_: &TheArc) -> Result<i32, Failure> {
         Ok(SEEN.with(|t| t.borrow().segs.len() as i32))
@@ -132,8 +132,8 @@ impl TheTopolTool for ProbeDomain {
     fn initialize_arc(&self, arc: &TheArc) -> Result<(), Failure> {
         self.tool.initialize_arc(arc)
     }
-    fn init_vertex_iterator(&self) {
-        TheTopolTool::init_vertex_iterator(&self.tool);
+    fn init_vertex_iterator(&self) -> Result<(), Failure> {
+        TheTopolTool::init_vertex_iterator(&self.tool)
     }
     fn more_vertex(&self) -> bool {
         TheTopolTool::more_vertex(&self.tool)
@@ -141,19 +141,19 @@ impl TheTopolTool for ProbeDomain {
     fn vertex(&self) -> Result<TheVertex, Failure> {
         TheTopolTool::vertex(&self.tool)
     }
-    fn next_vertex(&self) {
-        TheTopolTool::next_vertex(&self.tool);
+    fn next_vertex(&self) -> Result<(), Failure> {
+        TheTopolTool::next_vertex(&self.tool)
     }
     fn identical(&self, first: &TheVertex, second: &TheVertex) -> Result<bool, Failure> {
         TheTopolTool::identical(&self.tool, first, second)
     }
-    fn edge(&self) -> Option<Edge> {
-        self.edge.clone()
+    fn edge(&self) -> Result<Option<Edge>, Failure> {
+        Ok(self.edge.clone())
     }
     fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure> {
         TheTopolTool::is_the_point_on(&self.tool, point, tol, reframe)
     }
-    fn domain_is_infinite(&self) -> bool {
+    fn domain_is_infinite(&self) -> Result<bool, Failure> {
         TheTopolTool::domain_is_infinite(&self.tool)
     }
     fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure> {
