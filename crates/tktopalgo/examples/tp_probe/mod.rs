@@ -4,6 +4,7 @@ pub mod bisector_algo;
 pub mod brep_bnd_lib;
 pub mod brep_builder_api;
 pub mod brep_builder_api_makers;
+pub mod brep_builder_api_modify;
 pub mod brep_check;
 pub mod brep_class;
 pub mod brep_class3d;

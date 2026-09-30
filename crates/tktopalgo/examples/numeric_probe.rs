@@ -3,9 +3,10 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_builder_api_makers, brep_check,
-    brep_class, brep_class3d, brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package,
-    brep_lib_wire, brep_top_adaptor, brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
+    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_builder_api_makers,
+    brep_builder_api_modify, brep_check, brep_class, brep_class3d, brep_lib_edge, brep_lib_face,
+    brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor, brep_top_adaptor_domain,
+    int_curves_face, mat, mat_parts,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -27,6 +28,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bba_solid", brep_builder_api_makers::solid_case),
     ("bba_face", brep_builder_api_makers::face_case),
     ("bba_shell", brep_builder_api_makers::shell_case),
+    ("bba_transform", brep_builder_api_modify::transform_case),
+    ("bba_gtransform", brep_builder_api_modify::gtransform_case),
+    ("bba_copy", brep_builder_api_modify::copy_case),
+    ("bba_nurbs", brep_builder_api_modify::nurbs_case),
+    ("bba_modify", brep_builder_api_modify::modify_case),
+    ("bba_findplane", brep_builder_api_modify::findplane_case),
+    ("bba_collect", brep_builder_api_modify::collect_case),
     // BRepClass (tp_probe/brep_class.rs)
     ("brc_edge", brep_class::edge_case),
     ("brc_explorer", brep_class::explorer_case),
