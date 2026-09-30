@@ -40,3 +40,16 @@ IntermediatePoint helper is also ported. Shared cache identity, allocator owners
 projection, block validity and vertex-on-curve behavior pass the integrated
 7,919-case native gate and its required missing-IsValid-symbol check. FaceFace
 legacy declarations are still pending the remaining Tools/WLineTool chain.
+
+### Complete IntTools_FaceFace
+
+The Tools/WLineTool/Context chain now supports the full FaceFace Perform and curve
+construction paths. All 15 FaceFace header rows are mapped, including the analytic,
+restriction and walking branches, approximation retries and tolerance recomputation.
+All ten original declarations pass in both native OCCT and Rust without skips.
+The integrated source gate passes 14,447 exact numeric requests; the separate private
+helper gate passes 7,434. Native wrappers include the unchanged source and record its
+hash and compiler command. The generic toolkit verifier now supports TKBO.
+
+TKBO as a whole remains incomplete: 10 of its 299 discovered GoogleTest declarations
+are mapped. The missing native IsValid symbol remains an explicit upstream gap.
