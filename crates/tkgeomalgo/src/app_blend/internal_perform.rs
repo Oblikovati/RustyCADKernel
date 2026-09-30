@@ -95,12 +95,12 @@ impl AppBlendAppSurf {
             return Ok(());
         };
         let reparametrize = self.knownp && !smoothing;
-        let (u1, u2) = (
-            f.parameter(&lin.point(1)),
-            f.parameter(&lin.point(lin.nb_points())),
-        );
+        // The parameters are read only when the knots are reparametrized, after the
+        // pole tables are allocated, as natively (a generator can raise there).
         self.store_solution(&multc, &arrays, |knots| {
             if reparametrize {
+                let u1: f64 = f.parameter(&lin.point(1))?;
+                let u2: f64 = f.parameter(&lin.point(lin.nb_points()))?;
                 bsplclib::reparametrize(u1, u2, knots)?;
             }
             Ok(())
@@ -112,7 +112,7 @@ impl AppBlendAppSurf {
         &mut self,
         f: &G,
     ) -> Result<SectionArrays, Failure> {
-        let [nb_u_poles, nb_u_knots, udeg, nb_poles2d] = f.get_shape();
+        let [nb_u_poles, nb_u_knots, udeg, nb_poles2d] = f.get_shape()?;
         self.udeg = udeg;
         self.tab_u_knots = one_based(nb_u_knots)?;
         self.tab_u_mults = one_based(nb_u_knots)?;
@@ -271,10 +271,10 @@ where
     let mut params: Vector<'static> = Vector::filled(1, nb_point, 0.0)?;
     params[1] = 0.0;
     params[nb_point] = 1.0;
-    let uf: f64 = f.parameter(&lin.point(1));
-    let ul: f64 = f.parameter(&lin.point(nb_point)) - uf;
+    let uf: f64 = f.parameter(&lin.point(1))?;
+    let ul: f64 = f.parameter(&lin.point(nb_point))? - uf;
     for i in 2..nb_point {
-        params[i] = (f.parameter(&lin.point(i)) - uf) / ul;
+        params[i] = (f.parameter(&lin.point(i))? - uf) / ul;
     }
     Ok(params)
 }

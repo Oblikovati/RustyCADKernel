@@ -2,6 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
+use ga_probe::gfill;
 use ga_probe::int_curve_surface_inter as ics_inter;
 use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, plate};
 use ga_probe::{
@@ -167,6 +168,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ics_estlim", ics_inter::estlim_case),
     ("ics_project", ics_inter::project_case),
     ("ics_interutils", ics_interutils::interutils_case),
+    // GeomFill filling part (ga_probe/gfill*.rs)
+    ("gfill_line", gfill::line_case),
+    ("gfill_profiler", gfill::profiler_case),
+    ("gfill_secgen", gfill::secgen_case),
+    ("gfill_appsurf", gfill::appsurf_case),
     // GeomAPI (ga_probe/geom_api*.rs)
     ("gapi_ppc", geom_api::ppc_case),
     ("gapi_pps", geom_api::pps_case),

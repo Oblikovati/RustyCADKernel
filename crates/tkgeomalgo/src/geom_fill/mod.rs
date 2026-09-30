@@ -13,5 +13,27 @@
 // commercial license or contractual agreement.
 // Rust translation of ModelingAlgorithms/TKGeomAlgo/GeomFill at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! OCCT package GeomFill. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tkgeomalgo-progress.md lists the ported packages).
+//! OCCT package GeomFill: surfaces filled between boundary curves, skinned through
+//! sections, and swept along paths.
+//!
+//! The package is ported in two parts, each class in its own file. The filling part
+//! (docs/geomalgo-design.md section 13) holds the skinning classes (`GeomFill_Line`,
+//! `GeomFill_Profiler`, `GeomFill_SectionGenerator`, `GeomFill_Generator`, the
+//! `GeomFill_AppSurf` instance of the AppBlend template), the filling of two to four
+//! curves (`GeomFill_BezierCurves`, `GeomFill_BSplineCurves` and the pole schemes
+//! `GeomFill_Filling`, `GeomFill_Coons`, `GeomFill_Curved`, `GeomFill_Stretch`) and
+//! the constrained filling of boundaries (`GeomFill_ConstrainedFilling` with its
+//! boundaries, tangent fields, Coons patch and corner states). The sweep part holds
+//! the trihedron, location and section laws and the sweeps.
+
+// Filling part (docs/geomalgo-design.md section 13).
+mod app_surf;
+mod line;
+mod profiler;
+mod profiler_unify;
+mod section_generator;
+
+pub use app_surf::GeomFillAppSurf;
+pub use line::GeomFillLine;
+pub use profiler::GeomFillProfiler;
+pub use section_generator::GeomFillSectionGenerator;

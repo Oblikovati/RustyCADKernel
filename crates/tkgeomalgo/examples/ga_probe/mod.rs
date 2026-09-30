@@ -17,6 +17,7 @@ pub mod geom2d_gcc_lines;
 pub mod geom2d_hatch;
 pub mod geom2d_hatcher;
 pub mod geom2d_int;
+pub mod gfill;
 pub mod geom_api;
 pub mod geom_api_fit;
 pub mod ginter;

@@ -53,6 +53,7 @@
 #include "tkgeomalgo_probe_iwalk.cxx"
 #include "tkgeomalgo_probe_intcurvesurface.cxx"
 #include "tkgeomalgo_probe_intcurvesurface_inter.cxx"
+#include "tkgeomalgo_probe_gfill.cxx"
 #include "tkgeomalgo_probe_geomapi.cxx"
 #include "tkgeomalgo_probe_geomapi_fit.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
@@ -203,6 +204,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ics_estlim",ga_ics_estlim_case},
  {"ics_project",ga_ics_project_case},
  {"ics_interutils",ga_ics_interutils_case},
+ // GeomFill filling part (tkgeomalgo_probe_gfill*.cxx)
+ {"gfill_line", ga_gfill_line_case},
+ {"gfill_profiler", ga_gfill_profiler_case},
+ {"gfill_secgen", ga_gfill_secgen_case},
+ {"gfill_appsurf", ga_gfill_appsurf_case},
  // GeomAPI (tkgeomalgo_probe_geomapi*.cxx)
  {"gapi_ppc", ga_gapi_ppc_case},
  {"gapi_pps", ga_gapi_pps_case},
