@@ -81,9 +81,13 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
         let tol_coeff: f64 = (self.usup - self.uinf) * precision::p_confusion();
         if T::is_periodic(curve)? {
             let first_knot: f64 = spans.knot(first_idx)?;
+            // `(int)` of a quotient beyond the int range gives INT_MIN on x86-64 (the Rust
+            // cast saturates to it for a large negative range start, as for
+            // GeomAPI_ProjectPointOnCurve on [-2e100, 2e100]), and `shift - 1` then wraps
+            // to INT_MAX natively.
             let mut shift: i32 = ((self.uinf - first_knot) / T::period(curve)?) as i32;
             if self.uinf < first_knot - tol_coeff {
-                shift -= 1;
+                shift = shift.wrapping_sub(1);
             }
             spans.jump = T::period(curve)? * f64::from(shift);
         }
