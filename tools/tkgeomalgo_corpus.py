@@ -53,3 +53,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intwalk').append_intwalk_requests(requests)
     # IntCurveSurface (tkgeomalgo_corpus_intcurvesurface*.py)
     __import__('tkgeomalgo_corpus_intcurvesurface').append_intcurvesurface_requests(requests)
+    # IntStart (tkgeomalgo_corpus_intstart.py)
+    __import__('tkgeomalgo_corpus_intstart').append_intstart_requests(requests)
