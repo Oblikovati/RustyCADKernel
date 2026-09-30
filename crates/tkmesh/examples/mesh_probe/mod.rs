@@ -251,3 +251,5 @@ pub mod vertex_tool;
 pub mod delaun_structure;
 
 pub mod delaun_selector;
+
+pub mod circle_tool;
