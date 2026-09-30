@@ -14,6 +14,7 @@ use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
 use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_tools};
+use ga_probe::int_patch_impimp;
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
@@ -225,6 +226,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_arcf", int_patch_tools::arcf_case),
     ("ip_csf", int_patch_tools::csf_case),
     ("ip_curvature", int_patch_tools::curvature_case),
+    // IntPatch analytic intersections (ga_probe/int_patch_impimp.rs)
+    ("ip_impimp", int_patch_impimp::impimp_case),
+    ("ip_aline2wline", int_patch_impimp::aline2wline_case),
+    ("ip_special", int_patch_impimp::special_case),
+    ("ip_special_pole", int_patch_impimp::special_pole_case),
 ];
 
 fn main() {
