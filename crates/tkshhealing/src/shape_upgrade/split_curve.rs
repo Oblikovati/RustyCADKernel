@@ -142,7 +142,10 @@ impl_transient_interface!(dyn SplitCurve, "ShapeUpgrade_SplitCurve", StandardTra
 /// `[First, Last]`, the given values beyond `First + PConfusion` and before
 /// `Last - PConfusion` are inserted before `Last` in order (the reading index goes on
 /// across the intervals). `given` is `None` when the given sequence is the current one.
-fn insert_split_values(values: &mut Sequence<f64>, given: Option<&[f64]>) -> Result<(), Failure> {
+pub(super) fn insert_split_values(
+    values: &mut Sequence<f64>,
+    given: Option<&[f64]>,
+) -> Result<(), Failure> {
     let tolerance = precision::p_confusion();
     let given_value = |values: &Sequence<f64>, i: usize| -> Result<f64, Failure> {
         match given {

@@ -53,6 +53,7 @@
 #include "tkshhealing_probe_shell_sewing.cxx"
 #include "tkshhealing_probe_free_bounds.cxx"
 #include "tkshhealing_probe_split_curve3d.cxx"
+#include "tkshhealing_probe_split_surface.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_analysis_projection",sh_analysis_curve_projection_case},
  {"sh_analysis_period",sh_analysis_period_case},
@@ -63,6 +64,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_analysis_samples3d",sh_analysis_samples3d_case},
  {"sh_analysis_closure",sh_analysis_closure_case},
  {"sh_analysis_samples2d",sh_analysis_samples2d_case},
+ {"sh_split_surface", sh_split_surface_case},
  {"sh_split_curve3d", sh_split_curve3d_case},
  {"sh_free_bounds", sh_free_bounds_case},
  {"sh_shell_sewing", sh_shell_sewing_case},

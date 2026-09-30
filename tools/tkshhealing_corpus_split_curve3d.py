@@ -1,7 +1,7 @@
 """Curve splitting range clamping, wrapper recursion, segmentation and native null pieces."""
 
 from itertools import product
-import hashlib
+from native_crash_accounting import partition_crash_requests
 from tkshhealing_corpus_shapeconstruct import construct_curves_3d
 from tktopalgo_corpus_breplib_records import (
     numbers,
@@ -133,21 +133,7 @@ def split3d_partition() -> tuple[list[str], list[str]]:
     """Account every candidate as exact or reproducible native crash; split3d_partition()."""
     candidates: list[str] = []
     append_split3d_candidates(candidates)
-    exact: list[str] = []
-    crashes: list[str] = []
-    found: set[str] = set()
-    for request in candidates:
-        digest = hashlib.sha256(request.encode()).hexdigest()
-        if digest in NATIVE_CRASH_SHA256:
-            crashes.append(request)
-            found.add(digest)
-        else:
-            exact.append(request)
-    if found != NATIVE_CRASH_SHA256:
-        raise ValueError(
-            f"SplitCurve3d crash inventory {found}; expected {NATIVE_CRASH_SHA256}"
-        )
-    return exact, crashes
+    return partition_crash_requests(candidates, NATIVE_CRASH_SHA256)
 
 
 def append_split_curve3d_requests(requests: list[str]) -> None:
