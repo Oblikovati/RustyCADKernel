@@ -15,6 +15,7 @@ Usage from a verifier:
 from __future__ import annotations
 import hashlib
 import json
+import shutil
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -42,9 +43,14 @@ class NumericOracle:
         return ROOT/'target'/f'oracle-{self.toolkit.lower()}'/'numeric'
 
     @property
+    def rust_example(self) -> str:
+        """Unique Cargo target name; shared example names can reuse stale artifacts."""
+        return self.rust_package+'-numeric-probe'
+
+    @property
     def rust_probe(self) -> Path:
-        """The Rust twin executable (`numeric_probe` example of the toolkit crate)."""
-        return ROOT/'target/debug/examples/numeric_probe'
+        """Toolkit-owned snapshot, avoiding Cargo examples with colliding names."""
+        return self.evidence/'rust-probe'
 
 
 def build_probes(oracle: NumericOracle, build: Path, output: Path) -> Path:
@@ -54,9 +60,17 @@ def build_probes(oracle: NumericOracle, build: Path, output: Path) -> Path:
     run(['c++', '-std=c++17', '-O2', '-I'+str(build/'include/opencascade'),
          str(ROOT/oracle.probe_source), *map(str, libraries), '-Wl,-rpath,'+str(libraries[0].parent),
          '-o', str(executable)], output/'compile.log')
-    run(['cargo', 'build', '--locked', '-p', oracle.rust_package, '--example', 'numeric_probe'],
-        output/'rust-build.log')
+    build_rust_probe(oracle, output)
     return executable
+
+
+def build_rust_probe(oracle: NumericOracle, output: Path) -> None:
+    """Build a uniquely named Cargo example and retain this toolkit's executable."""
+    selected = ROOT/'target/debug/examples'/oracle.rust_example
+    oracle.rust_probe.unlink(missing_ok=True)
+    run(['cargo', 'build', '--locked', '-p', oracle.rust_package, '--example', oracle.rust_example],
+        output/'rust-build.log')
+    shutil.copy2(selected, oracle.rust_probe)
 
 
 def check_generators(oracle: NumericOracle, source: Path, output: Path) -> None:

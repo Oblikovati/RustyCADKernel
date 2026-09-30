@@ -586,3 +586,17 @@ ValidateRange preserves the native return flags, range clamping, periodic repair
 near-closed spline handling and shared-curve reversal. Its 520 additional native
 cases compare repaired bounds and post-call geometry (9,235 total). Three focused
 regressions and strict clippy pass.
+
+## Surface analysis and mesh wire dependencies
+
+ShapeAnalysis_Surface adds 33 implemented callable APIs and 1,278 native cases.
+The integrated 10,513-case healing corpus passes exactly, including a repeated
+warm build after the mesh oracle. Twenty focused surface tests and its executable
+doctest pass. The separate native probe reader now sequences rectangular Bezier
+surface dimensions explicitly; the existing TKTopAlgo corpus still passes all
+24,225 comparisons with that reader correction. OCCT source was not changed.
+
+Wire ordering and OuterWire/TotCross2D foundations add 29 API rows and preserve
+actual wire state, mixed-mode fallback and signed boundary sampling. Other wire
+checks remain pending. Their 8,448 differential cases run in the TKMesh oracle
+because they exercise the model-building closure.

@@ -26,3 +26,9 @@ complete BRepMesh ShapeTool utility adds 16. The integrated native corpus passes
 41,871 exact comparisons, including geometry, polygons, location and tolerance
 behavior. Concrete model construction still needs wire-analysis dependencies;
 triangulation and all 29 original TKMesh declarations remain pending.
+
+Concrete ModelBuilder and ShapeVisitor add 11 APIs. Original edge/face/wire and
+pcurve incidence, reuse and malformed-boundary statuses are preserved. The
+integrated oracle passes 51,039 comparisons (8,448 wire-foundation and 720 model
+construction cases added). Model construction is available; edge discretization,
+triangulation and original TKMesh regression declarations are still pending.

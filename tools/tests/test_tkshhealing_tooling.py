@@ -68,7 +68,7 @@ class CorpusTests(unittest.TestCase):
         native = (ROOT/'tools/oracle/tkshhealing_probe.cxx').read_text()
         rust = (ROOT/'crates/tkshhealing/examples/numeric_probe.rs').read_text()
         self.assertEqual(set(re.findall(r'\{"(\w+)",', native)), operations)
-        self.assertEqual(set(re.findall(r'\("(\w+)",', rust)), operations)
+        self.assertEqual(set(re.findall(r'\(\s*"(\w+)",', rust)), operations)
 
     def test_status_requests_cover_every_enumerator(self):
         self.assertEqual(status_request(-1, 18), 'sh_status -1 18')

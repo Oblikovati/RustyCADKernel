@@ -207189,6 +207189,672 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::validate_range",
       "status": "implemented",
       "notes": "Native range clamping, periodic repair, near-closed spline repair and shared-curve reversal. 520 exact native cases compare return, bounds and post-call curve digest. Three focused regressions pass."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Init(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::init",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Init(const occ::handle<ShapeAnalysis_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::init_from",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::SetDomain(double,double,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::set_domain",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Surface() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::surface",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Adaptor3d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::adaptor3d",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::TrueAdaptor3d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::true_adaptor3d",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Gap() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::gap",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Value(double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::value",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Value(const gp_Pnt2d&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::value_uv",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::HasSingularities(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::has_singularities",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::NbSingularities(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::nb_singularities",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Singularity(int,double&,gp_Pnt&,gp_Pnt2d&,gp_Pnt2d&,double&,double&,bool&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::singularity",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::IsDegenerated(const gp_Pnt&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::is_degenerated",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::DegeneratedValues(const gp_Pnt&,double,gp_Pnt2d&,gp_Pnt2d&,double&,double&,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::degenerated_values",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::ProjectDegenerated(const gp_Pnt&,double,const gp_Pnt2d&,gp_Pnt2d&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::project_degenerated",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::ProjectDegenerated(int,const NCollection_Sequence<gp_Pnt>&,NCollection_Sequence<gp_Pnt2d>&,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::project_degenerated_sequence",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::IsDegenerated(const gp_Pnt2d&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::is_degenerated_segment",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::Bounds(double&,double&,double&,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::bounds",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::ComputeBoundIsos()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::compute_bound_isos",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::UIso(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::u_iso",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::VIso(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::v_iso",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::IsUClosed(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::IsVClosed(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::ValueOfUV(const gp_Pnt&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::value_of_uv",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::NextValueOfUV(const gp_Pnt2d&,const gp_Pnt&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::next_value_of_uv",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::UVFromIso(const gp_Pnt&,double,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::uv_from_iso",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::UCloseVal() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::u_close_val",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::VCloseVal() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::v_close_val",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::GetBoxUF()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::get_box_uf",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::GetBoxUL()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::get_box_ul",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::GetBoxVF()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::get_box_vf",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::GetBoxVL()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface::get_box_vl",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; ShapeAnalysis_Surface full public callable recovery. 1,278 new native differential requests and 20 focused Rust tests plus a doctest; full local TKShHealing numeric gate 7,232 exact comparisons. Native differential covers analytical, Bezier, BSpline, offset and swept surfaces, cached closure/gap, singularities, global/hinted projection, degenerate sequence count and partial mutation. Undefined null constructor dereference/assertion becomes typed Failure; null Init keeps state."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Surface::DEFINE_STANDARD_RTTIEXT(ShapeAnalysis_Surface,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Surface.hxx",
+      "source_sha256": "61e1d414fdb04e0a1bf1e8773721e0d363506dbbf326a3fbc6a51f714e2af60b",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro implemented by impl_transient! below Standard_Transient."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::new",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire(const TopoDS_Wire&,const TopoDS_Face&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::from_wire",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire(const occ::handle<ShapeExtend_WireData>&,const TopoDS_Face&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::from_wire_data",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Init(const TopoDS_Wire&,const TopoDS_Face&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::init_wire",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Init(const occ::handle<ShapeExtend_WireData>&,const TopoDS_Face&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::init_wire_data",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Load(const TopoDS_Wire&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::load_wire",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Load(const occ::handle<ShapeExtend_WireData>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::load_wire_data",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::set_face",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::SetFace(const TopoDS_Face&,const occ::handle<ShapeAnalysis_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::set_face_with_analysis",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::SetSurface(const occ::handle<ShapeAnalysis_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::set_surface_analysis",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::SetSurface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::set_surface",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::SetSurface(const occ::handle<Geom_Surface>&,const TopLoc_Location&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::set_located_surface",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::SetPrecision(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::set_precision",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::ClearStatuses()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::clear_statuses",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::IsLoaded() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::is_loaded",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::IsReady() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::is_ready",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Precision() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::precision",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::WireData() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::wire_data",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::NbEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::nb_edges",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Face() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::face",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Surface() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::surface",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckOrder(bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_order",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckOrder(ShapeAnalysis_WireOrder&,bool,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_order_with",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusOrder(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_order",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::LastCheckStatus(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::last_check_status",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::DEFINE_STANDARD_RTTIEXT(ShapeAnalysis_Wire,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::OuterWire(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "source_sha256": "f9ca4be2bb2ce41458d6b0a2215384c04defb54414156bd7c2ca6d1129ae46b5",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysis::outer_wire",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::TotCross2D(const occ::handle<ShapeExtend_WireData>&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "source_sha256": "f9ca4be2bb2ce41458d6b0a2215384c04defb54414156bd7c2ca6d1129ae46b5",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysis::tot_cross_2d",
+      "status": "implemented",
+      "notes": "Partial native ShapeAnalysis foundation for BRepMesh: actual state initialization, ordering and signed outer-wire sampling. Other wire checks and other package methods remain unported. Differential requests mesh_wire_order/mesh_outer_wire in TKMesh closure plus shape_analysis_wire_foundation tests."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelBuilder",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelBuilder.hxx",
+      "source_sha256": "63ef7574bd12fdd816d6e24d732008e9478d2b766f18397e85826a70caaff257",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelBuilder",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelBuilder()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelBuilder.hxx",
+      "source_sha256": "63ef7574bd12fdd816d6e24d732008e9478d2b766f18397e85826a70caaff257",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelBuilder::new",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelBuilder::~BRepMesh_ModelBuilder()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelBuilder.hxx",
+      "source_sha256": "63ef7574bd12fdd816d6e24d732008e9478d2b766f18397e85826a70caaff257",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native model-builder and shape-visitor state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelBuilder::DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelBuilder,IMeshTools_ModelBuilder)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelBuilder.hxx",
+      "source_sha256": "63ef7574bd12fdd816d6e24d732008e9478d2b766f18397e85826a70caaff257",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelBuilder (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelBuilder::performInternal(const TopoDS_Shape&,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelBuilder.hxx",
+      "source_sha256": "63ef7574bd12fdd816d6e24d732008e9478d2b766f18397e85826a70caaff257",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelBuilder::perform_internal",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeVisitor",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeVisitor.hxx",
+      "source_sha256": "7ed35d445476c8cafb8c1b8c8be82c06f7ab6e829f9db32198a81c64bd00a44c",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshShapeVisitor",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeVisitor(const occ::handle<IMeshData_Model>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeVisitor.hxx",
+      "source_sha256": "7ed35d445476c8cafb8c1b8c8be82c06f7ab6e829f9db32198a81c64bd00a44c",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshShapeVisitor::new",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeVisitor::~BRepMesh_ShapeVisitor()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeVisitor.hxx",
+      "source_sha256": "7ed35d445476c8cafb8c1b8c8be82c06f7ab6e829f9db32198a81c64bd00a44c",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native model-builder and shape-visitor state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeVisitor::Visit(const TopoDS_Face&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeVisitor.hxx",
+      "source_sha256": "7ed35d445476c8cafb8c1b8c8be82c06f7ab6e829f9db32198a81c64bd00a44c",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshShapeVisitor::visit_face",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeVisitor::Visit(const TopoDS_Edge&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeVisitor.hxx",
+      "source_sha256": "7ed35d445476c8cafb8c1b8c8be82c06f7ab6e829f9db32198a81c64bd00a44c",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshShapeVisitor::visit_edge",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeVisitor::DEFINE_STANDARD_RTTIEXT(BRepMesh_ShapeVisitor,IMeshTools_ShapeVisitor)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeVisitor.hxx",
+      "source_sha256": "7ed35d445476c8cafb8c1b8c8be82c06f7ab6e829f9db32198a81c64bd00a44c",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshShapeVisitor (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
     }
   ],
   "tests": [

@@ -130,3 +130,11 @@ recorded upstream skip, and 1522 passing Rust runtime cases)
 plus deterministic differential cases. Full OCCT test coverage remains pending.
 GPU/backend and native dependency profiles must
 be tested on suitable runners before their capabilities can count as verified.
+
+Numeric probe examples use unique Cargo target names, for example
+`cargo build -p rustycad-tkshhealing --example rustycad-tkshhealing-numeric-probe`.
+Their source paths remain `examples/numeric_probe.rs`. The verifier keeps a copy
+under its own evidence directory. Shared Cargo example names could otherwise
+reuse another toolkit's executable after a workspace build, even when Cargo
+reported the selected crate as fresh. The regression tests cover package identity
+and removal of old evidence executables after a failed build.

@@ -519,7 +519,7 @@ def main() -> None:
     run(['c++', '-std=c++17', '-O2', '-I'+str(build/'include/opencascade'),
          str(ROOT/'tools/oracle/tkmath_probe.cxx'), *map(str,libraries), '-Wl,-rpath,'+str(library.parent),
          '-o', str(executable)], output/'compile.log')
-    run(['cargo', 'build', '--locked', '-p', 'rustycad-tkmath', '--example', 'numeric_probe'], output/'rust-build.log')
+    run(['cargo', 'build', '--locked', '-p', 'rustycad-tkmath', '--example', 'rustycad-tkmath-numeric-probe'], output/'rust-build.log')
     verify_probes(output, executable, inventory['revision'])
 
 
@@ -534,11 +534,11 @@ def reject_unknown_operation(executable: Path) -> None:
 def verify_probes(output: Path, executable: Path, revision: str) -> None:
     """Execute both probes on identical persisted input; verify_probes(out, executable, sha)."""
     reject_unknown_operation(executable)
-    reject_unknown_operation(ROOT/'target/debug/examples/numeric_probe')
+    reject_unknown_operation(ROOT/'target/debug/examples/rustycad-tkmath-numeric-probe')
     requests = corpus()
     (output/'inputs.txt').write_text(requests)
     oracle = run_probe([str(executable)], output/'native.txt', requests)
-    rust = run_probe([str(ROOT/'target/debug/examples/numeric_probe')], output/'rust.txt', requests)
+    rust = run_probe([str(ROOT/'target/debug/examples/rustycad-tkmath-numeric-probe')], output/'rust.txt', requests)
     compare(oracle, rust, requests)
     report = {'revision': revision, 'cases_passed': len(requests.splitlines()),
               'input_sha256': hashlib.sha256(requests.encode()).hexdigest(),

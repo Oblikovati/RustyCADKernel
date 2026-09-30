@@ -29,3 +29,8 @@ SurfaceRangeLocalizeData adds 34 APIs; TopolTool adds 11, with all nine native
 surface kinds, adaptive sampling and retained-array behavior exercised. The
 integrated 4,043-case native oracle passes. FClass2d and the ten original FaceFace
 test declarations remain pending; no Boolean algorithm acceptance is claimed.
+
+FClass2d adds seven callable APIs and a destructor mapped to Rust Drop. Its own
+5,051-case native gate passes, including repeated Init, infinite UV bounds,
+periodic surfaces, open/missing-pcurve wires and native fallback tolerances.
+Context and FaceFace remain in progress.

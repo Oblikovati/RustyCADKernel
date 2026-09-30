@@ -33,7 +33,7 @@ class NativeClosureTests(unittest.TestCase):
         # Other toolkits join the closure after these two (TKShHealing for its verifier).
         additional = next(flag for flag in flags if flag.startswith('-DBUILD_ADDITIONAL_TOOLKITS='))
         self.assertEqual(additional.split('=')[1].split()[:2], ['TKTopAlgo', 'TKPrim'])
-        self.assertEqual(LINKED_TOOLKITS[0], 'TKPrim')
+        self.assertLess(LINKED_TOOLKITS.index('TKPrim'), LINKED_TOOLKITS.index('TKBRep'))
         self.assertEqual(LINKED_TOOLKITS[-1], 'TKernel')
 
 
