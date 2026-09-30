@@ -172,3 +172,12 @@ TKHLR numeric corpus passes 7,015 cases. Six focused analytic tests supplement i
 comparisons over elementary surfaces, indirect frames and generic Bezier patches.
 The complete corpus passes 8,199 cases. The distinct cone-apex thresholds and
 normal choices are retained. Six focused Rust tests also cover these contracts.
+
+## Contap_HCurve2dTool
+
+All 24 callable APIs are mapped with zero header audit gaps or stale rows. The
+adaptor forwarding and Contap-specific sample-count formula pass 600 additional
+native comparisons (8,799 total), including rational curves and zero/reversed
+sample ranges. Three focused Rust regressions pass. The native 2D curve reader
+is shared with TKGeomAlgo to preserve input construction. Null handles return
+explicit Rust errors instead of native null dereferences.

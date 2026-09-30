@@ -54,3 +54,5 @@ pub use poly_records::{
 pub use poly_shell_data::{PolyShellData, ShellIndices};
 pub use projector::Projector;
 pub use wires_block::WiresBlock;
+
+pub(crate) use failures::c_int_truncation;

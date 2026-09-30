@@ -208243,6 +208243,198 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPostProcessor::perform_internal",
       "status": "implemented",
       "notes": "Native polygon publication, seam grouping, skip flags, BRepLib deflection estimation and shared triangulation parameters. Exact differential cases cover empty curves, absent meshes, 1/2/3 pcurves, multiple faces and both parallel modes."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::FirstParameter(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::first_parameter",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::LastParameter(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::last_parameter",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Continuity(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::continuity",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::NbIntervals(const occ::handle<Adaptor2d_Curve2d>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::nb_intervals",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Intervals(const occ::handle<Adaptor2d_Curve2d>&,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::intervals",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::IsClosed(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::is_closed",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::IsPeriodic(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::is_periodic",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Period(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::period",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Value(const occ::handle<Adaptor2d_Curve2d>&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::value",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::D0(const occ::handle<Adaptor2d_Curve2d>&,double,gp_Pnt2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::d0",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::D1(const occ::handle<Adaptor2d_Curve2d>&,double,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::d1",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::D2(const occ::handle<Adaptor2d_Curve2d>&,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::d2",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::D3(const occ::handle<Adaptor2d_Curve2d>&,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::d3",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::DN(const occ::handle<Adaptor2d_Curve2d>&,double,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::dn",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Resolution(const occ::handle<Adaptor2d_Curve2d>&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::resolution",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::GetType(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::get_type",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Line(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::line",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Circle(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::circle",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Ellipse(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::ellipse",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Hyperbola(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::hyperbola",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Parabola(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::parabola",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::Bezier(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::bezier",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::BSpline(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::bspline",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HCurve2dTool::NbSamples(const occ::handle<Adaptor2d_Curve2d>&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HCurve2dTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::nb_samples",
+      "status": "implemented",
+      "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
     }
   ],
   "tests": [

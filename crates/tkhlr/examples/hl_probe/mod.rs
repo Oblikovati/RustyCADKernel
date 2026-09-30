@@ -21,3 +21,8 @@ pub mod contap;
 pub mod contana;
 
 pub mod contap_surface;
+
+pub mod contap_hcurve;
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/curve2d.rs"]
+pub mod curve2d;

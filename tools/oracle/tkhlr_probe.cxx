@@ -33,8 +33,10 @@
 #include "tkhlr_probe_contap.cxx"
 #include "tkhlr_probe_contana.cxx"
 #include "tkhlr_probe_contap_surface.cxx"
+#include "tkhlr_probe_contap_hcurve.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ct_surface", hl_contap_surface_case},
+ {"ct_hcurve", ct_hcurve_case},
  {"ct_analytic", hl_contana_case},
  {"ct_point", hl_contap_point_case},
  {"ct_line", hl_contap_line_case},

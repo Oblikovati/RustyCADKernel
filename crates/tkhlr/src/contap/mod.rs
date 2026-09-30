@@ -18,3 +18,6 @@ mod cont_ana_sphere;
 
 mod surf_props;
 pub use surf_props::{ContapDerivAndNorm, ContapNormAndDn, ContapSurfProps};
+
+mod h_curve2d_tool;
+pub use h_curve2d_tool::ContapHCurve2dTool;
