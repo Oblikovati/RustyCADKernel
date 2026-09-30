@@ -208738,14 +208738,6 @@
       "notes": "Native polygon node indexing, face placement and EdgeParameterProvider evaluation. Raw mesh/node associations use non-owning WeakHandle references. Exact differential cases cover seams, both SameParameter settings, translated placements and repeated/reversed reads."
     },
     {
-      "upstream_id": "IntTools_WLineTool::NotUseSurfacesForApprox(const TopoDS_Face&,const TopoDS_Face&,const occ::handle<IntPatch_WLine>&,int,int)",
-      "toolkit": "TKBO",
-      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_WLineTool.hxx",
-      "rust_item": "rustycad_tkbo::int_tools::WLineTool::not_use_surfaces_for_approx",
-      "status": "implemented",
-      "notes": "Pinned native differential across plane/cylinder/cone/sphere/torus pairs, seams, poles and tiny radii. Preserves native reuse of surface1 bounds for surface2 and final negated bFlag after a non-degenerate boundary check. DecompositionOfWLine not yet ported; no completeness claim."
-    },
-    {
       "upstream_id": "Contap_HContTool::NbSamplesU(const occ::handle<Adaptor3d_Surface>&,double,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
@@ -209233,6 +209225,150 @@
       "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::p_surface",
       "status": "implemented",
       "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "IntTools_WLineTool::NotUseSurfacesForApprox(const TopoDS_Face&,const TopoDS_Face&,const occ::handle<IntPatch_WLine>&,int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_WLineTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::WLineTool::not_use_surfaces_for_approx",
+      "status": "implemented",
+      "notes": "Pinned native differential across plane/cylinder/cone/sphere/torus pairs, seams, poles and tiny radii. Preserves native reuse of surface1 bounds for surface2 and final negated bFlag after a non-degenerate boundary check."
+    },
+    {
+      "upstream_id": "IntTools_WLineTool::DecompositionOfWLine(const occ::handle<IntPatch_WLine>&,const occ::handle<GeomAdaptor_Surface>&,const occ::handle<GeomAdaptor_Surface>&,const TopoDS_Face&,const TopoDS_Face&,const GeomInt_LineConstructor&,bool,double,NCollection_Sequence<occ::handle<IntPatch_Line>>&,const occ::handle<IntTools_Context>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_WLineTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::WLineTool::decomposition_of_wline",
+      "status": "implemented",
+      "notes": "Pinned exact native differential includes periodic U/V seam grouping, near-boundary corrections, endpoint reflection/projection, append semantics, preserved creation metadata, and real GeomInt_LineConstructor clipping parts. Native boundary-condition quirks and index/zero-vector exceptions preserved."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::new",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Set(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::set_surface",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Set(const gp_Dir&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::set_direction",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Set(const gp_Dir&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::set_direction_angle",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Set(const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::set_eye",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Set(const gp_Pnt&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::set_eye_angle",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Set(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::set_arc",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Value(double,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::value_at",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Derivative(double,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::derivative_at",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Values(double,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::values_into",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::NbSamples() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::nb_samples",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::GetStateNumber()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::get_state_number",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Valpoint(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::valpoint",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Quadric() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::quadric",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::Surface() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::surface",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "Contap_ArcFunction::LastComputedPoint() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ArcFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::last_computed_point",
+      "status": "implemented",
+      "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
     }
   ],
   "tests": [

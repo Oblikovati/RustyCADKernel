@@ -1,4 +1,4 @@
-use super::super::{ContapSurfProps, ContapTFunction, geometry::vector_of_dir};
+use super::super::ContapSurfProps;
 use super::ContapSurfFunction;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::{
@@ -6,48 +6,25 @@ use rustycad_tkmath::{
     math::{Matrix, Vector},
 };
 impl ContapSurfFunction {
-    /// The value of `F` for the normal `norm` at the point `solpt` (None for DraftPrs).
-    fn function_of(&self, norm: Vector3) -> Option<f64> {
-        let dir = vector_of_dir(self.my_dir);
-        match self.my_type {
-            ContapTFunction::ContourStd => Some(norm.dot(dir) / self.my_mean),
-            ContapTFunction::ContourPrs => {
-                Some(norm.dot(Vector3::between(self.my_eye, self.solpt)) / self.my_mean)
-            }
-            ContapTFunction::DraftStd => {
-                Some((norm.dot(dir) - self.my_cos_ang * norm.magnitude()) / self.my_mean)
-            }
-            ContapTFunction::DraftPrs => None,
+    fn equation(&self) -> super::super::equation::ContourEquation {
+        super::super::equation::ContourEquation {
+            kind: self.my_type,
+            direction: self.my_dir,
+            eye: self.my_eye,
+            cosine: self.my_cos_ang,
+            scale: self.my_mean,
         }
     }
-
-    /// The gradient of `F` from the normal and its derivatives (None for DraftPrs);
-    /// the draft gradient uses the normalized normal.
+    fn function_of(&self, normal: Vector3) -> Option<f64> {
+        self.equation().normal_value(self.solpt, normal)
+    }
     pub(super) fn gradient_of(
         &self,
-        mut norm: Vector3,
-        dnu: Vector3,
-        dnv: Vector3,
+        normal: Vector3,
+        du: Vector3,
+        dv: Vector3,
     ) -> Result<Option<(f64, f64)>, Failure> {
-        let dir = vector_of_dir(self.my_dir);
-        Ok(match self.my_type {
-            ContapTFunction::ContourStd => {
-                Some((dnu.dot(dir) / self.my_mean, dnv.dot(dir) / self.my_mean))
-            }
-            ContapTFunction::ContourPrs => {
-                let ep = Vector3::between(self.my_eye, self.solpt);
-                Some((dnu.dot(ep) / self.my_mean, dnv.dot(ep) / self.my_mean))
-            }
-            ContapTFunction::DraftStd => {
-                norm.normalize()?;
-                let c = self.my_cos_ang;
-                Some((
-                    (dnu.dot(dir) - c * dnu.dot(norm)) / self.my_mean,
-                    (dnv.dot(dir) - c * dnv.dot(norm)) / self.my_mean,
-                ))
-            }
-            ContapTFunction::DraftPrs => None,
-        })
+        self.equation().normal_gradient(self.solpt, normal, du, dv)
     }
 
     /// Value(X, F): `F` at `x`; always true; `f.value(&x, &mut out)?`.

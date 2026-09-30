@@ -1,4 +1,4 @@
-use super::super::{ContapHContTool, ContapSurfProps, ContapTFunction};
+use super::super::ContapTFunction;
 use super::ContapSurfFunction;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
@@ -8,17 +8,7 @@ impl ContapSurfFunction {
     /// process-wide sampling of `Contap_HContTool`); `f.set_surface(&s)?`.
     pub fn set_surface(&mut self, s: &Adaptor3dSurfaceHandle) -> Result<(), Failure> {
         self.my_surf = s.clone();
-        let nbs = ContapHContTool::nb_sample_points(s)?;
-        if nbs > 0 {
-            self.my_mean = 0.;
-            for i in 1..=nbs {
-                let (u, v) = ContapHContTool::sample_point(s, i)?;
-                let (p, norm) = ContapSurfProps::normale(s, u, v)?;
-                self.solpt = p;
-                self.my_mean += norm.magnitude();
-            }
-            self.my_mean /= f64::from(nbs);
-        }
+        super::super::normal_sampling::sample_normal_scale(s, &mut self.my_mean, &mut self.solpt)?;
         self.computed = false;
         self.derived = false;
         Ok(())

@@ -28,3 +28,8 @@ pub use h_cont_tool::ContapHContTool;
 mod surf_function;
 mod surf_function_traits;
 pub use surf_function::ContapSurfFunction;
+
+mod arc_function;
+mod equation;
+mod normal_sampling;
+pub use arc_function::ContapArcFunction;

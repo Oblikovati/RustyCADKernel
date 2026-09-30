@@ -37,7 +37,9 @@
 #include "tkhlr_probe_contap_sampling.cxx"
 #include "tkhlr_probe_contap_hcont.cxx"
 #include "tkhlr_probe_contap_function.cxx"
+#include "tkhlr_probe_contap_arc_function.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"ct_arc_function",ct_arc_function_case},
  {"ct_function",ct_function_case},
  {"ct_sampling",ct_sampling_case},
  {"ct_hcont_arc",ct_hcont_arc_case},

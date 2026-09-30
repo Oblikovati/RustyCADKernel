@@ -201,3 +201,12 @@ normal-based scaling, singular-point failures and first-failure capture in solve
 callbacks. All 12,219 numeric requests pass exactly (432 new requests), the crate
 suite and three direct regressions pass, and strict Clippy passes. These helper APIs
 have no standalone original test declarations; overall toolkit completion is pending.
+
+### Contap_ArcFunction recovery
+
+All 16 public members now preserve native arc evaluation, saved-point numbering and
+callback outputs. The arc and surface functions share their identical normal scale
+and equation calculations. The exact corpus passes 13,083 requests (864 new), all
+crate tests/doctests and strict Clippy pass, and three direct regressions cover draft
+output retention, saved-state resets and failure capture. The default quadric member
+is retained without asserting meaningful geometry for native uninitialized fields.
