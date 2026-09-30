@@ -9,3 +9,8 @@ The model foundation oracle compares 10,300 cases with the pinned native TKMesh:
 all 512 status masks, four orientations, sample retention, container mutation,
 and native pcurve lookup behavior. Twelve focused Rust tests also pass.
 No original TKMesh legacy declarations are mapped by this foundation slice.
+
+Eight independent IMeshTools headers add 50 API rows: parameters, strategy
+interfaces and native shape exploration. The numeric corpus now passes 14,407
+cases. Status masks retain unlisted bit combinations via a newtype. Context and
+mesh builders await the Message_Algorithm shared-handle base port.

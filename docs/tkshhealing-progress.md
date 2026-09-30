@@ -544,3 +544,11 @@ dereference; the native corpus uses non-null shapes.
 TKShHealing now maps 44 legacy declarations (21 canonical recognition, 18 edge-connect,
 5 edge analysis). Other classes and legacy suites remain outstanding; these results do
 not imply toolkit acceptance or completion of the full OCCT port.
+
+## Recovered ShapeConstruct_Curve
+
+All seven APIs are mapped. The native copy-before-Segment fallback, original
+one-based FixKnots indexing and partial mutation, and the unusual 3D approximation
+limits are preserved. Eighteen integration tests, two private regressions, and
+one doctest pass; 642 new native comparisons bring the full numeric corpus to
+5,954. ProjectCurveOnSurface and its original legacy tests remain pending.

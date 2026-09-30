@@ -205045,6 +205045,1023 @@
       "rust_item": "rustycad_tkhlr::contap::ContapContAna::line",
       "status": "implemented",
       "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "ShapeConstruct_Curve::AdjustCurve(const occ::handle<Geom_Curve>&,const gp_Pnt&,const gp_Pnt&,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_Curve.hxx",
+      "source_sha256": "8d4225df1bb8ddd30e8ac0124374f90b7ab107b7d664468c241379d39f1d7223",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::adjust_curve",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; 642 sh_construct differential requests in tools/verify_tkshhealing_numeric.py, plus API and copy-before-Segment regression tests. Preserves partial knot mutation, native 3D Approx maxSegments=9/maxDegree=1000, and assigned copy after Segment failure. Null dereferences become typed Failure errors."
+    },
+    {
+      "upstream_id": "ShapeConstruct_Curve::AdjustCurveSegment(const occ::handle<Geom_Curve>&,const gp_Pnt&,const gp_Pnt&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_Curve.hxx",
+      "source_sha256": "8d4225df1bb8ddd30e8ac0124374f90b7ab107b7d664468c241379d39f1d7223",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::adjust_curve_segment",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; 642 sh_construct differential requests in tools/verify_tkshhealing_numeric.py, plus API and copy-before-Segment regression tests. Preserves partial knot mutation, native 3D Approx maxSegments=9/maxDegree=1000, and assigned copy after Segment failure. Null dereferences become typed Failure errors."
+    },
+    {
+      "upstream_id": "ShapeConstruct_Curve::AdjustCurve2d(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_Curve.hxx",
+      "source_sha256": "8d4225df1bb8ddd30e8ac0124374f90b7ab107b7d664468c241379d39f1d7223",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::adjust_curve_2d",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; 642 sh_construct differential requests in tools/verify_tkshhealing_numeric.py, plus API and copy-before-Segment regression tests. Preserves partial knot mutation, native 3D Approx maxSegments=9/maxDegree=1000, and assigned copy after Segment failure. Null dereferences become typed Failure errors."
+    },
+    {
+      "upstream_id": "ShapeConstruct_Curve::ConvertToBSpline(const occ::handle<Geom_Curve>&,double,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_Curve.hxx",
+      "source_sha256": "8d4225df1bb8ddd30e8ac0124374f90b7ab107b7d664468c241379d39f1d7223",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::convert_to_bspline",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; 642 sh_construct differential requests in tools/verify_tkshhealing_numeric.py, plus API and copy-before-Segment regression tests. Preserves partial knot mutation, native 3D Approx maxSegments=9/maxDegree=1000, and assigned copy after Segment failure. Null dereferences become typed Failure errors."
+    },
+    {
+      "upstream_id": "ShapeConstruct_Curve::ConvertToBSpline(const occ::handle<Geom2d_Curve>&,double,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_Curve.hxx",
+      "source_sha256": "8d4225df1bb8ddd30e8ac0124374f90b7ab107b7d664468c241379d39f1d7223",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::convert_to_bspline_2d",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; 642 sh_construct differential requests in tools/verify_tkshhealing_numeric.py, plus API and copy-before-Segment regression tests. Preserves partial knot mutation, native 3D Approx maxSegments=9/maxDegree=1000, and assigned copy after Segment failure. Null dereferences become typed Failure errors."
+    },
+    {
+      "upstream_id": "ShapeConstruct_Curve::FixKnots(occ::handle<NCollection_HArray1<double>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_Curve.hxx",
+      "source_sha256": "8d4225df1bb8ddd30e8ac0124374f90b7ab107b7d664468c241379d39f1d7223",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::fix_knots_handle",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; 642 sh_construct differential requests in tools/verify_tkshhealing_numeric.py, plus API and copy-before-Segment regression tests. Preserves partial knot mutation, native 3D Approx maxSegments=9/maxDegree=1000, and assigned copy after Segment failure. Null dereferences become typed Failure errors."
+    },
+    {
+      "upstream_id": "ShapeConstruct_Curve::FixKnots(NCollection_Array1<double>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_Curve.hxx",
+      "source_sha256": "8d4225df1bb8ddd30e8ac0124374f90b7ab107b7d664468c241379d39f1d7223",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::fix_knots",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0; 642 sh_construct differential requests in tools/verify_tkshhealing_numeric.py, plus API and copy-before-Segment regression tests. Preserves partial knot mutation, native 3D Approx maxSegments=9/maxDegree=1000, and assigned copy after Segment failure. Null dereferences become typed Failure errors."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::default",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::RelMinSize()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::rel_min_size",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::MeshAlgo",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::mesh_algo",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::Angle",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::angle",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::Deflection",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::deflection",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::AngleInterior",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::angle_interior",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::DeflectionInterior",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::deflection_interior",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::MinSize",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::min_size",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::InParallel",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::in_parallel",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::Relative",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::relative",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::InternalVerticesMode",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::internal_vertices_mode",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::ControlSurfaceDeflection",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::control_surface_deflection",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::EnableControlSurfaceDeflectionAllSurfaces",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::enable_control_surface_deflection_all_surfaces",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::CleanModel",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::clean_model",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::AdjustMinSize",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::adjust_min_size",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::ForceFaceDeflection",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::force_face_deflection",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_Parameters::AllowQualityDecrease",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Parameters.hxx",
+      "source_sha256": "7252a2021e7b9d1fa17dc559c385d00bb2042fa798ff7a5c0805f541e5eb65e3",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshParameters::allow_quality_decrease",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoType",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoType.hxx",
+      "source_sha256": "8de3d2b0779c3e4e0a250272350f085002ac66568ed5446304d50ff91a3be98b",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgoType",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoType_DEFAULT",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoType.hxx",
+      "source_sha256": "8de3d2b0779c3e4e0a250272350f085002ac66568ed5446304d50ff91a3be98b",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgoType::Default",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoType_Watson",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoType.hxx",
+      "source_sha256": "8de3d2b0779c3e4e0a250272350f085002ac66568ed5446304d50ff91a3be98b",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgoType::Watson",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoType_Delabella",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoType.hxx",
+      "source_sha256": "8de3d2b0779c3e4e0a250272350f085002ac66568ed5446304d50ff91a3be98b",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgoType::Delabella",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_CurveTessellator",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_CurveTessellator.hxx",
+      "source_sha256": "d9ffc23fff17f5fc79636276d77236bd9ca7fe96bf93558e9985fd488d3e3337",
+      "rust_item": "rustycad_tkmesh::imesh_tools::CurveTessellator",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_CurveTessellator::~IMeshTools_CurveTessellator()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_CurveTessellator.hxx",
+      "source_sha256": "d9ffc23fff17f5fc79636276d77236bd9ca7fe96bf93558e9985fd488d3e3337",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops strategy and explorer state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_CurveTessellator::PointsNb() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_CurveTessellator.hxx",
+      "source_sha256": "d9ffc23fff17f5fc79636276d77236bd9ca7fe96bf93558e9985fd488d3e3337",
+      "rust_item": "rustycad_tkmesh::imesh_tools::CurveTessellator::points_nb",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_CurveTessellator::Value(int,gp_Pnt&,double&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_CurveTessellator.hxx",
+      "source_sha256": "d9ffc23fff17f5fc79636276d77236bd9ca7fe96bf93558e9985fd488d3e3337",
+      "rust_item": "rustycad_tkmesh::imesh_tools::CurveTessellator::value",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_CurveTessellator::DEFINE_STANDARD_RTTIEXT(IMeshTools_CurveTessellator,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_CurveTessellator.hxx",
+      "source_sha256": "d9ffc23fff17f5fc79636276d77236bd9ca7fe96bf93558e9985fd488d3e3337",
+      "rust_item": "rustycad_tkmesh::imesh_tools::CurveTessellator (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgo",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgo.hxx",
+      "source_sha256": "ee9cb732a79df6491e370e388d6b7fc625c1f77b52c9fd8b8ca4fe207c9a3004",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgo",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgo::~IMeshTools_MeshAlgo()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgo.hxx",
+      "source_sha256": "ee9cb732a79df6491e370e388d6b7fc625c1f77b52c9fd8b8ca4fe207c9a3004",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops strategy and explorer state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgo::Perform(const IMeshData::IFaceHandle&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgo.hxx",
+      "source_sha256": "ee9cb732a79df6491e370e388d6b7fc625c1f77b52c9fd8b8ca4fe207c9a3004",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgo::perform",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgo::DEFINE_STANDARD_RTTIEXT(IMeshTools_MeshAlgo,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgo.hxx",
+      "source_sha256": "ee9cb732a79df6491e370e388d6b7fc625c1f77b52c9fd8b8ca4fe207c9a3004",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgo (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoFactory",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoFactory.hxx",
+      "source_sha256": "64bd3f0527d49b1f075e9d4721eb1b53f83ebe3296b229fa5672ce146d9cf00d",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgoFactory",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoFactory::~IMeshTools_MeshAlgoFactory()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoFactory.hxx",
+      "source_sha256": "64bd3f0527d49b1f075e9d4721eb1b53f83ebe3296b229fa5672ce146d9cf00d",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops strategy and explorer state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoFactory::GetAlgo(GeomAbs_SurfaceType,const IMeshTools_Parameters&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoFactory.hxx",
+      "source_sha256": "64bd3f0527d49b1f075e9d4721eb1b53f83ebe3296b229fa5672ce146d9cf00d",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgoFactory::get_algo",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshAlgoFactory::DEFINE_STANDARD_RTTIEXT(IMeshTools_MeshAlgoFactory,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshAlgoFactory.hxx",
+      "source_sha256": "64bd3f0527d49b1f075e9d4721eb1b53f83ebe3296b229fa5672ce146d9cf00d",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshAlgoFactory (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelAlgo",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelAlgo.hxx",
+      "source_sha256": "4c20654ae43d35a79fa03487bb374da0bee55ab83a57772979ef9c2549e954aa",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelAlgo",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelAlgo::~IMeshTools_ModelAlgo()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelAlgo.hxx",
+      "source_sha256": "4c20654ae43d35a79fa03487bb374da0bee55ab83a57772979ef9c2549e954aa",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops strategy and explorer state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelAlgo::Perform(const occ::handle<IMeshData_Model>&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelAlgo.hxx",
+      "source_sha256": "4c20654ae43d35a79fa03487bb374da0bee55ab83a57772979ef9c2549e954aa",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelAlgo::perform",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelAlgo::DEFINE_STANDARD_RTTIEXT(IMeshTools_ModelAlgo,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelAlgo.hxx",
+      "source_sha256": "4c20654ae43d35a79fa03487bb374da0bee55ab83a57772979ef9c2549e954aa",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelAlgo (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelAlgo::performInternal(const occ::handle<IMeshData_Model>&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelAlgo.hxx",
+      "source_sha256": "4c20654ae43d35a79fa03487bb374da0bee55ab83a57772979ef9c2549e954aa",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelAlgo::perform_internal",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeVisitor",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeVisitor.hxx",
+      "source_sha256": "42b5de8e30756ae89e82aa98c6b14330f4d9f92e1e07d4fb1814726281ce10c8",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeVisitor",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeVisitor::~IMeshTools_ShapeVisitor()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeVisitor.hxx",
+      "source_sha256": "42b5de8e30756ae89e82aa98c6b14330f4d9f92e1e07d4fb1814726281ce10c8",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops strategy and explorer state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeVisitor::Visit(const TopoDS_Face&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeVisitor.hxx",
+      "source_sha256": "42b5de8e30756ae89e82aa98c6b14330f4d9f92e1e07d4fb1814726281ce10c8",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeVisitor::visit_face",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeVisitor::Visit(const TopoDS_Edge&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeVisitor.hxx",
+      "source_sha256": "42b5de8e30756ae89e82aa98c6b14330f4d9f92e1e07d4fb1814726281ce10c8",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeVisitor::visit_edge",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeVisitor::DEFINE_STANDARD_RTTIEXT(IMeshTools_ShapeVisitor,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeVisitor.hxx",
+      "source_sha256": "42b5de8e30756ae89e82aa98c6b14330f4d9f92e1e07d4fb1814726281ce10c8",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeVisitor (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeExplorer",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeExplorer.hxx",
+      "source_sha256": "57848c4072ed1dd6c728802de884f8966d8f5ad065ed4aa56d7f8f2c67896b70",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeExplorer",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeExplorer(const TopoDS_Shape&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeExplorer.hxx",
+      "source_sha256": "57848c4072ed1dd6c728802de884f8966d8f5ad065ed4aa56d7f8f2c67896b70",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeExplorer::new",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeExplorer::~IMeshTools_ShapeExplorer()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeExplorer.hxx",
+      "source_sha256": "57848c4072ed1dd6c728802de884f8966d8f5ad065ed4aa56d7f8f2c67896b70",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops strategy and explorer state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeExplorer::Accept(const occ::handle<IMeshTools_ShapeVisitor>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeExplorer.hxx",
+      "source_sha256": "57848c4072ed1dd6c728802de884f8966d8f5ad065ed4aa56d7f8f2c67896b70",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeExplorer::accept",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IMeshTools_ShapeExplorer::DEFINE_STANDARD_RTTIEXT(IMeshTools_ShapeExplorer,IMeshData_Shape)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ShapeExplorer.hxx",
+      "source_sha256": "57848c4072ed1dd6c728802de884f8966d8f5ad065ed4aa56d7f8f2c67896b70",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ShapeExplorer (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py and focused imesh_tools Rust tests; abstract strategies preserve native signatures as runtime-typed traits."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::default",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::Init(const TopoDS_Face&,const gp_Pnt&,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::init",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::set_face",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::SetPnt(const gp_Pnt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::set_pnt",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::SetParameters(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::set_parameters",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::SetValid(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::set_valid",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::Valid() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::valid",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::Face() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::face",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::Pnt() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::pnt",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::Parameters(double&,double&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOnFace::parameters",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOnFace::IsValid() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
+      "rust_item": "",
+      "status": "upstream_unimplemented",
+      "notes": "Declared but unimplemented in pinned OCCT 3d097a0: native link fails with undefined reference to IntTools_PntOnFace::IsValid() const; Valid() is the executable member. No behavior invented."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::default",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces(const IntTools_PntOnFace&,const IntTools_PntOnFace&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::new",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces::SetP1(const IntTools_PntOnFace&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::set_p1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces::SetP2(const IntTools_PntOnFace&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::set_p2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces::SetValid(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::set_valid",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces::P1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::p1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces::P2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::p2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_PntOn2Faces::IsValid() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOn2Faces.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::PntOn2Faces::is_valid",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::default",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve(const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::new",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::SetCurves(const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::set_curves",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::SetCurve(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::set_curve",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::SetFirstCurve2d(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::set_first_curve2d",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::SetSecondCurve2d(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::set_second_curve2d",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::SetTolerance(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::set_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::SetTangentialTolerance(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::set_tangential_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::Curve() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::curve",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::FirstCurve2d() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::first_curve2d",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::SecondCurve2d() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::second_curve2d",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::Tolerance() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::tolerance",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::TangentialTolerance() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::tangential_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::HasBounds() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::has_bounds",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::Bounds(double&,double&,gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::bounds",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::D0(const double&,gp_Pnt&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::d0",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_Curve::Type() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Curve.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Curve::curve_type",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::default",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt(const IntTools_CommonPrt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::clone",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Assign(const IntTools_CommonPrt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::assign",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::operator=(const IntTools_CommonPrt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::assign",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetEdge1(const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_edge1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetEdge2(const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_edge2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetType(TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_type",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetRange1(const IntTools_Range&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_range1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetRange1(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_range1_bounds",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::AppendRange2(const IntTools_Range&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::append_range2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::AppendRange2(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::append_range2_bounds",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetVertexParameter1(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_vertex_parameter1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetVertexParameter2(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_vertex_parameter2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Edge1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::edge1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Edge2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::edge2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Type() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::shape_type",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Range1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::range1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Range1(double&,double&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::range1_bounds",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Ranges2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::ranges2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::ChangeRanges2()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::change_ranges2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::VertexParameter1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::vertex_parameter1",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::VertexParameter2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::vertex_parameter2",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::Copy(IntTools_CommonPrt&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::copy_to",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::AllNullFlag() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::all_null_flag",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetAllNullFlag(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_all_null_flag",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::SetBoundingPoints(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::set_bounding_points",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CommonPrt::BoundingPoints(gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CommonPrt.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CommonPrt::bounding_points",
+      "status": "implemented",
+      "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
     }
   ],
   "tests": [

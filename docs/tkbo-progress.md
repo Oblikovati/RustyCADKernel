@@ -13,3 +13,9 @@ as translated by this foundation slice.
 
 BOPDS IndexRange, Pave, Pair, and Point add 42 API rows. Their comparison, hash,
 mutation and Dump behavior are checked against native calls, including signed zero.
+
+IntTools Curve, CommonPrt and point-on-face records add 62 implemented APIs.
+The cumulative oracle passes 3,027 cases. `IntTools_PntOnFace::IsValid()` is
+declared but has no native definition: a direct link fails with an undefined
+reference. Its ledger status is `upstream_unimplemented`, an explicit acceptance
+gap. The separately implemented native `Valid()` method is ported.
