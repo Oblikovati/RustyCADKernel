@@ -82,7 +82,7 @@ fn box2d_print(bounds: &BoundingBox2) {
     }
 }
 
-fn box3d_print(bounds: &BoundingBox3) {
+pub fn box3d_print(bounds: &BoundingBox3) {
     for value in [
         bounds.is_void(),
         bounds.is_whole(),

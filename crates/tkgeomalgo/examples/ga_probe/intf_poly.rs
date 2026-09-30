@@ -245,7 +245,7 @@ impl PolyhedronTool for ProbePolyhedronTool {
 
 type ProbeInterference = InterferencePolygonPolyhedron<ProbePolygon3dTool, ProbePolyhedronTool>;
 
-fn lines(r: &mut Reader) -> Array1<'static, Line3> {
+pub fn lines(r: &mut Reader) -> Array1<'static, Line3> {
     let n = r.integer();
     let mut lines: Array1<'static, Line3> = Array1::with_bounds(1, n.max(1)).expect("probe lines");
     for slot in lines.iter_mut().take(n as usize) {

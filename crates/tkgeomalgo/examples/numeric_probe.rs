@@ -7,6 +7,7 @@ use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
+use ga_probe::{int_curve_surface, int_curve_surface_inter};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -107,6 +108,27 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // AppBlend (ga_probe/app_blend.rs)
     ("ab_appsurf", app_blend::appsurf_case),
     ("ab_context", app_blend::context_case),
+    // IntCurveSurface (ga_probe/int_curve_surface*.rs)
+    ("ics_records", int_curve_surface::records_case),
+    ("ics_intersection", int_curve_surface::intersection_case),
+    ("ics_hcurve", int_curve_surface::hcurve_case),
+    ("ics_polygon", int_curve_surface::polygon_case),
+    ("ics_polyhedron", int_curve_surface::polyhedron_case),
+    ("ics_utils", int_curve_surface::utils_case),
+    (
+        "ics_interference",
+        int_curve_surface_inter::interference_case,
+    ),
+    ("ics_exact", int_curve_surface_inter::exact_case),
+    ("ics_quadcurv", int_curve_surface_inter::quadcurv_case),
+    ("ics_hinter", int_curve_surface_inter::hinter_case),
+    (
+        "ics_hinter_protected",
+        int_curve_surface_inter::hinter_protected_case,
+    ),
+    ("ics_estlim", int_curve_surface_inter::estlim_case),
+    ("ics_project", int_curve_surface_inter::project_case),
+    ("ics_interutils", int_curve_surface_inter::interutils_case),
 ];
 
 fn main() {

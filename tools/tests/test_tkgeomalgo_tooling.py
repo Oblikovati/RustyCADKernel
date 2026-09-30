@@ -9,6 +9,7 @@ from pathlib import Path
 from coverage_report import PROBE_CORPORA
 from native_build import LINKED_TOOLKITS
 from tkgeomalgo_corpus import append_tkgeomalgo_requests
+from tkgeomalgo_corpus_intcurvesurface import CURVES, _count_commands, _surface_grid, bspline, sad, plane
 from tkgeomalgo_corpus_intf import identity, point_pool, spoint, triangle_request
 from tkgeomalgo_corpus_intf_poly import height_field
 from tkgeomalgo_corpus_toptrans import fan
@@ -95,6 +96,27 @@ class IntfCorpusTests(unittest.TestCase):
 class TopTransCorpusTests(unittest.TestCase):
     def test_fan_directions_are_normal_to_the_tangent(self):
         self.assertEqual(fan(0.0), (0.0, 1.0, 0.0))
+
+
+
+class IntCurveSurfaceCorpusTests(unittest.TestCase):
+    def test_bspline_encoding_counts_poles_weights_and_knots(self):
+        spec = bspline(1, [[0, 0, 0], [1, 0, 0]], [0.0, 1.0], [2, 2])
+        self.assertEqual(spec, [6, 1, 2, 0, 0, 0, 1, 0, 0, 0, 2, 0.0, 1.0, 2, 2, 0])
+
+    def test_line_curves_have_no_radius_field(self):
+        # `ga_ics_geom_curve` reads a radius only for the other conics.
+        self.assertEqual(len(CURVES['line']), 1 + 6 + 3)
+
+    def test_intersection_script_counts_its_commands(self):
+        self.assertEqual(_count_commands([0, 6, 1, 3, 0, 2, 1, 0]), 3)
+
+    def test_grid_scales_the_unit_box_to_the_surface_box(self):
+        self.assertEqual(_surface_grid('trim_plane', [0, 3, 3, 0.0, 0.0, 1.0, 1.0]), [0, 3, 3, -1.0, -0.5, 1.5, 2.0])
+        self.assertEqual(_surface_grid('plane', [1, 2, 0.0, 1.0, 1, 0.5]), [1, 2, 0.0, 1.0, 1, 0.5])
+
+    def test_surface_adaptor_flags_given_bounds(self):
+        self.assertEqual(sad(plane([0, 0, 0], [0, 0, 1]), (0, 1, 2, 3))[-5:], [1, 0, 1, 2, 3])
 
 
 if __name__ == '__main__':

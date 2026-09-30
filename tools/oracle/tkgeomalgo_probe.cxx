@@ -43,6 +43,8 @@
 #include "tkgeomalgo_probe_faircurve.cxx"
 #include "tkgeomalgo_probe_intimp.cxx"
 #include "tkgeomalgo_probe_appblend.cxx"
+#include "tkgeomalgo_probe_intcurvesurface.cxx"
+#include "tkgeomalgo_probe_intcurvesurface_inter.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -137,6 +139,21 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // AppBlend (tkgeomalgo_probe_appblend.cxx)
  {"ab_appsurf", ga_ab_appsurf_case},
  {"ab_context", ga_ab_context_case},
+ // IntCurveSurface (tkgeomalgo_probe_intcurvesurface*.cxx)
+ {"ics_records",ga_ics_records_case},
+ {"ics_intersection",ga_ics_intersection_case},
+ {"ics_hcurve",ga_ics_hcurve_case},
+ {"ics_polygon",ga_ics_polygon_case},
+ {"ics_polyhedron",ga_ics_polyhedron_case},
+ {"ics_utils",ga_ics_utils_case},
+ {"ics_interference",ga_ics_interference_case},
+ {"ics_exact",ga_ics_exact_case},
+ {"ics_quadcurv",ga_ics_quadcurv_case},
+ {"ics_hinter",ga_ics_hinter_case},
+ {"ics_hinter_protected",ga_ics_hinter_protected_case},
+ {"ics_estlim",ga_ics_estlim_case},
+ {"ics_project",ga_ics_project_case},
+ {"ics_interutils",ga_ics_interutils_case},
 };
 int main() {
  std::string line;

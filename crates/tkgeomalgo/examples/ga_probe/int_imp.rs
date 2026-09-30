@@ -1,8 +1,7 @@
 //! IntImp probe operations, the Rust twin of tools/oracle/tkgeomalgo_probe_intimp.cxx.
 //! The native probe drives the templates through their TKGeomAlgo instances; this
 //! twin instantiates the generics with the same tools (`HSurfaceTool`,
-//! `IntSurfQuadricTool`, and [`HCurveTool`], the calls of
-//! `IntCurveSurface_TheHCurveTool`).
+//! `IntSurfQuadricTool`, and `IntCurveSurface_TheHCurveTool`).
 use super::common::{Reader, end, flag, int, pnt, real, show, xyz};
 use super::int_surf::quadric;
 use rustycad_tkernel::ncollection::Array1;
@@ -16,32 +15,13 @@ use rustycad_tkg3d::geom::{
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkgeomalgo::int_imp::*;
 use rustycad_tkgeomalgo::int_surf::IntSurfQuadricTool;
-use rustycad_tkmath::gp::{Axis2, Axis3, Direction2, Point3, Vector3};
+use rustycad_tkmath::gp::{Axis2, Axis3, Direction2, Vector3};
 use rustycad_tkmath::math::{FunctionSetRoot, Matrix, Vector};
 
 type Curve = Handle<dyn Adaptor3dCurve>;
 
-/// `IntCurveSurface_TheHCurveTool`: direct calls on the curve adaptor.
-struct HCurveTool;
-
-impl TheCurveTool for HCurveTool {
-    type Curve = Curve;
-    fn first_parameter(curve: &Curve) -> Result<f64, Failure> {
-        curve.first_parameter()
-    }
-    fn last_parameter(curve: &Curve) -> Result<f64, Failure> {
-        curve.last_parameter()
-    }
-    fn resolution(curve: &Curve, r3d: f64) -> Result<f64, Failure> {
-        curve.resolution(r3d)
-    }
-    fn value(curve: &Curve, w: f64) -> Result<Point3, Failure> {
-        curve.value(w)
-    }
-    fn d1(curve: &Curve, w: f64) -> Result<(Point3, Vector3), Failure> {
-        curve.d1(w)
-    }
-}
+/// `IntCurveSurface_TheHCurveTool`, the curve tool of the IntCurveSurface instances.
+use rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool as HCurveTool;
 
 const ISOS: [IntImpConstIsoparametric; 4] = [
     IntImpConstIsoparametric::UIsoparametricOnCaro1,
@@ -78,13 +58,13 @@ fn curve(r: &mut Reader) -> Curve {
     Handle::new(GeomAdaptorCurve::with_range(&c, first, last).expect("probe adaptor")).cast()
 }
 
-fn vector(v: &Vector<'_>) {
+pub fn vector(v: &Vector<'_>) {
     for i in v.lower()..=v.upper() {
         real(v[i]);
     }
 }
 
-fn matrix(m: &Matrix<'_>) {
+pub fn matrix(m: &Matrix<'_>) {
     for i in m.lower_row()..=m.upper_row() {
         for j in m.lower_col()..=m.upper_col() {
             real(m[(i, j)]);
