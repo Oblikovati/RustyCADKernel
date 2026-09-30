@@ -2,3 +2,6 @@
 //! Exact hidden-line curve and topology tools.
 mod b_curve_tool;
 pub use b_curve_tool::BCurveTool;
+
+mod b_surface_tool;
+pub use b_surface_tool::BSurfaceTool;
