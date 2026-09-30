@@ -45,8 +45,8 @@ impl Translated {
 
 impl TheSectionGenerator for Translated {
     type Point = i32;
-    fn get_shape(&self) -> [i32; 4] {
-        [3, 2, 2, 1]
+    fn get_shape(&self) -> Result<[i32; 4], Failure> {
+        Ok([3, 2, 2, 1])
     }
     fn knots(&self, knots: &mut Array1<'_, f64>) -> Result<(), Failure> {
         (knots[1], knots[2]) = (0.0, 1.0);
@@ -72,8 +72,8 @@ impl TheSectionGenerator for Translated {
         s.poles2d[1] = Point2::new(t, 0.5);
         Ok(())
     }
-    fn parameter(&self, p: &i32) -> f64 {
-        10.0 * self.t(*p)
+    fn parameter(&self, p: &i32) -> Result<f64, Failure> {
+        Ok(10.0 * self.t(*p))
     }
 }
 
