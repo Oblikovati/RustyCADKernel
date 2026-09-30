@@ -55,7 +55,7 @@ impl ClipRectangle {
             endpoints,
             distances,
             self.tolerance,
-            index % 2 == 0,
+            index.is_multiple_of(2),
         )
     }
 }

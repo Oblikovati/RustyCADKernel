@@ -42,8 +42,7 @@ pub fn clip_case(v: &[f64]) {
     use rustycad_tkmath::gp::{Direction2, Line2, Point2};
     let direction = Direction2::new(v[6], v[7]).unwrap();
     let line = Line2::new(Point2::new(v[4], v[5]), direction);
-    let result =
-        super::face_plane_clip::classify_line([v[0], v[1], v[2], v[3]], line, v[8]).unwrap();
+    let result = super::plane_clip::classify_line([v[0], v[1], v[2], v[3]], line, v[8]).unwrap();
     flag(result.is_some());
     let (first, last) = result.unwrap_or((9., 10.));
     real(first);
