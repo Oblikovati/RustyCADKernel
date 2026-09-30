@@ -22,6 +22,7 @@ pub mod geom_api_fit;
 pub mod geom_api_surface;
 pub mod gfill;
 pub mod ginter;
+pub mod gordon;
 pub mod hatch;
 pub mod hatch_gen;
 pub mod ics_geometry;

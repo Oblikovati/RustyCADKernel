@@ -57,6 +57,7 @@
 #include "tkgeomalgo_probe_geomapi.cxx"
 #include "tkgeomalgo_probe_geomapi_fit.cxx"
 #include "tkgeomalgo_probe_geomapi_surface.cxx"
+#include "tkgeomalgo_probe_gordon.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -222,6 +223,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gapi_interpolate", ga_gapi_interpolate_case},
  {"gapi_points_to_bspline", ga_gapi_points_to_bspline_case},
  {"gapi_p2bss", ga_gapi_p2bss_case},
+ // GeomFill Gordon (tkgeomalgo_probe_gordon.cxx)
+ {"gfill_gordon", ga_gfill_gordon_case},
+ {"gfill_network", ga_gfill_network_case},
 };
 int main() {
  std::string line;

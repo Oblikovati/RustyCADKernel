@@ -10,7 +10,7 @@ use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::Point3;
 
 /// `ga_gapi_bsurface_out`: degrees, periodicity, rationality, poles, knots, mults.
-fn bsurface_out(s: &Handle<GeomBSplineSurface>) -> Result<(), Failure> {
+pub fn bsurface_out(s: &Handle<GeomBSplineSurface>) -> Result<(), Failure> {
     flag(s.is_null());
     let Some(s) = s.get() else { return Ok(()) };
     int(s.u_degree());

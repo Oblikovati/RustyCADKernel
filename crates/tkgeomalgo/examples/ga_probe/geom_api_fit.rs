@@ -283,7 +283,7 @@ fn fit(
 }
 
 /// `mode n points [np params] args`: GeomAPI_PointsToBSpline.
-pub fn points_to_bspline_case(values: &[f64]) {
+pub fn p2bs_case(values: &[f64]) {
     let mut r = Reader::new(values);
     let (mode, n) = (r.integer(), r.integer());
     let mut pts: Array1<'static, Point3> = Array1::with_bounds(1, n).unwrap();
