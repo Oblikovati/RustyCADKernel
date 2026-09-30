@@ -61,6 +61,17 @@ move to a 1:1 translation once BRepBuilderAPI is ported. IntCurvesFace has no up
 suite; `tests/brep_top_adaptor_tools.rs` and `tests/int_curves_face_behavior.rs` hold its
 behavior tests and those of the tool, vertex and Tool classes.
 
+BRepBndLib_Test.cxx (6 declarations) is not mapped: it builds its shapes with
+BRepBuilderAPI_MakeEdge and MakeFace and BRepPrimAPI_MakeCylinder, and meshes them with
+BRepMesh_IncrementalMesh of TKMesh, which is not in the shared native build (the unchanged
+suite does not link there). Its six cases run as the behavior tests of
+`crates/tktopalgo/tests/brep_bnd_lib_behavior.rs` on the same shapes built with
+BRep_Builder (the edge MakeEdge gives on a curve, the plane face MakeFace gives on an
+infinite plane, and the 26-segment 3d polygon of deflection 0.1 that BRepMesh gives the
+unit circle, which the reference bounds of the upstream cases pin), with the same values
+and tolerances; they move to a 1:1 translation once BRepBuilderAPI and BRepPrimAPI are
+ported and TKMesh is in the native build.
+
 BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBndLib
 (level 4, not ported), which it calls to box each face.
 
@@ -96,6 +107,14 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `IntCurvesFace_ShapeIntersector` is `IntCurvesFaceShapeIntersector` (its intersectors
   in a `Vec`). The i-th point accessors return Standard_OutOfRange outside
   `[1, NbPnt]`, as the native sequences raise.
+
+- BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
+  are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
+  `add_optimal`); they extend the caller's `BoundingBox3` in place and return `Result`.
+  `AddOBB` (BRepBndLib_1.cxx) needs BRepGProp and BRepBuilderAPI_Transform (stage B) and
+  has no row yet: the audit lists it as the one missing member of the package.
+  `Bnd_Box` implements the TKernel `BoundingVolume` trait (in TKMath), so
+  `NCollection_UBTree<int, Bnd_Box>` is `UBTree<i32, BoundingBox3>`.
 
 ## Verification
 
@@ -168,6 +187,24 @@ without the restriction and the boundary tolerances, and the unrestricted
 boundary-tolerance lines of the toleranced squares), `icf_curve` (circles, segments and
 a Bezier curve on every face) and `icf_shape` (compounds of three to four faces with
 Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
+
+BRepBndLib: 266 requests (`tools/tktopalgo_corpus_brepbndlib.py`). Each request carries
+a shape record (`tools/tktopalgo_corpus_shapes.py`, named shapes in
+`tools/tktopalgo_corpus_solids.py`) that both probes build with BRep_Builder
+(`tktopalgo_probe_shape.cxx` and `tp_probe/shape.rs`): vertices, edges with 3d curves
+(lines, circles, Bezier and B-spline curves) and 3d polygons, faces on planes, cylinders,
+spheres, cones, tori and Bezier surfaces with pcurves (seams get the pcurves of both
+uses), triangulations and polygons on them, shells with located faces, and a solid or a
+compound of shells, faces, edges and vertices, optionally located. `bbl_add` runs Add
+(meshes used or not), AddClose and AddOptimal (the four flag pairs) on boxes (with
+tolerances, 3d polygons, triangulations, translated and rotated), a box with a face
+translated in its shell, hollow and open boxes, cylinders, spheres, a torus, a box with a
+spherical cavity, a solid without shells, a meshed face, an edge with only a polygon on
+a triangulation, an infinite plane, a face with only a triangulation, spherical patches
+bounded by iso edges, Bezier patches (flagged natural or bounded by their boundary
+pcurves), lone cylinder, sphere and torus faces, and a compound of free edges of every
+kind and free vertices; the first boxes and two faces also go into boxes that already
+hold points (with a gap).
 
 ## Preserved native behaviour
 
@@ -261,6 +298,25 @@ Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
   faces are kept.
 - `(int)` casts of out-of-range doubles (sample counts of the polyhedron and of the
   quadric samples) give `INT_MIN`, as x86 `cvttsd2si` does.
+
+### BRepBndLib
+
+- `FindExactUVBounds` calls `ElCLib::InPeriod` on the middle of each pcurve of a
+  periodic surface but discards the result, so that point is never moved into the
+  period before it is compared with the surface bounds; the port does the same (it skips
+  the call, which has no other effect).
+- `Add` bounds a plane face by the 3d curves of its geometric edges (the plane itself is
+  not added, degenerated edges without curve are skipped) and then enlarges the box by
+  the face tolerance; a face without surface uses its triangulation even when the
+  meshes are not wanted; a triangulation whose box is void falls back to the geometry.
+- An edge outside a face uses its 3d polygon, else the first polygon on a triangulation
+  that it holds (whatever the face), else its curve; with `useTriangulation` false a
+  geometric edge always uses its curve, but a polygon-only edge still uses its polygon.
+- `AddClose` ignores the faces and every tolerance; it adds only the curves of the
+  geometric edges and the vertices outside an edge.
+- `AdjustFaceBox` moves each side of the surface box towards the edge box in the order
+  x min, x max, y min, y max, z min, z max, and each test uses the sides moved before it
+  (the rectangle of `IsModifySize` spans the current box).
 
 ## BRepClass deviations
 

@@ -175258,6 +175258,30 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ virtual destructor (defaulted): Rust drops the face intersectors with the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepBndLib::Add(const TopoDS_Shape&,Bnd_Box&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add",
+      "status": "implemented",
+      "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
+    },
+    {
+      "upstream_id": "BRepBndLib::AddClose(const TopoDS_Shape&,Bnd_Box&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add_close",
+      "status": "implemented",
+      "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
+    },
+    {
+      "upstream_id": "BRepBndLib::AddOptimal(const TopoDS_Shape&,Bnd_Box&,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add_optimal",
+      "status": "implemented",
+      "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place (the file-static CanUseEdges, FindExactUVBounds, AdjustFaceBox and IsModifySize are private helpers); native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
     }
   ],
   "tests": [
