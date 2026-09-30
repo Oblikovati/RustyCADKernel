@@ -129,3 +129,30 @@ pub fn closure_case(values: &[f64]) {
     });
     end();
 }
+
+/// Print samples of the native 3D curve or its unwrapped basis; `sampling_3d_case(numbers)`.
+pub fn sampling_3d_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    let mut points = rustycad_tkernel::ncollection::Sequence::default();
+    points.append(Point3::new(91.0, -37.0, 18.0));
+    attempt(|| {
+        let curve = geom_curve(&mut reader)?;
+        let first = reader.real();
+        let last = reader.real();
+        print!(
+            "{} ",
+            i32::from(ShapeAnalysisCurve::get_sample_points(
+                &curve,
+                first,
+                last,
+                &mut points
+            )?)
+        );
+        Ok(())
+    });
+    print!("{} ", points.length());
+    for point in points.iter() {
+        pnt(*point);
+    }
+    end();
+}

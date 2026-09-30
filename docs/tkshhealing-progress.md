@@ -572,3 +572,8 @@ IsClosed and both IsPeriodic overloads add three mapped APIs and 65 exact
 native comparisons (8,165 total). OCC966 basis-curve unwrapping and the native
 closure tolerance floor are preserved. Null inputs return explicit errors in
 Rust; native dereferences them, so these safety cases are Rust-only regressions.
+
+The 3D GetSamplePoints overload adds 66 exact native comparisons (8,231 total).
+The port retains native type-dependent counts and sampling of the basis curve for
+offset/trimmed wrappers. Focused tests check zero-length circle sampling and the
+intentional distinction between offset geometry and its sampled basis points.

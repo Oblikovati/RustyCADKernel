@@ -207101,6 +207101,14 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::is_periodic_2d",
       "status": "implemented",
       "notes": "Native endpoint closure and OCC966 basis-curve periodicity; 65 additional exact numeric cases and focused regression tests. Null inputs return explicit Standard_NullObject instead of native null dereference."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::GetSamplePoints(const occ::handle<Geom_Curve>&,double,double,NCollection_Sequence<gp_Pnt>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::get_sample_points",
+      "status": "implemented",
+      "notes": "Original type-specific 3D sample counts and basis-curve recursion, including offset sampling of underlying geometry. 66 additional exact native comparisons; focused zero-range and offset regressions."
     }
   ],
   "tests": [

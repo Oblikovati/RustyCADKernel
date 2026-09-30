@@ -20,3 +20,5 @@ def append_analysis_curve_requests(requests:list[str])->None:
         requests.append('sh_analysis_closure '+numbers([3,*curve,tolerance]))
     for curve in construct_curves_2d():
         requests.append('sh_analysis_closure '+numbers([2,*curve]))
+    for curve, bounds in product(construct_curves_3d(), [(0,1),(-1,2),(1,0),(0.5,0.5),(1e-9,1-1e-9),(0,8)]):
+        requests.append('sh_analysis_samples3d '+numbers([*curve,*bounds]))
