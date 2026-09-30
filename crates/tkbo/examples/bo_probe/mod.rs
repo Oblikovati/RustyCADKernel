@@ -1,3 +1,4 @@
+mod marked;
 use rustycad_tkbo::int_tools::*;
 use rustycad_tkg3d::top_abs::State;
 fn real(value: f64) {
@@ -16,6 +17,7 @@ fn flag(value: bool) {
 pub fn dispatch(operation: &str, v: &[f64]) {
     match operation {
         "range" => range_case(v),
+        "marked" => marked::case(v),
         "root" => root_case(v),
         "curve" => curve_case(v),
         "surface" => surface_case(v),

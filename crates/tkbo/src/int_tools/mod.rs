@@ -9,3 +9,5 @@ pub use curve_range_sample::CurveRangeSample;
 pub use range::Range;
 pub use root::Root;
 pub use surface_range_sample::SurfaceRangeSample;
+mod marked_range_set;
+pub use marked_range_set::MarkedRangeSet;
