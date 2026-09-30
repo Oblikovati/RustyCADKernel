@@ -23,3 +23,5 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_complexcurve').append_complexcurve_requests(requests)
     # ShapeExtend_CompositeSurface (tkshhealing_corpus_composite.py)
     __import__('tkshhealing_corpus_composite').append_composite_requests(requests)
+    # ShapeBuild (tkshhealing_corpus_shapebuild.py)
+    __import__('tkshhealing_corpus_shapebuild').append_shapebuild_requests(requests)

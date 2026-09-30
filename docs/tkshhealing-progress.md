@@ -6,9 +6,10 @@ Healing). It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, T
 and TKTopAlgo ports, as the native toolkit does (its EXTERNLIB). Each of the 11 OCCT
 packages is one module of the crate, declared up front in `src/lib.rs`; a module whose
 package is not ported yet holds only its documentation. Ported so far: SHMessage (the
-message resource data) and ShapeExtend. The numeric corpus has 1662 requests: ShapeExtend
-status codes 475, messages 85, WireData 92, Explorer 849, registrators 11, ComplexCurve 24
-and CompositeSurface 126.
+message resource data), ShapeExtend and ShapeBuild. The numeric corpus has 2178 requests:
+ShapeExtend status codes 475, messages 85, WireData 92, Explorer 849, registrators 11,
+ComplexCurve 24 and CompositeSurface 126; ShapeBuild vertices 48, edges 457 and re-shapers
+11.
 
 ## SHMessage: the message resources
 
@@ -120,6 +121,16 @@ ShapeAnalysis_Edge, and every class above it, waits for BRepExtrema. Every other
 external include of the toolkit is in a ported package (TKBRep, TKGeomBase, TKGeomAlgo
 and the ported TKTopAlgo packages).
 
+## ShapeBuild
+
+Every public member is ported (the api audit is 0 missing and 0 stale: 27 rows, one of
+them the excluded RTTI macro); docs/shhealing-design.md section 3 fixes the mapping.
+`ShapeBuild_Vertex` and `ShapeBuild_Edge` are the unit structs `ShapeBuildVertex` and
+`ShapeBuildEdge`; `ShapeBuild_ReShape` is `ShapeBuildReShape`, which embeds TKBRep's
+`BRepToolsReShape` and implements its trait `ReShape` with its own `apply`, plus
+`apply_with_build_mode` and `status_flag`. `crates/tkshhealing/tests/shape_build_*.rs`
+hold the behavior tests.
+
 ## GoogleTest suites
 
 The toolkit test inventory maps these suites (0 declarations):
@@ -128,10 +139,18 @@ The toolkit test inventory maps these suites (0 declarations):
 | --- | --- | ---: | --- | --- |
 
 The upstream GTests directory holds 12 suites (143 declarations). None needs only
-SHMessage, ShapeExtend and ShapeBuild: `ShapeBuild_ReShape_Test.cxx` (4 declarations)
-builds its shapes with `BRepPrimAPI_MakeBox` of TKPrim and fixes one with
-`ShapeFix_Shape`; the other eleven exercise ShapeAnalysis, ShapeConstruct, ShapeFix and
-ShapeUpgrade classes.
+SHMessage, ShapeExtend, ShapeBuild and the ported toolkits:
+
+- `ShapeBuild_ReShape_Test.cxx` (4 declarations) is not mapped: its case
+  `ShapeFix_ShapeStabilityTest.RepeatedPerformDoesNotMultiplyEdges` builds a box with
+  `BRepPrimAPI_MakeBox` of TKPrim and heals it with `ShapeFix_Shape`, which are not
+  ported (a suite is mapped whole). The unchanged suite compiles against the shared
+  build and passes natively (4 of 4). Its three `ShapeBuild_ReShapeTest` cases run as the
+  behavior tests of `crates/tkshhealing/tests/shape_build_reshape.rs` on the same shapes
+  (built with the ported BRepBuilderAPI makers) with the same assertions; the suite moves
+  to a 1:1 translation once TKPrim and ShapeFix are ported.
+- The other eleven suites exercise ShapeAnalysis, ShapeConstruct, ShapeFix and
+  ShapeUpgrade classes.
 
 ## Verification
 
@@ -200,6 +219,25 @@ and print shapes the same way:
   new joint values, first values, the connectivity check, `Copy()` and `Transform()`, and
   the members of an empty surface that do not dereference its null grid.
 
+ShapeBuild (tools/tkshhealing_corpus_shapebuild.py):
+
+- `sh_vertex` (48): `CombineVertex` through points and through vertices, for spheres one
+  inside the other, apart, touching, at the same point, with signed zeros and tiny
+  coordinates, with three tolerance factors;
+- `sh_edge` (457): a scene of edges on a plane and on a cylinder (a line, a periodic
+  circle, a circle range beyond its period, a trimmed circle, a seam with two p-curves,
+  p-curve only edges, a bare edge, a located edge, an edge with an INTERNAL vertex, and
+  their REVERSED and INTERNAL copies) and faces (one located, one REVERSED): every
+  ShapeBuild_Edge member on them, `TransformPCurve` of lines, circles, ellipses, Bezier,
+  B-spline, trimmed and offset p-curves under no transformation, a translation, a
+  rotation and a scale with the U factors 1, 2 and 0.5, and the six `MakeEdge` members on
+  every curve kind and location (infinite curves included);
+- `sh_reshape` (11): scripts of replacements (by another face, a compound, a shell, an
+  edge, a null shape, a REVERSED or moved shape, a cycle) and removals, with and without
+  the location mode, then `Apply` (four `until` types), the build-mode `Apply` (all
+  three modes), `Status` (with and without `last`) and `Value` of solids, shells,
+  compounds, wires, faces and edges, with the ShapeExtend status flags.
+
 ## Preserved native behaviour
 
 ### ShapeExtend
@@ -230,6 +268,26 @@ and print shapes the same way:
 - `ShapeExtend_MsgRegistrator` does not keep the gravity of a message.
 - `ShapeExtend::Init` sets its flag before loading: a failed first call is not retried.
 
+### ShapeBuild
+
+- `ShapeBuild_Edge.cxx` keeps its own static copy of `ShapeAnalysis::AdjustByPeriod`
+  ("invoke ShapeAnalysis leads to cyclic dependency") and its own `IsPeriodic` that walks
+  offset and trimmed curves to their basis; the port keeps them private to the module.
+- `CopyRanges` moves a range that starts before a periodic curve (beyond `PConfusion`) or
+  at or after its end by whole periods, and the target edge then loses its SameRange and
+  SameParameter flags. `CopyReplaceVertices` keeps the INTERNAL and EXTERNAL vertices
+  only when both given vertices are null.
+- `ReplacePCurve` sets the range on the face from the p-curve of the reversed edge (the
+  last one it reads). `TransformPCurve` does not update the range of a curve converted to
+  a B-spline unless it is a conic, and scales the poles of the copied Bezier or B-spline
+  in place.
+- `BuildCurve3d` catches every exception and returns false.
+- `ShapeBuild_ReShape::Apply` leaves the status of the last sub-shape call when nothing
+  changed. The build-mode `Apply` prints "BRepTools_ReShape::Apply NOT YET IMPLEMENTED" on
+  the standard output for the types below the shell (it does the same here); the corpus
+  keeps to the handled types, since the printed line would enter the probe's token
+  stream.
+
 ## Deliberate deviations
 
 ### ShapeExtend
@@ -241,3 +299,8 @@ and print shapes the same way:
   in the `GeomSurface` trait, returns zeros then, and the closed flags of a composite
   surface start false (uninitialized natively until `CheckConnectivity`). The corpus does
   not reach these cases natively.
+
+### ShapeBuild
+
+- A null curve given to `MakeEdge` without a range, and the other null dereferences of
+  the native members, return Standard_NullObject errors.

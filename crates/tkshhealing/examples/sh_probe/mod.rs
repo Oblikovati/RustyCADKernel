@@ -3,6 +3,8 @@ pub mod complex_curve;
 pub mod composite_surface;
 pub mod explorer;
 pub mod registrator;
+pub mod reshape;
+pub mod shape_build;
 pub mod shape_extend;
 pub mod wire_data;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit

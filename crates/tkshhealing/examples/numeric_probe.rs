@@ -2,7 +2,10 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod sh_probe;
-use sh_probe::{complex_curve, composite_surface, explorer, registrator, shape_extend, wire_data};
+use sh_probe::{
+    complex_curve, composite_surface, explorer, registrator, reshape, shape_build, shape_extend,
+    wire_data,
+};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -23,6 +26,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sh_complex", complex_curve::complex_case),
     // ShapeExtend_CompositeSurface (sh_probe/composite_surface.rs)
     ("sh_composite", composite_surface::composite_case),
+    // ShapeBuild (sh_probe/shape_build.rs, sh_probe/reshape.rs)
+    ("sh_vertex", shape_build::vertex_case),
+    ("sh_edge", shape_build::edge_case),
+    ("sh_reshape", reshape::reshape_case),
 ];
 
 fn main() {

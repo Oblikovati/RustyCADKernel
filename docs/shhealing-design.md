@@ -20,7 +20,8 @@ number in code comments and ledger notes.
 - **Status fields.** Many tools keep an `int` bit field of `ShapeExtend_Status` flags and
   answer `Status(ShapeExtend_Status)` with `ShapeExtend::DecodeStatus`; the Rust field is
   the same `i32`, set with `ShapeExtend::encode_status`, so that the bits are the native
-  bits.
+  bits, and the member is `status_flag(ShapeExtendStatus)` (a class may have another
+  `Status` overload, as `ShapeBuild_ReShape`).
 - **Transient classes and handles** follow geom-design.md sections 2 and 3: a class
   derived from `Standard_Transient` is used through `Handle`, keeps its mutable fields in
   one shared state, and registers its RTTI name. A class that derives from a Transient
@@ -72,3 +73,29 @@ number in code comments and ledger notes.
 - **ShapeExtend::Init** keeps the native function-local flag as a process-wide atomic set
   before the first load, and loads into the global catalog (`MsgFile::global`); the
   public `load_messages(catalog)` is its body on any catalog, for tests.
+
+## 3. ShapeBuild: the value builders and the derived re-shaper
+
+- **ShapeBuild_Vertex** and **ShapeBuild_Edge** have only `const` members and no field:
+  they are the unit structs `ShapeBuildVertex` and `ShapeBuildEdge`. Overloads are named by
+  argument (`combine_vertices`/`combine_points`, `remove_pcurve_on_face`/`_on_surface`/
+  `_on_located_surface`, `make_edge_on_curve`/`_on_curve_range`/`_on_face`/
+  `_on_face_range`/`_on_surface`/`_on_surface_range`). `TransformPCurve` returns the curve
+  with the new range instead of writing its two reference arguments. `MakeEdge` keeps its
+  `TopoDS_Edge&` argument as `&mut Edge`, left unchanged when `BRepBuilderAPI_MakeEdge`
+  fails, as natively. The members that walk the curve representations of a TEdge
+  (`CopyRanges`, `SetRange3d`, `CopyPCurves`, `CountPCurves`) read the list through
+  `BRep_TEdge::curves()` and change the shared representation objects, as the native
+  loops over `ChangeCurves()` do. `BuildCurve3d` catches every failure (the native
+  `try/catch`) and returns false.
+- **ShapeBuild_ReShape** derives from `BRepTools_ReShape` (TKBRep's trait `ReShape` with
+  the struct `BRepToolsReShape`): the struct `ShapeBuildReShape` embeds a
+  `BRepToolsReShape` as its parent (its RTTI chain is ShapeBuild_ReShape ->
+  BRepTools_ReShape -> Standard_Transient) and implements `ReShape` over the parent's data.
+  It overrides `apply` with its own `applyImpl` (the base `status` with `last` calls it
+  through the trait, as the native virtual call does); `Status(shape, newsh, last)` only
+  calls the base, so the trait default stays. The virtual build-mode
+  `Apply(shape, until, buildmode)`, which no class overrides, is the inherent
+  `apply_with_build_mode`, and `Status(ShapeExtend_Status)` is `status_flag` (the name the
+  Shape Healing tools use for their status flags). The in-flight set of `applyImpl` holds
+  TShape addresses.

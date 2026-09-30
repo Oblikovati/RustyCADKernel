@@ -209,7 +209,8 @@ fn curve_points(value: impl Fn(f64) -> Result<Point3, Failure>, f: f64, l: f64) 
         show(value(0.5 * (f + l)), pnt);
     }
 }
-fn curve2d_points(value: impl Fn(f64) -> Result<Point2, Failure>, f: f64, l: f64) {
+/// `tp_curve2d_points`: the same for a 2D curve.
+pub fn curve2d_points(value: impl Fn(f64) -> Result<Point2, Failure>, f: f64, l: f64) {
     let (finf, linf) = (precision::is_infinite(f), precision::is_infinite(l));
     if !finf {
         show(value(f), pnt2d);

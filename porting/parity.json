@@ -192826,6 +192826,222 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::CopyReplaceVertices(const TopoDS_Edge&,const TopoDS_Vertex&,const TopoDS_Vertex&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::copy_replace_vertices",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::CopyRanges(const TopoDS_Edge&,const TopoDS_Edge&,double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::copy_ranges",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::SetRange3d(const TopoDS_Edge&,double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::set_range_3d",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::CopyPCurves(const TopoDS_Edge&,const TopoDS_Edge&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::copy_pcurves",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::Copy(const TopoDS_Edge&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::copy",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::RemovePCurve(const TopoDS_Edge&,const TopoDS_Face&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::remove_pcurve_on_face",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::RemovePCurve(const TopoDS_Edge&,const occ::handle<Geom_Surface>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::remove_pcurve_on_surface",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::RemovePCurve(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::remove_pcurve_on_located_surface",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::ReplacePCurve(const TopoDS_Edge&,const occ::handle<Geom2d_Curve>&,const TopoDS_Face&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::replace_pcurve",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::ReassignPCurve(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::reassign_pcurve",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::TransformPCurve(const occ::handle<Geom2d_Curve>&,const gp_Trsf2d&,double,double&,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::transform_pcurve",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::RemoveCurve3d(const TopoDS_Edge&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::remove_curve_3d",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::BuildCurve3d(const TopoDS_Edge&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::build_curve_3d",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::MakeEdge(TopoDS_Edge&,const occ::handle<Geom_Curve>&,const TopLoc_Location&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::make_edge_on_curve",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::MakeEdge(TopoDS_Edge&,const occ::handle<Geom_Curve>&,const TopLoc_Location&,double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::make_edge_on_curve_range",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::MakeEdge(TopoDS_Edge&,const occ::handle<Geom2d_Curve>&,const TopoDS_Face&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::make_edge_on_face",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::MakeEdge(TopoDS_Edge&,const occ::handle<Geom2d_Curve>&,const TopoDS_Face&,double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::make_edge_on_face_range",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::MakeEdge(TopoDS_Edge&,const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const TopLoc_Location&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::make_edge_on_surface",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Edge::MakeEdge(TopoDS_Edge&,const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildEdge::make_edge_on_surface_range",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_ReShape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_ReShape.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildReShape::new",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_ReShape::Apply(const TopoDS_Shape&,TopAbs_ShapeEnum,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_ReShape.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildReShape::apply_with_build_mode",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_ReShape::Apply(const TopoDS_Shape&,TopAbs_ShapeEnum)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_ReShape.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildReShape::apply",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_ReShape::Status(const TopoDS_Shape&,TopoDS_Shape&,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_ReShape.hxx",
+      "rust_item": "rustycad_tkbrep::brep_tools::ReShape::status",
+      "status": "implemented",
+      "notes": "ShapeBuild_ReShape override that only calls BRepTools_ReShape::Status (docs/shhealing-design.md section 3): the provided method of the TKBRep trait ReShape, which ShapeBuildReShape keeps; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_ReShape::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_ReShape.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildReShape::status_flag",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_ReShape::DEFINE_STANDARD_RTTIEXT(ShapeBuild_ReShape,BRepTools_ReShape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_ReShape.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient! registers ShapeBuild_ReShape below BRepTools_ReShape; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeBuild_Vertex::CombineVertex(const TopoDS_Vertex&,const TopoDS_Vertex&,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Vertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildVertex::combine_vertices",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeBuild_Vertex::CombineVertex(const gp_Pnt&,const gp_Pnt&,double,double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeBuild/ShapeBuild_Vertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildVertex::combine_points",
+      "status": "implemented",
+      "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
     }
   ],
   "tests": [
