@@ -162,6 +162,12 @@ def append_line_requests(requests: list[str], faces: dict[str, FaceSpec]) -> Non
         for index in range(0, len(lines), 6):
             tol, restr, usebtol = settings[(index // 6) % len(settings)]
             requests.append(line_request(face, tol, restr, usebtol, lines[index:index + 6]))
+    # The boundary tolerance path: on an unrestricted surface the points just outside the
+    # square reach the classifiers (the restricted plane drops them), and the edges are
+    # projected (their 3d lines, or a null curve without one).
+    for name in ('toleranced_3d', 'toleranced_2d'):
+        for usebtol in (1, 0):
+            requests.append(line_request(faces[name], 1e-7, 0, usebtol, boundary_lines()))
 
 
 def curves(face: FaceSpec) -> list[list[float]]:
