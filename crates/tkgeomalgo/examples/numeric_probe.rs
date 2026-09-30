@@ -12,6 +12,7 @@ use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
 use ga_probe::{int_walk, int_walk_iw};
+use ga_probe::geom_fill_sweep as gfs;
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -166,6 +167,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ics_estlim", ics_inter::estlim_case),
     ("ics_project", ics_inter::project_case),
     ("ics_interutils", ics_interutils::interutils_case),
+    // GeomFill sweep (ga_probe/geom_fill_*.rs)
+    ("gfs_shape", gfs::shape_case),
+    ("gfs_circle", gfs::circle_case),
+    ("gfs_convert", gfs::convert_case),
+    ("gfs_tensor", gfs::tensor_case),
 ];
 
 fn main() {

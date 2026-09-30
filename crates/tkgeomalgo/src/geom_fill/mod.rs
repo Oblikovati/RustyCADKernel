@@ -15,3 +15,40 @@
 
 //! OCCT package GeomFill. Not ported yet: its classes land in this module when
 //! the package is ported (docs/tkgeomalgo-progress.md lists the ported packages).
+//!
+//! The sweep part (the trihedron, location and section laws, `GeomFill_Sweep`,
+//! `GeomFill_Pipe` and their helpers) follows docs/geomalgo-design.md, section 14.
+
+// Sweep classes (docs/geomalgo-design.md, section 14).
+mod arc_section;
+mod circle_spans;
+mod convertor_basis;
+mod frame_math;
+mod geomfill;
+mod geomfill_circle;
+mod location_law;
+mod pipe_error;
+mod polynomial_convertor;
+mod quasi_angular_convertor;
+mod quasi_angular_terms;
+mod section_law;
+mod sweep_failures;
+mod tensor;
+mod trihedron_law;
+mod trihedron_with_guide;
+
+pub use arc_section::{ArcPolesD1, ArcPolesD2, ArcSectionD0, ArcSectionD1, ArcSectionD2};
+pub use geomfill::{get_minimal_weights, get_shape, get_tolerance, knots, mults};
+pub use geomfill_circle::{CircleD0, CircleD1, CircleD2, get_circle, get_circle_d1, get_circle_d2};
+pub use location_law::{GeomFillLocationLaw, LocationD0, LocationD1, LocationD2, LocationPoles2d};
+pub use pipe_error::{GeomFillPipeError, GeomFillTrihedron};
+pub use polynomial_convertor::GeomFillPolynomialConvertor;
+pub use quasi_angular_convertor::GeomFillQuasiAngularConvertor;
+pub use section_law::{GeomFillSectionLaw, SectionD1, SectionD2};
+pub use tensor::GeomFillTensor;
+pub use trihedron_law::{
+    GeomFillTrihedronLaw, GeomFillTrihedronLawBase, TrihedronD0, TrihedronD1, TrihedronD2,
+};
+pub use trihedron_with_guide::{
+    GeomFillTrihedronWithGuide, GeomFillTrihedronWithGuideBase, GuideFields,
+};

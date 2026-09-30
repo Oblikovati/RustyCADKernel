@@ -53,6 +53,7 @@
 #include "tkgeomalgo_probe_iwalk.cxx"
 #include "tkgeomalgo_probe_intcurvesurface.cxx"
 #include "tkgeomalgo_probe_intcurvesurface_inter.cxx"
+#include "tkgeomalgo_probe_geomfill_sweep.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -201,6 +202,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ics_estlim",ga_ics_estlim_case},
  {"ics_project",ga_ics_project_case},
  {"ics_interutils",ga_ics_interutils_case},
+ // GeomFill sweep (tkgeomalgo_probe_geomfill_*.cxx)
+ {"gfs_shape",ga_gfs_shape_case},
+ {"gfs_circle",ga_gfs_circle_case},
+ {"gfs_convert",ga_gfs_convert_case},
+ {"gfs_tensor",ga_gfs_tensor_case},
 };
 int main() {
  std::string line;
