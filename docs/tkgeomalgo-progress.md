@@ -108,6 +108,14 @@ The toolkit test inventory maps these suites (80 declarations):
   names, output references become returned tuples, and `Dump` members write to a
   `fmt::Write` where the native ones write to `std::cout`.
 
+- GeomFill (filling part, [geomalgo-design.md](geomalgo-design.md) section 13):
+  `GeomFill_AppSurf` is the alias `GeomFillAppSurf` of `AppBlendAppSurf`, with
+  `GeomFillLine` and `GeomFillSectionGenerator` implementing its line and generator
+  traits; `GeomFill_Profiler` is a struct that `GeomFillSectionGenerator` embeds
+  (`Deref`). Output arrays are assigned as natively (`NCollection_Array1::operator=`
+  takes the source bounds and length), `GetShape` returns the four counts, and the two
+  `Section` overloads are `section_d1` and `section`.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomAlgo --jobs 16 --source OCCT --native-build BUILD`
@@ -631,6 +639,17 @@ polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
 `ics_quadcurv` the instance classes; `ics_estlim`, `ics_project` and
 `ics_interutils` the InterUtils functions.
 
+GeomFill filling part (gfill, 161 requests): `gfill_line` reads line points;
+`gfill_profiler` adds B-splines (several degrees, rational, periodic, mixed periodic and
+not), Bezier curves, circles and ellipses (trimmed or not, through the C1
+approximation branch) and trimmed lines to a profiler and reads it before and after
+`Perform` at three knot tolerances, with wrong array sizes, indices out of range, and
+knot vectors that the insertion cannot unify (the mean-knot branch, and one that
+raises); `gfill_secgen` runs every generator query and `SetParam` on arrays of lower
+bound 1, 0, 2 and -3; `gfill_appsurf` skins those sections through `GeomFill_AppSurf`
+in the four Perform modes, with imposed parameters, and on lines shorter and longer
+than the section list.
+
 ## Preserved native behaviour
 
 - TopTrans: a `CurveTransition` that was never reset answers the states of its
@@ -963,6 +982,23 @@ polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
 - The polygon tool `Dump` numbers its output by a process-wide call counter (a static
   shared by every instance of the generic in the port); the probe masks the number.
 - `NbSamples` truncates a double count, `(int)` of NaN being undefined (0 here).
+
+### GeomFill (filling part)
+
+- `GeomFill_SectionGenerator::SetParam` shares the given array and copies it into itself
+  from index 1 (`myParams(i) = Params(Lower + i - 1)` on the same array): a lower bound
+  of 0 spreads the first value over the array, then raises Standard_OutOfRange at the
+  last index; any lower bound above 1 raises at once. The native constructor sets the
+  parameters only when the empty profile holds sections, so `Parameter` without
+  `SetParam` dereferences a null handle (a crash natively, Standard_NullObject here;
+  not in the corpus), and `GeomFill_AppSurf` with known parameters needs `SetParam`.
+- `GeomFill_SectionGenerator::Section` never computes derivatives and leaves the 2d
+  poles unchanged; the poles and weights are assigned, so the arrays take the section's
+  length.
+- `GeomFill_Profiler::Perform` segments periodic curves of a non-periodic profile,
+  and when the knot insertion leaves different knot counts it sets the mean inner knots
+  on the original curves, which raises when their knot counts differ. The consultation
+  members all name `Degree` in their StdFail_NotDone message.
 
 ## IntCurveSurface deviations
 

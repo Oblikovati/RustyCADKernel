@@ -51,8 +51,8 @@ impl Sections {
 
 impl TheSectionGenerator for Sections {
     type Point = i32;
-    fn get_shape(&self) -> [i32; 4] {
-        [3, 2, 2, self.np2d]
+    fn get_shape(&self) -> Result<[i32; 4], Failure> {
+        Ok([3, 2, 2, self.np2d])
     }
     fn knots(&self, knots: &mut Array1<'_, f64>) -> Result<(), Failure> {
         let lower: i32 = knots.lower();
@@ -81,8 +81,8 @@ impl TheSectionGenerator for Sections {
         self.fill(*p, s);
         Ok(())
     }
-    fn parameter(&self, p: &i32) -> f64 {
-        self.t(*p)
+    fn parameter(&self, p: &i32) -> Result<f64, Failure> {
+        Ok(self.t(*p))
     }
 }
 

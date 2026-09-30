@@ -55,8 +55,10 @@ pub struct AppBlendSection {
 pub trait TheSectionGenerator {
     /// The line point a section is computed at.
     type Point;
-    /// `GetShape(NbPoles, NbKnots, Degree, NbPoles2d)`, in that order.
-    fn get_shape(&self) -> [i32; 4];
+    /// `GetShape(NbPoles, NbKnots, Degree, NbPoles2d)`, in that order; a `Result`
+    /// because a generator can raise (`GeomFill_SectionGenerator` reads its first
+    /// section, Standard_OutOfRange when it has none).
+    fn get_shape(&self) -> Result<[i32; 4], Failure>;
     /// `Knots(TKnots)`: the knots of the sections.
     fn knots(&self, knots: &mut Array1<'_, f64>) -> Result<(), Failure>;
     /// `Mults(TMults)`: the multiplicities of the sections.
@@ -71,6 +73,7 @@ pub trait TheSectionGenerator {
     ) -> Result<bool, Failure>;
     /// `Section(P, Poles, Poles2d, Weigths)`: the poles, 2d poles and weights only.
     fn section(&mut self, p: &Self::Point, section: &mut AppBlendSection) -> Result<(), Failure>;
-    /// `Parameter(P)`: the sweep parameter of a line point.
-    fn parameter(&self, p: &Self::Point) -> f64;
+    /// `Parameter(P)`: the sweep parameter of a line point; a `Result` because a
+    /// generator can raise (`GeomFill_SectionGenerator` reads its parameter array).
+    fn parameter(&self, p: &Self::Point) -> Result<f64, Failure>;
 }

@@ -112,7 +112,7 @@ impl AppBlendAppSurf {
             param_seq: Vec::new(),
         };
         if self.knownp {
-            state.param_seq.push(f.parameter(&lin.point(1)));
+            state.param_seq.push(f.parameter(&lin.point(1))?);
         }
         for (start, size) in tronc_layout(lin.nb_points(), nb_max_p)? {
             self.approximate_tronc(lin, f, (&mut arrays, &scale), (start, size), &mut state)?;
@@ -121,15 +121,13 @@ impl AppBlendAppSurf {
         state.concat.perform()?;
         let multc = state.concat.value().clone();
         let (knownp, param_seq) = (self.knownp, state.param_seq);
-        let (u1, u2) = (
-            f.parameter(&lin.point(1)),
-            f.parameter(&lin.point(lin.nb_points())),
-        );
         self.store_solution(&multc, &arrays, |knots| {
             if !knownp {
                 return Ok(());
             }
             if param_seq.len() as i32 != knots.length() {
+                let u1: f64 = f.parameter(&lin.point(1))?;
+                let u2: f64 = f.parameter(&lin.point(lin.nb_points()))?;
                 return bsplclib::reparametrize(u1, u2, knots);
             }
             let lower: i32 = knots.lower();
@@ -245,11 +243,11 @@ impl AppBlendAppSurf {
         let (mut ufloc, mut ulloc) = (0.0, 0.0);
         let mut approx = Compute::new(self.options(ParametrizationType::ChordLength, false));
         if self.knownp {
-            ufloc = f.parameter(&lin.point(start));
-            ulloc = f.parameter(&lin.point(start + size - 1));
+            ufloc = f.parameter(&lin.point(start))?;
+            ulloc = f.parameter(&lin.point(start + size - 1))?;
             let mut params: Vector<'static> = Vector::filled(1, size, 0.0)?;
             for i in 1..=size {
-                params[i] = (f.parameter(&lin.point(start + i - 1)) - ufloc) / (ulloc - ufloc);
+                params[i] = (f.parameter(&lin.point(start + i - 1))? - ufloc) / (ulloc - ufloc);
             }
             approx = Compute::from_parameters(
                 &params,

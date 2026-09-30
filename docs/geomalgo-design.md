@@ -354,3 +354,55 @@ call the polygon and polyhedron utilities. The port (`crates/tkgeomalgo/src/int_
 - **Exceptions.** Tool calls, the IntAna and ProjLib constructors, and indexed reads
   can raise natively; every member that reaches one returns `Result`, and the
   exception leaves the algorithm where the native one would unwind.
+
+## 13. GeomFill filling part
+
+GeomFill has no `.gxx` template of its own except the `GeomFill_AppSurf` instance of
+`AppBlend_AppSurf.gxx`; the filling part (`crates/tkgeomalgo/src/geom_fill`, one file per
+class, beside the sweep part of the same module) maps the class hierarchies:
+
+- **AppSurf.** `GeomFill_AppSurf` is the alias `GeomFillAppSurf = AppBlendAppSurf`
+  (section 7): `GeomFill_Line` implements `TheLine` (its points are the section
+  indices) and `GeomFill_SectionGenerator` implements `TheSectionGenerator`. The
+  generator reads its sections and parameters through arrays and sequences that raise
+  natively, so the trait members `GetShape` and `Parameter` return `Result` too; the
+  template reads the parameters only where the native code does (the knot
+  reparametrization runs after the pole tables are allocated).
+- **Profiler.** `GeomFill_Profiler` is a struct holding the section B-splines as
+  `Handle<GeomBSplineCurve>` (every added curve is converted to one); its two
+  derived classes embed it and reach it through `Deref`: `GeomFill_SectionGenerator`
+  (with its shared parameter array, `Handle<HArray1<f64>>`, which `SetParam` edits in
+  place as natively) and `GeomFill_Generator`, whose `perform` replaces the virtual
+  `Perform` (nothing calls it through the base class).
+- **Filling schemes.** `GeomFill_Filling` is a struct with the protected pole and
+  weight arrays (`None` stands for a null handle); `GeomFill_Coons`,
+  `GeomFill_Curved` and `GeomFill_Stretch` embed it and reach it through `Deref`, and
+  their `Init` overloads take distinct names. `GeomFill_BezierCurves` and
+  `GeomFill_BSplineCurves` assign the scheme's `GeomFill_Filling` part, as the native
+  slicing assignment `Caro = GeomFill_Stretch(...)` does.
+- **Boundaries.** The abstract transient `GeomFill_Boundary` is the trait
+  `GeomFillBoundary`, reached through `Handle<dyn GeomFillBoundary>`. Its private
+  tolerances live in each concrete struct as a `GeomFillBoundaryTolerances` (a lock,
+  since `Tol3d(Tol)` edits a shared object) that the trait reaches through one
+  required accessor; `HasNormals`, `Norm`, `D1Norm` and `Points` are provided
+  methods with the native bodies. `Reparametrize` edits a shared boundary, so
+  `GeomFill_SimpleBound`, `GeomFill_BoundWithSurf` and `GeomFill_DegeneratedBound` keep
+  their parameter law or range behind a lock. `GeomFill_BoundWithSurf` holds a copy
+  of the `Adaptor3d_CurveOnSurface` (the native member is a copy).
+- **Tangent fields.** `GeomFill_TgtField` is the trait `GeomFillTgtField`
+  (`IsScalable` and `Scale` provided, false and empty as natively); the two `D1`
+  overloads are `d1` and `d1_with_value`. `GeomFill_TgtOnCoons` holds its
+  `Handle<GeomFillCoonsAlgPatch>` and bound index.
+- **Coons patch.** `GeomFill_CoonsAlgPatch` is a handle-shared struct whose blending
+  laws sit behind a lock (`SetFunc` edits the patch that the tangent fields share);
+  the fixed arrays `bound[4]`, `c[4]` and `a[2]` are read without a bounds check
+  natively, so `Bound`, `Corner` and `Func` raise Standard_OutOfRange outside them.
+- **Constrained filling.** `GeomFill_ConstrainedFilling` is a plain struct with the
+  native fields; its file static helpers (`sortbounds`, `coonscnd`, `killcorners`,
+  `inqadd`, `mklin`) are private functions, and the evaluator class
+  `GeomFill_ConstrainedFilling_Eval` is a closure over the struct passed to
+  `AdvApprox_ApproxAFunction`. A boundary or field exception inside the evaluator is
+  kept (the native exception unwinds through the approximation), the evaluator
+  answers an error code, and the failure is raised when the approximation returns.
+  The debug members `CheckTgteField`, `CheckApprox` and `CheckResult` write to a
+  `fmt::Write` where the native ones write to `std::cout`.
