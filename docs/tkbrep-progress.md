@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (697 declarations):
+The toolkit test inventory maps these suites (756 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -46,7 +46,7 @@ The toolkit test inventory maps these suites (697 declarations):
 | BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for BRepGProp, BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
 | BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh) |
 | BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepBuilderAPI_Copy (TKTopAlgo) |
-| BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for TKPrim sphere, cylinder, cone, torus and wedge, BRepBuilderAPI_MakeFace |
+| BRepGraph_Build_Test.cxx | mapped | 59 | passed | original production builders |
 | BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for BRepGProp, TKPrim cylinder and sphere, BRepBuilderAPI_MakeFace and Transform |
 | BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for TKPrim sphere, BRepBuilderAPI_Copy |
 | BRepGraph_Test.cxx | brep_graph_suite | 95 | pass | pass |
@@ -1098,3 +1098,11 @@ box, sphere and compound builders. They cover empty input, invalid IDs, rebuild 
 UID generations and the sequential/parallel import options. All previously mapped
 TKBRep tests also run with the shared production-builder fixtures. The broader graph
 source suites still require translation; toolkit acceptance is not complete.
+
+### Recovered BRepGraph build declarations
+
+All 59 original `BRepGraph_Build_Test.cxx` declarations run through the production
+TKPrim and TKTopAlgo builders. The tests retain the original primitive dimensions,
+TopExp comparisons, flattening options, UID checks, and natural-boundary inputs.
+Unbounded faces retain OCCT's warning behavior; synthesized plane PCurves are
+checked through the adaptor without requiring a stored PCurve.
