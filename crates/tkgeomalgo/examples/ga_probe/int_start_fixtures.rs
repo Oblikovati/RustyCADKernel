@@ -3,6 +3,7 @@
 //! whose Edge() is a real edge (GaProbeEdgeTopolTool). The IntPatch classes themselves
 //! are the real ones of `rustycad_tkgeomalgo::int_patch`.
 use rustycad_tkbrep::topods::Edge;
+use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dTopolTool};
 use rustycad_tkg3d::top_abs::{Orientation, State};
@@ -148,5 +149,26 @@ impl TheTopolTool for ProbeDomain {
     }
     fn edge(&self) -> Option<Edge> {
         self.edge.clone()
+    }
+    fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure> {
+        TheTopolTool::is_the_point_on(&self.tool, point, tol, reframe)
+    }
+    fn tol3d(&self, arc: &TheArc) -> Result<f64, Failure> {
+        TheTopolTool::tol3d(&self.tool, arc)
+    }
+    fn domain_is_infinite(&self) -> bool {
+        TheTopolTool::domain_is_infinite(&self.tool)
+    }
+    fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure> {
+        TheTopolTool::sample_pnts(&self.tool, deflection, nu_min, nv_min)
+    }
+    fn u_parameters(&self) -> Result<Array1<'static, f64>, Failure> {
+        TheTopolTool::u_parameters(&self.tool)
+    }
+    fn v_parameters(&self) -> Result<Array1<'static, f64>, Failure> {
+        TheTopolTool::v_parameters(&self.tool)
+    }
+    fn is_uniform_sampling(&self) -> Result<bool, Failure> {
+        TheTopolTool::is_uniform_sampling(&self.tool)
     }
 }

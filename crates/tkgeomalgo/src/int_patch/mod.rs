@@ -34,6 +34,7 @@ mod h_inter_tool;
 mod instances;
 mod iwline;
 mod line;
+mod line_constructor;
 mod path_point;
 mod point;
 mod point_dump;
@@ -43,6 +44,7 @@ mod rline;
 mod rline_compute;
 mod vertices;
 mod wline;
+mod wline_tool;
 
 pub use aline::IntPatchALine;
 pub use arc_function::IntPatchArcFunction;
@@ -57,11 +59,13 @@ pub use instances::{
 };
 pub use iwline::IntPatchTheIWLineOfTheIWalking;
 pub use line::{IntPatchLine, IntPatchLineBase, IntPatchLineTransitions};
+pub use line_constructor::IntPatchLineConstructor;
 pub use path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds};
 pub use point::IntPatchPoint;
 pub use point_line::{IntPatchPointLine, curvature_radius_of_inters_line};
 pub use rline::IntPatchRLine;
 pub use wline::{IntPatchWLType, IntPatchWLine};
+pub use wline_tool::IntPatchWLineTool;
 
 /// `IntPatch_SearchPnt`: `Intf_InterferencePolygon2d`.
 pub type IntPatchSearchPnt = crate::intf::InterferencePolygon2d;
