@@ -1,7 +1,7 @@
-// BRepBuilderAPI probe operations; the Rust twin is
-// crates/tktopalgo/examples/tp_probe/brep_builder_api.rs. The Rust side is still the
-// STUB MakeVertex (crates/tktopalgo/src/brep_builder_api), so only the vertex it
-// builds is compared: its point and its tolerance.
+// BRepBuilderAPI_MakeVertex probe operation; the Rust twin is
+// crates/tktopalgo/examples/tp_probe/brep_builder_api.rs. The other BRepBuilderAPI
+// operations are in tktopalgo_probe_brepbuilderapi_makers.cxx and
+// tktopalgo_probe_brepbuilderapi_modify.cxx, which need the BRepLib readers.
 #include <BRep_Tool.hxx>
 #include <BRepBuilderAPI_MakeVertex.hxx>
 // `point`: BRepBuilderAPI_MakeVertex(P), then IsDone, BRep_Tool::Pnt and Tolerance.

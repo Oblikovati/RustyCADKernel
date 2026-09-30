@@ -74,12 +74,14 @@ TopoDS_Shape tp_shape_record_more(GaReader& r,int kind){
  if(build)BRepLib::BuildCurves3d(sh);
  if(unflag)for(TopExp_Explorer x(sh,TopAbs_EDGE);x.More();x.Next()){B.SameParameter(TopoDS::Edge(x.Current()),false);B.SameRange(TopoDS::Edge(x.Current()),false);}
  return sh;}
-// The gp constructors of MakeFace on an elementary surface; false for another one.
-bool tp_gp_face(const occ::handle<Geom_Surface>& s,int mode,GaReader& r,BRepLib_MakeFace& m){
+// The gp constructors of MakeFace on an elementary surface; false for another one. The
+// face requests are templates over the maker, so that the BRepBuilderAPI probe runs the
+// same calls on BRepBuilderAPI_MakeFace.
+template<class M> bool tp_gp_face(const occ::handle<Geom_Surface>& s,int mode,GaReader& r,M& m){
  double b[4]={0,0,0,0};TopoDS_Wire w;bool inside=true;
  if(mode==1)for(double& x:b)x=r.real();
  if(mode==4){w=TopoDS::Wire(tp_shape_record(r));inside=r.flag();}
- auto make=[&](const auto& gp){if(mode==0)m=BRepLib_MakeFace(gp);else if(mode==1)m=BRepLib_MakeFace(gp,b[0],b[1],b[2],b[3]);else m=BRepLib_MakeFace(gp,w,inside);};
+ auto make=[&](const auto& gp){if(mode==0)m=M(gp);else if(mode==1)m=M(gp,b[0],b[1],b[2],b[3]);else m=M(gp,w,inside);};
  if(auto p=occ::down_cast<Geom_Plane>(s))make(p->Pln());
  else if(auto c=occ::down_cast<Geom_CylindricalSurface>(s))make(c->Cylinder());
  else if(auto k=occ::down_cast<Geom_ConicalSurface>(s))make(k->Cone());
@@ -88,19 +90,25 @@ bool tp_gp_face(const occ::handle<Geom_Surface>& s,int mode,GaReader& r,BRepLib_
  else return false;
  return true;}
 void tp_face_maker(const BRepLib_MakeFace& m){ga_flag(m.IsDone());ga_int(m.Error());GA_TRY(tp_shape(m.Face()))}
+// The maker of a `blm_face` request (`print` shows the first maker of mode 10); false for
+// a gp mode on a surface that is not elementary.
+template<class M,class P> bool tp_face_request(GaReader& r,M& m,P print){
+ int mode=r.integer();
+ if(mode==0||mode==1||mode==4){occ::handle<Geom_Surface> s=tp_surface2(r);return tp_gp_face(s,mode,r,m);}
+ if(mode==2){occ::handle<Geom_Surface> s=tp_surface2(r);m=M(s,r.real());}
+ else if(mode==3||mode==10){occ::handle<Geom_Surface> s=tp_surface2(r);double u1=r.real(),u2=r.real(),v1=r.real(),v2=r.real();m=M(s,u1,u2,v1,v2,r.real());
+  if(mode==10){print(m);occ::handle<Geom_Surface> s2=tp_surface2(r);double a1=r.real(),a2=r.real(),b1=r.real(),b2=r.real();m.Init(s2,a1,a2,b1,b2,r.real());}}
+ else if(mode==5){occ::handle<Geom_Surface> s=tp_surface2(r);TopoDS_Wire w=TopoDS::Wire(tp_shape_record(r));m=M(s,w,r.flag());}
+ else if(mode==6){TopoDS_Wire w=TopoDS::Wire(tp_shape_record(r));m=M(w,r.flag());}
+ else if(mode==7){m=M(TopoDS::Face(tp_shape_record(r)));}
+ else if(mode==8){TopoDS_Face f=TopoDS::Face(tp_shape_record(r));m=M(f,TopoDS::Wire(tp_shape_record(r)));}
+ else{occ::handle<Geom_Surface> s=tp_surface2(r);bool bound=r.flag();m.Init(s,bound,r.real());int n=r.integer();
+  for(int i=0;i<n;++i)m.Add(TopoDS::Wire(tp_shape_record(r)));}
+ return true;}
 void tp_blm_face_case(std::istream& input){
  GaReader r{input};
- try{int mode=r.integer();BRepLib_MakeFace m;
-  if(mode==0||mode==1||mode==4){occ::handle<Geom_Surface> s=tp_surface2(r);if(!tp_gp_face(s,mode,r,m)){ga_int(-2);ga_end();return;}}
-  else if(mode==2){occ::handle<Geom_Surface> s=tp_surface2(r);m=BRepLib_MakeFace(s,r.real());}
-  else if(mode==3||mode==10){occ::handle<Geom_Surface> s=tp_surface2(r);double u1=r.real(),u2=r.real(),v1=r.real(),v2=r.real();m=BRepLib_MakeFace(s,u1,u2,v1,v2,r.real());
-   if(mode==10){tp_face_maker(m);occ::handle<Geom_Surface> s2=tp_surface2(r);double a1=r.real(),a2=r.real(),b1=r.real(),b2=r.real();m.Init(s2,a1,a2,b1,b2,r.real());}}
-  else if(mode==5){occ::handle<Geom_Surface> s=tp_surface2(r);TopoDS_Wire w=TopoDS::Wire(tp_shape_record(r));m=BRepLib_MakeFace(s,w,r.flag());}
-  else if(mode==6){TopoDS_Wire w=TopoDS::Wire(tp_shape_record(r));m=BRepLib_MakeFace(w,r.flag());}
-  else if(mode==7){m=BRepLib_MakeFace(TopoDS::Face(tp_shape_record(r)));}
-  else if(mode==8){TopoDS_Face f=TopoDS::Face(tp_shape_record(r));m=BRepLib_MakeFace(f,TopoDS::Wire(tp_shape_record(r)));}
-  else{occ::handle<Geom_Surface> s=tp_surface2(r);bool bound=r.flag();m.Init(s,bound,r.real());int n=r.integer();
-   for(int i=0;i<n;++i)m.Add(TopoDS::Wire(tp_shape_record(r)));}
+ try{BRepLib_MakeFace m;
+  if(!tp_face_request(r,m,tp_face_maker)){ga_int(-2);ga_end();return;}
   tp_face_maker(m);
  }catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
  ga_end();}

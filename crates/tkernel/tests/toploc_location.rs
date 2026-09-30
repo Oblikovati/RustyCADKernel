@@ -11,7 +11,7 @@ use rustycad_tkmath::{
     gp::{Point3, Transform3},
     toploc::Location,
 };
-use rustycad_tktopalgo::brep_builder_api::MakeVertex;
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeShape, BRepBuilderAPIMakeVertex};
 use std::sync::atomic::{AtomicI32, Ordering};
 struct TopLocTransformFunctor<'a> {
     shapes: &'a [Shape],
@@ -33,7 +33,8 @@ fn TopLoc_Location_Test__OCC25545_ConcurrentTransformationAccess() {
     let n = 1000;
     let mut shapes = vec![Shape::default(); n];
     let mut locations = vec![Location::default(); n];
-    let shape: Shape = MakeVertex::new(Point3::default()).shape().clone();
+    let mut maker = BRepBuilderAPIMakeVertex::new(Point3::default()).unwrap();
+    let shape: Shape = maker.shape().unwrap().clone();
     shapes[0] = shape.clone();
     for index in 1..n {
         let transform = Transform3::translation([1.0, 0.0, 0.0]);

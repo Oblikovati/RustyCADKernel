@@ -1,11 +1,14 @@
-"""Deterministic requests for BRepBuilderAPI (tools/oracle/tktopalgo_probe_brepbuilderapi.cxx).
+"""Deterministic requests for BRepBuilderAPI (tools/oracle/tktopalgo_probe_brepbuilderapi*.cxx).
 
-`tp_make_vertex` builds a vertex with BRepBuilderAPI_MakeVertex (the Rust side is still
-the STUB MakeVertex) and compares its point and its tolerance: the origin, signed zeros,
-tiny, huge and non-representable decimal coordinates, and seeded random points.
+The maker and modification families live in tktopalgo_corpus_brepbuilderapi_makers.py and
+tktopalgo_corpus_brepbuilderapi_modify.py. `tp_make_vertex` builds a vertex with
+BRepBuilderAPI_MakeVertex and compares its point and its tolerance: the origin, signed
+zeros, tiny, huge and non-representable decimal coordinates, and seeded random points.
 """
 from __future__ import annotations
 import random
+from tktopalgo_corpus_brepbuilderapi_makers import append_brepbuilderapi_maker_requests
+from tktopalgo_corpus_brepbuilderapi_modify import append_brepbuilderapi_modify_requests
 
 
 def numbers(values: list[float]) -> str:
@@ -25,7 +28,10 @@ def fixed_points() -> list[list[float]]:
 
 
 def append_brepbuilderapi_requests(requests: list[str]) -> None:
-    """Append the BRepBuilderAPI requests: fixed points, then 20 seeded random ones."""
+    """Append the BRepBuilderAPI requests: the MakeVertex points (fixed, then 20 seeded
+    random ones), the makers and the modifications."""
     rng = random.Random(20260930)
     points = fixed_points() + [[rng.uniform(-100.0, 100.0) for _ in range(3)] for _ in range(20)]
     requests.extend(make_vertex_request(point) for point in points)
+    append_brepbuilderapi_maker_requests(requests)
+    append_brepbuilderapi_modify_requests(requests)

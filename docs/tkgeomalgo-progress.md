@@ -1,17 +1,16 @@
 # TKGeomAlgo port status
 
-**Every package is ported; three upstream suites still wait for other toolkits.**
+**Every package is ported; two upstream suites still wait for other toolkits.**
 `crates/tkgeomalgo`
 (`rustycad-tkgeomalgo`) is the port of the ModelingAlgorithms toolkit TKGeomAlgo. It
 depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase and TKBRep ports, as the
 native toolkit does (its EXTERNLIB). Each of the 33 OCCT packages is one module of the
 crate, declared up front in `src/lib.rs`; a module whose package is not ported yet
 holds only its documentation. All 33 packages are ported (NLPlate has no sources at the
-pinned commit), and each audits with 0 missing and 0 stale api rows. Three suites are not
+pinned commit), and each audits with 0 missing and 0 stale api rows. Two suites are not
 mapped yet because they build shapes with toolkits that are not ported:
-GeomFill_BSplineCurves_Test and GeomFill_CorrectedFrenet_Test (TKTopAlgo, TKOffset,
-TKShHealing) and GeomPlate_BuildPlateSurface_Test (BRepBuilderAPI); their cases run as
-behaviour tests.
+GeomFill_BSplineCurves_Test and GeomFill_CorrectedFrenet_Test (TKOffset, TKShHealing);
+their cases run as behaviour tests.
 
 Generic C++ code (the `.gxx` and `.pxx` templates that OCCT instantiates per type) is
 ported once as a Rust generic and instantiated where OCCT instantiates it, as
@@ -28,7 +27,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (198 declarations):
+The toolkit test inventory maps these suites (204 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -66,6 +65,7 @@ The toolkit test inventory maps these suites (198 declarations):
 | GeomFill_GuideTrihedronAC_Test.cxx | geom_fill_guide_trihedron_ac | 4 | pass | pass |
 | IntPatch_Polyhedron_Test.cxx | int_patch_polyhedron | 5 | pass | pass |
 | IntPatch_PolyhedronBVH_Test.cxx | int_patch_polyhedron_bvh | 8 | pass | pass |
+| GeomPlate_BuildPlateSurface_Test.cxx | geom_plate_build_plate_surface | 6 | pass | pass |
 
 GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
 build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
@@ -80,15 +80,11 @@ it with BRepAdaptor_CompCurve, which the port does not provide and which needs
 TKShHealing, absent from the shared native build. Its three other cases run as the
 behavior tests of `geom_fill_corrected_frenet_behavior`.
 
-GeomPlate_BuildPlateSurface_Test.cxx is not mapped: its A1 and A2 cases (and the shared
-helper of the file) build their boundaries as `BRepAdaptor_Curve` of edges made by
-`BRepBuilderAPI_MakeEdge` (TKTopAlgo), which the port does not provide (the native suite
-itself compiles and passes against the shared build, which links TKTopAlgo). Its six
-cases run as behavior tests (`geom_plate_behavior`): the same Bezier curves go through
-`GeomAdaptor_Curve` on their natural range, which the edge of `MakeEdge` evaluates
-identically, and the progress observer checks the same scope names
-(`Calculating the surface filled`, `Plate_Plate::SolveTI1()`, `math_Gauss
-LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
+GeomPlate_BuildPlateSurface_Test.cxx is translated 1:1 since BRepBuilderAPI (TKTopAlgo)
+is ported: its A1 and A2 cases build their boundaries as `BRepAdaptor_Curve` of edges made
+by `BRepBuilderAPI_MakeEdge`, so the crate has a dev-dependency on `rustycad-tktopalgo`,
+as the native suite links TKTopAlgo (its behavior-test surrogate is removed). Its
+GeomPlate content is also in the numeric corpus.
 
 ## API mapping
 

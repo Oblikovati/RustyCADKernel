@@ -7,17 +7,17 @@ as the native toolkit does (its EXTERNLIB). Each of the 16 OCCT packages is one 
 of the crate, declared up front in `src/lib.rs`; a module whose package is not ported
 yet holds only its documentation. Ported so far: BRepClass, BRepTopAdaptor,
 IntCurvesFace, Bisector, MAT, MAT2d, BRepBndLib (without AddOBB), BRepClass3d,
-BRepCheck, BRepLib (without PointCloudShape), BRepGProp, BRepApprox and
-BRepIntCurveSurface. The numeric corpus has 19056 requests: BRepClass 4779,
-BRepTopAdaptor 650, IntCurvesFace 424, Bisector 455, MAT and MAT2d 84, BRepBndLib 266,
-BRepClass3d 996, BRepCheck with BRepLib_ValidateEdge 981, the BRep domains of IntStart
-and IntPatch 752, BRepLib 2688, BRepGProp 4492, BRepApprox 2148, BRepIntCurveSurface
-314, and the MakeVertex stub pipeline 27.
+BRepCheck, BRepLib (without PointCloudShape), BRepGProp, BRepApprox, BRepIntCurveSurface
+and BRepBuilderAPI (without MakeShapeOnMesh). The numeric corpus has 21465 requests:
+BRepClass 4779, BRepTopAdaptor 650, IntCurvesFace 424, Bisector 455, MAT and MAT2d 84,
+BRepBndLib 266, BRepClass3d 996, BRepCheck with BRepLib_ValidateEdge 981, the BRep
+domains of IntStart and IntPatch 752, BRepLib 2688, BRepGProp 4492, BRepApprox 2148,
+BRepIntCurveSurface 314, and BRepBuilderAPI 2436.
 
-`brep_builder_api::MakeVertex` is a **stub**, not the port of
-`BRepBuilderAPI_MakeVertex`: a minimal vertex builder that the TKernel test
-`crates/tkernel/tests/toploc_location.rs` and the TKernel geometry probe use. It has
-no `api` row, and the port of BRepBuilderAPI replaces it.
+BRepBuilderAPI is ported without its sewing group (`BRepBuilderAPI_Sewing`,
+`FastSewing`, `MakeShapeOnMesh`, `BndBoxTreeSelector` and `VertexInspector`, ported
+separately); its `BRepBuilderAPI_MakeVertex` is the vertex builder of the TKernel test
+`crates/tkernel/tests/toploc_location.rs` and the TKernel geometry probe.
 
 Generic C++ code (the `.gxx`, `.pxx` and `.lxx` templates that OCCT instantiates per
 type) is ported once as a Rust generic and instantiated where OCCT instantiates it, as
@@ -40,54 +40,59 @@ BRepCheck_Edge includes BRepLib; BRepBuilderAPI includes BRepLib, which includes
 BRepBndLib, which includes BRepBuilderAPI), so they are ported class by class in an
 order that follows the includes of each file.
 
-The toolkit test inventory maps these suites (1 declaration):
+The toolkit test inventory maps these suites (12 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
 | BRepLib_MakeWire_Test.cxx | brep_lib_make_wire | 1 | 1 of 1 | 1 of 1 |
+| BRepBuilderAPI_MakeShell_Test.cxx | brep_builder_api_make_shell | 1 | 1 of 1 | 1 of 1 |
+| BRepBuilderAPI_MakeWire_Test.cxx | brep_builder_api_make_wire | 1 | 1 of 1 | 1 of 1 |
+| BRepCheck_Face_Test.cxx | brep_check_face | 4 | 4 of 4 | 4 of 4 |
+| BRepTopAdaptor_FClass2d_Test.cxx | brep_top_adaptor_fclass2d | 5 | 5 of 5 | 5 of 5 |
 
-BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: every case builds its
-faces with BRepBuilderAPI_MakeEdge, MakeWire and MakeFace (and one with
-BRepPrimAPI_MakeSphere of TKPrim), which the port does not provide yet. The unchanged
+BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: its case
+`BRepClassFaceExplorerTest.DegenerateEdges_HaveNoNextEdge` builds its sphere face with
+BRepPrimAPI_MakeSphere of TKPrim, which the port does not provide (the seven other cases
+need only BRepBuilderAPI, ported now, but a suite is mapped whole). The unchanged
 suite compiles and passes natively against the shared build (8 of 8). Its eight cases
 run as the behavior tests of `crates/tktopalgo/tests/brep_class_behavior.rs`, on the
 same faces built with BRep_Builder by the probe's face reader (a holed square, the
 lateral face of a cylinder with its seam, a square with a reversed wire, a disc, a
 sphere face with its degenerated poles), checking the same properties; they move to a
-1:1 translation once BRepBuilderAPI is ported.
+1:1 translation once BRepPrimAPI is ported.
 
-BRepTopAdaptor_FClass2d_Test.cxx (5 declarations) is not mapped: four cases build their
-faces with BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, which the port does not
-provide yet. The unchanged suite compiles and passes natively against the shared build
-(5 of 5). Its five cases run as the behavior tests of
-`crates/tktopalgo/tests/brep_top_adaptor_behavior.rs` with the same inputs and checks, on
-the same faces built with BRep_Builder by the probe's face reader (edges with 3d lines
-and pcurves, as MakeEdge and MakeFace give on a plane; the cylinder with its seam); they
-move to a 1:1 translation once BRepBuilderAPI is ported. IntCurvesFace has no upstream
-suite; `tests/brep_top_adaptor_tools.rs` and `tests/int_curves_face_behavior.rs` hold its
+BRepTopAdaptor_FClass2d_Test.cxx and BRepCheck_Face_Test.cxx are translated 1:1 since
+BRepBuilderAPI is ported (their BRep_Builder surrogates are removed). IntCurvesFace has
+no upstream suite; `tests/brep_top_adaptor_tools.rs` and `tests/int_curves_face_behavior.rs` hold its
 behavior tests and those of the tool, vertex and Tool classes.
 
-BRepCheck_Face_Test.cxx (4 declarations) is not mapped: every case builds its planar
-face and its wires with BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, which the port
-does not provide yet. The unchanged suite compiles and passes natively against the
-shared build (4 of 4). Its four `ClassifyWires` cases (with the
-`BRepCheck_Analyzer::IsValid` assertion of the first one) run as the `face_test_*`
-behavior tests of
-`crates/tktopalgo/tests/brep_check_wire_face.rs` on the same faces built with
-BRep_Builder (40 circular holes, an offset-circle pcurve, an open and an unbounded wire
-outside the face, on the face and its reverse); `tests/brep_check_package.rs`,
+`tests/brep_check_wire_face.rs`, `tests/brep_check_package.rs`,
 `brep_check_vertex_edge.rs`, `brep_check_shell.rs` and `brep_check_analyzer.rs` test
 the other checkers, the analyzer, the package functions and BRepLib_ValidateEdge.
-BRepBndLib_Test.cxx (6 declarations) is not mapped: it builds its shapes with
-BRepBuilderAPI_MakeEdge and MakeFace and BRepPrimAPI_MakeCylinder, and meshes them with
-BRepMesh_IncrementalMesh of TKMesh, which is not in the shared native build (the unchanged
-suite does not link there). Its six cases run as the behavior tests of
+BRepBndLib_Test.cxx (6 declarations) is not mapped: besides BRepBuilderAPI_MakeEdge and
+MakeFace (ported now), it builds a cylinder with BRepPrimAPI_MakeCylinder of TKPrim (case
+`OCC30292_MeshedCylinderEdgeUsesPolygon3d`) and meshes shapes with
+BRepMesh_IncrementalMesh of TKMesh (cases `OCC30292_MeshedGeometricEdgeUsesRequestedRepresentation`
+and `OCC30292_MeshedCylinderEdgeUsesPolygon3d`); TKMesh is not in the shared native build
+(the unchanged suite does not link there). Its six cases run as the behavior tests of
 `crates/tktopalgo/tests/brep_bnd_lib_behavior.rs` on the same shapes built with
 BRep_Builder (the edge MakeEdge gives on a curve, the plane face MakeFace gives on an
 infinite plane, and the 26-segment 3d polygon of deflection 0.1 that BRepMesh gives the
 unit circle, which the reference bounds of the upstream cases pin), with the same values
-and tolerances; they move to a 1:1 translation once BRepBuilderAPI and BRepPrimAPI are
-ported and TKMesh is in the native build.
+and tolerances; they move to a 1:1 translation once BRepPrimAPI is ported and TKMesh is
+in the native build.
+
+Four BRepBuilderAPI suites wait for other packages: BRepBuilderAPI_MakeEdge_Test.cxx
+(6 declarations; `LinearEdge_TwoPoints`, `CircularEdge_Full`, `CircularEdge_Trimmed` and
+`EdgeFromLine_WithBounds` measure the edge length with `BRepGProp::LinearProperties`) and
+BRepBuilderAPI_MakeFace_Test.cxx (4; `FaceFromWire`, `FaceFromGeomPlane_WithBounds` and
+`FaceFromCylindricalSurface` call `BRepGProp::SurfaceProperties`) need BRepGProp, ported
+in parallel; BRepBuilderAPI_Transform_Test.cxx (5) and BRepBuilderAPI_Copy_Test.cxx (6)
+build every input with `BRepPrimAPI_MakeBox` of TKPrim and measure it with
+`BRepGProp::VolumeProperties` or `SurfaceProperties` (and `CafNamedShape_A4` translates
+with BRepBuilderAPI_Transform). The four unchanged suites pass natively (21 of 21); the
+behavior tests of `crates/tktopalgo/tests/brep_builder_api_behavior.rs` and the numeric
+probe cover the same members.
 
 BRepClass3d_SolidClassifier_Test.cxx (5 declarations) is not mapped: its solids come from
 BRepPrimAPI_MakeBox and BRepPrimAPI_MakeSphere of TKPrim, which the port does not provide.
@@ -200,6 +205,28 @@ accessors without a current point and past the last face).
   `avoid_edges`, `set_concat_bspl`, `perform`, `nb_vertices`, `shape`, and `edges`,
   `result_edges` and `faces`, which return the maps the native members fill.
 
+- BRepBuilderAPI (docs/topalgo-design.md section 10): `BRepBuilderAPI_Command` is
+  `BRepBuilderAPICommand` and the protected data of `BRepBuilderAPI_MakeShape` is
+  `BRepBuilderAPIMakeShapeBase`; the virtual members of both classes are the trait
+  `BRepBuilderAPIMakeShape` (`is_done`, `check`, `build`, `shape`, `generated`,
+  `modified`, `is_deleted`), which every maker and modification implements (import it to
+  call them). The makers `BRepBuilderAPIMakeVertex`, `MakeEdge`, `MakeEdge2d`,
+  `MakePolygon`, `MakeWire`, `MakeFace`, `MakeShell` and `MakeSolid` use the constructor
+  and Init names of their BRepLib makers (`from_lin_params`, `init_pcurve`, `add_edge`,
+  `with_bounds`, ...); the conversion operators map to `vertex`, `edge`, `wire`, `face`,
+  `shell` and `solid`, and `Error()` returns `BRepBuilderAPIEdgeError`, `WireError`,
+  `FaceError` or `ShellError` (with `PipeError` and `TransitionMode`, the other
+  enumerations). `BRepBuilderAPI_ModifyShape` is `BRepBuilderAPIModifyShape` (public
+  fields and protected members: `with_shape`, `with_modification`,
+  `with_shape_modification`, `do_modif_shape`, `do_modif_modification`,
+  `do_modif_shape_modification`); `BRepBuilderAPITransform`, `GTransform`, `Copy` and
+  `NurbsConvert` dereference to it and shadow its `modified_shape`; their constructors
+  are `new` (no shape) and `with_shape`, and `perform`. `BRepBuilderAPI_Collect` is
+  `BRepBuilderAPICollect` (`add` takes `&mut dyn BRepBuilderAPIMakeShape`; its maps are
+  `ShapeHistoryMap`), `BRepBuilderAPI_FindPlane` is `BRepBuilderAPIFindPlane`
+  (`from_shape`, `init`, `found`, `plane`), and the package class is the free functions
+  `plane`, `set_plane`, `precision` and `set_precision`. The audit of the package lists
+  only the sewing group (71 members), which is ported separately.
 - BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
   are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
   `add_optimal`); they extend the caller's `BoundingBox3` in place and return `Result`.
@@ -294,10 +321,26 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-BRepBuilderAPI (stub): `tp_make_vertex` compares the vertex of the stub `MakeVertex`
-with `BRepBuilderAPI_MakeVertex` (its point and its tolerance, `BRepLib::Precision()`)
-on 27 points (signed zeros, tiny, huge and decimal coordinates, 20 seeded random
-points). It proves the pipeline; it is not evidence for a BRepBuilderAPI port.
+BRepBuilderAPI: 2436 requests (`tools/tktopalgo_corpus_brepbuilderapi.py` and its
+`_makers` and `_modify` modules; probes `tktopalgo_probe_brepbuilderapi*.cxx` and
+`tp_probe/brep_builder_api*.rs`). `tp_make_vertex` (27) compares the vertex of
+`BRepBuilderAPI_MakeVertex` on signed zeros, tiny, huge, decimal and seeded random
+points. The makers (1372) run the BRepLib maker requests under `bba_vertex`,
+`bba_edge`, `bba_edge2d`, `bba_polygon`, `bba_wire`, `bba_solid`, `bba_face` and
+`bba_shell` (the BRepLib first-call readers are templates natively and macros in Rust
+over the maker type): every constructor, Init and Add with valid and failing inputs
+(each error value), later Inits on done and failed makers, changed precisions and
+planes; each prints the BRepLib outputs, then the virtual IsDone, Check, Shape() and the
+history (Generated, Modified, IsDeleted) of the built shape; `bba_package` sets and reads
+the package precision and plane. The modifications (1037): `bba_transform` (every gp_Trsf
+kind, with and without the geometry and mesh copies, the three call orders),
+`bba_gtransform` (affinities and matrices), `bba_copy`, `bba_nurbs` (faces on every
+surface kind, shells, edges of every curve kind), `bba_modify` (the protected ModifyShape
+paths and their Standard_NullObject failures), `bba_findplane` and `bba_collect`
+(chains with AddGenerated, AddModif and Filter); each prints the images of every input
+sub-shape through ModifiedShape and Modified (as indices in the result), Generated and
+IsDeleted, the image of a foreign vertex, the geometry sharing of every face and edge,
+and the result meshes.
 
 BRepClass: 4779 requests (`tools/tktopalgo_corpus_brepclass.py`). Each request carries
 a face record (`tools/tktopalgo_corpus_faces.py`) that both probes build with
@@ -985,6 +1028,34 @@ Native null dereferences in these packages are Standard_NullObject errors.
   edge's curve has no location, the curve stored in that edge changes too. The range
   set on the fused edge from a curve on surface also moves its 3d range.
 
+### BRepBuilderAPI
+
+- The makers' `IsDone()` is the flag of the wrapped BRepLib maker while `Check()` reads
+  the command flag, which only a done BRepLib step sets: after a disconnected
+  `MakeWire::Add` the maker is not done, but `Check` passes and `Shape()` returns the
+  wire of the earlier Adds; the empty `MakeSolid()` is done with a null `Shape()` (its
+  BRepLib maker holds an empty solid that `Solid()` returns); `MakeFace(F)` and
+  `Init(F)` leave the maker not done, so `Shape()` raises StdFail_NotDone while `Face()`
+  returns the copy.
+- `MakePolygon::Close` takes the BRepLib shape without the done test, so closing a
+  polygon of fewer than two points raises StdFail_NotDone; `Add(P)` takes the wire only
+  when a last vertex exists.
+- `Copy::Perform` marks the command not done to force a new copy ("on force la copie"),
+  but `BRepTools_Modifier::Init` keeps the images of the shapes it already recorded, so
+  performing again on the same shape returns the first copy.
+- `GTransform::Modified(S)` lets each image of the NURBS conversion overwrite the list
+  (the local copy `Li` is discarded), so it returns the image of the last conversion
+  image only, and an empty list for a shape the conversion did not record.
+- `NurbsConvert::Modified` gives a vertex that was not replaced its modifier image
+  without the re-shaper, where `ModifiedShape` applies the re-shaper to it.
+- `Transform(T)` leaves `myUseModif` uninitialized until the first `Perform`; the port
+  starts it false, so `ModifiedShape` and `Modified` before a Perform move by the
+  identity location (the probe does not read it).
+- `BRepTools_NurbsConvertModification::NewCurve2d` passes the null 3d curve of an edge
+  that has only curves on surface to `BRepTools::EvalAndUpdateTol`, a segmentation fault
+  natively for the cylinder, sphere and cone faces of the face reader; NurbsConvert and
+  GTransform (which converts first) are compared on the other shapes.
+
 ## Deviations
 
 Each ported package lists where the port must differ from native behaviour.
@@ -1166,3 +1237,10 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   inside `Is2DClosed` it answers false, as the native signal handler does. A chain
   edge without 3d curve that `BRepLib_FuseEdges` dereferences raises it too.
 
+### BRepBuilderAPI
+- `BRepBuilderAPI_MakeShape` is a trait and the virtual `ModifiedShape` of ModifyShape is
+  shadowed by each derived struct (docs/topalgo-design.md section 10); `Shape()`,
+  `Build`, `Generated`, `Modified` and `IsDeleted` return `Result`.
+- Where the native conversion above crashes, the Rust NurbsConvert raises
+  Standard_NullObject. A null shape passed to `MakeSolid::IsDeleted` raises
+  Standard_NullObject (a crash natively).

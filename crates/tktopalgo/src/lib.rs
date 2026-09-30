@@ -13,9 +13,6 @@
 //! Generic C++ packages (`.gxx`/`.pxx`/`.lxx` templates) are ported once as Rust
 //! generics, as docs/topalgo-design.md fixes, and docs/tktopalgo-progress.md lists
 //! the ported packages.
-//!
-//! [`brep_builder_api::MakeVertex`] is a STUB kept for the TKernel tests until
-//! BRepBuilderAPI is ported.
 pub mod bisector;
 pub mod brep_approx;
 pub mod brep_bnd_lib;
