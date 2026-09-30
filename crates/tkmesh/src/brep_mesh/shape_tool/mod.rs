@@ -29,7 +29,7 @@ impl_transient!(
     StandardTransient,
     transient
 );
-fn native_max(left: f64, right: f64) -> f64 {
+pub(super) fn native_max(left: f64, right: f64) -> f64 {
     if left < right { right } else { left }
 }
 impl ShapeTool {

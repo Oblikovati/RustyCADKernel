@@ -33,6 +33,8 @@ def corpus() -> str:
              for values in product(range(4), range(16), range(3), range(4), range(3))]
     rows += ['mesh_model_builder ' + ' '.join(map(str, values))
              for values in product(range(10), range(2), range(3), range(3), range(4))]
+    rows += ['mesh_deflection ' + ' '.join(map(str, v)) for v in product(range(8), range(2), range(2), range(3), range(3), range(3))]
+    rows += ['mesh_consistent ' + ' '.join(map(str, v)) for v in product(range(9), range(9), range(2), range(4))]
     return '\n'.join(rows) + '\n'
 
 

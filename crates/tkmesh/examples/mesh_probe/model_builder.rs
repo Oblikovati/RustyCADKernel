@@ -7,7 +7,7 @@ use rustycad_tkmesh::{
     imesh_tools::{MeshParameters, ModelBuilder},
 };
 #[path = "../../tests/support/model_builder_fixture.rs"]
-mod fixtures;
+pub(super) mod fixtures;
 pub fn model_builder_case(v: &[i32]) {
     let shape = fixtures::model_shape(v[0]).oriented(orientation(v[4]));
     let parameters = MeshParameters {
