@@ -11,32 +11,30 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of Geom2dAPI_Interpolate.cxx (PerformPeriodic, PerformNonPeriodic) at
-// 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of Geom2dAPI_Interpolate.cxx and GeomAPI_Interpolate.cxx
+// (PerformPeriodic, PerformNonPeriodic) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! The two interpolations of Geom2dAPI_Interpolate: a cubic B-spline through the
-//! points with tangent conditions at the ends (and where requested), or a closed C1
-//! one through the first point.
-use super::Interpolate;
-use super::interpolate::InterpolateArrays;
+//! The two interpolations of Geom2dAPI_Interpolate and GeomAPI_Interpolate: a cubic
+//! B-spline through the points with tangent conditions at the ends (and where
+//! requested), or a closed C1 one through the first point.
+use super::interpolate::{InterpolateArrays, InterpolateGen};
 use super::interpolate_build::{array, at, build_periodic_tangent, build_tangents, put};
+use super::interpolate_space::{InterpolateSpace, vector_as_point};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkg2d::geom2d::Geom2dBSplineCurve;
 use rustycad_tkmath::bsplclib;
-use rustycad_tkmath::gp::{Point2, Vector2};
 
 /// The linear system of BSplCLib::Interpolate being assembled.
-struct System {
+struct System<S: InterpolateSpace> {
     degree: i32,
     parameters: Array1<'static, f64>,
     flatknots: Array1<'static, f64>,
     mults: Array1<'static, i32>,
     contact_order_array: Array1<'static, i32>,
-    poles: Array1<'static, Point2>,
+    poles: Array1<'static, S::Point>,
 }
 
-impl System {
+impl<S: InterpolateSpace> System<S> {
     fn new(num_poles: i32, degree: i32, num_distinct_knots: i32) -> Result<Self, Failure> {
         let mut contact_order_array: Array1<'static, i32> = array(1, num_poles)?;
         contact_order_array.init(0);
@@ -71,22 +69,18 @@ impl System {
         Ok(inversion_problem == 0)
     }
     // A pole and its derivative condition: the tangent as a pole, contact order 1.
-    fn add_tangent(&mut self, index: i32, parameter: f64, tangent: Vector2) -> Result<(), Failure> {
+    fn add_tangent(&mut self, index: i32, parameter: f64, tangent: S::Vector) -> Result<(), Failure> {
         put(&mut self.contact_order_array, index, 1)?;
         put(&mut self.parameters, index, parameter)?;
-        put(
-            &mut self.poles,
-            index,
-            Point2::new(tangent.x(), tangent.y()),
-        )
+        put(&mut self.poles, index, vector_as_point::<S>(&tangent))
     }
 }
 
 /// The contents of the arrays once the tangents are built.
-struct Inputs<'g> {
-    points: &'g Array1<'static, Point2>,
+struct Inputs<'g, S: InterpolateSpace> {
+    points: &'g Array1<'static, S::Point>,
     parameters: &'g Array1<'static, f64>,
-    tangents: &'g Array1<'static, Vector2>,
+    tangents: &'g Array1<'static, S::Vector>,
     flags: &'g Array1<'static, bool>,
 }
 
@@ -99,20 +93,19 @@ fn count_flags(flags: &Array1<'_, bool>, from: i32, to: i32) -> Result<i32, Fail
     Ok(count)
 }
 
-impl Interpolate {
+impl<S: InterpolateSpace> InterpolateGen<S> {
     /// `PerformPeriodic()`: a periodic curve of degree 1 through two points without
     /// tangents, otherwise a C1 periodic cubic closing on the first point, with the
     /// tangent of the first point (built by BuildPeriodicTangent when missing).
     pub(super) fn perform_periodic(&mut self) -> Result<(), Failure> {
-        let h: InterpolateArrays = self.arrays();
+        let h: InterpolateArrays<S> = self.arrays();
         let num_points: i32 = h.points()?.array1().len() as i32;
         if num_points == 2 && !self.tangent_request() {
             // build a periodic curve of degree 1
             let mut deg1_mults: Array1<'static, i32> = array(1, num_points + 1)?;
             deg1_mults.init(1);
             let (points, parameters) = (h.points()?.array1(), h.parameters()?.array1());
-            let curve =
-                Geom2dBSplineCurve::new(&points, &parameters, &deg1_mults, 1, self.periodic())?;
+            let curve = S::new_curve(&points, &parameters, &deg1_mults, 1, self.periodic())?;
             self.set_result(curve);
             return Ok(());
         }
@@ -124,7 +117,7 @@ impl Interpolate {
         if num_points >= 3 {
             // only here with 3 points or more, otherwise the tangent is given
             let (points, parameters) = (h.points()?.array1(), h.parameters()?.array1());
-            build_periodic_tangent(
+            build_periodic_tangent::<S>(
                 &points,
                 &mut h.tangents()?.change_array1(),
                 &mut h.flags()?.change_array1(),
@@ -139,22 +132,22 @@ impl Interpolate {
             tangents: &tangents,
             flags: &flags,
         };
-        let mut s: System = System::new(num_poles, 3, num_points + 1)?;
+        let mut s: System<S> = System::new(num_poles, 3, num_points + 1)?;
         self.fill_periodic(&inputs, &mut s)?;
         let system_parameters: Array1<'static, f64> = s.parameters.clone();
         if !s.interpolate(&system_parameters)? {
             return Ok(());
         }
-        let mut newpoles: Array1<'static, Point2> = array(1, num_poles - 2)?;
+        let mut newpoles: Array1<'static, S::Point> = array(1, num_poles - 2)?;
         for i in 1..=num_poles - 2 {
             put(&mut newpoles, i, at(&s.poles, i)?)?;
         }
-        let curve = Geom2dBSplineCurve::new(&newpoles, &parameters, &s.mults, 3, self.periodic())?;
+        let curve = S::new_curve(&newpoles, &parameters, &s.mults, 3, self.periodic())?;
         self.set_result(curve);
         Ok(())
     }
 
-    fn fill_periodic(&self, a: &Inputs<'_>, s: &mut System) -> Result<(), Failure> {
+    fn fill_periodic(&self, a: &Inputs<'_, S>, s: &mut System<S>) -> Result<(), Failure> {
         let (half_order, num_poles) = (2, s.num_poles());
         let (p_lower, p_upper) = (a.parameters.lower(), a.parameters.upper());
         let period: f64 = at(a.parameters, p_upper)? - at(a.parameters, p_lower)?;
@@ -201,7 +194,10 @@ impl Interpolate {
 
 // The periodic system without requested tangents: every parameter as a knot, every
 // point after the first as a pole (the last pole is the first point again).
-fn fill_periodic_plain(a: &Inputs<'_>, s: &mut System) -> Result<(), Failure> {
+fn fill_periodic_plain<S: InterpolateSpace>(
+    a: &Inputs<'_, S>,
+    s: &mut System<S>,
+) -> Result<(), Failure> {
     let (mut index, mut index1) = (s.degree + 1, 2);
     for ii in a.parameters.lower()..=a.parameters.upper() {
         put(&mut s.parameters, index1, at(a.parameters, ii)?)?;
@@ -218,7 +214,10 @@ fn fill_periodic_plain(a: &Inputs<'_>, s: &mut System) -> Result<(), Failure> {
 
 // The periodic system with requested tangents: every flagged point after the first
 // doubles its knot and adds a derivative condition.
-fn fill_periodic_requested(a: &Inputs<'_>, s: &mut System) -> Result<(), Failure> {
+fn fill_periodic_requested<S: InterpolateSpace>(
+    a: &Inputs<'_, S>,
+    s: &mut System<S>,
+) -> Result<(), Failure> {
     let (mut mult_index, mut index, mut index1) = (2, 3, s.degree + 2);
     for ii in a.flags.lower() + 1..=a.flags.upper() {
         put(&mut s.parameters, index, at(a.parameters, ii)?)?;
@@ -239,12 +238,12 @@ fn fill_periodic_requested(a: &Inputs<'_>, s: &mut System) -> Result<(), Failure
     Ok(())
 }
 
-impl Interpolate {
+impl<S: InterpolateSpace> InterpolateGen<S> {
     /// `PerformNonPeriodic()`: degree 1 for two points and degree 2 for three
     /// without tangents, otherwise a cubic with end tangents (built by BuildTangents
     /// when missing) and the requested inner ones.
     pub(super) fn perform_non_periodic(&mut self) -> Result<(), Failure> {
-        let h: InterpolateArrays = self.arrays();
+        let h: InterpolateArrays<S> = self.arrays();
         let num_points: i32 = h.points()?.array1().len() as i32;
         let (degree, num_distinct_knots, mut num_poles) = match num_points {
             2 if !self.tangent_request() => (1, num_points, num_points),
@@ -255,7 +254,7 @@ impl Interpolate {
             let flags = h.flags()?.array1();
             num_poles += count_flags(&flags, flags.lower() + 1, flags.upper() - 1)?;
         }
-        let mut s: System = System::new(num_poles, degree, num_distinct_knots)?;
+        let mut s: System<S> = System::new(num_poles, degree, num_distinct_knots)?;
         {
             let parameters = h.parameters()?.array1();
             for ii in 1..=degree + 1 {
@@ -276,18 +275,26 @@ impl Interpolate {
         }
     }
 
-    fn perform_degree1(&mut self, h: &InterpolateArrays, s: &mut System) -> Result<(), Failure> {
+    fn perform_degree1(
+        &mut self,
+        h: &InterpolateArrays<S>,
+        s: &mut System<S>,
+    ) -> Result<(), Failure> {
         let (points, parameters) = (h.points()?.array1(), h.parameters()?.array1());
         for ii in 1..=s.num_poles() {
             put(&mut s.poles, ii, at(&points, ii)?)?;
         }
-        let curve = Geom2dBSplineCurve::new(&s.poles, &parameters, &s.mults, 1, false)?;
+        let curve = S::new_curve(&s.poles, &parameters, &s.mults, 1, false)?;
         drop((points, parameters));
         self.set_result(curve);
         Ok(())
     }
 
-    fn perform_degree2(&mut self, h: &InterpolateArrays, s: &mut System) -> Result<(), Failure> {
+    fn perform_degree2(
+        &mut self,
+        h: &InterpolateArrays<S>,
+        s: &mut System<S>,
+    ) -> Result<(), Failure> {
         let (points, parameters) = (h.points()?.array1(), h.parameters()?.array1());
         let mut knots: Array1<'static, f64> = array(1, 2)?;
         put(&mut knots, 1, at(&parameters, 1)?)?;
@@ -298,7 +305,7 @@ impl Interpolate {
         if !s.interpolate(&parameters)? {
             return Ok(());
         }
-        let curve = Geom2dBSplineCurve::new(&s.poles, &knots, &s.mults, 2, false)?;
+        let curve = S::new_curve(&s.poles, &knots, &s.mults, 2, false)?;
         drop((points, parameters));
         self.set_result(curve);
         Ok(())
@@ -306,15 +313,15 @@ impl Interpolate {
 
     fn perform_cubic(
         &mut self,
-        h: &InterpolateArrays,
-        s: &mut System,
+        h: &InterpolateArrays<S>,
+        s: &mut System<S>,
         num_points: i32,
     ) -> Result<(), Failure> {
         if num_points >= 3 {
             // the tangents of a cubic cannot be built from only 2 points if they
             // were not given in advance
             let (points, parameters) = (h.points()?.array1(), h.parameters()?.array1());
-            build_tangents(
+            build_tangents::<S>(
                 &points,
                 &mut h.tangents()?.change_array1(),
                 &mut h.flags()?.change_array1(),
@@ -334,13 +341,18 @@ impl Interpolate {
         if !s.interpolate(&system_parameters)? {
             return Ok(());
         }
-        let curve = Geom2dBSplineCurve::new(&s.poles, &parameters, &s.mults, 3, false)?;
+        let curve = S::new_curve(&s.poles, &parameters, &s.mults, 3, false)?;
         drop((points, parameters, tangents, flags));
         self.set_result(curve);
         Ok(())
     }
 
-    fn fill_cubic(&self, a: &Inputs<'_>, s: &mut System, num_points: i32) -> Result<(), Failure> {
+    fn fill_cubic(
+        &self,
+        a: &Inputs<'_, S>,
+        s: &mut System<S>,
+        num_points: i32,
+    ) -> Result<(), Failure> {
         let num_poles: i32 = s.num_poles();
         s.add_tangent(2, at(a.parameters, 1)?, at(a.tangents, 1)?)?;
         put(&mut s.parameters, 1, at(a.parameters, 1)?)?;
@@ -364,7 +376,10 @@ impl Interpolate {
 // The cubic system with requested tangents: each flagged inner point doubles its
 // knot and adds a derivative condition. The flag is read at a running index from 2
 // and the tangent at the parameter index, as natively.
-fn fill_cubic_requested(a: &Inputs<'_>, s: &mut System) -> Result<(), Failure> {
+fn fill_cubic_requested<S: InterpolateSpace>(
+    a: &Inputs<'_, S>,
+    s: &mut System<S>,
+) -> Result<(), Failure> {
     let (mut mult_index, mut index, mut index1) = (2, 3, 2);
     let (mut index2, mut index3) = (a.points.lower() + 1, s.degree + 2);
     for ii in a.parameters.lower() + 1..a.parameters.upper() {
@@ -391,7 +406,10 @@ fn fill_cubic_requested(a: &Inputs<'_>, s: &mut System) -> Result<(), Failure> {
 
 // The cubic system without requested tangents: every parameter a knot and a
 // condition, every inner point a pole.
-fn fill_cubic_plain(a: &Inputs<'_>, s: &mut System) -> Result<(), Failure> {
+fn fill_cubic_plain<S: InterpolateSpace>(
+    a: &Inputs<'_, S>,
+    s: &mut System<S>,
+) -> Result<(), Failure> {
     for (index1, ii) in (2..).zip(a.parameters.lower()..=a.parameters.upper()) {
         put(&mut s.parameters, index1, at(a.parameters, ii)?)?;
     }

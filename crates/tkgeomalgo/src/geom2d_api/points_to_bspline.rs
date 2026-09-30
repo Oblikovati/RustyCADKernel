@@ -32,13 +32,13 @@ const MEMBER: &str = "Geom2dAPI_PointsToBSpline";
 
 /// `hasMeaningfulSpan(theSpan)`: the square of the span exceeds that of
 /// gp::Resolution().
-fn has_meaningful_span(the_span: f64) -> bool {
+pub(crate) fn has_meaningful_span(the_span: f64) -> bool {
     let a_resolution: f64 = gp::resolution();
     the_span * the_span > a_resolution * a_resolution
 }
 
 /// The continuity code of AppDef_BSplineCompute::SetContinuity for a GeomAbs shape.
-fn continuity_code(continuity: Shape) -> i32 {
+pub(crate) fn continuity_code(continuity: Shape) -> i32 {
     match continuity {
         Shape::C0 => 0,
         Shape::G1 | Shape::C1 => 1,

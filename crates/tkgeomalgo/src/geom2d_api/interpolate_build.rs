@@ -11,18 +11,22 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the static helpers of Geom2dAPI_Interpolate.cxx (CheckPoints,
-// CheckTangents, CheckParameters, BuildParameters, BuildPeriodicTangent, BuildTangents,
-// ScaleTangents) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of the static helpers of Geom2dAPI_Interpolate.cxx and
+// GeomAPI_Interpolate.cxx (CheckPoints, CheckTangents, CheckParameters,
+// BuildParameters, BuildPeriodicTangent, BuildTangents, ScaleTangents) at
+// 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! The checks and the tangent construction of Geom2dAPI_Interpolate.
+//! The checks and the tangent construction of Geom2dAPI_Interpolate and
+//! GeomAPI_Interpolate, generic over their space (docs/geomalgo-design.md section 15).
+use super::interpolate_space::InterpolateSpace;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::real::real_small;
-use rustycad_tkmath::gp::{Point2, Vector2};
-use rustycad_tkmath::plib;
+use rustycad_tkmath::bsplclib::CurvePoint;
+use rustycad_tkmath::plib::{self, PolePoint};
 
-const MEMBER: &str = "Geom2dAPI_Interpolate";
+// Both native classes; the Array1 errors name the index and the bounds.
+const MEMBER: &str = "Geom2dAPI_Interpolate/GeomAPI_Interpolate";
 
 /// The value at `index` of a native array (Standard_OutOfRange outside it).
 pub(super) fn at<T: Clone>(array: &Array1<'_, T>, index: i32) -> Result<T, Failure> {
@@ -45,12 +49,15 @@ pub(super) fn array<T: Default>(lower: i32, upper: i32) -> Result<Array1<'static
 }
 
 /// `CheckPoints(PointArray, Tolerance)`: consecutive points are at least `tol` apart.
-pub(super) fn check_points(points: &Array1<'_, Point2>, tolerance: f64) -> Result<bool, Failure> {
+pub(super) fn check_points<S: InterpolateSpace>(
+    points: &Array1<'_, S::Point>,
+    tolerance: f64,
+) -> Result<bool, Failure> {
     let tolerance_squared: f64 = tolerance * tolerance;
     let mut result: bool = true;
     let mut ii: i32 = points.lower();
     while result && ii < points.upper() {
-        let distance_squared: f64 = at(points, ii)?.square_distance(at(points, ii + 1)?);
+        let distance_squared: f64 = S::square_distance(&at(points, ii)?, &at(points, ii + 1)?);
         result = distance_squared >= tolerance_squared;
         ii += 1;
     }
@@ -59,8 +66,8 @@ pub(super) fn check_points(points: &Array1<'_, Point2>, tolerance: f64) -> Resul
 
 /// `CheckTangents(Tangents, TangentFlags, Tolerance)`: every flagged tangent is at
 /// least `tol` long (the flags are read from their own lower bound).
-pub(super) fn check_tangents(
-    tangents: &Array1<'_, Vector2>,
+pub(super) fn check_tangents<S: InterpolateSpace>(
+    tangents: &Array1<'_, S::Vector>,
     tangent_flags: &Array1<'_, bool>,
     tolerance: f64,
 ) -> Result<bool, Failure> {
@@ -70,7 +77,7 @@ pub(super) fn check_tangents(
     let mut ii: i32 = tangents.lower();
     while result && ii <= tangents.upper() {
         if at(tangent_flags, index)? {
-            result = at(tangents, ii)?.square_magnitude() >= tolerance_squared;
+            result = S::square_magnitude(&at(tangents, ii)?) >= tolerance_squared;
         }
         index += 1;
         ii += 1;
@@ -93,9 +100,9 @@ pub(super) fn check_parameters(parameters: &Array1<'_, f64>) -> Result<bool, Fai
 /// lengths from 0, one more for the closing chord of a periodic curve. The native
 /// code reads the previous parameter at the POINT index, so points not starting
 /// at 1 raise Standard_OutOfRange.
-pub(super) fn build_parameters(
+pub(super) fn build_parameters<S: InterpolateSpace>(
     periodic: bool,
-    points: &Array1<'_, Point2>,
+    points: &Array1<'_, S::Point>,
 ) -> Result<Array1<'static, f64>, Failure> {
     let num_parameters: i32 = points.len() as i32 + i32::from(periodic);
     let mut parameters: Array1<'static, f64> = array(1, num_parameters)?;
@@ -103,15 +110,15 @@ pub(super) fn build_parameters(
     let mut index: i32 = 2;
     let mut ii: i32 = points.lower();
     while ii < points.upper() {
-        let distance: f64 = at(points, ii)?.distance(at(points, ii + 1)?);
+        let distance: f64 = S::distance(&at(points, ii)?, &at(points, ii + 1)?);
         let value: f64 = at(&parameters, ii)? + distance;
         put(&mut parameters, index, value)?;
         index += 1;
         ii += 1;
     }
     if periodic {
-        let distance: f64 = at(points, points.upper())?.distance(at(points, points.lower())?);
-        let value: f64 = at(&parameters, ii)? + distance;
+        let closing = (at(points, points.upper())?, at(points, points.lower())?);
+        let value: f64 = at(&parameters, ii)? + S::distance(&closing.0, &closing.1);
         put(&mut parameters, index, value)?;
     }
     Ok(parameters)
@@ -121,40 +128,42 @@ pub(super) fn build_parameters(
 /// points and parameters starting at `from_point` and `from_parameter`
 /// (`PLib::EvalLagrange` on the native arrays). The native result array is not
 /// written when two parameters are too close (garbage then); it is 0 here.
-fn lagrange_derivative(
-    (points, from_point): (&Array1<'_, Point2>, i32),
+fn lagrange_derivative<S: InterpolateSpace>(
+    (points, from_point): (&Array1<'_, S::Point>, i32),
     (parameters, from_parameter): (&Array1<'_, f64>, i32),
     parameter: f64,
     degree: i32,
-) -> Result<Vector2, Failure> {
-    let mut values: Vec<f64> = Vec::with_capacity(2 * (degree as usize + 1));
+) -> Result<S::Vector, Failure> {
+    let dimension: usize = <S::Point as PolePoint>::DIMENSION;
+    let mut values: Vec<f64> = Vec::with_capacity(dimension * (degree as usize + 1));
     let mut knots: Vec<f64> = Vec::with_capacity(degree as usize + 1);
     for offset in 0..=degree {
-        let point: Point2 = at(points, from_point + offset)?;
-        values.extend([point.x(), point.y()]);
+        let point: S::Point = at(points, from_point + offset)?;
+        values.extend((0..dimension).map(|k| point.pole_coordinate(k)));
         knots.push(at(parameters, from_parameter + offset)?);
     }
-    let mut eval_result: [f64; 4] = [0.0; 4];
-    plib::eval_lagrange(parameter, 1, degree, 2, &values, &knots, &mut eval_result)?;
-    Ok(Vector2::new(eval_result[2], eval_result[3]))
+    let mut eval_result: Vec<f64> = vec![0.0; 2 * dimension];
+    let dim: i32 = dimension as i32;
+    plib::eval_lagrange(parameter, 1, degree, dim, &values, &knots, &mut eval_result)?;
+    Ok(S::Point::vector_from(&eval_result[dimension..]))
 }
 
 /// `BuildPeriodicTangent(PointsArray, TangentsArray, TangentFlags, ParametersArray)`:
 /// the first tangent from a cubic (quadratic for 3 points) Lagrange interpolant when
 /// it is not given; Standard_ConstructionError for fewer than 3 points.
-pub(super) fn build_periodic_tangent(
-    points: &Array1<'_, Point2>,
-    tangents: &mut Array1<'_, Vector2>,
+pub(super) fn build_periodic_tangent<S: InterpolateSpace>(
+    points: &Array1<'_, S::Point>,
+    tangents: &mut Array1<'_, S::Vector>,
     tangent_flags: &mut Array1<'_, bool>,
     parameters: &Array1<'_, f64>,
 ) -> Result<(), Failure> {
     if points.len() < 3 {
-        return Err(construction("BuildPeriodicTangent", points.len()));
+        return Err(construction::<S>("BuildPeriodicTangent", points.len()));
     }
     if !at(tangent_flags, 1)? {
         let degree: i32 = if points.len() == 3 { 2 } else { 3 };
         put(tangent_flags, 1, true)?;
-        let tangent = lagrange_derivative(
+        let tangent = lagrange_derivative::<S>(
             (points, points.lower()),
             (parameters, 1),
             at(parameters, 1)?,
@@ -168,19 +177,19 @@ pub(super) fn build_periodic_tangent(
 /// `BuildTangents(PointsArray, TangentsArray, TangentFlags, ParametersArray)`: the
 /// missing end tangents from the Lagrange interpolants of the first and last
 /// `degree + 1` points; Standard_ConstructionError for fewer than 3 points.
-pub(super) fn build_tangents(
-    points: &Array1<'_, Point2>,
-    tangents: &mut Array1<'_, Vector2>,
+pub(super) fn build_tangents<S: InterpolateSpace>(
+    points: &Array1<'_, S::Point>,
+    tangents: &mut Array1<'_, S::Vector>,
     tangent_flags: &mut Array1<'_, bool>,
     parameters: &Array1<'_, f64>,
 ) -> Result<(), Failure> {
     if points.len() < 3 {
-        return Err(construction("BuildTangents", points.len()));
+        return Err(construction::<S>("BuildTangents", points.len()));
     }
     let degree: i32 = if points.len() == 3 { 2 } else { 3 };
     if !at(tangent_flags, 1)? {
         put(tangent_flags, 1, true)?;
-        let tangent = lagrange_derivative(
+        let tangent = lagrange_derivative::<S>(
             (points, points.lower()),
             (parameters, 1),
             at(parameters, 1)?,
@@ -193,7 +202,7 @@ pub(super) fn build_tangents(
         put(tangent_flags, upper, true)?;
         let at_end: f64 = at(parameters, parameters.upper())?;
         let source = (points, points.upper() - degree);
-        let tangent = lagrange_derivative(
+        let tangent = lagrange_derivative::<S>(
             source,
             (parameters, parameters.upper() - degree),
             at_end,
@@ -209,14 +218,13 @@ pub(super) fn build_tangents(
 /// flagged tangent rescaled to the L1 norm of the derivative of the Lagrange
 /// interpolant (linear for 2 points, quadratic otherwise) of the points from the
 /// running index.
-pub(super) fn scale_tangents(
-    points: &Array1<'_, Point2>,
-    tangents: &mut Array1<'_, Vector2>,
+pub(super) fn scale_tangents<S: InterpolateSpace>(
+    points: &Array1<'_, S::Point>,
+    tangents: &mut Array1<'_, S::Vector>,
     tangent_flags: &Array1<'_, bool>,
     parameters: &Array1<'_, f64>,
 ) -> Result<(), Failure> {
-    let num_points: usize = points.len();
-    let degree: i32 = match num_points {
+    let degree: i32 = match points.len() {
         2 => 1,
         n if n >= 3 => 2,
         _ => 0,
@@ -226,21 +234,15 @@ pub(super) fn scale_tangents(
         if !at(tangent_flags, ii)? {
             continue;
         }
-        let derivative = lagrange_derivative(
+        let derivative = lagrange_derivative::<S>(
             (points, index),
             (parameters, index),
             at(parameters, ii)?,
             degree,
         )?;
-        let tangent: Vector2 = at(tangents, ii)?;
-        let value0: f64 = tangent.x().abs() + tangent.y().abs();
-        let value1: f64 = derivative.x().abs() + derivative.y().abs();
-        let ratio: f64 = value1 / value0;
-        put(
-            tangents,
-            ii,
-            Vector2::new(ratio * tangent.x(), ratio * tangent.y()),
-        )?;
+        let tangent: S::Vector = at(tangents, ii)?;
+        let ratio: f64 = l1_norm::<S>(&derivative) / l1_norm::<S>(&tangent);
+        put(tangents, ii, scaled::<S>(ratio, &tangent))?;
         if ii != tangent_flags.lower() {
             index += 1;
         }
@@ -251,11 +253,31 @@ pub(super) fn scale_tangents(
     Ok(())
 }
 
+// `value = 0.0e0; for (jj) value += Abs(V.Coord(jj))`.
+fn l1_norm<S: InterpolateSpace>(v: &S::Vector) -> f64 {
+    let dimension: usize = <S::Point as PolePoint>::DIMENSION;
+    (0..dimension).fold(0.0e0, |value, k| {
+        value + S::Point::vector_coordinate(v, k).abs()
+    })
+}
+
+// `for (jj) a_vector.SetCoord(jj, ratio * V.Coord(jj))`.
+fn scaled<S: InterpolateSpace>(ratio: f64, v: &S::Vector) -> S::Vector {
+    let dimension: usize = <S::Point as PolePoint>::DIMENSION;
+    let coordinates: Vec<f64> = (0..dimension)
+        .map(|k| ratio * S::Point::vector_coordinate(v, k))
+        .collect();
+    S::Point::vector_from(&coordinates)
+}
+
 // The Standard_ConstructionError of the tangent builders.
-fn construction(member: &str, nb_points: usize) -> Failure {
+fn construction<S: InterpolateSpace>(member: &str, nb_points: usize) -> Failure {
     Failure::with_type(
         "Standard_ConstructionError",
-        &format!("Geom2dAPI_Interpolate {member}() - {nb_points} points; expected at least 3"),
+        &format!(
+            "{} {member}() - {nb_points} points; expected at least 3",
+            S::NAME
+        ),
         "",
     )
 }

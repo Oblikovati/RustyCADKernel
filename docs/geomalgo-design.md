@@ -354,3 +354,44 @@ call the polygon and polyhedron utilities. The port (`crates/tkgeomalgo/src/int_
 - **Exceptions.** Tool calls, the IntAna and ProjLib constructors, and indexed reads
   can raise natively; every member that reaches one returns `Result`, and the
   exception leaves the algorithm where the native one would unwind.
+
+## 15. GeomAPI: the interpolation body and the Extrema members
+
+GeomAPI (`crates/tkgeomalgo/src/geom_api`) has no `.gxx` template, but two constructs
+need a rule.
+
+- **One interpolation body.** `GeomAPI_Interpolate.cxx` is `Geom2dAPI_Interpolate.cxx`
+  with `gp_Pnt`, `gp_Vec` and `Geom_BSplineCurve` for `gp_Pnt2d`, `gp_Vec2d` and
+  `Geom2d_BSplineCurve`, and with 3 in place of 2 in the coordinate loops and the
+  `PLib::EvalLagrange` dimension. The body is ported once, as the generic
+  `geom2d_api::InterpolateGen<S: InterpolateSpace>` (the files `interpolate`,
+  `interpolate_build` and `interpolate_perform`). The trait
+  `geom2d_api::interpolate_space::InterpolateSpace` names the point (a tkmath
+  `bsplclib::CurvePoint`, which gives the coordinates and the vector type), the curve
+  and the point, vector and curve members the body calls. `geom2d_api::Interpolate`
+  is the alias on `Interpolate2dSpace` and `geom_api::Interpolate` the alias on
+  `Interpolate3dSpace`, declared in the package of each class. The loops keep the
+  native order (`value += |Coord(jj)|` from 0, `ratio * Coord(jj)`), so each
+  instance runs the operations of its native class.
+- **Extrema members.** Each GeomAPI class holds an Extrema object and the adaptors
+  that the Extrema object points to natively; in Rust an Extrema object borrows its
+  adaptors, so it cannot live beside them in one struct. Each class takes the rule that
+  reproduces the native state:
+  - `GeomAPI_ProjectPointOnSurf` keeps its `Extrema_ExtPS` (the sampling grid, the tree
+    and the swept-surface algorithms persist between Performs, and `SetExtremaAlgo` and
+    `SetExtremaFlag` act between an Init and a Perform). `Extrema_ExtPS` takes its
+    surface through a shared handle (`ExtPS::initialize_shared`, as
+    `Extrema_GenExtPS` already does with `SurfaceRef`), so the object holds
+    `ExtPS<'static>` and the adaptor handle.
+  - `GeomAPI_ExtremaCurveCurve` keeps one `Extrema_ExtCC` from Init to Init, and
+    `Extrema_ExtCC` keeps its `Extrema_ECC` solutions and its end points across
+    Performs. The object records the arguments of each Init and replays them, in
+    order, on one `ExtCC` over its own adaptors (which each Init reloads, as natively);
+    the replay also rebuilds `Extrema()`. The cost is one Extrema computation per
+    earlier Init of the same object.
+  - `GeomAPI_ProjectPointOnCurve`, `GeomAPI_ExtremaCurveSurface` and
+    `GeomAPI_ExtremaSurfaceSurface` keep the results of their Extrema object: its
+    state does not carry from one computation to the next (`Extrema_ExtPC` resets
+    its samples and results at each Perform; the two others are initialized and
+    performed on local adaptors at each Init, and `Extrema_ExtSS` is even copied
+    from a new object). `Extrema()` rebuilds the same object on stored adaptors.
