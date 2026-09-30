@@ -6,6 +6,7 @@
 #include <GeomFill_LocationDraft.hxx>
 #include <GeomFill_LocationGuide.hxx>
 #include <GeomFill_LocFunction.hxx>
+#include <GeomFill_NSections.hxx>
 #include <GeomFill_UniformSection.hxx>
 #include <Law_BSpFunc.hxx>
 #include <Law_Constant.hxx>
@@ -18,9 +19,27 @@ occ::handle<Law_Function> ga_gfl_law(GaReader& r){
  if(kind==1){occ::handle<Law_Linear> l=new Law_Linear();double a=r.real(),b=r.real(),c=r.real();l->Set(a,b,c,r.real());return l;}
  occ::handle<Law_BSpline> b=ga_law_bspline(r);double f=r.real();return new Law_BSpFunc(b,f,r.real());
 }
-// A section law `kind ...`: 0 uniform curve first last, 1 evolved curve law.
+gp_Trsf ga_gfn_trsf(GaReader& r){
+ double v[12];for(double& x:v)x=r.real();gp_Trsf t;t.SetValues(v[0],v[1],v[2],v[3],v[4],v[5],v[6],v[7],v[8],v[9],v[10],v[11]);return t;}
+// `ctor n curves... np params... [extras]`: ctor 0 `NC`, 1 `NC NP`, 2 `NC NP UF UL`, 3 `NC
+// NP UF UL VF VL`, 4 `NC Trsfs NP UF UL VF VL Surf` (read as `ntrsf [12 reals]... uf ul vf
+// vl surface` after the parameters).
+occ::handle<GeomFill_SectionLaw> ga_gfn_nsections(GaReader& r){
+ int ctor=r.integer(),n=r.integer();NCollection_Sequence<occ::handle<Geom_Curve>> nc;
+ for(int i=0;i<n;++i)nc.Append(ga_ics_geom_curve(r));
+ std::vector<double> p=r.reals();NCollection_Sequence<double> np;for(double x:p)np.Append(x);
+ if(ctor==0)return new GeomFill_NSections(nc);
+ if(ctor==1)return new GeomFill_NSections(nc,np);
+ if(ctor==2){double uf=r.real();return new GeomFill_NSections(nc,np,uf,r.real());}
+ if(ctor==3){double uf=r.real(),ul=r.real(),vf=r.real();return new GeomFill_NSections(nc,np,uf,ul,vf,r.real());}
+ int nt=r.integer();NCollection_Sequence<gp_Trsf> ts;for(int i=0;i<nt;++i)ts.Append(ga_gfn_trsf(r));
+ double uf=r.real(),ul=r.real(),vf=r.real(),vl=r.real();
+ occ::handle<Geom_BSplineSurface> s=occ::down_cast<Geom_BSplineSurface>(ga_ics_geom_surface(r));
+ return new GeomFill_NSections(nc,ts,np,uf,ul,vf,vl,s);
+}
+// A section law `kind ...`: 0 uniform curve first last, 1 evolved curve law, 2 N sections.
 occ::handle<GeomFill_SectionLaw> ga_gfl_section(GaReader& r){
- int kind=r.integer();occ::handle<Geom_Curve> c=ga_ics_geom_curve(r);
+ int kind=r.integer();if(kind==2)return ga_gfn_nsections(r);occ::handle<Geom_Curve> c=ga_ics_geom_curve(r);
  if(kind==0){double f=r.real();return new GeomFill_UniformSection(c,f,r.real());}
  return new GeomFill_EvolvedSection(c,ga_gfl_law(r));
 }
@@ -42,8 +61,8 @@ void ga_gfl_section_eval(const occ::handle<GeomFill_SectionLaw>& s,double u,int 
 // The queries of a section law.
 void ga_gfl_section_queries(const occ::handle<GeomFill_SectionLaw>& s){
  int np=0,nk=0,deg=0;GA_TRY(s->SectionShape(np,nk,deg);ga_int(np);ga_int(nk);ga_int(deg));
- GA_TRY(NCollection_Array1<double> k(1,1);s->Knots(k);ga_int(k.Lower());ga_gfs_reals(k));
- GA_TRY(NCollection_Array1<int> m(1,1);s->Mults(m);for(int i=m.Lower();i<=m.Upper();++i)ga_int(m(i)));
+ GA_TRY(NCollection_Array1<double> k(1,1);k.Init(0);s->Knots(k);ga_int(k.Lower());ga_gfs_reals(k));
+ GA_TRY(NCollection_Array1<int> m(1,1);m.Init(0);s->Mults(m);for(int i=m.Lower();i<=m.Upper();++i)ga_int(m(i)));
  GA_TRY(ga_flag(s->IsRational()));GA_TRY(ga_flag(s->IsUPeriodic()));GA_TRY(ga_flag(s->IsVPeriodic()));
  for(int sh=0;sh<=6;++sh){GA_TRY(int n=s->NbIntervals(GeomAbs_Shape(sh));ga_int(n);
   NCollection_Array1<double> t(1,n+1);t.Init(-1);GA_TRY(s->Intervals(t,GeomAbs_Shape(sh)));ga_gfs_reals(t));}
@@ -51,7 +70,7 @@ void ga_gfl_section_queries(const occ::handle<GeomFill_SectionLaw>& s){
  GA_TRY(NCollection_Array1<double> t(1,np>1?np:2);s->GetTolerance(1e-3,1e-2,0.1,t);ga_gfs_reals(t));
  GA_TRY(NCollection_Array1<double> t(1,np>1?np:2);s->GetTolerance(1e-1,1e-2,0.1,t);ga_gfs_reals(t));
  GA_TRY(ga_pnt(s->BarycentreOfSurf()));GA_TRY(ga_real(s->MaximalSection()));
- GA_TRY(NCollection_Array1<double> w(1,1);s->GetMinimalWeight(w);ga_int(w.Upper());ga_gfs_reals(w));
+ GA_TRY(NCollection_Array1<double> w(1,1);w.Init(0);s->GetMinimalWeight(w);ga_int(w.Upper());ga_gfs_reals(w));
  double e=-7;GA_TRY(ga_flag(s->IsConstant(e));ga_real(e));GA_TRY(ga_gfl_curve(s->ConstantSection()));
  e=-7;GA_TRY(ga_flag(s->IsConicalLaw(e));ga_real(e));GA_TRY(ga_gfl_curve(s->CirclSection(0.5)));
  GA_TRY(occ::handle<Geom_BSplineSurface> b=s->BSplineSurface();ga_flag(b.IsNull());
@@ -67,6 +86,9 @@ void ga_gfl_section_case(std::istream& input){
  for(double u:params){ga_gfl_section_eval(s,u,np,lower);ga_gfl_section_eval(s,u,np-1,1);}
  GA_TRY(s->SetInterval(a,b));GA_TRY(double f,l;s->GetInterval(f,l);ga_real(f);ga_real(l));
  for(double u:params)ga_gfl_section_eval(s,u,np,1);
+ // An N-section law recomputed as a segment of its own surface.
+ occ::handle<GeomFill_NSections> ns=occ::down_cast<GeomFill_NSections>(s);
+ if(!ns.IsNull()){GA_TRY(ns->SetSurface(ns->BSplineSurface());ns->ComputeSurface());ga_gfl_section_queries(ns);}
  ga_end();
 }
 void ga_gfl_mat(const gp_Mat& m){for(int i=1;i<=3;++i)for(int j=1;j<=3;++j)ga_real(m.Value(i,j));}

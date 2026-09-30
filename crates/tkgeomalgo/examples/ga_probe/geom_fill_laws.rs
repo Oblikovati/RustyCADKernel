@@ -3,60 +3,11 @@
 use super::common::{Reader, end, flag, int, pnt, real, show};
 use super::geom_fill_sweep::{Outputs, filled, pnts, reals, vecs};
 use super::geom_fill_trihedron::SHAPES;
-use super::ics_geometry::geom_curve;
-use super::law::bspline;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::geom::GeomCurve;
 use rustycad_tkgeomalgo::geom_fill::*;
-use rustycad_tkgeomalgo::law::{LawBSpFunc, LawConstant, LawFunction, LawLinear};
 
-/// `ga_gfl_law`.
-pub fn gfl_law(r: &mut Reader) -> Result<Handle<dyn LawFunction>, Failure> {
-    Ok(match r.integer() {
-        0 => {
-            let c = LawConstant::new();
-            let (v, f, l) = (r.real(), r.real(), r.real());
-            c.set(v, f, l);
-            Handle::new(c).cast()
-        }
-        1 => {
-            let law = LawLinear::new();
-            let (a, b, c, d) = (r.real(), r.real(), r.real(), r.real());
-            law.set(a, b, c, d);
-            Handle::new(law).cast()
-        }
-        _ => {
-            let b = bspline(r)?;
-            let (f, l) = (r.real(), r.real());
-            Handle::new(LawBSpFunc::with_curve(&b, f, l)).cast()
-        }
-    })
-}
-
-/// `ga_gfl_section`.
-pub fn gfl_section(r: &mut Reader) -> Result<Handle<dyn GeomFillSectionLaw>, Failure> {
-    let kind = r.integer();
-    let c = geom_curve(r);
-    if kind == 0 {
-        let (f, l) = (r.real(), r.real());
-        return Ok(Handle::new(GeomFillUniformSection::new(&c, f, l)?).cast());
-    }
-    let law = gfl_law(r)?;
-    Ok(Handle::new(GeomFillEvolvedSection::new(&c, &law)?).cast())
-}
-
-/// `ga_gfl_curve`.
-pub fn gfl_curve(c: Handle<dyn GeomCurve>) {
-    let Some(curve) = c.get() else {
-        int(-1);
-        return;
-    };
-    let (f, l) = (curve.first_parameter(), curve.last_parameter());
-    real(f);
-    real(l);
-    show(curve.value(0.5 * (f + l)), pnt);
-}
+pub use super::geom_fill_sections::{gfl_curve, gfl_section};
 
 fn show_unit(result: Result<(), Failure>) {
     show(result, |()| ());
@@ -188,14 +139,14 @@ pub fn section_queries(s: &dyn GeomFillSectionLaw) -> i32 {
 /// `section nparams params... lower a b`.
 pub fn section_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    let s = match gfl_section(&mut r) {
+    let law = match gfl_section(&mut r) {
         Ok(s) => s,
         Err(error) => {
             print!("{} ", error.exception_type());
             return end();
         }
     };
-    let s = s.get().expect("probe law");
+    let s = law.get().expect("probe law");
     let params = r.reals();
     let (lower, a, b) = (r.integer(), r.real(), r.real());
     section_queries(s);
@@ -208,6 +159,14 @@ pub fn section_case(values: &[f64]) {
     show(s.get_interval(), |(f, l)| [f, l].into_iter().for_each(real));
     for u in &params {
         section_eval(s, *u, np, 1);
+    }
+    let ns: Handle<GeomFillNSections> = law.cast();
+    if let Some(ns) = ns.get() {
+        show_unit(ns.bspline_surface().and_then(|b| {
+            ns.set_surface(&b);
+            ns.compute_surface()
+        }));
+        section_queries(ns);
     }
     end();
 }

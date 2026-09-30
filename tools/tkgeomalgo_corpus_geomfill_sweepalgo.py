@@ -86,7 +86,23 @@ def _sweeps(requests: list[str]) -> None:
     requests.append(_sweep(FIXED_Z, STRAIGHT, CIRCLE_SEC, domain=[1.0, 3.0, 0.2, 0.8]))
     requests.append(_sweep(FRENET, ARC, SPLINE_SEC, methode=0, tol=[1e-2, 1e-3, 1e-4, 0.1]))
     requests.append(_sweep(FRENET, WAVE, SPLINE_SEC, tol=[1e-7, 1e-7, 1e-7, 1e-3], degmax=6, segmax=5))
+    _nsection_sweeps(requests)
     _guided_sweeps(requests)
+
+
+def _nsection_sweeps(requests: list[str]) -> None:
+    """N-section laws: two equal circles (a constant law), coaxial circles (a cone
+    along a translation) and B-spline sections (the approximation)."""
+    two_circles = [2, 1, 2, *circle(O, Z, 1.0), *circle(O, Z, 1.0), 2, 0.0, 1.0]
+    cone = [2, 3, 2, *circle(O, Z, 1.0), *circle(O, Z, 2.0), 2, 0.0, 4.0, 0.0, 6.283185307179586, 0.0, 4.0]
+    shrink = [2, 3, 2, *circle(O, Z, 2.0), *circle(O, Z, 0.5), 2, 0.0, 4.0, 0.0, 6.283185307179586, 0.0, 4.0]
+    splines = [2, 1, 2, *SPLINE_SEC[1:-2], *bspline(3, [[1, 0, 0], [1.5, 1, 0], [0, 2.5, 0], [-1.5, 1, 0], [-1, 0, 0]],
+                                                     [0.0, 0.5, 1.0], [4, 1, 4]), 2, 0.0, 1.0]
+    for loc in (FIXED_Z, FRENET):
+        for section in (two_circles, cone, shrink, splines):
+            requests.append(_sweep(loc, STRAIGHT, section, cont=2, cont2=1))
+    requests.append(_sweep(FRENET, WAVE, splines, cont=2, cont2=1))
+    requests.append(_sweep(FRENET, ROUND, cone, cont=2, cont2=1))
 
 
 def _guided_sweeps(requests: list[str]) -> None:
