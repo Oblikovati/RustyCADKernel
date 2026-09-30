@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (789 declarations):
+The toolkit test inventory maps these suites (822 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -43,7 +43,7 @@ The toolkit test inventory maps these suites (789 declarations):
 | BRepGraph_Tool_Test.cxx | mapped | 16 | passed | original production builders |
 | BRepGraph_RefId_Test.cxx | brep_graph_ref_id | 19 | pass | pass |
 | BRepGraph_VersionStamp_Test.cxx | brep_graph_version_stamp | 22 | pass | pass |
-| BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for BRepGProp, BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
+| BRepGraph_Reconstruct_Test.cxx | mapped | 24 | passed | original builders and BRepGProp integration |
 | BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh) |
 | BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepBuilderAPI_Copy (TKTopAlgo) |
 | BRepGraph_Build_Test.cxx | mapped | 59 | passed | original production builders |
@@ -77,7 +77,7 @@ The toolkit test inventory maps these suites (789 declarations):
 | BRepGraph_Validate_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepBuilderAPI_Copy (TKTopAlgo), BRepPrimAPI_MakeSphere (TKPrim) |
 | BRepGraph_SparseModel_Test.cxx | brep_graph_sparse_model | 28 | pass | pass |
 | BRepGraph_ScenarioMatrix_Test.cxx | not mapped (phase 2) | 18 | not run | waits for BRepGProp, TKPrim cylinder and sphere |
-| BRepGraph_SeamRedesign_Test.cxx | not mapped (phase 2) | 9 | not run | waits for TKPrim cylinder and sphere |
+| BRepGraph_SeamRedesign_Test.cxx | mapped | 9 | passed | original builders and seam connectivity |
 | BRepGraph_Fuzz_Test.cxx | not mapped (phase 2) | 2 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim); its two TEST_P declarations are instantiated per seed |
 
 The shared fixtures in `crates/tkbrep/tests/support` now call the production
