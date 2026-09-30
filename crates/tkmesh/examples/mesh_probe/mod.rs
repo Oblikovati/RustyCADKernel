@@ -22,22 +22,13 @@ const STATUSES: [Status; 10] = [
     Status::UserBreak,
 ];
 fn status_report(owner: &StatusOwner, mask: i32, unset: i32) {
-    for value in STATUSES {
-        if mask & value as i32 != 0 {
-            owner.set_status(value);
-        }
-    }
+    owner.set_status(Status(mask));
     int(owner.get_status_mask());
     for value in STATUSES {
         flag(owner.is_set(value));
         flag(owner.is_equal(value));
     }
-    owner.unset_status(
-        *STATUSES
-            .iter()
-            .find(|value| **value as i32 == unset)
-            .unwrap(),
-    );
+    owner.unset_status(Status(unset));
     int(owner.get_status_mask());
 }
 fn edge_report(edge: &dyn MeshEdge) {
@@ -214,3 +205,5 @@ fn pcurve_lookup_report(
         int(index);
     }
 }
+
+pub(super) mod tools;
