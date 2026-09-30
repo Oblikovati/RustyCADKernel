@@ -1,9 +1,9 @@
 """Deterministic requests for BRepBuilderAPI (tools/oracle/tktopalgo_probe_brepbuilderapi*.cxx).
 
 The maker and modification families live in tktopalgo_corpus_brepbuilderapi_makers.py and
-tktopalgo_corpus_brepbuilderapi_modify.py. `tp_make_vertex` builds a vertex with BRepBuilderAPI_MakeVertex and compares its point
-and its tolerance: the origin, signed zeros, tiny, huge and non-representable decimal
-coordinates, and seeded random points.
+tktopalgo_corpus_brepbuilderapi_modify.py. `tp_make_vertex` builds a vertex with
+BRepBuilderAPI_MakeVertex and compares its point and its tolerance: the origin, signed
+zeros, tiny, huge and non-representable decimal coordinates, and seeded random points.
 """
 from __future__ import annotations
 import random

@@ -66,6 +66,7 @@ The toolkit test inventory maps these suites (198 declarations):
 | GeomFill_GuideTrihedronAC_Test.cxx | geom_fill_guide_trihedron_ac | 4 | pass | pass |
 | IntPatch_Polyhedron_Test.cxx | int_patch_polyhedron | 5 | pass | pass |
 | IntPatch_PolyhedronBVH_Test.cxx | int_patch_polyhedron_bvh | 8 | pass | pass |
+| GeomPlate_BuildPlateSurface_Test.cxx | geom_plate_build_plate_surface | 6 | pass | pass |
 
 GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
 build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
@@ -80,15 +81,11 @@ it with BRepAdaptor_CompCurve, which the port does not provide and which needs
 TKShHealing, absent from the shared native build. Its three other cases run as the
 behavior tests of `geom_fill_corrected_frenet_behavior`.
 
-GeomPlate_BuildPlateSurface_Test.cxx is not mapped: its A1 and A2 cases (and the shared
-helper of the file) build their boundaries as `BRepAdaptor_Curve` of edges made by
-`BRepBuilderAPI_MakeEdge` (TKTopAlgo), which the port does not provide (the native suite
-itself compiles and passes against the shared build, which links TKTopAlgo). Its six
-cases run as behavior tests (`geom_plate_behavior`): the same Bezier curves go through
-`GeomAdaptor_Curve` on their natural range, which the edge of `MakeEdge` evaluates
-identically, and the progress observer checks the same scope names
-(`Calculating the surface filled`, `Plate_Plate::SolveTI1()`, `math_Gauss
-LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
+GeomPlate_BuildPlateSurface_Test.cxx is translated 1:1 since BRepBuilderAPI (TKTopAlgo)
+is ported: its A1 and A2 cases build their boundaries as `BRepAdaptor_Curve` of edges made
+by `BRepBuilderAPI_MakeEdge`, so the crate has a dev-dependency on `rustycad-tktopalgo`,
+as the native suite links TKTopAlgo (its behavior-test surrogate is removed). Its
+GeomPlate content is also in the numeric corpus.
 
 ## API mapping
 
