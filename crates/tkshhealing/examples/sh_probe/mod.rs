@@ -72,3 +72,7 @@ pub mod fix_small_curves;
 pub mod transfer_parameters;
 
 pub mod transfer_parameters_proj;
+
+pub mod wire_divide;
+
+pub mod wire_divide_state;

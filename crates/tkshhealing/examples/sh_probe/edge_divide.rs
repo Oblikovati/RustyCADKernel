@@ -14,7 +14,7 @@ use rustycad_tkshhealing::shape_upgrade::{
     ShapeUpgradeSplitCurve3d, SplitCurve,
 };
 #[path = "../../tests/divide_support/criteria.rs"]
-mod criteria;
+pub(super) mod criteria;
 use criteria::{Midpoint2d, Midpoint3d};
 struct EdgeProbeTools {
     spatial: Handle<ShapeUpgradeSplitCurve3d>,
