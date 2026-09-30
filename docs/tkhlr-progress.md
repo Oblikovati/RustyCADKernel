@@ -231,3 +231,11 @@ All seven public APIs now instantiate the original IntStart search with the cont
 surface function. The exact corpus passes 13,571 requests (144 new), including sampled
 search, explicit starts, repeated performs and unset-result exceptions. Crate tests,
 two direct regressions and strict Clippy pass; the header audit has no gaps.
+
+### Contap boundary search
+
+All eight public APIs now use the native IntStart restriction search with Contap
+functions and records. The exact corpus passes 13,787 requests (216 new), with
+complete point/segment output, repeated performs and all-arc cases. Two direct tests,
+all crate tests and strict Clippy pass. The probe registration parser now tolerates
+Rustfmt line breaks; all 253 tooling tests pass.

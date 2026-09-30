@@ -42,3 +42,6 @@ pub use search_records::{ContapThePathPointOfTheSearch, ContapTheSegmentOfTheSea
 
 mod search_inside;
 pub use search_inside::{ContapTheSearchInside, ContapTheSearchInsideTypes};
+
+mod search_boundary;
+pub use search_boundary::{ContapTheSearch, ContapTheSearchTypes};

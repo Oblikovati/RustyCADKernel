@@ -69,7 +69,7 @@ class HlrCorpusTests(unittest.TestCase):
         native = (ROOT/'tools/oracle/tkhlr_probe.cxx').read_text()
         rust = (ROOT/'crates/tkhlr/examples/numeric_probe.rs').read_text()
         self.assertEqual(set(re.findall(r'\{"(\w+)",', native)), operations)
-        self.assertEqual(set(re.findall(r'\("(\w+)",', rust)), operations)
+        self.assertEqual(set(re.findall(r'\(\s*"(\w+)",', rust)), operations)
 
     def test_frame_request_is_nine_exact_numbers(self):
         self.assertEqual(frame_request([0.1, -0.0, 2], [0, 0, 1], [1, 0, 0]),

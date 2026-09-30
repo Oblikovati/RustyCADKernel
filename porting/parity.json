@@ -209926,6 +209926,443 @@
       "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::value",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::default",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::SetParameters(bool,bool,bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::set_parameters",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::IsDone() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::is_done",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::Lines() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::lines",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::Points() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::points",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::Face1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::face1",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::Face2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::face2",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::TangentFaces() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::tangent_faces",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::PrepareLines3D(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::prepare_lines_3d",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::SetList(NCollection_List<IntSurf_PntOn2S>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::set_list",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::SetContext(const occ::handle<IntTools_Context>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::set_context",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::SetFuzzyValue(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::set_fuzzy_value",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::FuzzyValue() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::fuzzy_value",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::Context() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::context",
+      "status": "implemented",
+      "notes": "Pinned 3d097a0 state and curve preparation behavior. Five Rust regressions and 160 native state requests; full Perform and all ten FaceFace legacy declarations remain unported."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::default",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::~BRepMesh_DefaultRangeSplitter()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native splitter state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::Reset(const IMeshData::IFaceHandle&,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::reset",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::AddPoint(const gp_Pnt2d&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::add_point",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::AdjustRange()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::adjust_range",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::IsValid()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::is_valid",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::Scale(const gp_Pnt2d&,bool) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::scale",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::Handle(IMeshData::ListOfPnt2d)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::generate_surface_nodes",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::Point(const gp_Pnt2d&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::point",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::computeTolerance(double,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::RangeSplitter::compute_tolerance",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::computeDelta(double,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::RangeSplitter::compute_delta",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::GetDFace() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::get_dface",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::GetSurface() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::get_surface",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::GetRangeU() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::get_range_u",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::GetRangeV() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::get_range_v",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::GetDelta() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::get_delta",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::GetToleranceUV() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::get_tolerance_uv",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::myDFace",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::face",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::myRangeU",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::range_u",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::myRangeV",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::range_v",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::myDelta",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::delta",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::myTolerance",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::tolerance",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::myIsValid",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::valid",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_ConeRangeSplitter",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
+      "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ConeRangeSplitter",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_ConeRangeSplitter()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
+      "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ConeRangeSplitter::default",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_ConeRangeSplitter::~BRepMesh_ConeRangeSplitter()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
+      "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native splitter state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_ConeRangeSplitter::GetSplitSteps(const IMeshTools_Parameters&,std::pair<int,int>&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
+      "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ConeRangeSplitter::get_split_steps",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_ConeRangeSplitter::Handle(IMeshData::ListOfPnt2d)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
+      "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ConeRangeSplitter::generate_surface_nodes",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "Contap_TheSearch()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::new",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheSearch::Perform(Contap_ArcFunction&,const occ::handle<Adaptor3d_TopolTool>&,double,double,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::perform",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheSearch::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::is_done",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheSearch::AllArcSolution() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::all_arc_solution",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheSearch::NbPoints() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::nb_points",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheSearch::Point(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::point",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheSearch::NbSegments() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::nb_segments",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheSearch::Segment(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::segment",
+      "status": "implemented",
+      "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     }
   ],
   "tests": [

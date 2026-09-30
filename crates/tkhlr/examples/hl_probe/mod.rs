@@ -39,3 +39,5 @@ pub mod contap_iwline;
 pub mod contap_search_records;
 
 pub mod contap_search_inside;
+
+pub mod contap_search_boundary;

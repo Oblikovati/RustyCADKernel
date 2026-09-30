@@ -41,7 +41,9 @@
 #include "tkhlr_probe_contap_iwline.cxx"
 #include "tkhlr_probe_contap_search_records.cxx"
 #include "tkhlr_probe_contap_search_inside.cxx"
+#include "tkhlr_probe_contap_search_boundary.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"ct_boundary",ct_boundary_case},
  {"ct_inside",ct_inside_case},
  {"ct_search_records",ct_search_records_case},
  {"ct_iwline",ct_iwline_case},
