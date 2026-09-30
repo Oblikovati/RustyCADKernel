@@ -194,4 +194,4 @@ def cases(rng: random.Random) -> list[str]:
     True
     """
     return (report_cases(rng) + level_cases(rng) + printer_to_report_cases(rng) + algo_cases(rng)
-            + printer_cases(rng))
+            + printer_cases(rng) + ["algo_handles"])

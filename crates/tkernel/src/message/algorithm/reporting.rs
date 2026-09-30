@@ -43,29 +43,16 @@ impl Algorithm {
         name
     }
     /// The catalog message of one status with its recorded integers and strings.
-    fn status_message(
-        &self,
-        index: usize,
-        status: Status,
-        max_count: i32,
-    ) -> Result<Option<Msg>, Failure> {
+    fn status_message(&self, status: Status, max_count: i32) -> Result<Option<Msg>, Failure> {
         let Some(suffix) = status_suffix(status) else {
             return Ok(None);
         };
         let mut message = Msg::from_key(&self.message_name(&suffix));
-        if let Some(numbers) = self
-            .report_integers
-            .as_ref()
-            .and_then(|slots| slots[index].as_ref())
-        {
-            message.arg_extended(&Self::prepare_report_numbers(numbers, max_count))?;
+        if let Some(numbers) = self.get_message_numbers(status) {
+            message.arg_extended(&Self::prepare_report_numbers(&numbers, max_count))?;
         }
-        if let Some(strings) = self
-            .report_strings
-            .as_ref()
-            .and_then(|slots| slots[index].as_ref())
-        {
-            message.arg_extended(&Self::prepare_report_strings(strings, max_count))?;
+        if let Some(strings) = self.get_message_strings(status) {
+            message.arg_extended(&Self::prepare_report_strings(&strings, max_count))?;
         }
         Ok(Some(message))
     }
@@ -81,26 +68,37 @@ impl Algorithm {
         trace_level: Gravity,
         max_count: i32,
     ) -> Result<(), Failure> {
+        let messenger = self.get_messenger();
         for (index, status) in all_statuses() {
-            if !filter.is_set(status) || !self.status.is_set(status) {
+            if !filter.is_set(status) || !self.get_status().is_set(status) {
                 continue;
             }
-            let custom = self
-                .report_messages
-                .as_ref()
-                .and_then(|slots| slots[index].as_ref());
-            if let Some(custom) = custom {
-                let mut message = custom
-                    .lock()
-                    .unwrap_or_else(|poisoned| poisoned.into_inner());
-                self.messenger.send_extended(message.get()?, trace_level);
-                continue;
-            }
-            if let Some(mut message) = self.status_message(index, status, max_count)? {
-                self.messenger.send_extended(message.get()?, trace_level);
+            if let Some(text) = self.status_text(index, status, max_count)? {
+                messenger.send_extended(&text, trace_level);
             }
         }
         Ok(())
+    }
+    fn status_text(
+        &self,
+        index: usize,
+        status: Status,
+        max_count: i32,
+    ) -> Result<Option<ExtendedString>, Failure> {
+        let custom = self
+            .report_messages
+            .read()
+            .as_ref()
+            .and_then(|slots| slots[index].clone());
+        if let Some(custom) = custom {
+            let mut message = custom
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+            return Ok(Some(message.get()?.clone()));
+        }
+        self.status_message(status, max_count)?
+            .map(|mut message| message.get().cloned())
+            .transpose()
     }
     /// Sends the warn, alarm and fail messages; `algorithm.send_messages(Gravity::Warning, 20)?`.
     pub fn send_messages(&self, trace_level: Gravity, max_count: i32) -> Result<(), Failure> {
@@ -111,8 +109,8 @@ impl Algorithm {
         self.send_status_messages(&filter, trace_level, max_count)
     }
     /// Copies every status of `other` with its data; `algorithm.add_status(&other)`.
-    pub fn add_status(&mut self, other: &Algorithm) {
-        let allowed = *other.get_status();
+    pub fn add_status(&self, other: &Algorithm) {
+        let allowed = other.get_status();
         self.add_status_filtered(&allowed, other);
     }
     /// Copies the statuses of `other` allowed by the filter, uniting integers and adding
@@ -120,24 +118,29 @@ impl Algorithm {
     ///
     /// Native quirk kept: the string loop runs `n < Length()`, so the last string of each
     /// status is not copied.
-    pub fn add_status_filtered(&mut self, allowed: &ExecStatus, other: &Algorithm) {
+    pub fn add_status_filtered(&self, allowed: &ExecStatus, other: &Algorithm) {
         for (index, status) in all_statuses() {
             if !allowed.is_set(status) || !other.get_status().is_set(status) {
                 continue;
             }
             self.set_status(status);
-            if let Some(numbers) = other.get_message_numbers(status) {
-                let slots = self.report_integers.get_or_insert_with(super::status_slots);
-                packed_map_algo::unite(
-                    slots[index].get_or_insert_with(PackedMap::default),
-                    numbers,
-                );
-            }
+            self.merge_status_numbers(index, status, other);
             let strings = other.get_message_strings(status).unwrap_or_default();
             for text in strings.iter().take(strings.len().saturating_sub(1)) {
                 self.set_status_with_h_extended(status, text, true);
             }
         }
+    }
+    fn merge_status_numbers(&self, index: usize, status: Status, other: &Algorithm) {
+        let Some(numbers) = other.get_message_numbers(status) else {
+            return;
+        };
+        let mut recorded = self.report_integers.write();
+        let slots = recorded.get_or_insert_with(super::status_slots);
+        packed_map_algo::unite(
+            slots[index].get_or_insert_with(PackedMap::default),
+            &numbers,
+        );
     }
 }
 
