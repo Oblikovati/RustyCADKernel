@@ -2,6 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
+use ga_probe::int_curve_surface_inter as ics_inter;
 use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, plate};
 use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
@@ -9,6 +10,7 @@ use ga_probe::{
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
+use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
 use ga_probe::{int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
@@ -149,6 +151,21 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("pw_edit", int_walk::edit_case),
     ("pw_min", int_walk::min_case),
     ("iw_walk", int_walk_iw::walk_case),
+    // IntCurveSurface (ga_probe/int_curve_surface*.rs)
+    ("ics_records", int_curve_surface::records_case),
+    ("ics_intersection", int_curve_surface::intersection_case),
+    ("ics_hcurve", int_curve_surface::hcurve_case),
+    ("ics_polygon", int_curve_surface::polygon_case),
+    ("ics_polyhedron", ics_polyhedron::polyhedron_case),
+    ("ics_utils", int_curve_surface::utils_case),
+    ("ics_interference", ics_inter::interference_case),
+    ("ics_exact", ics_inter::exact_case),
+    ("ics_quadcurv", ics_inter::quadcurv_case),
+    ("ics_hinter", ics_inter::hinter_case),
+    ("ics_hinter_protected", ics_inter::hinter_protected_case),
+    ("ics_estlim", ics_inter::estlim_case),
+    ("ics_project", ics_inter::project_case),
+    ("ics_interutils", ics_interutils::interutils_case),
 ];
 
 fn main() {

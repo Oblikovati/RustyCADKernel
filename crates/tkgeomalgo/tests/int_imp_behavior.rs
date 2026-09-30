@@ -15,7 +15,7 @@
 //! Behavior of the IntImp port beyond the numeric probe, which compares the templates
 //! with their native TKGeomAlgo instances.
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
 use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSphericalSurface, GeomSurface};
@@ -27,27 +27,8 @@ use rustycad_tkmath::math::{Matrix, Vector};
 
 type Curve = Handle<dyn Adaptor3dCurve>;
 
-/// `IntCurveSurface_TheHCurveTool`: direct calls on the curve adaptor.
-struct HCurveTool;
-
-impl TheCurveTool for HCurveTool {
-    type Curve = Curve;
-    fn first_parameter(curve: &Curve) -> Result<f64, Failure> {
-        curve.first_parameter()
-    }
-    fn last_parameter(curve: &Curve) -> Result<f64, Failure> {
-        curve.last_parameter()
-    }
-    fn resolution(curve: &Curve, r3d: f64) -> Result<f64, Failure> {
-        curve.resolution(r3d)
-    }
-    fn value(curve: &Curve, w: f64) -> Result<Point3, Failure> {
-        curve.value(w)
-    }
-    fn d1(curve: &Curve, w: f64) -> Result<(Point3, Vector3), Failure> {
-        curve.d1(w)
-    }
-}
+/// `IntCurveSurface_TheHCurveTool`, the curve tool of the IntCurveSurface instances.
+use rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool as HCurveTool;
 
 fn adapted(
     surface: Handle<dyn GeomSurface>,

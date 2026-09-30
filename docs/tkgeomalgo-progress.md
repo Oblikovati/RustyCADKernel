@@ -22,7 +22,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (69 declarations):
+The toolkit test inventory maps these suites (80 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -42,6 +42,10 @@ The toolkit test inventory maps these suites (69 declarations):
 | Geom2dGcc_Lin2d2Tan_Test.cxx | geom2dgcc_lin2d_2tan | 2 | pass | pass |
 | Geom2dGcc_Circ2d2TanRad_Test.cxx | geom2dgcc_circ2d_2tan_rad | 7 | pass | pass |
 | Geom2dGcc_Circ2d3Tan_Test.cxx | geom2dgcc_circ2d_3tan | 12 | pass | pass |
+| IntCurveSurface_IntersectionPoint_Test.cxx | int_curve_surface_intersection_point | 3 | pass | pass |
+| IntCurveSurface_InterUtils_Test.cxx | int_curve_surface_inter_utils | 1 | pass | pass |
+| IntCurveSurface_ThePolygonOfHInter_Test.cxx | int_curve_surface_the_polygon_of_h_inter | 1 | pass | pass |
+| IntCurveSurface_ThePolyhedronOfHInter_Test.cxx | int_curve_surface_the_polyhedron_of_h_inter | 6 | pass | pass |
 
 ## API mapping
 
@@ -89,6 +93,20 @@ The toolkit test inventory maps these suites (69 declarations):
   (`Circ2d3TanIter::circ_lin_curve`, `Circ2d2TanOnIter::curve_pnt_on_circle`,
   `Lin2d2Tan::through_point_with_parameter`...), the `Results` overloads are `results_ana`
   and `results_geo`, and `Geom2dGcc_QCurve` is an alias of `QualifiedCurve`.
+
+- IntCurveSurface: the `.pxx` templates are generics (docs/geomalgo-design.md section
+  11): `InterGen<T: InterTypes>` is the algorithm (`HInter` its alias), `InterPolygon<C>`
+  and `InterPolygonTool<C>` the polygon, the utilities are the modules `inter_utils`,
+  `polygon_utils` and `polyhedron_utils`; the instance classes are aliases
+  (`TheCSFunctionOfHInter`, `TheExactHInter` on the IntImp generics,
+  `TheInterferenceOfHInter` on the Intf generic, `TheQuadCurvExactHInter`,
+  `TheQuadCurvFuncOfTheQuadCurvExactHInter`). The protected members of `HInter` and of
+  `IntCurveSurface_Intersection` are public (`perform_bounds`, `internal_perform_*`,
+  `perform_conic_surf_<conic>`, `append_int_ana`, `append_curve_point`,
+  `append_curve_segment`; `append`, `append_point`, `append_segment`, `set_values`,
+  `reset_fields` and the `done`/`my_is_parallel` fields). Overloads take distinct
+  names, output references become returned tuples, and `Dump` members write to a
+  `fmt::Write` where the native ones write to `std::cout`.
 
 ## Verification
 
@@ -373,11 +391,11 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 17878 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 20955 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
-with TopClass 1116, Geom2dGcc 3968, and IntWalk 717.
+with TopClass 1116, Geom2dGcc 3968, IntWalk 717, and IntCurveSurface 3077.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -592,6 +610,26 @@ left out. The native builder zeroes the stack before each solver: the `Circ2d3Ta
 reads math_FunctionSetRoot's residual buffer, which `FunctionTanCuCuCu` never writes, so its
 native result depends on what earlier requests left on the stack. GccAna gains 12 touching
 three-circle requests (`touching_circles`, the BUC60622 configurations).
+
+IntCurveSurface: 3077 requests (`tkgeomalgo_corpus_intcurvesurface*.py`) over a
+geometry catalog of 21 curves (lines, conics, polynomial and rational Bezier and
+B-spline curves with C1 knots, periodic and degree 1, offset and trimmed curves) and
+29 surfaces (planes, cylinders, cones, spheres, tori, Bezier and multi-patch B-spline
+surfaces, revolutions and extrusions of lines, parabolas, hyperbolas and Bezier
+curves, offsets of each, trimmed surfaces; natural infinite and given domains).
+`ics_hinter` runs `IntCurveSurface_HInter::Perform` on every curve against every
+surface, on tangent, grazing, four-root, axis, in-plane, parallel, missing and
+null-offset cases, and through its polygon and polyhedron overloads;
+`ics_hinter_protected` drives each protected member through a probe subclass;
+`ics_records` and `ics_intersection` the records (merged points, flags, copies,
+out-of-range indices, dumps); `ics_hcurve` every curve tool member (C0 to CN
+intervals, sample counts and B-spline sample parameters over partial spans and
+deflections); `ics_polygon` and `ics_polyhedron` every polygon, polyhedron and tool
+member on uniform and explicit samplings (degenerate triangles at poles and apexes,
+too-short parameter arrays, every TriConnex case); `ics_utils` the polygon and
+polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
+`ics_quadcurv` the instance classes; `ics_estlim`, `ics_project` and
+`ics_interutils` the InterUtils functions.
 
 ## Preserved native behaviour
 
@@ -899,3 +937,39 @@ three-circle requests (`touching_circles`, the BUC60622 configurations).
   its box scaling is a constant true.
 - `Curves2dShape` returns the U pole count of the surface as the 2d pole count.
 - The `AppBlend_Debug.cxx` switches are process-wide, as the native file statics.
+
+### IntCurveSurface
+
+- `Perform` marks the result done before it computes: an exception leaves the points
+  found so far, done. `PerformBounds` clamps the patch to `1e50` (bug26525).
+- `IntCurveSurface_Intersection::Append(Inter, First, Last)` ignores the range, and
+  `Append(Point)` drops a point whose (u, v, w) lie within 1e-8 of a kept one with the
+  same transition. `HInter::AppendSegment` is empty: no result has segments.
+- `ProcessIntAna` and `PerformCurveQuadric` read the quadric parameters of each point
+  into locals shared across the loop; `AppendIntAna` on a surface that is not a
+  plane, cylinder, cone or sphere reads them uninitialized natively (the port reads
+  0; the corpus calls it on quadrics only).
+- `SortStartPoints` snaps the w (then u) of a point within `10 * PConfusion` of the
+  previous one to it before the next pass, and `ProcessSortedPoints` compares each
+  point with the previous unsnapped one, starting from `u - 1`.
+- `EstLimForInfOffs` sets NoIntersection only for a line parallel to (or on) the
+  equivalent cylinder or cone; a line meeting it nowhere widens the V bounds from
+  RealLast to [-10, 10]. `EstLimForInfRevl` takes an arbitrary point `(u, u + 1,
+  u + 2)` when the basis curve lies on the axis.
+- `TriConnex` compares the triangle column with `nbdeltaV`, though triangle columns run
+  to `2 nbdeltaV`; `ComputeBorderDeflection` starts at RealFirst; the singularity flags
+  and `Point(thePnt, lig, col, U, V)` store nothing the algorithm reads (the setter is
+  empty).
+- The polygon tool `Dump` numbers its output by a process-wide call counter (a static
+  shared by every instance of the generic in the port); the probe masks the number.
+- `NbSamples` truncates a double count, `(int)` of NaN being undefined (0 here).
+
+## IntCurveSurface deviations
+
+- The polyhedron arrays keep the native 1-based layout: index 0 is the origin with
+  null parameters (uninitialized natively), and an index past the grid, an
+  out-of-bounds read natively, raises Standard_OutOfRange; after `destroy` every point
+  access raises it. `IsOnBound` reads false outside the flags.
+- Curve exceptions inside the quadric distance function are kept and raised when the
+  root search returns, as for the IntImp functions (docs/geomalgo-design.md section 6).
+
