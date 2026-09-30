@@ -21,7 +21,7 @@ def clip_requests() -> str:
     directions = [(1,0),(-1,0),(0,1),(1,1),(1,-1),(1,1e-10)]
     clipped = '\n'.join(f"face_clip {a} {b} {c} {d} {x} {y} {dx} {dy} {tol}"
         for (a,b,c,d), (x,y), (dx,dy), tol in product(bounds, points, directions, [0,1e-7,1,10]))+'\n'
-    return clipped + plane_requests() + policy_requests()
+    return clipped + plane_requests() + policy_requests() + boundary_requests()
 
 
 def plane_requests() -> str:
@@ -41,6 +41,14 @@ def policy_requests() -> str:
         for r1, r2, x, y, axis, reverse in product([0,1,2,10], [0,0.5,1],
             [0,0.8,1,1.2,2,9,10,11,100], [0,1], [0,1], [0,1])]
     return '\n'.join(requests)+'\n'
+
+
+def boundary_requests() -> str:
+    """Compare finite/infinite enlargement and periodic seams on genuine BRep faces."""
+    intervals = [(0,1,-1,1),(-100,100,-100,100),(-2e100,2e100,-2e100,2e100),(-1e-8,1e-8,0,0)]
+    return '\n'.join(f"face_bounds {kind} {radius} {tol} {explicit} {u1} {u2} {v1} {v2}"
+        for kind, radius, tol, explicit, (u1,u2,v1,v2) in product(
+            range(30), [3,4], [-1,0,1e-7,1], [0,1], intervals))+'\n'
 
 
 def main() -> None:

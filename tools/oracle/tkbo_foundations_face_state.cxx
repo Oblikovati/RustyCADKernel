@@ -70,4 +70,28 @@ void bo_face_pcurves_case(const std::vector<double>& v) {
  gp_Ax3 axes(gp_Pnt(v[2],v[3],0),direction,x);if(v[5]!=0)axes.XReverse();
  gp_Sphere sphere(axes,v[1]);bo_int(ApproxWithPCurves(cylinder,sphere));
 }
+
+TopoDS_Face bo_face_special_face(int kind,double radius) {
+ if(kind==23)return BRepBuilderAPI_MakeFace(gp_Torus(gp_Ax3(),radius*2.,radius));
+ if(kind==24)return BRepBuilderAPI_MakeFace(gp_Cylinder(gp_Ax3(),radius));
+ occ::handle<Geom_Surface> surface=new Geom_CylindricalSurface(gp_Ax3(),radius);
+ auto trim=[](const occ::handle<Geom_Surface>& s)->occ::handle<Geom_Surface>{return new Geom_RectangularTrimmedSurface(s,0.2,5.5,-1.,1.);};
+ auto offset=[](const occ::handle<Geom_Surface>& s)->occ::handle<Geom_Surface>{return new Geom_OffsetSurface(s,0.1,true);};
+ if(kind==25)surface=offset(trim(surface));else if(kind==26)surface=trim(offset(surface));
+ else if(kind==27)surface=offset(offset(surface));else if(kind==28)surface=trim(trim(surface));else surface=trim(surface);
+ TopoDS_Face face;BRep_Builder().MakeFace(face,surface,1e-7);return face;
+}
+void bo_face_bounds_case(const std::vector<double>& v) {
+ try {
+  TopoDS_Face face;
+  if(v[0]>=23)face=bo_face_special_face(int(v[0]),v[1]);
+  else if(v[0]<14)face=bo_fclass_face(int(v[0]),v[1]);
+  else {auto surface=occ::down_cast<GeomAdaptor_Surface>(bo_topol_surface({v[0]-14,v[1],0,1,0,1}));BRep_Builder().MakeFace(face,surface->Surface(),1e-7);}
+  double u1,u2,v1,v2;IntTools_Context().UVBounds(face,u1,u2,v1,v2);
+  if(v[3]!=0){u1=v[4];u2=v[5];v1=v[6];v2=v[7];}
+  CorrectSurfaceBoundaries(face,v[2],u1,u2,v1,v2);
+  for(double t:{u1,u2,v1,v2})bo_real(t);
+  CorrectPlaneBoundaries(u1,u2,v1,v2);for(double t:{u1,u2,v1,v2})bo_real(t);
+ }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
+}
 #endif

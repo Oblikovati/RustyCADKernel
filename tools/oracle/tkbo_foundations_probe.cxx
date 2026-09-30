@@ -74,6 +74,7 @@ int main() {
   std::istringstream input(line);std::string operation;input>>operation;std::vector<double> values;double value;
   while(input>>value)values.push_back(value);
 #ifdef TKBO_FACEFACE_PRIVATE_PROBE
+  if(operation=="face_bounds"){bo_face_bounds_case(values);std::cout<<'\n';continue;}
   if(operation=="face_policy"){bo_face_policy_case(values);std::cout<<'\n';continue;}
   if(operation=="face_pcurves"){bo_face_pcurves_case(values);std::cout<<'\n';continue;}
   if(operation=="face_planes"){bo_face_planes_case(values);std::cout<<'\n';continue;}
