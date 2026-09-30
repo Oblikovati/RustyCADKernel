@@ -389,7 +389,7 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
-    head = mask_type_expressions(strip_decltypes(head))
+    head = mask_handle_return_type(mask_type_expressions(strip_decltypes(head)))
     # A conversion operator may name a cv-qualified template type
     # (`operator const occ::handle<Geom_Line>&() const`, the GC_Make* conversions).
     name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)"
@@ -409,6 +409,12 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     owner = scope or primary
     prefix = owner if name == class_name(owner) else f"{owner}::{name}"
     return [Member(prefix, params, qualifier)]
+
+
+def mask_handle_return_type(head: str) -> str:
+    """Avoid reading a Handle(T) return macro as the method; mask_handle_return_type(head)."""
+    pattern = r"\bHandle\s*\(([^()]*)\)(?=\s*(?:const\s*)?[&*]?\s*[A-Za-z_]\w*\s*\()"
+    return re.sub(pattern, r"occ::handle<\1>", head)
 
 
 def mask_type_expressions(head: str) -> str:

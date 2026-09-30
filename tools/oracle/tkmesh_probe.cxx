@@ -67,6 +67,8 @@ void mesh_pcurve(std::istream& input) {
 #include "tkmesh_probe_model_healer.cxx"
 #include "tkmesh_probe_elements.cxx"
 #include "tkmesh_probe_cell_failure.cxx"
+#include "tkmesh_probe_vertex_inspector.cxx"
+#include "tkmesh_probe_vertex_tool.cxx"
 int main(){
     std::string line;
     while(std::getline(std::cin,line)){
@@ -99,6 +101,9 @@ int main(){
         else if(operation=="mesh_geom_cells")mesh_geom_cells(input);
         else if(operation=="mesh_range_overflow")mesh_range_overflow(input);
         else if(operation=="mesh_editable_tree")mesh_editable_tree(input);
+        else if(operation=="mesh_vertex_tool")mesh_vertex_tool(input);
+        else if(operation=="mesh_vertex_invalid")mesh_vertex_invalid(input);
+        else if(operation=="mesh_vertex_inspector")mesh_vertex_inspector(input);
         else if(operation=="mesh_cell_failure")mesh_cell_failure(input);
         else if(operation=="mesh_element_vertex")mesh_element_vertex(input);
         else if(operation=="mesh_element_edge")mesh_element_edge(input);

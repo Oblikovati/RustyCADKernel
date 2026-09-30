@@ -48,7 +48,7 @@ pub fn vertex_case(v: &[i32]) {
     report_vertex(&vertex);
     println!();
 }
-fn report_vertex(vertex: &BRepMeshVertex) {
+pub(super) fn report_vertex(vertex: &BRepMeshVertex) {
     real(vertex.coord().x());
     real(vertex.coord().y());
     int(vertex.location_3d());
