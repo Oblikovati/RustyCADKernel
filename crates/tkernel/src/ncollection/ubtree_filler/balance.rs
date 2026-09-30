@@ -1,24 +1,26 @@
 //! Native `CheckTree`: leaf count and depth balance report of the filled tree.
-use super::UBTreeFiller;
+use super::{BoundingTreeInsertion, UBTreeFiller};
 use crate::ncollection::{BoundingNode, BoundingVolume, UBTree};
 use crate::standard::Failure;
 use std::fmt::Write;
 
-impl<T: Clone + Default, B: BoundingVolume> UBTreeFiller<'_, T, B> {
+impl<T: Clone + Default, B: BoundingVolume, Tree: BoundingTreeInsertion<T, B> + ?Sized>
+    UBTreeFiller<'_, T, B, Tree>
+{
     /// Write `Checking UBTree:%8d leaves, balance =%7.2f` and a newline, as native
     /// `CheckTree`, and return the leaf count. The balance is
     /// `sqrt(sum(depth^2) / leaves) / log2(leaves)`; a one-leaf tree divides zero by zero
     /// and prints glibc's `-nan`. An empty tree, which natively dereferences a null root,
     /// is refused with Standard_NoSuchObject. Example: `filler.check_tree(&mut text)?`.
     pub fn check_tree(&self, stream: &mut impl Write) -> Result<i32, Failure> {
-        let root: &BoundingNode<T, B> = self.tree.root().ok_or_else(|| {
+        let root: &BoundingNode<T, B> = self.tree.tree_view().root().ok_or_else(|| {
             Failure::with_type(
                 "Standard_NoSuchObject",
                 "UBTree is empty; expected a root node",
                 "",
             )
         })?;
-        let (length, number): (f64, i32) = depth_squares(self.tree, root);
+        let (length, number): (f64, i32) = depth_squares(self.tree.tree_view(), root);
         let count: f64 = f64::from(number);
         let spread: f64 = (length / count).sqrt();
         let depth: f64 = count.ln() / 2.0_f64.ln();

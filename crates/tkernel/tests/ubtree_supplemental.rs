@@ -57,3 +57,25 @@ fn selector_stop_is_checked_after_rejected_acceptance() {
     assert!(tree.is_empty());
     assert_eq!(tree.allocator(), &resource);
 }
+
+#[test]
+fn filler_dispatches_editable_tree_insertion_and_drop() {
+    use rustycad_tkernel::ncollection::{BoundingTreeInsertion, UBTreeFiller};
+    let mut tree: EBTree<i32, TestBnd1D> = EBTree::default();
+    {
+        let mut filler = UBTreeFiller::new(&mut tree, None, true);
+        filler.add(1, TestBnd1D::new(0.0, 1.0));
+        filler.add(1, TestBnd1D::new(2.0, 3.0));
+        filler.add(2, TestBnd1D::new(4.0, 5.0));
+        assert_eq!(filler.fill(), 3);
+        assert_eq!(filler.check_tree(&mut String::new()).unwrap(), 2);
+        filler.add(3, TestBnd1D::new(6.0, 7.0));
+    }
+    for object in 1..=3 {
+        assert!(tree.contains(&object));
+        assert_eq!(*tree.find_node(&object).unwrap().object(), object);
+    }
+    assert!(tree.remove(&2));
+    assert!(!tree.contains(&2));
+    assert!(!tree.tree_view().is_empty());
+}

@@ -119,6 +119,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_geom_sampling" => mesh_probe::geom_tool::sampling_case(values),
         "mesh_geom_cells" => mesh_probe::geom_tool::cells_case(values),
         "mesh_range_overflow" => mesh_probe::geom_tool::overflow_steps_case(),
+        "mesh_editable_tree" => mesh_probe::editable_tree::editable_tree_case(values),
         "mesh_range" => mesh_probe::range_splitter::range_case(values),
         "mesh_edge_callback" => mesh_probe::edge_discret::edge_callback_case(),
         "mesh_tools" => mesh_probe::tools::tools_case(values[0]),
