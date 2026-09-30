@@ -5,6 +5,8 @@ Usage: python3 tools/verify_tkbo_foundations.py --source OCCT --native-build BUI
 """
 from itertools import product
 from toolkit_numeric import NumericOracle, verify_numeric
+from tkbo_upstream_gaps import verify_missing_isvalid
+from verify_tkmath_numeric import selected_paths
 
 
 def corpus() -> str:
@@ -68,4 +70,7 @@ ORACLE = NumericOracle('TKBO-foundations', 'tools/oracle/tkbo_foundations_probe.
                         'TKG3d', 'TKG2d', 'TKMath', 'TKernel'], 'rustycad-tkbo', corpus)
 
 if __name__ == '__main__':
+    ORACLE.evidence.mkdir(parents=True, exist_ok=True)
+    (ORACLE.evidence/'report.json').unlink(missing_ok=True)
+    verify_missing_isvalid(selected_paths()[1], ORACLE.evidence)
     verify_numeric(ORACLE)
