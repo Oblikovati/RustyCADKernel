@@ -8,14 +8,15 @@
 use super::{BRepBuilderAPIFastSewing, FastSewingStatus};
 use crate::brep_builder_api::sewing::failures::{null_object, out_of_range, program_error};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
-use rustycad_tkbrep::topods::{Edge, Face, Vertex, Wire};
+use rustycad_tkbrep::topods::{Edge, Face, Shape, Vertex, Wire};
 use rustycad_tkernel::ncollection::{CellAction, CellFilter, CellInspector};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve};
-use rustycad_tkg3d::geom::GeomCurve;
+use rustycad_tkg3d::geom::{GeomCurve, GeomSurface};
 use rustycad_tkg3d::top_abs::{self, Orientation};
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Direction2, Line2, Point2, Point3, Xyz};
+use rustycad_tkmath::toploc::Location;
 
 /// `FS_Vertex`: a corner point shared by faces and edges (its native `myID` is its
 /// index in the vector, never read).
@@ -232,6 +233,40 @@ impl FsEdge {
         self.my_vertices[0] == self.my_vertices[1]
     }
 
+    /// The topological ends of the edge: FORWARD and REVERSED.
+    fn end_vertices(&self, vertices: &[FsVertex]) -> Result<(Shape, Shape), Failure> {
+        let vertex = |i: i32| {
+            vertices
+                .get(i as usize)
+                .map(|v| v.my_topo_vert.clone())
+                .ok_or_else(|| program_error("FS_Edge: vertex index"))
+        };
+        let v1 = vertex(self.my_vertices[0])?.oriented(Orientation::Forward);
+        Ok((
+            v1,
+            vertex(self.my_vertices[1])?.oriented(Orientation::Reversed),
+        ))
+    }
+
+    /// The first face of the edge and the side of it the edge is.
+    fn first_face<'f>(&self, faces: &'f [FsFace]) -> Result<(&'f FsFace, usize), Failure> {
+        let face = self
+            .my_faces
+            .first()
+            .and_then(|&f| faces.get(f as usize))
+            .ok_or_else(|| out_of_range("FS_Edge::CreateTopologicalEdge: myFaces", 1, 0))?;
+        let side = face
+            .my_edges
+            .iter()
+            .position(|&e| e == self.my_id)
+            .ok_or_else(|| {
+                program_error(
+                    "BRepBuilderAPI_FastSewing::FS_Edge::CreateTopologicalEdge: Single edge.",
+                )
+            })?;
+        Ok((face, side))
+    }
+
     /// `CreateTopologicalEdge(theVertexVec, theFaceVec, theTol)`: on the first face of
     /// the edge, a degenerated edge with its p-curve, or an edge on the isoline of its
     /// side (in the surface's own coordinates, as natively).
@@ -241,65 +276,66 @@ impl FsEdge {
         faces: &[FsFace],
         tol: f64,
     ) -> Result<Edge, Failure> {
-        let vertex = |i: i32| {
-            vertices
-                .get(i as usize)
-                .map(|v| v.my_topo_vert.clone())
-                .ok_or_else(|| program_error("FS_Edge: vertex index"))
-        };
-        let v1 = vertex(self.my_vertices[0])?.oriented(Orientation::Forward);
-        let v2 = vertex(self.my_vertices[1])?.oriented(Orientation::Reversed);
-        let face = self
-            .my_faces
-            .first()
-            .and_then(|&f| faces.get(f as usize))
-            .ok_or_else(|| out_of_range("FS_Edge::CreateTopologicalEdge: myFaces", 1, 0))?;
+        let ends = self.end_vertices(vertices)?;
+        let (face, side) = self.first_face(faces)?;
         let (surface, location) = BRepTool::surface_with_location(&face.my_src_face)?;
         let s = surface
             .get()
             .ok_or_else(|| null_object("FS_Edge::CreateTopologicalEdge: null surface"))?;
-        let bounds = s.bounds();
-        let edge_id = face
-            .my_edges
-            .iter()
-            .position(|&e| e == self.my_id)
-            .ok_or_else(|| {
-                program_error(
-                    "BRepBuilderAPI_FastSewing::FS_Edge::CreateTopologicalEdge: Single edge.",
-                )
-            })?;
-        let b = BRepBuilder::default();
-        let mut edge = Edge::default();
         if self.is_degenerated() {
-            let c2d = get_2d_curve(edge_id, bounds, false)?;
-            let c2 = c2d
-                .get()
-                .ok_or_else(|| null_object("FS_Edge: null p-curve"))?;
-            let (f_par, l_par) = (c2.first_parameter(), c2.last_parameter());
-            b.make_edge(&mut edge)?;
-            b.update_edge_pcurve(&edge, &c2d, &surface, &location, tol, None)?;
-            b.add(&mut edge, &v1)?;
-            b.add(&mut edge, &v2)?;
-            b.range(&edge, f_par, l_par, false)?;
-            b.degenerated(&edge, true)?;
-            return Ok(edge);
+            let c2d = get_2d_curve(side, s.bounds(), false)?;
+            return degenerated_edge(&c2d, (&surface, &location), tol, ends);
         }
-        let (uf, ul, vf, vl) = bounds;
-        let c3d: Handle<dyn GeomCurve> = match edge_id {
+        let (uf, ul, vf, vl) = s.bounds();
+        let c3d: Handle<dyn GeomCurve> = match side {
             0 => s.v_iso(vf)?,
             1 => s.u_iso(ul)?,
             2 => s.v_iso(vl)?,
             _ => s.u_iso(uf)?,
         };
-        let c = c3d
-            .get()
-            .ok_or_else(|| null_object("FS_Edge: null isoline"))?;
-        b.make_edge_with_curve(&mut edge, &c3d, tol)?;
-        b.add(&mut edge, &v1)?;
-        b.add(&mut edge, &v2)?;
-        b.range(&edge, c.first_parameter(), c.last_parameter(), false)?;
-        Ok(edge)
+        iso_edge(&c3d, tol, ends)
     }
+}
+
+/// The degenerated edge of a collapsed side: its p-curve on the surface, its two ends,
+/// the range of the p-curve.
+fn degenerated_edge(
+    c2d: &Handle<dyn Geom2dCurve>,
+    (surface, location): (&Handle<dyn GeomSurface>, &Location),
+    tol: f64,
+    (v1, v2): (Shape, Shape),
+) -> Result<Edge, Failure> {
+    let c2 = c2d
+        .get()
+        .ok_or_else(|| null_object("FS_Edge: null p-curve"))?;
+    let (f_par, l_par) = (c2.first_parameter(), c2.last_parameter());
+    let b = BRepBuilder::default();
+    let mut edge = Edge::default();
+    b.make_edge(&mut edge)?;
+    b.update_edge_pcurve(&edge, c2d, surface, location, tol, None)?;
+    b.add(&mut edge, &v1)?;
+    b.add(&mut edge, &v2)?;
+    b.range(&edge, f_par, l_par, false)?;
+    b.degenerated(&edge, true)?;
+    Ok(edge)
+}
+
+/// The edge on an isoline: its 3d curve, its two ends, the range of the curve.
+fn iso_edge(
+    c3d: &Handle<dyn GeomCurve>,
+    tol: f64,
+    (v1, v2): (Shape, Shape),
+) -> Result<Edge, Failure> {
+    let c = c3d
+        .get()
+        .ok_or_else(|| null_object("FS_Edge: null isoline"))?;
+    let b = BRepBuilder::default();
+    let mut edge = Edge::default();
+    b.make_edge_with_curve(&mut edge, c3d, tol)?;
+    b.add(&mut edge, &v1)?;
+    b.add(&mut edge, &v2)?;
+    b.range(&edge, c.first_parameter(), c.last_parameter(), false)?;
+    Ok(edge)
 }
 
 impl BRepBuilderAPIFastSewing {

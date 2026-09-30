@@ -99,6 +99,36 @@ impl BRepBuilderAPISewing {
         Ok(new_edge)
     }
 
+    /// Merges one candidate section into the merged edge (its faces joined to the merged
+    /// faces, the orientation flipped with the section); false when the section is
+    /// floating or the pair does not merge.
+    fn merge_into(
+        &self,
+        state: &mut SequenceMerge,
+        oedge2: &Shape,
+        forward: bool,
+        loc_reshape: &Handle<dyn ReShape>,
+    ) -> Result<bool, Failure> {
+        let edge2 = self.section_image(oedge2, loc_reshape)?;
+        let orientation = forward == state.is_forward;
+        // Skip floating edge.
+        let Some(list_faces2) = self.my_bound_faces.seek(&self.bound_of(oedge2)) else {
+            return Ok(false);
+        };
+        let mut which_sec: i32 = 1;
+        let pair = (&state.edge, &edge2, &state.faces, list_faces2);
+        let new_edge = self.same_parameter_edge_of_pair(pair, orientation, &mut which_sec, true)?;
+        if new_edge.is_null() {
+            return Ok(false);
+        }
+        self.append_bound_faces(&mut state.faces, &mut state.merged_faces, list_faces2);
+        if !orientation && which_sec != 1 {
+            state.is_forward = !state.is_forward;
+        }
+        state.edge = new_edge;
+        Ok(true)
+    }
+
     /// `SameParameterEdge(edge, seqEdges, seqForward, mapMerged, locReShape)`: merges
     /// the candidate sections into the reference one (only the first in manifold
     /// mode), each merged section recorded in `map_merged`; the result is oriented as
@@ -111,39 +141,26 @@ impl BRepBuilderAPISewing {
         map_merged: &mut MapOfShape,
         loc_reshape: &Handle<dyn ReShape>,
     ) -> Result<Edge, Failure> {
-        let mut edge1 = self.section_image(edge, loc_reshape)?;
-        let mut is_done = false;
-        let mut list_faces1: List<Shape> = List::default();
-        let mut merged_faces = MapOfShape::default();
+        let mut state = SequenceMerge {
+            edge: self.section_image(edge, loc_reshape)?,
+            faces: List::default(),
+            merged_faces: MapOfShape::default(),
+            is_forward: true,
+        };
         if self.my_sewing {
             if let Some(faces) = self.my_bound_faces.seek(&self.bound_of(edge)) {
-                self.append_bound_faces(&mut list_faces1, &mut merged_faces, faces);
+                self.append_bound_faces(&mut state.faces, &mut state.merged_faces, faces);
             }
         } else {
-            edge1 = self.presentation_edge(&edge1)?;
+            state.edge = self.presentation_edge(&state.edge)?;
         }
-        let mut is_forward = true;
+        let mut is_done = false;
         for i in 1..=seq_edges.length() as usize {
             let oedge2 = seq_edges.value(i)?;
-            if self.my_sewing {
-                let edge2 = self.section_image(oedge2, loc_reshape)?;
-                let orientation = *seq_forward.value(i)? == is_forward;
-                // Skip floating edge.
-                let Some(list_faces2) = self.my_bound_faces.seek(&self.bound_of(oedge2)) else {
-                    continue;
-                };
-                let mut which_sec: i32 = 1;
-                let pair = (&edge1, &edge2, &list_faces1, list_faces2);
-                let new_edge =
-                    self.same_parameter_edge_of_pair(pair, orientation, &mut which_sec, true)?;
-                if new_edge.is_null() {
-                    continue;
-                }
-                self.append_bound_faces(&mut list_faces1, &mut merged_faces, list_faces2);
-                if !orientation && which_sec != 1 {
-                    is_forward = !is_forward;
-                }
-                edge1 = new_edge;
+            if self.my_sewing
+                && !self.merge_into(&mut state, oedge2, *seq_forward.value(i)?, loc_reshape)?
+            {
+                continue;
             }
             map_merged.add(oedge2.clone());
             is_done = true;
@@ -151,15 +168,24 @@ impl BRepBuilderAPISewing {
                 break;
             }
         }
-        if is_done {
-            edge1.set_orientation(if is_forward {
-                Orientation::Forward
-            } else {
-                Orientation::Reversed
-            });
-        } else {
-            edge1.nullify();
+        if !is_done {
+            state.edge.nullify();
+            return Ok(state.edge);
         }
-        Ok(edge1)
+        state.edge.set_orientation(if state.is_forward {
+            Orientation::Forward
+        } else {
+            Orientation::Reversed
+        });
+        Ok(state.edge)
     }
+}
+
+/// The state of `SameParameterEdge(edge, seqEdges, ...)`: the merged edge, the faces of
+/// the merged sections (each once) and the orientation of the result.
+struct SequenceMerge {
+    edge: Edge,
+    faces: List<Shape>,
+    merged_faces: MapOfShape,
+    is_forward: bool,
 }

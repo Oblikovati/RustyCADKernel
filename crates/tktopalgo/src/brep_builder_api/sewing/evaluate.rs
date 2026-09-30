@@ -41,6 +41,54 @@ pub(super) fn global_curve(edge: &Edge) -> Result<(Handle<dyn GeomCurve>, f64, f
     Ok((copy, found.first, found.last))
 }
 
+/// A curve and its parameter range.
+type CurveRange<'c> = (&'c Handle<dyn GeomCurve>, f64, f64);
+
+/// The samples of the reference and of the current section, and the reference curve.
+struct DistanceSamples {
+    pts_ref: Array1<'static, Point3>,
+    pts_sec: Array1<'static, Point3>,
+    reference: (Handle<dyn GeomCurve>, f64, f64),
+}
+
+impl DistanceSamples {
+    /// Samples a section (the reference when `is_ref`, kept with its curve) and
+    /// measures it against the reference.
+    fn sample(
+        &mut self,
+        is_ref: bool,
+        (c3d, first, last): CurveRange<'_>,
+    ) -> Result<SampleDistances, Failure> {
+        let curve = c3d
+            .get()
+            .ok_or_else(|| null_object("EvaluateDistances: null curve"))?;
+        if is_ref {
+            self.reference = (c3d.clone(), first, last);
+            sample_curve(curve, (first, last), &mut self.pts_ref)?;
+            return Ok(sample_distances(&self.pts_ref, &self.pts_ref, true));
+        }
+        sample_curve(curve, (first, last), &mut self.pts_sec)?;
+        Ok(sample_distances(&self.pts_sec, &self.pts_ref, false))
+    }
+
+    /// The samples to project and the curve to project them on: the section's onto the
+    /// reference curve when the reference is longer, else the reference's onto the
+    /// section's curve.
+    fn projection<'c>(
+        &'c self,
+        longer_reference: bool,
+        section: CurveRange<'c>,
+    ) -> (&'c Array1<'static, Point3>, CurveRange<'c>) {
+        if longer_reference {
+            return (
+                &self.pts_sec,
+                (&self.reference.0, self.reference.1, self.reference.2),
+            );
+        }
+        (&self.pts_ref, section)
+    }
+}
+
 /// The distances between one section's samples and the reference's, both ways.
 struct SampleDistances {
     dist_for: f64,
@@ -122,42 +170,34 @@ impl BRepBuilderAPISewing {
         tab_dst.init(-1.0);
         arr_len.init(0.);
         tab_min_dist.init(precision::infinite());
-        let mut pts_ref = array1(NB_DISTANCE_SAMPLES, Point3::default())?;
-        let mut pts_sec = array1(NB_DISTANCE_SAMPLES, Point3::default())?;
-        let mut reference: (Handle<dyn GeomCurve>, f64, f64) = (Handle::default(), 0., 0.);
+        let mut samples = DistanceSamples {
+            pts_ref: array1(NB_DISTANCE_SAMPLES, Point3::default())?,
+            pts_sec: array1(NB_DISTANCE_SAMPLES, Point3::default())?,
+            reference: (Handle::default(), 0., 0.),
+        };
         for i in ind_ref..=sequence_sec.length() {
             let sec = topods::edge(sequence_sec.value(i as usize)?)?;
             let (c3d, first, last) = global_curve(&sec)?;
-            let Some(curve) = c3d.get() else { continue };
-            if i == ind_ref {
-                reference = (c3d.clone(), first, last);
+            if c3d.is_null() {
+                continue;
             }
-            let d = if i == ind_ref {
-                sample_curve(curve, (first, last), &mut pts_ref)?;
-                sample_distances(&pts_ref, &pts_ref, true)
-            } else {
-                sample_curve(curve, (first, last), &mut pts_sec)?;
-                sample_distances(&pts_sec, &pts_ref, false)
-            };
+            let d = samples.sample(i == ind_ref, (&c3d, first, last))?;
             arr_len[i] = d.len2.sqrt();
             // szv debug: <=
             let is_forward = d.dist_for < d.dist_rev;
             sec_forward[i] = is_forward;
             let dist = if is_forward { d.dist_for } else { d.dist_rev };
-            if i == ind_ref
-                || (dist < self.my_tolerance
-                    && f64::from(d.nb_found) >= f64::from(NB_DISTANCE_SAMPLES) * 0.5)
-            {
+            let close = dist < self.my_tolerance
+                && f64::from(d.nb_found) >= f64::from(NB_DISTANCE_SAMPLES) * 0.5;
+            if i == ind_ref || close {
                 tab_dst[i] = dist;
                 tab_min_dist[i] = d.min_dist;
                 continue;
             }
-            let (points, onto) = if arr_len[ind_ref] >= arr_len[i] {
-                (&pts_sec, (&reference.0, reference.1, reference.2))
-            } else {
-                (&pts_ref, (&c3d, first, last))
-            };
-            if let Some((max, min)) = self.projected_distances(points, onto)? {
+            let longer_reference = arr_len[ind_ref] >= arr_len[i];
+            if let Some((max, min)) =
+                self.projected_distances(samples.projection(longer_reference, (&c3d, first, last)))?
+            {
                 tab_dst[i] = max;
                 tab_min_dist[i] = min;
             }
@@ -169,8 +209,7 @@ impl BRepBuilderAPISewing {
     /// projects.
     fn projected_distances(
         &self,
-        points: &Array1<'_, Point3>,
-        (curve, first, last): (&Handle<dyn GeomCurve>, f64, f64),
+        (points, (curve, first, last)): (&Array1<'_, Point3>, CurveRange<'_>),
     ) -> Result<Option<(f64, f64)>, Failure> {
         let mut out = Projections::new(NB_DISTANCE_SAMPLES)?;
         self.project_points_on_curve(points, curve, (first, last), &mut out, false)?;

@@ -23,7 +23,39 @@ struct SectionDistances {
     min_dist: rustycad_tkernel::ncollection::Array1<'static, f64>,
 }
 
+/// The sections with the reference first (the others in order) and their indices in
+/// the input sequence.
+fn reference_first(
+    seq_sections: &Sequence<Shape>,
+    ind_reference: i32,
+    edge1: &Edge,
+) -> Result<(Sequence<Shape>, Sequence<i32>), Failure> {
+    let (mut sections_new, mut candidates_new): (Sequence<Shape>, Sequence<i32>) =
+        (Sequence::default(), Sequence::default());
+    for i in 1..=seq_sections.length() {
+        if i == ind_reference {
+            sections_new.prepend(edge1.clone().into_shape());
+            candidates_new.prepend(i);
+        } else {
+            sections_new.append(seq_sections.value(i as usize)?.clone());
+            candidates_new.append(i);
+        }
+    }
+    Ok((sections_new, candidates_new))
+}
+
 impl BRepBuilderAPISewing {
+    /// The faces of the boundary of a section, as a set.
+    fn bound_face_set(&self, section: &Shape) -> MapOfShape {
+        let mut faces = MapOfShape::default();
+        if let Some(list) = self.my_bound_faces.seek(&self.bound_of(section)) {
+            for f in list.iter() {
+                faces.add(f.clone());
+            }
+        }
+        faces
+    }
+
     /// `EvaluateDistances` of a sequence against its first section.
     fn distances_to_first(&self, sections: &Sequence<Shape>) -> Result<SectionDistances, Failure> {
         let n = sections.length();
@@ -102,23 +134,8 @@ impl BRepBuilderAPISewing {
         }
         let ind_reference = *map_reference.find_key(map_reference.extent())?;
         let edge1 = topods::edge(seq_sections.value(ind_reference as usize)?)?;
-        let mut faces1 = MapOfShape::default();
-        if let Some(faces) = self.my_bound_faces.seek(&self.bound_of(&edge1)) {
-            for f in faces.iter() {
-                faces1.add(f.clone());
-            }
-        }
-        let (mut sections_new, mut candidates_new): (Sequence<Shape>, Sequence<i32>) =
-            (Sequence::default(), Sequence::default());
-        for i in 1..=nb_sections {
-            if i == ind_reference {
-                sections_new.prepend(edge1.clone().into_shape());
-                candidates_new.prepend(i);
-            } else {
-                sections_new.append(seq_sections.value(i as usize)?.clone());
-                candidates_new.append(i);
-            }
-        }
+        let faces1 = self.bound_face_set(&edge1);
+        let (sections_new, candidates_new) = reference_first(seq_sections, ind_reference, &edge1)?;
         let d = self.distances_to_first(&sections_new)?;
         self.sorted_candidates(&d, sections_new.length(), seq_candidates, seq_orientations)?;
         let mut nb_candidates = seq_candidates.length();
@@ -126,6 +143,7 @@ impl BRepBuilderAPISewing {
             // Section has no candidates to merge.
             return Ok(false);
         }
+        // Replace candidate indices.
         for i in 1..=seq_candidates.len() {
             let replaced = *candidates_new.value(*seq_candidates.value(i)? as usize)?;
             seq_candidates.set_value(i, replaced)?;
@@ -276,6 +294,30 @@ impl BRepBuilderAPISewing {
         Ok(is_merged)
     }
 
+    /// Whether a candidate stays: not the work edge, bounding faces, and merging with the
+    /// work edge on the faces they share (otherwise it joins the sections that are no
+    /// candidates).
+    fn keeps_candidate(
+        &self,
+        sequence_sec: &Sequence<Shape>,
+        index: i32,
+        (work_index, work, map_faces): (i32, &Edge, &MapOfShape),
+        seq_not_candidate: &mut Sequence<i32>,
+    ) -> Result<bool, Failure> {
+        if index == work_index {
+            return Ok(false);
+        }
+        let candidate = sequence_sec.value(index as usize)?;
+        let Some(listfaces) = self.my_bound_faces.seek(&self.bound_of(candidate)) else {
+            return Ok(false);
+        };
+        let merged = self.merges_on_shared_faces(candidate, work, listfaces, map_faces)?;
+        if !merged {
+            seq_not_candidate.append(index);
+        }
+        Ok(merged)
+    }
+
     /// `AnalysisNearestEdges(sequenceSec, seqIndCandidate, seqOrientations,
     /// evalDist)`: the work edge (the first candidate) and the candidates that share
     /// one of its faces without merging across it are removed; with `eval_dist`, a
@@ -307,26 +349,8 @@ impl BRepBuilderAPISewing {
         let mut i = 1;
         while i <= seq_ind_candidate.len() {
             let index = *seq_ind_candidate.value(i)?;
-            let keep = index != work_index
-                && match self
-                    .my_bound_faces
-                    .seek(&self.bound_of(sequence_sec.value(index as usize)?))
-                {
-                    Some(listfaces) => {
-                        let merged = self.merges_on_shared_faces(
-                            sequence_sec.value(index as usize)?,
-                            &work,
-                            listfaces,
-                            &map_faces,
-                        )?;
-                        if !merged {
-                            seq_not_candidate.append(index);
-                        }
-                        merged
-                    }
-                    None => false,
-                };
-            if keep {
+            let work = (work_index, &work, &map_faces);
+            if self.keeps_candidate(sequence_sec, index, work, &mut seq_not_candidate)? {
                 i += 1;
                 continue;
             }

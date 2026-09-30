@@ -153,6 +153,28 @@ fn add_vertices(
     Ok(())
 }
 
+/// The new edge of the merge with its vertices (None when the sections share their
+/// vertices the wrong way), and the 3d curve of the reference in global coordinates.
+#[allow(clippy::type_complexity)]
+fn merged_edge(
+    edge1: &Edge,
+    edge2: &Edge,
+    sec_forward: bool,
+    range: (f64, f64),
+) -> Result<Option<(Edge, (Handle<dyn GeomCurve>, f64, f64))>, Failure> {
+    // To keep NM vertices on edge.
+    let (mut nm_vertices, mut nm_pars) = (Sequence::default(), Sequence::default());
+    find_nm_vertices(edge1, &mut nm_vertices, &mut nm_pars)?;
+    find_nm_vertices(edge2, &mut nm_vertices, &mut nm_pars)?;
+    let curve = global_curve3d(edge1)?;
+    let edge = new_edge_on_curve(edge1, &curve.0, range)?;
+    let Some(vertices) = merged_vertices(edge1, edge2, sec_forward)? else {
+        return Ok(None);
+    };
+    add_vertices(&edge, vertices, &nm_vertices)?;
+    Ok(Some((edge, curve)))
+}
+
 impl BRepBuilderAPISewing {
     /// `SameParameterEdge(edge1, edge2, listFaces1, listFaces2, secForward, whichSec,
     /// firstCall)`: a new edge merging two sections (null for a floating section, for
@@ -172,15 +194,9 @@ impl BRepBuilderAPISewing {
         }
         let (edge1, edge2) = sort_sections(pair, which_sec, first_call)?;
         let range = BRepTool::range(&edge1)?;
-        let (mut nm_vertices, mut nm_pars) = (Sequence::default(), Sequence::default());
-        find_nm_vertices(&edge1, &mut nm_vertices, &mut nm_pars)?;
-        find_nm_vertices(&edge2, &mut nm_vertices, &mut nm_pars)?;
-        let (c3d, first3d, last3d) = global_curve3d(&edge1)?;
-        let mut edge = new_edge_on_curve(&edge1, &c3d, range)?;
-        let Some(vertices) = merged_vertices(&edge1, &edge2, sec_forward)? else {
+        let Some((mut edge, curve)) = merged_edge(&edge1, &edge2, sec_forward, range)? else {
             return Ok(Edge::default());
         };
-        add_vertices(&edge, vertices, &nm_vertices)?;
         let (faces1, faces2) = if *which_sec == 1 {
             (faces_first, faces_last)
         } else {
@@ -191,29 +207,41 @@ impl BRepBuilderAPISewing {
             PcurveTransfer::Rejected => return Ok(Edge::default()),
             PcurveTransfer::Done(is_res_edge) => is_res_edge,
         };
-        let (is_same_par, mut tol_reached) = self.same_parameter_reached(&edge, is_res_edge)?;
+        let (is_same_par, tol_reached) = self.same_parameter_reached(&edge, is_res_edge)?;
         if first_call && (!is_res_edge || !is_same_par || tol_reached > self.my_tolerance) {
-            let mut which_secn = *which_sec;
-            let s_edge =
-                self.same_parameter_edge_of_pair(pair, sec_forward, &mut which_secn, false)?;
-            let mut second_ok = false;
-            if !s_edge.is_null() {
-                let tol_reached2 = BRepTool::edge_tolerance(&s_edge)?;
-                second_ok = BRepTool::same_parameter(&s_edge)? && tol_reached2 < tol_reached;
-                if second_ok {
-                    edge = s_edge;
-                    *which_sec = which_secn;
-                    tol_reached = tol_reached2;
-                }
-            }
-            if !second_ok && !edge.is_null() {
-                self.set_measured_tolerance(&edge, (&c3d, first3d, last3d), tol_reached)?;
-            }
+            let retry = (pair, sec_forward, which_sec);
+            self.second_try(retry, &mut edge, tol_reached, (&curve.0, curve.1, curve.2))?;
         }
         if BRepTool::edge_tolerance(&edge)? > self.max_tolerance() {
             edge.nullify();
         }
         Ok(edge)
+    }
+
+    /// The merge on the other section (the second call); it replaces the edge when it
+    /// is SameParameter with a smaller tolerance, otherwise the edge takes the
+    /// tolerance measured against the 3d curve.
+    fn second_try(
+        &self,
+        (pair, sec_forward, which_sec): (SectionPair<'_>, bool, &mut i32),
+        edge: &mut Edge,
+        tol_reached: f64,
+        curve: (&Handle<dyn GeomCurve>, f64, f64),
+    ) -> Result<(), Failure> {
+        let mut which_secn = *which_sec;
+        let s_edge = self.same_parameter_edge_of_pair(pair, sec_forward, &mut which_secn, false)?;
+        if !s_edge.is_null() {
+            let tol_reached2 = BRepTool::edge_tolerance(&s_edge)?;
+            if BRepTool::same_parameter(&s_edge)? && tol_reached2 < tol_reached {
+                *edge = s_edge;
+                *which_sec = which_secn;
+                return Ok(());
+            }
+        }
+        if edge.is_null() {
+            return Ok(());
+        }
+        self.set_measured_tolerance(edge, curve, tol_reached)
     }
 
     /// The guarded SameParameter of the merged edge: whether the edge is SameParameter

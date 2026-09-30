@@ -181,6 +181,50 @@ fn insert_by_distance(
     Ok(())
 }
 
+/// The nodes and their vertices (a node is filed in the cell filter and the inspector
+/// when first met, with its index).
+struct NodeCells {
+    node_vertices: IndexedDataMapOfShapeListOfShape,
+    filter: CellFilter<BRepBuilderAPIVertexInspector>,
+    inspector: BRepBuilderAPIVertexInspector,
+}
+
+/// The `map node -> vertices` of GlueVertices, with the cells of the nodes.
+fn node_cells(vertex_node: &SewingShapeIndexedMap, tolerance: f64) -> Result<NodeCells, Failure> {
+    let mut cells = NodeCells {
+        node_vertices: IndexedDataMapOfShapeListOfShape::default(),
+        filter: CellFilter::new(tolerance),
+        inspector: BRepBuilderAPIVertexInspector::new(tolerance),
+    };
+    for i in 1..=vertex_node.extent() {
+        let vertex = vertex_node.find_key(i)?.clone();
+        let node = topods::vertex(vertex_node.find_from_index(i)?)?;
+        if let Some(list) = cells.node_vertices.change_seek(&node) {
+            list.append(vertex);
+            continue;
+        }
+        let mut vlist = List::default();
+        vlist.append(vertex);
+        let index = cells.node_vertices.add(node.clone().into_shape(), vlist) as i32;
+        let point = BRepTool::pnt(&node)?.xyz();
+        cells.filter.add(&index, &point);
+        cells.inspector.add(point);
+    }
+    Ok(cells)
+}
+
+/// The indices of the nodes within the tolerance box of `node1` (itself included).
+fn near_nodes(cells: &mut NodeCells, node1: &Vertex, tolerance: f64) -> Result<Vec<i32>, Failure> {
+    let pt1 = BRepTool::pnt(node1)?.xyz();
+    cells.inspector.set_current(pt1);
+    let pmin = BRepBuilderAPIVertexInspector::shift(&pt1, -tolerance);
+    let pmax = BRepBuilderAPIVertexInspector::shift(&pt1, tolerance);
+    cells
+        .filter
+        .inspect_range(&pmin, &pmax, &mut cells.inspector);
+    Ok(cells.inspector.res_ind().iter().copied().collect())
+}
+
 /// The static `GlueVertices(aVertexNode, aNodeEdges, aBoundFaces, Tolerance,
 /// theProgress)`: the nodes are filed in a cell filter; each node is linked to its
 /// nearest node, then the chains are merged (`CreateNewNodes`). False when nothing is
@@ -190,42 +234,20 @@ fn glue_vertices(
     tolerance: f64,
     progress: &ProgressRange<'_>,
 ) -> Result<bool, Failure> {
-    let mut node_vertices = IndexedDataMapOfShapeListOfShape::default();
-    let mut filter: CellFilter<BRepBuilderAPIVertexInspector> = CellFilter::new(tolerance);
-    let mut inspector = BRepBuilderAPIVertexInspector::new(tolerance);
-    for i in 1..=maps.vertex_node.extent() {
-        let vertex = maps.vertex_node.find_key(i)?.clone();
-        let node = topods::vertex(maps.vertex_node.find_from_index(i)?)?;
-        if let Some(list) = node_vertices.change_seek(&node) {
-            list.append(vertex);
-            continue;
-        }
-        let mut vlist = List::default();
-        vlist.append(vertex);
-        let index = node_vertices.add(node.clone().into_shape(), vlist) as i32;
-        let point = BRepTool::pnt(&node)?.xyz();
-        filter.add(&index, &point);
-        inspector.add(point);
-    }
-    let nb_nodes = node_vertices.extent();
+    let mut cells = node_cells(maps.vertex_node, tolerance)?;
+    let nb_nodes = cells.node_vertices.extent();
     let mut node_nearest_node = SewingShapeIndexedMap::default();
     let scope = ProgressScope::with_literal(progress, "Glueing nodes", nb_nodes as f64, true);
     let mut i = 1;
     while i <= nb_nodes && scope.more() {
-        let node1 = topods::vertex(node_vertices.find_key(i)?)?;
-        let pt1 = BRepTool::pnt(&node1)?.xyz();
-        inspector.set_current(pt1);
-        let (pmin, pmax) = (
-            BRepBuilderAPIVertexInspector::shift(&pt1, -tolerance),
-            BRepBuilderAPIVertexInspector::shift(&pt1, tolerance),
-        );
-        filter.inspect_range(&pmin, &pmax, &mut inspector);
-        let found: Vec<i32> = inspector.res_ind().iter().copied().collect();
+        let node1 = topods::vertex(cells.node_vertices.find_key(i)?)?;
+        let found = near_nodes(&mut cells, &node1, tolerance)?;
         if !found.is_empty() {
-            if let Some(nearest) = nearest_node(&node1, &found, &node_vertices, maps, tolerance)? {
+            let nearest = nearest_node(&node1, &found, &cells.node_vertices, maps, tolerance)?;
+            if let Some(nearest) = nearest {
                 node_nearest_node.add(node1.into_shape(), nearest);
             }
-            inspector.clear_res_list();
+            cells.inspector.clear_res_list();
         }
         i += 1;
         scope.next(1.0);
@@ -235,7 +257,7 @@ fn glue_vertices(
     }
     create_new_nodes(
         &node_nearest_node,
-        &node_vertices,
+        &cells.node_vertices,
         maps.vertex_node,
         maps.node_edges,
     )

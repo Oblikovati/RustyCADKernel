@@ -62,7 +62,58 @@ fn ordered_by_distance(
     Ok(ordered_index.iter().copied().collect())
 }
 
-impl CuttingPoints<'_> {
+impl<'s> CuttingPoints<'s> {
+    /// The two ends of the boundary (to be removed afterwards): its vertices, the range
+    /// of its curve, no distance yet, and the end points of the curve.
+    fn with_ends(
+        vertices: &'s mut Sequence<Shape>,
+        params: &'s mut Sequence<f64>,
+        bound: &Edge,
+        (vfirst, vlast): (Shape, Shape),
+    ) -> Result<Self, Failure> {
+        let (c3d, first, last) = global_curve(bound)?;
+        let adaptor = GeomAdaptorCurve::with_curve(&c3d)?;
+        vertices.prepend(vfirst);
+        vertices.append(vlast);
+        params.prepend(first);
+        params.append(last);
+        let mut points = Self {
+            vertices,
+            params,
+            dists: Sequence::default(),
+            points: Sequence::default(),
+        };
+        points.dists.prepend(-1.0);
+        points.dists.append(-1.0);
+        points.points.prepend(adaptor.value(first)?);
+        points.points.append(adaptor.value(last)?);
+        Ok(points)
+    }
+
+    /// The cutting vertex of a projection `(parameter, distance, point)`: the nearest
+    /// end when the point is near it (a null vertex for a secondary node when that end
+    /// is bound already), else a new vertex inserted by parameter.
+    fn cutting_vertex(
+        &mut self,
+        (par, dis_proj, pnt_proj): (f64, f64, Point3),
+        min_tolerance: f64,
+    ) -> Result<Shape, Failure> {
+        let (index_min, dist_min) = self.nearest(&pnt_proj)?;
+        if dist_min <= std_max(dis_proj * 0.1, min_tolerance) {
+            if *self.dists.value(index_min)? >= 0.0 {
+                // Bind secondary cutting nodes.
+                return Ok(Shape::default());
+            }
+            // Bind new cutting node (end vertex only).
+            self.dists.set_value(index_min, dis_proj)?;
+            return Ok(self.vertices.value(index_min)?.clone());
+        }
+        let mut cvertex = Vertex::default();
+        BRepBuilder::default().make_vertex_at(&mut cvertex, pnt_proj, precision::confusion())?;
+        self.insert(&cvertex, (par, dis_proj, pnt_proj))?;
+        Ok(cvertex.into_shape())
+    }
+
     /// The index of the cutting point nearest to `point` (the first of equal ones).
     fn nearest(&self, point: &Point3) -> Result<(usize, f64), Failure> {
         let mut index_min = 1;
@@ -119,51 +170,25 @@ impl BRepBuilderAPISewing {
         if ordered.is_empty() {
             return Ok(());
         }
-        let (c3d, first, last) = global_curve(bound)?;
-        let adaptor = GeomAdaptorCurve::with_curve(&c3d)?;
-        seq_vert.prepend(vfirst.clone());
-        seq_vert.append(vlast.clone());
-        seq_para.prepend(first);
-        seq_para.append(last);
-        let mut points = CuttingPoints {
-            vertices: seq_vert,
-            params: seq_para,
-            dists: Sequence::default(),
-            points: Sequence::default(),
-        };
-        points.dists.prepend(-1.0);
-        points.dists.append(-1.0);
-        points.points.prepend(adaptor.value(first)?);
-        points.points.append(adaptor.value(last)?);
+        let ends = (vfirst.clone(), vlast.clone());
+        let mut points = CuttingPoints::with_ends(seq_vert, seq_para, bound, ends)?;
         let mut node_cutting_vertex = super::SewingShapeIndexedMap::default();
         for index in ordered {
             let node = self
                 .my_vertex_node
                 .find_from_key(map_vert.find_key(index as usize)?)?
                 .clone();
+            // Skip node if already bound to cutting vertex.
             if node_cutting_vertex.contains(&node) {
                 continue;
             }
-            let (dis_proj, pnt_proj) = (projections.dist[index], projections.proj[index]);
-            let (index_min, dist_min) = points.nearest(&pnt_proj)?;
-            if dist_min <= std_max(dis_proj * 0.1, self.min_tolerance()) {
-                let cvertex = if *points.dists.value(index_min)? < 0.0 {
-                    points.dists.set_value(index_min, dis_proj)?;
-                    points.vertices.value(index_min)?.clone()
-                } else {
-                    Shape::default()
-                };
-                node_cutting_vertex.add(node, cvertex);
-                continue;
-            }
-            let mut cvertex = Vertex::default();
-            BRepBuilder::default().make_vertex_at(
-                &mut cvertex,
-                pnt_proj,
-                precision::confusion(),
-            )?;
-            node_cutting_vertex.add(node, cvertex.clone().into_shape());
-            points.insert(&cvertex, (projections.para[index], dis_proj, pnt_proj))?;
+            let projection = (
+                projections.para[index],
+                projections.dist[index],
+                projections.proj[index],
+            );
+            let cvertex = points.cutting_vertex(projection, self.min_tolerance())?;
+            node_cutting_vertex.add(node, cvertex);
         }
         self.link_cutting_nodes(&node_cutting_vertex)?;
         seq_vert.remove(1)?;
