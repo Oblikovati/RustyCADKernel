@@ -45,3 +45,5 @@ pub mod analysis_edge;
 pub mod healing_common;
 
 pub mod edge_outputs;
+
+pub mod canonical;

@@ -17,3 +17,6 @@ pub use shell::ShapeAnalysisShell;
 pub use wire_order::ShapeAnalysisWireOrder;
 
 pub use edge::{Curve3dRange, EdgeTangent2d, PCurveRange, ShapeAnalysisEdge};
+
+mod canonical_recognition;
+pub use canonical_recognition::ShapeAnalysisCanonicalRecognition;

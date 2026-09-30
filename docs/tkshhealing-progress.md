@@ -8,7 +8,7 @@ packages is one module of the crate, declared up front in `src/lib.rs`; a module
 package is not ported yet holds only its documentation. Ported so far: SHMessage (the
 message resource data), ShapeExtend and ShapeBuild, plus the ShapeAnalysis, ShapeFix,
 ShapeCustom and ShapeUpgrade classes listed below. The combined numeric corpus has
-4869 passing requests. The original 2178 requests cover:
+5312 passing requests. The original 2178 requests cover:
 ShapeExtend status codes 475, messages 85, WireData 92, Explorer 849, registrators 11,
 ComplexCurve 24 and CompositeSurface 126; ShapeBuild vertices 48, edges 457 and re-shapers
 11.
@@ -524,3 +524,23 @@ maximum deviation for a degenerated edge. Sixty `sh_edgeoutputs` differential re
 check these branches with nonzero and signed-zero sentinels, through both overloads.
 The tuple-returning convenience methods start their outputs at zero. Three standalone
 Rust regressions also check output preservation.
+
+## Recovered ShapeAnalysis_CanonicalRecognition implementation
+
+All 14 public members have API rows. All 21 declarations from
+`ShapeAnalysis_CanonicalRecognition_Test.cxx` are translated with the original polygon,
+Bezier, B-spline, NURBS conversion, sewing and surface-intersection builders, tolerances
+and assertions. The module recognizes elementary surfaces and conics on faces, shells,
+edges and wires; the edge/wire fallback retains OCCT's particle-swarm and Powell fits.
+
+The 443 `sh_canonical` requests compare analytic output frames and parameters, retained
+caller values after failure, constructor and setter state, gap, status clearing, support
+selection, mismatching wires and seeded least-squares fits. Finite results agree bit for
+bit. The native shell comparison uses the first surface's parameters again when checking
+later faces; that behavior is preserved, including translated parallel faces. A null
+shape passed to `SetShape` returns Standard_NullObject in Rust instead of the native null
+dereference; the native corpus uses non-null shapes.
+
+TKShHealing now maps 44 legacy declarations (21 canonical recognition, 18 edge-connect,
+5 edge analysis). Other classes and legacy suites remain outstanding; these results do
+not imply toolkit acceptance or completion of the full OCCT port.

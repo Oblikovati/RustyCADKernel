@@ -35,3 +35,5 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_shapeupgrade').append_shapeupgrade_requests(requests)
     # ShapeAnalysis_Edge recovery: all overloads and degenerate geometry.
     __import__('tkshhealing_corpus_analysis_edge').append_analysis_edge_requests(requests)
+    # ShapeAnalysis_CanonicalRecognition: state, output geometry and fitting seeds.
+    __import__('tkshhealing_corpus_canonical').append_canonical_requests(requests)

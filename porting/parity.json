@@ -202114,6 +202114,118 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_overlapping",
       "status": "implemented",
       "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::new",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::with_shape",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::SetShape",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::set_shape",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::GetShape",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::get_shape",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::GetGap",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::get_gap",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::GetStatus",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::get_status",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::ClearStatus",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::clear_status",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::IsPlane",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_plane",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::IsCylinder",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_cylinder",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::IsCone",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_cone",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::IsSphere",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_sphere",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::IsLine",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_line",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::IsCircle",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_circle",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CanonicalRecognition::IsEllipse",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CanonicalRecognition.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_ellipse",
+      "status": "implemented",
+      "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
     }
   ],
   "tests": [
@@ -294317,6 +294429,300 @@
       "rust_target": "shape_fix_edge_connect",
       "rust_test": "ShapeFix_EdgeConnectTest__PreservesTotalLengthAgainstReference",
       "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionApproxTest.PolylineToPlaneRecognition_A1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionApproxTest__PolylineToPlaneRecognition_A1",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionApproxTest.CylinderRecognition_A2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionApproxTest__CylinderRecognition_A2",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionApproxTest.ConicalSurfaceRecognition_A3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionApproxTest__ConicalSurfaceRecognition_A3",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionApproxTest.SphericalSurfaceRecognition_A4",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionApproxTest__SphericalSurfaceRecognition_A4",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseCurveTest.BezierToLineRecognition_A1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseCurveTest__BezierToLineRecognition_A1",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseCurveTest.BezierToCircleRecognition_A2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseCurveTest__BezierToCircleRecognition_A2",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseCurveTest.EllipseToEllipseRecognition_A3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseCurveTest__EllipseToEllipseRecognition_A3",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseCurveTest.MultiSegmentWireToLineRecognition_A4",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseCurveTest__MultiSegmentWireToLineRecognition_A4",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseCurveTest.MultiSegmentCircleWireRecognition_A5",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseCurveTest__MultiSegmentCircleWireRecognition_A5",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseCurveTest.MultiSegmentEllipseWireRecognition_A6",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseCurveTest__MultiSegmentEllipseWireRecognition_A6",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.TrimmedPlaneRecognition_B1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__TrimmedPlaneRecognition_B1",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.TrimmedCylinderRecognition_B2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__TrimmedCylinderRecognition_B2",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.TrimmedConeRecognition_B3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__TrimmedConeRecognition_B3",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.ConvertedSphereRecognition_B4",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__ConvertedSphereRecognition_B4",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.SewnPlanarSurfaceRecognition_B5",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__SewnPlanarSurfaceRecognition_B5",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.SewnCylindricalSurfaceRecognition_B6",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__SewnCylindricalSurfaceRecognition_B6",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.SewnConicalSurfaceRecognition_B7",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__SewnConicalSurfaceRecognition_B7",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.SewnSphericalSurfaceRecognition_B8",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__SewnSphericalSurfaceRecognition_B8",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.ComplexCylindricalRecognitionWithSection_B9",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__ComplexCylindricalRecognitionWithSection_B9",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.ExtrudedCylindricalSurfaceRecognition_B10",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__ExtrudedCylindricalSurfaceRecognition_B10",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CanonicalRecognitionBaseSurfaceTest.PlaneDetectionWithGapValidation_Bug33170",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_CanonicalRecognition_Test.cxx",
+      "source_sha256": "2f1290e73808f26b0498975a550e64145336374ef4f96878b65fa434c0db08ea",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_canonical_recognition",
+      "rust_test": "CanonicalRecognitionBaseSurfaceTest__PlaneDetectionWithGapValidation_Bug33170",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_canonical_recognition.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

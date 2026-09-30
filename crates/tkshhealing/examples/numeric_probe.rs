@@ -4,6 +4,7 @@ use std::io::{self, BufRead};
 mod sh_probe;
 use sh_probe::analysis_basic;
 use sh_probe::analysis_edge;
+use sh_probe::canonical;
 use sh_probe::edge_outputs;
 use sh_probe::fix_basic;
 use sh_probe::{
@@ -18,6 +19,7 @@ type ProbeCase = fn(&[f64]);
 /// The dispatch table of tools/oracle/tkshhealing_probe.cxx (`probe_cases`); each
 /// package adds its operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
+    ("sh_canonical", canonical::canonical_case),
     ("sh_edgeoutputs", edge_outputs::edgeoutputs_case),
     ("sh_edgeana", analysis_edge::edgeana_case),
     // ShapeExtend (sh_probe/shape_extend.rs)
