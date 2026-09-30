@@ -118,6 +118,21 @@ fn curve_on_surface_change_curve_keeps_the_special_kind() {
     assert_eq!(adaptor.get_type().unwrap(), CurveType::OtherCurve);
 }
 
+/// The copy shares the curve and surface but not the fields: loading a new curve
+/// into the original leaves the copy on the old one (GeomFill_BoundWithSurf keeps
+/// such a copy).
+#[test]
+fn curve_on_surface_copy_keeps_its_own_fields() {
+    let adaptor =
+        Adaptor3dCurveOnSurface::with_curve(&segment((1.0, 0.0)), &sphere_adaptor()).unwrap();
+    let copy = Adaptor3dCurveOnSurface::copy_of(&adaptor);
+    assert!(copy.get_curve() == adaptor.get_curve());
+    assert!(copy.get_surface() == adaptor.get_surface());
+    adaptor.load_curve(&segment((0.6, 0.8))).unwrap();
+    assert_eq!(adaptor.get_type().unwrap(), CurveType::OtherCurve);
+    assert_eq!(copy.get_type().unwrap(), CurveType::Circle);
+}
+
 #[test]
 fn curve_on_surface_eval_dn_stops_at_order_three() {
     let adaptor =

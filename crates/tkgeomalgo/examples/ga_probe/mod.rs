@@ -18,6 +18,8 @@ pub mod geom2d_hatch;
 pub mod geom2d_hatcher;
 pub mod geom2d_int;
 pub mod gfill;
+pub mod gfill_cf;
+pub mod gfill_fill;
 pub mod ginter;
 pub mod hatch;
 pub mod hatch_gen;
