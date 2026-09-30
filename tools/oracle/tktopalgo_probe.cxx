@@ -24,9 +24,22 @@
 // token stream; the Rust twin includes crates/tkgeomalgo/examples/ga_probe/common.rs.
 #include "tkgeomalgo_probe_common.cxx"
 #include "tktopalgo_probe_brepbuilderapi.cxx"
+#include "tktopalgo_probe_bisector.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
+ // Bisector (tktopalgo_probe_bisector.cxx)
+ {"tp_bisec_curves", tp_bisec_curves_case},
+ {"tp_bisec_curve_point", tp_bisec_curve_point_case},
+ {"tp_bisec_points", tp_bisec_points_case},
+ {"tp_bisec_ana", tp_bisec_ana_case},
+ {"tp_bisec_cc", tp_bisec_cc_case},
+ {"tp_bisec_pc", tp_bisec_pc_case},
+ {"tp_bisec_inter", tp_bisec_inter_case},
+ {"tp_bisec_function_h", tp_bisec_function_h_case},
+ {"tp_bisec_function_inter", tp_bisec_function_inter_case},
+ {"tp_bisec_poly", tp_bisec_poly_case},
+ {"tp_bisec_is_convex", tp_bisec_is_convex_case},
 };
 int main() {
  std::string line;

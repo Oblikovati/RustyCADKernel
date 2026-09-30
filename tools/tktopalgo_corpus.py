@@ -13,3 +13,5 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     """Append every TKTopAlgo request family in a fixed order."""
     # BRepBuilderAPI (tktopalgo_corpus_brepbuilderapi.py)
     __import__('tktopalgo_corpus_brepbuilderapi').append_brepbuilderapi_requests(requests)
+    # Bisector (tktopalgo_corpus_bisector.py)
+    __import__('tktopalgo_corpus_bisector').append_bisector_requests(requests)
