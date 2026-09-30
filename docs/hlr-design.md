@@ -106,3 +106,26 @@ and ShapeToHLR, EdgeIList and VertexList, EdgeBuilder, Hider, ShapeBounds (after
 HLRTopoBRep slice), InternalAlgo, Algo, HLRToShape and HLRAppli_ReflectLines. The two
 TKHLR GoogleTest suites (HLRBRep_Data_Test, HLRBRep_InternalAlgo_Test) need levels 12
 and 17.
+
+## 3. Intrv: fuzzy intervals and interval sets
+
+- `Intrv_Interval` is the `Copy` value `intrv::Interval`. Its tolerances stay `f32`, and
+  every expression keeps the native mixed precision: a sum of two tolerances is a
+  `float` sum (`t1 + t2` on `f32`) compared with a `double` difference of bounds, the
+  envelopes of `Position` are `double` (`start - f64::from(tol)`), and the fused
+  tolerance is `(float)(b - a) / 2` (rounded to `f32` before the halving).
+  `std::min`/`std::max` are the tkg2d `std_min`/`std_max`, so signed zeros and NaN pick
+  the native operand.
+- `Bounds(double&, float&, double&, float&)` returns the tuple
+  `(start, tol_start, end, tol_end)`.
+- `Intrv_Intervals` keeps its `NCollection_Sequence` as a `Vec<Interval>`: only the
+  class touches it, and `Value` returns Standard_OutOfRange for an index outside
+  `1..=NbIntervals`, as the native sequence does. `Subtract` and `Unite` walk it with
+  the native 1-based index: a removal steps the index back, an early exit sets it to
+  the length (after the insertion of `Unite`'s Before case and `Subtract`'s Inside
+  split), and each pass steps it forward, so unsorted and overlapping sets give the
+  native result. The overloads on one interval take an `_interval` suffix
+  (`subtract_interval`), the overloads on a set keep the native name.
+- A native call whose tool is the object itself (`x.Unite(x)`) edits the sequence while
+  it reads it. Rust borrowing forbids it; a caller passes a copy, which gives the result
+  of a separate tool.

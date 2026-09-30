@@ -193890,6 +193890,342 @@
       "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::shape",
       "status": "implemented",
       "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::new",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval(double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::from_bounds",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval(double,float,double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::with_tolerances",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::Start() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::End() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::TolStart() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::tol_start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::TolEnd() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::tol_end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::Bounds(double&,float&,double&,float&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::bounds",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::SetStart(double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::set_start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::FuseAtStart(double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::fuse_at_start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::CutAtStart(double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::cut_at_start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::SetEnd(double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::set_end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::FuseAtEnd(double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::fuse_at_end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::CutAtEnd(double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::cut_at_end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsProbablyEmpty() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_probably_empty",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::Position(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::position",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsBefore(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_before",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsAfter(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_after",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsInside(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_inside",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsEnclosing(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_enclosing",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsJustEnclosingAtStart(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_just_enclosing_at_start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsJustEnclosingAtEnd(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_just_enclosing_at_end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsJustBefore(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_just_before",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsJustAfter(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_just_after",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsOverlappingAtStart(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_overlapping_at_start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsOverlappingAtEnd(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_overlapping_at_end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsJustOverlappingAtStart(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_just_overlapping_at_start",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsJustOverlappingAtEnd(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_just_overlapping_at_end",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Interval::IsSimilar(const Intrv_Interval&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Interval::is_similar",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::new",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals(const Intrv_Interval&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::from_interval",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::Intersect(const Intrv_Interval&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::intersect_interval",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::Intersect(const Intrv_Intervals&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::intersect",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::Subtract(const Intrv_Interval&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::subtract_interval",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::Subtract(const Intrv_Intervals&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::subtract",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::Unite(const Intrv_Interval&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::unite_interval",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::Unite(const Intrv_Intervals&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::unite",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::XUnite(const Intrv_Interval&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::xunite_interval",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::XUnite(const Intrv_Intervals&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::xunite",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::NbIntervals() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::nb_intervals",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Intervals::Value(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Intervals.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Intervals::value",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_Position",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position",
+      "status": "implemented",
+      "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
     }
   ],
   "tests": [
