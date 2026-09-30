@@ -239,6 +239,51 @@ port follows geom-design.md (abstract classes with protected data):
   `BRepLibValidateEdge` in `brep_lib::validate_edge`; it owns handles to the two
   adaptors, as natively.
 
+## 7. BRepLib: the command classes, the makers and the package globals
+
+BRepLib derives every maker from `BRepLib_MakeShape`, itself derived from
+`BRepLib_Command`, and keeps two process-wide settings in `BRepLib.cxx`:
+
+- `BRepLib_Command` is the struct `BRepLibCommand` (its done flag). `IsDone` and `Check`
+  (StdFail_NotDone) are public; the protected `Done` and `NotDone` are crate-visible
+  (`set_done`, `set_not_done`), as only the makers call them.
+- `BRepLib_MakeShape` is `BRepLibMakeShape`: the command, the shape and the three face
+  lists. It dereferences to its command, and each maker holds one and dereferences to
+  it, as the public C++ base. Its virtual members (`FaceStatus`, `HasDescendants`,
+  `DescendantFaces`, `NbSurfaces`, `NewFaces`, `FacesFromEdges`) are inherent methods
+  with the base results; `BRepLib_MakeSolid::FaceStatus`, the only override in the
+  package, is an inherent method of `BRepLibMakeSolid` that shadows the base one.
+  Nothing in the package calls a virtual member through a base reference, so no trait
+  is needed; BRepBuilderAPI wraps the concrete makers.
+- `Build()` is not virtual natively and does nothing, so `Shape()` (Build, then Check
+  when not done) takes `&self` and returns `Result`. A conversion operator
+  (`operator TopoDS_Shape()`, `operator TopoDS_Edge()`, ...) is the same call as the
+  accessor it wraps (`Shape()`, `Edge()`, ...); both rows map to the accessor.
+- Every constructor and `Init` overload takes a distinct name (`from_lin_points`,
+  `init_curve_vertices_params`, ...) and returns `Result`: the native code can raise
+  from the builder, the Geom evaluators and Extrema. A failure that the native maker
+  records in its error value (`BRepLib_EdgeError`, `BRepLib_WireError`, ...) is not a
+  `Result` error: the maker is built and `IsDone()` is false, as natively. A later
+  failing `Init` keeps the shape and the done flag of an earlier successful one, as
+  natively.
+- The error enumerations are Rust enums with the native discriminants. An error field
+  that the native constructor leaves uninitialized (`BRepLib_MakeEdge2d::myError` on
+  success, `BRepLib_MakeWire::myError` before the first Add) starts at the value the
+  default constructor gives (docs/tktopalgo-progress.md lists them).
+- `BRepLib::Precision` and `BRepLib::Plane` are process-wide, as the native statics
+  (`thePrecision`, `thePlane`): the precision is an atomic double and the plane a
+  mutex-guarded handle, created as `Geom_Plane(gp::XOY())` by the first read after it
+  was null. `plane()` returns the shared handle, so a caller sees the same object.
+  Tests and probe requests that set them restore the defaults before they return.
+- The package functions of `BRepLib` are free functions of the `brep_lib` module
+  (`brep_lib::build_curves3d`, `brep_lib::same_parameter_edge`, ...); C++ output
+  references become returned values. `SameParameter(E, Tol, NewTol, IsUseOldEdge)`
+  keeps `NewTol` as `&mut f64`: the call leaves it unchanged when it sets no tolerance.
+- `BRepLib_FindSurface` and `BRepLib_FuseEdges` are plain structs (`BRepLibFindSurface`,
+  `BRepLibFuseEdges`), not makers. The FuseEdges members that fill an output map
+  (`Edges`, `ResultEdges`, `Faces`) return a copy of the map; they compute the chains,
+  the fused edges and the rebuilt shape once, on first request, as natively.
+
 ## 8. Virtual Adaptor3d_HVertex and the BRep domain of IntStart and IntPatch
 
 Section 4 mapped the two derived adaptors of BRepTopAdaptor on the concrete TKG3d

@@ -109,7 +109,7 @@ fn other_surface(
 }
 
 /// `tp_surface`: a plane, cylinder, sphere, trimmed plane, cone, torus, Bezier or
-/// B-spline surface.
+/// B-spline surface. The BRepLib probe reads its surfaces with it too.
 pub fn surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
     let kind = r.integer();
     let (p, n) = (point(r), direction(r)?);

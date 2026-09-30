@@ -42,6 +42,7 @@ The toolkit test inventory maps these suites (0 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
+| BRepLib_MakeWire_Test.cxx | brep_lib_make_wire | 1 | 1 of 1 | 1 of 1 |
 
 BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: every case builds its
 faces with BRepBuilderAPI_MakeEdge, MakeWire and MakeFace (and one with
@@ -147,6 +148,35 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   unchanged when it does not set them, as the native references). Every member that can
   raise returns `Result`. `BRepLib_ValidateEdge` is `brep_lib::BRepLibValidateEdge`
   (its setters take `&mut self`; `UpdateTolerance` takes `&mut f64`).
+- BRepLib (docs/topalgo-design.md section 7): `BRepLib_Command` is `BRepLibCommand`,
+  `BRepLib_MakeShape` is `BRepLibMakeShape` (it dereferences to the command), and every
+  maker `BRepLib_MakeX` is `BRepLibMakeX` dereferencing to `BRepLibMakeShape`;
+  `BRepLibMakeSolid::face_status` shadows the base member as the native override does.
+  The constructors and `Init` overloads take distinct names: `from_vertices`,
+  `from_points`, `from_<gp curve>[_params|_points|_vertices]` (`lin`, `circ`, `elips`,
+  `hypr`, `parab` and their `2d` forms), `from_curve[...]` and `from_pcurve[...]` (a
+  Geom2d curve on a surface) with the tails `_params`, `_points`, `_vertices`,
+  `_points_params` and `_vertices_params`, and `init_*` for the Init members;
+  `BRepLibMakePolygon::from_{two,three,four}_{points,vertices}`, `add_point`,
+  `add_vertex`; `BRepLibMakeWire::from_{edge,two_edges,three_edges,four_edges,wire,
+  wire_edge}`, `add_edge`, `add_wire`, `add_list` (the list Add of BRepLib_MakeWire_1); `BRepLibMakeSolid::from_{comp_solid,shell,
+  two_shells,three_shells,solid,solid_shell}`. The conversion operators map to the
+  accessors (`edge`, `wire`, `vertex`, `solid`, `shape`), which return the typed shape by
+  value. The status enumerations are `BRepLibEdgeError`, `BRepLibWireError`,
+  `BRepLibFaceError`, `BRepLibShellError` and `BRepLibShapeModification`. The package
+  functions of `BRepLib` are free functions of `brep_lib`; `Precision` and `Plane` are
+  `precision`/`set_precision` and `plane`/`set_plane`, process-wide as natively. The
+  re-shaper overload of `UpdateTolerances` is `update_tolerances_with_reshape`; the
+  `SameParameter` overloads are `same_parameter_shape`, `same_parameter_shape_with_reshape`,
+  `same_parameter_edge` and `same_parameter_edge_with_tolerance` (its `theNewTol` is
+  `&mut f64`), and `ExtendFace` returns the extended face (`extend_face(F, ext, [UMin,
+  UMax, VMin, VMax])`). `BRepLibMakeFace` has `from_{plane,cylinder,cone,sphere,torus}`
+  with the tails `_bounds` and `_wire`, `from_surface[_bounds|_wire]`, `from_wire`,
+  `from_face[_wire]`, `init_face`, `init_surface`, `init_surface_bounds`, `add`, `face`
+  and `is_degenerated` (the flag and the actual tolerance); `BRepLibFindSurface` has
+  `new` and `init` and the native accessors; `BRepLibFuseEdges` has `new`,
+  `avoid_edges`, `set_concat_bspl`, `perform`, `nb_vertices`, `shape`, and `edges`,
+  `result_edges` and `faces`, which return the maps the native members fill.
 
 - BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
   are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
@@ -303,6 +333,62 @@ three PointInTheFace overloads from indices 0 to 2000, on and off the surface),
 vertices, along and across edges, every Accept index including 0 and Extent + 1, result
 indices 0 and past the end) and `bc3_inter3d` (Intersector3d on FORWARD and REVERSED
 faces).
+BRepLib: 2688 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
+and solid makers, 736 for the package functions, 678 for MakeFace, FindSurface,
+SameParameter and ExtendFace, 136 for FuseEdges). `tools/tktopalgo_corpus_breplib.py`
+appends one module per family, with the
+record builders of `tools/tktopalgo_corpus_breplib_records.py`; both probes read the
+records and print the shapes with `tktopalgo_probe_breplib_common.cxx` and
+`tp_probe/brep_lib_common.rs`: vertices built with BRep_Builder, gp curves, Geom curves
+(conics, Bezier, B-splines, periodic B-splines, trimmed and offset curves), gp 2d curves,
+Geom2d curves and the surfaces of the face reader, and a canonical shape digest (the
+sub-shapes in TopExp::MapShapes order with their type, orientation, Closed flag,
+location, children, vertex points and tolerances, edge tolerances, flags, 3d curves,
+curves on surfaces and vertex parameters, face tolerances and surfaces). The families:
+`blm_vertex`, `blm_edge` (every MakeEdge constructor and Init on segments, the gp
+curves, the Geom curves and curves on planes, cylinders, spheres, cones, tori, a Bezier
+and a B-spline patch and a trimmed plane, each BRepLib_EdgeError value, infinite
+parameters, later Init calls on a done or failed maker, the default and a changed
+BRepLib::Precision), `blm_edge2d` (MakeEdge2d on the default and a tilted
+BRepLib::Plane), `blm_polygon` (every constructor, Add, Close, closing on a
+compared-equal vertex, refused segments), `blm_wire` (every MakeWire constructor and
+Add: connected edges in every order and orientation, edges merged through vertex
+tolerances, branches, disconnected, closed and degenerated edges, null and empty wires,
+and the list Add on empty and started wires with coincident, chained and disconnected
+vertices)
+and `blm_solid` (every MakeSolid constructor, Add and FaceStatus, with a compsolid
+sharing a face). The package functions (`tools/tktopalgo_corpus_breplib_package.py`,
+`tktopalgo_probe_breplib_shapes.cxx` and `tp_probe/brep_lib_shapes.rs`) run on shape
+records: faces of the face readers, BRepLib_MakeShell shells of every surface kind (a
+B-spline surface of several C2 patches, segmented or not), compounds,
+BRepLib_MakeEdge edges with enlarged vertices and BRep_Builder solids of the shells
+(closed and open, as built and reversed, nested and empty); a grid mesher gives the faces
+triangulations (with or without UV nodes) and their edges polygons (two for a seam).
+The families: `blp_build3d`, `blp_samerange`, `blp_edgetol`, `blp_regularity`,
+`blp_continuity`, `blp_inner`, `blp_sort`, `blp_bounding`, `blp_validrange` and
+`blp_validrange2`, `blp_pcurveplane`, `blp_ccos` (BRepLib_CheckCurveOnSurface, one
+checker per edge and one reused), `blp_shell` (every MakeShell constructor and Init),
+`blp_normals`, `blp_deflection` and `blp_trinormals` (BRepLib_ToolTriangulatedShape),
+`blp_tolerances` (both UpdateTolerances, with and without the face verification; the
+re-shaper form prints the input and the re-shaper `Apply` of it) and `blp_orient`
+(OrientClosedSolid on each solid). `tools/tktopalgo_corpus_breplib_face.py`,
+`tktopalgo_probe_breplib_face.cxx` and `tp_probe/brep_lib_face.rs` add surface records
+for offset surfaces, linear extrusions and revolutions, and shape records for polygon
+wires, the wires and faces of bounded MakeFace faces, edges whose p-curve runs at
+another speed than the 3d curve (Bezier, C0 B-spline, shifted ranges) and shapes whose
+3d curves BuildCurves3d approximates with their flags cleared. The families:
+`blm_face` (every MakeFace constructor and Init on every surface kind, with infinite,
+swapped, periodic, out-of-range and degenerated bounds, polygon and face wires, planar
+and non-planar wires with and without OnlyPlane), `blm_facedegen`, `blp_findsurface`
+(tolerances, OnlyPlane and OnlyClosed on wires, faces, edges and shells),
+`blp_sameparam` (the four overloads, forced or not) and `blp_extendface` (every
+direction on analytic, periodic, spline, trimmed and offset faces).
+`tools/tktopalgo_corpus_breplib_fuse.py` (`tktopalgo_probe_breplib_fuse.cxx`,
+`tp_probe/brep_lib_fuse.rs`) runs `blp_fuseedges` on wires of pieces of one line,
+circle, ellipse, open or closed B-spline, Bezier or trimmed curve, on polygons, on the
+planar faces of those wires, on a face with a split side and on multi-patch shells,
+with and without B-spline concatenation, with avoided edges, and in the three call
+orders.
 
 ## Preserved native behaviour
 
@@ -467,6 +553,125 @@ faces).
   `Select` (natively the exception leaves `Select`).
 - `FaceNormal` on a face without surface raises Standard_NullObject (a null dereference
   natively).
+### BRepLib
+
+- A failing `Init` of `BRepLib_MakeEdge` or `BRepLib_MakeEdge2d` only records its
+  error: the edge, the vertices and the done flag of an earlier successful Init stay.
+- `BRepLib_MakeEdge` on a 3d curve refuses a range shorter than gp::Resolution()
+  (`BRepLib_LineThroughIdenticPoints`); on a curve on surface it has no such check, and
+  swapped non-periodic parameters make the edge REVERSED. A closed 3d curve whose two
+  given vertices are the same one is degenerated when its middle point is within
+  `BRepLib::Precision()` of its start. The parameters are checked against the curve
+  range with Precision::PConfusion(), so a line accepts `±Precision::Infinite()` and
+  refuses anything beyond (`BRepLib_ParameterOutOfRange`).
+- The vertex projection of `BRepLib_MakeEdge` takes a curve end first, when it is
+  strictly the nearer one and within the vertex tolerance; on a curve on surface an
+  Extrema point is accepted within Precision::Confusion() only, whatever the vertex
+  tolerance.
+- `BRepLib_MakeEdge2d` works at Precision::Confusion() (not `BRepLib::Precision()`),
+  checks a vertex against its end only on a closed curve, and never sets its error on
+  success: `Error()` is uninitialized natively until a failure (the probe prints it only
+  for a maker that is not done). Its projection uses the closed form on lines and
+  circles, which raises Standard_ConstructionError for a vertex at the centre of a
+  circle; on other curves an Extrema_ExtPC2d that is done without extremum leaves the
+  parameter uninitialized natively (the port reads 0.0; such a request, a vertex beyond
+  the end of a B-spline, is not in the corpus).
+- `BRepLib_MakePolygon::Add` marks the wire Closed as soon as the new vertex compares
+  equal to the first one, before it builds the closing segment; the flag stays when
+  BRepLib_MakeEdge refuses that segment. `Close()` does nothing on a wire flagged Closed.
+- `BRepLib_MakeWire::Error()` is uninitialized natively until the first Add (a wire
+  constructor on a null or empty wire adds nothing); the port starts at
+  `BRepLib_EmptyWire`, the default constructor's value. `BRepLib_NonManifoldWire` is an
+  internal state: every successful Add ends with `BRepLib_WireDone`, and a
+  non-manifold wire forgets its free ends, so later edges keep their input orientation.
+  A copied edge (connected through a vertex tolerance) replaces its vertex by the wire
+  vertex, moved to the point weighted by the two tolerances and enlarged to cover both.
+- The list `BRepLib_MakeWire::Add(L)` makes the maker done on an empty list (0 of 0
+  edges added). The box of its vertex selector is never reset: it grows with every
+  vertex searched, so a later search accepts any vertex whose tolerance sphere touches
+  the current one inside the union of the earlier boxes (the sphere test still decides).
+  The groups start from the first vertex of a hashed map, so the group order, and with it
+  the order of new vertices, can differ from run to run natively; the merged points and
+  tolerances do not depend on it. The first edge of an empty wire goes through the
+  proximity check of `Add(E)`, the other edges connect without it.
+- `BRepLib_MakeSolid` built from a compsolid gathers the faces in the iteration order of
+  a hashed map (TShape addresses), so the face order of its shell differs from run to
+  run natively too (the probe prints an order-free digest); a face met three times is
+  deleted, then added again.
+- `BRepLib_MakeShell` asks the adaptor whether the surface is periodic, not whether the
+  range covers the period: on a cylinder, cone, sphere or torus restricted to part of
+  its period the right edge of the last patch is still the left edge of the first one,
+  so the face gets a seam between two distant isolines. On a V-periodic surface of one
+  interval the seam range is set from the V parameters. Its final degenerated check
+  adapts the 3d curve of each edge, so an edge whose 3d curve could not be built raises
+  Standard_NullObject.
+- `BRepLib::UpdateEdgeTol` looks for its reference curve on surface without advancing
+  its iterator: it reads the first representation again and again (an edge without 3d
+  curve whose first representation is not a curve on surface loops without end
+  natively), and then skips the second representation instead of the reference, which
+  is compared with itself. On a seam only the second p-curve is measured, and the edge
+  tolerance is set, also downwards. On a SameParameter edge without 3d curve the
+  parametric distance reads an unloaded 3d adaptor (a crash natively, Standard_NullObject
+  in the port); such edges are not in the corpus.
+- `BRepLib::BuildCurve3d` stores the image of a p-curve on a plane with the range of the
+  edge looked up on the plane at the identity location (not the location of the curve
+  on surface), and an edge without any curve reads an uninitialized first range
+  natively (Standard_NullObject in both, from the 2d adaptor of the null curve).
+- `BRepLib::SameRange` passes one output handle from one representation to the next, so
+  a GeomLib::SameRange that assigns nothing reuses the previous curve.
+- `BRepLib::EncodeRegularity` catches every exception of one shape (the edges before
+  it keep their regularity) and of each `ContinuityOfFaces`.
+- `BRepLib::EnsureNormalConsistency` reads the polygon of every edge shared by two
+  faces on both triangulations; a seam (its face twice) without a seam polygon is a null
+  dereference natively (Standard_NullObject in the port). The probe mesher gives seams
+  their two polygons.
+- `BRepLib::FindValidRange` may write `theFirst`, or both outputs, before it returns
+  false; the port returns them in `ValidRange`. `BRepLib::BoundingVertex` leaves its
+  outputs unchanged for fewer than two vertices (None in the port).
+- `BRepLib_CheckCurveOnSurface::Init` keeps the curves on surface of an earlier Init
+  when the new edge is degenerated or not geometric, and the second curve (of a seam)
+  of an earlier Init when the new edge is not a seam.
+- `BRepLib::ReverseSortFaces` classifies a rectangular trimmed surface through its own
+  adaptor, where `SortFaces` takes its basis first.
+- `BRepLib::UpdateTolerances` with the verification measures a face by the X extent of
+  its box, but for Y and Z it overwrites the lower bound with the extent only when both
+  sides are closed: a box open in Y or Z compares its raw lower bound instead. The box
+  includes its gap, so edge tolerances enlarge the face tolerance. A vertex tolerance is
+  set (not only enlarged) and gains twice the epsilon of the value; with the
+  verification a vertex takes its computed tolerance even when smaller, once per vertex
+  TShape. The updates are applied in hashed-map order; each shape is updated on its
+  own, so only the order of the re-shaper records depends on it.
+- `BRepLib::OrientClosedSolid` classifies the infinite point: a solid without shells is
+  IN, so it is reversed and the call returns true.
+- `BRepLib_MakeFace::Init(F)` records `BRepLib_FaceDone` without marking the maker done
+  (so do the constructor from a face and `Init(S, false, TolDegen)`); `Add` marks it.
+  The bounded Init checks swapped bounds against the natural bounds of the basis of a
+  trimmed surface (a trimmed plane accepts any bounds), gives a closed U direction the
+  seam lines UMax then UMin but a closed V direction VMin then VMax, and makes a face
+  on an offset surface SameParameter (after trimming an offset extrusion or revolution
+  in its infinite direction). The wire constructor sets the face tolerance to the
+  larger of 1.2 times the reached and the searched tolerance.
+- `BRepLib_FindSurface` keeps the surface and location of the last curve on surface
+  searched when none is shared; `Is2DClosed` answers false on any failure (a missing
+  p-curve included). The plane fit orients the plane of a closed wire so that the
+  infinite point is outside.
+- `BRepLib::SameParameter` on a C0 B-spline p-curve works on the curve handle of the
+  adaptor: when the C1 conversion leaves it unchanged, the reparametrization and the
+  origin change of a periodic curve modify the p-curve stored in the edge itself.
+  `ComputeTol` returns the distance of a sample outside the surface domain when larger
+  than the others, and 1.5 times the largest sample distance below 1 when fewer than
+  10% of the samples are at least 1. On a planar face the edges without a curve on
+  the plane take 1.05 times the deviation of their projection.
+- `BRepLib::ExtendFace` tests the VMax bound (not VMin) before extending in VMin.
+- `BRepLib_FuseEdges::Perform` does not build the chains: called first, it finds none,
+  marks the shape done and leaves it unchanged, and later calls keep it. Without
+  chains the result edges are never marked built. Two lines are on the same support
+  when their directions are parallel (not when they are the same line); two
+  B-splines when their poles are within the tolerance of the first edge and their
+  knots do not exceed the other's by more than Precision::Confusion() (a signed
+  difference). A closed fused B-spline is made periodic in place: when the first
+  edge's curve has no location, the curve stored in that edge changes too. The range
+  set on the fused edge from a curve on surface also moves its 3d range.
 
 ## BRepClass deviations
 
@@ -719,3 +924,14 @@ Native null dereferences in these packages are Standard_NullObject errors.
 - The native mutex guards the status map only in parallel mode; the port always locks,
   which changes no result. `IsUnorientable` returns `Result` (it reads the statuses).
 
+## BRepLib deviations
+
+- A null curve, surface or vertex that the native makers dereference raises
+  Standard_NullObject (a crash natively).
+- The uninitialized native values (`BRepLib_MakeEdge2d::Error()` after a success,
+  `BRepLib_MakeWire::Error()` before the first Add, the parameter of a MakeEdge2d
+  projection without extremum) read the values given above.
+- A null surface, p-curve or projection that `BRepLib::SameParameter`, `GetEdgeTol` or
+  `BRepLib_FindSurface` dereferences raises Standard_NullObject (a crash natively);
+  inside `Is2DClosed` it answers false, as the native signal handler does. A chain
+  edge without 3d curve that `BRepLib_FuseEdges` dereferences raises it too.

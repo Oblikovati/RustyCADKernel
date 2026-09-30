@@ -4,7 +4,8 @@ use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
     bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_check, brep_class, brep_class3d,
-    brep_top_adaptor, brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
+    brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor,
+    brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -90,6 +91,37 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "bta_intersection",
         brep_top_adaptor_domain::intersection_case,
     ),
+    // BRepLib (tp_probe/brep_lib_*.rs)
+    ("blm_vertex", brep_lib_edge::vertex_case),
+    ("blm_edge", brep_lib_edge::edge_case),
+    ("blm_edge2d", brep_lib_edge::edge2d_case),
+    ("blm_polygon", brep_lib_wire::polygon_case),
+    ("blm_wire", brep_lib_wire::wire_case),
+    ("blm_solid", brep_lib_wire::solid_case),
+    ("blp_build3d", brep_lib_package::build3d_case),
+    ("blp_samerange", brep_lib_package::samerange_case),
+    ("blp_edgetol", brep_lib_package::edgetol_case),
+    ("blp_regularity", brep_lib_package::regularity_case),
+    ("blp_continuity", brep_lib_package::continuity_case),
+    ("blp_inner", brep_lib_package::inner_case),
+    ("blp_sort", brep_lib_package::sort_case),
+    ("blp_bounding", brep_lib_package::bounding_case),
+    ("blp_validrange", brep_lib_package::validrange_case),
+    ("blp_validrange2", brep_lib_package::validrange2_case),
+    ("blp_pcurveplane", brep_lib_package::pcurveplane_case),
+    ("blp_ccos", brep_lib_package::ccos_case),
+    ("blp_shell", brep_lib_package::shell_case),
+    ("blp_normals", brep_lib_package::normals_case),
+    ("blp_deflection", brep_lib_package::deflection_case),
+    ("blp_trinormals", brep_lib_package::trinormals_case),
+    ("blp_tolerances", brep_lib_package::tolerances_case),
+    ("blp_orient", brep_lib_package::orient_case),
+    ("blm_face", brep_lib_face::face_case),
+    ("blm_facedegen", brep_lib_face::facedegen_case),
+    ("blp_findsurface", brep_lib_face::findsurface_case),
+    ("blp_sameparam", brep_lib_face::sameparam_case),
+    ("blp_extendface", brep_lib_face::extendface_case),
+    ("blp_fuseedges", brep_lib_fuse::fuseedges_case),
 ];
 
 fn main() {
