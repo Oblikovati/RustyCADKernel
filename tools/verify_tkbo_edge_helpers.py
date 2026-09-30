@@ -4,6 +4,7 @@ import hashlib
 import json
 from itertools import product
 from pathlib import Path
+from tkbo_edge_corpus import edge_full_requests
 from porting import ROOT
 from toolkit_numeric import NumericOracle, verify_numeric
 from verify_tkmath_numeric import selected_paths
@@ -42,6 +43,7 @@ def requests() -> str:
     lines+=['edge_solutions '+' '.join(map(str,[source,target,a,b,c,d,tol]))
             for source,target,(a,b),(c,d),tol in product([0,1,3,4,7,9,11],
                 [0,1,3,7,9,11],[(0,1),(-1,1),(0,6.283185307179586)],[(0,1),(0,6.283185307179586)],[0.01,0.2])]
+    lines += edge_full_requests()
     return '\n'.join(lines)+'\n' 
 
 

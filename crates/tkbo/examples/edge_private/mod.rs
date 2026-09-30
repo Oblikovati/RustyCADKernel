@@ -2,6 +2,7 @@
 use super::{edge_math, edge_resolution};
 mod distances;
 mod fixtures;
+mod full;
 mod lines;
 mod pairs;
 mod parameters;
@@ -68,6 +69,7 @@ fn geometry(values: &[f64]) -> Result<(), Failure> {
 }
 pub fn run(operation: &str, values: &[f64]) {
     match operation {
+        "edge_full" => attempt(full::case(values)),
         "edge_solutions" => attempt(solutions::case(values)),
         "edge_lines" => attempt(lines::case(values)),
         "edge_pairs" => attempt(pairs::case(values)),

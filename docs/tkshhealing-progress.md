@@ -689,3 +689,14 @@ source gate passes all 101 mapped declarations in both native OCCT and Rust, wit
 17,284 exact numeric requests including 140 new transfer histories. Independent
 3D/pcurve domains, collapsed spans, sequence ownership and reversed range copying
 are covered. Projection-based transfer and WireDivide remain in progress.
+
+### Projected parameter transfer
+
+TransferParametersProj maps ten callable APIs. Its mandatory accounting gate
+passes 380 exact comparisons and separately replays two native null-curve crashes;
+CopyNMVertex(edge) remains partial. Six exact construction exceptions are retained
+in the corpus. Eleven Rust regressions cover projection choice, nonlinear curves,
+range updates and non-manifold vertex copying. No original legacy declaration is
+added by this dependency.
+The integrated toolkit gate passes 17,664 exact numeric comparisons and all 101
+mapped original declarations in both native and Rust executions.

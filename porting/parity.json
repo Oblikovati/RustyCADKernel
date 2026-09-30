@@ -213684,6 +213684,438 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun (RuntimeTyped/Transient)",
       "status": "implemented",
       "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::new",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::from_edge",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::Init(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::init",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::Perform(const occ::handle<NCollection_HSequence<double>>&,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::perform",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::Perform(double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::perform_parameter",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::ForceProjection()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::force_projection",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::TransferRange(TopoDS_Edge&,double,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::transfer_range",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::IsSameRange() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::is_same_range",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::CopyNMVertex(const TopoDS_Vertex&,const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::copy_nm_vertex_edge",
+      "status": "partial",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::CopyNMVertex(const TopoDS_Vertex&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::copy_nm_vertex_face",
+      "status": "implemented",
+      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParametersProj::DEFINE_STANDARD_RTTIEXT(ShapeAnalysis_TransferParametersProj,ShapeAnalysis_TransferParameters)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
+      "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "RTTI macro has no separate callable API; impl_transient preserves native type ancestry."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::default",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun(const occ::handle<BRepMesh_DataStructureOfDelaun>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::new",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::Initialize(const occ::handle<BRepMesh_DataStructureOfDelaun>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::initialize",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursOf(const BRepMesh_Vertex&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_of_vertex",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursOfNode(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_of_node",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursOf(const BRepMesh_Edge&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_of_edge",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursOfLink(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_of_link",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursOf(const BRepMesh_Triangle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_of_triangle",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursOfElement(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_of_element",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursByEdgeOf(const BRepMesh_Triangle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_by_edge_of",
+      "status": "partial",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order. Explicit gap: seven native null-mesh query overloads SIGSEGV while Rust returns Standard_NullObject; retained by tools/verify_tkmesh_selector_undefined.py as divergences with complete_parity=false and zero exact passes. NeighboursOfElement also inherits the underlying unchecked element-index gap already retained in the Delaun inventory. No legacy declaration is claimed or skipped."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::NeighboursOf(const BRepMesh_SelectorOfDataStructureOfDelaun&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::neighbours_of_selector",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::AddNeighbours()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::add_neighbours",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::Nodes() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::nodes",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::Links() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::links",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::Elements() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::elements",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::FrontierLinks() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun::frontier_links",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "BRepMesh_SelectorOfDataStructureOfDelaun::DEFINE_STANDARD_RTTIEXT(BRepMesh_SelectorOfDataStructureOfDelaun,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_SelectorOfDataStructureOfDelaun.hxx",
+      "source_sha256": "4835e3689f4ef2c83c90cdd5717d8fdc866a9be024fea4b4b7fe7937b9ebef43",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Faithful element accumulation through incident links, endpoint-based edge selection, node-based triangle selection, edge-only triangle selection, retained preceding results on checked exceptions, initialization clearing all four maps, and native no-op expansion overloads. Native node/link/frontier maps remain unpopulated; no invented frontier computation. Returned sets are value snapshots in native hash iteration order."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::new",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::~IntTools_EdgeEdge()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership releases stored edges, adaptors, geometry and common parts without an explicit destructor."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::with_edges",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge(const TopoDS_Edge&,double,double,const TopoDS_Edge&,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::with_ranges",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetEdge1(const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_edge1",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetEdge1(const TopoDS_Edge&,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_edge1_range",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetRange1(const IntTools_Range&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_range1",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetRange1(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_range1_bounds",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetEdge2(const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_edge2",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetEdge2(const TopoDS_Edge&,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_edge2_range",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetRange2(const IntTools_Range&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_range2",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetRange2(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_range2_bounds",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::SetFuzzyValue(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::set_fuzzy_value",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::Perform()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::IsDone() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::is_done",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::FuzzyValue() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::fuzzy_value",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::CommonParts() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::common_parts",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::UseQuickCoincidenceCheck(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::use_quick_coincidence_check",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::IsCoincidenceCheckedQuickly()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::is_coincidence_checked_quickly",
+      "status": "implemented",
+      "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
     }
   ],
   "tests": [

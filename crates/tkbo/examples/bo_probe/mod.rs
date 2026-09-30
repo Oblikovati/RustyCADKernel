@@ -1,6 +1,7 @@
 mod context;
 mod context_compute;
 mod curves;
+mod edge_cases;
 mod face_face;
 mod face_perform;
 mod fclass;
@@ -43,6 +44,7 @@ pub fn dispatch(operation: &str, v: &[f64]) {
 }
 fn dispatch_case(operation: &str, v: &[f64]) {
     match operation {
+        "edge_full" => edge_cases::case(v),
         "shrunk" => shrunk_range::case(v),
         "bop_range" => records::index_case(v),
         "bop_pave" => records::pave_case(v),

@@ -40,3 +40,6 @@ pub use face_face::FaceFace;
 
 mod shrunk_range;
 pub use shrunk_range::ShrunkRange;
+
+mod edge_edge;
+pub use edge_edge::EdgeEdge;

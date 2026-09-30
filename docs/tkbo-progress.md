@@ -69,3 +69,16 @@ helpers, projection distances, and golden-section extrema searches and curve/box
 Conic, spline and offset families are covered. Negative subdivision counts retain
 native behavior; their corpus uses bounded resolutions to avoid enormous native
 allocations. These private helpers add no complete public API or legacy-test claim.
+
+### Public edge/edge intersection
+
+IntTools_EdgeEdge now has all 18 callable public APIs and an ownership mapping for
+its destructor. Its five Rust state regressions and 1,362 exact public native
+histories cover construction, located edges, repeated execution and sticky errors.
+The existing 10,028 helper cases cover the intermediate searches. Default IsDone
+is true, later validation errors remain set, repeated successes can accumulate
+results, and whole-range matches clear earlier results, following the pinned code.
+No standalone original EdgeEdge declaration exists; TKBO remains 10/299 mapped.
+The regular TKBO gate passes 16,457 exact numeric comparisons and all ten mapped
+original declarations in both native and Rust executions. The complete header
+audit has no missing or stale EdgeEdge rows.

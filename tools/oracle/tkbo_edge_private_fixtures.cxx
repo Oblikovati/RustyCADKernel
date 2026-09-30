@@ -1,3 +1,7 @@
+#pragma once
+#include <Geom_OffsetCurve.hxx>
+#include <Geom_BSplineCurve.hxx>
+#include <Geom_Ellipse.hxx>
 #include <Geom_Hyperbola.hxx>
 occ::handle<Geom_Curve> ee_geometry_fixture(int kind,double offset){
  if(kind<=6)return bo_tools_geometry(kind,0,1);

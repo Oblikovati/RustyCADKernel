@@ -106,3 +106,11 @@ all 17 recorded vertex/connectivity divergences separately. Signed links, deleti
 queues, reused slots, compaction and real BRep dump bytes are covered. Native
 writes to the following initialized slot are preserved. These foundations add no
 original legacy declaration; TKMesh remains at 1/29 mapped declarations.
+
+### Delaunay neighborhood selection
+
+SelectorOfDataStructureOfDelaun adds 18 audited header rows and 640 exact native
+histories. The integrated routine gate now passes 125,262 exact comparisons and
+replays 24 explicit divergences: nine vertex-index cases, eight connectivity-index
+cases and seven null-selector cases. Native empty selection sets and no-op neighbor
+expansion behavior are retained; this does not complete triangulation.
