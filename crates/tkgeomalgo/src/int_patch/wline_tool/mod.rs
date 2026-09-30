@@ -18,6 +18,9 @@
 //! the tube of their neighbours), the joining of lines that share an end point and the
 //! extension of two lines to a common point. The file-static helpers of the native
 //! source are private functions of the submodules, one per step.
+mod extend;
+mod extend_checks;
+mod extend_lines;
 mod join;
 mod purge;
 mod tube;
