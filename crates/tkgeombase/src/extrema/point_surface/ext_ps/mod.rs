@@ -25,6 +25,7 @@ use super::gen_ext_ps::{GenExtPS, Sampling};
 use crate::extrema::ext_p_el_s::ExtPElS;
 use crate::extrema::failures::{extremum_index, not_done, null_object, sequence_value};
 use crate::extrema::pon::POnSurf;
+use crate::extrema::surface_ref::SurfaceRef;
 use crate::extrema::{ExtAlgo, ExtFlag};
 use iso::iso_is_deg;
 use rustycad_tkernel::precision;
@@ -40,7 +41,7 @@ use rustycad_tkmath::gp::Point3;
 /// `Extrema_ExtPS`; `ExtPS::with_surface(point, &surface, 1e-9, 1e-9, ExtFlag::MinMax,
 /// ExtAlgo::Grad)?.nb_ext()?`.
 pub struct ExtPS<'a> {
-    s: Option<&'a dyn Adaptor3dSurface>,
+    s: Option<SurfaceRef<'a>>,
     done: bool,
     ext_p_el_s: ExtPElS,
     ext_ps: GenExtPS<'a>,
@@ -133,11 +134,36 @@ impl<'a> ExtPS<'a> {
     pub fn initialize(
         &mut self,
         surface: &'a dyn Adaptor3dSurface,
+        u_range: (f64, f64),
+        v_range: (f64, f64),
+        tolerances: (f64, f64),
+    ) -> Result<(), Failure> {
+        self.initialize_ref(SurfaceRef::Borrowed(surface), u_range, v_range, tolerances)
+    }
+    /// `Initialize(S, Uinf, Usup, Vinf, Vsup, TolU, TolV)` on a surface kept alive by
+    /// its handle, for an owner that keeps this object and the adaptor side by side
+    /// (GeomAPI_ProjectPointOnSurf keeps both as members natively, and the grid, the
+    /// tree and the swept-surface algorithms persist from one Perform to the next);
+    /// `extrema.initialize_shared(&surface, (0., 1.), (0., 1.), (1e-9, 1e-9))?`.
+    pub fn initialize_shared(
+        &mut self,
+        surface: &Handle<dyn Adaptor3dSurface>,
+        u_range: (f64, f64),
+        v_range: (f64, f64),
+        tolerances: (f64, f64),
+    ) -> Result<(), Failure> {
+        let shared = SurfaceRef::Shared(surface.clone());
+        self.initialize_ref(shared, u_range, v_range, tolerances)
+    }
+    fn initialize_ref(
+        &mut self,
+        surface_ref: SurfaceRef<'a>,
         (uinf, usup): (f64, f64),
         (vinf, vsup): (f64, f64),
         (tol_u, tol_v): (f64, f64),
     ) -> Result<(), Failure> {
-        self.s = Some(surface);
+        self.s = Some(surface_ref.clone());
+        let surface: &dyn Adaptor3dSurface = surface_ref.get();
         (self.uinf, self.usup, self.vinf, self.vsup) = (uinf, usup, vinf, vsup);
         if precision::is_negative_infinite(self.uinf) {
             self.uinf = -1e10;
@@ -176,8 +202,8 @@ impl<'a> ExtPS<'a> {
             tol_u,
             tol_v,
         };
-        self.ext_ps.initialize_range(
-            surface,
+        self.ext_ps.initialize_range_ref(
+            surface_ref,
             sampling,
             (self.uinf, self.usup),
             (self.vinf, self.vsup),
@@ -187,15 +213,17 @@ impl<'a> ExtPS<'a> {
         Ok(())
     }
     // The surface, Standard_NullObject before Initialize.
-    fn surface(&self) -> Result<&'a dyn Adaptor3dSurface, Failure> {
+    fn surface(&self) -> Result<SurfaceRef<'a>, Failure> {
         self.s
+            .clone()
             .ok_or_else(|| null_object("Extrema_ExtPS::Perform()"))
     }
     /// `Perform(P)`; `extrema.perform(point)?`.
     pub fn perform(&mut self, point: Point3) -> Result<(), Failure> {
         self.points.clear();
         self.sq_dist.clear();
-        let surface = self.surface()?;
+        let surface_ref: SurfaceRef<'a> = self.surface()?;
+        let surface: &dyn Adaptor3dSurface = surface_ref.get();
         let conf: f64 = precision::confusion();
         match self.surface_type {
             SurfaceType::Cylinder => {
@@ -346,7 +374,8 @@ impl<'a> ExtPS<'a> {
     // `TreatSolution(PS, Val)`: the parameters brought into the period (and back by
     // one period across a trimmed bound), kept within the bounds and tolerances.
     fn treat_solution(&mut self, ps: &POnSurf, val: f64) -> Result<(), Failure> {
-        let surface = self.surface()?;
+        let surface_ref: SurfaceRef<'a> = self.surface()?;
+        let surface: &dyn Adaptor3dSurface = surface_ref.get();
         let (mut u, mut v) = ps.parameter();
         if surface.is_u_periodic()? {
             u = elclib::in_period(u, self.uinf, self.uinf + surface.u_period()?);
