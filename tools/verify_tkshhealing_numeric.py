@@ -23,7 +23,8 @@ def corpus() -> str:
 ORACLE = NumericOracle('TKShHealing', 'tools/oracle/tkshhealing_probe.cxx',
                        ['TKShHealing', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase', 'TKG3d',
                         'TKG2d', 'TKMath', 'TKernel'],
-                       'rustycad-tkshhealing', corpus)
+                       'rustycad-tkshhealing', corpus,
+                       generators=('tools/generate_shmessage_data.py',))
 
 
 if __name__ == '__main__':

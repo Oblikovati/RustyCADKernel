@@ -5,9 +5,27 @@
 Healing). It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo
 and TKTopAlgo ports, as the native toolkit does (its EXTERNLIB). Each of the 11 OCCT
 packages is one module of the crate, declared up front in `src/lib.rs`; a module whose
-package is not ported yet holds only its documentation. Ported so far: the ShapeExtend
-status flags and their bit codes (the pipeline proof of the scaffold). The numeric corpus
-has 475 requests: ShapeExtend status codes 475.
+package is not ported yet holds only its documentation. Ported so far: SHMessage (the
+message resource data) and the ShapeExtend status flags and their bit codes. The numeric
+corpus has 475 requests: ShapeExtend status codes 475.
+
+## SHMessage: the message resources
+
+SHMessage holds no code. `SHMessage_SHAPE_us.pxx` and `SHMessage_SHAPE_fr.pxx` each define
+one C string literal generated from `resources/SHMessage/SHAPE.us` and `SHAPE.fr`; the
+package's FILES.cmake lists only the `us` file, which `ShapeExtend::Init` loads into the
+message catalog. The port does not port OCCT file formats, but message texts are data, so
+they are handled as TKernel handles its compiled resources (the UnitsAPI `Units.dat`
+literal, the Resource code tables): `tools/generate_shmessage_data.py` decodes the
+literals byte for byte (C escapes and adjacent literals included) from the pinned headers
+into `crates/tkshhealing/src/sh_message/SHAPE.us` and `SHAPE.fr`, which the crate embeds
+with `include_bytes!` as `SHAPE_US` and `SHAPE_FR`, and records the source and payload
+hashes in `porting/shmessage-data.json`. `--check` regenerates in memory and fails on any
+difference; the numeric verifier runs it before any comparison, and
+`tools/tests/test_shmessage_data.py` checks the decoder and the recorded hashes. The two
+`.pxx` files declare no member, so the api audit of SHMessage is 0 missing and 0 stale
+with no row. The embedded `us` text equals `resources/SHMessage/SHAPE.us` byte for byte.
+The messages are compared with OCCT through `ShapeExtend::Init` (see ShapeExtend).
 
 How C++ constructs map is fixed in [shhealing-design.md](shhealing-design.md); each
 package adds its section there before it codes a construct, and cites it by its number.
