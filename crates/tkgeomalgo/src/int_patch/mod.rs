@@ -23,6 +23,7 @@
 //! templates. The intersection algorithms land on top of it.
 mod aline;
 mod aline_compute;
+mod aline_to_wline;
 mod arc_function;
 mod cs_function;
 mod dump;
@@ -41,10 +42,12 @@ mod point_line;
 mod point_line_dump;
 mod rline;
 mod rline_compute;
+mod special_points;
 mod vertices;
 mod wline;
 
 pub use aline::IntPatchALine;
+pub use aline_to_wline::IntPatchALineToWLine;
 pub use arc_function::IntPatchArcFunction;
 pub use cs_function::IntPatchCSFunction;
 pub use gline::IntPatchGLine;
@@ -61,6 +64,7 @@ pub use path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfThe
 pub use point::IntPatchPoint;
 pub use point_line::{IntPatchPointLine, curvature_radius_of_inters_line};
 pub use rline::IntPatchRLine;
+pub use special_points::IntPatchSpecialPoints;
 pub use wline::{IntPatchWLType, IntPatchWLine};
 
 /// `IntPatch_SearchPnt`: `Intf_InterferencePolygon2d`.
