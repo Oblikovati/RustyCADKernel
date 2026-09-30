@@ -62,6 +62,26 @@ move to a 1:1 translation once BRepBuilderAPI is ported. IntCurvesFace has no up
 suite; `tests/brep_top_adaptor_tools.rs` and `tests/int_curves_face_behavior.rs` hold its
 behavior tests and those of the tool, vertex and Tool classes.
 
+BRepBndLib_Test.cxx (6 declarations) is not mapped: it builds its shapes with
+BRepBuilderAPI_MakeEdge and MakeFace and BRepPrimAPI_MakeCylinder, and meshes them with
+BRepMesh_IncrementalMesh of TKMesh, which is not in the shared native build (the unchanged
+suite does not link there). Its six cases run as the behavior tests of
+`crates/tktopalgo/tests/brep_bnd_lib_behavior.rs` on the same shapes built with
+BRep_Builder (the edge MakeEdge gives on a curve, the plane face MakeFace gives on an
+infinite plane, and the 26-segment 3d polygon of deflection 0.1 that BRepMesh gives the
+unit circle, which the reference bounds of the upstream cases pin), with the same values
+and tolerances; they move to a 1:1 translation once BRepBuilderAPI and BRepPrimAPI are
+ported and TKMesh is in the native build.
+
+BRepClass3d_SolidClassifier_Test.cxx (5 declarations) is not mapped: its solids come from
+BRepPrimAPI_MakeBox and BRepPrimAPI_MakeSphere of TKPrim, which the port does not provide.
+The unchanged suite compiles and passes natively against the shared build (5 of 5). Its
+five cases run as the behavior tests of `crates/tktopalgo/tests/brep_class3d_behavior.rs`
+with the same points, tolerance and expected states, on the same box and sphere built
+with BRep_Builder by the probe's shape reader (records in
+`crates/tktopalgo/tests/solid_records`); they move to a 1:1 translation once BRepPrimAPI
+is ported.
+
 BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBndLib
 (level 4, not ported), which it calls to box each face.
 
@@ -97,6 +117,31 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `IntCurvesFace_ShapeIntersector` is `IntCurvesFaceShapeIntersector` (its intersectors
   in a `Vec`). The i-th point accessors return Standard_OutOfRange outside
   `[1, NbPnt]`, as the native sequences raise.
+
+- BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
+  are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
+  `add_optimal`); they extend the caller's `BoundingBox3` in place and return `Result`.
+  `AddOBB` (BRepBndLib_1.cxx) needs BRepGProp and BRepBuilderAPI_Transform (stage B) and
+  has no row yet: the audit lists it as the one missing member of the package.
+  `Bnd_Box` implements the TKernel `BoundingVolume` trait (in TKMath), so
+  `NCollection_UBTree<int, Bnd_Box>` is `UBTree<i32, BoundingBox3>`.
+
+- BRepClass3d (docs/topalgo-design.md section 5): `BRepClass3d_SolidExplorer` is
+  `BRepClass3dSolidExplorer` (its intersector map is `BRepClass3dMapOfInter`, the
+  UB-tree `UBTree<i32, BoundingBox3>`), `BRepClass3d_SClassifier` is
+  `BRepClass3dSClassifier`, `BRepClass3d_SolidClassifier` is
+  `BRepClass3dSolidClassifier` (the base members through `Deref`),
+  `BRepClass3d_Intersector3d` is `BRepClass3dIntersector3d`, the two selectors of
+  BRepClass3d_BndBoxTree.hxx are `BRepClass3dBndBoxTreeSelectorPoint` and
+  `BRepClass3dBndBoxTreeSelectorLine` (with `EdgeParam` and `VertParam`), and
+  `BRepClass3d::OuterShell` is `BRepClass3d::outer_shell`. The in/out references of
+  `FindAPointInTheFace`, `PointInTheFace`, `Segment` and `OtherSegment` stay `&mut`
+  arguments (`FacePointSample` holds the point, its parameters and derivatives); the
+  overloads are `find_a_point_in_the_face`, `_uv_param`, `_d1`, `_uv`, `_point`,
+  `_parameters` and `point_in_the_face`, `_on_surface`, `_on_surface_d1`.
+  `Intersector(F)` is `change_intersector` (`&mut`) with the shared view `intersector`;
+  the protected `ClassifyUVPoint`, `ForceIn` and `ForceOut` are public. The audit reports
+  0 missing and 0 stale rows (the destructors are excluded rows).
 
 ## Verification
 
@@ -169,6 +214,47 @@ without the restriction and the boundary tolerances, and the unrestricted
 boundary-tolerance lines of the toleranced squares), `icf_curve` (circles, segments and
 a Bezier curve on every face) and `icf_shape` (compounds of three to four faces with
 Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
+
+BRepBndLib: 266 requests (`tools/tktopalgo_corpus_brepbndlib.py`). Each request carries
+a shape record (`tools/tktopalgo_corpus_shapes.py`, named shapes in
+`tools/tktopalgo_corpus_solids.py`) that both probes build with BRep_Builder
+(`tktopalgo_probe_shape.cxx` and `tp_probe/shape.rs`): vertices, edges with 3d curves
+(lines, circles, Bezier and B-spline curves) and 3d polygons, faces on planes, cylinders,
+spheres, cones, tori and Bezier surfaces with pcurves (seams get the pcurves of both
+uses), triangulations and polygons on them, shells with located faces, and a solid or a
+compound of shells, faces, edges and vertices, optionally located. `bbl_add` runs Add
+(meshes used or not), AddClose and AddOptimal (the four flag pairs) on boxes (with
+tolerances, 3d polygons, triangulations, translated and rotated), a box with a face
+translated in its shell, hollow and open boxes, cylinders, spheres, a torus, a box with a
+spherical cavity, a solid without shells, a meshed face, an edge with only a polygon on
+a triangulation, an infinite plane, a face with only a triangulation, spherical patches
+bounded by iso edges, Bezier patches (flagged natural or bounded by their boundary
+pcurves), lone cylinder, sphere and torus faces, and a compound of free edges of every
+kind and free vertices; the first boxes and two faces also go into boxes that already
+hold points (with a gap).
+
+BRepClass3d: 996 requests (`tools/tktopalgo_corpus_brepclass3d.py`), on the shape records
+of the BRepBndLib corpus (the reader gains B-spline surfaces): boxes (tolerances 1e-7,
+1e-3 and 0.3, translated, rotated, with a REVERSED face, 1e-10 thick, with a planar
+B-spline top face), cylinders and spheres (tolerances 1e-7 and 0.2), a torus, hollow boxes
+(cavity shell listed after or before the outer one, a box, sphere or cylinder cavity), two
+cavities without an outer shell, an INTERNAL first shell, an open box, a square sheet, a
+half-space bounded by a whole plane, a solid without shells, compounds of box shells and
+a shell whose record holds the faces of another box. The families: `bc3_classify`
+(SolidClassifier with Load, twice Load, the constructors, PerformInfinitePoint first, no
+shape, then Destroy; on points inside, outside, on and within 1e-8 of faces, on edges and
+vertices, on a face plane outside the face, seeded points; tolerances 1e-7, 1e-3, 0.5),
+`bc3_infinite` (PerformInfinitePoint of both classifiers, twice on one explorer, and
+OuterShell), `bc3_sclassifier` (the constructor point after point on one explorer),
+`bc3_segment` (Segment and 12 OtherSegment calls: flag, line, length, face index),
+`bc3_explorer` (map, shells, faces, intersector boxes, the members past the last shell
+and face, a foreign face, Destroy, InitShape again, a default explorer), `bc3_findpoint`
+(the six FindAPointInTheFace overloads, parameters 0 to 1), `bc3_pointinface` (the
+three PointInTheFace overloads from indices 0 to 2000, on and off the surface),
+`bc3_uvpoint` (ClassifyUVPoint), `bc3_tree` (both selectors on points and lines through
+vertices, along and across edges, every Accept index including 0 and Extent + 1, result
+indices 0 and past the end) and `bc3_inter3d` (Intersector3d on FORWARD and REVERSED
+faces).
 
 ## Preserved native behaviour
 
@@ -262,6 +348,67 @@ Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
   faces are kept.
 - `(int)` casts of out-of-range doubles (sample counts of the polyhedron and of the
   quadric samples) give `INT_MIN`, as x86 `cvttsd2si` does.
+
+### BRepBndLib
+
+- `FindExactUVBounds` calls `ElCLib::InPeriod` on the middle of each pcurve of a
+  periodic surface but discards the result, so that point is never moved into the
+  period before it is compared with the surface bounds; the port does the same (it skips
+  the call, which has no other effect).
+- `Add` bounds a plane face by the 3d curves of its geometric edges (the plane itself is
+  not added, degenerated edges without curve are skipped) and then enlarges the box by
+  the face tolerance; a face without surface uses its triangulation even when the
+  meshes are not wanted; a triangulation whose box is void falls back to the geometry.
+- An edge outside a face uses its 3d polygon, else the first polygon on a triangulation
+  that it holds (whatever the face), else its curve; with `useTriangulation` false a
+  geometric edge always uses its curve, but a polygon-only edge still uses its polygon.
+- `AddClose` ignores the faces and every tolerance; it adds only the curves of the
+  geometric edges and the vertices outside an edge.
+- `AdjustFaceBox` moves each side of the surface box towards the edge box in the order
+  x min, x max, y min, y max, z min, z max, and each test uses the sides moved before it
+  (the rectangle of `IsModifySize` spans the current box).
+
+### BRepClass3d
+
+- `BRepClass3d_SolidExplorer::Reject` ignores the point: only a shape without faces
+  rejects, and the classifiers then answer IN (the whole space). A classifier that was
+  never loaded classifies against the empty explorer, so it answers IN as well.
+- `InitShape` builds one intersector per face (restricted, tolerance
+  Precision::Confusion()); a face met twice keeps the intersector of its last
+  occurrence. Only the edges and vertices of the faces that are neither INTERNAL nor
+  EXTERNAL (degenerated edges skipped) enter the tree.
+- `OtherSegment` keeps the best steepness, the count of points found (`NbPointsOK`),
+  the face point and its derivatives over the faces and the restarts: once 16 points
+  were found, every later face tries a single grid index, and a face without a
+  projection starts from the point of the face before. The edge parameter it passes to
+  `PointInTheFace` is never changed, `encoreuneface` is always true (its branch is dead),
+  and a restart (edge parameters 0.512345, 0.4, 0.6, 0.3, 0.7, 0.2, 0.8, 0.1, 0.9, then
+  halved) replaces the intersector of a face whose infinite point is IN with an
+  unrestricted one (the native map leaks the old one).
+- `BRepClass3d_SClassifier::Perform` records the error state for a face whose
+  intersector is not done and goes on, so a later crossing replaces it; the line
+  selector's `IsCorrect` (an edge along the segment) is never read.
+- `PerformInfinitePoint` starts in the ON state and keeps it when no probe (ten random
+  points per face, a `math_BullardGenerator` seeded afresh at each call) meets a face
+  IN it with an entering or leaving transition; its tolerance is unused.
+- `PointInTheFace` writes the derivatives of the given (u, v) once it classifies IN,
+  even when the point differs from the given one and the grid search goes on.
+- `BRepClass3d_Intersector3d::Transition()` is uninitialized natively until a point is
+  kept (the port starts it at Tangent; the corpus reads it only after `HasAPoint`); a
+  Perform that keeps no point leaves the earlier results, it is done only when the
+  intersection has points, and its `Prm` argument is unused.
+- `BRepClass3d::OuterShell` returns the only shell of a solid without checking it, and
+  otherwise the first shell (first face not INTERNAL) whose solid classifies the
+  infinite point OUT.
+
+## BRepClass3d deviations
+
+- The selectors' `Accept` cannot raise through the tree traversal: an exception of the
+  extrema (or of the map for index 0) is kept by the selector, stops the traversal and
+  is returned by `take_failure`, which the explorer and classifier check right after
+  `Select` (natively the exception leaves `Select`).
+- `FaceNormal` on a face without surface raises Standard_NullObject (a null dereference
+  natively).
 
 ## BRepClass deviations
 

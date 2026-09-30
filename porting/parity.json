@@ -178698,6 +178698,654 @@
       "rust_item": "rustycad_tktopalgo::mat2d::Mat2dTool2d::change_geom_bis",
       "status": "implemented",
       "notes": "MAT2d mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, a figure is Mat2dFigure (a Sequence of Mat2dLine), CreateMat and CreateMatOpen run one engine, overloads take distinct Rust names, C++ output references become returned values and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat2d_* requests)."
+    },
+    {
+      "upstream_id": "BRepBndLib::Add(const TopoDS_Shape&,Bnd_Box&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add",
+      "status": "implemented",
+      "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
+    },
+    {
+      "upstream_id": "BRepBndLib::AddClose(const TopoDS_Shape&,Bnd_Box&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add_close",
+      "status": "implemented",
+      "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
+    },
+    {
+      "upstream_id": "BRepBndLib::AddOptimal(const TopoDS_Shape&,Bnd_Box&,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add_optimal",
+      "status": "implemented",
+      "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place (the file-static CanUseEdges, FindExactUVBounds, AdjustFaceBox and IsModifySize are private helpers); native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d::OuterShell(const TopoDS_Solid&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3d::outer_shell",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorPoint(const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorPoint::new",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorPoint::Reject(const Bnd_Box&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorPoint::reject",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorPoint::Accept(const int&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorPoint::accept",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorPoint::SetCurrentPoint(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorPoint::set_current_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine(const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::new",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::Reject(const Bnd_Box&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::reject",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::Accept(const int&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::accept",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::SetCurrentLine(const gp_Lin&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::set_current_line",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::GetEdgeParam(int,TopoDS_Edge&,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::get_edge_param",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::GetVertParam(int,TopoDS_Vertex&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::get_vert_param",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::GetNbEdgeParam() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::get_nb_edge_param",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::GetNbVertParam() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::get_nb_vert_param",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::ClearResults()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::clear_results",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::IsCorrect() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dBndBoxTreeSelectorLine::is_correct",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/topalgo-design.md section 5): the selector borrows the explorer map and implements the TKernel TreeSelector trait of NCollection_UBTree<int, Bnd_Box>; an exception inside Accept is kept (take_failure) and stops the selection; compared by the bc3_tree requests."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::new",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::Perform(const gp_Lin&,double,double,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::perform",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::is_done",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::HasAPoint() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::has_a_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::UParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::u_parameter",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::VParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::v_parameter",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::WParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::w_parameter",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::Pnt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::pnt",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::Transition() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::transition",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::state",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_Intersector3d::Face() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_Intersector3d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dIntersector3d::face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier(BRepClass3d_SolidExplorer&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::with_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::Perform(BRepClass3d_SolidExplorer&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::perform",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::PerformInfinitePoint(BRepClass3d_SolidExplorer&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::perform_infinite_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::Rejected() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::rejected",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::state",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::IsOnAFace() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::is_on_a_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::Face() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::ForceIn()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::force_in",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SClassifier::ForceOut()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSClassifier::force_out",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidClassifier::with_shape",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier(const TopoDS_Shape&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidClassifier::with_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier::Load(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidClassifier::load",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier::Perform(const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidClassifier::perform",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier::PerformInfinitePoint(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidClassifier::perform_infinite_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier::Destroy()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidClassifier::destroy",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidClassifier::~BRepClass3d_SolidClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidClassifier.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ destructor (it only calls Destroy): Rust drops the explorer and its intersectors with the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::new",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::with_shape",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::~BRepClass3d_SolidExplorer()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ destructor (it only calls Destroy): Rust drops the intersector map with the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::InitShape(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::init_shape",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::Reject(const gp_Pnt&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::reject",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::FindAPointInTheFace(const TopoDS_Face&,gp_Pnt&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::find_a_point_in_the_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::FindAPointInTheFace(const TopoDS_Face&,gp_Pnt&,double&,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::find_a_point_in_the_face_uv_param",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::FindAPointInTheFace(const TopoDS_Face&,gp_Pnt&,double&,double&,double&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::find_a_point_in_the_face_d1",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::FindAPointInTheFace(const TopoDS_Face&,gp_Pnt&,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::find_a_point_in_the_face_uv",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::FindAPointInTheFace(const TopoDS_Face&,gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::find_a_point_in_the_face_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::FindAPointInTheFace(const TopoDS_Face&,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::find_a_point_in_the_face_parameters",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::PointInTheFace(const TopoDS_Face&,gp_Pnt&,double&,double&,double&,int&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::point_in_the_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::PointInTheFace(const TopoDS_Face&,gp_Pnt&,double&,double&,double&,int&,const occ::handle<BRepAdaptor_Surface>&,double,double,double,double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::point_in_the_face_on_surface",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::PointInTheFace(const TopoDS_Face&,gp_Pnt&,double&,double&,double&,int&,const occ::handle<BRepAdaptor_Surface>&,double,double,double,double,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::point_in_the_face_on_surface_d1",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::InitShell()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::init_shell",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::MoreShell() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::more_shell",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::NextShell()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::next_shell",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::CurrentShell() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::current_shell",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::RejectShell(const gp_Lin&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::reject_shell",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::InitFace()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::init_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::MoreFace() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::more_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::NextFace()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::next_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::CurrentFace() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::current_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::RejectFace(const gp_Lin&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::reject_face",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::Segment(const gp_Pnt&,gp_Lin&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::segment",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::OtherSegment(const gp_Pnt&,gp_Lin&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::other_segment",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::GetFaceSegmentIndex() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::get_face_segment_index",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::DumpSegment(const gp_Pnt&,const gp_Lin&,double,TopAbs_State) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::dump_segment",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::GetShape() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::get_shape",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::GetTree()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::get_tree",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::GetMapEV()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::get_map_ev",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::Destroy()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::destroy",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::ClassifyUVPoint(const IntCurvesFace_Intersector&,const occ::handle<BRepAdaptor_Surface>&,const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::classify_uv_point",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass3d_SolidExplorer::Intersector(const TopoDS_Face&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_SolidExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::change_intersector",
+      "status": "implemented",
+      "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests). The non-const reference of the const member is change_intersector (&mut); intersector is the shared view."
     }
   ],
   "tests": [

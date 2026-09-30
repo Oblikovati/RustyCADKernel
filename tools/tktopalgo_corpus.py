@@ -23,3 +23,7 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_bisector').append_bisector_requests(requests)
     # MAT and MAT2d (tktopalgo_corpus_mat.py)
     __import__('tktopalgo_corpus_mat').append_mat_requests(requests)
+    # BRepBndLib (tktopalgo_corpus_brepbndlib.py, shapes of tktopalgo_corpus_solids.py)
+    __import__('tktopalgo_corpus_brepbndlib').append_brepbndlib_requests(requests)
+    # BRepClass3d (tktopalgo_corpus_brepclass3d.py, shapes of tktopalgo_corpus_solids.py)
+    __import__('tktopalgo_corpus_brepclass3d').append_brepclass3d_requests(requests)
