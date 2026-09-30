@@ -5,6 +5,7 @@ mod ga_probe;
 use ga_probe::geom_fill_laws as gfl;
 use ga_probe::geom_fill_placement as gfp;
 use ga_probe::geom_fill_sweep as gfs;
+use ga_probe::geom_fill_sweepalgo as gfw;
 use ga_probe::geom_fill_trihedron as gft;
 use ga_probe::int_curve_surface_inter as ics_inter;
 use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, plate};
@@ -193,6 +194,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfs_section", gfl::section_case),
     ("gfs_location", gfl::location_case),
     ("gfs_placement", gfp::placement_case),
+    ("gfs_sweepfunc", gfw::function_case),
+    ("gfs_sweep", gfw::sweep_case),
 ];
 
 fn main() {

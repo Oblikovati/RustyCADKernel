@@ -125,7 +125,13 @@ mod section_placement_axis;
 mod section_placement_frame;
 mod section_placement_search;
 mod snglr_func;
+mod sweep;
+mod sweep_build_all;
 mod sweep_failures;
+mod sweep_function;
+mod sweep_function_eval;
+mod sweep_kpart;
+mod sweep_kpart_rotation;
 mod tensor;
 mod trihedron_law;
 mod trihedron_with_guide;
@@ -158,6 +164,8 @@ pub use quasi_angular_convertor::GeomFillQuasiAngularConvertor;
 pub use section_law::{GeomFillSectionLaw, SectionD1, SectionD2};
 pub use section_placement::GeomFillSectionPlacement;
 pub use snglr_func::GeomFillSnglrFunc;
+pub use sweep::GeomFillSweep;
+pub use sweep_function::GeomFillSweepFunction;
 pub use tensor::GeomFillTensor;
 pub use trihedron_law::{
     GeomFillTrihedronLaw, GeomFillTrihedronLawBase, TrihedronD0, TrihedronD1, TrihedronD2,

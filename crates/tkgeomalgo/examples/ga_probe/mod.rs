@@ -20,6 +20,7 @@ pub mod geom2d_int;
 pub mod geom_fill_laws;
 pub mod geom_fill_placement;
 pub mod geom_fill_sweep;
+pub mod geom_fill_sweepalgo;
 pub mod geom_fill_trihedron;
 pub mod gfill;
 pub mod gfill_cf;
