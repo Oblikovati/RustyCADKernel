@@ -175,6 +175,18 @@ fn span_bounds(bc: &GeomBSplineCurve, first: f64, last: f64) -> Result<SpanBound
     Ok(SpanBounds { i1, i2, i3, tail })
 }
 
+impl SpanBounds {
+    /// Ten points per whole span, per partial span at each end, and the last point
+    /// of an open curve.
+    fn point_count(&self, closed: bool) -> i32 {
+        let nb_knots = self.i3 - self.i2 + 1;
+        let mut nb_pnts = ((nb_knots - 1) * NB_LOCAL_PNTS).max(0);
+        nb_pnts += if self.i1 != self.i2 { NB_LOCAL_PNTS } else { 0 };
+        nb_pnts += if self.tail { NB_LOCAL_PNTS } else { 0 };
+        nb_pnts + if closed { 0 } else { 1 }
+    }
+}
+
 fn bspline_points(
     adp: &GeomAdaptorCurve,
     (first, last): (f64, f64),
@@ -184,31 +196,15 @@ fn bspline_points(
     let bc = live(&spline, "GeomFill_SectionPlacement", "BC")?;
     let s = span_bounds(bc, first, last)?;
     let closed = adp.is_closed()?;
-    let nb_knots = s.i3 - s.i2 + 1;
-    let mut nb_pnts = ((nb_knots - 1) * NB_LOCAL_PNTS).max(0);
-    nb_pnts += if s.i1 != s.i2 { NB_LOCAL_PNTS } else { 0 };
-    nb_pnts += if s.tail { NB_LOCAL_PNTS } else { 0 };
-    nb_pnts += if closed { 0 } else { 1 };
-    let mut pnts = one_based(nb_pnts)?;
+    let mut pnts = one_based(s.point_count(closed))?;
     let mut nb = 1;
     if s.i1 != s.i2 {
-        let knot = bc.knot(s.i2)?;
-        let locallast = if knot < last { knot } else { last };
-        let delta = (locallast - first) / f64::from(NB_LOCAL_PNTS);
-        for j in 0..NB_LOCAL_PNTS {
-            put(&mut pnts, nb, adp.value(first + f64::from(j) * delta)?)?;
-            nb += 1;
-        }
+        nb = head_span(adp, &mut pnts, (first, last), bc.knot(s.i2)?)?;
     }
     for i in s.i2..s.i3 {
         let t = bc.knot(i)?;
-        nb = walk_span(
-            adp,
-            &mut pnts,
-            nb,
-            t,
-            (bc.knot(i + 1)? - t) / f64::from(NB_LOCAL_PNTS),
-        )?;
+        let delta = (bc.knot(i + 1)? - t) / f64::from(NB_LOCAL_PNTS);
+        nb = walk_span(adp, &mut pnts, nb, t, delta)?;
     }
     if s.tail {
         let t = bc.knot(s.i3)?;
@@ -218,6 +214,22 @@ fn bspline_points(
         put(&mut pnts, nb, adp.value(last)?)?;
     }
     Ok(pnts)
+}
+
+/// Ten points `first + j delta` of the partial span before the knot `knot` (or
+/// `last`), stored from 1; returns the next index.
+fn head_span(
+    adp: &GeomAdaptorCurve,
+    pnts: &mut Array1<'static, Point3>,
+    (first, last): (f64, f64),
+    knot: f64,
+) -> Result<i32, Failure> {
+    let locallast = if knot < last { knot } else { last };
+    let delta = (locallast - first) / f64::from(NB_LOCAL_PNTS);
+    for j in 0..NB_LOCAL_PNTS {
+        put(pnts, j + 1, adp.value(first + f64::from(j) * delta)?)?;
+    }
+    Ok(NB_LOCAL_PNTS + 1)
 }
 
 /// Ten points from `t` by `delta` (the running sum, as natively) stored from `nb`;

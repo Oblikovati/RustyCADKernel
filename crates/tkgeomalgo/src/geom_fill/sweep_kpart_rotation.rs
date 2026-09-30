@@ -54,6 +54,61 @@ struct ConstantSection {
     ac: GeomAdaptorCurve,
 }
 
+/// The distance of the circle centre from the axis (after moving the frame
+/// centre into the circle plane), the radial vector (the frame one for a centre on
+/// the axis) and whether the centre is on the side of the path.
+fn circle_offset(c: &Circle3, f: &mut RotationFrame, tol: f64) -> (f64, Vector3, bool) {
+    let dc = Vector3::from(c.location().xyz() - f.centre.xyz());
+    f.centre = Point3::from(f.centre.xyz() + dc.dot(f.dn) * *f.dn.xyz());
+    let mut dc = Vector3::from(c.location().xyz() - f.centre.xyz());
+    let radius = dc.magnitude();
+    let is_good_side = !(radius > tol && dc.dot(f.ds) < 0.0);
+    if radius < tol / 100.0 {
+        dc = f.ds;
+    }
+    (radius, dc, is_good_side)
+}
+
+/// How far the circle plane is from holding the axis, scaled by the radius.
+fn circle_plane_error(c: &Circle3, f: &RotationFrame) -> Result<f64, Failure> {
+    let mut nc = Vector3::from(c.position().direction());
+    nc.normalize()?;
+    let mut error = nc.dot(f.dn).abs();
+    error += nc.dot(f.ds).abs();
+    error *= c.radius();
+    Ok(error)
+}
+
+/// `((UFirst, ULast), (VFirst, VLast))` on a sphere.
+type SphereRange = ((f64, f64), (f64, f64));
+
+/// The sphere parameters `((UFirst, ULast), (VFirst, VLast))` of the ends of the
+/// section moved by `tf2`.
+fn section_on_sphere(
+    cs: &ConstantSection,
+    tf2: Transform3,
+    sphere: &Sphere3,
+) -> Result<SphereRange, Failure> {
+    let (fpar, lpar) = (cs.ac.first_parameter()?, cs.ac.last_parameter()?);
+    let the_section = GeomTrimmedCurve::new(&cs.section, fpar, lpar, true, true)?;
+    the_section.transform(tf2)?;
+    let first_point = the_section.value(the_section.first_parameter())?;
+    let last_point = the_section.value(the_section.last_parameter())?;
+    let (u1, v1) = elslib::parameters(sphere, first_point);
+    let (u2, v2) = elslib::parameters(sphere, last_point);
+    Ok(((u1, u2), (v1, v2)))
+}
+
+/// The frame of the U iso circle at 0 of a torus.
+fn first_u_iso_frame(s: &Handle<dyn GeomSurface>) -> Result<rustycad_tkmath::gp::Axis2, Failure> {
+    let iso: Handle<GeomCircle> = live(s, "GeomFill_Sweep::BuildKPart", "S")?
+        .u_iso(0.0)?
+        .cast();
+    Ok(live(&iso, "GeomFill_Sweep::BuildKPart", "Iso")?
+        .circ()?
+        .position())
+}
+
 impl GeomFillSweep {
     /// The rotation part of `BuildKPart`; `Some(false)` for a degenerate rotation
     /// or a spherical zone the sphere cannot hold.
@@ -124,31 +179,21 @@ impl GeomFillSweep {
     ) -> Result<Option<bool>, Failure> {
         let mut c = cs.ac.circle()?;
         c.transform(f.tf2)?;
-        let mut dc = Vector3::from(c.location().xyz() - f.centre.xyz());
-        f.centre = Point3::from(f.centre.xyz() + dc.dot(f.dn) * *f.dn.xyz());
-        dc = Vector3::from(c.location().xyz() - f.centre.xyz());
-        let radius = dc.magnitude();
-        let is_good_side = !(radius > k.tol && dc.dot(f.ds) < 0.0);
-        if radius < k.tol / 100.0 {
-            dc = f.ds;
-        }
-        let mut nc = Vector3::from(c.position().direction());
-        nc.normalize()?;
-        k.error = nc.dot(f.dn).abs();
-        k.error += nc.dot(f.ds).abs();
-        k.error *= c.radius();
-        if k.error <= k.tol {
-            self.s_error = k.error;
-            k.error += radius;
-            if radius <= k.tol {
-                return self.spherical(k, cs, f, &c);
-            }
-            if is_good_side {
-                self.toroidal(k, f, &c, radius, dc)?;
-            }
+        let (radius, dc, is_good_side) = circle_offset(&c, f, k.tol);
+        k.error = circle_plane_error(&c, f)?;
+        let within = k.error <= k.tol;
+        if !within {
+            self.s_error = 0.0;
             return Ok(None);
         }
-        self.s_error = 0.0;
+        self.s_error = k.error;
+        k.error += radius;
+        if radius <= k.tol {
+            return self.spherical(k, cs, f, &c);
+        }
+        if is_good_side {
+            self.toroidal(k, f, &c, radius, dc)?;
+        }
         Ok(None)
     }
 
@@ -162,28 +207,19 @@ impl GeomFillSweep {
     ) -> Result<Option<bool>, Failure> {
         self.s_error = k.error;
         f.centre.barycenter(1.0, c.location(), 1.0);
-        let axis_of_sphere = Axis3::new(
-            f.centre,
-            Direction3::from_vector(f.dn)?,
-            Direction3::from_vector(f.ds)?,
-        )?;
+        let dn = Direction3::from_vector(f.dn)?;
+        let axis_of_sphere = Axis3::new(f.centre, dn, Direction3::from_vector(f.ds)?)?;
         let the_sphere = Sphere3::new(axis_of_sphere, c.radius())?;
         k.s = Handle::new(GeomSphericalSurface::from_sphere(the_sphere)).cast();
-        let (fpar, lpar) = (cs.ac.first_parameter()?, cs.ac.last_parameter()?);
-        let the_section = GeomTrimmedCurve::new(&cs.section, fpar, lpar, true, true)?;
-        the_section.transform(f.tf2)?;
-        let first_point = the_section.value(the_section.first_parameter())?;
-        let last_point = the_section.value(the_section.last_parameter())?;
-        let (u_first_on_sec, v_first_on_sec) = elslib::parameters(&the_sphere, first_point);
-        let (u_last_on_sec, v_last_on_sec) = elslib::parameters(&the_sphere, last_point);
-        let (fv, lv) = if v_first_on_sec < v_last_on_sec {
-            (v_first_on_sec, v_last_on_sec)
+        let (u_on_sec, (v_first, v_last)) = section_on_sphere(cs, f.tf2, &the_sphere)?;
+        let (fv, lv) = if v_first < v_last {
+            (v_first, v_last)
         } else {
             self.is_u_reversed = true;
-            (v_last_on_sec, v_first_on_sec)
+            (v_last, v_first)
         };
         if (lv - fv).abs() <= precision::p_confusion()
-            || (u_last_on_sec - u_first_on_sec).abs() > FRAC_PI_2
+            || (u_on_sec.1 - u_on_sec.0).abs() > FRAC_PI_2
         {
             self.is_u_reversed = false;
             return Ok(Some(k.ok));
@@ -207,19 +243,11 @@ impl GeomFillSweep {
         radius: f64,
         dc: Vector3,
     ) -> Result<(), Failure> {
-        let axis_of_tore = Axis3::new(
-            f.centre,
-            Direction3::from_vector(f.dn)?,
-            Direction3::from_vector(dc)?,
-        )?;
+        let dn = Direction3::from_vector(f.dn)?;
+        let axis_of_tore = Axis3::new(f.centre, dn, Direction3::from_vector(dc)?)?;
         let s: Handle<dyn GeomSurface> =
             Handle::new(GeomToroidalSurface::new(axis_of_tore, radius, c.radius())?).cast();
-        let iso: Handle<GeomCircle> = live(&s, "GeomFill_Sweep::BuildKPart", "S")?
-            .u_iso(0.0)?
-            .cast();
-        let axeiso = live(&iso, "GeomFill_Sweep::BuildKPart", "Iso")?
-            .circ()?
-            .position();
+        let axeiso = first_u_iso_frame(&s)?;
         if c.position()
             .direction()
             .is_opposite(axeiso.direction(), 0.1)

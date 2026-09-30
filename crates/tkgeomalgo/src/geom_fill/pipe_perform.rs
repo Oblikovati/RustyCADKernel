@@ -44,6 +44,18 @@ fn approx_continuity(conti: Shape) -> Shape {
     }
 }
 
+/// The non-periodic B-spline surface of a sweep approximation.
+fn sweep_surface(app: &SweepApproximation) -> Result<GeomBSplineSurface, Failure> {
+    GeomBSplineSurface::with_weights(
+        app.surf_poles()?,
+        app.surf_weights()?,
+        (app.surf_u_knots()?, app.surf_u_mults()?),
+        (app.surf_v_knots()?, app.surf_v_mults()?),
+        (app.u_degree()?, app.v_degree()?),
+        (false, false),
+    )
+}
+
 impl GeomFillPipe {
     /// `Perform(WithParameters, Polynomial)` (natively defaulted to false): a law
     /// pipe through `Perform(1e-4, Polynomial)`; a blend by its particular case,
@@ -86,12 +98,21 @@ impl GeomFillPipe {
         if self.my_loc.is_null() || self.my_sec.is_null() {
             return self.perform_with_parameters(true, polynomial);
         }
+        self.law_sweep(tol, (the_conti, deg_max, nb_max_segment))
+    }
+
+    /// A law pipe: the `GeomFill_Sweep` of the section law along the location law.
+    fn law_sweep(
+        &mut self,
+        tol: f64,
+        (conti, deg_max, nb_max_segment): (Shape, i32, i32),
+    ) -> Result<(), Failure> {
         let mut sweep = GeomFillSweep::new(&self.my_loc, self.my_k_part)?;
         sweep.set_tolerance(tol, 1.0, 1.0e-5, 1.0);
         sweep.build(
             &self.my_sec,
             GeomFillApproxStyle::Location,
-            the_conti,
+            conti,
             deg_max,
             nb_max_segment,
         )?;
@@ -110,14 +131,14 @@ impl GeomFillPipe {
         polynomial: bool,
         shape: (Shape, i32, i32),
     ) -> Result<(), Failure> {
-        let func: Handle<dyn SweepFunction> = Handle::new(GeomFillCircularBlendFunc::new(
+        let func = GeomFillCircularBlendFunc::new(
             &self.my_adp_path,
             &self.my_adp_first_sect,
             &self.my_adp_last_sect,
             self.my_radius,
             polynomial,
-        )?)
-        .cast();
+        )?;
+        let func: Handle<dyn SweepFunction> = Handle::new(func).cast();
         let mut app = SweepApproximation::new(&func);
         let path = live(&self.my_adp_path, "GeomFill_Pipe::Perform", "myAdpPath")?;
         let options = SweepOptions {
@@ -128,15 +149,7 @@ impl GeomFillPipe {
         };
         app.perform(path.first_parameter()?, path.last_parameter()?, options)?;
         if app.is_done() {
-            let surface = GeomBSplineSurface::with_weights(
-                app.surf_poles()?,
-                app.surf_weights()?,
-                (app.surf_u_knots()?, app.surf_u_mults()?),
-                (app.surf_v_knots()?, app.surf_v_mults()?),
-                (app.u_degree()?, app.v_degree()?),
-                (false, false),
-            )?;
-            self.my_surface = Handle::new(surface).cast();
+            self.my_surface = Handle::new(sweep_surface(&app)?).cast();
             self.my_error = app.max_error_on_surf()?;
             self.my_status = GeomFillPipeError::PipeOk;
         }

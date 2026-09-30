@@ -114,9 +114,9 @@ impl GeomFillSweepSectionGenerator {
         Ok(())
     }
 
-    /// The arc of `myRadius` from the first rail to the second around the path
-    /// point, or the first rail point repeated when the arc is empty.
-    fn rail_section(&self, p: i32, section: &mut AppBlendSection) -> Result<(), Failure> {
+    /// The path point of section `p` and the points of the rails at the same
+    /// fraction of their ranges.
+    fn rail_points(&self, p: i32) -> Result<[Point3; 3], Failure> {
         let member = "GeomFill_SweepSectionGenerator::Section";
         let adp_path = live(&self.my_adp_path, member, "myAdpPath")?;
         let coef = (f64::from(p) - 1.0) / (f64::from(self.my_nb_sections) - 1.0);
@@ -129,15 +129,19 @@ impl GeomFillSweepSectionGenerator {
         let p1 = first_rail.value(rail_parameter(first_rail, alpha, ppath)?)?;
         let last_rail = live(&self.my_adp_last_sect, member, "myAdpLastSect")?;
         let p2 = last_rail.value(rail_parameter(last_rail, alpha, ppath)?)?;
+        Ok([ppath, p1, p2])
+    }
+
+    /// The arc of `myRadius` from the first rail to the second around the path
+    /// point, or the first rail point repeated when the arc is empty.
+    fn rail_section(&self, p: i32, section: &mut AppBlendSection) -> Result<(), Failure> {
+        let [ppath, p1, p2] = self.rail_points(p)?;
         let (axis, angle) = if p1.distance(&p2) < precision::confusion() {
             (Axis2::default(), 0.0)
         } else {
             let (v1, v2) = (Vector3::between(ppath, p1), Vector3::between(ppath, p2));
-            let axis = Axis2::with_x_direction(
-                ppath,
-                Direction3::from_vector(v1.crossed(v2))?,
-                Direction3::from_vector(v1)?,
-            )?;
+            let normal = Direction3::from_vector(v1.crossed(v2))?;
+            let axis = Axis2::with_x_direction(ppath, normal, Direction3::from_vector(v1)?)?;
             (axis, elclib::circle_parameter(axis, p2))
         };
         if angle < precision::angular() {
@@ -148,7 +152,7 @@ impl GeomFillSweepSectionGenerator {
             return Ok(());
         }
         let bs = self.arc_bspline(axis, angle)?;
-        let b = live(&bs, member, "BS")?;
+        let b = live(&bs, "GeomFill_SweepSectionGenerator::Section", "BS")?;
         section.poles.assign(&b.poles());
         b.weights_array(|w| section.weights.assign(w));
         Ok(())
@@ -190,32 +194,42 @@ impl GeomFillSweepSectionGenerator {
         if l < epsilon(1.0) {
             return Ok(false);
         }
-        let t = Vector3::from(Direction3::from_vector(d1)?);
-        let d = d2 - t * d2.dot(t);
-        let c = d.magnitude() / (l * l);
         let nb_poles = self
             .first_sect("GeomFill_SweepSectionGenerator::Section")?
             .nb_poles();
-        if c < epsilon(1.0) {
-            for i in 1..=nb_poles {
-                put(&mut section.d_poles, i, d1)?;
-            }
-        } else {
-            let n = Vector3::from(Direction3::from_vector(d)?);
-            let q = pt.translated(n * (1.0 / c));
-            for i in 1..=nb_poles {
-                put(
-                    &mut section.d_poles,
-                    i,
-                    turning_derivative(&section.poles, i, q, t, n)?,
-                )?;
-            }
-        }
-        for i in 1..=nb_poles {
-            put(&mut section.d_weights, i, 0.0)?;
-        }
+        end_derivatives(section, nb_poles, (pt, d1, d2), l)?;
         Ok(true)
     }
+}
+
+/// The pole derivatives of an end section: a rotation about the centre of
+/// curvature of the path, or the path derivative on a straight end; the weight
+/// derivatives are null.
+fn end_derivatives(
+    section: &mut AppBlendSection,
+    nb_poles: i32,
+    (pt, d1, d2): (Point3, Vector3, Vector3),
+    l: f64,
+) -> Result<(), Failure> {
+    let t = Vector3::from(Direction3::from_vector(d1)?);
+    let d = d2 - t * d2.dot(t);
+    let c = d.magnitude() / (l * l);
+    if c < epsilon(1.0) {
+        for i in 1..=nb_poles {
+            put(&mut section.d_poles, i, d1)?;
+        }
+    } else {
+        let n = Vector3::from(Direction3::from_vector(d)?);
+        let q = pt.translated(n * (1.0 / c));
+        for i in 1..=nb_poles {
+            let dp = turning_derivative(&section.poles, i, q, t, n)?;
+            put(&mut section.d_poles, i, dp)?;
+        }
+    }
+    for i in 1..=nb_poles {
+        put(&mut section.d_weights, i, 0.0)?;
+    }
+    Ok(())
 }
 
 /// `x N - y T` scaled to the distance of pole `i` from `q` in the `(T, N)` plane.

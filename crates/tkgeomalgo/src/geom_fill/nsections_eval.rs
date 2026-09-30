@@ -122,6 +122,61 @@ fn set<T>(array: &mut Array1<'_, T>, name: &str, ii: i32, v: T) -> Result<(), Fa
         .map_err(|e| index_failure(name, ii, e))
 }
 
+/// The poles, weights and first derivatives of a section, read by the second
+/// derivatives.
+struct FirstOrder<'a, 'b> {
+    poles: &'a Array1<'b, Point3>,
+    d_poles: &'a Array1<'b, Vector3>,
+    weights: &'a Array1<'b, f64>,
+    d_weights: &'a Array1<'b, f64>,
+}
+
+/// The second derivatives of the poles from the evaluated rows `result` (weighted
+/// back by the rational terms); false, after writing the raw value, at a weight
+/// below 10 PConfusion().
+fn second_order_poles(
+    result: &[f64],
+    rational: bool,
+    first: &FirstOrder<'_, '_>,
+    d2_poles: &mut Array1<'_, Vector3>,
+    d2_weights: &mut Array1<'_, f64>,
+) -> Result<bool, Failure> {
+    if !rational {
+        d2_weights.init(0.0);
+    }
+    let gap = if rational { 4 } else { 3 };
+    for ii in 1..=first.poles.length() {
+        let indice = ((ii - 1) * gap) as usize;
+        let mut d2p = xyz_at(result, indice)?;
+        if rational {
+            let ww = value(first.weights, "Weights", ii)?;
+            if ww < eps_w() {
+                set(d2_poles, "D2Poles", ii, Vector3::from(d2p))?;
+                return Ok(false);
+            }
+            let d2w = result_at(result, indice + 3)?;
+            set(d2_weights, "D2Weights", ii, d2w)?;
+            d2p = rational_second(first, ii, d2p, d2w, ww)?;
+        }
+        set(d2_poles, "D2Poles", ii, Vector3::from(d2p))?;
+    }
+    Ok(true)
+}
+
+/// `(D2P - D2W P - 2 DW DP) / W` of pole `ii`.
+fn rational_second(
+    first: &FirstOrder<'_, '_>,
+    ii: i32,
+    d2p: Xyz,
+    d2w: f64,
+    ww: f64,
+) -> Result<Xyz, Failure> {
+    let p = value(first.poles, "Poles", ii)?.xyz();
+    let dw = value(first.d_weights, "DWeights", ii)?;
+    let dp = *value(first.d_poles, "DPoles", ii)?.xyz();
+    Ok((d2p - d2w * p - (2.0 * dw) * dp) / ww)
+}
+
 /// The weight below which a derivative is not computed (`EpsW`).
 fn eps_w() -> f64 {
     10.0 * precision::p_confusion()
@@ -208,30 +263,13 @@ impl GeomFillNSections {
         if !self.nsections_d1(v, first)? {
             return Ok(false);
         }
-        let rational = s.is_v_rational();
+        let first = FirstOrder {
+            poles,
+            d_poles,
+            weights,
+            d_weights,
+        };
         let result = result_eval(live(&derivative_surface(&surface)?, "D2", "surf")?, v, 2)?;
-        if !rational {
-            d2_weights.init(0.0);
-        }
-        let gap = if rational { 4 } else { 3 };
-        for ii in 1..=poles.length() {
-            let indice = ((ii - 1) * gap) as usize;
-            let mut d2p = xyz_at(&result, indice)?;
-            if rational {
-                let ww = value(weights, "Weights", ii)?;
-                if ww < eps_w() {
-                    set(d2_poles, "D2Poles", ii, Vector3::from(d2p))?;
-                    return Ok(false);
-                }
-                let d2w = result_at(&result, indice + 3)?;
-                set(d2_weights, "D2Weights", ii, d2w)?;
-                let p = value(poles, "Poles", ii)?.xyz();
-                let dw = value(d_weights, "DWeights", ii)?;
-                let dp = *value(d_poles, "DPoles", ii)?.xyz();
-                d2p = (d2p - d2w * p - (2.0 * dw) * dp) / ww;
-            }
-            set(d2_poles, "D2Poles", ii, Vector3::from(d2p))?;
-        }
-        Ok(true)
+        second_order_poles(&result, s.is_v_rational(), &first, d2_poles, d2_weights)
     }
 }

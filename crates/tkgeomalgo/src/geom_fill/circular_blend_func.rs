@@ -109,6 +109,29 @@ struct Discretization {
 }
 
 impl Discretization {
+    /// The samples of the deflection points (or of 21 equal steps when the sampling
+    /// failed); returns the barycentre weight `1 / (2 n)`.
+    fn sample_all(
+        &mut self,
+        curves: &TrimmedCurves,
+        samp: &QuasiUniformDeflection,
+        (t_first, t_last): (f64, f64),
+    ) -> Result<f64, Failure> {
+        if samp.is_done() {
+            for ii in 1..=samp.nb_points()? {
+                self.sample(curves, samp.parameter(ii)?)?;
+            }
+            return Ok(1.0 / f64::from(2 * samp.nb_points()?));
+        }
+        let delta = (t_last - t_first) / 20.0;
+        let mut t = t_first;
+        for _ in 0..=20 {
+            self.sample(curves, t)?;
+            t += delta;
+        }
+        Ok(1.0 / 42.0)
+    }
+
     /// One sample: the opening angle at `t` and the pair added to the barycentre.
     fn sample(&mut self, curves: &TrimmedCurves, t: f64) -> Result<(), Failure> {
         let p1 = live(&curves.curve1, "GeomFill_CircularBlendFunc", "myCurve1")?.d0(t)?;
@@ -161,26 +184,25 @@ fn discret(curves: &TrimmedCurves) -> Result<Discretization, Failure> {
         maxang: f64::MIN,
         minang: f64::MAX,
     };
-    let percent = if samp.is_done() {
-        for ii in 1..=samp.nb_points()? {
-            d.sample(curves, samp.parameter(ii)?)?;
-        }
-        1.0 / f64::from(2 * samp.nb_points()?)
-    } else {
-        let delta = (t_last - t_first) / 20.0;
-        let mut t = t_first;
-        for _ in 0..=20 {
-            d.sample(curves, t)?;
-            t += delta;
-        }
-        1.0 / 42.0
-    };
+    let percent = d.sample_all(curves, &samp, (t_first, t_last))?;
     d.bary *= percent;
     let t = (t_first + t_last) / 2.0;
     c1.d0(t)?;
     c2.d0(t)?;
     path.d1(t)?;
     Ok(d)
+}
+
+/// The arc parameterisation: polynomial on request, quasi-angular above 0.65 PI
+/// (continuous), else rational by half-angle tangent.
+fn arc_parameterisation(polynomial: bool, maxang: f64) -> ParameterisationType {
+    if polynomial {
+        ParameterisationType::Polynomial
+    } else if maxang > 0.65 * PI {
+        ParameterisationType::QuasiAngular
+    } else {
+        ParameterisationType::TgtThetaOver2
+    }
 }
 
 impl GeomFillCircularBlendFunc {
@@ -201,13 +223,7 @@ impl GeomFillCircularBlendFunc {
             curve2: curve2.clone(),
         };
         let d = discret(&curves)?;
-        let mut conv = if polynomial {
-            ParameterisationType::Polynomial
-        } else if d.maxang > 0.65 * PI {
-            ParameterisationType::QuasiAngular
-        } else {
-            ParameterisationType::TgtThetaOver2
-        };
+        let mut conv = arc_parameterisation(polynomial, d.maxang);
         let (nb_poles, nb_knots, degree) = get_shape(d.maxang, &mut conv);
         Ok(Self {
             parent: StandardTransient::default(),

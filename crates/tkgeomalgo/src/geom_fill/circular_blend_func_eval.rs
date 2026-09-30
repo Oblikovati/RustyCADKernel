@@ -74,6 +74,67 @@ fn half_form(r: f64, a: Xyz, b: Xyz, c: Xyz, d: Xyz) -> Xyz {
     temp * 0.5
 }
 
+/// The section circle of the unit rail vectors, the plane normal and the rail points.
+fn circle_d0(r: f64, ns: (Vector3, Vector3), nplan: Vector3, pts: (Point3, Point3)) -> CircleD0 {
+    let center = half_form(r, *ns.0.xyz(), *ns.1.xyz(), pts.0.xyz(), pts.1.xyz());
+    CircleD0 {
+        ns1: ns.0,
+        ns2: ns.1,
+        nplan,
+        pts1: pts.0,
+        pts2: pts.1,
+        rayon: r,
+        center: Point3::from(center),
+    }
+}
+
+/// `circle` with the first derivatives (the radius is constant).
+fn circle_d1(
+    circle: CircleD0,
+    dns: (Vector3, Vector3),
+    dnplan: Vector3,
+    dp: (Vector3, Vector3),
+) -> CircleD1 {
+    let d_center = half_form(
+        circle.rayon,
+        *dns.0.xyz(),
+        *dns.1.xyz(),
+        *dp.0.xyz(),
+        *dp.1.xyz(),
+    );
+    CircleD1 {
+        circle,
+        dn1w: dns.0,
+        dn2w: dns.1,
+        dnplan,
+        tang1: dp.0,
+        tang2: dp.1,
+        d_rayon: 0.0,
+        d_center: Vector3::from(d_center),
+    }
+}
+
+/// `d1` with the second derivatives.
+fn circle_d2(
+    d1: CircleD1,
+    d2ns: (Vector3, Vector3),
+    d2nplan: Vector3,
+    d2p: (Vector3, Vector3),
+) -> CircleD2 {
+    let r = d1.circle.rayon;
+    let d2_center = half_form(r, *d2ns.0.xyz(), *d2ns.1.xyz(), *d2p.0.xyz(), *d2p.1.xyz());
+    CircleD2 {
+        d1,
+        d2n1w: d2ns.0,
+        d2n2w: d2ns.1,
+        d2nplan,
+        dtang1: d2p.0,
+        dtang2: d2p.1,
+        d2_rayon: 0.0,
+        d2_center: Vector3::from(d2_center),
+    }
+}
+
 fn rail<'a>(
     h: &'a Handle<dyn Adaptor3dCurve>,
     name: &str,
@@ -106,17 +167,23 @@ impl GeomFillCircularBlendFunc {
         ns1.normalize()?;
         ns2.normalize()?;
         nplan.normalize()?;
-        let r = self.my_radius;
-        let center = half_form(r, *ns1.xyz(), *ns2.xyz(), p1.xyz(), p2.xyz());
-        Ok(CircleD0 {
-            ns1,
-            ns2,
-            nplan,
-            pts1: p1,
-            pts2: p2,
-            rayon: r,
-            center: Point3::from(center),
-        })
+        Ok(circle_d0(self.my_radius, (ns1, ns2), nplan, (p1, p2)))
+    }
+
+    /// `nplan` and its derivative: the cross product of the rail vectors, or the path
+    /// derivatives when they are parallel.
+    fn d1_plane(
+        &self,
+        t: &TrimmedCurves,
+        param: f64,
+        ns: [(Vector3, Vector3); 2],
+    ) -> Result<(Vector3, Vector3), Failure> {
+        let [(ns1, dns1), (ns2, dns2)] = ns;
+        if !ns1.is_parallel(ns2, TOL_ANG)? {
+            return Ok((ns1.crossed(ns2), dns1.crossed(ns2) + ns1.crossed(dns2)));
+        }
+        let (_, v1, v2) = rail(&t.path, "myTPath")?.d2(param)?;
+        Ok((self.path_normal(v1), self.path_normal(v2)))
     }
 
     fn d1_circle(&self, param: f64) -> Result<CircleD1, Failure> {
@@ -127,47 +194,22 @@ impl GeomFillCircularBlendFunc {
         let ns1 = Vector3::from(center.xyz() - p1.xyz());
         let ns2 = Vector3::from(center.xyz() - p2.xyz());
         let (dns1, dns2) = (d_center - dp1, d_center - dp2);
-        let (nplan, dnplan) = if !ns1.is_parallel(ns2, TOL_ANG)? {
-            (ns1.crossed(ns2), dns1.crossed(ns2) + ns1.crossed(dns2))
-        } else {
-            let (_, v1, v2) = rail(&t.path, "myTPath")?.d2(param)?;
-            (self.path_normal(v1), self.path_normal(v2))
-        };
+        let (nplan, dnplan) = self.d1_plane(&t, param, [(ns1, dns1), (ns2, dns2)])?;
         let ((ns1, dns1), (ns2, dns2)) = (unit_d1(ns1, dns1), unit_d1(ns2, dns2));
-        let r = self.my_radius;
-        let center = half_form(r, *ns1.xyz(), *ns2.xyz(), p1.xyz(), p2.xyz());
-        let d_center = half_form(r, *dns1.xyz(), *dns2.xyz(), *dp1.xyz(), *dp2.xyz());
         let (nplan, dnplan) = unit_d1(nplan, dnplan);
-        Ok(CircleD1 {
-            circle: CircleD0 {
-                ns1,
-                ns2,
-                nplan,
-                pts1: p1,
-                pts2: p2,
-                rayon: r,
-                center: Point3::from(center),
-            },
-            dn1w: dns1,
-            dn2w: dns2,
-            dnplan,
-            tang1: dp1,
-            tang2: dp2,
-            d_rayon: 0.0,
-            d_center: Vector3::from(d_center),
-        })
+        let c = circle_d0(self.my_radius, (ns1, ns2), nplan, (p1, p2));
+        Ok(circle_d1(c, (dns1, dns2), dnplan, (dp1, dp2)))
     }
 
-    fn d2_circle(&self, param: f64) -> Result<CircleD2, Failure> {
-        let t = self.trimmed_curves();
-        let (center, d_center, d2_center) = rail(&t.path, "myTPath")?.d2(param)?;
-        let (p1, dp1, d2p1) = rail(&t.curve1, "myTCurve1")?.d2(param)?;
-        let (p2, dp2, d2p2) = rail(&t.curve2, "myTCurve2")?.d2(param)?;
-        let ns1 = Vector3::from(center.xyz() - p1.xyz());
-        let (dns1, d2ns1) = (d_center - dp1, d2_center - d2p1);
-        let ns2 = Vector3::from(center.xyz() - p2.xyz());
-        let (dns2, d2ns2) = (d_center - dp2, d2_center - d2p2);
-        let (nplan, dnplan, d2nplan) = if !ns1.is_parallel(ns2, TOL_ANG)? {
+    /// `nplan` and its two derivatives (see `d1_plane`).
+    fn d2_plane(
+        &self,
+        t: &TrimmedCurves,
+        param: f64,
+        ns: [(Vector3, Vector3, Vector3); 2],
+    ) -> Result<(Vector3, Vector3, Vector3), Failure> {
+        let [(ns1, dns1, d2ns1), (ns2, dns2, d2ns2)] = ns;
+        if !ns1.is_parallel(ns2, TOL_ANG)? {
             let mut d2nplan = Vector3::default();
             d2nplan.set_linear_form_offset(
                 1.0,
@@ -176,53 +218,42 @@ impl GeomFillCircularBlendFunc {
                 dns1.crossed(dns2),
                 ns1.crossed(d2ns2),
             );
-            (
+            return Ok((
                 ns1.crossed(ns2),
                 dns1.crossed(ns2) + ns1.crossed(dns2),
                 d2nplan,
-            )
-        } else {
-            let (_, v1, v2, v3) = rail(&t.path, "myTPath")?.d3(param)?;
-            (
-                self.path_normal(v1),
-                self.path_normal(v2),
-                self.path_normal(v3),
-            )
-        };
-        let (ns1, dns1, d2ns1) = unit_d2(ns1, dns1, d2ns1);
-        let (ns2, dns2, d2ns2) = unit_d2(ns2, dns2, d2ns2);
-        let r = self.my_radius;
-        let center = half_form(r, *ns1.xyz(), *ns2.xyz(), p1.xyz(), p2.xyz());
-        let d_center = half_form(r, *dns1.xyz(), *dns2.xyz(), *dp1.xyz(), *dp2.xyz());
-        let d2_center = half_form(r, *d2ns1.xyz(), *d2ns2.xyz(), *d2p1.xyz(), *d2p2.xyz());
+            ));
+        }
+        let (_, v1, v2, v3) = rail(&t.path, "myTPath")?.d3(param)?;
+        Ok((
+            self.path_normal(v1),
+            self.path_normal(v2),
+            self.path_normal(v3),
+        ))
+    }
+
+    fn d2_circle(&self, param: f64) -> Result<CircleD2, Failure> {
+        let t = self.trimmed_curves();
+        let (center, d_center, d2_center) = rail(&t.path, "myTPath")?.d2(param)?;
+        let (p1, dp1, d2p1) = rail(&t.curve1, "myTCurve1")?.d2(param)?;
+        let (p2, dp2, d2p2) = rail(&t.curve2, "myTCurve2")?.d2(param)?;
+        let ns1 = (
+            Vector3::from(center.xyz() - p1.xyz()),
+            d_center - dp1,
+            d2_center - d2p1,
+        );
+        let ns2 = (
+            Vector3::from(center.xyz() - p2.xyz()),
+            d_center - dp2,
+            d2_center - d2p2,
+        );
+        let (nplan, dnplan, d2nplan) = self.d2_plane(&t, param, [ns1, ns2])?;
+        let (ns1, dns1, d2ns1) = unit_d2(ns1.0, ns1.1, ns1.2);
+        let (ns2, dns2, d2ns2) = unit_d2(ns2.0, ns2.1, ns2.2);
         let (nplan, dnplan, d2nplan) = unit_d2(nplan, dnplan, d2nplan);
-        Ok(CircleD2 {
-            d1: CircleD1 {
-                circle: CircleD0 {
-                    ns1,
-                    ns2,
-                    nplan,
-                    pts1: p1,
-                    pts2: p2,
-                    rayon: r,
-                    center: Point3::from(center),
-                },
-                dn1w: dns1,
-                dn2w: dns2,
-                dnplan,
-                tang1: dp1,
-                tang2: dp2,
-                d_rayon: 0.0,
-                d_center: Vector3::from(d_center),
-            },
-            d2n1w: d2ns1,
-            d2n2w: d2ns2,
-            d2nplan,
-            dtang1: d2p1,
-            dtang2: d2p2,
-            d2_rayon: 0.0,
-            d2_center: Vector3::from(d2_center),
-        })
+        let c = circle_d0(self.my_radius, (ns1, ns2), nplan, (p1, p2));
+        let c = circle_d1(c, (dns1, dns2), dnplan, (dp1, dp2));
+        Ok(circle_d2(c, (d2ns1, d2ns2), d2nplan, (d2p1, d2p2)))
     }
 
     /// The fused intervals of the rails (at `S`) and of the path (one order higher).

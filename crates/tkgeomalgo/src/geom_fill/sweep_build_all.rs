@@ -40,43 +40,66 @@ fn iso_restriction(u: f64, v1: f64, v2: f64) -> Result<Handle<dyn Geom2dCurve>, 
     Ok(Handle::new(Geom2dTrimmedCurve::new(&line, v1, v2, true, true)?).cast())
 }
 
-fn put_curve(
-    curves: &mut Curves2d,
-    index: i32,
-    curve: Handle<dyn Geom2dCurve>,
-) -> Result<(), Failure> {
-    rustycad_tkg2d::geom2d::arrays::put(curves, index, curve)
+/// The restrictions and traces of a sweep with their errors (`myCurve2d`, `CError`).
+struct RestrictionTable {
+    curves: Curves2d,
+    c_error: Array2<'static, f64>,
 }
 
-fn put_errors(c_error: &mut Array2<'static, f64>, col: i32, u: f64, v: f64) -> Result<(), Failure> {
-    for (row, value) in [(1, u), (2, v)] {
-        c_error.set_value(row, col, value).map_err(|e| {
+impl RestrictionTable {
+    /// `n` null curves; the errors are unset natively until written (0 here).
+    fn new(n: i32) -> Result<Self, Failure> {
+        let curves = rustycad_tkg2d::geom2d::arrays::one_based(n)?;
+        let c_error = Array2::with_bounds(1, 2, 1, n).map_err(|e| {
             super::sweep_failures::sweep_failure(
-                "Standard_OutOfRange",
-                &format!("GeomFill_Sweep: CError({row}, {col}): {e}; expected an index in the array bounds"),
+                "Standard_RangeError",
+                &format!("NCollection_HArray2(1, 2, 1, {n}): {e}; expected n >= 1"),
             )
         })?;
+        Ok(Self { curves, c_error })
     }
-    Ok(())
+
+    fn last(&self) -> i32 {
+        self.curves.len() as i32
+    }
+
+    /// Curve `index` with the error `error` in U and V.
+    fn set(
+        &mut self,
+        index: i32,
+        curve: Handle<dyn Geom2dCurve>,
+        error: f64,
+    ) -> Result<(), Failure> {
+        rustycad_tkg2d::geom2d::arrays::put(&mut self.curves, index, curve)?;
+        for row in [1, 2] {
+            self.c_error.set_value(row, index, error).map_err(|e| {
+                super::sweep_failures::sweep_failure(
+                    "Standard_OutOfRange",
+                    &format!("GeomFill_Sweep: CError({row}, {index}): {e}; expected an index in the array bounds"),
+                )
+            })?;
+        }
+        Ok(())
+    }
+
+    /// Curve `index`: the exact iso line at `u` over `v`.
+    fn set_iso(&mut self, index: i32, u: f64, v: (f64, f64)) -> Result<(), Failure> {
+        self.set(index, iso_restriction(u, v.0, v.1)?, 0.0)
+    }
 }
 
 impl GeomFillSweep {
-    /// `BuildAll(Continuity, Degmax, Segmax)`: true when the approximation is done.
-    pub(crate) fn build_all(
-        &mut self,
+    /// The approximation of the sweep function of the laws over the path domain.
+    fn approximation(
+        &self,
         continuity: Shape,
         degmax: i32,
         segmax: i32,
-    ) -> Result<bool, Failure> {
+    ) -> Result<SweepApproximation, Failure> {
         let ratio = (self.s_last - self.s_first) / (self.last - self.first);
-        let func: Handle<dyn SweepFunction> = Handle::new(GeomFillSweepFunction::new(
-            &self.my_sec,
-            &self.my_loc,
-            self.first,
-            self.s_first,
-            ratio,
-        ))
-        .cast();
+        let func =
+            GeomFillSweepFunction::new(&self.my_sec, &self.my_loc, self.first, self.s_first, ratio);
+        let func: Handle<dyn SweepFunction> = Handle::new(func).cast();
         let mut approx = SweepApproximation::new(&func);
         let options = SweepOptions {
             continuity,
@@ -85,6 +108,17 @@ impl GeomFillSweep {
             ..SweepOptions::new(self.tol3d, self.bound_tol, self.tol2d, self.tol_angular)
         };
         approx.perform(self.first, self.last, options)?;
+        Ok(approx)
+    }
+
+    /// `BuildAll(Continuity, Degmax, Segmax)`: true when the approximation is done.
+    pub(crate) fn build_all(
+        &mut self,
+        continuity: Shape,
+        degmax: i32,
+        segmax: i32,
+    ) -> Result<bool, Failure> {
+        let approx = self.approximation(continuity, degmax, segmax)?;
         if !approx.is_done() {
             return Ok(false);
         }
@@ -97,9 +131,10 @@ impl GeomFillSweep {
             (approx.u_degree()?, approx.v_degree()?),
             (self.sec()?.is_u_periodic()?, false),
         )?;
+        let force = self.my_force_approx_c1 && !bspline.is_cn_v(1)?;
         self.my_surface = Handle::new(bspline).cast();
         self.s_error = approx.max_error_on_surf()?;
-        if self.my_force_approx_c1 && !self.surface_ref()?.is_cn_v(1)? {
+        if force {
             self.force_c1()?;
         }
         if self.my_curve2d.is_none() {
@@ -108,41 +143,24 @@ impl GeomFillSweep {
         Ok(true)
     }
 
-    fn surface_ref(&self) -> Result<&dyn GeomSurface, Failure> {
-        super::sweep_failures::live(&self.my_surface, "GeomFill_Sweep::BuildAll", "mySurface")
-    }
-
     /// The C1 approximation of a surface that is not C1 in V, with its two
     /// restrictions at the first and last U knots.
     fn force_c1(&mut self) -> Result<(), Failure> {
         let the_tol = 1.0e-4;
-        let convert = ApproxSurface::from_surface(
-            &self.my_surface,
-            the_tol,
-            (Shape::C1, Shape::C1),
-            (14, 14),
-            16,
-            1,
-        )?;
+        let shape = ((Shape::C1, Shape::C1), (14, 14));
+        let convert =
+            ApproxSurface::from_surface(&self.my_surface, the_tol, shape.0, shape.1, 16, 1)?;
         if !convert.has_result() {
             return Ok(());
         }
         let bspl = convert.surface();
         self.my_surface = bspl.clone().cast();
         let b = super::sweep_failures::live(&bspl, "GeomFill_Sweep::BuildAll", "BSplSurf")?;
-        let mut curves: Curves2d = rustycad_tkg2d::geom2d::arrays::one_based(2)?;
-        let mut c_error = error_table(2)?;
+        let mut table = RestrictionTable::new(2)?;
         let v_last = b.v_knot(b.nb_v_knots())?;
-        put_curve(&mut curves, 1, iso_restriction(b.u_knot(1)?, 0.0, v_last)?)?;
-        put_errors(&mut c_error, 1, 0.0, 0.0)?;
-        let length = curves.len() as i32;
-        put_curve(
-            &mut curves,
-            length,
-            iso_restriction(b.u_knot(b.nb_u_knots())?, 0.0, v_last)?,
-        )?;
-        put_errors(&mut c_error, length, 0.0, 0.0)?;
-        (self.my_curve2d, self.c_error) = (Some(curves), Some(c_error));
+        table.set_iso(1, b.u_knot(1)?, (0.0, v_last))?;
+        table.set_iso(table.last(), b.u_knot(b.nb_u_knots())?, (0.0, v_last))?;
+        (self.my_curve2d, self.c_error) = (Some(table.curves), Some(table.c_error));
         self.s_error = the_tol;
         Ok(())
     }
@@ -157,53 +175,40 @@ impl GeomFillSweep {
         let loc = self.loc()?;
         let trace_number = loc.trace_number();
         let (has_first, has_last) = (loc.has_first_restriction(), loc.has_last_restriction());
-        let mut curves: Curves2d = rustycad_tkg2d::geom2d::arrays::one_based(2 + trace_number)?;
-        let mut c_error = error_table(2 + trace_number)?;
+        let mut table = RestrictionTable::new(2 + trace_number)?;
         let ideb = if has_first { 1 } else { 2 };
         let ifin = 1 + trace_number + i32::from(has_last);
         for (kk, ii) in (ideb..=ifin).enumerate() {
             let kk = kk as i32 + 1;
-            let c = Geom2dBSplineCurve::new(
-                approx.curve_2d_poles(kk)?,
-                approx.curves_2d_knots()?,
-                approx.curves_2d_mults()?,
-                approx.curves_2d_degree()?,
-                false,
+            table.set(
+                ii,
+                approximated_curve(approx, kk)?,
+                approx.max_2d_error(kk)?,
             )?;
-            put_curve(&mut curves, ii, Handle::new(c).cast())?;
-            let error = approx.max_2d_error(kk)?;
-            put_errors(&mut c_error, ii, error, error)?;
         }
-        let (first, last) = (self.first, self.last);
+        let range = (self.first, self.last);
         if !has_first {
-            put_curve(
-                &mut curves,
-                1,
-                iso_restriction(u_knots[u_knots.lower()], first, last)?,
-            )?;
-            put_errors(&mut c_error, 1, 0.0, 0.0)?;
+            table.set_iso(1, u_knots[u_knots.lower()], range)?;
         }
         if !has_last {
-            let length = curves.len() as i32;
-            put_curve(
-                &mut curves,
-                length,
-                iso_restriction(u_knots[u_knots.upper()], first, last)?,
-            )?;
-            put_errors(&mut c_error, length, 0.0, 0.0)?;
+            table.set_iso(table.last(), u_knots[u_knots.upper()], range)?;
         }
-        (self.my_curve2d, self.c_error) = (Some(curves), Some(c_error));
+        (self.my_curve2d, self.c_error) = (Some(table.curves), Some(table.c_error));
         Ok(())
     }
 }
 
-/// `new NCollection_HArray2<double>(1, 2, 1, cols)` (its values are unset natively
-/// until written; here 0).
-fn error_table(cols: i32) -> Result<Array2<'static, f64>, Failure> {
-    Array2::with_bounds(1, 2, 1, cols).map_err(|e| {
-        super::sweep_failures::sweep_failure(
-            "Standard_RangeError",
-            &format!("NCollection_HArray2(1, 2, 1, {cols}): {e}; expected cols >= 1"),
-        )
-    })
+/// The B-spline of the 2d curve `kk` of the approximation.
+fn approximated_curve(
+    approx: &SweepApproximation,
+    kk: i32,
+) -> Result<Handle<dyn Geom2dCurve>, Failure> {
+    let c = Geom2dBSplineCurve::new(
+        approx.curve_2d_poles(kk)?,
+        approx.curves_2d_knots()?,
+        approx.curves_2d_mults()?,
+        approx.curves_2d_degree()?,
+        false,
+    )?;
+    Ok(Handle::new(c).cast())
 }

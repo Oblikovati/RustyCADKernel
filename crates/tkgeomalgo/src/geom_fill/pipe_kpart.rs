@@ -29,7 +29,7 @@ use rustycad_tkg3d::geom::{
 };
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::CurveType;
-use rustycad_tkmath::gp::{Axis1, Axis3, Direction3, Line3, Point3, Torus3, Vector3};
+use rustycad_tkmath::gp::{Axis1, Axis2, Axis3, Direction3, Line3, Point3, Torus3, Vector3};
 use std::f64::consts::PI;
 
 /// The path and the two rails.
@@ -51,6 +51,11 @@ impl Rails<'_> {
             }
         }
         Ok(true)
+    }
+
+    /// The path range.
+    fn path_range(&self) -> Result<(f64, f64), Failure> {
+        Ok((self.path.first_parameter()?, self.path.last_parameter()?))
     }
 
     /// The start points of the curves.
@@ -109,46 +114,23 @@ impl GeomFillPipe {
     /// Three parallel lines of the same length, the rails normal to the path: the
     /// cylinder of `myRadius` around the path between the rails.
     fn cylinder_between(&mut self, rails: &Rails<'_>) -> Result<bool, Failure> {
-        let a0 = rails.path.line()?.position();
-        let d = [
-            a0.direction(),
-            rails.first.line()?.direction(),
-            rails.last.line()?.direction(),
-        ];
-        if !same_directions(d) {
+        let Some(f) = cylinder_frame(rails)? else {
             return Ok(false);
-        }
-        let mut lengths = [0.0; 3];
-        for (l, c) in lengths.iter_mut().zip(rails.all()) {
-            *l = c.last_parameter()? - c.first_parameter()?;
-        }
-        let conf = precision::confusion();
-        if (lengths[1] - lengths[0]).abs() > conf || (lengths[2] - lengths[0]).abs() > conf {
-            return Ok(false);
-        }
-        let p = rails.starts()?;
-        let (v1, v2) = start_directions(p)?;
-        if v1.dot(d[0]).abs() > conf || v2.dot(d[0]).abs() > conf {
-            return Ok(false);
-        }
-        let z_ref = v1.crossed(v2)?;
-        let mut axis = Axis3::new(a0.location(), d[0], v1)?;
-        if z_ref.dot(d[0]) < 0.0 {
+        };
+        let z_ref = f.v1.crossed(f.v2)?;
+        let mut axis = Axis3::new(f.axis.location(), f.axis.direction(), f.v1)?;
+        if z_ref.dot(f.axis.direction()) < 0.0 {
             axis.y_reverse();
         }
-        axis.rotate(Axis1::new(p[0], z_ref), -PI / 2.0)?;
+        axis.rotate(Axis1::new(f.p0, z_ref), -PI / 2.0)?;
         let cylinder: Handle<dyn GeomSurface> =
             Handle::new(GeomCylindricalSurface::new(axis, self.my_radius)?).cast();
         // The native code stores the cylinder before trimming it.
         self.my_surface = cylinder.clone();
-        let alpha = v1.angle_with_ref(v2, z_ref);
-        let range = (rails.path.first_parameter()?, rails.path.last_parameter()?);
-        let trimmed = GeomRectangularTrimmedSurface::new(
-            &cylinder,
-            (PI / 2.0, PI / 2.0 + alpha),
-            range,
-            (true, true),
-        )?;
+        let alpha = f.v1.angle_with_ref(f.v2, z_ref);
+        let u = (PI / 2.0, PI / 2.0 + alpha);
+        let trimmed =
+            GeomRectangularTrimmedSurface::new(&cylinder, u, rails.path_range()?, (true, true))?;
         self.my_surface = Handle::new(trimmed).cast();
         self.my_status = GeomFillPipeError::PipeOk;
         Ok(true)
@@ -157,55 +139,139 @@ impl GeomFillPipe {
     /// Three coaxial circles of the same range, the rails in a plane of the axis
     /// at the path start: the torus of `myRadius` around the path.
     fn torus_between(&mut self, rails: &Rails<'_>) -> Result<bool, Failure> {
-        let mut alp = [0.0; 3];
-        for (a, c) in alp.iter_mut().zip(rails.all()) {
-            *a = c.first_parameter()? - c.last_parameter()?;
-        }
-        let ang = precision::angular();
-        if (alp[0] - alp[1]).abs() > ang || (alp[0] - alp[2]).abs() > ang {
+        let Some(f) = torus_frame(rails)? else {
             return Ok(false);
-        }
-        let a = [
-            rails.path.circle()?.position(),
-            rails.first.circle()?.position(),
-            rails.last.circle()?.position(),
-        ];
-        let p = rails.starts()?;
-        if !same_directions([a[0].direction(), a[1].direction(), a[2].direction()]) {
-            return Ok(false);
-        }
-        let l = Line3::from_axis(a[0].axis());
-        let conf = precision::confusion();
-        if !l.contains(a[1].location(), conf) || !l.contains(a[2].location(), conf) {
-            return Ok(false);
-        }
-        let (v1, v2) = start_directions(p)?;
-        let ci = rails.path.circle()?;
-        let y_ref = Direction3::from_vector(elclib::circle_dn(
-            rails.path.first_parameter()?,
-            a[0],
-            ci.radius(),
-            1,
-        ))?;
-        if v1.dot(y_ref).abs() > conf || v2.dot(y_ref).abs() > conf {
-            return Ok(false);
-        }
-        let mut t = Torus3::new(Axis3::from_axis2(a[0]), ci.radius(), self.my_radius)?;
-        let x_ref = Direction3::from_vector(Vector3::between(a[0].location(), p[0]))?;
-        let mut vv1 = v1.angle_with_ref(x_ref, y_ref);
-        let mut vv2 = v2.angle_with_ref(x_ref, y_ref);
-        let delta_v = v2.angle_with_ref(v1, y_ref);
+        };
+        let mut t = Torus3::new(Axis3::from_axis2(f.a0), f.radius, self.my_radius)?;
+        let x_ref = Direction3::from_vector(Vector3::between(f.a0.location(), f.p0))?;
+        let mut vv1 = f.v1.angle_with_ref(x_ref, f.y_ref);
+        let mut vv2 = f.v2.angle_with_ref(x_ref, f.y_ref);
+        let delta_v = f.v2.angle_with_ref(f.v1, f.y_ref);
         if delta_v < 0.0 {
             t.v_reverse();
             vv1 = -vv1;
             vv2 = 2.0 * PI + vv1 - delta_v;
         }
         let torus: Handle<dyn GeomSurface> = Handle::new(GeomToroidalSurface::from_torus(t)).cast();
-        let range = (rails.path.first_parameter()?, rails.path.last_parameter()?);
-        let trimmed = GeomRectangularTrimmedSurface::new(&torus, range, (vv1, vv2), (true, true))?;
+        let trimmed = GeomRectangularTrimmedSurface::new(
+            &torus,
+            rails.path_range()?,
+            (vv1, vv2),
+            (true, true),
+        )?;
         self.my_surface = Handle::new(trimmed).cast();
         self.my_exch_uv = true;
         self.my_status = GeomFillPipeError::PipeOk;
         Ok(true)
     }
+}
+
+/// The frame of a cylindrical blend: the path axis, its start point and the unit
+/// vectors to the rail starts.
+struct CylinderFrame {
+    axis: Axis1,
+    p0: Point3,
+    v1: Direction3,
+    v2: Direction3,
+}
+
+/// The frame of three parallel lines of the same length whose starts lie in a
+/// plane normal to them, or `None`.
+fn cylinder_frame(rails: &Rails<'_>) -> Result<Option<CylinderFrame>, Failure> {
+    let a0 = rails.path.line()?.position();
+    let d0 = a0.direction();
+    if !same_directions([
+        d0,
+        rails.first.line()?.direction(),
+        rails.last.line()?.direction(),
+    ]) {
+        return Ok(None);
+    }
+    let mut lengths = [0.0; 3];
+    for (l, c) in lengths.iter_mut().zip(rails.all()) {
+        *l = c.last_parameter()? - c.first_parameter()?;
+    }
+    let conf = precision::confusion();
+    if (lengths[1] - lengths[0]).abs() > conf || (lengths[2] - lengths[0]).abs() > conf {
+        return Ok(None);
+    }
+    let p = rails.starts()?;
+    let (v1, v2) = start_directions(p)?;
+    if v1.dot(d0).abs() > conf || v2.dot(d0).abs() > conf {
+        return Ok(None);
+    }
+    Ok(Some(CylinderFrame {
+        axis: a0,
+        p0: p[0],
+        v1,
+        v2,
+    }))
+}
+
+/// The frame of a toroidal blend: the path circle frame and radius, its start
+/// point, the unit vectors to the rail starts and the path tangent at the start.
+struct TorusFrame {
+    a0: Axis2,
+    radius: f64,
+    p0: Point3,
+    v1: Direction3,
+    v2: Direction3,
+    y_ref: Direction3,
+}
+
+/// The frame of three coaxial circles of the same range whose starts lie in a
+/// plane of the axis, or `None`.
+fn torus_frame(rails: &Rails<'_>) -> Result<Option<TorusFrame>, Failure> {
+    if !same_ranges(rails)? {
+        return Ok(None);
+    }
+    let a = [
+        rails.path.circle()?.position(),
+        rails.first.circle()?.position(),
+        rails.last.circle()?.position(),
+    ];
+    let p = rails.starts()?;
+    if !same_directions([a[0].direction(), a[1].direction(), a[2].direction()])
+        || !coaxial_centres(a)
+    {
+        return Ok(None);
+    }
+    let (v1, v2) = start_directions(p)?;
+    let radius = rails.path.circle()?.radius();
+    let y_ref = start_tangent(rails.path, a[0], radius)?;
+    let conf = precision::confusion();
+    if v1.dot(y_ref).abs() > conf || v2.dot(y_ref).abs() > conf {
+        return Ok(None);
+    }
+    Ok(Some(TorusFrame {
+        a0: a[0],
+        radius,
+        p0: p[0],
+        v1,
+        v2,
+        y_ref,
+    }))
+}
+
+/// The unit tangent of the path circle at its start.
+fn start_tangent(path: &dyn Adaptor3dCurve, a0: Axis2, radius: f64) -> Result<Direction3, Failure> {
+    Direction3::from_vector(elclib::circle_dn(path.first_parameter()?, a0, radius, 1))
+}
+
+/// Whether the three circles span the same angle (within Precision::Angular()).
+fn same_ranges(rails: &Rails<'_>) -> Result<bool, Failure> {
+    let mut alp = [0.0; 3];
+    for (a, c) in alp.iter_mut().zip(rails.all()) {
+        *a = c.first_parameter()? - c.last_parameter()?;
+    }
+    let ang = precision::angular();
+    let differs = (alp[0] - alp[1]).abs() > ang || (alp[0] - alp[2]).abs() > ang;
+    Ok(!differs)
+}
+
+/// Whether the rail centres lie on the path axis.
+fn coaxial_centres(a: [Axis2; 3]) -> bool {
+    let l = Line3::from_axis(a[0].axis());
+    let conf = precision::confusion();
+    l.contains(a[1].location(), conf) && l.contains(a[2].location(), conf)
 }

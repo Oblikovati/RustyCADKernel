@@ -50,6 +50,19 @@ pub(crate) struct KPart {
     pub error: f64,
 }
 
+/// The circles of a conical law: the centres at the path origin and ends, the
+/// start points and radii at the ends, the radius at the origin and the section
+/// derivative at the last end.
+struct ConeCircles {
+    centre: [Point3; 3],
+    p1: Point3,
+    p2: Point3,
+    r1: f64,
+    r2: f64,
+    radius0: f64,
+    dsection: Vector3,
+}
+
 /// `Tf2.SetValues(Tf(1, 1), ..., Tf(3, 4))` of the `gp_GTrsf` with the vectorial
 /// part `M` and the translation `V` of a placement.
 pub(crate) fn placement_trsf(p: &LocationD0) -> Result<Transform3, Failure> {
@@ -269,6 +282,35 @@ impl GeomFillSweep {
         ac.load(&section)
     }
 
+    /// The circles of a conical law at the path ends (translated along the path)
+    /// and at the path origin, loaded one after the other in `ac`.
+    fn cone_circles(
+        &self,
+        ac: &GeomAdaptorCurve,
+        tf2: Transform3,
+        dp: Vector3,
+    ) -> Result<ConeCircles, Failure> {
+        self.placed_circle(ac, self.s_last, tf2, Some(dp * self.last))?;
+        let c = ac.circle()?;
+        let (centre2, r2) = (c.location(), c.radius());
+        let (p2, dsection) = ac.d1(0.0)?;
+        self.placed_circle(ac, self.s_first, tf2, Some(dp * self.first))?;
+        let c = ac.circle()?;
+        let (centre1, p1, r1) = (c.location(), ac.value(0.0)?, c.radius());
+        let ratio = (self.s_last - self.s_first) / (self.last - self.first);
+        self.placed_circle(ac, self.s_first - self.first * ratio, tf2, None)?;
+        let c = ac.circle()?;
+        Ok(ConeCircles {
+            centre: [c.location(), centre1, centre2],
+            p1,
+            p2,
+            r1,
+            r2,
+            radius0: c.radius(),
+            dsection,
+        })
+    }
+
     /// A conical section law: a cone through the circles at both ends when their
     /// chord makes a proper angle with the axis.
     fn translated_conical(
@@ -278,28 +320,22 @@ impl GeomFillSweep {
         dp: Vector3,
     ) -> Result<(), Failure> {
         let ac = GeomAdaptorCurve::default();
-        self.placed_circle(&ac, self.s_last, tf2, Some(dp * self.last))?;
-        let c = ac.circle()?;
-        let (centre2, r2) = (c.location(), c.radius());
-        let (p2, dsection) = ac.d1(0.0)?;
-        self.placed_circle(&ac, self.s_first, tf2, Some(dp * self.first))?;
-        let c = ac.circle()?;
-        let (centre1, p1, r1) = (c.location(), ac.value(0.0)?, c.radius());
-        let ratio = (self.s_last - self.s_first) / (self.last - self.first);
-        self.placed_circle(&ac, self.s_first - self.first * ratio, tf2, None)?;
-        let c = ac.circle()?;
-        let centre0 = c.location();
-        let mut n = Vector3::between(centre1, p1);
+        let cc = self.cone_circles(&ac, tf2, dp)?;
+        let [centre0, centre1, centre2] = cc.centre;
+        let mut n = Vector3::between(centre1, cc.p1);
         if n.magnitude() < 1.0e-9 {
-            n = Vector3::between(centre2, p2);
+            n = Vector3::between(centre2, cc.p2);
         }
-        let (l, dir) = (Vector3::between(p1, p2), Vector3::between(centre1, centre2));
+        let (l, dir) = (
+            Vector3::between(cc.p1, cc.p2),
+            Vector3::between(centre1, centre2),
+        );
         let mut angle = l.angle(dir)?;
         let proper = angle > 0.01 && angle < PI / 2.0 - 0.01;
         if !proper {
             return Ok(());
         }
-        if r2 < r1 {
+        if cc.r2 < cc.r1 {
             angle = -angle;
         }
         self.s_error = k.error;
@@ -308,11 +344,16 @@ impl GeomFillSweep {
             Direction3::from_vector(dir)?,
             Direction3::from_vector(n)?,
         )?;
-        let s: Handle<dyn GeomSurface> =
-            Handle::new(GeomConicalSurface::new(axis, angle, c.radius())?).cast();
+        k.s = Handle::new(GeomConicalSurface::new(axis, angle, cc.radius0)?).cast();
         k.v = (self.first / angle.cos(), self.last / angle.cos());
         k.u = (ac.first_parameter()?, ac.last_parameter()?);
-        let iso = live(&s, "GeomFill_Sweep::BuildKPart", "S")?.v_iso(k.v.1)?;
+        self.cone_orientation(k, cc.dsection)
+    }
+
+    /// Reverses the section range when the last V iso of the cone runs against the
+    /// section.
+    fn cone_orientation(&mut self, k: &mut KPart, dsection: Vector3) -> Result<(), Failure> {
+        let iso = live(&k.s, "GeomFill_Sweep::BuildKPart", "S")?.v_iso(k.v.1)?;
         let (_, diso) = live(&iso, "GeomFill_Sweep::BuildKPart", "VIso")?.d1(0.0)?;
         if diso.magnitude() > 1.0e-9 && dsection.magnitude() > 1.0e-9 {
             self.is_u_reversed = diso.is_opposite(dsection, 0.1)?;
@@ -321,7 +362,6 @@ impl GeomFillSweep {
             k.u = reversed_range(k.u);
         }
         k.ok = true;
-        k.s = s;
         Ok(())
     }
 
