@@ -1,4 +1,4 @@
-// Rust translation of ModelingAlgorithms/TKHLR/HLRBRep at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-
-//! OCCT package HLRBRep. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tkhlr-progress.md lists the ported packages).
+// HLRBRep at OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
+//! Exact hidden-line curve and topology tools.
+mod b_curve_tool;
+pub use b_curve_tool::BCurveTool;
