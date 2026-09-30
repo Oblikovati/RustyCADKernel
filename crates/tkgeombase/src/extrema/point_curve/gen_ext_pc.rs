@@ -2,6 +2,7 @@
 
 //! `Extrema_GGenExtPC`: every root of [`GFuncExtPC`] on a parameter range, found by
 //! math_FunctionRoots on a sampling.
+use super::curve_reference::CurveReference;
 use super::func_ext_pc::GFuncExtPC;
 use crate::extrema::curve_tool::ExtremaCurveTool;
 use crate::extrema::failures::{extremum_index, not_done};
@@ -125,6 +126,12 @@ impl<'a, T: ExtremaCurveTool> GGenExtPC<'a, T> {
     /// `Initialize(C)`: the curve of the function only; `extrema.initialize_curve(&adaptor)?`.
     pub fn initialize_curve(&mut self, curve: &'a T::Curve) -> Result<(), Failure> {
         self.function.initialize(curve)
+    }
+    pub(super) fn initialize_reference(
+        &mut self,
+        curve: CurveReference<'a, T::Curve>,
+    ) -> Result<(), Failure> {
+        self.function.initialize_reference(curve)
     }
     fn set_sampling(&mut self, nb_u: i32, tol_u: f64, tol_f: f64) {
         self.nb_sample = nb_u;

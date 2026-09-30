@@ -6,6 +6,7 @@
 use crate::extrema::curve_tool::ExtremaCurveTool;
 use crate::extrema::failures::{sequence_value, type_mismatch};
 use crate::extrema::gp_space::{GpPoint, GpVector};
+use crate::extrema::point_curve::curve_reference::CurveReference;
 use crate::extrema::pon::POnCurve;
 use crate::extrema::singular::{SingularSearch, singular_derivative, singular_step};
 use crate::failure_capture::FailureCapture;
@@ -24,7 +25,7 @@ use crate::extrema::singular::{MAX_ORDER, MIN_TOL, TOL_FACTOR};
 /// `GFuncExtPC::<CurveTool>::with_point_curve(point, &adaptor)?`.
 pub struct GFuncExtPC<'a, T: ExtremaCurveTool> {
     p: T::Point,
-    curve: Option<&'a T::Curve>,
+    curve: Option<CurveReference<'a, T::Curve>>,
     u: f64,
     pc: T::Point,
     d1f: f64,
@@ -76,12 +77,18 @@ impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
             p_init: true,
             ..Self::default()
         };
-        function.set_curve(curve)?;
+        function.set_curve(CurveReference::Borrowed(curve))?;
         Ok(function)
     }
     /// `Initialize(C)`: sets the curve and clears the extrema;
     /// `function.initialize(&adaptor)?`.
     pub fn initialize(&mut self, curve: &'a T::Curve) -> Result<(), Failure> {
+        self.initialize_reference(CurveReference::Borrowed(curve))
+    }
+    pub(super) fn initialize_reference(
+        &mut self,
+        curve: CurveReference<'a, T::Curve>,
+    ) -> Result<(), Failure> {
         self.points.clear();
         self.sq_dist.clear();
         self.is_min.clear();
@@ -89,8 +96,9 @@ impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
     }
     // The curve part of the constructor and of Initialize: the interval and, for the
     // curves with a variable parametrization, the singularity tolerance.
-    fn set_curve(&mut self, curve: &'a T::Curve) -> Result<(), Failure> {
-        self.curve = Some(curve);
+    fn set_curve(&mut self, reference: CurveReference<'a, T::Curve>) -> Result<(), Failure> {
+        self.curve = Some(reference.clone());
+        let curve = reference.get();
         self.c_init = true;
         self.sub_interval_initialize(T::first_parameter(curve)?, T::last_parameter(curve)?);
         match T::get_type(curve)? {
@@ -122,8 +130,10 @@ impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
         self.usupremum = ulast;
     }
     /// The curve (`*myC`), Standard_NullObject before one is set.
-    fn curve(&self) -> Result<&'a T::Curve, Failure> {
+    fn curve(&self) -> Result<&T::Curve, Failure> {
         self.curve
+            .as_ref()
+            .map(CurveReference::get)
             .ok_or_else(|| crate::extrema::failures::null_object("Extrema_GFuncExtPC"))
     }
     fn check_init(&self, member: &str) -> Result<(), Failure> {

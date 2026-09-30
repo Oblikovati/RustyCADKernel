@@ -2,6 +2,7 @@
 
 //! `Extrema_GenLocateExtPC`: the root of [`GFuncExtPC`] nearest to a start parameter,
 //! found by math_FunctionRoot.
+use super::curve_reference::CurveReference;
 use super::func_ext_pc::GFuncExtPC;
 use crate::extrema::curve_tool::ExtremaCurveTool;
 use crate::extrema::failures::not_done;
@@ -69,8 +70,16 @@ impl<'a, T: ExtremaCurveTool> GenLocateExtPC<'a, T> {
         (umin, usup): (f64, f64),
         tol_u: f64,
     ) -> Result<(), Failure> {
+        self.initialize_reference(CurveReference::Borrowed(curve), (umin, usup), tol_u)
+    }
+    pub(super) fn initialize_reference(
+        &mut self,
+        curve: CurveReference<'a, T::Curve>,
+        (umin, usup): (f64, f64),
+        tol_u: f64,
+    ) -> Result<(), Failure> {
         self.done = false;
-        self.function.initialize(curve)?;
+        self.function.initialize_reference(curve)?;
         self.umin = umin;
         self.usup = usup;
         self.tol_u = tol_u;

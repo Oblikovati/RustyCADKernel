@@ -46,8 +46,11 @@ impl<'a, T: ExtremaCurveTool> GLocateExtPC<'a, T> {
             inter -= 1; // IFV 16.06.00 - inter is increased after found!
         }
         let tol: f64 = self.tol;
-        self.loc_ext_pc
-            .initialize(self.curve()?, (int_uinf, int_usup), tol)?;
+        self.loc_ext_pc.initialize_reference(
+            self.curve.clone().unwrap(),
+            (int_uinf, int_usup),
+            tol,
+        )?;
         self.loc_ext_pc.perform(point, u0)?;
         self.done = self.loc_ext_pc.is_done();
         if self.done {
@@ -150,8 +153,11 @@ impl<'a, T: ExtremaCurveTool> GLocateExtPC<'a, T> {
         (int_uinf, int_usup): (f64, f64),
     ) -> Result<bool, Failure> {
         let tol: f64 = self.tol;
-        self.loc_ext_pc
-            .initialize(self.curve()?, (int_uinf, int_usup), tol)?;
+        self.loc_ext_pc.initialize_reference(
+            self.curve.clone().unwrap(),
+            (int_uinf, int_usup),
+            tol,
+        )?;
         self.loc_ext_pc
             .perform(point, (int_uinf + int_usup) * 0.5)?;
         self.done = self.loc_ext_pc.is_done();

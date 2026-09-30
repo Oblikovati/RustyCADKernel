@@ -5,7 +5,7 @@ use super::common::{Reader, attempt, end, flag, int, pnt, pnt2d, real};
 use super::extrema_el::{poncurv, poncurv2d};
 use super::pc2d::curve2d;
 use super::pc3d::curve3d;
-use rustycad_tkernel::standard::Failure;
+use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
@@ -18,8 +18,8 @@ use rustycad_tkmath::gp::{Point2, Point3};
 
 /// The 3D or 2D side of a request family (GbSpace3 / GbSpace2).
 pub trait Space {
-    type Tool: ExtremaCurveTool;
-    fn adaptor(r: &mut Reader) -> Result<Box<<Self::Tool as ExtremaCurveTool>::Curve>, Failure>;
+    type Tool: ExtremaCurveTool<Curve: RuntimeTyped + Send + Sync>;
+    fn adaptor(r: &mut Reader) -> Result<Handle<<Self::Tool as ExtremaCurveTool>::Curve>, Failure>;
     fn point(r: &mut Reader) -> <Self::Tool as ExtremaCurveTool>::Point;
     fn pnt(p: <Self::Tool as ExtremaCurveTool>::Point);
     fn pon(p: POnCurve<<Self::Tool as ExtremaCurveTool>::Point>);
@@ -28,13 +28,13 @@ pub struct Space3;
 pub struct Space2;
 impl Space for Space3 {
     type Tool = CurveTool;
-    fn adaptor(r: &mut Reader) -> Result<Box<dyn Adaptor3dCurve>, Failure> {
+    fn adaptor(r: &mut Reader) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
         let c = curve3d(r)?;
         if r.flag() {
             let (u1, u2) = (r.real(), r.real());
-            return Ok(Box::new(GeomAdaptorCurve::with_range(&c, u1, u2)?));
+            return Ok(Handle::new(GeomAdaptorCurve::with_range(&c, u1, u2)?).cast());
         }
-        Ok(Box::new(GeomAdaptorCurve::with_curve(&c)?))
+        Ok(Handle::new(GeomAdaptorCurve::with_curve(&c)?).cast())
     }
     fn point(r: &mut Reader) -> Point3 {
         r.pnt()
@@ -48,13 +48,13 @@ impl Space for Space3 {
 }
 impl Space for Space2 {
     type Tool = Curve2dTool;
-    fn adaptor(r: &mut Reader) -> Result<Box<dyn Adaptor2dCurve2d>, Failure> {
+    fn adaptor(r: &mut Reader) -> Result<Handle<dyn Adaptor2dCurve2d>, Failure> {
         let c = curve2d(r)?;
         if r.flag() {
             let (u1, u2) = (r.real(), r.real());
-            return Ok(Box::new(Geom2dAdaptorCurve::with_range(&c, u1, u2)?));
+            return Ok(Handle::new(Geom2dAdaptorCurve::with_range(&c, u1, u2)?).cast());
         }
-        Ok(Box::new(Geom2dAdaptorCurve::with_curve(&c)?))
+        Ok(Handle::new(Geom2dAdaptorCurve::with_curve(&c)?).cast())
     }
     fn point(r: &mut Reader) -> Point2 {
         r.pnt2d()
@@ -164,12 +164,16 @@ fn loc_result<S: Space>(e: &impl LocView<S>) {
     attempt(|| Ok(S::pon(e.pon()?)));
 }
 
-fn locpc_body<S: Space>(r: &mut Reader) -> Result<(), Failure> {
+fn locpc_body<S: Space>(r: &mut Reader, owned: bool) -> Result<(), Failure> {
     let a = S::adaptor(r)?;
     let (tolf, s1, s2) = (r.real(), r.real(), r.real());
     let n = r.integer();
     let mut reused = GLocateExtPC::<S::Tool>::new();
-    attempt(|| reused.initialize(&*a, (s1, s2), tolf));
+    if owned {
+        attempt(|| reused.initialize_owned(a.clone(), (s1, s2), tolf));
+    } else {
+        attempt(|| reused.initialize(&*a, (s1, s2), tolf));
+    }
     for _ in 0..n {
         let p = S::point(r);
         let u0 = r.real();
@@ -189,12 +193,12 @@ fn locpc_body<S: Space>(r: &mut Reader) -> Result<(), Failure> {
 
 pub fn locpc_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    attempt(|| locpc_body::<Space3>(&mut r));
+    attempt(|| locpc_body::<Space3>(&mut r, false));
     end();
 }
 pub fn locpc2d_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    attempt(|| locpc_body::<Space2>(&mut r));
+    attempt(|| locpc_body::<Space2>(&mut r, false));
     end();
 }
 
@@ -380,5 +384,16 @@ pub fn ctool2d_case(values: &[f64]) {
         int(Curve2dTool::continuity(&*a)? as i32);
         Ok(())
     });
+    end();
+}
+
+pub fn locpc_owned_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    attempt(|| locpc_body::<Space3>(&mut reader, true));
+    end();
+}
+pub fn locpc2d_owned_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    attempt(|| locpc_body::<Space2>(&mut reader, true));
     end();
 }

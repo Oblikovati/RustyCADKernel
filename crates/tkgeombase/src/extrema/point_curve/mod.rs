@@ -59,3 +59,5 @@ pub type LocEPCOfLocateExtPC2d<'a> = GenLocateExtPC<'a, Curve2dTool>;
 pub type LocateExtPC<'a> = GLocateExtPC<'a, CurveTool>;
 /// `Extrema_LocateExtPC2d`.
 pub type LocateExtPC2d<'a> = GLocateExtPC<'a, Curve2dTool>;
+
+mod curve_reference;

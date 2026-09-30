@@ -17,6 +17,8 @@ def corpus() -> str:
     """The whole TKGeomBase request corpus, one request per line."""
     requests: list[str] = []
     append_tkgeombase_requests(requests)
+    requests += [row.replace(row.split()[0], row.split()[0]+"_owned", 1)
+                 for row in requests if row.split()[0] in ("ex_locpc", "ex_locpc2d")]
     return '\n'.join(requests)+'\n'
 
 
