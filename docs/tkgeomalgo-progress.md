@@ -286,8 +286,12 @@ LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
   `perform_with_points` and `perform_from_start`, the four marching tolerances of the
   polyhedral and start-point overloads are one `IntPatchPrmPrmTolerances`, and the grid
   members take arrays for the cell coordinates (`remplit_lin([x1, y1, z1], [x2, y2, z2],
-  map)`). The domains are `&dyn TheTopolTool` (the virtual `Adaptor3d_TopolTool`) and the
-  line sequences `Vec<Handle<dyn IntPatchLine>>`.
+  map)`). `IntPatch_Intersection` is `IntPatchIntersection` (`new`, `with_surfaces`,
+  `with_surface`, `set_tolerances`, `perform` and `perform_with_points` with the three
+  flags in one `IntPatchIntersectionOptions`, `perform_from_start`, `perform_self`, the
+  result accessors, `dump`, and the static `check_singular_points`, `define_uv_max_step`
+  and `prepare_surfaces`). The domains are `&(dyn TheTopolTool + 'static)` (the virtual
+  `Adaptor3d_TopolTool`) and the line sequences `Vec<Handle<dyn IntPatchLine>>`.
 
 ## Verification
 
@@ -950,8 +954,9 @@ interference. `ip_polyline` and `ip_polyarc` build the 2d polygons of walking an
 restriction lines and of arcs (parabola deflection, resampling near the other box, offsets,
 the construction errors); `ip_t3bits` edits the bit sets.
 
-IntPatch parametric intersection: 105 requests (`tkgeomalgo_corpus_intpatch_wltool.py` and
-`tkgeomalgo_corpus_intpatch_prmprm.py`). `ip_purge` purges walking lines (two equal points,
+IntPatch parametric intersection: 333 requests (`tkgeomalgo_corpus_intpatch_wltool.py`,
+`tkgeomalgo_corpus_intpatch_prmprm.py`, `tkgeomalgo_corpus_intpatch_extend.py` and
+`tkgeomalgo_corpus_intpatch_inter.py`). `ip_purge` purges walking lines (two equal points,
 equal points among a few, long straight and curved lines for the tube criteria, lines leaving
 the domains at either end, periodic and C0 surfaces, uneven steps, the bad distributions,
 vertices out of the line). `ip_join` joins the walking lines of two cylinders in the four end
@@ -960,7 +965,17 @@ the same cylinder twice and a plane. `ip_lc` splits every line kind at its verti
 domains made of the fixture arcs, with and without a 3d tolerance (a probe subclass of
 `Adaptor3d_TopolTool` overriding the arc iteration and `Tol3d`), and codes walking lines on
 the arcs as restriction lines. `ip_ppgrid` and `ip_ppdepart` run the grid members and
-`PointDepart` on crossing, tangent, disjoint and far apart surface pairs. Left out: a
+`PointDepart` on crossing, tangent, disjoint and far apart surface pairs. `ip_extend` (24)
+extends walking lines on two quadrics: gaps in the four end orders, shared ends, arcs of a
+sphere and a plane across the seam and at a pole, a cylinder and a tilted plane, a cone near
+its apex, lines whose tangents turn too much, critical points and three pieces in a row.
+`ip_isingular` (23) runs the static members of `IntPatch_Intersection` on poles and flat
+cones; `ip_inter` (107) runs the front end on every pair of surface kinds of the
+IntCurveSurface catalog (bounded and infinite), on nearly degenerated cones and tori, with
+the three flags, with start points, from a start point and on self-intersections;
+`ip_prmprm` (74) runs every `Perform` overload of the parametric intersection on Bezier,
+B-spline, offset and revolution surfaces with the deflection options, and `NewLine` on the
+lines found. Left out: a
 restriction line on neither surface, whose part between two vertices dereferences a null arc
 natively.
 IntPatch analytic intersections: 582 requests (`tkgeomalgo_corpus_intpatch_impimp.py`
@@ -1545,6 +1560,20 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
   `PointDepart` clears the neighbours of a cell only in the first map. `RemplitLin` sets
   only the first cell of each halved segment, so between cells two apart the middle cell
   stays unset.
+- `IntPatch_WLineTool::ExtendTwoWLines` keeps references to the end points of the lines
+  while it inserts points, so a reference taken before an insertion at the start of a line
+  reads the new point after it; the tests that disable an extension read the bits set by
+  the previous lines of the sequence.
+- `IntPatch_PrmPrmIntersection::Perform`: the images of the start points on the opposite
+  bound of a closed direction share one point, whose 3d point is the origin; the flag of
+  the periodic adjustment of a new point is not reset between the parameters; the
+  processing of several walking lines keeps the vertex count of the first line when the
+  line is replaced; in the polyhedral overloads the first point of a section line is read
+  into the parameter minima of the previous line.
+- `IntPatch_Intersection::Dump` does nothing (its body needs `DUMPOFIntPatch_Intersection`).
+  `SetTolerances` clamps the values with two tests that keep a NaN. The infinite surfaces
+  are trimmed on the V bounds of both surfaces, then on the U bounds.
+
 ### IntPatch analytic intersections
 
 - `IntPatch_ImpImpIntersection`: the plane-plane and cone-torus pairs do not update the
@@ -1785,13 +1814,17 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
 ## IntPatch parametric intersection deviations
 
 - The IntStart trait `TheTopolTool` has the domain members the IntPatch algorithms call
-  (`is_the_point_on`, `tol3d`, `domain_is_infinite`, `sample_pnts`, `u_parameters`,
-  `v_parameters`, `is_uniform_sampling`).
+  (`is_the_point_on`, `domain_is_infinite`, `sample_pnts`, `u_parameters`, `v_parameters`,
+  `is_uniform_sampling`; `Tol3d(C)` is the `tol_3d_arc` of the analytic classes).
+- `FUN_PL_Intersection` and the trimming of infinite surfaces in `IntPatch_Intersection`
+  cast the surface adaptor to `GeomAdaptor_Surface` without a check; another adaptor
+  raises Standard_NullObject.
 - A restriction line on neither surface raises Standard_NullObject in
   `IntPatch_LineConstructor::Perform` where the native code dereferences a null arc.
 - The locals the native `Perform` bodies read before any assignment on some branches (the
   parameters of a section point of the `Intf_EXTERNAL` type) keep their previous value, 0 at
   first.
+
 ## IntPatch analytic-intersection deviations
 
 - `ProcessBounds` of `IntPatch_ImpImpIntersection` loops forever natively on a line list

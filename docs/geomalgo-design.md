@@ -664,9 +664,13 @@ line_constructor, prm_prm, intersection}`) are classes without templates; the ru
   `AddLine`, the restriction coding and the `Perform` branches of
   `IntPatch_LineConstructor.cxx`).
 - **Domains.** The native algorithms take `occ::handle<Adaptor3d_TopolTool>`, a
-  virtual class; they take `&dyn TheTopolTool` (section 12). The trait gets the
-  members these algorithms call (`IsThePointOn`, `Tol3d(C)`, `DomainIsInfinite`,
-  `SamplePnts`, `UParameters`, `VParameters`, `IsUniformSampling`).
+  virtual class; they take `&(dyn TheTopolTool + 'static)` (section 12), as the
+  analytic classes of section 17 do. The trait gets the members these algorithms call
+  (`IsThePointOn`, `DomainIsInfinite`, `SamplePnts`, `UParameters`, `VParameters`,
+  `IsUniformSampling`); `Tol3d(C)` is the `tol_3d_arc` of section 17.
+- **Flags.** The three trailing `bool` parameters of `IntPatch_Intersection::Perform`
+  (`isGeomInt`, `theIsReqToKeepRLine`, `theIsReqToPostWLProc`) are one
+  `IntPatchIntersectionOptions` with the native defaults.
 - **Line sequences.** `NCollection_Sequence<occ::handle<IntPatch_Line>>` is
   `Vec<Handle<dyn IntPatchLine>>`, read 1-based with the native Standard_OutOfRange;
   the `occ::down_cast` and the reinterpret casts of a line handle are `Handle::cast`.
@@ -690,6 +694,7 @@ line_constructor, prm_prm, intersection}`) are classes without templates; the ru
 - **Casts.** `(int)` of a double is `intf::native_int_cast` (the x86-64 conversion)
   and `std::min`/`std::max` of doubles are `intf::std_min`/`std_max`, so NaN operands
   take the native branch.
+
 ## 17. IntPatch analytic intersections
 
 The analytic intersections of IntPatch (`IntPatch_ImpImpIntersection`,
