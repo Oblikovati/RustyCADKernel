@@ -14,6 +14,7 @@ use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom_api, geom_api_fit, geom_api_surface, gordon};
+use ga_probe::{geom_int, geom_int_approx, geom_int_statics};
 use ga_probe::{geom_plate, geom_plate_build};
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
@@ -282,6 +283,23 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gplate_halfspace", geom_plate::halfspace_case),
     ("gplate_build", geom_plate_build::build_case),
     ("gplate_approx", geom_plate_build::approx_case),
+    // GeomInt, ApproxInt and GeomAPI_IntSS (ga_probe/geom_int*.rs)
+    ("gi_intss", geom_int::intss_case),
+    ("gapi_intss", geom_int::gapi_intss_case),
+    ("gi_lconst", geom_int::lconst_case),
+    ("gi_lines", geom_int::lines_case),
+    ("gi_ltool", geom_int::ltool_case),
+    ("gi_wlapprox", geom_int_approx::wlapprox_case),
+    ("gi_mline", geom_int_approx::mline_case),
+    ("gi_sv", geom_int_approx::sv_case),
+    ("gi_knots", geom_int_approx::knots_case),
+    ("gi_partype", geom_int_approx::partype_case),
+    ("gi_pcurves", geom_int_statics::pcurves_case),
+    ("gi_trim", geom_int_statics::trim_case),
+    ("gi_mkbsp", geom_int_statics::mkbsp_case),
+    ("gi_rline", geom_int_statics::rline_case),
+    ("gi_adjust", geom_int_statics::adjust_case),
+    ("gi_porient", geom_int_statics::porient_case),
 ];
 
 fn main() {

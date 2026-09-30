@@ -72,3 +72,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     # IntPatch analytic intersections (tkgeomalgo_corpus_intpatch_impimp.py, _impprm.py)
     __import__('tkgeomalgo_corpus_intpatch_impimp').append_intpatch_impimp_requests(requests)
     __import__('tkgeomalgo_corpus_intpatch_impprm').append_intpatch_impprm_requests(requests)
+    # ApproxInt, GeomInt, GeomAPI_IntSS (tkgeomalgo_corpus_geomint.py)
+    __import__('tkgeomalgo_corpus_geomint').append_geomint_requests(requests)

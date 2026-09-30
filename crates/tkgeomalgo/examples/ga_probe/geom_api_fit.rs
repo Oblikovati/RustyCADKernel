@@ -27,7 +27,7 @@ fn sample(f: f64, l: f64, k: i32) -> f64 {
 }
 
 /// `ga_gapi_curve_out`: null flag, type, bounds, periodicity and five points.
-fn curve_out(c: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
+pub fn curve_out(c: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
     flag(c.is_null());
     if c.is_null() {
         return Ok(());
@@ -44,7 +44,7 @@ fn curve_out(c: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
 }
 
 /// `ga_gapi_curve2d_out`: null flag, type, bounds, periodicity and five points.
-fn curve2d_out(c: &Handle<dyn Geom2dCurve>) -> Result<(), Failure> {
+pub fn curve2d_out(c: &Handle<dyn Geom2dCurve>) -> Result<(), Failure> {
     flag(c.is_null());
     if c.is_null() {
         return Ok(());
@@ -128,7 +128,7 @@ pub fn intcs_case(values: &[f64]) {
 }
 
 /// `ga_gapi_bspline_out`: degree, periodic, rational, poles (weights), knots and mults.
-fn bspline_out(c: &Handle<GeomBSplineCurve>) -> Result<(), Failure> {
+pub fn bspline_out(c: &Handle<GeomBSplineCurve>) -> Result<(), Failure> {
     flag(c.is_null());
     let Some(c) = c.get() else { return Ok(()) };
     int(c.degree());

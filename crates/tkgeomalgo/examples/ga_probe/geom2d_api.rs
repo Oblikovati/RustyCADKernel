@@ -14,7 +14,7 @@ use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Vector2};
 
 /// `ga_bspline_out`: degree, periodic, rational, poles (weights), knots and mults.
-fn bspline_out(c: &Handle<Geom2dBSplineCurve>) -> Result<(), Failure> {
+pub fn bspline_out(c: &Handle<Geom2dBSplineCurve>) -> Result<(), Failure> {
     flag(c.is_null());
     let Some(c) = c.get() else { return Ok(()) };
     int(c.degree());
