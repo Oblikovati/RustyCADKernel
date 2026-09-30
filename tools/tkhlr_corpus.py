@@ -13,3 +13,5 @@ def append_tkhlr_requests(requests: list[str]) -> None:
     """Append every TKHLR request family in a fixed order."""
     # HLRAlgo_Projector viewing frame (tkhlr_corpus_frame.py)
     __import__('tkhlr_corpus_frame').append_frame_requests(requests)
+    # Intrv (tkhlr_corpus_intrv.py)
+    __import__('tkhlr_corpus_intrv').append_intrv_requests(requests)

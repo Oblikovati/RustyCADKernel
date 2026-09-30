@@ -24,9 +24,16 @@
 // token stream; the Rust twin includes crates/tkgeomalgo/examples/ga_probe/common.rs.
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkhlr_probe_frame.cxx"
+#include "tkhlr_probe_intrv.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // HLRAlgo_Projector viewing frame (tkhlr_probe_frame.cxx)
  {"hl_frame", hl_frame_case},
+ // Intrv (tkhlr_probe_intrv.cxx)
+ {"iv_interval", hl_iv_interval_case},
+ {"iv_edit", hl_iv_edit_case},
+ {"iv_relate", hl_iv_relate_case},
+ {"iv_set", hl_iv_set_case},
+ {"iv_value", hl_iv_value_case},
 };
 int main() {
  std::string line;

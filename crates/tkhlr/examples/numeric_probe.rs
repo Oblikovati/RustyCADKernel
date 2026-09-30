@@ -3,6 +3,7 @@
 use std::io::{self, BufRead};
 mod hl_probe;
 use hl_probe::frame;
+use hl_probe::intrv;
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -12,6 +13,12 @@ type ProbeCase = fn(&[f64]);
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // HLRAlgo_Projector viewing frame (hl_probe/frame.rs)
     ("hl_frame", frame::frame_case),
+    // Intrv (hl_probe/intrv.rs)
+    ("iv_interval", intrv::interval_case),
+    ("iv_edit", intrv::edit_case),
+    ("iv_relate", intrv::relate_case),
+    ("iv_set", intrv::set_case),
+    ("iv_value", intrv::value_case),
 ];
 
 fn main() {
