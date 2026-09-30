@@ -1,21 +1,3 @@
-// Created on: 1995-02-08
-// Created by: Jacques GOUSSARD
-// Copyright (c) 1995-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
-// Rust translation of ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_LineTool.hxx/.cxx
-// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-
 //! `GeomInt_LineTool`: the vertices and the parameter range of an intersection line of
 //! any kind, and the decomposition of a walking line at the seams of periodic surfaces
 //! (`decomposition`, with its boundary helpers in `boundary` and the projector in
@@ -116,69 +98,28 @@ enum End {
 
 /// The parameter of the vertex at the end of the line, when it has one.
 fn end_point(l: &Handle<dyn IntPatchLine>, end: End, member: &str) -> Result<Option<f64>, Failure> {
-    let point = match l.arc_type() {
-        IntPatchIType::Analytic => {
-            let a = line_as::<IntPatchALine>(l, member)?;
-            let has: bool = if end == End::First {
-                a.has_first_point()
+    // The four line classes declare the same end-point members.
+    macro_rules! end_of {
+        ($line:ty) => {{
+            let x = line_as::<$line>(l, member)?;
+            let (has, point) = if end == End::First {
+                (x.has_first_point(), x.first_point())
             } else {
-                a.has_last_point()
+                (x.has_last_point(), x.last_point())
             };
-            has.then(|| {
-                if end == End::First {
-                    a.first_point()
-                } else {
-                    a.last_point()
-                }
-            })
-        }
-        IntPatchIType::Restriction => {
-            let r = line_as::<IntPatchRLine>(l, member)?;
-            let has: bool = if end == End::First {
-                r.has_first_point()
+            if has {
+                Some(point?.parameter_on_line())
             } else {
-                r.has_last_point()
-            };
-            has.then(|| {
-                if end == End::First {
-                    r.first_point()
-                } else {
-                    r.last_point()
-                }
-            })
-        }
-        IntPatchIType::Walking => {
-            let w = line_as::<IntPatchWLine>(l, member)?;
-            let has: bool = if end == End::First {
-                w.has_first_point()
-            } else {
-                w.has_last_point()
-            };
-            has.then(|| {
-                if end == End::First {
-                    w.first_point()
-                } else {
-                    w.last_point()
-                }
-            })
-        }
-        _ => {
-            let g = line_as::<IntPatchGLine>(l, member)?;
-            let has: bool = if end == End::First {
-                g.has_first_point()
-            } else {
-                g.has_last_point()
-            };
-            has.then(|| {
-                if end == End::First {
-                    g.first_point()
-                } else {
-                    g.last_point()
-                }
-            })
-        }
-    };
-    point.map(|p| p.map(|v| v.parameter_on_line())).transpose()
+                None
+            }
+        }};
+    }
+    Ok(match l.arc_type() {
+        IntPatchIType::Analytic => end_of!(IntPatchALine),
+        IntPatchIType::Restriction => end_of!(IntPatchRLine),
+        IntPatchIType::Walking => end_of!(IntPatchWLine),
+        _ => end_of!(IntPatchGLine),
+    })
 }
 
 /// `FirstParameter(L)` and `LastParameter(L)`.
