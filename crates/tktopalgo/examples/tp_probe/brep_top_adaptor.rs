@@ -1,7 +1,7 @@
 //! BRepTopAdaptor probe operations over faces read by `tp_face`, the Rust twin of
 //! tools/oracle/tktopalgo_probe_breptopadaptor.cxx. Edges are printed as their index
 //! among the edges of the FORWARD face (`tp_edge_index`), states as integers.
-use super::common::{Reader, attempt, end, flag, int, pnt, pnt2d, real};
+use super::common::{Reader, attempt, end, flag, int, pnt, pnt2d, real, show};
 use super::face::{tp_edge_index, tp_face};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorSurface;
@@ -24,13 +24,21 @@ pub fn fclass2d_case(values: &[f64]) {
         let f = tp_face(&mut r)?;
         let (tol, ontol) = (r.real(), r.real());
         let c = BRepTopAdaptorFClass2d::new(&f.face, tol)?;
-        attempt(|| Ok(int(c.perform_infinite_point()? as i32)));
+        show(c.perform_infinite_point().map(|value| value as i32), int);
         for _ in 0..r.integer() {
             let p = r.pnt2d();
-            attempt(|| Ok(int(c.perform(p, true)? as i32)));
-            attempt(|| Ok(int(c.perform(p, false)? as i32)));
-            attempt(|| Ok(int(c.test_on_restriction(p, ontol, true)? as i32)));
-            attempt(|| Ok(int(c.test_on_restriction(p, ontol, false)? as i32)));
+            show(c.perform(p, true).map(|value| value as i32), int);
+            show(c.perform(p, false).map(|value| value as i32), int);
+            show(
+                c.test_on_restriction(p, ontol, true)
+                    .map(|value| value as i32),
+                int,
+            );
+            show(
+                c.test_on_restriction(p, ontol, false)
+                    .map(|value| value as i32),
+                int,
+            );
         }
         Ok(())
     });
@@ -70,13 +78,13 @@ fn vertices(
             first = v.clone();
         }
         int(t.vertex_orientation(&v)? as i32);
-        attempt(|| Ok(real(t.vertex_tol_3d(&v)?)));
-        attempt(|| Ok(pnt(t.pnt(&v)?)));
+        show(t.vertex_tol_3d(&v), real);
+        show(t.pnt(&v), pnt);
         let brep: Handle<BRepTopAdaptorHVertex> = v.cast();
         let hv = brep.get().expect("a BRepTopAdaptor_HVertex");
         pnt2d(hv.value());
-        attempt(|| Ok(real(hv.parameter(arc)?)));
-        attempt(|| Ok(real(hv.resolution(arc)?)));
+        show(hv.parameter(arc), real);
+        show(hv.resolution(arc), real);
         flag(hv.is_same(&first)?);
         t.next_vertex()?;
     }
@@ -118,13 +126,13 @@ pub fn topol_case(values: &[f64]) {
             let edge = t.edge()?;
             int(tp_edge_index(&f.face, &edge));
             int(t.curve_orientation(&arc)? as i32);
-            attempt(|| Ok(real(t.curve_tol_3d(&arc)?)));
+            show(t.curve_tol_3d(&arc), real);
             real(arc.first_parameter()?);
             real(arc.last_parameter()?);
             attempt(|| vertices(&t, &arc));
             t.next();
         }
-        attempt(|| Ok(flag(t.domain_is_infinite()?)));
+        show(t.domain_is_infinite(), flag);
         attempt(|| samples(&t));
         Ok(())
     });
@@ -142,13 +150,17 @@ pub fn classify_case(values: &[f64]) {
         let t = BRepTopAdaptorTopolTool::with_surface(&s)?;
         for _ in 0..r.integer() {
             let p = r.pnt2d();
-            attempt(|| Ok(int(t.classify(p, tol, true)? as i32)));
-            attempt(|| Ok(int(t.classify(p, tol, false)? as i32)));
-            attempt(|| Ok(flag(t.is_the_point_on(p, tol, true)?)));
-            attempt(|| Ok(flag(t.is_the_point_on(p, tol, false)?)));
+            show(t.classify(p, tol, true).map(|value| value as i32), int);
+            show(t.classify(p, tol, false).map(|value| value as i32), int);
+            show(t.is_the_point_on(p, tol, true), flag);
+            show(t.is_the_point_on(p, tol, false), flag);
         }
         t.destroy();
-        attempt(|| Ok(int(t.classify(Point2::new(0.0, 0.0), tol, true)? as i32)));
+        show(
+            t.classify(Point2::new(0.0, 0.0), tol, true)
+                .map(|value| value as i32),
+            int,
+        );
         Ok(())
     });
     end();
@@ -166,12 +178,12 @@ pub fn tool_case(values: &[f64]) {
         int(b.get_surface().get_type()? as i32);
         real(b.get_surface().first_u_parameter()?);
         real(b.get_surface().last_v_parameter()?);
-        attempt(|| Ok(int(b.get_topol_tool().nb_samples()?)));
+        show(b.get_topol_tool().nb_samples(), int);
         let s: Handle<dyn Adaptor3dSurface> =
             Handle::new(BRepAdaptorSurface::with_face(&f.face, false)?).cast();
         let c = BRepTopAdaptorTool::with_surface(&s, 1e-9)?;
         flag(c.get_surface().object_address() == s.object_address());
-        attempt(|| Ok(flag(c.get_topol_tool().domain_is_infinite()?)));
+        show(c.get_topol_tool().domain_is_infinite(), flag);
         a.init_face(&f.face, 1e-9)?;
         int(a.get_surface().get_type()? as i32);
         a.init_surface(&s, 0.0)?;
@@ -200,22 +212,22 @@ pub fn errors_case(values: &[f64]) {
         attempt(|| BRepTopAdaptorTopolTool::with_surface(&gs).map(|_| ()));
         let gc: Handle<dyn Adaptor2dCurve2d> = Handle::new(Geom2dAdaptorCurve::default()).cast();
         attempt(|| t.initialize_curve(&gc));
-        attempt(|| Ok(real(t.curve_tol_3d(&gc)?)));
+        show(t.curve_tol_3d(&gc), real);
         let hv = Handle::new(Adaptor3dHVertex::new(
             Point2::new(1.0, 2.0),
             Orientation::Reversed,
             0.5,
         ));
         int(t.vertex_orientation(&hv)? as i32);
-        attempt(|| Ok(real(t.vertex_tol_3d(&hv)?)));
-        attempt(|| Ok(pnt(t.pnt(&hv)?)));
+        show(t.vertex_tol_3d(&hv), real);
+        show(t.pnt(&hv), pnt);
         let nv = Handle::new(BRepTopAdaptorHVertex::new(
             &Vertex::default(),
             &Handle::default(),
         ));
         let nvb: Handle<Adaptor3dHVertex> = nv.cast();
-        attempt(|| Ok(real(t.vertex_tol_3d(&nvb)?)));
-        attempt(|| Ok(pnt(t.pnt(&nvb)?)));
+        show(t.vertex_tol_3d(&nvb), real);
+        show(t.pnt(&nvb), pnt);
         pnt2d(nv.value());
         int(nv.orientation() as i32);
         let s: Handle<dyn Adaptor3dSurface> =
