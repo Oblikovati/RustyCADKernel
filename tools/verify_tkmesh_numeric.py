@@ -4,6 +4,7 @@
 Usage: python3 tools/verify_tkmesh_numeric.py --source OCCT --native-build BUILD
 This foundation corpus does not claim coverage of the triangulation algorithms.
 """
+from itertools import product
 from toolkit_numeric import NumericOracle, verify_numeric
 
 
@@ -19,6 +20,10 @@ def corpus() -> str:
     rows += [f'mesh_tools {outcome}' for outcome in (-1, 0, 1)]
     rows += [f'mesh_explorer {orientation} {duplicates}' for orientation in range(4)
              for duplicates in (0, 1)]
+    rows += ['mesh_pipeline ' + ' '.join(map(str, (builder, *stages, clean, cancel)))
+             for builder in (-4, -3, -2, -1, 0, 1)
+             for stages in product((-2, -1, 0, 1), repeat=5)
+             for clean, cancel in product((0, 1), repeat=2)]
     return '\n'.join(rows) + '\n'
 
 

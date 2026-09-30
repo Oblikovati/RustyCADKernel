@@ -88,6 +88,12 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
     match operation {
         "mesh_curve" => curve_case(values[0], values[1] != 0),
         "mesh_pcurve" => pcurve_case(values[0], values[1] != 0, orientation(values[2])),
+        "mesh_pipeline" => mesh_probe::pipeline::pipeline_case(
+            values[0],
+            values[1..6].try_into().unwrap(),
+            values[6] != 0,
+            values[7] != 0,
+        ),
         "mesh_tools" => mesh_probe::tools::tools_case(values[0]),
         "mesh_explorer" => mesh_probe::tools::explorer_case(values[0], values[1] != 0),
         "mesh_model" => mesh_probe::model_case(values[0], values[1], orientation(values[2])),
