@@ -292,3 +292,11 @@ closing-circle calculation; replacing it with `parameter + (PI + PI)` changes on
 The source operation order is now retained. The probe also preserves Init's implicit
 vector-to-direction normalization. General surface orchestration remains incomplete,
 so no Contap_Contour API or original TKHLR legacy declaration is claimed complete.
+
+### Walking-line internal points
+
+The native shifted root search and walking-point insertion now pass 1,296 differential
+requests (3,864 combined contour cases). The corpus exercises 34 insertion results,
+40 results with internal vertices, 48 native failure diagnostics and 324 empty-line
+exceptions. Diagnostic text is compared exactly through an injected output writer.
+Strict all-target Clippy passes; general Contap_Contour remains incomplete.

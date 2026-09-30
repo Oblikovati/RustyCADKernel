@@ -1,3 +1,5 @@
+mod walking_internal_case;
+pub use walking_internal_case::walking_internal_case;
 mod analytic_case;
 pub use analytic_case::analytic_case;
 mod segments;

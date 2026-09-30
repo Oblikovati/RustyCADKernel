@@ -32,6 +32,10 @@ mod print;
 mod process_segments;
 #[path = "../src/contap/contour/restriction_internal.rs"]
 mod restriction_internal;
+#[path = "../src/contap/contour/walking_internal.rs"]
+mod walking_internal;
+#[path = "../src/contap/contour/walking_root.rs"]
+mod walking_root;
 fn main() {
     for line in io::stdin().lock().lines() {
         let line = line.expect("private contour probe input");
@@ -47,6 +51,7 @@ fn main() {
             "contour_internal" => contour_private::internal_case(&values),
             "contour_segments" => contour_private::segments_case(&values),
             "contour_analytic" => contour_private::analytic_case(&values),
+            "contour_walking_internal" => contour_private::walking_internal_case(&values),
             "contour_math" => contour_private::math_case(&values),
             "contour_sections" => contour_private::sections_case(&values),
             _ => {

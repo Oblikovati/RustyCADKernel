@@ -26,6 +26,7 @@ def requests() -> str:
             [(1,0,0),(1,2,3)], [0,2]):
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
         lines.append('contour_math '+numbers([*surface,*uv,*tangent,*direction,circle]))
+    append_walking_internal_requests(lines)
     append_analytic_requests(lines)
     append_attachment_requests(lines)
     append_section_requests(lines)
@@ -64,6 +65,13 @@ def append_analytic_requests(lines: list[str]) -> None:
             [(1,2,3),(-1,0,1),(0,1,0),(0,0,-1)],[0.5,3],bounds,[(0,0,0),(1,-2,3)]):
         surface=[kind,*origin,0,0,1,1,0,0,0,radius,0.4,*limits]
         lines.append('contour_analytic '+numbers([*surface,mode,*direction]))
+
+
+def append_walking_internal_requests(lines: list[str]) -> None:
+    """Observe mutation of empty, singleton and sampled surface polylines."""
+    for kind,count,path,seed,mode,direction in product(range(6),[0,1,3,7],range(3),[0,1],range(3),[(1,0,0),(0,0,1),(1,2,3)]):
+        surface=[kind,0,0,0,0,0,1,1,0,0,0,2,0.4,-2,2,-1,1]
+        lines.append('contour_walking_internal '+numbers([*surface,mode,*direction,count,path,seed]))
 
 
 def source_wrapper(source: Path, build: Path, output: Path, libraries: list[str]) -> Path:
