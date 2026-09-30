@@ -96,3 +96,5 @@ impl TopolTool {
         Ok(counts[0].wrapping_mul(counts[1]))
     }
 }
+
+mod domain;

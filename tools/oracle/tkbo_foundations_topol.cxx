@@ -41,11 +41,20 @@ void bo_topol_parameters(IntTools_TopolTool& t) {
  NCollection_Array1<double> u,v;t.UParameters(u);t.VParameters(v);
  for(const auto* a:{&u,&v}) {bo_int(a->Length());for(double value:*a)bo_real(value);}
 }
+void bo_topol_vertices(Adaptor3d_TopolTool& t,const occ::handle<Adaptor2d_Curve2d>& arc) {
+ t.Initialize(arc);t.InitVertexIterator();while(t.MoreVertex()){auto vertex=t.Vertex();bo_int(t.Orientation(vertex));bo_int(t.Identical(vertex,vertex));
+ try{bo_real(t.Tol3d(vertex));}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}t.NextVertex();}bo_int(t.MoreVertex());
+}
+void bo_topol_domain(Adaptor3d_TopolTool& t) {
+ bo_int(t.DomainIsInfinite());bo_int(t.Has3d());bo_int(t.Classify(gp_Pnt2d(),1e-7,true));bo_int(t.IsThePointOn(gp_Pnt2d(),1e-7,true));bo_int(t.IsUniformSampling());t.Init();
+ while(t.More()){auto arc=t.Value();bo_int(t.Orientation(arc));bo_int(t.Edge()!=nullptr);try{bo_real(t.Tol3d(arc));}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}bo_topol_vertices(t,arc);t.Next();}
+ bo_int(t.More());t.SamplePnts(0.1,4,5);NCollection_Array1<double> u,v;t.UParameters(u);t.VParameters(v);bo_real(u(1));bo_real(v(1));
+}
 void bo_topol_case(const std::vector<double>& v) {
  auto s=bo_topol_surface(v);IntTools_TopolTool t(s);
  try{t.Initialize();}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
  bo_int(t.More());bo_topol_state(t);t.ComputeSamplePoints();bo_topol_state(t);
  t.SamplePnts(0.1,4,5);bo_topol_state(t);bo_topol_parameters(t);
  t.Initialize(s);bo_topol_point(t,1);bo_topol_state(t);bo_topol_parameters(t);
- t.SamplePnts(0.2,6,7);bo_topol_state(t);
+ t.SamplePnts(0.2,6,7);bo_topol_state(t);bo_topol_domain(t);
 }
