@@ -681,3 +681,11 @@ subdivision histories. Independent 3D/2D parameters, virtual split criteria, sha
 knot state, reversed/free edges and unchanged small-curve outputs are covered.
 All three splitter divergence-accounting gates also passed after the shared tool's
 optional exception-type extension; their documented differences remain open.
+
+### Linear parameter transfer
+
+TransferParameters adds eight callable APIs and an RTTI mapping. The integrated
+source gate passes all 101 mapped declarations in both native OCCT and Rust, with
+17,284 exact numeric requests including 140 new transfer histories. Independent
+3D/pcurve domains, collapsed spans, sequence ownership and reversed range copying
+are covered. Projection-based transfer and WireDivide remain in progress.

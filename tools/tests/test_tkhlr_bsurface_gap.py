@@ -1,4 +1,4 @@
-"""Strict missing-symbol evidence validation; python3 -m unittest discover -s tools -p test_tkhlr_bsurface_gap.py."""
+"""Strict missing-symbol evidence validation; python3 -m unittest discover -s tools/tests -p test_tkhlr_bsurface_gap.py."""
 import unittest
 from tkhlr_bsurface_gap import validate_axis_failure
 

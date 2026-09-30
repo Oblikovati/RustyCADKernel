@@ -87,3 +87,13 @@ CellFilter now accepts fallible callbacks while retaining its existing interface
 Early removals and throw-time traversal order match native behavior. The integrated
 mesh gate passes 102,356 exact requests; all 251 existing TKernel tree comparisons
 and three new mutation-order regressions pass.
+
+### Vertex indexing
+
+VertexInspector and VertexTool add 40 API rows: 29 implemented and 11 partial.
+The integrated routine oracle passes 103,010 defined-domain comparisons and also
+replays nine separately reported invalid-index differences. Native code faults in
+six cases and reads uninitialized allocated slots in three; Rust reports bounds
+errors. Those differences remain open and are never counted as exact passes.
+The header scanner now identifies Handle(T) return methods individually; three
+older renderer identities were corrected without combining distinct members.

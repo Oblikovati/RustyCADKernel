@@ -323,3 +323,11 @@ All 30 BCurveTool header members are mapped. The integrated oracle passes 8,800
 exact requests, including inverse-span sampling, rational/located spline poles,
 partial buffer writes and zero-span conversion behavior. The nonempty HLRBRep
 legacy tests still require the remaining curve/surface and intersection pipeline.
+
+### Exact hidden-line surface tool
+
+BSurfaceTool adds 49 implemented members. Its 600-case integrated native oracle
+covers real conic/spline/swept surfaces, locations, trims, derivatives and sampling.
+The declared Axis member is undefined in pinned OCCT: its oracle first compiles the
+call, then requires the specific missing-symbol linker error. This remains an
+upstream-unimplemented API gap and is not recorded as an exclusion or parity pass.

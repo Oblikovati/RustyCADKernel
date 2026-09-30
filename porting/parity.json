@@ -209968,15 +209968,6 @@
       "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
     },
     {
-      "upstream_id": "BRepMesh_DefaultRangeSplitter::Handle(IMeshData::ListOfPnt2d)",
-      "toolkit": "TKMesh",
-      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
-      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
-      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::generate_surface_nodes",
-      "status": "implemented",
-      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
-    },
-    {
       "upstream_id": "BRepMesh_DefaultRangeSplitter::Point(const gp_Pnt2d&) const",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
@@ -210144,15 +210135,6 @@
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
       "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
       "rust_item": "rustycad_tkmesh::brep_mesh::ConeRangeSplitter::get_split_steps",
-      "status": "implemented",
-      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
-    },
-    {
-      "upstream_id": "BRepMesh_ConeRangeSplitter::Handle(IMeshData::ListOfPnt2d)",
-      "toolkit": "TKMesh",
-      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
-      "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
-      "rust_item": "rustycad_tkmesh::brep_mesh::ConeRangeSplitter::generate_surface_nodes",
       "status": "implemented",
       "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
     },
@@ -210854,15 +210836,6 @@
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
       "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker::perform",
-      "status": "implemented",
-      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
-    },
-    {
-      "upstream_id": "BRepMesh_FaceChecker::Handle(IMeshData::MapOfIEdgePtr)",
-      "toolkit": "TKMesh",
-      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
-      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
-      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker::get_intersecting_edges",
       "status": "implemented",
       "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
     },
@@ -212564,6 +212537,874 @@
       "rust_item": "",
       "status": "excluded",
       "notes": "OCCT RTTI macro has no separate callable Rust API; impl_transient preserves runtime type ancestry."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::FirstUParameter(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::first_u_parameter",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::FirstVParameter(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::first_v_parameter",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::LastUParameter(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::last_u_parameter",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::LastVParameter(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::last_v_parameter",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbUIntervals(const BRepAdaptor_Surface&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_u_intervals",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbVIntervals(const BRepAdaptor_Surface&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_v_intervals",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::UIntervals(const BRepAdaptor_Surface&,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::u_intervals",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::VIntervals(const BRepAdaptor_Surface&,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::v_intervals",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::UTrim(const BRepAdaptor_Surface&,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::u_trim",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::VTrim(const BRepAdaptor_Surface&,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::v_trim",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::IsUClosed(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::is_u_closed",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::IsVClosed(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::is_v_closed",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::IsUPeriodic(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::is_u_periodic",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::UPeriod(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::u_period",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::IsVPeriodic(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::is_v_periodic",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::VPeriod(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::v_period",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Value(const BRepAdaptor_Surface&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::value",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::D0(const BRepAdaptor_Surface&,double,double,gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::d0",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::D1(const BRepAdaptor_Surface&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::d1",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::D2(const BRepAdaptor_Surface&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::d2",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::D3(const BRepAdaptor_Surface&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::d3",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::DN(const BRepAdaptor_Surface&,double,double,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::dn",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::UContinuity(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::u_continuity",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::VContinuity(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::v_continuity",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::UDegree(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::u_degree",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbUPoles(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_u_poles",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbUKnots(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_u_knots",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::IsURational(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::is_u_rational",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::VDegree(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::v_degree",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbVPoles(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_v_poles",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbVKnots(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_v_knots",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::IsVRational(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::is_v_rational",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::UResolution(const BRepAdaptor_Surface&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::u_resolution",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::VResolution(const BRepAdaptor_Surface&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::v_resolution",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::GetType(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::get_type",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Plane(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::plane",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Cylinder(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::cylinder",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Cone(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::cone",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Torus(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::torus",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Sphere(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::sphere",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Bezier(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::bezier",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::BSpline(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::bspline",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::AxeOfRevolution(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::axe_of_revolution",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Direction(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::direction",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::BasisCurve(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::basis_curve",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::Axis(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "",
+      "status": "upstream_unimplemented",
+      "notes": "Pinned OCCT 3d097a03 declares Axis but provides no definition. Persistent tools/oracle/tkhlr_bsurface_missing_axis.cxx compiles successfully and links with precisely undefined HLRBRep_BSurfaceTool::Axis(BRepAdaptor_Surface const&); tools/verify_tkhlr_bsurface.py requires this failure and rejects successful links or unrelated diagnostics. No Rust implementation or executable acceptance claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbSamplesU(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_u_range",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbSamplesV(const BRepAdaptor_Surface&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_v_range",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbSamplesU(const BRepAdaptor_Surface&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_u_range",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "HLRBRep_BSurfaceTool::NbSamplesV(const BRepAdaptor_Surface&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_v_range",
+      "status": "implemented",
+      "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Dimension",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::DIMENSION",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Point",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::VertexInspectorPoint",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Target",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::VertexInspectorTarget",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Coord(int,const Point&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::coord",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Shift(const Point&,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::shift",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector(const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::new",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Add(const BRepMesh_Vertex&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::add",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::SetTolerance(double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::set_tolerance",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::SetTolerance(double,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::set_tolerances",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Clear()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::clear",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Delete(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::delete",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::NbVertices() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::nb_vertices",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::GetVertex(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::get_vertex",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::SetPoint(const gp_XY&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::set_point",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::GetCoincidentPoint() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::get_coincident_point",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::GetListOfDelPoints() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::get_list_of_del_points",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Vertices() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::vertices",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::ChangeVertices()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::change_vertices",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::Inspect(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::inspect",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexInspector::IsEqual(int,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexInspector.hxx",
+      "source_sha256": "621b0b0e721df137fa4a1a25a4078e67b0c0bfbca3f90b0d34bd44fb4430a57f",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexInspector::is_equal",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool(const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::new",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::SetCellSize(double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::set_cell_size",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::SetCellSize(double,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::set_cell_sizes",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::SetTolerance(double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::set_tolerance",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::SetTolerance(double,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::set_tolerances",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::GetTolerance(double&,double&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::get_tolerance",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::Add(const BRepMesh_Vertex&,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::add",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::DeleteVertex(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::delete_vertex",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::Vertices() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::vertices",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::ChangeVertices()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::change_vertices",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::FindKey(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::find_key",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::FindIndex(const BRepMesh_Vertex&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::find_index",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::Extent() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::extent",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::IsEmpty() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::is_empty",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::Substitute(int,const BRepMesh_Vertex&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::substitute",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::RemoveLast()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::remove_last",
+      "status": "partial",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact. Explicit divergence: native invalid indices access unchecked DynamicArray slots (SIGSEGV for negative/zero; uninitialized allocated memory for index 2 in one-item storage), while Rust returns Standard_OutOfRange. Nine candidates retained by tools/verify_tkmesh_vertex_undefined.py with complete_parity=false; wrapper operations inherit these index failures. No legacy declaration is skipped or claimed for these candidates."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::GetListOfDelNodes() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool::get_list_of_del_nodes",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_VertexTool::DEFINE_STANDARD_RTTIEXT(BRepMesh_VertexTool,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_VertexTool.hxx",
+      "source_sha256": "866a1aa6f8359ceeec1fe1e48aaacc5d046bd672b6bd4c9bd90a329b6afb6908",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertexTool (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native cell-filter traversal, strict radial/rectangular tolerance selection, nearest-candidate ties, duplicate deleted-slot FIFO reuse and allocator ownership. Shared vector and mutable handle-slot ownership preserve live aliases; GetVertex uses value read plus explicit set_vertex. Scalar cell reset after anisotropic reset preserves the native bounds failure. Defined-domain numeric corpus is exact."
+    },
+    {
+      "upstream_id": "BRepMesh_DefaultRangeSplitter::GenerateSurfaceNodes(const IMeshTools_Parameters&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DefaultRangeSplitter.hxx",
+      "source_sha256": "103f0b4f2bef1a79e69ff346634e2d3f99cdb47a606936cfd1d997a5f91ad10b",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DefaultRangeSplitter::generate_surface_nodes",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_ConeRangeSplitter::GenerateSurfaceNodes(const IMeshTools_Parameters&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ConeRangeSplitter.hxx",
+      "source_sha256": "754b5e7ecf5b25c8887db42c20fd2a95e1f59db821cd1d13b242c356c0f179c3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ConeRangeSplitter::generate_surface_nodes",
+      "status": "implemented",
+      "notes": "Exact native range bounds, twenty-step three-isoparameter length sampling, tolerance/delta, scaling, persistent validity and cone interior nodes. RangeSplitter trait preserves virtual hooks; public state fields retain native protected subclass access."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::GetIntersectingEdges() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker::get_intersecting_edges",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::new",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::from_edge",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters::Init(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::init",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters::SetMaxTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::set_max_tolerance",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters::Perform(const occ::handle<NCollection_HSequence<double>>&,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::perform",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters::Perform(double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::perform_parameter",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters::TransferRange(TopoDS_Edge&,double,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::transfer_range",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters::IsSameRange() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParameters::is_same_range",
+      "status": "implemented",
+      "notes": "Linear base implementation preserves native expression order, gp::Resolution collapsed/reversed spatial-span fallback, virtual scalar dispatch for sequence transfer, reinitialization state and CopyRanges geometry. 140 native differential histories exact. No original legacy declarations for this class. TransferParametersProj remains unimplemented. Native uninitialized constructor fields are never observed before initialization; null input sequence returns a Rust Standard_NullObject error and is not an exact native crash comparison. Existing upstream splitter divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_TransferParameters::DEFINE_STANDARD_RTTIEXT(ShapeAnalysis_TransferParameters,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParameters.hxx",
+      "source_sha256": "bd2ecd02812f6c0b8646adf38e4b89d0c973fcf04d5ab1726c40714d2bc087cf",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "RTTI macro has no separate callable API; impl_transient preserves native type ancestry."
     }
   ],
   "tests": [
