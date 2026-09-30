@@ -72,7 +72,7 @@ fn print_splitter(splitter: &ProbeSplitter, previous: &ProbeCurves) -> Result<()
     print_curves(&curves)?;
     print_curves(previous)
 }
-fn print_curves(curves: &ProbeCurves) -> Result<(), Failure> {
+pub(super) fn print_curves(curves: &ProbeCurves) -> Result<(), Failure> {
     flag(curves.is_null());
     if curves.is_null() {
         return Ok(());
