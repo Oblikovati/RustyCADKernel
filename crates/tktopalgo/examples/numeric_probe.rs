@@ -3,9 +3,9 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_check, brep_class, brep_class3d,
-    brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor,
-    brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
+    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_builder_api_makers, brep_check,
+    brep_class, brep_class3d, brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package,
+    brep_lib_wire, brep_top_adaptor, brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -16,6 +16,17 @@ type ProbeCase = fn(&[f64]);
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // BRepBuilderAPI (tp_probe/brep_builder_api.rs)
     ("tp_make_vertex", brep_builder_api::make_vertex_case),
+    // BRepBuilderAPI makers and modifications (tp_probe/brep_builder_api_makers.rs,
+    // tp_probe/brep_builder_api_modify.rs)
+    ("bba_vertex", brep_builder_api_makers::vertex_case),
+    ("bba_package", brep_builder_api_makers::package_case),
+    ("bba_edge", brep_builder_api_makers::edge_case),
+    ("bba_edge2d", brep_builder_api_makers::edge2d_case),
+    ("bba_polygon", brep_builder_api_makers::polygon_case),
+    ("bba_wire", brep_builder_api_makers::wire_case),
+    ("bba_solid", brep_builder_api_makers::solid_case),
+    ("bba_face", brep_builder_api_makers::face_case),
+    ("bba_shell", brep_builder_api_makers::shell_case),
     // BRepClass (tp_probe/brep_class.rs)
     ("brc_edge", brep_class::edge_case),
     ("brc_explorer", brep_class::explorer_case),

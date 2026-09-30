@@ -145,60 +145,157 @@ fn unflagged_record(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     Ok(sh)
 }
 
-/// The wire of a shape record (Standard_TypeMismatch otherwise).
-fn wire_record(r: &mut Reader<'_>) -> Result<Wire, Failure> {
-    topods::wire(&shape_record(r)?)
+/// One gp constructor of `tp_gp_face` (`make` natively): mode 0 the whole surface, 1 the
+/// bounds, else the wire.
+macro_rules! gp_face_ctor {
+    ($maker:ident, $mode:expr, $bounds:expr, $wire:expr, $inside:expr, $gp:expr, $plain:ident, $on_bounds:ident, $on_wire:ident) => {
+        Some(match $mode {
+            0 => $maker::$plain($gp)?,
+            1 => $maker::$on_bounds($gp, $bounds)?,
+            _ => $maker::$on_wire($gp, &$wire, $inside)?,
+        })
+    };
 }
+pub(crate) use gp_face_ctor;
 
-/// `tp_gp_face`: None for a surface that is not elementary.
-fn gp_face(
-    s: &Handle<dyn GeomSurface>,
-    mode: i32,
-    r: &mut Reader<'_>,
-) -> Result<Option<BRepLibMakeFace>, Failure> {
-    let mut bounds = (0., 0., 0., 0.);
-    let mut wire = Wire::default();
-    let mut inside = true;
-    if mode == 1 {
-        bounds = (r.real(), r.real(), r.real(), r.real());
-    }
-    if mode == 4 {
-        wire = wire_record(r)?;
-        inside = r.flag();
-    }
-    macro_rules! make {
-        ($gp:expr, $plain:ident, $bounds:ident, $wire:ident) => {
-            Some(match mode {
-                0 => BRepLibMakeFace::$plain($gp)?,
-                1 => BRepLibMakeFace::$bounds($gp, bounds)?,
-                _ => BRepLibMakeFace::$wire($gp, &wire, inside)?,
+/// `tp_gp_face` and the maker of `blm_face` (`tp_face_request`) over a face maker with the
+/// BRepLib member names; `$print` shows the first maker of mode 10. The BRepBuilderAPI
+/// probe instantiates them on its maker, as the native templates.
+macro_rules! face_request_fn {
+    ($gp_face:ident, $request:ident, $maker:ident, $print:ident) => {
+        /// `tp_gp_face`: None for a surface that is not elementary.
+        fn $gp_face(
+            s: &Handle<dyn GeomSurface>,
+            mode: i32,
+            r: &mut Reader<'_>,
+        ) -> Result<Option<$maker>, Failure> {
+            let mut bounds = (0., 0., 0., 0.);
+            let mut wire = Wire::default();
+            let mut inside = true;
+            if mode == 1 {
+                bounds = (r.real(), r.real(), r.real(), r.real());
+            }
+            if mode == 4 {
+                wire = topods::wire(&shape_record(r)?)?;
+                inside = r.flag();
+            }
+            Ok(if let Some(p) = s.cast::<GeomPlane>().get() {
+                gp_face_ctor!(
+                    $maker,
+                    mode,
+                    bounds,
+                    wire,
+                    inside,
+                    p.pln(),
+                    from_plane,
+                    from_plane_bounds,
+                    from_plane_wire
+                )
+            } else if let Some(c) = s.cast::<GeomCylindricalSurface>().get() {
+                gp_face_ctor!(
+                    $maker,
+                    mode,
+                    bounds,
+                    wire,
+                    inside,
+                    c.cylinder()?,
+                    from_cylinder,
+                    from_cylinder_bounds,
+                    from_cylinder_wire
+                )
+            } else if let Some(k) = s.cast::<GeomConicalSurface>().get() {
+                gp_face_ctor!(
+                    $maker,
+                    mode,
+                    bounds,
+                    wire,
+                    inside,
+                    k.cone()?,
+                    from_cone,
+                    from_cone_bounds,
+                    from_cone_wire
+                )
+            } else if let Some(sp) = s.cast::<GeomSphericalSurface>().get() {
+                gp_face_ctor!(
+                    $maker,
+                    mode,
+                    bounds,
+                    wire,
+                    inside,
+                    sp.sphere()?,
+                    from_sphere,
+                    from_sphere_bounds,
+                    from_sphere_wire
+                )
+            } else if let Some(t) = s.cast::<GeomToroidalSurface>().get() {
+                gp_face_ctor!(
+                    $maker,
+                    mode,
+                    bounds,
+                    wire,
+                    inside,
+                    t.torus()?,
+                    from_torus,
+                    from_torus_bounds,
+                    from_torus_wire
+                )
+            } else {
+                None
             })
-        };
-    }
-    Ok(if let Some(p) = s.cast::<GeomPlane>().get() {
-        make!(p.pln(), from_plane, from_plane_bounds, from_plane_wire)
-    } else if let Some(c) = s.cast::<GeomCylindricalSurface>().get() {
-        make!(
-            c.cylinder()?,
-            from_cylinder,
-            from_cylinder_bounds,
-            from_cylinder_wire
-        )
-    } else if let Some(k) = s.cast::<GeomConicalSurface>().get() {
-        make!(k.cone()?, from_cone, from_cone_bounds, from_cone_wire)
-    } else if let Some(sp) = s.cast::<GeomSphericalSurface>().get() {
-        make!(
-            sp.sphere()?,
-            from_sphere,
-            from_sphere_bounds,
-            from_sphere_wire
-        )
-    } else if let Some(t) = s.cast::<GeomToroidalSurface>().get() {
-        make!(t.torus()?, from_torus, from_torus_bounds, from_torus_wire)
-    } else {
-        None
-    })
+        }
+
+        /// The maker of `blm_face`, None for a gp mode on another surface.
+        fn $request(r: &mut Reader<'_>) -> Result<Option<$maker>, Failure> {
+            let mode = r.integer();
+            Ok(Some(match mode {
+                0 | 1 | 4 => {
+                    let s = surface2(r)?;
+                    return $gp_face(&s, mode, r);
+                }
+                2 => $maker::from_surface(&surface2(r)?, r.real())?,
+                3 | 10 => {
+                    let s = surface2(r)?;
+                    let b = (r.real(), r.real(), r.real(), r.real());
+                    let mut m = $maker::from_surface_bounds(&s, b, r.real())?;
+                    if mode == 10 {
+                        $print(&m);
+                        let s2 = surface2(r)?;
+                        let b2 = (r.real(), r.real(), r.real(), r.real());
+                        m.init_surface_bounds(&s2, b2, r.real())?;
+                    }
+                    m
+                }
+                5 => {
+                    let s = surface2(r)?;
+                    let w = topods::wire(&shape_record(r)?)?;
+                    $maker::from_surface_wire(&s, &w, r.flag())?
+                }
+                6 => {
+                    let w = topods::wire(&shape_record(r)?)?;
+                    $maker::from_wire(&w, r.flag())?
+                }
+                7 => $maker::from_face(&topods::face(&shape_record(r)?)?)?,
+                8 => {
+                    let f: Face = topods::face(&shape_record(r)?)?;
+                    $maker::from_face_wire(&f, &topods::wire(&shape_record(r)?)?)?
+                }
+                _ => {
+                    let s = surface2(r)?;
+                    let bound = r.flag();
+                    let mut m = $maker::new();
+                    m.init_surface(&s, bound, r.real())?;
+                    for _ in 0..r.integer() {
+                        m.add(&topods::wire(&shape_record(r)?)?)?;
+                    }
+                    m
+                }
+            }))
+        }
+    };
 }
+pub(crate) use face_request_fn;
+
+face_request_fn!(gp_face, face_request, BRepLibMakeFace, face_maker);
 
 /// `tp_face_maker`.
 fn face_maker(m: &BRepLibMakeFace) {
@@ -210,54 +307,6 @@ fn face_maker(m: &BRepLibMakeFace) {
 /// The four bounds of a request.
 fn bounds(r: &mut Reader<'_>) -> (f64, f64, f64, f64) {
     (r.real(), r.real(), r.real(), r.real())
-}
-
-/// The maker of `blm_face`, None for a gp mode on another surface.
-fn face_request(r: &mut Reader<'_>) -> Result<Option<BRepLibMakeFace>, Failure> {
-    let mode = r.integer();
-    Ok(Some(match mode {
-        0 | 1 | 4 => {
-            let s = surface2(r)?;
-            return gp_face(&s, mode, r);
-        }
-        2 => BRepLibMakeFace::from_surface(&surface2(r)?, r.real())?,
-        3 | 10 => {
-            let s = surface2(r)?;
-            let b = bounds(r);
-            let mut m = BRepLibMakeFace::from_surface_bounds(&s, b, r.real())?;
-            if mode == 10 {
-                face_maker(&m);
-                let s2 = surface2(r)?;
-                let b2 = bounds(r);
-                m.init_surface_bounds(&s2, b2, r.real())?;
-            }
-            m
-        }
-        5 => {
-            let s = surface2(r)?;
-            let w = wire_record(r)?;
-            BRepLibMakeFace::from_surface_wire(&s, &w, r.flag())?
-        }
-        6 => {
-            let w = wire_record(r)?;
-            BRepLibMakeFace::from_wire(&w, r.flag())?
-        }
-        7 => BRepLibMakeFace::from_face(&topods::face(&shape_record(r)?)?)?,
-        8 => {
-            let f: Face = topods::face(&shape_record(r)?)?;
-            BRepLibMakeFace::from_face_wire(&f, &wire_record(r)?)?
-        }
-        _ => {
-            let s = surface2(r)?;
-            let bound = r.flag();
-            let mut m = BRepLibMakeFace::new();
-            m.init_surface(&s, bound, r.real())?;
-            for _ in 0..r.integer() {
-                m.add(&wire_record(r)?)?;
-            }
-            m
-        }
-    }))
 }
 
 /// `blm_face`.

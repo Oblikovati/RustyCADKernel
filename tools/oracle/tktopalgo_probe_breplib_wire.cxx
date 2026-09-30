@@ -6,6 +6,8 @@
 // on [0, distance] (tolerance 1e-7); 1 the circle P N R on [a1, a2]; 2 no curve,
 // degenerated. An edge reference is `index orientation`.
 //
+// The first-call readers are templates over the maker, so that the BRepBuilderAPI probe
+// runs the same calls on its makers.
 // `blm_polygon prec vertices ctor args nops (op)...`: ctor 0 default, 1..3 two to four
 // points and (for 2, 3) the close flag, 4..6 two to four vertex references and (for 5, 6)
 // the close flag; op 0 Add(P), 1 Add(V), 2 Close(). Prints Added and IsDone after each op,
@@ -39,15 +41,15 @@ TopoDS_Wire tp_wire_of(GaReader& r,const std::vector<TopoDS_Edge>& es){
  TopoDS_Wire w;int n=r.integer();if(n<0)return w;BRep_Builder B;B.MakeWire(w);
  for(int i=0;i<n;++i)B.Add(w,tp_edge_ref(r,es));
  return w;}
-BRepLib_MakePolygon* tp_polygon_first(GaReader& r,const std::vector<TopoDS_Vertex>& vs){
+template<class M=BRepLib_MakePolygon> M* tp_polygon_first(GaReader& r,const std::vector<TopoDS_Vertex>& vs){
  int ctor=r.integer();
- if(ctor==0)return new BRepLib_MakePolygon();
- if(ctor<=3){gp_Pnt p1=r.pnt(),p2=r.pnt();if(ctor==1)return new BRepLib_MakePolygon(p1,p2);
-  gp_Pnt p3=r.pnt();if(ctor==2)return new BRepLib_MakePolygon(p1,p2,p3,r.flag());
-  gp_Pnt p4=r.pnt();return new BRepLib_MakePolygon(p1,p2,p3,p4,r.flag());}
- TopoDS_Vertex v1=tp_vertex_ref(r,vs),v2=tp_vertex_ref(r,vs);if(ctor==4)return new BRepLib_MakePolygon(v1,v2);
- TopoDS_Vertex v3=tp_vertex_ref(r,vs);if(ctor==5)return new BRepLib_MakePolygon(v1,v2,v3,r.flag());
- TopoDS_Vertex v4=tp_vertex_ref(r,vs);return new BRepLib_MakePolygon(v1,v2,v3,v4,r.flag());}
+ if(ctor==0)return new M();
+ if(ctor<=3){gp_Pnt p1=r.pnt(),p2=r.pnt();if(ctor==1)return new M(p1,p2);
+  gp_Pnt p3=r.pnt();if(ctor==2)return new M(p1,p2,p3,r.flag());
+  gp_Pnt p4=r.pnt();return new M(p1,p2,p3,p4,r.flag());}
+ TopoDS_Vertex v1=tp_vertex_ref(r,vs),v2=tp_vertex_ref(r,vs);if(ctor==4)return new M(v1,v2);
+ TopoDS_Vertex v3=tp_vertex_ref(r,vs);if(ctor==5)return new M(v1,v2,v3,r.flag());
+ TopoDS_Vertex v4=tp_vertex_ref(r,vs);return new M(v1,v2,v3,v4,r.flag());}
 void tp_blm_polygon_case(std::istream& input){
  GaReader r{input};TpPrecisionScope scope(r.real());std::vector<TopoDS_Vertex> vs=tp_vertices(r);
  try{
@@ -61,15 +63,15 @@ void tp_blm_polygon_case(std::istream& input){
   tp_shape(m->Edge());GA_TRY(tp_shape(m->Wire()))
  }catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
  ga_end();}
-BRepLib_MakeWire* tp_wire_first(GaReader& r,const std::vector<TopoDS_Edge>& es,bool& known){
+template<class M=BRepLib_MakeWire> M* tp_wire_first(GaReader& r,const std::vector<TopoDS_Edge>& es,bool& known){
  int ctor=r.integer();known=true;
- if(ctor==0)return new BRepLib_MakeWire();
+ if(ctor==0)return new M();
  if(ctor==5||ctor==6){TopoDS_Wire w=tp_wire_of(r,es);known=w.NbChildren()>0;
-  if(ctor==5)return new BRepLib_MakeWire(w);known=true;return new BRepLib_MakeWire(w,tp_edge_ref(r,es));}
- TopoDS_Edge e1=tp_edge_ref(r,es);if(ctor==1)return new BRepLib_MakeWire(e1);
- TopoDS_Edge e2=tp_edge_ref(r,es);if(ctor==2)return new BRepLib_MakeWire(e1,e2);
- TopoDS_Edge e3=tp_edge_ref(r,es);if(ctor==3)return new BRepLib_MakeWire(e1,e2,e3);
- return new BRepLib_MakeWire(e1,e2,e3,tp_edge_ref(r,es));}
+  if(ctor==5)return new M(w);known=true;return new M(w,tp_edge_ref(r,es));}
+ TopoDS_Edge e1=tp_edge_ref(r,es);if(ctor==1)return new M(e1);
+ TopoDS_Edge e2=tp_edge_ref(r,es);if(ctor==2)return new M(e1,e2);
+ TopoDS_Edge e3=tp_edge_ref(r,es);if(ctor==3)return new M(e1,e2,e3);
+ return new M(e1,e2,e3,tp_edge_ref(r,es));}
 void tp_blm_wire_case(std::istream& input){
  GaReader r{input};std::vector<TopoDS_Vertex> vs=tp_vertices(r);
  try{
@@ -100,16 +102,16 @@ TopoDS_Solid tp_solid_of(GaReader& r,const std::vector<TopoDS_Shell>& shells){
  TopoDS_Solid s;BRep_Builder B;B.MakeSolid(s);int n=r.integer();
  for(int i=0;i<n;++i)B.Add(s,shells.at(r.integer()));
  return s;}
-BRepLib_MakeSolid* tp_solid_first(int ctor,GaReader& r,const std::vector<TopoDS_Shell>& shells){
- if(ctor==0)return new BRepLib_MakeSolid();
+template<class M=BRepLib_MakeSolid> M* tp_solid_first(int ctor,GaReader& r,const std::vector<TopoDS_Shell>& shells){
+ if(ctor==0)return new M();
  if(ctor==1){TopoDS_CompSolid cs;BRep_Builder B;B.MakeCompSolid(cs);int n=r.integer();
   for(int i=0;i<n;++i){TopoDS_Solid s;B.MakeSolid(s);B.Add(s,shells.at(r.integer()));B.Add(cs,s);}
-  return new BRepLib_MakeSolid(cs);}
- if(ctor==5)return new BRepLib_MakeSolid(tp_solid_of(r,shells));
- if(ctor==6){TopoDS_Solid so=tp_solid_of(r,shells);return new BRepLib_MakeSolid(so,shells.at(r.integer()));}
- const TopoDS_Shell& s1=shells.at(r.integer());if(ctor==2)return new BRepLib_MakeSolid(s1);
- const TopoDS_Shell& s2=shells.at(r.integer());if(ctor==3)return new BRepLib_MakeSolid(s1,s2);
- return new BRepLib_MakeSolid(s1,s2,shells.at(r.integer()));}
+  return new M(cs);}
+ if(ctor==5)return new M(tp_solid_of(r,shells));
+ if(ctor==6){TopoDS_Solid so=tp_solid_of(r,shells);return new M(so,shells.at(r.integer()));}
+ const TopoDS_Shell& s1=shells.at(r.integer());if(ctor==2)return new M(s1);
+ const TopoDS_Shell& s2=shells.at(r.integer());if(ctor==3)return new M(s1,s2);
+ return new M(s1,s2,shells.at(r.integer()));}
 // The order-free digest of a solid built from a compsolid.
 void tp_merged_solid(const TopoDS_Solid& so,const std::vector<TpFace>& faces){
  ga_int(so.NbChildren());TopoDS_Iterator it(so);if(!it.More())return;

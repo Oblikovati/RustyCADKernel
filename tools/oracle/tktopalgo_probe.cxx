@@ -52,9 +52,29 @@
 #include "tktopalgo_probe_breplib_package.cxx"
 #include "tktopalgo_probe_breplib_face.cxx"
 #include "tktopalgo_probe_breplib_fuse.cxx"
+#include "tktopalgo_probe_brepbuilderapi_makers.cxx"
+#include "tktopalgo_probe_brepbuilderapi_modify.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
+ // BRepBuilderAPI makers and modifications (tktopalgo_probe_brepbuilderapi_makers.cxx,
+ // tktopalgo_probe_brepbuilderapi_modify.cxx)
+ {"bba_vertex", tp_bba_vertex_case},
+ {"bba_package", tp_bba_package_case},
+ {"bba_edge", tp_bba_edge_case},
+ {"bba_edge2d", tp_bba_edge2d_case},
+ {"bba_polygon", tp_bba_polygon_case},
+ {"bba_wire", tp_bba_wire_case},
+ {"bba_solid", tp_bba_solid_case},
+ {"bba_face", tp_bba_face_case},
+ {"bba_shell", tp_bba_shell_case},
+ {"bba_transform", tp_bba_transform_case},
+ {"bba_gtransform", tp_bba_gtransform_case},
+ {"bba_copy", tp_bba_copy_case},
+ {"bba_nurbs", tp_bba_nurbs_case},
+ {"bba_modify", tp_bba_modify_case},
+ {"bba_findplane", tp_bba_findplane_case},
+ {"bba_collect", tp_bba_collect_case},
  // BRepClass (tktopalgo_probe_brepclass.cxx, faces of tktopalgo_probe_face.cxx)
  {"brc_edge", tp_brc_edge_case},
  {"brc_explorer", tp_brc_explorer_case},

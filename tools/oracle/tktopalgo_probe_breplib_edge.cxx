@@ -49,11 +49,12 @@ template<class M,class... A> void tp_curve_init(M& m,int j,GaReader& r,const std
  TopoDS_Vertex v1=tp_vertex_ref(r,vs),v2=tp_vertex_ref(r,vs);
  if(j==3){m.Init(a...,v1,v2);return;}double p1=r.real();m.Init(a...,v1,v2,p1,r.real());}
 // A later call of `blm_edge`: an Init on a Geom curve (30..) or a curve on surface (40..).
-void tp_edge_init(BRepLib_MakeEdge& m,int id,GaReader& r,const std::vector<TopoDS_Vertex>& vs){
+// The makers are templates so that the BRepBuilderAPI probe runs the same calls on its
+// makers, which have the same constructors and Init members.
+template<class M> void tp_edge_init(M& m,int id,GaReader& r,const std::vector<TopoDS_Vertex>& vs){
  if(id<40){occ::handle<Geom_Curve> c=tp_geom_curve(r);tp_curve_init(m,id-30,r,vs,c);return;}
  occ::handle<Geom2d_Curve> c=tp_geom2d_curve(r);occ::handle<Geom_Surface> s=tp_surface(r);tp_curve_init(m,id-40,r,vs,c,s);}
-BRepLib_MakeEdge* tp_edge_first(int id,GaReader& r,const std::vector<TopoDS_Vertex>& vs){
- using M=BRepLib_MakeEdge;
+template<class M=BRepLib_MakeEdge> M* tp_edge_first(int id,GaReader& r,const std::vector<TopoDS_Vertex>& vs){
  if(id==0)return new M();
  if(id==1){TopoDS_Vertex v1=tp_vertex_ref(r,vs);return new M(v1,tp_vertex_ref(r,vs));}
  if(id==2){gp_Pnt a=r.pnt();return new M(a,r.pnt());}
@@ -65,8 +66,7 @@ BRepLib_MakeEdge* tp_edge_first(int id,GaReader& r,const std::vector<TopoDS_Vert
  if(k==2)return tp_curve_ctor<M,false>(j,r,vs,tp_elips(r));
  if(k==3)return tp_curve_ctor<M,false>(j,r,vs,tp_hypr(r));
  return tp_curve_ctor<M,false>(j,r,vs,tp_parab(r));}
-BRepLib_MakeEdge2d* tp_edge2d_first(int id,GaReader& r,const std::vector<TopoDS_Vertex>& vs){
- using M=BRepLib_MakeEdge2d;
+template<class M=BRepLib_MakeEdge2d> M* tp_edge2d_first(int id,GaReader& r,const std::vector<TopoDS_Vertex>& vs){
  if(id==1){TopoDS_Vertex v1=tp_vertex_ref(r,vs);return new M(v1,tp_vertex_ref(r,vs));}
  if(id==2){gp_Pnt2d a=r.pnt2d();return new M(a,r.pnt2d());}
  if(id>=30){occ::handle<Geom2d_Curve> c=tp_geom2d_curve(r);return tp_curve_ctor<M,true>(id-30,r,vs,c);}

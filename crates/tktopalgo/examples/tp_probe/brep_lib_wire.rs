@@ -71,34 +71,43 @@ pub fn wire_of(r: &mut Reader<'_>, es: &[Edge]) -> Result<Wire, Failure> {
     Ok(w)
 }
 
-fn polygon_first(r: &mut Reader<'_>, vs: &[Vertex]) -> Result<BRepLibMakePolygon, Failure> {
-    let ctor = r.integer();
-    if ctor == 0 {
-        return Ok(BRepLibMakePolygon::new());
-    }
-    if ctor <= 3 {
-        let (p1, p2) = (r.pnt(), r.pnt());
-        if ctor == 1 {
-            return BRepLibMakePolygon::from_two_points(p1, p2);
+/// `tp_polygon_first` over a polygon maker with the BRepLib member names (the
+/// BRepBuilderAPI probe instantiates it on its maker, as the native template).
+macro_rules! polygon_first_fn {
+    ($name:ident, $maker:ident) => {
+        fn $name(r: &mut Reader<'_>, vs: &[Vertex]) -> Result<$maker, Failure> {
+            let ctor = r.integer();
+            if ctor == 0 {
+                return Ok($maker::new());
+            }
+            if ctor <= 3 {
+                let (p1, p2) = (r.pnt(), r.pnt());
+                if ctor == 1 {
+                    return $maker::from_two_points(p1, p2);
+                }
+                let p3 = r.pnt();
+                if ctor == 2 {
+                    return $maker::from_three_points(p1, p2, p3, r.flag());
+                }
+                let p4 = r.pnt();
+                return $maker::from_four_points(p1, p2, p3, p4, r.flag());
+            }
+            let (v1, v2) = (vertex_ref(r, vs), vertex_ref(r, vs));
+            if ctor == 4 {
+                return $maker::from_two_vertices(&v1, &v2);
+            }
+            let v3 = vertex_ref(r, vs);
+            if ctor == 5 {
+                return $maker::from_three_vertices(&v1, &v2, &v3, r.flag());
+            }
+            let v4 = vertex_ref(r, vs);
+            $maker::from_four_vertices(&v1, &v2, &v3, &v4, r.flag())
         }
-        let p3 = r.pnt();
-        if ctor == 2 {
-            return BRepLibMakePolygon::from_three_points(p1, p2, p3, r.flag());
-        }
-        let p4 = r.pnt();
-        return BRepLibMakePolygon::from_four_points(p1, p2, p3, p4, r.flag());
-    }
-    let (v1, v2) = (vertex_ref(r, vs), vertex_ref(r, vs));
-    if ctor == 4 {
-        return BRepLibMakePolygon::from_two_vertices(&v1, &v2);
-    }
-    let v3 = vertex_ref(r, vs);
-    if ctor == 5 {
-        return BRepLibMakePolygon::from_three_vertices(&v1, &v2, &v3, r.flag());
-    }
-    let v4 = vertex_ref(r, vs);
-    BRepLibMakePolygon::from_four_vertices(&v1, &v2, &v3, &v4, r.flag())
+    };
 }
+pub(crate) use polygon_first_fn;
+
+polygon_first_fn!(polygon_first, BRepLibMakePolygon);
 
 fn polygon_body(r: &mut Reader<'_>, vs: &[Vertex]) -> Result<(), Failure> {
     let mut m = polygon_first(r, vs)?;
@@ -133,39 +142,43 @@ pub fn polygon_case(values: &[f64]) {
     end();
 }
 
-fn wire_first(
-    r: &mut Reader<'_>,
-    es: &[Edge],
-    known: &mut bool,
-) -> Result<BRepLibMakeWire, Failure> {
-    let ctor = r.integer();
-    *known = true;
-    if ctor == 0 {
-        return Ok(BRepLibMakeWire::new());
-    }
-    if ctor == 5 || ctor == 6 {
-        let w = wire_of(r, es)?;
-        *known = w.nb_children() > 0;
-        if ctor == 5 {
-            return BRepLibMakeWire::from_wire(&w);
+/// `tp_wire_first` over a wire maker with the BRepLib member names.
+macro_rules! wire_first_fn {
+    ($name:ident, $maker:ident) => {
+        fn $name(r: &mut Reader<'_>, es: &[Edge], known: &mut bool) -> Result<$maker, Failure> {
+            let ctor = r.integer();
+            *known = true;
+            if ctor == 0 {
+                return Ok($maker::new());
+            }
+            if ctor == 5 || ctor == 6 {
+                let w = wire_of(r, es)?;
+                *known = w.nb_children() > 0;
+                if ctor == 5 {
+                    return $maker::from_wire(&w);
+                }
+                *known = true;
+                return $maker::from_wire_edge(&w, &edge_ref(r, es));
+            }
+            let e1 = edge_ref(r, es);
+            if ctor == 1 {
+                return $maker::from_edge(&e1);
+            }
+            let e2 = edge_ref(r, es);
+            if ctor == 2 {
+                return $maker::from_two_edges(&e1, &e2);
+            }
+            let e3 = edge_ref(r, es);
+            if ctor == 3 {
+                return $maker::from_three_edges(&e1, &e2, &e3);
+            }
+            $maker::from_four_edges(&e1, &e2, &e3, &edge_ref(r, es))
         }
-        *known = true;
-        return BRepLibMakeWire::from_wire_edge(&w, &edge_ref(r, es));
-    }
-    let e1 = edge_ref(r, es);
-    if ctor == 1 {
-        return BRepLibMakeWire::from_edge(&e1);
-    }
-    let e2 = edge_ref(r, es);
-    if ctor == 2 {
-        return BRepLibMakeWire::from_two_edges(&e1, &e2);
-    }
-    let e3 = edge_ref(r, es);
-    if ctor == 3 {
-        return BRepLibMakeWire::from_three_edges(&e1, &e2, &e3);
-    }
-    BRepLibMakeWire::from_four_edges(&e1, &e2, &e3, &edge_ref(r, es))
+    };
 }
+pub(crate) use wire_first_fn;
+
+wire_first_fn!(wire_first, BRepLibMakeWire);
 
 fn wire_body(r: &mut Reader<'_>, vs: &[Vertex]) -> Result<(), Failure> {
     let es = edges(r, vs)?;
@@ -216,7 +229,7 @@ pub fn wire_case(values: &[f64]) {
 }
 
 /// `tp_shells`.
-fn shells(r: &mut Reader<'_>, faces: &[TpFace]) -> Result<Vec<Shell>, Failure> {
+pub fn shells(r: &mut Reader<'_>, faces: &[TpFace]) -> Result<Vec<Shell>, Failure> {
     let n = r.integer();
     let builder = BRepBuilder::default();
     let mut result = Vec::new();
@@ -233,7 +246,7 @@ fn shells(r: &mut Reader<'_>, faces: &[TpFace]) -> Result<Vec<Shell>, Failure> {
     Ok(result)
 }
 /// `tp_solid_of`.
-fn solid_of(r: &mut Reader<'_>, shells: &[Shell]) -> Result<Solid, Failure> {
+pub fn solid_of(r: &mut Reader<'_>, shells: &[Shell]) -> Result<Solid, Failure> {
     let mut s = Solid::default();
     let builder = BRepBuilder::default();
     builder.make_solid(&mut s);
@@ -243,45 +256,49 @@ fn solid_of(r: &mut Reader<'_>, shells: &[Shell]) -> Result<Solid, Failure> {
     }
     Ok(s)
 }
-fn solid_first(
-    ctor: i32,
-    r: &mut Reader<'_>,
-    shells: &[Shell],
-) -> Result<BRepLibMakeSolid, Failure> {
-    let builder = BRepBuilder::default();
-    match ctor {
-        0 => return BRepLibMakeSolid::new(),
-        1 => {
-            let mut cs = CompSolid::default();
-            builder.make_comp_solid(&mut cs);
-            let n = r.integer();
-            for _ in 0..n {
-                let mut s = Solid::default();
-                builder.make_solid(&mut s);
-                builder.add(&mut s, &shells[r.integer() as usize])?;
-                builder.add(&mut cs, &s)?;
+/// `tp_solid_first` over a solid maker with the BRepLib member names.
+macro_rules! solid_first_fn {
+    ($name:ident, $maker:ident) => {
+        fn $name(ctor: i32, r: &mut Reader<'_>, shells: &[Shell]) -> Result<$maker, Failure> {
+            let builder = BRepBuilder::default();
+            match ctor {
+                0 => return $maker::new(),
+                1 => {
+                    let mut cs = CompSolid::default();
+                    builder.make_comp_solid(&mut cs);
+                    let n = r.integer();
+                    for _ in 0..n {
+                        let mut s = Solid::default();
+                        builder.make_solid(&mut s);
+                        builder.add(&mut s, &shells[r.integer() as usize])?;
+                        builder.add(&mut cs, &s)?;
+                    }
+                    return $maker::from_comp_solid(&cs);
+                }
+                5 => return $maker::from_solid(&solid_of(r, shells)?),
+                6 => {
+                    let so = solid_of(r, shells)?;
+                    return $maker::from_solid_shell(&so, &shells[r.integer() as usize]);
+                }
+                _ => {}
             }
-            return BRepLibMakeSolid::from_comp_solid(&cs);
+            let s1 = &shells[r.integer() as usize];
+            if ctor == 2 {
+                return $maker::from_shell(s1);
+            }
+            let s2 = &shells[r.integer() as usize];
+            if ctor == 3 {
+                return $maker::from_two_shells(s1, s2);
+            }
+            $maker::from_three_shells(s1, s2, &shells[r.integer() as usize])
         }
-        5 => return BRepLibMakeSolid::from_solid(&solid_of(r, shells)?),
-        6 => {
-            let so = solid_of(r, shells)?;
-            return BRepLibMakeSolid::from_solid_shell(&so, &shells[r.integer() as usize]);
-        }
-        _ => {}
-    }
-    let s1 = &shells[r.integer() as usize];
-    if ctor == 2 {
-        return BRepLibMakeSolid::from_shell(s1);
-    }
-    let s2 = &shells[r.integer() as usize];
-    if ctor == 3 {
-        return BRepLibMakeSolid::from_two_shells(s1, s2);
-    }
-    BRepLibMakeSolid::from_three_shells(s1, s2, &shells[r.integer() as usize])
+    };
 }
+pub(crate) use solid_first_fn;
+
+solid_first_fn!(solid_first, BRepLibMakeSolid);
 /// `tp_merged_solid`: the order-free digest of a solid built from a compsolid.
-fn merged_solid(so: &Solid, faces: &[TpFace]) -> Result<(), Failure> {
+pub fn merged_solid(so: &Solid, faces: &[TpFace]) -> Result<(), Failure> {
     int(so.nb_children());
     let it = ShapeIterator::new(so, true, true);
     let Ok(shell) = it.value() else { return Ok(()) };

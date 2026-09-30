@@ -39,9 +39,9 @@ impl Drop for PrecisionScope {
 }
 
 /// `TpPlaneScope`: sets BRepLib::Plane for one request (0, or 1 P N), reset on drop.
-struct PlaneScope;
+pub struct PlaneScope;
 impl PlaneScope {
-    fn new(r: &mut Reader<'_>) -> Result<Self, Failure> {
+    pub fn new(r: &mut Reader<'_>) -> Result<Self, Failure> {
         if r.flag() {
             let p = r.pnt();
             brep_lib::set_plane(&Handle::new(GeomPlane::from_point(p, r.dir())?));
@@ -56,7 +56,7 @@ impl Drop for PlaneScope {
 }
 
 /// The trailing arguments of a curve constructor or Init (`j` in the native header).
-enum Tail<P> {
+pub enum Tail<P> {
     Whole,
     Params(f64, f64),
     Points(P, P),
@@ -64,7 +64,7 @@ enum Tail<P> {
     PointsParams(P, P, f64, f64),
     VerticesParams(Vertex, Vertex, f64, f64),
 }
-fn tail<P>(
+pub fn tail<P>(
     j: i32,
     r: &mut Reader<'_>,
     vs: &[Vertex],
@@ -94,97 +94,11 @@ fn tail<P>(
         }
     }
 }
-fn point3(r: &mut Reader<'_>) -> Point3 {
+pub fn point3(r: &mut Reader<'_>) -> Point3 {
     r.pnt()
 }
-fn point2(r: &mut Reader<'_>) -> Point2 {
+pub fn point2(r: &mut Reader<'_>) -> Point2 {
     r.pnt2d()
-}
-
-/// The Init member of a Geom curve (ids 30..).
-fn init_curve(
-    m: &mut BRepLibMakeEdge,
-    c: &Handle<dyn GeomCurve>,
-    t: Tail<Point3>,
-) -> Result<(), Failure> {
-    match t {
-        Tail::Whole => m.init_curve(c),
-        Tail::Params(p1, p2) => m.init_curve_params(c, p1, p2),
-        Tail::Points(a, b) => m.init_curve_points(c, a, b),
-        Tail::Vertices(v1, v2) => m.init_curve_vertices(c, &v1, &v2),
-        Tail::PointsParams(a, b, p1, p2) => m.init_curve_points_params(c, a, b, p1, p2),
-        Tail::VerticesParams(v1, v2, p1, p2) => m.init_curve_vertices_params(c, &v1, &v2, p1, p2),
-    }
-}
-/// The Init member of a curve on surface (ids 40..).
-fn init_pcurve(
-    m: &mut BRepLibMakeEdge,
-    c: &Handle<dyn Geom2dCurve>,
-    s: &Handle<dyn GeomSurface>,
-    t: Tail<Point3>,
-) -> Result<(), Failure> {
-    match t {
-        Tail::Whole => m.init_pcurve(c, s),
-        Tail::Params(p1, p2) => m.init_pcurve_params(c, s, p1, p2),
-        Tail::Points(a, b) => m.init_pcurve_points(c, s, a, b),
-        Tail::Vertices(v1, v2) => m.init_pcurve_vertices(c, s, &v1, &v2),
-        Tail::PointsParams(a, b, p1, p2) => m.init_pcurve_points_params(c, s, a, b, p1, p2),
-        Tail::VerticesParams(v1, v2, p1, p2) => {
-            m.init_pcurve_vertices_params(c, s, &v1, &v2, p1, p2)
-        }
-    }
-}
-/// A later call of `blm_edge`.
-fn edge_init(
-    m: &mut BRepLibMakeEdge,
-    id: i32,
-    r: &mut Reader<'_>,
-    vs: &[Vertex],
-) -> Result<(), Failure> {
-    if id < 40 {
-        let c = geom_curve(r)?;
-        let t = tail(id - 30, r, vs, point3);
-        return init_curve(m, &c, t);
-    }
-    let c = geom2d_curve(r)?;
-    let s = surface(r)?;
-    let t = tail(id - 40, r, vs, point3);
-    init_pcurve(m, &c, &s, t)
-}
-
-/// The constructors of a Geom curve (ids 30..).
-fn curve_ctor(c: &Handle<dyn GeomCurve>, t: Tail<Point3>) -> Result<BRepLibMakeEdge, Failure> {
-    match t {
-        Tail::Whole => BRepLibMakeEdge::from_curve(c),
-        Tail::Params(p1, p2) => BRepLibMakeEdge::from_curve_params(c, p1, p2),
-        Tail::Points(a, b) => BRepLibMakeEdge::from_curve_points(c, a, b),
-        Tail::Vertices(v1, v2) => BRepLibMakeEdge::from_curve_vertices(c, &v1, &v2),
-        Tail::PointsParams(a, b, p1, p2) => {
-            BRepLibMakeEdge::from_curve_points_params(c, a, b, p1, p2)
-        }
-        Tail::VerticesParams(v1, v2, p1, p2) => {
-            BRepLibMakeEdge::from_curve_vertices_params(c, &v1, &v2, p1, p2)
-        }
-    }
-}
-/// The constructors of a curve on surface (ids 40..).
-fn pcurve_ctor(
-    c: &Handle<dyn Geom2dCurve>,
-    s: &Handle<dyn GeomSurface>,
-    t: Tail<Point3>,
-) -> Result<BRepLibMakeEdge, Failure> {
-    match t {
-        Tail::Whole => BRepLibMakeEdge::from_pcurve(c, s),
-        Tail::Params(p1, p2) => BRepLibMakeEdge::from_pcurve_params(c, s, p1, p2),
-        Tail::Points(a, b) => BRepLibMakeEdge::from_pcurve_points(c, s, a, b),
-        Tail::Vertices(v1, v2) => BRepLibMakeEdge::from_pcurve_vertices(c, s, &v1, &v2),
-        Tail::PointsParams(a, b, p1, p2) => {
-            BRepLibMakeEdge::from_pcurve_points_params(c, s, a, b, p1, p2)
-        }
-        Tail::VerticesParams(v1, v2, p1, p2) => {
-            BRepLibMakeEdge::from_pcurve_vertices_params(c, s, &v1, &v2, p1, p2)
-        }
-    }
 }
 
 /// The four constructors of one gp curve kind (j = 0..3).
@@ -199,204 +113,304 @@ macro_rules! gp_ctor {
         }
     };
 }
+pub(crate) use gp_ctor;
 
-fn edge_first(id: i32, r: &mut Reader<'_>, vs: &[Vertex]) -> Result<BRepLibMakeEdge, Failure> {
-    type M = BRepLibMakeEdge;
-    match id {
-        0 => return Ok(M::new()),
-        1 => {
-            let v1 = vertex_ref(r, vs);
-            return M::from_vertices(&v1, &vertex_ref(r, vs));
+/// The first-call and Init dispatch of `blm_edge` and `blm_edge2d` over an edge maker and
+/// a 2d edge maker with the BRepLib member names (the BRepBuilderAPI probe instantiates it
+/// on its makers, as the native templates do).
+macro_rules! edge_dispatch {
+    ($edge:ident, $edge2d:ident) => {
+        /// The Init member of a Geom curve (ids 30..).
+        fn init_curve(
+            m: &mut $edge,
+            c: &Handle<dyn GeomCurve>,
+            t: Tail<Point3>,
+        ) -> Result<(), Failure> {
+            match t {
+                Tail::Whole => m.init_curve(c),
+                Tail::Params(p1, p2) => m.init_curve_params(c, p1, p2),
+                Tail::Points(a, b) => m.init_curve_points(c, a, b),
+                Tail::Vertices(v1, v2) => m.init_curve_vertices(c, &v1, &v2),
+                Tail::PointsParams(a, b, p1, p2) => m.init_curve_points_params(c, a, b, p1, p2),
+                Tail::VerticesParams(v1, v2, p1, p2) => {
+                    m.init_curve_vertices_params(c, &v1, &v2, p1, p2)
+                }
+            }
         }
-        2 => {
-            let a = r.pnt();
-            return M::from_points(a, r.pnt());
+        /// The Init member of a curve on surface (ids 40..).
+        fn init_pcurve(
+            m: &mut $edge,
+            c: &Handle<dyn Geom2dCurve>,
+            s: &Handle<dyn GeomSurface>,
+            t: Tail<Point3>,
+        ) -> Result<(), Failure> {
+            match t {
+                Tail::Whole => m.init_pcurve(c, s),
+                Tail::Params(p1, p2) => m.init_pcurve_params(c, s, p1, p2),
+                Tail::Points(a, b) => m.init_pcurve_points(c, s, a, b),
+                Tail::Vertices(v1, v2) => m.init_pcurve_vertices(c, s, &v1, &v2),
+                Tail::PointsParams(a, b, p1, p2) => m.init_pcurve_points_params(c, s, a, b, p1, p2),
+                Tail::VerticesParams(v1, v2, p1, p2) => {
+                    m.init_pcurve_vertices_params(c, s, &v1, &v2, p1, p2)
+                }
+            }
         }
-        40.. => {
-            let (c, s) = (geom2d_curve(r)?, surface(r)?);
-            return pcurve_ctor(&c, &s, tail(id - 40, r, vs, point3));
-        }
-        30.. => {
-            let c = geom_curve(r)?;
-            return curve_ctor(&c, tail(id - 30, r, vs, point3));
-        }
-        _ => {}
-    }
-    let (k, j) = ((id - 10) / 4, (id - 10) % 4);
-    match k {
-        0 => {
-            let g = lin(r);
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point3),
-                g,
-                from_lin,
-                from_lin_params,
-                from_lin_points,
-                from_lin_vertices
-            )
-        }
-        1 => {
-            let g = circ(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point3),
-                g,
-                from_circ,
-                from_circ_params,
-                from_circ_points,
-                from_circ_vertices
-            )
-        }
-        2 => {
-            let g = elips(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point3),
-                g,
-                from_elips,
-                from_elips_params,
-                from_elips_points,
-                from_elips_vertices
-            )
-        }
-        3 => {
-            let g = hypr(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point3),
-                g,
-                from_hypr,
-                from_hypr_params,
-                from_hypr_points,
-                from_hypr_vertices
-            )
-        }
-        _ => {
-            let g = parab(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point3),
-                g,
-                from_parab,
-                from_parab_params,
-                from_parab_points,
-                from_parab_vertices
-            )
-        }
-    }
-}
-
-/// The constructors (and Init members) of a Geom2d curve for MakeEdge2d.
-fn curve2d_ctor(
-    c: &Handle<dyn Geom2dCurve>,
-    t: Tail<Point2>,
-) -> Result<BRepLibMakeEdge2d, Failure> {
-    type M = BRepLibMakeEdge2d;
-    match t {
-        Tail::Whole => M::from_curve(c),
-        Tail::Params(p1, p2) => M::from_curve_params(c, p1, p2),
-        Tail::Points(a, b) => M::from_curve_points(c, a, b),
-        Tail::Vertices(v1, v2) => M::from_curve_vertices(c, &v1, &v2),
-        Tail::PointsParams(a, b, p1, p2) => M::from_curve_points_params(c, a, b, p1, p2),
-        Tail::VerticesParams(v1, v2, p1, p2) => M::from_curve_vertices_params(c, &v1, &v2, p1, p2),
-    }
-}
-fn init_curve2d(
-    m: &mut BRepLibMakeEdge2d,
-    c: &Handle<dyn Geom2dCurve>,
-    t: Tail<Point2>,
-) -> Result<(), Failure> {
-    match t {
-        Tail::Whole => m.init_curve(c),
-        Tail::Params(p1, p2) => m.init_curve_params(c, p1, p2),
-        Tail::Points(a, b) => m.init_curve_points(c, a, b),
-        Tail::Vertices(v1, v2) => m.init_curve_vertices(c, &v1, &v2),
-        Tail::PointsParams(a, b, p1, p2) => m.init_curve_points_params(c, a, b, p1, p2),
-        Tail::VerticesParams(v1, v2, p1, p2) => m.init_curve_vertices_params(c, &v1, &v2, p1, p2),
-    }
-}
-fn edge2d_first(id: i32, r: &mut Reader<'_>, vs: &[Vertex]) -> Result<BRepLibMakeEdge2d, Failure> {
-    type M = BRepLibMakeEdge2d;
-    match id {
-        1 => {
-            let v1 = vertex_ref(r, vs);
-            return M::from_vertices(&v1, &vertex_ref(r, vs));
-        }
-        2 => {
-            let a = r.pnt2d();
-            return M::from_points(a, r.pnt2d());
-        }
-        30.. => {
+        /// A later call of `blm_edge`.
+        fn edge_init(
+            m: &mut $edge,
+            id: i32,
+            r: &mut Reader<'_>,
+            vs: &[Vertex],
+        ) -> Result<(), Failure> {
+            if id < 40 {
+                let c = geom_curve(r)?;
+                let t = tail(id - 30, r, vs, point3);
+                return init_curve(m, &c, t);
+            }
             let c = geom2d_curve(r)?;
-            return curve2d_ctor(&c, tail(id - 30, r, vs, point2));
+            let s = surface(r)?;
+            let t = tail(id - 40, r, vs, point3);
+            init_pcurve(m, &c, &s, t)
         }
-        _ => {}
-    }
-    let (k, j) = ((id - 10) / 4, (id - 10) % 4);
-    match k {
-        0 => {
-            let g = lin2d(r);
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point2),
-                g,
-                from_lin2d,
-                from_lin2d_params,
-                from_lin2d_points,
-                from_lin2d_vertices
-            )
+
+        /// The constructors of a Geom curve (ids 30..).
+        fn curve_ctor(c: &Handle<dyn GeomCurve>, t: Tail<Point3>) -> Result<$edge, Failure> {
+            match t {
+                Tail::Whole => $edge::from_curve(c),
+                Tail::Params(p1, p2) => $edge::from_curve_params(c, p1, p2),
+                Tail::Points(a, b) => $edge::from_curve_points(c, a, b),
+                Tail::Vertices(v1, v2) => $edge::from_curve_vertices(c, &v1, &v2),
+                Tail::PointsParams(a, b, p1, p2) => {
+                    $edge::from_curve_points_params(c, a, b, p1, p2)
+                }
+                Tail::VerticesParams(v1, v2, p1, p2) => {
+                    $edge::from_curve_vertices_params(c, &v1, &v2, p1, p2)
+                }
+            }
         }
-        1 => {
-            let g = circ2d(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point2),
-                g,
-                from_circ2d,
-                from_circ2d_params,
-                from_circ2d_points,
-                from_circ2d_vertices
-            )
+        /// The constructors of a curve on surface (ids 40..).
+        fn pcurve_ctor(
+            c: &Handle<dyn Geom2dCurve>,
+            s: &Handle<dyn GeomSurface>,
+            t: Tail<Point3>,
+        ) -> Result<$edge, Failure> {
+            match t {
+                Tail::Whole => $edge::from_pcurve(c, s),
+                Tail::Params(p1, p2) => $edge::from_pcurve_params(c, s, p1, p2),
+                Tail::Points(a, b) => $edge::from_pcurve_points(c, s, a, b),
+                Tail::Vertices(v1, v2) => $edge::from_pcurve_vertices(c, s, &v1, &v2),
+                Tail::PointsParams(a, b, p1, p2) => {
+                    $edge::from_pcurve_points_params(c, s, a, b, p1, p2)
+                }
+                Tail::VerticesParams(v1, v2, p1, p2) => {
+                    $edge::from_pcurve_vertices_params(c, s, &v1, &v2, p1, p2)
+                }
+            }
         }
-        2 => {
-            let g = elips2d(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point2),
-                g,
-                from_elips2d,
-                from_elips2d_params,
-                from_elips2d_points,
-                from_elips2d_vertices
-            )
+
+        fn edge_first(id: i32, r: &mut Reader<'_>, vs: &[Vertex]) -> Result<$edge, Failure> {
+            type M = $edge;
+            match id {
+                0 => return Ok(M::new()),
+                1 => {
+                    let v1 = vertex_ref(r, vs);
+                    return M::from_vertices(&v1, &vertex_ref(r, vs));
+                }
+                2 => {
+                    let a = r.pnt();
+                    return M::from_points(a, r.pnt());
+                }
+                40.. => {
+                    let (c, s) = (geom2d_curve(r)?, surface(r)?);
+                    return pcurve_ctor(&c, &s, tail(id - 40, r, vs, point3));
+                }
+                30.. => {
+                    let c = geom_curve(r)?;
+                    return curve_ctor(&c, tail(id - 30, r, vs, point3));
+                }
+                _ => {}
+            }
+            let (k, j) = ((id - 10) / 4, (id - 10) % 4);
+            match k {
+                0 => {
+                    let g = lin(r);
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point3),
+                        g,
+                        from_lin,
+                        from_lin_params,
+                        from_lin_points,
+                        from_lin_vertices
+                    )
+                }
+                1 => {
+                    let g = circ(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point3),
+                        g,
+                        from_circ,
+                        from_circ_params,
+                        from_circ_points,
+                        from_circ_vertices
+                    )
+                }
+                2 => {
+                    let g = elips(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point3),
+                        g,
+                        from_elips,
+                        from_elips_params,
+                        from_elips_points,
+                        from_elips_vertices
+                    )
+                }
+                3 => {
+                    let g = hypr(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point3),
+                        g,
+                        from_hypr,
+                        from_hypr_params,
+                        from_hypr_points,
+                        from_hypr_vertices
+                    )
+                }
+                _ => {
+                    let g = parab(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point3),
+                        g,
+                        from_parab,
+                        from_parab_params,
+                        from_parab_points,
+                        from_parab_vertices
+                    )
+                }
+            }
         }
-        3 => {
-            let g = hypr2d(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point2),
-                g,
-                from_hypr2d,
-                from_hypr2d_params,
-                from_hypr2d_points,
-                from_hypr2d_vertices
-            )
+
+        /// The constructors (and Init members) of a Geom2d curve for MakeEdge2d.
+        fn curve2d_ctor(c: &Handle<dyn Geom2dCurve>, t: Tail<Point2>) -> Result<$edge2d, Failure> {
+            type M = $edge2d;
+            match t {
+                Tail::Whole => M::from_curve(c),
+                Tail::Params(p1, p2) => M::from_curve_params(c, p1, p2),
+                Tail::Points(a, b) => M::from_curve_points(c, a, b),
+                Tail::Vertices(v1, v2) => M::from_curve_vertices(c, &v1, &v2),
+                Tail::PointsParams(a, b, p1, p2) => M::from_curve_points_params(c, a, b, p1, p2),
+                Tail::VerticesParams(v1, v2, p1, p2) => {
+                    M::from_curve_vertices_params(c, &v1, &v2, p1, p2)
+                }
+            }
         }
-        _ => {
-            let g = parab2d(r)?;
-            gp_ctor!(
-                M,
-                tail(j, r, vs, point2),
-                g,
-                from_parab2d,
-                from_parab2d_params,
-                from_parab2d_points,
-                from_parab2d_vertices
-            )
+        fn init_curve2d(
+            m: &mut $edge2d,
+            c: &Handle<dyn Geom2dCurve>,
+            t: Tail<Point2>,
+        ) -> Result<(), Failure> {
+            match t {
+                Tail::Whole => m.init_curve(c),
+                Tail::Params(p1, p2) => m.init_curve_params(c, p1, p2),
+                Tail::Points(a, b) => m.init_curve_points(c, a, b),
+                Tail::Vertices(v1, v2) => m.init_curve_vertices(c, &v1, &v2),
+                Tail::PointsParams(a, b, p1, p2) => m.init_curve_points_params(c, a, b, p1, p2),
+                Tail::VerticesParams(v1, v2, p1, p2) => {
+                    m.init_curve_vertices_params(c, &v1, &v2, p1, p2)
+                }
+            }
         }
-    }
+        fn edge2d_first(id: i32, r: &mut Reader<'_>, vs: &[Vertex]) -> Result<$edge2d, Failure> {
+            type M = $edge2d;
+            match id {
+                1 => {
+                    let v1 = vertex_ref(r, vs);
+                    return M::from_vertices(&v1, &vertex_ref(r, vs));
+                }
+                2 => {
+                    let a = r.pnt2d();
+                    return M::from_points(a, r.pnt2d());
+                }
+                30.. => {
+                    let c = geom2d_curve(r)?;
+                    return curve2d_ctor(&c, tail(id - 30, r, vs, point2));
+                }
+                _ => {}
+            }
+            let (k, j) = ((id - 10) / 4, (id - 10) % 4);
+            match k {
+                0 => {
+                    let g = lin2d(r);
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point2),
+                        g,
+                        from_lin2d,
+                        from_lin2d_params,
+                        from_lin2d_points,
+                        from_lin2d_vertices
+                    )
+                }
+                1 => {
+                    let g = circ2d(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point2),
+                        g,
+                        from_circ2d,
+                        from_circ2d_params,
+                        from_circ2d_points,
+                        from_circ2d_vertices
+                    )
+                }
+                2 => {
+                    let g = elips2d(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point2),
+                        g,
+                        from_elips2d,
+                        from_elips2d_params,
+                        from_elips2d_points,
+                        from_elips2d_vertices
+                    )
+                }
+                3 => {
+                    let g = hypr2d(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point2),
+                        g,
+                        from_hypr2d,
+                        from_hypr2d_params,
+                        from_hypr2d_points,
+                        from_hypr2d_vertices
+                    )
+                }
+                _ => {
+                    let g = parab2d(r)?;
+                    gp_ctor!(
+                        M,
+                        tail(j, r, vs, point2),
+                        g,
+                        from_parab2d,
+                        from_parab2d_params,
+                        from_parab2d_points,
+                        from_parab2d_vertices
+                    )
+                }
+            }
+        }
+    };
 }
+pub(crate) use edge_dispatch;
+
+edge_dispatch!(BRepLibMakeEdge, BRepLibMakeEdge2d);
 
 /// `tp_edge_result` on the accessors both makers share.
 macro_rules! edge_result {
@@ -420,6 +434,7 @@ macro_rules! edge_result {
         });
     }};
 }
+pub(crate) use edge_result;
 
 fn edge_body(r: &mut Reader<'_>, vs: &[Vertex]) -> Result<(), Failure> {
     let n = r.integer();
