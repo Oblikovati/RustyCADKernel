@@ -207109,6 +207109,78 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::get_sample_points",
       "status": "implemented",
       "notes": "Original type-specific 3D sample counts and basis-curve recursion, including offset sampling of underlying geometry. 66 additional exact native comparisons; focused zero-range and offset regressions."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d::default",
+      "status": "implemented",
+      "notes": "Exact pinned native differential tools/verify_tkbo_foundations.py: 14 real face kinds, malformed wires, thin ellipse refinement, holes, periodic UVs, exact boundary fallback and repeated Init retaining prior classifiers/explorer."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d(const TopoDS_Face&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d::new",
+      "status": "implemented",
+      "notes": "Exact pinned native differential tools/verify_tkbo_foundations.py: 14 real face kinds, malformed wires, thin ellipse refinement, holes, periodic UVs, exact boundary fallback and repeated Init retaining prior classifiers/explorer."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d::Init(const TopoDS_Face&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d::init",
+      "status": "implemented",
+      "notes": "Exact pinned native differential tools/verify_tkbo_foundations.py: 14 real face kinds, malformed wires, thin ellipse refinement, holes, periodic UVs, exact boundary fallback and repeated Init retaining prior classifiers/explorer."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d::PerformInfinitePoint() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d::perform_infinite_point",
+      "status": "implemented",
+      "notes": "Exact pinned native differential tools/verify_tkbo_foundations.py: 14 real face kinds, malformed wires, thin ellipse refinement, holes, periodic UVs, exact boundary fallback and repeated Init retaining prior classifiers/explorer."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d::Perform(const gp_Pnt2d&,bool) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d::perform",
+      "status": "implemented",
+      "notes": "Exact pinned native differential tools/verify_tkbo_foundations.py: 14 real face kinds, malformed wires, thin ellipse refinement, holes, periodic UVs, exact boundary fallback and repeated Init retaining prior classifiers/explorer."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d::~IntTools_FClass2d()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d",
+      "status": "excluded",
+      "notes": "Rust Drop owns and releases polygon storage and cached explorer; no callable destructor API."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d::TestOnRestriction(const gp_Pnt2d&,double,bool) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d::test_on_restriction",
+      "status": "implemented",
+      "notes": "Exact pinned native differential tools/verify_tkbo_foundations.py: 14 real face kinds, malformed wires, thin ellipse refinement, holes, periodic UVs, exact boundary fallback and repeated Init retaining prior classifiers/explorer."
+    },
+    {
+      "upstream_id": "IntTools_FClass2d::IsHole() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FClass2d.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::FClass2d::is_hole",
+      "status": "implemented",
+      "notes": "Exact pinned native differential tools/verify_tkbo_foundations.py: 14 real face kinds, malformed wires, thin ellipse refinement, holes, periodic UVs, exact boundary fallback and repeated Init retaining prior classifiers/explorer."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::SelectForwardSeam",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::select_forward_seam",
+      "status": "implemented",
+      "notes": "Native bounded-curve chord conversion, small chord rejection, X-before-Y precedence and directional tie rules. 484 exact native comparisons plus three focused regressions."
     }
   ],
   "tests": [

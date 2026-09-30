@@ -577,3 +577,7 @@ The 3D GetSamplePoints overload adds 66 exact native comparisons (8,231 total).
 The port retains native type-dependent counts and sampling of the basis curve for
 offset/trimmed wrappers. Focused tests check zero-length circle sampling and the
 intentional distinction between offset geometry and its sampled basis points.
+
+SelectForwardSeam adds 484 exact comparisons (8,715 total), retaining bounded
+curve chord conversion, rejection of tiny chords, X-before-Y precedence and
+directional ties. Three focused Rust tests pass.

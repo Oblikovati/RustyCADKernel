@@ -20,6 +20,10 @@ type ProbeCase = fn(&[f64]);
 /// package adds its operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     (
+        "sh_analysis_seam",
+        sh_probe::shape_analysis_curve::seam_case,
+    ),
+    (
         "sh_analysis_samples3d",
         sh_probe::shape_analysis_curve::sampling_3d_case,
     ),

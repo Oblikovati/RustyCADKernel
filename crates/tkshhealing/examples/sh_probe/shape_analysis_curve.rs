@@ -156,3 +156,18 @@ pub fn sampling_3d_case(values: &[f64]) {
     }
     end();
 }
+
+/// Compare native seam selection with both original p-curves; `seam_case(numbers)`.
+pub fn seam_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    attempt(|| {
+        let first = super::brep_lib_common::geom2d_curve(&mut reader)?;
+        let second = super::brep_lib_common::geom2d_curve(&mut reader)?;
+        print!(
+            "{} ",
+            ShapeAnalysisCurve.select_forward_seam(&first, &second)?
+        );
+        Ok(())
+    });
+    end();
+}

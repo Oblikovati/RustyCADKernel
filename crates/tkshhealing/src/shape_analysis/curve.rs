@@ -18,3 +18,4 @@ pub struct ShapeAnalysisCurve;
 mod closure;
 mod sampling;
 mod sampling_3d;
+mod seam;
