@@ -50,6 +50,8 @@ The toolkit test inventory maps these suites (12 declarations):
 | BRepBuilderAPI_MakeWire_Test.cxx | brep_builder_api_make_wire | 1 | 1 of 1 | 1 of 1 |
 | BRepCheck_Face_Test.cxx | brep_check_face | 4 | 4 of 4 | 4 of 4 |
 | BRepTopAdaptor_FClass2d_Test.cxx | brep_top_adaptor_fclass2d | 5 | 5 of 5 | 5 of 5 |
+| BRepBuilderAPI_MakeEdge_Test.cxx | brep_builder_api_make_edge | 6 | 6 of 6 | 6 of 6 |
+| BRepBuilderAPI_MakeFace_Test.cxx | brep_builder_api_make_face | 4 | 4 of 4 | 4 of 4 |
 
 BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: its case
 `BRepClassFaceExplorerTest.DegenerateEdges_HaveNoNextEdge` builds its sphere face with
@@ -83,15 +85,13 @@ unit circle, which the reference bounds of the upstream cases pin), with the sam
 and tolerances; they move to a 1:1 translation once BRepPrimAPI is ported and TKMesh is
 in the native build.
 
-Four BRepBuilderAPI suites wait for other packages: BRepBuilderAPI_MakeEdge_Test.cxx
-(6 declarations; `LinearEdge_TwoPoints`, `CircularEdge_Full`, `CircularEdge_Trimmed` and
-`EdgeFromLine_WithBounds` measure the edge length with `BRepGProp::LinearProperties`) and
-BRepBuilderAPI_MakeFace_Test.cxx (4; `FaceFromWire`, `FaceFromGeomPlane_WithBounds` and
-`FaceFromCylindricalSurface` call `BRepGProp::SurfaceProperties`) need BRepGProp, ported
-in parallel; BRepBuilderAPI_Transform_Test.cxx (5) and BRepBuilderAPI_Copy_Test.cxx (6)
-build every input with `BRepPrimAPI_MakeBox` of TKPrim and measure it with
+BRepBuilderAPI_MakeEdge_Test.cxx (6 declarations) and BRepBuilderAPI_MakeFace_Test.cxx (4)
+are translated 1:1 since BRepGProp is ported (they measure the edges and faces with
+`BRepGProp::LinearProperties` and `SurfaceProperties`). Two BRepBuilderAPI suites still
+wait: BRepBuilderAPI_Transform_Test.cxx (5) and BRepBuilderAPI_Copy_Test.cxx (6) build
+every input with `BRepPrimAPI_MakeBox` of TKPrim and measure it with
 `BRepGProp::VolumeProperties` or `SurfaceProperties` (and `CafNamedShape_A4` translates
-with BRepBuilderAPI_Transform). The four unchanged suites pass natively (21 of 21); the
+with BRepBuilderAPI_Transform). The two unchanged suites pass natively (11 of 11); the
 behavior tests of `crates/tktopalgo/tests/brep_builder_api_behavior.rs` and the numeric
 probe cover the same members.
 
