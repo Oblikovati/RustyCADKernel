@@ -22,7 +22,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (80 declarations):
+The toolkit test inventory maps these suites (93 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -46,6 +46,8 @@ The toolkit test inventory maps these suites (80 declarations):
 | IntCurveSurface_InterUtils_Test.cxx | int_curve_surface_inter_utils | 1 | pass | pass |
 | IntCurveSurface_ThePolygonOfHInter_Test.cxx | int_curve_surface_the_polygon_of_h_inter | 1 | pass | pass |
 | IntCurveSurface_ThePolyhedronOfHInter_Test.cxx | int_curve_surface_the_polyhedron_of_h_inter | 6 | pass | pass |
+| IntPolyh_Intersection_Test.cxx | int_polyh_intersection | 3 | pass | pass |
+| IntPolyh_Point_Test.cxx | int_polyh_point | 10 | pass | pass |
 
 GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
 build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
@@ -135,6 +137,28 @@ cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` a
   and `set_nor_ang`; `GeomFill_ConstrainedFilling`'s `Init` overloads are `init_three`
   and `init_four`, `ReBuild` is `re_build`, `Eval` writes into a slice, and the
   `Check` members write to a `fmt::Write` where the native ones write to `std::cout`.
+
+- IntStart: the package has no header; its two templates are the generics
+  `SearchOnBoundaries<T: SearchOnBoundariesTypes>` and `SearchInside<T: SearchInsideTypes>`
+  over the tool traits of `int_start::tools` (docs/geomalgo-design.md section 12), which
+  IntPatch and Contap will instantiate as aliases. The api rows name the template
+  members (`IntStart_SearchOnBoundaries::Perform`...) with the `.gxx`/`.lxx` source. The
+  performing constructor of `SearchInside` is `with_domain`, the Perform from a start
+  point `perform_from`; the output references of the tool members become returned
+  values (`Option` for `HasFirstPoint`/`HasLastPoint`).
+
+- IntPolyh: concrete structs (docs/geomalgo-design.md section 12). `IntPolyh_Array<T>` is
+  `IntPolyhArray<T>` and the six array typedefs are aliases; `operator[]` is `Index`/`IndexMut`
+  and `Value`/`ChangeValue` return Standard_OutOfRange past the storage. The constructors are
+  named (`IntPolyhIntersection::with_samples`/`with_parameters`,
+  `IntPolyhMaillageAffinage::with_samples`, `IntPolyhSectionLine::with_size`), the
+  `FillArrayOfPnt` overloads are `fill_array_of_pnt`, `_shift`, `_params`, `_shift_params`
+  and `_normals` (an optional deflection for `const double*`), `CommonBox(B1, B2, ...)` is
+  `common_box_of`, the `Dump(int)` overloads are `dump_index`, `TriangleEdgeContact` takes its
+  fourteen geometric arguments in `IntPolyhTriangleEdge`, and output references become
+  returned arrays or tuples (`get_line_point` returns `[x, y, z, u1, v1, u2, v2, incidence]`).
+  The members that can raise (surface evaluations, `Bnd_Box::Get`, the coplanar `IsParallel`)
+  return `Result`.
 
 ## Verification
 
@@ -419,12 +443,12 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 21523 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 22719 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
 with TopClass 1116, Geom2dGcc 3968, IntWalk 717, IntCurveSurface 3077, and the GeomFill
-filling classes 568.
+filling classes 568, IntStart 674 and IntPolyh 522.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -684,6 +708,40 @@ tangent fields of its four sides and the patch with swapped laws; `gfill_cfill` 
 three and four boundaries (constrained, free and mixed, in any order and orientation,
 with a degenerated side), with and without the corner checks, with `SetDomain` and
 `ReBuild`, the `Check` members' text, and a second `Init` on the same framework.
+
+IntStart: 674 requests (`tkgeomalgo_corpus_intstart.py`) over the surface catalog of
+IntCurveSurface and nine quadrics (planes, cylinders, spheres, cones including a nearly
+flat one, a torus). `is_sob` runs the boundary search with the IntPatch tools on every
+surface against every quadric (finite, periodic and infinite restrictions, the exact
+conic-quadric intersection and the sampled one), with the regularity recheck, twice in a
+row, never performed, on arcs on the quadric or tangent to it (spheres and tori of radius
+1 +- 1e-9 on the unit square), with larger tolerances (Brent refinement, merged tangent
+zeros), with an edge behind the domain (straight and tangent to a cylinder, off it,
+skew, degenerated, regular), and with a tool whose arcs have been seen (known points,
+vertices and segments, indices past the known points). `is_inside` runs the inside
+search on every surface against every quadric, from start points inside, outside and on
+the bounds, tangent and coincident, and without a Perform. Every consultation is printed
+from index 0 to Nb + 1. The branches not reached are the state of a math_FunctionAllRoots
+point at an end of the arc (`GetPointState`) and the merge with a new point already at
+the same parameter of the arc.
+
+IntPolyh: 522 requests (`tkgeomalgo_corpus_intpolyh.py`) over the IntCurveSurface surface
+catalog. `ph_inter` intersects every pair of 15 surfaces (planes, cylinders, a cone, spheres,
+a torus, Bezier and B-spline surfaces, a revolution, offsets and trimmed surfaces) with the
+default sampling, then five pairs with given sample counts (2 to 30) and given parameters
+(short arrays included), and tangent, grazing, coincident, parallel, disjoint and very
+small-in-large pairs; it prints every section line and tangent zone with the reads past them
+that stay in the allocated storage. `ph_maillage` drives IntPolyh_MaillageAffinage step by
+step (standard, shifted and parameter fills, the enlarged zone, each refinement, the
+comparison and the chaining, and the error paths of void boxes and short parameters) and
+prints its whole state. `ph_tricontact` and `ph_edgecontact` test triangle pairs (crossing,
+apart, coplanar, touching, null, random) and triangle-edge pairs on both surfaces (every
+vertex and side crossing, coplanar overlaps and crossings, null edges, sliver triangles for
+the last coordinate combinations). `ph_triangle` refines grid triangles of five surfaces
+once and repeatedly; the record operations cover every member of the points, start points,
+section lines, arrays, couples, edges and tools with their dumps. Not reached: the overlap
+cases that need the side to project backwards (see below), a coplanar next couple
+on the first chaining side, and a next point equal to the initial one.
 
 ## Preserved native behaviour
 
@@ -1065,6 +1123,96 @@ with a degenerated side), with and without the corner checks, with `SetDomain` a
   negative size natively (Standard_RangeError here; not in the corpus). A default
   scheme (no `Init`) dereferences a null grid in `NbUPoles`, `Poles` and `Weights`
   (Standard_NullObject here; not in the corpus).
+
+### IntStart
+
+- `SearchOnBoundaries`: `FindVertex` gives the vertex solutions the boundary tolerance
+  as their tolerance. A new point of `PointProcess` has 1000 times the tolerance, at
+  most 0.005 (#24643), where `TreatLC` caps its point at 0.001; the new point is the
+  last point the loops copied, so it carries that point's vertex (unread, since
+  `Vertex()` raises on a new point).
+- A rejected arc (the six first-order samples keep one sign) is not solution. The
+  regularity recheck runs only when isolated zeros exist (`Nbp > 0`), and without the
+  recheck the null intervals are dropped whenever an isolated zero exists.
+- `TreatLC` and `IsRegularity` read the edge behind the domain: with
+  `Adaptor3d_TopolTool`, whose `Edge()` is null, the tangent line on a cylinder is
+  never special and no edge is regular. The branch of arcs that "have been seen" is
+  unreachable with IntPatch_HInterTool (its `HasBeenSeen` is false); the probe reaches
+  it through its own tool.
+- `ComputeBoundsfromInfinite` takes two Newton steps from far points and widens the
+  result tenfold; its `NbEchant` output is not read. `(1e10, -1e10)` is returned when
+  the distance is flat at 0.
+- The tangent zeros of an exact line intersection are merged only when the three
+  distances have one sign; the node count of the minimization is `ceil((b - a) / tol)`
+  with the parameters clamped to 1e9 ("floating point exception 569").
+- `SearchInside`: the sampling steps are the half-cells `2 (umax - umin) / NbSamplesU`,
+  the solver box is clipped with `std::max`/`std::min`, and the twelve extra starts are
+  the four corners at 2% of the steps twice, then at 0.5%. The classification tolerance
+  is `1000` times the larger resolution, at most 0.1% of the steps.
+
+### IntPolyh
+
+- `IntPolyh_Array::Init(N)` sets the item `N` of its dynamic array: the storage holds `N + 1`
+  items, and a second `Init` resets only that item, so the points, edges and triangles of a
+  second fill (the enlarged-zone retry of `PerformMaillage`) keep the degenerated flags, the
+  intersection flags, deflections and cached boxes of the first one where they are not
+  rewritten. `operator=` (`Copy`) keeps the target's increment; the one-`int` constructor
+  cannot be called natively (it is ambiguous with the `(N, increment)` one). `Dump` titles
+  any array "ArrayOfSectionLines" and compiles only for points, start points and lines.
+- `IntPolyh_SectionLine` holds a spare point: `NbStartPoints()` is its length minus one
+  (-1 for a line never initialized), `Init` ignores its argument, `Destroy` is empty.
+- `IntPolyh_Point::Divide` returns the default point for a divisor not above
+  Precision::Computational (bug #18); the dumps print `%+8.3eg`, a stray `g` after each
+  number. `IntPolyh_StartPoint::CheckSameSP` compares `lambda1` with the other `lambda1`
+  (its comment says `lambda2`) and prints both points (numbered 128 and 129, the octal
+  `00200` and `00201`) when both edges are unknown.
+- `FillArrayOfPnt(SurfID, isShiftFwd, Upars, Vpars, theDeflTol)` always fills the first
+  surface (it passes 1 to the overload it calls). `IsDegenerated` samples the isoline at
+  `i * step`, not from the first bound. `CommonBox(B1, B2, ...)` ignores its box arguments.
+  `GetFinTE` and `GetFinTT` are declared but defined nowhere (excluded rows).
+- `TriContact` leaves the angle unchanged when a normal is null, so `TriangleCompare` stores
+  the angle of the previous couple in contact. `MiddleRefinement` numbers the new triangles
+  and edges differently for each longest side and leaves the split edge pointing at the two
+  killed triangles.
+- `CalculPtsInterTriEdgeCoplanaires` divides the edge and side vectors by their squared
+  magnitudes before `IsParallel`; on the crossing, the end `alpha == 0` is overwritten by
+  the inner case (the second test has no `else`) and the second point of surface 2 reads
+  the side orientation from the first triangle; on the overlap, surface 2 mixes the U of
+  one point with the V of the other, both points take `alpha1` and `lambda1`, one case
+  starts `PEP2` from `PE2`, and the two cases where the side's end projects before its start
+  need rounding to happen (the side runs from `PT1` to `PT2`, so only a side far shorter
+  than its coordinates can project backwards). `TriangleEdgeContact` compares
+  `V2` with `V1` after the first coplanar pair and gives surface 2 `alpha` instead of `beta`
+  on the side `PT2PT3`.
+- `StartPointsChain` stores several points of the next couple in the tangent zones on the
+  first side only: on the second side the test sits in the `else` of the single-point case.
+  The chaining shares one next point between both sides of a couple, so a step that finds
+  several points stores the previous point with the new couple.
+- `IntPolyh_Intersection::NbPointsInLine` past the lines answers -1 (the allocated empty
+  lines) and `GetTangentZonePoint` past the zones the default point; `AnalyzeIntersection`
+  never fails, so `IsDone` is always true once the constructor returns.
+
+## IntStart deviations
+
+- The native code ignores the result of `Func.Value` in `FindVertex`, the recheck
+  samples and `ComputeBoundsfromInfinite`, and reads the output variable, which is
+  uninitialized (or the previous value) when the function answers false. The port keeps
+  the previous value, 0 at first; the IntPatch and Contap functions never answer false.
+- `TheTopolTool` is a trait, as the native domain is virtual; `Edge()` returns the edge
+  itself (`Option<Edge>`) where the native one returns a `void*`.
+
+## IntPolyh deviations
+
+- The native `Value` and `operator[]` of the arrays do not check the index: past the storage
+  the read is undefined. The port returns Standard_OutOfRange from `value`/`change_value` and
+  panics in `Index`/`IndexMut`; the corpus reads only inside the storage.
+- `MiddleRefinement` and `MultipleMiddleRefinement` run on an item of the array they grow;
+  the port refines a copy and writes it back, which gives the native result (the body never
+  writes the refined triangle through the array before its last two assignments).
+- `StartPointsChain` and `GetNextChainStartPoint` walk the couples by position in a vector
+  taken from the list and put back in order; the positions stand for the native iterators.
+- The diagnostics of `CheckSameSP` and of a null side in `TriangleEdgeContact` print to
+  standard output, as natively; the dumps write to a `fmt::Write`.
 
 ## IntCurveSurface deviations
 

@@ -56,6 +56,8 @@
 #include "tkgeomalgo_probe_gfill.cxx"
 #include "tkgeomalgo_probe_gfill_fill.cxx"
 #include "tkgeomalgo_probe_gfill_cf.cxx"
+#include "tkgeomalgo_probe_intstart.cxx"
+#include "tkgeomalgo_probe_intpolyh.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -217,6 +219,21 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gfill_corner", ga_gfill_corner_case},
  {"gfill_patch", ga_gfill_patch_case},
  {"gfill_cfill", ga_gfill_cfill_case},
+ // IntStart (tkgeomalgo_probe_intstart.cxx)
+ {"is_sob", ga_is_sob_case},
+ {"is_inside", ga_is_inside_case},
+ // IntPolyh (tkgeomalgo_probe_intpolyh.cxx)
+ {"ph_inter", ga_ph_inter_case},
+ {"ph_maillage", ga_ph_maillage_case},
+ {"ph_tricontact", ga_ph_tricontact_case},
+ {"ph_edgecontact", ga_ph_edgecontact_case},
+ {"ph_point", ga_ph_point_case},
+ {"ph_triangle", ga_ph_triangle_case},
+ {"ph_startpoint", ga_ph_startpoint_case},
+ {"ph_sectionline", ga_ph_sectionline_case},
+ {"ph_array", ga_ph_array_case},
+ {"ph_tools", ga_ph_tools_case},
+ {"ph_couple", ga_ph_couple_case},
 };
 int main() {
  std::string line;
