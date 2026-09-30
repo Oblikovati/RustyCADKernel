@@ -182220,6 +182220,830 @@
       "notes": "GeomInt (docs/geomalgo-design.md section 20): surfaces are Handle<GeomAdaptorSurface> compared by address, domains Rc<dyn TheTopolTool>, line sequences Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange, in-out references become &mut parameters or returned tuples, the native sorts run the libstdc++ algorithm; exceptions (and the null dereferences of the native code) become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gi_intss, gi_lconst, gi_lines, gi_ltool, gi_pcurves, gi_trim, gi_mkbsp, gi_rline, gi_adjust, gi_porient requests)."
     },
     {
+      "upstream_id": "BRepCheck::Add(NCollection_List<BRepCheck_Status>&,BRepCheck_Status)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheck::add",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck::Print(BRepCheck_Status,Standard_OStream&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheck::print",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck::SelfIntersection(const TopoDS_Wire&,const TopoDS_Face&,TopoDS_Edge&,TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheck::self_intersection",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck::PrecCurve(const Adaptor3d_Curve&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheck::prec_curve",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck::PrecSurface(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheck::prec_surface",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::new",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::InContext(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::Minimum()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::Blind()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::GeometricControls() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::geometric_controls",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::GeometricControls(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::set_geometric_controls",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::Tolerance()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::tolerance",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::SetStatus(BRepCheck_Status)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::set_status",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::SetExactMethod(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::set_exact_method",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::IsExactMethod()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::is_exact_method",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::CheckPolygonOnTriangulation(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::check_polygon_on_triangulation",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Edge::DEFINE_STANDARD_RTTIEXT(BRepCheck_Edge,BRepCheck_Result)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckEdge::static_type",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepCheck_Face(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::new",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::InContext(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::Minimum()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::Blind()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::IntersectWires(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::intersect_wires",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::ClassifyWires(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::classify_wires",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::OrientationOfWires(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::orientation_of_wires",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::SetUnorientable()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::set_unorientable",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::SetStatus(BRepCheck_Status)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::set_status",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::IsUnorientable() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::is_unorientable",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::GeometricControls() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::geometric_controls",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::GeometricControls(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::set_geometric_controls",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Face::DEFINE_STANDARD_RTTIEXT(BRepCheck_Face,BRepCheck_Result)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckFace::static_type",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::Init(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::init",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::InContext(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::Minimum()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::Blind()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::SetFailStatus(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::set_fail_status",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::Status() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::status",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::IsMinimum() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::is_minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::IsBlind() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::is_blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::InitContextIterator()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::init_context_iterator",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::MoreShapeInContext() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::more_shape_in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::ContextualShape() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::contextual_shape",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::StatusOnShape() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::status_on_shape",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::NextShapeInContext()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::next_shape_in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::SetParallel(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::set_parallel",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::IsParallel() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::is_parallel",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::IsStatusOnShape(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::is_status_on_shape",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::StatusOnShape(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::status_on_shape_of",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::DEFINE_STANDARD_RTTIEXT(BRepCheck_Result,Standard_Transient)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckResult::static_type",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell(const TopoDS_Shell&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::new",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::InContext(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::Minimum()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::Blind()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::Closed(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::closed",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::Orientation(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::orientation",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::SetUnorientable()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::set_unorientable",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::IsUnorientable() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::is_unorientable",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::NbConnectedSet(NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::nb_connected_set",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Shell::DEFINE_STANDARD_RTTIEXT(BRepCheck_Shell,BRepCheck_Result)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckShell::static_type",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepCheck_Status",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Vertex(const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Vertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckVertex::new",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Vertex::InContext(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Vertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckVertex::in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Vertex::Minimum()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Vertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckVertex::minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Vertex::Blind()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Vertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckVertex::blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Vertex::Tolerance()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Vertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckVertex::tolerance",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Vertex::DEFINE_STANDARD_RTTIEXT(BRepCheck_Vertex,BRepCheck_Result)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Vertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckVertex::static_type",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire(const TopoDS_Wire&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::new",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::InContext(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::Minimum()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::Blind()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::Closed(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::closed",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::Closed2d(const TopoDS_Face&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::closed2d",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::Orientation(const TopoDS_Face&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::orientation",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::SelfIntersect(const TopoDS_Face&,TopoDS_Edge&,TopoDS_Edge&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::self_intersect",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::GeometricControls() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::geometric_controls",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::GeometricControls(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::set_geometric_controls",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::SetStatus(BRepCheck_Status)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::set_status",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Wire::DEFINE_STANDARD_RTTIEXT(BRepCheck_Wire,BRepCheck_Result)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Wire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckWire::static_type",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge(occ::handle<Adaptor3d_Curve>,occ::handle<Adaptor3d_CurveOnSurface>,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::new",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::SetExactMethod(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::set_exact_method",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::IsExactMethod()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::is_exact_method",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::SetParallel(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::set_parallel",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::IsParallel()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::is_parallel",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::SetControlPointsNumber(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::set_control_points_number",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::SetExitIfToleranceExceeded(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::set_exit_if_tolerance_exceeded",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::Process()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::process",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::is_done",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::CheckTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::check_tolerance",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::GetMaxDistance()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::get_max_distance",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ValidateEdge::UpdateTolerance(double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ValidateEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibValidateEdge::update_tolerance",
+      "status": "implemented",
+      "notes": "BRepLib_ValidateEdge mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): the struct BRepLibValidateEdge owns the two adaptor handles; the setters take &mut self, UpdateTolerance takes &mut f64, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (ble_validate requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer(const TopoDS_Shape&,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::new",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::Init(const TopoDS_Shape&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::init",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::SetExactMethod(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::set_exact_method",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::IsExactMethod()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::is_exact_method",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::SetParallel(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::set_parallel",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::IsParallel()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::is_parallel",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::IsValid(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::is_valid_shape",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::IsValid() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::is_valid",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Analyzer::Result(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Analyzer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckAnalyzer::result",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). BRepCheck_Analyzer is the struct BRepCheckAnalyzer (its map keeps the default hasher, a compound has a null checker, the checks in context run in order or on the default pool and a failure outside the native catch blocks is returned); IsValid(S) is is_valid_shape. Compared by the bck_analyze requests."
+    },
+    {
+      "upstream_id": "BRepCheck_Solid(const TopoDS_Solid&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Solid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckSolid::new",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Solid::InContext(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Solid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckSolid::in_context",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Solid::Minimum()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Solid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckSolid::minimum",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Solid::Blind()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Solid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckSolid::blind",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests)."
+    },
+    {
+      "upstream_id": "BRepCheck_Solid::DEFINE_STANDARD_RTTIEXT(BRepCheck_Solid,BRepCheck_Result)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Solid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckSolid::static_type",
+      "status": "implemented",
+      "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
       "upstream_id": "BRepLib::Precision(double)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib.hxx",

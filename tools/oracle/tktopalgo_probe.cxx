@@ -32,6 +32,8 @@
 #include "tktopalgo_probe_bisector.cxx"
 #include "tktopalgo_probe_mat.cxx"
 #include "tktopalgo_probe_mat_parts.cxx"
+#include "tktopalgo_probe_shapes.cxx"
+#include "tktopalgo_probe_brepcheck.cxx"
 #include "tktopalgo_probe_shape.cxx"
 #include "tktopalgo_probe_brepbndlib.cxx"
 #include "tktopalgo_probe_brepclass3d.cxx"
@@ -88,6 +90,15 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"tp_mat2d_cut", tp_mat2d_cut_case},
  {"tp_mat2d_minipath", tp_mat2d_minipath_case},
  {"tp_mat2d_tool", tp_mat2d_tool_case},
+ // BRepCheck and BRepLib_ValidateEdge (tktopalgo_probe_brepcheck.cxx, shapes of
+ // tktopalgo_probe_shapes.cxx)
+ {"bck_status", tp_bck_status_case},
+ {"bck_add", tp_bck_add_case},
+ {"bck_prec", tp_bck_prec_case},
+ {"bck_selfint", tp_bck_selfint_case},
+ {"bck_check", tp_bck_check_case},
+ {"ble_validate", tp_ble_validate_case},
+ {"bck_analyze", tp_bck_analyze_case},
  // BRepBndLib (tktopalgo_probe_brepbndlib.cxx, shapes of tktopalgo_probe_shape.cxx)
  {"bbl_add", tp_bbl_add_case},
  // BRepClass3d (tktopalgo_probe_brepclass3d.cxx, shapes of tktopalgo_probe_shape.cxx)

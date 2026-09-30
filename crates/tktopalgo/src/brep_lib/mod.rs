@@ -35,6 +35,7 @@ mod tool_triangulated_shape;
 mod update_edge_tol;
 mod update_tolerances;
 mod valid_range;
+mod validate_edge;
 
 pub use bounding_vertex::bounding_vertex;
 pub use build_curve3d::{
@@ -73,3 +74,4 @@ pub use tool_triangulated_shape::BRepLibToolTriangulatedShape;
 pub use update_edge_tol::{update_edge_tol, update_edge_tolerance};
 pub use update_tolerances::{update_tolerances, update_tolerances_with_reshape};
 pub use valid_range::{RangeEnd, ValidRange, find_valid_range, find_valid_range_of_edge};
+pub use validate_edge::BRepLibValidateEdge;
