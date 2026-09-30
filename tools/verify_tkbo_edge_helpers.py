@@ -27,7 +27,10 @@ def requests() -> str:
     lines+=['edge_geometry '+' '.join(map(str,[kind,a,b,tol,res,offset]))
             for kind,(a,b),tol,res,offset in product(range(15),[(0,1),(0,0),(-2,3),(0,6.283185307179586)],
                 [-1,0,1e-7,0.1,10],[-1,0,1e-7],[-2,0.5])]
-    return '\n'.join(lines)+'\n'
+    lines+=['edge_distance '+' '.join(map(str,[source,target,a,b,threshold,eps,maximum]))
+            for source,target,(a,b),threshold,eps,maximum in product([0,1,3,4,7,9,11],
+                [0,1,3,7,9,11],[(0,1),(0,0),(1,0),(-1,1)],[0.1,10],[1e-7],[0,1])]
+    return '\n'.join(lines)+'\n' 
 
 
 def main() -> None:

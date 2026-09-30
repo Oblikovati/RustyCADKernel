@@ -14,7 +14,8 @@ void ee_geometry(const std::vector<double>& v){
  try{bo_real(CurveDeflection(curve,range));}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
  try{bo_int(IsClosed(source,v[1],v[2],v[3],v[4]));}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
 }
+#include "tkbo_edge_private_distance.cxx"
 int main(){
  std::string line;while(std::getline(std::cin,line)){std::istringstream input(line);std::string operation;input>>operation;double x;std::vector<double> v;while(input>>x)v.push_back(x);
- try{if(operation=="edge_math")ee_math(v);else if(operation=="edge_geometry")ee_geometry(v);else{return 2;}}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}std::cout<<'\n';}
+ try{if(operation=="edge_distance")ee_distance(v);else if(operation=="edge_math")ee_math(v);else if(operation=="edge_geometry")ee_geometry(v);else{return 2;}}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}std::cout<<'\n';}
 }

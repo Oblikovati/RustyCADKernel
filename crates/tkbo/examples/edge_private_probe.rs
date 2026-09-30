@@ -1,5 +1,9 @@
 //! Isolated EdgeEdge helper oracle; no complete public API is implied.
 pub use rustycad_tkbo::int_tools;
+#[path = "../src/int_tools/edge_edge/distance.rs"]
+mod distance;
+#[path = "../src/int_tools/edge_edge/distance_search.rs"]
+mod distance_search;
 #[path = "../src/int_tools/edge_edge/math.rs"]
 mod edge_math;
 mod edge_private;

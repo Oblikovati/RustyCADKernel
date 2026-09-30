@@ -1,5 +1,6 @@
 //! Helper state is compared without exposing an unfinished intersection API.
 use super::{edge_math, edge_resolution};
+mod distances;
 mod fixtures;
 use rustycad_tkbo::int_tools::Range;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
@@ -63,6 +64,7 @@ fn geometry(values: &[f64]) -> Result<(), Failure> {
 }
 pub fn run(operation: &str, values: &[f64]) {
     match operation {
+        "edge_distance" => attempt(distances::case(values)),
         "edge_math" => attempt(math(values)),
         "edge_geometry" => attempt(geometry(values)),
         _ => {
