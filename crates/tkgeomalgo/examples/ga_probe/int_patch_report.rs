@@ -5,12 +5,11 @@ use super::common::{attempt, dir, flag, int, pnt, pnt2d, real, xyz};
 use super::int_patch::trans;
 use super::int_walk::pnt2s;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool;
 use rustycad_tkgeomalgo::int_patch::{
     IntPatchALine, IntPatchGLine, IntPatchIType, IntPatchLine, IntPatchPoint, IntPatchPointLine,
     IntPatchRLine, IntPatchWLine,
 };
-use rustycad_tkgeomalgo::int_start::{TheArc, TheVertex};
+use rustycad_tkgeomalgo::int_start::{TheArc, TheTopolTool, TheVertex};
 use rustycad_tkmath::gp::{Axis2, Point3, Vector3};
 
 /// GaIplDomains: the arcs of both domains, collected before the intersection runs.
@@ -19,7 +18,9 @@ pub struct Domains {
     a2: Vec<TheArc>,
 }
 
-fn collect(d: &Adaptor3dTopolTool) -> Vec<TheArc> {
+// Any domain (the TKTopAlgo probe passes BRepTopAdaptor_TopolTool ones), through the
+// virtual members, as the native `occ::handle<Adaptor3d_TopolTool>`.
+fn collect(d: &dyn TheTopolTool) -> Vec<TheArc> {
     let mut v = Vec::new();
     d.init();
     while d.more() {
@@ -30,7 +31,7 @@ fn collect(d: &Adaptor3dTopolTool) -> Vec<TheArc> {
 }
 
 impl Domains {
-    pub fn new(d1: &Adaptor3dTopolTool, d2: &Adaptor3dTopolTool) -> Self {
+    pub fn new(d1: &dyn TheTopolTool, d2: &dyn TheTopolTool) -> Self {
         Self {
             a1: collect(d1),
             a2: collect(d2),

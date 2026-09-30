@@ -4,7 +4,7 @@ use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
     bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_class, brep_class3d,
-    brep_top_adaptor, int_curves_face, mat, mat_parts,
+    brep_top_adaptor, brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -74,6 +74,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bc3_uvpoint", brep_class3d::uvpoint_case),
     ("bc3_tree", brep_class3d::tree_case),
     ("bc3_inter3d", brep_class3d::inter3d_case),
+    // BRepTopAdaptor domains of IntStart and IntPatch (tp_probe/brep_top_adaptor_domain.rs)
+    ("bta_sob", brep_top_adaptor_domain::sob_case),
+    ("bta_inside", brep_top_adaptor_domain::inside_case),
+    (
+        "bta_intersection",
+        brep_top_adaptor_domain::intersection_case,
+    ),
 ];
 
 fn main() {

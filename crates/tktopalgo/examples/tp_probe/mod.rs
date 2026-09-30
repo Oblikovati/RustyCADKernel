@@ -6,6 +6,7 @@ pub mod brep_builder_api;
 pub mod brep_class;
 pub mod brep_class3d;
 pub mod brep_top_adaptor;
+pub mod brep_top_adaptor_domain;
 pub mod face;
 pub mod int_curves_face;
 pub mod mat;
@@ -31,3 +32,22 @@ pub mod int_res2d;
 // MAT2d probes share with it.
 #[path = "../../../tkgeomalgo/examples/ga_probe/curve2d.rs"]
 pub mod curve2d;
+
+// The IntPatch line printers of the TKGeomAlgo probe (tkgeomalgo_probe_intpatch_report.cxx
+// natively) with the readers they need, for the BRepTopAdaptor domains of IntStart and
+// IntPatch; their own request operations are not in this probe's table.
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/int_patch.rs"]
+pub mod int_patch;
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/int_patch_report.rs"]
+pub mod int_patch_report;
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/int_surf.rs"]
+pub mod int_surf;
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/int_walk.rs"]
+pub mod int_walk;
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/int_walk_iw.rs"]
+pub mod int_walk_iw;
