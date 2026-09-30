@@ -113,7 +113,7 @@ fn purge_of_a_long_straight_line_keeps_its_ends() {
     // The collinear points are in the tubes of their neighbours: few points are left, and
     // the vertices stay on the ends.
     let nb = purged.nb_pnts().unwrap();
-    assert!(nb < 40 && nb >= 2);
+    assert!((2..40).contains(&nb));
     assert_eq!(purged.vertex(1).unwrap().parameter_on_line(), 1.0);
     assert_eq!(purged.vertex(2).unwrap().parameter_on_line(), f64::from(nb));
 }
@@ -145,9 +145,9 @@ fn join_of_two_lines_sharing_an_end() {
     assert_eq!(lines.len(), 1);
     let joined: Handle<IntPatchWLine> = lines[0].cast();
     assert!(joined.nb_pnts().unwrap() >= 11);
-    assert!(
-        IntPatchWLineTool::MY_MAX_CONCAT_ANGLE > 0.52
-            && IntPatchWLineTool::MY_MAX_CONCAT_ANGLE < 0.53
+    assert_eq!(
+        IntPatchWLineTool::MY_MAX_CONCAT_ANGLE,
+        std::f64::consts::PI / 6.0
     );
 }
 
