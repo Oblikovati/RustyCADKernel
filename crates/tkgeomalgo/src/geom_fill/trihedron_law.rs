@@ -102,9 +102,8 @@ impl GeomFillTrihedronLawBase {
     /// `base.set_interval(0.0, 1.0)?`.
     pub fn set_interval(&self, first: f64, last: f64) -> Result<(), Failure> {
         let curve = self.curve();
-        let trimmed = live(&curve, "GeomFill_TrihedronLaw::SetInterval", "myCurve")?.trim(
-            first, last, 0.0,
-        )?;
+        let trimmed = live(&curve, "GeomFill_TrihedronLaw::SetInterval", "myCurve")?
+            .trim(first, last, 0.0)?;
         self.curves.write().trimmed = trimmed;
         Ok(())
     }
@@ -114,6 +113,12 @@ impl GeomFillTrihedronLawBase {
         let trimmed = self.trimmed();
         let curve = live(&trimmed, "GeomFill_TrihedronLaw::GetInterval", "myTrimmed")?;
         Ok((curve.first_parameter()?, curve.last_parameter()?))
+    }
+
+    /// `myTrimmed = trimmed`, for the laws that trim their own curve;
+    /// `base.set_trimmed(&curve)`.
+    pub fn set_trimmed(&self, trimmed: &Handle<dyn Adaptor3dCurve>) {
+        self.curves.write().trimmed = trimmed.clone();
     }
 
     /// `myCurve` (a null handle before `SetCurve`); `base.curve()`.

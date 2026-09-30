@@ -280,7 +280,11 @@ impl GeomFillPolynomialConvertor {
 
 /// The first and second derivative of one pole from the three frames and the
 /// three planar terms, in the native operation order.
-fn second_order_poles(frames: &[Matrix3; 3], terms: [Xyz; 3], arc: &ArcSectionD2) -> (Vector3, Vector3) {
+fn second_order_poles(
+    frames: &[Matrix3; 3],
+    terms: [Xyz; 3],
+    arc: &ArcSectionD2,
+) -> (Vector3, Vector3) {
     let [m, m_prim, m_secn] = *frames;
     let [mut p, mut dp, mut d2p] = terms;
     let mut auxyz = Xyz::default();

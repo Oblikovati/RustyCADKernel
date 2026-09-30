@@ -71,13 +71,39 @@ pub fn shape_case(values: &[f64]) {
 fn read_circle(r: &mut Reader) -> CircleD2 {
     let (ns1, ns2, nplan) = (vec(r), vec(r), vec(r));
     let (pts1, pts2, rayon, center) = (r.pnt(), r.pnt(), r.real(), r.pnt());
-    let circle = CircleD0 { ns1, ns2, nplan, pts1, pts2, rayon, center };
+    let circle = CircleD0 {
+        ns1,
+        ns2,
+        nplan,
+        pts1,
+        pts2,
+        rayon,
+        center,
+    };
     let (dn1w, dn2w, dnplan, tang1, tang2) = (vec(r), vec(r), vec(r), vec(r), vec(r));
     let (d_rayon, d_center) = (r.real(), vec(r));
-    let d1 = CircleD1 { circle, dn1w, dn2w, dnplan, tang1, tang2, d_rayon, d_center };
+    let d1 = CircleD1 {
+        circle,
+        dn1w,
+        dn2w,
+        dnplan,
+        tang1,
+        tang2,
+        d_rayon,
+        d_center,
+    };
     let (d2n1w, d2n2w, d2nplan, dtang1, dtang2) = (vec(r), vec(r), vec(r), vec(r), vec(r));
     let (d2_rayon, d2_center) = (r.real(), vec(r));
-    CircleD2 { d1, d2n1w, d2n2w, d2nplan, dtang1, dtang2, d2_rayon, d2_center }
+    CircleD2 {
+        d1,
+        d2n1w,
+        d2n2w,
+        d2nplan,
+        dtang1,
+        dtang2,
+        d2_rayon,
+        d2_center,
+    }
 }
 
 /// The six output arrays of the D2 members, reset to -1.
@@ -102,11 +128,21 @@ impl Outputs {
         }
     }
     pub fn d1(&mut self) -> ArcPolesD1<'_, 'static> {
-        ArcPolesD1 { poles: &mut self.p, d_poles: &mut self.dp, weights: &mut self.w, d_weights: &mut self.dw }
+        ArcPolesD1 {
+            poles: &mut self.p,
+            d_poles: &mut self.dp,
+            weights: &mut self.w,
+            d_weights: &mut self.dw,
+        }
     }
     pub fn d2(&mut self) -> ArcPolesD2<'_, 'static> {
         ArcPolesD2 {
-            d1: ArcPolesD1 { poles: &mut self.p, d_poles: &mut self.dp, weights: &mut self.w, d_weights: &mut self.dw },
+            d1: ArcPolesD1 {
+                poles: &mut self.p,
+                d_poles: &mut self.dp,
+                weights: &mut self.w,
+                d_weights: &mut self.dw,
+            },
             d2_poles: &mut self.d2p,
             d2_weights: &mut self.d2w,
         }
@@ -145,9 +181,26 @@ fn read_arc(r: &mut Reader) -> ArcSectionD2 {
     let (c, dc, d2c) = (r.pnt(), vec(r), vec(r));
     let (dir, ddir, d2dir) = (vec(r), vec(r), vec(r));
     let (a, da, d2a) = (r.real(), r.real(), r.real());
-    let arc = ArcSectionD0 { first_pnt: fp, center: c, dir, angle: a };
-    let d1 = ArcSectionD1 { arc, d_first_pnt: dfp, d_center: dc, d_dir: ddir, d_angle: da };
-    ArcSectionD2 { d1, d2_first_pnt: d2fp, d2_center: d2c, d2_dir: d2dir, d2_angle: d2a }
+    let arc = ArcSectionD0 {
+        first_pnt: fp,
+        center: c,
+        dir,
+        angle: a,
+    };
+    let d1 = ArcSectionD1 {
+        arc,
+        d_first_pnt: dfp,
+        d_center: dc,
+        d_dir: ddir,
+        d_angle: da,
+    };
+    ArcSectionD2 {
+        d1,
+        d2_first_pnt: d2fp,
+        d2_center: d2c,
+        d2_dir: d2dir,
+        d2_angle: d2a,
+    }
 }
 
 fn polynomial(init: bool, arc: &ArcSectionD2, lower: i32, u: i32) {

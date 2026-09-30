@@ -174,7 +174,11 @@ fn rational_spans(
     for (i, jj) in (1..nb_span).zip((low + 2..).step_by(2)) {
         let lambda = f64::from(i) * alpha;
         temp.set_linear_form(lambda.cos() - 1.0, c.ns1, lambda.sin(), np2);
-        put(poles, jj, point_from_xyz(c.pts1.xyz() + c.rayon * *temp.xyz()))?;
+        put(
+            poles,
+            jj,
+            point_from_xyz(c.pts1.xyz() + c.rayon * *temp.xyz()),
+        )?;
         put(weights, jj, 1.0)?;
     }
     let lambda = 1.0 / (2.0 * cosas2 * cosas2);
@@ -265,9 +269,8 @@ fn d2_angles(c: &CircleD2, cosa: f64, sina: f64) -> (f64, f64) {
     let d_angle = (d1.dnplan.dot(cross) + b.nplan.dot(temp)) / cosa;
     let d2 = (c.d2nplan.dot(cross)
         + 2.0 * d1.dnplan.dot(temp)
-        + b.nplan.dot(
-            c.d2n1w.crossed(b.ns2) + 2.0 * d1.dn1w.crossed(d1.dn2w) + b.ns1.crossed(c.d2n2w),
-        ))
+        + b.nplan
+            .dot(c.d2n1w.crossed(b.ns2) + 2.0 * d1.dn1w.crossed(d1.dn2w) + b.ns1.crossed(c.d2n2w)))
         / cosa
         - (d1.dn1w.dot(b.ns2) + b.ns1.dot(d1.dn2w)) * (d1.dnplan.dot(cross) + b.nplan.dot(temp))
             / (cosa * cosa);
@@ -299,7 +302,11 @@ pub fn get_circle_d2(
     match conv {
         ParameterisationType::QuasiAngular => quasi_convertor()?.section_d2(&arc, out)?,
         ParameterisationType::Polynomial => {
-            let ArcPolesD2 { d1, d2_poles, d2_weights } = out;
+            let ArcPolesD2 {
+                d1,
+                d2_poles,
+                d2_weights,
+            } = out;
             polynomial_convertor()?.section_d2(&arc, d1.poles, d1.d_poles, d2_poles)?;
             d1.weights.init(1.0);
             d1.d_weights.init(0.0);

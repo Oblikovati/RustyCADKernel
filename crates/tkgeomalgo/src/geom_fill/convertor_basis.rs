@@ -35,8 +35,14 @@ pub(crate) fn basis_matrix(ordre: i32) -> Result<Matrix<'static>, Failure> {
     let mut inter: Array1<'static, f64> = one_based_reals(2)?;
     inter[1] = -1.0;
     inter[2] = 1.0;
-    let converter =
-        CompPolynomialToPoles::from_single_span(ordre, ordre - 1, ordre - 1, &coeffs, &inter, &inter)?;
+    let converter = CompPolynomialToPoles::from_single_span(
+        ordre,
+        ordre - 1,
+        ordre - 1,
+        &coeffs,
+        &inter,
+        &inter,
+    )?;
     let poles = converter.poles()?;
     let mut result = matrix_with_bounds(1, ordre, 1, ordre)?;
     for jj in 1..=ordre {

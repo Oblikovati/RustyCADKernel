@@ -2,6 +2,8 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
+use ga_probe::geom_fill_sweep as gfs;
+use ga_probe::geom_fill_trihedron as gft;
 use ga_probe::int_curve_surface_inter as ics_inter;
 use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, plate};
 use ga_probe::{
@@ -12,7 +14,6 @@ use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
 use ga_probe::{int_walk, int_walk_iw};
-use ga_probe::geom_fill_sweep as gfs;
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -172,6 +173,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfs_circle", gfs::circle_case),
     ("gfs_convert", gfs::convert_case),
     ("gfs_tensor", gfs::tensor_case),
+    ("gfs_trihedron", gft::law_case),
 ];
 
 fn main() {

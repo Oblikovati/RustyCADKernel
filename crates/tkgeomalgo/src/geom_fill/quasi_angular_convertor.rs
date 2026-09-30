@@ -187,7 +187,12 @@ impl GeomFillQuasiAngularConvertor {
     }
 
     /// `P`, `DP`, `D2P` of pole `ii` divided by its weight, in the native order.
-    fn rational_terms(&self, ii: i32, dp: &[Vector<'static>; 3], d2p: &[Vector<'static>; 3]) -> [Xyz; 3] {
+    fn rational_terms(
+        &self,
+        ii: i32,
+        dp: &[Vector<'static>; 3],
+        d2p: &[Vector<'static>; 3],
+    ) -> [Xyz; 3] {
         let (wi, dwi) = (self.w[ii], dp[2][ii]);
         let p = Xyz::new(self.px[ii] / wi, self.py[ii] / wi, 0.0);
         let mut d = Xyz::new(dp[0][ii] / wi, dp[1][ii] / wi, 0.0);
@@ -214,7 +219,11 @@ impl GeomFillQuasiAngularConvertor {
         self.store_value_terms(&value)?;
         let dp = first_order_terms_d2(&value, primes[0], bpr).products(&self.b)?;
         let d2p = second_order_terms(&value, primes, [bpr, bsc]).products(&self.b)?;
-        let ArcPolesD2 { d1: out1, d2_poles, d2_weights } = out;
+        let ArcPolesD2 {
+            d1: out1,
+            d2_poles,
+            d2_weights,
+        } = out;
         for ii in 1..=ORDRE {
             let [mut p, mut d, mut d2] = self.rational_terms(ii, &dp, &d2p);
             put(out1.poles, ii, point_from_xyz(m * p + d1.arc.center.xyz()))?;

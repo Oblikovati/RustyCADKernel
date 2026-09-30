@@ -53,7 +53,11 @@ fn d1_arc_poles(
         let lambda = f64::from(i) * alpha;
         let (cosa, sina) = (lambda.cos(), lambda.sin());
         temp.set_linear_form(cosa - 1.0, b.ns1, sina, np2);
-        put(out.poles, jj, point_from_xyz(b.pts1.xyz() + b.rayon * *temp.xyz()))?;
+        put(
+            out.poles,
+            jj,
+            point_from_xyz(b.pts1.xyz() + b.rayon * *temp.xyz()),
+        )?;
         let mut d_pole = Vector3::default();
         d_pole.set_scaled_sum(c.d_rayon, temp, c.tang1);
         temp.set_linear_form(-sina, b.ns1, cosa, np2);
@@ -79,11 +83,19 @@ pub(crate) fn d1_spans(
     let dlambda = (lambda * sinas2 * d_angle) / (cosas2 * f64::from(nb_span));
     let center = c.circle.center.xyz();
     for (_, jj) in span_indices(1, nb_span, out.poles.lower()) {
-        let temp = Vector3::from(at(out.poles, jj)?.xyz() + at(out.poles, jj + 2)?.xyz() - 2.0 * center);
-        put(out.poles, jj + 1, point_from_xyz(center + lambda * *temp.xyz()))?;
+        let temp =
+            Vector3::from(at(out.poles, jj)?.xyz() + at(out.poles, jj + 2)?.xyz() - 2.0 * center);
+        put(
+            out.poles,
+            jj + 1,
+            point_from_xyz(center + lambda * *temp.xyz()),
+        )?;
         let sum = at(out.d_poles, jj)? + at(out.d_poles, jj + 2)?;
         let mut d_pole = Vector3::default();
-        d_pole.set_linear_form_three([dlambda, 1.0 - 2.0 * lambda, lambda], [temp, c.d_center, sum]);
+        d_pole.set_linear_form_three(
+            [dlambda, 1.0 - 2.0 * lambda, lambda],
+            [temp, c.d_center, sum],
+        );
         put(out.d_poles, jj + 1, d_pole)?;
     }
     let dlambda = -sinas2 * d_angle / f64::from(2 * nb_span);
@@ -99,7 +111,11 @@ pub(crate) fn d1_spans(
 
 /// The on-arc poles of the D2 member with their two derivatives;
 /// `angles` is `[Angle, DAngle, D2Angle]`.
-fn d2_arc_poles(c: &CircleD2, angles: [f64; 3], out: &mut ArcPolesD2<'_, '_>) -> Result<(), Failure> {
+fn d2_arc_poles(
+    c: &CircleD2,
+    angles: [f64; 3],
+    out: &mut ArcPolesD2<'_, '_>,
+) -> Result<(), Failure> {
     let (d1, b) = (&c.d1, &c.d1.circle);
     let [angle, d_angle, d2_angle] = angles;
     let nb_span = (out.d1.poles.length() - 1) / 2;
@@ -113,7 +129,11 @@ fn d2_arc_poles(c: &CircleD2, angles: [f64; 3], out: &mut ArcPolesD2<'_, '_>) ->
         let lambda = f64::from(i) * alpha;
         let (cosa, sina) = (lambda.cos(), lambda.sin());
         temp.set_linear_form(cosa - 1.0, b.ns1, sina, np2);
-        put(out.d1.poles, jj, point_from_xyz(b.pts1.xyz() + b.rayon * *temp.xyz()))?;
+        put(
+            out.d1.poles,
+            jj,
+            point_from_xyz(b.pts1.xyz() + b.rayon * *temp.xyz()),
+        )?;
         let mut d_pole = Vector3::default();
         d_pole.set_scaled_sum(d1.d_rayon, temp, d1.tang1);
         dtemp.set_linear_form(-sina, b.ns1, cosa, np2);
@@ -136,15 +156,26 @@ fn d2_arc_poles(c: &CircleD2, angles: [f64; 3], out: &mut ArcPolesD2<'_, '_>) ->
 }
 
 /// The middle poles of the D2 member; `lambdas` is `[lambda, Dlambda, D2lambda]`.
-fn d2_middle_poles(c: &CircleD2, lambdas: [f64; 3], out: &mut ArcPolesD2<'_, '_>) -> Result<(), Failure> {
+fn d2_middle_poles(
+    c: &CircleD2,
+    lambdas: [f64; 3],
+    out: &mut ArcPolesD2<'_, '_>,
+) -> Result<(), Failure> {
     let [lambda, dlambda, d2lambda] = lambdas;
     let nb_span = (out.d1.poles.length() - 1) / 2;
     let center = c.d1.circle.center.xyz();
     for (_, jj) in span_indices(1, nb_span, out.d1.poles.lower()) {
-        let temp = Vector3::from(at(out.d1.poles, jj)?.xyz() + at(out.d1.poles, jj + 2)?.xyz() - 2.0 * center);
-        put(out.d1.poles, jj + 1, point_from_xyz(center + lambda * *temp.xyz()))?;
+        let temp = Vector3::from(
+            at(out.d1.poles, jj)?.xyz() + at(out.d1.poles, jj + 2)?.xyz() - 2.0 * center,
+        );
+        put(
+            out.d1.poles,
+            jj + 1,
+            point_from_xyz(center + lambda * *temp.xyz()),
+        )?;
         let dtemp = Vector3::from(
-            *at(out.d1.d_poles, jj)?.xyz() + *at(out.d1.d_poles, jj + 2)?.xyz() - 2.0 * *c.d1.d_center.xyz(),
+            *at(out.d1.d_poles, jj)?.xyz() + *at(out.d1.d_poles, jj + 2)?.xyz()
+                - 2.0 * *c.d1.d_center.xyz(),
         );
         let mut d_pole = Vector3::default();
         d_pole.set_linear_form_offset(dlambda, temp, lambda, dtemp, c.d1.d_center);
@@ -159,7 +190,11 @@ fn d2_middle_poles(c: &CircleD2, lambdas: [f64; 3], out: &mut ArcPolesD2<'_, '_>
 }
 
 /// The default branch of the D2 `GetCircle`; `angles` is `[Angle, DAngle, D2Angle]`.
-pub(crate) fn d2_spans(c: &CircleD2, angles: [f64; 3], mut out: ArcPolesD2<'_, '_>) -> Result<(), Failure> {
+pub(crate) fn d2_spans(
+    c: &CircleD2,
+    angles: [f64; 3],
+    mut out: ArcPolesD2<'_, '_>,
+) -> Result<(), Failure> {
     d2_arc_poles(c, angles, &mut out)?;
     let [angle, d_angle, d2_angle] = angles;
     let nb_span = (out.d1.poles.length() - 1) / 2;

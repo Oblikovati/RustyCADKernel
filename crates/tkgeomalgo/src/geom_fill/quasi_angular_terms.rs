@@ -85,11 +85,7 @@ impl QuasiTerms {
                 p.beta4 * (b2 - 2.0 * c),
                 -p.beta6 * c2,
             ],
-            y: [
-                2.0 * p.beta,
-                p.beta3 * 2.0 * (c + b),
-                2.0 * p.beta5 * b * c,
-            ],
+            y: [2.0 * p.beta, p.beta3 * 2.0 * (c + b), 2.0 * p.beta5 * b * c],
             w: [
                 p.beta2 * (1.0 + 2.0 * b),
                 p.beta4 * (2.0 * c + b2),
@@ -237,7 +233,11 @@ pub(crate) fn first_order_terms_d2(t: &QuasiTerms, betaprim: f64, bpr: f64) -> D
 
 /// The second derivative terms `D2Vx`, `D2Vy`, `D2Vw` of the D2 member;
 /// `primes` is `[betaprim, betasecn]` and `bders` is `[bpr, bsc]`.
-pub(crate) fn second_order_terms(t: &QuasiTerms, primes: [f64; 2], bders: [f64; 2]) -> DerivativeTerms {
+pub(crate) fn second_order_terms(
+    t: &QuasiTerms,
+    primes: [f64; 2],
+    bders: [f64; 2],
+) -> DerivativeTerms {
     let p = &t.powers;
     let [betaprim, betasecn] = primes;
     let [bpr, bsc] = bders;

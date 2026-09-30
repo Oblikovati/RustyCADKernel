@@ -19,6 +19,7 @@
 //! of a sweep: their B-spline shape, knots, multiplicities, minimal weights and the
 //! approximation tolerance. They are functions of the `geom_fill` module, as the
 //! class functions of the other packages (`GeomFill::GetShape` is `get_shape`).
+use super::frame_math::std_max;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -124,7 +125,7 @@ pub fn get_minimal_weights(
     }
     let first = arc_bspline(1.0, max_ang, conv)?;
     first.weights_array(|w| weights.assign(w));
-    let angle_min = precision::p_confusion().max(min_ang);
+    let angle_min = std_max(precision::p_confusion(), min_ang);
     let second = arc_bspline(1.0, angle_min, conv)?;
     let poids: Array1<'static, f64> = second.weights_array(Clone::clone);
     for ii in weights.lower()..=weights.upper() {
@@ -146,7 +147,7 @@ pub fn get_tolerance(
     angular_tol: f64,
     spatial_tol: f64,
 ) -> Result<f64, Failure> {
-    let ctobspl = arc_bspline(radius, angle_min.max(0.02), conv)?;
+    let ctobspl = arc_bspline(radius, std_max(angle_min, 0.02), conv)?;
     let dist = ctobspl.pole(1)?.distance(&ctobspl.pole(2)?) + spatial_tol;
     Ok(dist * angular_tol / 2.0)
 }

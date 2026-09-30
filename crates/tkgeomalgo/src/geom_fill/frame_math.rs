@@ -39,3 +39,13 @@ pub(crate) fn dderiv(f: Vector3, df: Vector3, d2f: Vector3) -> Vector3 {
 pub(crate) fn point_from_xyz(xyz: Xyz) -> Point3 {
     Point3::new(xyz.x(), xyz.y(), xyz.z())
 }
+
+/// `std::min(a, b)`: `b < a ? b : a` (the first argument on ties and NaN).
+pub(crate) fn std_min(a: f64, b: f64) -> f64 {
+    if b < a { b } else { a }
+}
+
+/// `std::max(a, b)`: `a < b ? b : a` (the first argument on ties and NaN).
+pub(crate) fn std_max(a: f64, b: f64) -> f64 {
+    if a < b { b } else { a }
+}

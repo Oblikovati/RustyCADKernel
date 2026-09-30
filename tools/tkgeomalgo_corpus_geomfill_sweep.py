@@ -119,3 +119,4 @@ def append_geomfill_sweep_requests(requests: list[str]) -> None:
     _circle(requests)
     _convert(requests)
     _tensor(requests)
+    __import__('tkgeomalgo_corpus_geomfill_trihedron').append_trihedron_requests(requests)
