@@ -173162,6 +173162,1230 @@
       "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::static_type",
       "status": "implemented",
       "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "Bisector::IsConvex(const occ::handle<Geom2d_Curve>&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::is_convex",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Bisec()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Bisec.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::Bisec::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Bisec::Perform(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,GeomAbs_JoinType,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Bisec.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::Bisec::perform_curves",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Bisec::Perform(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Point>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Bisec.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::Bisec::perform_curve_point",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Bisec::Perform(const occ::handle<Geom2d_Point>&,const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Bisec.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::Bisec::perform_point_curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Bisec::Perform(const occ::handle<Geom2d_Point>&,const occ::handle<Geom2d_Point>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Bisec.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::Bisec::perform_points",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Bisec::Value() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Bisec.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::Bisec::value",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Bisec::ChangeValue()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Bisec.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::Bisec::change_value",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Perform(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,GeomAbs_JoinType,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::perform_curves",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Perform(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Point>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::perform_curve_point",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Perform(const occ::handle<Geom2d_Point>&,const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::perform_point_curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Perform(const occ::handle<Geom2d_Point>&,const occ::handle<Geom2d_Point>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Vec2d&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::perform_points",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Init(const occ::handle<Geom2d_TrimmedCurve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::init",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::IsExtendAtStart() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_start",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::IsExtendAtEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_end",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::SetTrim(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::set_trim_curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). The native body is commented out: it does nothing."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::SetTrim(double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::set_trim",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Reverse()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::ReversedParameter(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::IsCN(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Copy() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Transform(const gp_Trsf2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::FirstParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::LastParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::IsClosed() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::IsPeriodic() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Continuity() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::EvalD0(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::EvalD1(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::EvalD2(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::EvalD3(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::EvalDN(double,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Geom2dCurve() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::geom2d_curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Parameter(const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tktopalgo::bisector::BisectorCurve>::parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::ParameterOfStartPoint() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::parameter_of_start_point",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::ParameterOfEndPoint() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::parameter_of_end_point",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::NbIntervals() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tktopalgo::bisector::BisectorCurve>::nb_intervals",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::IntervalFirst(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tktopalgo::bisector::BisectorCurve>::interval_first",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::IntervalLast(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tktopalgo::bisector::BisectorCurve>::interval_last",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::Dump(int,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecAna::dump",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecAna::DEFINE_STANDARD_RTTIEXT(Bisector_BisecAna,Bisector_Curve)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecAna.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecAna as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&,double,double,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::with_curves",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Perform(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&,double,double,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::perform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IsExtendAtStart() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_start",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IsExtendAtEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_end",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Reverse()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::ReversedParameter(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IsCN(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::ChangeGuide() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::change_guide",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Copy() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Transform(const gp_Trsf2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::FirstParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::LastParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Continuity() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::NbIntervals() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tktopalgo::bisector::BisectorCurve>::nb_intervals",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IntervalFirst(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tktopalgo::bisector::BisectorCurve>::interval_first",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IntervalLast(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tktopalgo::bisector::BisectorCurve>::interval_last",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IntervalContinuity() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::interval_continuity",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IsClosed() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IsPeriodic() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::ValueAndDist(double,double&,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::value_and_dist",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::ValueByInt(double,double&,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::value_by_int",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::EvalD0(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::EvalD1(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::EvalD2(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::EvalD3(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::EvalDN(double,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::IsEmpty() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::is_empty",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::LinkBisCurve(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::link_bis_curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::LinkCurveBis(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::link_curve_bis",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Parameter(const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tktopalgo::bisector::BisectorCurve>::parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Curve(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Polygon() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::polygon",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::Dump(int,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecCC::dump",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecCC::DEFINE_STANDARD_RTTIEXT(Bisector_BisecCC,Bisector_Curve)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecCC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecCC as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::with_curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,double,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::with_bounds",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Perform(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::perform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IsExtendAtStart() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_start",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IsExtendAtEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_end",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Reverse()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::reverse",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::ReversedParameter(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::reversed_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Copy() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dGeometry>::copy",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Transform(const gp_Trsf2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IsCN(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::is_cn",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::FirstParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::first_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::LastParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::last_parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Continuity() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::continuity",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::NbIntervals() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tktopalgo::bisector::BisectorCurve>::nb_intervals",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IntervalFirst(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tktopalgo::bisector::BisectorCurve>::interval_first",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IntervalLast(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tktopalgo::bisector::BisectorCurve>::interval_last",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IntervalContinuity() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::interval_continuity",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IsClosed() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::is_closed",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IsPeriodic() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::is_periodic",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Distance(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::distance",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::EvalD0(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d0",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::EvalD1(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d1",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::EvalD2(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d2",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::EvalD3(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_d3",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::EvalDN(double,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkg2d::geom2d::Geom2dCurve>::eval_dn",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Dump(int,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::dump",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::LinkBisCurve(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::link_bis_curve",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::LinkCurveBis(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::link_curve_bis",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::Parameter(const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tktopalgo::bisector::BisectorCurve>::parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::IsEmpty() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisecPC::is_empty",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_BisecPC::DEFINE_STANDARD_RTTIEXT(Bisector_BisecPC,Bisector_Curve)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_BisecPC.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisecPC as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "Bisector_Curve::Parameter(const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Curve.hxx",
+      "rust_item": "<dyn rustycad_tktopalgo::bisector::BisectorCurve>::parameter",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Curve::IsExtendAtStart() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Curve.hxx",
+      "rust_item": "<dyn rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_start",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Curve::IsExtendAtEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Curve.hxx",
+      "rust_item": "<dyn rustycad_tktopalgo::bisector::BisectorCurve>::is_extend_at_end",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Curve::NbIntervals() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Curve.hxx",
+      "rust_item": "<dyn rustycad_tktopalgo::bisector::BisectorCurve>::nb_intervals",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Curve::IntervalFirst(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Curve.hxx",
+      "rust_item": "<dyn rustycad_tktopalgo::bisector::BisectorCurve>::interval_first",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Curve::IntervalLast(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Curve.hxx",
+      "rust_item": "<dyn rustycad_tktopalgo::bisector::BisectorCurve>::interval_last",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Curve::DEFINE_STANDARD_RTTIEXT(Bisector_Curve,Geom2d_Curve)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Curve.hxx",
+      "rust_item": "<dyn rustycad_tktopalgo::bisector::BisectorCurve as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "Bisector_FunctionH(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Vec2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionH.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisectorFunctionH::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_FunctionH::Value(double,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionH.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisectorFunctionH as rustycad_tkmath::math::Function>::value",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). A curve evaluation failure answers false; raised() gives the native exception."
+    },
+    {
+      "upstream_id": "Bisector_FunctionH::Derivative(double,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionH.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisectorFunctionH as rustycad_tkmath::math::FunctionWithDerivative>::derivative",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). A curve evaluation failure answers false; raised() gives the native exception."
+    },
+    {
+      "upstream_id": "Bisector_FunctionH::Values(double,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionH.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisectorFunctionH as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). A curve evaluation failure answers false; raised() gives the native exception."
+    },
+    {
+      "upstream_id": "Bisector_FunctionInter()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionInter.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisectorFunctionInter::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_FunctionInter(const occ::handle<Geom2d_Curve>&,const occ::handle<Bisector_Curve>&,const occ::handle<Bisector_Curve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionInter.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisectorFunctionInter::with_curves",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_FunctionInter::Perform(const occ::handle<Geom2d_Curve>&,const occ::handle<Bisector_Curve>&,const occ::handle<Bisector_Curve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionInter.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisectorFunctionInter::perform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_FunctionInter::Value(double,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionInter.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisectorFunctionInter as rustycad_tkmath::math::Function>::value",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). A curve evaluation failure answers false; raised() gives the native exception."
+    },
+    {
+      "upstream_id": "Bisector_FunctionInter::Derivative(double,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionInter.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisectorFunctionInter as rustycad_tkmath::math::FunctionWithDerivative>::derivative",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). A curve evaluation failure answers false; raised() gives the native exception."
+    },
+    {
+      "upstream_id": "Bisector_FunctionInter::Values(double,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_FunctionInter.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::BisectorFunctionInter as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests). A curve evaluation failure answers false; raised() gives the native exception."
+    },
+    {
+      "upstream_id": "Bisector_Inter()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Inter.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisectorInter::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Inter(const Bisector_Bisec&,const IntRes2d_Domain&,const Bisector_Bisec&,const IntRes2d_Domain&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Inter.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisectorInter::with_bisectors",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_Inter::Perform(const Bisector_Bisec&,const IntRes2d_Domain&,const Bisector_Bisec&,const IntRes2d_Domain&,double,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_Inter.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::BisectorInter::perform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::PointOnBis as Default>::default",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis(double,double,double,double,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::ParamOnC1(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::set_param_on_c1",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::ParamOnC2(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::set_param_on_c2",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::ParamOnBis(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::set_param_on_bis",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::Distance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::set_distance",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::IsInfinite(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::set_infinite",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::Point(const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::set_point",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::ParamOnC1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::param_on_c1",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::ParamOnC2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::param_on_c2",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::ParamOnBis() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::param_on_bis",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::Distance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::distance",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::Point() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::point",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::IsInfinite() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::is_infinite",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PointOnBis::Dump() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PointOnBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PointOnBis::dump",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::new",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::Append(const Bisector_PointOnBis&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::append",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::Length() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::length",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::IsEmpty() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::is_empty",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::Value(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::value",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::First() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::first",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::Last() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::last",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::Interval(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector::PolyBis::interval",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
+    },
+    {
+      "upstream_id": "Bisector_PolyBis::Transform(const gp_Trsf2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector_PolyBis.hxx",
+      "rust_item": "<rustycad_tktopalgo::bisector::PolyBis as rustycad_tkg2d::geom2d::Geom2dGeometry>::transform",
+      "status": "implemented",
+      "notes": "Bisector mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): Bisector_Curve is the trait BisectorCurve (a Geom2dCurve) and the three bisector classes are structs whose fields sit in one SharedState; overloads take distinct Rust names, C++ output references become returned values, native exceptions are Failure errors and Dump writes to a String where native code writes to std::cout; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_bisec_* requests)."
     }
   ],
   "tests": [

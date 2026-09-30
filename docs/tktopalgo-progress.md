@@ -68,6 +68,63 @@ with `BRepBuilderAPI_MakeVertex` (its point and its tolerance, `BRepLib::Precisi
 on 27 points (signed zeros, tiny, huge and decimal coordinates, 20 seeded random
 points). It proves the pipeline; it is not evidence for a BRepBuilderAPI port.
 
+Bisector: the `tp_bisec_*` requests (455, `tools/tktopalgo_corpus_bisector.py` over the
+curve helpers of `tools/tktopalgo_corpus_curves.py`) compare `Bisector_Bisec` on corners
+of every pair of lines, arcs, an ellipse, a parabola and B-splines (both sides, the three
+join types, on and off the curve, with the vectors taken from the curves as MAT2d takes
+them), a curve or a point and a point, and two points; every `Bisector_BisecAna` overload
+with its members; `Bisector_BisecCC` and `Bisector_BisecPC` with their polygons, values,
+derivatives, extensions, `ChangeGuide`, `Copy` and `Dump`; `Bisector_Inter` on the corner
+bisectors of straight, curved and B-spline triangles (neighbour curve-curve bisectors
+included); the two functions, the polygon and `IsConvex`. The Rust side reads the curves
+with the TKGeomAlgo reader `ga_probe/curve2d.rs`.
+
 ## Preserved native behaviour
 
-None recorded yet; each ported package adds its own subsection.
+Each ported package adds its own subsection.
+
+### Bisector
+
+- `Bisector_BisecPC::Values` has no case for `N = 3`: `EvalD3` (and `DN(U, 3)`) returns the
+  bisected point `P` itself (the initial value of its output) and null derivatives inside
+  the bisector's range.
+  `Bisector_BisecCC::Values` computes the first derivative only, so `EvalD2` and `EvalD3`
+  return null higher derivatives; with a polygon of one point it computes the extension,
+  then goes on to the iterative value.
+- The distance `Bisector_BisecCC::Extension` returns is not squared, unlike the other
+  paths of `ValueAndDist`. A path of `ValueAndDist` or `ValueByInt` that writes no
+  parameter on the second curve keeps the caller's (uninitialised) variable natively; the
+  port's outputs start at 0, and `Perform` keeps the parameters of the previous call, as
+  its native locals do.
+- `new Bisector_BisecPC(Cu, P, Side, UMin, UMax)` does not set the shift, `DistMax` or the
+  empty flag: they are 0, 0 and false from the cleared native allocation, as in the port.
+  `Bisector_BisecCC::Copy` does not copy the shift and the current interval (always 0).
+- `Bisector_BisecAna::SetTrim(Cu)` does nothing (its body is commented out). A
+  `Bisector_BisecAna` is periodic when its conic is, but its period is the inherited
+  `Last - First` of the trimmed conic, which a `Geom2d_TrimmedCurve` built on it uses to
+  adjust its bounds.
+- `Perform` of the algorithmic bisectors appends to the existing intervals (and polygon)
+  instead of resetting them. On a second `Bisector_BisecPC::Perform` over a periodic curve,
+  the merge of the first and last intervals reads the period of the bisector itself, which
+  is not periodic: Standard_NoSuchObject after the two intervals were removed.
+- `Bisector_Inter::Perform` tests the extension at the end of the second bisector against
+  the interval count of the first one, and reads the first `NB` slots of the part arrays,
+  whose slots of intervals outside the domain are null handles: a native crash when an
+  interval before the domain was skipped, Standard_NullObject in the port.
+- `TestExtension` of `Bisector_BisecCC` compares the tangent of the first curve without
+  normalizing it at the last end of the second curve.
+- A circle-line bisector trimmed at the apex of its parabola ends at `-0.0` (the native
+  `-secondparameter`).
+- `Bisector_BisecAna::Perform` prints "Not yet implemented" on std::cout for curves that
+  are not circles or lines; the port does not print (the probe mutes std::cout).
+- A `Bisector_BisecAna` without curve (a `Perform` that selects no solution, as the curve
+  of concentric arcs through a point off both) crashes natively on any member; in the port
+  the null handle dereference panics. The corpus leaves those two requests out.
+
+Deviations: `FirstParameter`/`LastParameter` of a `Bisector_BisecCC` or
+`Bisector_BisecPC` without interval raise Standard_NoSuchObject natively; the `Geom2d_Curve`
+members of the port cannot fail and answer NaN. `Bisector_PolyBis` raises
+Standard_OutOfRange for a 30th point or an index outside its 30 slots where the native
+array overruns. Math functions (`Bisector_FunctionH`, `Bisector_FunctionInter`) answer
+`false` on an evaluation failure and give it through `raised()`, where the native
+exception leaves the solver.
