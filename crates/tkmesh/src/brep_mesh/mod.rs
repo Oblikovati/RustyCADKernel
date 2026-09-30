@@ -43,3 +43,9 @@ pub use face_checker::{
 
 mod model_healer;
 pub use model_healer::BRepMeshModelHealer;
+
+mod elements;
+pub use elements::{
+    BRepMeshEdge, BRepMeshOrientedEdge, BRepMeshTriangle, BRepMeshVertex, DegreeOfFreedom,
+    PairOfIndex,
+};

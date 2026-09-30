@@ -239,3 +239,5 @@ pub mod editable_tree;
 pub mod face_checker;
 
 pub mod model_healer;
+
+pub mod elements;
