@@ -33,6 +33,7 @@ mod gline_compute;
 mod h_curve2d_tool;
 mod h_inter_tool;
 mod instances;
+mod imp_imp;
 mod iwline;
 mod line;
 mod path_point;
@@ -58,6 +59,7 @@ pub use instances::{
     IntPatchTheSOnBoundsTypes, IntPatchTheSearchInside, IntPatchTheSearchInsideTypes,
     IntPatchTheSurfFunction,
 };
+pub use imp_imp::{IntPatchImpImpIntersection, IntPatchImpImpStatus};
 pub use iwline::IntPatchTheIWLineOfTheIWalking;
 pub use line::{IntPatchLine, IntPatchLineBase, IntPatchLineTransitions};
 pub use path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds};

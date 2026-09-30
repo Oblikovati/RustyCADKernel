@@ -205,7 +205,7 @@ impl Walk<'_> {
     }
 
     fn crossing_transitions(&self) -> Result<(IntSurfTypeTrans, IntSurfTypeTrans), Failure> {
-        let indice1: i32 = (self.lin_on_2s.nb_points() / 3).max(2);
+        let indice1: i32 = std::cmp::max(self.lin_on_2s.nb_points() / 3, 2);
         let pp0: Point3 = self.lin_on_2s.value(indice1 - 1)?.value();
         let pp1: Point3 = self.lin_on_2s.value(indice1)?.value();
         let tgvalid = Vector3::between(pp0, pp1);

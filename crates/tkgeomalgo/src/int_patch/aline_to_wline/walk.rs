@@ -25,6 +25,7 @@ use super::super::special_points::IntPatchSpecialPoints;
 use super::specials::add_point_into_line;
 use super::{IntPatchALineToWLine, aline_of};
 use crate::int_surf::{IntSurfLineOn2S, IntSurfPntOn2S, set_period};
+use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::real::epsilon;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -141,7 +142,7 @@ impl<'a> Walk<'a> {
         nb_vert: i32,
     ) -> Result<Self, Failure> {
         let tol: f64 = 2.0 * conv.tol_3d + precision::confusion();
-        let prm_tol: f64 = (1.0e-4 * (l_par - f_par)).max(precision::p_confusion());
+        let prm_tol: f64 = std_max(1.0e-4 * (l_par - f_par), precision::p_confusion());
         let vertex_params: Vec<f64> = (1..=nb_vert)
             .map(|i| aline.vertex(i).map(|v| v.parameter_on_line()))
             .collect::<Result<_, _>>()?;
@@ -200,7 +201,7 @@ impl<'a> Walk<'a> {
         if (self.step - (l_par - self.parameter) > self.prm_tol)
             && ((l_par - self.parameter).abs() > self.prm_tol)
         {
-            self.step = ((l_par - self.parameter) / 5.0).max(1.0e-5);
+            self.step = std_max((l_par - self.parameter) / 5.0, 1.0e-5);
             self.is_step_reduced = true;
         }
     }
@@ -345,7 +346,7 @@ impl<'a> Walk<'a> {
         }
         let rpt: IntSurfPntOn2S = point_on_quadrics(self.conv, self.aline.value(prt)?);
         let (u1, _, u2, _) = rpt.parameters();
-        let same_tol: f64 = precision::approximation().max(self.tol);
+        let same_tol: f64 = std_max(precision::approximation(), self.tol);
         if p_on_2s.is_same(&self.prev_l_point, same_tol, -1.0) {
             // Set the V parameter as the precise value found on the previous step (the
             // native code reuses the variables of the reference parameters).
@@ -364,12 +365,12 @@ impl<'a> Walk<'a> {
     /// seam directions otherwise.
     fn continuation_tol_2d(&self) -> Result<f64, Failure> {
         let (s1, s2, tol) = (&self.conv.s1, &self.conv.s2, self.conv.tol_3d);
-        let u_res: f64 = s1.u_resolution(tol)?.max(s2.u_resolution(tol)?);
-        let v_res: f64 = s1.v_resolution(tol)?.max(s2.v_resolution(tol)?);
+        let u_res: f64 = std_max(s1.u_resolution(tol)?, s2.u_resolution(tol)?);
+        let v_res: f64 = std_max(s1.v_resolution(tol)?, s2.v_resolution(tol)?);
         Ok(match self.pre_point_exist {
             Spt::SPntPole => -1.0,
             Spt::SPntSeamV => v_res,
-            Spt::SPntSeamUV => u_res.max(v_res),
+            Spt::SPntSeamUV => std_max(u_res, v_res),
             _ => u_res,
         })
     }

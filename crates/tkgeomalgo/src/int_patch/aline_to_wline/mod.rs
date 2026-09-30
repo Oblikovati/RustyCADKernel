@@ -26,6 +26,7 @@ use super::aline::IntPatchALine;
 use super::line::IntPatchLine;
 use super::point_line::curvature_radius_of_inters_line;
 use crate::int_surf::{IntSurfLineOn2S, IntSurfPntOn2S, IntSurfQuadric};
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
@@ -147,7 +148,7 @@ impl IntPatchALineToWLine {
         if dist > max_deflection {
             return 1;
         }
-        dist = self.quad2.distance(p).abs().max(dist);
+        dist = std_max(self.quad2.distance(p).abs(), dist);
         if dist > max_deflection {
             return 1;
         }
@@ -168,7 +169,7 @@ impl IntPatchALineToWLine {
                     let cone = quad.cone()?;
                     let r_vec: Xyz = pnt_3d.xyz() - cone.apex().xyz();
                     let dir: Xyz = cone.axis().direction().xyz();
-                    ret_val = ret_val.min((r_vec.dot(dir) * cone.semi_angle().tan()).abs());
+                    ret_val = std_min(ret_val, (r_vec.dot(dir) * cone.semi_angle().tan()).abs());
                 }
                 SurfaceType::Sphere => {
                     let sphere = quad.sphere()?;
@@ -180,7 +181,7 @@ impl IntPatchALineToWLine {
                     if delta <= 0.0 {
                         return Ok(0.0);
                     }
-                    ret_val = ret_val.min(delta.sqrt());
+                    ret_val = std_min(ret_val, delta.sqrt());
                 }
                 _ => {}
             }
@@ -270,7 +271,7 @@ impl IntPatchALineToWLine {
         }
         let eps: f64 = self.tol_3d;
         let not_filled_range: f64 = last_par_of_aline - cur_param;
-        let (min_step, max_step) = (step_min, step_max.min(not_filled_range));
+        let (min_step, max_step) = (step_min, std_min(step_max, not_filled_range));
         if min_step > max_step {
             *step = max_step;
             return Ok(true);
@@ -281,8 +282,8 @@ impl IntPatchALineToWLine {
         }
         // The 3D step is the length of the tangent to the osculating circle whose end
         // is within eps of the circle, converted to the parameter of the curve.
-        *step = ((eps * (2.0 * r + eps)).sqrt() / tg_magnitude).min(max_step);
-        *step = step.max(min_step);
+        *step = std_min((eps * (2.0 * r + eps)).sqrt() / tg_magnitude, max_step);
+        *step = std_max(*step, min_step);
         let bounds = [min_step, max_step];
         self.refine_step(aline, p_on_2s.value(), cur_param, bounds, max_deflection, step)
     }
