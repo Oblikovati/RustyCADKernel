@@ -35,7 +35,7 @@ fn ints(r: &mut Reader) -> Array1<'static, i32> {
 }
 
 /// `degree periodic rational poles [weights] knots mults`: the ga_law_bspline law.
-fn bspline(r: &mut Reader) -> Result<Handle<LawBSpline>, Failure> {
+pub fn bspline(r: &mut Reader) -> Result<Handle<LawBSpline>, Failure> {
     let (deg, per, rat) = (r.integer(), r.flag(), r.flag());
     let poles = reals(r);
     let weights = if rat { Some(reals(r)) } else { None };

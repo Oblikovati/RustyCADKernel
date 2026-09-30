@@ -76,8 +76,8 @@ pub trait GeomFillSectionLaw: Transient {
 
     /// `BSplineSurface()`: the surface of the law when it has one; a null handle by
     /// default.
-    fn bspline_surface(&self) -> Handle<GeomBSplineSurface> {
-        Handle::default()
+    fn bspline_surface(&self) -> Result<Handle<GeomBSplineSurface>, Failure> {
+        Ok(Handle::default())
     }
 
     /// `SectionShape(NbPoles, NbKnots, Degree)`.

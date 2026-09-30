@@ -17,6 +17,7 @@ pub mod geom2d_gcc_lines;
 pub mod geom2d_hatch;
 pub mod geom2d_hatcher;
 pub mod geom2d_int;
+pub mod geom_fill_laws;
 pub mod geom_fill_sweep;
 pub mod geom_fill_trihedron;
 pub mod ginter;

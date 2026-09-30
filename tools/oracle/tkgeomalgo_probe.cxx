@@ -55,6 +55,7 @@
 #include "tkgeomalgo_probe_intcurvesurface_inter.cxx"
 #include "tkgeomalgo_probe_geomfill_sweep.cxx"
 #include "tkgeomalgo_probe_geomfill_trihedron.cxx"
+#include "tkgeomalgo_probe_geomfill_laws.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -209,6 +210,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gfs_convert",ga_gfs_convert_case},
  {"gfs_tensor",ga_gfs_tensor_case},
  {"gfs_trihedron",ga_gft_law_case},
+ {"gfs_section",ga_gfl_section_case},
+ {"gfs_location",ga_gfl_location_case},
 };
 int main() {
  std::string line;
