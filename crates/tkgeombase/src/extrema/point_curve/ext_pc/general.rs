@@ -34,7 +34,7 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
     pub(super) fn perform_general(
         &mut self,
         point: T::Point,
-        curve: &'a T::Curve,
+        curve: &T::Curve,
     ) -> Result<(), Failure> {
         let bounds: Vec<f64> = Self::interval_bounds(curve)?;
         let n: usize = bounds.len() - 1;
@@ -49,7 +49,8 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
         let is_periodic: bool = T::is_periodic(curve)?;
         let mut s2: f64 = 0.0;
         let mut int_ext_done: bool = false;
-        self.ext_pc.initialize_curve(curve)?;
+        self.ext_pc
+            .initialize_reference(self.curve.clone().unwrap())?;
         for i in 1..=n {
             self.int_uinf = bounds[i - 1];
             self.int_usup = bounds[i];

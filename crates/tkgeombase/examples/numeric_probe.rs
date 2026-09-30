@@ -252,6 +252,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ex_pc", extrema_pc::pc_case),
     ("ex_pc2d", extrema_pc::pc2d_case),
     ("ex_locpc", extrema_pc::locpc_case),
+    ("ex_locpc_owned", extrema_pc::locpc_owned_case),
+    ("ex_locpc2d_owned", extrema_pc::locpc2d_owned_case),
     ("ex_locpc2d", extrema_pc::locpc2d_case),
     ("ex_genpc", extrema_pc::genpc_case),
     ("ex_genpc2d", extrema_pc::genpc2d_case),

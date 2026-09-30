@@ -12,6 +12,7 @@ use super::gen_locate_ext_pc::GenLocateExtPC;
 use crate::extrema::curve_tool::ExtremaCurveTool;
 use crate::extrema::failures::null_object;
 use crate::extrema::gp_space::{GpPoint, GpVector};
+use crate::extrema::point_curve::curve_reference::CurveReference;
 use crate::extrema::pon::POnCurve;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
@@ -23,7 +24,7 @@ use rustycad_tkmath::geom_abs::{CurveType, Shape};
 /// `Extrema_LocateExtPC2d`); `LocateExtPC::with_curve(point, &adaptor, 0.5, 1e-9)?`.
 pub struct GLocateExtPC<'a, T: ExtremaCurveTool> {
     pp: POnCurve<T::Point>,
-    curve: Option<&'a T::Curve>,
+    curve: Option<CurveReference<'a, T::Curve>>,
     dist2: f64,
     is_min: bool,
     done: bool,
@@ -105,16 +106,28 @@ impl<'a, T: ExtremaCurveTool> GLocateExtPC<'a, T> {
         (umin, usup): (f64, f64),
         tol_f: f64,
     ) -> Result<(), Failure> {
-        self.curve = Some(curve);
+        self.initialize_reference(CurveReference::Borrowed(curve), (umin, usup), tol_f)
+    }
+    fn initialize_reference(
+        &mut self,
+        reference: CurveReference<'a, T::Curve>,
+        (umin, usup): (f64, f64),
+        tol_f: f64,
+    ) -> Result<(), Failure> {
+        self.curve = Some(reference.clone());
+        let curve = reference.get();
         self.tol = tol_f;
         self.umin = umin;
         self.usup = usup;
         self.kind = T::get_type(curve)?;
         let tol_u: f64 = T::resolution(curve, precision::confusion())?;
         if is_numeric_kind(self.kind) {
-            return self.loc_ext_pc.initialize(curve, (umin, usup), tol_u);
+            return self
+                .loc_ext_pc
+                .initialize_reference(reference, (umin, usup), tol_u);
         }
-        self.extrem_pc.initialize(curve, umin, usup, tol_u)
+        self.extrem_pc
+            .initialize_reference(reference, umin, usup, tol_u)
     }
     /// `Perform(P, U0)`; `extrema.perform(point, 0.5)?`.
     pub fn perform(&mut self, point: T::Point, u0: f64) -> Result<(), Failure> {
@@ -150,8 +163,10 @@ impl<'a, T: ExtremaCurveTool> GLocateExtPC<'a, T> {
         }
         Ok(())
     }
-    fn curve(&self) -> Result<&'a T::Curve, Failure> {
+    fn curve(&self) -> Result<&T::Curve, Failure> {
         self.curve
+            .as_ref()
+            .map(CurveReference::get)
             .ok_or_else(|| null_object("Extrema_GLocateExtPC::Perform()"))
     }
     // The C2 bounds of the curve (`theInter`).
@@ -181,5 +196,20 @@ impl<'a, T: ExtremaCurveTool> GLocateExtPC<'a, T> {
         self.is_min = self.loc_ext_pc.is_min()?;
         self.dist2 = self.loc_ext_pc.square_distance()?;
         Ok(())
+    }
+}
+
+impl<T: ExtremaCurveTool> GLocateExtPC<'_, T>
+where
+    T::Curve: rustycad_tkernel::standard::RuntimeTyped + Send + Sync,
+{
+    /// Owns the adaptor while retaining native cache and reinitialization behavior; `projector.initialize_owned(curve, (0.0, 1.0), 1e-9)?`.
+    pub fn initialize_owned(
+        &mut self,
+        curve: rustycad_tkernel::standard::Handle<T::Curve>,
+        range: (f64, f64),
+        tolerance: f64,
+    ) -> Result<(), Failure> {
+        self.initialize_reference(CurveReference::owned(curve)?, range, tolerance)
     }
 }

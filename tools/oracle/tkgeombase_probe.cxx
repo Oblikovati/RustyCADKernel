@@ -317,6 +317,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ex_pc", gb_ex_pc_case},
  {"ex_pc2d", gb_ex_pc2d_case},
  {"ex_locpc", gb_ex_locpc_case},
+ {"ex_locpc_owned", gb_ex_locpc_case},
+ {"ex_locpc2d_owned", gb_ex_locpc2d_case},
  {"ex_locpc2d", gb_ex_locpc2d_case},
  {"ex_genpc", gb_ex_genpc_case},
  {"ex_genpc2d", gb_ex_genpc2d_case},

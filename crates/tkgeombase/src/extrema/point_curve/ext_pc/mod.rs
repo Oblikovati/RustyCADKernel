@@ -12,6 +12,7 @@ use crate::extrema::curve_tool::ExtremaCurveTool;
 use crate::extrema::elementary_point_curve::ElementaryPointCurve;
 use crate::extrema::failures::{extremum_index, not_done, null_object, sequence_value};
 use crate::extrema::gp_space::GpPoint;
+use crate::extrema::point_curve::curve_reference::CurveReference;
 use crate::extrema::pon::POnCurve;
 use crate::gcpnts::PoleCurve;
 use rustycad_tkernel::precision;
@@ -26,7 +27,7 @@ use rustycad_tkmath::geom_abs::CurveType;
 /// dereference natively);
 /// `ExtPC::with_curve(point, &adaptor, 1.0e-10)?.nb_ext()?`.
 pub struct GGExtPC<'a, T: ExtremaCurveTool> {
-    curve: Option<&'a T::Curve>,
+    curve: Option<CurveReference<'a, T::Curve>>,
     pf: T::Point,
     pl: T::Point,
     ext_p_el_c: T::ExtPElC,
@@ -108,7 +109,17 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
         usup: f64,
         tol_f: f64,
     ) -> Result<(), Failure> {
-        self.curve = Some(curve);
+        self.initialize_reference(CurveReference::Borrowed(curve), uinf, usup, tol_f)
+    }
+    pub(super) fn initialize_reference(
+        &mut self,
+        reference: CurveReference<'a, T::Curve>,
+        uinf: f64,
+        usup: f64,
+        tol_f: f64,
+    ) -> Result<(), Failure> {
+        self.curve = Some(reference.clone());
+        let curve = reference.get();
         self.uinf = uinf;
         self.int_uinf = uinf;
         self.usup = usup;
@@ -122,17 +133,17 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
         self.sample = 17;
         Ok(())
     }
-    fn curve(&self) -> Result<&'a T::Curve, Failure> {
-        self.curve
-            .ok_or_else(|| null_object("Extrema_GGExtPC::Perform()"))
-    }
     /// `Perform(P)`; `extrema.perform(point)?`.
     pub fn perform(&mut self, point: T::Point) -> Result<(), Failure> {
         self.sq_dist.clear();
         self.points.clear();
         self.is_min.clear();
         self.sample = 17;
-        let curve: &'a T::Curve = self.curve()?;
+        let reference = self
+            .curve
+            .clone()
+            .ok_or_else(|| null_object("Extrema_GGExtPC::Perform()"))?;
+        let curve = reference.get();
         self.end_distances(point, curve)?;
         let tol: f64 = precision::confusion();
         let (uinf, usup) = (self.uinf, self.usup);
@@ -178,7 +189,7 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
         Ok(())
     }
     // The whole range with twice the pole count as samples (no postprocessing).
-    fn perform_bezier(&mut self, point: T::Point, curve: &'a T::Curve) -> Result<(), Failure> {
+    fn perform_bezier(&mut self, point: T::Point, curve: &T::Curve) -> Result<(), Failure> {
         self.int_uinf = self.uinf;
         self.int_usup = self.usup;
         let bezier = T::bezier(curve)?;
@@ -187,7 +198,8 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
             .ok_or_else(|| null_object("Extrema_GGExtPC: Bezier()"))?
             .pole_count();
         self.sample = poles * 2;
-        self.ext_pc.initialize_curve(curve)?;
+        self.ext_pc
+            .initialize_reference(self.curve.clone().unwrap())?;
         self.interval_perform(point)
     }
 }
@@ -272,7 +284,11 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
         if !self.done {
             return Ok(());
         }
-        let curve: &T::Curve = self.curve()?;
+        let reference = self
+            .curve
+            .clone()
+            .ok_or_else(|| null_object("Extrema_GGExtPC::Perform()"))?;
+        let curve = reference.get();
         for i in 1..=self.ext_pc.nb_ext()? {
             let pc: POnCurve<T::Point> = self.ext_pc.point(i)?;
             let u: f64 = self.periodic_parameter(curve, pc.parameter())?;

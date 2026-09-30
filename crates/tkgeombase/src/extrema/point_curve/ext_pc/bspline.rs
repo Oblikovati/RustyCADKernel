@@ -103,7 +103,7 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
     pub(super) fn perform_bspline(
         &mut self,
         point: T::Point,
-        curve: &'a T::Curve,
+        curve: &T::Curve,
     ) -> Result<(), Failure> {
         let handle = T::bspline(curve)?;
         let spline: &T::BSpline = handle
@@ -126,12 +126,13 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
     fn perform_linear_spans(
         &mut self,
         point: T::Point,
-        curve: &'a T::Curve,
+        curve: &T::Curve,
         spans: &KnotSpans,
     ) -> Result<(), Failure> {
         let (mut p_min, mut t_min, mut dist_min) = (T::Point::default(), 0.0, f64::MAX);
         let mut min2: f64 = 0.0;
-        self.ext_pc.initialize_curve(curve)?;
+        self.ext_pc
+            .initialize_reference(self.curve.clone().unwrap())?;
         for index in spans.first..spans.last {
             let (f, l) = spans.span(index, (self.uinf, self.usup), true)?;
             let (p1, p2) = (T::d0(curve, f)?, T::d0(curve, l)?);
@@ -190,11 +191,12 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
     fn perform_sampled_spans(
         &mut self,
         point: T::Point,
-        curve: &'a T::Curve,
+        curve: &T::Curve,
         spans: &KnotSpans,
     ) -> Result<(), Failure> {
         let (values, params) = self.span_samples(point, curve, spans)?;
-        self.ext_pc.initialize_curve(curve)?;
+        self.ext_pc
+            .initialize_reference(self.curve.clone().unwrap())?;
         let sq_conf: f64 = precision::square_confusion();
         for i in 1..values.len() - 1 {
             if values[i] <= sq_conf {
@@ -244,7 +246,7 @@ impl<'a, T: ExtremaCurveTool> GGExtPC<'a, T> {
     fn end_span(
         &mut self,
         point: T::Point,
-        curve: &'a T::Curve,
+        curve: &T::Curve,
         (a, b): (f64, f64),
         first: bool,
     ) -> Result<(), Failure> {
