@@ -316,3 +316,10 @@ Integration checkpoint: `cargo test --workspace` passed 11,443 tests with zero
 failures and 69 existing ignored doctests. Strict TKHLR all-target Clippy passed;
 the toolkit's 14,003-case public numeric oracle and 8,100-case tangency oracle also
 passed. Counts of Rust tests are supplementary evidence, not legacy declarations.
+
+### Exact hidden-line curve tool
+
+All 30 BCurveTool header members are mapped. The integrated oracle passes 8,800
+exact requests, including inverse-span sampling, rational/located spline poles,
+partial buffer writes and zero-span conversion behavior. The nonempty HLRBRep
+legacy tests still require the remaining curve/surface and intersection pipeline.

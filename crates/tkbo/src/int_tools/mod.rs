@@ -37,3 +37,6 @@ pub use wline_tool::WLineTool;
 
 mod face_face;
 pub use face_face::FaceFace;
+
+mod shrunk_range;
+pub use shrunk_range::ShrunkRange;

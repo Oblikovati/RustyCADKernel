@@ -9,6 +9,7 @@ mod intersections;
 mod localize;
 mod marked;
 mod records;
+mod shrunk_range;
 mod surface_localize;
 mod tools;
 mod tools_curves;
@@ -42,6 +43,7 @@ pub fn dispatch(operation: &str, v: &[f64]) {
 }
 fn dispatch_case(operation: &str, v: &[f64]) {
     match operation {
+        "shrunk" => shrunk_range::case(v),
         "bop_range" => records::index_case(v),
         "bop_pave" => records::pave_case(v),
         "bop_pair" => records::pair_case(v),

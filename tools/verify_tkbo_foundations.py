@@ -23,6 +23,7 @@ def corpus() -> str:
                  for index, depth in product([-3, 0, 1, 7], [-2, 0, 1, 2, 7, 64])]
     requests += [f"face_state {a} {b} {c} {tol} {fuzzy} {n}" for a, b, c, tol, fuzzy, n in product([0,1], [0,1], [0,1], [-1,1e-7], [-1,0,1e-7,1e-3,99], [0,3])]
     requests += [f"face_perform {a} {b} {x} {y} {z} {parallel} {split}" for (a, b), x, y, z, parallel, split in product([(0, 0), (0, 1), (1, 0), (0, 3), (3, 0), (1, 3), (3, 1)], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1])]
+    requests += shrunk_requests()
     requests += marked_requests()
     requests += bopds_requests()
     requests += intersection_requests()
@@ -44,6 +45,14 @@ def corpus() -> str:
     requests += [f"tools_curves {kind} {a} {b} {tol} {pc} {other}"
                  for kind, (a, b), tol, pc, other in product(range(7), [(-2, 3), (0, 6.283185307179586)], [0, 1e-7], [0, 1], [0, 1, 6])]
     return '\n'.join(requests) + '\n'
+
+
+def shrunk_requests() -> list[str]:
+    """Retain range history, boxes, partial failures and endpoint tolerance policies."""
+    return ['shrunk '+' '.join(map(str,[kind,*bounds,edge_tol,v_tol,v_tol*2,*second]))
+            for kind,bounds,edge_tol,v_tol,second in product([0,1,2,3,4,6],
+                [(0,1),(-2,3),(0,6.283185307179586)],[1e-7,1e-4,0.2],
+                [1e-7,0.1,10],[(0,0),(0,1),(1,0),(-2,4)])]
 
 
 def marked_requests() -> list[str]:

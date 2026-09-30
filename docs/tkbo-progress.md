@@ -53,3 +53,11 @@ hash and compiler command. The generic toolkit verifier now supports TKBO.
 
 TKBO as a whole remains incomplete: 10 of its 299 discovered GoogleTest declarations
 are mapped. The missing native IsValid symbol remains an explicit upstream gap.
+
+### Edge working ranges
+
+IntTools_ShrunkRange adds twelve callable APIs with an ownership mapping for its
+destructor. The integrated Boolean foundation oracle passes 15,095 exact requests,
+including 648 new range cases. Six direct regressions cover tolerance spheres,
+unsplittable short ranges, repeated failures, retained length and box accumulation.
+The ten original FaceFace declarations remain the only mapped TKBO originals.

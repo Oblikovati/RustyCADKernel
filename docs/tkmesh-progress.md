@@ -80,3 +80,10 @@ The 67 header rows for DegreeOfFreedom, Vertex, OrientedEdge, Edge, Triangle and
 PairOfIndex are mapped. Native element equality, hashing, orientation and indexed
 mutation pass the integrated 102,336-case numeric gate. Vertex indexing and the
 concrete triangulation algorithms remain in progress.
+
+### Fallible spatial inspection
+
+CellFilter now accepts fallible callbacks while retaining its existing interface.
+Early removals and throw-time traversal order match native behavior. The integrated
+mesh gate passes 102,356 exact requests; all 251 existing TKernel tree comparisons
+and three new mutation-order regressions pass.

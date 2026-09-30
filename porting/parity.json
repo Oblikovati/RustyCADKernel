@@ -79588,22 +79588,6 @@
       "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
     },
     {
-      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,Inspector&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
-    },
-    {
-      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,const Point&,Inspector&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect_range",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
-    },
-    {
       "upstream_id": "NCollection_KDTree()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
@@ -212027,6 +212011,379 @@
       "rust_item": "rustycad_tkhlr::contap::ContapContour::surface_function",
       "status": "implemented",
       "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,Inspector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena). Additive CellGeometry policy and try_inspect_with/try_inspect_range_with preserve native throwing-callback early stop and prior purges while retaining existing CellInspector entry points."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,const Point&,Inspector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena). Additive CellGeometry policy and try_inspect_with/try_inspect_range_with preserve native throwing-callback early stop and prior purges while retaining existing CellInspector entry points."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::FirstParameter(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::first_parameter",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::LastParameter(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::last_parameter",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Continuity(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::continuity",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::NbIntervals(const BRepAdaptor_Curve&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::nb_intervals",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Intervals(const BRepAdaptor_Curve&,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::intervals",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::IsClosed(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::is_closed",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::IsPeriodic(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::is_periodic",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Period(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::period",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Value(const BRepAdaptor_Curve&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::value",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::D0(const BRepAdaptor_Curve&,double,gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::d0",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::D1(const BRepAdaptor_Curve&,double,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::d1",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::D2(const BRepAdaptor_Curve&,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::d2",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::D3(const BRepAdaptor_Curve&,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::d3",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::DN(const BRepAdaptor_Curve&,double,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::dn",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Resolution(const BRepAdaptor_Curve&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::resolution",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::GetType(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::get_type",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Line(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::line",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Circle(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::circle",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Ellipse(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::ellipse",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Hyperbola(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::hyperbola",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Parabola(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::parabola",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Bezier(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::bezier",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::BSpline(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::bspline",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Degree(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::degree",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::IsRational(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::is_rational",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::NbPoles(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::nb_poles",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::NbKnots(const BRepAdaptor_Curve&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::nb_knots",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::Poles(const BRepAdaptor_Curve&,NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::poles",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::PolesAndWeights(const BRepAdaptor_Curve&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::poles_and_weights",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "HLRBRep_BCurveTool::NbSamples(const BRepAdaptor_Curve&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BCurveTool::nb_samples",
+      "status": "implemented",
+      "notes": "Complete pinned BCurveTool: 8800 exact native comparisons across all 30 methods, conics and rational/non-rational splines, located edges, partial indexed copies, reversed/zero sampling and zero curve spans; five Rust regressions. No exact-HLR pipeline or original legacy declaration claims."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::new",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::~IntTools_ShrunkRange()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership releases the stored topology, box and context without an explicit destructor."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::SetData(const TopoDS_Edge&,double,double,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::set_data",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::SetContext(const occ::handle<IntTools_Context>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::set_context",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::Context() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::context",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::SetShrunkRange(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::set_shrunk_range",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::ShrunkRange(double&,double&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::shrunk_range",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::BndBox() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::bounding_box",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::Edge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::edge",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::Perform()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::perform",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::IsDone() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::is_done",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::IsSplittable() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::is_splittable",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "IntTools_ShrunkRange::Length() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_ShrunkRange.hxx",
+      "source_sha256": "a4c2c7b6b02be8b58491aaa2298d5c0de6ede88ec2a242d6324f962c250e262b",
+      "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::length",
+      "status": "implemented",
+      "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
     }
   ],
   "tests": [
