@@ -650,3 +650,38 @@ intersection algorithms build on it.
   native base class. `IntPatch_Polygo` is the trait `IntPatchPolygo: Polygon2d` with the
   shared state `IntPatchPolygoBase` (error and box); the `polygo_polygon2d!` macro gives
   `IntPatchPolyLine` and `IntPatchPolyArc` their `Polygon2d` members.
+
+## 19. GeomPlate
+
+GeomPlate (`crates/tkgeomalgo/src/geom_plate`) has no `.gxx` template; four constructs
+need a rule.
+
+- **The plate surface is a Geom surface.** `GeomPlate_Surface` derives from
+  `Geom_Surface`, so `GeomPlateSurface` implements the tkg3d traits `GeomGeometry` and
+  `GeomSurface` and registers as `GeomPlate_Surface` under `Geom_Surface`
+  (`impl_transient!`); every Geom and adaptor algorithm takes it through
+  `Handle<dyn GeomSurface>`. It holds its initial surface, a copy of the solved
+  `PlatePlate` (the native member is a copy) and its bounds, which `SetBounds` edits on
+  a shared surface, behind a `SharedState`.
+- **Shared constraints.** `GeomPlate_CurveConstraint` and `GeomPlate_PointConstraint`
+  are transients that the caller and the builder share (the builder changes their
+  number of points and 2d curves in `Perform`), so each is a handle-shared struct with
+  its fields in a `SharedState`. `LPropSurf` returns a reference to the member
+  `GeomLProp_SLProps`, which `LocalAnalysis_SurfaceContinuity::ComputeAnalysis` then
+  updates; the port keeps that object in its own lock and returns the write guard.
+- **The builder.** `GeomPlate_BuildPlateSurface` keeps its constraint sequences as
+  vectors of handles (1-based access with the native Standard_OutOfRange), its two
+  `Plate_Plate` values, and its `Extrema_ExtPS` projector as `ExtPS<'static>` on a
+  shared adaptor handle (`ExtPS::initialize_shared`, section 15): natively the
+  projector points to a local `GeomAdaptor_Surface` of the member that initializes it,
+  and every projection happens while that local lives. Its private members are
+  methods in the files `perform`, `surf_init`, `projection`, `intersect`, `discretise`,
+  `load`, `verif`, `contour` and `errors` of `geom_plate::build_plate_surface`.
+- **Approximation callbacks.** `GeomPlate_MakeApprox_Eval` implements the tkgeombase
+  trait `AdvApp2VarEvaluatorFunc2Var`; its surface evaluations can raise, and the
+  callback cannot return `Result`, so the first failure is kept (`FailureCapture` in a
+  `RefCell`), the error code reports it, and `MakeApprox` raises it when
+  `AdvApp2Var_ApproxAFunc2Var` returns, where the native exception would unwind
+  through the approximation. `GeomPlate_PlateG0Criterion` and
+  `GeomPlate_PlateG1Criterion` implement `AdvApp2VarCriterion` and read the patch
+  coefficients through `AdvApp2Var_Patch::Coefficients` as natively.

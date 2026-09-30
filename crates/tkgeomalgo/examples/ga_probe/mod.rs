@@ -27,6 +27,8 @@ pub mod geom_fill_sections;
 pub mod geom_fill_sweep;
 pub mod geom_fill_sweepalgo;
 pub mod geom_fill_trihedron;
+pub mod geom_plate;
+pub mod geom_plate_build;
 pub mod gfill;
 pub mod gfill_cf;
 pub mod gfill_fill;

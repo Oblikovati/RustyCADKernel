@@ -14,6 +14,7 @@ use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom_api, geom_api_fit, geom_api_surface, gordon};
+use ga_probe::{geom_plate, geom_plate_build};
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
@@ -252,6 +253,16 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_polyline", int_patch_poly::polyline_case),
     ("ip_polyarc", int_patch_poly::polyarc_case),
     ("ip_t3bits", int_patch_poly::t3bits_case),
+    // GeomPlate (ga_probe/geom_plate*.rs)
+    ("gplate_point", geom_plate::point_case),
+    ("gplate_curve", geom_plate::curve_case),
+    ("gplate_curve_empty", geom_plate::curve_empty_case),
+    ("gplate_surface", geom_plate::surface_case),
+    ("gplate_average", geom_plate::average_case),
+    ("gplate_normals", geom_plate::normals_case),
+    ("gplate_halfspace", geom_plate::halfspace_case),
+    ("gplate_build", geom_plate_build::build_case),
+    ("gplate_approx", geom_plate_build::approx_case),
 ];
 
 fn main() {

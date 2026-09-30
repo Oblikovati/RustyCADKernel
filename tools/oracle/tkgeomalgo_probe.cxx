@@ -72,6 +72,8 @@
 #include "tkgeomalgo_probe_geomfill_sweepalgo.cxx"
 #include "tkgeomalgo_probe_geomfill_pipe.cxx"
 #include "tkgeomalgo_probe_intpatch_poly.cxx"
+#include "tkgeomalgo_probe_geomplate.cxx"
+#include "tkgeomalgo_probe_geomplate_build.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -297,6 +299,16 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ip_polyline", ga_ip_polyline_case},
  {"ip_polyarc", ga_ip_polyarc_case},
  {"ip_t3bits", ga_ip_t3bits_case},
+ // GeomPlate (tkgeomalgo_probe_geomplate*.cxx)
+ {"gplate_point", ga_gp_point_case},
+ {"gplate_curve", ga_gp_curve_case},
+ {"gplate_curve_empty", ga_gp_curve_empty_case},
+ {"gplate_surface", ga_gp_surface_case},
+ {"gplate_average", ga_gp_average_case},
+ {"gplate_normals", ga_gp_normals_case},
+ {"gplate_halfspace", ga_gp_halfspace_case},
+ {"gplate_build", ga_gp_build_case},
+ {"gplate_approx", ga_gp_approx_case},
 };
 int main() {
  std::string line;
