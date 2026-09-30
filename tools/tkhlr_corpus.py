@@ -22,3 +22,4 @@ def append_tkhlr_requests(requests: list[str]) -> None:
     __import__('tkhlr_corpus_hlralgo_poly').append_hlralgo_poly_requests(requests)
     __import__('tkhlr_corpus_contap').append_contap_requests(requests)
     __import__('tkhlr_corpus_contana').append_contana_requests(requests)
+    __import__('tkhlr_corpus_contap_surface').append_contap_surface_requests(requests)

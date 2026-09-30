@@ -9,8 +9,11 @@ void hl_contana_snapshot(const Contap_ContAna& c) {
  for(int i:{-1,0,1,2,3,4,5}){GA_TRY(gp_Lin a=c.Line(i);ga_pnt(a.Location());ga_dir(a.Direction()));}
 }
 struct HlAnalyticInput{gp_Ax3 frame;double radius,semi;gp_XYZ view;double draft;};
+gp_Ax3 hl_contour_frame(GaReader& r) {
+ gp_Pnt p=r.pnt();gp_Dir n=r.dir(),x=r.dir();gp_Ax3 f(gp_Ax2(p,n,x));if(r.flag())f.YReverse();return f;
+}
 HlAnalyticInput hl_contana_read(GaReader& r) {
- gp_Pnt p=r.pnt();gp_Dir n=r.dir(),x=r.dir();gp_Ax3 f(gp_Ax2(p,n,x));if(r.flag())f.YReverse();
+ gp_Ax3 f=hl_contour_frame(r);
  double radius=r.real(),semi=r.real();gp_XYZ view=r.xyz();return {f,radius,semi,view,r.real()};
 }
 void hl_contana_perform(Contap_ContAna& c,int mode,const HlAnalyticInput& a) {

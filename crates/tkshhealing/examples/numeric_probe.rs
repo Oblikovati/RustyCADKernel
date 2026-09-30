@@ -19,7 +19,10 @@ type ProbeCase = fn(&[f64]);
 /// The dispatch table of tools/oracle/tkshhealing_probe.cxx (`probe_cases`); each
 /// package adds its operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
-    ("sh_construct", sh_probe::shape_construct::construct_curve_case),
+    (
+        "sh_construct",
+        sh_probe::shape_construct::construct_curve_case,
+    ),
     ("sh_canonical", canonical::canonical_case),
     ("sh_edgeoutputs", edge_outputs::edgeoutputs_case),
     ("sh_edgeana", analysis_edge::edgeana_case),

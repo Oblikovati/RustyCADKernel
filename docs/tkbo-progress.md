@@ -19,3 +19,8 @@ The cumulative oracle passes 3,027 cases. `IntTools_PntOnFace::IsValid()` is
 declared but has no native definition: a direct link fails with an undefined
 reference. Its ledger status is `upstream_unimplemented`, an explicit acceptance
 gap. The separately implemented native `Valid()` method is ported.
+
+CurveRangeLocalizeData adds eight APIs and preserves native map iteration order
+through resize, cache replacement and exclusion behavior; cumulative numeric
+coverage is 3,099 cases. The missing IsValid symbol now has a permanent compiling
+probe and a verifier that requires precisely that linker failure.

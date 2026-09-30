@@ -40,10 +40,7 @@ struct AnalyticInput {
     draft: f64,
 }
 fn read_analytic(r: &mut Reader) -> Result<AnalyticInput, Failure> {
-    let mut frame = Axis3::from_axis2(Axis2::with_x_direction(r.pnt(), r.dir(), r.dir())?);
-    if r.integer() != 0 {
-        frame.y_reverse();
-    }
+    let frame = contour_frame(r)?;
     Ok(AnalyticInput {
         frame,
         radius: r.real(),
@@ -94,4 +91,12 @@ pub fn analytic_case(values: &[f64]) {
     });
     contour_snapshot(&contour);
     end();
+}
+
+pub(super) fn contour_frame(r: &mut Reader) -> Result<Axis3, Failure> {
+    let mut frame = Axis3::from_axis2(Axis2::with_x_direction(r.pnt(), r.dir(), r.dir())?);
+    if r.integer() != 0 {
+        frame.y_reverse();
+    }
+    Ok(frame)
 }

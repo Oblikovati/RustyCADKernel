@@ -14,3 +14,9 @@ Eight independent IMeshTools headers add 50 API rows: parameters, strategy
 interfaces and native shape exploration. The numeric corpus now passes 14,407
 cases. Status masks retain unlisted bit combinations via a newtype. Context and
 mesh builders await the Message_Algorithm shared-handle base port.
+
+Message_Algorithm now embeds StandardTransient with real base projections and
+shared state, enabling the remaining builder hierarchy. Its mutable status access
+uses a scoped guard; report getters return owned snapshots to avoid holding locks
+across callbacks. Native Message/progress checks include derived-handle ancestry
+and reference counts. Context and builder implementations remain in progress.

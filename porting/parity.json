@@ -88801,7 +88801,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
       "rust_item": "rustycad_tkernel::message::Algorithm::get_status",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string. Shared Handle base uses actual StandardTransient projection; read getters return owned snapshots, ChangeStatus a scoped write guard. Native Message/progress corpus and derived-handle probe verified."
     },
     {
       "upstream_id": "Message_Algorithm::ChangeStatus()",
@@ -88809,7 +88809,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
       "rust_item": "rustycad_tkernel::message::Algorithm::change_status",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string. Shared Handle base uses actual StandardTransient projection; read getters return owned snapshots, ChangeStatus a scoped write guard. Native Message/progress corpus and derived-handle probe verified."
     },
     {
       "upstream_id": "Message_Algorithm::ClearStatus()",
@@ -88873,7 +88873,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
       "rust_item": "rustycad_tkernel::message::Algorithm::get_message_numbers",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string. Shared Handle base uses actual StandardTransient projection; read getters return owned snapshots, ChangeStatus a scoped write guard. Native Message/progress corpus and derived-handle probe verified."
     },
     {
       "upstream_id": "Message_Algorithm::GetMessageStrings(const Message_Status&) const",
@@ -88881,7 +88881,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
       "rust_item": "rustycad_tkernel::message::Algorithm::get_message_strings",
       "status": "implemented",
-      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string. Shared Handle base uses actual StandardTransient projection; read getters return owned snapshots, ChangeStatus a scoped write guard. Native Message/progress corpus and derived-handle probe verified."
     },
     {
       "upstream_id": "Message_Algorithm::PrepareReport(const occ::handle<TColStd_HPackedMapOfInteger>&,int)",
@@ -88905,7 +88905,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
       "rust_item": "<rustycad_tkernel::message::Algorithm as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
-      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type(). Shared Handle base uses actual StandardTransient projection; read getters return owned snapshots, ChangeStatus a scoped write guard. Native Message/progress corpus and derived-handle probe verified."
     },
     {
       "upstream_id": "Message_Attribute::DEFINE_STANDARD_RTTIEXT(Message_Attribute,Standard_Transient)",
@@ -205645,7 +205645,7 @@
       "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_PntOnFace.hxx",
       "rust_item": "",
       "status": "upstream_unimplemented",
-      "notes": "Declared but unimplemented in pinned OCCT 3d097a0: native link fails with undefined reference to IntTools_PntOnFace::IsValid() const; Valid() is the executable member. No behavior invented."
+      "notes": "Declared but unimplemented in pinned OCCT 3d097a0: native link fails with undefined reference to IntTools_PntOnFace::IsValid() const; Valid() is the executable member. No behavior invented. Reproduce via tools/verify_tkbo_foundations.py; tools/oracle/tkbo_missing_isvalid.cxx must compile, then fail linking for exactly this member. Evidence target/oracle-tkbo-foundations/numeric/isvalid-gap.json and isvalid-link.log."
     },
     {
       "upstream_id": "IntTools_PntOn2Faces()",
@@ -206062,6 +206062,94 @@
       "rust_item": "rustycad_tkbo::int_tools::CommonPrt::bounding_points",
       "status": "implemented",
       "notes": "Pinned native differential evidence: tools/verify_tkbo_foundations.py; preserves native copy and OR-predicate semantics."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData(int,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::new",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData::GetNbSample() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::get_nb_sample",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData::GetMinRange() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::get_min_range",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData::AddOutRange(const IntTools_CurveRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::add_out_range",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData::AddBox(const IntTools_CurveRangeSample&,const Bnd_Box&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::add_box",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData::FindBox(const IntTools_CurveRangeSample&,Bnd_Box&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::find_box",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData::IsRangeOut(const IntTools_CurveRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::is_range_out",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeLocalizeData::ListRangeOut(NCollection_List<IntTools_CurveRangeSample>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeLocalizeData::list_range_out",
+      "status": "implemented",
+      "notes": "Native exact differential evidence tools/verify_tkbo_foundations.py includes map traversal order, resize, duplicates, cache overwrite and exclusion invalidation."
+    },
+    {
+      "upstream_id": "Contap_SurfProps::Normale(const occ::handle<Adaptor3d_Surface>&,double,double,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfProps.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfProps::normale",
+      "status": "implemented",
+      "notes": "All elementary branches and generic derivative cross products compared against native OCCT. Distinct cone-apex thresholds retained. Undefined null handles report Standard_NullObject."
+    },
+    {
+      "upstream_id": "Contap_SurfProps::DerivAndNorm(const occ::handle<Adaptor3d_Surface>&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfProps.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfProps::deriv_and_norm",
+      "status": "implemented",
+      "notes": "All elementary branches and generic derivative cross products compared against native OCCT. Distinct cone-apex thresholds retained. Undefined null handles report Standard_NullObject."
+    },
+    {
+      "upstream_id": "Contap_SurfProps::NormAndDn(const occ::handle<Adaptor3d_Surface>&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfProps.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfProps::norm_and_dn",
+      "status": "implemented",
+      "notes": "All elementary branches and generic derivative cross products compared against native OCCT. Distinct cone-apex thresholds retained. Undefined null handles report Standard_NullObject."
     }
   ],
   "tests": [

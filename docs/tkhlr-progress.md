@@ -167,3 +167,8 @@ and its five result accessors. An additional 4,086 native comparisons cover dire
 and indirect frames, draft angles, near-axis directions, zero/tiny/invalid radii,
 perspective eyes, fresh/reused state, and all accessor error branches. The full
 TKHLR numeric corpus passes 7,015 cases. Six focused analytic tests supplement it.
+
+`Contap_SurfProps` adds all three normal/derivative APIs, with 1,184 new native
+comparisons over elementary surfaces, indirect frames and generic Bezier patches.
+The complete corpus passes 8,199 cases. The distinct cone-apex thresholds and
+normal choices are retained. Six focused Rust tests also cover these contracts.

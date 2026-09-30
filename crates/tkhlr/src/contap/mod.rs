@@ -15,3 +15,6 @@ pub use cont_ana::ContapContAna;
 
 mod cont_ana_cylinder;
 mod cont_ana_sphere;
+
+mod surf_props;
+pub use surf_props::{ContapDerivAndNorm, ContapNormAndDn, ContapSurfProps};
