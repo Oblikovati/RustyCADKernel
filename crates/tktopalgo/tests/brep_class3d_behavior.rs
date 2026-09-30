@@ -1,10 +1,6 @@
-//! Behavior tests of BRepClass3d after the cases of the upstream suite
-//! `BRepClass3d_SolidClassifier_Test.cxx`, which is not mapped: its solids come from
-//! BRepPrimAPI_MakeBox and BRepPrimAPI_MakeSphere (TKPrim), which the port does not
-//! provide. The unchanged suite passes natively against the shared build (5 of 5). Here
-//! the same box and sphere are built with BRep_Builder by the probe's shape reader, and
-//! each case checks the same state with the same inputs; the other tests cover the
-//! explorer, the selectors, the intersector and OuterShell.
+//! Supplemental BRepClass3d coverage for the explorer, selectors, intersector and
+//! OuterShell. The five legacy cases now use the TKPrim builders in
+//! brep_class3d_solid_classifier.rs; these additional topology fixtures remain here.
 #[allow(dead_code)]
 #[path = "../examples/tp_probe/face.rs"]
 mod face;
@@ -31,7 +27,7 @@ use rustycad_tktopalgo::brep_class3d::{
     BRepClass3dSolidExplorer, FacePointSample,
 };
 use shape::{TpShape, tp_shape};
-use solid_records::{BOX10, HOLLOW10, SPHERE10};
+use solid_records::{BOX10, HOLLOW10};
 
 fn shape(record: &[f64]) -> TpShape {
     tp_shape(&mut Reader::new(record)).expect("shape record")
@@ -42,41 +38,6 @@ fn classify(record: &[f64], point: Point3) -> State {
     let mut classifier = BRepClass3dSolidClassifier::with_shape(&solid.shape).unwrap();
     classifier.perform(&point, precision::confusion()).unwrap();
     classifier.state()
-}
-
-// BRepClass3d_SolidClassifierTest.PointInside_Box
-#[test]
-fn point_inside_box() {
-    assert_eq!(classify(&BOX10, Point3::new(5.0, 5.0, 5.0)), State::In);
-}
-
-// BRepClass3d_SolidClassifierTest.PointOutside_Box
-#[test]
-fn point_outside_box() {
-    assert_eq!(classify(&BOX10, Point3::new(20.0, 20.0, 20.0)), State::Out);
-}
-
-// BRepClass3d_SolidClassifierTest.PointOnFace_Box
-#[test]
-fn point_on_face_box() {
-    assert_eq!(classify(&BOX10, Point3::new(5.0, 5.0, 0.0)), State::On);
-}
-
-// BRepClass3d_SolidClassifierTest.PointInside_Sphere
-#[test]
-fn point_inside_sphere() {
-    assert_eq!(classify(&SPHERE10, Point3::new(0.0, 0.0, 0.0)), State::In);
-}
-
-// BRepClass3d_SolidClassifierTest.PerformInfinitePoint
-#[test]
-fn perform_infinite_point() {
-    let solid = shape(&BOX10);
-    let mut classifier = BRepClass3dSolidClassifier::with_shape(&solid.shape).unwrap();
-    classifier
-        .perform_infinite_point(precision::confusion())
-        .unwrap();
-    assert_eq!(classifier.state(), State::Out);
 }
 
 #[test]

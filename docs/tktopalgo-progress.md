@@ -37,7 +37,7 @@ BRepCheck_Edge includes BRepLib; BRepBuilderAPI includes BRepLib, which includes
 BRepBndLib, which includes BRepBuilderAPI), so they are ported class by class in an
 order that follows the includes of each file.
 
-The toolkit test inventory maps these suites (25 declarations):
+The toolkit test inventory maps these suites (49 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -49,17 +49,17 @@ The toolkit test inventory maps these suites (25 declarations):
 | BRepBuilderAPI_MakeEdge_Test.cxx | brep_builder_api_make_edge | 6 | 6 of 6 | 6 of 6 |
 | BRepBuilderAPI_MakeFace_Test.cxx | brep_builder_api_make_face | 4 | 4 of 4 | 4 of 4 |
 | BRepExtrema_DistShapeShape_Test.cxx | brep_extrema_dist_shape_shape | 3 | 3 of 3 | 3 of 3 |
+| BRepClass_FaceExplorer_Test.cxx | brep_class_face_explorer | 8 | 8 of 8 | 8 of 8 |
+| BRepClass3d_SolidClassifier_Test.cxx | brep_class3d_solid_classifier | 5 | 5 of 5 | 5 of 5 |
+| BRepBuilderAPI_Copy_Test.cxx | brep_builder_api_copy | 6 | 6 of 6 | 6 of 6 |
+| BRepBuilderAPI_Transform_Test.cxx | brep_builder_api_transform | 5 | 5 of 5 | 5 of 5 |
 
-BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: its case
-`BRepClassFaceExplorerTest.DegenerateEdges_HaveNoNextEdge` builds its sphere face with
-BRepPrimAPI_MakeSphere of TKPrim, which the port does not provide (the seven other cases
-need only BRepBuilderAPI, ported now, but a suite is mapped whole). The unchanged
-suite compiles and passes natively against the shared build (8 of 8). Its eight cases
-run as the behavior tests of `crates/tktopalgo/tests/brep_class_behavior.rs`, on the
-same faces built with BRep_Builder by the probe's face reader (a holed square, the
-lateral face of a cylinder with its seam, a square with a reversed wire, a disc, a
-sphere face with its degenerated poles), checking the same properties; they move to a
-1:1 translation once BRepPrimAPI is ported.
+BRepClass_FaceExplorer_Test.cxx and BRepClass3d_SolidClassifier_Test.cxx now use
+BRepPrimAPI_MakeSphere and BRepPrimAPI_MakeBox from the Rust TKPrim crate, plus the
+original BRepBuilderAPI constructors. Their 13 declarations pass in Rust and in the
+unchanged native suites. `rustycad-tkprim` is a test dependency of TKTopAlgo; the
+production dependency direction stays TKPrim → TKTopAlgo. The old face-record substitutes
+have been removed from these legacy tests; supplemental classifier tests remain.
 
 BRepTopAdaptor_FClass2d_Test.cxx and BRepCheck_Face_Test.cxx are translated 1:1 since
 BRepBuilderAPI is ported (their BRep_Builder surrogates are removed). IntCurvesFace has
@@ -84,22 +84,10 @@ in the native build.
 
 BRepBuilderAPI_MakeEdge_Test.cxx (6 declarations) and BRepBuilderAPI_MakeFace_Test.cxx (4)
 are translated 1:1 since BRepGProp is ported (they measure the edges and faces with
-`BRepGProp::LinearProperties` and `SurfaceProperties`). Two BRepBuilderAPI suites still
-wait: BRepBuilderAPI_Transform_Test.cxx (5) and BRepBuilderAPI_Copy_Test.cxx (6) build
-every input with `BRepPrimAPI_MakeBox` of TKPrim and measure it with
-`BRepGProp::VolumeProperties` or `SurfaceProperties` (and `CafNamedShape_A4` translates
-with BRepBuilderAPI_Transform). The two unchanged suites pass natively (11 of 11); the
-behavior tests of `crates/tktopalgo/tests/brep_builder_api_behavior.rs` and the numeric
-probe cover the same members.
-
-BRepClass3d_SolidClassifier_Test.cxx (5 declarations) is not mapped: its solids come from
-BRepPrimAPI_MakeBox and BRepPrimAPI_MakeSphere of TKPrim, which the port does not provide.
-The unchanged suite compiles and passes natively against the shared build (5 of 5). Its
-five cases run as the behavior tests of `crates/tktopalgo/tests/brep_class3d_behavior.rs`
-with the same points, tolerance and expected states, on the same box and sphere built
-with BRep_Builder by the probe's shape reader (records in
-`crates/tktopalgo/tests/solid_records`); they move to a 1:1 translation once BRepPrimAPI
-is ported.
+`BRepGProp::LinearProperties` and `SurfaceProperties`). BRepBuilderAPI_Transform_Test.cxx (5) and BRepBuilderAPI_Copy_Test.cxx (6) now
+use the Rust TKPrim box maker. The translation retains the native dimensions, transformation
+settings, property calculations, assertion order and tolerances, including the caf/nam/A4
+face identity and translated center checks. All 11 pass against the unchanged native suites.
 
 BRepGProp_Test.cxx (17 declarations) is not mapped: its shapes come from
 BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, BRepPrimAPI_MakeBox, MakeSphere and

@@ -6,7 +6,9 @@ Healing). It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, T
 and TKTopAlgo ports, as the native toolkit does (its EXTERNLIB). Each of the 11 OCCT
 packages is one module of the crate, declared up front in `src/lib.rs`; a module whose
 package is not ported yet holds only its documentation. Ported so far: SHMessage (the
-message resource data), ShapeExtend and ShapeBuild. The numeric corpus has 2178 requests:
+message resource data), ShapeExtend and ShapeBuild, plus the ShapeAnalysis, ShapeFix,
+ShapeCustom and ShapeUpgrade classes listed below. The combined numeric corpus has
+3448 passing requests. The original 2178 requests cover:
 ShapeExtend status codes 475, messages 85, WireData 92, Explorer 849, registrators 11,
 ComplexCurve 24 and CompositeSurface 126; ShapeBuild vertices 48, edges 457 and re-shapers
 11.
