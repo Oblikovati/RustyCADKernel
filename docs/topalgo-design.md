@@ -580,3 +580,87 @@ as the native code got). The accessors of the current point raise StdFail_NotDon
 there is none, as natively; `Face()` raises Standard_OutOfRange when the face index is
 outside the sequence (a `Value` of the native sequence). The two `Init` overloads with
 a shape are `init_curve` and `init_line`, and `Init(curve)` is `init`.
+
+## 13. BRepExtrema: the extrema wrappers, the parallel distance and the triangle sets
+
+BRepExtrema has two groups: the distance between shapes (`DistShapeShape`,
+`DistanceSS`, the `Ext*` wrappers of Extrema, `Poly`, `SolutionElem`, `SupportType`)
+and the proximity tools on triangulations (`TriangleSet`, `OverlapTool`,
+`SelfIntersection`, `ElementFilter`, `ProximityDistTool`, `ProximityValueTool`,
+`ShapeProximity`).
+
+- **`BRepExtrema_SupportType`** is the enum `BRepExtremaSupportType` with the native
+  discriminants; **`BRepExtrema_SolutionElem`** is the value struct
+  `BRepExtremaSolutionElem` (its three constructors are `with_vertex`, `with_edge`,
+  `with_face`; `EdgeParameter`/`FaceParameter` return their values).
+  **`BRepExtrema_UnCompatibleShape`** is a `Failure` of that type
+  (`uncompatible_shape`).
+- **The `Ext*` wrappers keep the native state of their Extrema member.** Natively
+  `BRepExtrema_ExtPC`, `ExtCC`, `ExtCF` and `ExtFF` own an Extrema object that keeps a
+  pointer to an adaptor the wrapper owns (or to a local adaptor of `Perform`), and the
+  Extrema object keeps state from one call to the next (the solutions of the general
+  curve-curve algorithm accumulate, `IsParallel` of `Extrema_ExtCS`/`ExtSS` survives a
+  non-analytic `Perform`, the end points of an infinite range are kept). The port's
+  Extrema classes borrow their adaptors, so a wrapper cannot hold one with its adaptor.
+  Each wrapper records the calls it makes on the member (`Initialize`/`SetCurve`/
+  `Perform` with the adaptor handles and the numbers) and, at each call, replays them
+  all on a new Extrema object and reads its accessors (`IndexedCapture` keeps what each
+  indexed accessor returns, its exception included, for every index and just outside
+  the range). The member thus ends in the native state; the result of the last call
+  is returned, the earlier ones having raised when they were made. `ExtPF` keeps its
+  `Extrema_ExtPS` directly: that class holds its surface by a shared handle
+  (`initialize_shared`), which is the member adaptor `mySurf` re-initialized in place.
+  The `BRepExtrema` sequences of the wrappers (`mySqDist`, `myPointsOnS`, ...) are
+  `Vec`s read with the check of `NCollection_Sequence::Value`.
+- **`BRepExtrema_DistanceSS`** is a struct built by `new` (the native constructor
+  performs); its private `Perform` overloads are methods of an inner search state
+  (`myDstRef`, `myModif`, `myEps`, `myFlag`, `myAlgo`) that take the two solution
+  vectors as `&mut`, so the overloads called with swapped sequences (edge-vertex,
+  face-vertex, face-edge) are the same methods. The file-static helpers
+  (`TRI_SOLUTION`, `MIN_SOLUTION`, `TRIM_INFINIT_EDGE`, `TRIM_INFINIT_FACE`,
+  `PERFORM_C0`, `isOnBoundary`) are private functions.
+- **`BRepExtrema_DistShapeShape`** is a struct with the native fields (the maps and
+  boxes of each shape grouped per shape). The functors of the native file
+  (`VertexFunctor`, `DistancePairFunctor`, `DistanceFunctor`, `TreatmentFunctor`) are
+  task bodies run by `OSD_Parallel::For` over `rustycad_tkernel::osd::Parallel`; their
+  `mutable ThreadSolution` arrays are one `Mutex` slot per task, and their progress
+  `Ranges` one locked range per task. The task layout depends on
+  `OSD_ThreadPool::DefaultPool()->NbThreads()` in both modes, as natively, so a result
+  depends on the number of logical processors, never on the thread timing, except in
+  the solid treatment of a parallel run (several tasks may each find a vertex inside
+  before they see the flag of another). A task failure stops a forced single-thread
+  run and is returned as is; in a parallel run the pool catches it and returns a
+  Standard_ProgramError, as the OSD launcher does (the task raises it through a panic
+  payload, the transport of the OSD port). `Dump` writes to a `std::io::Write`.
+- **`BRepExtrema_TriangleSet`** derives from `BVH_PrimitiveSet3d` and is shared by
+  handle between the proximity tools (`ShapeProximity` gives its sets to the overlap
+  and value tools; `SelfIntersection` gives one set as both sets). It is the
+  transient `BRepExtremaTriangleSet` whose fields are in one `SharedState`: the
+  state implements `BvhSet` and `BvhPrimitiveSetAccess` (docs/bvh-design.md), and
+  every member takes `&self`. A traversal takes the built tree out of the set
+  (`BVH()`, built when dirty) for its duration and puts it back, as the BVH port does
+  for its own sets; a set traversed against itself is taken once. The accessors that
+  read `NCollection_LinearVector::operator[]` or `NCollection_DynamicArray::Value(int)`
+  (unchecked natively: an index outside the set reads out of bounds) raise
+  Standard_OutOfRange here.
+- **`BRepExtrema_ElementFilter`** is the trait `BRepExtremaElementFilter` with the
+  native default `PreCheckElements` (`DoCheck`), and `FilterResult` the enum
+  `BRepExtremaFilterResult`. The overlap tool keeps the filter as an owned
+  `Box<dyn BRepExtremaElementFilter>` instead of the native non-owning pointer;
+  `SelfIntersection` gives it a filter over its own triangle set (the native tool sets
+  itself as the filter of its member tool, which Rust cannot express), and its
+  protected `PreCheckElements`, `isRegularSharedVertex` and `isRegularSharedEdge` are
+  public methods of the same logic.
+- **`BRepExtrema_OverlapTool`** implements `BvhPairTraverse` (`RejectNode`, `Accept`);
+  **`BRepExtrema_ProximityDistTool`** embeds the `BvhDistance` state and implements
+  `BvhTraverse` over the tree of its second set (`BVH_Distance`; the protected
+  `myDistance`, `myIsDone` and `myObject` are written through the state).
+  `ProxPnt_Status` is the enum `BRepExtremaProxPntStatus` and `PrjState` the struct
+  `BRepExtremaPrjState`.
+- **`BRepExtrema_ProximityValueTool`** keeps its `NCollection_CellFilter` over the
+  inspector `BRepExtremaVertexInspector` (an implementation of TKernel's
+  `CellInspector`), and **`BRepExtrema_ShapeProximity`** its two sets, its overlap tool
+  and its value tool, as natively.
+- Every member that can raise returns `Result`; a native member that dereferences a
+  null handle (a tool performed before its sets are loaded) returns
+  Standard_NullObject.
