@@ -2,7 +2,7 @@
 //! suite `BRepCheck_Face_Test.cxx`. That suite is not mapped: its faces come from
 //! BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, which the port does not provide yet;
 //! here the same faces are built with BRep_Builder and each case checks the same
-//! statuses (its IsValid assertion waits for BRepCheck_Analyzer).
+//! statuses, including the IsValid assertion of BRepCheck_Analyzer.
 mod brep_check_support;
 
 use brep_check_support::{Planar, TOL, square, vertex, wire_of};
@@ -14,7 +14,7 @@ use rustycad_tkg3d::geom::{GeomCircle, GeomCurve, GeomLine, GeomSurface};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::{Axis2, Axis2d, Direction2, Direction3, Point2, Point3, Vector3};
 use rustycad_tktopalgo::brep_check::{
-    BRepCheckFace, BRepCheckResult, BRepCheckStatus, BRepCheckWire,
+    BRepCheckAnalyzer, BRepCheckFace, BRepCheckResult, BRepCheckStatus, BRepCheckWire,
 };
 use std::f64::consts::TAU;
 
@@ -110,6 +110,12 @@ fn face_test_classify_wires_disjoint_holes_are_valid() {
         }
     }
     assert_eq!(classify(&face), NoError);
+    assert!(
+        BRepCheckAnalyzer::new(&face, true, false, false)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
 }
 
 #[test]

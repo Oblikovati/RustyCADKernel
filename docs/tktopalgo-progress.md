@@ -65,15 +65,15 @@ behavior tests and those of the tool, vertex and Tool classes.
 
 BRepCheck_Face_Test.cxx (4 declarations) is not mapped: every case builds its planar
 face and its wires with BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, which the port
-does not provide yet, and the first case also asserts `BRepCheck_Analyzer::IsValid`,
-which waits for BRepCheck_Solid (BRepClass3d_SolidClassifier). The unchanged suite
-compiles and passes natively against the shared build (4 of 4). Its four
-`ClassifyWires` cases run as the `face_test_*` behavior tests of
+does not provide yet. The unchanged suite compiles and passes natively against the
+shared build (4 of 4). Its four `ClassifyWires` cases (with the
+`BRepCheck_Analyzer::IsValid` assertion of the first one) run as the `face_test_*`
+behavior tests of
 `crates/tktopalgo/tests/brep_check_wire_face.rs` on the same faces built with
 BRep_Builder (40 circular holes, an offset-circle pcurve, an open and an unbounded wire
 outside the face, on the face and its reverse); `tests/brep_check_package.rs`,
-`brep_check_vertex_edge.rs` and `brep_check_shell.rs` test the other checkers, the
-package functions and BRepLib_ValidateEdge.
+`brep_check_vertex_edge.rs`, `brep_check_shell.rs` and `brep_check_analyzer.rs` test
+the other checkers, the analyzer, the package functions and BRepLib_ValidateEdge.
 BRepBndLib_Test.cxx (6 declarations) is not mapped: it builds its shapes with
 BRepBuilderAPI_MakeEdge and MakeFace and BRepPrimAPI_MakeCylinder, and meshes them with
 BRepMesh_IncrementalMesh of TKMesh, which is not in the shared native build (the unchanged
@@ -134,9 +134,11 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `SelfIntersection` writes its edges through `&mut Edge`), `BRepCheck_Status` the enum
   `BRepCheckStatus` (native order, `from_index`, `name`) and its list `ListOfStatus`.
   `BRepCheck_Result` is the trait `BRepCheckResult` over the embedded `ResultBase`;
-  `BRepCheck_Vertex`, `_Edge`, `_Wire`, `_Face` and `_Shell` are `BRepCheckVertex`,
-  `BRepCheckEdge`, `BRepCheckWire`, `BRepCheckFace` and `BRepCheckShell`, transient
-  structs whose members take `&self`. The overloads are `status_on_shape` (the context
+  `BRepCheck_Vertex`, `_Edge`, `_Wire`, `_Face`, `_Shell` and `_Solid` are
+  `BRepCheckVertex`, `BRepCheckEdge`, `BRepCheckWire`, `BRepCheckFace`,
+  `BRepCheckShell` and `BRepCheckSolid`, transient structs whose members take `&self`.
+  `BRepCheck_Analyzer` is `BRepCheckAnalyzer` (`IsValid(S)` is `is_valid_shape`,
+  `Result` returns the checker handle, null for a compound). The overloads are `status_on_shape` (the context
   iterator) and `status_on_shape_of(S)`, `geometric_controls` and
   `set_geometric_controls`; `SelfIntersect` writes `E1`/`E2` through `&mut Edge` (left
   unchanged when it does not set them, as the native references). Every member that can
@@ -486,8 +488,8 @@ algorithms. Other requests exercise the classes one by one: edit scripts of
 `MAT_ListOfEdge`, `MAT_Bisector::Dump`, a hand-made graph piece, `MAT2d_Connexion`
 (`Reverse`, `IsAfter`, `Dump`), `MAT2d_CutCurve`, `MAT2d_MiniPath` and `MAT2d_Tool2d`.
 
-BRepCheck and BRepLib_ValidateEdge: 927 requests (`tools/tktopalgo_corpus_brepcheck.py`
-and its `_vertex`, `_edge`, `_wire`, `_face`, `_shell` and `_validate` modules). The shapes
+BRepCheck and BRepLib_ValidateEdge: 981 requests (`tools/tktopalgo_corpus_brepcheck.py`
+and its `_vertex`, `_edge`, `_wire`, `_face`, `_shell`, `_solid` and `_validate` modules). The shapes
 are shape programs (`tools/tktopalgo_shape_program.py`): both probes build any shape
 with BRep_Builder from the same numbers (`tktopalgo_probe_shapes.cxx` and
 `tp_probe/shapes.rs`: surfaces, 3d curves and pcurves, locations, vertices, edges and
@@ -512,7 +514,12 @@ the outer wire at a vertex or along an edge, misoriented wires and faces, no sur
 wire, an infinite face, a wire met twice, thin faces, the four BRepCheck_Face_Test
 faces, half-infinite and clamped edges), shells (cubes whole, open and with reversed or
 INTERNAL faces, repeated faces, disconnected faces, edges of three and four faces, a
-band plain and twisted, an empty shell, solid contexts) and `ble_validate` (lines,
+band plain and twisted, an empty shell, solid contexts), solids of one to three shells
+(holes, nested and disjoint shells, a shared face, a detached vertex, INTERNAL shells),
+`bck_analyze` (the analyzer on every kind of shape, compounds and compsolids of valid
+and invalid shapes, with the geometric controls off, in parallel and exact, IsValid of
+every sub-shape and every checker's statuses in table order, the first face of
+BRepCheck_Face_Test) and `ble_validate` (lines,
 circles, ellipses on planes and cones, a curve on surface as reference, a B-spline
 against a Bezier pcurve, with the same and another parametrization and every option).
 
@@ -649,6 +656,16 @@ Native null dereferences in these packages are Standard_NullObject errors.
   `InvalidImbricationOfWires` for a finite face; a thin exterior wire (two edges between
   the same vertices) returns `NoError` without recording it. `IsInside` reads the start
   of the 3d curve at the first parameter of the pcurve.
+- `BRepCheck_Solid` initializes its shell tools in order and stops at the second shell
+  that is not a hole (`EnclosedRegion`); the pair scan that follows uses the tools after
+  it without classifier, a null dereference natively when four or more closed shells
+  get there (the corpus has three at most; the port raises Standard_NullObject).
+- `BRepCheck_Analyzer::IsValid` reads only the first status of each checker, and
+  `ValidSub` stops at the first sub-shape that has no statuses in the context (the rest
+  are not read). The analyzer never checks an edge in a solid (only faces, wires and
+  vertices in faces, vertices in edges and shells in solids), so free edges are found by
+  the shell check. Its map keeps orientations apart: a face met reversed gets its own
+  checkers.
 - `BRepLib_ValidateEdge` counts fewer than one control point as one, compares the ends
   first when the parametrizations differ, corrects the exit tolerance by the precisions
   of `BRepCheck`, and uses the exact method only for a same-parameter edge.
@@ -660,6 +677,10 @@ Native null dereferences in these packages are Standard_NullObject errors.
   down cast is null), `Tolerance` with a null 3d curve or without an adaptable
   representation, `BRepLib_ValidateEdge` with a null adaptor, `PrecSurface` of a null
   handle. The corpus leaves the native crashes out.
+- The analyzer's functor catches the failures of the checks as the native catch blocks
+  do; a failure outside them (a missing checker) is returned by `Init` (it leaves the
+  native loop). With the parallel flag the tasks run on the default pool of
+  `OSD_Parallel`.
 - The context iterator is a snapshot of the map taken by `InitContextIterator` (natively
   an iterator over the live map, invalid after a change of the map).
 - The native mutex guards the status map only in parallel mode; the port always locks,
