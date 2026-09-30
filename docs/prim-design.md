@@ -114,3 +114,46 @@ members, and the rules for the whole toolkit are:
   builder members that make a container fill a `&mut Shape` slot through the typed cast
   of the native code (`TopoDS::Wire(aWire)`, Standard_TypeMismatch for a slot of another
   type).
+
+## 4. BRepPrimAPI: the makers
+
+- Every maker is a struct holding a `BRepBuilderAPIMakeShapeBase` and its algorithm, and
+  implements `BRepBuilderAPIMakeShape` (topalgo-design.md section 10) with the members its
+  header overrides: `Build` everywhere, `Generated` and `IsDeleted` for the prism and the
+  revolution. The constructors take distinct names and do what the native ones do: the
+  primitive makers only build their algorithm (`Shape()` then calls `Build`), the sweep
+  makers run `BRepLib::BuildCurves3d` on the base and build at once.
+- `BRepPrimAPI_MakeOneAxis` is the trait `BRepPrimAPIMakeOneAxis`, a sub-trait of
+  `BRepBuilderAPIMakeShape`: the pure virtual `void* OneAxis()` becomes the required
+  `one_axis(&mut self) -> &mut dyn BRepPrimOneAxis` (the native cast of the pointer to
+  `BRepPrim_OneAxis*`), and `Face`, `Shell` and `Solid` are provided methods, each calling
+  the virtual `Build` first as natively. `BRepPrimAPI_MakeOneAxis::Build` is the function
+  `one_axis_build`, which the five one-axis makers call from their `build`; a macro writes
+  the identical trait implementations of the five makers.
+- `BRepPrimAPI_MakeSweep` is the trait `BRepPrimAPIMakeSweep`, a sub-trait of
+  `BRepBuilderAPIMakeShape` with the pure virtual `FirstShape` and `LastShape`; the prism
+  and the revolution implement it and keep their `FirstShape(theShape)` and
+  `LastShape(theShape)` overloads as inherent `first_shape_of` and `last_shape_of`.
+- The accessors returning a `const` reference to a built sub-shape (`Shell`, `Solid`, the
+  box faces) return the shape (a handle sharing its TShape). The conversion operators map
+  to the accessor they call. The accessors of the algorithm (`Wedge()`, `Cylinder()`,
+  `Prism()`, ...) return a reference to it.
+- `BRepPrimAPI_MakeRevol` keeps its private history (`myHist`, a `BRepTools_History`
+  handle), the list of degenerated edges and the build flag; its `Build` (the copies of
+  shared degenerated edges through BRepTools_ReShape) is in `make_revol_build.rs` and
+  `CheckValidity` (protected, public here) with its helper `IsIntersect` in
+  `make_revol_validity.rs`.
+- `BRepPrimAPI_MakeHalfSpace` finds the reference point's projection with
+  `BRepExtrema_DistShapeShape` of the TKTopAlgo port; its static helpers are private
+  functions.
+
+## 5. BRepPreviewAPI
+
+- `BRepPreviewAPI_MakeBox` derives from `BRepPrimAPI_MakeBox` and overrides `Build` only.
+  `BRepPreviewAPIMakeBox` holds a `BRepPrimAPIMakeBox`, dereferences to it (so the `Init`
+  members, the faces and `Shell`/`Solid` are the box maker's) and implements
+  `BRepBuilderAPIMakeShape` on the base of the inner maker with its own `build`. The
+  box's `Build` calls the non-virtual `Solid()`, which never reaches the override, as
+  natively.
+- The private `makeVertex`, `makeEdge` and `makeRectangle` are private functions that
+  return the shape instead of writing `myShape`.

@@ -26,6 +26,7 @@ mod torus;
 mod wedge;
 
 pub use builder::BRepPrimBuilder;
+pub(crate) use cylinder::standard_frame;
 pub use cone::BRepPrimCone;
 pub use cylinder::BRepPrimCylinder;
 pub use direction::BRepPrimDirection;
