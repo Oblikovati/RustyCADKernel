@@ -50,3 +50,17 @@ pub fn pcurves_case(v: &[f64]) {
     let sphere = Sphere3::new(axes, v[1]).unwrap();
     flag(policy::approximate_with_pcurves(cylinder, sphere).unwrap());
 }
+
+pub fn distance_case(v: &[f64]) {
+    let result = maximum_distance(v);
+    match result {
+        Ok(distance) => real(distance),
+        Err(error) => print!("{} ", error.exception_type()),
+    }
+}
+fn maximum_distance(v: &[f64]) -> Result<f64, Failure> {
+    let curve = super::tools_geometry::geometry(v[0] as i32, v[2], v[3])?;
+    let face = super::fclass_faces::face(v[1] as i32, 3.)?;
+    let context = rustycad_tkbo::int_tools::Context::default();
+    super::face_distance::face_distance(&curve, v[2], v[3], &face, &context)
+}

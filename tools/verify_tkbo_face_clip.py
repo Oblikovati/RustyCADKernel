@@ -21,7 +21,9 @@ def clip_requests() -> str:
     directions = [(1,0),(-1,0),(0,1),(1,1),(1,-1),(1,1e-10)]
     clipped = '\n'.join(f"face_clip {a} {b} {c} {d} {x} {y} {dx} {dy} {tol}"
         for (a,b,c,d), (x,y), (dx,dy), tol in product(bounds, points, directions, [0,1e-7,1,10]))+'\n'
-    return clipped + plane_requests() + policy_requests() + boundary_requests()
+    checks = [f"face_check {kind} {face} {u} {v}" for kind, face, u, v in product(range(5), [0,1,3,4,7,9], [-7,-6.283185307179586,-0.1,0,0.1,6.283185307179586,10], [-3,0,1])]
+    checks += [f"face_distance {kind} {face} {a} {b}" for kind, face, (a,b) in product(range(7),[0,1,3],[(0,1),(-2,3)])]
+    return clipped + plane_requests() + policy_requests() + boundary_requests() + "\n".join(checks)+"\n"
 
 
 def plane_requests() -> str:
