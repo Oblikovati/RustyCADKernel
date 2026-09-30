@@ -159546,6 +159546,1638 @@
       "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::value",
       "status": "implemented",
       "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::with_size",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::operator=(const IntPolyh_Array&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::copy_from",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::Copy(const IntPolyh_Array&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::copy_from",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::Init(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::init",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::IncrementNbItems()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::increment_nb_items",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::GetN() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::get_n",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::NbItems() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::nb_items",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::SetNbItems(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::set_nb_items",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::Value(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::operator[](int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::index",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::ChangeValue(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::change_value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::operator[](int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::index_mut",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::dump",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::default",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple(int,int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::FirstValue() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::first_value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::SecondValue() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::second_value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::IsAnalyzed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::is_analyzed",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::Angle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::angle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::SetCoupleValue(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::set_couple_value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::SetAnalyzed(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::set_analyzed",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::SetAngle(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::set_angle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::IsEqual(const IntPolyh_Couple&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::is_equal",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::operator==(const IntPolyh_Couple&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::eq",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Couple::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::dump",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "std::hash<IntPolyh_Couple>::operator()(const IntPolyh_Couple&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::hash",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::default",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge(int,int,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::FirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::first_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::SecondPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::second_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::FirstTriangle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::first_triangle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::SecondTriangle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::second_triangle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::SetFirstPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::set_first_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::SetSecondPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::set_second_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::SetFirstTriangle(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::set_first_triangle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::SetSecondTriangle(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::set_second_triangle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Edge::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Edge.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhEdge::dump",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection(const occ::handle<Adaptor3d_Surface>&,int,int,const occ::handle<Adaptor3d_Surface>&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::with_samples",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection(const occ::handle<Adaptor3d_Surface>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const occ::handle<Adaptor3d_Surface>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::with_parameters",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::is_done",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::IsParallel() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::is_parallel",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::NbSectionLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::nb_section_lines",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::NbPointsInLine(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::nb_points_in_line",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::NbTangentZones() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::nb_tangent_zones",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::NbPointsInTangentZone(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::nb_points_in_tangent_zone",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::GetLinePoint(int,int,double&,double&,double&,double&,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::get_line_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection::GetTangentZonePoint(int,int,double&,double&,double&,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhIntersection::get_tangent_zone_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage(const occ::handle<Adaptor3d_Surface>&,int,int,const occ::handle<Adaptor3d_Surface>&,int,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::with_samples",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::MakeSampling(int,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::make_sampling",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::FillArrayOfPnt(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::fill_array_of_pnt",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::FillArrayOfPnt(int,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::fill_array_of_pnt_shift",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::FillArrayOfPnt(int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const double*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::fill_array_of_pnt_params",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::FillArrayOfPnt(int,bool,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const double*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::fill_array_of_pnt_shift_params",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::FillArrayOfPnt(int,bool,const IntPolyh_ArrayOfPointNormal&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::fill_array_of_pnt_normals",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::CommonBox()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::common_box",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::CommonBox(const Bnd_Box&,const Bnd_Box&,double&,double&,double&,double&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::common_box_of",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::FillArrayOfEdges(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::fill_array_of_edges",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::FillArrayOfTriangles(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::fill_array_of_triangles",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::CommonPartRefinement()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::common_part_refinement",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::LocalSurfaceRefinement(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::local_surface_refinement",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::ComputeDeflections(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::compute_deflections",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::TrianglesDeflectionsRefinementBSB()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::triangles_deflections_refinement_bsb",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::TriContact(const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::tri_contact",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::TriangleEdgeContact(int,int,const IntPolyh_Triangle&,const IntPolyh_Triangle&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,const IntPolyh_Point&,IntPolyh_StartPoint&,IntPolyh_StartPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::triangle_edge_contact",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::StartingPointsResearch(int,int,IntPolyh_StartPoint&,IntPolyh_StartPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::starting_points_research",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::NextStartingPointsResearch(int,int,const IntPolyh_StartPoint&,IntPolyh_StartPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::next_starting_points_research",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::TriangleCompare()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::triangle_compare",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::StartPointsChain(IntPolyh_ArrayOfSectionLines&,IntPolyh_ArrayOfTangentZones&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::start_points_chain",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetNextChainStartPoint(const IntPolyh_StartPoint&,IntPolyh_StartPoint&,IntPolyh_SectionLine&,IntPolyh_ArrayOfTangentZones&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_next_chain_start_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetArrayOfPoints(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_array_of_points",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetArrayOfEdges(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_array_of_edges",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetArrayOfTriangles(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_array_of_triangles",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetFinTE(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage",
+      "status": "excluded",
+      "notes": "Excluded: declared in IntPolyh_MaillageAffinage.hxx but defined nowhere at the pinned commit (a call fails to link); there is no behaviour to port."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetFinTT(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage",
+      "status": "excluded",
+      "notes": "Excluded: declared in IntPolyh_MaillageAffinage.hxx but defined nowhere at the pinned commit (a call fails to link); there is no behaviour to port."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetBox(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_box",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetCouples()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_couples",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::SetEnlargeZone(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::set_enlarge_zone",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetEnlargeZone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_enlarge_zone",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetMinDeflection(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_min_deflection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_MaillageAffinage::GetMaxDeflection(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage::get_max_deflection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::default",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point(double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::X() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::x",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Y() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::y",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Z() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::z",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::U() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::u",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::V() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::v",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::PartOfCommon() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::part_of_common",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Set(double,double,double,double,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SetX(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set_x",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SetY(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set_y",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SetZ(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set_z",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SetU(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set_u",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SetV(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set_v",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SetPartOfCommon(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set_part_of_common",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Middle(const occ::handle<Adaptor3d_Surface>&,const IntPolyh_Point&,const IntPolyh_Point&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::middle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Add(const IntPolyh_Point&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::add",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::operator+(const IntPolyh_Point&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::add",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Sub(const IntPolyh_Point&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::sub",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::operator-(const IntPolyh_Point&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::sub",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Divide(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::divide",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::operator/(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::div",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Multiplication(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::multiplication",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::operator*(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::mul",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SquareModulus() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::square_modulus",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SquareDistance(const IntPolyh_Point&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::square_distance",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Dot(const IntPolyh_Point&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::dot",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Cross(const IntPolyh_Point&,const IntPolyh_Point&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::cross",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::dump",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::dump_index",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::SetDegenerated(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::set_degenerated",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Point::Degenerated() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Point.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPoint::degenerated",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::with_size",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine(const IntPolyh_SectionLine&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::clone",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::Init(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::init",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::Value(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::operator[](int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::ChangeValue(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::change_value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::operator[](int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::change_value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::Copy(const IntPolyh_SectionLine&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::copy_from",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::operator=(const IntPolyh_SectionLine&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::copy_from",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::GetN() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::get_n",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::NbStartPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::nb_start_points",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::IncrementNbStartPoints()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::increment_nb_start_points",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::Destroy()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::destroy",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::~IntPolyh_SectionLine()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine",
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor (it calls the empty Destroy). Rust releases the sequence through Drop glue; there is no callable counterpart."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::dump",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_SectionLine::Prepend(const IntPolyh_StartPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_SectionLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhSectionLine::prepend",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::default",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint(double,double,double,double,double,double,double,int,int,double,int,int,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::X() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::x",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::Y() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::y",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::Z() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::z",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::U1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::u1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::V1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::v1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::U2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::u2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::V2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::v2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::T1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::t1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::E1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::e1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::Lambda1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::lambda1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::T2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::t2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::E2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::e2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::Lambda2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::lambda2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::GetAngle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::get_angle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::ChainList() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::chain_list",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::GetEdgePoints(const IntPolyh_Triangle&,int&,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::get_edge_points",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetXYZ(double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_xyz",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetUV1(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_uv1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetUV2(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_uv2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetEdge1(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_edge1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetLambda1(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_lambda1",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetEdge2(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_edge2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetLambda2(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_lambda2",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetCoupleValue(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_couple_value",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetAngle(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_angle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::SetChainList(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::set_chain_list",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::CheckSameSP(const IntPolyh_StartPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::check_same_sp",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::dump",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_StartPoint::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_StartPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhStartPoint::dump_index",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Tools::IsEnlargePossible(const occ::handle<Adaptor3d_Surface>&,bool&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Tools.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTools::is_enlarge_possible",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Tools::MakeSampling(const occ::handle<Adaptor3d_Surface>&,int,int,bool,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Tools.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTools::make_sampling",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Tools::ComputeDeflection(const occ::handle<Adaptor3d_Surface>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Tools.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTools::compute_deflection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Tools::FillArrayOfPointNormal(const occ::handle<Adaptor3d_Surface>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,IntPolyh_ArrayOfPointNormal&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Tools.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTools::fill_array_of_point_normal",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::default",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle(int,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::new",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::FirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::first_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SecondPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::second_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::ThirdPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::third_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::FirstEdge() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::first_edge",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::FirstEdgeOrientation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::first_edge_orientation",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SecondEdge() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::second_edge",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SecondEdgeOrientation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::second_edge_orientation",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::ThirdEdge() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::third_edge",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::ThirdEdgeOrientation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::third_edge_orientation",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::Deflection() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::deflection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::IsIntersectionPossible() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::is_intersection_possible",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::HasIntersection() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::has_intersection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::IsDegenerated() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::is_degenerated",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetFirstPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_first_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetSecondPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_second_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetThirdPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_third_point",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetFirstEdge(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_first_edge",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetSecondEdge(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_second_edge",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetThirdEdge(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_third_edge",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetDeflection(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_deflection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetIntersectionPossible(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_intersection_possible",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetIntersection(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_intersection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetDegenerated(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_degenerated",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::GetEdgeNumber(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::get_edge_number",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetEdge(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_edge",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::GetEdgeOrientation(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::get_edge_orientation",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetEdgeOrientation(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_edge_orientation",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::ComputeDeflection(const occ::handle<Adaptor3d_Surface>&,const IntPolyh_ArrayOfPoints&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::compute_deflection",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::GetNextTriangle(int,int,const IntPolyh_ArrayOfEdges&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::get_next_triangle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::MiddleRefinement(int,const occ::handle<Adaptor3d_Surface>&,IntPolyh_ArrayOfPoints&,IntPolyh_ArrayOfTriangles&,IntPolyh_ArrayOfEdges&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::middle_refinement",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::MultipleMiddleRefinement(double,const Bnd_Box&,int,const occ::handle<Adaptor3d_Surface>&,IntPolyh_ArrayOfPoints&,IntPolyh_ArrayOfTriangles&,IntPolyh_ArrayOfEdges&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::multiple_middle_refinement",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::LinkEdges2Triangle(const IntPolyh_ArrayOfEdges&,int,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::link_edges_2_triangle",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::SetEdgeAndOrientation(const IntPolyh_Edge&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::set_edge_and_orientation",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::BoundingBox(const IntPolyh_ArrayOfPoints&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::bounding_box",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Triangle::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Triangle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::dump",
+      "status": "implemented",
+      "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
     }
   ],
   "tests": [
@@ -246919,6 +248551,188 @@
       "rust_target": "int_curve_surface_the_polyhedron_of_h_inter",
       "rust_test": "IntCurveSurface_ThePolyhedronOfHInter__PlaneEquation_FiniteResults",
       "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polyhedron_of_h_inter.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection.SpherePlane_ValidUVCoordinates",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Intersection_Test.cxx",
+      "source_sha256": "c0b330631fff2afe6041b43f43561187d571e0b2787805d7f6dc18def76ae05e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_intersection",
+      "rust_test": "IntPolyh_Intersection__SpherePlane_ValidUVCoordinates",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_intersection.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection.SphereCylinder_ValidUVCoordinates",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Intersection_Test.cxx",
+      "source_sha256": "c0b330631fff2afe6041b43f43561187d571e0b2787805d7f6dc18def76ae05e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_intersection",
+      "rust_test": "IntPolyh_Intersection__SphereCylinder_ValidUVCoordinates",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_intersection.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Intersection.TwoPlanes_ProducesSectionLine",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Intersection_Test.cxx",
+      "source_sha256": "c0b330631fff2afe6041b43f43561187d571e0b2787805d7f6dc18def76ae05e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_intersection",
+      "rust_test": "IntPolyh_Intersection__TwoPlanes_ProducesSectionLine",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_intersection.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.DefaultConstructor_AllZero",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__DefaultConstructor_AllZero",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.Divide_NormalDivisor_CorrectResult",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__Divide_NormalDivisor_CorrectResult",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.Divide_ZeroDivisor_ReturnsDefaultPoint",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__Divide_ZeroDivisor_ReturnsDefaultPoint",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.Divide_NearZeroDivisor_ReturnsDefaultPoint",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__Divide_NearZeroDivisor_ReturnsDefaultPoint",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.Divide_NegativeDivisor_CorrectResult",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__Divide_NegativeDivisor_CorrectResult",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.Add_CorrectResult",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__Add_CorrectResult",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.Sub_CorrectResult",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__Sub_CorrectResult",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.SquareModulus_CorrectResult",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__SquareModulus_CorrectResult",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.SquareDistance_SamePoint_Zero",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__SquareDistance_SamePoint_Zero",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPolyh_Point.Dot_OrthogonalVectors_Zero",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPolyh_Point_Test.cxx",
+      "source_sha256": "e796e3163faaa4980ab98dc71fcffddf50726f4c47c4f7faea8931dcc7bd4fa6",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_polyh_point",
+      "rust_test": "IntPolyh_Point__Dot_OrthogonalVectors_Zero",
+      "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
