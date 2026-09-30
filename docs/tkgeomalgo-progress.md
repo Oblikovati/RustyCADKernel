@@ -1468,7 +1468,9 @@ return.
   UNKNOWN states count as OUT on conic lines only.
 - `IntPatch_PrmPrmIntersection::NewLine` adds the point `Indice`, not `Indice + 1`, when it
   skips the points before the sampled abscissa, and compares `1 / (a + b)` with the step.
-  `PointDepart` clears the neighbours of a cell only in the first map.
+  `PointDepart` clears the neighbours of a cell only in the first map. `RemplitLin` sets
+  only the first cell of each halved segment, so between cells two apart the middle cell
+  stays unset.
 
 ## IntStart deviations
 
