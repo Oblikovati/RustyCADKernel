@@ -123,3 +123,5 @@ def append_intpatch_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intpatch_lines').append_intpatch_line_requests(requests)
     __import__('tkgeomalgo_corpus_intpatch_tools').append_intpatch_tool_requests(requests)
     __import__('tkgeomalgo_corpus_intpatch_poly').append_intpatch_poly_requests(requests)
+    __import__('tkgeomalgo_corpus_intpatch_wltool').append_intpatch_wltool_requests(requests)
+    __import__('tkgeomalgo_corpus_intpatch_prmprm').append_intpatch_prmprm_requests(requests)
