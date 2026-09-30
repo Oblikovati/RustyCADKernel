@@ -6,6 +6,8 @@ mod distance;
 mod distance_search;
 #[path = "../src/int_tools/edge_edge/math.rs"]
 mod edge_math;
+#[path = "../src/int_tools/edge_edge/parameters.rs"]
+mod edge_parameters;
 mod edge_private;
 #[path = "../src/int_tools/edge_edge/resolution.rs"]
 mod edge_resolution;
