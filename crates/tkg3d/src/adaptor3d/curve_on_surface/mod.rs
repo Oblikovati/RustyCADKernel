@@ -115,6 +115,13 @@ impl Adaptor3dCurveOnSurface {
         adaptor.load_curve(curve)?;
         Ok(adaptor)
     }
+    /// The implicit copy constructor (`Adaptor3d_CurveOnSurface(const
+    /// Adaptor3d_CurveOnSurface&)`): an adaptor with the same fields, sharing the
+    /// curve and surface handles, whose later `Load` does not change `other`;
+    /// `Adaptor3dCurveOnSurface::copy_of(&adaptor)`.
+    pub fn copy_of(other: &Self) -> Self {
+        Self::from_state(other.snapshot())
+    }
     fn from_state(state: CosState) -> Self {
         Self {
             parent: StandardTransient::default(),
