@@ -21,6 +21,7 @@ def corpus() -> str:
                  for index, depth in product([-3, 0, 1, 7], [-2, 0, 1, 2, 7, 64])]
     requests += marked_requests()
     requests += bopds_requests()
+    requests += intersection_requests()
     return '\n'.join(requests) + '\n'
 
 
@@ -48,6 +49,17 @@ def bopds_requests() -> list[str]:
     requests += [f'bop_pair {a} {b} {c} {d}' for a, b, c, d in product([-1, 0, 2], repeat=4)]
     requests += [f'bop_point {a} {b} {c} {b} {c} {c} {a} -7'
                  for a, b, c in product([-3.0, -0.0, 0.0, 5.25], repeat=3)]
+    return requests
+
+
+def intersection_requests() -> list[str]:
+    """Compare record copies and evaluation inside/outside native curve bounds."""
+    requests = [f'points {a} {b} {c} {b} {a} {flag}'
+                for a, b, c, flag in product([-0.0, 0.0, 2.5], [-3, 0, 4], [0, 1], [0, 1])]
+    requests += [f'common {a} {b} {c} {b} {a} {c}'
+                 for a, b, c in product([-0.0, 0.0, 2.5], [-3, 0, 4], [0, 1])]
+    requests += [f'intersection_curve {kind} {parameter} {tol} {tol*3}'
+                 for kind, parameter, tol in product(range(4), [-10, 0, 0.25, 1, 2, 3, 4, 5, 10], [0, 1e-7, -1])]
     return requests
 
 
