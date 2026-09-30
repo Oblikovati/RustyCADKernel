@@ -210435,6 +210435,204 @@
       "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::single_pnt",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::new",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds(const TopoDS_Shape&,double,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::forecast",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds(const TopoDS_Shape&,bool,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::from_shape",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::GetClosedWires() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::closed_wires",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::GetOpenWires() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::open_wires",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::ConnectEdgesToWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::connect_edges_to_wires",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::ConnectEdgesToWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,double,bool,occ::handle<NCollection_HSequence<TopoDS_Shape>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::connect_edges_into",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::ConnectWiresToWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::connect_wires_to_wires",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::ConnectWiresToWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,double,bool,occ::handle<NCollection_HSequence<TopoDS_Shape>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::connect_wires_into",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::ConnectWiresToWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,double,bool,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::connect_wires_with_vertices",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::ConnectWiresToWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,double,bool,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::connect_wires_with_vertices_into",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::SplitWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,double,bool,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::split_wires_into",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBounds::DispatchWires(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,TopoDS_Compound&,TopoDS_Compound&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "source_sha256": "4f2e7984c0a484769c86f4043bdb7a52a7a2a8b4ecc8c1d662c8bb78e1af182b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBounds::dispatch_wires",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckConnected(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_connected",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckConnected(int,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_connected_at",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusConnected(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_connected",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::MinDistance3d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::min_distance_3d",
+      "status": "implemented",
+      "notes": "Native UBTree/Filler traversal and tail preference, endpoint substitution, elementary loop splitting, sewing/shared constructors and output-overload exception assignment timing. Wire CheckConnected preserves accumulated and advanced statuses and native distance fallback; other unported Wire checks are not claimed. 11 original tests and 1,723 exact differential requests. Full local TKShHealing numeric gate: 9,948 exact comparisons. Crate 249 passed, one pre-existing ignored doctest; strict Clippy passed. Integration requires the companion wire field/module/reset patch."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPreProcessor",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPreProcessor.hxx",
+      "source_sha256": "b1cc11f5b2b688b6b826627b4e29ac874b51af10e37d72924f15374cc7ffe936",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPreProcessor",
+      "status": "implemented",
+      "notes": "Native seam amplification, source-parameter deflection reuse checks, triangle index validation and outdated polygon cleanup. Exact oracle covers actual full/truncated cones, descending seam parameters, missing pcurves with retained earlier 3D mutation, degenerate UV span, skipped failed faces and quality-decrease settings."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPreProcessor()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPreProcessor.hxx",
+      "source_sha256": "b1cc11f5b2b688b6b826627b4e29ac874b51af10e37d72924f15374cc7ffe936",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPreProcessor::new",
+      "status": "implemented",
+      "notes": "Native seam amplification, source-parameter deflection reuse checks, triangle index validation and outdated polygon cleanup. Exact oracle covers actual full/truncated cones, descending seam parameters, missing pcurves with retained earlier 3D mutation, degenerate UV span, skipped failed faces and quality-decrease settings."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPreProcessor::~BRepMesh_ModelPreProcessor()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPreProcessor.hxx",
+      "source_sha256": "b1cc11f5b2b688b6b826627b4e29ac874b51af10e37d72924f15374cc7ffe936",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops the stateless preprocessing stage; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPreProcessor::DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelPreProcessor,IMeshTools_ModelAlgo)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPreProcessor.hxx",
+      "source_sha256": "b1cc11f5b2b688b6b826627b4e29ac874b51af10e37d72924f15374cc7ffe936",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPreProcessor (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native seam amplification, source-parameter deflection reuse checks, triangle index validation and outdated polygon cleanup. Exact oracle covers actual full/truncated cones, descending seam parameters, missing pcurves with retained earlier 3D mutation, degenerate UV span, skipped failed faces and quality-decrease settings."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPreProcessor::performInternal(const occ::handle<IMeshData_Model>&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPreProcessor.hxx",
+      "source_sha256": "b1cc11f5b2b688b6b826627b4e29ac874b51af10e37d72924f15374cc7ffe936",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPreProcessor::perform_internal",
+      "status": "implemented",
+      "notes": "Native seam amplification, source-parameter deflection reuse checks, triangle index validation and outdated polygon cleanup. Exact oracle covers actual full/truncated cones, descending seam parameters, missing pcurves with retained earlier 3D mutation, degenerate UV span, skipped failed faces and quality-decrease settings."
     }
   ],
   "tests": [
@@ -312234,6 +312432,160 @@
       "rust_target": "shape_upgrade_shell_sewing_legacy",
       "rust_test": "ProcessesSingleFaceShell",
       "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectWires_InternalOnlyWireAfterManifoldWire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectWires_InternalOnlyWireAfterManifoldWire",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/wires.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectWires_InternalOnlyWireBeforeManifoldWire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectWires_InternalOnlyWireBeforeManifoldWire",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/wires.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectWires_OnlyNonManifoldWires",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectWires_OnlyNonManifoldWires",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/wires.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectWires_EmptyWireBeforeValidWires",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectWires_EmptyWireBeforeValidWires",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/wires.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectWires_OnlyEmptyWire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectWires_OnlyEmptyWire",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/wires.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectWires_MixedManifoldAndInternalEdges",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectWires_MixedManifoldAndInternalEdges",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/wires.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectEdges_InternalEdgeAfterManifoldEdges",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectEdges_InternalEdgeAfterManifoldEdges",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/edges.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectEdges_InternalEdgeBeforeManifoldEdges",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectEdges_InternalEdgeBeforeManifoldEdges",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/edges.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.ConnectEdges_ExternalEdgeIsSkipped",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "ConnectEdges_ExternalEdgeIsSkipped",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/edges.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.SingleFaceNoCrash",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "SingleFaceNoCrash",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/faces.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundsTest.TwoDisjointFacesNoCrash",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_FreeBounds_Test.cxx",
+      "source_sha256": "41a2258eedd5234f503feb50ba5af922cafc438e7725f8c45966f713720a0698",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_free_bounds_legacy",
+      "rust_test": "TwoDisjointFacesNoCrash",
+      "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/faces.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

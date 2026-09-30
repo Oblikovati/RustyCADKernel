@@ -629,3 +629,10 @@ shell history across calls. The integrated gate passes all 90 currently mapped
 TKShHealing declarations in both unchanged native sources and Rust, without skips.
 The combined exact numeric corpus includes 345 new sewing/history requests. Toolkit
 completion remains false while other original declarations remain unmapped.
+
+### Free-boundary integration
+
+All 11 FreeBounds legacy declarations are translated and pass against the unchanged
+OCCT tests. The integrated source gate now passes 101 declarations, with 101 native
+and 101 Rust cases and no skips. Connection checks in ShapeAnalysis_Wire retain
+native distance fallback and accumulated status. The broader Wire API remains partial.

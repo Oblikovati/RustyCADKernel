@@ -37,3 +37,10 @@ Deflection and ModelPostProcessor add 12 APIs. Relative deflection, endpoint
 checks, polygon publication, seam pcurves, retained skip flags and deflection
 updates pass the integrated 54,471-case native gate. Edge parameter projection and
 tessellation remain pending; no IncrementalMesh acceptance is claimed.
+
+### Model preprocessor
+
+The five ModelPreProcessor API rows now cover seam amplification, source-parameter
+checks and invalid triangulation cleanup. The integrated numeric gate passes 62,460
+exact requests. The original mesh regression declarations remain pending until their
+required meshing pipeline is implemented.
