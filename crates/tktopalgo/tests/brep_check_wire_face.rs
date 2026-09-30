@@ -1,150 +1,18 @@
-//! Behavior tests of BRepCheck_Wire and BRepCheck_Face, with the cases of the upstream
-//! suite `BRepCheck_Face_Test.cxx`. That suite is not mapped: its faces come from
-//! BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, which the port does not provide yet;
-//! here the same faces are built with BRep_Builder and each case checks the same
-//! statuses, including the IsValid assertion of BRepCheck_Analyzer.
+//! Behavior tests of BRepCheck_Wire and BRepCheck_Face beyond the upstream suite
+//! `BRepCheck_Face_Test.cxx` (translated 1:1 in `brep_check_face.rs`), on faces built
+//! with BRep_Builder.
 mod brep_check_support;
 
-use brep_check_support::{Planar, TOL, square, vertex, wire_of};
+use brep_check_support::{Planar, TOL, square, wire_of};
 use rustycad_tkbrep::brep::BRepBuilder;
-use rustycad_tkbrep::topods::{Edge, Face, Wire};
-use rustycad_tkernel::standard::Handle;
-use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve, Geom2dOffsetCurve};
-use rustycad_tkg3d::geom::{GeomCircle, GeomCurve, GeomLine, GeomSurface};
+use rustycad_tkbrep::topods::{Edge, Face};
 use rustycad_tkg3d::top_abs::Orientation;
-use rustycad_tkmath::gp::{Axis2, Axis2d, Direction2, Direction3, Point2, Point3, Vector3};
+use rustycad_tkmath::gp::Vector3;
 use rustycad_tktopalgo::brep_check::{
-    BRepCheckAnalyzer, BRepCheckFace, BRepCheckResult, BRepCheckStatus, BRepCheckWire,
+    BRepCheckFace, BRepCheckResult, BRepCheckStatus, BRepCheckWire,
 };
-use std::f64::consts::TAU;
 
 use BRepCheckStatus::*;
-
-fn z() -> Direction3 {
-    Direction3::new(0.0, 0.0, 1.0).unwrap()
-}
-
-/// A circular wire of `radius` around `centre` on the plane z = 0 of `surface`, reversed
-/// to bound a hole; with `offset`, its pcurve is the offset of a smaller circle.
-fn circular_hole(
-    face: &mut Face,
-    surface: &Handle<dyn GeomSurface>,
-    centre: (f64, f64),
-    radius: f64,
-    offset: Option<f64>,
-) {
-    let b = BRepBuilder::default();
-    let v = vertex(Point3::new(centre.0 + radius, centre.1, 0.0), TOL);
-    let mut e = Edge::default();
-    b.make_edge(&mut e).unwrap();
-    let frame = Axis2::new(Point3::new(centre.0, centre.1, 0.0), z()).unwrap();
-    let circle: Handle<dyn GeomCurve> = Handle::new(GeomCircle::new(frame, radius).unwrap()).cast();
-    b.update_edge_curve(&e, &circle, TOL).unwrap();
-    let axis = Axis2d::new(
-        Point2::new(centre.0, centre.1),
-        Direction2::new(1.0, 0.0).unwrap(),
-    );
-    let base = radius - offset.unwrap_or(0.0);
-    let pc: Handle<dyn Geom2dCurve> =
-        Handle::new(Geom2dCircle::from_axis(axis, base, true).unwrap()).cast();
-    let pc = match offset {
-        Some(d) => Handle::new(Geom2dOffsetCurve::new(&pc, d, false).unwrap()).cast(),
-        None => pc,
-    };
-    b.update_edge_pcurve(&e, &pc, surface, &Default::default(), TOL, None)
-        .unwrap();
-    b.range(&e, 0.0, TAU, false).unwrap();
-    b.add(&mut e, &v.oriented(Orientation::Forward)).unwrap();
-    b.add(&mut e, &v.oriented(Orientation::Reversed)).unwrap();
-    let hole: Wire = wire_of(&[(&e, Orientation::Forward)]);
-    b.add(face, &hole.reversed()).unwrap();
-}
-
-fn classify(face: &Face) -> BRepCheckStatus {
-    BRepCheckFace::new(face)
-        .unwrap()
-        .classify_wires(false)
-        .unwrap()
-}
-
-/// A line edge outside the face, finite (with vertices) or unbounded, in its own wire.
-fn add_outside_edge(face: &mut Face, unbounded: bool) {
-    let b = BRepBuilder::default();
-    let mut e = Edge::default();
-    b.make_edge(&mut e).unwrap();
-    let x = Direction3::new(1.0, 0.0, 0.0).unwrap();
-    let start = if unbounded {
-        Point3::new(0.0, 120.0, 0.0)
-    } else {
-        Point3::new(120.0, 10.0, 0.0)
-    };
-    let line: Handle<dyn GeomCurve> = Handle::new(GeomLine::from_point(start, x)).cast();
-    b.update_edge_curve(&e, &line, TOL).unwrap();
-    if unbounded {
-        b.range(&e, -2e100, 2e100, false).unwrap();
-    } else {
-        b.range(&e, 0.0, 10.0, false).unwrap();
-        b.add(&mut e, &vertex(start, TOL).oriented(Orientation::Forward))
-            .unwrap();
-        b.add(
-            &mut e,
-            &vertex(Point3::new(130.0, 10.0, 0.0), TOL).oriented(Orientation::Reversed),
-        )
-        .unwrap();
-    }
-    b.add(face, &wire_of(&[(&e, Orientation::Forward)]))
-        .unwrap();
-}
-
-#[test]
-fn face_test_classify_wires_disjoint_holes_are_valid() {
-    let sq = square(100.0, &[], &[], 0.0);
-    let mut face = sq.faces[0].clone();
-    for row in 0..5 {
-        for column in 0..8 {
-            let centre = (
-                10.0 + 11.0 * f64::from(column),
-                10.0 + 11.0 * f64::from(row),
-            );
-            circular_hole(&mut face, &sq.surfaces[0], centre, 2.0, None);
-        }
-    }
-    assert_eq!(classify(&face), NoError);
-    assert!(
-        BRepCheckAnalyzer::new(&face, true, false, false)
-            .unwrap()
-            .is_valid()
-            .unwrap()
-    );
-}
-
-#[test]
-fn face_test_classify_wires_offset_pcurve() {
-    let sq = square(100.0, &[], &[], 0.0);
-    let mut face = sq.faces[0].clone();
-    circular_hole(&mut face, &sq.surfaces[0], (50.0, 50.0), 5.0, Some(1.0));
-    assert_eq!(classify(&face), NoError);
-}
-
-#[test]
-fn face_test_classify_wires_open_wire_fallback_is_orientation_independent() {
-    let sq = square(100.0, &[], &[], 0.0);
-    let mut face = sq.faces[0].clone();
-    add_outside_edge(&mut face, false);
-    let forward = classify(&face);
-    assert_eq!(forward, NoError);
-    assert_eq!(classify(&Face::unchecked(face.reversed())), forward);
-}
-
-#[test]
-fn face_test_classify_wires_unbounded_wire_fallback_is_orientation_independent() {
-    let sq = square(100.0, &[], &[], 0.0);
-    let mut face = sq.faces[0].clone();
-    add_outside_edge(&mut face, true);
-    let forward = classify(&face);
-    assert_eq!(forward, NoError);
-    assert_eq!(classify(&Face::unchecked(face.reversed())), forward);
-}
 
 #[test]
 fn face_wire_checks_report_holes_that_intersect_escape_or_face_the_wrong_way() {
