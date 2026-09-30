@@ -49,3 +49,5 @@ pub mod edge_outputs;
 pub mod canonical;
 
 pub mod shape_construct;
+
+pub mod shape_analysis_curve;

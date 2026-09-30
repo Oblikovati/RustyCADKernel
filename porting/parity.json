@@ -206150,6 +206150,925 @@
       "rust_item": "rustycad_tkhlr::contap::ContapSurfProps::norm_and_dn",
       "status": "implemented",
       "notes": "All elementary branches and generic derivative cross products compared against native OCCT. Distinct cone-apex thresholds retained. Undefined null handles report Standard_NullObject."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::default",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData(int,int,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::new",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData(const IntTools_SurfaceRangeLocalizeData&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::clone",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::Assign(const IntTools_SurfaceRangeLocalizeData&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::assign",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::operator=(const IntTools_SurfaceRangeLocalizeData&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::assign",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetNbSampleU() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_nb_sample_u",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetNbSampleV() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_nb_sample_v",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetMinRangeU() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_min_range_u",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetMinRangeV() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_min_range_v",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::AddOutRange(const IntTools_SurfaceRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::add_out_range",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::AddBox(const IntTools_SurfaceRangeSample&,const Bnd_Box&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::add_box",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::FindBox(const IntTools_SurfaceRangeSample&,Bnd_Box&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::find_box",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::IsRangeOut(const IntTools_SurfaceRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::is_range_out",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::ListRangeOut(NCollection_List<IntTools_SurfaceRangeSample>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::list_range_out",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::RemoveRangeOutAll()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::remove_range_out_all",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::SetGridDeflection(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::set_grid_deflection",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetGridDeflection() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_grid_deflection",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::SetRangeUGrid(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::set_range_u_grid",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetRangeUGrid() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_range_u_grid",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::SetUParam(int,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::set_u_param",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetUParam(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_u_param",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::SetRangeVGrid(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::set_range_v_grid",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetRangeVGrid() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_range_v_grid",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::SetVParam(int,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::set_v_param",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetVParam(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_v_param",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::SetGridPoint(int,int,const gp_Pnt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::set_grid_point",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetGridPoint(int,int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_grid_point",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::SetFrame(double,double,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::set_frame",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetNBUPointsInFrame() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_nb_u_points_in_frame",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetNBVPointsInFrame() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_nb_v_points_in_frame",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetPointInFrame(int,int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_point_in_frame",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetUParamInFrame(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_u_param_in_frame",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::GetVParamInFrame(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::get_v_param_in_frame",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeLocalizeData::ClearGrid()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeLocalizeData.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeLocalizeData::clear_grid",
+      "status": "implemented",
+      "notes": "Exact native comparison tools/verify_tkbo_foundations.py: shared grid copies, null-source assignment retention, strict/reversed/empty frames, independent exclusions and native map traversal/copy order."
+    },
+    {
+      "upstream_id": "IMeshTools_Context",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::new",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::~IMeshTools_Context()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops context and builder state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::BuildModel()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::build_model",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::DiscretizeEdges()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::discretize_edges",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::HealModel()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::heal_model",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::PreProcessModel()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::pre_process_model",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::DiscretizeFaces(const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::discretize_faces",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::PostProcessModel()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::post_process_model",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::Clean()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::clean",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetModelBuilder() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_model_builder",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::SetModelBuilder(const occ::handle<IMeshTools_ModelBuilder>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::set_model_builder",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetEdgeDiscret() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_edge_discret",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::SetEdgeDiscret(const occ::handle<IMeshTools_ModelAlgo>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::set_edge_discret",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetModelHealer() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_model_healer",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::SetModelHealer(const occ::handle<IMeshTools_ModelAlgo>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::set_model_healer",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetPreProcessor() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_pre_processor",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::SetPreProcessor(const occ::handle<IMeshTools_ModelAlgo>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::set_pre_processor",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetFaceDiscret() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_face_discret",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::SetFaceDiscret(const occ::handle<IMeshTools_ModelAlgo>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::set_face_discret",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetPostProcessor() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_post_processor",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::SetPostProcessor(const occ::handle<IMeshTools_ModelAlgo>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::set_post_processor",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetParameters() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_parameters",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::ChangeParameters()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::change_parameters",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::GetModel() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context::get_model",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_Context::DEFINE_STANDARD_RTTIEXT(IMeshTools_Context,IMeshData_Shape)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_Context.hxx",
+      "source_sha256": "c62ee2bd1a7af27db805bf22f1c8e22dc4fb5eca1a30791ea8cc6706c4e95c78",
+      "rust_item": "rustycad_tkmesh::imesh_tools::Context (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelBuilder",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelBuilder.hxx",
+      "source_sha256": "ea8055d53564677b58a113d6c83d8cef2a4e323b7107f83f86953c2bb49872bc",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelBuilder",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelBuilder::~IMeshTools_ModelBuilder()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelBuilder.hxx",
+      "source_sha256": "ea8055d53564677b58a113d6c83d8cef2a4e323b7107f83f86953c2bb49872bc",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops context and builder state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelBuilder::Perform(const TopoDS_Shape&,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelBuilder.hxx",
+      "source_sha256": "ea8055d53564677b58a113d6c83d8cef2a4e323b7107f83f86953c2bb49872bc",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelBuilder::perform",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelBuilder::DEFINE_STANDARD_RTTIEXT(IMeshTools_ModelBuilder,Message_Algorithm)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelBuilder.hxx",
+      "source_sha256": "ea8055d53564677b58a113d6c83d8cef2a4e323b7107f83f86953c2bb49872bc",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelBuilder (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_ModelBuilder::performInternal(const TopoDS_Shape&,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_ModelBuilder.hxx",
+      "source_sha256": "ea8055d53564677b58a113d6c83d8cef2a4e323b7107f83f86953c2bb49872bc",
+      "rust_item": "rustycad_tkmesh::imesh_tools::ModelBuilder::perform_internal",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshBuilder",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshBuilder::new",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder(const occ::handle<IMeshTools_Context>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshBuilder::with_context",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder::~IMeshTools_MeshBuilder()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops context and builder state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder::SetContext(const occ::handle<IMeshTools_Context>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshBuilder::set_context",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder::GetContext() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshBuilder::get_context",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshBuilder::perform",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IMeshTools_MeshBuilder::DEFINE_STANDARD_RTTIEXT(IMeshTools_MeshBuilder,Message_Algorithm)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/IMeshTools/IMeshTools_MeshBuilder.hxx",
+      "source_sha256": "f8c7fc817e93173763376287efc15b311df7e05dab5d0eaea9d51ef3b7a107c2",
+      "rust_item": "rustycad_tkmesh::imesh_tools::MeshBuilder (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native IMeshTools pipeline differential corpus covers all strategy outcome combinations, cancellation/progress and cleanup. Context and ModelBuilder use native runtime descriptors with actual base projections."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::default",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::with_surface",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::Initialize()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::initialize",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::Initialize(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::initialize_surface",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::ComputeSamplePoints()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::compute_sample_points",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::NbSamplesU()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::nb_samples_u",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::NbSamplesV()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::nb_samples_v",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::NbSamples()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::nb_samples",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::SamplePoint(int,gp_Pnt2d&,gp_Pnt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::sample_point",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::SamplePnts(double,int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::sample_pnts",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "IntTools_TopolTool::DEFINE_STANDARD_RTTIEXT(IntTools_TopolTool,Adaptor3d_TopolTool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_TopolTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::TopolTool::dynamic_type",
+      "status": "implemented",
+      "notes": "Exact native evidence tools/verify_tkbo_foundations.py covers all surface-kind sampling branches, adaptive spline sampling, native parameter indexing and retained arrays after reinitialize. Initialize() preserves Standard_NotImplemented."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::MaxFaceTolerance(const TopoDS_Face&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::max_face_tolerance",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::BoxMaxDimension(const Bnd_Box&,double&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::box_max_dimension",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::CheckAndUpdateFlags(const IMeshData::IEdgeHandle&,const IMeshData::IPCurveHandle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::check_and_update_flags",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::AddInFace(const TopoDS_Face&,occ::handle<Poly_Triangulation>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::add_in_face",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::NullifyFace(const TopoDS_Face&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::nullify_face",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::NullifyEdge(const TopoDS_Edge&,const occ::handle<Poly_Triangulation>&,const TopLoc_Location&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::nullify_edge_on_triangulation",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::NullifyEdge(const TopoDS_Edge&,const TopLoc_Location&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::nullify_edge_polygon3d",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::UpdateEdge(const TopoDS_Edge&,const occ::handle<Poly_PolygonOnTriangulation>&,const occ::handle<Poly_Triangulation>&,const TopLoc_Location&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::update_edge_on_triangulation",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::UpdateEdge(const TopoDS_Edge&,const occ::handle<Poly_Polygon3D>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::update_edge_polygon3d",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::UpdateEdge(const TopoDS_Edge&,const occ::handle<Poly_PolygonOnTriangulation>&,const occ::handle<Poly_PolygonOnTriangulation>&,const occ::handle<Poly_Triangulation>&,const TopLoc_Location&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::update_edge_seam",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::UseLocation(const gp_Pnt&,const TopLoc_Location&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::use_location",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::UVPoints(const TopoDS_Edge&,const TopoDS_Face&,gp_Pnt2d&,gp_Pnt2d&,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::uv_points",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::Range(const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&,double&,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::range_on_face",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::Range(const TopoDS_Edge&,occ::handle<Geom_Curve>&,double&,double&,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool::range_3d",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "BRepMesh_ShapeTool::DEFINE_STANDARD_RTTIEXT(BRepMesh_ShapeTool,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ShapeTool.hxx",
+      "source_sha256": "23b65743e9b96c54edbaffefac2e1f5b17222efcb30ed0c983d572d42a27e926",
+      "rust_item": "rustycad_tkmesh::brep_mesh::ShapeTool (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::Project(const occ::handle<Geom_Curve>&,const gp_Pnt&,double,gp_Pnt&,double&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::project_full_into",
+      "status": "implemented",
+      "notes": "Original ExtPC, local Newton, endpoint precedence, periodic and 25/40/20/25/40 sampling decisions; 2096 added exact native corpus cases include all six projection overloads and namespace period shifts. Other ShapeAnalysis_Curve APIs remain pending."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::Project(const Adaptor3d_Curve&,const gp_Pnt&,double,gp_Pnt&,double&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::project_adaptor_into",
+      "status": "implemented",
+      "notes": "Original ExtPC, local Newton, endpoint precedence, periodic and 25/40/20/25/40 sampling decisions; 2096 added exact native corpus cases include all six projection overloads and namespace period shifts. Other ShapeAnalysis_Curve APIs remain pending."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::Project(const occ::handle<Geom_Curve>&,const gp_Pnt&,double,gp_Pnt&,double&,double,double,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::project_into",
+      "status": "implemented",
+      "notes": "Original ExtPC, local Newton, endpoint precedence, periodic and 25/40/20/25/40 sampling decisions; 2096 added exact native corpus cases include all six projection overloads and namespace period shifts. Other ShapeAnalysis_Curve APIs remain pending."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::ProjectAct(const Adaptor3d_Curve&,const gp_Pnt&,double,gp_Pnt&,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::project_act",
+      "status": "implemented",
+      "notes": "Original ExtPC, local Newton, endpoint precedence, periodic and 25/40/20/25/40 sampling decisions; 2096 added exact native corpus cases include all six projection overloads and namespace period shifts. Other ShapeAnalysis_Curve APIs remain pending."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::NextProject(double,const occ::handle<Geom_Curve>&,const gp_Pnt&,double,gp_Pnt&,double&,double,double,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::next_project_into",
+      "status": "implemented",
+      "notes": "Original ExtPC, local Newton, endpoint precedence, periodic and 25/40/20/25/40 sampling decisions; 2096 added exact native corpus cases include all six projection overloads and namespace period shifts. Other ShapeAnalysis_Curve APIs remain pending."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::NextProject(double,const Adaptor3d_Curve&,const gp_Pnt&,double,gp_Pnt&,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::next_project_adaptor_into",
+      "status": "implemented",
+      "notes": "Original ExtPC, local Newton, endpoint precedence, periodic and 25/40/20/25/40 sampling decisions; 2096 added exact native corpus cases include all six projection overloads and namespace period shifts. Other ShapeAnalysis_Curve APIs remain pending."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::AdjustByPeriod",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::adjust_by_period",
+      "status": "implemented",
+      "notes": "Native floor-based adjustment, including negative/zero/tiny periods and large values, checked by exact numeric oracle."
+    },
+    {
+      "upstream_id": "ShapeAnalysis::AdjustToPeriod",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::adjust_to_period",
+      "status": "implemented",
+      "notes": "Native floor-based adjustment, including negative/zero/tiny periods and large values, checked by exact numeric oracle."
     }
   ],
   "tests": [

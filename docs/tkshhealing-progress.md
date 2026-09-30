@@ -552,3 +552,13 @@ one-based FixKnots indexing and partial mutation, and the unusual 3D approximati
 limits are preserved. Eighteen integration tests, two private regressions, and
 one doctest pass; 642 new native comparisons bring the full numeric corpus to
 5,954. ProjectCurveOnSurface and its original legacy tests remain pending.
+
+## ShapeAnalysis_Curve projection dependency
+
+Six projection overloads and both namespace period adjustments are mapped. The
+original global extrema, local Newton, endpoint precedence, range extension and
+25/40/20/25/40 fallback sampling order are preserved, including retained caller
+outputs on exceptions. Five integration regressions and the zero-segment private
+regression pass; strict clippy passes. All 8,050 numeric comparisons pass exactly,
+including 2,096 new projection/period cases. Remaining curve-analysis APIs and
+the dependent ProjectCurveOnSurface legacy suite are still pending.

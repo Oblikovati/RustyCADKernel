@@ -39,3 +39,4 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_canonical').append_canonical_requests(requests)
     # ShapeConstruct_Curve: adjustments, B-spline conversions and OCC90 knot spacing.
     __import__('tkshhealing_corpus_shapeconstruct').append_shapeconstruct_requests(requests)
+    __import__('tkshhealing_corpus_analysiscurve').append_analysis_curve_requests(requests)
