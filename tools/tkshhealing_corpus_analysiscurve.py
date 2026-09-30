@@ -1,7 +1,7 @@
 """All ShapeAnalysis_Curve projection overloads and output-preserving failure paths."""
 from itertools import product
 from tkshhealing_corpus_shapeconstruct import construct_curves_3d, construct_curves_2d
-from tktopalgo_corpus_breplib_records import numbers, geom2d_gp, geom2d_bezier
+from tktopalgo_corpus_breplib_records import numbers, geom2d_gp, geom2d_bezier, geom_bezier, geom_bspline
 
 
 def append_analysis_curve_requests(requests:list[str])->None:
@@ -26,3 +26,8 @@ def append_analysis_curve_requests(requests:list[str])->None:
     seams += [geom2d_bezier([(0,0),(0,0)]), geom2d_bezier([(0,0),(1e-100,0)])]
     for first, second in product(seams, repeat=2):
         requests.append('sh_analysis_seam '+numbers([*first,*second]))
+    closed = [(0,0,0),(1,2,0),(0,0,0)]
+    nearly_closed = [(0,0,0),(1,2,0),(1e-5,0,0)]
+    range_curves = construct_curves_3d() + [geom_bezier(closed), geom_bspline(2,False,nearly_closed,[(0,3),(1,3)])]
+    for curve, bounds, tolerance in product(range_curves, [(0,1),(1,0),(-2,3),(0.5,0.5),(0.8,0.2),(1,0.2),(0.2,0),(7,-7)],[-1,0,1e-7,1e-3,10]):
+        requests.append('sh_analysis_validate '+numbers([*curve,*bounds,tolerance]))

@@ -53,3 +53,9 @@ void sh_analysis_samples3d_case(std::istream& in) {
 void sh_analysis_seam_case(std::istream& in) {
  GaReader r{in};GA_TRY(auto first=tp_geom2d_curve(r);auto second=tp_geom2d_curve(r);std::cout<<ShapeAnalysis_Curve().SelectForwardSeam(first,second)<<' ');ga_end();
 }
+
+void sh_analysis_validate_case(std::istream& in) {
+ GaReader r{in};double first=0,last=0;occ::handle<Geom_Curve> curve;
+ GA_TRY(curve=tp_geom_curve(r);first=r.real();last=r.real();double tolerance=r.real();std::cout<<ShapeAnalysis_Curve().ValidateRange(curve,first,last,tolerance)<<' ');
+ ga_real(first);ga_real(last);shc_curve(curve);ga_end();
+}

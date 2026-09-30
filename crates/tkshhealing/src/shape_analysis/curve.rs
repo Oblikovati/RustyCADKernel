@@ -19,3 +19,4 @@ mod closure;
 mod sampling;
 mod sampling_3d;
 mod seam;
+mod validate_range;

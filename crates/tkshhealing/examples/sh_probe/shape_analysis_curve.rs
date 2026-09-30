@@ -171,3 +171,30 @@ pub fn seam_case(values: &[f64]) {
     });
     end();
 }
+
+/// Print repaired bounds and mutated curve, also after failure; `validate_case(numbers)`.
+pub fn validate_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    let mut first = 0.0;
+    let mut last = 0.0;
+    let mut curve = Handle::<dyn GeomCurve>::default();
+    attempt(|| {
+        curve = geom_curve(&mut reader)?;
+        first = reader.real();
+        last = reader.real();
+        print!(
+            "{} ",
+            i32::from(ShapeAnalysisCurve.validate_range(
+                &curve,
+                &mut first,
+                &mut last,
+                reader.real()
+            )?)
+        );
+        Ok(())
+    });
+    real(first);
+    real(last);
+    super::sh_common::curve(&curve);
+    end();
+}

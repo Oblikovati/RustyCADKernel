@@ -207181,6 +207181,14 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::select_forward_seam",
       "status": "implemented",
       "notes": "Native bounded-curve chord conversion, small chord rejection, X-before-Y precedence and directional tie rules. 484 exact native comparisons plus three focused regressions."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::ValidateRange",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::validate_range",
+      "status": "implemented",
+      "notes": "Native range clamping, periodic repair, near-closed spline repair and shared-curve reversal. 520 exact native cases compare return, bounds and post-call curve digest. Three focused regressions pass."
     }
   ],
   "tests": [

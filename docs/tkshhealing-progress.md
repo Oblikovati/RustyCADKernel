@@ -581,3 +581,8 @@ intentional distinction between offset geometry and its sampled basis points.
 SelectForwardSeam adds 484 exact comparisons (8,715 total), retaining bounded
 curve chord conversion, rejection of tiny chords, X-before-Y precedence and
 directional ties. Three focused Rust tests pass.
+
+ValidateRange preserves the native return flags, range clamping, periodic repair,
+near-closed spline handling and shared-curve reversal. Its 520 additional native
+cases compare repaired bounds and post-call geometry (9,235 total). Three focused
+regressions and strict clippy pass.
