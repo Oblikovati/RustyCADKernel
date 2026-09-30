@@ -97,3 +97,12 @@ six cases and reads uninitialized allocated slots in three; Rust reports bounds
 errors. Those differences remain open and are never counted as exact passes.
 The header scanner now identifies Handle(T) return methods individually; three
 older renderer identities were corrected without combining distinct members.
+
+### Delaunay mesh connectivity
+
+DataStructureOfDelaun adds 31 API rows, with 11 kept partial for unchecked native
+index behavior. The integrated oracle passes 124,622 exact comparisons and replays
+all 17 recorded vertex/connectivity divergences separately. Signed links, deletion
+queues, reused slots, compaction and real BRep dump bytes are covered. Native
+writes to the following initialized slot are preserved. These foundations add no
+original legacy declaration; TKMesh remains at 1/29 mapped declarations.

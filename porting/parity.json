@@ -213405,6 +213405,285 @@
       "rust_item": "",
       "status": "excluded",
       "notes": "RTTI macro has no separate callable API; impl_transient preserves native type ancestry."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun(const occ::handle<NCollection_IncAllocator>&,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::new",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Constructor reserve arithmetic is covered on nonnegative, nonoverflowing sizes."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::NbNodes() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::nb_nodes",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::AddNode(const BRepMesh_Vertex&,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::add_node",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::IndexOf(const BRepMesh_Vertex&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::index_of_node",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::GetNode(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::get_node",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::operator()(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::get_node",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::SubstituteNode(int,const BRepMesh_Vertex&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::substitute_node",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::RemoveNode(int,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::remove_node",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::LinksConnectedTo(int) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::links_connected_to",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::NbLinks() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::nb_links",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::AddLink(const BRepMesh_Edge&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::add_link",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::IndexOf(const BRepMesh_Edge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::index_of_link",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::GetLink(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::get_link",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::LinksOfDomain() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::links_of_domain",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::SubstituteLink(int,const BRepMesh_Edge&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::substitute_link",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::RemoveLink(int,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::remove_link",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::ElementsConnectedTo(int) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::elements_connected_to",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::NbElements() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::nb_elements",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::AddElement(const BRepMesh_Triangle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::add_element",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::GetElement(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::get_element",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::ElementsOfDomain() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::elements_of_domain",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::SubstituteElement(int,const BRepMesh_Triangle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::substitute_element",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::RemoveElement(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::remove_element",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::ElementNodes(const BRepMesh_Triangle&,int(&)[3])",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::element_nodes",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::Dump(const char*)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::dump",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::Allocator() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::allocator",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::Data()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::vertex_tool",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::ClearDomain()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::clear_domain",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::ClearDeleted()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun::clear_deleted",
+      "status": "partial",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation. Explicit bounds divergence: native unchecked DynamicArray access can fault or touch uninitialized allocated slots; Rust returns Standard_OutOfRange. Eight Delaun candidates retained by tools/verify_tkmesh_delaun_undefined.py, in addition to nine VertexTool candidates. No undefined case counts as exact parity or a legacy declaration."
+    },
+    {
+      "upstream_id": "BRepMesh_DataStructureOfDelaun::DEFINE_STANDARD_RTTIEXT(BRepMesh_DataStructureOfDelaun,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DataStructureOfDelaun.hxx",
+      "source_sha256": "12094db8117d2731fba8ef85312f34aa75d004501576923af6be81b52481fd95",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDataStructureOfDelaun (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native indexed map/list/dynamic-array allocator ownership, signed edge orientation, constraint flags, deletion queues, domain iteration, exception mutation order and real BRep debug serialization. Preserves native off-by-one SubstituteElement and clearDeletedLinks writes to the following initialized slot, and VertexTool RemoveLast retaining storage extent. Returned connectivity collections are value snapshots; vertex-tool handle remains live. Exact native defined-domain oracle includes every public concrete operation."
     }
   ],
   "tests": [
