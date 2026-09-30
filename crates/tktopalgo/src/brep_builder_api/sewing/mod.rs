@@ -25,6 +25,8 @@ mod queries;
 mod replace_edge;
 mod same_parameter;
 mod sewed_shape;
+#[cfg(test)]
+mod tests;
 mod vertex_tolerance;
 
 use failures::null_object;

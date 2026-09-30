@@ -185082,6 +185082,558 @@
       "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFuseEdges::perform",
       "status": "implemented",
       "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_BndBoxTreeSelector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_BndBoxTreeSelector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIBndBoxTreeSelector::new",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the TreeSelector<i32, BoundingBox3> of the cutting step; Reject and Accept are reject_box and accept_object and implement the trait; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_boxselector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_BndBoxTreeSelector::Reject(const Bnd_Box&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_BndBoxTreeSelector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIBndBoxTreeSelector::reject_box",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the TreeSelector<i32, BoundingBox3> of the cutting step; Reject and Accept are reject_box and accept_object and implement the trait; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_boxselector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_BndBoxTreeSelector::Accept(const int&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_BndBoxTreeSelector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIBndBoxTreeSelector::accept_object",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the TreeSelector<i32, BoundingBox3> of the cutting step; Reject and Accept are reject_box and accept_object and implement the trait; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_boxselector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_BndBoxTreeSelector::ClearResList()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_BndBoxTreeSelector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIBndBoxTreeSelector::clear_res_list",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the TreeSelector<i32, BoundingBox3> of the cutting step; Reject and Accept are reject_box and accept_object and implement the trait; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_boxselector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_BndBoxTreeSelector::SetCurrent(const Bnd_Box&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_BndBoxTreeSelector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIBndBoxTreeSelector::set_current",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the TreeSelector<i32, BoundingBox3> of the cutting step; Reject and Accept are reject_box and accept_object and implement the trait; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_boxselector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_BndBoxTreeSelector::ResInd()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_BndBoxTreeSelector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIBndBoxTreeSelector::res_ind",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the TreeSelector<i32, BoundingBox3> of the cutting step; Reject and Accept are reject_box and accept_object and implement the trait; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_boxselector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Statuses",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::new",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::Add(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::add_shape",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::Add(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::add_surface",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::Perform()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::perform",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::SetTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::set_tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::GetTolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::get_tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::GetResult() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::get_result",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::GetStatuses(Standard_OStream* const)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::get_statuses",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::DEFINE_STANDARD_RTTIEXT(BRepBuilderAPI_FastSewing,Standard_Transient)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFastSewing::static_type",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the overloaded Add is add_shape/add_surface, FS_Statuses is the enum FastSewingStatus with the native bits, GetStatuses writes to an optional std::io::Write, Perform catches every Failure into FS_Exception; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_fastsew requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing(double,bool,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::new",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Init(double,bool,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::init",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Load(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::load",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Add(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::add",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::perform",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SewedShape() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::sewed_shape",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetContext(const occ::handle<BRepTools_ReShape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_context",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::GetContext() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::get_context",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::NbFreeEdges() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::nb_free_edges",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::FreeEdge(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::free_edge",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::NbMultipleEdges() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::nb_multiple_edges",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::MultipleEdge(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::multiple_edge",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::NbContigousEdges() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::nb_contigous_edges",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::ContigousEdge(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::contigous_edge",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::ContigousEdgeCouple(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::contigous_edge_couple",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::IsSectionBound(const TopoDS_Edge&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::is_section_bound",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SectionToBoundary(const TopoDS_Edge&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::section_to_boundary",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::NbDegeneratedShapes() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::nb_degenerated_shapes",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::DegeneratedShape(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::degenerated_shape",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::IsDegenerated(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::is_degenerated",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::IsModified(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::is_modified",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Modified(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::modified",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::IsModifiedSubShape(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::is_modified_sub_shape",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::ModifiedSubShape(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::modified_sub_shape",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Dump() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::dump",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::NbDeletedFaces() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::nb_deleted_faces",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::DeletedFace(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::deleted_face",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::WhichFace(const TopoDS_Edge&,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::which_face",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SameParameterMode() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::same_parameter_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetSameParameterMode(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_same_parameter_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Tolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::MinTolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::min_tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetMinTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_min_tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::MaxTolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::max_tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetMaxTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_max_tolerance",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::FaceMode() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::face_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetFaceMode(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_face_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::FloatingEdgesMode() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::floating_edges_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetFloatingEdgesMode(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_floating_edges_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::LocalTolerancesMode() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::local_tolerances_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetLocalTolerancesMode(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_local_tolerances_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SetNonManifoldMode(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::set_non_manifold_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::NonManifoldMode() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::non_manifold_mode",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::DEFINE_STANDARD_RTTIEXT(BRepBuilderAPI_Sewing,Standard_Transient)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPISewing::static_type",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 11): the transient struct keeps the native maps and steps (protected members are crate-visible), the context is a Handle<dyn ReShape>, members that can raise return Failure errors, accessors by index raise Standard_OutOfRange outside [1, N]; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_sew requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::Coord(int,const Point&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::coord",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::Shift(const Point&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::shift",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::new",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::Add(const gp_XYZ&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::add",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::ClearResList()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::clear_res_list",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::SetCurrent(const gp_XYZ&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::set_current",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::ResInd()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::res_ind",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::Inspect(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::inspect_target",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
     }
   ],
   "tests": [

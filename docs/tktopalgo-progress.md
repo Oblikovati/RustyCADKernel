@@ -96,6 +96,15 @@ with BRep_Builder by the probe's shape reader (records in
 `crates/tktopalgo/tests/solid_records`); they move to a 1:1 translation once BRepPrimAPI
 is ported.
 
+BRepBuilderAPI_Sewing_Test.cxx (TKOffset GTests, 5 declarations) is not mapped: its box
+comes from BRepPrimAPI_MakeBox of TKPrim, which the port does not provide. The unchanged
+suite compiles against libTKPrim and libTKTopAlgo of the shared build and passes natively
+(5 of 5). Its five cases run as the behavior tests of
+`crates/tktopalgo/tests/brep_builder_api_sewing.rs` on the same box built with BRep_Builder
+by the probe's shape reader (the record of `crates/tktopalgo/tests/solid_records`), with
+the same checks; they move to a 1:1 translation once BRepPrimAPI is ported. No upstream
+suite uses BRepBuilderAPI_FastSewing, BRepBuilderAPI_MakeShapeOnMesh or the two helpers.
+
 BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBndLib
 (level 4, not ported), which it calls to box each face.
 
@@ -202,6 +211,22 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `Intersector(F)` is `change_intersector` (`&mut`) with the shared view `intersector`;
   the protected `ClassifyUVPoint`, `ForceIn` and `ForceOut` are public. The audit reports
   0 missing and 0 stale rows (the destructors are excluded rows).
+
+- BRepBuilderAPI sewing (docs/topalgo-design.md section 11): `BRepBuilderAPI_Sewing` is
+  the transient struct `BRepBuilderAPISewing` (`Handle<dyn ReShape>` context, the native
+  maps as crate fields, the protected steps crate-visible; `Perform` takes a
+  `ProgressRange` and returns the exception of a step; `Dump` writes to
+  `std::io::Write`; `FreeEdge`, `MultipleEdge`, `ContigousEdge`, `SectionToBoundary`
+  and `DeletedFace` return the typed shape). `BRepBuilderAPI_FastSewing` is
+  `BRepBuilderAPIFastSewing` (`add_shape`, `add_surface`, `FastSewingStatus` with the
+  native bits, `get_statuses(Option<&mut dyn Write>)`). `BRepBuilderAPI_VertexInspector`
+  is `BRepBuilderAPIVertexInspector` (a `CellInspector`; `Inspect` is `inspect_target`)
+  and `BRepBuilderAPI_BndBoxTreeSelector` is `BRepBuilderAPIBndBoxTreeSelector` (a
+  `TreeSelector<i32, BoundingBox3>`; `Reject` and `Accept` are `reject_box` and
+  `accept_object`). The audit reports 0 missing and 0 stale rows for these four classes
+  (Sewing 45 rows, FastSewing 10, VertexInspector 8, BndBoxTreeSelector 6, each RTTI
+  macro an implemented row). `BRepBuilderAPI_MakeShapeOnMesh` waits for
+  `BRepBuilderAPI_MakeShape` (another port).
 
 ## Verification
 
@@ -389,6 +414,36 @@ circle, ellipse, open or closed B-spline, Bezier or trimmed curve, on polygons, 
 planar faces of those wires, on a face with a split side and on multi-patch shells,
 with and without B-spline concatenation, with avoided edges, and in the three call
 orders.
+
+BRepBuilderAPI sewing: 652 requests. `tools/tktopalgo_corpus_sewing.py` (582 `bba_sew`
+requests, `tktopalgo_probe_sewing.cxx` and `tp_probe/sewing.rs`) sews the shape records of
+`tools/tktopalgo_corpus_sewing_shapes.py`: loose boxes whose faces are moved below and
+above the tolerance, coplanar and stepped squares, a boundary cut by the nodes of two or
+three neighbours (and one also merged whole), three and four faces and a sliver on one
+edge, a square with a hole next to its corner, small faces and edges (glued vertex
+groups that grow from either end and merge), an open cylinder and an open torus with
+split seams, a cylinder with a fin along its seam (one bowed, one split in two), a
+Bezier side bulging between the samples, a REVERSED face, located faces, floating edges
+and closed solids with seams and degenerated edges; some requests add INTERNAL vertices
+on edges. Each shape is sewn with the default options and with each option or mode
+changed (cutting, non-manifold, analysis, sewing, SameParameter, face and floating
+modes, minimal and maximal tolerances, Add, Load, Load then Add, an own context). A
+request prints the sewn shape (the BRepLib digest), the free, multiple, contiguous and
+degenerated edges and the deleted faces (located in the input and in the result), the
+out-of-range accessors, the history of every input sub-shape (IsModified, Modified,
+IsModifiedSubShape, ModifiedSubShape, IsDegenerated, WhichFace) and the Dump text.
+BRepTools_Quilt appends the bound shapes that are not faces (floating edges) in the
+order of a hashed map (TShape addresses), so the floating-edge requests print an
+order-free summary of the result (sorted vertex and edge tuples) and presence flags
+instead of result indices. `tools/tktopalgo_corpus_fastsewing.py` (46 `bba_fastsew`
+requests) sews quad and triangle soups of degree-1 Bezier patches on a height field,
+exact or with noise below and above the tolerance, a face record, rejected surfaces
+(infinite, trimmed, null), closed ones (a sphere and a torus) and a patch along the
+diagonal of another (an exception inside Perform), with and without Perform.
+`tools/tktopalgo_corpus_sewing_helpers.py` (24 requests) runs `bba_vertexinspector`
+(clouds around a current point in a cell filter, Coord, Shift and direct Inspect) and
+`bba_boxselector` (UB-trees of row, nested, touching and random boxes, Select, Reject
+and Accept).
 
 ## Preserved native behaviour
 
@@ -935,3 +990,47 @@ Native null dereferences in these packages are Standard_NullObject errors.
   `BRepLib_FindSurface` dereferences raises Standard_NullObject (a crash natively);
   inside `Is2DClosed` it answers false, as the native signal handler does. A chain
   edge without 3d curve that `BRepLib_FuseEdges` dereferences raises it too.
+
+## Preserved native behaviour of the sewing group
+
+- `BRepBuilderAPI_Sewing::EdgeRegularity` clears the merged edges before
+  `CreateOutputInformations` binds the merged cutting sections to their boundaries, so
+  after a sewing `IsSectionBound` is false for every section and `SectionToBoundary`
+  raises Standard_NoSuchObject; only the analysis mode (option1 false) binds them.
+- The fallback of `SameParameterEdge` (after the second try on the other section) sets
+  the tolerance measured on the last p-curve of the edge, not the largest; it sets it
+  directly when the reached tolerance exceeds the maximal tolerance.
+- `FindCandidates` in manifold mode prepends another reference as candidate without an
+  orientation (the two sequences lose alignment; only the first orientation is read);
+  in non-manifold mode it prepends the index 1 (not the reference) before the analysis
+  of the nearest edges.
+- `MergedNearestEdges` in non-manifold mode swaps the longest section to the front but
+  keeps the reference at its old index, so the reference stays the section it started
+  from. In the passes after the first, `AnalysisNearestEdges` tests the tolerance on
+  the distance of the previous candidate (index n) but compares the next one (n + 1),
+  and reads an uninitialized row of `TotTabDist` for positions already dropped (the
+  port reads 0; the result is the same).
+- `findNMVertices` appends a parameter only for the vertices whose projection is done,
+  so the vertex and parameter sequences may lose alignment; `CreateCuttingNodes` binds
+  a projection beyond the last parameter to a cutting vertex that it inserts nowhere.
+- `SetTolerance` keeps the value as given, where `Init` raises it to
+  Precision::Confusion(); `LocalTolerancesMode` is stored and never read;
+  `EvaluateAngulars` is never called.
+- `BRepBuilderAPI_FastSewing` computes the corner points on the located surface of a
+  face but builds its edges on the unlocated surface, so the edges of a located face
+  are not at its corners. A second `Perform` appends to the vertices, edges and faces of
+  the first. A side along the diagonal of an earlier patch raises
+  Standard_ProgramError inside Perform, which sets FS_Exception.
+
+## BRepBuilderAPI sewing deviations
+
+- A null context (`SetContext` with a null handle) or a null shape that the native code
+  dereferences (`IsDegenerated`, a seam p-curve without its partner in
+  `SameParameterEdge`) raises Standard_NullObject (a crash natively).
+- `BRepBuilderAPI_VertexInspector::Inspect` reports a target without a point as
+  Standard_OutOfRange (an unchecked read natively); inside the cell filter, which only
+  holds added targets, the target is kept.
+- Not reached by the corpus: the copy of a seam met by one face only in
+  `FindFreeBoundaries` (a record gives each seam use its face), the degenerated sections
+  whose ends are farther than both vertex tolerances, and the rectangular trimmed and
+  offset surfaces of `IsUClosedSurface` (the shape reader has none).
