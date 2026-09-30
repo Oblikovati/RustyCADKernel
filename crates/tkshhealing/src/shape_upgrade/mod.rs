@@ -30,3 +30,7 @@ pub use split_surface::{
     ShapeUpgradeSplitSurface, SplitSurface, SplitSurfaceData, SplitSurfaceFields,
     SurfaceSplitValues,
 };
+
+mod split_curve_2d;
+mod split_curve_geometry;
+pub use split_curve_2d::{ShapeUpgradeSplitCurve2d, SplitCurves2d};

@@ -16,6 +16,7 @@ def split3d_record(
     natural: bool,
     bounds: tuple[float, float],
     operations: list[list[float]],
+    operation_name: str = "sh_split_curve3d",
 ) -> str:
     """Serialize one shared splitter history; split3d_record(curve,False,(0.,1.),[[1,1]])."""
     values = [
@@ -25,7 +26,7 @@ def split3d_record(
         len(operations),
         *(value for operation in operations for value in operation),
     ]
-    return "sh_split_curve3d " + numbers(values)
+    return operation_name + " " + numbers(values)
 
 
 def append_split3d_candidates(requests: list[str]) -> None:
