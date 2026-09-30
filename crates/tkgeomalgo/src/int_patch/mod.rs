@@ -15,7 +15,7 @@ mod aline_to_wline;
 mod arc_function;
 mod bvh_traversal;
 mod cs_function;
-mod dump;
+pub(crate) mod dump;
 pub(crate) mod failures;
 mod gline;
 mod gline_compute;

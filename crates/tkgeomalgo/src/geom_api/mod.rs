@@ -2,7 +2,8 @@
 
 //! OCCT package GeomAPI: the 3D geometry algorithms of the geometry API (the
 //! plane conversions of the `GeomAPI` class, point projections, extrema,
-//! curve-surface intersection, interpolation and approximation of points).
+//! curve-surface and surface-surface intersections, interpolation and approximation of
+//! points).
 //!
 //! The static members of the `GeomAPI` class are the free functions [`to_2d`] and
 //! [`to_3d`]. As in Geom2dAPI, each constructor overload is a named constructor
@@ -10,14 +11,13 @@
 //! tuples, the `operator int`/`operator double`/`operator gp_Pnt`/`operator
 //! occ::handle<...>` conversions are the `as_int`, `as_real`, `as_point` and
 //! `as_curve`/`as_surface` methods, and native exceptions are returned as `Err`.
-//!
-//! `GeomAPI_IntSS` is not ported: it wraps `GeomInt_IntSS`, whose package (and
-//! IntPatch below it) is not ported yet.
+//! `GeomAPI_IntSS` ([`IntSS`]) wraps `GeomInt_IntSS` (`crate::geom_int`).
 mod extrema_curve_curve;
 mod extrema_curve_curve_total;
 mod extrema_curve_surface;
 mod extrema_surface_surface;
 mod int_cs;
+mod int_ss;
 mod interpolate;
 mod plane_curves;
 mod points_to_bspline;
@@ -32,6 +32,7 @@ pub use extrema_curve_curve::ExtremaCurveCurve;
 pub use extrema_curve_surface::ExtremaCurveSurface;
 pub use extrema_surface_surface::ExtremaSurfaceSurface;
 pub use int_cs::IntCS;
+pub use int_ss::IntSS;
 pub use interpolate::{Interpolate, Interpolate3dSpace};
 pub use plane_curves::{to_2d, to_3d};
 pub use points_to_bspline::PointsToBSpline;

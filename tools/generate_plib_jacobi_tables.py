@@ -13,6 +13,7 @@ import argparse
 from pathlib import Path
 import re
 import sys
+from rust_include_list import include_list
 
 ROOT = Path(__file__).resolve().parent.parent
 TARGET = ROOT/'crates/tkmath/src/plib'
@@ -71,10 +72,10 @@ def index_module(tables: dict[str, list[str]], files: dict[str, str]) -> str:
     lines = [INDEX_PRELUDE]
     for name in tables:
         stem = rust_name(name).lower()
-        includes = ''.join(f'        include!("jacobi_tables/{file}"),\n' for file in sorted(files, key=chunk_order) if file.rsplit('_', 1)[0] == stem)
+        paths = [f'jacobi_tables/{file}' for file in sorted(files, key=chunk_order) if file.rsplit('_', 1)[0] == stem]
         lines.append(f'/// Verbatim `{name}` literals ({len(tables[name])} values).\n'
                      f'pub(super) const {rust_name(name)}: ChunkedTable = ChunkedTable {{\n'
-                     f'    chunks: &[\n{includes}    ],\n}};\n')
+                     f'    chunks: {include_list(paths, "    ")},\n}};\n')
     return '\n'.join(lines)
 
 

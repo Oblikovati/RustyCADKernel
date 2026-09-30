@@ -146,6 +146,56 @@ structs (the subclasses were not ported when they were written), so:
   `IntCurvesFace_ShapeIntersector` owns its intersectors in a `Vec` (the native
   sequence of handles is private and never shared).
 
+## 5. BRepBndLib and BRepClass3d: static boxes, the solid explorer and its box tree
+
+- `BRepBndLib` is the unit struct `BRepBndLib` with associated functions, as TKBRep
+  maps `BRep_Tool` (`BRepBndLib::add`, `add_close`, `add_optimal`). They extend the
+  caller's `BoundingBox3` in place and return `Result`: an exception of an adaptor or of
+  BndLib leaves the box as far as the native loop got. The file-static helpers of
+  BRepBndLib.cxx (`CanUseEdges`, `FindExactUVBounds`, `AdjustFaceBox`, `IsModifySize`)
+  are private functions of the module. `AddOBB` lives in BRepBndLib_1.cxx, which needs
+  BRepGProp and BRepBuilderAPI_Transform (stage B of the level-4 cycle); it is not a
+  member until then.
+- The UB-tree of the solid explorer is the TKernel generic
+  `ncollection::UBTree<i32, BoundingBox3>`, filled by `UBTreeFiller` (same
+  `std::mt19937` order). `Bnd_Box` implements the tree's `BoundingVolume` trait in
+  TKMath (`Add`, `IsOut(Bnd_Box)`, `SquareExtent`), where `Bnd_Box` lives, so that every
+  toolkit instantiates `NCollection_UBTree<int, Bnd_Box>` on the same type.
+- The two selectors of BRepClass3d_BndBoxTree.hxx are the structs
+  `BRepClass3dBndBoxTreeSelectorPoint` and `BRepClass3dBndBoxTreeSelectorLine`; each
+  borrows the explorer's edge/vertex map (a `const&` member natively) and implements
+  `TreeSelector<i32, BoundingBox3>`. The trait's `Accept` cannot fail, so an exception of
+  the extrema inside `Accept` is kept by the selector, stops the traversal (as the
+  exception leaves `Select` natively) and is returned by `take_failure`; the callers
+  check it right after `Select`. The out-parameter getters return tuples.
+- `BRepClass3d_SolidExplorer` is the struct `BRepClass3dSolidExplorer`. Its map of
+  intersectors (`NCollection_DataMap<TopoDS_Shape, void*>`, the deprecated alias
+  `BRepClass3d_MapOfInter`) owns `IntCurvesFaceIntersector` values keyed with
+  `TopTools_ShapeMapHasher`; a second `Bind` of the same face replaces the value (the
+  native map leaks the old one). `Intersector(F)` (a non-const reference from a const
+  member natively) is `change_intersector` (`&mut`, to perform with) and
+  `intersector` (`&`, to pass to `ClassifyUVPoint`); both raise Standard_NoSuchObject
+  for an unbound face, as `Find` does. The virtual members (`Reject`, `RejectShell`,
+  `RejectFace`, `DumpSegment`) have no override in OCCT and are plain methods. The
+  protected `ClassifyUVPoint` is public. `Destroy` clears the map; the copy constructor
+  is deleted natively and the struct is not `Clone`.
+- `BRepClass3d_SClassifier` is `BRepClass3dSClassifier`; its Perform members take the
+  explorer as `&mut`. `BRepClass3d_SolidClassifier` derives from it: the struct
+  `BRepClass3dSolidClassifier` holds the base and the explorer and reaches the base's
+  read-only members (`State`, `Rejected`, `IsOnAFace`, `Face`) through `Deref`; the
+  base's `Perform(S, P, Tol)` is hidden natively by the derived overloads and is not
+  reachable through `Deref` (it takes `&mut self`). `ForceIn` and `ForceOut` are
+  protected natively and public here (the derived class calls them only under the
+  disabled `MARCHEPASSIUNESEULEFACE` switch).
+- `BRepClass3d_Intersector3d` is `BRepClass3dIntersector3d`, with the inline accessors
+  of its `.lxx`.
+- The reference arguments of `FindAPointInTheFace`, `PointInTheFace`, `Segment` and
+  `OtherSegment` are in/out natively (a member writes some of them even when it fails,
+  and leaves the others as the caller set them), so they stay `&mut` arguments; the
+  point, its parameters and its derivatives travel together in `FacePointSample`, and
+  the `U1, V1, U2, V2` bounds of `PointInTheFace` are one `UvRectangle`. The getters
+  of the tree selectors return tuples. Overloads take distinct Rust names.
+
 ## 6. BRepCheck and BRepLib_ValidateEdge: the result classes
 
 BRepCheck derives six checkers (`Vertex`, `Edge`, `Wire`, `Face`, `Shell`, `Solid`) from

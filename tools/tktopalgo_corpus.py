@@ -26,3 +26,7 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     # BRepCheck and BRepLib_ValidateEdge (tktopalgo_corpus_brepcheck.py, shapes of
     # tktopalgo_shape_program.py)
     __import__('tktopalgo_corpus_brepcheck').append_brepcheck_requests(requests)
+    # BRepBndLib (tktopalgo_corpus_brepbndlib.py, shapes of tktopalgo_corpus_solids.py)
+    __import__('tktopalgo_corpus_brepbndlib').append_brepbndlib_requests(requests)
+    # BRepClass3d (tktopalgo_corpus_brepclass3d.py, shapes of tktopalgo_corpus_solids.py)
+    __import__('tktopalgo_corpus_brepclass3d').append_brepclass3d_requests(requests)
