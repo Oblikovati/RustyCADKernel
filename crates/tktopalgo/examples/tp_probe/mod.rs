@@ -1,6 +1,8 @@
 //! The TKTopAlgo probe operations, one module per C++ probe file under tools/oracle.
 pub mod brep_builder_api;
 pub mod brep_class;
+pub mod brep_lib_common;
+pub mod brep_lib_edge;
 pub mod brep_top_adaptor;
 pub mod face;
 pub mod int_curves_face;

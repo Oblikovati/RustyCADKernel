@@ -13,5 +13,34 @@
 // commercial license or contractual agreement.
 // Rust translation of ModelingAlgorithms/TKTopAlgo/BRepLib at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! OCCT package BRepLib. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tktopalgo-progress.md lists the ported packages).
+//! OCCT package BRepLib: the makers of vertices, edges, wires, faces, shells and
+//! solids, and the package functions that repair and complete the geometry of
+//! shapes (3d curves, same parameter, tolerances, regularity).
+//!
+//! The makers derive from [`BRepLibMakeShape`] and [`BRepLibCommand`] through
+//! `Deref`, and the process-wide [`precision`] and [`plane`] are the native statics
+//! (docs/topalgo-design.md section 7).
+mod command;
+mod errors;
+mod globals;
+mod make_edge;
+mod make_edge2d;
+mod make_polygon;
+mod make_shape;
+mod make_solid;
+mod make_vertex;
+mod make_wire;
+
+pub use command::BRepLibCommand;
+pub use errors::{
+    BRepLibEdgeError, BRepLibFaceError, BRepLibShapeModification, BRepLibShellError,
+    BRepLibWireError,
+};
+pub use globals::{plane, precision, set_plane, set_precision};
+pub use make_edge::BRepLibMakeEdge;
+pub use make_edge2d::BRepLibMakeEdge2d;
+pub use make_polygon::BRepLibMakePolygon;
+pub use make_shape::BRepLibMakeShape;
+pub use make_solid::BRepLibMakeSolid;
+pub use make_vertex::BRepLibMakeVertex;
+pub use make_wire::BRepLibMakeWire;
