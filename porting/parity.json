@@ -175258,6 +175258,1230 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ virtual destructor (defaulted): Rust drops the face intersectors with the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepLib_Command::~BRepLib_Command()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_Command.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the maker with its owner; nothing to port."
+    },
+    {
+      "upstream_id": "BRepLib_Command::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_Command.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibCommand::is_done",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_Command::Check() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_Command.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibCommand::check",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_EdgeError",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_FaceError",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFaceError",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_WireError",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibWireError",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ShellError",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShellError",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_ShapeModification",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShapeModification.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShapeModification",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::Build()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::build",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::Shape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::shape",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::operator TopoDS_Shape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::shape",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::FaceStatus(const TopoDS_Face&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::face_status",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::HasDescendants(const TopoDS_Face&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::has_descendants",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::DescendantFaces(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::descendant_faces",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::NbSurfaces() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::nb_surfaces",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::NewFaces(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::new_faces",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::FacesFromEdges(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::faces_from_edges",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeVertex(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeVertex::new",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeVertex::Vertex()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeVertex::vertex",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeVertex::operator TopoDS_Vertex()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeVertex::vertex",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::new",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Lin&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_lin",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Lin&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_lin_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Lin&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_lin_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Lin&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_lin_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Circ&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_circ",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Circ&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_circ_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Circ&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_circ_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Circ&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_circ_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Elips&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_elips",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Elips&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_elips_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Elips&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_elips_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Elips&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_elips_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Hypr&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_hypr",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Hypr&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_hypr_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Hypr&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_hypr_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Hypr&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_hypr_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Parab&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_parab",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Parab&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_parab_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Parab&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_parab_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const gp_Parab&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_parab_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_curve",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_curve_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom_Curve>&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_curve_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_curve_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom_Curve>&,const gp_Pnt&,const gp_Pnt&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_curve_points_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_curve_vertices_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_curve",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_curve_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom_Curve>&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_curve_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_curve_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom_Curve>&,const gp_Pnt&,const gp_Pnt&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_curve_points_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_curve_vertices_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Error() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::error",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Edge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::operator TopoDS_Edge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Vertex1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::vertex1",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Vertex2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::vertex2",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Lin2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_lin2d",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Lin2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_lin2d_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Lin2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_lin2d_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Lin2d&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_lin2d_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Circ2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_circ2d",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Circ2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_circ2d_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Circ2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_circ2d_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Circ2d&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_circ2d_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Elips2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_elips2d",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Elips2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_elips2d_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Elips2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_elips2d_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Elips2d&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_elips2d_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Hypr2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_hypr2d",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Hypr2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_hypr2d_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Hypr2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_hypr2d_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Hypr2d&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_hypr2d_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Parab2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_parab2d",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Parab2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_parab2d_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Parab2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_parab2d_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const gp_Parab2d&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_parab2d_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_curve",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_curve_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_curve_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const occ::handle<Geom2d_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_curve_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_curve_points_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d(const occ::handle<Geom2d_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::from_curve_vertices_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Init(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::init_curve",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Init(const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::init_curve_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Init(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::init_curve_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Init(const occ::handle<Geom2d_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::init_curve_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Init(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::init_curve_points_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Init(const occ::handle<Geom2d_Curve>&,const TopoDS_Vertex&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::init_curve_vertices_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Error() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::error",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Edge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::operator TopoDS_Edge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Vertex1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::vertex1",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge2d::Vertex2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge2d::vertex2",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::new",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::from_two_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::from_three_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::from_four_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon(const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::from_two_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon(const TopoDS_Vertex&,const TopoDS_Vertex&,const TopoDS_Vertex&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::from_three_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon(const TopoDS_Vertex&,const TopoDS_Vertex&,const TopoDS_Vertex&,const TopoDS_Vertex&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::from_four_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::Add(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::add_point",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::Add(const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::add_vertex",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::Added() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::added",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::Close()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::close",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::FirstVertex() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::first_vertex",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::LastVertex() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::last_vertex",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::operator TopoDS_Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::Wire()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::wire",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakePolygon::operator TopoDS_Wire()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakePolygon.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakePolygon::wire",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::new",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::from_edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::from_two_edges",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::from_three_edges",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::from_four_edges",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire(const TopoDS_Wire&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::from_wire",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire(const TopoDS_Wire&,const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::from_wire_edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::Add(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::add_edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::Add(const TopoDS_Wire&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::add_wire",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::Error() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::error",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::Wire()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::wire",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::operator TopoDS_Wire()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::wire",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::edge",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::Vertex() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::vertex",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::new",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid(const TopoDS_CompSolid&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::from_comp_solid",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid(const TopoDS_Shell&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::from_shell",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid(const TopoDS_Shell&,const TopoDS_Shell&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::from_two_shells",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid(const TopoDS_Shell&,const TopoDS_Shell&,const TopoDS_Shell&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::from_three_shells",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid(const TopoDS_Solid&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::from_solid",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid(const TopoDS_Solid&,const TopoDS_Shell&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::from_solid_shell",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid::Add(const TopoDS_Shell&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::add",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid::Solid()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::solid",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid::operator TopoDS_Solid()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::solid",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid::FaceStatus(const TopoDS_Face&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeSolid::face_status",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_pcurve",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_pcurve_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_pcurve_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_pcurve_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const gp_Pnt&,const gp_Pnt&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_pcurve_points_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const TopoDS_Vertex&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::from_pcurve_vertices_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_pcurve",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_pcurve_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_pcurve_points",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_pcurve_vertices",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const gp_Pnt&,const gp_Pnt&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_pcurve_points_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeEdge::Init(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,const TopoDS_Vertex&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeEdge::init_pcurve_vertices_params",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
     }
   ],
   "tests": [
@@ -265025,6 +266249,20 @@
       "rust_target": "int_patch_polyhedron_bvh",
       "rust_test": "IntPatch_PolyhedronBVHTest__NoOverlap",
       "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire_Test.OCC30708_2_InitializeWithNullWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepLib_MakeWire_Test.cxx",
+      "source_sha256": "12cf0c11caf6a0211bde983f542d0cd0cc86f352daff52cdd3056b82533374f5",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_lib_make_wire",
+      "rust_test": "BRepLib_MakeWire_Test__OCC30708_2_InitializeWithNullWire",
+      "rust_source": "crates/tktopalgo/tests/brep_lib_make_wire.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

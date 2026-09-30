@@ -39,6 +39,7 @@ The toolkit test inventory maps these suites (0 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
+| BRepLib_MakeWire_Test.cxx | brep_lib_make_wire | 1 | 1 of 1 | 1 of 1 |
 
 BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: every case builds its
 faces with BRepBuilderAPI_MakeEdge, MakeWire and MakeFace (and one with
@@ -96,6 +97,24 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `IntCurvesFace_ShapeIntersector` is `IntCurvesFaceShapeIntersector` (its intersectors
   in a `Vec`). The i-th point accessors return Standard_OutOfRange outside
   `[1, NbPnt]`, as the native sequences raise.
+- BRepLib (docs/topalgo-design.md section 7): `BRepLib_Command` is `BRepLibCommand`,
+  `BRepLib_MakeShape` is `BRepLibMakeShape` (it dereferences to the command), and every
+  maker `BRepLib_MakeX` is `BRepLibMakeX` dereferencing to `BRepLibMakeShape`;
+  `BRepLibMakeSolid::face_status` shadows the base member as the native override does.
+  The constructors and `Init` overloads take distinct names: `from_vertices`,
+  `from_points`, `from_<gp curve>[_params|_points|_vertices]` (`lin`, `circ`, `elips`,
+  `hypr`, `parab` and their `2d` forms), `from_curve[...]` and `from_pcurve[...]` (a
+  Geom2d curve on a surface) with the tails `_params`, `_points`, `_vertices`,
+  `_points_params` and `_vertices_params`, and `init_*` for the Init members;
+  `BRepLibMakePolygon::from_{two,three,four}_{points,vertices}`, `add_point`,
+  `add_vertex`; `BRepLibMakeWire::from_{edge,two_edges,three_edges,four_edges,wire,
+  wire_edge}`, `add_edge`, `add_wire`; `BRepLibMakeSolid::from_{comp_solid,shell,
+  two_shells,three_shells,solid,solid_shell}`. The conversion operators map to the
+  accessors (`edge`, `wire`, `vertex`, `solid`, `shape`), which return the typed shape by
+  value. The status enumerations are `BRepLibEdgeError`, `BRepLibWireError`,
+  `BRepLibFaceError`, `BRepLibShellError` and `BRepLibShapeModification`. The package
+  functions of `BRepLib` are free functions of `brep_lib`; `Precision` and `Plane` are
+  `precision`/`set_precision` and `plane`/`set_plane`, process-wide as natively.
 
 ## Verification
 
@@ -168,6 +187,27 @@ without the restriction and the boundary tolerances, and the unrestricted
 boundary-tolerance lines of the toleranced squares), `icf_curve` (circles, segments and
 a Bezier curve on every face) and `icf_shape` (compounds of three to four faces with
 Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
+
+BRepLib: `tools/tktopalgo_corpus_breplib.py` appends one module per family, with the
+record builders of `tools/tktopalgo_corpus_breplib_records.py`; both probes read the
+records and print the shapes with `tktopalgo_probe_breplib_common.cxx` and
+`tp_probe/brep_lib_common.rs`: vertices built with BRep_Builder, gp curves, Geom curves
+(conics, Bezier, B-splines, periodic B-splines, trimmed and offset curves), gp 2d curves,
+Geom2d curves and the surfaces of the face reader, and a canonical shape digest (the
+sub-shapes in TopExp::MapShapes order with their type, orientation, Closed flag,
+location, children, vertex points and tolerances, edge tolerances, flags, 3d curves,
+curves on surfaces and vertex parameters, face tolerances and surfaces). The families:
+`blm_vertex`, `blm_edge` (every MakeEdge constructor and Init on segments, the gp
+curves, the Geom curves and curves on planes, cylinders, spheres, cones, tori, a Bezier
+and a B-spline patch and a trimmed plane, each BRepLib_EdgeError value, infinite
+parameters, later Init calls on a done or failed maker, the default and a changed
+BRepLib::Precision), `blm_edge2d` (MakeEdge2d on the default and a tilted
+BRepLib::Plane), `blm_polygon` (every constructor, Add, Close, closing on a
+compared-equal vertex, refused segments), `blm_wire` (every MakeWire constructor and
+Add: connected edges in every order and orientation, edges merged through vertex
+tolerances, branches, disconnected, closed and degenerated edges, null and empty wires)
+and `blm_solid` (every MakeSolid constructor, Add and FaceStatus, with a compsolid
+sharing a face).
 
 ## Preserved native behaviour
 
@@ -262,6 +302,44 @@ Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
 - `(int)` casts of out-of-range doubles (sample counts of the polyhedron and of the
   quadric samples) give `INT_MIN`, as x86 `cvttsd2si` does.
 
+### BRepLib
+
+- A failing `Init` of `BRepLib_MakeEdge` or `BRepLib_MakeEdge2d` only records its
+  error: the edge, the vertices and the done flag of an earlier successful Init stay.
+- `BRepLib_MakeEdge` on a 3d curve refuses a range shorter than gp::Resolution()
+  (`BRepLib_LineThroughIdenticPoints`); on a curve on surface it has no such check, and
+  swapped non-periodic parameters make the edge REVERSED. A closed 3d curve whose two
+  given vertices are the same one is degenerated when its middle point is within
+  `BRepLib::Precision()` of its start. The parameters are checked against the curve
+  range with Precision::PConfusion(), so a line accepts `±Precision::Infinite()` and
+  refuses anything beyond (`BRepLib_ParameterOutOfRange`).
+- The vertex projection of `BRepLib_MakeEdge` takes a curve end first, when it is
+  strictly the nearer one and within the vertex tolerance; on a curve on surface an
+  Extrema point is accepted within Precision::Confusion() only, whatever the vertex
+  tolerance.
+- `BRepLib_MakeEdge2d` works at Precision::Confusion() (not `BRepLib::Precision()`),
+  checks a vertex against its end only on a closed curve, and never sets its error on
+  success: `Error()` is uninitialized natively until a failure (the probe prints it only
+  for a maker that is not done). Its projection uses the closed form on lines and
+  circles, which raises Standard_ConstructionError for a vertex at the centre of a
+  circle; on other curves an Extrema_ExtPC2d that is done without extremum leaves the
+  parameter uninitialized natively (the port reads 0.0; such a request, a vertex beyond
+  the end of a B-spline, is not in the corpus).
+- `BRepLib_MakePolygon::Add` marks the wire Closed as soon as the new vertex compares
+  equal to the first one, before it builds the closing segment; the flag stays when
+  BRepLib_MakeEdge refuses that segment. `Close()` does nothing on a wire flagged Closed.
+- `BRepLib_MakeWire::Error()` is uninitialized natively until the first Add (a wire
+  constructor on a null or empty wire adds nothing); the port starts at
+  `BRepLib_EmptyWire`, the default constructor's value. `BRepLib_NonManifoldWire` is an
+  internal state: every successful Add ends with `BRepLib_WireDone`, and a
+  non-manifold wire forgets its free ends, so later edges keep their input orientation.
+  A copied edge (connected through a vertex tolerance) replaces its vertex by the wire
+  vertex, moved to the point weighted by the two tolerances and enlarged to cover both.
+- `BRepLib_MakeSolid` built from a compsolid gathers the faces in the iteration order of
+  a hashed map (TShape addresses), so the face order of its shell differs from run to
+  run natively too (the probe prints an order-free digest); a face met three times is
+  deleted, then added again.
+
 ## BRepClass deviations
 
 - The TopClass trait's `CheckPoint` cannot fail, so a failure of the face bounds (no
@@ -288,3 +366,11 @@ Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
   (`Identical`, `SamplePnts`, `BSplSamplePnts`, `UParameters`, `VParameters`,
   `IsUniformSampling`) are not members of the Rust struct (docs/topalgo-design.md
   section 4), and the struct does not implement IntStart's `TheTopolTool`.
+
+## BRepLib deviations
+
+- A null curve, surface or vertex that the native makers dereference raises
+  Standard_NullObject (a crash natively).
+- The uninitialized native values (`BRepLib_MakeEdge2d::Error()` after a success,
+  `BRepLib_MakeWire::Error()` before the first Add, the parameter of a MakeEdge2d
+  projection without extremum) read the values given above.

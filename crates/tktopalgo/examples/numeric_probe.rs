@@ -2,7 +2,9 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod tp_probe;
-use tp_probe::{brep_builder_api, brep_class, brep_lib_edge, brep_top_adaptor, int_curves_face};
+use tp_probe::{
+    brep_builder_api, brep_class, brep_lib_edge, brep_lib_wire, brep_top_adaptor, int_curves_face,
+};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -38,6 +40,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("blm_vertex", brep_lib_edge::vertex_case),
     ("blm_edge", brep_lib_edge::edge_case),
     ("blm_edge2d", brep_lib_edge::edge2d_case),
+    ("blm_polygon", brep_lib_wire::polygon_case),
+    ("blm_wire", brep_lib_wire::wire_case),
+    ("blm_solid", brep_lib_wire::solid_case),
 ];
 
 fn main() {

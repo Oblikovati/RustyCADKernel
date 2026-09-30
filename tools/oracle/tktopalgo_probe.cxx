@@ -31,6 +31,7 @@
 #include "tktopalgo_probe_intcurvesface.cxx"
 #include "tktopalgo_probe_breplib_common.cxx"
 #include "tktopalgo_probe_breplib_edge.cxx"
+#include "tktopalgo_probe_breplib_wire.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -60,6 +61,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"blm_vertex", tp_blm_vertex_case},
  {"blm_edge", tp_blm_edge_case},
  {"blm_edge2d", tp_blm_edge2d_case},
+ {"blm_polygon", tp_blm_polygon_case},
+ {"blm_wire", tp_blm_wire_case},
+ {"blm_solid", tp_blm_solid_case},
 };
 int main() {
  std::string line;
