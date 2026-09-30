@@ -383,8 +383,8 @@ copied; the package adds the two types the `_0.cxx` macros name and aliases:
   section.
 
 `BRepIntCurveSurface_Inter` is the struct `BRepIntCurveSurfaceInter`. It owns its
-`IntCurveSurface_HInter`, its `BRepTopAdaptor_TopolTool` handle and the lazily built
-face boxes (`Option<Vec<BoundingBox3>>`, one box per face, void until first needed, as
+`IntCurveSurface_HInter`, its `BRepTopAdaptor_TopolTool` (by value: the native handle
+is private and never shared) and the lazily built face boxes (`Option<Vec<BoundingBox3>>`, one box per face, void until first needed, as
 the `NCollection_HArray1<Bnd_Box>`); the protected `Find`, `FindPoint` and `Clear` are
 private methods. `Init` and `Load` take `&mut self` and return `Result` (the adaptors,
 BndLib, BRepBndLib and the classifier can raise; the exploration state is left as far

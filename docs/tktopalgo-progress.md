@@ -96,8 +96,12 @@ with BRep_Builder by the probe's shape reader (records in
 `crates/tktopalgo/tests/solid_records`); they move to a 1:1 translation once BRepPrimAPI
 is ported.
 
-BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBndLib
-(level 4, not ported), which it calls to box each face.
+BRepApprox and BRepIntCurveSurface have no upstream suite.
+`tests/brep_approx_behavior.rs` and `tests/brep_int_curve_surface_behavior.rs` hold
+their behavior tests on faces built by the probe's face reader (the surface tool, the
+approximation line, a line of points approximated alone and on a plane and a cylinder;
+the exploration of lines and a circle across the holed square and the cylinder, the
+accessors without a current point and past the last face).
 
 ## API mapping
 
@@ -202,6 +206,29 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `Intersector(F)` is `change_intersector` (`&mut`) with the shared view `intersector`;
   the protected `ClassifyUVPoint`, `ForceIn` and `ForceOut` are public. The audit reports
   0 missing and 0 stale rows (the destructors are excluded rows).
+
+- BRepApprox (docs/topalgo-design.md section 12): `BRepApprox_SurfaceTool` is the unit
+  struct `BRepApproxSurfaceTool` (associated functions over `Handle<BRepAdaptorSurface>`,
+  the alias `BRepApproxSurface`; `NbSamplesU(S, u1, u2)` is `nb_samples_u_range`), which
+  implements the IntImp `ThePSurfaceTool` and the ApproxInt `ApproxIntSurfaceTool`
+  traits; `BRepApprox_ApproxLine` is `BRepApproxApproxLine` (`from_curves`, `from_line`,
+  `nb_pnts`, `point`), which implements `ApproxIntLine`. Every other class is an alias of
+  the generic GeomInt instantiates too: `BRepApprox_Approx` is
+  `ApproxIntApprox<BRepApproxApproxTypes>` (`perform`, `perform_on_surfaces`, and the
+  private quadric overload `perform_quadric`), `BRepApprox_TheMultiLineOfApprox` is
+  `ApproxIntMultiLine<BRepApproxApproxLine>` (its `LineTool` implementation is
+  `BRepApprox_TheMultiLineToolOfApprox`), the SvSurfaces, Int2S, ZerParFunc and
+  ZerImpFunc instances are the ApproxInt and IntImp generics over
+  `BRepApproxSurfaceTool`, and the compute lines, gradients, least squares, constraint
+  solvers and functions are the TKGeomBase generics. The api rows of the instance
+  classes name the methods of those generics. `BRepApprox_Approx::Perform()` and the two
+  `ResConstraint...::Error()` are excluded rows: declared, never defined natively. The
+  audit reports 0 missing and 0 stale rows.
+- BRepIntCurveSurface (section 12): `BRepIntCurveSurface_Inter` is
+  `BRepIntCurveSurfaceInter`; `Init(S, C, Tol)` is `init_curve`, `Init(S, L, Tol)` is
+  `init_line`, `Init(C)` is `init`; `load`, `next`, `point`, `pnt`, `u`, `v`, `w`, `state`,
+  `transition` and `face` return `Result` (the native members can raise), `more` does
+  not. The audit reports 0 missing and 0 stale rows.
 
 ## Verification
 
@@ -389,6 +416,45 @@ circle, ellipse, open or closed B-spline, Bezier or trimmed curve, on polygons, 
 planar faces of those wires, on a face with a split side and on multi-patch shells,
 with and without B-spline concatenation, with avoided edges, and in the three call
 orders.
+
+BRepApprox: 2148 requests (`tools/tktopalgo_corpus_brepapprox.py`, probes
+`tktopalgo_probe_brepapprox.cxx`, `_parts.cxx` and `_tool.cxx` with the twins
+`tp_probe/brep_approx.rs`, `brep_approx_parts.rs` and `brep_approx_tool.rs`). The
+walking lines are those of `IntPatch_Intersection` on two faces read by `tp_face` with
+their BRepTopAdaptor domains (17 of the face pairs of the domain corpus, in both
+orders: plane-plane, plane-cylinder, plane-sphere, plane-cone, plane-torus,
+plane-spline, disc-cylinder, cylinder-cylinder, sphere-cylinder and B-spline-Bezier,
+with the parametric walk `geomint` 0 for the quadric pairs and both walks for the
+spline pairs). `bra_approx` runs `BRepApprox_Approx` on them with six SetParameters
+sets (the defaults, tolerances 1e-7 to 1e-3, degrees 1 to 8, iterations 0 to 5,
+NbPntMax 4 to 30, with and without tangency, the three parametrizations), the six
+choices of approximated spaces, on the faces (the ImpPrm and PrmPrm SvSurfaces) and on
+the line alone, on all the points, on the default range and on sub-ranges of 3 to 6
+points, on restricted and unrestricted adaptors and for a line index past the last;
+`bra_line` reads approximation lines of 0 to 40 points and of the poles of three
+B-spline curves (some null) at indices 0 to n+1 and approximates them alone; `bra_mline`
+and `bra_sv` drive the multi-line (values, tangents, curvature, MakeMLBetween,
+MakeMLOneMorePoint, Dump, `Parameters` of the three kinds) and the three SvSurfaces
+kinds (Compute, Pnt, SeekPoint, the tangencies, SetUseSolver,
+FillInitialVectorOfSolution); `bra_zerimp` and `bra_int2s` the ZerImpFunc and Int2S
+instances on the faces; `bra_tool` every `BRepApprox_SurfaceTool` member on every face
+of the adaptor corpus, restricted or not.
+
+BRepIntCurveSurface: 314 requests (`tools/tktopalgo_corpus_brepintcurvesurface.py`,
+probe `tktopalgo_probe_brepintcurvesurface.cxx`, twin
+`tp_probe/brep_int_curve_surface.rs`) on the shape records of `tp_shape`: boxes
+(tolerances 1e-7 and 1e-3, translated, rotated, with a flipped face, with a B-spline
+top face), cylinders, spheres, a torus, hollow boxes, a box with a spherical cavity, an
+open box, a square sheet, a half-space, two boxes and an empty solid. `bics_line` runs
+`Init(shape, line, tol)` with the three tolerances 1e-7, 1e-3 and 0.5 for lines through
+the centre, along the axes, through edges and vertices, tangent to the curved faces, in
+the plane of a face, 1e-8 and 1e-4 outside a face and missing the shape; `bics_curve`
+loads the shape once or twice and runs `Init(curve)` (or `Init(shape, curve, tol)`) for
+finite, partial and infinite line segments, circles, cubic B-splines and parabolas;
+`bics_state` reads a fresh object, `Init` before `Load`, `Load` followed by `Next` with
+the previous curve, and `Next` past the last face. Every exploration prints each point
+(face index, `Point`, `Pnt`, `U`, `V`, `W`, `State`, `Transition`) and the accessors past
+the end.
 
 ## Preserved native behaviour
 
@@ -923,6 +989,43 @@ Native null dereferences in these packages are Standard_NullObject errors.
   an iterator over the live map, invalid after a change of the map).
 - The native mutex guards the status map only in parallel mode; the port always locks,
   which changes no result. `IsUnorientable` returns `Result` (it reads the statuses).
+
+## Preserved native behaviour: BRepApprox and BRepIntCurveSurface
+
+- `BRepApprox_SurfaceTool::NbSamplesU` and `NbSamplesV` (both overloads) answer 10 for
+  every surface, where `Adaptor3d_HSurfaceTool` counts by surface kind; every other
+  member calls the adaptor member of the same name.
+- `BRepApprox_ApproxLine::NbPnts` reads the pole count of the first non-null curve (3d,
+  then on the first surface, then on the second) before the points of the line, and
+  `Point` reads the line only when it has points: a line built on an empty
+  `IntSurf_LineOn2S` has no points and answers the origin with zero parameters at every
+  index. The poles of a null curve are the default `gp_Pnt` and `gp_Pnt2d` (the origin);
+  the flag `theTang` of the second constructor is unused.
+- `BRepIntCurveSurface_Inter::More()` compares the face index with the face count, so a
+  fresh object (index 0, no face) and an object after `Load` report a current face while
+  `Point` and the other accessors raise StdFail_NotDone and `Face` raises
+  Standard_OutOfRange. Each `Next` past the last face moves the face index one further.
+- The points of a face come in the order of `IntCurveSurface_HInter` (not sorted by
+  parameter); `FindPoint` keeps the state of the last classified point. A curve of line
+  type is tested against the face boxes as the whole line even on a finite range, a
+  finite curve against its own box, and an infinite curve of another type is never
+  rejected. The face boxes (BRepBndLib::Add with the triangulation, enlarged by the
+  tolerance) are built on first use and kept by every later `Init(curve)` until the
+  next `Load`.
+
+## BRepApprox and BRepIntCurveSurface deviations
+
+- The BRepApprox templates keep `void*` pointers to the caller's `BRepAdaptor_Surface`;
+  the port passes and keeps `Handle<BRepAdaptorSurface>` (the shared object).
+  `BRepApprox_ApproxLine::Point` is non-const natively and writes nothing; it takes
+  `&self`. `NbPnts` on a line without curves and without points dereferences a null
+  handle natively; the port raises Standard_NullObject.
+- `BRepIntCurveSurface_Inter` leaves its tolerance uninitialized until `Load` (it is
+  never read before); the port starts at 0. `Next` after `Load` of a shape with faces and
+  before any `Init(curve)` dereferences the null curve natively; the port raises
+  Standard_NullObject, and the corpus leaves that call out. `Init(curve)` keeps a shallow
+  copy of the adaptor, where the native copy constructor also shares the evaluation
+  cache of a B-spline curve (the values are the same).
 
 ## BRepLib deviations
 
