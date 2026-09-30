@@ -2,6 +2,7 @@ mod context;
 mod context_compute;
 mod curves;
 mod face_face;
+mod face_perform;
 mod fclass;
 mod fclass_faces;
 mod intersections;
@@ -65,6 +66,7 @@ fn dispatch_scalar(operation: &str, v: &[f64]) {
         "face_pcurves" => face_surface_case::pcurves_case(v),
         "face_planes" => face_planes_case::case(v),
         "face_clip" => face_face::clip_case(v),
+        "face_perform" => face_perform::case(v),
         "face_state" => face_face::case(v),
         "context_compute" => context_compute::case(v),
         "tools_curves" => tools_curves::case(v),

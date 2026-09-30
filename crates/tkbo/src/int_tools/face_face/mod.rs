@@ -23,6 +23,7 @@ pub struct FaceFace {
     approximation_tolerance: f64,
     fuzzy: f64,
     seeds: Vec<IntSurfPntOn2S>,
+    kernel: perform::IntersectionKernel,
 }
 impl Default for FaceFace {
     fn default() -> Self {
@@ -38,6 +39,7 @@ impl Default for FaceFace {
             approximation_tolerance: 1e-7,
             fuzzy: precision::confusion(),
             seeds: Vec::new(),
+            kernel: perform::IntersectionKernel::default(),
         }
     }
 }
@@ -105,3 +107,24 @@ impl FaceFace {
 }
 #[cfg(test)]
 mod tests;
+
+mod analytic;
+mod boundaries;
+mod boundary_parameter;
+mod closed_conics;
+mod conic_support;
+mod curves;
+mod distance;
+mod open_conics;
+mod pcurve_checks;
+mod perform;
+mod plane_clip;
+mod planes;
+mod points;
+mod restriction;
+mod surface_policy;
+mod tolerance;
+mod walking;
+mod walking_fit;
+mod walking_result;
+mod walking_spline;

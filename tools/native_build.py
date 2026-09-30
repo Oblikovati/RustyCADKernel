@@ -23,13 +23,13 @@ Runner = Callable[..., str]
 # dependencies). TKPrim is here because unchanged TKBRep suites (TopExp_Test) build their
 # shapes with BRepPrimAPI_MakeBox; TKHelix and TKShHealing for their own suites and
 # numeric oracles.
-ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKTopAlgo', 'TKPrim',
+ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKBO', 'TKTopAlgo', 'TKPrim',
                                         'TKHelix',
                                         'TKShHealing',
                                         'TKHLR',
                                         )
 # The closure's shared libraries in link order, dependants first.
-LINKED_TOOLKITS: tuple[str, ...] = ('TKPrim',
+LINKED_TOOLKITS: tuple[str, ...] = ('TKBO', 'TKPrim',
                                     'TKHelix',
                                     'TKShHealing',
                                         'TKHLR',
