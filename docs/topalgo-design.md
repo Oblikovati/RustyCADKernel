@@ -29,3 +29,39 @@ rule for the whole toolkit, the same as geomalgo-design.md section 1:
   methods (or the wrapper's) and name this section.
 
 The sections below record each instantiation as it is ported.
+
+## 3. Bisector, MAT and MAT2d
+
+These three packages compute the bisecting locus (the medial axis) of a 2D figure.
+
+- **Bisector curves.** `Bisector_Curve` derives from `Geom2d_Curve` and is abstract, so
+  it is the trait `BisectorCurve: Geom2dCurve` (docs/geom-design.md section 1),
+  registered as `Bisector_Curve` below `Geom2d_Curve`. `Bisector_BisecAna`,
+  `Bisector_BisecCC` and `Bisector_BisecPC` are structs that implement the whole
+  ancestry, so a `Geom2d_TrimmedCurve` (and every Geom2d consumer, as the
+  `Geom2dAdaptor_Curve` of `Geom2dInt_GInter`) takes them as a basis curve, and MAT2d
+  casts the basis back with `cast::<dyn BisectorCurve>()`. Each keeps its fields in one
+  `SharedState`; the algorithms are written on the plain state value, which never holds
+  a handle to its own object.
+- **Protected and private setters.** The private setters of `Bisector_BisecCC` and the
+  private `Init` of `Bisector_BisecPC` only serve `Copy` and `ChangeGuide`; they are
+  crate-private in Rust.
+- **Raw pointers.** `MAT_Arc`, `MAT_Node` and `MAT_BasicElt` keep their neighbour
+  arcs as `void*` so that the graph has no reference cycle. They are
+  `WeakHandle<MatArc>` (TKernel, `standard::WeakHandle`): the pointer can be null or
+  not, as C++ tests it, and upgrading a pointer to a destroyed arc gives a null handle
+  where C++ has a dangling pointer. The strong handles of the native classes stay
+  strong, including the native reference cycles (a `MAT_Edge` and its
+  `MAT_Bisector`s); `MAT2d_Mat2d` breaks them in its `Drop`, as its destructor does.
+- **`MAT_TList` (`MAT_TList.gxx`, `.lxx`).** The template is the generic transient
+  `MatTList<I: MatTListItem>` with its node `MatTListNode<I>`; the trait gives the
+  native class names of each instance and the `Dump` of the item.
+  `MAT_ListOfBisector`, `MAT_ListOfEdge` and their `MAT_TListNodeOf...` classes are
+  aliases of the two instances. The generic implements the runtime type once: the
+  registry is keyed by the Rust type, so each instance registers its own descriptor.
+  The `Drop` of the list unlinks the nodes as the template destructor does.
+- **`MAT2d_Mat2d::CreateMat` and `CreateMatOpen`.** The two members repeat one
+  algorithm with a few differences (the number of initial bisectors, the edge range of
+  the scans, the infinite-loop patch of the closed case). They are one engine over
+  the enum `MatContour` (open or closed), which selects each difference in the native
+  order; every floating-point operation stays the one of the member it ports.
