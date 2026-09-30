@@ -79,6 +79,19 @@ bisectors of straight, curved and B-spline triangles (neighbour curve-curve bise
 included); the two functions, the polygon and `IsConvex`. The Rust side reads the curves
 with the TKGeomAlgo reader `ga_probe/curve2d.rs`.
 
+MAT and MAT2d: the `tp_mat*` requests (84, `tools/tktopalgo_corpus_mat.py`) run the
+bisecting-locus pipeline of `BRepMAT2d_BisectingLocus::Compute` (written again in the probe:
+`MAT2d_CutCurve` on every curve, `MAT2d_Circuit`, `MAT2d_Tool2d`, `MAT2d_Mat2d`, `MAT_Graph`,
+the fusion of the basic elements of several lines, `CompactArcs`/`CompactNodes`) and print
+the circuit, the bisectors of the tool and the whole graph (arcs, nodes, basic elements and
+their `MAT_Zone`). The figures are convex and concave polygons, rounded rectangles, a
+D shape, B-spline and ellipse contours, contours with one and two holes, and open lines
+(polylines, a segment and an arc, a B-spline, an open line inside a closed contour), on
+both sides, with joins by arc and by intersection, and with the closed and the open
+algorithms. Other requests exercise the classes one by one: edit scripts of
+`MAT_ListOfEdge`, `MAT_Bisector::Dump`, a hand-made graph piece, `MAT2d_Connexion`
+(`Reverse`, `IsAfter`, `Dump`), `MAT2d_CutCurve`, `MAT2d_MiniPath` and `MAT2d_Tool2d`.
+
 ## Preserved native behaviour
 
 Each ported package adds its own subsection.
@@ -128,3 +141,34 @@ Standard_OutOfRange for a 30th point or an index outside its 30 slots where the 
 array overruns. Math functions (`Bisector_FunctionH`, `Bisector_FunctionInter`) answer
 `false` on an evaluation failure and give it through `raised()`, where the native
 exception leaves the solver.
+
+### MAT and MAT2d
+
+- `MAT_Graph::CompactArcs` and `CompactNodes` scan the indices from 1 until they found as
+  many items as the count; when fewer items are bound the native scan never ends. The port
+  stops at the largest bound key (the same result when the scan ends natively).
+- `MAT2d_Mat2d` reads `intersectionpoint` before `IntersectBisector` writes it (it writes
+  it only when it finds a point): natively uninitialised before the first point, 0 in the
+  port.
+- `MAT_Graph::FusionOfBasicElts` writes its six output references only on the paths that
+  merge arcs; the others keep the caller's values (`MatFusion` fields keep theirs).
+- `MAT2d_Circuit::Perform` on a figure of one line appends the length of the line once
+  more to the line lengths, so `LineLength(2)` answers for a one-line figure.
+- `MAT_Edge::Dump` prints nothing. `MAT_Bisector::Dump` dereferences its edges: a null edge
+  is a native crash, Standard_NullObject in the port.
+- `MAT_Zone` built on a basic element whose frontier reaches an infinite node turns from
+  its start arc; a null start arc (an end element of an open line) is a native crash,
+  Standard_NullObject in the port. The probe does not build these zones.
+- The open algorithm (`CreateMatOpen`) with joins by arc on a figure that mixes a closed
+  and an open line makes `MAT2d_Tool2d` read a point item of the circuit as a curve: a
+  native crash, Standard_NullObject in the port. The corpus leaves that request out.
+- `MAT_TList::Init(item)` runs past the end when the item is absent; on a looped list it
+  loops forever, as natively.
+
+Deviations: the native `void*` back-pointers (the linked arc of a node, the start and end
+arcs of a basic element, the neighbour arcs and the nodes of an arc) are `WeakHandle`s
+(docs/topalgo-design.md section 3); a destroyed target reads as a null handle where native
+code reads a dangling pointer. The lists and `MAT2d_Mat2d` unlink their cyclic strong
+handles on drop. Maps that the algorithms only look up (never iterate in an order that
+reaches the output) are `HashMap`s; `MAT2d_BiInt::hash_code` is the native `hashBytes`.
+Native null dereferences in these packages are Standard_NullObject errors.
