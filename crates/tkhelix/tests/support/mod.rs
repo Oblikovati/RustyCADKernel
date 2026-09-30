@@ -33,3 +33,46 @@ pub fn expect_throw<T>(result: Result<T, Failure>, kind: &str) {
         Err(failure) => assert_eq!(failure.exception_type(), kind),
     }
 }
+
+/// Shape helpers of the HelixBRep fixtures (`TKHelixTest`, `HelixBRepTest`).
+pub mod brep {
+    use rustycad_tkbrep::topexp::Explorer;
+    use rustycad_tkbrep::topods::Shape;
+    use rustycad_tkernel::ncollection::Array1;
+    use rustycad_tkg3d::top_abs::ShapeEnum;
+    use rustycad_tkgeombase::gprop::GProps;
+    use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
+    use rustycad_tktopalgo::brep_gprop::BRepGProp;
+
+    /// The fixtures' `myAxis`: `gp_Ax3(gp_Pnt(0, 0, 0), gp_Dir(Z), gp_Dir(X))`.
+    pub fn my_axis() -> Axis3 {
+        Axis3::new(Point3::new(0., 0., 0.), Direction3::Z, Direction3::X).unwrap()
+    }
+
+    /// `NCollection_Array1<T>(1, n)` filled with `values`.
+    pub fn array<T: Clone + Default>(values: &[T]) -> Array1<'static, T> {
+        let mut array: Array1<'static, T> = Array1::with_bounds(1, values.len() as i32).unwrap();
+        for (i, value) in values.iter().enumerate() {
+            *array.change_value(i as i32 + 1).unwrap() = value.clone();
+        }
+        array
+    }
+
+    /// `CountShapes(theShape, theType)`: the TopExp_Explorer count.
+    pub fn count_shapes(shape: &Shape, kind: ShapeEnum) -> i32 {
+        let mut count = 0;
+        let mut explorer = Explorer::new(shape, kind, ShapeEnum::Shape).unwrap();
+        while explorer.more() {
+            count += 1;
+            explorer.next().unwrap();
+        }
+        count
+    }
+
+    /// `ComputeWireLength(theWire)`: `BRepGProp::LinearProperties` (default flags), then `Mass()`.
+    pub fn compute_wire_length(wire: &Shape) -> f64 {
+        let mut props = GProps::new();
+        BRepGProp::linear_properties(wire, &mut props, false, false).unwrap();
+        props.mass()
+    }
+}

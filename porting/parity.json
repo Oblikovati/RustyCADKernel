@@ -192106,6 +192106,118 @@
       "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomTools::appr_curve_3d",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::new",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::~HelixBRep_BuilderHelix()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the builder; nothing to port."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<bool>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<bool>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_diam",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<bool>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_spiral",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_turns",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_diam_turns",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_spiral_turns",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetApproxParameters(double,int,GeomAbs_Shape)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_approx_parameters",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::Perform()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::perform",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::ToleranceReached() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::tolerance_reached",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::ErrorStatus() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::error_status",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::WarningStatus() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::warning_status",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::Shape() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::shape",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
     }
   ],
   "tests": [
@@ -282629,6 +282741,342 @@
       "rust_target": "helix_geom_builder_helix_coil",
       "rust_test": "HelixGeom_BuilderHelixCoil_Test__TaperedHelix",
       "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix_coil.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomHelixCurve_Basic",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomHelixCurve_Basic",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomHelixCurve_CustomParameters",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomHelixCurve_CustomParameters",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomHelixCurve_TaperedHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomHelixCurve_TaperedHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomBuilderHelixCoil_Basic",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomBuilderHelixCoil_Basic",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomBuilderHelix_SingleCoil",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomBuilderHelix_SingleCoil",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomBuilderHelix_MultipleCoils",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomBuilderHelix_MultipleCoils",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_PureCylindricalHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_PureCylindricalHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_SpiralHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_SpiralHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_MultiPartHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_MultiPartHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_NumberOfTurnsInterface",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_NumberOfTurnsInterface",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomTools_ApprHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomTools_ApprHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_ErrorConditions",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_ErrorConditions",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_ZeroPitch",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_ZeroPitch",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_ToleranceReached",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_ToleranceReached",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_A1_PureCylindricalHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_A1_PureCylindricalHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_B1_CompositeCylindricalHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_B1_CompositeCylindricalHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_C1_SpiralHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_C1_SpiralHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_F1_Helix2Interface",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_F1_Helix2Interface",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_E1_CustomerExample",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_E1_CustomerExample",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ErrorConditions_InvalidDimensions",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ErrorConditions_InvalidDimensions",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ErrorConditions_TurnsInterface",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ErrorConditions_TurnsInterface",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ApproximationQuality",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ApproximationQuality",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ParameterValidation",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ParameterValidation",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.MultiPartContinuity",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__MultiPartContinuity",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
