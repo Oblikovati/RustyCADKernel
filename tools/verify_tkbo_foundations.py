@@ -32,6 +32,7 @@ def corpus() -> str:
     requests += context_requests()
     requests += context_compute_requests()
     requests += tools_requests()
+    requests += wline_requests()
     requests += [f"tools_topology {t} {offset} {tol} {ori}" for t, offset, tol, ori in product(
         [0, 1e-7, 5e-7, 1e-6, 1, 2], [0, 1e-7, 1], [1e-7, 0.1], range(4))]
     requests += [f"tools_surface {a} {b} {lo} {hi} {tol} {parallel}" for a, b, (lo, hi), tol, parallel in product(
@@ -103,6 +104,16 @@ def fclass_requests() -> list[str]:
     points = [(0, 0), (1, 1), (0.25, -1), (5.5, 1), (0.25-1e-8, 0), (3, 0), (-3, 0), (10, 10), (-10, -10)]
     return [f'fclass {kind} {radius} {tol} {u} {v} {tol*3} {periodic}'
             for kind, radius, tol, (u, v), periodic in product(range(14), [0.1, 2], [1e-7, 1e-3], points, [0, 1])]
+
+
+def wline_requests() -> list[str]:
+    """Exercise real surfaces, poles, seam endpoints and native early index bypass."""
+    return [f'wline {first} {last} {radius} {u} {v} {x} {y}'
+            for first, last, radius, (u,v), (x,y) in product(
+                range(5), range(5), [1e-6,2],
+                [(0,0),(1,0),(0,1.5707963267948966),(1,1.5707963267948966),
+                 (6.283185307179586,0),(0,-1.5707963267948966)],
+                [(1,0),(0,1.5707963267948966)])]
 
 
 def tools_requests() -> list[str]:

@@ -32,3 +32,5 @@ mod context;
 pub use context::{Cached, Context};
 mod tools;
 pub use tools::Tools;
+mod wline_tool;
+pub use wline_tool::WLineTool;
