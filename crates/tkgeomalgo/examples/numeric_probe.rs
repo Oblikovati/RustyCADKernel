@@ -2,6 +2,12 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
+use ga_probe::geom_fill_laws as gfl;
+use ga_probe::geom_fill_pipe as gfg;
+use ga_probe::geom_fill_placement as gfp;
+use ga_probe::geom_fill_sweep as gfs;
+use ga_probe::geom_fill_sweepalgo as gfw;
+use ga_probe::geom_fill_trihedron as gft;
 use ga_probe::int_curve_surface_inter as ics_inter;
 use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, plate};
 use ga_probe::{
@@ -225,6 +231,21 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_arcf", int_patch_tools::arcf_case),
     ("ip_csf", int_patch_tools::csf_case),
     ("ip_curvature", int_patch_tools::curvature_case),
+    // GeomFill sweep (ga_probe/geom_fill_*.rs)
+    ("gfs_shape", gfs::shape_case),
+    ("gfs_circle", gfs::circle_case),
+    ("gfs_convert", gfs::convert_case),
+    ("gfs_tensor", gfs::tensor_case),
+    ("gfs_trihedron", gft::law_case),
+    ("gfs_section", gfl::section_case),
+    ("gfs_location", gfl::location_case),
+    ("gfs_placement", gfp::placement_case),
+    ("gfs_sweepfunc", gfw::function_case),
+    ("gfs_sweep", gfw::sweep_case),
+    ("gfs_blendfunc", gfw::blend_case),
+    ("gfs_sweepsec", gfg::sweepsec_case),
+    ("gfs_pipe", gfg::pipe_case),
+    ("gfs_surface", gfg::surface_case),
 ];
 
 fn main() {

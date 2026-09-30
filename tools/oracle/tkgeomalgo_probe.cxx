@@ -65,6 +65,12 @@
 #include "tkgeomalgo_probe_intpatch.cxx"
 #include "tkgeomalgo_probe_intpatch_lines.cxx"
 #include "tkgeomalgo_probe_intpatch_tools.cxx"
+#include "tkgeomalgo_probe_geomfill_sweep.cxx"
+#include "tkgeomalgo_probe_geomfill_trihedron.cxx"
+#include "tkgeomalgo_probe_geomfill_laws.cxx"
+#include "tkgeomalgo_probe_geomfill_placement.cxx"
+#include "tkgeomalgo_probe_geomfill_sweepalgo.cxx"
+#include "tkgeomalgo_probe_geomfill_pipe.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -269,6 +275,21 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ip_arcf", ga_ip_arcf_case},
  {"ip_csf", ga_ip_csf_case},
  {"ip_curvature", ga_ip_curvature_case},
+ // GeomFill sweep (tkgeomalgo_probe_geomfill_*.cxx)
+ {"gfs_shape",ga_gfs_shape_case},
+ {"gfs_circle",ga_gfs_circle_case},
+ {"gfs_convert",ga_gfs_convert_case},
+ {"gfs_tensor",ga_gfs_tensor_case},
+ {"gfs_trihedron",ga_gft_law_case},
+ {"gfs_section",ga_gfl_section_case},
+ {"gfs_location",ga_gfl_location_case},
+ {"gfs_placement",ga_gfp_placement_case},
+ {"gfs_sweepfunc",ga_gfw_function_case},
+ {"gfs_sweep",ga_gfw_sweep_case},
+ {"gfs_blendfunc",ga_gfw_blend_case},
+ {"gfs_sweepsec",ga_gfg_sweepsec_case},
+ {"gfs_pipe",ga_gfp_pipe_case},
+ {"gfs_surface",ga_gfp_surface_case},
 };
 int main() {
  std::string line;

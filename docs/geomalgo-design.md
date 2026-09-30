@@ -477,6 +477,66 @@ class, beside the sweep part of the same module) maps the class hierarchies:
   The debug members `CheckTgteField`, `CheckApprox` and `CheckResult` write to a
   `fmt::Write` where the native ones write to `std::cout`.
 
+## 14. GeomFill sweep part
+
+The sweep part of GeomFill (`crates/tkgeomalgo/src/geom_fill`, beside the filling part)
+maps the law hierarchies, the sweep functions and the pipes:
+
+- **Laws.** The abstract transients `GeomFill_TrihedronLaw`, `GeomFill_TrihedronWithGuide`,
+  `GeomFill_LocationLaw` and `GeomFill_SectionLaw` are the traits `GeomFillTrihedronLaw`,
+  `GeomFillTrihedronWithGuide`, `GeomFillLocationLaw` and `GeomFillSectionLaw`, reached
+  through `Handle<dyn ...>`. Their protected data (`myCurve`, `myTrimmed`, the guide and
+  its trimmed copy) is an embedded base struct (`GeomFillTrihedronLawBase`,
+  `GeomFillTrihedronWithGuideBase`) reached through one required accessor, so the
+  provided methods keep the native bodies. Every law keeps its state behind a lock,
+  because the laws are shared (a location law holds its trihedron law, a sweep function
+  holds both laws) and `SetCurve`, `SetInterval`, `SetTrsf` and `SetTolerance` edit the
+  shared object.
+- **Outputs.** The `gp_Vec&` frames of the trihedron laws are the structs `TrihedronD0`,
+  `TrihedronD1` and `TrihedronD2`; the `gp_Mat&`/`gp_Vec&` placements of the location
+  laws are `LocationD0`, `LocationD1` and `LocationD2`, passed in with their previous
+  values, since a law that fails leaves them unchanged natively; the arrays of the
+  section laws are `SectionD1`/`SectionD2` and of the sweep functions the
+  `Approx_SweepFunction` structs `SweepD1`/`SweepD2`. A section law assigns its pole
+  arrays as natively (`NCollection_Array1::operator=` resizes and takes the source
+  bounds). Members that write an `Error` argument take `&mut f64`, since some bodies
+  leave it untouched.
+- **Solver functions.** `GeomFill_FunctionDraft`, `GeomFill_FunctionGuide`,
+  `GeomFill_PlanFunc` and `GeomFill_SnglrFunc` implement the math function traits
+  (and `Adaptor3d_Curve` for `GeomFill_SnglrFunc`); an exception inside a callback is
+  kept by a `FailureCapture` and raised when the solver returns (`take_failure`).
+  `GeomFill_LocFunction` evaluates a location law as the 12 reals of
+  `AdvApprox_ApproxAFunction`.
+- **Sweep.** `GeomFill_Sweep` is a plain struct. `BuildKPart` (translation and rotation
+  laws with a suitable section) builds the elementary surfaces, and `BuildAll` runs
+  `Approx_SweepApproximation` on a `GeomFill_SweepFunction`, which implements the
+  tkgeombase trait `SweepFunction` and keeps the placement of its last evaluation
+  behind a lock, as the native members `M`, `V` and their derivatives.
+  `GeomFill_CircularBlendFunc` implements the same trait with its trimmed rails
+  behind a lock (`SetInterval` replaces them).
+- **Placement.** `GeomFill_SectionPlacement` is a plain struct; its `Extrema_ExtPC`
+  member, initialized once on the section natively, is rebuilt on the section at each
+  projection, since every `Perform` of it starts from its initialized state.
+- **Sections.** `GeomFill_NSections` skins its sections with `GeomFill_AppSurf` (the
+  filling part) and keeps the reference and computed surfaces behind a lock
+  (`SetSurface`, `ComputeSurface`). `GeomFill_AppSweep` is the alias
+  `GeomFillAppSweep = AppBlendAppSurf` (section 7); `GeomFill_SweepSectionGenerator`
+  implements `TheSectionGenerator` on the points of a `GeomFill_Line`.
+- **Pipe.** `GeomFill_Pipe` is a plain struct; its constructors are `new`,
+  `with_radius`, `with_section`, `on_surface`, `with_direction`, `with_two_sections`,
+  `with_sections`, `with_rails`, `with_adaptor_rails` and `with_guide`, with the
+  matching `init_*` members, and its two `Perform` overloads are `perform` and
+  `perform_with_parameters`.
+- **Class functions.** The static members of the `GeomFill` class are functions of
+  the module: `surface`, `get_circle` (and `_d1`, `_d2`), `get_shape`, `knots`,
+  `mults`, `get_minimal_weights` and `get_tolerance`.
+
+Private members that nothing calls natively are not ported: `GeomFill_Sweep::BuildProduct`
+with its `GeomFill_Sweep_Eval`, and `GeomFill_SectionPlacement::SectionAxis`. Members
+that OCCT declares without a definition (`GeomFill_FunctionGuide::Deriv2T` and the
+four-argument `GeomFill_SweepSectionGenerator` constructor and `Init`) have excluded api
+rows.
+
 ## 15. GeomAPI: the interpolation body and the Extrema members
 
 GeomAPI (`crates/tkgeomalgo/src/geom_api`) has no `.gxx` template, but two constructs
