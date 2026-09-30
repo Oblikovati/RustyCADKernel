@@ -298481,6 +298481,636 @@
           "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_3735928559"
         }
       ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.AddProduct_InvalidShapeRoot_ReturnsInvalid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__AddProduct_InvalidShapeRoot_ReturnsInvalid",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.AddProduct_IsPart",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__AddProduct_IsPart",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Add_CompoundParent_AppendsAsChild",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Add_CompoundParent_AppendsAsChild",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/imports.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Add_InvalidParent_ReturnsInvalidResult",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Add_InvalidParent_ReturnsInvalidResult",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/imports.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Add_NoAutoProduct_TopologyOnly",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Add_NoAutoProduct_TopologyOnly",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/imports.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Add_NullShape_ReturnsInvalidResult",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Add_NullShape_ReturnsInvalidResult",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/imports.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Add_ProductParent_CreatesChildPartAndOccurrence",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Add_ProductParent_CreatesChildPartAndOccurrence",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/imports.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Add_RootProduct_PreservesShapeLocation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Add_RootProduct_PreservesShapeLocation",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/imports.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Build_Compound_AutoCreatesRootProduct",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Build_Compound_AutoCreatesRootProduct",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Build_SingleSolid_AutoCreatesRootProduct",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Build_SingleSolid_AutoCreatesRootProduct",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.CreateEmptyProduct_EmptyIsNotAssemblyYet",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__CreateEmptyProduct_EmptyIsNotAssemblyYet",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.DAGSharing_MultipleOccurrencesSamePart",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__DAGSharing_MultipleOccurrencesSamePart",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.GlobalPlacement_DAGSharing_DistinctPathsGiveDistinctPlacements",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__GlobalPlacement_DAGSharing_DistinctPathsGiveDistinctPlacements",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/placements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.GlobalPlacement_DeepNesting",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__GlobalPlacement_DeepNesting",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/placements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.GlobalPlacement_ThreeLevelNesting",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__GlobalPlacement_ThreeLevelNesting",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/placements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.LinkProducts_InvalidParent_ReturnsInvalid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__LinkProducts_InvalidParent_ReturnsInvalid",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.LinkProducts_LinksCorrectly",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__LinkProducts_LinksCorrectly",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.LinkProducts_ParentOccurrenceMustMatchParentProduct",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__LinkProducts_ParentOccurrenceMustMatchParentProduct",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.LinkProducts_RemovedProduct_ReturnsInvalid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__LinkProducts_RemovedProduct_ReturnsInvalid",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.LinkProducts_SelfReference_ReturnsInvalid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__LinkProducts_SelfReference_ReturnsInvalid",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.MutInvalidAssemblyDefs_ThrowProgramError",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__MutInvalidAssemblyDefs_ThrowProgramError",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.MutOccurrenceRef_LocalLocation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__MutOccurrenceRef_LocalLocation",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/placements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.MutProduct_RAII",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__MutProduct_RAII",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.NbNodes_IncludesAssembly",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__NbNodes_IncludesAssembly",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.NodeId_Helpers",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__NodeId_Helpers",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.OccurrenceLocation_AlwaysTerminates",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__OccurrenceLocation_AlwaysTerminates",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/placements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Occurrence_Count",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Occurrence_Count",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.OccurrencesOfProduct_Relations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__OccurrencesOfProduct_Relations",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.OccurrencesOfProduct_ViaRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__OccurrencesOfProduct_ViaRelations",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/links.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.Product_Count",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__Product_Count",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RemoveOccurrence_CascadesToNestedChildren",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RemoveOccurrence_CascadesToNestedChildren",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/removals.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RemoveOccurrence_UpdatesParent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RemoveOccurrence_UpdatesParent",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/removals.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RemoveProduct_CascadeOccurrences",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RemoveProduct_CascadeOccurrences",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/removals.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RemoveProduct_RemovesProductAndOccurrences",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RemoveProduct_RemovesProductAndOccurrences",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/removals.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RootProductIds_Query",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RootProductIds_Query",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/roots.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RootProductIds_ReflectsAssemblyMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RootProductIds_ReflectsAssemblyMutation",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/roots.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RootProductIds_ShapelessRootAssembly_UsesProductId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RootProductIds_ShapelessRootAssembly_UsesProductId",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/roots.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RootProductRemovalCompactsInPlaceAfterRepeatedRemoves",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RootProductRemovalCompactsInPlaceAfterRepeatedRemoves",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/roots.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.RootProducts_RemovedOccurrence_DoesNotAffectRoots",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__RootProducts_RemovedOccurrence_DoesNotAffectRoots",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/roots.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.ShapesView_AssemblyProduct_ReconstructsChildOccurrences",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__ShapesView_AssemblyProduct_ReconstructsChildOccurrences",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/reconstruction.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.ShapesView_OccurrenceShape_FiltersNestedChildrenByParentOccurrence",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__ShapesView_OccurrenceShape_FiltersNestedChildrenByParentOccurrence",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/reconstruction.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.ShapesView_OccurrenceShape_KeepsCommonChildrenAndFiltersBranchSpecificOnes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__ShapesView_OccurrenceShape_KeepsCommonChildrenAndFiltersBranchSpecificOnes",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/reconstruction.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.ShapesView_OccurrenceShape_UsesGlobalPlacementChain",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__ShapesView_OccurrenceShape_UsesGlobalPlacementChain",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/reconstruction.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.ShapesView_ProductShape_ReconstructsBuiltRootTransform",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__ShapesView_ProductShape_ReconstructsBuiltRootTransform",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/reconstruction.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_AssemblyTest.UID_IsAssembly",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Assembly_Test.cxx",
+      "source_sha256": "cf4acba705a16acd78b0ef23699ba4a63f7281381ec924d030edd5ffb4fb9be1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_assembly_legacy",
+      "rust_test": "BRepGraph_AssemblyTest__UID_IsAssembly",
+      "rust_source": "crates/tkbrep/tests/graph_assembly/basics.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }

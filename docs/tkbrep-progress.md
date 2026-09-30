@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (910 declarations; 922 runtime cases):
+The toolkit test inventory maps these suites (955 declarations; 967 runtime cases):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -63,7 +63,7 @@ The toolkit test inventory maps these suites (910 declarations; 922 runtime case
 | BRepGraph_DeferredInvalidation_Test.cxx | brep_graph_deferred_invalidation | 16 | pass | pass |
 | BRepGraph_BatchOps_Test.cxx | brep_graph_batch_ops | 17 | pass | pass |
 | BRepGraph_EventBus_Test.cxx | brep_graph_event_bus | 26 | pass | pass |
-| BRepGraph_Assembly_Test.cxx | not mapped (phase 2) | 45 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
+| BRepGraph_Assembly_Test.cxx | brep_graph_assembly_legacy | 45 | passed | original product, occurrence, placement, removal and reconstruction inputs |
 | BRepGraph_EdgeCases_Test.cxx | mapped | 12 | passed | original primitive builders |
 | BRepGraph_Convenience_Test.cxx | mapped | 17 | passed | original production builders |
 | BRepGraph_PermissionUpdate_Test.cxx | brep_graph_permission_update | 15 | pass | pass |
