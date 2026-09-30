@@ -30,6 +30,8 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_brepbndlib').append_brepbndlib_requests(requests)
     # BRepBndLib::AddOBB (tktopalgo_corpus_brepbndlib_obb.py, shapes of tktopalgo_corpus_brepbndlib.py)
     __import__('tktopalgo_corpus_brepbndlib_obb').append_brepbndlib_obb_requests(requests)
+    # BRepLib_PointCloudShape (tktopalgo_corpus_breplib_pointcloud.py)
+    __import__('tktopalgo_corpus_breplib_pointcloud').append_breplib_pointcloud_requests(requests)
     # BRepClass3d (tktopalgo_corpus_brepclass3d.py, shapes of tktopalgo_corpus_solids.py)
     __import__('tktopalgo_corpus_brepclass3d').append_brepclass3d_requests(requests)
     # BRepTopAdaptor domains of IntStart and IntPatch (tktopalgo_corpus_breptopadaptor_domain.py)

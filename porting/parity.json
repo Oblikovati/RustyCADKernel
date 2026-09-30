@@ -185092,6 +185092,102 @@
       "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
     },
     {
+      "upstream_id": "BRepLib_PointCloudShape(const TopoDS_Shape&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::new",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::Shape() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::shape",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::SetShape(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::set_shape",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::Tolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::tolerance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::SetTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::set_tolerance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::GetDistance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::get_distance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::SetDistance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::set_distance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::NbPointsByDensity(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::nb_points_by_density",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::NbPointsByTriangulation() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::nb_points_by_triangulation",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::GeneratePointsByDensity(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::generate_points_by_density",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::GeneratePointsByTriangulation()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::generate_points_by_triangulation",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::~BRepLib_PointCloudShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the embedded base and the implementor with the value; nothing to port."
+    },
+    {
       "upstream_id": "BRepGProp::LinearProperties(const TopoDS_Shape&,GProp_GProps&,bool,bool)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",

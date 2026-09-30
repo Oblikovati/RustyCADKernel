@@ -33,6 +33,7 @@ mod make_wire;
 mod normals;
 mod orient_closed_solid;
 mod pcurve_on_plane;
+mod point_cloud_shape;
 mod same_parameter;
 mod same_range;
 mod sort_faces;
@@ -77,6 +78,7 @@ pub use orient_closed_solid::orient_closed_solid;
 pub use pcurve_on_plane::{
     build_pcurve_for_edge_on_plane, build_pcurve_for_edges_on_plane, pcurve_for_edge_on_plane,
 };
+pub use point_cloud_shape::{BRepLibPointCloudShape, BRepLibPointCloudShapeBase};
 pub use same_parameter::{
     same_parameter_edge, same_parameter_edge_with_tolerance, same_parameter_shape,
     same_parameter_shape_with_reshape,

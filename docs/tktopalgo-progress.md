@@ -214,6 +214,10 @@ accessors without a current point and past the last face).
   `new` and `init` and the native accessors; `BRepLibFuseEdges` has `new`,
   `avoid_edges`, `set_concat_bspl`, `perform`, `nb_vertices`, `shape`, and `edges`,
   `result_edges` and `faces`, which return the maps the native members fill.
+  The abstract `BRepLib_PointCloudShape` (docs/topalgo-design.md section 14) is the trait
+  `BRepLibPointCloudShape` over the embedded protected data `BRepLibPointCloudShapeBase`;
+  an implementor provides `add_point`. The audit of the package reports 0 missing and
+  0 stale rows.
 
 - BRepBuilderAPI (docs/topalgo-design.md section 10): `BRepBuilderAPI_Command` is
   `BRepBuilderAPICommand` and the protected data of `BRepBuilderAPI_MakeShape` is
@@ -577,6 +581,21 @@ and a circle edge without polygon; eleven of the shapes also go into an axis-ali
 a rotated initial box with four flag triples. Each request prints every field of the
 box (void flag, centre, axes, half sizes, axis-aligned flag).
 
+BRepLib_PointCloudShape: 113 requests (`tools/tktopalgo_corpus_breplib_pointcloud.py`,
+`tktopalgo_probe_breplib_pointcloud.cxx` and `tp_probe/brep_lib_point_cloud.rs`). A
+`blp_pointcloud` request builds one cloud (a probe class that prints each point, its
+normal, its UV and the index of its face) and runs a list of operations: the counts and
+the points by density on boxes, a cylinder, a sphere, a torus, a sphere patch, natural
+and bounded Bezier patches, a REVERSED face, a box with a located face, a rotated box and
+a translated cylinder (given, zero and negative densities, offsets along the normal,
+negative and changed distances, counts kept between calls), the default density with
+faces below the square of the tolerance, and the node counts and points of the
+triangulations (boxes, a REVERSED face, meshed spheres and cylinders, located and
+rotated, with and without UV nodes, a face without surface, faces without mesh), and
+shapes without a usable face (free edges, an empty solid, an infinite plane). The
+random points check the port of `std::mt19937` and libstdc++'s
+`std::uniform_real_distribution<double>` bit for bit.
+
 BRepBuilderAPI sewing: 652 requests. `tools/tktopalgo_corpus_sewing.py` (582 `bba_sew`
 requests, `tktopalgo_probe_sewing.cxx` and `tp_probe/sewing.rs`) sews the shape records of
 `tools/tktopalgo_corpus_sewing_shapes.py`: loose boxes whose faces are moved below and
@@ -755,6 +774,28 @@ Each ported package adds its own subsection.
   of the inverse transformation in the last bits.
 - `BRepBuilderAPI_Transform` is included by BRepBndLib_1.cxx but not used (the shape is
   moved with `TopoDS_Shape::Moved`).
+
+### BRepLib_PointCloudShape
+
+- `NbPointsByDensity` computes the default density when the given one is below
+  `Precision::Confusion()`, but divides each face area by the given density: with 0 the
+  quotient is infinite (NaN for a zero area) and `(int)std::ceil` gives `INT_MIN`
+  (x86 `cvttsd2si`), so every face gets `max(INT_MIN, 1) = 1` point; with a negative
+  density every face gets 1 point too. The computed density only decides whether 0 is
+  returned. The port keeps this.
+- `GeneratePointsByDensity` counts only when no face has a count, so the counts of an
+  earlier `NbPointsByDensity` (with another density) are reused.
+- Each face draws from its own `std::mt19937` seeded with 0, so equal faces get equal
+  UV samples; the offset distribution along the normal draws from the same generator
+  after the UV pair. A point is moved by the face's own location only (not by the
+  location of its surface representation), and a normal of magnitude below
+  `gp::Resolution()` is neither normalized nor moved.
+- A draw that classifies OUT is repeated without limit, so a face whose UV box holds no
+  inside point never returns natively (the port loops the same way).
+- `addTriangulationPoints` computes and stores the normals of the triangulation (it
+  changes the shape's mesh) and moves the nodes and normals by the triangulation
+  location; a mesh without UV nodes gives the UV (0, 0).
+- `myNbPoints` is set by the constructor and never used.
 
 ### BRepClass3d
 
@@ -1360,6 +1401,14 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   `BRepLib_FindSurface` dereferences raises Standard_NullObject (a crash natively);
   inside `Is2DClosed` it answers false, as the native signal handler does. A chain
   edge without 3d curve that `BRepLib_FuseEdges` dereferences raises it too.
+
+### BRepLib_PointCloudShape
+- The density points of a face without surface and without wires crash natively
+  (`BRepTools::UVBounds` reads the bounds of the null surface before `addDensityPoints`
+  checks it); the port raises Standard_NullObject there, and those requests are not in
+  the corpus.
+- `addPoint` receives the points in native order; it returns nothing, as the native
+  pure virtual member.
 
 ### BRepBuilderAPI
 - `BRepBuilderAPI_MakeShape` is a trait and the virtual `ModifiedShape` of ModifyShape is

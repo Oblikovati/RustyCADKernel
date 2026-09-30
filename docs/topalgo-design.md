@@ -592,4 +592,16 @@ a shape are `init_curve` and `init_line`, and `Init(curve)` is `init`.
   `PointsForOBB` runs natively twice over the same exploration (a count, then a fill of
   arrays of that size); the port gathers the points and tolerances in one pass into
   vectors, which visits the same sub-shapes in the same order and gives the same arrays.
+- **`BRepLib_PointCloudShape`** is abstract (its `addPoint` is pure virtual, `clear` is
+  virtual) and has no derived class in TKTopAlgo, so it is mapped like
+  `BRepBuilderAPI_MakeShape` (section 10): the struct `BRepLibPointCloudShapeBase` holds
+  the protected fields under their native names in snake case (public, since derived
+  classes live in other crates; the two maps are `NCollection_DataMap`s with
+  `TopTools_ShapeMapHasher`), and the trait `BRepLibPointCloudShape` has two required
+  accessors of that base, the required `add_point` and the other members (public and
+  protected) as provided methods with the native bodies; `clear` is a provided method an
+  implementor may override. The random draws use `std::mt19937` and libstdc++ 13's
+  `std::uniform_real_distribution<double>` (`generate_canonical` from two 32-bit draws),
+  ported once in `rustycad_tkernel::stl` next to the libstdc++ sort; the twister moved
+  there from the UBTree filler, which uses it too.
 
