@@ -25,6 +25,12 @@
 //! the constrained filling of boundaries (`GeomFill_ConstrainedFilling` with its
 //! boundaries, tangent fields, Coons patch and corner states). The sweep part holds
 //! the trihedron, location and section laws and the sweeps.
+//!
+//! The sweep part (docs/geomalgo-design.md section 14) holds the laws, their solver
+//! functions, `GeomFill_SectionPlacement`, `GeomFill_Sweep` with its sweep function,
+//! `GeomFill_CircularBlendFunc`, `GeomFill_NSections`, the old pipe sections
+//! (`GeomFill_SweepSectionGenerator`, `GeomFill_AppSweep`), `GeomFill_Pipe` and the
+//! static members of the `GeomFill` class.
 
 // Filling part (docs/geomalgo-design.md section 13).
 mod app_surf;
