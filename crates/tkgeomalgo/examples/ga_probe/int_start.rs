@@ -82,7 +82,7 @@ fn path_point(d: &ProbeDomain, p: &IntPatchThePathPointOfTheSOnBounds) {
     attempt(|| {
         let v = p.vertex()?;
         pnt2d(v.value());
-        real(v.resolution(&p.arc()));
+        real(v.resolution(&p.arc())?);
         Ok(())
     });
 }

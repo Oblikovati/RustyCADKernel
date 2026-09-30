@@ -8,7 +8,7 @@ use super::int_walk_iw::line_report;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
-use rustycad_tkg3d::adaptor3d::Adaptor3dHVertex;
+use rustycad_tkg3d::adaptor3d::Adaptor3dHVertexBase;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkgeomalgo::int_patch::{
     IntPatchPoint, IntPatchTheIWLineOfTheIWalking, IntPatchThePathPointOfTheSOnBounds,
@@ -38,11 +38,14 @@ impl Fixture {
             let adaptor = Geom2dAdaptorCurve::with_range(&line, 0.0, 10.0).expect("probe arc");
             arcs.push(Handle::new(adaptor).cast());
             let p = Point2::new(f64::from(k), 0.5);
-            vtx.push(Handle::new(Adaptor3dHVertex::new(
-                p,
-                Orientation::Forward,
-                1.0e-7 * f64::from(k),
-            )));
+            vtx.push(
+                Handle::new(Adaptor3dHVertexBase::new(
+                    p,
+                    Orientation::Forward,
+                    1.0e-7 * f64::from(k),
+                ))
+                .cast(),
+            );
         }
         Self { arcs, vtx }
     }

@@ -39,7 +39,7 @@ pub(super) fn is_degenerated_quadric(quadric: &IntSurfQuadric) -> Result<bool, F
 /// `IsRegularity(A, aDomain)`: the edge of the arc has a regularity; false without an
 /// edge.
 pub(super) fn is_regularity<D: TheTopolTool + ?Sized>(domain: &D) -> Result<bool, Failure> {
-    let Some(edge) = domain.edge() else {
+    let Some(edge) = domain.edge()? else {
         return Ok(false);
     };
     BRepTool::has_continuity(&edge)
@@ -55,7 +55,7 @@ pub(super) fn treat_lc<D: TheTopolTool + ?Sized, P: ThePathPoint>(
     tol_boundary: f64,
     pnt: &mut Vec<P>,
 ) -> Result<i32, Failure> {
-    let Some(edge) = domain.edge() else {
+    let Some(edge) = domain.edge()? else {
         return Ok(1);
     };
     if BRepTool::degenerated(&edge)?

@@ -4,6 +4,7 @@
 //! (refined by the pole grid of splines), or explicit parameters.
 use super::super::surface::Adaptor3dSurface;
 use super::Adaptor3dTopolTool;
+use super::bspl_samples::bspl_sample_parameters;
 use crate::geom::errors::{array_bounds, null_object, program};
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -242,8 +243,13 @@ impl Adaptor3dTopolTool {
     /// `tool.is_uniform_sampling()?`.
     pub fn is_uniform_sampling(&self) -> Result<bool, Failure> {
         let surface: Handle<dyn Adaptor3dSurface> = self.live_surface()?;
-        let adapted: &dyn Adaptor3dSurface = &*surface;
-        Ok(adapted.get_type()? != SurfaceType::BSplineSurface)
+        Self::uniform_sampling_of(&*surface)
+    }
+    /// The body of `IsUniformSampling` on the protected surface `myS` of a tool, which
+    /// the subclasses that keep their own state share (docs/topalgo-design.md section
+    /// 8); `Adaptor3dTopolTool::uniform_sampling_of(&*surface)?`.
+    pub fn uniform_sampling_of(surface: &dyn Adaptor3dSurface) -> Result<bool, Failure> {
+        Ok(surface.get_type()? != SurfaceType::BSplineSurface)
     }
     /// Sample parameters with deflection `deflection` and at least the given counts
     /// (`SamplePnts`): the B-spline analysis, else the counts of ComputeSamplePoints
@@ -251,16 +257,32 @@ impl Adaptor3dTopolTool {
     pub fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure> {
         let surface: Handle<dyn Adaptor3dSurface> = self.live_surface()?;
         let adapted: &dyn Adaptor3dSurface = &*surface;
-        let (uinf, usup, vinf, vsup) = sampled_box(adapted)?;
-        if adapted.get_type()? == SurfaceType::BSplineSurface {
-            return self.bspl_sample_pnts(deflection, nu_min, nv_min);
-        }
-        let (nbsu, nbsv) = compute_counts(adapted)?;
-        let (u_pars, v_pars) = (spread(uinf, usup, nbsu)?, spread(vinf, vsup, nbsv)?);
+        let (u_pars, v_pars) =
+            Self::sample_pnts_parameters(adapted, (deflection, nu_min, nv_min), || {
+                compute_counts(adapted)
+            })?;
         let mut state = self.state.write();
-        (state.nb_samples_u, state.nb_samples_v) = (nbsu, nbsv);
+        (state.nb_samples_u, state.nb_samples_v) = (u_pars.length(), v_pars.length());
         (state.u_pars, state.v_pars) = (Some(u_pars), Some(v_pars));
         Ok(())
+    }
+    /// The body of `SamplePnts` on the protected surface `myS` of a tool: the U and V
+    /// sample parameters (their lengths are the sample counts the tool stores), with the
+    /// virtual `ComputeSamplePoints` of the tool as `compute_sample_points`, which returns
+    /// the counts it set. A B-spline surface takes the `BSplSamplePnts` body instead
+    /// (docs/topalgo-design.md section 8);
+    /// `let (u, v) = Adaptor3dTopolTool::sample_pnts_parameters(&*s, (0.01, 10, 10), || tool.counts())?;`.
+    pub fn sample_pnts_parameters(
+        surface: &dyn Adaptor3dSurface,
+        (deflection, nu_min, nv_min): (f64, i32, i32),
+        compute_sample_points: impl FnOnce() -> Result<(i32, i32), Failure>,
+    ) -> Result<(Array1<'static, f64>, Array1<'static, f64>), Failure> {
+        let (uinf, usup, vinf, vsup) = sampled_box(surface)?;
+        if surface.get_type()? == SurfaceType::BSplineSurface {
+            return bspl_sample_parameters(surface, deflection, nu_min, nv_min);
+        }
+        let (nbsu, nbsv) = compute_sample_points()?;
+        Ok((spread(uinf, usup, nbsu)?, spread(vinf, vsup, nbsv)?))
     }
 }
 

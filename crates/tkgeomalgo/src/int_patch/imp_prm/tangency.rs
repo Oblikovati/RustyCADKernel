@@ -98,7 +98,7 @@ fn start_point(
 ) -> Result<(), Failure> {
     st.pstart = input.solrst.point(i)?.clone();
     let thearc: TheArc = st.pstart.arc();
-    st.arcorien = input.domain.arc_orientation(&thearc);
+    st.arcorien = input.domain.arc_orientation(&thearc)?;
     st.ispassing = is_passing(st.arcorien);
     let p2d: Point2 = thearc.d0(st.pstart.parameter())?;
     st.x = [p2d.x(), p2d.y()];
@@ -132,7 +132,7 @@ fn tangent_point(
                 continue;
             }
             let thearc: TheArc = st.pstart.arc();
-            st.arcorien = input.domain.arc_orientation(&thearc);
+            st.arcorien = input.domain.arc_orientation(&thearc)?;
             st.ispassing = st.ispassing && is_passing(st.arcorien);
             let p2d: Point2 = thearc.d0(st.pstart.parameter())?;
             st.ppoint.add_uv(p2d.x(), p2d.y())?;
@@ -270,7 +270,7 @@ fn same_vertex_arcs(
             continue;
         }
         let thearc: TheArc = st.pstart.arc();
-        st.arcorien = input.domain.arc_orientation(&thearc);
+        st.arcorien = input.domain.arc_orientation(&thearc)?;
         st.ppoint.add_uv(st.x[0], st.x[1])?;
         let (p2d, d2d): (Point2, Vector2) = thearc.d1(st.pstart.parameter())?;
         st.ppoint.add_uv(p2d.x(), p2d.y())?;

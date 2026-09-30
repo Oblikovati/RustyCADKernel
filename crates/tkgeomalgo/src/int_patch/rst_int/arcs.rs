@@ -49,7 +49,7 @@ impl RstInput<'_> {
             plast = MY_INFINITE;
         }
         self.domain.initialize_arc(arc)?;
-        self.domain.init_vertex_iterator();
+        self.domain.init_vertex_iterator()?;
         while self.domain.more_vertex() {
             let vtx = self.domain.vertex()?;
             let prm: f64 = IntPatchHInterTool::parameter(&vtx, arc)?;
@@ -58,7 +58,7 @@ impl RstInput<'_> {
             } else if (prm - plast).abs() < precision::p_confusion() {
                 arc.d0(plast)?;
             }
-            self.domain.next_vertex();
+            self.domain.next_vertex()?;
         }
         Ok((pfirst, plast))
     }

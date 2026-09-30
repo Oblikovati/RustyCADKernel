@@ -21,14 +21,18 @@ use rustycad_tkmath::math::{FunctionSetWithDerivatives, FunctionWithDerivative, 
 /// instance.
 pub type TheArc = Handle<dyn Adaptor2dCurve2d>;
 /// `TheVertex`: a vertex of the domain, `occ::handle<Adaptor3d_HVertex>` in every
-/// instance.
-pub type TheVertex = Handle<Adaptor3dHVertex>;
+/// instance; the trait object dispatches the virtual members to the overrides
+/// (docs/topalgo-design.md section 8).
+pub type TheVertex = Handle<dyn Adaptor3dHVertex>;
 
 /// `TheTopolTool`: the domain of the surface, whose native class is the virtual
 /// `Adaptor3d_TopolTool`. Every member takes `&self`, as the domain is shared through a
 /// handle and keeps its iterators inside.
 ///
-/// `Adaptor3dTopolTool` implements it; `domain.nb_samples()?`.
+/// `Adaptor3dTopolTool` implements it, and so does every subclass of the native class
+/// (BRepTopAdaptor_TopolTool in TKTopAlgo, docs/topalgo-design.md section 8). The
+/// members whose override can raise where the base cannot return `Result`;
+/// `domain.nb_samples()?`.
 pub trait TheTopolTool {
     /// `NbSamplesU()`.
     fn nb_samples_u(&self) -> Result<i32, Failure>;
@@ -51,24 +55,24 @@ pub trait TheTopolTool {
     /// `Initialize(A)`: the vertex iterator runs on the arc `arc`.
     fn initialize_arc(&self, arc: &TheArc) -> Result<(), Failure>;
     /// `InitVertexIterator()`.
-    fn init_vertex_iterator(&self);
+    fn init_vertex_iterator(&self) -> Result<(), Failure>;
     /// `MoreVertex()`.
     fn more_vertex(&self) -> bool;
     /// `Vertex()`: the current vertex.
     fn vertex(&self) -> Result<TheVertex, Failure>;
     /// `NextVertex()`.
-    fn next_vertex(&self);
+    fn next_vertex(&self) -> Result<(), Failure>;
     /// `Identical(V1, V2)`.
     fn identical(&self, first: &TheVertex, second: &TheVertex) -> Result<bool, Failure>;
     /// `Edge()`: the edge of the current arc, where the native member returns a `void*`
     /// to a `TopoDS_Edge` (or null).
-    fn edge(&self) -> Option<Edge>;
+    fn edge(&self) -> Result<Option<Edge>, Failure>;
     // The members the IntPatch algorithms call on their domains (docs/geomalgo-design.md
     // section 18).
     /// `IsThePointOn(P, Tol, ReacdreOnPeriodic)`.
     fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure>;
     /// `DomainIsInfinite()`.
-    fn domain_is_infinite(&self) -> bool;
+    fn domain_is_infinite(&self) -> Result<bool, Failure>;
     /// `SamplePnts(theDefl, theNUmin, theNVmin)`.
     fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure>;
     /// `UParameters(theArray)`: a copy of the U sample parameters.
@@ -94,8 +98,8 @@ pub trait TheTopolTool {
     }
     /// `Orientation(C)`: the orientation of an arc (FORWARD for the base domain).
     /// IntPatch_ImpPrmIntersection reads it.
-    fn arc_orientation(&self, _arc: &TheArc) -> Orientation {
-        Orientation::Forward
+    fn arc_orientation(&self, _arc: &TheArc) -> Result<Orientation, Failure> {
+        Ok(Orientation::Forward)
     }
     /// `Orientation(V)`: the orientation of a vertex (its own one for the base domain).
     fn vertex_orientation(&self, vertex: &TheVertex) -> Result<Orientation, Failure> {
@@ -307,8 +311,9 @@ impl TheTopolTool for Adaptor3dTopolTool {
     fn initialize_arc(&self, arc: &TheArc) -> Result<(), Failure> {
         self.initialize_curve(arc)
     }
-    fn init_vertex_iterator(&self) {
+    fn init_vertex_iterator(&self) -> Result<(), Failure> {
         Adaptor3dTopolTool::init_vertex_iterator(self);
+        Ok(())
     }
     fn more_vertex(&self) -> bool {
         Adaptor3dTopolTool::more_vertex(self)
@@ -316,23 +321,24 @@ impl TheTopolTool for Adaptor3dTopolTool {
     fn vertex(&self) -> Result<TheVertex, Failure> {
         Adaptor3dTopolTool::vertex(self)
     }
-    fn next_vertex(&self) {
+    fn next_vertex(&self) -> Result<(), Failure> {
         Adaptor3dTopolTool::next_vertex(self);
+        Ok(())
     }
     fn identical(&self, first: &TheVertex, second: &TheVertex) -> Result<bool, Failure> {
         Adaptor3dTopolTool::identical(self, first, second)
     }
     // The base class has no edge: its `Edge()` returns a null pointer.
-    fn edge(&self) -> Option<Edge> {
-        None
+    fn edge(&self) -> Result<Option<Edge>, Failure> {
+        Ok(None)
     }
     fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure> {
         Ok(Adaptor3dTopolTool::is_the_point_on(
             self, point, tol, reframe,
         ))
     }
-    fn domain_is_infinite(&self) -> bool {
-        Adaptor3dTopolTool::domain_is_infinite(self)
+    fn domain_is_infinite(&self) -> Result<bool, Failure> {
+        Ok(Adaptor3dTopolTool::domain_is_infinite(self))
     }
     fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure> {
         Adaptor3dTopolTool::sample_pnts(self, deflection, nu_min, nv_min)
@@ -355,8 +361,8 @@ impl TheTopolTool for Adaptor3dTopolTool {
     fn tol_3d_vertex(&self, vertex: &TheVertex) -> Result<f64, Failure> {
         Adaptor3dTopolTool::vertex_tol_3d(self, vertex)
     }
-    fn arc_orientation(&self, arc: &TheArc) -> Orientation {
-        self.curve_orientation(arc)
+    fn arc_orientation(&self, arc: &TheArc) -> Result<Orientation, Failure> {
+        Ok(self.curve_orientation(arc))
     }
     fn vertex_orientation(&self, vertex: &TheVertex) -> Result<Orientation, Failure> {
         Adaptor3dTopolTool::vertex_orientation(self, vertex)

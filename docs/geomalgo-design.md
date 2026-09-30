@@ -363,7 +363,8 @@ arc, vertex and domain types, so the port fixes them and makes a trait only of w
 varies. The port (`crates/tkgeomalgo/src/int_start`):
 
 - **Fixed types.** `TheArc` is `Handle<dyn Adaptor2dCurve2d>` and `TheVertex` is
-  `Handle<Adaptor3dHVertex>` in every instance. `ThePSurfaceTool` is the IntImp trait
+  `Handle<dyn Adaptor3dHVertex>` in every instance (the vertex is virtual too,
+  docs/topalgo-design.md section 8). `ThePSurfaceTool` is the IntImp trait
   `ThePSurfaceTool` (Adaptor3d_HSurfaceTool in both instances). `TheArcTool` and
   `TheSITool` are named by the macros but not called by the bodies, so the traits
   leave them out.
@@ -371,8 +372,10 @@ varies. The port (`crates/tkgeomalgo/src/int_start`):
   native class is virtual (BRepTopAdaptor_TopolTool overrides `Edge()` and the
   iteration), so the calls the bodies make are the trait `TheTopolTool` (sampling,
   classification, the arc and vertex iteration, `Identical`, `Edge`). `Edge()` returns
-  `Option<TopoDsEdge>` where the native one returns a `void*` to a `TopoDS_Edge`;
-  `Adaptor3dTopolTool` implements it with `None`, as its native `Edge()` returns null.
+  `Result<Option<TopoDsEdge>, _>` where the native one returns a `void*` to a
+  `TopoDS_Edge`; `Adaptor3dTopolTool` implements it with `Ok(None)`, as its native
+  `Edge()` returns null, and BRepTopAdaptor_TopolTool with its current edge
+  (docs/topalgo-design.md section 8).
 - **The function and the tool.** `TheFunction` of `SearchOnBoundaries` is the trait
   `TheArcFunction` (a tkmath `FunctionWithDerivative` with `Set(arc)`, `NbSamples`,
   `GetStateNumber`, `Valpoint`, `Quadric`, `Surface`, `LastComputedPoint` and the direct

@@ -7,7 +7,8 @@ use super::geom_adaptor_cases::geom_curve;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg3d::adaptor3d::{
-    Adaptor3dCurve, Adaptor3dCurveOnSurface, Adaptor3dHVertex, Adaptor3dSurface, Adaptor3dTopolTool,
+    Adaptor3dCurve, Adaptor3dCurveOnSurface, Adaptor3dHVertex, Adaptor3dHVertexBase,
+    Adaptor3dSurface, Adaptor3dTopolTool,
 };
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve;
 use rustycad_tkg3d::top_abs::Orientation;
@@ -132,15 +133,15 @@ fn empty_transformed() {
 
 // a3_hvertex_state.
 fn hvertex_state(
-    v: &Handle<Adaptor3dHVertex>,
+    v: &Handle<dyn Adaptor3dHVertex>,
     c: &Handle<dyn Adaptor2dCurve2d>,
-    o: &Handle<Adaptor3dHVertex>,
+    o: &Handle<dyn Adaptor3dHVertex>,
 ) {
     let p: Point2 = v.value();
     real(p.x());
     real(p.y());
     int(v.orientation() as i32);
-    real(v.resolution(c));
+    real(v.resolution(c).expect("the base resolution cannot fail"));
     show(v.parameter(c), real);
     flag(v.is_same(o).unwrap());
     flag(v.is_same(v).unwrap());
@@ -160,11 +161,11 @@ pub fn hvertex_case(values: &[f64]) {
     let Some(c) = report(adaptor2d(&mut r)) else {
         return;
     };
-    let v = Handle::new(Adaptor3dHVertex::new(p, orientation(ori), res));
-    let o = Handle::new(Adaptor3dHVertex::new(q, Orientation::Reversed, 0.));
+    let v = Handle::new(Adaptor3dHVertexBase::new(p, orientation(ori), res)).cast();
+    let o = Handle::new(Adaptor3dHVertexBase::new(q, Orientation::Reversed, 0.)).cast();
     hvertex_state(&v, &c, &o);
     hvertex_state(&o, &c, &v);
-    hvertex_state(&Handle::new(Adaptor3dHVertex::default()), &c, &v);
+    hvertex_state(&Handle::new(Adaptor3dHVertexBase::default()).cast(), &c, &v);
     end();
 }
 
@@ -196,7 +197,7 @@ fn restrictions(t: &Adaptor3dTopolTool) {
 }
 
 fn vertices(t: &Adaptor3dTopolTool, c: &Handle<dyn Adaptor2dCurve2d>) {
-    let mut first: Handle<Adaptor3dHVertex> = Handle::default();
+    let mut first: Handle<dyn Adaptor3dHVertex> = Handle::default();
     t.init_vertex_iterator();
     while t.more_vertex() {
         let v = t.vertex().unwrap();

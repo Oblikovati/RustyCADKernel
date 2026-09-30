@@ -1,7 +1,7 @@
 // Rust translation of ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.cxx (Initialize(S), Initialize(C)) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The restrictions of the parametric rectangle and the vertices of one restriction.
-use super::super::h_vertex::Adaptor3dHVertex;
+use super::super::h_vertex::Adaptor3dHVertexBase;
 use super::super::surface::Adaptor3dSurface;
 use super::{Adaptor3dTopolTool, TopolState, samples};
 use crate::geom::errors::null_object;
@@ -70,20 +70,20 @@ impl Adaptor3dTopolTool {
                 "Adaptor3d_TopolTool::Initialize: null curve; expected a curve",
             ));
         };
-        let mut vertices: Vec<Adaptor3dHVertex> = Vec::new();
+        let mut vertices: Vec<Adaptor3dHVertexBase> = Vec::new();
         let (first, last) = (
             restriction.first_parameter()?,
             restriction.last_parameter()?,
         );
         if first > -INFINITE {
-            vertices.push(Adaptor3dHVertex::new(
+            vertices.push(Adaptor3dHVertexBase::new(
                 restriction.value(first)?,
                 Orientation::Forward,
                 1.0e-8,
             ));
         }
         if last < INFINITE {
-            vertices.push(Adaptor3dHVertex::new(
+            vertices.push(Adaptor3dHVertexBase::new(
                 restriction.value(last)?,
                 Orientation::Reversed,
                 1.0e-8,
@@ -94,7 +94,7 @@ impl Adaptor3dTopolTool {
         state.id_vtx = 0;
         for vertex in vertices {
             let index = state.nb_vtx as usize;
-            state.vtx[index] = Handle::new(vertex);
+            state.vtx[index] = Handle::new(vertex).cast();
             state.nb_vtx += 1;
         }
         Ok(())

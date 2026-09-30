@@ -219,7 +219,7 @@ pub(super) fn classify(
         treat_as_bi_parametric = check.treat_as_bi_parametric;
         geom_geom = check.geom_geom;
     }
-    if d1.domain_is_infinite() || d2.domain_is_infinite() {
+    if d1.domain_is_infinite()? || d2.domain_is_infinite()? {
         treat_as_bi_parametric = false;
     }
     if treat_as_bi_parametric {

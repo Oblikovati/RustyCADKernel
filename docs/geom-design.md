@@ -141,9 +141,11 @@ data in one `SharedState`. `GeomAdaptor_SurfaceOfLinearExtrusion` and
 `GeomAdaptor_SurfaceOfRevolution` derive from `GeomAdaptor_Surface` natively: each
 struct embeds a `GeomAdaptorSurface` parent, writes the protected base state
 through it when the direction or axis is loaded, overrides the native virtual
-members and forwards the inherited ones. `Adaptor3d_HVertex` and
-`Adaptor3d_TopolTool` are `Handle`-shared structs whose virtual members are
-inherent methods, because no port overrides them.
+members and forwards the inherited ones. `Adaptor3d_HVertex` is
+the trait `Adaptor3dHVertex` with the base instance `Adaptor3dHVertexBase`, and
+`Adaptor3d_TopolTool` is a `Handle`-shared struct whose virtual interface is the
+IntStart trait `TheTopolTool`, so that BRepTopAdaptor overrides both
+(docs/topalgo-design.md section 8).
 
 The native offset, extrusion and revolution templates take either a Geom object
 or an adaptor as their basis. In Rust they are generic over

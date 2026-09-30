@@ -9,7 +9,7 @@ use rustycad_tkbrep::topods::Vertex;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
-use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dSurface};
+use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dHVertexBase, Adaptor3dSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::Point2;
@@ -70,7 +70,7 @@ fn vertices(
     arc: &Handle<dyn Adaptor2dCurve2d>,
 ) -> Result<(), Failure> {
     t.initialize_curve(arc)?;
-    let mut first: Handle<Adaptor3dHVertex> = Handle::default();
+    let mut first: Handle<dyn Adaptor3dHVertex> = Handle::default();
     t.init_vertex_iterator()?;
     while t.more_vertex() {
         let v = t.vertex()?;
@@ -80,12 +80,12 @@ fn vertices(
         int(t.vertex_orientation(&v)? as i32);
         show(t.vertex_tol_3d(&v), real);
         show(t.pnt(&v), pnt);
-        let brep: Handle<BRepTopAdaptorHVertex> = v.cast();
-        let hv = brep.get().expect("a BRepTopAdaptor_HVertex");
-        pnt2d(hv.value());
-        show(hv.parameter(arc), real);
-        show(hv.resolution(arc), real);
-        flag(hv.is_same(&first)?);
+        // Through the base handle, as the native probe calls them: the vertex trait
+        // dispatches to the BRepTopAdaptor_HVertex overrides.
+        pnt2d(v.value());
+        show(v.parameter(arc), real);
+        show(v.resolution(arc), real);
+        flag(v.is_same(&first)?);
         t.next_vertex()?;
     }
     attempt(|| t.vertex().map(|_| ()));
@@ -213,11 +213,12 @@ pub fn errors_case(values: &[f64]) {
         let gc: Handle<dyn Adaptor2dCurve2d> = Handle::new(Geom2dAdaptorCurve::default()).cast();
         attempt(|| t.initialize_curve(&gc));
         show(t.curve_tol_3d(&gc), real);
-        let hv = Handle::new(Adaptor3dHVertex::new(
+        let hv: Handle<dyn Adaptor3dHVertex> = Handle::new(Adaptor3dHVertexBase::new(
             Point2::new(1.0, 2.0),
             Orientation::Reversed,
             0.5,
-        ));
+        ))
+        .cast();
         int(t.vertex_orientation(&hv)? as i32);
         show(t.vertex_tol_3d(&hv), real);
         show(t.pnt(&hv), pnt);
@@ -225,7 +226,7 @@ pub fn errors_case(values: &[f64]) {
             &Vertex::default(),
             &Handle::default(),
         ));
-        let nvb: Handle<Adaptor3dHVertex> = nv.cast();
+        let nvb: Handle<dyn Adaptor3dHVertex> = nv.cast();
         show(t.vertex_tol_3d(&nvb), real);
         show(t.pnt(&nvb), pnt);
         pnt2d(nv.value());
