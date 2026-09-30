@@ -497,7 +497,7 @@ pub fn tanon_geo_case(values: &[f64]) {
 enum Locus {
     Line(rustycad_tkmath::gp::Line2),
     Circle(Circle2),
-    Curve(rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve),
+    Curve(Box<rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve>),
 }
 
 fn build_on_iter(r: &mut Reader<'_>, first: i32, on: &Locus) -> Result<Circ2d2TanOnIter, Failure> {
@@ -551,7 +551,7 @@ pub fn tanon_iter_case(values: &[f64]) {
         let on = match locus {
             0 => Locus::Line(r.lin2d()),
             1 => Locus::Circle(r.circ2d()),
-            _ => Locus::Curve(hatch_adaptor(&mut r)?),
+            _ => Locus::Curve(Box::new(hatch_adaptor(&mut r)?)),
         };
         let s = build_on_iter(&mut r, first, &on)?;
         flag(s.is_done());
