@@ -170,3 +170,5 @@ def append_gfill_requests(requests: list[str]) -> None:
     _appsurf_requests(requests)
     # The fillings reuse the section sets above (tkgeomalgo_corpus_gfill_fill.py).
     __import__('tkgeomalgo_corpus_gfill_fill').append_gfill_fill_requests(requests)
+    # The constrained filling (tkgeomalgo_corpus_gfill_cf.py).
+    __import__('tkgeomalgo_corpus_gfill_cf').append_gfill_cf_requests(requests)

@@ -70,7 +70,7 @@ fn dump_surface_poles<S: PoleGrid + GeomSurface>(s: &S) {
     }
 }
 
-fn dump_bsurface(s: &Handle<GeomBSplineSurface>) {
+pub fn dump_bsurface(s: &Handle<GeomBSplineSurface>) {
     let Some(s) = s.get() else {
         print!("null ");
         return;

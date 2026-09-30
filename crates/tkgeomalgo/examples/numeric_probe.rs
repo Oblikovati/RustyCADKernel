@@ -10,7 +10,7 @@ use ga_probe::{
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
-use ga_probe::{gfill, gfill_fill};
+use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
 use ga_probe::{int_walk, int_walk_iw};
 
@@ -176,6 +176,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfill_scheme", gfill_fill::scheme_case),
     ("gfill_bezier", gfill_fill::bezier_case),
     ("gfill_bspline", gfill_fill::bspline_case),
+    ("gfill_bound", gfill_cf::bound_case),
+    ("gfill_corner", gfill_cf::corner_case),
+    ("gfill_patch", gfill_cf::patch_case),
+    ("gfill_cfill", gfill_cf::cfill_case),
 ];
 
 fn main() {
