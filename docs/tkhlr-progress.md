@@ -272,3 +272,8 @@ Restriction-curve internal-point search now passes 288 additional exact requests
 (1,512 combined), including bisection and marking or inserting internal vertices.
 All resulting vertices are compared on six real surface types with four initial
 vertex arrangements. Strict all-target Clippy passes.
+
+Restriction-segment processing passes 432 more exact requests (1,944 combined),
+including repeated endpoint matches, shared vertex mutation, negative tolerance and
+internal-vertex insertion. Strict all-target Clippy passes. Contap_Contour itself is
+still unregistered while its orchestration is being completed.

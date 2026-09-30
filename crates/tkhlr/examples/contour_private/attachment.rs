@@ -11,7 +11,7 @@ use rustycad_tkhlr::contap::{
     ContapArcFunction, ContapLine, ContapSurfFunction, ContapTheSearch, ContapTheSearchInside,
 };
 use rustycad_tkmath::gp::{Axis2, Circle3, Direction3, Line3, Point3};
-fn candidates() -> Result<Vec<ContapLine>, Failure> {
+pub(super) fn candidates() -> Result<Vec<ContapLine>, Failure> {
     let mut lines = Vec::new();
     for location in [
         Point3::new(0., 2., 0.),

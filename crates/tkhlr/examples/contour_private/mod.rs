@@ -1,3 +1,5 @@
+mod segments;
+pub use segments::segments_case;
 mod internal;
 pub use internal::internal_case;
 mod attachment;

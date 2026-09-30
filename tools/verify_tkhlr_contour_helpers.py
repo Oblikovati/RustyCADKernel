@@ -48,6 +48,8 @@ def append_attachment_requests(lines: list[str]) -> None:
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
         fields=[*surface,mode,*direction]
         lines.append('contour_attachment '+numbers(fields))
+        for seeded,tolerance in product([0,1],[-1,0,1e-7]):
+            lines.append('contour_segments '+numbers([*fields,seeded,tolerance]))
         for scenario in range(4):
             lines.append('contour_internal '+numbers([*fields,scenario]))
 
