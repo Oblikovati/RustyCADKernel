@@ -36,15 +36,17 @@ impl GeomIntLineConstructor {
         &self,
         p: rustycad_tkmath::gp::Point3,
     ) -> Result<[f64; 4], Failure> {
-        let mut uv: [f64; 4] = parameters(&self.my_hs1, &self.my_hs2, p)?;
-        adjust_periodic(&self.my_hs1, &self.my_hs2, &mut uv)?;
+        let (hs1, hs2) = self.surfaces()?;
+        let mut uv: [f64; 4] = parameters(hs1, hs2, p)?;
+        adjust_periodic(hs1, hs2, &mut uv)?;
         Ok(uv)
     }
 
     /// The parameters of a point line, adjusted to the periods of the quadrics.
     fn adjusted(&self, (u1, v1, u2, v2): (f64, f64, f64, f64)) -> Result<[f64; 4], Failure> {
         let mut uv: [f64; 4] = [u1, v1, u2, v2];
-        adjust_periodic(&self.my_hs1, &self.my_hs2, &mut uv)?;
+        let (hs1, hs2) = self.surfaces()?;
+        adjust_periodic(hs1, hs2, &mut uv)?;
         Ok(uv)
     }
 
@@ -149,7 +151,8 @@ impl GeomIntLineConstructor {
                 SurfaceType::SurfaceOfExtrusion | SurfaceType::SurfaceOfRevolution
             )
         };
-        let (st1, st2) = (self.my_hs1.get_type()?, self.my_hs2.get_type()?);
+        let (hs1, hs2) = self.surfaces()?;
+        let (st1, st2) = (hs1.get_type()?, hs2.get_type()?);
         let cond: bool = if st1 == SurfaceType::Plane {
             swept(st2)
         } else {

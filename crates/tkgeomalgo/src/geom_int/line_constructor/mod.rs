@@ -136,6 +136,18 @@ impl GeomIntLineConstructor {
         })
     }
 
+    /// The loaded surfaces, or Standard_NullObject before `Load` (a null dereference
+    /// natively).
+    fn surfaces(&self) -> Result<(&GeomAdaptorSurface, &GeomAdaptorSurface), Failure> {
+        match (self.my_hs1.get(), self.my_hs2.get()) {
+            (Some(s1), Some(s2)) => Ok((s1, s2)),
+            _ => Err(Failure::with_message(
+                "Standard_NullObject",
+                "GeomInt_LineConstructor::Perform() - the surfaces are not loaded; expected Load first",
+            )),
+        }
+    }
+
     /// Whether `(u1, v1)` is not OUT of the first domain and `(u2, v2)` not OUT of the
     /// second one (the second is not classified when the first answers OUT).
     fn in_both(&self, uv: [f64; 4], tol: f64) -> Result<bool, Failure> {
