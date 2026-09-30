@@ -26,3 +26,5 @@ mod surface_range_localize;
 pub use surface_range_localize::SurfaceRangeLocalizeData;
 mod topol_tool;
 pub use topol_tool::TopolTool;
+mod fclass2d;
+pub use fclass2d::FClass2d;
