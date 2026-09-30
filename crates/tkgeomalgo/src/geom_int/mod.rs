@@ -13,5 +13,10 @@
 // commercial license or contractual agreement.
 // Rust translation of ModelingAlgorithms/TKGeomAlgo/GeomInt at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! OCCT package GeomInt. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tkgeomalgo-progress.md lists the ported packages).
+//! OCCT package GeomInt: the intersection of two Geom surfaces as Geom curves
+//! (docs/geomalgo-design.md section 20). `GeomInt_IntSS` runs `IntPatch_Intersection`,
+//! splits its lines with `GeomInt_LineConstructor` and makes the curves, approximating
+//! the walking lines with `GeomInt_WLApprox` (the ApproxInt instances of `instances`).
+mod instances;
+
+pub use instances::*;
