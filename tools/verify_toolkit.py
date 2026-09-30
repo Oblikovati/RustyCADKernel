@@ -59,9 +59,9 @@ def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
 
 
 def declared_names(text: str) -> set[str]:
-    """The `Suite.Case` of every TEST, TEST_F and TYPED_TEST, whatever the spacing (a
+    """The `Suite.Case` of every TEST, TEST_F, TEST_P and typed declaration, whatever the spacing (a
     declaration may wrap after the comma); declared_names('TEST(A, b)') == {'A.b'}."""
-    pattern = r'(?:TEST(?:_F)?|TYPED_TEST)\(\s*(\w+)\s*,\s*(\w+)\s*\)'
+    pattern = r'\b(?:TEST(?:_[FP])?|TYPED_TEST(?:_P)?)\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)'
     return {f'{suite}.{case}' for suite, case in re.findall(pattern, text)}
 
 

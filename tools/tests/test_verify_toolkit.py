@@ -26,6 +26,15 @@ class DeclaredNameTests(unittest.TestCase):
         text = 'TEST_F(Suite,\n       LongCase)\n{}\nTEST(Other, Short)\nTYPED_TEST( T , c )'
         self.assertEqual(declared_names(text), {'Suite.LongCase', 'Other.Short', 'T.c'})
 
+    def test_parameterized_declarations_are_found(self) -> None:
+        # BRepGraph_Fuzz_Test.cxx expands each TEST_P over seven fixed seeds.
+        text = 'TEST_P (Fuzz,\n Seed) {} TYPED_TEST_P(Typed, Case) {}'
+        self.assertEqual(declared_names(text), {'Fuzz.Seed', 'Typed.Case'})
+
+    def test_macro_suffixes_do_not_create_declarations(self) -> None:
+        text = 'MY_TEST(Fake, Case) TESTING(Fake, Other) TEST_P(Real, Seed)'
+        self.assertEqual(declared_names(text), {'Real.Seed'})
+
 
 
 def gtest_case(name: str, outcome: str = 'pass') -> ET.Element:

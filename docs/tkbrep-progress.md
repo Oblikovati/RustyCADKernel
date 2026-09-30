@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (908 declarations):
+The toolkit test inventory maps these suites (910 declarations; 922 runtime cases):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -78,7 +78,7 @@ The toolkit test inventory maps these suites (908 declarations):
 | BRepGraph_SparseModel_Test.cxx | brep_graph_sparse_model | 28 | pass | pass |
 | BRepGraph_ScenarioMatrix_Test.cxx | not mapped (phase 2) | 18 | not run | waits for BRepGProp, TKPrim cylinder and sphere |
 | BRepGraph_SeamRedesign_Test.cxx | mapped | 9 | passed | original builders and seam connectivity |
-| BRepGraph_Fuzz_Test.cxx | not mapped (phase 2) | 2 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim); its two TEST_P declarations are instantiated per seed |
+| BRepGraph_Fuzz_Test.cxx | brep_graph_fuzz_legacy | 2 (14 runtime cases) | passed | original seven seeds and 630 mutation inputs |
 
 The shared fixtures in `crates/tkbrep/tests/support` now call the production
 BRepBuilderAPI_MakeVertex/MakeEdge/MakeWire and BRepPrimAPI_MakeBox ports. The previous
@@ -1106,3 +1106,27 @@ TKPrim and TKTopAlgo builders. The tests retain the original primitive dimension
 TopExp comparisons, flattening options, UID checks, and natural-boundary inputs.
 Unbounded faces retain OCCT's warning behavior; synthesized plane PCurves are
 checked through the adaptor without requiring a stored PCurve.
+
+### Recovered fixed-seed graph mutations
+
+Both original `BRepGraph_FuzzSeedTest` declarations retain all seven seeds and their
+50 box / 40 cylinder iterations. The fixtures store input indices and random deltas,
+not expected kernel outputs. Each Rust mutation still runs through the guarded editor,
+followed by the original audit assertion. The native cases run unchanged in the gate.
+
+`tools/generate_tkbrep_fuzz_inputs.py --source ../OCCT --native-build BUILD` reproduces
+`tests/graph_fuzz/inputs` with the compiler recorded in the oracle CMake cache (this
+capture: Ubuntu GCC/libstdc++ 13.3.0, `-std=c++17 -O2`). Its C++ translation unit includes
+the unchanged upstream test and checks the RNG state, bitwise coordinate/tolerance
+results, and audit after every call to the original `applyOne`. This pins libstdc++'s
+uniform distributions and GCC's coordinate argument evaluation order. Every one of the
+630 captured operations applies; no retry or skip is omitted from these fixtures.
+The source excludes split/removal from this stream under its Phase 5.10/5.11 comment.
+
+Fixture SHA-256:
+
+- `box.txt`: `34689d0d04d03e8322fe5b394970327c69876ac9e55b0d35028dbe4efe97b323`
+- `cylinder.txt`: `20fad48d5b540c6d23618e1f970e7b0fb48a4786704a7f6a648cf64d81a23abf`
+
+The toolkit verifier now recognizes `TEST_P` and `TYPED_TEST_P`, with parser regressions;
+its existing runtime expansion checks require a distinct Rust test for every native case.

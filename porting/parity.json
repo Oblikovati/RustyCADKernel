@@ -298395,6 +298395,92 @@
       "profiles": [
         "linux-gcc-c-locale"
       ]
+    },
+    {
+      "upstream_id": "BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Fuzz_Test.cxx",
+      "source_sha256": "845c35d071a3de05d5f66a1628b0702e658aaf2cbe4b74af3a7ad70530c1bc06",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_fuzz_legacy",
+      "rust_source": "crates/tkbrep/tests/graph_fuzz/cases.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "runtime_cases": [
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid/0",
+          "rust_test": "BRepGraph_FuzzSeedTest__BoxSeed_RandomMutations_RemainValid__seed_1"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid/1",
+          "rust_test": "BRepGraph_FuzzSeedTest__BoxSeed_RandomMutations_RemainValid__seed_7"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid/2",
+          "rust_test": "BRepGraph_FuzzSeedTest__BoxSeed_RandomMutations_RemainValid__seed_42"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid/3",
+          "rust_test": "BRepGraph_FuzzSeedTest__BoxSeed_RandomMutations_RemainValid__seed_137"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid/4",
+          "rust_test": "BRepGraph_FuzzSeedTest__BoxSeed_RandomMutations_RemainValid__seed_2026"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid/5",
+          "rust_test": "BRepGraph_FuzzSeedTest__BoxSeed_RandomMutations_RemainValid__seed_12648430"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.BoxSeed_RandomMutations_RemainValid/6",
+          "rust_test": "BRepGraph_FuzzSeedTest__BoxSeed_RandomMutations_RemainValid__seed_3735928559"
+        }
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Fuzz_Test.cxx",
+      "source_sha256": "845c35d071a3de05d5f66a1628b0702e658aaf2cbe4b74af3a7ad70530c1bc06",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_fuzz_legacy",
+      "rust_source": "crates/tkbrep/tests/graph_fuzz/cases.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "runtime_cases": [
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid/0",
+          "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_1"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid/1",
+          "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_7"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid/2",
+          "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_42"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid/3",
+          "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_137"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid/4",
+          "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_2026"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid/5",
+          "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_12648430"
+        },
+        {
+          "upstream_case": "FixedSeeds/BRepGraph_FuzzSeedTest.CylinderSeed_RandomMutations_RemainValid/6",
+          "rust_test": "BRepGraph_FuzzSeedTest__CylinderSeed_RandomMutations_RemainValid__seed_3735928559"
+        }
+      ]
     }
   ]
 }
