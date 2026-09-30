@@ -1,0 +1,35 @@
+//! Isolated oracle for private contour helpers; no public API completion is implied.
+pub use rustycad_tkhlr::contap;
+use std::io::{self, BufRead};
+#[allow(dead_code, unused_imports)]
+#[path = "../../tkgeomalgo/examples/ga_probe/common.rs"]
+mod common;
+#[allow(dead_code)]
+#[path = "hl_probe/contana.rs"]
+mod contana;
+#[allow(dead_code)]
+#[path = "hl_probe/contap_surface.rs"]
+mod contap_surface;
+mod contour_private;
+#[path = "../src/contap/contour/math_helpers.rs"]
+mod math_helpers;
+#[allow(dead_code)]
+#[path = "../../tkg2d/examples/g2_probe/print.rs"]
+mod print;
+fn main() {
+    for line in io::stdin().lock().lines() {
+        let line = line.expect("private contour probe input");
+        let mut fields = line.split_whitespace();
+        let Some(operation) = fields.next() else {
+            continue;
+        };
+        let values: Vec<f64> = fields
+            .map(|value| value.parse().expect("contour numeric field"))
+            .collect();
+        if operation != "contour_math" {
+            eprintln!("Unknown probe operation: {operation}");
+            std::process::exit(2);
+        }
+        contour_private::math_case(&values);
+    }
+}

@@ -247,3 +247,12 @@ walking-line behavior. All 14,003 exact requests pass (216 new walks), including
 boundary/interior seeds, both Perform overloads, reversal and hole filling. Complete
 polyline and single-point results are compared. Two direct regressions, all crate
 tests and strict Clippy pass. Contap_Contour orchestration remains unported.
+
+### Contour orchestration: private math helpers
+
+The first Contap_Contour helper translations pass 576 exact comparisons against an
+isolated translation unit that includes the unchanged native source. The gate records
+its source hash and compiler command. It covers periodic recadrage, signed transitions,
+analytic projection, zero-radius circles and observable function state. Strict Clippy
+passes. These helpers have no public API or original test completion claims; the main
+Contour algorithm remains incomplete.
