@@ -2,3 +2,4 @@
 //! Discrete model interfaces and their default BRep implementations.
 pub mod brep_mesh_data;
 pub mod imesh_data;
+pub mod imesh_tools;

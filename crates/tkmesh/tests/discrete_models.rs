@@ -329,3 +329,15 @@ fn assert_weak_wire_edge(wire: &WireHandle) {
     drop(edge);
     assert!(pointer.upgrade().is_null());
 }
+
+#[test]
+fn native_status_casts_accept_combined_and_unlisted_bits() {
+    let owner = StatusOwner::default();
+    owner.set_status(Status(0x400 | 24));
+    assert!(owner.is_equal(Status(0x418)));
+    assert!(owner.is_set(Status(24)));
+    owner.unset_status(Status(24));
+    assert_eq!(owner.get_status_mask(), 0x400);
+    owner.unset_status(Status(-1));
+    assert!(owner.is_equal(Status::NoError));
+}

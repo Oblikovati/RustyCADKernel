@@ -1,30 +1,30 @@
 //! IMeshData_Status and IMeshData_StatusOwner, including exact-mask comparisons.
 use rustycad_tkernel::standard::SharedState;
-/// Native status values; `Status::ReMesh as i32 == 8`.
+/// Native status values; `Status::ReMesh.0 == 8`.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-#[repr(i32)]
-pub enum Status {
+pub struct Status(pub i32);
+#[allow(non_upper_case_globals)]
+impl Status {
     /// Successful generation.
-    #[default]
-    NoError = 0,
+    pub const NoError: Self = Self(0);
     /// Open boundary.
-    OpenWire = 1,
+    pub const OpenWire: Self = Self(1);
     /// Boundary self intersection.
-    SelfIntersectingWire = 2,
+    pub const SelfIntersectingWire: Self = Self(2);
     /// Mesh generation failed.
-    Failure = 4,
+    pub const Failure: Self = Self(4);
     /// Deflection reduced after interference.
-    ReMesh = 8,
+    pub const ReMesh: Self = Self(8);
     /// Incorrect boundary orientation.
-    UnorientedWire = 16,
+    pub const UnorientedWire: Self = Self(16);
     /// Insufficient boundary points.
-    TooFewPoints = 32,
+    pub const TooFewPoints: Self = Self(32);
     /// Existing triangulation too coarse.
-    Outdated = 64,
+    pub const Outdated: Self = Self(64);
     /// Existing triangulation retained.
-    Reused = 128,
+    pub const Reused: Self = Self(128);
     /// User cancellation.
-    UserBreak = 256,
+    pub const UserBreak: Self = Self(256);
 }
 /// Shared status bitmask; `StatusOwner::default().is_equal(Status::NoError)`.
 #[derive(Default)]
@@ -34,19 +34,19 @@ pub struct StatusOwner {
 impl StatusOwner {
     /// Exact comparison; `owner.is_equal(Status::ReMesh)`.
     pub fn is_equal(&self, value: Status) -> bool {
-        self.get_status_mask() == value as i32
+        self.get_status_mask() == value.0
     }
     /// Any common bit; `owner.is_set(Status::OpenWire)`.
     pub fn is_set(&self, value: Status) -> bool {
-        self.get_status_mask() & value as i32 != 0
+        self.get_status_mask() & value.0 != 0
     }
     /// Add bits; `owner.set_status(Status::Failure)`.
     pub fn set_status(&self, value: Status) {
-        *self.mask.write() |= value as i32;
+        *self.mask.write() |= value.0;
     }
     /// Remove bits; `owner.unset_status(Status::Failure)`.
     pub fn unset_status(&self, value: Status) {
-        *self.mask.write() &= !(value as i32);
+        *self.mask.write() &= !(value.0);
     }
     /// Complete mask; `owner.get_status_mask()`.
     pub fn get_status_mask(&self) -> i32 {

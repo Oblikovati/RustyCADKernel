@@ -15,7 +15,10 @@ def corpus() -> str:
              for count in (0, 1, 2, 3, 8, 33) for keep in (0, 1)
              for orientation in range(4)]
     rows += [f'mesh_model {mask} {unset} {orientation}' for mask in range(512)
-             for unset in (0, 1, 8, 16, 256) for orientation in range(4)]
+             for unset in (0, 1, 8, 16, 24, 256, -1) for orientation in range(4)]
+    rows += [f'mesh_tools {outcome}' for outcome in (-1, 0, 1)]
+    rows += [f'mesh_explorer {orientation} {duplicates}' for orientation in range(4)
+             for duplicates in (0, 1)]
     return '\n'.join(rows) + '\n'
 
 

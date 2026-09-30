@@ -1,6 +1,6 @@
 // Native model behavior, independent of the mesher itself.
 void mesh_status(IMeshData_StatusOwner& owner,int mask,int unset){
-    for(int bit=1;bit<=256;bit*=2)if(mask&bit)owner.SetStatus(IMeshData_Status(bit));
+    owner.SetStatus(IMeshData_Status(mask));
     ga_int(owner.GetStatusMask());
     for(int bit=0;bit<=256;bit=bit==0?1:bit*2){ga_flag(owner.IsSet(IMeshData_Status(bit)));ga_flag(owner.IsEqual(IMeshData_Status(bit)));}
     owner.UnsetStatus(IMeshData_Status(unset));ga_int(owner.GetStatusMask());
