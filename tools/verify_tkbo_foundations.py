@@ -33,6 +33,8 @@ def corpus() -> str:
     requests += context_compute_requests()
     requests += tools_requests()
     requests += wline_requests()
+    requests += [f"wline_decompose {a} {b} {pattern} {v} {shift} {mode} {axis}" for a, b, pattern, v, shift, mode, axis in product([1, 3, 4], [0, 1, 3, 4], range(12, 15), [0, 1], [-1e-6, 1e-6], [1, 2, 4], [0, 1])]
+    requests += [f"wline_decompose {a} {b} {pattern} {v} {shift} {avoid}" for a, b, pattern, v, shift, avoid in product([1, 3, 4], [0, 1, 3, 4], range(12), [0, 1.5707963267948966], [0, 6.283185307179586], range(5))]
     requests += [f"tools_topology {t} {offset} {tol} {ori}" for t, offset, tol, ori in product(
         [0, 1e-7, 5e-7, 1e-6, 1, 2], [0, 1e-7, 1], [1e-7, 0.1], range(4))]
     requests += [f"tools_surface {a} {b} {lo} {hi} {tol} {parallel}" for a, b, (lo, hi), tol, parallel in product(

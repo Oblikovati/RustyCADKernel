@@ -22,3 +22,4 @@ impl WLineTool {
         degenerate::point_in_zone(points.value(end)?, first, last)
     }
 }
+mod decompose;
