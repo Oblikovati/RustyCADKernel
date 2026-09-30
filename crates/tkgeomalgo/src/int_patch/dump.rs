@@ -8,7 +8,7 @@ use rustycad_tkernel::standard::Failure;
 use std::fmt::{self, Write};
 
 /// The Standard_Failure of a text sink that refused a write.
-pub(super) fn sink_failure(_: fmt::Error) -> Failure {
+pub(crate) fn sink_failure(_: fmt::Error) -> Failure {
     Failure::with_message("Standard_Failure", "IntPatch Dump: the output sink failed")
 }
 
@@ -28,7 +28,7 @@ fn special(value: f64, plus: bool) -> String {
 
 /// `%+10.20f`: a sign, fixed notation with 20 decimals, right-aligned in 10.
 /// `signed_fixed(0.5) == "+0.50000000000000000000"`.
-pub(super) fn signed_fixed(value: f64) -> String {
+pub(crate) fn signed_fixed(value: f64) -> String {
     let text: String = if value.is_finite() {
         format!("{value:+.20}")
     } else {

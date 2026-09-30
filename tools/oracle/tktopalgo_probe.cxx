@@ -32,6 +32,9 @@
 #include "tktopalgo_probe_bisector.cxx"
 #include "tktopalgo_probe_mat.cxx"
 #include "tktopalgo_probe_mat_parts.cxx"
+#include "tktopalgo_probe_shape.cxx"
+#include "tktopalgo_probe_brepbndlib.cxx"
+#include "tktopalgo_probe_brepclass3d.cxx"
 #include "tktopalgo_probe_breplib_common.cxx"
 #include "tktopalgo_probe_breplib_edge.cxx"
 #include "tktopalgo_probe_breplib_wire.cxx"
@@ -85,6 +88,19 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"tp_mat2d_cut", tp_mat2d_cut_case},
  {"tp_mat2d_minipath", tp_mat2d_minipath_case},
  {"tp_mat2d_tool", tp_mat2d_tool_case},
+ // BRepBndLib (tktopalgo_probe_brepbndlib.cxx, shapes of tktopalgo_probe_shape.cxx)
+ {"bbl_add", tp_bbl_add_case},
+ // BRepClass3d (tktopalgo_probe_brepclass3d.cxx, shapes of tktopalgo_probe_shape.cxx)
+ {"bc3_classify", tp_bc3_classify_case},
+ {"bc3_infinite", tp_bc3_infinite_case},
+ {"bc3_sclassifier", tp_bc3_sclassifier_case},
+ {"bc3_segment", tp_bc3_segment_case},
+ {"bc3_explorer", tp_bc3_explorer_case},
+ {"bc3_findpoint", tp_bc3_findpoint_case},
+ {"bc3_pointinface", tp_bc3_pointinface_case},
+ {"bc3_uvpoint", tp_bc3_uvpoint_case},
+ {"bc3_tree", tp_bc3_tree_case},
+ {"bc3_inter3d", tp_bc3_inter3d_case},
  // BRepLib (tktopalgo_probe_breplib_*.cxx)
  {"blm_vertex", tp_blm_vertex_case},
  {"blm_edge", tp_blm_edge_case},

@@ -7,6 +7,7 @@ mod queries;
 mod segment;
 mod state;
 mod transforms;
+mod tree_volume;
 // C++ std::min/max retain the first operand on ties and unordered comparisons.
 fn native_min(a: f64, b: f64) -> f64 {
     if b < a { b } else { a }

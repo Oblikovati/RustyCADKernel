@@ -81,6 +81,9 @@
 #include "tkgeomalgo_probe_intpatch_inter.cxx"
 #include "tkgeomalgo_probe_geomplate.cxx"
 #include "tkgeomalgo_probe_geomplate_build.cxx"
+#include "tkgeomalgo_probe_geomint.cxx"
+#include "tkgeomalgo_probe_geomint_approx.cxx"
+#include "tkgeomalgo_probe_geomint_statics.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -333,6 +336,23 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gplate_halfspace", ga_gp_halfspace_case},
  {"gplate_build", ga_gp_build_case},
  {"gplate_approx", ga_gp_approx_case},
+ // GeomInt, ApproxInt and GeomAPI_IntSS (tkgeomalgo_probe_geomint*.cxx)
+ {"gi_intss", ga_gi_intss_case},
+ {"gapi_intss", ga_gapi_intss_case},
+ {"gi_lconst", ga_gi_lconst_case},
+ {"gi_lines", ga_gi_lines_case},
+ {"gi_ltool", ga_gi_ltool_case},
+ {"gi_wlapprox", ga_gi_wlapprox_case},
+ {"gi_mline", ga_gi_mline_case},
+ {"gi_sv", ga_gi_sv_case},
+ {"gi_knots", ga_gi_knots_case},
+ {"gi_partype", ga_gi_partype_case},
+ {"gi_pcurves", ga_gi_pcurves_case},
+ {"gi_trim", ga_gi_trim_case},
+ {"gi_mkbsp", ga_gi_mkbsp_case},
+ {"gi_rline", ga_gi_rline_case},
+ {"gi_adjust", ga_gi_adjust_case},
+ {"gi_porient", ga_gi_porient_case},
 };
 int main() {
  std::string line;

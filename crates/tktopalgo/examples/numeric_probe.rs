@@ -3,8 +3,9 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    bisector, bisector_algo, brep_builder_api, brep_class, brep_lib_edge, brep_lib_package,
-    brep_lib_wire, brep_top_adaptor, int_curves_face, mat, mat_parts,
+    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_class, brep_class3d,
+    brep_lib_edge, brep_lib_package, brep_lib_wire, brep_top_adaptor, int_curves_face, mat,
+    mat_parts,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -61,6 +62,19 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("tp_mat2d_cut", mat_parts::mat2d_cut_case),
     ("tp_mat2d_minipath", mat_parts::mat2d_minipath_case),
     ("tp_mat2d_tool", mat_parts::mat2d_tool_case),
+    // BRepBndLib (tp_probe/brep_bnd_lib.rs, shapes of tp_probe/shape.rs)
+    ("bbl_add", brep_bnd_lib::add_case),
+    // BRepClass3d (tp_probe/brep_class3d.rs, shapes of tp_probe/shape.rs)
+    ("bc3_classify", brep_class3d::classify_case),
+    ("bc3_infinite", brep_class3d::infinite_case),
+    ("bc3_sclassifier", brep_class3d::sclassifier_case),
+    ("bc3_segment", brep_class3d::segment_case),
+    ("bc3_explorer", brep_class3d::explorer_case),
+    ("bc3_findpoint", brep_class3d::findpoint_case),
+    ("bc3_pointinface", brep_class3d::pointinface_case),
+    ("bc3_uvpoint", brep_class3d::uvpoint_case),
+    ("bc3_tree", brep_class3d::tree_case),
+    ("bc3_inter3d", brep_class3d::inter3d_case),
     // BRepLib (tp_probe/brep_lib_*.rs)
     ("blm_vertex", brep_lib_edge::vertex_case),
     ("blm_edge", brep_lib_edge::edge_case),

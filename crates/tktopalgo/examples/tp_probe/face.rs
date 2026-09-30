@@ -28,28 +28,28 @@ pub struct TpFace {
     pub edges: Vec<Edge>,
 }
 
-fn point(r: &mut Reader<'_>) -> Point3 {
+pub fn point(r: &mut Reader<'_>) -> Point3 {
     let (x, y) = (r.real(), r.real());
     Point3::new(x, y, r.real())
 }
-fn direction(r: &mut Reader<'_>) -> Result<Direction3, Failure> {
+pub fn direction(r: &mut Reader<'_>) -> Result<Direction3, Failure> {
     let (x, y) = (r.real(), r.real());
     Direction3::new(x, y, r.real())
 }
-fn point2d(r: &mut Reader<'_>) -> Point2 {
+pub fn point2d(r: &mut Reader<'_>) -> Point2 {
     let x = r.real();
     Point2::new(x, r.real())
 }
-fn orientation(r: &mut Reader<'_>) -> Orientation {
+pub fn orientation(r: &mut Reader<'_>) -> Orientation {
     Orientation::ALL[r.integer() as usize]
 }
 
-fn array_failure<E: std::fmt::Debug>(error: E) -> Failure {
+pub fn array_failure<E: std::fmt::Debug>(error: E) -> Failure {
     Failure::new(&format!("{error:?}"))
 }
 
 /// `tp_poles`: a grid of nu x nv poles, U rows first.
-fn poles(r: &mut Reader<'_>, nu: i32, nv: i32) -> Result<Array2<'static, Point3>, Failure> {
+pub fn poles(r: &mut Reader<'_>, nu: i32, nv: i32) -> Result<Array2<'static, Point3>, Failure> {
     let mut grid = Array2::with_bounds(1, nu, 1, nv).map_err(array_failure)?;
     for i in 1..=nu {
         for j in 1..=nv {
@@ -60,7 +60,7 @@ fn poles(r: &mut Reader<'_>, nu: i32, nv: i32) -> Result<Array2<'static, Point3>
 }
 
 /// `tp_knots`: `n (knot mult)...` of one direction.
-fn knots(r: &mut Reader<'_>) -> Result<(Array1<'static, f64>, Array1<'static, i32>), Failure> {
+pub fn knots(r: &mut Reader<'_>) -> Result<(Array1<'static, f64>, Array1<'static, i32>), Failure> {
     let n = r.integer();
     let mut values = Array1::<f64>::with_bounds(1, n).map_err(array_failure)?;
     let mut mults = Array1::<i32>::with_bounds(1, n).map_err(array_failure)?;
@@ -72,7 +72,7 @@ fn knots(r: &mut Reader<'_>) -> Result<(Array1<'static, f64>, Array1<'static, i3
 }
 
 /// `tp_bspline_surface`: degrees, poles, then the U and V knots.
-fn bspline_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
+pub fn bspline_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
     let (udeg, vdeg) = (r.integer(), r.integer());
     let (nu, nv) = (r.integer(), r.integer());
     let grid = poles(r, nu, nv)?;

@@ -16,6 +16,7 @@ import argparse
 from pathlib import Path
 import re
 import sys
+from rust_include_list import include_list
 
 ROOT = Path(__file__).resolve().parent.parent
 TARGET = ROOT/'crates/tkgeombase/src/adv_app2var/data'
@@ -54,10 +55,9 @@ def index_module(blocks: dict[str, list[str]]) -> str:
     """Emit the fragment lists of every block; index_module(blocks)."""
     lines = [INDEX_PRELUDE]
     for name, values in blocks.items():
-        includes = ''.join(f'    include!("tables/{name}_{index}.rs"),\n'
-                           for index in range((len(values)+CHUNK-1)//CHUNK))
+        paths = [f'tables/{name}_{index}.rs' for index in range((len(values)+CHUNK-1)//CHUNK)]
         lines.append(f'/// Verbatim `{name}_` initialiser ({len(values)} values).\n'
-                     f'pub(super) const {name.upper()}: &[&[f64]] = &[\n{includes}];\n')
+                     f'pub(super) const {name.upper()}: &[&[f64]] = {include_list(paths, "")};\n')
     return '\n'.join(lines)
 
 
