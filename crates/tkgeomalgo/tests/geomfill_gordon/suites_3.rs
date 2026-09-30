@@ -64,7 +64,7 @@ fn rational_quadratic_line_network() -> CurveNetwork {
 }
 
 #[test]
-fn NetworkSurface_UClosedNetwork_ProducesUPeriodicSurface() {
+fn GeomFill_Gordon__NetworkSurface_UClosedNetwork_ProducesUPeriodicSurface() {
     let aProfiles = bsplines(&[
         makeQuadraticBSpline(p(0.0, 0.0, 0.0), p(1.0, 0.0, 0.0), p(0.0, 0.0, 0.0)),
         makeQuadraticBSpline(p(0.0, 1.0, 0.0), p(1.0, 1.0, 1.0), p(0.0, 1.0, 0.0)),
@@ -93,7 +93,7 @@ fn NetworkSurface_UClosedNetwork_ProducesUPeriodicSurface() {
 }
 
 #[test]
-fn NetworkSurface_UClosedNetwork_UsesInputToleranceForPeriodicity() {
+fn GeomFill_Gordon__NetworkSurface_UClosedNetwork_UsesInputToleranceForPeriodicity() {
     const aSeamGap: f64 = 1.0e-5;
     const aTolerance: f64 = 1.0e-4;
 
@@ -118,7 +118,7 @@ fn NetworkSurface_UClosedNetwork_UsesInputToleranceForPeriodicity() {
 }
 
 #[test]
-fn NetworkSurface_InvalidPreparedNetworkReportsStatus() {
+fn GeomFill_Gordon__NetworkSurface_InvalidPreparedNetworkReportsStatus() {
     let aProfiles = bsplines(&[makeLinearBSpline(p(0.0, 0.0, 0.0), p(1.0, 0.0, 0.0))]);
     let aGuides = bsplines(&[
         makeLinearBSpline(p(0.0, 0.0, 0.0), p(0.0, 1.0, 0.0)),
@@ -146,7 +146,7 @@ fn NetworkSurface_InvalidPreparedNetworkReportsStatus() {
 }
 
 #[test]
-fn NetworkSurface_InvalidWeightsReportsInvalidInput() {
+fn GeomFill_Gordon__NetworkSurface_InvalidWeightsReportsInvalidInput() {
     let aProfiles = bsplines(&[
         makeLinearBSpline(p(0.0, 0.0, 0.0), p(1.0, 0.0, 0.0)),
         makeLinearBSpline(p(0.0, 1.0, 0.0), p(1.0, 1.0, 0.0)),
@@ -174,7 +174,7 @@ fn NetworkSurface_InvalidWeightsReportsInvalidInput() {
 }
 
 #[test]
-fn NetworkSurface_CompatibleRationalWeightsProducesRationalSurface() {
+fn GeomFill_Gordon__NetworkSurface_CompatibleRationalWeightsProducesRationalSurface() {
     let aProfiles = bsplines(&[
         makeRationalQuadraticBSpline(p(0.0, 0.0, 0.0), p(0.5, 0.0, 0.0), p(1.0, 0.0, 0.0), 0.5),
         makeRationalQuadraticBSpline(p(0.0, 0.5, 0.0), p(0.5, 0.5, 0.0), p(1.0, 0.5, 0.0), 0.5),
@@ -210,7 +210,7 @@ fn NetworkSurface_CompatibleRationalWeightsProducesRationalSurface() {
 }
 
 #[test]
-fn NetworkSurface_IncompatibleRationalFamilyReportsStatus() {
+fn GeomFill_Gordon__NetworkSurface_IncompatibleRationalFamilyReportsStatus() {
     let aProfiles = bsplines(&[
         makeRationalQuadraticBSpline(p(0.0, 0.0, 0.0), p(0.5, 0.0, 0.0), p(1.0, 0.0, 0.0), 0.5),
         makeWeightedLinearBSpline(p(0.0, 1.0, 0.0), p(1.0, 1.0, 0.0), 1.0),
@@ -234,7 +234,7 @@ fn NetworkSurface_IncompatibleRationalFamilyReportsStatus() {
 }
 
 #[test]
-fn NetworkSurface_RationalDegreeOverflowReportsStatus() {
+fn GeomFill_Gordon__NetworkSurface_RationalDegreeOverflowReportsStatus() {
     const aDegree: i32 = 9;
     let (aProfileList, aGuideList) = rational_line_network(aDegree);
     let aProfiles = bsplines(&aProfileList);
@@ -254,7 +254,7 @@ fn NetworkSurface_RationalDegreeOverflowReportsStatus() {
 }
 
 #[test]
-fn RationalProfilesWithPolynomialGuidesProducesSurface() {
+fn GeomFill_Gordon__RationalProfilesWithPolynomialGuidesProducesSurface() {
     let aProfiles = curves(&[
         makeRationalQuadraticBSpline(p(0.0, 0.0, 0.0), p(0.5, 0.0, 0.0), p(1.0, 0.0, 0.0), 0.5),
         makeRationalQuadraticBSpline(p(0.0, 0.5, 0.0), p(0.5, 0.5, 0.0), p(1.0, 0.5, 0.0), 0.5),
@@ -276,7 +276,7 @@ fn RationalProfilesWithPolynomialGuidesProducesSurface() {
 }
 
 #[test]
-fn PolynomialProfilesWithRationalGuidesProducesSurface() {
+fn GeomFill_Gordon__PolynomialProfilesWithRationalGuidesProducesSurface() {
     let aProfiles = curves(&[
         makeLinearBSpline(p(0.0, 0.0, 0.0), p(1.0, 0.0, 0.0)),
         makeLinearBSpline(p(0.0, 0.5, 0.0), p(1.0, 0.5, 0.0)),
@@ -298,7 +298,7 @@ fn PolynomialProfilesWithRationalGuidesProducesSurface() {
 }
 
 #[test]
-fn ApproximateFallbackCanRecoverRationalDegreeOverflow() {
+fn GeomFill_Gordon__ApproximateFallbackCanRecoverRationalDegreeOverflow() {
     const aDegree: i32 = 9;
     let (aProfileList, aGuideList) = rational_line_network(aDegree);
     let aProfiles = curves(&aProfileList);
@@ -339,7 +339,7 @@ fn ApproximateFallbackCanRecoverRationalDegreeOverflow() {
 }
 
 #[test]
-fn ExactOnlyReportsRationalDegreeOverflow() {
+fn GeomFill_Gordon__ExactOnlyReportsRationalDegreeOverflow() {
     const aDegree: i32 = 9;
     let (aProfileList, aGuideList) = rational_line_network(aDegree);
     let aProfiles = curves(&aProfileList);
@@ -359,7 +359,7 @@ fn ExactOnlyReportsRationalDegreeOverflow() {
 }
 
 #[test]
-fn ExactOnlyReparametrizesRationalCurves() {
+fn GeomFill_Gordon__ExactOnlyReparametrizesRationalCurves() {
     let (aProfiles, aGuides) = rational_quadratic_line_network();
     let aGordon = gordon_of(&aProfiles, &aGuides, precision::confusion());
 
@@ -373,7 +373,7 @@ fn ExactOnlyReparametrizesRationalCurves() {
 }
 
 #[test]
-fn ApproximationModeUsesExactRationalReparametrizationWhenPossible() {
+fn GeomFill_Gordon__ApproximationModeUsesExactRationalReparametrizationWhenPossible() {
     let (aProfiles, aGuides) = rational_quadratic_line_network();
 
     let mut aGordon = GeomFillGordon::new();
@@ -402,7 +402,7 @@ fn assert_stable_exact_report(aGordon: &GeomFillGordon) {
 }
 
 #[test]
-fn ExactRationalReparametrizationRepeatPerformKeepsReportStable() {
+fn GeomFill_Gordon__ExactRationalReparametrizationRepeatPerformKeepsReportStable() {
     let (aProfiles, aGuides) = rational_quadratic_line_network();
 
     let mut aGordon = GeomFillGordon::new();
@@ -420,7 +420,7 @@ fn ExactRationalReparametrizationRepeatPerformKeepsReportStable() {
 }
 
 #[test]
-fn NetworkSurface_VClosedNetwork_ProducesVPeriodicSurface() {
+fn GeomFill_Gordon__NetworkSurface_VClosedNetwork_ProducesVPeriodicSurface() {
     let aProfiles = bsplines(&[
         makeLinearBSpline(p(0.0, 0.0, 0.0), p(2.0, 0.0, 0.0)),
         makeLinearBSpline(p(0.0, 1.0, 0.0), p(2.0, 1.0, 1.0)),
@@ -457,42 +457,42 @@ fn exact_gordon_of(aNetwork: &AnalyticNetwork, theTolerance: f64) -> GeomFillGor
 }
 
 #[test]
-fn DenseWavyFiveByFiveNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__DenseWavyFiveByFiveNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::new(5, 5, wavyHeight);
     let aGordon = exact_gordon_of(&aNetwork, precision::confusion());
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, precision::confusion());
 }
 
 #[test]
-fn DenseSaddleSevenByFourNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__DenseSaddleSevenByFourNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::new(7, 4, saddleHeight);
     let aGordon = exact_gordon_of(&aNetwork, precision::confusion());
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, precision::confusion());
 }
 
 #[test]
-fn DenseRippleFourBySevenNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__DenseRippleFourBySevenNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::new(4, 7, rippleHeight);
     let aGordon = exact_gordon_of(&aNetwork, precision::confusion());
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, precision::confusion());
 }
 
 #[test]
-fn DenseWavyEightByEightNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__DenseWavyEightByEightNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::new(8, 8, wavyHeight);
     let aGordon = exact_gordon_of(&aNetwork, precision::confusion());
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, precision::confusion());
 }
 
 #[test]
-fn TranslatedScaledSixByFiveNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__TranslatedScaledSixByFiveNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::with_frame(6, 5, rippleHeight, Xyz::new(1.0e5, -2.0e5, 3.0e5), 250.0);
     let aGordon = exact_gordon_of(&aNetwork, 1.0e-5);
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, 1.0e-5);
 }
 
 #[test]
-fn SmallScaledFiveBySixNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__SmallScaledFiveBySixNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::with_frame(5, 6, saddleHeight, Xyz::new(0.0, 0.0, 0.0), 0.01);
     let aGordon = exact_gordon_of(&aNetwork, precision::confusion());
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, precision::confusion());
@@ -512,7 +512,7 @@ fn assert_same_surface(aFirst: &Handle<GeomBSplineSurface>, aSecond: &Handle<Geo
 }
 
 #[test]
-fn DenseWavyNetwork_ParallelConstructionMatchesSerialQuality() {
+fn GeomFill_Gordon__DenseWavyNetwork_ParallelConstructionMatchesSerialQuality() {
     let aNetwork = AnalyticNetwork::new(6, 6, wavyHeight);
     let aSerial = gordon_of(&aNetwork.Profiles, &aNetwork.Guides, precision::confusion());
     assert!(aSerial.is_done(), "{:?}", aSerial.status());
@@ -529,7 +529,7 @@ fn DenseWavyNetwork_ParallelConstructionMatchesSerialQuality() {
 }
 
 #[test]
-fn DenseSaddleNetwork_RepeatedPerformMaintainsQuality() {
+fn GeomFill_Gordon__DenseSaddleNetwork_RepeatedPerformMaintainsQuality() {
     let aNetwork = AnalyticNetwork::new(6, 5, saddleHeight);
     let mut aGordon = gordon_of(&aNetwork.Profiles, &aNetwork.Guides, precision::confusion());
     assert!(aGordon.is_done(), "{:?}", aGordon.status());
@@ -542,21 +542,21 @@ fn DenseSaddleNetwork_RepeatedPerformMaintainsQuality() {
 }
 
 #[test]
-fn DenseRippleNineByThreeNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__DenseRippleNineByThreeNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::new(9, 3, rippleHeight);
     let aGordon = exact_gordon_of(&aNetwork, precision::confusion());
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, precision::confusion());
 }
 
 #[test]
-fn DenseWavyThreeByNineNetwork_InterpolatesAllInputCurves() {
+fn GeomFill_Gordon__DenseWavyThreeByNineNetwork_InterpolatesAllInputCurves() {
     let aNetwork = AnalyticNetwork::new(3, 9, wavyHeight);
     let aGordon = exact_gordon_of(&aNetwork, precision::confusion());
     verifyUniformNetworkInterpolation(&aGordon.surface().unwrap(), &aNetwork, precision::confusion());
 }
 
 #[test]
-fn ClosedBSplineProfilesWithInteriorGuides_ProducePeriodicSurface() {
+fn GeomFill_Gordon__ClosedBSplineProfilesWithInteriorGuides_ProducePeriodicSurface() {
     let aProfiles = curves(&[makeClosedBSplineProfile(0.0, 1.0, 1.0), makeClosedBSplineProfile(1.0, 1.15, 0.85)]);
     let aFirst: Handle<GeomBSplineCurve> = aProfiles[1].cast();
     assert!(!aFirst.is_periodic());
@@ -584,7 +584,7 @@ fn ClosedBSplineProfilesWithInteriorGuides_ProducePeriodicSurface() {
 }
 
 #[test]
-fn NetworkSurface_ClosedNetworkWithNonUnitUParameters_ProducesUPeriodicSurface() {
+fn GeomFill_Gordon__NetworkSurface_ClosedNetworkWithNonUnitUParameters_ProducesUPeriodicSurface() {
     let aProfiles = bsplines(&[
         makeQuadraticBSplineOn(p(0.0, 0.0, 0.0), p(1.0, 0.0, 0.0), p(0.0, 0.0, 0.0), 2.0, 5.0),
         makeQuadraticBSplineOn(p(0.0, 1.0, 0.0), p(1.0, 1.0, 1.0), p(0.0, 1.0, 0.0), 2.0, 5.0),

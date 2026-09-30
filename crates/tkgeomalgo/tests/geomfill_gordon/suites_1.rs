@@ -31,7 +31,7 @@ fn bump_network() -> CurveNetwork {
 }
 
 #[test]
-fn SimpleLineNetwork_ProducesValidSurface() {
+fn GeomFill_Gordon__SimpleLineNetwork_ProducesValidSurface() {
     let (aProfiles, aGuides) = unit_line_network();
     let aGordon = gordon_of(&aProfiles, &aGuides, precision::confusion());
 
@@ -54,7 +54,7 @@ fn SimpleLineNetwork_ProducesValidSurface() {
 }
 
 #[test]
-fn EmptyInput_NotDone() {
+fn GeomFill_Gordon__EmptyInput_NotDone() {
     let aOneProfile = curve_array(vec![trimmed_line(p(0.0, 0.0, 0.0), X, 0.0, 1.0)]);
     let aOneGuide = curve_array(vec![trimmed_line(p(0.0, 0.0, 0.0), Y, 0.0, 1.0)]);
     let aGordon = gordon_of(&aOneProfile, &aOneGuide, precision::confusion());
@@ -64,7 +64,7 @@ fn EmptyInput_NotDone() {
 }
 
 #[test]
-fn SingleProfileOrGuide_NotDone() {
+fn GeomFill_Gordon__SingleProfileOrGuide_NotDone() {
     let aProfiles = curve_array(vec![trimmed_line(p(0.0, 0.0, 0.0), X, 0.0, 1.0)]);
     let aGuides = curve_array(vec![
         trimmed_line(p(0.0, 0.0, 0.0), Y, 0.0, 1.0),
@@ -77,7 +77,7 @@ fn SingleProfileOrGuide_NotDone() {
 }
 
 #[test]
-fn NotDone_BeforePerform() {
+fn GeomFill_Gordon__NotDone_BeforePerform() {
     let aGordon = GeomFillGordon::new();
     assert!(!aGordon.is_done());
     assert_eq!(aGordon.status(), GordonStatus::NotStarted);
@@ -88,7 +88,7 @@ fn NotDone_BeforePerform() {
 }
 
 #[test]
-fn ReinitResetsReportAndSurface() {
+fn GeomFill_Gordon__ReinitResetsReportAndSurface() {
     let (aProfiles, aGuides) = unit_line_network();
     let mut aGordon = gordon_of(&aProfiles, &aGuides, precision::confusion());
 
@@ -120,7 +120,7 @@ fn ReinitResetsReportAndSurface() {
 }
 
 #[test]
-fn DisjointNetworkReportsContactDiscoveryFailure() {
+fn GeomFill_Gordon__DisjointNetworkReportsContactDiscoveryFailure() {
     let aProfiles = curve_array(vec![
         trimmed_line(p(0.0, 0.0, 0.0), X, 0.0, 1.0),
         trimmed_line(p(0.0, 1.0, 0.0), X, 0.0, 1.0),
@@ -143,7 +143,7 @@ fn DisjointNetworkReportsContactDiscoveryFailure() {
 }
 
 #[test]
-fn ParallelMode_DefaultSingleThreadAndMatchesParallelResult() {
+fn GeomFill_Gordon__ParallelMode_DefaultSingleThreadAndMatchesParallelResult() {
     let (aProfiles, aGuides) = bump_network();
 
     let mut aSingleThread = GeomFillGordon::new();
@@ -168,7 +168,7 @@ fn ParallelMode_DefaultSingleThreadAndMatchesParallelResult() {
 }
 
 #[test]
-fn CurvedBSplineNetwork_ProducesValidSurface() {
+fn GeomFill_Gordon__CurvedBSplineNetwork_ProducesValidSurface() {
     // 3 quadratic profiles with Z-curvature + 2 linear guides.
     let (aProfiles, aGuides) = bump_network();
     let aGordon = gordon_of(&aProfiles, &aGuides, precision::confusion());
@@ -184,7 +184,7 @@ fn CurvedBSplineNetwork_ProducesValidSurface() {
 }
 
 #[test]
-fn NonAffineProfileReparametrization_PreservesProfilesAndGuideContinuity() {
+fn GeomFill_Gordon__NonAffineProfileReparametrization_PreservesProfilesAndGuideContinuity() {
     let aProfiles = curves(&[
         makeCubicInterpBSpline(p(0.0, 0.0, 0.0), p(0.25, 0.0, 0.4), p(0.75, 0.0, -0.3), p(1.0, 0.0, 0.0)),
         makeCubicInterpBSpline(p(0.0, 0.5, 0.0), p(0.25, 0.5, 0.2), p(0.75, 0.5, -0.5), p(1.0, 0.5, 0.0)),
@@ -236,7 +236,7 @@ fn NonAffineProfileReparametrization_PreservesProfilesAndGuideContinuity() {
 }
 
 #[test]
-fn MixedCurveTypes_ProducesValidSurface() {
+fn GeomFill_Gordon__MixedCurveTypes_ProducesValidSurface() {
     let aProfiles = curve_array(vec![
         trimmed_line(p(0.0, 0.0, 0.0), X, 0.0, 2.0),
         trimmed_line(p(0.0, 2.0, 0.0), X, 0.0, 2.0),
@@ -255,7 +255,7 @@ fn MixedCurveTypes_ProducesValidSurface() {
 }
 
 #[test]
-fn PeriodicBSplineProfiles_AreExpandedBeforeConstruction() {
+fn GeomFill_Gordon__PeriodicBSplineProfiles_AreExpandedBeforeConstruction() {
     let aProfiles = curves(&[makePeriodicProfile(0.0), makePeriodicProfile(0.5), makePeriodicProfile(1.0)]);
     let aFirst: Handle<GeomBSplineCurve> = aProfiles[1].cast();
     assert!(aFirst.is_periodic());
@@ -273,7 +273,7 @@ fn PeriodicBSplineProfiles_AreExpandedBeforeConstruction() {
 }
 
 #[test]
-fn PeriodicBSplineGuides_AreExpandedBeforeConstruction() {
+fn GeomFill_Gordon__PeriodicBSplineGuides_AreExpandedBeforeConstruction() {
     let aGuides = curves(&[makePeriodicGuide(0.0), makePeriodicGuide(0.5), makePeriodicGuide(1.0)]);
     let aFirst: Handle<GeomBSplineCurve> = aGuides[1].cast();
     assert!(aFirst.is_periodic());
@@ -291,7 +291,7 @@ fn PeriodicBSplineGuides_AreExpandedBeforeConstruction() {
 }
 
 #[test]
-fn InterpolatedPeriodicProfilesWithAlignedSeams_InterpolateWithoutDeviation() {
+fn GeomFill_Gordon__InterpolatedPeriodicProfilesWithAlignedSeams_InterpolateWithoutDeviation() {
     let aProfiles = curves(&[makeInterpolatedPeriodicProfile(0.0, 0), makeInterpolatedPeriodicProfile(1.0, 2)]);
 
     let aFirstProfile: Handle<GeomBSplineCurve> = aProfiles[1].cast();
@@ -350,7 +350,7 @@ fn InterpolatedPeriodicProfilesWithAlignedSeams_InterpolateWithoutDeviation() {
 }
 
 #[test]
-fn MultipleIntersections_SelectsMonotoneBranch() {
+fn GeomFill_Gordon__MultipleIntersections_SelectsMonotoneBranch() {
     let aProfiles = curves(&[makeMeanderingProfile(0.0), makeMeanderingProfile(0.5), makeMeanderingProfile(1.0)]);
     let aGuides = curves(&[
         makeLinearBSpline(p(0.0, 0.0, 0.0), p(0.0, 1.0, 0.0)),
@@ -376,7 +376,7 @@ fn MultipleIntersections_SelectsMonotoneBranch() {
 }
 
 #[test]
-fn FourByThreeGrid_NonUniformParams() {
+fn GeomFill_Gordon__FourByThreeGrid_NonUniformParams() {
     let aProfiles = curve_array(vec![
         trimmed_line(p(0.0, 0.0, 0.0), X, 0.0, 1.0),
         trimmed_line(p(0.0, 0.2, 0.0), X, 0.0, 1.0),
@@ -395,7 +395,7 @@ fn FourByThreeGrid_NonUniformParams() {
 }
 
 #[test]
-fn SurfaceAlongInputCurves_IsAccurate() {
+fn GeomFill_Gordon__SurfaceAlongInputCurves_IsAccurate() {
     let (aProfiles, aGuides) = unit_line_network();
     let aGordon = gordon_of(&aProfiles, &aGuides, precision::confusion());
 
@@ -423,7 +423,7 @@ fn SurfaceAlongInputCurves_IsAccurate() {
 }
 
 #[test]
-fn ReversedCurveNetwork_ProducesValidSurface() {
+fn GeomFill_Gordon__ReversedCurveNetwork_ProducesValidSurface() {
     // Reversed profile and guide directions.
     let aProfiles = curve_array(vec![
         trimmed_line(p(1.0, 0.0, 0.0), (-1.0, 0.0, 0.0), 0.0, 1.0),
@@ -465,7 +465,7 @@ fn ReversedCurveNetwork_ProducesValidSurface() {
 }
 
 #[test]
-fn CubicInterpolatedNetwork_ProducesValidSurface() {
+fn GeomFill_Gordon__CubicInterpolatedNetwork_ProducesValidSurface() {
     // Cubic interpolated profiles (S-shaped in Z) + linear guides.
     let aProfiles = curves(&[
         makeCubicInterpBSpline(p(0.0, 0.0, 0.0), p(0.33, 0.0, 0.3), p(0.66, 0.0, -0.3), p(1.0, 0.0, 0.0)),
@@ -495,7 +495,7 @@ fn CubicInterpolatedNetwork_ProducesValidSurface() {
 }
 
 #[test]
-fn SinusoidalProfiles_SurfacePreservesShape() {
+fn GeomFill_Gordon__SinusoidalProfiles_SurfacePreservesShape() {
     // Sinusoidal profiles at different Y positions + linear guides.
     let aProfiles = curves(&[
         makeSineBSpline(0.0, 1.0, 0.0, 0.3),
@@ -520,7 +520,7 @@ fn SinusoidalProfiles_SurfacePreservesShape() {
 }
 
 #[test]
-fn ThreeByThreeGrid_SurfaceInterpolatesAllCurves() {
+fn GeomFill_Gordon__ThreeByThreeGrid_SurfaceInterpolatesAllCurves() {
     // 3 profiles + 3 guides. Check that the Gordon surface interpolates all
     // input curves by dense sampling along each one.
     let aProfiles = curve_array(vec![
@@ -576,7 +576,7 @@ fn scaled_line_network(
 }
 
 #[test]
-fn ScaledGeometry_LargeCoordinates() {
+fn GeomFill_Gordon__ScaledGeometry_LargeCoordinates() {
     // Large-scale geometry: coordinates in thousands.
     // Tests that scale-relative tolerances work correctly.
     let aScale = 1000.0;
@@ -598,7 +598,7 @@ fn ScaledGeometry_LargeCoordinates() {
 }
 
 #[test]
-fn ScaledGeometry_SmallCoordinates() {
+fn GeomFill_Gordon__ScaledGeometry_SmallCoordinates() {
     // Micro-scale geometry: coordinates in millionths.
     let aScale = 1.0e-3;
     let (aProfiles, aGuides) = scaled_line_network(aScale);

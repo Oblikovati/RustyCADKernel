@@ -15,7 +15,7 @@ fn unit_linear_guides() -> Array1<'static, Handle<dyn GeomCurve>> {
 }
 
 #[test]
-fn AllReversedCurves_ProducesValidSurface() {
+fn GeomFill_Gordon__AllReversedCurves_ProducesValidSurface() {
     // Every single curve is reversed. The sort network should fix them all.
     let aProfiles = curve_array(vec![
         trimmed_line(p(1.0, 0.0, 0.0), (-1.0, 0.0, 0.0), 0.0, 1.0),
@@ -32,7 +32,7 @@ fn AllReversedCurves_ProducesValidSurface() {
 }
 
 #[test]
-fn ShuffledInputOrder_ProducesValidSurface() {
+fn GeomFill_Gordon__ShuffledInputOrder_ProducesValidSurface() {
     // Curves provided in non-sorted order. Sort network should handle it.
     // Provide profiles out of order: y=1, y=0.5, y=0.
     let aProfiles = curve_array(vec![
@@ -57,7 +57,7 @@ fn ShuffledInputOrder_ProducesValidSurface() {
 }
 
 #[test]
-fn SaddleSurface_BothDirectionsCurved() {
+fn GeomFill_Gordon__SaddleSurface_BothDirectionsCurved() {
     // Saddle shape: profiles curve up in Z, guides curve down in Z.
     // This creates a hyperbolic paraboloid-like surface.
     let aProfiles = curves(&[
@@ -85,7 +85,7 @@ fn SaddleSurface_BothDirectionsCurved() {
 }
 
 #[test]
-fn AsymmetricNetwork_FiveProfilesTwoGuides() {
+fn GeomFill_Gordon__AsymmetricNetwork_FiveProfilesTwoGuides() {
     // Highly asymmetric: 5 profiles but only 2 guides.
     let aProfiles = curve_array(
         (0..5).map(|i| trimmed_line(p(0.0, f64::from(i) * 0.25, 0.0), X, 0.0, 1.0)).collect(),
@@ -101,7 +101,7 @@ fn AsymmetricNetwork_FiveProfilesTwoGuides() {
 }
 
 #[test]
-fn AsymmetricNetwork_TwoProfilesFiveGuides() {
+fn GeomFill_Gordon__AsymmetricNetwork_TwoProfilesFiveGuides() {
     // Highly asymmetric: 2 profiles but 5 guides.
     let aProfiles = curve_array(vec![
         trimmed_line(p(0.0, 0.0, 0.0), X, 0.0, 1.0),
@@ -117,7 +117,7 @@ fn AsymmetricNetwork_TwoProfilesFiveGuides() {
 }
 
 #[test]
-fn NonPlanarNetwork_CurvesInBothDirections() {
+fn GeomFill_Gordon__NonPlanarNetwork_CurvesInBothDirections() {
     // Both profiles and guides are curved in 3D (non-planar network).
     let aProfiles = curves(&[makeSineBSpline(0.0, 1.0, 0.0, 0.2), makeSineBSpline(0.0, 1.0, 1.0, 0.2)]);
 
@@ -153,7 +153,7 @@ fn NonPlanarNetwork_CurvesInBothDirections() {
 }
 
 #[test]
-fn SurfaceContinuity_IsSmooth() {
+fn GeomFill_Gordon__SurfaceContinuity_IsSmooth() {
     // Verify that the resulting surface is at least C1 continuous by checking
     // that derivatives are smooth across the parameter domain.
     let aProfiles = curves(&[
@@ -190,7 +190,7 @@ fn SurfaceContinuity_IsSmooth() {
 }
 
 #[test]
-fn ArcLikeProfiles_NonRational() {
+fn GeomFill_Gordon__ArcLikeProfiles_NonRational() {
     // Profiles are arc-like curves (interpolated semicircle shape) in XZ plane
     // at different Y positions. Non-rational since Gordon rejects rational curves.
     // Guides are straight lines connecting endpoints.
@@ -227,7 +227,7 @@ fn ArcLikeProfiles_NonRational() {
 }
 
 #[test]
-fn RepeatPerform_GivesSameResult() {
+fn GeomFill_Gordon__RepeatPerform_GivesSameResult() {
     // Calling Perform() twice on the same initialized Gordon should produce
     // the same result (no state corruption).
     let (aProfiles, aGuides) = unit_line_network();
@@ -252,7 +252,7 @@ fn RepeatPerform_GivesSameResult() {
 }
 
 #[test]
-fn HighDensityNetwork_SixBySix() {
+fn GeomFill_Gordon__HighDensityNetwork_SixBySix() {
     // 6 profiles + 6 guides - tests performance and correctness with denser grids.
     const THE_NB: i32 = 6;
     let aProfiles = curve_array(
@@ -288,7 +288,7 @@ fn HighDensityNetwork_SixBySix() {
 }
 
 #[test]
-fn QuadraticProfiles_SurfaceMatchesCurvesAtBoundaries() {
+fn GeomFill_Gordon__QuadraticProfiles_SurfaceMatchesCurvesAtBoundaries() {
     // Quadratic profiles with Z-bump + linear guides.
     // Verify the surface exactly matches the boundary profiles.
     let aProfiles = curves(&[
@@ -321,7 +321,7 @@ fn QuadraticProfiles_SurfaceMatchesCurvesAtBoundaries() {
 }
 
 #[test]
-fn OffsetPlane_NetworkAtNonZeroZ() {
+fn GeomFill_Gordon__OffsetPlane_NetworkAtNonZeroZ() {
     // Network at Z=5 (not at origin). Tests that the algorithm works for
     // arbitrary positions, not just geometry centered at origin.
     let aZ = 5.0;
@@ -341,7 +341,7 @@ fn OffsetPlane_NetworkAtNonZeroZ() {
 }
 
 #[test]
-fn TiltedPlane_DiagonalCurves() {
+fn GeomFill_Gordon__TiltedPlane_DiagonalCurves() {
     // Profiles and guides on a tilted plane (Z varies linearly with X and Y).
     // Expected surface: Z = X + Y.
     let aProfiles = curves(&[
@@ -371,7 +371,7 @@ fn TiltedPlane_DiagonalCurves() {
 }
 
 #[test]
-fn RectangularNotSquare_2x3AspectRatio() {
+fn GeomFill_Gordon__RectangularNotSquare_2x3AspectRatio() {
     // Rectangular domain with 2:3 aspect ratio.
     let aProfiles = curve_array(vec![
         trimmed_line(p(0.0, 0.0, 0.0), X, 0.0, 2.0),
@@ -391,7 +391,7 @@ fn RectangularNotSquare_2x3AspectRatio() {
 }
 
 #[test]
-fn WavySurface_SinusoidalProfilesAndGuides() {
+fn GeomFill_Gordon__WavySurface_SinusoidalProfilesAndGuides() {
     // Both profiles and guides have sinusoidal Z, creating a wavy surface.
     let aProfiles = curves(&[
         makeSineBSpline(0.0, 1.0, 0.0, 0.3),
