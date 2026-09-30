@@ -212384,6 +212384,186 @@
       "rust_item": "rustycad_tkbo::int_tools::ShrunkRange::length",
       "status": "implemented",
       "notes": "Native tolerance inflation, partial interval writes, repeated Perform length/history, accumulating boxes and unused context identity; 648 exact native requests and six direct regressions. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::new",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::clear",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::set_face",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::Compute(const TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::compute",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::HasCurve2d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::has_curve_2d",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::HasCurve3d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::has_curve_3d",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::Knots2d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::knots_2d",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::Knots3d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::knots_3d",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::SetSplitCurve2dTool(const occ::handle<ShapeUpgrade_SplitCurve2d>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::set_split_curve_2d_tool",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::SetSplitCurve3dTool(const occ::handle<ShapeUpgrade_SplitCurve3d>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::set_split_curve_3d_tool",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::GetSplitCurve2dTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::split_curve_2d_tool",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::GetSplitCurve3dTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeEdgeDivide::split_curve_3d_tool",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_EdgeDivide::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_EdgeDivide,ShapeUpgrade_Tool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_EdgeDivide.hxx",
+      "source_sha256": "6958f9f8b57d5318c480596acd8edc7584319074aa5b27cc4c3cb1b65cc1e9fd",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "OCCT RTTI macro has no separate callable Rust API; impl_transient preserves runtime type ancestry."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "source_sha256": "d93349f61b05cfa2367feafdfc3415581638509c414bc8b15818243540daf6a1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves::new",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves::Init(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "source_sha256": "d93349f61b05cfa2367feafdfc3415581638509c414bc8b15818243540daf6a1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves::init",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves::Approx(occ::handle<Geom_Curve>&,occ::handle<Geom2d_Curve>&,occ::handle<Geom2d_Curve>&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "source_sha256": "d93349f61b05cfa2367feafdfc3415581638509c414bc8b15818243540daf6a1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves::approx",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves::SetSplitCurve3dTool(const occ::handle<ShapeUpgrade_SplitCurve3d>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "source_sha256": "d93349f61b05cfa2367feafdfc3415581638509c414bc8b15818243540daf6a1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves::set_split_curve_3d_tool",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves::SetSplitCurve2dTool(const occ::handle<ShapeUpgrade_SplitCurve2d>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "source_sha256": "d93349f61b05cfa2367feafdfc3415581638509c414bc8b15818243540daf6a1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves::set_split_curve_2d_tool",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "source_sha256": "d93349f61b05cfa2367feafdfc3415581638509c414bc8b15818243540daf6a1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallCurves::status_flag",
+      "status": "implemented",
+      "notes": "Native OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871. 301 differential histories (241 EdgeDivide, 60 FixSmallCurves), actual independent curve/pcurve ranges, virtual criteria and geometry splits, shared knot ownership, repeated Compute and retained status. Base FixSmallCurves Approx is a native no-op preserving geometry and parameter bits. No original legacy declarations for either class. Constructor flags are observed only after Clear because native leaves them uninitialized; null tool assignment is tested without invalid dereference. Dependency splitter crash divergences remain separately accounted and are not claimed exact."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallCurves::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_FixSmallCurves,ShapeUpgrade_Tool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallCurves.hxx",
+      "source_sha256": "d93349f61b05cfa2367feafdfc3415581638509c414bc8b15818243540daf6a1",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "OCCT RTTI macro has no separate callable Rust API; impl_transient preserves runtime type ancestry."
     }
   ],
   "tests": [

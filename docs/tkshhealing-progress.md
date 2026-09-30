@@ -671,3 +671,13 @@ exact requests. All 600 dedicated candidates are accounted: 530 exact comparison
 and 70 replayed native-fault/Rust-error differences. Existing 3D accounting remains
 332 exact plus 16 differences, and surface accounting remains 634 plus 16.
 These differences are not parity passes; no original declaration is added here.
+
+### Edge subdivision and small-curve base
+
+EdgeDivide and the FixSmallCurves base add 18 callable APIs with two RTTI mappings.
+The integrated source gate still passes all 101 mapped originals in both OCCT and
+Rust; numeric comparison now covers 17,144 exact requests, including 301 new curve
+subdivision histories. Independent 3D/2D parameters, virtual split criteria, shared
+knot state, reversed/free edges and unchanged small-curve outputs are covered.
+All three splitter divergence-accounting gates also passed after the shared tool's
+optional exception-type extension; their documented differences remain open.
