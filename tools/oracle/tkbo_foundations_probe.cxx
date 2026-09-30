@@ -53,12 +53,13 @@ void bo_surface_case(const std::vector<double>& v) {
  IntTools_SurfaceRangeSample other(w,u);bo_surface_state(other);other.Assign(sample);bo_int(other==sample);
  other.SetRanges(w,u);bo_surface_state(other);other.SetSampleRangeU(u);other.SetSampleRangeV(w);bo_surface_state(other);
 }
+#include "tkbo_foundations_marked.cxx"
 int main() {
  std::string line;
  while(std::getline(std::cin,line)) {
   std::istringstream input(line);std::string operation;input>>operation;std::vector<double> values;double value;
   while(input>>value)values.push_back(value);
-  if(operation=="range")bo_range_case(values);else if(operation=="root")bo_root_case(values);
+  if(operation=="marked")bo_marked_case(values);else if(operation=="range")bo_range_case(values);else if(operation=="root")bo_root_case(values);
   else if(operation=="curve")bo_curve_case(values);else if(operation=="surface")bo_surface_case(values);
   else {std::cerr<<"Unknown probe operation: "<<operation<<'\n';return 2;}
   std::cout<<'\n';

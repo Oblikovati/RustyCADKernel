@@ -19,7 +19,21 @@ def corpus() -> str:
                      [-3, 0, 1, 2, 10], [-3, 0, 1, 7])]
     requests += [f'surface {index} {depth} {index+1} {depth+1} 3 -2 4 2 -5 6'
                  for index, depth in product([-3, 0, 1, 7], [-2, 0, 1, 2, 7, 64])]
+    requests += marked_requests()
     return '\n'.join(requests) + '\n'
+
+
+def marked_requests() -> list[str]:
+    """Exercise duplicate boundaries, every insertion overload, and endpoint tie rules."""
+    requests = []
+    for bounds, mode, first, last, hint in product(
+            ['2 0 2', '3 0 1 2', '4 0 1 1 2'], range(4),
+            [-1, 0, 0.25, 1, 1.5, 2], [-1, 0, 0.75, 1, 2, 3], [0, 1, 2, 7]):
+        requests.append(f'marked {bounds} 0 {mode} {first} {last} 3 {hint} '
+                        '2 0.5 1.5 7 1 1 1 1 9 0')
+    requests += ['marked 2 0 2 0 2 1e-16 1.9999999999999998 8 1',
+                 'marked 3 2 1 0 0 0 1.5 0.5 2 1']
+    return requests
 
 
 ORACLE = NumericOracle('TKBO-foundations', 'tools/oracle/tkbo_foundations_probe.cxx',
