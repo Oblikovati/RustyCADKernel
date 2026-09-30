@@ -256,3 +256,9 @@ its source hash and compiler command. It covers periodic recadrage, signed trans
 analytic projection, zero-radius circles and observable function state. Strict Clippy
 passes. These helpers have no public API or original test completion claims; the main
 Contour algorithm remains incomplete.
+
+The private LineConstructor translation now passes another 576 exact requests
+(1,152 combined), comparing every output vertex and walking point. Cases cover
+empty and repeated vertices, tiny circle spans, closing-circle intervals, duplicate
+walking points, restriction passthrough and domain rejection. These remain private
+helper results, not completion of Contap_Contour.

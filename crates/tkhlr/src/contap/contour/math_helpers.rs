@@ -81,7 +81,7 @@ pub(super) fn transition_on_line(
         IntSurfTypeTrans::In
     })
 }
-fn analytic_parameters(
+pub(super) fn analytic_parameters(
     surface: &Adaptor3dSurfaceHandle,
     point: Point3,
 ) -> Result<(f64, f64), Failure> {

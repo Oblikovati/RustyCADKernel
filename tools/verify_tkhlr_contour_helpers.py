@@ -26,7 +26,19 @@ def requests() -> str:
             [(1,0,0),(1,2,3)], [0,2]):
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
         lines.append('contour_math '+numbers([*surface,*uv,*tangent,*direction,circle]))
+    append_section_requests(lines)
     return '\n'.join(lines)+'\n'
+
+
+def append_section_requests(lines: list[str]) -> None:
+    """Exercise all line kinds, vertex partitions, tiny spans and duplicate points."""
+    for surface_kind, kind, scenario, duplicate, offset in product(range(6), range(4),
+            range(6), [0,1], [-3,0,3]):
+        if kind == 1 and surface_kind not in (2,3): continue
+        if kind == 2 and surface_kind not in (1,2,3): continue
+        if kind == 0 and scenario == 5: continue
+        surface=[surface_kind,0,0,0,0,0,1,1,0,0,0,2,0.4,-2,2,-1,1]
+        lines.append('contour_sections '+numbers([*surface,kind,scenario,duplicate,offset]))
 
 
 def source_wrapper(source: Path, build: Path, output: Path, libraries: list[str]) -> Path:

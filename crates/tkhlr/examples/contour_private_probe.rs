@@ -11,6 +11,8 @@ mod contana;
 #[path = "hl_probe/contap_surface.rs"]
 mod contap_surface;
 mod contour_private;
+#[path = "../src/contap/contour/line_constructor.rs"]
+mod line_constructor;
 #[path = "../src/contap/contour/math_helpers.rs"]
 mod math_helpers;
 #[allow(dead_code)]
@@ -26,10 +28,13 @@ fn main() {
         let values: Vec<f64> = fields
             .map(|value| value.parse().expect("contour numeric field"))
             .collect();
-        if operation != "contour_math" {
-            eprintln!("Unknown probe operation: {operation}");
-            std::process::exit(2);
+        match operation {
+            "contour_math" => contour_private::math_case(&values),
+            "contour_sections" => contour_private::sections_case(&values),
+            _ => {
+                eprintln!("Unknown probe operation: {operation}");
+                std::process::exit(2);
+            }
         }
-        contour_private::math_case(&values);
     }
 }

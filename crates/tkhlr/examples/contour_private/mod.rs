@@ -1,4 +1,6 @@
-//! Direct private-helper outputs and their observable surface-function state.
+mod sections;
+pub use sections::sections_case;
+// Direct private-helper outputs and their observable surface-function state.
 use super::{
     common::{Reader, attempt, end, flag, int, pnt, real, show, xyz},
     math_helpers,
