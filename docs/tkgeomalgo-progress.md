@@ -39,6 +39,9 @@ The toolkit test inventory maps these suites (48 declarations):
 | Plate_Plate_Test.cxx | plate_plate | 2 | pass | pass |
 | Geom2dHatch_Elements_Test.cxx | geom2dhatch_elements | 3 | pass | pass |
 | Geom2dHatch_Intersector_Test.cxx | geom2dhatch_intersector | 3 | pass | pass |
+| Geom2dGcc_Lin2d2Tan_Test.cxx | geom2dgcc_lin2d_2tan | 2 | pass | pass |
+| Geom2dGcc_Circ2d2TanRad_Test.cxx | geom2dgcc_circ2d_2tan_rad | 7 | pass | pass |
+| Geom2dGcc_Circ2d3Tan_Test.cxx | geom2dgcc_circ2d_3tan | 12 | pass | pass |
 
 ## API mapping
 
@@ -69,6 +72,11 @@ The toolkit test inventory maps these suites (48 declarations):
   `compute_domains`/`compute_domains_of`, `add_element`/`add_element_curve`), and the protected
   `Element(IndE)` and `Hatching(IndH)` of the hatcher are public as `element_mut` and
   `hatching_mut`.
+- Geom2dGcc: see the section below; each constructor overload is a named constructor
+  returning `Result`, named after its argument kinds and locus
+  (`Circ2d3TanIter::circ_lin_curve`, `Circ2d2TanOnIter::curve_pnt_on_circle`,
+  `Lin2d2Tan::through_point_with_parameter`...), the `Results` overloads are `results_ana`
+  and `results_geo`, and `Geom2dGcc_QCurve` is an alias of `QualifiedCurve`.
 
 ## Verification
 
@@ -270,6 +278,70 @@ Deliberate Rust deviations:
   intersectors with their copy constructor, so their done and reversed flags are not copied;
   every Perform sets those flags before reading them.
 
+## Geom2dGcc
+
+Geom2dGcc (`geom2d_gcc`) is ported in full: `tools/audit_api_rows.py` reports 0 missing and 0
+stale rows (238 rows). OCCT 8 expands the old GccIter and GccGeo templates into concrete
+classes, so the `...Iter` and `...Geo` classes are concrete structs (docs/geomalgo-design.md
+section 9). The qualified curve holds a copy of its `Geom2dAdaptor_Curve`; the function classes
+borrow their curves (`&'a Geom2dAdaptorCurve`) and implement the tkmath `Function`,
+`FunctionWithDerivative`, `FunctionSet` and `FunctionSetWithDerivatives` traits. The fixed-size
+solution arrays are the GccAna `solutions::Slots` and `Tangencies`, with the native bounds
+checks. `Geom2dGcc_IsParallel` is a `Failure` of that type (`geom2d_gcc::is_parallel`), and
+`Geom2dGcc_Type1`, `Type2` and `Type3` are enums. The GTest suites Geom2dGcc_Lin2d2Tan_Test,
+Geom2dGcc_Circ2d2TanRad_Test and Geom2dGcc_Circ2d3Tan_Test are translated 1:1; the Lin2d2Tan
+suite calls `GeomAPI::To2d`, whose toolkit is not ported, so the test file builds the same
+projected curve with `ProjLib::ProjectedCurve` and `make_curve`.
+
+Preserved native behaviour:
+
+- `Lin2dTanObl(Qualified1, TheLin, Param1, TolAng, Angle)` hands its arguments to the solver as
+  (TolAng, Param1) and never counts the solution it stores, so NbSolutions stays 0. The
+  sampling of both constructors raises Geom2dGcc_IsParallel (from `Lin2dTanOblIter`'s
+  `Intersection2`) when a solution is parallel to TheLin. `IsParallel2` of `Lin2dTanObl` is
+  declared but never defined natively; its row is excluded.
+- `Lin2d2TanIter(curve, curve)` raises gp_VectorWithNullMagnitude for two straight curves
+  (their second derivative is null).
+- `FunctionTanCuCuCu::Values` and `Derivatives` return true and write nothing, so the
+  `Circ2d3TanIter` search stops at its start point; three `FunctionTanCuCuCu` constructors with
+  points are declared but never defined natively (excluded rows).
+- `FunctionTanCuCuOnCu(circle, curve, OnCirc, Rad)` builds the curve-curve-on-circle type: its
+  evaluation reads the null first curve (a crash natively; the port raises Standard_NullObject).
+- `Circ2d3TanIter` slips: the curve-line-point and curve-circle-point forms evaluate the curve
+  at the wrong parameter; the curve-curve-point and circle-circle-curve forms test Qualified1
+  for the second argument; `IsTheSame2` reads the third flag and `IsTheSame3` is always true, so
+  `Circ2d3Tan::Tangency3` of an iterated solution raises. `Circ2d3Tan` sets NbSolutions to 1 for
+  an iteration even when it fails, and its (line, circle, circle) case permutes the qualifiers
+  wrongly.
+- `Circ2d2TanRadGeo(curve, curve)` never writes the second qualifier and stores the start
+  parameters, not the refined ones.
+- `Circ2d2TanOnGeo(circle, circle)` fills `Rbid(1)` twice and leaves `Rbid(2)` unset, and
+  reads `Radius(i)` at the bisector index (a third radius raises Standard_OutOfRange).
+- `Circ2d2TanOnIter`: the point forms search 4 unknowns with vectors of 3, so math_FunctionSetRoot
+  raises Standard_DimensionError on the start point (math_FunctionSetRoot.cxx reads the fourth
+  tolerance past the end without a check); the consultations return 0 for every parameter; the
+  circle-curve-on-line form takes its centre from `X(1)`; `Func.Value` runs at the start point
+  before the done test. `Circ2d2TanOn(curve, point)` therefore always raises
+  Standard_DimensionError for a non-analytic curve.
+- `Circ2d2TanOn` goes on to the curve iteration after its line and circle loci (the iteration
+  is not in an `else`), and leaves the centre parameter unset for iterated solutions.
+- A GccAna solution `TheSame` to its argument raises StdFail_NotDone out of the
+  `Circ2dTanCen`, `Circ2d2TanRad` and `Circ2d2TanOn` constructors, which read every tangency.
+  The `Results` members of `Circ2d2TanRad`, `Circ2d2TanOn` and `Circ2d3Tan` are public.
+- `FunctionTanCirCu` on a zero-length range loops forever natively (its sampling step is 0);
+  no request builds one.
+- The three-circle `GccAna_Circ2d3Tan` reuses the quartic coefficients A, B, C for the X
+  quadratic of a touching configuration; the port now does the same (it found 4 circles for
+  the BUC60622 case where native finds 3).
+
+Deliberate Rust deviations:
+
+- A tangency function keeps the first failure of a curve evaluation (`raised()`), and the
+  solvers return it after the tkmath search stops, where native code throws from inside the
+  search.
+- A null point handle raises Standard_NullObject where native code dereferences it.
+- Slots that native leaves uninitialized start at 0; the corpus avoids reading them.
+
 ## Numeric comparison policy
 
 `tools/verify_tkgeomalgo_numeric.py` uses the shared driver `tools/toolkit_numeric.py`.
@@ -340,7 +412,8 @@ cases) and on seeded random arguments; `gccana_tancen`, `gccana_lin2tan`,
 `gccana_lintanobl`, `gccana_linbisec` and `gccana_bisec` do the same for Circ2dTanCen,
 Lin2d2Tan, Lin2dTanObl, Lin2dBisec and the five bisector classes. Each request prints
 the solution count and order and, from index 0 to NbSolutions + 1, every solution and
-the consultations its detail mask selects (2670 requests).
+the consultations its detail mask selects; `touching_circles` adds six three-circle
+configurations that touch (BUC60622) at two tolerances (2682 requests).
 
 IntRes2d, IntImpParGen, IntCurve: `tkgeomalgo_corpus_intcurve.py` adds 2044 requests:
 `intcurve_conics` intersects every ordered conic pair of IntCurve_IntConicConic
@@ -461,6 +534,24 @@ vertices and near them; `g2hatch_hatcher` hatches every such region with lines c
 through its vertices, along its edges and tangent to it, with every keep-flag pair and
 operation sequences (removals, tolerance and flag changes, clears, the protected members);
 `g2hatch_hatching` runs every Hatching member.
+
+Geom2dGcc: `tkgeomalgo_corpus_geom2dgcc.py` and `tkgeomalgo_corpus_geom2dgcc_circles.py` add
+3968 requests. `g2gcc_qualified`, `g2gcc_tool` and `g2gcc_func1` to `g2gcc_func4` run the four
+qualifier makers, both qualified-curve classes with every position, every curve-tool member
+and every tangency function constructor with Value, Derivative(s), Values and InitDerivative on
+lines, circles (whole and trimmed), an ellipse, a parabola, Bezier, B-spline (C0 knots,
+periodic, rational), offset and trimmed curves, bounded or not. The solver operations
+(`g2gcc_lin2tan`, `g2gcc_lintanobl`, `g2gcc_tancen`, `g2gcc_2tanrad`, `g2gcc_3tan`,
+`g2gcc_2tanon`, their `_geo` and `_iter` classes) run every constructor overload with each
+qualifier (the rejected GccEnt_noqualifier included), tangent, secant, nested and far
+arguments, start parameters on and off the solutions, parallel and degenerate cases and the
+`Results` members, and print every consultation from index 0 to NbSolutions + 1. The detail
+masks and the skipped configurations keep off the slots native leaves uninitialized (listed in
+the corpus module), and the circle-curve-on-circle function and iteration (a native crash) are
+left out. The native builder zeroes the stack before each solver: the `Circ2d3TanIter` search
+reads math_FunctionSetRoot's residual buffer, which `FunctionTanCuCuCu` never writes, so its
+native result depends on what earlier requests left on the stack. GccAna gains 12 touching
+three-circle requests (`touching_circles`, the BUC60622 configurations).
 
 ## Preserved native behaviour
 
