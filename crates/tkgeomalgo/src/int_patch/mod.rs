@@ -78,6 +78,7 @@ pub use instances::{
     IntPatchTheSurfFunction,
 };
 pub use interference_polyhedron::IntPatchInterferencePolyhedron;
+pub use intersection::{IntPatchIntersection, IntPatchIntersectionOptions};
 pub use iwline::IntPatchTheIWLineOfTheIWalking;
 pub use line::{IntPatchLine, IntPatchLineBase, IntPatchLineTransitions};
 pub use line_constructor::IntPatchLineConstructor;
@@ -89,7 +90,6 @@ pub use polygo::{IntPatchPolygo, IntPatchPolygoBase};
 pub use polyhedron::IntPatchPolyhedron;
 pub use polyhedron_bvh::{IntPatchPolyhedronBVH, IntPatchPolyhedronTool};
 pub use polyline::IntPatchPolyLine;
-pub use intersection::{IntPatchIntersection, IntPatchIntersectionOptions};
 pub use prm_prm::{IntPatchPrmPrmIntersection, IntPatchPrmPrmTolerances};
 pub use rline::IntPatchRLine;
 pub use rst_int::IntPatchRstInt;
