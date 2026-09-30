@@ -25,6 +25,8 @@
 #include "tkgeomalgo_probe_common.cxx"
 #include "tktopalgo_probe_brepbuilderapi.cxx"
 #include "tktopalgo_probe_bisector.cxx"
+#include "tktopalgo_probe_mat.cxx"
+#include "tktopalgo_probe_mat_parts.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -40,6 +42,15 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"tp_bisec_function_inter", tp_bisec_function_inter_case},
  {"tp_bisec_poly", tp_bisec_poly_case},
  {"tp_bisec_is_convex", tp_bisec_is_convex_case},
+ // MAT and MAT2d (tktopalgo_probe_mat.cxx, tktopalgo_probe_mat_parts.cxx)
+ {"tp_mat2d_locus", tp_mat2d_locus_case},
+ {"tp_mat_list", tp_mat_list_case},
+ {"tp_mat_bisector", tp_mat_bisector_case},
+ {"tp_mat_arc", tp_mat_arc_case},
+ {"tp_mat2d_connexion", tp_mat2d_connexion_case},
+ {"tp_mat2d_cut", tp_mat2d_cut_case},
+ {"tp_mat2d_minipath", tp_mat2d_minipath_case},
+ {"tp_mat2d_tool", tp_mat2d_tool_case},
 };
 int main() {
  std::string line;

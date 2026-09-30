@@ -2,6 +2,8 @@
 pub mod bisector;
 pub mod bisector_algo;
 pub mod brep_builder_api;
+pub mod mat;
+pub mod mat_parts;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tktopalgo_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.
