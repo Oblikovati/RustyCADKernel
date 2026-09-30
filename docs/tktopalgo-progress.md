@@ -164,7 +164,15 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `BRepLibFaceError`, `BRepLibShellError` and `BRepLibShapeModification`. The package
   functions of `BRepLib` are free functions of `brep_lib`; `Precision` and `Plane` are
   `precision`/`set_precision` and `plane`/`set_plane`, process-wide as natively. The
-  re-shaper overload of `UpdateTolerances` is `update_tolerances_with_reshape`.
+  re-shaper overload of `UpdateTolerances` is `update_tolerances_with_reshape`; the
+  `SameParameter` overloads are `same_parameter_shape`, `same_parameter_shape_with_reshape`,
+  `same_parameter_edge` and `same_parameter_edge_with_tolerance` (its `theNewTol` is
+  `&mut f64`), and `ExtendFace` returns the extended face (`extend_face(F, ext, [UMin,
+  UMax, VMin, VMax])`). `BRepLibMakeFace` has `from_{plane,cylinder,cone,sphere,torus}`
+  with the tails `_bounds` and `_wire`, `from_surface[_bounds|_wire]`, `from_wire`,
+  `from_face[_wire]`, `init_face`, `init_surface`, `init_surface_bounds`, `add`, `face`
+  and `is_degenerated` (the flag and the actual tolerance); `BRepLibFindSurface` has
+  `new` and `init` and the native accessors.
 
 - BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
   are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
@@ -303,8 +311,9 @@ three PointInTheFace overloads from indices 0 to 2000, on and off the surface),
 vertices, along and across edges, every Accept index including 0 and Extent + 1, result
 indices 0 and past the end) and `bc3_inter3d` (Intersector3d on FORWARD and REVERSED
 faces).
-BRepLib: 1874 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
-and solid makers, 736 for the package functions). `tools/tktopalgo_corpus_breplib.py`
+BRepLib: 2552 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
+and solid makers, 736 for the package functions, 678 for MakeFace, FindSurface,
+SameParameter and ExtendFace). `tools/tktopalgo_corpus_breplib.py`
 appends one module per family, with the
 record builders of `tools/tktopalgo_corpus_breplib_records.py`; both probes read the
 records and print the shapes with `tktopalgo_probe_breplib_common.cxx` and
@@ -340,7 +349,18 @@ checker per edge and one reused), `blp_shell` (every MakeShell constructor and I
 `blp_normals`, `blp_deflection` and `blp_trinormals` (BRepLib_ToolTriangulatedShape),
 `blp_tolerances` (both UpdateTolerances, with and without the face verification; the
 re-shaper form prints the input and the re-shaper `Apply` of it) and `blp_orient`
-(OrientClosedSolid on each solid).
+(OrientClosedSolid on each solid). `tools/tktopalgo_corpus_breplib_face.py`,
+`tktopalgo_probe_breplib_face.cxx` and `tp_probe/brep_lib_face.rs` add surface records
+for offset surfaces, linear extrusions and revolutions, and shape records for polygon
+wires, the wires and faces of bounded MakeFace faces, edges whose p-curve runs at
+another speed than the 3d curve (Bezier, C0 B-spline, shifted ranges) and shapes whose
+3d curves BuildCurves3d approximates with their flags cleared. The families:
+`blm_face` (every MakeFace constructor and Init on every surface kind, with infinite,
+swapped, periodic, out-of-range and degenerated bounds, polygon and face wires, planar
+and non-planar wires with and without OnlyPlane), `blm_facedegen`, `blp_findsurface`
+(tolerances, OnlyPlane and OnlyClosed on wires, faces, edges and shells),
+`blp_sameparam` (the four overloads, forced or not) and `blp_extendface` (every
+direction on analytic, periodic, spline, trimmed and offset faces).
 
 ## Preserved native behaviour
 
@@ -585,6 +605,26 @@ re-shaper form prints the input and the re-shaper `Apply` of it) and `blp_orient
   own, so only the order of the re-shaper records depends on it.
 - `BRepLib::OrientClosedSolid` classifies the infinite point: a solid without shells is
   IN, so it is reversed and the call returns true.
+- `BRepLib_MakeFace::Init(F)` records `BRepLib_FaceDone` without marking the maker done
+  (so do the constructor from a face and `Init(S, false, TolDegen)`); `Add` marks it.
+  The bounded Init checks swapped bounds against the natural bounds of the basis of a
+  trimmed surface (a trimmed plane accepts any bounds), gives a closed U direction the
+  seam lines UMax then UMin but a closed V direction VMin then VMax, and makes a face
+  on an offset surface SameParameter (after trimming an offset extrusion or revolution
+  in its infinite direction). The wire constructor sets the face tolerance to the
+  larger of 1.2 times the reached and the searched tolerance.
+- `BRepLib_FindSurface` keeps the surface and location of the last curve on surface
+  searched when none is shared; `Is2DClosed` answers false on any failure (a missing
+  p-curve included). The plane fit orients the plane of a closed wire so that the
+  infinite point is outside.
+- `BRepLib::SameParameter` on a C0 B-spline p-curve works on the curve handle of the
+  adaptor: when the C1 conversion leaves it unchanged, the reparametrization and the
+  origin change of a periodic curve modify the p-curve stored in the edge itself.
+  `ComputeTol` returns the distance of a sample outside the surface domain when larger
+  than the others, and 1.5 times the largest sample distance below 1 when fewer than
+  10% of the samples are at least 1. On a planar face the edges without a curve on
+  the plane take 1.05 times the deviation of their projection.
+- `BRepLib::ExtendFace` tests the VMax bound (not VMin) before extending in VMin.
 
 ## BRepClass deviations
 
@@ -842,3 +882,6 @@ Native null dereferences in these packages are Standard_NullObject errors.
 - The uninitialized native values (`BRepLib_MakeEdge2d::Error()` after a success,
   `BRepLib_MakeWire::Error()` before the first Add, the parameter of a MakeEdge2d
   projection without extremum) read the values given above.
+- A null surface, p-curve or projection that `BRepLib::SameParameter`, `GetEdgeTol` or
+  `BRepLib_FindSurface` dereferences raises Standard_NullObject (a crash natively);
+  inside `Is2DClosed` it answers false, as the native signal handler does.

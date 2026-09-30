@@ -1,4 +1,4 @@
-// Rust translation of BRepLib::UpdateTolerances, InternalUpdateTolerances and
+// Rust translation of BRepLib::UpdateTolerances, InternalUpdateTolerances, UpdTolMap and
 // UpdShTol (BRepLib.cxx) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepLib::UpdateTolerances`: the tolerances harmonized with the rule
@@ -11,7 +11,7 @@ use rustycad_tkbrep::brep::access::vertex_tshape;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::{BRepToolsReShape, ReShape};
 use rustycad_tkbrep::topexp::{self, Explorer};
-use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, TShape};
+use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, TShape, Vertex};
 use rustycad_tkbrep::toptools::{IndexedDataMapOfShapeListOfShape, ShapeMapHasher};
 use rustycad_tkernel::ncollection::DataMap;
 use rustycad_tkernel::precision;
@@ -144,6 +144,30 @@ fn edge_tolerances(
         let edge = parents.find_key(index)?.clone();
         if tol > BRepTool::edge_tolerance(&Edge::unchecked(edge.clone()))? {
             sh_to_tol.bind(edge, tol);
+        }
+    }
+    Ok(())
+}
+
+/// The static `UpdTolMap`: records `new_tol` for a vertex or an edge whose tolerance it
+/// exceeds (the larger one when already recorded); other shapes are ignored.
+pub(crate) fn upd_tol_map(
+    shape: &Shape,
+    new_tol: f64,
+    sh_to_tol: &mut ShapeTolerances,
+) -> Result<(), Failure> {
+    let sh_tol: f64 = match shape.shape_type()? {
+        ShapeEnum::Vertex => BRepTool::vertex_tolerance(&Vertex::unchecked(shape.clone()))?,
+        ShapeEnum::Edge => BRepTool::edge_tolerance(&Edge::unchecked(shape.clone()))?,
+        _ => return Ok(()),
+    };
+    if new_tol <= sh_tol {
+        return Ok(());
+    }
+    match sh_to_tol.change_seek(shape) {
+        Some(old) => *old = std_max(*old, new_tol),
+        None => {
+            sh_to_tol.bind(shape.clone(), new_tol);
         }
     }
     Ok(())

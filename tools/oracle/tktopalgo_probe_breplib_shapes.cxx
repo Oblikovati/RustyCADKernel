@@ -7,7 +7,8 @@
 // 2 a compound `n (shape record)...`; 3 the BRepLib_MakeEdge edge of a Geom curve record
 // between two parameters, its vertices enlarged to two tolerances (a null shape when the
 // maker is not done); 4 a BRep_Builder solid `n (shape record)... reversed` of the
-// shells of the records (each reversed when `reversed`).
+// shells of the records (each reversed when `reversed`); 5 to 8 are read by
+// tp_shape_record_more (tktopalgo_probe_breplib_face.cxx).
 //
 // `tp_mesh(shape, n, uv)` gives every face (explorer order, each once) an n x n grid
 // triangulation over the box of the ends of its curves on surface (the node points on
@@ -19,6 +20,7 @@
 #include <TopoDS_Compound.hxx>
 #include <TopoDS_Solid.hxx>
 #include <TopTools_ShapeMapHasher.hxx>
+TopoDS_Shape tp_shape_record_more(GaReader& r,int kind);
 TopoDS_Shape tp_shape_record(GaReader& r){
  int kind=r.integer();BRep_Builder B;
  if(kind==0)return tp_face(r).face;
@@ -29,6 +31,7 @@ TopoDS_Shape tp_shape_record(GaReader& r){
  if(kind==4){TopoDS_Solid so;B.MakeSolid(so);int n=r.integer();std::vector<TopoDS_Shape> shells;
   for(int i=0;i<n;++i)shells.push_back(tp_shape_record(r));bool rev=r.flag();
   for(const TopoDS_Shape& sh:shells)B.Add(so,rev?sh.Reversed():sh);return so;}
+ if(kind>=5)return tp_shape_record_more(r,kind);
  occ::handle<Geom_Curve> c=tp_geom_curve(r);double p1=r.real(),p2=r.real(),t1=r.real(),t2=r.real();
  BRepLib_MakeEdge m(c,p1,p2);if(!m.IsDone())return TopoDS_Shape();
  if(!m.Vertex1().IsNull())B.UpdateVertex(m.Vertex1(),t1);

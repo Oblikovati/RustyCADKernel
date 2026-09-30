@@ -59,6 +59,7 @@ pub fn shape_record(r: &mut Reader<'_>) -> Result<Shape, Failure> {
             Ok(c.into_shape())
         }
         4 => solid_record(r),
+        kind @ 5.. => super::brep_lib_face::shape_record_more(r, kind),
         _ => {
             let c = geom_curve(r)?;
             let (p1, p2, t1, t2) = (r.real(), r.real(), r.real(), r.real());

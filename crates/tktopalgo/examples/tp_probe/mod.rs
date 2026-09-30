@@ -8,6 +8,7 @@ pub mod brep_class;
 pub mod brep_class3d;
 pub mod brep_lib_common;
 pub mod brep_lib_edge;
+pub mod brep_lib_face;
 pub mod brep_lib_package;
 pub mod brep_lib_shapes;
 pub mod brep_lib_wire;

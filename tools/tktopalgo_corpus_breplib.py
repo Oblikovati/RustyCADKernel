@@ -5,6 +5,7 @@ builders of tktopalgo_corpus_breplib_records.py; this module appends them in a f
 """
 from __future__ import annotations
 from tktopalgo_corpus_breplib_edge import append_breplib_edge_requests
+from tktopalgo_corpus_breplib_face import append_breplib_face_requests
 from tktopalgo_corpus_breplib_package import append_breplib_package_requests
 from tktopalgo_corpus_breplib_wire import append_breplib_wire_requests
 
@@ -14,3 +15,4 @@ def append_breplib_requests(requests: list[str]) -> None:
     append_breplib_edge_requests(requests)
     append_breplib_wire_requests(requests)
     append_breplib_package_requests(requests)
+    append_breplib_face_requests(requests)

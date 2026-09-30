@@ -16,10 +16,13 @@ mod deflection;
 mod degenerated_curve;
 mod encode_regularity;
 mod errors;
+mod extend_face;
+mod find_surface;
 mod globals;
 mod inner_tolerances;
 mod make_edge;
 mod make_edge2d;
+mod make_face;
 mod make_polygon;
 mod make_shape;
 mod make_shell;
@@ -29,6 +32,7 @@ mod make_wire;
 mod normals;
 mod orient_closed_solid;
 mod pcurve_on_plane;
+mod same_parameter;
 mod same_range;
 mod sort_faces;
 mod tool_triangulated_shape;
@@ -53,10 +57,13 @@ pub use errors::{
     BRepLibEdgeError, BRepLibFaceError, BRepLibShapeModification, BRepLibShellError,
     BRepLibWireError,
 };
+pub use extend_face::{ExtendDirections, extend_face};
+pub use find_surface::BRepLibFindSurface;
 pub use globals::{plane, precision, set_plane, set_precision};
 pub use inner_tolerances::update_inner_tolerances;
 pub use make_edge::BRepLibMakeEdge;
 pub use make_edge2d::BRepLibMakeEdge2d;
+pub use make_face::BRepLibMakeFace;
 pub use make_polygon::BRepLibMakePolygon;
 pub use make_shape::BRepLibMakeShape;
 pub use make_shell::BRepLibMakeShell;
@@ -67,6 +74,10 @@ pub use normals::{ENSURE_NORMAL_CONSISTENCY_DEFAULTS, ensure_normal_consistency}
 pub use orient_closed_solid::orient_closed_solid;
 pub use pcurve_on_plane::{
     build_pcurve_for_edge_on_plane, build_pcurve_for_edges_on_plane, pcurve_for_edge_on_plane,
+};
+pub use same_parameter::{
+    same_parameter_edge, same_parameter_edge_with_tolerance, same_parameter_shape,
+    same_parameter_shape_with_reshape,
 };
 pub use same_range::{check_same_range, same_range};
 pub use sort_faces::{reverse_sort_faces, sort_faces};

@@ -22,7 +22,7 @@ use rustycad_tktopalgo::brep_lib::{
     ValidRange,
 };
 
-fn sub_shapes(s: &Shape, kind: ShapeEnum) -> Result<IndexedMapOfShape, Failure> {
+pub(super) fn sub_shapes(s: &Shape, kind: ShapeEnum) -> Result<IndexedMapOfShape, Failure> {
     let mut m = IndexedMapOfShape::default();
     if !s.is_null() {
         topexp::map_shapes_of_type(s, kind, &mut m)?;
@@ -65,7 +65,7 @@ fn edge_faces(e: &Edge, anc: &List<Shape>) -> Result<Option<(Face, Face)>, Failu
     Ok(None)
 }
 /// Runs a request body with the native `try`: the exception type ends the line.
-fn guarded(values: &[f64], body: impl FnOnce(&mut Reader<'_>) -> Result<(), Failure>) {
+pub(super) fn guarded(values: &[f64], body: impl FnOnce(&mut Reader<'_>) -> Result<(), Failure>) {
     let mut r = Reader::new(values);
     attempt(|| body(&mut r));
     end();
