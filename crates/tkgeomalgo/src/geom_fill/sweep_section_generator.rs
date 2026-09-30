@@ -260,22 +260,31 @@ impl GeomFillSweepSectionGenerator {
             self.my_nb_sections = n;
         }
         let parameters = self.parameters(u1, u2);
+        self.transformations(&parameters, u1, u2)?;
+        self.my_is_done = true;
+        Ok(())
+    }
+
+    /// The first circle of a tube and the transformations of the sections: along a
+    /// curve (kinds 1 to 3) or rotations about the circle axis (kinds 4 to 6).
+    fn transformations(&mut self, parameters: &[f64], u1: f64, u2: f64) -> Result<(), Failure> {
         if (1..=3).contains(&self.my_type) {
             if self.my_type == 1 {
                 self.circle_section()?;
             }
-            self.along_curve(&parameters, u1, u2)?;
-        } else if self.my_type != 0 {
-            if self.my_type == 4 {
-                self.circle_section()?;
-            }
-            let mut cumul_tr = Transform3::default();
-            for parameter in parameters.iter().skip(1) {
-                cumul_tr.set_rotation(self.my_circ_path_axis, *parameter)?;
-                self.my_trsfs.push(cumul_tr);
-            }
+            return self.along_curve(parameters, u1, u2);
         }
-        self.my_is_done = true;
+        if self.my_type == 0 {
+            return Ok(());
+        }
+        if self.my_type == 4 {
+            self.circle_section()?;
+        }
+        let mut cumul_tr = Transform3::default();
+        for parameter in parameters.iter().skip(1) {
+            cumul_tr.set_rotation(self.my_circ_path_axis, *parameter)?;
+            self.my_trsfs.push(cumul_tr);
+        }
         Ok(())
     }
 

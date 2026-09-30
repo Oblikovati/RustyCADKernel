@@ -47,14 +47,8 @@ fn live_curve(c: &Handle<dyn GeomCurve>) -> Result<&dyn GeomCurve, Failure> {
     live(c, "GeomFill_Pipe CheckSense", "C")
 }
 
-/// `NP` points from `f` by `h` (the last at `l`), their inertia axis, and the angles
-/// of the chords around `(f + l - h) / 2` about `axe_ref` (the curve's own axis when
-/// `None`).
-fn section_turn(
-    c: &dyn GeomCurve,
-    h: f64,
-    axe_ref: Option<Direction3>,
-) -> Result<(SectionTurn, Direction3), Failure> {
+/// `NP` points of `c` from its start by `h`, the last ones clamped to its end.
+fn sample_section(c: &dyn GeomCurve, h: f64) -> Result<Array1<'static, Point3>, Failure> {
     let (f, l) = (c.first_parameter(), c.last_parameter());
     let mut tab: Array1<'static, Point3> = one_based(NP)?;
     let mut u = f;
@@ -65,26 +59,34 @@ fn section_turn(
             u = l;
         }
     }
-    let inertia = axe_of_inertia(&tab, 1.0e-7)?;
-    let pos = inertia.axe.location();
-    let axis = axe_ref.unwrap_or(inertia.axe.direction());
-    let mut u = (f + l - h) / 2.0 - h;
+    Ok(tab)
+}
+
+/// The sampled points of `c`, their inertia axis, and the angles of the chords
+/// around `(f + l - h) / 2` seen from the inertia centre about `axe_ref` (the
+/// curve's own axis when `None`).
+fn section_turn(
+    c: &dyn GeomCurve,
+    h: f64,
+    axe_ref: Option<Direction3>,
+) -> Result<(SectionTurn, Direction3), Failure> {
+    let inertia = axe_of_inertia(&sample_section(c, h)?, 1.0e-7)?;
+    let (pos, own) = (inertia.axe.location(), inertia.axe.direction());
+    let axis = Vector3::from(axe_ref.unwrap_or(own));
+    let mut u = (c.first_parameter() + c.last_parameter() - h) / 2.0 - h;
     let mut p1 = c.value(u)?;
     let mut angles = [0.0; 3];
     for angle in &mut angles {
         u += h;
         let p2 = c.value(u)?;
-        *angle = Vector3::between(pos, p1)
-            .angle_with_ref(Vector3::between(pos, p2), Vector3::from(axis))?;
+        *angle = Vector3::between(pos, p1).angle_with_ref(Vector3::between(pos, p2), axis)?;
         p1 = p2;
     }
-    Ok((
-        SectionTurn {
-            no_sing: !inertia.is_singular,
-            angles,
-        },
-        inertia.axe.direction(),
-    ))
+    let turn = SectionTurn {
+        no_sing: !inertia.is_singular,
+        angles,
+    };
+    Ok((turn, own))
 }
 
 /// Whether a section turns like the first one, from the signs of the products of

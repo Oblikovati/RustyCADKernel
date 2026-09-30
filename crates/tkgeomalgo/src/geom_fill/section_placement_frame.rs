@@ -24,7 +24,7 @@ use super::sweep_failures::{live, sweep_failure};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::GeomCurve;
-use rustycad_tkmath::gp::{Axis1, Axis3, Direction3, Point3, Transform3};
+use rustycad_tkmath::gp::{Axis1, Axis3, Direction3, Point3, Transform3, Vector3};
 
 impl GeomFillSectionPlacement {
     /// `Transformation(WithTranslation, WithCorrection)`: from the section frame to
@@ -36,14 +36,7 @@ impl GeomFillSectionPlacement {
         with_translation: bool,
         with_correction: bool,
     ) -> Result<Transform3, Failure> {
-        let mut placement = LocationD0::default();
-        self.law("GeomFill_SectionPlacement::Transformation")?
-            .d0(self.path_param, &mut placement)?;
-        let (m, v) = (placement.m, placement.v);
-        let origin = Point3::from(*v.xyz());
-        let d = Direction3::from_xyz(m.column(3)?)?;
-        let dn = Direction3::from_xyz(m.column(1)?)?;
-        let paxe = Axis3::new(origin, d, dn)?;
+        let (paxe, v) = self.path_frame()?;
         let mut psection = Point3::new(0.0, 0.0, 0.0);
         if with_translation || with_correction {
             psection = self.section_point()?;
@@ -65,6 +58,18 @@ impl GeomFillSectionPlacement {
             tf.multiply(rot);
         }
         Ok(tf)
+    }
+
+    /// The frame of the law at `PathParam` (its third column as the main direction,
+    /// its first as X) and the law translation.
+    fn path_frame(&self) -> Result<(Axis3, Vector3), Failure> {
+        let mut placement = LocationD0::default();
+        self.law("GeomFill_SectionPlacement::Transformation")?
+            .d0(self.path_param, &mut placement)?;
+        let (m, v) = (placement.m, placement.v);
+        let d = Direction3::from_xyz(m.column(3)?)?;
+        let dn = Direction3::from_xyz(m.column(1)?)?;
+        Ok((Axis3::new(Point3::from(*v.xyz()), d, dn)?, v))
     }
 
     fn section_point(&self) -> Result<Point3, Failure> {

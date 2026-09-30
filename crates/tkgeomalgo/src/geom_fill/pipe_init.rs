@@ -249,15 +249,7 @@ impl GeomFillPipe {
         rotat: bool,
     ) -> Result<(), Failure> {
         self.my_adp_path = copied_path(path)?;
-        let t_law: Handle<dyn GeomFillTrihedronWithGuide> = if by_acr {
-            Handle::new(GeomFillGuideTrihedronAC::new(guide)?).cast()
-        } else {
-            Handle::new(GeomFillGuideTrihedronPlan::new(guide)?).cast()
-        };
-        live(&t_law, "GeomFill_Pipe::Init", "TLaw")?.set_curve(&self.my_adp_path)?;
-        let the_loc = GeomFillLocationGuide::new(&t_law)?;
-        the_loc.set_curve(&self.my_adp_path)?;
-        let the_loc: Handle<GeomFillLocationGuide> = Handle::new(the_loc);
+        let the_loc = guided_location(guide, by_acr, &self.my_adp_path)?;
         let loc: Handle<dyn GeomFillLocationLaw> = the_loc.clone().cast();
         let mut place = GeomFillSectionPlacement::new(&loc, &first_sect.clone().cast())?;
         place.perform(precision::confusion())?;
@@ -265,15 +257,27 @@ impl GeomFillPipe {
         let (first, last) = (adp.first_parameter()?, adp.last_parameter()?);
         self.set_uniform_section(&place.section(false)?, (first, last))?;
         if rotat {
-            live(&the_loc, "GeomFill_Pipe::Init", "TheLoc")?.set(
-                &self.my_sec,
-                rotat,
-                first,
-                last,
-                0.0,
-            )?;
+            let l = live(&the_loc, "GeomFill_Pipe::Init", "TheLoc")?;
+            l.set(&self.my_sec, rotat, first, last, 0.0)?;
         }
         self.my_loc = loc;
         Ok(())
     }
+}
+
+/// The guided location law (by the curvilinear abscissa or by planes) on `path`.
+fn guided_location(
+    guide: &Handle<dyn Adaptor3dCurve>,
+    by_acr: bool,
+    path: &Handle<dyn Adaptor3dCurve>,
+) -> Result<Handle<GeomFillLocationGuide>, Failure> {
+    let t_law: Handle<dyn GeomFillTrihedronWithGuide> = if by_acr {
+        Handle::new(GeomFillGuideTrihedronAC::new(guide)?).cast()
+    } else {
+        Handle::new(GeomFillGuideTrihedronPlan::new(guide)?).cast()
+    };
+    live(&t_law, "GeomFill_Pipe::Init", "TLaw")?.set_curve(path)?;
+    let the_loc = GeomFillLocationGuide::new(&t_law)?;
+    the_loc.set_curve(path)?;
+    Ok(Handle::new(the_loc))
 }
