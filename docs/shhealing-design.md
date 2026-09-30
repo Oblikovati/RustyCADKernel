@@ -99,3 +99,33 @@ number in code comments and ledger notes.
   `apply_with_build_mode`, and `Status(ShapeExtend_Status)` is `status_flag` (the name the
   Shape Healing tools use for their status flags). The in-flight set of `applyImpl` holds
   TShape addresses.
+
+## 4. ShapeAnalysis, ShapeConstruct and ShapeFix: tools, roots and outputs
+
+- **Value tools.** A class that does not derive from `Standard_Transient`
+  (`ShapeAnalysis_Edge`, `_Geom`, `_ShapeTolerance`, `_Shell`, `_WireOrder`, `_Curve`,
+  `ShapeConstruct_Curve`...) is a plain struct; a class with only static members is a
+  unit struct whose functions are associated functions (`ShapeAnalysisGeom::nearest_plane`).
+  A native `const` member takes `&self`, any other `&mut self` (a status field is written
+  by the checks, as `ShapeAnalysis_Edge::myStatus`).
+- **Transient classes** (`ShapeAnalysis_FreeBoundData`, `ShapeAnalysis_Surface`,
+  `ShapeAnalysis_TransferParameters`, `ShapeFix_*` below `ShapeFix_Root`...) follow section
+  1: they are shared through `Handle`, keep their fields in one `SharedState`, and every
+  member takes `&self`. A sequence that a getter returns as a handle
+  (`FreeBoundData::Notches()`) stays a shared `HSequence` handle.
+- **Outputs.** Reference arguments that only receive results become returned values: a
+  pair or tuple (`WireOrder::XYZ` returns the two points), `Option` when the native `bool`
+  says whether the outputs were set (`Geom::NearestPlane` returns `None` for false), or
+  `(bool, value)` when the outputs are set on both paths (`Geom::PositionTrsf` returns the
+  identity with false). A reference argument that is read and written stays `&mut`.
+  A member that returns a `bool&` or `double&` to a field is a getter and setter pair
+  (`WireOrder::KeepLoopsMode` is `keep_loops_mode`/`set_keep_loops_mode`).
+- **Overloads** are named by argument, as in section 3 (`WireOrder::Add` is `add_3d`,
+  `add_2d`, `add_both`; members on a face or on a surface with a location are `_on_face`
+  and `_on_surface` pairs where both exist).
+- **Out-of-range reads.** `NCollection` containers raise Standard_OutOfRange in the pinned
+  build (`Standard_OutOfRange_Raise_if` is active), so a rank outside a native list gives
+  that error, even where the header promises a null result (`ShapeAnalysis_Shell::Loaded`).
+- **Uninitialized fields.** A native field read before it is set (the `myTols` sum of
+  `ShapeAnalysis_ShapeTolerance` before `InitTolerance`) starts at zero here; the progress
+  document lists each one, and the corpus never reads it natively.

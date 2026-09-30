@@ -2,6 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod sh_probe;
+use sh_probe::analysis_basic;
 use sh_probe::{
     complex_curve, composite_surface, explorer, registrator, reshape, shape_build, shape_extend,
     wire_data,
@@ -30,6 +31,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sh_vertex", shape_build::vertex_case),
     ("sh_edge", shape_build::edge_case),
     ("sh_reshape", reshape::reshape_case),
+    // ShapeAnalysis_Geom, _ShapeTolerance, _Shell, _WireOrder, _FreeBoundData (sh_probe/analysis_basic.rs)
+    ("sh_geom", analysis_basic::geom_case),
+    ("sh_shapetol", analysis_basic::shapetol_case),
+    ("sh_shell", analysis_basic::shell_case),
+    ("sh_wireorder", analysis_basic::wireorder_case),
+    ("sh_fbdata", analysis_basic::fbdata_case),
 ];
 
 fn main() {

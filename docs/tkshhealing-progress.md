@@ -131,6 +131,22 @@ them the excluded RTTI macro); docs/shhealing-design.md section 3 fixes the mapp
 `apply_with_build_mode` and `status_flag`. `crates/tkshhealing/tests/shape_build_*.rs`
 hold the behavior tests.
 
+## ShapeAnalysis, ShapeConstruct and ShapeFix (low classes)
+
+These classes are ported (docs/shhealing-design.md section 4 fixes the mapping); every
+public member has an api row:
+
+| Class | Rust | Probe operations |
+| --- | --- | --- |
+| ShapeAnalysis_Geom | `ShapeAnalysisGeom` | `sh_geom` |
+| ShapeAnalysis_ShapeTolerance | `ShapeAnalysisShapeTolerance` | `sh_shapetol` |
+| ShapeAnalysis_Shell | `ShapeAnalysisShell` | `sh_shell` |
+| ShapeAnalysis_WireOrder | `ShapeAnalysisWireOrder` | `sh_wireorder` |
+| ShapeAnalysis_FreeBoundData | `ShapeAnalysisFreeBoundData` | `sh_fbdata` |
+
+`crates/tkshhealing/tests/shape_analysis_*.rs` hold the behavior tests, on shapes built
+with the ported BRepBuilderAPI makers (`tests/healing_support`).
+
 ## GoogleTest suites
 
 The toolkit test inventory maps these suites (0 declarations):
@@ -238,6 +254,21 @@ ShapeBuild (tools/tkshhealing_corpus_shapebuild.py):
   three modes), `Status` (with and without `last`) and `Value` of solids, shells,
   compounds, wires, faces and edges, with the ShapeExtend status flags.
 
+ShapeAnalysis, ShapeConstruct and ShapeFix (tools/tkshhealing_corpus_analysis_basic.py):
+
+- `sh_geom` (65): `NearestPlane` on planar, noisy, linear, single-point, volume, tiny and
+  empty clouds; `PositionTrsf` on identity, rotation, left-handed, scaled, skew and
+  unequal-column matrices with units and precisions, a null handle and too small
+  matrices;
+- `sh_shapetol` (35), `sh_shell` (63) and `sh_fbdata` (6) on a strip of three planar faces
+  with shared edges of different tolerances, shells whose faces use an edge twice, with
+  the same orientation, INTERNAL or degenerated, a solid and compounds: every member,
+  with each shape type and interval (open, empty, reversed), and the cumulation scripts;
+- `sh_wireorder` (129): 3D, 2D and miscible edge lists in order, reversed, shifted,
+  shuffled, partly reversed, with a gap, two loops, an open chain, a degenerated edge and
+  a seam used twice, with and without the keep-loops mode, then chains and couples;
+  adds in the wrong mode, `SetMode`, `Clear` and a second `Perform`.
+
 ## Preserved native behaviour
 
 ### ShapeExtend
@@ -287,6 +318,24 @@ ShapeBuild (tools/tkshhealing_corpus_shapebuild.py):
   the standard output for the types below the shell (it does the same here); the corpus
   keeps to the handled types, since the printed line would enter the probe's token
   stream.
+
+### ShapeAnalysis (low classes)
+
+- `ShapeAnalysis_Geom::PositionTrsf` calls `SetScale` after `SetTransformation`, and
+  `gp_Trsf::SetScale` resets the rotation: a scaled matrix keeps only its scale and
+  translation. `NearestPlane` also succeeds on collinear points (two extents are zero).
+- `ShapeAnalysis_ShapeTolerance::InTolerance` keeps a vertex whose tolerance is at least
+  `valmax` (faces and edges: at most). The sum `myTols[1]` is uninitialized until
+  `InitTolerance`, so `AddTolerance` right after the constructor reads garbage natively;
+  it starts at 0 here and the corpus always calls `InitTolerance` or `Tolerance` first.
+- `ShapeAnalysis_Shell::CheckOrientedShells` returns true whenever a shell has a bad edge,
+  loaded before or not: the native `if (myShells.Add(sh))` tests the returned index.
+  EXTERNAL edges are ignored; `Loaded` raises Standard_OutOfRange outside the loaded
+  shells although its header promises a null shape.
+- `ShapeAnalysis_WireOrder` never uses its tolerance, never computes `myGap` (`Gap(0)` is
+  0) and does not implement `SetCouples` (no couple exists). `Clear` keeps the last order,
+  so `IsDone` stays true, and `Perform` on no edge keeps it too. `Ordered(0)` and
+  `Chain(-1)` raise Standard_OutOfRange once an order or chains exist.
 
 ## Deliberate deviations
 

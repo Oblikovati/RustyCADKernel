@@ -195130,6 +195130,518 @@
       "rust_item": "rustycad_tkshhealing::shape_build::ShapeBuildVertex::combine_points",
       "status": "implemented",
       "notes": "ShapeBuild mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 3): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_vertex, sh_edge and sh_reshape requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::new",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData(const TopoDS_Wire&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::with_bound",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::clear",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::SetFreeBound(const TopoDS_Wire&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::set_free_bound",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::SetArea(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::set_area",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::SetPerimeter(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::set_perimeter",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::SetRatio(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::set_ratio",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::SetWidth(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::set_width",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::AddNotch(const TopoDS_Wire&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::add_notch",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::FreeBound() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::free_bound",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::Area() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::area",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::Perimeter() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::perimeter",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::Ratio() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::ratio",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::Width() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::width",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::NbNotches() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::nb_notches",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::Notches() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::notches",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::Notch(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::notch",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::NotchWidth(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::notch_width",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::NotchWidth(const TopoDS_Wire&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundData::notch_width_of",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fbdata requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_FreeBoundData::DEFINE_STANDARD_RTTIEXT(ShapeAnalysis_FreeBoundData,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundData.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient! registers ShapeAnalysis_FreeBoundData below Standard_Transient; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Geom::NearestPlane(const NCollection_Array1<gp_Pnt>&,gp_Pln&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Geom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisGeom::nearest_plane",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_geom requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Geom::PositionTrsf(const occ::handle<NCollection_HArray2<double>>&,gp_Trsf&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Geom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisGeom::position_trsf",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_geom requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeTolerance()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeTolerance::new",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shapetol requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeTolerance::Tolerance(const TopoDS_Shape&,int,TopAbs_ShapeEnum)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeTolerance::tolerance",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shapetol requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeTolerance::OverTolerance(const TopoDS_Shape&,double,TopAbs_ShapeEnum) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeTolerance::over_tolerance",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shapetol requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeTolerance::InTolerance(const TopoDS_Shape&,double,double,TopAbs_ShapeEnum) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeTolerance::in_tolerance",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shapetol requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeTolerance::InitTolerance()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeTolerance::init_tolerance",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shapetol requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeTolerance::AddTolerance(const TopoDS_Shape&,TopAbs_ShapeEnum)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeTolerance::add_tolerance",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shapetol requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_ShapeTolerance::GlobalTolerance(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeTolerance::global_tolerance",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shapetol requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::new",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::clear",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::LoadShells(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::load_shells",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::CheckOrientedShells(const TopoDS_Shape&,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::check_oriented_shells",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::IsLoaded(const TopoDS_Shape&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::is_loaded",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::NbLoaded() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::nb_loaded",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::Loaded(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::loaded",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::HasBadEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::has_bad_edges",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::BadEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::bad_edges",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::HasFreeEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::has_free_edges",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::FreeEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::free_edges",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Shell::HasConnectedEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Shell.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShell::has_connected_edges",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_shell requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::new",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder(bool,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::with_mode",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::SetMode(bool,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::set_mode",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Tolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::tolerance",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::clear",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Add(const gp_XYZ&,const gp_XYZ&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::add_3d",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Add(const gp_XY&,const gp_XY&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::add_2d",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Add(const gp_XYZ&,const gp_XYZ&,const gp_XY&,const gp_XY&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::add_both",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::NbEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::nb_edges",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::KeepLoopsMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::keep_loops_mode",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Perform(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::perform",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::IsDone() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::is_done",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Status() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::status",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Ordered(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::ordered",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::XYZ(int,gp_XYZ&,gp_XYZ&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::xyz",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::XY(int,gp_XY&,gp_XY&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::xy",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Gap(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::gap",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::SetChains(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::set_chains",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::NbChains() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::nb_chains",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Chain(int,int&,int&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::chain",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::SetCouples(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::set_couples",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::NbCouples() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::nb_couples",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireOrder::Couple(int,int&,int&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireOrder.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::couple",
+      "status": "implemented",
+      "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
     }
   ],
   "tests": [
