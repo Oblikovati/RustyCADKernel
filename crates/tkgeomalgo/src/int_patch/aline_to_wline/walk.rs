@@ -252,11 +252,10 @@ impl<'a> Walk<'a> {
             self.parameter = self.l_par;
         }
         let (mut p_on_2s, is_point_valid, tg_magn) = self.current_point()?;
-        if self.pre_point_exist != Spt::SPntNone {
-            match self.after_special_point(&mut p_on_2s)? {
-                Some(flow) => return Ok(flow),
-                None => {}
-            }
+        if self.pre_point_exist != Spt::SPntNone
+            && let Some(flow) = self.after_special_point(&mut p_on_2s)?
+        {
+            return Ok(flow);
         }
         self.pre_point_exist = Spt::SPntNone;
         let vertex_number: Option<usize> = self.passed_vertex(&p_on_2s)?;

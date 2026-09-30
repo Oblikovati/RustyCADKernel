@@ -18,6 +18,8 @@
 
 //! `IntPatch_ALineToWLine`: the conversion of an analytic line (`IntPatch_ALine`) of two
 //! quadrics into walking lines (docs/geomalgo-design.md section 17).
+// The negated comparisons keep the native result for NaN operands.
+#![allow(clippy::neg_cmp_op_on_partial_ord)]
 mod build;
 mod specials;
 mod walk;

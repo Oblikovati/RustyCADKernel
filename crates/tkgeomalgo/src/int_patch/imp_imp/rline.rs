@@ -211,10 +211,10 @@ fn rline_against(
             continue;
         }
         let gl: Handle<IntPatchGLine> = slinj.cast();
-        if let Some(g) = gl.get() {
-            if !is_rline_good(quads, g, rline, tol_arc)? {
-                return Ok(true);
-            }
+        if let Some(g) = gl.get()
+            && !is_rline_good(quads, g, rline, tol_arc)?
+        {
+            return Ok(true);
         }
     }
     Ok(false)

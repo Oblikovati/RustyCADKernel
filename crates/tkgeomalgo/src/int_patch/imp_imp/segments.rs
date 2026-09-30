@@ -293,17 +293,17 @@ fn own_ends(
     (pstartf, pstartl): (&EndPoint, &EndPoint),
     ends: &Ends,
 ) -> Result<(), Failure> {
-    if ends.dofirst {
-        if let Some((p, prm)) = pstartf {
-            own_end(input, st, rline, (p, *prm))?;
-            rline.set_first_point(rline.nb_vertex());
-        }
+    if ends.dofirst
+        && let Some((p, prm)) = pstartf
+    {
+        own_end(input, st, rline, (p, *prm))?;
+        rline.set_first_point(rline.nb_vertex());
     }
-    if ends.dolast {
-        if let Some((p, prm)) = pstartl {
-            own_end(input, st, rline, (p, *prm))?;
-            rline.set_last_point(rline.nb_vertex());
-        }
+    if ends.dolast
+        && let Some((p, prm)) = pstartl
+    {
+        own_end(input, st, rline, (p, *prm))?;
+        rline.set_last_point(rline.nb_vertex());
     }
     Ok(())
 }

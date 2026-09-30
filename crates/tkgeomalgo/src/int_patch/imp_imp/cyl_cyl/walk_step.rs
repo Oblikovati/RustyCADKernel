@@ -79,9 +79,9 @@ impl IntervalWalk<'_, '_> {
     /// A line that went through a critical point stops there: U1 takes its value and
     /// both lines are broken.
     fn cross_critical(&self, u1: &mut f64, lines: &mut LinesState, crit_delta: &[f64; NB_CRIT_POINTS_MAX]) {
-        for i in 0..self.nb_crit {
-            if (*u1 - self.u1crit[i]) * crit_delta[i] < 0.0 {
-                *u1 = self.u1crit[i];
+        for (&crit, &delta) in self.u1crit.iter().zip(crit_delta).take(self.nb_crit) {
+            if (*u1 - crit) * delta < 0.0 {
+                *u1 = crit;
                 lines.status = [WlfStatus::Broken; NB_WLINES];
                 lines.u_expect = [*u1; NB_WLINES];
                 break;

@@ -17,6 +17,8 @@
 
 //! The critical U1 values where the walking lines of two cylinders break, and the
 //! adaptive step of U1.
+// The negated comparisons keep the native result for NaN operands.
+#![allow(clippy::neg_cmp_op_on_partial_ord)]
 use super::coeffs::{CoeffsValue, NUL_VALUE};
 use super::inscribe::{exclude_near_elements, insertion_sort, min_max};
 use rustycad_tkernel::precision;
@@ -55,7 +57,8 @@ pub(in super::super) fn critical_points_computing(
     let bsb: f64 = coeffs.b.abs();
     if (coeffs.c - bsb <= cos_fi2) && (cos_fi2 <= coeffs.c + bsb) {
         let mut arg: f64 = (cos_fi2 - coeffs.c) / coeffs.b;
-        arg = arg.clamp_native();
+        // f64::clamp keeps NaN, as the two native comparisons do.
+        arg = arg.clamp(-1.0, 1.0);
         u1crit[4] = -arg.acos() + coeffs.fi1;
         u1crit[5] = arg.acos() + coeffs.fi1;
     }
@@ -111,23 +114,6 @@ fn count_significant(u1crit: &mut [f64; NB_CRIT_POINTS_MAX], period: f64, tol_2d
     nb
 }
 
-/// The clamp of the arguments of acos to [-1, 1], with the native comparisons.
-trait ClampNative {
-    fn clamp_native(self) -> f64;
-}
-impl ClampNative for f64 {
-    fn clamp_native(self) -> f64 {
-        let mut a: f64 = self;
-        if a > 1.0 {
-            a = 1.0;
-        }
-        if a < -1.0 {
-            a = -1.0;
-        }
-        a
-    }
-}
-
 /// A column of the 3x3 system from the column `col` of the 3x5 matrix.
 fn set_col_from(syst: &mut Matrix<'_>, col: i32, matr: &Matrix<'_>, from: i32) -> Result<(), Failure> {
     syst.set_col(col, &matr.col(from)?)
@@ -174,7 +160,7 @@ fn free_column(matr: &Matrix<'_>, v: f64, k: i32) -> Result<Vector<'static>, Fai
     let mut out = matr.col(5)?;
     let col = matr.col(k)?;
     for i in 1..=3 {
-        out[i] = out[i] - v * col[i];
+        out[i] -= v * col[i];
     }
     Ok(out)
 }

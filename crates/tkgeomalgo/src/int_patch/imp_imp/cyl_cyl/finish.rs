@@ -17,6 +17,8 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The walking lines and points of two cylinders put into the result.
+// The negated comparisons keep the native result for NaN operands.
+#![allow(clippy::neg_cmp_op_on_partial_ord)]
 use super::super::super::point::IntPatchPoint;
 use super::super::super::point_line::IntPatchPointLine;
 use super::super::super::wline::{IntPatchWLType, IntPatchWLine};

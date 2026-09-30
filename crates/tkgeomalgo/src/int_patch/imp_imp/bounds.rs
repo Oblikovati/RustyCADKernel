@@ -17,6 +17,8 @@
 
 //! The analytic lines of two quadrics (`IntAna_IntQuadQuad` curves) and their end
 //! vertices, shared with the lines already found.
+// The negated comparisons keep the native result for NaN operands.
+#![allow(clippy::neg_cmp_op_on_partial_ord)]
 use super::super::IntPatchIType;
 use super::super::aline::IntPatchALine;
 use super::super::line::IntPatchLineTransitions;

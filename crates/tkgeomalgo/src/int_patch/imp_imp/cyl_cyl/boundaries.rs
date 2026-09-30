@@ -17,6 +17,8 @@
 
 //! The boundaries of the cylinder-cylinder walking: the U ranges where the lines exist,
 //! the estimated V ranges, and the points where a line crosses a V boundary.
+// The negated comparisons keep the native result for NaN operands.
+#![allow(clippy::neg_cmp_op_on_partial_ord)]
 use super::coeffs::{CoeffsValue, cyl_cyl_compute_uvv};
 use super::inscribe::insertion_sort;
 use super::wline::{AddFlags, SurfBounds, WlContext, add_point_into_wl};
@@ -129,8 +131,7 @@ impl WorkWithBoundaries<'_> {
         if flo * fhi > 0.0 {
             return Ok(None); // no bracketed crossing
         }
-        let mut cfg = Config::default();
-        cfg.x_tolerance = precision::p_confusion();
+        let cfg = Config { x_tolerance: precision::p_confusion(), ..Config::default() };
         let res = brent(&mut func, u_lo, u_hi, &cfg);
         if let Some(e) = failure {
             return Err(e);
@@ -261,14 +262,9 @@ fn add_pair(range: &mut Range1, a: f64, b: f64) {
 }
 
 /// `acos` of the argument clamped to [-1, 1].
-fn clamped_acos(mut arg: f64) -> f64 {
-    if arg > 1.0 {
-        arg = 1.0;
-    }
-    if arg < -1.0 {
-        arg = -1.0;
-    }
-    arg.acos()
+fn clamped_acos(arg: f64) -> f64 {
+    // f64::clamp keeps NaN, as the two native comparisons do.
+    arg.clamp(-1.0, 1.0).acos()
 }
 
 /// `BoundariesComputing(theCoeffs, thePeriod, theURange)`: the U1 ranges (one or two)

@@ -17,6 +17,8 @@
 
 //! The points of a restriction that are multiple points of the lines, or points of the
 //! domain of the other surface.
+// The negated comparisons keep the native result for NaN operands.
+#![allow(clippy::neg_cmp_op_on_partial_ord)]
 use super::super::line::IntPatchLine;
 use super::super::path_point::IntPatchThePathPointOfTheSOnBounds;
 use super::super::point::IntPatchPoint;

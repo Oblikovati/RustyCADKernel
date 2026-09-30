@@ -211,7 +211,7 @@ pub(in super::super) fn short_cos_form(cos_factor: f64, sin_factor: f64) -> (f64
         } else if is_equal(cos_factor, 0.0) {
             angle = 3.0 * PI / 2.0;
         } else if cos_factor < 0.0 {
-            angle = PI + angle;
+            angle += PI;
         }
     }
     (coeff, angle)

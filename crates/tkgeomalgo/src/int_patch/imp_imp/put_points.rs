@@ -265,8 +265,8 @@ fn same_vertex_points(
     done: &mut [i32],
     i: usize,
 ) -> Result<(), Failure> {
-    for k in i + 1..input.listpnt.len() {
-        let other: &IntPatchThePathPointOfTheSOnBounds = &input.listpnt[k];
+    for (k, other) in input.listpnt.iter().enumerate().skip(i + 1) {
+        let other: &IntPatchThePathPointOfTheSOnBounds = other;
         if done[k] == 1 || other.is_new() {
             continue;
         }
