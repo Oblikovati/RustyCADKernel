@@ -200,6 +200,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfs_blendfunc", gfw::blend_case),
     ("gfs_sweepsec", gfg::sweepsec_case),
     ("gfs_pipe", gfg::pipe_case),
+    ("gfs_surface", gfg::surface_case),
 ];
 
 fn main() {

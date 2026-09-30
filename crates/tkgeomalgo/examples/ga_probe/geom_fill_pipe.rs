@@ -242,3 +242,13 @@ pub fn pipe_case(values: &[f64]) {
     surface(&p.surface());
     end();
 }
+
+/// `curve1 curve2`: `GeomFill::Surface`.
+pub fn surface_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let (c1, c2) = (geom_curve(&mut r), geom_curve(&mut r));
+    show(rustycad_tkgeomalgo::geom_fill::surface(&c1, &c2), |s| {
+        surface(&s)
+    });
+    end();
+}

@@ -85,3 +85,10 @@ void ga_gfp_pipe_case(std::istream& input){
  ga_gfp_pipe_state(*p);ga_flag(p->ExchangeUV());ga_real(p->ErrorOnSurf());ga_gfw_surface(p->Surface());
  ga_end();
 }
+#include <GeomFill.hxx>
+// `surface curve1 curve2`: GeomFill::Surface between two geometric curves.
+void ga_gfp_surface_case(std::istream& input){
+ GaReader r{input};occ::handle<Geom_Curve> c1=ga_ics_geom_curve(r),c2=ga_ics_geom_curve(r);
+ GA_TRY(ga_gfw_surface(GeomFill::Surface(c1,c2)));
+ ga_end();
+}

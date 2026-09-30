@@ -106,6 +106,21 @@ def _guide_pipes(requests: list[str]) -> None:
             _pipe(requests, [9, *axis, 0, *ad(HELIX), *circle(O, Z, 1.2), acr, rot], [LAW_PERFORM])
 
 
+def _surfaces(requests: list[str]) -> None:
+    """`gfs_surface`: GeomFill::Surface between matching segments (a plane), coaxial
+    full circles (a cylinder or a cone) and other curves (the generator)."""
+    seg = [trimmed(0.0, 2.0, line(O, X)), trimmed(0.0, 2.0, line(Y, X)), trimmed(-2.0, 0.0, line([0.0, 1.0, 0.0], [-1.0, 0.0, 0.0])),
+           trimmed(0.5, 2.0, line(Y, X)), trimmed(0.0, 2.0, line(Z, Y))]
+    pairs = [(seg[0], seg[1]), (seg[0], seg[2]), (seg[0], seg[3]), (seg[0], seg[4]), (line(O, X), line(Y, X)),
+             (circle(O, Z, 1.0), circle([0.0, 0.0, 2.0], Z, 1.0)), (circle(O, Z, 1.0), circle([0.0, 0.0, 2.0], Z, 2.0)),
+             (circle(O, Z, 2.0), circle([0.0, 0.0, 2.0], Z, 1.0)), (circle(O, Z, 1.0), circle([0.0, 0.0, -2.0], Z, 2.0)),
+             (circle(O, Z, 1.0), circle([1.0, 0.0, 2.0], Z, 1.0)),
+             (trimmed(0.0, 3.0, circle(O, Z, 1.0)), trimmed(0.0, 3.0, circle([0.0, 0.0, 2.0], Z, 1.0))),
+             (SEC_SPLINE, SEC_SPLINE2), (ARC, WAVE), (SEC_ELLIPSE, SEC_CIRCLE)]
+    for c1, c2 in pairs:
+        requests.append(line_of('gfs_surface', [*c1, *c2]))
+
+
 def append_pipe_requests(requests: list[str]) -> None:
     """Append every section generator and pipe request in a fixed order."""
     _sweepsec(requests)
@@ -113,3 +128,4 @@ def append_pipe_requests(requests: list[str]) -> None:
     _section_pipes(requests)
     _blend_pipes(requests)
     _guide_pipes(requests)
+    _surfaces(requests)
