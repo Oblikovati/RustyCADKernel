@@ -141,3 +141,52 @@ and 17.
   the TKGeomAlgo port of `TopTrans_CurveTransition`. `Reset(Tgt)` is `reset_line`, as
   in TopTrans. The `OCCT_DEBUG` message of `Transition` for an unprocessed state is not
   ported (release builds do not print it); the result stays INTERNAL.
+
+## 5. HLRAlgo: transients, reference accessors and array pointers
+
+- **Values.** `HLRAlgo_BiPoint`, `HLRAlgo_EdgeStatus`, `HLRAlgo_Intersection`,
+  `HLRAlgo_Coincidence`, `HLRAlgo_Interference`, `HLRAlgo_Projector` and the records
+  (`TriangleData`, `PolyInternalSegment`, `PolyHidingData`, the nested `IndicesT`,
+  `PointsT`, `FaceIndices`, `Triangle`, `NodeIndices`, `NodeData`, `MinMaxIndices`) are
+  Rust values with public fields where the native struct has them. The nested types
+  take flat names (`BiPointIndices`, `PolyTriangle`, `HidingPlane`, ...). The six
+  `HLRAlgo_BiPoint` constructors group their 12 coordinates in `BiPointPoints`, the face
+  triplets in `BiPointFace` and the four booleans in `BiPointRegularity`.
+- **Uninitialized native fields.** Several native constructors leave fields
+  uninitialized (the `MinMaxIndices` arrays, the edge and flag arrays of
+  `HLRAlgo_EdgesBlock`, the enumerations of a default `HLRAlgo_Intersection` and
+  `HLRAlgo_Interference`, the POD array entries of the poly classes, the distance
+  tolerance of `HLRAlgo_PolyAlgo` before `Update`). The port starts them at zero or
+  FORWARD/IN; the probes never read them.
+- **Transients.** `HLRAlgo_EdgesBlock`, `HLRAlgo_WiresBlock`, `HLRAlgo_PolyData`,
+  `HLRAlgo_PolyShellData`, `HLRAlgo_PolyInternalNode`, `HLRAlgo_PolyInternalData` and
+  `HLRAlgo_PolyAlgo` are registered transients (`impl_transient!`) whose fields sit in
+  `SharedState` locks, so every member takes `&self`. A native accessor that returns a
+  reference to a small value (`MinMax()`) returns a copy, and the value is written
+  through its setter (`UpdateMinMax`). A native accessor that returns a reference to a
+  structure the caller edits in place (`Indices()`, `Data()`, `PolyData()`, `Edges()`,
+  `ChangePolyShell()`) returns a write guard of a lock of its own; a caller holds at
+  most one guard of an object at a time (two nodes of a degenerate triangle are one
+  node).
+- **Shared arrays and array pointers.** The `NCollection_HArray1` members are
+  `Handle<HArray1<T>>`. `Nodes()`, `TData()`, `PHDat()`, `PISeg()` and `PINod()` return
+  the shared handle; the caller locks its array. The native
+  `NCollection_Array1<T>*&` parameters of `AddNode`, the split `UpdateLinks` and the
+  `Inc*` members are `&mut Handle<HArray1<T>>`: a member that grows an array stores the
+  new handle in the first parameter, and in the second too when both named the same
+  array (compared by object identity), as the native pointer update does.
+- **Failures.** A native read of a null handle crashes and an out-of-range read under
+  `No_Exception` is undefined; the port returns Standard_NullObject and
+  Standard_OutOfRange there. Array reads in the files compiled without `No_Exception`
+  raise Standard_OutOfRange natively and in the port alike (`PHDat(1)` of an empty
+  hiding array, node 1 of an empty node array). A negative block or array size makes the
+  native allocation of `SIZE_MAX` entries fail; the port returns Standard_RangeError.
+- **Repeated blocks.** The native `hideByOneTriangle` repeats one block per triangle
+  edge and `UpdateLinks` one block per triangle edge; the port runs one function per
+  edge over a state struct that holds the native locals shared by the blocks, and keeps
+  the native comparisons as written, so NaN distances take the native branches.
+- **Dump.** `HLRAlgo_PolyInternalData::Dump` writes the native `std::cout` text
+  (`std::setw` columns, doubles as `%g` with 6 digits) to a `fmt::Write`.
+- **The box constants.** The seven directions of `HLRAlgo::UpdateMinMax` are the bit
+  patterns of the pinned build's `cos(k*PI/14)` and `sin(k*PI/14)`, so no platform
+  `cos` can change them.
