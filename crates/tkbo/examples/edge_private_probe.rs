@@ -10,6 +10,8 @@ mod edge_best;
 mod edge_coincidence;
 #[path = "../src/int_tools/edge_edge/intersection.rs"]
 mod edge_intersection;
+#[path = "../src/int_tools/edge_edge/line_line.rs"]
+mod edge_lines;
 #[path = "../src/int_tools/edge_edge/math.rs"]
 mod edge_math;
 #[path = "../src/int_tools/edge_edge/parameters.rs"]

@@ -36,6 +36,9 @@ def requests() -> str:
     lines+=['edge_pairs '+' '.join(map(str,[source,target,a,b,c,d,tol,res]))
             for source,target,(a,b),(c,d),tol,res in product([0,1,3,4,7,9,11],
                 [0,1,3,7,9,11],[(0,1),(0,0),(1,0),(-1,1)],[(0,1),(-2,3)],[0,1e-7,0.01,10],[1e-7,0.001,10])]
+    lines+=['edge_lines '+' '.join(map(str,[kind,x,y,z,a,b,tol1,tol2,shared]))
+            for kind,x,y,z,(a,b),(tol1,tol2),shared in product(range(6),[-1,0,0.5],[0,0.5],[0,0.05],
+                [(-1,1),(0,1),(1,0),(0,0)],[(1e-7,1e-7),(0.01,0.05),(0.5,0.2)],[0,1])]
     return '\n'.join(lines)+'\n' 
 
 

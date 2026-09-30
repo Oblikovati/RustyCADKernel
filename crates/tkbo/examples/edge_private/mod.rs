@@ -2,6 +2,7 @@
 use super::{edge_math, edge_resolution};
 mod distances;
 mod fixtures;
+mod lines;
 mod pairs;
 mod parameters;
 use rustycad_tkbo::int_tools::Range;
@@ -66,6 +67,7 @@ fn geometry(values: &[f64]) -> Result<(), Failure> {
 }
 pub fn run(operation: &str, values: &[f64]) {
     match operation {
+        "edge_lines" => attempt(lines::case(values)),
         "edge_pairs" => attempt(pairs::case(values)),
         "edge_parameters" => attempt(parameters::case(values)),
         "edge_distance" => attempt(distances::case(values)),
