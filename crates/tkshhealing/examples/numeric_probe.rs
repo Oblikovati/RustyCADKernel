@@ -6,6 +6,7 @@ use sh_probe::{
     complex_curve, composite_surface, explorer, registrator, reshape, shape_build, shape_extend,
     wire_data,
 };
+use sh_probe::{modification, shape_custom};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -30,6 +31,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sh_vertex", shape_build::vertex_case),
     ("sh_edge", shape_build::edge_case),
     ("sh_reshape", reshape::reshape_case),
+    // ShapeCustom (sh_probe/shape_custom.rs, sh_probe/modification.rs)
+    ("sc_curve2d", shape_custom::curve2d_case),
+    ("sc_restriction", shape_custom::restriction_case),
+    ("sc_modif", modification::modif_case),
 ];
 
 fn main() {

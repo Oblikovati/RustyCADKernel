@@ -7,6 +7,11 @@ pub mod reshape;
 pub mod shape_build;
 pub mod shape_extend;
 pub mod wire_data;
+// ShapeCustom, ShapeUpgrade and ShapeProcess (tkshhealing_probe_shcommon.cxx and the probe
+// files of each class group).
+pub mod modification;
+pub mod sh_common;
+pub mod shape_custom;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit
 // prints the same token stream (tools/oracle/tkshhealing_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.

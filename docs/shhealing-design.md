@@ -99,3 +99,42 @@ number in code comments and ledger notes.
   `apply_with_build_mode`, and `Status(ShapeExtend_Status)` is `status_flag` (the name the
   Shape Healing tools use for their status flags). The in-flight set of `applyImpl` holds
   TShape addresses.
+
+## 7. ShapeCustom: the modifications
+
+Sections 4 to 6 are left to ShapeAnalysis, ShapeConstruct and ShapeFix, which are ported
+in parallel; the ShapeCustom, ShapeUpgrade and ShapeProcess sections take the numbers 7, 8
+and 9 in package order.
+
+- **ShapeCustom_Curve2d** has only static members: the unit struct `ShapeCustomCurve2d`.
+  `IsLinear` and `ConvertToLine2d` leave their output arguments unchanged when they return
+  false or a null line, so they return `Option` (`None` is the native false or null line).
+  `IsLinear` reads the poles by the indices 1..Length through `Array1::value`, as natively;
+  another lower bound is Standard_OutOfRange instead of an unchecked read.
+  `SimplifyBSpline2d` changes the B-spline through its shared handle (`&Geom2dBSplineCurve`).
+- **ShapeCustom_RestrictionParameters** is a Transient with its fields in one
+  `SharedState`; each accessor that returns a reference to a field is a getter and a `set_`
+  setter.
+- **ShapeCustom_Modification** is abstract and derives from `BRepTools_Modification`
+  (TKBRep's trait `BRepToolsModification`): it is the trait
+  `ShapeCustomModification: BRepToolsModification`, registered below
+  `BRepTools_Modification`. Its private `myMsgReg` is the struct
+  `ShapeCustomModificationFields` that each concrete modification embeds and lends through
+  the required method `modification_messages`; `SetMsgRegistrator` (virtual),
+  `MsgRegistrator` and `SendMsg` are provided methods. A concrete modification
+  (`ShapeCustomDirectModification`, `ShapeCustomConvertToRevolution`) lists both traits as
+  interfaces of its `impl_transient!`, so a `Handle<dyn BRepToolsModification>` casts to
+  `Handle<dyn ShapeCustomModification>` as the native `DownCast`.
+- **ShapeCustom_TrsfModification** derives from `BRepTools_TrsfModification`, a concrete
+  class: the struct `ShapeCustomTrsfModification` embeds a `TrsfModification` as its parent
+  (RTTI chain ShapeCustom_TrsfModification -> BRepTools_TrsfModification ->
+  BRepTools_Modification) and implements `BRepToolsModification` by calling the parent,
+  then overwriting the tolerance; the inherited `Trsf()`/`IsCopyMesh()` are reached through
+  `trsf_modification()`.
+- The `NewCurve` bodies that ShapeCustom_DirectModification and
+  ShapeCustom_ConvertToRevolution share (copy the 3D curve of an edge when one of its
+  p-curves lies on a surface that changes) are one private function with the surface test
+  as a closure.
+- The output parameters of the `New*` members are the `&mut` arguments and the
+  `NewSurface`/`NewCurve` structs of the TKBRep trait; a member leaves them as natively
+  (written or not) on every path.
