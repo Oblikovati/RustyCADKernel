@@ -62,3 +62,6 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     # EdgeDivide criteria and FixSmallCurves base preserve real curve geometry.
     __import__('tkshhealing_corpus_edge_divide').append_edge_divide_requests(requests)
     __import__('tkshhealing_corpus_edge_divide').append_fix_small_curve_requests(requests)
+
+    # TransferParameters: independent parameter spaces and topology range copying.
+    __import__('tkshhealing_corpus_transfer_parameters').append_transfer_parameter_requests(requests)

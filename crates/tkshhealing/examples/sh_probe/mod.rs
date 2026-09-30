@@ -68,3 +68,5 @@ pub mod split_curve_2d;
 pub mod edge_divide;
 
 pub mod fix_small_curves;
+
+pub mod transfer_parameters;

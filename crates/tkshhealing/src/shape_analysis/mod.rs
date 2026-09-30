@@ -35,3 +35,9 @@ pub use package::ShapeAnalysis;
 
 mod free_bounds;
 pub use free_bounds::ShapeAnalysisFreeBounds;
+
+mod transfer_parameters;
+pub use transfer_parameters::{
+    ShapeAnalysisTransferParameters, TransferParameterData, TransferParameterFields,
+    TransferParameters,
+};
