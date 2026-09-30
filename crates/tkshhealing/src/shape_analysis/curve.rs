@@ -17,6 +17,8 @@ pub struct ShapeAnalysisCurve;
 
 mod bounds;
 mod closure;
+mod planarity_curve;
+mod planarity_points;
 mod sampling;
 mod sampling_3d;
 mod seam;

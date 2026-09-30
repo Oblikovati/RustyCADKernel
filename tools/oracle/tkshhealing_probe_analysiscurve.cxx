@@ -66,3 +66,11 @@ void sh_analysis_bounds_case(std::istream& in) {
  GA_TRY(auto curve=tp_geom2d_curve(r);double first=r.real(),last=r.real();int count=r.integer();bool exact=r.flag();ShapeAnalysis_Curve().FillBndBox(curve,first,last,count,exact,bounds));
  ga_flag(bounds.IsVoid());GA_TRY(double a,b,c,d;bounds.Get(a,b,c,d);ga_real(a);ga_real(b);ga_real(c);ga_real(d));ga_end();
 }
+
+void sh_analysis_planar_case(std::istream& in) {
+ GaReader r{in};gp_XYZ normal;
+ GA_TRY(int kind=r.integer();bool result;
+ if(kind==0){int count=r.integer();NCollection_Array1<gp_Pnt> points(1,count);for(int i=1;i<=count;++i)points(i)=r.pnt();normal=r.xyz();double tolerance=r.real();result=ShapeAnalysis_Curve::IsPlanar(points,normal,tolerance);}
+ else{occ::handle<Geom_Curve> curve;if(kind==1)curve=tp_geom_curve(r);else{int count=r.integer();std::vector<occ::handle<Geom_Curve>> curves;for(int i=0;i<count;++i)curves.push_back(tp_geom_curve(r));curve=new ShProbeComplexCurve(curves);}normal=r.xyz();double tolerance=r.real();result=ShapeAnalysis_Curve::IsPlanar(curve,normal,tolerance);}
+ ga_flag(result));ga_xyz(normal);ga_end();
+}

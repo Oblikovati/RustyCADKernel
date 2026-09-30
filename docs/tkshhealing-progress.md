@@ -605,3 +605,11 @@ FillBndBox adds 960 exact comparisons (11,473 total). Native C2 intervals,
 ten-step coordinate extrema, previous-iterate return values and the no-op for
 nonpositive exact sample counts are preserved. Three focused regressions and
 strict clippy pass. Both IsPlanar overloads remain pending for ShapeAnalysis_Curve.
+
+Both IsPlanar overloads now preserve the native ordered polygon normal, supplied
+normal scale, small-normal fallback, wrapper basis recursion and complex-curve
+control polygons. The 1,158 new exact comparisons bring the integrated corpus to
+12,631. Four focused regressions and the full TKShHealing Rust crate pass; strict
+clippy passes. ShapeAnalysis_Curve now has all 16 callable APIs mapped, with zero
+header audit gaps or stale rows. This class has no original standalone GTest suite;
+its API oracle does not count as translated ProjectCurveOnSurface declarations.

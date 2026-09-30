@@ -227,3 +227,50 @@ pub fn bounds_case(values: &[f64]) {
     });
     end();
 }
+
+fn planar_curve_input(reader: &mut Reader, kind: i32) -> Result<Handle<dyn GeomCurve>, Failure> {
+    if kind == 1 {
+        return geom_curve(reader);
+    }
+    let count = reader.integer();
+    let mut curves = Vec::new();
+    for _ in 0..count {
+        curves.push(geom_curve(reader)?);
+    }
+    Ok(Handle::new(super::complex_curve::ShProbeComplexCurve::new(curves)).cast())
+}
+/// Point and curve overloads with the original supplied normal; `planar_case(numbers)`.
+pub fn planar_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    let mut normal = rustycad_tkmath::gp::Xyz::default();
+    attempt(|| {
+        let kind = reader.integer();
+        let result = if kind == 0 {
+            planar_points_input(&mut reader, &mut normal)?
+        } else {
+            let curve = planar_curve_input(&mut reader, kind)?;
+            normal = reader.xyz();
+            ShapeAnalysisCurve::is_planar(&curve, &mut normal, reader.real())?
+        };
+        super::common::flag(result);
+        Ok(())
+    });
+    super::common::xyz(normal);
+    end();
+}
+fn planar_points_input(
+    reader: &mut Reader,
+    normal: &mut rustycad_tkmath::gp::Xyz,
+) -> Result<bool, Failure> {
+    let count = reader.integer();
+    let mut points = Vec::new();
+    for _ in 0..count {
+        points.push(reader.pnt());
+    }
+    *normal = reader.xyz();
+    ShapeAnalysisCurve::is_planar_points(
+        &rustycad_tkernel::ncollection::Array1::from_shared(&points, 1),
+        normal,
+        reader.real(),
+    )
+}

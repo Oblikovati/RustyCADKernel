@@ -52,6 +52,7 @@
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_analysis_projection",sh_analysis_curve_projection_case},
  {"sh_analysis_period",sh_analysis_period_case},
+ {"sh_analysis_planar",sh_analysis_planar_case},
  {"sh_analysis_bounds",sh_analysis_bounds_case},
  {"sh_analysis_validate",sh_analysis_validate_case},
  {"sh_analysis_seam",sh_analysis_seam_case},

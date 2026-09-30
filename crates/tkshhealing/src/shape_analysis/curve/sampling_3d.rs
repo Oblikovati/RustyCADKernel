@@ -41,7 +41,7 @@ fn curve_sample_count(curve: &Handle<dyn GeomCurve>, factor: i32) -> i32 {
     }
     100_i32.wrapping_mul(factor)
 }
-fn wrapper_basis(curve: &Handle<dyn GeomCurve>) -> Option<Handle<dyn GeomCurve>> {
+pub(super) fn wrapper_basis(curve: &Handle<dyn GeomCurve>) -> Option<Handle<dyn GeomCurve>> {
     if let Some(offset) = curve.cast::<GeomOffsetCurve>().get() {
         return Some(offset.basis_curve());
     }

@@ -33,3 +33,13 @@ def append_analysis_curve_requests(requests:list[str])->None:
         requests.append('sh_analysis_validate '+numbers([*curve,*bounds,tolerance]))
     for curve, bounds, count, exact, initial in product(construct_curves_2d(),[(0,1),(-1,2),(1,0),(0.5,0.5)],[-1,0,1,2,5,20],range(2),range(2)):
         requests.append('sh_analysis_bounds '+numbers([initial,*curve,*bounds,count,exact]))
+    normals = [(0,0,0),(0,0,1),(0,0,3),(1,0,0),(1,2,3),(1e-9,0,0)]
+    points_sets = [[(0,0,0),(1,0,0)],[(0,0,0),(0,0,1)],[(1,2,3)]*3,
+        [(0,0,0),(1,0,0),(1,1,0),(0,1,0)],[(0,0,0),(1,0,0),(1,1,1),(0,1,0)],
+        [(0,0,0),(1,0,0),(0,0,0),(2,0,0)],[(0,0,0),(1,0,0),(1,1,1e-8),(0,1,0)]]
+    for points, normal, tolerance in product(points_sets,normals,[-1,0,1e-7,1]):
+        requests.append('sh_analysis_planar '+numbers([0,len(points),*[v for p in points for v in p],*normal,tolerance]))
+    for curve, normal, tolerance in product(construct_curves_3d(),normals,[-1,0,1e-7,1]):
+        requests.append('sh_analysis_planar '+numbers([1,*curve,*normal,tolerance]))
+    for first, second, normal in product(construct_curves_3d(),construct_curves_3d(),normals):
+        requests.append('sh_analysis_planar '+numbers([2,2,*first,*second,*normal,1e-7]))

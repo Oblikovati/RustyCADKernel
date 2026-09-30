@@ -207863,6 +207863,85 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::fill_bnd_box",
       "status": "implemented",
       "notes": "Native C2 interval sampling, ten-step coordinate Newton extrema, previous-iterate result, and nonpositive sample no-op behavior. 960 exact native comparisons; three focused regressions."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::IsPlanar(const NCollection_Array1<gp_Pnt>&,gp_XYZ&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::is_planar_points",
+      "status": "implemented",
+      "notes": "Native ordered polygon normals, supplied-normal scale/tolerance rules, wrapper recursion and complex-curve control polygons. 1158 exact native comparisons; four focused regressions. Null curves and undersized arrays return explicit Rust errors where native access may be undefined."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::IsPlanar(const occ::handle<Geom_Curve>&,gp_XYZ&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::is_planar",
+      "status": "implemented",
+      "notes": "Native ordered polygon normals, supplied-normal scale/tolerance rules, wrapper recursion and complex-curve control polygons. 1158 exact native comparisons; four focused regressions. Null curves and undersized arrays return explicit Rust errors where native access may be undefined."
+    },
+    {
+      "upstream_id": "BRepMesh_Deflection",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Deflection.hxx",
+      "source_sha256": "6eca3e63a0b8384a05fa409723797736b379dbe226359e9ec9daa64656a02e13",
+      "rust_item": "rustycad_tkmesh::brep_mesh::Deflection",
+      "status": "implemented",
+      "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
+    },
+    {
+      "upstream_id": "BRepMesh_Deflection::ComputeAbsoluteDeflection(const TopoDS_Shape&,double,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Deflection.hxx",
+      "source_sha256": "6eca3e63a0b8384a05fa409723797736b379dbe226359e9ec9daa64656a02e13",
+      "rust_item": "rustycad_tkmesh::brep_mesh::Deflection::compute_absolute",
+      "status": "implemented",
+      "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
+    },
+    {
+      "upstream_id": "BRepMesh_Deflection::ComputeDeflection(const IMeshData::IEdgeHandle&,double,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Deflection.hxx",
+      "source_sha256": "6eca3e63a0b8384a05fa409723797736b379dbe226359e9ec9daa64656a02e13",
+      "rust_item": "rustycad_tkmesh::brep_mesh::Deflection::compute_edge",
+      "status": "implemented",
+      "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
+    },
+    {
+      "upstream_id": "BRepMesh_Deflection::ComputeDeflection(const IMeshData::IWireHandle&,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Deflection.hxx",
+      "source_sha256": "6eca3e63a0b8384a05fa409723797736b379dbe226359e9ec9daa64656a02e13",
+      "rust_item": "rustycad_tkmesh::brep_mesh::Deflection::compute_wire",
+      "status": "implemented",
+      "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
+    },
+    {
+      "upstream_id": "BRepMesh_Deflection::ComputeDeflection(const IMeshData::IFaceHandle&,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Deflection.hxx",
+      "source_sha256": "6eca3e63a0b8384a05fa409723797736b379dbe226359e9ec9daa64656a02e13",
+      "rust_item": "rustycad_tkmesh::brep_mesh::Deflection::compute_face",
+      "status": "implemented",
+      "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
+    },
+    {
+      "upstream_id": "BRepMesh_Deflection::IsConsistent(double,double,bool,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Deflection.hxx",
+      "source_sha256": "6eca3e63a0b8384a05fa409723797736b379dbe226359e9ec9daa64656a02e13",
+      "rust_item": "rustycad_tkmesh::brep_mesh::Deflection::is_consistent",
+      "status": "implemented",
+      "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
+    },
+    {
+      "upstream_id": "BRepMesh_Deflection::DEFINE_STANDARD_RTTIEXT(BRepMesh_Deflection,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Deflection.hxx",
+      "source_sha256": "6eca3e63a0b8384a05fa409723797736b379dbe226359e9ec9daa64656a02e13",
+      "rust_item": "rustycad_tkmesh::brep_mesh::Deflection (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
     }
   ],
   "tests": [

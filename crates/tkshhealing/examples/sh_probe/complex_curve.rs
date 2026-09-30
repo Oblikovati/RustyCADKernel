@@ -26,7 +26,7 @@ impl_transient!(
 );
 
 impl ShProbeComplexCurve {
-    fn new(curves: Vec<Handle<dyn GeomCurve>>) -> Self {
+    pub(super) fn new(curves: Vec<Handle<dyn GeomCurve>>) -> Self {
         Self {
             parent: StandardTransient::default(),
             curves,
