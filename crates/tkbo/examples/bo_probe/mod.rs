@@ -1,5 +1,6 @@
 mod curves;
 mod intersections;
+mod localize;
 mod marked;
 mod records;
 use rustycad_tkbo::int_tools::*;
@@ -30,6 +31,7 @@ fn dispatch_case(operation: &str, v: &[f64]) {
         "points" => intersections::points_case(v),
         "common" => intersections::common_case(v),
         "intersection_curve" => curves::case(v),
+        "localize" => localize::case(v),
         "range" => range_case(v),
         "marked" => marked::case(v),
         "root" => root_case(v),

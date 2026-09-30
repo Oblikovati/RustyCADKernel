@@ -56,12 +56,13 @@ void bo_surface_case(const std::vector<double>& v) {
 #include "tkbo_foundations_marked.cxx"
 #include "tkbo_foundations_bopds.cxx"
 #include "tkbo_foundations_intersections.cxx"
+#include "tkbo_foundations_localize.cxx"
 int main() {
  std::string line;
  while(std::getline(std::cin,line)) {
   std::istringstream input(line);std::string operation;input>>operation;std::vector<double> values;double value;
   while(input>>value)values.push_back(value);
-  if(operation=="points")bo_points_case(values);else if(operation=="common")bo_common_case(values);else if(operation=="intersection_curve")bo_intersection_curve_case(values);else if(operation=="bop_range")bo_index_case(values);else if(operation=="bop_pave")bo_pave_case(values);else if(operation=="bop_pair")bo_pair_case(values);else if(operation=="bop_point")bo_point_case(values);else if(operation=="marked")bo_marked_case(values);else if(operation=="range")bo_range_case(values);else if(operation=="root")bo_root_case(values);
+  if(operation=="localize")bo_local_case(values);else if(operation=="points")bo_points_case(values);else if(operation=="common")bo_common_case(values);else if(operation=="intersection_curve")bo_intersection_curve_case(values);else if(operation=="bop_range")bo_index_case(values);else if(operation=="bop_pave")bo_pave_case(values);else if(operation=="bop_pair")bo_pair_case(values);else if(operation=="bop_point")bo_point_case(values);else if(operation=="marked")bo_marked_case(values);else if(operation=="range")bo_range_case(values);else if(operation=="root")bo_root_case(values);
   else if(operation=="curve")bo_curve_case(values);else if(operation=="surface")bo_surface_case(values);
   else {std::cerr<<"Unknown probe operation: "<<operation<<'\n';return 2;}
   std::cout<<'\n';

@@ -24,6 +24,8 @@ def corpus() -> str:
     requests += marked_requests()
     requests += bopds_requests()
     requests += intersection_requests()
+    requests += [f'localize {count} {minimum} {steps} {depth}'
+                 for count, minimum, steps, depth in product([-1, 0, 4], [-0.0, 0.1], [0, 1, 101, 420], [-2, 0, 3])]
     return '\n'.join(requests) + '\n'
 
 
