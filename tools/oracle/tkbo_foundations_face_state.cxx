@@ -1,6 +1,7 @@
 // FaceFace state behavior from the unchanged OCCT 3d097a0 shared library.
 #include <IntTools_FaceFace.hxx>
 #include <limits>
+#include <Geom2d_Circle.hxx>
 void bo_face_state(const IntTools_FaceFace& ff) {
  bo_int(ff.IsDone());bo_int(ff.TangentFaces());bo_int(ff.Face1().IsNull());
  bo_int(ff.Face2().IsNull());bo_int(ff.Context().IsNull());
@@ -92,6 +93,35 @@ void bo_face_bounds_case(const std::vector<double>& v) {
   CorrectSurfaceBoundaries(face,v[2],u1,u2,v1,v2);
   for(double t:{u1,u2,v1,v2})bo_real(t);
   CorrectPlaneBoundaries(u1,u2,v1,v2);for(double t:{u1,u2,v1,v2})bo_real(t);
+ }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
+}
+occ::handle<Geom2d_Curve> bo_face_check_spline(int kind,double x,double y) {
+ NCollection_Array1<gp_Pnt2d> poles(1,5);poles(1)=gp_Pnt2d(x,y);poles(2)=gp_Pnt2d(x+2,y+2);poles(3)=gp_Pnt2d(x,y+2);poles(4)=gp_Pnt2d(x+2,y);
+ poles(5)=kind==3?gp_Pnt2d(x+3,y+1):gp_Pnt2d(x,y);
+ NCollection_Array1<double> knots(1,5);NCollection_Array1<int> mults(1,5);mults.Init(1);
+ for(int i=1;i<=5;++i)knots(i)=i-1;mults(1)=mults(5)=2;
+ return new Geom2d_BSplineCurve(poles,knots,mults,1,false);
+}
+occ::handle<Geom2d_Curve> bo_face_check_curve(int kind,double x,double y) {
+ gp_Ax2d axis(gp_Pnt2d(x,y),gp_Dir2d(1,0));
+ if(kind==0)return occ::handle<Geom2d_Curve>();
+ if(kind==1)return new Geom2d_TrimmedCurve(new Geom2d_Line(axis),0,1);
+ if(kind==2)return new Geom2d_Circle(axis,1,true);
+ return bo_face_check_spline(kind,x,y);
+}
+void bo_face_check_case(const std::vector<double>& v) {
+ try {
+  auto curve=bo_face_check_curve(int(v[0]),v[2],v[3]);bo_int(IsCurveValid(curve));
+  if(curve.IsNull())return;
+  auto face=bo_fclass_face(int(v[1]),3);occ::handle<IntTools_Context> context=new IntTools_Context;
+  bo_int(CheckPCurve(curve,face,context));
+ }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
+}
+void bo_face_distance_case(const std::vector<double>& v) {
+ try {
+  auto curve=bo_tools_geometry(int(v[0]),v[2],v[3]);auto face=bo_fclass_face(int(v[1]),3.);
+  occ::handle<IntTools_Context> context=new IntTools_Context;
+  bo_real(FindMaxDistance(curve,v[2],v[3],face,context));
  }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
 }
 #endif
