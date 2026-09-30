@@ -154162,6 +154162,1494 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "the virtual destructor of the abstract class; Rust drops the implementors"
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter, ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::Perform(const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::Perform(const occ::handle<Adaptor3d_Curve>&,const IntCurveSurface_ThePolygonOfHInter&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polygon",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_poly)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::Perform(const occ::handle<Adaptor3d_Curve>&,const IntCurveSurface_ThePolygonOfHInter&,const occ::handle<Adaptor3d_Surface>&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polygon_polyhedron",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_poly)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::Perform(const occ::handle<Adaptor3d_Curve>&,const IntCurveSurface_ThePolygonOfHInter&,const occ::handle<Adaptor3d_Surface>&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polygon_polyhedron_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_poly)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::Perform(const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polyhedron",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_poly)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::Perform(const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_bounds",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::InternalPerformCurveQuadric(const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_curve_quadric",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter, ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::InternalPerform(const occ::handle<Adaptor3d_Curve>&,const IntCurveSurface_ThePolygonOfHInter&,const occ::handle<Adaptor3d_Surface>&,const IntCurveSurface_ThePolyhedronOfHInter&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_polyhedron",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::InternalPerform(const occ::handle<Adaptor3d_Curve>&,const IntCurveSurface_ThePolygonOfHInter&,const occ::handle<Adaptor3d_Surface>&,const IntCurveSurface_ThePolyhedronOfHInter&,double,double,double,double,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_polyhedron_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::InternalPerform(const occ::handle<Adaptor3d_Curve>&,const IntCurveSurface_ThePolygonOfHInter&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_polygon",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::PerformConicSurf(const gp_Lin&,const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_line",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::PerformConicSurf(const gp_Circ&,const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_circle",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::PerformConicSurf(const gp_Elips&,const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_ellipse",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::PerformConicSurf(const gp_Parab&,const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_parabola",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::PerformConicSurf(const gp_Hypr&,const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::AppendIntAna(const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor3d_Surface>&,const IntAna_IntConicQuad&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::append_int_ana",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter, ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::AppendPoint(const occ::handle<Adaptor3d_Curve>&,double,const occ::handle<Adaptor3d_Surface>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::append_curve_point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter, ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_HInter::AppendSegment(const occ::handle<Adaptor3d_Curve>&,double,double,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_HInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::append_curve_segment",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hinter, ics_hinter_protected)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::is_done",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::nb_points",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::nb_segments",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::Segment(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::segment",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::IsParallel() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::is_parallel",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::dump",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::SetValues(const IntCurveSurface_Intersection&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::set_values",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::Append(const IntCurveSurface_Intersection&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::append",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::Append(const IntCurveSurface_IntersectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::append_point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::Append(const IntCurveSurface_IntersectionSegment&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::append_segment",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::ResetFields()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::reset_fields",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::default",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint(const gp_Pnt&,double,double,double,IntCurveSurface_TransitionOnCurve)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::SetValues(const gp_Pnt&,double,double,double,IntCurveSurface_TransitionOnCurve)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::set_values",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::Values(gp_Pnt&,double&,double&,double&,IntCurveSurface_TransitionOnCurve&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::values",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::Pnt() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::pnt",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::U() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::u",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::V() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::v",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::W() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::w",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::Transition() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::transition",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionPoint::dump",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::default",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment(const IntCurveSurface_IntersectionPoint&,const IntCurveSurface_IntersectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment::SetValues(const IntCurveSurface_IntersectionPoint&,const IntCurveSurface_IntersectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::set_values",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment::Values(IntCurveSurface_IntersectionPoint&,IntCurveSurface_IntersectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::values",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment::FirstPoint(IntCurveSurface_IntersectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::first_point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment::SecondPoint(IntCurveSurface_IntersectionPoint&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::second_point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment::FirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::first_point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment::SecondPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::second_point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionSegment::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::IntersectionSegment::dump",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::NbVariables() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::nb_variables",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::NbEquations() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::nb_equations",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::value",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::Derivatives(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::derivatives",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::Values(const math_Vector&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::values",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::Point() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::Root() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::root",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::AuxillarSurface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::auxillar_surface",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheCSFunctionOfHInter::AuxillarCurve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheCSFunctionOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheCSFunctionOfHInter::auxillar_curve",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter(double,double,double,const IntCurveSurface_TheCSFunctionOfHInter&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter(const IntCurveSurface_TheCSFunctionOfHInter&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::from_function",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter::Perform(double,double,double,math_FunctionSetRoot&,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::perform",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::is_done",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::is_empty",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter::Point() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter::ParameterOnCurve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::parameter_on_curve",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter::ParameterOnSurface(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::parameter_on_surface",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheExactHInter::Function()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheExactHInter::function",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_exact)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::FirstParameter(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::first_parameter",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::LastParameter(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::last_parameter",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Continuity(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::continuity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::NbIntervals(const occ::handle<Adaptor3d_Curve>&,GeomAbs_Shape)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::nb_intervals",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Intervals(const occ::handle<Adaptor3d_Curve>&,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::intervals",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::IsClosed(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::is_closed",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::IsPeriodic(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::is_periodic",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Period(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::period",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Value(const occ::handle<Adaptor3d_Curve>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::value",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::D0(const occ::handle<Adaptor3d_Curve>&,double,gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::d0",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::D1(const occ::handle<Adaptor3d_Curve>&,double,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::d1",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::D2(const occ::handle<Adaptor3d_Curve>&,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::d2",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::D3(const occ::handle<Adaptor3d_Curve>&,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::d3",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::DN(const occ::handle<Adaptor3d_Curve>&,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::dn",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Resolution(const occ::handle<Adaptor3d_Curve>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::resolution",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::GetType(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::get_type",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Line(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::line",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Circle(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::circle",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Ellipse(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::ellipse",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Hyperbola(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::hyperbola",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Parabola(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::parabola",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::Bezier(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::bezier",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::BSpline(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::bspline",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::NbSamples(const occ::handle<Adaptor3d_Curve>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::nb_samples",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::SamplePars(const occ::handle<Adaptor3d_Curve>&,double,double,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::sample_pars",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheHCurveTool::SamplePars(const occ::handle<Adaptor3d_Curve>&,double,double,double,int,occ::handle<NCollection_HArray1<double>>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheHCurveTool::sample_pars",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_hcurve)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter(const IntCurveSurface_ThePolygonOfHInter&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::with_polygon",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter(const gp_Lin&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::with_line",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter(const NCollection_Array1<gp_Lin>&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::with_lines",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Perform(const IntCurveSurface_ThePolygonOfHInter&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::perform_polygon",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Perform(const gp_Lin&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::perform_line",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Perform(const NCollection_Array1<gp_Lin>&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::perform_lines",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter(const IntCurveSurface_ThePolygonOfHInter&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::with_polygon_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter(const gp_Lin&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::with_line_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter(const NCollection_Array1<gp_Lin>&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::with_lines_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Perform(const IntCurveSurface_ThePolygonOfHInter&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::perform_polygon_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Perform(const gp_Lin&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::perform_line_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Perform(const NCollection_Array1<gp_Lin>&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::perform_lines_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Interference(const IntCurveSurface_ThePolygonOfHInter&,const IntCurveSurface_ThePolyhedronOfHInter&,Bnd_BoundSortBox&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::interference_grid",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheInterferenceOfHInter::Interference(const IntCurveSurface_ThePolygonOfHInter&,const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheInterferenceOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheInterferenceOfHInter::interference",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_interference)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter(const occ::handle<Adaptor3d_Curve>&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter(const occ::handle<Adaptor3d_Curve>&,double,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::with_range",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter(const occ::handle<Adaptor3d_Curve>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::with_parameters",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::Bounding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::bounding",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::DeflectionOverEstimation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::SetDeflectionOverEstimation(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::set_deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::Closed(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::set_closed",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::Closed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::closed",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::nb_segments",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::BeginOfSeg(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::begin_of_seg",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::EndOfSeg(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::end_of_seg",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::InfParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::inf_parameter",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::SupParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::sup_parameter",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::ApproxParamOnCurve(int,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::approx_param_on_curve",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::dump",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::Bounding(const IntCurveSurface_ThePolygonOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::bounding",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::DeflectionOverEstimation(const IntCurveSurface_ThePolygonOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::Closed(const IntCurveSurface_ThePolygonOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::closed",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::NbSegments(const IntCurveSurface_ThePolygonOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::nb_segments",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::BeginOfSeg(const IntCurveSurface_ThePolygonOfHInter&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::begin_of_seg",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::EndOfSeg(const IntCurveSurface_ThePolygonOfHInter&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::end_of_seg",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::Dump(const IntCurveSurface_ThePolygonOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::dump",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter(const occ::handle<Adaptor3d_Surface>&,int,int,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter(const occ::handle<Adaptor3d_Surface>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::with_parameters",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Destroy()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::destroy",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::~IntCurveSurface_ThePolyhedronOfHInter()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::destroy",
+      "status": "excluded",
+      "notes": "The destructor calls Destroy to free the void* arrays; the Rust polyhedron owns vectors that Drop frees, and destroy() ports Destroy."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::DeflectionOverEstimation(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::set_deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::UMinSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::u_min_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::UMaxSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::u_max_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::VMinSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::v_min_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::VMaxSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::v_max_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Size(int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::size",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::NbTriangles() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::nb_triangles",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Triangle(int,int&,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::triangle",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::TriConnex(int,int,int,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::tri_connex",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::nb_points",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Point(const gp_Pnt&,int,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::set_point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Point(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::point_with_parameters",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Point(int,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Bounding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::bounding",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::FillBounding()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::fill_bounding",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::ComponentsBounding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::components_bounding",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::DeflectionOverEstimation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::HasUMinSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_u_min_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::HasUMaxSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_u_max_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::HasVMinSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_v_min_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::HasVMaxSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_v_max_singularity",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::PlaneEquation(int,gp_XYZ&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::plane_equation",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Contain(int,const gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::contain",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::parameters",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::IsOnBound(int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::is_on_bound",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::GetBorderDeflection() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::get_border_deflection",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::dump",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::Bounding(const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::bounding",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::ComponentsBounding(const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::components_bounding",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::DeflectionOverEstimation(const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::NbTriangles(const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::nb_triangles",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::Triangle(const IntCurveSurface_ThePolyhedronOfHInter&,int,int&,int&,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::triangle",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::Point(const IntCurveSurface_ThePolyhedronOfHInter&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::point",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::TriConnex(const IntCurveSurface_ThePolyhedronOfHInter&,int,int,int,int&,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::tri_connex",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::IsOnBound(const IntCurveSurface_ThePolyhedronOfHInter&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::is_on_bound",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::GetBorderDeflection(const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::get_border_deflection",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::Dump(const IntCurveSurface_ThePolyhedronOfHInter&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronToolOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::dump",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvExactHInter(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvExactHInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvExactHInter::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvExactHInter::is_done",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvExactHInter::NbRoots() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvExactHInter::nb_roots",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvExactHInter::Root(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvExactHInter::root",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvExactHInter::NbIntervals() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvExactHInter::nb_intervals",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvExactHInter::Intervals(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvExactHInter::intervals",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter(const IntSurf_Quadric&,const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvFuncOfTheQuadCurvExactHInter::new",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter::Value(double,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvFuncOfTheQuadCurvExactHInter::value",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter::Derivative(double,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvFuncOfTheQuadCurvExactHInter::derivative",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter::Values(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TheQuadCurvFuncOfTheQuadCurvExactHInter::values",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_quadcurv)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_TransitionOnCurve",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TransitionOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TransitionOnCurve",
+      "status": "implemented",
+      "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 8): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
     }
   ],
   "tests": [
@@ -241003,6 +242491,160 @@
       "rust_target": "plate_plate",
       "rust_test": "Plate_Plate__Init_EvaluateReturnsZero",
       "rust_source": "crates/tkgeomalgo/tests/plate_plate.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint.DefaultConstructor_TransitionInitialized",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_IntersectionPoint_Test.cxx",
+      "source_sha256": "694e290fed7956dc180acb513fd03f58a1b7f6419366931d5fcd97b7f6e10111",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_intersection_point",
+      "rust_test": "IntCurveSurface_IntersectionPoint__DefaultConstructor_TransitionInitialized",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_intersection_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint.ValueConstructor_AllFieldsSet",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_IntersectionPoint_Test.cxx",
+      "source_sha256": "694e290fed7956dc180acb513fd03f58a1b7f6419366931d5fcd97b7f6e10111",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_intersection_point",
+      "rust_test": "IntCurveSurface_IntersectionPoint__ValueConstructor_AllFieldsSet",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_intersection_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_IntersectionPoint.SetValues_OverwritesTransition",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_IntersectionPoint_Test.cxx",
+      "source_sha256": "694e290fed7956dc180acb513fd03f58a1b7f6419366931d5fcd97b7f6e10111",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_intersection_point",
+      "rust_test": "IntCurveSurface_IntersectionPoint__SetValues_OverwritesTransition",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_intersection_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_InterUtils.SectionPointToParameters_DegenerateFaceFallsBackToLongestEdge",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_InterUtils_Test.cxx",
+      "source_sha256": "d8b601bca19befae617963bd7c57e92a1e2d201f989133c053cb74022c3a1620",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_inter_utils",
+      "rust_test": "IntCurveSurface_InterUtils__SectionPointToParameters_DegenerateFaceFallsBackToLongestEdge",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_inter_utils.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter_Test.ClosedFlagReflectsStoredState",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_ThePolygonOfHInter_Test.cxx",
+      "source_sha256": "796eed86216cdd95aaa6e102e776a1880e5195fc9d0821cad05329bc8d08aca0",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_the_polygon_of_h_inter",
+      "rust_test": "IntCurveSurface_ThePolygonOfHInter_Test__ClosedFlagReflectsStoredState",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polygon_of_h_inter.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter.SingularityFlags_InitializedFalse",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_ThePolyhedronOfHInter_Test.cxx",
+      "source_sha256": "33ff53dfa19f551de0bc2039161e307b7b86bdfca71195f0021d949259317a2a",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_the_polyhedron_of_h_inter",
+      "rust_test": "IntCurveSurface_ThePolyhedronOfHInter__SingularityFlags_InitializedFalse",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polyhedron_of_h_inter.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter.SingularitySetters_UpdateFlags",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_ThePolyhedronOfHInter_Test.cxx",
+      "source_sha256": "33ff53dfa19f551de0bc2039161e307b7b86bdfca71195f0021d949259317a2a",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_the_polyhedron_of_h_inter",
+      "rust_test": "IntCurveSurface_ThePolyhedronOfHInter__SingularitySetters_UpdateFlags",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polyhedron_of_h_inter.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter.BasicConstruction_ValidMesh",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_ThePolyhedronOfHInter_Test.cxx",
+      "source_sha256": "33ff53dfa19f551de0bc2039161e307b7b86bdfca71195f0021d949259317a2a",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_the_polyhedron_of_h_inter",
+      "rust_test": "IntCurveSurface_ThePolyhedronOfHInter__BasicConstruction_ValidMesh",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polyhedron_of_h_inter.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter.ParamArrayConstructor_MinimumSize",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_ThePolyhedronOfHInter_Test.cxx",
+      "source_sha256": "33ff53dfa19f551de0bc2039161e307b7b86bdfca71195f0021d949259317a2a",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_the_polyhedron_of_h_inter",
+      "rust_test": "IntCurveSurface_ThePolyhedronOfHInter__ParamArrayConstructor_MinimumSize",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polyhedron_of_h_inter.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter.ParamArrayConstructor_RejectsSingleValueArrays",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_ThePolyhedronOfHInter_Test.cxx",
+      "source_sha256": "33ff53dfa19f551de0bc2039161e307b7b86bdfca71195f0021d949259317a2a",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_the_polyhedron_of_h_inter",
+      "rust_test": "IntCurveSurface_ThePolyhedronOfHInter__ParamArrayConstructor_RejectsSingleValueArrays",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polyhedron_of_h_inter.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter.PlaneEquation_FiniteResults",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntCurveSurface_ThePolyhedronOfHInter_Test.cxx",
+      "source_sha256": "33ff53dfa19f551de0bc2039161e307b7b86bdfca71195f0021d949259317a2a",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_curve_surface_the_polyhedron_of_h_inter",
+      "rust_test": "IntCurveSurface_ThePolyhedronOfHInter__PlaneEquation_FiniteResults",
+      "rust_source": "crates/tkgeomalgo/tests/int_curve_surface_the_polyhedron_of_h_inter.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
