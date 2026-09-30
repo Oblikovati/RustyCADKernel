@@ -5,7 +5,7 @@ use rustycad_tkmesh::{
     imesh_tools::MeshParameters,
 };
 #[path = "../../tests/support/range_splitter_fixture.rs"]
-mod fixture;
+pub(super) mod fixture;
 pub fn range_case(v: &[i32]) {
     let parameters = MeshParameters {
         min_size: 0.001,
