@@ -1,35 +1,10 @@
 //! Native connectivity, exception persistence and compaction regressions.
-use rustycad_tkernel::standard::{Handle, Transient};
-use rustycad_tkmesh::brep_mesh::{
-    BRepMeshDataStructureOfDelaun as Mesh, BRepMeshEdge, BRepMeshTriangle, BRepMeshVertex,
-    DegreeOfFreedom as Freedom,
-};
-fn mesh() -> Mesh {
-    let mesh = Mesh::new(&Handle::new(Default::default()), 1);
-    mesh.vertex_tool().set_cell_size(0.5).unwrap();
-    for index in 0..5 {
-        mesh.add_node(&vertex(index as f64), true).unwrap();
-    }
-    mesh
-}
-fn vertex(x: f64) -> BRepMeshVertex {
-    BRepMeshVertex::from_uv(x, 0., Freedom::Free)
-}
-fn edge(first: i32, last: i32) -> BRepMeshEdge {
-    BRepMeshEdge::new(first, last, Freedom::Free)
-}
-fn triangle(edges: [i32; 3]) -> BRepMeshTriangle {
-    BRepMeshTriangle::new(edges, [true; 3], Freedom::Free)
-}
-fn triangulated() -> Mesh {
-    let mesh = mesh();
-    for (a, b) in [(1, 2), (2, 3), (3, 1), (3, 4), (4, 1)] {
-        mesh.add_link(&edge(a, b)).unwrap();
-    }
-    mesh.add_element(&triangle([1, 2, 3])).unwrap();
-    mesh.add_element(&triangle([3, 4, 5])).unwrap();
-    mesh
-}
+use rustycad_tkernel::standard::Transient;
+use rustycad_tkmesh::brep_mesh::DegreeOfFreedom as Freedom;
+#[allow(dead_code)]
+#[path = "support/delaun_fixture.rs"]
+mod fixture;
+use fixture::*;
 #[test]
 fn native_node_identity_and_deletion_preserve_slots() {
     let mesh = mesh();

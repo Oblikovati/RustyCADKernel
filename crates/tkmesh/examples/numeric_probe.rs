@@ -122,6 +122,8 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_editable_tree" => mesh_probe::editable_tree::editable_tree_case(values),
         "mesh_delaun_invalid" => mesh_probe::delaun_structure::invalid_case(values),
         "mesh_delaun_dump" => mesh_probe::delaun_structure::dump_case(values),
+        "mesh_selector" => mesh_probe::delaun_selector::selector_case(values),
+        "mesh_selector_invalid" => mesh_probe::delaun_selector::invalid_case(values),
         "mesh_delaun" => mesh_probe::delaun_structure::delaun_case(values),
         "mesh_vertex_tool" => mesh_probe::vertex_tool::vertex_tool_case(values),
         "mesh_vertex_invalid" => mesh_probe::vertex_inspector::invalid_index_case(values),

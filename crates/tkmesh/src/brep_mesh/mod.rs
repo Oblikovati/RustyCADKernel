@@ -58,3 +58,6 @@ pub use vertex_tool::{
 
 mod delaun_structure;
 pub use delaun_structure::BRepMeshDataStructureOfDelaun;
+
+mod delaun_selector;
+pub use delaun_selector::BRepMeshSelectorOfDataStructureOfDelaun;
