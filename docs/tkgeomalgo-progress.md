@@ -22,7 +22,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (174 declarations):
+The toolkit test inventory maps these suites (192 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -55,6 +55,10 @@ The toolkit test inventory maps these suites (174 declarations):
 | GeomAPI_ExtremaSurfaceSurface_Test.cxx | geomapi_extrema_surface_surface | 2 | pass | pass |
 | GeomAPI_PointsToBSplineSurface_Test.cxx | geomapi_points_to_bspline_surface | 1 | pass | pass |
 | GeomFill_Gordon_Test.cxx | geomfill_gordon | 64 | pass | pass |
+| GeomFill_NSections_Test.cxx | geom_fill_nsections | 1 | pass | pass |
+| GeomFill_GuideTrihedronAC_Test.cxx | geom_fill_guide_trihedron_ac | 4 | pass | pass |
+| IntPatch_Polyhedron_Test.cxx | int_patch_polyhedron | 5 | pass | pass |
+| IntPatch_PolyhedronBVH_Test.cxx | int_patch_polyhedron_bvh | 8 | pass | pass |
 
 GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
 build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
@@ -62,6 +66,22 @@ of TKTopAlgo, TKOffset and TKShHealing, and GeomAPI::To3d), which neither the po
 the shared native build (no TKOffset or TKShHealing library) provides. Its two GeomFill
 cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` and
 `geom_fill_filling_behavior`) and in the numeric corpus.
+
+GeomFill_CorrectedFrenet_Test.cxx is not mapped yet: its `ActualReproducerCase` builds a
+wire with GC_MakeSegment, BRepBuilderAPI_MakeEdge and ShapeExtend_WireData and adapts
+it with BRepAdaptor_CompCurve, which the port does not provide and which needs
+TKShHealing, absent from the shared native build. Its three other cases run as the
+behavior tests of `geom_fill_corrected_frenet_behavior`.
+
+GeomPlate_BuildPlateSurface_Test.cxx is not mapped: its A1 and A2 cases (and the shared
+helper of the file) build their boundaries as `BRepAdaptor_Curve` of edges made by
+`BRepBuilderAPI_MakeEdge` (TKTopAlgo), which the port does not provide (the native suite
+itself compiles and passes against the shared build, which links TKTopAlgo). Its six
+cases run as behavior tests (`geom_plate_behavior`): the same Bezier curves go through
+`GeomAdaptor_Curve` on their natural range, which the edge of `MakeEdge` evaluates
+identically, and the progress observer checks the same scope names
+(`Calculating the surface filled`, `Plate_Plate::SolveTI1()`, `math_Gauss
+LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
 
 ## API mapping
 
@@ -181,6 +201,21 @@ cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` a
   (`gordon_params`, `gordon_contacts`, `gordon_normalize`, `gordon_order`,
   `gordon_reorder`, `gordon_reparam`, `gordon_rebuild`, `gordon_network`,
   `gordon_fallback`).
+- GeomPlate ([geomalgo-design.md](geomalgo-design.md) section 19): the classes are
+  `GeomPlateBuildPlateSurface`, `GeomPlateSurface` (a `GeomSurface`),
+  `GeomPlateCurveConstraint` and `GeomPlatePointConstraint` (handle-shared, their fields
+  behind a lock), `GeomPlateMakeApprox`, `GeomPlatePlateG0Criterion` and
+  `GeomPlatePlateG1Criterion` (`AdvApp2VarCriterion`), `GeomPlateBuildAveragePlane`
+  and `GeomPlateAij`. Overloads take distinct names: the builder constructors
+  `with_curves` (the old arrays), `with_surface` and `new`, `add_curve`/`add_point`,
+  `G0Error(Index)` as `g0_error_of` (and G1, G2); `GeomPlateCurveConstraint::empty`
+  and `new`; `GeomPlatePointConstraint::with_point` and `on_surface`;
+  `GeomPlateMakeApprox::with_criterion` and `with_order`;
+  `GeomPlateBuildAveragePlane::new` and `with_normals`. `LPropSurf` returns the write
+  guard of the member `GeomLProp_SLProps`, `D1`/`D2` of the constraints return
+  `GeomSurfaceD1`/`GeomSurfaceD2` (the point constraint's `D1` a tuple), and the
+  private `ProjectedCurve` of the builder, which nothing calls natively, is kept as a
+  crate method with a unit test.
 
 - IntPatch (the core; docs/geomalgo-design.md section 16): `IntPatch_Line` and
   `IntPatch_PointLine` are the traits `IntPatchLine` and `IntPatchPointLine` over an
@@ -197,6 +232,41 @@ cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` a
   (`IntPatchTheSurfFunction`, `IntPatchCurvIntSurf`, `IntPatchTheSOnBounds`,
   `IntPatchTheSearchInside`, `IntPatchTheIWalking`) whose rows name the generic members.
   `IntPatch_RLine::SetParamOnS1/S2` are declared but defined nowhere (excluded rows).
+- IntPatch polyhedra and polygons: `IntPatch_Polyhedron` reuses the IntCurveSurface
+  polyhedron helpers; its constructors are `new` (automatic subdivision) and
+  `with_subdivisions`, `Point(P, i, j, U, V)` is `set_point`, `Point(i, U, V)` is
+  `point_with_parameters`, `DeflectionOverEstimation(flec)` is
+  `set_deflection_over_estimation`. `Perform`, the `*Singularity(bool)` setters and the
+  `Has*Singularity` queries are declared but defined nowhere (excluded rows).
+  `IntPatch_PolyhedronBVH` implements the TKMath `BvhSet`/`BvhObject` traits (`Box` is
+  `element_box`, the polyhedron constructor `with_polyhedron`); `IntPatch_BVHTraversal`
+  implements `BvhPairTraverse` privately and `Perform(aSet, aSet, true)` is `perform_self`.
+  `IntPatch_InterferencePolyhedron` derefs to `Interference` (constructors `new`, `between`,
+  `of_self`; `Perform(one)` is `perform_self`). `IntPatch_Polygo` is the trait
+  `IntPatchPolygo` over `Polygon2d`; `IntPatch_PolyLine`'s setters are `set_w_line` and
+  `set_r_line`, `IntPatch_PolyArc::Closed` is `is_closed`.
+
+- GeomFill (sweep part, [geomalgo-design.md](geomalgo-design.md) section 14): the
+  trihedron, location and section laws are the traits `GeomFillTrihedronLaw`,
+  `GeomFillTrihedronWithGuide`, `GeomFillLocationLaw` and `GeomFillSectionLaw`; the
+  `gp_Vec&` and `gp_Mat&` outputs are the frame structs `TrihedronD0..D2` and
+  `LocationD0..D2`, the `D0` overload with 2d poles is `d0_poles2d`, and `Error`
+  arguments are `&mut f64`. `GeomFill_CorrectedFrenet(ForEvaluation)` is
+  `with_evaluation`. The `GeomFill_SectionPlacement::Perform` overloads are `perform`,
+  `perform_on_path` and `perform_at`. `GeomFill_NSections` constructors are `new`,
+  `with_params`, `with_section_domain`, `with_domain` and `with_reference`;
+  `GeomFill_SweepSectionGenerator` constructors are `new`, `with_radius`,
+  `with_section`, `with_sections` and `with_rails` (with the matching `init_*`), and
+  its `Section` overloads are `section_d1` and `section`. `GeomFill_Pipe` constructors
+  are `new`, `with_radius`, `with_section`, `on_surface`, `with_direction`,
+  `with_two_sections`, `with_sections`, `with_rails`, `with_adaptor_rails` and
+  `with_guide` (with the matching `init_*`); its `Perform` overloads are `perform` and
+  `perform_with_parameters`, and `GenerateParticularCase(B)` is
+  `set_generate_particular_case`. `GeomFill_AppSweep` is the alias `GeomFillAppSweep`
+  of `AppBlendAppSurf`. The static `GeomFill` members are functions of `geom_fill`
+  (`surface`, `get_circle`, `get_circle_d1`, `get_circle_d2`, `get_shape`, `knots`,
+  `mults`, `get_minimal_weights`, `get_tolerance`). The `GeomFill_Tensor` call
+  operators are `value` and `change_value`.
 
 ## Verification
 
@@ -500,13 +570,14 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 25386 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 27006 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
 with TopClass 1116, Geom2dGcc 3968, IntWalk 717, IntCurveSurface 3077, and the GeomFill
 filling classes 568, IntStart 674, IntPolyh 522, GeomAPI 1980, and GeomFill Gordon and
-NetworkSurface 145, and the IntPatch core 542.
+NetworkSurface 145, the IntPatch core 924, the GeomFill sweep classes 1075, and GeomPlate
+163.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -817,6 +888,46 @@ quadrics (the unset quadric included). The IntStart (`is_*`) and IntWalk (`iw_wa
 requests now run through the IntPatch instances on both sides. Left out: `SetPoint` on a
 restriction line without points and `Bezier()`/`BSpline()` of other curves, which dereference
 null handles natively.
+
+GeomFill sweep part (gfs, 1075 requests): `gfs_shape`, `gfs_circle`, `gfs_convert` and
+`gfs_tensor` cover the `GeomFill` class functions, the two arc convertors and
+`GeomFill_Tensor` (104, 85, 42 and 4 requests: every parameterisation over angles
+beyond a full turn, reflex and zero arcs, short and shifted arrays, uninitialized
+convertors, indices outside the tensor). `gfs_trihedron` (146) evaluates every
+trihedron law on lines, conics, Bezier and B-spline curves, inflections (the Frenet
+singular points), a cusp, a straight B-spline, periodic and ranged curves and curves
+on surfaces, with the queries, `Copy`, `SetInterval` and the guide members.
+`gfs_section` (51) runs the uniform, evolved and N-section laws (a single section, equal
+and coaxial circles, segments, several B-splines, periodic sections, section and path
+domains, a reference surface with transformations) on arrays of the right size, of one
+pole less and of other bounds. `gfs_location` (36) runs the curve-and-trihedron, draft
+and guided location laws with `LocFunction::DN`, `SetTrsf`, the draft stop surface and
+the guided section and rotation. `gfs_placement` (334) places points and curve sections
+(conics, planar and skew B-splines and Bezier curves, lines, periodic and trimmed
+curves) on five paths under five laws with the three `Perform` overloads and the four
+transformations. `gfs_sweepfunc` (16), `gfs_sweep` (92) and `gfs_blendfunc` (13) cover
+the sweep functions and every elementary sweep (plane, cylinder, cone, sphere, torus,
+extrusion, revolution) and approximation, with the second build, the restrictions and
+the traces. `gfs_sweepsec` (33) covers every kind of section generator with the
+AppSweep approximation, `gfs_pipe` (105) every pipe constructor with both `Perform`
+overloads, and `gfs_surface` (14) `GeomFill::Surface`. Left out: parameters below the
+first sample of a corrected Frenet law (its `GetAngleAT` loops forever natively),
+`LocFunction::DN` of another order, the empty pipe's `Perform`, `Resolution(1)` of a
+draft law without stop surface, the evaluation of a copied guided law, `Section()` of a
+guided law without section, `SetStopSurf` before `SetCurve`, `Section` and
+`ModifiedSection` of a point section, and the evaluators of a single-section law (arrays
+of -1 poles): each reads a null or uninitialized value, or never returns, natively.
+
+IntPatch polyhedra and polygons: 382 more requests (`tkgeomalgo_corpus_intpatch_poly.py`,
+924 IntPatch requests in all). `ip_polyh` builds the polyhedron of every IntCurveSurface
+catalog surface with the automatic and given subdivisions (0 clamped to 1, thin grids, poles
+with null edges) and compares its points, triangles, boxes, plane equations, containment and
+`TriConnex` around the first triangles. `ip_bvh` builds the BVH sets and the traversal pairs
+of overlapping, far, identical and empty sets; `ip_interf` computes the interference of
+crossing, tangent, coplanar and nearly coplanar polyhedra (tangent zones) and the self
+interference. `ip_polyline` and `ip_polyarc` build the 2d polygons of walking and
+restriction lines and of arcs (parabola deflection, resampling near the other box, offsets,
+the construction errors); `ip_t3bits` edits the bit sets.
 
 ## Preserved native behaviour
 
@@ -1174,6 +1285,26 @@ degree overflow, zero and negative weights, too few curves, a wrong grid size an
 Performs. The hyperbola-circle pair of `gapi_ecc` is left out: natively it does not
 return.
 
+GeomPlate (163 requests, `tkgeomalgo_corpus_geomplate.py`): `gplate_point` and
+`gplate_curve` read every member of the point and curve constraints (points, 3d lines,
+circles and Bezier curves, 2d lines and Bezier curves on planes, cylinders, spheres and
+Bezier surfaces; criterion laws; projected curves and their approximation; the setters;
+the order and law exceptions), `gplate_curve_empty` the empty curve constraint;
+`gplate_surface` evaluates GeomPlate_Surface (D0 to D2, the D3/DN/IsCNu exceptions,
+bounds, a copy and a plate surface on a plate surface) on five initial surfaces;
+`gplate_average`, `gplate_normals` and `gplate_halfspace` run the average plane of point
+clouds (every option, lines, degenerate clouds), of normal sets (one, two, opposite,
+many) and successive HalfSpace calls; `gplate_build` performs 47 builders (the three
+constructors; point constraints of order G0 to G2; closed and open Bezier contours with
+and without initial surface; G1 and G2 contours of curves on planes, cylinders and
+spheres, reordered and reversed; mixed G0/G1 and G1/G1 corners; criterion laws; degrees 2
+to 6, one to four iterations, tolerances and the anisotropy flag; the non-linear first
+plate with the free and incremental loops; construction errors) and reads every result,
+the out-of-range constraint indices and both contours; `gplate_approx` runs MakeApprox
+with CritOrder -1 to 2, C0 to C2 (and the refused G1), and explicit G0 and G1 criteria.
+Values that native OCCT leaves uninitialized are not read (see the quirks below), and a
+glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every request.
+
 ### GeomFill (filling part)
 
 - `GeomFill_SectionGenerator::SetParam` shares the given array and copies it into itself
@@ -1326,6 +1457,19 @@ return.
   `IntPatch_HCurve2dTool::NbSamples` answers 25 for the non-spline curves and caps at 50.
 - `IntPatch_ArcFunction::Values` with a quadric that is not set leaves `F` unchanged and
   gives a null derivative (the quadric writes nothing).
+- `IntPatch_Polyhedron::PlaneEquation` leaves the polar distance unchanged on a null edge;
+  `Dump` writes nothing and `Point(P, i, j, U, V)` does nothing. The bounding tests keep the
+  native positive comparisons, so a NaN coordinate gives the native boxes.
+- `IntPatch_InterferencePolyhedron`: `Perform(Obje)` (one polyhedron) only clears the
+  result and sets the tolerance, so it finds nothing, while the constructor of one
+  polyhedron computes the self interference. `Intf_TangentZone::Insert` never accepts a
+  point, so the edge crossings are offered twice and dropped. A segment already found on
+  either triangle (both are checked, no short circuit) still inserts its two points.
+- `IntPatch_PolyLine`: the line type is uninitialized until a line is set. `IntPatch_Polygo::Dump`
+  numbers its dumps with a static counter shared by every polygon.
+- `IntPatch_PrmPrmIntersection_T3Bits` allocates `(size^3) >> 5` words: the bits of a last
+  incomplete word are not stored, and for `size^3 < 32` the native constructor writes before
+  its empty array (undefined behaviour).
 
 ## IntStart deviations
 
@@ -1382,6 +1526,105 @@ return.
 - The approximate fallback measures its profile and guide deviations by mapping the fixed
   parameter through the surface parameter mapping twice, as natively.
 
+### GeomFill (sweep part)
+
+- `GeomFill_TrihedronLaw::D1` and `D2` both raise Standard_NotImplemented with the
+  message ` GeomFill_TrihedronLaw::D2`. Frenet-based laws raise Standard_OutOfRange for
+  the G1 and G2 continuities in `NbIntervals`/`Intervals`.
+- `GeomFill_CorrectedFrenet::GetAngleAT` loops forever for a parameter below the first
+  sampled one (not in the corpus). `GeomFill_DiscreteTrihedron::Init` appends to the
+  samples of an earlier curve. `GeomFill_DraftTrihedron::GetAverageLaw` returns the
+  plain mean of 21 frames, not normalized.
+- `GeomFill_GuideTrihedronPlan` declares its own `myCurve` and `myTrimmed`, hiding the
+  base members, so the base `GetInterval` dereferences a null curve (not in the
+  corpus); its `D2` always answers false and `Origine` does nothing.
+- `GeomFill_PlanFunc::D2` is empty and `D2E` writes only `DFDT`.
+  `GeomFill_FunctionGuide::DSDT` prints `Not implemented` on the standard output for a
+  varying section.
+- `GeomFill_QuasiAngularConvertor` uses `-2/21` and the `b + 11` offset in its second
+  derivative, and its first and second derivatives compute the weight derivative with
+  different formulas; both are kept.
+- `GeomFill_LocationDraft::D2` answers true when the trace search fails.
+  `GeomFill_LocationGuide::GetAverageLaw` averages 22 path points spaced by a tenth of
+  the interval (the last beyond its end). A guided law transforms its output matrices
+  before writing them, so the transformation shows only when a rotating law answers
+  false.
+- `GeomFill_SweepFunction::SetInterval` maps the path interval to the section from
+  `myf`, not from `myfOnS`; the function keeps the placement of its last evaluation and
+  hands it to the next one.
+- `GeomFill_Sweep::Build` with `GeomFill_Location` reads the section's B-spline surface
+  and drops it; a second `Build` keeps the 2d curves of the first approximation.
+  `GeomFill_Sweep` stores `myExchUV`, `isUReversed` and `isVReversed` only in `Build`.
+- Along a curve, `GeomFill_SweepSectionGenerator::Perform` composes a transformation
+  that is set only when the tangent turns back, so every section stays in place; a
+  second `Perform` appends to the transformations. The rail kind reports seven poles
+  whatever the parameterisation (the polynomial arcs have eight).
+- `GeomFill_NSections::ComputeSurface` reparameterises a B-spline section of the caller
+  in place; `BarycentreOfSurf` does not restart U at each row; with fewer than two
+  sections there is no surface, the evaluators answer false and `SectionShape`,
+  `Knots` and `Mults` leave their outputs unchanged.
+- `GeomFill_Pipe(Path, FirstSect, Option)` builds a Frenet law for `IsDarboux` and
+  raises Standard_ConstructionError for the guided and discrete options.
+  `CheckSense` reverses the placed sections in place. A two-section pipe whose law
+  refuses the path is `GeomFill_ImpossibleContact` and its `Perform` does nothing, while
+  `Perform(WithParameters, Polynomial)` then falls to `ApproxSurf`, which raises
+  Standard_ConstructionError. `KPartT4` keeps the untrimmed cylinder when its trim
+  raises. The empty pipe's `Perform` dereferences null adaptors (not in the corpus).
+- `GeomFill::Surface` leaves two trimmed coaxial circles to `GeomFill_Generator`.
+
+### GeomPlate
+
+- `Perform` without constraint returns with the plate reset, so `IsDone()` is true and
+  `Surface()` null, as the native test notes.
+- `G0Error(Index)`, `G1Error(Index)` and `G2Error(Index)` gather the gaps into arrays of
+  `NbPtsOnCur` values while `EcartContraintesMil` writes one value per interval of the
+  curve: a curve with fewer intervals (or of order -1) leaves values uninitialized
+  natively (zeros here; never read by the corpus), one with more raises
+  Standard_OutOfRange. The global errors are uninitialized until a check ran (points
+  only, a failed plate).
+- `EcartContraintesMil` and `VerifSurface` read at least three intervals: a curve with
+  fewer than three parameters reads past them (Standard_OutOfRange).
+- The G2 constraints pass the second derivatives `(D2U, D2V, D2UV)` to
+  `Plate_D2(duu, duv, dvv)`, so D2V becomes `duv` and D2UV `dvv`, for the target and the
+  initial surface alike.
+- `VerifPoints` overwrites its distance, angle and curvature with each point, so only the
+  last point constraint of each order counts; the results are discarded by `Perform`.
+- `Disc2dContour` and `Disc3dContour` start their samples at the second interval (the
+  quarter points of the first interval are skipped), ignore their count argument, and
+  initialize the projector (with the current tolerances in 2d, the resolutions of Tol3d
+  in 3d).
+- `ComputeSurfInit` sums the curve lengths for a point count it never uses, and its
+  non-linear branch leaves the intermediate plate surface in `Surface()` when the later
+  plate fails.
+- When a curve has no continuous projection, `Perform` approximates the current plate
+  surface, which it has just nullified unless the non-linear branch set it: natively a
+  null dereference (Standard_NullObject here, not in the corpus).
+- `GeomPlate_Surface::Copy` keeps the initial surface and the plate but not the bounds;
+  `UPeriod`/`VPeriod` return 0 (a `false` converted to a real) instead of raising;
+  `Continuity` is C0, `IsCNu`/`IsCNv` raise Standard_Failure, `EvalD3`/`EvalDN` raise
+  Geom_UndefinedDerivative, and the reversing and transforming members do nothing.
+- `GeomPlate_MakeApprox` with a CritOrder outside -1..=1 computes nothing and leaves both
+  errors uninitialized (zero here).
+- `GeomPlate_BuildAveragePlane` leaves its box uninitialized when no plane is found, and
+  a flux normal (option 2) with no boundary points gives a null frame whose line raises
+  Standard_ConstructionError; the normals constructor raises Standard_OutOfRange without
+  normals (`OptVec(0)`).
+- `GeomPlate_PointConstraint(Pt, Order)` accepts orders -1 to 1 although its message
+  says "0 or -1".
+
+## GeomPlate deviations
+
+- Null handles that the native code dereferences (a missing surface or law, the
+  `LPropSurf` of a point without surface, the criteria of the empty curve constraint, a
+  null initial surface in `Bounds` of GeomPlate_Surface) raise Standard_NullObject or
+  give the stored bounds.
+- The projector of the builder holds its adaptor through a shared handle
+  (`ExtPS::initialize_shared`); natively it points to a local adaptor, which dies when
+  the member that initialized it returns.
+- A surface failure inside the MakeApprox evaluator is kept, reported by the error code
+  and raised when `AdvApp2Var_ApproxAFunc2Var` returns
+  ([geomalgo-design.md](geomalgo-design.md) section 19).
+
 ## IntCurveSurface deviations
 
 - The polyhedron arrays keep the native 1-based layout: index 0 is the origin with
@@ -1421,3 +1664,38 @@ return.
 - `IntPatch_CSFunction` keeps copies of the handles where the native one keeps pointers to
   the caller's handles. `IntPatch_ArcFunction`'s IntStart side answers 0 for `F` where a
   quadric that is not set leaves the caller's variable uninitialized.
+- `IntPatch_Polyhedron` keeps the IntCurveSurface layout: index 0 is the origin with null
+  parameters (uninitialized natively) and an index past the grid, an out-of-bounds read
+  natively, raises Standard_OutOfRange; `Triangle` past the grid answers the native
+  arithmetic. `IntPatch_PolyhedronBVH` borrows its polyhedron (the native one keeps a
+  pointer).
+- `IntPatch_PolyLine` raises Standard_DomainError before a line is set (the native read of
+  an uninitialized type) and Standard_NullObject for a null line.
+  `IntPatch_PrmPrmIntersection_T3Bits` panics on a bit outside its words and is empty for
+  `size^3 < 32`, where the native code writes out of bounds.
+
+## GeomFill sweep-part deviations
+
+- `GeomFill_SnglrFunc` declares no RTTI natively (its dynamic type is
+  `Adaptor3d_Curve`); the port registers it as `GeomFill_SnglrFunc`.
+- `GeomFill_SectionPlacement` rebuilds its section projector at each projection, where
+  the native member is initialized once; each native `Perform` of it starts from its
+  initialized state, so the results are the same. The private `SectionAxis` and
+  `GeomFill_Sweep::BuildProduct` (with `GeomFill_Sweep_Eval`) are called nowhere
+  natively and are not ported. `GeomFill_CircularBlendFunc` drops the member `distmin`,
+  written and never read.
+- `GeomFill_Darboux` on a curve that is not an `Adaptor3d_CurveOnSurface` raises
+  Standard_TypeMismatch where the native down cast gives a null handle that is then
+  dereferenced.
+- `GeomFill_SweepFunction`, `GeomFill_NSections` and `GeomFill_SweepSectionGenerator`
+  read and write their arrays without bounds checks natively; an index outside them
+  raises Standard_OutOfRange here.
+- Null handles that the native code dereferences (a missing curve, law, section,
+  surface or adaptor) raise Standard_NullObject. `GeomFill_LocFunction::DN` of an order
+  outside 0..2 reads a null pointer natively and raises Standard_NullObject here.
+- Uninitialized native members start at 0 or false: `GeomFill_Tensor`, the convertors
+  before `Init`, `GeomFill_Sweep`'s `myExchUV`, `isUReversed` and `isVReversed` before
+  `Build`, and `myNbSections` and `myPolynomial` of a
+  `GeomFill_SweepSectionGenerator` built with arguments before `Perform`.
+  `GeomFill_NSections::SectionShape` without a surface answers `(0, 0, 0)`, where the
+  native one leaves its outputs unchanged.

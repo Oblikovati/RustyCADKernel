@@ -19,7 +19,7 @@ use rustycad_tkmath::gp::Vector2;
 use rustycad_tkmath::math::{Matrix, Vector};
 
 /// `ga_ip_arc`.
-fn arc(r: &mut Reader) -> Result<TheArc, Failure> {
+pub fn arc(r: &mut Reader) -> Result<TheArc, Failure> {
     let c = curve2d(r)?;
     if !r.flag() {
         return Ok(Handle::new(Geom2dAdaptorCurve::with_curve(&c)?).cast());

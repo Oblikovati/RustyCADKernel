@@ -67,6 +67,15 @@
 #include "tkgeomalgo_probe_intpatch_tools.cxx"
 #include "tkgeomalgo_probe_intpatch_report.cxx"
 #include "tkgeomalgo_probe_intpatch_impimp.cxx"
+#include "tkgeomalgo_probe_geomfill_sweep.cxx"
+#include "tkgeomalgo_probe_geomfill_trihedron.cxx"
+#include "tkgeomalgo_probe_geomfill_laws.cxx"
+#include "tkgeomalgo_probe_geomfill_placement.cxx"
+#include "tkgeomalgo_probe_geomfill_sweepalgo.cxx"
+#include "tkgeomalgo_probe_geomfill_pipe.cxx"
+#include "tkgeomalgo_probe_intpatch_poly.cxx"
+#include "tkgeomalgo_probe_geomplate.cxx"
+#include "tkgeomalgo_probe_geomplate_build.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -276,6 +285,37 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ip_aline2wline", ga_ip_aline2wline_case},
  {"ip_special", ga_ip_special_case},
  {"ip_special_pole", ga_ip_special_pole_case},
+ // GeomFill sweep (tkgeomalgo_probe_geomfill_*.cxx)
+ {"gfs_shape",ga_gfs_shape_case},
+ {"gfs_circle",ga_gfs_circle_case},
+ {"gfs_convert",ga_gfs_convert_case},
+ {"gfs_tensor",ga_gfs_tensor_case},
+ {"gfs_trihedron",ga_gft_law_case},
+ {"gfs_section",ga_gfl_section_case},
+ {"gfs_location",ga_gfl_location_case},
+ {"gfs_placement",ga_gfp_placement_case},
+ {"gfs_sweepfunc",ga_gfw_function_case},
+ {"gfs_sweep",ga_gfw_sweep_case},
+ {"gfs_blendfunc",ga_gfw_blend_case},
+ {"gfs_sweepsec",ga_gfg_sweepsec_case},
+ {"gfs_pipe",ga_gfp_pipe_case},
+ {"gfs_surface",ga_gfp_surface_case},
+ {"ip_polyh", ga_ip_polyh_case},
+ {"ip_bvh", ga_ip_bvh_case},
+ {"ip_interf", ga_ip_interf_case},
+ {"ip_polyline", ga_ip_polyline_case},
+ {"ip_polyarc", ga_ip_polyarc_case},
+ {"ip_t3bits", ga_ip_t3bits_case},
+ // GeomPlate (tkgeomalgo_probe_geomplate*.cxx)
+ {"gplate_point", ga_gp_point_case},
+ {"gplate_curve", ga_gp_curve_case},
+ {"gplate_curve_empty", ga_gp_curve_empty_case},
+ {"gplate_surface", ga_gp_surface_case},
+ {"gplate_average", ga_gp_average_case},
+ {"gplate_normals", ga_gp_normals_case},
+ {"gplate_halfspace", ga_gp_halfspace_case},
+ {"gplate_build", ga_gp_build_case},
+ {"gplate_approx", ga_gp_approx_case},
 };
 int main() {
  std::string line;

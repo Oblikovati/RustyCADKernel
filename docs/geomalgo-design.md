@@ -477,6 +477,66 @@ class, beside the sweep part of the same module) maps the class hierarchies:
   The debug members `CheckTgteField`, `CheckApprox` and `CheckResult` write to a
   `fmt::Write` where the native ones write to `std::cout`.
 
+## 14. GeomFill sweep part
+
+The sweep part of GeomFill (`crates/tkgeomalgo/src/geom_fill`, beside the filling part)
+maps the law hierarchies, the sweep functions and the pipes:
+
+- **Laws.** The abstract transients `GeomFill_TrihedronLaw`, `GeomFill_TrihedronWithGuide`,
+  `GeomFill_LocationLaw` and `GeomFill_SectionLaw` are the traits `GeomFillTrihedronLaw`,
+  `GeomFillTrihedronWithGuide`, `GeomFillLocationLaw` and `GeomFillSectionLaw`, reached
+  through `Handle<dyn ...>`. Their protected data (`myCurve`, `myTrimmed`, the guide and
+  its trimmed copy) is an embedded base struct (`GeomFillTrihedronLawBase`,
+  `GeomFillTrihedronWithGuideBase`) reached through one required accessor, so the
+  provided methods keep the native bodies. Every law keeps its state behind a lock,
+  because the laws are shared (a location law holds its trihedron law, a sweep function
+  holds both laws) and `SetCurve`, `SetInterval`, `SetTrsf` and `SetTolerance` edit the
+  shared object.
+- **Outputs.** The `gp_Vec&` frames of the trihedron laws are the structs `TrihedronD0`,
+  `TrihedronD1` and `TrihedronD2`; the `gp_Mat&`/`gp_Vec&` placements of the location
+  laws are `LocationD0`, `LocationD1` and `LocationD2`, passed in with their previous
+  values, since a law that fails leaves them unchanged natively; the arrays of the
+  section laws are `SectionD1`/`SectionD2` and of the sweep functions the
+  `Approx_SweepFunction` structs `SweepD1`/`SweepD2`. A section law assigns its pole
+  arrays as natively (`NCollection_Array1::operator=` resizes and takes the source
+  bounds). Members that write an `Error` argument take `&mut f64`, since some bodies
+  leave it untouched.
+- **Solver functions.** `GeomFill_FunctionDraft`, `GeomFill_FunctionGuide`,
+  `GeomFill_PlanFunc` and `GeomFill_SnglrFunc` implement the math function traits
+  (and `Adaptor3d_Curve` for `GeomFill_SnglrFunc`); an exception inside a callback is
+  kept by a `FailureCapture` and raised when the solver returns (`take_failure`).
+  `GeomFill_LocFunction` evaluates a location law as the 12 reals of
+  `AdvApprox_ApproxAFunction`.
+- **Sweep.** `GeomFill_Sweep` is a plain struct. `BuildKPart` (translation and rotation
+  laws with a suitable section) builds the elementary surfaces, and `BuildAll` runs
+  `Approx_SweepApproximation` on a `GeomFill_SweepFunction`, which implements the
+  tkgeombase trait `SweepFunction` and keeps the placement of its last evaluation
+  behind a lock, as the native members `M`, `V` and their derivatives.
+  `GeomFill_CircularBlendFunc` implements the same trait with its trimmed rails
+  behind a lock (`SetInterval` replaces them).
+- **Placement.** `GeomFill_SectionPlacement` is a plain struct; its `Extrema_ExtPC`
+  member, initialized once on the section natively, is rebuilt on the section at each
+  projection, since every `Perform` of it starts from its initialized state.
+- **Sections.** `GeomFill_NSections` skins its sections with `GeomFill_AppSurf` (the
+  filling part) and keeps the reference and computed surfaces behind a lock
+  (`SetSurface`, `ComputeSurface`). `GeomFill_AppSweep` is the alias
+  `GeomFillAppSweep = AppBlendAppSurf` (section 7); `GeomFill_SweepSectionGenerator`
+  implements `TheSectionGenerator` on the points of a `GeomFill_Line`.
+- **Pipe.** `GeomFill_Pipe` is a plain struct; its constructors are `new`,
+  `with_radius`, `with_section`, `on_surface`, `with_direction`, `with_two_sections`,
+  `with_sections`, `with_rails`, `with_adaptor_rails` and `with_guide`, with the
+  matching `init_*` members, and its two `Perform` overloads are `perform` and
+  `perform_with_parameters`.
+- **Class functions.** The static members of the `GeomFill` class are functions of
+  the module: `surface`, `get_circle` (and `_d1`, `_d2`), `get_shape`, `knots`,
+  `mults`, `get_minimal_weights` and `get_tolerance`.
+
+Private members that nothing calls natively are not ported: `GeomFill_Sweep::BuildProduct`
+with its `GeomFill_Sweep_Eval`, and `GeomFill_SectionPlacement::SectionAxis`. Members
+that OCCT declares without a definition (`GeomFill_FunctionGuide::Deriv2T` and the
+four-argument `GeomFill_SweepSectionGenerator` constructor and `Init`) have excluded api
+rows.
+
 ## 15. GeomAPI: the interpolation body and the Extrema members
 
 GeomAPI (`crates/tkgeomalgo/src/geom_api`) has no `.gxx` template, but two constructs
@@ -578,3 +638,50 @@ intersection algorithms build on it.
   with `printf` and `std::cout` (`%+10.20f`, the default `operator<<(double)`, and `%10p`
   addresses, which are the Rust object addresses). The probe captures the native process
   output to compare the dumps of points and lines without arcs or vertices.
+- **Polyhedra and polygons.** `IntPatch_Polyhedron` has the layout of the
+  IntCurveSurface polyhedron (section 11) and reuses its free helpers (the arrays, the
+  uniform sampling, the deflection, `Contain`, `Triangle`, `TriConnex`); its own members
+  add the null-point checks of `TriConnex` and the bounding of the triangle boxes.
+  `IntPatch_PolyhedronTool` is a struct of associated functions. `IntPatch_PolyhedronBVH`
+  borrows its polyhedron and implements the TKMath BVH traits (`BvhSet`,
+  `BvhPrimitiveSetAccess`, `BvhObject`) with the native linear builder (5, 32);
+  `IntPatch_BVHTraversal` keeps the pairs and implements `BvhPairTraverse` in a private
+  selector. `IntPatch_InterferencePolyhedron` derefs to `Interference` (Intf) as its
+  native base class. `IntPatch_Polygo` is the trait `IntPatchPolygo: Polygon2d` with the
+  shared state `IntPatchPolygoBase` (error and box); the `polygo_polygon2d!` macro gives
+  `IntPatchPolyLine` and `IntPatchPolyArc` their `Polygon2d` members.
+
+## 19. GeomPlate
+
+GeomPlate (`crates/tkgeomalgo/src/geom_plate`) has no `.gxx` template; four constructs
+need a rule.
+
+- **The plate surface is a Geom surface.** `GeomPlate_Surface` derives from
+  `Geom_Surface`, so `GeomPlateSurface` implements the tkg3d traits `GeomGeometry` and
+  `GeomSurface` and registers as `GeomPlate_Surface` under `Geom_Surface`
+  (`impl_transient!`); every Geom and adaptor algorithm takes it through
+  `Handle<dyn GeomSurface>`. It holds its initial surface, a copy of the solved
+  `PlatePlate` (the native member is a copy) and its bounds, which `SetBounds` edits on
+  a shared surface, behind a `SharedState`.
+- **Shared constraints.** `GeomPlate_CurveConstraint` and `GeomPlate_PointConstraint`
+  are transients that the caller and the builder share (the builder changes their
+  number of points and 2d curves in `Perform`), so each is a handle-shared struct with
+  its fields in a `SharedState`. `LPropSurf` returns a reference to the member
+  `GeomLProp_SLProps`, which `LocalAnalysis_SurfaceContinuity::ComputeAnalysis` then
+  updates; the port keeps that object in its own lock and returns the write guard.
+- **The builder.** `GeomPlate_BuildPlateSurface` keeps its constraint sequences as
+  vectors of handles (1-based access with the native Standard_OutOfRange), its two
+  `Plate_Plate` values, and its `Extrema_ExtPS` projector as `ExtPS<'static>` on a
+  shared adaptor handle (`ExtPS::initialize_shared`, section 15): natively the
+  projector points to a local `GeomAdaptor_Surface` of the member that initializes it,
+  and every projection happens while that local lives. Its private members are
+  methods in the files `perform`, `surf_init`, `projection`, `intersect`, `discretise`,
+  `load`, `verif`, `contour` and `errors` of `geom_plate::build_plate_surface`.
+- **Approximation callbacks.** `GeomPlate_MakeApprox_Eval` implements the tkgeombase
+  trait `AdvApp2VarEvaluatorFunc2Var`; its surface evaluations can raise, and the
+  callback cannot return `Result`, so the first failure is kept (`FailureCapture` in a
+  `RefCell`), the error code reports it, and `MakeApprox` raises it when
+  `AdvApp2Var_ApproxAFunc2Var` returns, where the native exception would unwind
+  through the approximation. `GeomPlate_PlateG0Criterion` and
+  `GeomPlate_PlateG1Criterion` implement `AdvApp2VarCriterion` and read the patch
+  coefficients through `AdvApp2Var_Patch::Coefficients` as natively.

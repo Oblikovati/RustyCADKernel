@@ -2,19 +2,26 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
+use ga_probe::geom_fill_laws as gfl;
+use ga_probe::geom_fill_pipe as gfg;
+use ga_probe::geom_fill_placement as gfp;
+use ga_probe::geom_fill_sweep as gfs;
+use ga_probe::geom_fill_sweepalgo as gfw;
+use ga_probe::geom_fill_trihedron as gft;
 use ga_probe::int_curve_surface_inter as ics_inter;
 use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, plate};
 use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom_api, geom_api_fit, geom_api_surface, gordon};
+use ga_probe::{geom_plate, geom_plate_build};
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
-use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_tools};
 use ga_probe::int_patch_impimp;
+use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_poly, int_patch_tools};
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
@@ -231,6 +238,37 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_aline2wline", int_patch_impimp::aline2wline_case),
     ("ip_special", int_patch_impimp::special_case),
     ("ip_special_pole", int_patch_impimp::special_pole_case),
+    // GeomFill sweep (ga_probe/geom_fill_*.rs)
+    ("gfs_shape", gfs::shape_case),
+    ("gfs_circle", gfs::circle_case),
+    ("gfs_convert", gfs::convert_case),
+    ("gfs_tensor", gfs::tensor_case),
+    ("gfs_trihedron", gft::law_case),
+    ("gfs_section", gfl::section_case),
+    ("gfs_location", gfl::location_case),
+    ("gfs_placement", gfp::placement_case),
+    ("gfs_sweepfunc", gfw::function_case),
+    ("gfs_sweep", gfw::sweep_case),
+    ("gfs_blendfunc", gfw::blend_case),
+    ("gfs_sweepsec", gfg::sweepsec_case),
+    ("gfs_pipe", gfg::pipe_case),
+    ("gfs_surface", gfg::surface_case),
+    ("ip_polyh", int_patch_poly::polyh_case),
+    ("ip_bvh", int_patch_poly::bvh_case),
+    ("ip_interf", int_patch_poly::interf_case),
+    ("ip_polyline", int_patch_poly::polyline_case),
+    ("ip_polyarc", int_patch_poly::polyarc_case),
+    ("ip_t3bits", int_patch_poly::t3bits_case),
+    // GeomPlate (ga_probe/geom_plate*.rs)
+    ("gplate_point", geom_plate::point_case),
+    ("gplate_curve", geom_plate::curve_case),
+    ("gplate_curve_empty", geom_plate::curve_empty_case),
+    ("gplate_surface", geom_plate::surface_case),
+    ("gplate_average", geom_plate::average_case),
+    ("gplate_normals", geom_plate::normals_case),
+    ("gplate_halfspace", geom_plate::halfspace_case),
+    ("gplate_build", geom_plate_build::build_case),
+    ("gplate_approx", geom_plate_build::approx_case),
 ];
 
 fn main() {
