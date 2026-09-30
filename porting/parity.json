@@ -202226,6 +202226,646 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_ellipse",
       "status": "implemented",
       "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "IntTools_Range()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Range.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Range::default",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Range(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Range.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Range::new",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Range::SetFirst(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Range.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Range::set_first",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Range::SetLast(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Range.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Range::set_last",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Range::First() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Range.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Range::first",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Range::Last() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Range.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Range::last",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Range::Range(double&,double&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Range.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Range::range",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::default",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root(double,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::new",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::SetRoot(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::set_root",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::SetType(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::set_type",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::SetStateBefore(TopAbs_State)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::set_state_before",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::SetStateAfter(TopAbs_State)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::set_state_after",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::SetLayerHeight(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::set_layer_height",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::SetInterval(double,double,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::set_interval",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::Root() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::root",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::Type() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::root_type",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::StateBefore() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::state_before",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::StateAfter() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::state_after",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::LayerHeight() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::layer_height",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::IsValid() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::is_valid",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_Root::Interval(double&,double&,double&,double&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Root.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Root::interval",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_BaseRangeSample()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BaseRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::BaseRangeSample::default",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_BaseRangeSample(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BaseRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::BaseRangeSample::new",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_BaseRangeSample::SetDepth(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BaseRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::BaseRangeSample::set_depth",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_BaseRangeSample::GetDepth() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_BaseRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::BaseRangeSample::get_depth",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::default",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::new",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample::SetRangeIndex(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::set_range_index",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample::GetRangeIndex() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::get_range_index",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample::IsEqual(const IntTools_CurveRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::is_equal",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample::operator==(const IntTools_CurveRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::eq",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample::GetRange(double,double,int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::get_range",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_CurveRangeSample::GetRangeIndexDeeper(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::get_range_index_deeper",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "std::hash<IntTools_CurveRangeSample>::operator()(const IntTools_CurveRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::CurveRangeSample::hash_code",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::default",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample(int,int,int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::new",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample(const IntTools_CurveRangeSample&,const IntTools_CurveRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::from_ranges",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample(const IntTools_SurfaceRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::clone",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::Assign(const IntTools_SurfaceRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::assign",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::operator=(const IntTools_SurfaceRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::assign",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetRanges(const IntTools_CurveRangeSample&,const IntTools_CurveRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_ranges",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetRanges(IntTools_CurveRangeSample&,IntTools_CurveRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_ranges",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetIndexes(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_indexes",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetIndexes(int&,int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_indexes",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetDepths(int&,int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_depths",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetSampleRangeU(const IntTools_CurveRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_sample_range_u",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetSampleRangeU() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_sample_range_u",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetSampleRangeV(const IntTools_CurveRangeSample&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_sample_range_v",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetSampleRangeV() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_sample_range_v",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetIndexU(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_index_u",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetIndexU() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_index_u",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetIndexV(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_index_v",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetIndexV() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_index_v",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetDepthU(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_depth_u",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetDepthU() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_depth_u",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::SetDepthV(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::set_depth_v",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetDepthV() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_depth_v",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetRangeU(double,double,int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_range_u",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetRangeV(double,double,int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_range_v",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::IsEqual(const IntTools_SurfaceRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::is_equal",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetRangeIndexUDeeper(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_range_index_u_deeper",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::GetRangeIndexVDeeper(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::get_range_index_v_deeper",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_SurfaceRangeSample::operator==(const IntTools_SurfaceRangeSample&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::eq",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::default",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet(double,double,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::new",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet(const NCollection_Array1<double>&,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::from_ranges",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::SetBoundaries(double,double,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::set_boundaries",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::SetRanges(const NCollection_Array1<double>&,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::set_ranges",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::InsertRange(double,double,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::insert_range",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::InsertRange(const IntTools_Range&,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::insert",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::InsertRange(double,double,int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::insert_range_at",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::InsertRange(const IntTools_Range&,int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::insert_at",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::SetFlag(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::set_flag",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::Flag(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::flag",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::GetIndex(double) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::get_index",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::GetIndices(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::get_indices",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::GetIndex(double,bool) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::get_index_with_side",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::Length() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::length",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
+    },
+    {
+      "upstream_id": "IntTools_MarkedRangeSet::Range(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_MarkedRangeSet.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::MarkedRangeSet::range",
+      "status": "implemented",
+      "notes": "Complete foundation type; exact native differential evidence tools/verify_tkbo_foundations.py. Rust Clone/PartialEq represent copy/equality members."
     }
   ],
   "tests": [
@@ -302229,6 +302869,1158 @@
       "rust_target": "brep_graph_scenario_matrix_legacy",
       "rust_test": "BRepGraph_ScenarioMatrix__Sphere_SeamCoEdgePair_Bidirectional",
       "rust_source": "crates/tkbrep/tests/graph_scenarios/seams.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AnalyzeOnly_DoesNotRewrite",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AnalyzeOnly_DoesNotRewrite",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AnalyzeOnly_ReportsCanonicalCandidates",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AnalyzeOnly_ReportsCanonicalCandidates",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.CanonicalizeSurfaces_RewritesAndRecordsHistory",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__CanonicalizeSurfaces_RewritesAndRecordsHistory",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.CanonicalizeCurves_RewritesAndReducesUnique",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__CanonicalizeCurves_RewritesAndReducesUnique",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.HistoryModeOff_DoesNotAddHistory",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__HistoryModeOff_DoesNotAddHistory",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.RestoresHistoryEnabledFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__RestoresHistoryEnabledFlag",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DefaultOverload_PerformWorks",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DefaultOverload_PerformWorks",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.SingleFace_NoSurfaceRewrite",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__SingleFace_NoSurfaceRewrite",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.NotDoneGraph_ReturnsEmptyResult",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__NotDoneGraph_ReturnsEmptyResult",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Idempotent_SecondRunNoRewrites",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Idempotent_SecondRunNoRewrites",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.FullBox_AllSurfacesUnique",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__FullBox_AllSurfacesUnique",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.ResultCountersConsistency",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__ResultCountersConsistency",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.EmptyCompound_NoRewrites",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__EmptyCompound_NoRewrites",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MultipleCopies_NWayDedup",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MultipleCopies_NWayDedup",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MixedGeometry_OnlyIdenticalDeduped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MixedGeometry_OnlyIdenticalDeduped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterDedup_AllCopiedFacesShareCanonicalSurface",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterDedup_AllCopiedFacesShareCanonicalSurface",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.HistoryRecordNames_MatchExpectedOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__HistoryRecordNames_MatchExpectedOps",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AnalyzeOnly_CurveAndPCurveCountsReported",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AnalyzeOnly_CurveAndPCurveCountsReported",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DefaultOptionsStruct_HasExpectedDefaults",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DefaultOptionsStruct_HasExpectedDefaults",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DefaultResultStruct_AllZeroed",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DefaultResultStruct_AllZeroed",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MergeDefsWhenSafe_MergesVertices",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MergeDefsWhenSafe_MergesVertices",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.NestedCompound_AllCopiesDeduped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__NestedCompound_AllCopiesDeduped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.ThreeDistinctPrimitives_MinimalDedup",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__ThreeDistinctPrimitives_MinimalDedup",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.TwoIdenticalBoxes_SurfacesAndCurvesDeduped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__TwoIdenticalBoxes_SurfacesAndCurvesDeduped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.CurveRewriteCount_MatchesDuplicateEdgeCurves",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__CurveRewriteCount_MatchesDuplicateEdgeCurves",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterDedup_AllCopiedEdgesShareCanonicalCurve",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterDedup_AllCopiedEdgesShareCanonicalCurve",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MultiplePCurveDups_AllEdgesDeduped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MultiplePCurveDups_AllEdgesDeduped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.PCurveDup_AnalyzeOnly_CountsButNoRewrite",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__PCurveDup_AnalyzeOnly_CountsButNoRewrite",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.NoPCurveDuplicates_ZeroPCurveRewrites",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__NoPCurveDuplicates_ZeroPCurveRewrites",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.HistoryFindOriginal_TracesBackToCanonical",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__HistoryFindOriginal_TracesBackToCanonical",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/history.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.HistoryFindDerived_ContainsCanonicalNode",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__HistoryFindDerived_ContainsCanonicalNode",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/history.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.HistoryRecordSequenceNumbers_AreMonotonic",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__HistoryRecordSequenceNumbers_AreMonotonic",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/history.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.HistoryOff_NbRecordsUnchanged",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__HistoryOff_NbRecordsUnchanged",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterDedup_AllSurfacesValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterDedup_AllSurfacesValid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterDedup_AllCurve3dsValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterDedup_AllCurve3dsValid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterDedup_AllInlinePCurvesHaveCurve2d",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterDedup_AllInlinePCurvesHaveCurve2d",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterDedup_CanonicalSurfaceGeomNotNull",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterDedup_CanonicalSurfaceGeomNotNull",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterDedup_CanonicalCurveGeomNotNull",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterDedup_CanonicalCurveGeomNotNull",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.ParallelBuild_SameResultAsSequential",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__ParallelBuild_SameResultAsSequential",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/history.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.TenCopies_AllDeduplicatedToOneSurface",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__TenCopies_AllDeduplicatedToOneSurface",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.TwoCopies_CurveCanonicalCountLessThanTotal",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__TwoCopies_CurveCanonicalCountLessThanTotal",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Idempotent_MixedCompound_SurfacesAndCurves",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Idempotent_MixedCompound_SurfacesAndCurves",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Idempotent_TwoIdenticalBoxes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Idempotent_TwoIdenticalBoxes",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DISABLED_PCurveDedup_RewritesReduceUniquePCurveNodes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "compatibility_disabled_pcurve_dedup_retains_inline_entries",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/history.rs",
+      "status": "upstream_disabled",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "behavior_decision": "preserve_current",
+      "native_disabled_reason": "Pinned OCCT disables the legacy pcurve-node reduction assertion: pcurves are inline coedge entries and dedup retains all eight entries.",
+      "native_disabled_expected_failure": "Expected: (nbUniquePCurveNodes(aGraph)) < (aUniqueBefore), actual: 8 vs 8",
+      "rust_reference": "BRepGraph_DeduplicateTest__DISABLED_PCurveDedup_RewritesReduceUniquePCurveNodes"
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.RestoresHistoryFlag_WhenHistoryModeOff",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__RestoresHistoryFlag_WhenHistoryModeOff",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.RestoresHistoryFlag_AnalyzeOnlyPath",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__RestoresHistoryFlag_AnalyzeOnlyPath",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.GeomCountsUnchanged_AfterDedup",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__GeomCountsUnchanged_AfterDedup",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DefCountsUnchanged_AfterDedup",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DefCountsUnchanged_AfterDedup",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.PCurveEntryCount_UnchangedAfterDedup",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__PCurveEntryCount_UnchangedAfterDedup",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.TwoCopiedSphereFaces_Deduped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__TwoCopiedSphereFaces_Deduped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.TwoCopiedCylinderFaces_Deduped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__TwoCopiedCylinderFaces_Deduped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DifferentSizedCylinders_NotDeduped",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DifferentSizedCylinders_NotDeduped",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.BackRefs_SurfaceRewrite_UpdatesFaceDefUsers",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__BackRefs_SurfaceRewrite_UpdatesFaceDefUsers",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.BackRefs_CurveRewrite_UpdatesEdgeDefUsers",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__BackRefs_CurveRewrite_UpdatesEdgeDefUsers",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.FacesOnSurface_AfterDedup_ReturnsCorrectDefs",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__FacesOnSurface_AfterDedup_ReturnsCorrectDefs",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Nullify_OrphanedSurface_HandleIsNull",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Nullify_OrphanedSurface_HandleIsNull",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Nullify_OrphanedCurve_HandleIsNull",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Nullify_OrphanedCurve_HandleIsNull",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Nullify_OrphanedPCurve_HandleIsNull",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Nullify_OrphanedPCurve_HandleIsNull",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AnalyzeOnly_NoBackRefChangesOrNullification",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AnalyzeOnly_NoBackRefChangesOrNullification",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/history.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.RoundTrip_TwoCopiedFaces_FewerSurfaces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__RoundTrip_TwoCopiedFaces_FewerSurfaces",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.RoundTrip_TwoCopiedFaces_FewerCurves",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__RoundTrip_TwoCopiedFaces_FewerCurves",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Build_SharedTFace_OneSurfaceNode",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Build_SharedTFace_OneSurfaceNode",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.RoundTrip_TwoBoxes_GeomReduction",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__RoundTrip_TwoBoxes_GeomReduction",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MergeVertices_SharedVerticesReduced",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MergeVertices_SharedVerticesReduced",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/topology.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MergeEdges_SharedEdgesReduced",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MergeEdges_SharedEdgesReduced",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MergeWires_IdenticalWiresMerged",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MergeWires_IdenticalWiresMerged",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MergeFaces_IdenticalFacesMerged",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MergeFaces_IdenticalFacesMerged",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MergeDefsWhenSafe_False_NoMerge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MergeDefsWhenSafe_False_NoMerge",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AnalyzeOnly_MergeDefsWhenSafe_CountsOnly",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AnalyzeOnly_MergeDefsWhenSafe_CountsOnly",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.HistoryRecords_MergePhases",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__HistoryRecords_MergePhases",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_3.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.AfterMerge_Validate_NoIssues",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__AfterMerge_Validate_NoIssues",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_3.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.MergeFaces_SameSurfaceDifferentWires_NotMerged",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__MergeFaces_SameSurfaceDifferentWires_NotMerged",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.Sphere_SeamPCurve_SurvivesDedupCompactReconstruct",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__Sphere_SeamPCurve_SurvivesDedupCompactReconstruct",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.ThreeCopiedCylinderFaces_PCurvesSurviveFullPipeline",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__ThreeCopiedCylinderFaces_PCurvesSurviveFullPipeline",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.ThreeCopiedBoxes_DedupMergeCompact_FacesKeepOuterWires",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__ThreeCopiedBoxes_DedupMergeCompact_FacesKeepOuterWires",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.SelfLoopEdge_AfterVertexMerge_OrientationCorrect",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__SelfLoopEdge_AfterVertexMerge_OrientationCorrect",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.EdgeMerge_ThreeCopiedEdges_GraphValidates",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__EdgeMerge_ThreeCopiedEdges_GraphValidates",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/basic_3.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.FaceMerge_TwoIdenticalSingularFaces_Merge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__FaceMerge_TwoIdenticalSingularFaces_Merge",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DedupMerge_TwoBoxesWithSharedEdge_EdgeFaceCountCorrect",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DedupMerge_TwoBoxesWithSharedEdge_EdgeFaceCountCorrect",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DedupMerge_TwoSpheres_DifferentSize_NotMerged",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DedupMerge_TwoSpheres_DifferentSize_NotMerged",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DedupMerge_ThreeBoxes_AllEdgesMergeCorrectly",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DedupMerge_ThreeBoxes_AllEdgesMergeCorrectly",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_DeduplicateTest.DedupMerge_SelfLoopEdge_OrientationPreserved",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Deduplicate_Test.cxx",
+      "source_sha256": "f5d8d33c50c61143a20924994684ca853521a03645570d6f2139b9b015b95da4",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_deduplicate_legacy",
+      "rust_test": "BRepGraph_DeduplicateTest__DedupMerge_SelfLoopEdge_OrientationPreserved",
+      "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

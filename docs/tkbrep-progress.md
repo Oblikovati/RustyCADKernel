@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (1178 declarations; 1190 runtime cases):
+The toolkit test inventory maps these suites (1260 declarations; 1271 active native runtime cases and one source-disabled original):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -1130,3 +1130,12 @@ Fixture SHA-256:
 
 The toolkit verifier now recognizes `TEST_P` and `TYPED_TEST_P`, with parser regressions;
 its existing runtime expansion checks require a distinct Rust test for every native case.
+
+### Deduplicate source-disabled regression
+
+All 82 Deduplicate declarations are mapped. The 81 active originals pass natively
+and in Rust. The original disabled assertion remains disabled upstream and fails
+when forced (eight vertices remain, so `8 < 8` is false). Its assertion is retained
+as a Rust reference, alongside a separate passing current-behavior regression.
+The gate records that original as `upstream_disabled`, never as a passing legacy
+test, and requires the expected native failure when explicitly enabled.
