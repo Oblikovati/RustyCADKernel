@@ -4,6 +4,12 @@ pub use rustycad_tkbo::int_tools;
 mod distance;
 #[path = "../src/int_tools/edge_edge/distance_search.rs"]
 mod distance_search;
+#[path = "../src/int_tools/edge_edge/best_solution.rs"]
+mod edge_best;
+#[path = "../src/int_tools/edge_edge/coincidence.rs"]
+mod edge_coincidence;
+#[path = "../src/int_tools/edge_edge/intersection.rs"]
+mod edge_intersection;
 #[path = "../src/int_tools/edge_edge/math.rs"]
 mod edge_math;
 #[path = "../src/int_tools/edge_edge/parameters.rs"]
