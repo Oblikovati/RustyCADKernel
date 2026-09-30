@@ -23,3 +23,6 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_bisector').append_bisector_requests(requests)
     # MAT and MAT2d (tktopalgo_corpus_mat.py)
     __import__('tktopalgo_corpus_mat').append_mat_requests(requests)
+    # BRepCheck and BRepLib_ValidateEdge (tktopalgo_corpus_brepcheck.py, shapes of
+    # tktopalgo_shape_program.py)
+    __import__('tktopalgo_corpus_brepcheck').append_brepcheck_requests(requests)
