@@ -4,8 +4,8 @@
 toolkit. The `Geom2d`, `Adaptor2d`, `Geom2dAdaptor`, `Geom2dEval`, `Geom2dGridEval` and
 `Geom2dHash` packages are ported in full in `crates/tkg2d` (`rustycad-tkg2d`), and
 `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
-The source inventory has 33 GoogleTest files and 523 declaration candidates. 28
-complete source suites account for 506 mapped declarations, with matching native and
+The source inventory has 33 GoogleTest files and 523 declaration candidates. All 33
+complete source suites account for 523 mapped declarations, with matching native and
 Rust passes.
 
 The class mapping (traits behind `Handle<dyn Trait>`, one lock per object for
@@ -263,10 +263,10 @@ an evaluation representation, and every evaluator on null curves.
   port raises Standard_ConstructionError naming the NaN bounds. A periodic basis keeps
   the native NaN trim.
 
-## Remaining coverage
+## Recovered cross-toolkit legacy suites
 
-Five source suites (17 declarations) stay unmapped, because they need packages of
-later toolkits:
+The final five source suites (17 declarations) now use the ported dependencies below
+and are mapped in `geom2d_modeling_legacy.rs`:
 
 - `Geom2d_CurveEval_Test.cxx` (7): `Geom2dAPI_PointsToBSpline` (TKGeomAlgo).
 - `Geom2d_OffsetCurve_Test.cxx` (5): `GCPnts_AbscissaPoint`, `Geom2dConvert` and
@@ -279,3 +279,10 @@ later toolkits:
   `Geom2dGcc_QualifiedCurve` and `GccEnt_Position` (TKGeomAlgo).
 - `DumpJson` is compared on the corpus; the `InitFromJson` counterparts do not
   exist in Geom2d.
+
+All 523 GoogleTest declaration candidates now have complete source-suite mappings and
+matching native/Rust passes. The newly recovered fixtures retain original parameter
+bounds, sampling, exception assertions and approximation tolerances. TKGeomBase and
+TKGeomAlgo are test-only dependencies. This completes the inventoried GoogleTest
+mapping for TKG2d; full API and other legacy-test acceptance still follows the project
+coverage inventory, rather than this count alone.
