@@ -47,3 +47,5 @@ pub mod healing_common;
 pub mod edge_outputs;
 
 pub mod canonical;
+
+pub mod shape_construct;
