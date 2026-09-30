@@ -21,13 +21,19 @@ Runner = Callable[..., str]
 
 # Toolkits the shared oracle closure builds beyond FoundationClasses (with their
 # dependencies). TKPrim is here because unchanged TKBRep suites (TopExp_Test) build their
-# shapes with BRepPrimAPI_MakeBox.
-ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKTopAlgo', 'TKPrim')
+# shapes with BRepPrimAPI_MakeBox; TKHelix for its own suites and numeric oracle.
+ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKTopAlgo', 'TKPrim',
+                                        'TKHelix',
+                                        )
 # The closure's shared libraries in link order, dependants first.
-LINKED_TOOLKITS: tuple[str, ...] = ('TKPrim', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
+LINKED_TOOLKITS: tuple[str, ...] = ('TKPrim',
+                                    'TKHelix',
+                                    'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
                                     'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
-# The targets that build the whole closure plus GoogleTest.
-CLOSURE_TARGETS: list[str] = [ADDITIONAL_TOOLKITS[-1], 'gtest_main']
+# The targets that build the whole closure plus GoogleTest: every additional toolkit,
+# since no single one of them depends on all the others (TKPrim and TKHelix are siblings
+# over TKTopAlgo).
+CLOSURE_TARGETS: list[str] = [*ADDITIONAL_TOOLKITS, 'gtest_main']
 
 
 def closure_flags(modules: list[str]) -> list[str]:
