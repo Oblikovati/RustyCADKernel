@@ -18,3 +18,6 @@ pub use package::{BoundedCurve2dSequence, BoundedCurveSequence, ShapeUpgrade};
 pub use remove_locations::{ShapeReplacements, ShapeUpgradeRemoveLocations};
 pub use split_curve::{ShapeUpgradeSplitCurve, SplitCurve, SplitCurveData, SplitCurveFields};
 pub use tool::ShapeUpgradeTool;
+
+mod shell_sewing;
+pub use shell_sewing::ShapeUpgradeShellSewing;

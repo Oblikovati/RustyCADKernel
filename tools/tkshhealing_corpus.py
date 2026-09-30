@@ -45,3 +45,6 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
 
     # ShapeConstruct_ProjectCurveOnSurface: geometry, cache and statuses.
     __import__('tkshhealing_corpus_project_curve').append_project_curve_requests(requests)
+
+    # ShapeUpgrade_ShellSewing: topology, tolerance and persistent shell history.
+    __import__('tkshhealing_corpus_shell_sewing').append_shell_sewing_requests(requests)
