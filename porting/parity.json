@@ -194226,6 +194226,166 @@
       "rust_item": "rustycad_tkhlr::intrv::Position",
       "status": "implemented",
       "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::new",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference(const double&,const int&,TopAbs_Orientation,TopAbs_Orientation,TopAbs_Orientation)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::with_values",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Intersection(const double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::set_intersection",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Boundary(const int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::set_boundary",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Orientation(TopAbs_Orientation)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::set_orientation",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Transition(TopAbs_Orientation)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::set_transition",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::BoundaryTransition(TopAbs_Orientation)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::set_boundary_transition",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Intersection() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::intersection",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::ChangeIntersection()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::change_intersection",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Boundary() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::boundary",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::ChangeBoundary()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::change_boundary",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Orientation() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::orientation",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::Transition() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::transition",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopBas_TestInterference::BoundaryTransition() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopBas/TopBas_TestInterference.hxx",
+      "rust_item": "rustycad_tkhlr::top_bas::TestInterference::boundary_transition",
+      "status": "implemented",
+      "notes": "TopBas mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopBas_TestInterference is the Copy value TestInterference; the overloaded setters take set_ names, the Change accessors return &mut; the native default constructor leaves the fields uninitialized, the Rust default is 0.0, 0 and FORWARD; compared with OCCT by tools/verify_tkhlr_numeric.py (tb_interference requests)."
+    },
+    {
+      "upstream_id": "TopCnx_EdgeFaceTransition()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopCnx/TopCnx_EdgeFaceTransition.hxx",
+      "rust_item": "rustycad_tkhlr::top_cnx::EdgeFaceTransition::new",
+      "status": "implemented",
+      "notes": "TopCnx mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopCnx_EdgeFaceTransition is the Copy value EdgeFaceTransition over the TKGeomAlgo port rustycad_tkgeomalgo::toptrans::CurveTransition; Reset(Tgt) is reset_line; the OCCT_DEBUG message of Transition is not ported; compared with OCCT by tools/verify_tkhlr_numeric.py (tc_transition requests)."
+    },
+    {
+      "upstream_id": "TopCnx_EdgeFaceTransition::Reset(const gp_Dir&,const gp_Dir&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopCnx/TopCnx_EdgeFaceTransition.hxx",
+      "rust_item": "rustycad_tkhlr::top_cnx::EdgeFaceTransition::reset",
+      "status": "implemented",
+      "notes": "TopCnx mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopCnx_EdgeFaceTransition is the Copy value EdgeFaceTransition over the TKGeomAlgo port rustycad_tkgeomalgo::toptrans::CurveTransition; Reset(Tgt) is reset_line; the OCCT_DEBUG message of Transition is not ported; compared with OCCT by tools/verify_tkhlr_numeric.py (tc_transition requests)."
+    },
+    {
+      "upstream_id": "TopCnx_EdgeFaceTransition::Reset(const gp_Dir&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopCnx/TopCnx_EdgeFaceTransition.hxx",
+      "rust_item": "rustycad_tkhlr::top_cnx::EdgeFaceTransition::reset_line",
+      "status": "implemented",
+      "notes": "TopCnx mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopCnx_EdgeFaceTransition is the Copy value EdgeFaceTransition over the TKGeomAlgo port rustycad_tkgeomalgo::toptrans::CurveTransition; Reset(Tgt) is reset_line; the OCCT_DEBUG message of Transition is not ported; compared with OCCT by tools/verify_tkhlr_numeric.py (tc_transition requests)."
+    },
+    {
+      "upstream_id": "TopCnx_EdgeFaceTransition::AddInterference(double,const gp_Dir&,const gp_Dir&,double,TopAbs_Orientation,TopAbs_Orientation,TopAbs_Orientation)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopCnx/TopCnx_EdgeFaceTransition.hxx",
+      "rust_item": "rustycad_tkhlr::top_cnx::EdgeFaceTransition::add_interference",
+      "status": "implemented",
+      "notes": "TopCnx mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopCnx_EdgeFaceTransition is the Copy value EdgeFaceTransition over the TKGeomAlgo port rustycad_tkgeomalgo::toptrans::CurveTransition; Reset(Tgt) is reset_line; the OCCT_DEBUG message of Transition is not ported; compared with OCCT by tools/verify_tkhlr_numeric.py (tc_transition requests)."
+    },
+    {
+      "upstream_id": "TopCnx_EdgeFaceTransition::Transition() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopCnx/TopCnx_EdgeFaceTransition.hxx",
+      "rust_item": "rustycad_tkhlr::top_cnx::EdgeFaceTransition::transition",
+      "status": "implemented",
+      "notes": "TopCnx mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopCnx_EdgeFaceTransition is the Copy value EdgeFaceTransition over the TKGeomAlgo port rustycad_tkgeomalgo::toptrans::CurveTransition; Reset(Tgt) is reset_line; the OCCT_DEBUG message of Transition is not ported; compared with OCCT by tools/verify_tkhlr_numeric.py (tc_transition requests)."
+    },
+    {
+      "upstream_id": "TopCnx_EdgeFaceTransition::BoundaryTransition() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/TopCnx/TopCnx_EdgeFaceTransition.hxx",
+      "rust_item": "rustycad_tkhlr::top_cnx::EdgeFaceTransition::boundary_transition",
+      "status": "implemented",
+      "notes": "TopCnx mapping (docs/hlr-design.md section 4, docs/tkhlr-progress.md): TopCnx_EdgeFaceTransition is the Copy value EdgeFaceTransition over the TKGeomAlgo port rustycad_tkgeomalgo::toptrans::CurveTransition; Reset(Tgt) is reset_line; the OCCT_DEBUG message of Transition is not ported; compared with OCCT by tools/verify_tkhlr_numeric.py (tc_transition requests)."
     }
   ],
   "tests": [

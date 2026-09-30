@@ -129,3 +129,15 @@ and 17.
 - A native call whose tool is the object itself (`x.Unite(x)`) edits the sequence while
   it reads it. Rust borrowing forbids it; a caller passes a copy, which gives the result
   of a separate tool.
+
+## 4. TopBas and TopCnx: small value classes
+
+- `TopBas_TestInterference` is the `Copy` value `top_bas::TestInterference`. The
+  overloaded setters (`Intersection(const double&)`, ...) take `set_` names, and
+  `ChangeIntersection`/`ChangeBoundary` return `&mut`. The native default constructor
+  is `= default` on scalar fields, so it leaves them uninitialized; the Rust default is
+  `0.0`, `0` and FORWARD, and no probe reads a default record.
+- `TopCnx_EdgeFaceTransition` is the `Copy` value `top_cnx::EdgeFaceTransition` over
+  the TKGeomAlgo port of `TopTrans_CurveTransition`. `Reset(Tgt)` is `reset_line`, as
+  in TopTrans. The `OCCT_DEBUG` message of `Transition` for an unprocessed state is not
+  ported (release builds do not print it); the result stays INTERNAL.
