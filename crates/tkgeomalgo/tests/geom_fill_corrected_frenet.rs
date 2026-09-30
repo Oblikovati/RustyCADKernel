@@ -1,7 +1,6 @@
-//! The cases of GeomFill_CorrectedFrenet_Test.cxx (at 3d097a0328e71b826377d4814ab05ec3c3d23871)
-//! that need only GeomFill. The suite is not mapped: its fourth case builds a wire with
-//! BRepBuilderAPI and ShapeExtend and adapts it with BRepAdaptor_CompCurve, which are not
-//! ported (and TKShHealing is not in the native oracle closure).
+//! All declarations of GeomFill_CorrectedFrenet_Test.cxx at
+//! 3d097a0328e71b826377d4814ab05ec3c3d23871, including the original wire reproducer.
+#![allow(non_snake_case)]
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
@@ -36,7 +35,7 @@ fn law_on(poles: &[Point3], degree: i32) -> GeomFillCorrectedFrenet {
 }
 
 #[test]
-fn corrected_frenet_ends_of_a_turning_cubic_have_frames() {
+fn GeomFill_CorrectedFrenet__EndlessLoopPrevention() {
     let poles = [
         Point3::new(0.0, 0.0, 0.0),
         Point3::new(1.0, 0.0, 0.0),
@@ -53,7 +52,7 @@ fn corrected_frenet_ends_of_a_turning_cubic_have_frames() {
 }
 
 #[test]
-fn corrected_frenet_evaluates_a_tiny_segment() {
+fn GeomFill_CorrectedFrenet__SmallStepHandling() {
     let poles = [Point3::new(0.0, 0.0, 0.0), Point3::new(1e-10, 0.0, 0.0)];
     let law = law_on(&poles, 1);
     let mut frame = TrihedronD0::default();
@@ -61,7 +60,7 @@ fn corrected_frenet_evaluates_a_tiny_segment() {
 }
 
 #[test]
-fn corrected_frenet_parameters_progress_on_a_parabola() {
+fn GeomFill_CorrectedFrenet__ParameterProgressionGuarantee() {
     let poles = [
         Point3::new(0.0, 0.0, 0.0),
         Point3::new(0.5, 0.5, 0.0),
@@ -76,4 +75,43 @@ fn corrected_frenet_parameters_progress_on_a_parabola() {
         assert!(f.binormal.magnitude() > 1e-12);
         param += 0.1;
     }
+}
+
+/// Preserve the actual segment/make-edge/wire-builder path of the loop reproducer.
+fn corrected_frenet_reproducer_wire() -> rustycad_tkbrep::topods::Wire {
+    let points = [
+        Point3::new(-1.0, -1.0, 0.0),
+        Point3::new(0.0, -2.0, 0.0),
+        Point3::new(0.0, -2.0, -1.0),
+        Point3::new(0.0, -1.0, -1.0),
+    ];
+    let extend = rustycad_tkshhealing::shape_extend::ShapeExtendWireData::new();
+    for ends in points.windows(2) {
+        let curve = rustycad_tkgeombase::gc::MakeSegment::from_points(ends[0], ends[1])
+            .unwrap()
+            .value()
+            .unwrap();
+        let edge =
+            rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve(&curve.cast())
+                .unwrap()
+                .edge()
+                .unwrap();
+        extend.add_edge(&edge, 0).unwrap();
+    }
+    extend.wire_api_make().unwrap()
+}
+#[test]
+fn GeomFill_CorrectedFrenet__ActualReproducerCase() {
+    let adaptor = rustycad_tkbrep::brep_adaptor::BRepAdaptorCompCurve::with_wire(
+        &corrected_frenet_reproducer_wire(),
+        false,
+    )
+    .unwrap();
+    let law = GeomFillCorrectedFrenet::with_evaluation(false);
+    // This SetCurve call caused the original endless loop.
+    law.set_curve(&adaptor.shallow_copy().unwrap()).unwrap();
+    let mut frame = TrihedronD0::default();
+    law.d0(0.0, &mut frame).unwrap();
+    law.d0(0.5, &mut frame).unwrap();
+    law.d0(1.0, &mut frame).unwrap();
 }

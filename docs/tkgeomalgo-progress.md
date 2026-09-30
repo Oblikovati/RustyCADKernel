@@ -1,16 +1,14 @@
 # TKGeomAlgo port status
 
-**Every package is ported; two upstream suites still wait for other toolkits.**
+**Every package is ported; one upstream suite still waits for other toolkits.**
 `crates/tkgeomalgo`
 (`rustycad-tkgeomalgo`) is the port of the ModelingAlgorithms toolkit TKGeomAlgo. It
 depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase and TKBRep ports, as the
 native toolkit does (its EXTERNLIB). Each of the 33 OCCT packages is one module of the
 crate, declared up front in `src/lib.rs`; a module whose package is not ported yet
 holds only its documentation. All 33 packages are ported (NLPlate has no sources at the
-pinned commit), and each audits with 0 missing and 0 stale api rows. Two suites are not
-mapped yet because they build shapes with toolkits that are not ported:
-GeomFill_BSplineCurves_Test and GeomFill_CorrectedFrenet_Test (TKOffset, TKShHealing);
-their cases run as behaviour tests.
+pinned commit), and each audits with 0 missing and 0 stale api rows. One suite remains unmapped: GeomFill_BSplineCurves_Test needs the remaining TKOffset
+and ShapeFix_Shape implementations. Its available cases run as behaviour tests.
 
 Generic C++ code (the `.gxx` and `.pxx` templates that OCCT instantiates per type) is
 ported once as a Rust generic and instantiated where OCCT instantiates it, as
@@ -27,7 +25,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (204 declarations):
+The toolkit test inventory maps these suites (208 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -69,16 +67,16 @@ The toolkit test inventory maps these suites (204 declarations):
 
 GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
 build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
-of TKTopAlgo, TKOffset and TKShHealing, and GeomAPI::To3d), which neither the port nor
-the shared native build (no TKOffset or TKShHealing library) provides. Its two GeomFill
+of TKTopAlgo, TKOffset and TKShHealing, and GeomAPI::To3d). TKOffset and ShapeFix_Shape
+remain the Rust dependencies needed to map the complete source suite. Its two GeomFill
 cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` and
 `geom_fill_filling_behavior`) and in the numeric corpus.
 
-GeomFill_CorrectedFrenet_Test.cxx is not mapped yet: its `ActualReproducerCase` builds a
-wire with GC_MakeSegment, BRepBuilderAPI_MakeEdge and ShapeExtend_WireData and adapts
-it with BRepAdaptor_CompCurve, which the port does not provide and which needs
-TKShHealing, absent from the shared native build. Its three other cases run as the
-behavior tests of `geom_fill_corrected_frenet_behavior`.
+GeomFill_CorrectedFrenet_Test.cxx now maps all four declarations in
+`geom_fill_corrected_frenet`. The original reproducer constructs its three segments with
+GC_MakeSegment, BRepBuilderAPI_MakeEdge and ShapeExtend_WireData::WireAPIMake, then uses
+BRepAdaptor_CompCurve::ShallowCopy. Both SetCurve and the three D0 calls complete as in
+OCCT. TKShHealing is a dev dependency and is available in the shared native closure.
 
 GeomPlate_BuildPlateSurface_Test.cxx is translated 1:1 since BRepBuilderAPI (TKTopAlgo)
 is ported: its A1 and A2 cases build their boundaries as `BRepAdaptor_Curve` of edges made
