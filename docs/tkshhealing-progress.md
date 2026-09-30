@@ -636,3 +636,19 @@ All 11 FreeBounds legacy declarations are translated and pass against the unchan
 OCCT tests. The integrated source gate now passes 101 declarations, with 101 native
 and 101 Rust cases and no skips. Connection checks in ShapeAnalysis_Wire retain
 native distance fallback and accumulated status. The broader Wire API remains partial.
+
+### SplitCurve3d: defined paths and unresolved native failure behavior
+
+The translated splitter preserves copied initialization, OCC966 bounds, wrapper
+recursion, knot snapping and segmentation. Five direct Rust regressions pass.
+The integrated source gate remains 101/101 original declarations in each language,
+and the exact numeric gate passes 15,679 requests.
+
+All 348 SplitCurve3d candidates are separately accounted: 332 exact comparisons and
+16 reproducible native SIGSEGV versus Rust Standard_ConstructionError divergences for
+multipart offset Build(false). `tools/verify_split_curve3d.py` replays and checks both
+outcomes; its report explicitly says `complete_parity: false`. Build remains partial
+in the API ledger. The divergence inputs are retained, not counted as passing parity.
+
+At integration commit cfce18d4, the full Rust workspace passed 11,379 tests with zero
+failures and 69 pre-existing ignored doctests; all 259 tooling tests passed.

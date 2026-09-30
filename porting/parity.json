@@ -79484,14 +79484,6 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
     },
     {
-      "upstream_id": "NCollection_UBTreeFiller(UBTree&,const occ::handle<NCollection_BaseAllocator>&,bool)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::new",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
-    },
-    {
       "upstream_id": "NCollection_UBTreeFiller::Add(const TheObjType&,const TheBndType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
@@ -79522,14 +79514,6 @@
       "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::check_tree",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. Standard_OStream becomes any std::fmt::Write sink; an empty tree, a native null dereference, returns a Standard_NoSuchObject error."
-    },
-    {
-      "upstream_id": "NCollection_UBTreeFiller::~NCollection_UBTreeFiller()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::UBTreeFiller as Drop>::drop",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. The destructor has an observable effect (it fills pending items), so it maps to the Drop implementation."
     },
     {
       "upstream_id": "NCollection_CellFilter_Action",
@@ -210804,6 +210788,76 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::cells_count",
       "status": "implemented",
       "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
+      "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::new",
+      "status": "implemented",
+      "notes": "Native copied-curve Init, OCC966 bounds, wrapper recursion, knot snapping, segmentation and fallback. All 348 candidates accounted: 332 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences in multipart offset Build(false). Build is partial parity; crashes are never exact passes. Replay: tools/verify_split_curve3d.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3d::Init(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
+      "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::init_curve",
+      "status": "implemented",
+      "notes": "Native copied-curve Init, OCC966 bounds, wrapper recursion, knot snapping, segmentation and fallback. All 348 candidates accounted: 332 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences in multipart offset Build(false). Build is partial parity; crashes are never exact passes. Replay: tools/verify_split_curve3d.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3d::Init(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
+      "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::init_curve_range",
+      "status": "implemented",
+      "notes": "Native copied-curve Init, OCC966 bounds, wrapper recursion, knot snapping, segmentation and fallback. All 348 candidates accounted: 332 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences in multipart offset Build(false). Build is partial parity; crashes are never exact passes. Replay: tools/verify_split_curve3d.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3d::Build(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
+      "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::build",
+      "status": "partial",
+      "notes": "Native copied-curve Init, OCC966 bounds, wrapper recursion, knot snapping, segmentation and fallback. All 348 candidates accounted: 332 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences in multipart offset Build(false). Build is partial parity; crashes are never exact passes. Replay: tools/verify_split_curve3d.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3d::GetCurves() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
+      "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::curves",
+      "status": "implemented",
+      "notes": "Native copied-curve Init, OCC966 bounds, wrapper recursion, knot snapping, segmentation and fallback. All 348 candidates accounted: 332 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences in multipart offset Build(false). Build is partial parity; crashes are never exact passes. Replay: tools/verify_split_curve3d.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3d::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitCurve3d,ShapeUpgrade_SplitCurve)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
+      "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
+      "rust_item": "impl_transient!(ShapeUpgradeSplitCurve3d)",
+      "status": "excluded",
+      "notes": "Native RTTI macro maps to the shared Rust transient implementation; callable APIs counted separately."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller(UBTree&,const occ::handle<NCollection_BaseAllocator>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. Native virtual Add dispatch retained for UBTree and EBTree via BoundingTreeInsertion; editable index survives Fill and destructor flushing."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::~NCollection_UBTreeFiller()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UBTreeFiller as Drop>::drop",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. The destructor has an observable effect (it fills pending items), so it maps to the Drop implementation. Native virtual Add dispatch retained for UBTree and EBTree via BoundingTreeInsertion; editable index survives Fill and destructor flushing."
     }
   ],
   "tests": [
