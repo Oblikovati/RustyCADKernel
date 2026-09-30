@@ -27,6 +27,7 @@ def corpus() -> str:
     requests += [f'localize {count} {minimum} {steps} {depth}'
                  for count, minimum, steps, depth in product([-1, 0, 4], [-0.0, 0.1], [0, 1, 101, 420], [-2, 0, 3])]
     requests += surface_grid_requests()
+    requests += topol_requests()
     return '\n'.join(requests) + '\n'
 
 
@@ -74,6 +75,16 @@ def surface_grid_requests() -> list[str]:
     requests = [f'surface_grid {u} {v} {du} {dv} {a} {b} {c} {d}'
                 for u, v, du, dv, (a, b), (c, d) in product([1, 3], [1, 4], [-1, 0, 1], [-1, 0, 1], frames, frames)]
     requests += [f'surface_cache {count}' for count in [0, 1, 101, 420, 1001]]
+    return requests
+
+
+def topol_requests() -> list[str]:
+    """Every sampling surface kind with small/large radii, infinite domains and spline poles."""
+    requests = [f'topol {kind} {radius} 0 6.0 -1 1'
+                for kind, radius in product(range(7), [0.005, 1, 100])]
+    requests += [f'topol {kind} {radius} -2e100 2e100 -2e100 2e100'
+                 for kind, radius in product([0, 1, 2, 5], [0.005, 1, 100])]
+    requests += [f'topol {kind} {poles} 0 1 0 1' for kind, poles in product([7, 8], [3, 9, 12])]
     return requests
 
 
