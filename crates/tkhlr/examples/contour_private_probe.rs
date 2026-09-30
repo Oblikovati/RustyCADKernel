@@ -1,6 +1,8 @@
 //! Isolated oracle for private contour helpers; no public API completion is implied.
 pub use rustycad_tkhlr::contap;
 use std::io::{self, BufRead};
+#[path = "../src/contap/contour/boundary_points.rs"]
+mod boundary_points;
 #[allow(dead_code, unused_imports)]
 #[path = "../../tkgeomalgo/examples/ga_probe/common.rs"]
 mod common;
@@ -29,6 +31,7 @@ fn main() {
             .map(|value| value.parse().expect("contour numeric field"))
             .collect();
         match operation {
+            "contour_attachment" => contour_private::attachment_case(&values),
             "contour_math" => contour_private::math_case(&values),
             "contour_sections" => contour_private::sections_case(&values),
             _ => {

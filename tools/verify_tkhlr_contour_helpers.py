@@ -26,6 +26,7 @@ def requests() -> str:
             [(1,0,0),(1,2,3)], [0,2]):
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
         lines.append('contour_math '+numbers([*surface,*uv,*tangent,*direction,circle]))
+    append_attachment_requests(lines)
     append_section_requests(lines)
     return '\n'.join(lines)+'\n'
 
@@ -39,6 +40,13 @@ def append_section_requests(lines: list[str]) -> None:
         if kind == 0 and scenario == 5: continue
         surface=[surface_kind,0,0,0,0,0,1,1,0,0,0,2,0.4,-2,2,-1,1]
         lines.append('contour_sections '+numbers([*surface,kind,scenario,duplicate,offset]))
+
+
+def append_attachment_requests(lines: list[str]) -> None:
+    """Compare boundary attachment and interior filtering on real search outputs."""
+    for kind,mode,direction,radius in product(range(6),range(3),[(1,0,0),(0,0,1)], [0,2]):
+        surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
+        lines.append('contour_attachment '+numbers([*surface,mode,*direction]))
 
 
 def source_wrapper(source: Path, build: Path, output: Path, libraries: list[str]) -> Path:

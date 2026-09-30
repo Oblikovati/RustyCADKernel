@@ -262,3 +262,8 @@ The private LineConstructor translation now passes another 576 exact requests
 empty and repeated vertices, tiny circle spans, closing-circle intervals, duplicate
 walking points, restriction passthrough and domain rejection. These remain private
 helper results, not completion of Contap_Contour.
+
+Boundary attachment and interior-point exclusion now pass 72 additional exact
+requests using real Contap searches (1,224 combined). Every emitted point, transition
+and vertex flag is compared; singular normals and coincident restrictions are included.
+Strict all-target Clippy passes. Main contour orchestration remains incomplete.

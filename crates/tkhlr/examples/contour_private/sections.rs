@@ -41,7 +41,7 @@ fn add_vertices(line: &ContapLine, scenario: i32) {
         line.add_vertex(&point);
     }
 }
-fn report(line: &ContapLine) -> Result<(), Failure> {
+pub(super) fn report(line: &ContapLine) -> Result<(), Failure> {
     int(line.type_contour() as i32);
     int(line.transition_on_s() as i32);
     int(line.nb_vertex());

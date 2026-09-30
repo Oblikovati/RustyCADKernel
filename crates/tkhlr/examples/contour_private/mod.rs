@@ -1,3 +1,5 @@
+mod attachment;
+pub use attachment::attachment_case;
 mod sections;
 pub use sections::sections_case;
 // Direct private-helper outputs and their observable surface-function state.
