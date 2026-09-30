@@ -27,7 +27,7 @@ mod interpolate_build;
 mod interpolate_perform;
 pub mod interpolate_space;
 pub(crate) mod points_to_bspline;
-mod points_to_bspline_y;
+pub(crate) mod points_to_bspline_y;
 mod project_point_on_curve;
 
 pub use extrema_curve_curve::ExtremaCurveCurve;

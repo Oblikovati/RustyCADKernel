@@ -142,3 +142,4 @@ def append_geomapi_fit_requests(requests: list[str]) -> None:
     append_intcs_requests(requests)
     append_interpolate_requests(requests)
     append_points_to_bspline_requests(requests)
+    __import__('tkgeomalgo_corpus_geomapi_surface').append_p2bss_requests(requests)

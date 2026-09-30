@@ -126,7 +126,7 @@ def append_pps_requests(requests: list[str]) -> None:
 
 CC_PAIRS = [('line', 'line_diag'), ('line', 'line_z'), ('segment', 'line_z'), ('circle', 'line_z'),
             ('circle', 'circle_tilt'), ('circle', 'trimmed_circle'), ('ellipse', 'line'),
-            ('parabola', 'line'), ('hyperbola', 'circle'), ('bezier', 'bspline'), ('bezier_rat', 'segment'),
+            ('parabola', 'line'), ('hyperbola', 'line_z'), ('bezier', 'bspline'), ('bezier_rat', 'segment'),
             ('bspline_c1', 'polyline'), ('bspline_rat', 'circle'), ('bspline_per', 'ellipse'),
             ('offset_circle', 'line_diag'), ('trimmed_parab', 'bspline'), ('polyline', 'segment')]
 PARALLEL_LINES = (line([0.0, 0.0, 0.0], X), line([1.0, 2.0, 0.5], X))

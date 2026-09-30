@@ -8,7 +8,7 @@ use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, pl
 use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
-use ga_probe::{geom_api, geom_api_fit};
+use ga_probe::{geom_api, geom_api_fit, geom_api_surface};
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
@@ -187,6 +187,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "gapi_points_to_bspline",
         geom_api_fit::points_to_bspline_case,
     ),
+    ("gapi_p2bss", geom_api_surface::p2bss_case),
 ];
 
 fn main() {

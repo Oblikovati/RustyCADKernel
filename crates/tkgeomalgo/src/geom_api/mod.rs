@@ -34,6 +34,10 @@ mod int_cs;
 mod interpolate;
 mod plane_curves;
 mod points_to_bspline;
+mod points_to_bspline_surface;
+mod points_to_bspline_surface_fit;
+mod points_to_bspline_surface_tangent;
+mod points_to_bspline_surface_z;
 mod project_point_on_curve;
 mod project_point_on_surf;
 
@@ -44,6 +48,7 @@ pub use int_cs::IntCS;
 pub use interpolate::{Interpolate, Interpolate3dSpace};
 pub use plane_curves::{to_2d, to_3d};
 pub use points_to_bspline::PointsToBSpline;
+pub use points_to_bspline_surface::{HeightGrid, PointsToBSplineSurface, SurfaceFitSettings};
 pub use project_point_on_curve::ProjectPointOnCurve;
 pub use project_point_on_surf::ProjectPointOnSurf;
 
