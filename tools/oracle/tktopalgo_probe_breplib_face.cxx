@@ -15,7 +15,8 @@
 //   ends, then the two flags;
 // 8 `record build unflag`: BuildCurves3d on the shape when `build`, then SameParameter
 //   and SameRange cleared on every edge when `unflag`;
-// 9 the BRepLib_MakeFace face of a surface2 record over `u1 u2 v1 v2` at `toldegen`.
+// 9 the BRepLib_MakeFace face of a surface2 record over `u1 u2 v1 v2` at `toldegen`;
+// 10 and 11 are read by tp_shape_record_fuse (tktopalgo_probe_breplib_fuse.cxx).
 //
 // `blm_face mode ...`: 0 `surface` the gp constructor; 1 `surface u1 u2 v1 v2` the gp
 //   constructor on bounds; 2 `surface toldegen`; 3 `surface u1 u2 v1 v2 toldegen`;
@@ -53,8 +54,10 @@ occ::handle<Geom_Surface> tp_surface2(GaReader& r){
  if(kind==1){double v=r.real();return new Geom_OffsetSurface(tp_surface2(r),v);}
  if(kind==2){gp_Dir d=r.dir();return new Geom_SurfaceOfLinearExtrusion(tp_geom_curve(r),d);}
  gp_Pnt p=r.pnt();gp_Dir d=r.dir();return new Geom_SurfaceOfRevolution(tp_geom_curve(r),gp_Ax1(p,d));}
+TopoDS_Shape tp_shape_record_fuse(GaReader& r,int kind);
 TopoDS_Shape tp_shape_record_more(GaReader& r,int kind){
  BRep_Builder B;
+ if(kind>=10)return tp_shape_record_fuse(r,kind);
  if(kind==5){int n=r.integer();BRepLib_MakePolygon m;for(int i=0;i<n;++i)m.Add(r.pnt());if(r.flag())m.Close();
   if(!m.IsDone())return TopoDS_Shape();return m.Wire();}
  if(kind==9){occ::handle<Geom_Surface> s=tp_surface2(r);double u1=r.real(),u2=r.real(),v1=r.real(),v2=r.real();

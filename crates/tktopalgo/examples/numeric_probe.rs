@@ -4,7 +4,7 @@ use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
     bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_check, brep_class, brep_class3d,
-    brep_lib_edge, brep_lib_face, brep_lib_package, brep_lib_wire, brep_top_adaptor,
+    brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor,
     int_curves_face, mat, mat_parts,
 };
 
@@ -114,6 +114,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("blp_findsurface", brep_lib_face::findsurface_case),
     ("blp_sameparam", brep_lib_face::sameparam_case),
     ("blp_extendface", brep_lib_face::extendface_case),
+    ("blp_fuseedges", brep_lib_fuse::fuseedges_case),
 ];
 
 fn main() {

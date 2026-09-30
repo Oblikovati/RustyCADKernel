@@ -172,7 +172,9 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   with the tails `_bounds` and `_wire`, `from_surface[_bounds|_wire]`, `from_wire`,
   `from_face[_wire]`, `init_face`, `init_surface`, `init_surface_bounds`, `add`, `face`
   and `is_degenerated` (the flag and the actual tolerance); `BRepLibFindSurface` has
-  `new` and `init` and the native accessors.
+  `new` and `init` and the native accessors; `BRepLibFuseEdges` has `new`,
+  `avoid_edges`, `set_concat_bspl`, `perform`, `nb_vertices`, `shape`, and `edges`,
+  `result_edges` and `faces`, which return the maps the native members fill.
 
 - BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
   are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
@@ -311,9 +313,9 @@ three PointInTheFace overloads from indices 0 to 2000, on and off the surface),
 vertices, along and across edges, every Accept index including 0 and Extent + 1, result
 indices 0 and past the end) and `bc3_inter3d` (Intersector3d on FORWARD and REVERSED
 faces).
-BRepLib: 2552 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
+BRepLib: 2688 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
 and solid makers, 736 for the package functions, 678 for MakeFace, FindSurface,
-SameParameter and ExtendFace). `tools/tktopalgo_corpus_breplib.py`
+SameParameter and ExtendFace, 136 for FuseEdges). `tools/tktopalgo_corpus_breplib.py`
 appends one module per family, with the
 record builders of `tools/tktopalgo_corpus_breplib_records.py`; both probes read the
 records and print the shapes with `tktopalgo_probe_breplib_common.cxx` and
@@ -361,6 +363,12 @@ and non-planar wires with and without OnlyPlane), `blm_facedegen`, `blp_findsurf
 (tolerances, OnlyPlane and OnlyClosed on wires, faces, edges and shells),
 `blp_sameparam` (the four overloads, forced or not) and `blp_extendface` (every
 direction on analytic, periodic, spline, trimmed and offset faces).
+`tools/tktopalgo_corpus_breplib_fuse.py` (`tktopalgo_probe_breplib_fuse.cxx`,
+`tp_probe/brep_lib_fuse.rs`) runs `blp_fuseedges` on wires of pieces of one line,
+circle, ellipse, open or closed B-spline, Bezier or trimmed curve, on polygons, on the
+planar faces of those wires, on a face with a split side and on multi-patch shells,
+with and without B-spline concatenation, with avoided edges, and in the three call
+orders.
 
 ## Preserved native behaviour
 
@@ -625,6 +633,15 @@ direction on analytic, periodic, spline, trimmed and offset faces).
   10% of the samples are at least 1. On a planar face the edges without a curve on
   the plane take 1.05 times the deviation of their projection.
 - `BRepLib::ExtendFace` tests the VMax bound (not VMin) before extending in VMin.
+- `BRepLib_FuseEdges::Perform` does not build the chains: called first, it finds none,
+  marks the shape done and leaves it unchanged, and later calls keep it. Without
+  chains the result edges are never marked built. Two lines are on the same support
+  when their directions are parallel (not when they are the same line); two
+  B-splines when their poles are within the tolerance of the first edge and their
+  knots do not exceed the other's by more than Precision::Confusion() (a signed
+  difference). A closed fused B-spline is made periodic in place: when the first
+  edge's curve has no location, the curve stored in that edge changes too. The range
+  set on the fused edge from a curve on surface also moves its 3d range.
 
 ## BRepClass deviations
 
@@ -884,4 +901,5 @@ Native null dereferences in these packages are Standard_NullObject errors.
   projection without extremum) read the values given above.
 - A null surface, p-curve or projection that `BRepLib::SameParameter`, `GetEdgeTol` or
   `BRepLib_FindSurface` dereferences raises Standard_NullObject (a crash natively);
-  inside `Is2DClosed` it answers false, as the native signal handler does.
+  inside `Is2DClosed` it answers false, as the native signal handler does. A chain
+  edge without 3d curve that `BRepLib_FuseEdges` dereferences raises it too.

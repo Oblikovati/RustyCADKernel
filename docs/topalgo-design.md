@@ -276,4 +276,9 @@ BRepLib derives every maker from `BRepLib_MakeShape`, itself derived from
   Tests and probe requests that set them restore the defaults before they return.
 - The package functions of `BRepLib` are free functions of the `brep_lib` module
   (`brep_lib::build_curves3d`, `brep_lib::same_parameter_edge`, ...); C++ output
-  references become returned values.
+  references become returned values. `SameParameter(E, Tol, NewTol, IsUseOldEdge)`
+  keeps `NewTol` as `&mut f64`: the call leaves it unchanged when it sets no tolerance.
+- `BRepLib_FindSurface` and `BRepLib_FuseEdges` are plain structs (`BRepLibFindSurface`,
+  `BRepLibFuseEdges`), not makers. The FuseEdges members that fill an output map
+  (`Edges`, `ResultEdges`, `Faces`) return a copy of the map; they compute the chains,
+  the fused edges and the rebuilt shape once, on first request, as natively.

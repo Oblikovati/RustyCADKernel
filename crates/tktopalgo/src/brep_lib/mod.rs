@@ -18,6 +18,7 @@ mod encode_regularity;
 mod errors;
 mod extend_face;
 mod find_surface;
+mod fuse_edges;
 mod globals;
 mod inner_tolerances;
 mod make_edge;
@@ -59,6 +60,7 @@ pub use errors::{
 };
 pub use extend_face::{ExtendDirections, extend_face};
 pub use find_surface::BRepLibFindSurface;
+pub use fuse_edges::{BRepLibFuseEdges, FuseEdgeLists, FuseFaceMap};
 pub use globals::{plane, precision, set_plane, set_precision};
 pub use inner_tolerances::update_inner_tolerances;
 pub use make_edge::BRepLibMakeEdge;

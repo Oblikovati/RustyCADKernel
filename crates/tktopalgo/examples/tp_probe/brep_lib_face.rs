@@ -51,6 +51,7 @@ pub fn shape_record_more(r: &mut Reader<'_>, kind: i32) -> Result<Shape, Failure
         6 => face_wire_record(r),
         7 => edge_on_surface_record(r),
         9 => made_face_record(r),
+        10.. => super::brep_lib_fuse::shape_record_fuse(r, kind),
         _ => unflagged_record(r),
     }
 }
