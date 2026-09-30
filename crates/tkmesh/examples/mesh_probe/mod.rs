@@ -249,3 +249,5 @@ pub mod vertex_inspector;
 pub mod vertex_tool;
 
 pub mod delaun_structure;
+
+pub mod delaun_selector;

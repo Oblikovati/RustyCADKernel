@@ -66,6 +66,8 @@ def corpus() -> str:
     rows += ['mesh_vertex_tool ' + ' '.join(map(str, v)) for v in product(range(3), range(5), range(2), range(5))]
     rows += ['mesh_delaun ' + ' '.join(map(str, v)) for v in product((1,3,100), range(7), range(7), range(7), range(21))]
     rows += [f'mesh_delaun_dump {mode}' for mode in range(3)]
+    rows += ['mesh_selector ' + ' '.join(map(str, v)) for v in product((0,1,2,3,4,6,7), range(-1,10), range(8))]
+    rows += ['mesh_selector ' + ' '.join(map(str, (5,index,mode))) for index,mode in product(range(1,4),range(8))]
     return '\n'.join(rows) + '\n'
 
 
@@ -80,3 +82,5 @@ if __name__ == '__main__':
 
     from verify_tkmesh_delaun_undefined import verify_delaun_undefined
     verify_delaun_undefined(use_existing=True)
+    from verify_tkmesh_selector_undefined import verify_selector_undefined
+    verify_selector_undefined(use_existing=True)

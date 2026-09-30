@@ -70,6 +70,7 @@ void mesh_pcurve(std::istream& input) {
 #include "tkmesh_probe_vertex_inspector.cxx"
 #include "tkmesh_probe_vertex_tool.cxx"
 #include "tkmesh_probe_delaun.cxx"
+#include "tkmesh_probe_selector.cxx"
 int main(){
     std::string line;
     while(std::getline(std::cin,line)){
@@ -104,6 +105,8 @@ int main(){
         else if(operation=="mesh_editable_tree")mesh_editable_tree(input);
         else if(operation=="mesh_delaun_invalid")mesh_delaun_invalid(input);
         else if(operation=="mesh_delaun_dump")mesh_delaun_dump(input);
+        else if(operation=="mesh_selector")mesh_selector(input);
+        else if(operation=="mesh_selector_invalid")mesh_selector_invalid(input);
         else if(operation=="mesh_delaun")mesh_delaun(input);
         else if(operation=="mesh_vertex_tool")mesh_vertex_tool(input);
         else if(operation=="mesh_vertex_invalid")mesh_vertex_invalid(input);
