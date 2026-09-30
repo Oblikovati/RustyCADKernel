@@ -1,5 +1,6 @@
 //! Native ShapeAnalysis wire-order foundation probes used by model construction.
 use super::super::{flag, int, real};
+use crate::wire_fixture as fixtures;
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     topods::{self, Face},
@@ -10,8 +11,6 @@ use rustycad_tkshhealing::{
     shape_analysis::{ShapeAnalysis, ShapeAnalysisWire, ShapeAnalysisWireOrder},
     shape_extend::{ShapeExtendStatus, ShapeExtendWireData},
 };
-#[path = "../../../tkshhealing/tests/support/wire_foundation.rs"]
-mod fixtures;
 const STATUSES: [ShapeExtendStatus; 9] = [
     ShapeExtendStatus::Ok,
     ShapeExtendStatus::Done,

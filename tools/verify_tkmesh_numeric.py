@@ -31,11 +31,13 @@ def corpus() -> str:
              for values in product(range(4), range(16), range(3), range(2), range(2), range(2), range(2), range(2))]
     rows += ['mesh_outer_wire ' + ' '.join(map(str, values))
              for values in product(range(4), range(16), range(3), range(4), range(3))]
+    rows += ['mesh_model_builder ' + ' '.join(map(str, values))
+             for values in product(range(10), range(2), range(3), range(3), range(4))]
     return '\n'.join(rows) + '\n'
 
 
 ORACLE = NumericOracle('TKMesh', 'tools/oracle/tkmesh_probe.cxx',
-    ['TKMesh', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
+    ['TKMesh', 'TKPrim', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
      'TKG3d', 'TKG2d', 'TKMath', 'TKernel'], 'rustycad-tkmesh', corpus)
 
 if __name__ == '__main__':
