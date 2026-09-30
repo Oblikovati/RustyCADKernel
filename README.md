@@ -52,6 +52,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tktopalgo` | TKTopAlgo topological algorithms (classification, construction, checks), in progress |
 | `crates/tkhelix` | TKHelix helix curves (analytic helix, B-spline coils, composite helix wires), in progress |
 | `crates/tkshhealing` | TKShHealing Shape Healing (analysis, fixing, conversion of shapes), in progress |
+| `crates/tkprim` | TKPrim primitives (boxes, wedges, revolved bodies) and sweeps (prisms, revolutions), every package ported |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |
