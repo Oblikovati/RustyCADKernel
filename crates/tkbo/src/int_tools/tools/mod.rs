@@ -10,3 +10,10 @@ impl Tools {
         (1.0 - PAR_T) * first + PAR_T * last
     }
 }
+mod curves;
+mod ranges;
+mod segment_plane;
+mod splitting;
+mod surface_tolerance;
+mod tolerance;
+mod topology;

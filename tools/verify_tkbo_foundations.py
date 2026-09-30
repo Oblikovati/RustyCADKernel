@@ -31,6 +31,13 @@ def corpus() -> str:
     requests += fclass_requests()
     requests += context_requests()
     requests += context_compute_requests()
+    requests += tools_requests()
+    requests += [f"tools_topology {t} {offset} {tol} {ori}" for t, offset, tol, ori in product(
+        [0, 1e-7, 5e-7, 1e-6, 1, 2], [0, 1e-7, 1], [1e-7, 0.1], range(4))]
+    requests += [f"tools_surface {a} {b} {lo} {hi} {tol} {parallel}" for a, b, (lo, hi), tol, parallel in product(
+        [0, 0.1], [0, 0.2], [(0, 1), (-2, 3), (1, 1)], [1e-9, 0.1], [0, 1])]
+    requests += [f"tools_curves {kind} {a} {b} {tol} {pc} {other}"
+                 for kind, (a, b), tol, pc, other in product(range(7), [(-2, 3), (0, 6.283185307179586)], [0, 1e-7], [0, 1], [0, 1, 6])]
     return '\n'.join(requests) + '\n'
 
 
@@ -96,6 +103,15 @@ def fclass_requests() -> list[str]:
     points = [(0, 0), (1, 1), (0.25, -1), (5.5, 1), (0.25-1e-8, 0), (3, 0), (-3, 0), (10, 10), (-10, -10)]
     return [f'fclass {kind} {radius} {tol} {u} {v} {tol*3} {periodic}'
             for kind, radius, tol, (u, v), periodic in product(range(14), [0.1, 2], [1e-7, 1e-3], points, [0, 1])]
+
+
+def tools_requests() -> list[str]:
+    """Cover signed plane statuses, range boundaries, strictness and obtuse angles."""
+    return [f'tools {a} {b} {c} {d} {t} {tol} {angle} {x} {y} {z}'
+            for (a,b), (c,d), t, tol, angle, (x,y,z) in product(
+                [(-1,1),(1,-1),(0,0)], [(-2,2),(0,1)], [-1,0,1,2],
+                [0,1e-7,0.5], [0,0.5,1.5707963267948966,2.5],
+                [(1,0,0),(-1,0,0),(1,1e-4,0),(0,0,1),(1,1,1)])]
 
 
 def context_compute_requests() -> list[str]:
