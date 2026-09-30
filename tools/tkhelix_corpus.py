@@ -13,3 +13,5 @@ def append_tkhelix_requests(requests: list[str]) -> None:
     """Append every TKHelix request family in a fixed order."""
     # HelixGeom_BuilderHelix placement (tkhelix_corpus_placement.py)
     __import__('tkhelix_corpus_placement').append_placement_requests(requests)
+    # HelixGeom (tkhelix_corpus_helixgeom.py)
+    __import__('tkhelix_corpus_helixgeom').append_helixgeom_requests(requests)

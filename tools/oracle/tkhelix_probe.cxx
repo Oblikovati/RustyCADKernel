@@ -24,9 +24,16 @@
 // token stream; the Rust twin includes crates/tkgeomalgo/examples/ga_probe/common.rs.
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkhelix_probe_placement.cxx"
+#include "tkhelix_probe_helixgeom.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // HelixGeom_BuilderHelix placement (tkhelix_probe_placement.cxx)
  {"hx_placement", hx_placement_case},
+ // HelixGeom (tkhelix_probe_helixgeom.cxx)
+ {"hx_curve", hx_curve_case},
+ {"hx_appr_curve3d", hx_appr_curve3d_case},
+ {"hx_appr_helix", hx_appr_helix_case},
+ {"hx_coil", hx_coil_case},
+ {"hx_helix", hx_helix_case},
 };
 int main() {
  std::string line;

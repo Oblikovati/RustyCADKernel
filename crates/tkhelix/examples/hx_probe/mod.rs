@@ -1,4 +1,6 @@
 //! The TKHelix probe operations, one module per C++ probe file under tools/oracle.
+pub mod helix_geom;
+pub mod helix_geom_builders;
 pub mod placement;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tkhelix_probe.cxx includes
