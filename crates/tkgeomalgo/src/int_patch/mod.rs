@@ -24,6 +24,7 @@
 //! algorithms land on top of it.
 mod aline;
 mod aline_compute;
+mod aline_to_wline;
 mod arc_function;
 mod bvh_traversal;
 mod cs_function;
@@ -33,6 +34,8 @@ mod gline;
 mod gline_compute;
 mod h_curve2d_tool;
 mod h_inter_tool;
+mod imp_imp;
+mod imp_prm;
 mod instances;
 mod interference_polyhedron;
 mod iwline;
@@ -49,17 +52,22 @@ mod polyhedron_bvh;
 mod polyline;
 mod rline;
 mod rline_compute;
+mod rst_int;
+mod special_points;
 mod t3bits;
 mod vertices;
 mod wline;
 
 pub use aline::IntPatchALine;
+pub use aline_to_wline::IntPatchALineToWLine;
 pub use arc_function::IntPatchArcFunction;
 pub use bvh_traversal::{IntPatchBVHTraversal, IntPatchTrianglePair};
 pub use cs_function::IntPatchCSFunction;
 pub use gline::IntPatchGLine;
 pub use h_curve2d_tool::IntPatchHCurve2dTool;
 pub use h_inter_tool::IntPatchHInterTool;
+pub use imp_imp::{IntPatchImpImpIntersection, IntPatchImpImpStatus};
+pub use imp_prm::IntPatchImpPrmIntersection;
 pub use instances::{
     IntPatchCurvIntSurf, IntPatchTheIWalking, IntPatchTheIWalkingTypes, IntPatchTheSOnBounds,
     IntPatchTheSOnBoundsTypes, IntPatchTheSearchInside, IntPatchTheSearchInsideTypes,
@@ -77,6 +85,8 @@ pub use polyhedron::IntPatchPolyhedron;
 pub use polyhedron_bvh::{IntPatchPolyhedronBVH, IntPatchPolyhedronTool};
 pub use polyline::IntPatchPolyLine;
 pub use rline::IntPatchRLine;
+pub use rst_int::IntPatchRstInt;
+pub use special_points::IntPatchSpecialPoints;
 pub use t3bits::IntPatchPrmPrmIntersectionT3Bits;
 pub use wline::{IntPatchWLType, IntPatchWLine};
 

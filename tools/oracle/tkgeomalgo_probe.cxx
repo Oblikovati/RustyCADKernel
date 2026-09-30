@@ -65,6 +65,9 @@
 #include "tkgeomalgo_probe_intpatch.cxx"
 #include "tkgeomalgo_probe_intpatch_lines.cxx"
 #include "tkgeomalgo_probe_intpatch_tools.cxx"
+#include "tkgeomalgo_probe_intpatch_report.cxx"
+#include "tkgeomalgo_probe_intpatch_impimp.cxx"
+#include "tkgeomalgo_probe_intpatch_impprm.cxx"
 #include "tkgeomalgo_probe_geomfill_sweep.cxx"
 #include "tkgeomalgo_probe_geomfill_trihedron.cxx"
 #include "tkgeomalgo_probe_geomfill_laws.cxx"
@@ -278,6 +281,14 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ip_arcf", ga_ip_arcf_case},
  {"ip_csf", ga_ip_csf_case},
  {"ip_curvature", ga_ip_curvature_case},
+ // IntPatch analytic intersections (tkgeomalgo_probe_intpatch_impimp.cxx)
+ {"ip_impimp", ga_ip_impimp_case},
+ {"ip_aline2wline", ga_ip_aline2wline_case},
+ {"ip_special", ga_ip_special_case},
+ {"ip_special_pole", ga_ip_special_pole_case},
+ // IntPatch quadric-parametric intersections (tkgeomalgo_probe_intpatch_impprm.cxx)
+ {"ip_impprm", ga_ip_impprm_case},
+ {"ip_rstint", ga_ip_rstint_case},
  // GeomFill sweep (tkgeomalgo_probe_geomfill_*.cxx)
  {"gfs_shape",ga_gfs_shape_case},
  {"gfs_circle",ga_gfs_circle_case},

@@ -245,6 +245,15 @@ LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
   `of_self`; `Perform(one)` is `perform_self`). `IntPatch_Polygo` is the trait
   `IntPatchPolygo` over `Polygon2d`; `IntPatch_PolyLine`'s setters are `set_w_line` and
   `set_r_line`, `IntPatch_PolyArc::Closed` is `is_closed`.
+- IntPatch analytic intersections (docs/geomalgo-design.md section 17):
+  `IntPatch_ImpImpIntersection`, `IntPatch_ImpPrmIntersection`, `IntPatch_ALineToWLine`,
+  `IntPatch_RstInt` and `IntPatch_SpecialPoints` map member by member (45 api rows, all
+  implemented). The constructors that run `Perform` are `with_surfaces`; the second
+  `MakeWLine` is `make_wline_range`; `IntStatus` is the enum `IntPatchImpImpStatus`; the
+  static classes are unit structs with associated functions. The protected members the
+  probe reaches (`StepComputing`, `CheckDeflection`, `GetSectionRadius`,
+  `CorrectEndPoint`, `ProcessSphere`, `ProcessCone`, `GetTangentToIntLineForCone`) are
+  public and have rows. The five classes have no GoogleTest suite at this commit.
 
 - GeomFill (sweep part, [geomalgo-design.md](geomalgo-design.md) section 14): the
   trihedron, location and section laws are the traits `GeomFillTrihedronLaw`,
@@ -929,6 +938,26 @@ interference. `ip_polyline` and `ip_polyarc` build the 2d polygons of walking an
 restriction lines and of arcs (parabola deflection, resampling near the other box, offsets,
 the construction errors); `ip_t3bits` edits the bit sets.
 
+IntPatch analytic intersections: 582 requests (`tkgeomalgo_corpus_intpatch_impimp.py`
+348, `tkgeomalgo_corpus_intpatch_impprm.py` 234). `ip_impimp` (153) intersects every pair
+of plane, cylinder, cone, sphere and torus patches in coaxial, secant, tangent,
+coincident, disjoint and near-degenerate positions (axes 1e-9 rad from parallel, gaps and
+radius differences of 1e-9 to 1e-11, a cone of semi-angle 1e-9), on bounded and natural
+domains, with two tolerance sets and the flag that keeps the restriction lines; a pair
+without a quadric raises Standard_ConstructionError. `ip_aline2wline` (40) converts the
+analytic lines of ten pairs with four settings (point counts, tolerances, a range);
+`ip_special` (89) and `ip_special_pole` (66) run every `IntPatch_SpecialPoints` member on
+poles, apexes, seams and degenerate tangents. `ip_impprm` (210) intersects plane,
+cylinder, cone and sphere patches with Bezier, B-spline (C0 included), offset,
+revolution, extrusion and trimmed patches in both orders, with patches through the poles,
+the apex and the seams, patches whose edges lie on the quadric (restriction lines),
+two tolerance sets and a fine step, the start point, a second `Perform`, a far patch and
+the pairs without a quadric; `ip_rstint` (24) puts the restriction vertices of a
+cylinder and of plane patches on walking and restriction lines, with and without end
+vertices, run once and twice. Left out: `IntPatch_RstInt` on an analytic or conic line
+and `DecomposeResult` on a restriction line without a point set (both dereference a null
+handle natively).
+
 ## Preserved native behaviour
 
 - TopTrans: a `CurveTransition` that was never reset answers the states of its
@@ -1471,6 +1500,40 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
   incomplete word are not stored, and for `size^3 < 32` the native constructor writes before
   its empty array (undefined behaviour).
 
+### IntPatch analytic intersections
+
+- `IntPatch_ImpImpIntersection`: the plane-plane and cone-torus pairs do not update the
+  empty flag, and the plane-cone pair answers a failure for an empty result. `IntCyCo`
+  gives its tangent point the parameters of the first quadric twice. `PointOnSecondDom`
+  reads the vertex count again after each vertex (the added vertices are visited too) and
+  leaves the current point at the last one its vertex search read. `PutPointsOnLine`
+  keeps the vertex and the underlying vertex of the previous point for a new point. The
+  restriction line check keeps the side, arc and range of the previous line when a line
+  has no arc or no end point. `FindLine` replaces the parameter list with those of an
+  accepted analytic line but appends those of the arc search and of the chosen conic.
+  `IntCySp` does not test the open ends; `IntCyCo`, `IntCoCo` and `IntCoSp` evaluate the
+  curve at the last parameter tried when no tangent is found, which can raise.
+- `IntPatch_RstInt::PutVertexOnLine`: the counter of the periodic shifts is not reset
+  between the V shifts (a torus runs the three U shifts with the first V shift only); the
+  V2 loop of `Recadre` on a torus compares with V1 of the point first; the result of
+  `Project` is not tested (the parameter is kept when the projection fails); the end
+  points of an arc at its vertices are computed and unused.
+- `IntPatch_ImpPrmIntersection`: `DecomposeResult` adjusts the point set of each line in
+  place (U in `[0, 2 Pi]`, snapped to the bounds, seam points inserted) even when the line
+  is not decomposed, and a line of at most two points or a restriction line that is not an
+  isoline is dropped from the result when another line is decomposed. `ToSmooth` of the
+  last end runs its sampling loop from `NbPoints - max(NbPoints/5, 5) - 2` to
+  `max(NbPoints/5, 5)`, which iterates only on lines of 11 and 12 points: elsewhere the
+  mean step is 0, a smoothed last point takes the U of its neighbour exactly, and
+  `AddVertices` never adds the last vertex. The torus case
+  of the decomposition is unreachable (a torus is no quadric of this intersection), and
+  `SplitOnSegments` is called with `Tang` false. The trimmed arc of a restriction part is
+  discarded (the call only raises).
+- `IntPatch_ALineToWLine::MakeWLine` keeps the stale reads of its loops (the parameters of
+  the reference point reused for the special points) and the fall-throughs of
+  `IsPoleOrSeam`; `IntPatch_SpecialPoints::ProcessCone` keeps its input U when no
+  generatrix is chosen, and `FuncPreciseSeam` answers false on any Standard_Failure.
+
 ## IntStart deviations
 
 - The native code ignores the result of `Func.Value` in `FindVertex`, the recheck
@@ -1673,6 +1736,23 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
   an uninitialized type) and Standard_NullObject for a null line.
   `IntPatch_PrmPrmIntersection_T3Bits` panics on a bit outside its words and is empty for
   `size^3 < 32`, where the native code writes out of bounds.
+
+## IntPatch analytic-intersection deviations
+
+- `ProcessBounds` of `IntPatch_ImpImpIntersection` loops forever natively on a line list
+  that holds a line other than an analytic one (the loop does not advance); no caller
+  builds such a list, and the port raises Standard_ProgramError.
+- A native `occ::down_cast` that the code dereferences (`FindLine` on another line kind,
+  `IntPatch_RstInt` on an analytic or conic line, `DecomposeResult` on a restriction line
+  without a point set, `MakeWLine` on a null line) raises Standard_NullObject or
+  Standard_DomainError instead of crashing.
+- `IntPatch_RstInt` omits the `nbTreated` bookkeeping of the native merge: the counter
+  never reaches the value that would change the flow.
+- The quadric parameters of a point on an unset quadric are 0 (natively uninitialized);
+  the intersections always set their quadrics, so no result depends on them.
+- `IntPatch_RLine` gains the crate copy `duplicate` for `DecomposeResult`, and the domain
+  trait `TheTopolTool` gains defaulted 3d tolerance and orientation queries that
+  `IntPatch_RstInt` calls.
 
 ## GeomFill sweep-part deviations
 

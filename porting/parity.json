@@ -164172,6 +164172,110 @@
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
     },
     {
+      "upstream_id": "IntPatch_ALineToWLine(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::new",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::CheckDeflection(const gp_XYZ&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::check_deflection",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::CorrectEndPoint(occ::handle<IntSurf_LineOn2S>&,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::correct_end_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::GetSectionRadius(const gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::get_section_radius",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::MakeWLine(const occ::handle<IntPatch_ALine>&,NCollection_Sequence<occ::handle<IntPatch_Line>>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::make_wline",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::MakeWLine(const occ::handle<IntPatch_ALine>&,double,double,NCollection_Sequence<occ::handle<IntPatch_Line>>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::make_wline_range",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::SetTol3D(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::set_tol_3d",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::SetTolOpenDomain(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::set_tol_open_domain",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::SetTolTransition(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::set_tol_transition",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::StepComputing(const occ::handle<IntPatch_ALine>&,const IntSurf_PntOn2S&,double,double,double,double,double,double,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::step_computing",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::Tol3D() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::tol_3d",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::TolOpenDomain() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::tol_open_domain",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::TolTransition() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::tol_transition",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
       "upstream_id": "IntPatch_ArcFunction()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ArcFunction.hxx",
@@ -171556,6 +171660,190 @@
       "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
     },
     {
+      "upstream_id": "IntPatch_ImpImpIntersection()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::new",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::with_surfaces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::GetStatus() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::get_status",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IntStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpStatus",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::is_done",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::is_empty",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::Line(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::line",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::NbLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::nb_lines",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::NbPnts() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::nb_pnts",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::OppositeFaces() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::opposite_faces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::perform",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::TangentFaces() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::tangent_faces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::new",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::with_surfaces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::is_done",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::is_empty",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::Line(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::line",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::NbLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::nb_lines",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::NbPnts() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::nb_pnts",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::perform",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::SetStartPoint(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::set_start_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
       "upstream_id": "IntPatch_InterferencePolyhedron()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_InterferencePolyhedron.hxx",
@@ -172202,6 +172490,78 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::and",
       "status": "implemented",
       "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_RstInt::PutVertexOnLine(const occ::handle<IntPatch_Line>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_RstInt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchRstInt::put_vertex_on_line",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_rstint and ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AddCrossUVIsoPoint(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,double,IntSurf_PntOn2S&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::add_cross_uv_iso_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AddPointOnUorVIso(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,bool,double,const math_Vector&,const math_Vector&,const math_Vector&,const math_Vector&,IntSurf_PntOn2S&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::add_point_on_u_or_v_iso",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AddSingularPole(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,IntPatch_Point&,IntSurf_PntOn2S&,bool,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::add_singular_pole",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AdjustPointAndVertex(const IntSurf_PntOn2S&,const double*,IntSurf_PntOn2S&,IntPatch_Point* const)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::adjust_point_and_vertex",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::ContinueAfterSpecialPoint(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,IntPatch_SpecPntType,double,IntSurf_PntOn2S&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::continue_after_special_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::GetTangentToIntLineForCone(double,const gp_XYZ&,gp_XYZ*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::get_tangent_to_int_line_for_cone",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special_pole requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::ProcessCone(const IntSurf_PntOn2S&,const gp_Vec&,const gp_Vec&,const gp_Cone&,bool,double&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::process_cone",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special_pole requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::ProcessSphere(const IntSurf_PntOn2S&,const gp_Vec&,const gp_Vec&,bool,double,double&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::process_sphere",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special_pole requests). Protected natively; public here so the probe can reach it."
     },
     {
       "upstream_id": "GeomPlate_Aij()",
