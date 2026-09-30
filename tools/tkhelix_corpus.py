@@ -15,3 +15,5 @@ def append_tkhelix_requests(requests: list[str]) -> None:
     __import__('tkhelix_corpus_placement').append_placement_requests(requests)
     # HelixGeom (tkhelix_corpus_helixgeom.py)
     __import__('tkhelix_corpus_helixgeom').append_helixgeom_requests(requests)
+    # HelixBRep (tkhelix_corpus_helixbrep.py)
+    __import__('tkhelix_corpus_helixbrep').append_helixbrep_requests(requests)

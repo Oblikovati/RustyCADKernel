@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod hx_probe;
-use hx_probe::{helix_geom, helix_geom_builders, placement};
+use hx_probe::{helix_brep, helix_geom, helix_geom_builders, placement};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -18,6 +18,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("hx_appr_helix", helix_geom::appr_helix_case),
     ("hx_coil", helix_geom_builders::coil_case),
     ("hx_helix", helix_geom_builders::helix_case),
+    // HelixBRep (hx_probe/helix_brep.rs)
+    ("hxb_build", helix_brep::build_case),
 ];
 
 fn main() {

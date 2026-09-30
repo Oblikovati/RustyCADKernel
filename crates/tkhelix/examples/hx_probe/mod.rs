@@ -1,4 +1,5 @@
 //! The TKHelix probe operations, one module per C++ probe file under tools/oracle.
+pub mod helix_brep;
 pub mod helix_geom;
 pub mod helix_geom_builders;
 pub mod placement;
