@@ -4,7 +4,8 @@
 The shapes are faces of the face readers (pcurve-only edges on planes, cylinders, spheres,
 cones, tori and spline patches, edges with 3d lines), BRepLib_MakeShell shells (planes,
 cylinders, spheres, tori, cones, Bezier and B-spline surfaces with several C2 patches,
-trimmed surfaces), compounds of them and BRepLib_MakeEdge edges with enlarged vertices.
+trimmed surfaces), compounds of them, BRepLib_MakeEdge edges with enlarged vertices and BRep_Builder solids of
+the shells.
 Each family runs one package function on each shape and prints the shape digest after it.
 """
 from __future__ import annotations
@@ -34,6 +35,10 @@ def compound(children: list[list[float]]) -> list[float]:
 
 def edge(curve: list[float], p1: float, p2: float, t1: float = 1e-7, t2: float = 1e-7) -> list[float]:
     return [3] + curve + [p1, p2, t1, t2]
+
+
+def solid(children: list[list[float]], reversed_: bool = False) -> list[float]:
+    return [4, len(children)] + [c for child in children for c in child] + [int(reversed_)]
 
 
 def spline_grid() -> list[float]:
@@ -70,6 +75,15 @@ def edges() -> list[list[float]]:
     return [edge(line, 0., 1., 0.1, 0.2), edge(line, 0., 1., 0.6, 0.6), edge(circle, 0., math.pi, 0.3, 1e-7),
             edge(circle, 0., 2 * math.pi, 0.5, 0.5), edge(bez, 0., 1., 0.2, 0.05), edge(spl, 0., 1., 0.4, 0.4),
             edge(geom_trimmed(0., 3., line), 0.5, 2., 0.1, 0.1), edge(line, -1e5, 1e5, 1., 1.)]
+
+
+def solids() -> list[list[float]]:
+    """BRep_Builder solids of closed and open shells, as built and reversed, nested and empty."""
+    ball, small, ring = shell(sphere(radius=2.)), shell(sphere()), shell(torus())
+    tube = shell(cylinder(), (0., 2 * math.pi, 0., 3.))
+    return [solid([ball]), solid([ball], True), solid([ring]), solid([ring], True), solid([tube]),
+            solid([tube], True), solid([ball, small]), solid([ball, small], True), solid([]),
+            compound([solid([ball]), solid([ring], True)])]
 
 
 def all_shapes() -> list[list[float]]:
@@ -170,3 +184,6 @@ def append_breplib_package_requests(requests: list[str]) -> None:
     requests += per_shape('ccos', [0], shells() + [face(toleranced_square_face())]) + per_shape('ccos', [1], shells()[:2])
     requests += shell_requests()
     requests += mesh_requests()
+    for mode, verify in ((0, 0), (0, 1), (1, 0), (1, 1)):
+        requests += per_shape('tolerances', [mode, verify], all_shapes() + solids())
+    requests += per_shape('orient', [], solids())

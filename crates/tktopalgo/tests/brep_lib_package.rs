@@ -2,8 +2,9 @@
 //! and BRepLib_ToolTriangulatedShape (docs/tktopalgo-progress.md). The numeric oracle
 //! compares the same functions with OCCT bit for bit (`blp_*` requests).
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
+use rustycad_tkbrep::brep_tools::{BRepToolsReShape, ReShape};
 use rustycad_tkbrep::topexp::{self, Explorer};
-use rustycad_tkbrep::topods::{Edge, Face, Shape, Vertex};
+use rustycad_tkbrep::topods::{Edge, Face, Shape, Solid, Vertex};
 use rustycad_tkbrep::toptools::IndexedDataMapOfShapeListOfShape;
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::ncollection::{Array1, Array2};
@@ -13,7 +14,7 @@ use rustycad_tkg3d::geom::{
     GeomSurface,
 };
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
-use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::geom_abs::Shape as Continuity;
 use rustycad_tkmath::gp::{Axis3, Direction3, Point2, Point3};
 use rustycad_tkmath::poly::{Triangle, Triangulation, mesh_purpose};
@@ -273,5 +274,70 @@ fn triangulation_normals_and_deflection() -> Result<(), Failure> {
     brep_lib::update_deflection(&shell)?;
     let (again, _) = BRepTool::triangulation(&face, mesh_purpose::NONE)?;
     assert_eq!(again.get().unwrap().deflection(), 0.);
+    Ok(())
+}
+
+/// The largest tolerance of the sub-shapes of a kind.
+fn max_tolerance(shape: &Shape, kind: ShapeEnum) -> Result<f64, Failure> {
+    let mut max: f64 = 0.;
+    for sub in Explorer::new(shape, kind, ShapeEnum::Shape)? {
+        let tol = match kind {
+            ShapeEnum::Vertex => BRepTool::vertex_tolerance(&Vertex::unchecked(sub))?,
+            ShapeEnum::Edge => BRepTool::edge_tolerance(&Edge::unchecked(sub))?,
+            _ => BRepTool::face_tolerance(&Face::unchecked(sub))?,
+        };
+        max = max.max(tol);
+    }
+    Ok(max)
+}
+
+#[test]
+fn update_tolerances_orders_vertex_edge_and_face() -> Result<(), Failure> {
+    let shell = plane_shell(2.)?;
+    let face: Face = first_of(&shell, ShapeEnum::Face, Face::unchecked)?;
+    BRepBuilder::default().update_face_tolerance(&face, 1e-3)?;
+    // With a re-shaper the input keeps its tolerances; the copies carry the new ones.
+    let reshaper = BRepToolsReShape::new();
+    brep_lib::update_tolerances_with_reshape(&shell, &reshaper, false)?;
+    assert!(max_tolerance(&shell, ShapeEnum::Edge)? < 1e-3);
+    let updated = reshaper.apply(&shell, ShapeEnum::Shape)?;
+    assert!(max_tolerance(&updated, ShapeEnum::Edge)? >= 1e-3);
+    // In place: every edge and vertex covers the face tolerance.
+    brep_lib::update_tolerances(&shell, false)?;
+    assert!(max_tolerance(&shell, ShapeEnum::Edge)? >= 1e-3);
+    assert!(max_tolerance(&shell, ShapeEnum::Vertex)? >= 1e-3);
+    // The verification resets the face tolerance of a plane to Confusion x the size of
+    // its box, which the 1e-3 edge tolerances enlarge on both sides (2.002).
+    brep_lib::update_tolerances(&shell, true)?;
+    let face_tol = max_tolerance(&shell, ShapeEnum::Face)?;
+    assert!(
+        (face_tol - 2.002e-7).abs() < 1e-15,
+        "face tolerance {face_tol}"
+    );
+    Ok(())
+}
+
+#[test]
+fn orient_closed_solid_sets_the_material_inside() -> Result<(), Failure> {
+    let sphere: Handle<dyn GeomSurface> =
+        Handle::new(GeomSphericalSurface::new(Axis3::default(), 2.)?).cast();
+    let shell = BRepLibMakeShell::with_surface(&sphere, false)?
+        .shell()?
+        .into_shape();
+    let builder = BRepBuilder::default();
+    for (reversed, expected) in [(false, Orientation::Forward), (true, Orientation::Reversed)] {
+        let mut solid = Solid::default();
+        builder.make_solid(&mut solid);
+        builder.add(
+            &mut solid,
+            &if reversed {
+                shell.reversed()
+            } else {
+                shell.clone()
+            },
+        )?;
+        assert!(brep_lib::orient_closed_solid(&mut solid)?);
+        assert_eq!(solid.orientation(), expected);
+    }
     Ok(())
 }

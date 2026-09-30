@@ -6,7 +6,8 @@
 // shell of a surface record, `bounded` (then UMin UMax VMin VMax) and the segment flag;
 // 2 a compound `n (shape record)...`; 3 the BRepLib_MakeEdge edge of a Geom curve record
 // between two parameters, its vertices enlarged to two tolerances (a null shape when the
-// maker is not done).
+// maker is not done); 4 a BRep_Builder solid `n (shape record)... reversed` of the
+// shells of the records (each reversed when `reversed`).
 //
 // `tp_mesh(shape, n, uv)` gives every face (explorer order, each once) an n x n grid
 // triangulation over the box of the ends of its curves on surface (the node points on
@@ -16,6 +17,7 @@
 #include <Poly_PolygonOnTriangulation.hxx>
 #include <Poly_Triangulation.hxx>
 #include <TopoDS_Compound.hxx>
+#include <TopoDS_Solid.hxx>
 #include <TopTools_ShapeMapHasher.hxx>
 TopoDS_Shape tp_shape_record(GaReader& r){
  int kind=r.integer();BRep_Builder B;
@@ -24,6 +26,9 @@ TopoDS_Shape tp_shape_record(GaReader& r){
   if(bounded){double u1=r.real(),u2=r.real(),v1=r.real(),v2=r.real();BRepLib_MakeShell m(s,u1,u2,v1,v2,r.flag());return m.Shell();}
   BRepLib_MakeShell m(s,r.flag());return m.Shell();}
  if(kind==2){TopoDS_Compound c;B.MakeCompound(c);int n=r.integer();for(int i=0;i<n;++i)B.Add(c,tp_shape_record(r));return c;}
+ if(kind==4){TopoDS_Solid so;B.MakeSolid(so);int n=r.integer();std::vector<TopoDS_Shape> shells;
+  for(int i=0;i<n;++i)shells.push_back(tp_shape_record(r));bool rev=r.flag();
+  for(const TopoDS_Shape& sh:shells)B.Add(so,rev?sh.Reversed():sh);return so;}
  occ::handle<Geom_Curve> c=tp_geom_curve(r);double p1=r.real(),p2=r.real(),t1=r.real(),t2=r.real();
  BRepLib_MakeEdge m(c,p1,p2);if(!m.IsDone())return TopoDS_Shape();
  if(!m.Vertex1().IsNull())B.UpdateVertex(m.Vertex1(),t1);

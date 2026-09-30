@@ -98,6 +98,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("blp_normals", brep_lib_package::normals_case),
     ("blp_deflection", brep_lib_package::deflection_case),
     ("blp_trinormals", brep_lib_package::trinormals_case),
+    ("blp_tolerances", brep_lib_package::tolerances_case),
+    ("blp_orient", brep_lib_package::orient_case),
 ];
 
 fn main() {

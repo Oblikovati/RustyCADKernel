@@ -5,7 +5,7 @@ use super::common::{Reader, int, real};
 use super::face::{surface, tp_face};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topexp::{self, Explorer};
-use rustycad_tkbrep::topods::{Compound, Edge, Face, Shape};
+use rustycad_tkbrep::topods::{Compound, Edge, Face, Shape, Solid};
 use rustycad_tkbrep::toptools::IndexedMapOfShape;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -15,6 +15,22 @@ use rustycad_tkmath::gp::Point2;
 use rustycad_tkmath::poly::{PolygonOnTriangulation, Triangle, Triangulation, mesh_purpose};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tktopalgo::brep_lib::{BRepLibMakeEdge, BRepLibMakeShell};
+
+/// The solid of `tp_shape_record` (kind 4).
+fn solid_record(r: &mut Reader<'_>) -> Result<Shape, Failure> {
+    let builder = BRepBuilder::default();
+    let mut so = Solid::default();
+    builder.make_solid(&mut so);
+    let n = r.integer();
+    let shells = (0..n)
+        .map(|_| shape_record(r))
+        .collect::<Result<Vec<Shape>, Failure>>()?;
+    let reversed = r.flag();
+    for sh in &shells {
+        builder.add(&mut so, &if reversed { sh.reversed() } else { sh.clone() })?;
+    }
+    Ok(so.into_shape())
+}
 
 /// `tp_shape_record`.
 pub fn shape_record(r: &mut Reader<'_>) -> Result<Shape, Failure> {
@@ -42,6 +58,7 @@ pub fn shape_record(r: &mut Reader<'_>) -> Result<Shape, Failure> {
             }
             Ok(c.into_shape())
         }
+        4 => solid_record(r),
         _ => {
             let c = geom_curve(r)?;
             let (p1, p2, t1, t2) = (r.real(), r.real(), r.real(), r.real());

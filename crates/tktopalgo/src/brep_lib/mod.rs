@@ -27,11 +27,13 @@ mod make_solid;
 mod make_vertex;
 mod make_wire;
 mod normals;
+mod orient_closed_solid;
 mod pcurve_on_plane;
 mod same_range;
 mod sort_faces;
 mod tool_triangulated_shape;
 mod update_edge_tol;
+mod update_tolerances;
 mod valid_range;
 
 pub use bounding_vertex::bounding_vertex;
@@ -61,6 +63,7 @@ pub use make_solid::BRepLibMakeSolid;
 pub use make_vertex::BRepLibMakeVertex;
 pub use make_wire::BRepLibMakeWire;
 pub use normals::{ENSURE_NORMAL_CONSISTENCY_DEFAULTS, ensure_normal_consistency};
+pub use orient_closed_solid::orient_closed_solid;
 pub use pcurve_on_plane::{
     build_pcurve_for_edge_on_plane, build_pcurve_for_edges_on_plane, pcurve_for_edge_on_plane,
 };
@@ -68,4 +71,5 @@ pub use same_range::{check_same_range, same_range};
 pub use sort_faces::{reverse_sort_faces, sort_faces};
 pub use tool_triangulated_shape::BRepLibToolTriangulatedShape;
 pub use update_edge_tol::{update_edge_tol, update_edge_tolerance};
+pub use update_tolerances::{update_tolerances, update_tolerances_with_reshape};
 pub use valid_range::{RangeEnd, ValidRange, find_valid_range, find_valid_range_of_edge};

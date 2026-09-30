@@ -124,6 +124,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"blp_normals", tp_blp_normals_case},
  {"blp_deflection", tp_blp_deflection_case},
  {"blp_trinormals", tp_blp_trinormals_case},
+ {"blp_tolerances", tp_blp_tolerances_case},
+ {"blp_orient", tp_blp_orient_case},
 };
 int main() {
  std::string line;

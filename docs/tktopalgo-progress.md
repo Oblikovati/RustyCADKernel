@@ -136,7 +136,8 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   value. The status enumerations are `BRepLibEdgeError`, `BRepLibWireError`,
   `BRepLibFaceError`, `BRepLibShellError` and `BRepLibShapeModification`. The package
   functions of `BRepLib` are free functions of `brep_lib`; `Precision` and `Plane` are
-  `precision`/`set_precision` and `plane`/`set_plane`, process-wide as natively.
+  `precision`/`set_precision` and `plane`/`set_plane`, process-wide as natively. The
+  re-shaper overload of `UpdateTolerances` is `update_tolerances_with_reshape`.
 
 - BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
   are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
@@ -275,8 +276,8 @@ three PointInTheFace overloads from indices 0 to 2000, on and off the surface),
 vertices, along and across edges, every Accept index including 0 and Extent + 1, result
 indices 0 and past the end) and `bc3_inter3d` (Intersector3d on FORWARD and REVERSED
 faces).
-BRepLib: 1664 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
-and solid makers, 526 for the package functions). `tools/tktopalgo_corpus_breplib.py`
+BRepLib: 1874 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
+and solid makers, 736 for the package functions). `tools/tktopalgo_corpus_breplib.py`
 appends one module per family, with the
 record builders of `tools/tktopalgo_corpus_breplib_records.py`; both probes read the
 records and print the shapes with `tktopalgo_probe_breplib_common.cxx` and
@@ -301,14 +302,18 @@ and `blm_solid` (every MakeSolid constructor, Add and FaceStatus, with a compsol
 sharing a face). The package functions (`tools/tktopalgo_corpus_breplib_package.py`,
 `tktopalgo_probe_breplib_shapes.cxx` and `tp_probe/brep_lib_shapes.rs`) run on shape
 records: faces of the face readers, BRepLib_MakeShell shells of every surface kind (a
-B-spline surface of several C2 patches, segmented or not), compounds and
-BRepLib_MakeEdge edges with enlarged vertices; a grid mesher gives the faces
+B-spline surface of several C2 patches, segmented or not), compounds,
+BRepLib_MakeEdge edges with enlarged vertices and BRep_Builder solids of the shells
+(closed and open, as built and reversed, nested and empty); a grid mesher gives the faces
 triangulations (with or without UV nodes) and their edges polygons (two for a seam).
 The families: `blp_build3d`, `blp_samerange`, `blp_edgetol`, `blp_regularity`,
 `blp_continuity`, `blp_inner`, `blp_sort`, `blp_bounding`, `blp_validrange` and
 `blp_validrange2`, `blp_pcurveplane`, `blp_ccos` (BRepLib_CheckCurveOnSurface, one
 checker per edge and one reused), `blp_shell` (every MakeShell constructor and Init),
-`blp_normals`, `blp_deflection` and `blp_trinormals` (BRepLib_ToolTriangulatedShape).
+`blp_normals`, `blp_deflection` and `blp_trinormals` (BRepLib_ToolTriangulatedShape),
+`blp_tolerances` (both UpdateTolerances, with and without the face verification; the
+re-shaper form prints the input and the re-shaper `Apply` of it) and `blp_orient`
+(OrientClosedSolid on each solid).
 
 ## Preserved native behaviour
 
@@ -543,6 +548,16 @@ checker per edge and one reused), `blp_shell` (every MakeShell constructor and I
   of an earlier Init when the new edge is not a seam.
 - `BRepLib::ReverseSortFaces` classifies a rectangular trimmed surface through its own
   adaptor, where `SortFaces` takes its basis first.
+- `BRepLib::UpdateTolerances` with the verification measures a face by the X extent of
+  its box, but for Y and Z it overwrites the lower bound with the extent only when both
+  sides are closed: a box open in Y or Z compares its raw lower bound instead. The box
+  includes its gap, so edge tolerances enlarge the face tolerance. A vertex tolerance is
+  set (not only enlarged) and gains twice the epsilon of the value; with the
+  verification a vertex takes its computed tolerance even when smaller, once per vertex
+  TShape. The updates are applied in hashed-map order; each shape is updated on its
+  own, so only the order of the re-shaper records depends on it.
+- `BRepLib::OrientClosedSolid` classifies the infinite point: a solid without shells is
+  IN, so it is reversed and the call returns true.
 
 ## BRepClass deviations
 

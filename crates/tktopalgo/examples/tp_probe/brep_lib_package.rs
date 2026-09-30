@@ -6,8 +6,9 @@ use super::brep_lib_shapes::{faces_of, mesh, normals, shape_record};
 use super::common::{Reader, attempt, end, flag, int, pnt, real, show};
 use super::face::surface;
 use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::brep_tools::{BRepToolsReShape, ReShape};
 use rustycad_tkbrep::topexp::{self, Explorer};
-use rustycad_tkbrep::topods::{Edge, Face, Shape};
+use rustycad_tkbrep::topods::{Edge, Face, Shape, Solid};
 use rustycad_tkbrep::toptools::{IndexedDataMapOfShapeListOfShape, IndexedMapOfShape};
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::Failure;
@@ -412,5 +413,36 @@ pub fn trinormals_case(values: &[f64]) {
             }
         }
         normals(&s)
+    });
+}
+/// `blp_tolerances`.
+pub fn tolerances_case(values: &[f64]) {
+    guarded(values, |r| {
+        let s = shape_record(r)?;
+        let (mode, verify) = (r.integer(), r.flag());
+        if mode == 0 {
+            brep_lib::update_tolerances(&s, verify)?;
+            return shape(&s);
+        }
+        let reshaper = BRepToolsReShape::new();
+        brep_lib::update_tolerances_with_reshape(&s, &reshaper, verify)?;
+        shape(&s)?;
+        shape(&reshaper.apply(&s, ShapeEnum::Shape)?)
+    });
+}
+/// `blp_orient`.
+pub fn orient_case(values: &[f64]) {
+    guarded(values, |r| {
+        let s = shape_record(r)?;
+        let m = sub_shapes(&s, ShapeEnum::Solid)?;
+        for i in 1..=m.extent() {
+            let mut so = Solid::unchecked(m.find_key(i)?.clone());
+            attempt(|| {
+                flag(brep_lib::orient_closed_solid(&mut so)?);
+                int(so.orientation() as i32);
+                Ok(())
+            });
+        }
+        Ok(())
     });
 }

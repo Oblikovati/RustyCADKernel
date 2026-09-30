@@ -183810,6 +183810,30 @@
       "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::add_list",
       "status": "implemented",
       "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib::UpdateTolerances(const TopoDS_Shape&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::update_tolerances",
+      "status": "implemented",
+      "notes": "BRepLib package function (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): a free function of the brep_lib module, C++ output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bl_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib::UpdateTolerances(const TopoDS_Shape&,BRepTools_ReShape&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::update_tolerances_with_reshape",
+      "status": "implemented",
+      "notes": "BRepLib package function (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): a free function of the brep_lib module, C++ output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bl_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib::OrientClosedSolid(TopoDS_Solid&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::orient_closed_solid",
+      "status": "implemented",
+      "notes": "BRepLib package function (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): a free function of the brep_lib module, C++ output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bl_* requests)."
     }
   ],
   "tests": [

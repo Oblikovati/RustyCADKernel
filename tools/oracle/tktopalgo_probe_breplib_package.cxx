@@ -26,8 +26,14 @@
 // `blp_normals shape n uv angtol force`: the mesh then EnsureNormalConsistency.
 // `blp_deflection shape n`: the mesh then UpdateDeflection.
 // `blp_trinormals shape n uv connect`: the mesh then ComputeNormals per face.
+// `blp_tolerances shape mode verify`: mode 0 UpdateTolerances(S, verify) then the digest,
+//   1 UpdateTolerances(S, reshaper, verify) then the digests of S and of the reshaper
+//   Apply(S).
+// `blp_orient shape`: OrientClosedSolid on each solid (MapShapes order): the result and
+//   the orientation.
 #include <BRepLib_CheckCurveOnSurface.hxx>
 #include <BRepLib_ToolTriangulatedShape.hxx>
+#include <BRepTools_ReShape.hxx>
 #include <Poly_Connect.hxx>
 using TpShapeMap=NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>;
 TpShapeMap tp_sub_shapes(const TopoDS_Shape& s,TopAbs_ShapeEnum t){TpShapeMap m;if(!s.IsNull())TopExp::MapShapes(s,t,m);return m;}
@@ -175,5 +181,18 @@ void tp_blp_trinormals_case(std::istream& input){
   for(int i=1;i<=faces.Extent();++i){const TopoDS_Face& f=TopoDS::Face(faces(i));TopLoc_Location l;occ::handle<Poly_Triangulation> t=BRep_Tool::Triangulation(f,l);
    if(connect)GA_TRY(BRepLib_ToolTriangulatedShape::ComputeNormals(f,t,shared))else GA_TRY(BRepLib_ToolTriangulatedShape::ComputeNormals(f,t))}
   tp_normals(s);
+ }catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
+ ga_end();}
+void tp_blp_tolerances_case(std::istream& input){
+ GaReader r{input};
+ try{TopoDS_Shape s=tp_shape_record(r);int mode=r.integer();bool verify=r.flag();
+  if(mode==0){BRepLib::UpdateTolerances(s,verify);tp_shape(s);}
+  else{BRepTools_ReShape rs;BRepLib::UpdateTolerances(s,rs,verify);tp_shape(s);tp_shape(rs.Apply(s));}
+ }catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
+ ga_end();}
+void tp_blp_orient_case(std::istream& input){
+ GaReader r{input};
+ try{TopoDS_Shape s=tp_shape_record(r);TpShapeMap m=tp_sub_shapes(s,TopAbs_SOLID);
+  for(int i=1;i<=m.Extent();++i){TopoDS_Solid so=TopoDS::Solid(m(i));GA_TRY(ga_flag(BRepLib::OrientClosedSolid(so));ga_int(so.Orientation()))}
  }catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
  ga_end();}
