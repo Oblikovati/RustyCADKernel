@@ -89,6 +89,8 @@ pub struct GeomIntIntSS {
     sline_s2: Vec<Handle<dyn Geom2dCurve>>,
     my_tol_reached2d: f64,
     my_tol_reached3d: f64,
+    // The tangent check tolerances: `SetTolFixTangents` and `TolFixTangents` are declared
+    // without a definition natively (a call does not link), so they keep their values.
     my_tol_check: f64,
     my_tol_ang_check: f64,
 }
@@ -326,17 +328,5 @@ impl GeomIntIntSS {
             thept.parameters_on_s2()
         };
         Ok(Point2::new(u, v))
-    }
-
-    /// `SetTolFixTangents(aTolCheck, aTolAngCheck)`: the tolerances of the tangent fix
-    /// of the approximated curves; `inter.set_tol_fix_tangents(1e-7, 1e-6)`.
-    pub fn set_tol_fix_tangents(&mut self, tol_check: f64, tol_ang_check: f64) {
-        self.my_tol_check = tol_check;
-        self.my_tol_ang_check = tol_ang_check;
-    }
-
-    /// `TolFixTangents(aTolCheck, aTolAngCheck)`; `let (t, a) = inter.tol_fix_tangents();`.
-    pub fn tol_fix_tangents(&self) -> (f64, f64) {
-        (self.my_tol_check, self.my_tol_ang_check)
     }
 }
