@@ -139,7 +139,10 @@ impl HelixGeomBuilderHelix {
     ) -> Result<bool, Failure> {
         let t2x: f64 = self.base.t2;
         let eps: f64 = 1.0e-7 * (2. * PI);
-        if (t2x - t1x).abs() <= eps {
+        // `!(x > eps)`, not `x <= eps`: a NaN rest is skipped, as the native
+        // `if (fabs(aT2x - aT1x) > eps)` skips it.
+        let is_long: bool = (t2x - t1x).abs() > eps;
+        if !is_long {
             return Ok(true);
         }
         if !self.append_coil(bhc, t1x, t2x)? {

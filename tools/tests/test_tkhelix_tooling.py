@@ -8,6 +8,8 @@ from coverage_report import PROBE_CORPORA
 from native_build import ADDITIONAL_TOOLKITS, CLOSURE_TARGETS, LINKED_TOOLKITS
 from probe_shards import SHARD_COUNT
 from tkhelix_corpus import append_tkhelix_requests
+from tkhelix_corpus_helixbrep import arr, build_request, one_diam
+from tkhelix_corpus_helixgeom import coil_request, curve_request, run
 from tkhelix_corpus_placement import placement_request
 from verify_toolkit import NUMERIC_VERIFIERS
 from verify_tkhelix_numeric import ORACLE, corpus
@@ -73,6 +75,24 @@ class CorpusTests(unittest.TestCase):
     def test_placement_request_is_nine_exact_numbers(self):
         self.assertEqual(placement_request([0.1, -0.0, 2], [0, 0, 1], [1, 0, 0]),
                          'hx_placement 0.1 -0.0 2.0 0.0 0.0 1.0 1.0 0.0 0.0')
+
+    def test_curve_request_spells_loads_bounds_order_and_parameters(self):
+        request = curve_request([(0, [0, 1, 2, 3, 0.5, 1])], (1, 2), 2, [0.25])
+        self.assertEqual(request, 'hx_curve 1.0 0.0 0.0 1.0 2.0 3.0 0.5 1.0 1.0 2.0 2.0 1.0 0.25')
+
+    def test_coil_request_counts_its_runs(self):
+        request = coil_request([run([0, 1, 2, 3, 0, 1], 1e-3, 4, 6, 20)])
+        self.assertEqual(request, 'hx_coil 1.0 1.0 0.001 4.0 6.0 20.0 0.0 1.0 2.0 3.0 0.0 1.0')
+
+    def test_array_fields_carry_their_lower_bound(self):
+        self.assertEqual(arr([5.0, 6.0], 0), [0, 2, 5.0, 6.0])
+        self.assertEqual(arr([]), [1, 0])
+
+    def test_build_request_counts_its_steps(self):
+        steps = [one_diam(100.0, arr([100.0]), arr([20.0]), arr([1])), [2.0]]
+        self.assertEqual(build_request([0, 0, 0, 0, 0, 1, 1, 0, 0, 0], steps),
+                         'hxb_build 0.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 2.0 0.0 1.0 100.0 '
+                         '1.0 1.0 100.0 1.0 1.0 20.0 1.0 1.0 1.0 2.0')
 
 
 if __name__ == '__main__':
