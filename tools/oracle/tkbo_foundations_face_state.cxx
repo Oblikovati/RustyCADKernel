@@ -32,4 +32,24 @@ void bo_face_clip_case(const std::vector<double>& v) {
  bo_real(first);bo_real(last);
 }
 
+void bo_face_plane_curve(const IntTools_Curve& curve) {
+ bo_real(curve.Tolerance());bo_real(curve.TangentialTolerance());
+ for(double t:{curve.Curve()->FirstParameter(),curve.Curve()->LastParameter()}) {
+  bo_real(t);gp_Pnt p=curve.Curve()->Value(t);for(double x:{p.X(),p.Y(),p.Z()})bo_real(x);
+ }
+ for(const auto& pc:{curve.FirstCurve2d(),curve.SecondCurve2d()}) {
+  bo_int(pc.IsNull());if(!pc.IsNull()){for(double t:{pc->FirstParameter(),pc->LastParameter()}){bo_real(t);gp_Pnt2d p=pc->Value(t);bo_real(p.X());bo_real(p.Y());}}
+ }
+}
+void bo_face_planes_case(const std::vector<double>& v) {
+ try {
+  occ::handle<Geom_Surface> p1=new Geom_Plane(gp_Pnt(0,0,0),gp_Dir(0,0,1));
+  occ::handle<Geom_Surface> p2=new Geom_Plane(gp_Pnt(0,0,v[0]),gp_Dir(v[1],v[2],v[3]));
+  occ::handle<GeomAdaptor_Surface> s1=new GeomAdaptor_Surface(p1,-v[4],v[4],-v[4],v[4]);
+  occ::handle<GeomAdaptor_Surface> s2=new GeomAdaptor_Surface(p2,-v[4],v[4],-v[4],v[4]);
+  NCollection_Sequence<IntTools_Curve> curves;curves.Append(IntTools_Curve());bool tangent=true;
+  PerformPlanes(s1,s2,v[5],v[6],1e-8,v[5]+v[6],v[7]!=0,v[8]!=0,curves,tangent);
+  bo_int(tangent);bo_int(curves.Length());for(int i=2;i<=curves.Length();++i)bo_face_plane_curve(curves(i));
+ }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
+}
 #endif

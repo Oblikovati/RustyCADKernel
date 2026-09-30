@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Compare FaceFace's private plane clipping helper from unchanged pinned source.
+"""Compare FaceFace's private plane intersection helpers from unchanged pinned source.
 
 Usage: python3 tools/verify_tkbo_face_clip.py --source OCCT --native-build BUILD
 The native source is included verbatim into an isolated executable because the
-shared library hides ClassifyLin2d. No installed source or native build is changed.
+shared library hides its private helpers. No installed source or native build is changed.
 """
 import json
 import hashlib
@@ -19,8 +19,17 @@ def clip_requests() -> str:
     bounds = [(-2,3,-4,5), (0,0,0,1), (0,1,0,0), (-2e100,2e100,-2e100,2e100)]
     points = [(-2,-4),(-2,5),(3,5),(3,-4),(0,0),(9,10),(0,1e-7),(0,1e-8)]
     directions = [(1,0),(-1,0),(0,1),(1,1),(1,-1),(1,1e-10)]
-    return '\n'.join(f"face_clip {a} {b} {c} {d} {x} {y} {dx} {dy} {tol}"
+    clipped = '\n'.join(f"face_clip {a} {b} {c} {d} {x} {y} {dx} {dy} {tol}"
         for (a,b,c,d), (x,y), (dx,dy), tol in product(bounds, points, directions, [0,1e-7,1,10]))+'\n'
+    return clipped + plane_requests()
+
+
+def plane_requests() -> str:
+    """Exercise plane fast paths, pcurve flag asymmetry and endpoint/tolerance bits."""
+    normals = [(0,0,1),(1,0,0),(1,1,1),(1e-7,0,1),(0,0,-1)]
+    return '\n'.join(f"face_planes {z} {dx} {dy} {dz} {size} {t1} {t2} {a} {b}"
+        for z, (dx,dy,dz), size, t1, t2, a, b in product(
+            [0,1e-7,1,100], normals, [0,1,10], [0,1e-7], [1e-7,1], [0,1], [0,1]))+'\n'
 
 
 def main() -> None:
@@ -44,7 +53,7 @@ def record_source(original: Path, build: Path, output: Path, libraries: list[str
                str(output/'native-translation-unit.cxx'), *linked,
                '-Wl,-rpath,'+str(Path(linked[0]).parent), '-o', str(output/'native-probe')]
     manifest = {'source': str(original), 'source_sha256': hashlib.sha256(original.read_bytes()).hexdigest(),
-                'native_command': command, 'scope': 'private ClassifyLin2d only; no legacy declarations'}
+                'native_command': command, 'scope': 'private ClassifyLin2d and PerformPlanes; no legacy declarations'}
     (output/'native-source.json').write_text(json.dumps(manifest, indent=2)+'\n')
 
 
