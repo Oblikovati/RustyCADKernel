@@ -63,6 +63,16 @@ the shared native build (no TKOffset or TKShHealing library) provides. Its two G
 cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` and
 `geom_fill_filling_behavior`) and in the numeric corpus.
 
+GeomPlate_BuildPlateSurface_Test.cxx is not mapped: its A1 and A2 cases (and the shared
+helper of the file) build their boundaries as `BRepAdaptor_Curve` of edges made by
+`BRepBuilderAPI_MakeEdge` (TKTopAlgo), which the port does not provide (the native suite
+itself compiles and passes against the shared build, which links TKTopAlgo). Its six
+cases run as behavior tests (`geom_plate_behavior`): the same Bezier curves go through
+`GeomAdaptor_Curve` on their natural range, which the edge of `MakeEdge` evaluates
+identically, and the progress observer checks the same scope names
+(`Calculating the surface filled`, `Plate_Plate::SolveTI1()`, `math_Gauss
+LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
+
 ## API mapping
 
 - GccEnt: the static members of the `GccEnt` class are free functions of
@@ -181,6 +191,21 @@ cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` a
   (`gordon_params`, `gordon_contacts`, `gordon_normalize`, `gordon_order`,
   `gordon_reorder`, `gordon_reparam`, `gordon_rebuild`, `gordon_network`,
   `gordon_fallback`).
+- GeomPlate ([geomalgo-design.md](geomalgo-design.md) section 19): the classes are
+  `GeomPlateBuildPlateSurface`, `GeomPlateSurface` (a `GeomSurface`),
+  `GeomPlateCurveConstraint` and `GeomPlatePointConstraint` (handle-shared, their fields
+  behind a lock), `GeomPlateMakeApprox`, `GeomPlatePlateG0Criterion` and
+  `GeomPlatePlateG1Criterion` (`AdvApp2VarCriterion`), `GeomPlateBuildAveragePlane`
+  and `GeomPlateAij`. Overloads take distinct names: the builder constructors
+  `with_curves` (the old arrays), `with_surface` and `new`, `add_curve`/`add_point`,
+  `G0Error(Index)` as `g0_error_of` (and G1, G2); `GeomPlateCurveConstraint::empty`
+  and `new`; `GeomPlatePointConstraint::with_point` and `on_surface`;
+  `GeomPlateMakeApprox::with_criterion` and `with_order`;
+  `GeomPlateBuildAveragePlane::new` and `with_normals`. `LPropSurf` returns the write
+  guard of the member `GeomLProp_SLProps`, `D1`/`D2` of the constraints return
+  `GeomSurfaceD1`/`GeomSurfaceD2` (the point constraint's `D1` a tuple), and the
+  private `ProjectedCurve` of the builder, which nothing calls natively, is kept as a
+  crate method with a unit test.
 
 ## Verification
 
@@ -1141,6 +1166,26 @@ degree overflow, zero and negative weights, too few curves, a wrong grid size an
 Performs. The hyperbola-circle pair of `gapi_ecc` is left out: natively it does not
 return.
 
+GeomPlate (163 requests, `tkgeomalgo_corpus_geomplate.py`): `gplate_point` and
+`gplate_curve` read every member of the point and curve constraints (points, 3d lines,
+circles and Bezier curves, 2d lines and Bezier curves on planes, cylinders, spheres and
+Bezier surfaces; criterion laws; projected curves and their approximation; the setters;
+the order and law exceptions), `gplate_curve_empty` the empty curve constraint;
+`gplate_surface` evaluates GeomPlate_Surface (D0 to D2, the D3/DN/IsCNu exceptions,
+bounds, a copy and a plate surface on a plate surface) on five initial surfaces;
+`gplate_average`, `gplate_normals` and `gplate_halfspace` run the average plane of point
+clouds (every option, lines, degenerate clouds), of normal sets (one, two, opposite,
+many) and successive HalfSpace calls; `gplate_build` performs 47 builders (the three
+constructors; point constraints of order G0 to G2; closed and open Bezier contours with
+and without initial surface; G1 and G2 contours of curves on planes, cylinders and
+spheres, reordered and reversed; mixed G0/G1 and G1/G1 corners; criterion laws; degrees 2
+to 6, one to four iterations, tolerances and the anisotropy flag; the non-linear first
+plate with the free and incremental loops; construction errors) and reads every result,
+the out-of-range constraint indices and both contours; `gplate_approx` runs MakeApprox
+with CritOrder -1 to 2, C0 to C2 (and the refused G1), and explicit G0 and G1 criteria.
+Values that native OCCT leaves uninitialized are not read (see the quirks below), and a
+glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every request.
+
 ### GeomFill (filling part)
 
 - `GeomFill_SectionGenerator::SetParam` shares the given array and copies it into itself
@@ -1311,6 +1356,59 @@ return.
   the prepared curves; its catch-all turns every exception into ConstructionFailed.
 - The approximate fallback measures its profile and guide deviations by mapping the fixed
   parameter through the surface parameter mapping twice, as natively.
+
+### GeomPlate
+
+- `Perform` without constraint returns with the plate reset, so `IsDone()` is true and
+  `Surface()` null, as the native test notes.
+- `G0Error(Index)`, `G1Error(Index)` and `G2Error(Index)` gather the gaps into arrays of
+  `NbPtsOnCur` values while `EcartContraintesMil` writes one value per interval of the
+  curve: a curve with fewer intervals (or of order -1) leaves values uninitialized
+  natively (zeros here; never read by the corpus), one with more raises
+  Standard_OutOfRange. The global errors are uninitialized until a check ran (points
+  only, a failed plate).
+- `EcartContraintesMil` and `VerifSurface` read at least three intervals: a curve with
+  fewer than three parameters reads past them (Standard_OutOfRange).
+- The G2 constraints pass the second derivatives `(D2U, D2V, D2UV)` to
+  `Plate_D2(duu, duv, dvv)`, so D2V becomes `duv` and D2UV `dvv`, for the target and the
+  initial surface alike.
+- `VerifPoints` overwrites its distance, angle and curvature with each point, so only the
+  last point constraint of each order counts; the results are discarded by `Perform`.
+- `Disc2dContour` and `Disc3dContour` start their samples at the second interval (the
+  quarter points of the first interval are skipped), ignore their count argument, and
+  initialize the projector (with the current tolerances in 2d, the resolutions of Tol3d
+  in 3d).
+- `ComputeSurfInit` sums the curve lengths for a point count it never uses, and its
+  non-linear branch leaves the intermediate plate surface in `Surface()` when the later
+  plate fails.
+- When a curve has no continuous projection, `Perform` approximates the current plate
+  surface, which it has just nullified unless the non-linear branch set it: natively a
+  null dereference (Standard_NullObject here, not in the corpus).
+- `GeomPlate_Surface::Copy` keeps the initial surface and the plate but not the bounds;
+  `UPeriod`/`VPeriod` return 0 (a `false` converted to a real) instead of raising;
+  `Continuity` is C0, `IsCNu`/`IsCNv` raise Standard_Failure, `EvalD3`/`EvalDN` raise
+  Geom_UndefinedDerivative, and the reversing and transforming members do nothing.
+- `GeomPlate_MakeApprox` with a CritOrder outside -1..=1 computes nothing and leaves both
+  errors uninitialized (zero here).
+- `GeomPlate_BuildAveragePlane` leaves its box uninitialized when no plane is found, and
+  a flux normal (option 2) with no boundary points gives a null frame whose line raises
+  Standard_ConstructionError; the normals constructor raises Standard_OutOfRange without
+  normals (`OptVec(0)`).
+- `GeomPlate_PointConstraint(Pt, Order)` accepts orders -1 to 1 although its message
+  says "0 or -1".
+
+## GeomPlate deviations
+
+- Null handles that the native code dereferences (a missing surface or law, the
+  `LPropSurf` of a point without surface, the criteria of the empty curve constraint, a
+  null initial surface in `Bounds` of GeomPlate_Surface) raise Standard_NullObject or
+  give the stored bounds.
+- The projector of the builder holds its adaptor through a shared handle
+  (`ExtPS::initialize_shared`); natively it points to a local adaptor, which dies when
+  the member that initialized it returns.
+- A surface failure inside the MakeApprox evaluator is kept, reported by the error code
+  and raised when `AdvApp2Var_ApproxAFunc2Var` returns
+  ([geomalgo-design.md](geomalgo-design.md) section 19).
 
 ## IntCurveSurface deviations
 
