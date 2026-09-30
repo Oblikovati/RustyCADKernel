@@ -69,7 +69,7 @@ fn showv2d(a: &Array1<'_, Vector2>) {
 }
 
 /// `ga_gfw_eval`.
-fn gfw_eval(f: &GeomFillSweepFunction, u: f64, np: i32, n2: i32) {
+fn gfw_eval(f: &dyn SweepFunction, u: f64, np: i32, n2: i32) {
     let mut e = Evals::new(np, n2);
     show(f.d0(u, 0.0, 1.0, &mut e.p, &mut e.p2, &mut e.w), flag);
     pnts(&e.p);
@@ -94,7 +94,7 @@ fn gfw_eval(f: &GeomFillSweepFunction, u: f64, np: i32, n2: i32) {
     gfw_eval_d2(f, u, np, n2);
 }
 
-fn gfw_eval_d2(f: &GeomFillSweepFunction, u: f64, np: i32, n2: i32) {
+fn gfw_eval_d2(f: &dyn SweepFunction, u: f64, np: i32, n2: i32) {
     let mut e = Evals::new(np, n2);
     let values = SweepD2 {
         d1: SweepD1 {
@@ -132,7 +132,7 @@ const SHAPES: [Shape; 7] = [
 ];
 
 /// `ga_gfw_queries`: returns NbPoles.
-fn gfw_queries(f: &GeomFillSweepFunction) -> i32 {
+fn gfw_queries(f: &dyn SweepFunction) -> i32 {
     show(f.nb_2d_curves(), int);
     let (mut np, mut nk) = (0, 0);
     show(f.section_shape(), |(p, k, d)| {
@@ -312,5 +312,24 @@ pub fn sweep_case(values: &[f64]) {
         );
         result(&sw);
     }
+    end();
+}
+
+/// `path curve1 curve2 radius polynomial nparams params... a b`.
+pub fn blend_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let (p, c1, c2) = (gft_curve(&mut r), gft_curve(&mut r), gft_curve(&mut r));
+    let (rad, poly) = (r.real(), r.flag());
+    let params = r.reals();
+    let (a, b) = (r.real(), r.real());
+    let func = match GeomFillCircularBlendFunc::new(&p, &c1, &c2, rad, poly) {
+        Ok(func) => func,
+        Err(error) => return fail(error),
+    };
+    let np = gfw_queries(&func);
+    params.iter().for_each(|u| gfw_eval(&func, *u, np, 0));
+    show(func.set_interval(a, b), |()| ());
+    show(func.set_tolerance(1e-5, 1e-6), |()| ());
+    params.iter().for_each(|u| gfw_eval(&func, *u, np, 0));
     end();
 }

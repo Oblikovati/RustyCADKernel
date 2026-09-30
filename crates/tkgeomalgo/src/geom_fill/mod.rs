@@ -80,6 +80,8 @@ pub use tgt_on_coons::GeomFillTgtOnCoons;
 // Sweep classes (docs/geomalgo-design.md, section 14).
 mod arc_section;
 mod circle_spans;
+mod circular_blend_func;
+mod circular_blend_func_eval;
 mod constant_bi_normal;
 mod convertor_basis;
 mod corrected_frenet;
@@ -138,6 +140,7 @@ mod trihedron_with_guide;
 mod uniform_section;
 
 pub use arc_section::{ArcPolesD1, ArcPolesD2, ArcSectionD0, ArcSectionD1, ArcSectionD2};
+pub use circular_blend_func::GeomFillCircularBlendFunc;
 pub use constant_bi_normal::GeomFillConstantBiNormal;
 pub use corrected_frenet::GeomFillCorrectedFrenet;
 pub use curve_and_trihedron::GeomFillCurveAndTrihedron;

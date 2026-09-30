@@ -7,7 +7,8 @@ again. `gfs_sweep` builds sweeps twice (with two continuities): the elementary c
 of a translation (plane, cylinder, extrusion, cone) and of a rotation (sphere, torus,
 cylinder, cone, surface of revolution), and the approximations with their
 restrictions, traces and the optional C1 re-approximation. The second build keeps the
-2d curves of the first one, as natively.
+2d curves of the first one, as natively. `gfs_blendfunc` evaluates the circular
+blend sections between two rails around a path, in the three arc parameterisations.
 """
 from __future__ import annotations
 from tkgeomalgo_corpus_intcurvesurface import ad, bezier, bspline, circle, line, line_of, plane, trimmed
@@ -116,7 +117,29 @@ def _functions(requests: list[str]) -> None:
                                               2, 1.0, 3.0, 1.0, 3.0]))
 
 
+def _blend(requests: list[str]) -> None:
+    """`gfs_blendfunc`: straight and curved rails at right, obtuse and flat angles."""
+    def ranged(c: list[float]) -> list[float]:
+        return [0, *ad(c, (0.0, 4.0))]
+    axis = ranged(line(O, Z))
+    right = (ranged(line(X, Z)), ranged(line(Y, Z)))
+    obtuse = (ranged(line(X, Z)), ranged(line([-1.0, 0.1, 0.0], Z)))
+    flat = (ranged(line(X, Z)), ranged(line([-1.0, 0.0, 0.0], Z)))
+    wavy = bspline(3, [[0, 0, 0], [0.2, 0.1, 1], [-0.1, 0.2, 2], [0.1, -0.1, 3], [0, 0, 4]], [0.0, 2.0, 4.0],
+                   [4, 1, 4])
+    rail1 = bspline(3, [[1, 0, 0], [1.2, 0, 1], [0.9, 0.1, 2], [1.1, 0, 3], [1, 0, 4]], [0.0, 1.0, 4.0], [4, 1, 4])
+    rail2 = bspline(2, [[0, 1, 0], [0.1, 1.1, 1.3], [0, 0.9, 2.2], [0.05, 1.05, 3.2], [0, 1, 4]],
+                    [0.0, 1.5, 3.0, 4.0], [3, 1, 1, 3])
+    curved = ([0, *ad(rail1)], [0, *ad(rail2)])
+    params = [0.0, 1.3, 4.0]
+    for path, (c1, c2) in ((axis, right), (axis, obtuse), (axis, flat), ([0, *ad(wavy)], curved)):
+        for radius, poly in ((1.0, 0), (1.3, 0), (1.0, 1)):
+            requests.append(line_of('gfs_blendfunc', [*path, *c1, *c2, radius, poly, len(params), *params, 0.5, 3.5]))
+    requests.append(line_of('gfs_blendfunc', [*axis, *right[0], *right[0], 1.0, 0, 1, 1.0, 0.5, 3.5]))
+
+
 def append_sweepalgo_requests(requests: list[str]) -> None:
     """Append every sweep function and sweep request in a fixed order."""
     _functions(requests)
     _sweeps(requests)
+    _blend(requests)

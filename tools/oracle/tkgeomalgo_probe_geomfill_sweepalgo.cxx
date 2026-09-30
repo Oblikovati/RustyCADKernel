@@ -1,6 +1,7 @@
 // GeomFill_SweepFunction and GeomFill_Sweep probe operations (tkgeomalgo_probe.cxx); the
 // Rust twin is crates/tkgeomalgo/examples/ga_probe/geom_fill_sweepalgo.rs. The law readers
 // are those of tkgeomalgo_probe_geomfill_laws.cxx.
+#include <GeomFill_CircularBlendFunc.hxx>
 #include <GeomFill_Sweep.hxx>
 #include <GeomFill_SweepFunction.hxx>
 #include <Geom_BSplineSurface.hxx>
@@ -16,8 +17,8 @@ occ::handle<GeomFill_LocationLaw> ga_gfw_location(GaReader& r){
  if(!g.IsNull()&&!sec.IsNull())GA_TRY(double la=-9;g->Set(sec,set[0]!=0,set[1],set[2],set[3],la);ga_real(la));
  return l;
 }
-// D0, D1 and D2 of a sweep function at `u` on `np` poles and `n2` 2d poles.
-void ga_gfw_eval(const occ::handle<GeomFill_SweepFunction>& f,double u,int np,int n2){
+// D0, D1 and D2 of a sweep function (GeomFill_SweepFunction or GeomFill_CircularBlendFunc) at `u` on `np` poles and `n2` 2d poles.
+void ga_gfw_eval(const occ::handle<Approx_SweepFunction>& f,double u,int np,int n2){
  NCollection_Array1<gp_Pnt> p(1,np);NCollection_Array1<gp_Vec> dp(1,np),d2p(1,np);NCollection_Array1<double> w(1,np),dw(1,np),d2w(1,np);
  NCollection_Array1<gp_Pnt2d> p2(1,n2);NCollection_Array1<gp_Vec2d> dp2(1,n2),d2p2(1,n2);
  auto reset=[&](){p.Init(gp_Pnt(-1,-1,-1));dp.Init(gp_Vec(-1,-1,-1));d2p.Init(gp_Vec(-1,-1,-1));w.Init(-1);dw.Init(-1);d2w.Init(-1);
@@ -30,7 +31,7 @@ void ga_gfw_eval(const occ::handle<GeomFill_SweepFunction>& f,double u,int np,in
  show2d(p2);showv2d(dp2);showv2d(d2p2);ga_gfs_reals(w);ga_gfs_reals(dw);ga_gfs_reals(d2w);
 }
 // The queries of a sweep function; returns NbPoles.
-int ga_gfw_queries(const occ::handle<GeomFill_SweepFunction>& f){
+int ga_gfw_queries(const occ::handle<Approx_SweepFunction>& f){
  int np=0,nk=0,deg=0;GA_TRY(ga_int(f->Nb2dCurves()));GA_TRY(f->SectionShape(np,nk,deg);ga_int(np);ga_int(nk);ga_int(deg));
  GA_TRY(NCollection_Array1<double> k(1,nk>0?nk:1);f->Knots(k);ga_int(k.Lower());ga_gfs_reals(k));
  GA_TRY(NCollection_Array1<int> m(1,nk>0?nk:1);f->Mults(m);for(int i=m.Lower();i<=m.Upper();++i)ga_int(m(i)));
@@ -99,5 +100,18 @@ void ga_gfw_sweep_case(std::istream& input){
  if(dom)sw->SetDomain(d[0],d[1],d[2],d[3]);sw->SetTolerance(t[0],t[1],t[2],t[3]);sw->SetForceApproxC1(fc);
  GA_TRY(sw->Build(s,GeomFill_ApproxStyle(m),GeomAbs_Shape(cont),degmax,segmax));ga_gfw_result(*sw);
  GA_TRY(sw->Build(s,GeomFill_ApproxStyle(m),GeomAbs_Shape(cont2),degmax,segmax));ga_gfw_result(*sw);
+ ga_end();
+}
+// `blendfunc path curve1 curve2 radius polynomial nparams params... a b`: the queries,
+// the evaluators, SetInterval(a, b) and the evaluators again.
+void ga_gfw_blend_case(std::istream& input){
+ GaReader r{input};occ::handle<Adaptor3d_Curve> p=ga_gft_curve(r),c1=ga_gft_curve(r),c2=ga_gft_curve(r);
+ double rad=r.real();bool poly=r.flag();std::vector<double> params=r.reals();double a=r.real(),b=r.real();
+ occ::handle<GeomFill_CircularBlendFunc> fn;GA_TRY(fn=new GeomFill_CircularBlendFunc(p,c1,c2,rad,poly));
+ if(fn.IsNull()){ga_end();return;}
+ int np=ga_gfw_queries(fn);
+ for(double u:params)ga_gfw_eval(fn,u,np,0);
+ GA_TRY(fn->SetInterval(a,b));GA_TRY(fn->SetTolerance(1e-5,1e-6));
+ for(double u:params)ga_gfw_eval(fn,u,np,0);
  ga_end();
 }

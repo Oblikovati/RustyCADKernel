@@ -196,6 +196,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfs_placement", gfp::placement_case),
     ("gfs_sweepfunc", gfw::function_case),
     ("gfs_sweep", gfw::sweep_case),
+    ("gfs_blendfunc", gfw::blend_case),
 ];
 
 fn main() {
