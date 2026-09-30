@@ -141,7 +141,7 @@ fn arc_tolerance(
     }
     let d1 = s.d1(u, v)?;
     Ok(compute_parametric_tolerance(
-        d.tol3d(&d.value()?)?,
+        d.tol_3d_arc(&d.value()?)?,
         d1.d1u,
         d1.d1v,
     ))

@@ -153,9 +153,6 @@ impl TheTopolTool for ProbeDomain {
     fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure> {
         TheTopolTool::is_the_point_on(&self.tool, point, tol, reframe)
     }
-    fn tol3d(&self, arc: &TheArc) -> Result<f64, Failure> {
-        TheTopolTool::tol3d(&self.tool, arc)
-    }
     fn domain_is_infinite(&self) -> bool {
         TheTopolTool::domain_is_infinite(&self.tool)
     }

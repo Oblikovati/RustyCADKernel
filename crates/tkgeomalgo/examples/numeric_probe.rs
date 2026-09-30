@@ -14,12 +14,14 @@ use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom_api, geom_api_fit, geom_api_surface, gordon};
+use ga_probe::{geom_plate, geom_plate_build};
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
 use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_poly, int_patch_tools};
+use ga_probe::{int_patch_impimp, int_patch_impprm};
 use ga_probe::{int_patch_prmprm, int_patch_wltool};
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
@@ -232,6 +234,14 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_arcf", int_patch_tools::arcf_case),
     ("ip_csf", int_patch_tools::csf_case),
     ("ip_curvature", int_patch_tools::curvature_case),
+    // IntPatch analytic intersections (ga_probe/int_patch_impimp.rs)
+    ("ip_impimp", int_patch_impimp::impimp_case),
+    ("ip_aline2wline", int_patch_impimp::aline2wline_case),
+    ("ip_special", int_patch_impimp::special_case),
+    ("ip_special_pole", int_patch_impimp::special_pole_case),
+    // IntPatch quadric-parametric intersections (ga_probe/int_patch_impprm.rs)
+    ("ip_impprm", int_patch_impprm::impprm_case),
+    ("ip_rstint", int_patch_impprm::rstint_case),
     // GeomFill sweep (ga_probe/geom_fill_*.rs)
     ("gfs_shape", gfs::shape_case),
     ("gfs_circle", gfs::circle_case),
@@ -258,6 +268,16 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_lc", int_patch_wltool::lc_case),
     ("ip_ppgrid", int_patch_prmprm::ppgrid_case),
     ("ip_ppdepart", int_patch_prmprm::ppdepart_case),
+    // GeomPlate (ga_probe/geom_plate*.rs)
+    ("gplate_point", geom_plate::point_case),
+    ("gplate_curve", geom_plate::curve_case),
+    ("gplate_curve_empty", geom_plate::curve_empty_case),
+    ("gplate_surface", geom_plate::surface_case),
+    ("gplate_average", geom_plate::average_case),
+    ("gplate_normals", geom_plate::normals_case),
+    ("gplate_halfspace", geom_plate::halfspace_case),
+    ("gplate_build", geom_plate_build::build_case),
+    ("gplate_approx", geom_plate_build::approx_case),
 ];
 
 fn main() {

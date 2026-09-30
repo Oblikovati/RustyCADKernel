@@ -690,3 +690,73 @@ line_constructor, prm_prm, intersection}`) are classes without templates; the ru
 - **Casts.** `(int)` of a double is `intf::native_int_cast` (the x86-64 conversion)
   and `std::min`/`std::max` of doubles are `intf::std_min`/`std_max`, so NaN operands
   take the native branch.
+## 17. IntPatch analytic intersections
+
+The analytic intersections of IntPatch (`IntPatch_ImpImpIntersection`,
+`IntPatch_ImpPrmIntersection`, `IntPatch_ALineToWLine`, `IntPatch_RstInt` and
+`IntPatch_SpecialPoints`, in `crates/tkgeomalgo/src/int_patch/{imp_imp, imp_prm,
+aline_to_wline, rst_int, special_points}`) are long static functions in the native
+`.cxx` files. Four rules keep them native.
+
+- **One module per native function group.** Each pair solver of
+  `IntPatch_ImpImpIntersection.cxx` (plane, cylinder, cone, sphere and torus pairs, the
+  numerical walking of two cylinders) and each phase of the implicit-parametric
+  `Perform` (start points, walking, segments, restrictions, decomposition) is a module of
+  its own; the native helper names stay in the docs (`IntCyCy`, `DecomposeResult`,
+  `ToSmooth`, `SplitOnSegments`...). The public classes keep their members: the
+  constructors that run `Perform` are `with_surfaces`, the second `MakeWLine` overload is
+  `make_wline_range`, `IntPatch_ImpImpIntersection::IntStatus` is `IntPatchImpImpStatus`.
+- **Stale locals live in state structs.** The native loops keep locals from one
+  iteration to the next (the vertex `solpnt` and the underlying vertex of `PutPointsOnLine`,
+  the `aPrePointExist`/`PrePoint` pair of `DecomposeResult`, the counters of the arc
+  shifts of `IntPatch_RstInt`, the loop state of `MakeWLine`); they are fields of one
+  struct per loop, so every stale read is the native one.
+- **Lines and domains.** The surfaces are `Adaptor3dSurfaceHandle`; the domains are
+  `&(dyn TheTopolTool + 'static)` (the IntStart trait of section 12, which gains the
+  defaulted `has_3d`, `tol_3d_arc`, `tol_3d_vertex`, `arc_orientation` and
+  `vertex_orientation` that `Adaptor3dTopolTool` answers). The result lines are
+  `Handle<dyn IntPatchLine>`; a native `occ::down_cast` that the code then dereferences
+  is a `cast` whose null raises Standard_NullObject. `IntPatch_RLine`'s implicit copy
+  constructor, which `DecomposeResult` uses, is the crate method `duplicate` (the arcs and
+  the point set stay shared handles, as the native copy shares them).
+- **Native arithmetic.** `std::min`/`std::max` are the `std_min`/`std_max` of
+  `geom2d::native`, the negated comparisons (`!(d <= tol)`) keep the native branch for NaN
+  operands, and `std::sort` on the short arrays of `IntCyCy` is the libstdc++ insertion
+  sort of at most 16 elements. The protected members that the probe reaches
+  (`StepComputing`, `CheckDeflection`, `GetSectionRadius`, `CorrectEndPoint`,
+  `ProcessSphere`, `ProcessCone`, `GetTangentToIntLineForCone`) are public.
+
+## 19. GeomPlate
+
+GeomPlate (`crates/tkgeomalgo/src/geom_plate`) has no `.gxx` template; four constructs
+need a rule.
+
+- **The plate surface is a Geom surface.** `GeomPlate_Surface` derives from
+  `Geom_Surface`, so `GeomPlateSurface` implements the tkg3d traits `GeomGeometry` and
+  `GeomSurface` and registers as `GeomPlate_Surface` under `Geom_Surface`
+  (`impl_transient!`); every Geom and adaptor algorithm takes it through
+  `Handle<dyn GeomSurface>`. It holds its initial surface, a copy of the solved
+  `PlatePlate` (the native member is a copy) and its bounds, which `SetBounds` edits on
+  a shared surface, behind a `SharedState`.
+- **Shared constraints.** `GeomPlate_CurveConstraint` and `GeomPlate_PointConstraint`
+  are transients that the caller and the builder share (the builder changes their
+  number of points and 2d curves in `Perform`), so each is a handle-shared struct with
+  its fields in a `SharedState`. `LPropSurf` returns a reference to the member
+  `GeomLProp_SLProps`, which `LocalAnalysis_SurfaceContinuity::ComputeAnalysis` then
+  updates; the port keeps that object in its own lock and returns the write guard.
+- **The builder.** `GeomPlate_BuildPlateSurface` keeps its constraint sequences as
+  vectors of handles (1-based access with the native Standard_OutOfRange), its two
+  `Plate_Plate` values, and its `Extrema_ExtPS` projector as `ExtPS<'static>` on a
+  shared adaptor handle (`ExtPS::initialize_shared`, section 15): natively the
+  projector points to a local `GeomAdaptor_Surface` of the member that initializes it,
+  and every projection happens while that local lives. Its private members are
+  methods in the files `perform`, `surf_init`, `projection`, `intersect`, `discretise`,
+  `load`, `verif`, `contour` and `errors` of `geom_plate::build_plate_surface`.
+- **Approximation callbacks.** `GeomPlate_MakeApprox_Eval` implements the tkgeombase
+  trait `AdvApp2VarEvaluatorFunc2Var`; its surface evaluations can raise, and the
+  callback cannot return `Result`, so the first failure is kept (`FailureCapture` in a
+  `RefCell`), the error code reports it, and `MakeApprox` raises it when
+  `AdvApp2Var_ApproxAFunc2Var` returns, where the native exception would unwind
+  through the approximation. `GeomPlate_PlateG0Criterion` and
+  `GeomPlate_PlateG1Criterion` implement `AdvApp2VarCriterion` and read the patch
+  coefficients through `AdvApp2Var_Patch::Coefficients` as natively.

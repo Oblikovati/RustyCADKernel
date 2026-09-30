@@ -31,6 +31,7 @@ use rustycad_tkmath::gp::{Point2, Point3};
 
 /// The fields of `IntPatch_RLine` (`ParamInf1`...`ParamSup2` are never set natively
 /// beyond their 0 initial values and have no reader, so they are not kept).
+#[derive(Clone)]
 struct RLineState {
     arc_on_s1: TheArc,
     arc_on_s2: TheArc,
@@ -91,6 +92,17 @@ impl IntPatchRLine {
     /// `IntPatch_RLine(Tang)`: undecided transitions. `IntPatchRLine::new_undecided(false)`.
     pub fn new_undecided(tang: bool) -> Self {
         Self::with_transitions(tang, IntPatchLineTransitions::Undecided)
+    }
+
+    /// A copy of the line (the implicit copy constructor `IntPatch_RLine(const
+    /// IntPatch_RLine&)`): the arcs and the point set stay shared handles, the vertices
+    /// and the fields are copied. `let copy = line.duplicate();`.
+    pub(crate) fn duplicate(&self) -> Self {
+        Self {
+            transient: StandardTransient::default(),
+            base: self.base.duplicate(),
+            state: SharedState::new(self.state.read().clone()),
+        }
     }
 
     /// The point set, or the Standard_DomainError of a line without one.
@@ -296,5 +308,24 @@ impl IntPatchPointLine for IntPatchRLine {
     }
     fn is_out_box(&self, p: Point3) -> Result<bool, Failure> {
         Ok(self.points("IsOutBox")?.is_out_box(p))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn duplicate_copies_the_vertices_and_shares_the_point_set() {
+        let line = IntPatchRLine::new(true, IntSurfTypeTrans::In, IntSurfTypeTrans::Out);
+        let points = Handle::new(IntSurfLineOn2S::new(None));
+        line.add(&points);
+        line.add_vertex(&IntPatchPoint::new(), false);
+        let copy = line.duplicate();
+        copy.clear_vertexes();
+        // The copy owns its vertices and fields, as the native copy constructor.
+        assert_eq!((line.nb_vertex(), copy.nb_vertex()), (1, 0));
+        assert!(copy.is_tangent() && copy.transition_on_s2() == IntSurfTypeTrans::Out);
+        assert_eq!(copy.curve().object_address(), points.object_address());
     }
 }

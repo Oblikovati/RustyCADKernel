@@ -67,3 +67,8 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intpatch').append_intpatch_requests(requests)
     # GeomFill sweep part (tkgeomalgo_corpus_geomfill_*.py)
     __import__('tkgeomalgo_corpus_geomfill_sweep').append_geomfill_sweep_requests(requests)
+    # GeomPlate (tkgeomalgo_corpus_geomplate.py)
+    __import__('tkgeomalgo_corpus_geomplate').append_geomplate_requests(requests)
+    # IntPatch analytic intersections (tkgeomalgo_corpus_intpatch_impimp.py, _impprm.py)
+    __import__('tkgeomalgo_corpus_intpatch_impimp').append_intpatch_impimp_requests(requests)
+    __import__('tkgeomalgo_corpus_intpatch_impprm').append_intpatch_impprm_requests(requests)

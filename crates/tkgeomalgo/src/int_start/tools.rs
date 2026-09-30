@@ -26,7 +26,7 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dSurface, Adaptor3dTopolTool};
-use rustycad_tkg3d::top_abs::State;
+use rustycad_tkg3d::top_abs::{Orientation, State};
 use rustycad_tkmath::gp::{Direction2, Point2, Point3, Vector3};
 use rustycad_tkmath::math::{FunctionSetWithDerivatives, FunctionWithDerivative, Vector};
 
@@ -80,9 +80,6 @@ pub trait TheTopolTool {
     // section 18).
     /// `IsThePointOn(P, Tol, ReacdreOnPeriodic)`.
     fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure>;
-    /// `Tol3d(C)`: the 3d tolerance of the arc (Standard_DomainError without a 3d
-    /// representation).
-    fn tol3d(&self, arc: &TheArc) -> Result<f64, Failure>;
     /// `DomainIsInfinite()`.
     fn domain_is_infinite(&self) -> bool;
     /// `SamplePnts(theDefl, theNUmin, theNVmin)`.
@@ -93,6 +90,43 @@ pub trait TheTopolTool {
     fn v_parameters(&self) -> Result<Array1<'static, f64>, Failure>;
     /// `IsUniformSampling()`.
     fn is_uniform_sampling(&self) -> Result<bool, Failure>;
+    /// `Has3d()`: whether the restrictions carry 3d data (false for the base
+    /// `Adaptor3d_TopolTool`). IntPatch_RstInt reads it.
+    fn has_3d(&self) -> bool {
+        false
+    }
+    /// `Tol3d(C)`: the 3d tolerance of an arc; the base domain raises
+    /// Standard_DomainError (no 3d representation).
+    fn tol_3d_arc(&self, _arc: &TheArc) -> Result<f64, Failure> {
+        Err(no_3d_representation())
+    }
+    /// `Tol3d(V)`: the 3d tolerance of a vertex; the base domain raises
+    /// Standard_DomainError.
+    fn tol_3d_vertex(&self, _vertex: &TheVertex) -> Result<f64, Failure> {
+        Err(no_3d_representation())
+    }
+    /// `Orientation(C)`: the orientation of an arc (FORWARD for the base domain).
+    /// IntPatch_ImpPrmIntersection reads it.
+    fn arc_orientation(&self, _arc: &TheArc) -> Orientation {
+        Orientation::Forward
+    }
+    /// `Orientation(V)`: the orientation of a vertex (its own one for the base domain).
+    fn vertex_orientation(&self, vertex: &TheVertex) -> Result<Orientation, Failure> {
+        vertex.get().map(|v| v.orientation()).ok_or_else(|| {
+            Failure::with_message(
+                "Standard_NullObject",
+                "Adaptor3d_TopolTool::Orientation() - the vertex handle is null; expected a vertex",
+            )
+        })
+    }
+}
+
+/// The Standard_DomainError of `Tol3d` on a domain without 3d data.
+fn no_3d_representation() -> Failure {
+    Failure::with_message(
+        "Standard_DomainError",
+        "Adaptor3d_TopolTool: has no 3d representation",
+    )
 }
 
 /// `TheSOBTool`: the static members the boundary search calls on the arcs and vertices.
@@ -310,9 +344,6 @@ impl TheTopolTool for Adaptor3dTopolTool {
             self, point, tol, reframe,
         ))
     }
-    fn tol3d(&self, arc: &TheArc) -> Result<f64, Failure> {
-        self.curve_tol_3d(arc)
-    }
     fn domain_is_infinite(&self) -> bool {
         Adaptor3dTopolTool::domain_is_infinite(self)
     }
@@ -327,6 +358,21 @@ impl TheTopolTool for Adaptor3dTopolTool {
     }
     fn is_uniform_sampling(&self) -> Result<bool, Failure> {
         Adaptor3dTopolTool::is_uniform_sampling(self)
+    }
+    fn has_3d(&self) -> bool {
+        Adaptor3dTopolTool::has_3d(self)
+    }
+    fn tol_3d_arc(&self, arc: &TheArc) -> Result<f64, Failure> {
+        self.curve_tol_3d(arc)
+    }
+    fn tol_3d_vertex(&self, vertex: &TheVertex) -> Result<f64, Failure> {
+        Adaptor3dTopolTool::vertex_tol_3d(self, vertex)
+    }
+    fn arc_orientation(&self, arc: &TheArc) -> Orientation {
+        self.curve_orientation(arc)
+    }
+    fn vertex_orientation(&self, vertex: &TheVertex) -> Result<Orientation, Failure> {
+        Adaptor3dTopolTool::vertex_orientation(self, vertex)
     }
 }
 

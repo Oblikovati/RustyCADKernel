@@ -73,6 +73,16 @@ it with BRepAdaptor_CompCurve, which the port does not provide and which needs
 TKShHealing, absent from the shared native build. Its three other cases run as the
 behavior tests of `geom_fill_corrected_frenet_behavior`.
 
+GeomPlate_BuildPlateSurface_Test.cxx is not mapped: its A1 and A2 cases (and the shared
+helper of the file) build their boundaries as `BRepAdaptor_Curve` of edges made by
+`BRepBuilderAPI_MakeEdge` (TKTopAlgo), which the port does not provide (the native suite
+itself compiles and passes against the shared build, which links TKTopAlgo). Its six
+cases run as behavior tests (`geom_plate_behavior`): the same Bezier curves go through
+`GeomAdaptor_Curve` on their natural range, which the edge of `MakeEdge` evaluates
+identically, and the progress observer checks the same scope names
+(`Calculating the surface filled`, `Plate_Plate::SolveTI1()`, `math_Gauss
+LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
+
 ## API mapping
 
 - GccEnt: the static members of the `GccEnt` class are free functions of
@@ -191,6 +201,21 @@ behavior tests of `geom_fill_corrected_frenet_behavior`.
   (`gordon_params`, `gordon_contacts`, `gordon_normalize`, `gordon_order`,
   `gordon_reorder`, `gordon_reparam`, `gordon_rebuild`, `gordon_network`,
   `gordon_fallback`).
+- GeomPlate ([geomalgo-design.md](geomalgo-design.md) section 19): the classes are
+  `GeomPlateBuildPlateSurface`, `GeomPlateSurface` (a `GeomSurface`),
+  `GeomPlateCurveConstraint` and `GeomPlatePointConstraint` (handle-shared, their fields
+  behind a lock), `GeomPlateMakeApprox`, `GeomPlatePlateG0Criterion` and
+  `GeomPlatePlateG1Criterion` (`AdvApp2VarCriterion`), `GeomPlateBuildAveragePlane`
+  and `GeomPlateAij`. Overloads take distinct names: the builder constructors
+  `with_curves` (the old arrays), `with_surface` and `new`, `add_curve`/`add_point`,
+  `G0Error(Index)` as `g0_error_of` (and G1, G2); `GeomPlateCurveConstraint::empty`
+  and `new`; `GeomPlatePointConstraint::with_point` and `on_surface`;
+  `GeomPlateMakeApprox::with_criterion` and `with_order`;
+  `GeomPlateBuildAveragePlane::new` and `with_normals`. `LPropSurf` returns the write
+  guard of the member `GeomLProp_SLProps`, `D1`/`D2` of the constraints return
+  `GeomSurfaceD1`/`GeomSurfaceD2` (the point constraint's `D1` a tuple), and the
+  private `ProjectedCurve` of the builder, which nothing calls natively, is kept as a
+  crate method with a unit test.
 
 - IntPatch (the core; docs/geomalgo-design.md section 16): `IntPatch_Line` and
   `IntPatch_PointLine` are the traits `IntPatchLine` and `IntPatchPointLine` over an
@@ -220,6 +245,15 @@ behavior tests of `geom_fill_corrected_frenet_behavior`.
   `of_self`; `Perform(one)` is `perform_self`). `IntPatch_Polygo` is the trait
   `IntPatchPolygo` over `Polygon2d`; `IntPatch_PolyLine`'s setters are `set_w_line` and
   `set_r_line`, `IntPatch_PolyArc::Closed` is `is_closed`.
+- IntPatch analytic intersections (docs/geomalgo-design.md section 17):
+  `IntPatch_ImpImpIntersection`, `IntPatch_ImpPrmIntersection`, `IntPatch_ALineToWLine`,
+  `IntPatch_RstInt` and `IntPatch_SpecialPoints` map member by member (45 api rows, all
+  implemented). The constructors that run `Perform` are `with_surfaces`; the second
+  `MakeWLine` is `make_wline_range`; `IntStatus` is the enum `IntPatchImpImpStatus`; the
+  static classes are unit structs with associated functions. The protected members the
+  probe reaches (`StepComputing`, `CheckDeflection`, `GetSectionRadius`,
+  `CorrectEndPoint`, `ProcessSphere`, `ProcessCone`, `GetTangentToIntLineForCone`) are
+  public and have rows. The five classes have no GoogleTest suite at this commit.
 
 - GeomFill (sweep part, [geomalgo-design.md](geomalgo-design.md) section 14): the
   trihedron, location and section laws are the traits `GeomFillTrihedronLaw`,
@@ -557,13 +591,14 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 26843 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 27588 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
 with TopClass 1116, Geom2dGcc 3968, IntWalk 717, IntCurveSurface 3077, and the GeomFill
 filling classes 568, IntStart 674, IntPolyh 522, GeomAPI 1980, and GeomFill Gordon and
-NetworkSurface 145, the IntPatch core 924, and the GeomFill sweep classes 1075.
+NetworkSurface 145, the IntPatch core 924, the GeomFill sweep classes 1075, and GeomPlate
+163, and the IntPatch analytic intersections 582.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -928,6 +963,25 @@ the arcs as restriction lines. `ip_ppgrid` and `ip_ppdepart` run the grid member
 `PointDepart` on crossing, tangent, disjoint and far apart surface pairs. Left out: a
 restriction line on neither surface, whose part between two vertices dereferences a null arc
 natively.
+IntPatch analytic intersections: 582 requests (`tkgeomalgo_corpus_intpatch_impimp.py`
+348, `tkgeomalgo_corpus_intpatch_impprm.py` 234). `ip_impimp` (153) intersects every pair
+of plane, cylinder, cone, sphere and torus patches in coaxial, secant, tangent,
+coincident, disjoint and near-degenerate positions (axes 1e-9 rad from parallel, gaps and
+radius differences of 1e-9 to 1e-11, a cone of semi-angle 1e-9), on bounded and natural
+domains, with two tolerance sets and the flag that keeps the restriction lines; a pair
+without a quadric raises Standard_ConstructionError. `ip_aline2wline` (40) converts the
+analytic lines of ten pairs with four settings (point counts, tolerances, a range);
+`ip_special` (89) and `ip_special_pole` (66) run every `IntPatch_SpecialPoints` member on
+poles, apexes, seams and degenerate tangents. `ip_impprm` (210) intersects plane,
+cylinder, cone and sphere patches with Bezier, B-spline (C0 included), offset,
+revolution, extrusion and trimmed patches in both orders, with patches through the poles,
+the apex and the seams, patches whose edges lie on the quadric (restriction lines),
+two tolerance sets and a fine step, the start point, a second `Perform`, a far patch and
+the pairs without a quadric; `ip_rstint` (24) puts the restriction vertices of a
+cylinder and of plane patches on walking and restriction lines, with and without end
+vertices, run once and twice. Left out: `IntPatch_RstInt` on an analytic or conic line
+and `DecomposeResult` on a restriction line without a point set (both dereference a null
+handle natively).
 
 ## Preserved native behaviour
 
@@ -1285,6 +1339,26 @@ degree overflow, zero and negative weights, too few curves, a wrong grid size an
 Performs. The hyperbola-circle pair of `gapi_ecc` is left out: natively it does not
 return.
 
+GeomPlate (163 requests, `tkgeomalgo_corpus_geomplate.py`): `gplate_point` and
+`gplate_curve` read every member of the point and curve constraints (points, 3d lines,
+circles and Bezier curves, 2d lines and Bezier curves on planes, cylinders, spheres and
+Bezier surfaces; criterion laws; projected curves and their approximation; the setters;
+the order and law exceptions), `gplate_curve_empty` the empty curve constraint;
+`gplate_surface` evaluates GeomPlate_Surface (D0 to D2, the D3/DN/IsCNu exceptions,
+bounds, a copy and a plate surface on a plate surface) on five initial surfaces;
+`gplate_average`, `gplate_normals` and `gplate_halfspace` run the average plane of point
+clouds (every option, lines, degenerate clouds), of normal sets (one, two, opposite,
+many) and successive HalfSpace calls; `gplate_build` performs 47 builders (the three
+constructors; point constraints of order G0 to G2; closed and open Bezier contours with
+and without initial surface; G1 and G2 contours of curves on planes, cylinders and
+spheres, reordered and reversed; mixed G0/G1 and G1/G1 corners; criterion laws; degrees 2
+to 6, one to four iterations, tolerances and the anisotropy flag; the non-linear first
+plate with the free and incremental loops; construction errors) and reads every result,
+the out-of-range constraint indices and both contours; `gplate_approx` runs MakeApprox
+with CritOrder -1 to 2, C0 to C2 (and the refused G1), and explicit G0 and G1 criteria.
+Values that native OCCT leaves uninitialized are not read (see the quirks below), and a
+glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every request.
+
 ### GeomFill (filling part)
 
 - `GeomFill_SectionGenerator::SetParam` shares the given array and copies it into itself
@@ -1471,6 +1545,39 @@ return.
   `PointDepart` clears the neighbours of a cell only in the first map. `RemplitLin` sets
   only the first cell of each halved segment, so between cells two apart the middle cell
   stays unset.
+### IntPatch analytic intersections
+
+- `IntPatch_ImpImpIntersection`: the plane-plane and cone-torus pairs do not update the
+  empty flag, and the plane-cone pair answers a failure for an empty result. `IntCyCo`
+  gives its tangent point the parameters of the first quadric twice. `PointOnSecondDom`
+  reads the vertex count again after each vertex (the added vertices are visited too) and
+  leaves the current point at the last one its vertex search read. `PutPointsOnLine`
+  keeps the vertex and the underlying vertex of the previous point for a new point. The
+  restriction line check keeps the side, arc and range of the previous line when a line
+  has no arc or no end point. `FindLine` replaces the parameter list with those of an
+  accepted analytic line but appends those of the arc search and of the chosen conic.
+  `IntCySp` does not test the open ends; `IntCyCo`, `IntCoCo` and `IntCoSp` evaluate the
+  curve at the last parameter tried when no tangent is found, which can raise.
+- `IntPatch_RstInt::PutVertexOnLine`: the counter of the periodic shifts is not reset
+  between the V shifts (a torus runs the three U shifts with the first V shift only); the
+  V2 loop of `Recadre` on a torus compares with V1 of the point first; the result of
+  `Project` is not tested (the parameter is kept when the projection fails); the end
+  points of an arc at its vertices are computed and unused.
+- `IntPatch_ImpPrmIntersection`: `DecomposeResult` adjusts the point set of each line in
+  place (U in `[0, 2 Pi]`, snapped to the bounds, seam points inserted) even when the line
+  is not decomposed, and a line of at most two points or a restriction line that is not an
+  isoline is dropped from the result when another line is decomposed. `ToSmooth` of the
+  last end runs its sampling loop from `NbPoints - max(NbPoints/5, 5) - 2` to
+  `max(NbPoints/5, 5)`, which iterates only on lines of 11 and 12 points: elsewhere the
+  mean step is 0, a smoothed last point takes the U of its neighbour exactly, and
+  `AddVertices` never adds the last vertex. The torus case
+  of the decomposition is unreachable (a torus is no quadric of this intersection), and
+  `SplitOnSegments` is called with `Tang` false. The trimmed arc of a restriction part is
+  discarded (the call only raises).
+- `IntPatch_ALineToWLine::MakeWLine` keeps the stale reads of its loops (the parameters of
+  the reference point reused for the special points) and the fall-throughs of
+  `IsPoleOrSeam`; `IntPatch_SpecialPoints::ProcessCone` keeps its input U when no
+  generatrix is chosen, and `FuncPreciseSeam` answers false on any Standard_Failure.
 
 ## IntStart deviations
 
@@ -1573,6 +1680,59 @@ return.
   raises. The empty pipe's `Perform` dereferences null adaptors (not in the corpus).
 - `GeomFill::Surface` leaves two trimmed coaxial circles to `GeomFill_Generator`.
 
+### GeomPlate
+
+- `Perform` without constraint returns with the plate reset, so `IsDone()` is true and
+  `Surface()` null, as the native test notes.
+- `G0Error(Index)`, `G1Error(Index)` and `G2Error(Index)` gather the gaps into arrays of
+  `NbPtsOnCur` values while `EcartContraintesMil` writes one value per interval of the
+  curve: a curve with fewer intervals (or of order -1) leaves values uninitialized
+  natively (zeros here; never read by the corpus), one with more raises
+  Standard_OutOfRange. The global errors are uninitialized until a check ran (points
+  only, a failed plate).
+- `EcartContraintesMil` and `VerifSurface` read at least three intervals: a curve with
+  fewer than three parameters reads past them (Standard_OutOfRange).
+- The G2 constraints pass the second derivatives `(D2U, D2V, D2UV)` to
+  `Plate_D2(duu, duv, dvv)`, so D2V becomes `duv` and D2UV `dvv`, for the target and the
+  initial surface alike.
+- `VerifPoints` overwrites its distance, angle and curvature with each point, so only the
+  last point constraint of each order counts; the results are discarded by `Perform`.
+- `Disc2dContour` and `Disc3dContour` start their samples at the second interval (the
+  quarter points of the first interval are skipped), ignore their count argument, and
+  initialize the projector (with the current tolerances in 2d, the resolutions of Tol3d
+  in 3d).
+- `ComputeSurfInit` sums the curve lengths for a point count it never uses, and its
+  non-linear branch leaves the intermediate plate surface in `Surface()` when the later
+  plate fails.
+- When a curve has no continuous projection, `Perform` approximates the current plate
+  surface, which it has just nullified unless the non-linear branch set it: natively a
+  null dereference (Standard_NullObject here, not in the corpus).
+- `GeomPlate_Surface::Copy` keeps the initial surface and the plate but not the bounds;
+  `UPeriod`/`VPeriod` return 0 (a `false` converted to a real) instead of raising;
+  `Continuity` is C0, `IsCNu`/`IsCNv` raise Standard_Failure, `EvalD3`/`EvalDN` raise
+  Geom_UndefinedDerivative, and the reversing and transforming members do nothing.
+- `GeomPlate_MakeApprox` with a CritOrder outside -1..=1 computes nothing and leaves both
+  errors uninitialized (zero here).
+- `GeomPlate_BuildAveragePlane` leaves its box uninitialized when no plane is found, and
+  a flux normal (option 2) with no boundary points gives a null frame whose line raises
+  Standard_ConstructionError; the normals constructor raises Standard_OutOfRange without
+  normals (`OptVec(0)`).
+- `GeomPlate_PointConstraint(Pt, Order)` accepts orders -1 to 1 although its message
+  says "0 or -1".
+
+## GeomPlate deviations
+
+- Null handles that the native code dereferences (a missing surface or law, the
+  `LPropSurf` of a point without surface, the criteria of the empty curve constraint, a
+  null initial surface in `Bounds` of GeomPlate_Surface) raise Standard_NullObject or
+  give the stored bounds.
+- The projector of the builder holds its adaptor through a shared handle
+  (`ExtPS::initialize_shared`); natively it points to a local adaptor, which dies when
+  the member that initialized it returns.
+- A surface failure inside the MakeApprox evaluator is kept, reported by the error code
+  and raised when `AdvApp2Var_ApproxAFunc2Var` returns
+  ([geomalgo-design.md](geomalgo-design.md) section 19).
+
 ## IntCurveSurface deviations
 
 - The polyhedron arrays keep the native 1-based layout: index 0 is the origin with
@@ -1632,6 +1792,22 @@ return.
 - The locals the native `Perform` bodies read before any assignment on some branches (the
   parameters of a section point of the `Intf_EXTERNAL` type) keep their previous value, 0 at
   first.
+## IntPatch analytic-intersection deviations
+
+- `ProcessBounds` of `IntPatch_ImpImpIntersection` loops forever natively on a line list
+  that holds a line other than an analytic one (the loop does not advance); no caller
+  builds such a list, and the port raises Standard_ProgramError.
+- A native `occ::down_cast` that the code dereferences (`FindLine` on another line kind,
+  `IntPatch_RstInt` on an analytic or conic line, `DecomposeResult` on a restriction line
+  without a point set, `MakeWLine` on a null line) raises Standard_NullObject or
+  Standard_DomainError instead of crashing.
+- `IntPatch_RstInt` omits the `nbTreated` bookkeeping of the native merge: the counter
+  never reaches the value that would change the flow.
+- The quadric parameters of a point on an unset quadric are 0 (natively uninitialized);
+  the intersections always set their quadrics, so no result depends on them.
+- `IntPatch_RLine` gains the crate copy `duplicate` for `DecomposeResult`, and the domain
+  trait `TheTopolTool` gains defaulted 3d tolerance and orientation queries that
+  `IntPatch_RstInt` calls.
 
 ## GeomFill sweep-part deviations
 

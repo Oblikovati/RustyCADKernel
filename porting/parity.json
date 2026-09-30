@@ -164172,6 +164172,110 @@
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
     },
     {
+      "upstream_id": "IntPatch_ALineToWLine(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::new",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::CheckDeflection(const gp_XYZ&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::check_deflection",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::CorrectEndPoint(occ::handle<IntSurf_LineOn2S>&,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::correct_end_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::GetSectionRadius(const gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::get_section_radius",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::MakeWLine(const occ::handle<IntPatch_ALine>&,NCollection_Sequence<occ::handle<IntPatch_Line>>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::make_wline",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::MakeWLine(const occ::handle<IntPatch_ALine>&,double,double,NCollection_Sequence<occ::handle<IntPatch_Line>>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::make_wline_range",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::SetTol3D(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::set_tol_3d",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::SetTolOpenDomain(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::set_tol_open_domain",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::SetTolTransition(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::set_tol_transition",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::StepComputing(const occ::handle<IntPatch_ALine>&,const IntSurf_PntOn2S&,double,double,double,double,double,double,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::step_computing",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::Tol3D() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::tol_3d",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::TolOpenDomain() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::tol_open_domain",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ALineToWLine::TolTransition() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchALineToWLine::tol_transition",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_aline2wline requests)."
+    },
+    {
       "upstream_id": "IntPatch_ArcFunction()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ArcFunction.hxx",
@@ -171556,6 +171660,190 @@
       "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
     },
     {
+      "upstream_id": "IntPatch_ImpImpIntersection()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::new",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::with_surfaces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::GetStatus() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::get_status",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IntStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpStatus",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::is_done",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::is_empty",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::Line(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::line",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::NbLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::nb_lines",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::NbPnts() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::nb_pnts",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::OppositeFaces() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::opposite_faces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::perform",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::TangentFaces() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::tangent_faces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::new",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::with_surfaces",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::is_done",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::is_empty",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::Line(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::line",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::NbLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::nb_lines",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::NbPnts() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::nb_pnts",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::perform",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpPrmIntersection::SetStartPoint(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpPrmIntersection::set_start_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impprm requests)."
+    },
+    {
       "upstream_id": "IntPatch_InterferencePolyhedron()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_InterferencePolyhedron.hxx",
@@ -172370,6 +172658,1630 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::point_depart",
       "status": "implemented",
       "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_RstInt::PutVertexOnLine(const occ::handle<IntPatch_Line>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_RstInt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchRstInt::put_vertex_on_line",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_rstint and ip_impprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AddCrossUVIsoPoint(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,double,IntSurf_PntOn2S&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::add_cross_uv_iso_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AddPointOnUorVIso(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,bool,double,const math_Vector&,const math_Vector&,const math_Vector&,const math_Vector&,IntSurf_PntOn2S&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::add_point_on_u_or_v_iso",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AddSingularPole(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,IntPatch_Point&,IntSurf_PntOn2S&,bool,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::add_singular_pole",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::AdjustPointAndVertex(const IntSurf_PntOn2S&,const double*,IntSurf_PntOn2S&,IntPatch_Point* const)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::adjust_point_and_vertex",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::ContinueAfterSpecialPoint(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const IntSurf_PntOn2S&,IntPatch_SpecPntType,double,IntSurf_PntOn2S&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::continue_after_special_point",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::GetTangentToIntLineForCone(double,const gp_XYZ&,gp_XYZ*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::get_tangent_to_int_line_for_cone",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special_pole requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::ProcessCone(const IntSurf_PntOn2S&,const gp_Vec&,const gp_Vec&,const gp_Cone&,bool,double&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::process_cone",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special_pole requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "IntPatch_SpecialPoints::ProcessSphere(const IntSurf_PntOn2S&,const gp_Vec&,const gp_Vec&,bool,double,double&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecialPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecialPoints::process_sphere",
+      "status": "implemented",
+      "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_special_pole requests). Protected natively; public here so the probe can reach it."
+    },
+    {
+      "upstream_id": "GeomPlate_Aij()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Aij.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateAij::new",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Aij(int,int,const gp_Vec&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Aij.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateAij::with_values",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane(const occ::handle<NCollection_HArray1<gp_Pnt>>&,int,double,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::new",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane(const NCollection_Sequence<gp_Vec>&,const occ::handle<NCollection_HArray1<gp_Pnt>>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::with_normals",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane::Plane() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::plane",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane::Line() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::line",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane::IsPlane() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::is_plane",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane::IsLine() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::is_line",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane::MinMaxBox(double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::min_max_box",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildAveragePlane::HalfSpace(const NCollection_Sequence<gp_Vec>&,NCollection_Sequence<gp_Vec>&,NCollection_Sequence<GeomPlate_Aij>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildAveragePlane.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildAveragePlane::half_space",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface(const occ::handle<NCollection_HArray1<int>>&,const occ::handle<NCollection_HArray1<occ::handle<Adaptor3d_Curve>>>&,const occ::handle<NCollection_HArray1<int>>&,int,int,double,double,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::with_curves",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface(const occ::handle<Geom_Surface>&,int,int,int,double,double,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::with_surface",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface(int,int,int,double,double,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::new",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Init()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::init",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::LoadInitSurface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::load_init_surface",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Add(const occ::handle<GeomPlate_CurveConstraint>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::add_curve",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::SetNbBounds(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::set_nb_bounds",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Add(const occ::handle<GeomPlate_PointConstraint>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::add_point",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::perform",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::CurveConstraint(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::curve_constraint",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::PointConstraint(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::point_constraint",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Disc2dContour(int,NCollection_Sequence<gp_XY>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::disc2d_contour",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Disc3dContour(int,int,NCollection_Sequence<gp_XYZ>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::disc3d_contour",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::is_done",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::surface",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::SurfInit() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::surf_init",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Sense() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::sense",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Curves2d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::curves2d",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::Order() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::order",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::G0Error() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::g0_error",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::G1Error() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::g1_error",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::G2Error() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::g2_error",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::G0Error(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::g0_error_of",
+      "status": "implemented",
+      "notes": "Natively the gaps go to arrays of NbPtsOnCur values: a curve with fewer intervals reads uninitialized values (zeros in Rust), one with more raises Standard_OutOfRange. GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::G1Error(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::g1_error_of",
+      "status": "implemented",
+      "notes": "Natively the gaps go to arrays of NbPtsOnCur values: a curve with fewer intervals reads uninitialized values (zeros in Rust), one with more raises Standard_OutOfRange. GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_BuildPlateSurface::G2Error(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_BuildPlateSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateBuildPlateSurface::g2_error_of",
+      "status": "implemented",
+      "notes": "Natively the gaps go to arrays of NbPtsOnCur values: a curve with fewer intervals reads uninitialized values (zeros in Rust), one with more raises Standard_OutOfRange. GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::empty",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint(const occ::handle<Adaptor3d_Curve>&,int,int,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::new",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::SetOrder(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::set_order",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::Order() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::order",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::nb_points",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::SetNbPoints(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::set_nb_points",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::SetG0Criterion(const occ::handle<Law_Function>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::set_g0_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::SetG1Criterion(const occ::handle<Law_Function>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::set_g1_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::SetG2Criterion(const occ::handle<Law_Function>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::set_g2_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::G0Criterion(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::g0_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::G1Criterion(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::g1_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::G2Criterion(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::g2_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::FirstParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::first_parameter",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::LastParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::last_parameter",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::Length() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::length",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::LPropSurf(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::lprop_surf",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::D0(double,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::d0",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::D1(double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::d1",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::D2(double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::d2",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::Curve3d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::curve3d",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::SetCurve2dOnSurf(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::set_curve2d_on_surf",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::Curve2dOnSurf() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::curve2d_on_surf",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::SetProjectedCurve(const occ::handle<Adaptor2d_Curve2d>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::set_projected_curve",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::ProjectedCurve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::projected_curve",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::DEFINE_STANDARD_RTTIEXT(GeomPlate_CurveConstraint,Standard_Transient)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateCurveConstraint::static_type",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_MakeApprox(const occ::handle<GeomPlate_Surface>&,const AdvApp2Var_Criterion&,double,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_MakeApprox.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateMakeApprox::with_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_MakeApprox(const occ::handle<GeomPlate_Surface>&,double,int,int,double,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_MakeApprox.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateMakeApprox::with_order",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_MakeApprox::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_MakeApprox.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateMakeApprox::surface",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_MakeApprox::ApproxError() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_MakeApprox.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateMakeApprox::approx_error",
+      "status": "implemented",
+      "notes": "A CritOrder outside -1..=1 leaves it uninitialized natively; zero in Rust. GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_MakeApprox::CriterionError() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_MakeApprox.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateMakeApprox::criterion_error",
+      "status": "implemented",
+      "notes": "A CritOrder outside -1..=1 leaves it uninitialized natively; zero in Rust. GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PlateG0Criterion(const NCollection_Sequence<gp_XY>&,const NCollection_Sequence<gp_XYZ>&,double,AdvApp2Var_CriterionType,AdvApp2Var_CriterionRepartition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PlateG0Criterion.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePlateG0Criterion::new",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PlateG0Criterion::Value(AdvApp2Var_Patch&,const AdvApp2Var_Context&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PlateG0Criterion.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePlateG0Criterion::value",
+      "status": "implemented",
+      "notes": "The AdvApp2VarCriterion trait member (docs/geomalgo-design.md section 19). GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PlateG0Criterion::IsSatisfied(const AdvApp2Var_Patch&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PlateG0Criterion.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePlateG0Criterion::is_satisfied",
+      "status": "implemented",
+      "notes": "The AdvApp2VarCriterion trait member (docs/geomalgo-design.md section 19). GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PlateG1Criterion(const NCollection_Sequence<gp_XY>&,const NCollection_Sequence<gp_XYZ>&,double,AdvApp2Var_CriterionType,AdvApp2Var_CriterionRepartition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PlateG1Criterion.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePlateG1Criterion::new",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PlateG1Criterion::Value(AdvApp2Var_Patch&,const AdvApp2Var_Context&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PlateG1Criterion.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePlateG1Criterion::value",
+      "status": "implemented",
+      "notes": "The AdvApp2VarCriterion trait member (docs/geomalgo-design.md section 19). GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PlateG1Criterion::IsSatisfied(const AdvApp2Var_Patch&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PlateG1Criterion.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePlateG1Criterion::is_satisfied",
+      "status": "implemented",
+      "notes": "The AdvApp2VarCriterion trait member (docs/geomalgo-design.md section 19). GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint(const gp_Pnt&,int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::with_point",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint(double,double,const occ::handle<Geom_Surface>&,int,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::on_surface",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::SetOrder(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::set_order",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::Order() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::order",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::SetG0Criterion(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::set_g0_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::SetG1Criterion(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::set_g1_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::SetG2Criterion(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::set_g2_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::G0Criterion() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::g0_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::G1Criterion() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::g1_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::G2Criterion() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::g2_criterion",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::D0(gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::d0",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::D1(gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::d1",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::D2(gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::d2",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::HasPnt2dOnSurf() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::has_pnt2d_on_surf",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::SetPnt2dOnSurf(const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::set_pnt2d_on_surf",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::Pnt2dOnSurf() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::pnt2d_on_surf",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::LPropSurf()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::lprop_surf",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::DEFINE_STANDARD_RTTIEXT(GeomPlate_PointConstraint,Standard_Transient)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::static_type",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface(const occ::handle<Geom_Surface>&,const Plate_Plate&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::new",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::UReverse()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::u_reverse",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::UReversedParameter(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::VReverse()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::v_reverse",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::VReversedParameter(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::TransformParameters(double&,double&,const gp_Trsf&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::transform_parameters",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::ParametricTransformation(const gp_Trsf&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::parametric_transformation",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::Bounds(double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::bounds",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::IsUClosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::IsVClosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::IsUPeriodic() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::UPeriod() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::u_period",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::IsVPeriodic() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::VPeriod() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::v_period",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::UIso(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::u_iso",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::VIso(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::v_iso",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::continuity",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::IsCNu(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::is_cn_u",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::IsCNv(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::is_cn_v",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::EvalD0(double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::eval_d0",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::EvalD1(double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::eval_d1",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::EvalD2(double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::eval_d2",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::EvalD3(double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::eval_d3",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::EvalDN(double,double,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::eval_dn",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::Copy() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::copy",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::Transform(const gp_Trsf&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::transform",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::CallSurfinit() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::call_surfinit",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::SetBounds(double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::set_bounds",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::RealBounds(double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::real_bounds",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::Constraints(NCollection_Sequence<gp_XY>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::constraints",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::DEFINE_STANDARD_RTTIEXT(GeomPlate_Surface,Geom_Surface)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::static_type",
+      "status": "implemented",
+      "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BndBoxState",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BndBoxState",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::with_edge_face",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::Face() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::face",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetEdge(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_face",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::NextEdge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::next_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetNextEdge(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_next_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::MaxTolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetMaxTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::UseBndBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetUseBndBox(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetGeometry(const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_geometry",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetBoundingBox(const Bnd_Box2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_bounding_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetBoundingBoxUnavailable()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_bounding_box_unavailable",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::Curve() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::curve",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::FirstParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::first_parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::LastParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::last_parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BoundingBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::bounding_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BoundingBoxState() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::bounding_box_state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Reset(const gp_Lin2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::reset",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Compare(const BRepClass_Edge&,TopAbs_Orientation)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::compare",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Parameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Intersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::intersector",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::ClosestIntersection() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::closest_intersection",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::IsHeadOrEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::is_head_or_end",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier(BRepClass_FaceExplorer&,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::with_point",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Perform(BRepClass_FaceExplorer&,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::perform",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Rejected() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::rejected",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::NoWires() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::no_wires",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::EdgeParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::edge_parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Position() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::position",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier(BRepClass_FaceExplorer&,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::with_explorer",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier(const TopoDS_Face&,const gp_Pnt2d&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::with_face_point2d",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier::Perform(const TopoDS_Face&,const gp_Pnt2d&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::perform",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier(const TopoDS_Face&,const gp_Pnt&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::with_face_point3d",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier::Perform(const TopoDS_Face&,const gp_Pnt&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::perform_point3d",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::CheckPoint(gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::check_point",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::Reject(const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::reject",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::Segment(const gp_Pnt2d&,gp_Lin2d&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::segment",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::OtherSegment(const gp_Pnt2d&,gp_Lin2d&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::other_segment",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::InitWires()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::init_wires",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::MoreWires() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::more_wires",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::NextWire()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::next_wire",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::RejectWire(const gp_Lin2d&,double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::reject_wire",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::InitEdges()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::init_edges",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::MoreEdges() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::more_edges",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::NextEdge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::next_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::RejectEdge(const gp_Lin2d&,double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::reject_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::CurrentEdge(BRepClass_Edge&,TopAbs_Orientation&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::current_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::MaxTolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::SetMaxTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::set_max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::UseBndBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::SetUseBndBox(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::set_use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::ShouldUseBndBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::should_use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Reset(const gp_Lin2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::reset",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Compare(const BRepClass_Edge&,TopAbs_Orientation)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::compare",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Parameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Intersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::intersector",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::ClosestIntersection() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::closest_intersection",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::IsHeadOrEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::is_head_or_end",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Intersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassIntersector::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Intersector::Perform(const gp_Lin2d&,double,double,const BRepClass_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassIntersector::perform",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Intersector::LocalGeometry(const BRepClass_Edge&,double,gp_Dir2d&,gp_Dir2d&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassIntersector::local_geometry",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
     }
   ],
   "tests": [

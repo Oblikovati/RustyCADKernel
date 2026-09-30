@@ -112,9 +112,12 @@ impl TheTopolTool for WtDomain {
     fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure> {
         TheTopolTool::is_the_point_on(&self.tool, point, tol, reframe)
     }
-    fn tol3d(&self, arc: &TheArc) -> Result<f64, Failure> {
+    fn has_3d(&self) -> bool {
+        self.tol >= 0.0
+    }
+    fn tol_3d_arc(&self, arc: &TheArc) -> Result<f64, Failure> {
         if self.tol < 0.0 {
-            return TheTopolTool::tol3d(&self.tool, arc);
+            return TheTopolTool::tol_3d_arc(&self.tool, arc);
         }
         Ok(self.tol)
     }

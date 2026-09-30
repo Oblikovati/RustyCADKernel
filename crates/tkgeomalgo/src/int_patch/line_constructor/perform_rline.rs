@@ -108,7 +108,11 @@ fn is_inside_other(
     // The native code always tests the second domain, also when it initialized the
     // first one (`myDom1->Init(); if (myDom2->More())` when the arc is on S2).
     if side.domains.d2.more() {
-        *tol = compute_parametric_tolerance(other_dom.tol3d(&other_dom.value()?)?, d1.d1u, d1.d1v);
+        *tol = compute_parametric_tolerance(
+            other_dom.tol_3d_arc(&other_dom.value()?)?,
+            d1.d1u,
+            d1.d1v,
+        );
     }
     // Le 23 mars 1999.
     let mut bornin: State = side.classify((uo, vo), *tol)?;
