@@ -3,7 +3,7 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_class, brep_class3d,
+    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_check, brep_class, brep_class3d,
     brep_top_adaptor, int_curves_face, mat, mat_parts,
 };
 
@@ -61,6 +61,15 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("tp_mat2d_cut", mat_parts::mat2d_cut_case),
     ("tp_mat2d_minipath", mat_parts::mat2d_minipath_case),
     ("tp_mat2d_tool", mat_parts::mat2d_tool_case),
+    // BRepCheck and BRepLib_ValidateEdge (tp_probe/brep_check.rs, shapes of
+    // tp_probe/shapes.rs)
+    ("bck_status", brep_check::status_case),
+    ("bck_add", brep_check::add_case),
+    ("bck_prec", brep_check::prec_case),
+    ("bck_selfint", brep_check::selfint_case),
+    ("bck_check", brep_check::check_case),
+    ("ble_validate", brep_check::validate_case),
+    ("bck_analyze", brep_check::analyze_case),
     // BRepBndLib (tp_probe/brep_bnd_lib.rs, shapes of tp_probe/shape.rs)
     ("bbl_add", brep_bnd_lib::add_case),
     // BRepClass3d (tp_probe/brep_class3d.rs, shapes of tp_probe/shape.rs)

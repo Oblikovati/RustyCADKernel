@@ -195,3 +195,46 @@ structs (the subclasses were not ported when they were written), so:
   point, its parameters and its derivatives travel together in `FacePointSample`, and
   the `U1, V1, U2, V2` bounds of `PointInTheFace` are one `UvRectangle`. The getters
   of the tree selectors return tuples. Overloads take distinct Rust names.
+
+## 6. BRepCheck and BRepLib_ValidateEdge: the result classes
+
+BRepCheck derives six checkers (`Vertex`, `Edge`, `Wire`, `Face`, `Shell`, `Solid`) from
+the abstract transient `BRepCheck_Result`, whose protected data every checker writes and
+whose pure virtual members (`InContext`, `Minimum`, `Blind`) the base `Init` calls. The
+port follows geom-design.md (abstract classes with protected data):
+
+- `BRepCheck_Result` is the trait `BRepCheckResult` (registered with
+  `impl_transient_interface!`), and its protected data is the struct `ResultBase`, which
+  each checker embeds as its parent field and returns from one required accessor. The
+  non-virtual members of the base (`Init`, `SetFailStatus`, `Status`, the context
+  iterator, `SetParallel`, `IsStatusOnShape`, `StatusOnShape(S)`) are provided methods
+  written once; `InContext`, `Minimum` and `Blind` are required methods.
+- Every member takes `&self`, as the analyzer and its parallel functor reach the checkers
+  through shared handles natively. `ResultBase` keeps its fields (the shape, the
+  `myMin`/`myBlind`/`myIsParallel` flags, the map of status lists and the context
+  iterator) behind `SharedState`, and each checker its own fields likewise. The native
+  mutex guards the map only in parallel mode; the port always locks, which changes no
+  result.
+- A status list is shared natively (`Handle(NCollection_Shared<NCollection_List>)`): a
+  member fetches the list of a shape under the lock, releases it, then appends to the
+  list. The port keeps the lists as `Arc<SharedState<ListOfStatus>>` in the map, so the
+  appends reach the same list. `Status()` and `StatusOnShape()` return copies of the
+  lists; Standard_NoSuchObject when the shape has none (a DataMap `Find` natively).
+- The map of status lists keeps the native `NCollection_DataMap` with
+  `TopTools_ShapeMapHasher`, so the context iterator visits the context shapes in the
+  order of their hash, which follows the TShape addresses on both sides. That order is
+  therefore not compared: the probes read each context shape by key.
+- The members that can raise (the geometric checks, the constructors that call
+  `Minimum`) return `Result`. The analyzer catches a failure of `InContext` as the native
+  `catch (Standard_Failure)` blocks do and records `BRepCheck_CheckFail`.
+- The file-local helper classes (`BRepCheck_ParallelAnalyzer`, `BRepCheck_ToolSolid`,
+  `BRepCheck_HSC`) are private items of the modules that use them;
+  `BRepCheck_ParallelAnalyzer` is a friend of `BRepCheck_Result` natively and locks the
+  checkers' mutex itself, which the port does through the shared status lists.
+- `BRepCheck_Analyzer` keeps its native `NCollection_IndexedDataMap<TopoDS_Shape,
+  Handle(BRepCheck_Result)>` with the default hasher (`IsEqual`: the orientation counts),
+  so a sub-shape met with two orientations has two checkers, as natively. A compound or a
+  compsolid has a null checker.
+- `BRepLib_ValidateEdge` (a BRepLib class that BRepCheck_Edge uses) is the struct
+  `BRepLibValidateEdge` in `brep_lib::validate_edge`; it owns handles to the two
+  adaptors, as natively.

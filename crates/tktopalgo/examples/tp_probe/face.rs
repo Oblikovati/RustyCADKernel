@@ -110,7 +110,7 @@ fn other_surface(
 
 /// `tp_surface`: a plane, cylinder, sphere, trimmed plane, cone, torus, Bezier or
 /// B-spline surface.
-fn surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
+pub fn surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
     let kind = r.integer();
     let (p, n) = (point(r), direction(r)?);
     if kind >= 4 {

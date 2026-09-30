@@ -2,3 +2,5 @@
 
 //! OCCT package BRepLib. Not ported yet: its classes land in this module when
 //! the package is ported (docs/tktopalgo-progress.md lists the ported packages).
+mod validate_edge;
+pub use validate_edge::BRepLibValidateEdge;
