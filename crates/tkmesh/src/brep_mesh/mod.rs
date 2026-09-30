@@ -24,3 +24,6 @@ pub use curve_tessellator::BRepMeshCurveTessellator;
 
 mod edge_discret;
 pub use edge_discret::BRepMeshEdgeDiscret;
+
+mod range_splitter;
+pub use range_splitter::{ConeRangeSplitter, DefaultRangeSplitter, RangeSplitter, SurfaceNodes};

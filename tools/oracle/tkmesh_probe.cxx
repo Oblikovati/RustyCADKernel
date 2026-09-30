@@ -59,6 +59,7 @@ void mesh_pcurve(std::istream& input) {
     GA_TRY(curve->GetPoint(-1));GA_TRY(curve->GetIndex(count+1));GA_TRY(curve->GetParameter(-1));
     ga_flag(curve->IsKind(STANDARD_TYPE(IMeshData_ParametersList)));ga_end();
 }
+#include "tkmesh_probe_range_splitter.cxx"
 int main(){
     std::string line;
     while(std::getline(std::cin,line)){
@@ -82,6 +83,7 @@ int main(){
         else if(operation=="mesh_edge_discret")mesh_edge_discret(input);
         else if(operation=="mesh_edge_tessellate")mesh_edge_tessellate(input);
         else if(operation=="mesh_edge_callback")mesh_edge_callback(input);
+        else if(operation=="mesh_range")mesh_range(input);
         else if(operation=="mesh_tools")mesh_tools(input);
         else if(operation=="mesh_explorer")mesh_explorer(input);
         else {std::cerr<<"Unknown probe operation: "<<operation<<'\n';return 2;}

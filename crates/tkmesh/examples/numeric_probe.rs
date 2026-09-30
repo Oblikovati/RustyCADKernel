@@ -112,6 +112,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_curve_refinement" => mesh_probe::curve_tessellator::curve_refinement_case(values),
         "mesh_edge_discret" => mesh_probe::edge_discret::edge_discret_case(values),
         "mesh_edge_tessellate" => mesh_probe::edge_discret::edge_tessellate_case(values),
+        "mesh_range" => mesh_probe::range_splitter::range_case(values),
         "mesh_edge_callback" => mesh_probe::edge_discret::edge_callback_case(),
         "mesh_tools" => mesh_probe::tools::tools_case(values[0]),
         "mesh_explorer" => mesh_probe::tools::explorer_case(values[0], values[1] != 0),
