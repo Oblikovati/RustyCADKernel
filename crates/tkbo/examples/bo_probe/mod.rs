@@ -56,6 +56,7 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 }
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
+        "face_clip" => face_face::clip_case(v),
         "face_state" => face_face::case(v),
         "context_compute" => context_compute::case(v),
         "tools_curves" => tools_curves::case(v),
@@ -183,3 +184,6 @@ fn surface_copy_cases(sample: &SurfaceRangeSample) {
     other.set_sample_range_v(w);
     surface_state(&other);
 }
+
+#[path = "../../src/int_tools/face_face/plane_clip.rs"]
+mod face_plane_clip;

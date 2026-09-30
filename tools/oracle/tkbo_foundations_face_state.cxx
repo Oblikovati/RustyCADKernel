@@ -21,3 +21,15 @@ void bo_face_state_case(const std::vector<double>& v) {
  }
  ff.SetContext(occ::handle<IntTools_Context>());bo_face_state(ff);
 }
+
+#ifdef TKBO_FACEFACE_PRIVATE_PROBE
+extern bool ClassifyLin2d(const occ::handle<GeomAdaptor_Surface>&, const gp_Lin2d&, const double, double&, double&);
+void bo_face_clip_case(const std::vector<double>& v) {
+ occ::handle<Geom_Surface> plane=new Geom_Plane(gp::XOY());
+ occ::handle<GeomAdaptor_Surface> surface=new GeomAdaptor_Surface(plane,v[0],v[1],v[2],v[3]);
+ gp_Lin2d line(gp_Pnt2d(v[4],v[5]),gp_Dir2d(v[6],v[7]));
+ double first=9,last=10;bo_int(ClassifyLin2d(surface,line,v[8],first,last));
+ bo_real(first);bo_real(last);
+}
+
+#endif
