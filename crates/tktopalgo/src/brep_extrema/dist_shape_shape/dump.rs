@@ -59,28 +59,50 @@ impl BRepExtremaDistShapeShape {
         text += &coordinates(&self.point_on_shape1(i)?);
         text += "the coordinates of  the point on the second shape are: \n";
         text += &coordinates(&self.point_on_shape2(i)?);
-        text += &match kind1 {
+        text += &self.first_parameters_text(i, kind1)?;
+        text += &self.second_parameters_text(i, kind2)?;
+        Ok(text + "\n")
+    }
+
+    /// The parameter line of the solution `i` on the first shape (none on a vertex).
+    fn first_parameters_text(
+        &self,
+        i: i32,
+        kind: BRepExtremaSupportType,
+    ) -> Result<String, Failure> {
+        Ok(match kind {
             BRepExtremaSupportType::IsVertex => String::new(),
-            BRepExtremaSupportType::IsOnEdge => format!(
-                "parameter on the first edge :  t= {}\n",
-                g(self.par_on_edge_s1(i)?)
-            ),
+            BRepExtremaSupportType::IsOnEdge => {
+                format!(
+                    "parameter on the first edge :  t= {}\n",
+                    g(self.par_on_edge_s1(i)?)
+                )
+            }
             BRepExtremaSupportType::IsInFace => {
                 let (u, v) = self.par_on_face_s1(i)?;
                 format!("parameters on the first face :  u= {} v={}\n", g(u), g(v))
             }
-        };
-        text += &match kind2 {
+        })
+    }
+
+    /// The parameter line of the solution `i` on the second shape (none on a vertex).
+    fn second_parameters_text(
+        &self,
+        i: i32,
+        kind: BRepExtremaSupportType,
+    ) -> Result<String, Failure> {
+        Ok(match kind {
             BRepExtremaSupportType::IsVertex => String::new(),
-            BRepExtremaSupportType::IsOnEdge => format!(
-                "parameter on the second edge : t={}\n",
-                g(self.par_on_edge_s2(i)?)
-            ),
+            BRepExtremaSupportType::IsOnEdge => {
+                format!(
+                    "parameter on the second edge : t={}\n",
+                    g(self.par_on_edge_s2(i)?)
+                )
+            }
             BRepExtremaSupportType::IsInFace => {
                 let (u, v) = self.par_on_face_s2(i)?;
                 format!("parameters on the second face : u= {} v={}\n", g(u), g(v))
             }
-        };
-        Ok(text + "\n")
+        })
     }
 }

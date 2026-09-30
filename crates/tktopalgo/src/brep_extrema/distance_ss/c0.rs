@@ -3,9 +3,10 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The extra solutions of an edge-edge distance at the C1 breaks of a C0 curve.
-use super::helpers::{accepts, min_of, near, tri_solution};
+use super::helpers::{accepts, nearest_extrema, tri_solution};
 use crate::brep_builder_api::BRepBuilderAPIMakeVertex;
-use crate::brep_extrema::{BRepExtremaExtPC, BRepExtremaSolutionElem, BRepExtremaSupportType};
+use crate::brep_extrema::solution_elem::on_edge;
+use crate::brep_extrema::{BRepExtremaExtPC, BRepExtremaSolutionElem};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{Edge, Vertex};
 use rustycad_tkernel::ncollection::Array1;
@@ -109,18 +110,13 @@ impl C0Search<'_> {
         (udeb, ufin): (f64, f64),
     ) -> Result<(), Failure> {
         let nb_extrema: i32 = if ext.is_done() { ext.nb_ext()? } else { 0 };
-        if nb_extrema <= 0 {
+        let square_distance = |i: i32| ext.square_distance(i);
+        let nearest = nearest_extrema(nb_extrema, square_distance, self.dst_ref, self.eps)?;
+        let Some((dst_min, indices)) = nearest else {
             return Ok(());
-        }
-        let dst_min: f64 = min_of(nb_extrema, |i| ext.square_distance(i))?.sqrt();
-        if !accepts(dst_min, self.dst_ref, self.eps) {
-            return Ok(());
-        }
+        };
         let eps_p: f64 = precision::p_confusion();
-        for ii in 1..=nb_extrema {
-            if !near(dst_min, ext.square_distance(ii)?.sqrt(), self.eps) {
-                continue;
-            }
+        for ii in indices {
             let pt: Point3 = ext.point(ii)?;
             // Pt is on the other edge: S2 for the first side, S1 for the second one.
             let known = if side.first {
@@ -154,15 +150,8 @@ impl C0Search<'_> {
         if *self.m_dst_ref > dst {
             *self.m_dst_ref = dst;
         }
-        let sol1 =
-            BRepExtremaSolutionElem::with_edge(dst, point, BRepExtremaSupportType::IsOnEdge, e, t);
-        let sol2 = BRepExtremaSolutionElem::with_edge(
-            dst,
-            pt,
-            BRepExtremaSupportType::IsOnEdge,
-            e_other,
-            t_other,
-        );
+        let sol1: BRepExtremaSolutionElem = on_edge(dst, point, e, t);
+        let sol2: BRepExtremaSolutionElem = on_edge(dst, pt, e_other, t_other);
         let (first, second) = if side.first {
             (sol1, sol2)
         } else {

@@ -5,7 +5,7 @@
 //! The vertex-vertex step of `BRepExtrema_DistShapeShape`.
 use super::BRepExtremaDistShapeShape;
 use super::tasks::{TaskSolution, index_bands, lock, run_tasks, task_ranges};
-use crate::brep_extrema::{BRepExtremaSolutionElem, BRepExtremaSupportType};
+use crate::brep_extrema::solution_elem::on_vertex;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{self, Vertex};
 use rustycad_tkbrep::toptools::IndexedMapOfShape;
@@ -51,33 +51,11 @@ impl VertexTask<'_> {
             for index2 in 1..=count2 {
                 let (vertex2, point2) = vertex_point(self.map2, index2)?;
                 let dist: f64 = point1.distance(&point2);
-                let sol1 = || {
-                    BRepExtremaSolutionElem::with_vertex(
-                        dist,
-                        point1,
-                        BRepExtremaSupportType::IsVertex,
-                        &vertex1,
-                    )
+                let pair = || {
+                    let sol1 = on_vertex(dist, point1, &vertex1);
+                    (vec![sol1], vec![on_vertex(dist, point2, &vertex2)])
                 };
-                let sol2 = || {
-                    BRepExtremaSolutionElem::with_vertex(
-                        dist,
-                        point2,
-                        BRepExtremaSupportType::IsVertex,
-                        &vertex2,
-                    )
-                };
-                if dist < solution.dist - self.eps {
-                    solution.shape1 = vec![sol1()];
-                    solution.shape2 = vec![sol2()];
-                    solution.dist = dist;
-                } else if (dist - solution.dist).abs() < self.eps {
-                    solution.shape1.push(sol1());
-                    solution.shape2.push(sol2());
-                    if solution.dist > dist {
-                        solution.dist = dist;
-                    }
-                }
+                solution.offer(dist, self.eps, pair);
             }
         }
         Ok(())
@@ -121,18 +99,9 @@ impl BRepExtremaDistShapeShape {
             return Ok(false);
         }
         for slot in solutions {
-            let solution: TaskSolution = slot
-                .into_inner()
-                .unwrap_or_else(|poison| poison.into_inner());
-            if solution.dist < self.my_dist_ref - self.my_eps {
-                self.my_solutions_shape1 = solution.shape1;
-                self.my_solutions_shape2 = solution.shape2;
-                self.my_dist_ref = solution.dist;
-            } else if (solution.dist - self.my_dist_ref).abs() < self.my_eps {
-                self.my_solutions_shape1.extend(solution.shape1);
-                self.my_solutions_shape2.extend(solution.shape2);
-                self.my_dist_ref = solution.dist;
-            }
+            let solution: TaskSolution = slot.into_inner().unwrap_or_else(|p| p.into_inner());
+            // An equal task distance replaces the reference here (map-to-map only lowers it).
+            self.merge_task_solution(solution, true);
         }
         Ok(true)
     }

@@ -43,6 +43,32 @@ impl SearchState {
         }
         self.modif = true;
     }
+
+    /// The nearest extrema of an overload against the reference (see
+    /// `helpers::nearest_extrema`).
+    fn nearest_extrema(
+        &self,
+        nb: i32,
+        square_distance: impl Fn(i32) -> Result<f64, Failure>,
+    ) -> Result<Option<(f64, Vec<i32>)>, Failure> {
+        helpers::nearest_extrema(nb, square_distance, self.dst_ref, self.eps)
+    }
+
+    /// Lowers the reference to `dst`, marks the solution improved and appends the pair
+    /// of solutions.
+    fn push_pair(
+        &mut self,
+        dst: f64,
+        (sol1, sol2): (BRepExtremaSolutionElem, BRepExtremaSolutionElem),
+        (seq1, seq2): (
+            &mut Vec<BRepExtremaSolutionElem>,
+            &mut Vec<BRepExtremaSolutionElem>,
+        ),
+    ) {
+        self.improve(dst);
+        seq1.push(sol1);
+        seq2.push(sol2);
+    }
 }
 
 /// `BRepExtrema_DistanceSS` (docs/topalgo-design.md section 13): the solutions of the

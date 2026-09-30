@@ -31,23 +31,33 @@ fn pair_task(
             break;
         }
         drop(scope.next(1.0));
-        for index2 in 1..=step.boxes2.len() as i32 {
-            let box1 = &step.boxes1[index1 as usize - 1];
-            let box2 = &step.boxes2[index2 as usize - 1];
-            if box1.is_void() || box2.is_void() {
-                continue;
-            }
-            let distance: f64 = box1.distance(box2);
-            if distance - dist_ref < eps {
-                pairs.push(CheckPair {
-                    index1,
-                    index2,
-                    distance,
-                });
-            }
-        }
+        row_pairs(step, index1, (dist_ref, eps), &mut pairs);
     }
     pairs
+}
+
+/// The pairs of the row `index1` whose non-void boxes are within the reference.
+fn row_pairs(
+    step: &MapPair<'_>,
+    index1: i32,
+    (dist_ref, eps): (f64, f64),
+    pairs: &mut Vec<CheckPair>,
+) {
+    let box1 = &step.boxes1[index1 as usize - 1];
+    for index2 in 1..=step.boxes2.len() as i32 {
+        let box2 = &step.boxes2[index2 as usize - 1];
+        if box1.is_void() || box2.is_void() {
+            continue;
+        }
+        let distance: f64 = box1.distance(box2);
+        if distance - dist_ref < eps {
+            pairs.push(CheckPair {
+                index1,
+                index2,
+                distance,
+            });
+        }
+    }
 }
 
 /// `std::stable_sort` with the comparator `theLeft.Distance < theRight.Distance`.
@@ -109,20 +119,9 @@ impl DistanceTask<'_> {
         let options = (ExtFlag::MinMax, ExtAlgo::Grad);
         let tool =
             BRepExtremaDistanceSS::new(shape1, shape2, boxes, solution.dist, self.eps, options)?;
-        let dist: f64 = tool.dist_value();
-        if !tool.is_done() {
-            return Ok(());
-        }
-        if dist < solution.dist - self.eps {
-            solution.shape1 = tool.seq1_value().to_vec();
-            solution.shape2 = tool.seq2_value().to_vec();
-            solution.dist = tool.dist_value();
-        } else if (dist - solution.dist).abs() < self.eps {
-            solution.shape1.extend_from_slice(tool.seq1_value());
-            solution.shape2.extend_from_slice(tool.seq2_value());
-            if solution.dist > dist {
-                solution.dist = dist;
-            }
+        if tool.is_done() {
+            let pair = || (tool.seq1_value().to_vec(), tool.seq2_value().to_vec());
+            solution.offer(tool.dist_value(), self.eps, pair);
         }
         Ok(())
     }
@@ -236,16 +235,23 @@ impl BRepExtremaDistShapeShape {
     /// The merge of the task solutions of a map-to-map step, in task order.
     fn merge_task_solutions(&mut self, solutions: Vec<TaskSolution>) {
         for solution in solutions {
-            if solution.dist < self.my_dist_ref - self.my_eps {
-                self.my_solutions_shape1 = solution.shape1;
-                self.my_solutions_shape2 = solution.shape2;
+            self.merge_task_solution(solution, false);
+        }
+    }
+
+    /// The merge of one task result: a smaller distance (by more than the deflection)
+    /// replaces the solutions; an equal one (within it) is appended and replaces the
+    /// reference (`replace_equal`, the vertex-vertex step) or only lowers it.
+    pub(super) fn merge_task_solution(&mut self, solution: TaskSolution, replace_equal: bool) {
+        if solution.dist < self.my_dist_ref - self.my_eps {
+            self.my_solutions_shape1 = solution.shape1;
+            self.my_solutions_shape2 = solution.shape2;
+            self.my_dist_ref = solution.dist;
+        } else if (solution.dist - self.my_dist_ref).abs() < self.my_eps {
+            self.my_solutions_shape1.extend(solution.shape1);
+            self.my_solutions_shape2.extend(solution.shape2);
+            if replace_equal || self.my_dist_ref > solution.dist {
                 self.my_dist_ref = solution.dist;
-            } else if (solution.dist - self.my_dist_ref).abs() < self.my_eps {
-                self.my_solutions_shape1.extend(solution.shape1);
-                self.my_solutions_shape2.extend(solution.shape2);
-                if self.my_dist_ref > solution.dist {
-                    self.my_dist_ref = solution.dist;
-                }
             }
         }
     }

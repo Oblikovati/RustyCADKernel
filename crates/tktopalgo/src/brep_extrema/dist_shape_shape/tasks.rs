@@ -73,6 +73,30 @@ impl Default for TaskSolution {
     }
 }
 
+impl TaskSolution {
+    /// The solutions `pair` at `dist` offered to a task: a smaller distance (by more
+    /// than `eps`) replaces the task solutions, an equal one (within it) is appended
+    /// and lowers the task distance.
+    pub(super) fn offer(
+        &mut self,
+        dist: f64,
+        eps: f64,
+        pair: impl FnOnce() -> (Vec<BRepExtremaSolutionElem>, Vec<BRepExtremaSolutionElem>),
+    ) {
+        if dist < self.dist - eps {
+            (self.shape1, self.shape2) = pair();
+            self.dist = dist;
+        } else if (dist - self.dist).abs() < eps {
+            let (shape1, shape2) = pair();
+            self.shape1.extend(shape1);
+            self.shape2.extend(shape2);
+            if self.dist > dist {
+                self.dist = dist;
+            }
+        }
+    }
+}
+
 /// The lock of a slot; a poisoned slot is recovered (a task never panics while it holds
 /// its slot, the failure transport panics after the slot is released).
 pub(super) fn lock<T>(slot: &Mutex<T>) -> MutexGuard<'_, T> {

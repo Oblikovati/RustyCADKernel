@@ -5,12 +5,12 @@
 //! The distance overloads of `BRepExtrema_DistanceSS` between edges and faces.
 use super::SearchState;
 use super::c0::C0Search;
-use super::helpers::{is_on_boundary, min_of, min_solution, near, tri_solution};
+use super::helpers::{is_in, is_on_boundary, min_solution, tri_solution};
 use crate::brep_builder_api::BRepBuilderAPIMakeVertex;
 use crate::brep_class::BRepClassFaceClassifier;
+use crate::brep_extrema::solution_elem::{in_face, on_edge};
 use crate::brep_extrema::{
-    BRepExtremaExtCC, BRepExtremaExtCF, BRepExtremaExtFF, BRepExtremaExtPF,
-    BRepExtremaSolutionElem, BRepExtremaSupportType,
+    BRepExtremaExtCC, BRepExtremaExtCF, BRepExtremaExtFF, BRepExtremaExtPF, BRepExtremaSolutionElem,
 };
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{Edge, Face};
@@ -19,22 +19,31 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
-use rustycad_tkg3d::top_abs::State;
 use rustycad_tkgeombase::extrema::{ExtAlgo, ExtFlag};
 use rustycad_tkmath::geom_abs::Shape as Continuity;
-use rustycad_tkmath::gp::{Point2, Point3};
+use rustycad_tkmath::gp::Point3;
 
 type Solutions = Vec<BRepExtremaSolutionElem>;
 
-/// Whether the face classifier puts `(u, v)` strictly inside `face`.
-fn is_in(
-    classifier: &mut BRepClassFaceClassifier,
-    face: &Face,
-    (u, v): (f64, f64),
-    tol: f64,
-) -> Result<bool, Failure> {
-    classifier.perform(face, &Point2::new(u, v), tol, false, 0.1)?;
-    Ok(classifier.state() == State::In)
+/// The number of extrema of a wrapper that is done and not parallel, else 0.
+fn nb_non_parallel(
+    is_done: bool,
+    is_parallel: impl FnOnce() -> Result<bool, Failure>,
+    nb_ext: impl FnOnce() -> Result<i32, Failure>,
+) -> Result<i32, Failure> {
+    if !is_done || is_parallel()? {
+        return Ok(0);
+    }
+    nb_ext()
+}
+
+/// The C1 break parameters of the edge curve of `adaptor` (`NbIntervals` + 1 values).
+fn c1_breaks(adaptor: &GeomAdaptorCurve) -> Result<Vec<f64>, Failure> {
+    let count: i32 = adaptor.nb_intervals(Continuity::C1)?;
+    let mut breaks: Array1<'static, f64> = Array1::with_bounds(1, 1 + count)
+        .map_err(|error| error.into_failure("BRepExtrema_DistanceSS::Perform(Edge, Face)"))?;
+    adaptor.intervals(&mut breaks, Continuity::C1)?;
+    Ok(breaks.as_slice().to_vec())
 }
 
 impl SearchState {
@@ -51,16 +60,23 @@ impl SearchState {
         if BRepTool::degenerated(s1)? || BRepTool::degenerated(s2)? {
             return Ok(());
         }
+        // PERFORM_C0 gets the reference of the entry, before the extrema lower it.
         let dst_ref: f64 = self.dst_ref;
         let ext = BRepExtremaExtCC::with_edges(s1, s2)?;
-        let nb_extrema: i32 = match ext.is_done() {
-            true if ext.is_parallel()? => 0,
-            true => ext.nb_ext()?,
-            false => 0,
-        };
-        if nb_extrema > 0 {
-            self.edge_edge_extrema(&ext, nb_extrema, (s1, s2), (seq1, seq2))?;
-        }
+        let nb_extrema: i32 =
+            nb_non_parallel(ext.is_done(), || ext.is_parallel(), || ext.nb_ext())?;
+        self.edge_edge_extrema(&ext, nb_extrema, (s1, s2), (seq1, seq2))?;
+        self.edge_edge_c0((s1, s2), dst_ref, (seq1, seq2))
+    }
+
+    /// The `PERFORM_C0` part of the edge-edge overload: its solutions at the minimum
+    /// distance that are new on one edge at least.
+    fn edge_edge_c0(
+        &mut self,
+        (s1, s2): (&Edge, &Edge),
+        dst_ref: f64,
+        (seq1, seq2): (&mut Solutions, &mut Solutions),
+    ) -> Result<(), Failure> {
         let (mut solutions1, mut solutions2) = (Vec::new(), Vec::new());
         let mut c0 = C0Search {
             seq_sol1: &mut solutions1,
@@ -71,15 +87,14 @@ impl SearchState {
         };
         c0.perform(s1, s2)?;
         let (mut seq_sol1, mut seq_sol2) = (Vec::new(), Vec::new());
-        if !solutions1.is_empty() && !solutions2.is_empty() {
-            min_solution(
-                (&solutions1, &solutions2),
-                self.dst_ref,
-                self.eps,
-                &mut seq_sol1,
-                &mut seq_sol2,
-            );
-        }
+        let solutions = (solutions1.as_slice(), solutions2.as_slice());
+        min_solution(
+            solutions,
+            self.dst_ref,
+            self.eps,
+            &mut seq_sol1,
+            &mut seq_sol2,
+        );
         for (sol1, sol2) in seq_sol1.into_iter().zip(seq_sol2) {
             if tri_solution(seq1, sol1.point()) || tri_solution(seq2, sol2.point()) {
                 seq1.push(sol1);
@@ -98,15 +113,13 @@ impl SearchState {
         (s1, s2): (&Edge, &Edge),
         (seq1, seq2): (&mut Solutions, &mut Solutions),
     ) -> Result<(), Failure> {
-        let dst_min: f64 = min_of(nb_extrema, |i| ext.square_distance(i))?.sqrt();
-        if !self.accepts(dst_min) {
+        let Some((dst_min, indices)) =
+            self.nearest_extrema(nb_extrema, |i| ext.square_distance(i))?
+        else {
             return Ok(());
-        }
+        };
         let eps_p: f64 = precision::p_confusion();
-        for i in 1..=nb_extrema {
-            if !near(dst_min, ext.square_distance(i)?.sqrt(), self.eps) {
-                continue;
-            }
+        for i in indices {
             let pt1: Point3 = ext.point_on_e1(i)?;
             let pt2: Point3 = ext.point_on_e2(i)?;
             if !(tri_solution(seq1, &pt1) || tri_solution(seq2, &pt2)) {
@@ -116,21 +129,8 @@ impl SearchState {
             let t1: f64 = ext.parameter_on_e1(i)?;
             let t2: f64 = ext.parameter_on_e2(i)?;
             if !is_on_boundary(s1, &pt1, t1, eps_p)? && !is_on_boundary(s2, &pt2, t2, eps_p)? {
-                self.improve(dst_min);
-                seq1.push(BRepExtremaSolutionElem::with_edge(
-                    dst_min,
-                    pt1,
-                    BRepExtremaSupportType::IsOnEdge,
-                    s1,
-                    t1,
-                ));
-                seq2.push(BRepExtremaSolutionElem::with_edge(
-                    dst_min,
-                    pt2,
-                    BRepExtremaSupportType::IsOnEdge,
-                    s2,
-                    t2,
-                ));
+                let pair = (on_edge(dst_min, pt1, s1, t1), on_edge(dst_min, pt2, s2, t2));
+                self.push_pair(dst_min, pair, (seq1, seq2));
             }
         }
         Ok(())
@@ -152,14 +152,9 @@ impl SearchState {
         }
         let mut classifier = BRepClassFaceClassifier::new();
         let ext = BRepExtremaExtCF::with_edge_face(s1, s2)?;
-        let nb_extrema: i32 = match ext.is_done() {
-            true if ext.is_parallel()? => 0,
-            true => ext.nb_ext(),
-            false => 0,
-        };
-        if nb_extrema > 0 {
-            self.edge_face_extrema(&ext, nb_extrema, (s1, s2), &mut classifier, (seq1, seq2))?;
-        }
+        let nb_extrema: i32 =
+            nb_non_parallel(ext.is_done(), || ext.is_parallel(), || Ok(ext.nb_ext()))?;
+        self.edge_face_extrema(&ext, nb_extrema, (s1, s2), &mut classifier, (seq1, seq2))?;
         let (curve, first, last) = BRepTool::curve(s1)?;
         let Some(geometry) = curve.get() else {
             return Ok(());
@@ -180,16 +175,13 @@ impl SearchState {
         classifier: &mut BRepClassFaceClassifier,
         (seq1, seq2): (&mut Solutions, &mut Solutions),
     ) -> Result<(), Failure> {
-        let dst_min: f64 = min_of(nb_extrema, |i| ext.square_distance(i))?.sqrt();
-        if !self.accepts(dst_min) {
+        let Some((dst_min, indices)) =
+            self.nearest_extrema(nb_extrema, |i| ext.square_distance(i))?
+        else {
             return Ok(());
-        }
+        };
         let tol: f64 = BRepTool::face_tolerance(s2)?;
-        let eps_p: f64 = precision::p_confusion();
-        for i in 1..=nb_extrema {
-            if !near(dst_min, ext.square_distance(i)?.sqrt(), self.eps) {
-                continue;
-            }
+        for i in indices {
             let pt1: Point3 = ext.point_on_edge(i)?;
             let pt2: Point3 = ext.point_on_face(i)?;
             if !(tri_solution(seq1, &pt1) || tri_solution(seq2, &pt2)) {
@@ -197,27 +189,13 @@ impl SearchState {
             }
             // Check if the parameter does not correspond to a vertex.
             let t1: f64 = ext.parameter_on_edge(i)?;
-            if is_on_boundary(s1, &pt1, t1, eps_p)? {
+            if is_on_boundary(s1, &pt1, t1, precision::p_confusion())? {
                 continue;
             }
-            let (u, v) = ext.parameter_on_face(i)?;
-            if is_in(classifier, s2, (u, v), tol)? {
-                self.improve(dst_min);
-                seq1.push(BRepExtremaSolutionElem::with_edge(
-                    dst_min,
-                    pt1,
-                    BRepExtremaSupportType::IsOnEdge,
-                    s1,
-                    t1,
-                ));
-                seq2.push(BRepExtremaSolutionElem::with_face(
-                    dst_min,
-                    pt2,
-                    BRepExtremaSupportType::IsInFace,
-                    s2,
-                    u,
-                    v,
-                ));
+            let uv: (f64, f64) = ext.parameter_on_face(i)?;
+            if is_in(classifier, s2, uv, tol)? {
+                let pair = (on_edge(dst_min, pt1, s1, t1), in_face(dst_min, pt2, s2, uv));
+                self.push_pair(dst_min, pair, (seq1, seq2));
             }
         }
         Ok(())
@@ -233,60 +211,42 @@ impl SearchState {
         classifier: &mut BRepClassFaceClassifier,
         (seq1, seq2): (&mut Solutions, &mut Solutions),
     ) -> Result<(), Failure> {
-        let count: i32 = adaptor.nb_intervals(Continuity::C1)?;
-        let mut breaks: Array1<'static, f64> = Array1::with_bounds(1, 1 + count)
-            .map_err(|error| error.into_failure("BRepExtrema_DistanceSS::Perform(Edge, Face)"))?;
-        adaptor.intervals(&mut breaks, Continuity::C1)?;
+        let breaks: Vec<f64> = c1_breaks(adaptor)?;
         let tol: f64 = BRepTool::face_tolerance(s2)?;
         let (mut solutions1, mut solutions2): (Solutions, Solutions) = (Vec::new(), Vec::new());
-        for parameter in breaks.as_slice().to_vec() {
+        for parameter in breaks {
             let point: Point3 = adaptor.value(parameter)?;
-            let vertex = BRepBuilderAPIMakeVertex::new(point)?.vertex()?;
-            let ext =
-                BRepExtremaExtPF::with_vertex_face(&vertex, s2, ExtFlag::MinMax, ExtAlgo::Grad)?;
-            let nb: i32 = if ext.is_done() { ext.nb_ext() } else { 0 };
-            if nb <= 0 {
-                continue;
-            }
-            let dst_min: f64 = min_of(nb, |i| ext.square_distance(i))?.sqrt();
-            if !self.accepts(dst_min) {
-                continue;
-            }
-            for ii in 1..=nb {
-                if !near(dst_min, ext.square_distance(ii)?.sqrt(), self.eps) {
-                    continue;
-                }
-                // Check if the parameter does not correspond to a vertex.
-                let (u, v) = ext.parameter(ii)?;
-                if !is_in(classifier, s2, (u, v), tol)? {
-                    continue;
-                }
-                self.improve(dst_min);
-                solutions1.push(BRepExtremaSolutionElem::with_edge(
-                    dst_min,
-                    point,
-                    BRepExtremaSupportType::IsOnEdge,
-                    s1,
-                    parameter,
-                ));
-                solutions2.push(BRepExtremaSolutionElem::with_face(
-                    dst_min,
-                    ext.point(ii)?,
-                    BRepExtremaSupportType::IsInFace,
-                    s2,
-                    u,
-                    v,
-                ));
-            }
+            let solutions = (&mut solutions1, &mut solutions2);
+            self.break_point((s1, s2), (parameter, point), (classifier, tol), solutions)?;
         }
-        if !solutions1.is_empty() && !solutions2.is_empty() {
-            min_solution(
-                (&solutions1, &solutions2),
-                self.dst_ref,
-                self.eps,
-                seq1,
-                seq2,
-            );
+        let solutions = (solutions1.as_slice(), solutions2.as_slice());
+        min_solution(solutions, self.dst_ref, self.eps, seq1, seq2);
+        Ok(())
+    }
+
+    /// The nearest vertex-face extrema of one break point `(parameter, point)` of the
+    /// edge `s1`, strictly inside the face `s2`.
+    fn break_point(
+        &mut self,
+        (s1, s2): (&Edge, &Face),
+        (parameter, point): (f64, Point3),
+        (classifier, tol): (&mut BRepClassFaceClassifier, f64),
+        (solutions1, solutions2): (&mut Solutions, &mut Solutions),
+    ) -> Result<(), Failure> {
+        let vertex = BRepBuilderAPIMakeVertex::new(point)?.vertex()?;
+        let ext = BRepExtremaExtPF::with_vertex_face(&vertex, s2, ExtFlag::MinMax, ExtAlgo::Grad)?;
+        let nb: i32 = if ext.is_done() { ext.nb_ext() } else { 0 };
+        let Some((dst_min, indices)) = self.nearest_extrema(nb, |i| ext.square_distance(i))? else {
+            return Ok(());
+        };
+        for ii in indices {
+            // Check if the parameter does not correspond to a vertex.
+            let uv: (f64, f64) = ext.parameter(ii)?;
+            if is_in(classifier, s2, uv, tol)? {
+                let sol1 = on_edge(dst_min, point, s1, parameter);
+                let sol2 = in_face(dst_min, ext.point(ii)?, s2, uv);
+                self.push_pair(dst_min, (sol1, sol2), (solutions1, solutions2));
+            }
         }
         Ok(())
     }
@@ -301,54 +261,33 @@ impl SearchState {
         seq2: &mut Solutions,
     ) -> Result<(), Failure> {
         let ext = BRepExtremaExtFF::with_faces(s1, s2)?;
-        let nb_extrema: i32 = match ext.is_done() {
-            true if ext.is_parallel()? => 0,
-            true => ext.nb_ext(),
-            false => 0,
+        let nb_extrema: i32 =
+            nb_non_parallel(ext.is_done(), || ext.is_parallel(), || Ok(ext.nb_ext()))?;
+        let Some((dst_min, indices)) =
+            self.nearest_extrema(nb_extrema, |i| ext.square_distance(i))?
+        else {
+            return Ok(());
         };
-        if nb_extrema <= 0 {
-            return Ok(());
-        }
-        let dst_min: f64 = min_of(nb_extrema, |i| ext.square_distance(i))?.sqrt();
-        if !self.accepts(dst_min) {
-            return Ok(());
-        }
-        let tol1: f64 = BRepTool::face_tolerance(s1)?;
-        let tol2: f64 = BRepTool::face_tolerance(s2)?;
+        let tols: (f64, f64) = (BRepTool::face_tolerance(s1)?, BRepTool::face_tolerance(s2)?);
         let mut classifier = BRepClassFaceClassifier::new();
-        for i in 1..=nb_extrema {
-            if !near(dst_min, ext.square_distance(i)?.sqrt(), self.eps) {
-                continue;
-            }
+        for i in indices {
             let pt1: Point3 = ext.point_on_face1(i)?;
             let pt2: Point3 = ext.point_on_face2(i)?;
             if !(tri_solution(seq1, &pt1) || tri_solution(seq2, &pt2)) {
                 continue;
             }
             // Check if the parameter does not correspond to a vertex.
-            let (u1, v1) = ext.parameter_on_face1(i)?;
-            if !is_in(&mut classifier, s1, (u1, v1), tol1)? {
+            let uv1: (f64, f64) = ext.parameter_on_face1(i)?;
+            if !is_in(&mut classifier, s1, uv1, tols.0)? {
                 continue;
             }
-            let (u2, v2) = ext.parameter_on_face2(i)?;
-            if is_in(&mut classifier, s2, (u2, v2), tol2)? {
-                self.improve(dst_min);
-                seq1.push(BRepExtremaSolutionElem::with_face(
-                    dst_min,
-                    pt1,
-                    BRepExtremaSupportType::IsInFace,
-                    s1,
-                    u1,
-                    v1,
-                ));
-                seq2.push(BRepExtremaSolutionElem::with_face(
-                    dst_min,
-                    pt2,
-                    BRepExtremaSupportType::IsInFace,
-                    s2,
-                    u2,
-                    v2,
-                ));
+            let uv2: (f64, f64) = ext.parameter_on_face2(i)?;
+            if is_in(&mut classifier, s2, uv2, tols.1)? {
+                let pair = (
+                    in_face(dst_min, pt1, s1, uv1),
+                    in_face(dst_min, pt2, s2, uv2),
+                );
+                self.push_pair(dst_min, pair, (seq1, seq2));
             }
         }
         Ok(())

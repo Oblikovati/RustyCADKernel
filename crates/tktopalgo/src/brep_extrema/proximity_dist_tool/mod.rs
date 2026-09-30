@@ -178,12 +178,7 @@ impl BRepExtremaProximityDistTool {
         is_additional_set: bool,
     ) -> Result<(), Failure> {
         let vtx_size: i32 = array::size(vertices1);
-        let vtx_step: i32 = (if self.my_nb_samples1 <= 0 {
-            1
-        } else {
-            vtx_size / self.my_nb_samples1
-        })
-        .max(1);
+        let vtx_step: i32 = self.sample_step(vtx_size);
         let mut vtx_idx: i32 = 0;
         while vtx_idx < vtx_size {
             self.base.set_distance(f64::MAX);
@@ -196,16 +191,30 @@ impl BRepExtremaProximityDistTool {
                 return Ok(());
             }
             if self.base.is_done() && self.base.distance() > self.my_prox_dist {
-                self.my_pnt1 = vertex;
-                self.my_pnt2 = self.my_extrema_point;
-                self.my_prox_dist = self.base.distance();
-                self.my_prox_vtx_idx1 = vtx_idx;
-                self.my_is_prox_vtx1_from_add_set = is_additional_set;
-                self.my_prox_prj_state = self.my_ext_prj_state;
+                self.record_proximity(vertex, vtx_idx, is_additional_set);
             }
             vtx_idx += vtx_step;
         }
         Ok(())
+    }
+
+    /// The step between the sampled vertices of a set of `vtx_size` vertices: the size
+    /// over the sample count (every vertex without samples), at least 1.
+    fn sample_step(&self, vtx_size: i32) -> i32 {
+        if self.my_nb_samples1 <= 0 {
+            return 1;
+        }
+        (vtx_size / self.my_nb_samples1).max(1)
+    }
+
+    /// The vertex `vertex` of index `vtx_idx` and its extrema point become the proximity.
+    fn record_proximity(&mut self, vertex: BvhVec3d, vtx_idx: i32, is_additional_set: bool) {
+        self.my_pnt1 = vertex;
+        self.my_pnt2 = self.my_extrema_point;
+        self.my_prox_dist = self.base.distance();
+        self.my_prox_vtx_idx1 = vtx_idx;
+        self.my_is_prox_vtx1_from_add_set = is_additional_set;
+        self.my_prox_prj_state = self.my_ext_prj_state;
     }
 
     /// `Perform()`: the vertices of the first set, then the additional ones, against the
@@ -332,20 +341,7 @@ impl BvhTraverse<BvhVec3d, f64> for BRepExtremaProximityDistTool {
     fn accept(&mut self, trg_idx: i32, _metric: &f64) -> Result<bool, Failure> {
         let set2 = self.my_set2.clone();
         let vertices: [BvhVec3d; 3] = set2.get_vertices(trg_idx)?;
-        let mut projection = TriangleProjectionState {
-            state: PrjStateInTriangle::Vertex,
-            first_node: -1,
-            last_node: -1,
-        };
-        let [a, b, c] = &vertices;
-        let nearest_pnt: BvhVec3d =
-            point_triangle_projection(self.base.object(), a, b, c, Some(&mut projection));
-        let prj_state = BRepExtremaPrjState::new(
-            trg_idx,
-            projection.state,
-            projection.first_node,
-            projection.last_node,
-        );
+        let (nearest_pnt, prj_state) = project_on_triangle(self.base.object(), trg_idx, &vertices);
         let direct: BvhVec3d = *self.base.object() - nearest_pnt;
         let sq_distance: f64 = direct.dot(&direct);
         // The point belongs to the triangle when it is within Confusion.
@@ -368,4 +364,26 @@ impl BvhTraverse<BvhVec3d, f64> for BRepExtremaProximityDistTool {
         }
         Ok(false)
     }
+}
+
+/// The nearest point of the triangle `trg_idx` (its `vertices`) to `object` and
+/// the projection state of that point.
+fn project_on_triangle(
+    object: &BvhVec3d,
+    trg_idx: i32,
+    [a, b, c]: &[BvhVec3d; 3],
+) -> (BvhVec3d, BRepExtremaPrjState) {
+    let mut projection = TriangleProjectionState {
+        state: PrjStateInTriangle::Vertex,
+        first_node: -1,
+        last_node: -1,
+    };
+    let nearest_pnt: BvhVec3d = point_triangle_projection(object, a, b, c, Some(&mut projection));
+    let prj_state = BRepExtremaPrjState::new(
+        trg_idx,
+        projection.state,
+        projection.first_node,
+        projection.last_node,
+    );
+    (nearest_pnt, prj_state)
 }

@@ -7,7 +7,8 @@
 use super::BRepExtremaDistShapeShape;
 use super::tasks::{lock, nb_threads, run_tasks, task_ranges};
 use crate::brep_class3d::BRepClass3dSolidClassifier;
-use crate::brep_extrema::{BRepExtremaSolutionElem, BRepExtremaSupportType};
+use crate::brep_extrema::BRepExtremaSolutionElem;
+use crate::brep_extrema::solution_elem::on_vertex;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{self, Shape};
 use rustycad_tkbrep::toptools::IndexedMapOfShape;
@@ -72,12 +73,7 @@ impl Treatment {
                 let mut found = lock(&self.found);
                 self.inner_sol.store(true, Ordering::Release);
                 self.is_done.store(true, Ordering::Release);
-                found.push(BRepExtremaSolutionElem::with_vertex(
-                    0.0,
-                    point,
-                    BRepExtremaSupportType::IsVertex,
-                    &vertex,
-                ));
+                found.push(on_vertex(0.0, point, &vertex));
                 break;
             }
         }
@@ -106,32 +102,48 @@ impl BRepExtremaDistShapeShape {
         };
         let scope =
             ProgressScope::with_literal(range, "Solid treatment", tasks.len() as f64, false);
-        let functor_range = scope.next(1.0);
+        let run = self.run_treatment(solid, &tasks, &treatment, &scope.next(1.0));
+        // The tasks write the member solutions and reference directly: they are kept
+        // when a task raises; the flags are copied back only after the loop.
+        self.add_inner_solutions(
+            treatment
+                .found
+                .into_inner()
+                .unwrap_or_else(|p| p.into_inner()),
+        );
+        run?;
+        self.my_inner_sol = treatment.inner_sol.load(Ordering::Acquire);
+        self.my_is_done = treatment.is_done.load(Ordering::Acquire);
+        Ok(scope.more())
+    }
+
+    /// The `TreatmentFunctor` tasks in the functor scope of `functor_range`.
+    fn run_treatment(
+        &self,
+        solid: &Shape,
+        tasks: &[Vec<Shape>],
+        treatment: &Treatment,
+        functor_range: &ProgressRange<'_>,
+    ) -> Result<(), Failure> {
         let functor_scope = ProgressScope::with_literal(
-            &functor_range,
+            functor_range,
             "Search for the inner solid",
             tasks.len() as f64,
             false,
         );
         let ranges = task_ranges(&functor_scope, tasks.len());
-        let run = run_tasks(tasks.len() as i32, self.my_is_multi_thread, |index| {
+        run_tasks(tasks.len() as i32, self.my_is_multi_thread, |index| {
             let i = index as usize;
             treatment.run(solid, &tasks[i], &lock(&ranges[i]))
-        });
-        // The tasks write the member solutions and reference directly: they are kept
-        // when a task raises; the flags are copied back only after the loop.
-        let found: Vec<BRepExtremaSolutionElem> = treatment
-            .found
-            .into_inner()
-            .unwrap_or_else(|p| p.into_inner());
+        })
+    }
+
+    /// The inner solutions the tasks found, on both shapes; any sets the reference to 0.
+    fn add_inner_solutions(&mut self, found: Vec<BRepExtremaSolutionElem>) {
         if !found.is_empty() {
             self.my_dist_ref = 0.0;
         }
         self.my_solutions_shape1.extend(found.iter().cloned());
         self.my_solutions_shape2.extend(found);
-        run?;
-        self.my_inner_sol = treatment.inner_sol.load(Ordering::Acquire);
-        self.my_is_done = treatment.is_done.load(Ordering::Acquire);
-        Ok(scope.more())
     }
 }

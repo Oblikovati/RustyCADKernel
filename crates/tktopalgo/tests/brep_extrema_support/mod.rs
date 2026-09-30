@@ -3,6 +3,8 @@
 //! polygons of free edges, with cell counts derived from the linear deflection.
 #![allow(dead_code)]
 
+pub mod shapes;
+
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_adaptor::{BRepAdaptorCurve, BRepAdaptorSurface};
 use rustycad_tkbrep::brep_tools;

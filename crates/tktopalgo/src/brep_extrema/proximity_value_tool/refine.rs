@@ -261,52 +261,55 @@ impl BRepExtremaProximityValueTool {
         Ok(true)
     }
 
+    /// The first or the second shape.
+    fn proximity_shape(&mut self, first: bool) -> &mut ProximityShape {
+        if first {
+            return &mut self.shape1;
+        }
+        &mut self.shape2
+    }
+
     /// `getFaceAdditionalVertices(theFace, theStep, theAddVertices, theAddStatuses)` on
     /// the first or the second shape: each triangle split recursively (the cell filter
     /// reset to the model range) until the halves are smaller than the step; false
     /// without a triangulation.
     fn face_additional_vertices(&mut self, first: bool, step: f64) -> Result<bool, Failure> {
         let tol: f64 = precision::confusion();
-        let face = topods::face(if first {
-            &self.shape1.shape
-        } else {
-            &self.shape2.shape
-        })?;
+        let face = topods::face(&self.proximity_shape(first).shape)?;
         let (tr, location) = BRepTool::triangulation(&face, mesh_purpose::NONE)?;
         let Some(triangulation) = tr.get() else {
             return Ok(false);
         };
-        let cell_size: f64 = std_max(
-            tol,
-            model_range(&location, triangulation)? / f64::from(integer_last()),
+        let range: f64 = model_range(&location, triangulation)?;
+        self.my_cells
+            .reset(std_max(tol, range / f64::from(integer_last())), None)?;
+        let state = self.proximity_shape(first);
+        let mut added = (
+            std::mem::take(&mut state.add_vertices),
+            std::mem::take(&mut state.add_status),
         );
-        self.my_cells.reset(cell_size, None)?;
-        let mut added = (BvhArray3d::default(), Vec::new());
-        {
-            let state = if first {
-                &mut self.shape1
-            } else {
-                &mut self.shape2
-            };
-            std::mem::swap(&mut added.0, &mut state.add_vertices);
-            std::mem::swap(&mut added.1, &mut state.add_status);
-        }
-        let mut result: Result<(), Failure> = Ok(());
-        for tri_idx in 1..=triangulation.nb_triangles() {
-            result = triangle_of(tri_idx, &location, &tr)
-                .and_then(|trg| self.do_recur_trg_split(trg, (tol, step), &mut added));
-            if result.is_err() {
-                break;
-            }
-        }
-        let state = if first {
-            &mut self.shape1
-        } else {
-            &mut self.shape2
-        };
-        state.add_vertices = added.0;
-        state.add_status = added.1;
+        let result = self.split_triangles((&tr, &location), (tol, step), &mut added);
+        let state = self.proximity_shape(first);
+        (state.add_vertices, state.add_status) = added;
         result.map(|()| true)
+    }
+
+    /// The recursive split of every triangle of the triangulation `tr` at `location`,
+    /// stopped at the first failure.
+    fn split_triangles(
+        &mut self,
+        (tr, location): (&Handle<Triangulation>, &Location),
+        (tol, step): (f64, f64),
+        added: &mut (BvhArray3d, Vec<BRepExtremaProxPntStatus>),
+    ) -> Result<(), Failure> {
+        let nb_triangles: i32 = tr
+            .get()
+            .map_or(0, |triangulation| triangulation.nb_triangles());
+        for tri_idx in 1..=nb_triangles {
+            let trg: SplitTriangle = triangle_of(tri_idx, location, tr)?;
+            self.do_recur_trg_split(trg, (tol, step), added)?;
+        }
+        Ok(())
     }
 
     /// `doRecurTrgSplit(theTrg, theEdgesStatus, theTol, theStep, theAddVertices,
@@ -328,6 +331,21 @@ impl BRepExtremaProximityValueTool {
         let bisected: usize = longest_link(&trg);
         let mut center: Point3 = trg[bisected];
         center.barycenter(0.5, trg[(bisected + 1) % 3], 0.5);
+        self.add_if_new((center, statuses[bisected]), tol, added)?;
+        for half in halves((trg, statuses), bisected, center) {
+            self.do_recur_trg_split(half, (tol, step), added)?;
+        }
+        Ok(())
+    }
+
+    /// Adds `center` with its status to the added vertices and to the cell filter
+    /// unless the inspector finds an added point within `tol`.
+    fn add_if_new(
+        &mut self,
+        (center, status): (Point3, BRepExtremaProxPntStatus),
+        tol: f64,
+        added: &mut (BvhArray3d, Vec<BRepExtremaProxPntStatus>),
+    ) -> Result<(), Failure> {
         let mut bounds = BoundingBox3::default();
         bounds.add_point(center);
         bounds.enlarge(tol);
@@ -335,19 +353,17 @@ impl BRepExtremaProximityValueTool {
         self.my_inspector.set_current(center.xyz());
         self.my_cells
             .inspect_range(&corner_min, &corner_max, &mut self.my_inspector);
-        if self.my_inspector.is_need_add() {
-            array::append(
-                &mut added.0,
-                BvhVec3d::new(center.x(), center.y(), center.z()),
-            );
-            added.1.push(statuses[bisected]);
-            self.my_inspector.add(center.xyz());
-            self.my_cells
-                .add_range(&array::size(&added.0), &corner_min, &corner_max);
+        if !self.my_inspector.is_need_add() {
+            return Ok(());
         }
-        for half in halves((trg, statuses), bisected, center) {
-            self.do_recur_trg_split(half, (tol, step), added)?;
-        }
+        array::append(
+            &mut added.0,
+            BvhVec3d::new(center.x(), center.y(), center.z()),
+        );
+        added.1.push(status);
+        self.my_inspector.add(center.xyz());
+        self.my_cells
+            .add_range(&array::size(&added.0), &corner_min, &corner_max);
         Ok(())
     }
 }

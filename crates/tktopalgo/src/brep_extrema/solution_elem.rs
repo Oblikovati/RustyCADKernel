@@ -137,3 +137,23 @@ impl BRepExtremaSolutionElem {
         (self.my_par1, self.my_par2)
     }
 }
+
+/// A solution on the vertex `vertex` at the distance `dst`.
+pub(crate) fn on_vertex(dst: f64, pt: Point3, vertex: &Vertex) -> BRepExtremaSolutionElem {
+    BRepExtremaSolutionElem::with_vertex(dst, pt, BRepExtremaSupportType::IsVertex, vertex)
+}
+
+/// A solution on the edge `edge` at its parameter `t`.
+pub(crate) fn on_edge(dst: f64, pt: Point3, edge: &Edge, t: f64) -> BRepExtremaSolutionElem {
+    BRepExtremaSolutionElem::with_edge(dst, pt, BRepExtremaSupportType::IsOnEdge, edge, t)
+}
+
+/// A solution inside the face `face` at its parameters `(u, v)`.
+pub(crate) fn in_face(
+    dst: f64,
+    pt: Point3,
+    face: &Face,
+    (u, v): (f64, f64),
+) -> BRepExtremaSolutionElem {
+    BRepExtremaSolutionElem::with_face(dst, pt, BRepExtremaSupportType::IsInFace, face, u, v)
+}

@@ -210,6 +210,14 @@ impl BRepExtremaProximityValueTool {
         let Some(second) = Self::compute_proximity_dist(&self.shape2, &self.shape1)? else {
             return Ok(());
         };
+        self.set_proximity(&first, &second);
+        *tolerance = self.my_distance;
+        Ok(())
+    }
+
+    /// The smaller of both directed proximities (the second on a tie) becomes the
+    /// result; the tool is done.
+    fn set_proximity(&mut self, first: &DirectedProximity, second: &DirectedProximity) {
         // The second direction measures from the second shape: its points are swapped.
         let (distance, (p1, p2), (s1, s2)) = if first.distance < second.distance {
             (first.distance, first.points, first.statuses)
@@ -226,8 +234,6 @@ impl BRepExtremaProximityValueTool {
         self.my_pnt_status1 = s1;
         self.my_pnt_status2 = s2;
         self.my_is_done = true;
-        *tolerance = self.my_distance;
-        Ok(())
     }
 
     /// `IsDone()`: true when a proximity value was computed since the last change;

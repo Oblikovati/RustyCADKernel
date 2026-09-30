@@ -218,6 +218,19 @@ pub(super) fn triangles_intersected(trng0: [&BvhVec3d; 3], trng1: [&BvhVec3d; 3]
     time1 <= time2 // intervals intersected --> triangles overlapped
 }
 
+/// The origins and directions of the three edges of a triangle projected on the axes
+/// `x` and `y`.
+fn flat_edges(trng: [&BvhVec3d; 3], x: usize, y: usize) -> ([BvhVec2d; 3], [BvhVec2d; 3]) {
+    let flat = |v: &BvhVec3d| BvhVec2d::new(v[x], v[y]);
+    let origin: [BvhVec2d; 3] = [flat(trng[0]), flat(trng[1]), flat(trng[2])];
+    let direct: [BvhVec2d; 3] = [
+        origin[1] - origin[0],
+        origin[2] - origin[1],
+        origin[0] - origin[2],
+    ];
+    (origin, direct)
+}
+
 /// The coplanar case of `trianglesIntersected`: the triangles projected on the plane
 /// of the axes of the second normal.
 fn coplanar_intersected(
@@ -226,27 +239,12 @@ fn coplanar_intersected(
     trng1_normal: &BvhVec3d,
 ) -> bool {
     let (x, y) = projection_axes(trng1_normal);
-    let flat = |v: &BvhVec3d| BvhVec2d::new(v[x], v[y]);
-    let origin0: [BvhVec2d; 3] = [flat(trng0[0]), flat(trng0[1]), flat(trng0[2])];
-    let direct0: [BvhVec2d; 3] = [
-        origin0[1] - origin0[0],
-        origin0[2] - origin0[1],
-        origin0[0] - origin0[2],
-    ];
-    let origin1: [BvhVec2d; 3] = [flat(trng1[0]), flat(trng1[1]), flat(trng1[2])];
-    let direct1: [BvhVec2d; 3] = [
-        origin1[1] - origin1[0],
-        origin1[2] - origin1[1],
-        origin1[0] - origin1[2],
-    ];
+    let (origin0, direct0) = flat_edges(trng0, x, y);
+    let (origin1, direct1) = flat_edges(trng1, x, y);
     for edge0 in 0..3 {
         for edge1 in 0..3 {
-            if segments_intersected(
-                &origin0[edge0],
-                &origin1[edge1],
-                &direct0[edge0],
-                &direct1[edge1],
-            ) {
+            let (o0, o1) = (&origin0[edge0], &origin1[edge1]);
+            if segments_intersected(o0, o1, &direct0[edge0], &direct1[edge1]) {
                 return true; // edges intersected --> triangles overlapped
             }
         }

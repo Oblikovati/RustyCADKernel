@@ -72,6 +72,37 @@ fn line_outside(
     Ok((pos_out, neg_out))
 }
 
+/// The unit directions from `shared_vert` to the two other vertices of a triangle.
+fn edge_directions(shared_vert: &BvhVec3d, vtxs1: &BvhVec3d, vtxs2: &BvhVec3d) -> [BvhVec3d; 2] {
+    [
+        (*vtxs1 - *shared_vert).normalized(),
+        (*vtxs2 - *shared_vert).normalized(),
+    ]
+}
+
+/// `Overlap` when `overlap`, `NoCheck` otherwise.
+fn overlap_result(overlap: bool) -> BRepExtremaFilterResult {
+    if overlap {
+        return BRepExtremaFilterResult::Overlap;
+    }
+    BRepExtremaFilterResult::NoCheck
+}
+
+/// The coplanar case of the shared vertex test: the triangles overlap when an edge of
+/// one lies inside the angle of the other.
+fn coplanar_vertex_overlap(
+    trng0_edges: &[BvhVec3d; 2],
+    trng1_edges: &[BvhVec3d; 2],
+    trng0_normal: &BvhVec3d,
+) -> BRepExtremaFilterResult {
+    let axes = projection_axes(trng0_normal);
+    let overlap: bool = ray_inside_angle(&trng1_edges[0], &trng0_edges[0], &trng0_edges[1], axes)
+        || ray_inside_angle(&trng1_edges[1], &trng0_edges[0], &trng0_edges[1], axes)
+        || ray_inside_angle(&trng0_edges[0], &trng1_edges[0], &trng1_edges[1], axes)
+        || ray_inside_angle(&trng0_edges[1], &trng1_edges[0], &trng1_edges[1], axes);
+    overlap_result(overlap)
+}
+
 /// `isRegularSharedVertex(theSharedVert, theTrng1Vtxs1, theTrng1Vtxs2, theTrng2Vtxs1,
 /// theTrng2Vtxs2)`: `NoCheck` when two triangles sharing one vertex do not overlap
 /// near it, `Overlap` otherwise.
@@ -80,30 +111,17 @@ fn is_regular_shared_vertex(
     [trng0_vtxs1, trng0_vtxs2]: [&BvhVec3d; 2],
     [trng1_vtxs1, trng1_vtxs2]: [&BvhVec3d; 2],
 ) -> Result<BRepExtremaFilterResult, Failure> {
-    let trng0_edges = [
-        (*trng0_vtxs1 - *shared_vert).normalized(),
-        (*trng0_vtxs2 - *shared_vert).normalized(),
-    ];
-    let trng1_edges = [
-        (*trng1_vtxs1 - *shared_vert).normalized(),
-        (*trng1_vtxs2 - *shared_vert).normalized(),
-    ];
+    let trng0_edges = edge_directions(shared_vert, trng0_vtxs1, trng0_vtxs2);
+    let trng1_edges = edge_directions(shared_vert, trng1_vtxs1, trng1_vtxs2);
     let trng0_normal = BvhVec3d::cross(&trng0_edges[0], &trng0_edges[1]);
     let trng1_normal = BvhVec3d::cross(&trng1_edges[0], &trng1_edges[1]);
     let cross_line = BvhVec3d::cross(&trng0_normal, &trng1_normal);
     if cross_line.square_modulus() < precision::square_confusion() {
-        // Coplanar case.
-        let axes = projection_axes(&trng0_normal);
-        let overlap: bool =
-            ray_inside_angle(&trng1_edges[0], &trng0_edges[0], &trng0_edges[1], axes)
-                || ray_inside_angle(&trng1_edges[1], &trng0_edges[0], &trng0_edges[1], axes)
-                || ray_inside_angle(&trng0_edges[0], &trng1_edges[0], &trng1_edges[1], axes)
-                || ray_inside_angle(&trng0_edges[1], &trng1_edges[0], &trng1_edges[1], axes);
-        return Ok(if overlap {
-            BRepExtremaFilterResult::Overlap
-        } else {
-            BRepExtremaFilterResult::NoCheck
-        });
+        return Ok(coplanar_vertex_overlap(
+            &trng0_edges,
+            &trng1_edges,
+            &trng0_normal,
+        ));
     }
     // The shared line should lie outside at least one triangle.
     let (pos_out0, neg_out0) = line_outside(&cross_line, &trng0_edges, &trng0_normal)?;
@@ -114,10 +132,9 @@ fn is_regular_shared_vertex(
     if pos_out1 && neg_out1 {
         return Ok(BRepExtremaFilterResult::NoCheck);
     }
-    Ok(match (pos_out0 || pos_out1) && (neg_out0 || neg_out1) {
-        true => BRepExtremaFilterResult::NoCheck,
-        false => BRepExtremaFilterResult::Overlap,
-    })
+    Ok(overlap_result(
+        !((pos_out0 || pos_out1) && (neg_out0 || neg_out1)),
+    ))
 }
 
 /// `isRegularSharedEdge(theTrng1Vtxs0, theTrng1Vtxs1, theTrng1Vtxs2, theTrng2Vtxs2)`:
@@ -149,6 +166,21 @@ fn is_regular_shared_edge(
     BRepExtremaFilterResult::Overlap
 }
 
+/// The pairs of vertex indices of two triangles that coincide within Confusion, in the
+/// order of the vertices of the first triangle (the first match of each).
+fn shared_vertices(trng0_vtxs: &[BvhVec3d; 3], trng1_vtxs: &[BvhVec3d; 3]) -> Vec<(usize, usize)> {
+    let mut shared_vtxs: Vec<(usize, usize)> = Vec::new();
+    for (vert_idx1, vertex1) in trng0_vtxs.iter().enumerate() {
+        let shared = trng1_vtxs.iter().position(|vertex2| {
+            (*vertex1 - *vertex2).square_modulus() < precision::square_confusion()
+        });
+        if let Some(vert_idx2) = shared {
+            shared_vtxs.push((vert_idx1, vert_idx2)); // then the next vertex of the 1st triangle
+        }
+    }
+    shared_vtxs
+}
+
 /// `PreCheckElements(theIndex1, theIndex2)` on `set`: `NoCheck` for triangles of one
 /// face; the shared edge or shared vertex tests for triangles with two or one common
 /// vertices (within Confusion); `DoCheck` otherwise.
@@ -162,16 +194,7 @@ fn pre_check_elements(
     }
     let mut trng0_vtxs: [BvhVec3d; 3] = set.get_vertices(index1)?;
     let mut trng1_vtxs: [BvhVec3d; 3] = set.get_vertices(index2)?;
-    let mut shared_vtxs: Vec<(usize, usize)> = Vec::new();
-    for (vert_idx1, vertex1) in trng0_vtxs.iter().enumerate() {
-        let shared = trng1_vtxs.iter().position(|vertex2| {
-            (*vertex1 - *vertex2).square_modulus() < precision::square_confusion()
-        });
-        if let Some(vert_idx2) = shared {
-            shared_vtxs.push((vert_idx1, vert_idx2)); // then the next vertex of the 1st triangle
-        }
-    }
-    match shared_vtxs.as_slice() {
+    match shared_vertices(&trng0_vtxs, &trng1_vtxs).as_slice() {
         [(first0, first1), (second0, second1)] => Ok(is_regular_shared_edge(
             &trng0_vtxs[*first0],
             &trng0_vtxs[*second0],
