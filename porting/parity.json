@@ -173162,6 +173162,598 @@
       "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::static_type",
       "status": "implemented",
       "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BndBoxState",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BndBoxState",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::with_edge_face",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::Face() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::face",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetEdge(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_face",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::NextEdge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::next_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetNextEdge(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_next_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::MaxTolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetMaxTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::UseBndBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetUseBndBox(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetGeometry(const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_geometry",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetBoundingBox(const Bnd_Box2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_bounding_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::SetBoundingBoxUnavailable()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::set_bounding_box_unavailable",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::Curve() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::curve",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::FirstParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::first_parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::LastParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::last_parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BoundingBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::bounding_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BoundingBoxState() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassEdge::bounding_box_state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Reset(const gp_Lin2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::reset",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Compare(const BRepClass_Edge&,TopAbs_Orientation)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::compare",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Parameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::Intersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::intersector",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::ClosestIntersection() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::closest_intersection",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClass2dOfFClassifier::IsHeadOrEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClass2dOfFClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClass2dOfFClassifier::is_head_or_end",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier(BRepClass_FaceExplorer&,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::with_point",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Perform(BRepClass_FaceExplorer&,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::perform",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Rejected() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::rejected",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::NoWires() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::no_wires",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::EdgeParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::edge_parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::Position() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FClassifier::position",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier(BRepClass_FaceExplorer&,const gp_Pnt2d&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::with_explorer",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier(const TopoDS_Face&,const gp_Pnt2d&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::with_face_point2d",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier::Perform(const TopoDS_Face&,const gp_Pnt2d&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::perform",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier(const TopoDS_Face&,const gp_Pnt&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::with_face_point3d",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceClassifier::Perform(const TopoDS_Face&,const gp_Pnt&,double,bool,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceClassifier::perform_point3d",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::CheckPoint(gp_Pnt2d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::check_point",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::Reject(const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::reject",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::Segment(const gp_Pnt2d&,gp_Lin2d&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::segment",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::OtherSegment(const gp_Pnt2d&,gp_Lin2d&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::other_segment",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::InitWires()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::init_wires",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::MoreWires() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::more_wires",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::NextWire()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::next_wire",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::RejectWire(const gp_Lin2d&,double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::reject_wire",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::InitEdges()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::init_edges",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::MoreEdges() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::more_edges",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::NextEdge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::next_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::RejectEdge(const gp_Lin2d&,double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::reject_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::CurrentEdge(BRepClass_Edge&,TopAbs_Orientation&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::current_edge",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::MaxTolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::SetMaxTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::set_max_tolerance",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::UseBndBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::SetUseBndBox(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::set_use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::ShouldUseBndBox() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::should_use_bnd_box",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Reset(const gp_Lin2d&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::reset",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Compare(const BRepClass_Edge&,TopAbs_Orientation)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::compare",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Parameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::parameter",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::Intersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::intersector",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::ClosestIntersection() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::closest_intersection",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::State() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::state",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_FacePassiveClassifier::IsHeadOrEnd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FacePassiveClassifier.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::FacePassiveClassifier::is_head_or_end",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Intersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassIntersector::new",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Intersector::Perform(const gp_Lin2d&,double,double,const BRepClass_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassIntersector::perform",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
+    },
+    {
+      "upstream_id": "BRepClass_Intersector::LocalGeometry(const BRepClass_Edge&,double,gp_Dir2d&,gp_Dir2d&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassIntersector::local_geometry",
+      "status": "implemented",
+      "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
     }
   ],
   "tests": [
