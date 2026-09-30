@@ -124,6 +124,8 @@ def append_pps_requests(requests: list[str]) -> None:
     requests.append(pps(GEOM_SURFACES['bspline_s'], 8, 0, 1e-9, (0.5, 1.5, 0.2, 0.8), -1, [(POINTS[1], -1)]))
 
 
+# The hyperbola-circle pair is left out: natively GeomAPI_ExtremaCurveCurve on it does not
+# return (killed by the timeout), so hyperbola runs against line_z.
 CC_PAIRS = [('line', 'line_diag'), ('line', 'line_z'), ('segment', 'line_z'), ('circle', 'line_z'),
             ('circle', 'circle_tilt'), ('circle', 'trimmed_circle'), ('ellipse', 'line'),
             ('parabola', 'line'), ('hyperbola', 'line_z'), ('bezier', 'bspline'), ('bezier_rat', 'segment'),

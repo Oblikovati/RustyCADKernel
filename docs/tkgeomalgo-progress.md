@@ -46,6 +46,13 @@ The toolkit test inventory maps these suites (80 declarations):
 | IntCurveSurface_InterUtils_Test.cxx | int_curve_surface_inter_utils | 1 | pass | pass |
 | IntCurveSurface_ThePolygonOfHInter_Test.cxx | int_curve_surface_the_polygon_of_h_inter | 1 | pass | pass |
 | IntCurveSurface_ThePolyhedronOfHInter_Test.cxx | int_curve_surface_the_polyhedron_of_h_inter | 6 | pass | pass |
+| GeomAPI_ProjectPointOnSurf_Test.cxx | geomapi_project_point_on_surf | 2 | pass | pass |
+| GeomAPI_PointsToBSpline_Test.cxx | geomapi_points_to_bspline | 1 | pass | pass |
+| GeomAPI_IntCS_Test.cxx | geomapi_int_cs | 5 | pass | pass |
+| GeomAPI_ExtremaCurveSurface_Test.cxx | geomapi_extrema_curve_surface | 6 | pass | pass |
+| GeomAPI_ExtremaSurfaceSurface_Test.cxx | geomapi_extrema_surface_surface | 2 | pass | pass |
+| GeomAPI_PointsToBSplineSurface_Test.cxx | geomapi_points_to_bspline_surface | 1 | pass | pass |
+| GeomFill_Gordon_Test.cxx | geomfill_gordon | 64 | pass | pass |
 
 ## API mapping
 
@@ -115,6 +122,21 @@ The toolkit test inventory maps these suites (80 declarations):
   (`Deref`). Output arrays are assigned as natively (`NCollection_Array1::operator=`
   takes the source bounds and length), `GetShape` returns the four counts, and the two
   `Section` overloads are `section_d1` and `section`.
+- GeomAPI (see the section below): one named constructor or `init_*` method per native
+  overload (`ProjectPointOnSurf::with_bounds_tolerance`, `init_surface`...), the
+  conversion operators as `as_int`, `as_real`, `as_point`, `as_curve` and `as_surface`,
+  output references as returned tuples, and `GeomAPI::To2d`/`To3d` as the free functions
+  `to_2d` and `to_3d`. `GeomAPI_IntCS::Parameters(Index, U1, V1, U2, V2)` is
+  `segment_parameters`. The PointsToBSplineSurface settings travel as the tuple
+  `SurfaceFitSettings` and the height grid as `HeightGrid`.
+- GeomFill Gordon: `GeomFill_Gordon` is `GeomFillGordon`, its nested enums and report are
+  `GordonStatus`, `GordonApproximationMode`, `GordonBuildStage` and `GordonBuildReport`;
+  `GeomFill_NetworkSurface` is `GeomFillNetworkSurface` with `NetworkSurfaceStatus`, and
+  its Init takes the curve families, the parameters, the grids and the closed seams as
+  tuples. `GeomFill_GordonUtilities.pxx` is internal: its functions are private modules
+  (`gordon_params`, `gordon_contacts`, `gordon_normalize`, `gordon_order`,
+  `gordon_reorder`, `gordon_reparam`, `gordon_rebuild`, `gordon_network`,
+  `gordon_fallback`).
 
 ## Verification
 
@@ -385,6 +407,25 @@ Deliberate Rust deviations:
   search.
 - A null point handle raises Standard_NullObject where native code dereferences it.
 - Slots that native leaves uninitialized start at 0; the corpus avoids reading them.
+
+## GeomAPI and GeomFill Gordon
+
+GeomAPI (`geom_api`) ports every class except `GeomAPI_IntSS`, which waits for GeomInt:
+`to_2d`/`to_3d`, `ProjectPointOnCurve`, `ProjectPointOnSurf`, `ExtremaCurveCurve`,
+`ExtremaCurveSurface`, `ExtremaSurfaceSurface`, `IntCS`, `Interpolate` (the 3D instance
+of the interpolation body shared with Geom2dAPI), `PointsToBSpline` and
+`PointsToBSplineSurface`. `tools/audit_api_rows.py` reports for the package only the
+`GeomAPI_IntSS` members as missing, and 0 stale rows. How the classes hold their
+Extrema objects is in [geomalgo-design.md](geomalgo-design.md) section 15.
+
+GeomFill ports `GeomFill_GordonUtilities.pxx`, `GeomFill_Gordon` and
+`GeomFill_NetworkSurface` (the other GeomFill classes belong to the filling and sweep
+parts); every public member of the two classes has an api row. The three TKG3d suites
+that need GeomAPI (`Geom_CurveEval_Test.cxx`, 11; `GeomAPI_ExtremaCurveCurve_Test.cxx`,
+47; `GeomAPI_Interpolate_Test.cxx`, 1) are translated in this crate as
+`tkg3d_geom_curve_eval`, `tkg3d_geomapi_extrema_curve_curve` and
+`tkg3d_geomapi_interpolate`; their ledger rows keep the toolkit TKG3d, so the TKG3d
+verifier runs them.
 
 ## Numeric comparison policy
 
@@ -983,6 +1024,29 @@ than the section list.
   shared by every instance of the generic in the port); the probe masks the number.
 - `NbSamples` truncates a double count, `(int)` of NaN being undefined (0 here).
 
+GeomAPI (1980 requests) and GeomFill Gordon (145 requests): `gapi_ppc` and `gapi_pps`
+project points (on the geometry, at centres and axes, far away) on every curve and
+surface kind through every constructor and Init, with the out-of-range indices 0 and
+N+1, repeated Performs and switched Extrema algorithms and flags; `gapi_ecc`, `gapi_ecs`
+and `gapi_ess` run the extrema of curve pairs (parallel, concentric, tangent, repeated
+Inits on one object, the Total members), curve-surface and surface-surface pairs on
+whole and bounded domains; `gapi_to2d`/`gapi_to3d` the plane conversions of every curve
+kind; `gapi_intcs` curve-surface intersections with points and segments;
+`gapi_interpolate` periodic and open interpolations with parameters, end and full
+tangents, and too-close points; `gapi_points_to_bspline` and `gapi_p2bss` every
+approximation overload (least squares, smoothing, interpolation; every
+parametrization; periodic; heights; grids whose bounds do not start at 1).
+`gfill_gordon` runs 38 networks (trimmed-line grids, bumps, saddles, rational and
+degree-9 rational networks, periodic and closed curves, meanders with several contacts,
+arcs, Bezier and cubic iso-curve networks, disjoint and too small networks) in exact
+mode, in approximate-fallback mode with the parallel flag and two Performs, and at a
+second tolerance, printing every status and report field and the surface;
+`gfill_network` runs prepared networks: closed seams (with gaps within and beyond the
+tolerance, non-unit parameters), compatible and incompatible rational families, the
+degree overflow, zero and negative weights, too few curves, a wrong grid size and two
+Performs. The hyperbola-circle pair of `gapi_ecc` is left out: natively it does not
+return.
+
 ### GeomFill (filling part)
 
 - `GeomFill_SectionGenerator::SetParam` shares the given array and copies it into itself
@@ -999,6 +1063,39 @@ than the section list.
   and when the knot insertion leaves different knot counts it sets the mean inner knots
   on the original curves, which raises when their knot counts differ. The consultation
   members all name `Degree` in their StdFail_NotDone message.
+
+### GeomAPI
+
+- `GeomAPI_ExtremaCurveCurve::Init(C1, C2, U1min, U1max, U2min, U2max)` loads the whole
+  curves into its adaptors: the Total members (`TotalPerform`) work on the full curves,
+  not on the ranges. `TotalPerform` compares each pair of end points with the squared
+  distance from before the end-point checks (it never updates it), so the last pair
+  nearer than that distance wins, not the nearest one; the NaN comparisons keep their
+  native result.
+- `GeomAPI_ExtremaCurveSurface` is done when the Extrema answers parallel, even with 0
+  extrema; its Extrema object is built on local adaptors at each Init.
+- `GeomAPI_Interpolate::ClearTangents` is declared but never defined natively; its row is
+  excluded. The interpolation keeps the Geom2dAPI quirks (the shared flag array, the
+  previous-parameter read of BuildParameters).
+- `GeomAPI_PointsToBSpline::Init(Points, Params, ...)` reads `Params(i)` from the lower
+  bound of `Points`; `GeomAPI_PointsToBSplineSurface` sets its multipoints at the grid
+  indices, so a grid that does not start at (1, 1) raises Standard_OutOfRange.
+  `operator occ::handle<Geom_BSplineSurface>()` calls `Surface()` and raises
+  StdFail_NotDone when not done.
+- Extrema_ExtPC on a periodic B-spline far outside its period (bounds near 1e100)
+  computes a period shift that overflows `int`; natively the overflow is undefined, the
+  port wraps as x86-64 does (`wrapping_sub`), which the corpus checks.
+
+### GeomFill Gordon
+
+- `SetParallelMode(true)` runs the contact search sequentially: each search is
+  independent and writes its own slot, so the contacts are the same; `IsParallelMode`
+  still answers true.
+- `GeomFill_NetworkSurface::Perform` makes the curve families compatible in place (the
+  stored copies are raised in degree and knot-refined), so a second Perform starts from
+  the prepared curves; its catch-all turns every exception into ConstructionFailed.
+- The approximate fallback measures its profile and guide deviations by mapping the fixed
+  parameter through the surface parameter mapping twice, as natively.
 
 ## IntCurveSurface deviations
 

@@ -447,3 +447,13 @@ need a rule.
     its samples and results at each Perform; the two others are initialized and
     performed on local adaptors at each Init, and `Extrema_ExtSS` is even copied
     from a new object). `Extrema()` rebuilds the same object on stored adaptors.
+- **GeomFill Gordon.** `GeomFill_GordonUtilities.pxx` is an internal header of free
+  functions and small structs; it is ported as private modules of `geom_fill`, one per
+  step (parameters, contacts, normalization, ordering, reordering, reparametrization,
+  rebuild, network preparation, fallback), which `GeomFill_Gordon` and
+  `GeomFill_NetworkSurface` call as natively. The rational denominator product of
+  `GeomFill_NetworkSurface` goes through the `bsplclib::EvaluatorFunction` callback,
+  which cannot return `Result`; the evaluator stores the first failure in a `RefCell`
+  and the caller raises it after the call, as the native exception would leave it.
+  `OSD_Parallel::For` over the contact searches is a sequential loop: each iteration
+  writes only its own slot, so the order does not change the result.

@@ -443,5 +443,10 @@ GeomGridEval:
   TKGeomAlgo: `Geom_CurveEval_Test.cxx` (11, `GeomAPI_PointsToBSpline`),
   `GeomAPI_ExtremaCurveCurve_Test.cxx` (47, `GeomAPI_ExtremaCurveCurve` and
   `GeomAPI_ExtremaCurveSurface`) and `GeomAPI_Interpolate_Test.cxx` (1,
-  `GeomAPI_Interpolate`).
+  `GeomAPI_Interpolate`). With GeomAPI ported they are translated in
+  `crates/tkgeomalgo/tests` (`tkg3d_geom_curve_eval`,
+  `tkg3d_geomapi_extrema_curve_curve`, `tkg3d_geomapi_interpolate`, since this crate
+  cannot depend on rustycad-tkgeomalgo); their ledger rows keep the toolkit TKG3d with
+  the package rustycad-tkgeomalgo, so the TKG3d verifier runs them
+  ([tkgeomalgo-progress.md](tkgeomalgo-progress.md)).
 - `InitFromJson` does not exist in Geom; `DumpJson` is compared on the corpus.
