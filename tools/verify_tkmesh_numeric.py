@@ -57,6 +57,10 @@ def corpus() -> str:
     rows += ['mesh_healer ' + ' '.join(map(str, v)) for v in product((0,2,3,4,5,6,8,9), range(6), range(2), range(2), range(2))]
     rows += ['mesh_healer ' + ' '.join(map(str, v)) for v in product(range(10,19), range(2), range(2), range(2), range(2))]
     rows += ['mesh_healer ' + ' '.join(map(str, v)) for v in product((4,5), range(6,12), range(2), range(2), range(2))]
+    rows += ['mesh_element_vertex ' + ' '.join(map(str, v)) for v in product(range(8), (-1,0,7), range(7), range(7), range(4))]
+    rows += ['mesh_element_edge ' + ' '.join(map(str, v)) for v in product(range(9), range(9), range(7), range(7))]
+    rows += ['mesh_element_triangle ' + ' '.join(map(str, v)) for v in product(range(6), range(6), range(8), range(7), range(7))]
+    rows += ['mesh_element_pair ' + ' '.join(map(str, v)) for v in product(range(512), (-3,-1,0,7), (-1,0,1,2,3))]
     return '\n'.join(rows) + '\n'
 
 
