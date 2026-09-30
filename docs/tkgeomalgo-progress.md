@@ -48,6 +48,8 @@ The toolkit test inventory maps these suites (93 declarations):
 | IntCurveSurface_ThePolyhedronOfHInter_Test.cxx | int_curve_surface_the_polyhedron_of_h_inter | 6 | pass | pass |
 | IntPolyh_Intersection_Test.cxx | int_polyh_intersection | 3 | pass | pass |
 | IntPolyh_Point_Test.cxx | int_polyh_point | 10 | pass | pass |
+| IntPatch_Polyhedron_Test.cxx | int_patch_polyhedron | 5 | pass | pass |
+| IntPatch_PolyhedronBVH_Test.cxx | int_patch_polyhedron_bvh | 8 | pass | pass |
 
 GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
 build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
@@ -175,6 +177,19 @@ cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` a
   (`IntPatchTheSurfFunction`, `IntPatchCurvIntSurf`, `IntPatchTheSOnBounds`,
   `IntPatchTheSearchInside`, `IntPatchTheIWalking`) whose rows name the generic members.
   `IntPatch_RLine::SetParamOnS1/S2` are declared but defined nowhere (excluded rows).
+- IntPatch polyhedra and polygons: `IntPatch_Polyhedron` reuses the IntCurveSurface
+  polyhedron helpers; its constructors are `new` (automatic subdivision) and
+  `with_subdivisions`, `Point(P, i, j, U, V)` is `set_point`, `Point(i, U, V)` is
+  `point_with_parameters`, `DeflectionOverEstimation(flec)` is
+  `set_deflection_over_estimation`. `Perform`, the `*Singularity(bool)` setters and the
+  `Has*Singularity` queries are declared but defined nowhere (excluded rows).
+  `IntPatch_PolyhedronBVH` implements the TKMath `BvhSet`/`BvhObject` traits (`Box` is
+  `element_box`, the polyhedron constructor `with_polyhedron`); `IntPatch_BVHTraversal`
+  implements `BvhPairTraverse` privately and `Perform(aSet, aSet, true)` is `perform_self`.
+  `IntPatch_InterferencePolyhedron` derefs to `Interference` (constructors `new`, `between`,
+  `of_self`; `Perform(one)` is `perform_self`). `IntPatch_Polygo` is the trait
+  `IntPatchPolygo` over `Polygon2d`; `IntPatch_PolyLine`'s setters are `set_w_line` and
+  `set_r_line`, `IntPatch_PolyArc::Closed` is `is_closed`.
 
 ## Verification
 
@@ -776,6 +791,17 @@ requests now run through the IntPatch instances on both sides. Left out: `SetPoi
 restriction line without points and `Bezier()`/`BSpline()` of other curves, which dereference
 null handles natively.
 
+IntPatch polyhedra and polygons: 382 more requests (`tkgeomalgo_corpus_intpatch_poly.py`,
+924 IntPatch requests in all). `ip_polyh` builds the polyhedron of every IntCurveSurface
+catalog surface with the automatic and given subdivisions (0 clamped to 1, thin grids, poles
+with null edges) and compares its points, triangles, boxes, plane equations, containment and
+`TriConnex` around the first triangles. `ip_bvh` builds the BVH sets and the traversal pairs
+of overlapping, far, identical and empty sets; `ip_interf` computes the interference of
+crossing, tangent, coplanar and nearly coplanar polyhedra (tangent zones) and the self
+interference. `ip_polyline` and `ip_polyarc` build the 2d polygons of walking and
+restriction lines and of arcs (parabola deflection, resampling near the other box, offsets,
+the construction errors); `ip_t3bits` edits the bit sets.
+
 ## Preserved native behaviour
 
 - TopTrans: a `CurveTransition` that was never reset answers the states of its
@@ -1261,6 +1287,19 @@ null handles natively.
   `IntPatch_HCurve2dTool::NbSamples` answers 25 for the non-spline curves and caps at 50.
 - `IntPatch_ArcFunction::Values` with a quadric that is not set leaves `F` unchanged and
   gives a null derivative (the quadric writes nothing).
+- `IntPatch_Polyhedron::PlaneEquation` leaves the polar distance unchanged on a null edge;
+  `Dump` writes nothing and `Point(P, i, j, U, V)` does nothing. The bounding tests keep the
+  native positive comparisons, so a NaN coordinate gives the native boxes.
+- `IntPatch_InterferencePolyhedron`: `Perform(Obje)` (one polyhedron) only clears the
+  result and sets the tolerance, so it finds nothing, while the constructor of one
+  polyhedron computes the self interference. `Intf_TangentZone::Insert` never accepts a
+  point, so the edge crossings are offered twice and dropped. A segment already found on
+  either triangle (both are checked, no short circuit) still inserts its two points.
+- `IntPatch_PolyLine`: the line type is uninitialized until a line is set. `IntPatch_Polygo::Dump`
+  numbers its dumps with a static counter shared by every polygon.
+- `IntPatch_PrmPrmIntersection_T3Bits` allocates `(size^3) >> 5` words: the bits of a last
+  incomplete word are not stored, and for `size^3 < 32` the native constructor writes before
+  its empty array (undefined behaviour).
 
 ## IntStart deviations
 
@@ -1323,3 +1362,12 @@ null handles natively.
 - `IntPatch_CSFunction` keeps copies of the handles where the native one keeps pointers to
   the caller's handles. `IntPatch_ArcFunction`'s IntStart side answers 0 for `F` where a
   quadric that is not set leaves the caller's variable uninitialized.
+- `IntPatch_Polyhedron` keeps the IntCurveSurface layout: index 0 is the origin with null
+  parameters (uninitialized natively) and an index past the grid, an out-of-bounds read
+  natively, raises Standard_OutOfRange; `Triangle` past the grid answers the native
+  arithmetic. `IntPatch_PolyhedronBVH` borrows its polyhedron (the native one keeps a
+  pointer).
+- `IntPatch_PolyLine` raises Standard_DomainError before a line is set (the native read of
+  an uninitialized type) and Standard_NullObject for a null line.
+  `IntPatch_PrmPrmIntersection_T3Bits` panics on a bit outside its words and is empty for
+  `size^3 < 32`, where the native code writes out of bounds.
