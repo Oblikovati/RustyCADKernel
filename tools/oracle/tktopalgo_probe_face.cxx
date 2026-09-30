@@ -63,7 +63,8 @@ occ::handle<Geom_Surface> tp_surface(GaReader& r){
  if(kind==2)return new Geom_SphericalSurface(gp_Ax3(p,n),r.real());
  if(kind==4){double radius=r.real();return new Geom_ConicalSurface(gp_Ax3(p,n),r.real(),radius);}
  if(kind==5){double major=r.real();return new Geom_ToroidalSurface(gp_Ax3(p,n),major,r.real());}
- if(kind==6){NCollection_Array2<gp_Pnt> poles=tp_poles(r,r.integer(),r.integer());return new Geom_BezierSurface(poles);}
+ // Sequence reads: C++ argument evaluation otherwise swaps rectangular grid dimensions.
+ if(kind==6){int nu=r.integer(),nv=r.integer();NCollection_Array2<gp_Pnt> poles=tp_poles(r,nu,nv);return new Geom_BezierSurface(poles);}
  if(kind==7)return tp_bspline_surface(r);
  double u1=r.real(),u2=r.real(),v1=r.real(),v2=r.real();
  return new Geom_RectangularTrimmedSurface(new Geom_Plane(p,n),u1,u2,v1,v2);}

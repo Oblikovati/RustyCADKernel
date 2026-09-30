@@ -20,3 +20,10 @@ pub use edge::{Curve3dRange, EdgeTangent2d, PCurveRange, ShapeAnalysisEdge};
 
 mod canonical_recognition;
 pub use canonical_recognition::ShapeAnalysisCanonicalRecognition;
+
+mod surface;
+pub use surface::{ShapeAnalysisSurface, SurfaceSingularity};
+mod curve;
+pub use curve::{
+    CurveProjection, CurveProjectionResult, ShapeAnalysisCurve, adjust_by_period, adjust_to_period,
+};
