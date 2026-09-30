@@ -115,9 +115,17 @@ impl<T> List<T> {
     }
     /// Keeps selected nodes without reallocating survivors; `list.retain(|value| *value > 0)`.
     pub fn retain(&mut self, mut keep: impl FnMut(&T) -> bool) {
+        let result = self.try_retain(|value| Ok::<bool, std::convert::Infallible>(keep(value)));
+        match result {
+            Ok(()) => (),
+            Err(never) => match never {},
+        }
+    }
+    /// Retain until the first failure, preserving earlier removals; `list.try_retain(|value| Ok::<bool, ()>(*value > 0))?`.
+    pub fn try_retain<E>(&mut self, mut keep: impl FnMut(&T) -> Result<bool, E>) -> Result<(), E> {
         let mut link = &mut self.head;
         while let Some(node) = link.as_ref() {
-            if keep(&node.value) {
+            if keep(&node.value)? {
                 link = &mut link.as_mut().unwrap().next;
                 continue;
             }
@@ -125,6 +133,7 @@ impl<T> List<T> {
             *link = removed.next.take();
             self.count -= 1;
         }
+        Ok(())
     }
     /// Removes the head, reporting OCCT's NoSuchObject when empty; `list.remove_first()?`.
     pub fn remove_first(&mut self) -> Result<(), Failure> {

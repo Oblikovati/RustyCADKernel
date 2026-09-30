@@ -241,3 +241,5 @@ pub mod face_checker;
 pub mod model_healer;
 
 pub mod elements;
+
+pub mod cell_failure;
