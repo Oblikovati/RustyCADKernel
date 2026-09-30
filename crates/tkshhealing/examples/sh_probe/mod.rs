@@ -12,6 +12,7 @@ pub mod wire_data;
 pub mod modification;
 pub mod sh_common;
 pub mod shape_custom;
+pub mod shape_upgrade;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit
 // prints the same token stream (tools/oracle/tkshhealing_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.

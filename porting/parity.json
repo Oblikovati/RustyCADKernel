@@ -195514,6 +195514,254 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom_BoundedCurve>>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgrade::c0_bspline_to_sequence_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom2d_BoundedCurve>>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgrade::c0_bspline2d_to_sequence_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::new",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::Set(const occ::handle<ShapeUpgrade_Tool>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetContext(const occ::handle<ShapeBuild_ReShape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_context",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::Context() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::context",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetPrecision(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_precision",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::Precision() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::precision",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetMinTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_min_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::MinTolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::min_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetMaxTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_max_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::MaxTolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::max_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::LimitTolerance(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::limit_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_Tool,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::new",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::Remove(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::remove",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::GetResult() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::get_result",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::SetRemoveLevel(TopAbs_ShapeEnum)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::set_remove_level",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::RemoveLevel() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::remove_level",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::ModifiedShape(const TopoDS_Shape&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::modified_shape",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::GetModifiedShapesMap() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::get_modified_shapes_map",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_RemoveLocations,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve::new",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Init(double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::init",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::SetSplitValues(const occ::handle<NCollection_HSequence<double>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::set_split_values",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Build(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::build",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::SplitValues() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::split_values",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Compute()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::compute",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Perform(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::perform",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::status_flag",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitCurve,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
     }
   ],
   "tests": [

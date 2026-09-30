@@ -138,3 +138,30 @@ and 9 in package order.
 - The output parameters of the `New*` members are the `&mut` arguments and the
   `NewSurface`/`NewCurve` structs of the TKBRep trait; a member leaves them as natively
   (written or not) on every path.
+
+## 8. ShapeUpgrade: the package functions, the tool root and the curve splitter
+
+- **ShapeUpgrade** (package functions) is the unit struct `ShapeUpgrade`; the two
+  `C0BSplineToSequenceOfC1BSplineCurve` overloads are
+  `c0_bspline_to_sequence_of_c1_bspline_curve` (3D) and
+  `c0_bspline2d_to_sequence_of_c1_bspline_curve` (2D). They return the sequence of pieces
+  (`Handle<HSequence<Handle<dyn GeomBoundedCurve>>>`, and the 2D one) as `Some`; `None` is
+  the native false, whose output handle is left unchanged. The 3D member changes its
+  input through the shared handle (`SetNotPeriodic`), as natively.
+- **ShapeUpgrade_Tool** is a Transient with its fields in one `SharedState`; the tools
+  derived from it embed a `ShapeUpgradeTool` as their parent (`impl_transient!` with the
+  parent field). `Set(tool)` copies the fields of the other tool before writing its own,
+  so a tool can be set from itself.
+- **ShapeUpgrade_RemoveLocations** is a Transient; the recursion of `MakeNewShape` runs on
+  a private `Remover` that owns the map of new shapes while `Remove` runs (the map is taken
+  out of the shared state and put back, so no lock is held across the recursion).
+  `GetModifiedShapesMap()` returns a reference natively: it lends the map to a closure.
+- **ShapeUpgrade_SplitCurve** is a concrete base class whose `Build` and `Compute` are
+  virtual (ShapeUpgrade_SplitCurve2d and 3d override them): as TKBRep's
+  `BRepTools_ReShape`, it is the trait `SplitCurve` (provided methods with the native
+  bodies, so `Perform` calls the overrides of a derived class) and the struct
+  `ShapeUpgradeSplitCurve`. Its protected fields (`mySplitValues`, `myNbCurves`,
+  `myStatus`) are the public struct `SplitCurveFields` inside `SplitCurveData`, which a
+  derived class embeds and lends through `split_curve_data`. `Status(ShapeExtend_Status)`
+  is `status_flag`. `SetSplitValues` given the splitter's own sequence reads and edits
+  that one sequence, as natively.

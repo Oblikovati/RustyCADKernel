@@ -152,6 +152,25 @@ ShapeCustom.hxx (they use the four classes). The api audit of ShapeCustom is 0 s
 48 rows (6 of them the excluded RTTI macros); the 64 missing members belong to those
 classes.
 
+## ShapeUpgrade
+
+Ported: the package functions (C0BSplineToSequenceOfC1BSplineCurve in 3D and 2D),
+ShapeUpgrade_Tool, ShapeUpgrade_RemoveLocations and ShapeUpgrade_SplitCurve
+(docs/shhealing-design.md section 8 fixes the mapping): `ShapeUpgrade` is a unit struct,
+`ShapeUpgradeTool` and `ShapeUpgradeRemoveLocations` are Transients, and the curve
+splitter is the trait `SplitCurve` with the struct `ShapeUpgradeSplitCurve`.
+`crates/tkshhealing/tests/shape_upgrade_basics.rs` holds the behavior tests.
+
+Not ported yet, because they use classes of the parallel ShapeAnalysis/ShapeFix work that
+are not in this branch: ShapeUpgrade_ShellSewing (ShapeAnalysis_ShapeTolerance),
+ShapeUpgrade_SplitCurve2d and ShapeUpgrade_SplitCurve3d (ShapeAnalysis_Curve),
+ShapeUpgrade_RemoveInternalWires (ShapeAnalysis::OuterWire and ContourArea), and the level
+4 classes above them: ShapeUpgrade_ConvertCurve2dToBezier, ShapeUpgrade_ConvertCurve3dToBezier,
+ShapeUpgrade_SplitCurve2dContinuity, ShapeUpgrade_SplitCurve3dContinuity (the two
+splitters) and ShapeUpgrade_SplitSurface (ShapeUpgrade_SplitCurve3d). The api audit of
+ShapeUpgrade is 0 stale with 31 rows (4 of them the excluded RTTI macros); the 247 missing
+members belong to the classes not ported.
+
 ## GoogleTest suites
 
 The toolkit test inventory maps these suites (0 declarations):
@@ -284,6 +303,22 @@ surfaces, curves and locations:
   rebuilds each face and the compound, and the messages that reached a
   ShapeExtend_MsgRegistrator are printed with the RTTI of each modification.
 
+ShapeUpgrade (tools/tkshhealing_corpus_shapeupgrade.py, 173 requests):
+
+- `su_c0split` (24): C0BSplineToSequenceOfC1BSplineCurve on 15 3D and 7 2D B-splines
+  (polylines, quadratic, cubic and quartic curves with one or several C0 knots, mixed with
+  smooth knots, rational, periodic, C1 and single-span curves, far knots) and a null handle
+  of each dimension: the pieces with their knots, poles and weights, and the input after
+  the call;
+- `su_tool` (19): precision and tolerance settings of ShapeUpgrade_Tool in every order,
+  `Set` from another tool with and without a context, `LimitTolerance`;
+- `su_removeloc` (110): a scene with locations in a TFace, on faces, edges (on the 3D
+  curve), vertices, shells, solids and compounds, a seam and an edge shared by two faces;
+  `Remove` at the nine removal levels on twelve shapes, with `ModifiedShape` and the map
+  of new shapes, and two requests that remove twice with one remover;
+- `su_splitcurve` (20): Init and SetSplitValues with sorted, unsorted, close, outside,
+  empty, null and self-referencing sequences, then Perform, Compute and Build.
+
 ## Preserved native behaviour
 
 ### ShapeExtend
@@ -355,6 +390,19 @@ surfaces, curves and locations:
   p-curves are moved by `(0, 2PI)`, and a rectangular trimmed sphere raises
   Standard_ConstructionError, since its V bounds fall outside the new V range.
 
+### ShapeUpgrade
+
+- `ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve` (3D) makes its input curve
+  non-periodic in place before it splits it; the 2D overload lifts a copy to 3D, so a 2D
+  input keeps its periodicity.
+- `ShapeUpgrade_RemoveLocations` keeps its map of new shapes from one `Remove` to the
+  next; at the default level (TopAbs_SHAPE) compounds keep their location; the p-curves of
+  edges on a Geom_Plane face are not copied to the new edge; an edge shared by two faces is
+  rebuilt once and gets the p-curves of the second face on the same new edge.
+- `ShapeUpgrade_SplitCurve::SetSplitValues` compares each given value with the bounds of
+  the interval of the original values only: unsorted values are inserted unsorted and
+  values closer than `Precision::PConfusion()` to each other are all inserted.
+
 ## Deliberate deviations
 
 ### ShapeExtend
@@ -380,3 +428,11 @@ surfaces, curves and locations:
   return Standard_NullObject errors; `IsLinear` on an array whose lower bound is not 1
   returns Standard_OutOfRange instead of reading outside it. The corpus does not reach
   these cases natively.
+
+### ShapeUpgrade
+
+- `ShapeUpgrade_RemoveLocations::Remove` of a null shape, `ShapeUpgrade_Tool::Set` of a
+  null tool and `ShapeUpgrade_SplitCurve::SetSplitValues` before `Init` dereference a null
+  handle natively; they return Standard_NullObject errors. Work-array indices that the
+  native C0 split would read outside its arrays (impossible for a valid B-spline) are
+  Standard_OutOfRange.
