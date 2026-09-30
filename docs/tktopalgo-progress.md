@@ -103,16 +103,18 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
 - BRepTopAdaptor (docs/topalgo-design.md section 4): `BRepTopAdaptor_FClass2d` is
   `BRepTopAdaptorFClass2d` (its lazy exact explorer behind a mutex, so `perform` and
   `test_on_restriction` take `&self`); `BRepTopAdaptor_TopolTool` is
-  `BRepTopAdaptorTopolTool` and `BRepTopAdaptor_HVertex` is `BRepTopAdaptorHVertex`,
-  each with a default Adaptor3d base as its parent field (the RTTI chain) and the
-  members its header declares; the overloads are `initialize_surface`,
+  `BRepTopAdaptorTopolTool` and `BRepTopAdaptor_HVertex` is `BRepTopAdaptorHVertex`
+  (docs/topalgo-design.md sections 4 and 8). The vertex implements the TKG3d trait
+  `Adaptor3dHVertex`, so its overrides answer through `Handle<dyn Adaptor3dHVertex>`;
+  the tool keeps a default Adaptor3d_TopolTool as its parent field (the RTTI chain) and
+  has the members its header declares plus the inherited `Identical`, `SamplePnts`,
+  `BSplSamplePnts`, `UParameters`, `VParameters` and `IsUniformSampling`, and it
+  implements the IntStart trait `TheTopolTool`, so IntStart and IntPatch take a BRep
+  face as their domain; the overloads are `initialize_surface`,
   `initialize_curve`, `curve_orientation`, `vertex_orientation`, `curve_tol_3d` and
   `vertex_tol_3d`, as the Adaptor3d_TopolTool port names them. `Edge()` returns the
   edge (a `void*` to it natively). `BRepTopAdaptor_Tool` is `BRepTopAdaptorTool`, its
-  `Init` overloads `init_face` and `init_surface`. The tool does not implement the
-  IntStart `TheTopolTool` trait (section 4): the generic consumers call the
-  `Adaptor3d_HVertex` members of its vertices directly, and the concrete TKG3d struct
-  cannot dispatch them to the overrides yet.
+  `Init` overloads `init_face` and `init_surface`.
 - IntCurvesFace (section 4): `IntCurvesFace_Intersector` is `IntCurvesFaceIntersector`
   (transient; `perform_line` and `perform_curve` take `&mut self`),
   `IntCurvesFace_ShapeIntersector` is `IntCurvesFaceShapeIntersector` (its intersectors
@@ -206,6 +208,24 @@ TestOnRestriction, reframed or not, on grids, vertices, edge middles and points 
 `bta_destroy`, `bta_topol` (arcs, their vertices with the HVertex parameter and
 resolution, samples and domain, restricted or not), `bta_classify`, `bta_tool` and
 `bta_errors`.
+
+BRepTopAdaptor domains of IntStart and IntPatch (docs/topalgo-design.md section 8): 752
+requests (`tools/tktopalgo_corpus_breptopadaptor_domain.py`, probe
+`tools/oracle/tktopalgo_probe_breptopadaptor_domain.cxx`) on faces built with
+BRep_Builder: squares, the holed square, the trimmed plane, the disc, the cylinder,
+sphere, cone and torus-patch faces, the Bezier and B-spline patches (with a C1 knot and
+with a hole) and the toleranced square with 3d lines. `bta_sob` runs
+`IntPatch_TheSOnBounds` of a quadric (planes across the faces and through their
+vertices and edges, cylinders, a sphere and a cone) on the edges of the face with both
+tolerance pairs, with and without the regularity recheck, and prints each path point
+with its vertex through `Adaptor3d_HVertex` (value, orientation, parameter,
+resolution) and the tool (3d tolerance and point); `bta_inside` runs
+`IntPatch_TheSearchInside` of the same quadrics, sampled and classified by the tool;
+`bta_intersection` runs `IntPatch_Intersection::Perform` on 21 pairs of face domains
+(plane-plane through the hole and through the corners, coplanar, plane-cylinder,
+plane-sphere, plane-cone, plane-torus, plane-spline, cylinder-trimmed plane,
+disc-cylinder, cylinder-cylinder, sphere-cylinder and B-spline-Bezier), in both orders,
+with three option sets, and prints every line with the TKGeomAlgo IntPatch printers.
 
 IntCurvesFace: 424 requests (`tools/tktopalgo_corpus_intcurvesface.py`): `icf_line` (one
 intersector on groups of lines through grid points, vertices and seeded points of the
@@ -325,6 +345,16 @@ faces).
   `(RealFirst, RealFirst)`.
 - The tool on a face with an edge without pcurve crashes natively on that arc; the port
   reads the empty pcurve adaptor. Those requests are not in the corpus.
+- `IntStart_SearchOnBoundaries` (`TreatLC`) takes the 3d curve of a straight edge that
+  has solutions on a cylinder without a null check: a BRep domain whose line edges carry
+  only pcurves (the squares, the holed square and the trimmed plane of the corpus)
+  crashes natively against a cylinder that crosses them. Those searches and
+  intersections are not in the corpus; the toleranced square and a vertical square with
+  3d lines run that branch.
+- `SamplePnts` on the tool calls its own `ComputeSamplePoints` (at least 10 samples in
+  each direction) or the base `BSplSamplePnts`, and stores the counts in the base
+  fields that `NbSamplesU` and `SamplePoint` read; its `SamplePoint` override keeps the
+  regular grid of `ComputeSamplePoints` and ignores the `SamplePnts` parameters.
 
 ### IntCurvesFace
 
@@ -433,10 +463,12 @@ faces).
   `Edge()` past the last arc raise Standard_NoSuchObject and `Next()` past it does
   nothing (null dereferences natively). SamplePoint with a zero U count raises
   Standard_ProgramError (a division by zero natively).
-- The base members that BRepTopAdaptor_TopolTool inherits without redeclaring them
-  (`Identical`, `SamplePnts`, `BSplSamplePnts`, `UParameters`, `VParameters`,
-  `IsUniformSampling`) are not members of the Rust struct (docs/topalgo-design.md
-  section 4), and the struct does not implement IntStart's `TheTopolTool`.
+- `UParameters` and `VParameters` of the tool before `SamplePnts` raise
+  Standard_NullObject (a null dereference natively). `Edge()` of the `TheTopolTool`
+  implementation raises the Standard_NoSuchObject of `Edge()` past the last arc.
+- The `TheTopolTool` members `InitVertexIterator`, `NextVertex`, `DomainIsInfinite`,
+  `Edge` and `Orientation(C)` return `Result` for every domain, because the overrides of
+  the tool can raise (docs/topalgo-design.md section 8).
 
 Bisector: the `tp_bisec_*` requests (455, `tools/tktopalgo_corpus_bisector.py` over the
 curve helpers of `tools/tktopalgo_corpus_curves.py`) compare `Bisector_Bisec` on corners

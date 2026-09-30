@@ -1716,7 +1716,11 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
   uninitialized (or the previous value) when the function answers false. The port keeps
   the previous value, 0 at first; the IntPatch and Contap functions never answer false.
 - `TheTopolTool` is a trait, as the native domain is virtual; `Edge()` returns the edge
-  itself (`Option<Edge>`) where the native one returns a `void*`.
+  itself (`Result<Option<Edge>, _>`) where the native one returns a `void*`. The members
+  whose BRepTopAdaptor_TopolTool override can raise (`InitVertexIterator`, `NextVertex`,
+  `DomainIsInfinite`, `Edge`, `Orientation(C)`) return `Result`, and `TheVertex` is
+  `Handle<dyn Adaptor3dHVertex>`, whose members dispatch to the overrides
+  (docs/topalgo-design.md section 8).
 
 ## IntPolyh deviations
 

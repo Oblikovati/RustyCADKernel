@@ -66199,17 +66199,17 @@
       "upstream_id": "Adaptor3d_HVertex()",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
-      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::default",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertexBase::default",
       "status": "implemented",
-      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_HVertex is the trait Adaptor3dHVertex reached through Handle<dyn Adaptor3dHVertex>, so the BRepTopAdaptor_HVertex overrides dispatch as the native virtual calls do (docs/topalgo-design.md section 8); Adaptor3dHVertexBase is an instance of the base class itself. Parameter, Resolution and IsSame return Result (an override can raise); native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_HVertex(const gp_Pnt2d&,TopAbs_Orientation,double)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
-      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::new",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertexBase::new",
       "status": "implemented",
-      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_HVertex is the trait Adaptor3dHVertex reached through Handle<dyn Adaptor3dHVertex>, so the BRepTopAdaptor_HVertex overrides dispatch as the native virtual calls do (docs/topalgo-design.md section 8); Adaptor3dHVertexBase is an instance of the base class itself. Parameter, Resolution and IsSame return Result (an override can raise); native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_HVertex::Value",
@@ -66217,7 +66217,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::value",
       "status": "implemented",
-      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_HVertex is the trait Adaptor3dHVertex reached through Handle<dyn Adaptor3dHVertex>, so the BRepTopAdaptor_HVertex overrides dispatch as the native virtual calls do (docs/topalgo-design.md section 8); Adaptor3dHVertexBase is an instance of the base class itself. Parameter, Resolution and IsSame return Result (an override can raise); native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_HVertex::Parameter",
@@ -66225,7 +66225,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::parameter",
       "status": "implemented",
-      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_HVertex is the trait Adaptor3dHVertex reached through Handle<dyn Adaptor3dHVertex>, so the BRepTopAdaptor_HVertex overrides dispatch as the native virtual calls do (docs/topalgo-design.md section 8); Adaptor3dHVertexBase is an instance of the base class itself. Parameter, Resolution and IsSame return Result (an override can raise); native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_HVertex::Resolution",
@@ -66233,7 +66233,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::resolution",
       "status": "implemented",
-      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_HVertex is the trait Adaptor3dHVertex reached through Handle<dyn Adaptor3dHVertex>, so the BRepTopAdaptor_HVertex overrides dispatch as the native virtual calls do (docs/topalgo-design.md section 8); Adaptor3dHVertexBase is an instance of the base class itself. Parameter, Resolution and IsSame return Result (an override can raise); native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_HVertex::Orientation",
@@ -66241,7 +66241,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::orientation",
       "status": "implemented",
-      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_HVertex is the trait Adaptor3dHVertex reached through Handle<dyn Adaptor3dHVertex>, so the BRepTopAdaptor_HVertex overrides dispatch as the native virtual calls do (docs/topalgo-design.md section 8); Adaptor3dHVertexBase is an instance of the base class itself. Parameter, Resolution and IsSame return Result (an override can raise); native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_HVertex::IsSame",
@@ -66249,7 +66249,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::is_same",
       "status": "implemented",
-      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_HVertex is the trait Adaptor3dHVertex reached through Handle<dyn Adaptor3dHVertex>, so the BRepTopAdaptor_HVertex overrides dispatch as the native virtual calls do (docs/topalgo-design.md section 8); Adaptor3dHVertexBase is an instance of the base class itself. Parameter, Resolution and IsSame return Result (an override can raise); native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_HVertex::DEFINE_STANDARD_RTTIEXT",
@@ -66265,7 +66265,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::default",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool(const occ::handle<Adaptor3d_Surface>&)",
@@ -66273,7 +66273,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::with_surface",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Initialize()",
@@ -66281,7 +66281,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::initialize",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Initialize(const occ::handle<Adaptor3d_Surface>&)",
@@ -66289,7 +66289,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::initialize_surface",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Initialize(const occ::handle<Adaptor2d_Curve2d>&)",
@@ -66297,7 +66297,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::initialize_curve",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Init",
@@ -66305,7 +66305,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::init",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::More",
@@ -66313,7 +66313,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::more",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Value",
@@ -66321,7 +66321,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::value",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Next",
@@ -66329,7 +66329,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::next",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::InitVertexIterator",
@@ -66337,7 +66337,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::init_vertex_iterator",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::MoreVertex",
@@ -66345,7 +66345,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::more_vertex",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Vertex",
@@ -66353,7 +66353,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::vertex",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::NextVertex",
@@ -66361,7 +66361,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::next_vertex",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Classify",
@@ -66369,7 +66369,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::classify",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::IsThePointOn",
@@ -66377,7 +66377,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::is_the_point_on",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Orientation(const occ::handle<Adaptor2d_Curve2d>&)",
@@ -66385,7 +66385,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::curve_orientation",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Orientation(const occ::handle<Adaptor3d_HVertex>&)",
@@ -66393,7 +66393,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::vertex_orientation",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Identical",
@@ -66401,7 +66401,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::identical",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values. BRepTopAdaptorTopolTool::identical calls it on its base; V1->IsSame dispatches through the Adaptor3dHVertex trait."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Has3d",
@@ -66409,7 +66409,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::has_3d",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Tol3d(const occ::handle<Adaptor2d_Curve2d>&) const",
@@ -66417,7 +66417,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::curve_tol_3d",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Tol3d(const occ::handle<Adaptor3d_HVertex>&) const",
@@ -66425,7 +66425,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::vertex_tol_3d",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Pnt",
@@ -66433,7 +66433,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::pnt",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::ComputeSamplePoints",
@@ -66441,7 +66441,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::compute_sample_points",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::NbSamplesU",
@@ -66449,7 +66449,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::nb_samples_u",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::NbSamplesV",
@@ -66457,7 +66457,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::nb_samples_v",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::NbSamples",
@@ -66465,7 +66465,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::nb_samples",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::UParameters",
@@ -66473,7 +66473,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::u_parameters",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values. BRepTopAdaptorTopolTool::u_parameters inherits it on its own sample state."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::VParameters",
@@ -66481,7 +66481,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::v_parameters",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values. BRepTopAdaptorTopolTool::v_parameters inherits it on its own sample state."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::SamplePoint",
@@ -66489,7 +66489,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::sample_point",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::DomainIsInfinite",
@@ -66497,7 +66497,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::domain_is_infinite",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::Edge",
@@ -66505,7 +66505,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::edge",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::SamplePnts",
@@ -66513,7 +66513,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::sample_pnts",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values. The body over the surface is Adaptor3dTopolTool::sample_pnts_parameters, with the virtual ComputeSamplePoints as a closure; BRepTopAdaptorTopolTool::sample_pnts runs it with its override."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::BSplSamplePnts",
@@ -66521,7 +66521,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::bspl_sample_pnts",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::IsUniformSampling",
@@ -66529,7 +66529,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::is_uniform_sampling",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values. The body over the surface is Adaptor3dTopolTool::uniform_sampling_of; BRepTopAdaptorTopolTool::is_uniform_sampling inherits it."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::GetConeApexParam",
@@ -66537,7 +66537,7 @@
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
       "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::get_cone_apex_param",
       "status": "implemented",
-      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods and the IntStart trait TheTopolTool is the virtual interface that the base and BRepTopAdaptor_TopolTool implement (docs/topalgo-design.md section 8), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
     },
     {
       "upstream_id": "Adaptor3d_TopolTool::DEFINE_STANDARD_RTTIEXT",
@@ -174529,7 +174529,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::new",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_FClass2d::PerformInfinitePoint() const",
@@ -174537,7 +174537,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::perform_infinite_point",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_FClass2d::Perform(const gp_Pnt2d&,bool) const",
@@ -174545,7 +174545,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::perform",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_FClass2d::Destroy()",
@@ -174553,7 +174553,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::destroy",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_FClass2d::~BRepTopAdaptor_FClass2d()",
@@ -174569,7 +174569,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::test_on_restriction",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex(const TopoDS_Vertex&,const occ::handle<BRepAdaptor_Curve2d>&)",
@@ -174577,7 +174577,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::new",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::Vertex() const",
@@ -174585,7 +174585,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::vertex",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::ChangeVertex()",
@@ -174593,7 +174593,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::change_vertex",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::Value()",
@@ -174601,7 +174601,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::value",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::Parameter(const occ::handle<Adaptor2d_Curve2d>&)",
@@ -174609,7 +174609,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::parameter",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::Resolution(const occ::handle<Adaptor2d_Curve2d>&)",
@@ -174617,7 +174617,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::resolution",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::Orientation()",
@@ -174625,7 +174625,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::orientation",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::IsSame(const occ::handle<Adaptor3d_HVertex>&)",
@@ -174633,7 +174633,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::is_same",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_HVertex::DEFINE_STANDARD_RTTIEXT(BRepTopAdaptor_HVertex,Adaptor3d_HVertex)",
@@ -174641,7 +174641,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::static_type",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool()",
@@ -174649,7 +174649,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::new",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool(const TopoDS_Face&,double)",
@@ -174657,7 +174657,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::with_face",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool(const occ::handle<Adaptor3d_Surface>&,double)",
@@ -174665,7 +174665,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::with_surface",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool::Init(const TopoDS_Face&,double)",
@@ -174673,7 +174673,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::init_face",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool::Init(const occ::handle<Adaptor3d_Surface>&,double)",
@@ -174681,7 +174681,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::init_surface",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool::GetTopolTool()",
@@ -174689,7 +174689,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::get_topol_tool",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool::SetTopolTool(const occ::handle<BRepTopAdaptor_TopolTool>&)",
@@ -174697,7 +174697,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::set_topol_tool",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool::GetSurface()",
@@ -174705,7 +174705,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::get_surface",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool::Destroy()",
@@ -174713,7 +174713,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::destroy",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_Tool::~BRepTopAdaptor_Tool()",
@@ -174729,7 +174729,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::new",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool(const occ::handle<Adaptor3d_Surface>&)",
@@ -174737,7 +174737,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::with_surface",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Initialize()",
@@ -174745,7 +174745,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::initialize",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Initialize(const occ::handle<Adaptor3d_Surface>&)",
@@ -174753,7 +174753,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::initialize_surface",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Initialize(const occ::handle<Adaptor2d_Curve2d>&)",
@@ -174761,7 +174761,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::initialize_curve",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Init()",
@@ -174769,7 +174769,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::init",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::More()",
@@ -174777,7 +174777,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::more",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Value()",
@@ -174785,7 +174785,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::value",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Next()",
@@ -174793,7 +174793,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::next",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Edge() const",
@@ -174801,7 +174801,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::edge",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::InitVertexIterator()",
@@ -174809,7 +174809,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::init_vertex_iterator",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::MoreVertex()",
@@ -174817,7 +174817,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::more_vertex",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Vertex()",
@@ -174825,7 +174825,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::vertex",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::NextVertex()",
@@ -174833,7 +174833,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::next_vertex",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Classify(const gp_Pnt2d&,double,bool)",
@@ -174841,7 +174841,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::classify",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::IsThePointOn(const gp_Pnt2d&,double,bool)",
@@ -174849,7 +174849,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::is_the_point_on",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Orientation(const occ::handle<Adaptor2d_Curve2d>&)",
@@ -174857,7 +174857,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::curve_orientation",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Orientation(const occ::handle<Adaptor3d_HVertex>&)",
@@ -174865,7 +174865,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::vertex_orientation",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Destroy()",
@@ -174873,7 +174873,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::destroy",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Has3d() const",
@@ -174881,7 +174881,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::has_3d",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Tol3d(const occ::handle<Adaptor2d_Curve2d>&) const",
@@ -174889,7 +174889,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::curve_tol_3d",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Tol3d(const occ::handle<Adaptor3d_HVertex>&) const",
@@ -174897,7 +174897,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::vertex_tol_3d",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::Pnt(const occ::handle<Adaptor3d_HVertex>&) const",
@@ -174905,7 +174905,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::pnt",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::ComputeSamplePoints()",
@@ -174913,7 +174913,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::compute_sample_points",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::NbSamplesU()",
@@ -174921,7 +174921,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::nb_samples_u",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::NbSamplesV()",
@@ -174929,7 +174929,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::nb_samples_v",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::NbSamples()",
@@ -174937,7 +174937,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::nb_samples",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::SamplePoint(int,gp_Pnt2d&,gp_Pnt&)",
@@ -174945,7 +174945,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::sample_point",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::DomainIsInfinite()",
@@ -174953,7 +174953,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::domain_is_infinite",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
     },
     {
       "upstream_id": "BRepTopAdaptor_TopolTool::~BRepTopAdaptor_TopolTool()",
@@ -174969,7 +174969,7 @@
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::static_type",
       "status": "implemented",
-      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md sections 4 and 8): BRepTopAdaptor_HVertex implements the trait Adaptor3dHVertex (its virtual members dispatch from Handle<dyn Adaptor3dHVertex>), BRepTopAdaptor_TopolTool keeps a default Adaptor3d_TopolTool as its parent field (RTTI chain, inherited Identical and Orientation(V)) and implements the IntStart trait TheTopolTool with its overrides; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
     },
     {
       "upstream_id": "IntCurvesFace_Intersector::DEFINE_STANDARD_RTTIEXT(IntCurvesFace_Intersector,Standard_Transient)",
