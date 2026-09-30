@@ -79,3 +79,30 @@ pub fn period_case(values: &[f64]) {
     real(adjust_to_period(values[0], values[1], values[2]));
     end();
 }
+
+/// Print the appended samples including retained values after failure; `sampling_2d_case(numbers)`.
+pub fn sampling_2d_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    let mut points = rustycad_tkernel::ncollection::Sequence::default();
+    points.append(rustycad_tkmath::gp::Point2::new(91.0, -37.0));
+    attempt(|| {
+        let curve = super::brep_lib_common::geom2d_curve(&mut reader)?;
+        let first = reader.real();
+        let last = reader.real();
+        print!(
+            "{} ",
+            i32::from(ShapeAnalysisCurve::get_sample_points_2d(
+                &curve,
+                first,
+                last,
+                &mut points
+            )?)
+        );
+        Ok(())
+    });
+    print!("{} ", points.length());
+    for point in points.iter() {
+        super::common::pnt2d(*point);
+    }
+    end();
+}

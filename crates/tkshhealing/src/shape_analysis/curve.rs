@@ -14,3 +14,5 @@ pub type CurveProjectionResult = (f64, rustycad_tkmath::gp::Point3, f64);
 /// Stateless curve analysis; `let analysis = ShapeAnalysisCurve;`.
 #[derive(Clone, Copy, Debug, Default)]
 pub struct ShapeAnalysisCurve;
+
+mod sampling;

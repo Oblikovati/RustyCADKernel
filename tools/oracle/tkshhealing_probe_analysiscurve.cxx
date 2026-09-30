@@ -32,3 +32,9 @@ void sh_analysis_period_case(std::istream& in) {
  GaReader r{in};double value=r.real(),first=r.real(),last=r.real();
  ga_real(ShapeAnalysis::AdjustByPeriod(value,first,last));ga_real(ShapeAnalysis::AdjustToPeriod(value,first,last));ga_end();
 }
+
+void sh_analysis_samples2d_case(std::istream& in) {
+ GaReader r{in};NCollection_Sequence<gp_Pnt2d> points;points.Append(gp_Pnt2d(91,-37));
+ GA_TRY(auto curve=tp_geom2d_curve(r);double first=r.real(),last=r.real();std::cout<<ShapeAnalysis_Curve::GetSamplePoints(curve,first,last,points)<<' ');
+ std::cout<<points.Length()<<' ';for(int i=1;i<=points.Length();++i)ga_pnt2d(points(i));ga_end();
+}

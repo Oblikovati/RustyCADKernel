@@ -207069,6 +207069,14 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::adjust_to_period",
       "status": "implemented",
       "notes": "Native floor-based adjustment, including negative/zero/tiny periods and large values, checked by exact numeric oracle."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::GetSamplePoints(const occ::handle<Geom2d_Curve>&,double,double,NCollection_Sequence<gp_Pnt2d>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::get_sample_points_2d",
+      "status": "implemented",
+      "notes": "Original Geom2dInt sampling distribution and sequence append behavior. Fifty added exact-native comparisons across ten curve kinds and five ranges; three focused Rust regressions."
     }
   ],
   "tests": [
