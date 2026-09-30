@@ -40,14 +40,13 @@ fn sum(v1: Vector3, v2: Vector3) -> Vector3 {
     out
 }
 
-/// The frame and derivatives from the path point and three derivatives, the guide
-/// point and two derivatives; `scales` is `[Orig2 - Orig1, Lguide / L]`.
-pub(crate) fn ac_d2(
-    frame: &mut TrihedronD2,
-    (p, to, d_to, d2_to): (Point3, Vector3, Vector3, Vector3),
+/// The vector to the guide point and its two derivatives, divided by its norm
+/// when not null (`N`, `dN`, `d2N` before their unit corrections).
+fn guide_normal(
+    (p, to, d_to): (Point3, Vector3, Vector3),
     (pg, tg, dtg): (Point3, Vector3, Vector3),
     [orig, ratio]: [f64; 2],
-) {
+) -> [Vector3; 3] {
     let (n_to, n2_to) = (to.magnitude(), to.square_magnitude());
     let (n_tg, n2_tp) = (tg.magnitude(), tg.square_magnitude());
     let dtg_dt = orig * (n_to / n_tg) * ratio;
@@ -65,6 +64,18 @@ pub(crate) fn ac_d2(
         dn /= norm;
         d2n /= norm;
     }
+    [n, dn, d2n]
+}
+
+/// The frame and derivatives from the path point and three derivatives, the guide
+/// point and two derivatives; `scales` is `[Orig2 - Orig1, Lguide / L]`.
+pub(crate) fn ac_d2(
+    frame: &mut TrihedronD2,
+    (p, to, d_to, d2_to): (Point3, Vector3, Vector3, Vector3),
+    guide: (Point3, Vector3, Vector3),
+    scales: [f64; 2],
+) {
+    let [n, dn, d2n] = guide_normal((p, to, d_to), guide, scales);
     frame.normal = n;
     let mut tn = to.crossed(frame.normal);
     let norma = tn.magnitude();
@@ -83,14 +94,40 @@ pub(crate) fn ac_d2(
         frame.normal.crossed(frame.d_binormal),
         frame.d_normal.crossed(frame.binormal),
     );
-    let tn2 = tn.square_magnitude();
-    frame.d2_normal = form3(
-        -2.0 * ndn,
-        dn,
-        3.0 * ndn * ndn - (dn.square_magnitude() + n.dot(d2n)),
+    let unit = SecondOrder {
         n,
+        dn,
         d2n,
-    );
+        ndn,
+        tn,
+        dtn,
+        tndtn,
+        norma,
+    };
+    second_derivatives(frame, &unit, (to, d_to, d2_to));
+}
+
+/// The values the second derivatives reuse.
+struct SecondOrder {
+    n: Vector3,
+    dn: Vector3,
+    d2n: Vector3,
+    ndn: f64,
+    tn: Vector3,
+    dtn: Vector3,
+    tndtn: f64,
+    norma: f64,
+}
+
+/// The second derivatives of the normal, binormal and tangent.
+fn second_derivatives(
+    frame: &mut TrihedronD2,
+    u: &SecondOrder,
+    (to, d_to, d2_to): (Vector3, Vector3, Vector3),
+) {
+    let tn2 = u.tn.square_magnitude();
+    let a = 3.0 * u.ndn * u.ndn - (u.dn.square_magnitude() + u.n.dot(u.d2n));
+    frame.d2_normal = form3(-2.0 * u.ndn, u.dn, a, u.n, u.d2n);
     let mut d2tn = form3(
         1.0,
         d2_to.crossed(frame.normal),
@@ -98,14 +135,9 @@ pub(crate) fn ac_d2(
         d_to.crossed(frame.d_normal),
         to.crossed(frame.d2_normal),
     );
-    d2tn /= norma;
-    frame.d2_binormal = form3(
-        -2.0 * tndtn,
-        dtn,
-        3.0 * tndtn * tndtn - (tn2 + tn.dot(d2tn)),
-        tn,
-        d2tn,
-    );
+    d2tn /= u.norma;
+    let b = 3.0 * u.tndtn * u.tndtn - (tn2 + u.tn.dot(d2tn));
+    frame.d2_binormal = form3(-2.0 * u.tndtn, u.dtn, b, u.tn, d2tn);
     frame.d2_tangent = form3(
         1.0,
         frame.d2_normal.crossed(frame.binormal),

@@ -208,71 +208,63 @@ impl AngleWalk {
     }
 }
 
+/// `A ^ B` and its two derivatives from the jets `[A, dA, d2A]` and `[B, dB, d2B]`.
+fn jet_cross(a: [Vector3; 3], b: [Vector3; 3]) -> [Vector3; 3] {
+    [
+        a[0].crossed(b[0]),
+        scaled_sum(a[1].crossed(b[0]), a[0].crossed(b[1])),
+        three(
+            [1.0, 2.0],
+            [a[2].crossed(b[0]), a[1].crossed(b[1]), a[0].crossed(b[2])],
+        ),
+    ]
+}
+
+/// The increments of the normal derivatives `(d2N, dN)` of the rotation by the
+/// angle `(sin, cos)` with the derivatives `(dA, d2A)`, about the tangent.
+fn rotation_increments(
+    (sina, cosa): (f64, f64),
+    (d_angle, d2_angle): (f64, f64),
+    [cross, dcross, d2cross]: [Vector3; 3],
+    [tcross, dtcross, d2tcross]: [Vector3; 3],
+) -> (Vector3, Vector3) {
+    let mut aux = Vector3::default();
+    let w = [
+        sina,
+        2.0 * cosa * d_angle,
+        cosa * d2_angle - sina * d_angle * d_angle,
+    ];
+    aux.set_linear_form_three(w, [d2cross, dcross, cross]);
+    let prev = aux;
+    let w = [
+        1.0 - cosa,
+        2.0 * sina * d_angle,
+        cosa * d_angle * d_angle + sina * d2_angle,
+    ];
+    aux.set_linear_form_three_offset(w, [d2tcross, dtcross, tcross], prev);
+    let d2_aux = aux;
+    aux.set_linear_form(sina, dcross, cosa * d_angle, cross);
+    let prev = aux;
+    aux.set_linear_form_offset(1.0 - cosa, dtcross, sina * d_angle, tcross, prev);
+    (d2_aux, aux)
+}
+
 /// The D2 correction of the Frenet frame by the angle and its two derivatives.
 pub(crate) fn corrected_d2(frame: &mut TrihedronD2, angle_at: f64, d_angle: f64, d2_angle: f64) {
     let (sina, cosa) = (angle_at.sin(), angle_at.cos());
     let f = *frame;
-    let cross = f.tangent.crossed(f.normal);
-    let dcross = scaled_sum(f.d_tangent.crossed(f.normal), f.tangent.crossed(f.d_normal));
-    let d2cross = three(
-        [1.0, 2.0],
-        [
-            f.d2_tangent.crossed(f.normal),
-            f.d_tangent.crossed(f.d_normal),
-            f.tangent.crossed(f.d2_normal),
-        ],
-    );
-    let tcross = f.tangent.crossed(cross);
-    let dtcross = scaled_sum(f.d_tangent.crossed(cross), f.tangent.crossed(dcross));
-    let d2tcross = three(
-        [1.0, 2.0],
-        [
-            f.d2_tangent.crossed(cross),
-            f.d_tangent.crossed(dcross),
-            f.tangent.crossed(d2cross),
-        ],
-    );
-    let mut aux = Vector3::default();
-    aux.set_linear_form_three(
-        [
-            sina,
-            2.0 * cosa * d_angle,
-            cosa * d2_angle - sina * d_angle * d_angle,
-        ],
-        [d2cross, dcross, cross],
-    );
-    let prev = aux;
-    aux.set_linear_form_three_offset(
-        [
-            1.0 - cosa,
-            2.0 * sina * d_angle,
-            cosa * d_angle * d_angle + sina * d2_angle,
-        ],
-        [d2tcross, dtcross, tcross],
-        prev,
-    );
-    frame.d2_normal += aux;
-    aux.set_linear_form(sina, dcross, cosa * d_angle, cross);
-    let prev = aux;
-    aux.set_linear_form_offset(1.0 - cosa, dtcross, sina * d_angle, tcross, prev);
-    frame.d_normal += aux;
+    let t = [f.tangent, f.d_tangent, f.d2_tangent];
+    let cross = jet_cross(t, [f.normal, f.d_normal, f.d2_normal]);
+    let tcross = jet_cross(t, cross);
+    let (d2_aux, d_aux) = rotation_increments((sina, cosa), (d_angle, d2_angle), cross, tcross);
+    frame.d2_normal += d2_aux;
+    frame.d_normal += d_aux;
     let normal = frame.normal;
     frame
         .normal
-        .set_linear_form_offset(sina, cross, 1.0 - cosa, tcross, normal);
-    frame.binormal = frame.tangent.crossed(frame.normal);
-    frame.d_binormal = scaled_sum(
-        frame.d_tangent.crossed(frame.normal),
-        frame.tangent.crossed(frame.d_normal),
-    );
-    frame.d2_binormal = three(
-        [1.0, 2.0],
-        [
-            frame.d2_tangent.crossed(frame.normal),
-            frame.d_tangent.crossed(frame.d_normal),
-            frame.tangent.crossed(frame.d2_normal),
-        ],
-    );
+        .set_linear_form_offset(sina, cross[0], 1.0 - cosa, tcross[0], normal);
+    let [b, db, d2b] = jet_cross(t, [frame.normal, frame.d_normal, frame.d2_normal]);
+    (frame.binormal, frame.d_binormal, frame.d2_binormal) = (b, db, d2b);
 }
 
 /// `SetLinearForm(1, V1, V2)`.
