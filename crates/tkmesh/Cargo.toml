@@ -1,0 +1,21 @@
+[package]
+name = "rustycad-tkmesh"
+description = "OCCT TKMesh toolkit: discrete mesh models and meshing algorithms"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo" }
+rustycad-tktopalgo = { path = "../tktopalgo" }
+allocator-api2 = "0.4"
+rustycad-tkshhealing = { path = "../tkshhealing" }

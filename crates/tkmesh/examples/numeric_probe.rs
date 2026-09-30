@@ -1,0 +1,152 @@
+//! TKMesh foundation oracle twin; each request is independent.
+use rustycad_tkernel::{ncollection::IncrementalAllocatorObject, standard::Handle};
+use rustycad_tkg3d::top_abs::Orientation;
+use rustycad_tkmath::gp::{Point2, Point3};
+use rustycad_tkmesh::{brep_mesh_data::*, imesh_data::*};
+use std::io::{self, BufRead};
+mod mesh_probe;
+fn real(value: f64) {
+    print!("{} ", value.to_bits());
+}
+fn int(value: i32) {
+    print!("{value} ");
+}
+fn flag(value: bool) {
+    int(i32::from(value));
+}
+fn point3(value: Point3) {
+    real(value.x());
+    real(value.y());
+    real(value.z());
+}
+fn point2(value: Point2) {
+    real(value.x());
+    real(value.y());
+}
+fn orientation(value: i32) -> Orientation {
+    [
+        Orientation::Forward,
+        Orientation::Reversed,
+        Orientation::Internal,
+        Orientation::External,
+    ][value as usize]
+}
+fn curve_report(curve: &dyn MeshCurve) {
+    for index in 0..curve.parameters_nb() {
+        point3(curve.get_point(index).unwrap());
+        real(curve.get_parameter(index).unwrap());
+    }
+}
+fn curve_case(count: i32, keep: bool) {
+    let allocator = Handle::new(IncrementalAllocatorObject::default());
+    let curve = Handle::new(DiscreteCurve::new(&allocator));
+    let array = ParametersListArrayAdaptor::new(curve.cast());
+    int(array.lower());
+    int(array.upper());
+    flag(rustycad_tkernel::standard::Transient::is_instance_name(
+        &array,
+        "Standard_Transient",
+    ));
+    let object = curve.get().unwrap();
+    populate_curve(object, count);
+    int(array.upper());
+    real(array.value(0).unwrap());
+    curve_report(object);
+    object.remove_point(count / 2).unwrap();
+    object.clear(keep);
+    int(object.parameters_nb());
+    curve_report(object);
+    flag(curve.is_kind_name("IMeshData_ParametersList"));
+    println!();
+}
+fn pcurve_report(curve: &dyn MeshPCurve) {
+    for index in 0..curve.parameters_nb() {
+        point2(curve.get_point(index).unwrap());
+        real(curve.get_parameter(index).unwrap());
+        int(curve.get_index(index).unwrap());
+    }
+}
+fn pcurve_case(count: i32, keep: bool, orientation: Orientation) {
+    let allocator = Handle::new(IncrementalAllocatorObject::default());
+    let curve = Handle::new(DiscretePCurve::new(
+        FacePtr::default(),
+        orientation,
+        &allocator,
+    ));
+    let object = curve.get().unwrap();
+    populate_pcurve(object, count);
+    pcurve_report(object);
+    object.remove_point(count / 2).unwrap();
+    object.clear(keep);
+    int(object.parameters_nb());
+    pcurve_report(object);
+    pcurve_errors(object, count);
+    flag(curve.is_kind_name("IMeshData_ParametersList"));
+    println!();
+}
+fn dispatch(operation: &str, values: &[i32]) -> bool {
+    match operation {
+        "mesh_curve" => curve_case(values[0], values[1] != 0),
+        "mesh_pcurve" => pcurve_case(values[0], values[1] != 0, orientation(values[2])),
+        "mesh_model" => mesh_probe::model_case(values[0], values[1], orientation(values[2])),
+        _ => return false,
+    }
+    true
+}
+fn main() {
+    for line in io::stdin().lock().lines() {
+        let line = line.unwrap();
+        let mut tokens = line.split_whitespace();
+        let Some(operation) = tokens.next() else {
+            continue;
+        };
+        let values: Vec<i32> = tokens.map(|value| value.parse().unwrap()).collect();
+        if !dispatch(operation, &values) {
+            eprintln!("Unknown probe operation: {operation}");
+            std::process::exit(2);
+        }
+    }
+}
+
+fn populate_curve(object: &dyn MeshCurve, count: i32) {
+    for i in 0..count {
+        object.add_point(
+            Point3::new(i.into(), (-i).into(), (i * 2).into()),
+            f64::from(i) * 0.25,
+        );
+    }
+    object
+        .insert_point(count / 2, Point3::new(7.0, 8.0, 9.0), -1.25)
+        .unwrap();
+    let mut first = object.get_point(0).unwrap();
+    first.set_x(4.5);
+    object.set_point(0, first).unwrap();
+    object.set_parameter(0, -0.0).unwrap();
+}
+
+fn populate_pcurve(object: &dyn MeshPCurve, count: i32) {
+    flag(object.is_forward());
+    flag(object.is_internal());
+    int(object.get_orientation() as i32);
+    flag(object.get_face().is_null());
+    for i in 0..count {
+        object.add_point(Point2::new(i.into(), (-i).into()), f64::from(i) * 0.25);
+        object.set_index(i, i + 100).unwrap();
+    }
+    object
+        .insert_point(count / 2, Point2::new(7.0, 8.0), -1.25)
+        .unwrap();
+    let mut first = object.get_point(0).unwrap();
+    first.set_x(4.5);
+    object.set_point(0, first).unwrap();
+    object.set_parameter(0, -0.0).unwrap();
+}
+
+fn pcurve_errors(object: &dyn MeshPCurve, count: i32) {
+    print!(
+        "{} {} {} ",
+        object.get_point(-1).unwrap_err().exception_type(),
+        object.get_index(count + 1).unwrap_err().exception_type(),
+        object.get_parameter(-1).unwrap_err().exception_type()
+    );
+}

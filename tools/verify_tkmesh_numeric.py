@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""Compare the TKMesh discrete model foundations against unchanged OCCT.
+
+Usage: python3 tools/verify_tkmesh_numeric.py --source OCCT --native-build BUILD
+This foundation corpus does not claim coverage of the triangulation algorithms.
+"""
+from toolkit_numeric import NumericOracle, verify_numeric
+
+
+def corpus() -> str:
+    """Every curve size, endpoint mode, orientation, and status mask; corpus()."""
+    rows = [f'mesh_curve {count} {keep}' for count in (0, 1, 2, 3, 8, 33)
+            for keep in (0, 1)]
+    rows += [f'mesh_pcurve {count} {keep} {orientation}'
+             for count in (0, 1, 2, 3, 8, 33) for keep in (0, 1)
+             for orientation in range(4)]
+    rows += [f'mesh_model {mask} {unset} {orientation}' for mask in range(512)
+             for unset in (0, 1, 8, 16, 256) for orientation in range(4)]
+    return '\n'.join(rows) + '\n'
+
+
+ORACLE = NumericOracle('TKMesh', 'tools/oracle/tkmesh_probe.cxx',
+    ['TKMesh', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
+     'TKG3d', 'TKG2d', 'TKMath', 'TKernel'], 'rustycad-tkmesh', corpus)
+
+if __name__ == '__main__':
+    verify_numeric(ORACLE)
