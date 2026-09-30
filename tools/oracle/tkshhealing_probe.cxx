@@ -46,7 +46,9 @@
 #include "tkshhealing_probe_analysis_edge.cxx"
 #include "tkshhealing_probe_edge_outputs.cxx"
 #include "tkshhealing_probe_canonical.cxx"
+#include "tkshhealing_probe_shapeconstruct.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"sh_construct", sh_construct_case},
  {"sh_canonical", sh_canonical_case},
  {"sh_edgeoutputs", sh_edgeoutputs_case},
  {"sh_edgeana", sh_edgeana_case},

@@ -37,3 +37,5 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_analysis_edge').append_analysis_edge_requests(requests)
     # ShapeAnalysis_CanonicalRecognition: state, output geometry and fitting seeds.
     __import__('tkshhealing_corpus_canonical').append_canonical_requests(requests)
+    # ShapeConstruct_Curve: adjustments, B-spline conversions and OCC90 knot spacing.
+    __import__('tkshhealing_corpus_shapeconstruct').append_shapeconstruct_requests(requests)
