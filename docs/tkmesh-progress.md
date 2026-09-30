@@ -73,3 +73,10 @@ Endpoint alias order, strict vertex tolerance, face intersections, five refineme
 passes, minimum-size overrides, status flags and repeated serial/parallel calls are
 covered. The concrete triangulation pipeline and 28 original declarations remain
 pending; this dependency does not establish IncrementalMesh completion.
+
+### Triangulation element dependencies
+
+The 67 header rows for DegreeOfFreedom, Vertex, OrientedEdge, Edge, Triangle and
+PairOfIndex are mapped. Native element equality, hashing, orientation and indexed
+mutation pass the integrated 102,336-case numeric gate. Vertex indexing and the
+concrete triangulation algorithms remain in progress.

@@ -47,6 +47,8 @@ fn main() {
             .map(|value| value.parse().expect("contour numeric field"))
             .collect();
         match operation {
+            "contour_state" => contour_private::state_case(&values),
+            "contour_full" => contour_private::full_case(&values),
             "contour_attachment" => contour_private::attachment_case(&values),
             "contour_internal" => contour_private::internal_case(&values),
             "contour_segments" => contour_private::segments_case(&values),

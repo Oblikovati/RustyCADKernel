@@ -48,3 +48,6 @@ pub use search_boundary::{ContapTheSearch, ContapTheSearchTypes};
 
 mod walking;
 pub use walking::{ContapTheIWalking, ContapTheIWalkingTypes};
+
+mod contour;
+pub use contour::ContapContour;

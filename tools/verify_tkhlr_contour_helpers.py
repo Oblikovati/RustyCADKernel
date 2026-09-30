@@ -26,11 +26,37 @@ def requests() -> str:
             [(1,0,0),(1,2,3)], [0,2]):
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
         lines.append('contour_math '+numbers([*surface,*uv,*tangent,*direction,circle]))
+    append_state_requests(lines)
+    append_full_requests(lines)
     append_walking_internal_requests(lines)
     append_analytic_requests(lines)
     append_attachment_requests(lines)
     append_section_requests(lines)
     return '\n'.join(lines)+'\n'
+
+
+def append_state_requests(lines: list[str]) -> None:
+    """Exercise all constructor and Perform overloads plus failure and mutation order."""
+    for kind,direction,radius in product(range(4),[(1,0,0),(0,0,1),(1,2,3)],[0.5,2]):
+        surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
+        lines.append('contour_state '+numbers([*surface,*direction]))
+
+
+def append_full_requests(lines: list[str]) -> None:
+    """Exercise analytic and general searches, repeated calls and native diagnostics."""
+    for kind, mode, direction, radius in product(range(6),range(3),
+            [(1,0,0),(0,0,1),(1,2,3),(-1,0,-1)],[0.5,2]):
+        bounds = (-2,2,-1,1) if kind != 5 else (0,1,0,1)
+        surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,*bounds]
+        lines.append('contour_full '+numbers([*surface,mode,*direction]))
+
+    for kind,mode,direction,radius,origin,wide in product([4,5],range(3),
+            [(1,0,0),(0,0,1),(0,0,-1),(1,2,3),(0,1,0)],
+            [0,0.5,3],[(0,0,0),(1,-2,3)],[False,True]):
+        bounds = (0,6.283185307179586,0,6.283185307179586) if wide else (-0.1,0.1,-0.1,0.1)
+        if kind==5: bounds=(-1,2,-1,2) if wide else (0,1,0,1)
+        surface=[kind,*origin,0,0,1,1,0,0,0,radius,0.4,*bounds]
+        lines.append('contour_full '+numbers([*surface,mode,*direction]))
 
 
 def append_section_requests(lines: list[str]) -> None:

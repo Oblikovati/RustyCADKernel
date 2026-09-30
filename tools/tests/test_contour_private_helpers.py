@@ -7,10 +7,10 @@ class ContourHelperCorpusTests(unittest.TestCase):
     def test_requests_are_repeatable_numeric_and_complete(self):
         first = requests()
         self.assertEqual(first, requests())
-        self.assertEqual(len(first.splitlines()), 3864)
+        self.assertEqual(len(first.splitlines()), 4392)
         for line in first.splitlines():
             operation = line.split()[0]
-            expected = {'contour_math': 26, 'contour_sections': 21, 'contour_attachment': 21, 'contour_internal': 22, 'contour_segments': 23, 'contour_analytic': 21, 'contour_walking_internal': 24}
+            expected = {'contour_full': 21, 'contour_state': 20, 'contour_math': 26, 'contour_sections': 21, 'contour_attachment': 21, 'contour_internal': 22, 'contour_segments': 23, 'contour_analytic': 21, 'contour_walking_internal': 24}
             self.assertIn(operation, expected)
             self.assertEqual(len([float(value) for value in line.split()[1:]]), expected[operation])
 

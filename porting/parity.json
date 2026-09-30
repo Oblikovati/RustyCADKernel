@@ -211253,6 +211253,780 @@
       "rust_item": "impl_transient!(ShapeUpgradeSplitCurve2d)",
       "status": "excluded",
       "notes": "Native RTTI maps to the shared Rust transient implementation; callable APIs counted separately."
+    },
+    {
+      "upstream_id": "BRepMesh_DegreeOfFreedom",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Free",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom::Free",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_InVolume",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom::InVolume",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OnSurface",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom::OnSurface",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OnCurve",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom::OnCurve",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Fixed",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom::Fixed",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Frontier",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom::Frontier",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Deleted",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DegreeOfFreedom.hxx",
+      "source_sha256": "c968659d321c30b01c54757ce77d85ac14c6e828ad6e5706ee9fe7dc2cc3a5d9",
+      "rust_item": "rustycad_tkmesh::brep_mesh::DegreeOfFreedom::Deleted",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::default",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex(const gp_XY&,int,BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::new",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex(double,double,BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::from_uv",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::Initialize(const gp_XY&,int,BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::initialize",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::Coord() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::coord",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::ChangeCoord()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::change_coord",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::Location3d() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::location_3d",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::Movability() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::movability",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::SetMovability(BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::set_movability",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::IsEqual(const BRepMesh_Vertex&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex::is_equal",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Vertex::operator==(const BRepMesh_Vertex&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex (PartialEq::eq)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_Vertex>",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_Vertex>::operator()(const BRepMesh_Vertex&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Vertex.hxx",
+      "source_sha256": "c8f993dee7e2daa6c571dc55b483ca4cf143250839e0bd5fe384ab8ee8372391",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshVertex (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OrientedEdge",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OrientedEdge()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge::default",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OrientedEdge(int,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge::new",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OrientedEdge::FirstNode() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge::first_node",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OrientedEdge::LastNode() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge::last_node",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OrientedEdge::IsEqual(const BRepMesh_OrientedEdge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge::is_equal",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_OrientedEdge::operator==(const BRepMesh_OrientedEdge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge (PartialEq::eq)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_OrientedEdge>",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_OrientedEdge>::operator()(const BRepMesh_OrientedEdge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_OrientedEdge.hxx",
+      "source_sha256": "a7b804e4bc2bbf140f9c52c4d461b3f365579ac3066468c5cd7ebe869d303043",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshOrientedEdge (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge::default",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge(int,int,BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge::new",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge::Movability() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge::movability",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge::SetMovability(BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge::set_movability",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge::IsSameOrientation(const BRepMesh_Edge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge::is_same_orientation",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge::IsEqual(const BRepMesh_Edge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge::is_equal",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Edge::operator==(const BRepMesh_Edge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge (PartialEq::eq)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_Edge>",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_Edge>::operator()(const BRepMesh_Edge&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Edge.hxx",
+      "source_sha256": "ea5d1f0e6b9e9198e9e98e170f8d387ea877c462685cde91ca5ebda2d92fed19",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdge (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::default",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle(const int(&)[3],const bool(&)[3],BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::new",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::Initialize(const int(&)[3],const bool(&)[3],BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::initialize",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::Edges(int(&)[3],bool(&)[3]) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::edges",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::Movability() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::movability",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::SetMovability(BRepMesh_DegreeOfFreedom)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::set_movability",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::IsEqual(const BRepMesh_Triangle&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::is_equal",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::operator==(const BRepMesh_Triangle&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle (PartialEq::eq)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::myEdges",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::edges",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::myOrientations",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::orientations",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_Triangle::myMovability",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle::movability",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_Triangle>",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "std::hash<BRepMesh_Triangle>::operator()(const BRepMesh_Triangle&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Triangle.hxx",
+      "source_sha256": "23a529356853d422bcbec52a9ce2aede9a2685b399dbbde63d6d8a83fabe480a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshTriangle (HashKey::occt_hash)",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::default",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::Clear()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::clear",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::Append(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::append",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::Prepend(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::prepend",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::IsEmpty() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::is_empty",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::Extent() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::extent",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::FirstIndex() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::first_index",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::LastIndex() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::last_index",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::Index(int) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::index",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::SetIndex(int,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::set_index",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_PairOfIndex::RemoveIndex(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_PairOfIndex.hxx",
+      "source_sha256": "89a8c2e8fbd843958e8330dfb31525e49b534467f69accb4e61295aa67603849",
+      "rust_item": "rustycad_tkmesh::brep_mesh::PairOfIndex::remove_index",
+      "status": "implemented",
+      "notes": "Native element constructors, mutable coordinates/public triangle fields, degree flags, sentinel pair operations and exception categories. Deleted elements remain non-reflexive; vertex tolerance, cyclic triangle equality and specialized native hashes (16-bit edge packing, floored vertex product, sorted triangle bytes) preserved."
+    },
+    {
+      "upstream_id": "Contap_Contour()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::new",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour(const gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::with_direction",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour(const gp_Vec&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::with_direction_angle",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour(const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::with_eye",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::with_surface_direction",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const gp_Vec&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::with_surface_direction_angle",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::with_surface_eye",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::perform",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::perform_direction",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const gp_Vec&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::perform_direction_angle",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Perform(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::perform_eye",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Init(const gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::init_direction",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Init(const gp_Vec&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::init_direction_angle",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Init(const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::init_eye",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::is_done",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::IsEmpty() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::is_empty",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::NbLines() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::nb_lines",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::Line(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::line",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
+    },
+    {
+      "upstream_id": "Contap_Contour::SurfaceFunction()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_Contour.hxx",
+      "source_sha256": "2cc20a537da9938828179e6c92dd04d510e7af8abe03627ff5d4f6307e60f276",
+      "rust_item": "rustycad_tkhlr::contap::ContapContour::surface_function",
+      "status": "implemented",
+      "notes": "Pinned analytic and general contour searches, tangency groups, walking vertices, restriction joins, native diagnostics, failed initialization ordering and mutable SurfaceFunction. Contour oracle: 4,392 exact cases, including 504 complete searches and 24 constructor/state cases; separate tangency oracle: 8,100 exact. No original legacy declaration is claimed by this API slice."
     }
   ],
   "tests": [

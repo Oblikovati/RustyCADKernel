@@ -300,3 +300,19 @@ requests (3,864 combined contour cases). The corpus exercises 34 insertion resul
 40 results with internal vertices, 48 native failure diagnostics and 324 empty-line
 exceptions. Diagnostic text is compared exactly through an injected output writer.
 Strict all-target Clippy passes; general Contap_Contour remains incomplete.
+
+### Complete Contap contour orchestration
+
+All 19 Contap_Contour public members are translated, including the general search,
+walking endpoints, multiple vertices, restriction joins and mutable SurfaceFunction.
+The isolated contour oracle passes 4,392 exact requests: 504 complete analytic/general
+searches, 24 overload/state cases, and 3,864 helper cases. The separate unchanged-source
+tangency oracle passes 8,100 exact requests, including rejected destination groups.
+Five direct regressions cover initialization, all overloads, result access, failed
+normalization and retained surface-function mutation. The four original HLRBRep
+legacy declarations remain pending their exact hidden-line dependencies.
+
+Integration checkpoint: `cargo test --workspace` passed 11,443 tests with zero
+failures and 69 existing ignored doctests. Strict TKHLR all-target Clippy passed;
+the toolkit's 14,003-case public numeric oracle and 8,100-case tangency oracle also
+passed. Counts of Rust tests are supplementary evidence, not legacy declarations.

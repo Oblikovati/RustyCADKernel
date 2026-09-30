@@ -58,7 +58,7 @@ pub fn analytic_case(values: &[f64]) {
     end();
 }
 
-fn report(
+pub(super) fn report(
     line: &rustycad_tkhlr::contap::ContapLine,
     domain: &Adaptor3dTopolTool,
 ) -> Result<(), rustycad_tkernel::standard::Failure> {
