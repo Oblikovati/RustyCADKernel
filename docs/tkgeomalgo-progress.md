@@ -54,6 +54,7 @@ The toolkit test inventory maps these suites (192 declarations):
 | GeomAPI_ExtremaCurveSurface_Test.cxx | geomapi_extrema_curve_surface | 6 | pass | pass |
 | GeomAPI_ExtremaSurfaceSurface_Test.cxx | geomapi_extrema_surface_surface | 2 | pass | pass |
 | GeomAPI_PointsToBSplineSurface_Test.cxx | geomapi_points_to_bspline_surface | 1 | pass | pass |
+| GeomAPI_IntSS_Test.cxx | geomapi_int_ss | 6 | pass | pass |
 | GeomFill_Gordon_Test.cxx | geomfill_gordon | 64 | pass | pass |
 | GeomFill_NSections_Test.cxx | geom_fill_nsections | 1 | pass | pass |
 | GeomFill_GuideTrihedronAC_Test.cxx | geom_fill_guide_trihedron_ac | 4 | pass | pass |
@@ -565,12 +566,12 @@ Deliberate Rust deviations:
 
 ## GeomAPI and GeomFill Gordon
 
-GeomAPI (`geom_api`) ports every class except `GeomAPI_IntSS`, which waits for GeomInt:
+GeomAPI (`geom_api`) ports every class:
 `to_2d`/`to_3d`, `ProjectPointOnCurve`, `ProjectPointOnSurf`, `ExtremaCurveCurve`,
-`ExtremaCurveSurface`, `ExtremaSurfaceSurface`, `IntCS`, `Interpolate` (the 3D instance
-of the interpolation body shared with Geom2dAPI), `PointsToBSpline` and
-`PointsToBSplineSurface`. `tools/audit_api_rows.py` reports for the package only the
-`GeomAPI_IntSS` members as missing, and 0 stale rows. How the classes hold their
+`ExtremaCurveSurface`, `ExtremaSurfaceSurface`, `IntCS`, `IntSS` (over `GeomInt_IntSS`,
+see ApproxInt and GeomInt below), `Interpolate` (the 3D instance of the interpolation body
+shared with Geom2dAPI), `PointsToBSpline` and `PointsToBSplineSurface`.
+`tools/audit_api_rows.py` reports 0 missing and 0 stale rows for the package. How the classes hold their
 Extrema objects is in [geomalgo-design.md](geomalgo-design.md) section 15.
 
 GeomFill ports `GeomFill_GordonUtilities.pxx`, `GeomFill_Gordon` and
@@ -998,6 +999,51 @@ cylinder and of plane patches on walking and restriction lines, with and without
 vertices, run once and twice. Left out: `IntPatch_RstInt` on an analytic or conic line
 and `DecomposeResult` on a restriction line without a point set (both dereference a null
 handle natively).
+
+## ApproxInt and GeomInt
+
+ApproxInt (`approx_int`) and GeomInt (`geom_int`) follow
+[geomalgo-design.md](geomalgo-design.md) section 20. The five ApproxInt templates are Rust
+generics: `ApproxIntMultiLine<L>` (its `LineTool` implementation is
+`ApproxInt_MultiLineTool`), `ApproxIntPrmPrmSvSurfaces<T>`, `ApproxIntImpPrmSvSurfaces<T>`
+and `ApproxIntApprox<B>`, with the trait `ApproxIntSvSurfaces` for `ApproxInt_SvSurfaces`
+and the unit struct `ApproxIntKnotTools`. GeomInt declares every native instance as an
+alias (`GeomIntWLApprox`, `GeomIntTheMultiLineOfWLApprox`, the SvSurfaces, the IntImp
+functions, and the Approx and AppParCurves instances over the tkgeombase generics, as AppDef
+does), and ports `GeomInt::AdjustPeriodic` (`adjust_periodic`), `GeomInt_IntSS`
+(`GeomIntIntSS`), `GeomInt_LineConstructor`, `GeomInt_LineTool` and
+`GeomInt_ParameterAndOrientation`. Overloads take distinct names: `GeomIntIntSS::perform`,
+`perform_adaptors`, `perform_from_start`, `perform_adaptors_from_start`, with the three
+approximation flags in one `GeomIntIntSSApprox`; `build_pcurves_bounds` and
+`build_pcurves`; `GeomIntWLApprox::perform_on_surfaces` and `perform` (on the line alone),
+with the flags and the range in one `ApproxIntRange`; the multi-line constructors
+`with_sv_surfaces` and `with_line` over an `ApproxIntMultiLineLayout`. `TreatRLine` takes
+its in-out curves in one `GeomIntRLineCurves`. `tools/audit_api_rows.py` reports 0 missing
+and 0 stale rows for ApproxInt, GeomInt and GeomAPI.
+
+ApproxInt and GeomInt: `tkgeomalgo_corpus_geomint.py` adds 1114 requests. `gi_intss` (312)
+runs `GeomInt_IntSS` on 40 pairs of planes, cylinders, cones, spheres, tori, Bezier, B-spline,
+offset, revolution and extrusion surfaces and trimmed ones, with five flag sets (with and
+without approximation and 2d curves), the constructor, the swapped order, start points
+inside and outside the domains, adaptors with trimmed domains, two Performs in a row and one
+surface with itself, then every accessor with the indices 0 and N+1; `gapi_intss` (14) runs
+`GeomAPI_IntSS`. `gi_wlapprox` (312) approximates the walking lines of 13 intersections with
+six `SetParameters` sets (tolerances 1e-7 to 1e-3, degrees 1 to 8, 0 to 5 iterations, 4 to 30
+points per interval, with and without tangency, the three parametrizations) over the 3d and
+2d spaces, on and without the surfaces, over whole lines, sub-ranges and the default range.
+`gi_mline` (105) and `gi_sv` (24) drive the multi-line (values and tangents, with the
+indices outside, `MakeMLBetween`, `MakeMLOneMorePoint`, `Dump`) and the PrmPrm and ImpPrm
+SvSurfaces (every member, the two stored results, the solver switch,
+`FillInitialVectorOfSolution` across the periods), including a degenerated Bezier edge and a
+cone apex. `gi_knots` (56) and `gi_partype` (15) run `ApproxInt_KnotTools` and
+`GeomInt_WLApprox::Parameters`; `gi_lconst` (85), `gi_ltool` (41) and `gi_lines` (23) run
+the line constructor and the line tool on every line kind and on the lines of 23
+intersections (with the decomposition at the seams); `gi_pcurves` (47), `gi_trim` (36),
+`gi_mkbsp` (7), `gi_rline` (33), `gi_adjust` (1) and `gi_porient` (3) run the static
+members. Left out: `BuildPCurves` of a curve whose two projections fail (the null 2d curve
+is dereferenced natively), the ImpPrm SvSurfaces on a surface that is not a quadric (the
+parameters of `SeekPoint` stay uninitialized natively), and `SetTolFixTangents` and
+`TolFixTangents`, declared without a definition (a call does not link).
 
 ## Preserved native behaviour
 
@@ -1608,6 +1654,54 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
   the reference point reused for the special points) and the fall-throughs of
   `IsPoleOrSeam`; `IntPatch_SpecialPoints::ProcessCone` keeps its input U when no
   generatrix is chosen, and `FuncPreciseSeam` answers false on any Standard_Failure.
+
+### ApproxInt and GeomInt
+
+- `ApproxInt_ImpPrmSvSurfaces::Compute` with the quadric second stores the parameters on S2
+  as `(tu2, tu2)`, so the stored result matches a later call only when `u2 == v2`; the loops
+  meant to bring the quadric U within Pi of its input compare it with itself and do nothing,
+  and the quadric derivatives are taken at the input parameters. `SeekPoint` sets the stored
+  point and the computed flag but not the stored parameters. A start point that cannot be
+  brought into a non-periodic range clears the tangent flag of both stored results.
+  The native function keeps pointers to the quadric and to the surface handle given to the
+  constructor, which must outlive it (`GeomInt_WLApprox` keeps them on its stack).
+- `ApproxInt_PrmPrmSvSurfaces::Compute`: a solver that is not done keeps the stored tangent
+  flag; an empty result clears it.
+- `ApproxInt_MultiLine::MakeMLBetween` keeps the SvSurfaces on the new line only for more
+  than 10 source intervals, answers an empty line of indices 1..1 when too few points were
+  made or the line turns too sharply in a parameter plane, and restores the solver switch
+  only when it returns (an exception leaves it on). `Dump` prints with `printf`.
+- `ApproxInt_KnotTools::BuildKnots` appends to the output without clearing it (only the early
+  exit clears it); `BuildCurvature` keeps its Lagrange buffers from one point to the next.
+- `ApproxInt_Approx`: `SetParameters` without tangency sets the PassPoint constraints, which a
+  later call with tangency does not reset; `NbMultiCurves` is always 1 and `Value` ignores its
+  index; a knot interval without a Bezier piece ends the approximation before the pieces are
+  joined; `Perform()` is declared without a definition.
+- `GeomInt_IntSS::Perform` clears the 3d curves but not the 2d curve sequences, so after a
+  second Perform `LineOnS1(i)` and `LineOnS2(i)` read the curves of the first one;
+  `LineOnS1` does not skip the boundaries as `Line` does. With a start point outside a
+  domain the intersector is not run and its previous result is read again. The in-out
+  tolerance of the 2d curves grows from part to part; the circle parts keep their untrimmed
+  2d curves, and a single whole turn ends the loop. `SetTolFixTangents` and
+  `TolFixTangents` are declared without a definition.
+- `GeomInt_LineConstructor`: the walking parts of a plane with an extrusion or a revolution
+  are merged by the integer part of their parameters; a restriction line without vertex on a
+  domain is classified at its first free vertex.
+
+## ApproxInt and GeomInt deviations
+
+- The `void*` to the SvSurfaces is a shared `Rc<RefCell<dyn ApproxIntSvSurfaces>>`, and the
+  ImpPrm and IntImp functions hold their quadric and surface by value where the native ones
+  keep pointers to the constructor arguments.
+- A null dereference of the native code raises Standard_NullObject: `BuildPCurves` when both
+  projections fail, the line constructor before `Load`, a restriction line without arc in
+  `TreatRLine`, a missing line in the multi-line.
+- `NCollection_LocalArray` is a slice and `NCollection_DynamicArray` a `Vec`; the Lagrange
+  result buffer of `BuildCurvature` starts at 0 where the native one is uninitialized until
+  the first successful evaluation.
+- `MakeMLBetween` with `High < Low` raises Standard_OutOfRange (`High == Low - 1`, the native
+  write into an empty array) or Standard_OutOfMemory (the native allocation of a negative
+  size).
 
 ## IntStart deviations
 
