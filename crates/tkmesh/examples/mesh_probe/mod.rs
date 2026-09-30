@@ -209,3 +209,5 @@ fn pcurve_lookup_report(
 pub(super) mod tools;
 
 pub mod pipeline;
+
+pub mod shape_tool;

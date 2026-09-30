@@ -22,6 +22,7 @@
 #include "tkmesh_probe_models.cxx"
 #include "tkmesh_probe_tools.cxx"
 #include "tkmesh_probe_pipeline.cxx"
+#include "tkmesh_probe_shape_tool.cxx"
 void mesh_curve(std::istream& input) {
     int count, keep; input >> count >> keep;
     occ::handle<NCollection_IncAllocator> allocator = new NCollection_IncAllocator;
@@ -58,6 +59,8 @@ int main(){
         else if(operation=="mesh_pcurve")mesh_pcurve(input);
         else if(operation=="mesh_model")mesh_model(input);
         else if(operation=="mesh_pipeline")mesh_pipeline(input);
+        else if(operation=="mesh_shape_tool")mesh_shape_tool(input);
+        else if(operation=="mesh_shape_polygons")mesh_shape_polygons(input);
         else if(operation=="mesh_tools")mesh_tools(input);
         else if(operation=="mesh_explorer")mesh_explorer(input);
         else {std::cerr<<"Unknown probe operation: "<<operation<<'\n';return 2;}

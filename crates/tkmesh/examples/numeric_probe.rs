@@ -94,6 +94,10 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
             values[6] != 0,
             values[7] != 0,
         ),
+        "mesh_shape_tool" => mesh_probe::shape_tool::shape_tool_case(values),
+        "mesh_shape_polygons" => {
+            mesh_probe::shape_tool::shape_polygons_case(values[0] != 0, values[1])
+        }
         "mesh_tools" => mesh_probe::tools::tools_case(values[0]),
         "mesh_explorer" => mesh_probe::tools::explorer_case(values[0], values[1] != 0),
         "mesh_model" => mesh_probe::model_case(values[0], values[1], orientation(values[2])),

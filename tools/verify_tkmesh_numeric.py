@@ -24,6 +24,9 @@ def corpus() -> str:
              for builder in (-4, -3, -2, -1, 0, 1)
              for stages in product((-2, -1, 0, 1), repeat=5)
              for clean, cancel in product((0, 1), repeat=2)]
+    rows += ['mesh_shape_tool ' + ' '.join(map(str, values))
+             for values in product(range(5), range(3), range(3), range(8), range(4), range(2))]
+    rows += [f'mesh_shape_polygons {located} {orient}' for located, orient in product(range(2), range(4))]
     return '\n'.join(rows) + '\n'
 
 
