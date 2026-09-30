@@ -28,6 +28,7 @@ def corpus() -> str:
                  for count, minimum, steps, depth in product([-1, 0, 4], [-0.0, 0.1], [0, 1, 101, 420], [-2, 0, 3])]
     requests += surface_grid_requests()
     requests += topol_requests()
+    requests += fclass_requests()
     return '\n'.join(requests) + '\n'
 
 
@@ -86,6 +87,13 @@ def topol_requests() -> list[str]:
                  for kind, radius in product([0, 1, 2, 5], [0.005, 1, 100])]
     requests += [f'topol {kind} {poles} 0 1 0 1' for kind, poles in product([7, 8], [3, 9, 12])]
     return requests
+
+
+def fclass_requests() -> list[str]:
+    """Real faces including circular holes, exact boundaries and shifted periodic UVs."""
+    points = [(0, 0), (1, 1), (0.25, -1), (5.5, 1), (0.25-1e-8, 0), (3, 0), (-3, 0), (10, 10), (-10, -10)]
+    return [f'fclass {kind} {radius} {tol} {u} {v} {tol*3} {periodic}'
+            for kind, radius, tol, (u, v), periodic in product(range(14), [0.1, 2], [1e-7, 1e-3], points, [0, 1])]
 
 
 ORACLE = NumericOracle('TKBO-foundations', 'tools/oracle/tkbo_foundations_probe.cxx',

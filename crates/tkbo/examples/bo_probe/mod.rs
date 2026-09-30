@@ -1,4 +1,6 @@
 mod curves;
+mod fclass;
+mod fclass_faces;
 mod intersections;
 mod localize;
 mod marked;
@@ -43,6 +45,7 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
         "topol" => topol::case(v),
+        "fclass" => fclass::case(v),
         "range" => range_case(v),
         "marked" => marked::case(v),
         "root" => root_case(v),
