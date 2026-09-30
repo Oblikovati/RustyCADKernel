@@ -124,4 +124,21 @@ void bo_face_distance_case(const std::vector<double>& v) {
   bo_real(FindMaxDistance(curve,v[2],v[3],face,context));
  }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
 }
+void bo_face_parameter_case(const std::vector<double>& v) {
+ try {
+  auto curve=bo_tools_geometry(int(v[0]),0.,2*M_PI);
+  auto first=bo_fclass_face(int(v[1]),3.);auto second=bo_fclass_face(int(v[2]),3.);
+  occ::handle<IntTools_Context> context=new IntTools_Context;double parameter=99.;
+  bo_int(ParameterOutOfBoundary(v[3],curve,first,second,v[4],v[5]!=0,v[6],parameter,context));bo_real(parameter);
+ }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
+}
+void bo_face_analytic_case(const std::vector<double>& v) {
+ try {
+  occ::handle<Geom_Surface> plane=new Geom_Plane(gp_Pnt(),gp_Dir(1,0,v[0]));
+  TopoDS_Face first;BRep_Builder().MakeFace(first,plane,1e-7);
+  TopoDS_Face second=BRepBuilderAPI_MakeFace(gp_Cylinder(gp_Ax3(),3.),0.,2*M_PI,-v[1],v[1]);
+  if(v[3]==1)std::swap(first,second);else if(v[3]==2)first=second;else if(v[3]==3)second=first;
+  BRepAdaptor_Surface a(first,true),b(second,true);bo_int(isTreatAnalityc(a,b,v[2]));
+ }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
+}
 #endif
