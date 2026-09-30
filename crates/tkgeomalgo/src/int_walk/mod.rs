@@ -21,8 +21,10 @@
 //! [`IntWalkIWalking`] (docs/geomalgo-design.md, "IntWalk templates"), and the two
 //! IntImp instances of the package are aliases of the IntImp generics.
 mod iwalking;
+mod pwalking;
 
 pub use iwalking::{IWalkingTypes, IntWalkIWalking, TheIWFunction, TheIWLine};
+pub use pwalking::IntWalkPWalking;
 
 use crate::int_imp::{HSurfaceTool, IntImpInt2S, IntImpZerParFunc};
 
