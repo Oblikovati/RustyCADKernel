@@ -42,7 +42,10 @@
 #include "tkshhealing_probe_shapecustom.cxx"
 #include "tkshhealing_probe_modification.cxx"
 #include "tkshhealing_probe_shapeupgrade.cxx"
+#include "tkshhealing_probe_healing_common.cxx"
+#include "tkshhealing_probe_analysis_edge.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"sh_edgeana", sh_edgeana_case},
  // ShapeExtend (tkshhealing_probe_shapeextend.cxx)
  {"sh_status", sh_status_case},
  {"sh_msg", sh_message_case},

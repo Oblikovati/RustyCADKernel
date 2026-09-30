@@ -201890,6 +201890,230 @@
       "rust_item": "rustycad_tkhlr::hlr_algo::WiresBlock::static_type",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration (impl_transient!) gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::new",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::HasCurve3d(const TopoDS_Edge&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::has_curve_3d",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::Curve3d(const TopoDS_Edge&,occ::handle<Geom_Curve>&,double&,double&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::curve_3d",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::IsClosed3d(const TopoDS_Edge&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::is_closed_3d",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::HasPCurve(const TopoDS_Edge&,const TopoDS_Face&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::has_pcurve_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::HasPCurve(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::has_pcurve_on_surface",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::PCurve(const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&,double&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::pcurve_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::PCurve(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,occ::handle<Geom2d_Curve>&,double&,double&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::pcurve_on_surface",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::BoundUV(const TopoDS_Edge&,const TopoDS_Face&,gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::bound_uv_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::BoundUV(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::bound_uv_on_surface",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::IsSeam(const TopoDS_Edge&,const TopoDS_Face&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::is_seam_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::IsSeam(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::is_seam_on_surface",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::FirstVertex(const TopoDS_Edge&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::first_vertex",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::LastVertex(const TopoDS_Edge&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::last_vertex",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::GetEndTangent2d(const TopoDS_Edge&,const TopoDS_Face&,bool,gp_Pnt2d&,gp_Vec2d&,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::get_end_tangent_2d_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::GetEndTangent2d(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,bool,gp_Pnt2d&,gp_Vec2d&,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::get_end_tangent_2d_on_surface",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckVerticesWithCurve3d(const TopoDS_Edge&,double,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertices_with_curve_3d",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckVerticesWithPCurve(const TopoDS_Edge&,const TopoDS_Face&,double,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertices_with_pcurve_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckVerticesWithPCurve(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,double,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertices_with_pcurve_on_surface",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckVertexTolerance(const TopoDS_Edge&,const TopoDS_Face&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertex_tolerance_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckVertexTolerance(const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertex_tolerance",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckCurve3dWithPCurve(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_curve_3d_with_pcurve_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckCurve3dWithPCurve(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_curve_3d_with_pcurve_on_surface",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::status_flag",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckSameParameter(const TopoDS_Edge&,double&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_same_parameter",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckSameParameter(const TopoDS_Edge&,const TopoDS_Face&,double&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_same_parameter_on_face",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckPCurveRange(double,double,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_pcurve_range",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Edge::CheckOverlapping(const TopoDS_Edge&,const TopoDS_Edge&,double&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_overlapping",
+      "status": "implemented",
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
     }
   ],
   "tests": [
@@ -293771,6 +293995,328 @@
       "rust_target": "brep_builder_api_transform",
       "rust_test": "BRepBuilderAPI_TransformTest__ShapeValidity",
       "rust_source": "crates/tktopalgo/tests/brep_builder_api_transform.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_EdgeTest.HasCurve3d",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_Edge_Test.cxx",
+      "source_sha256": "ae6b16d5aa5d9ba0ca1d0f23244ae183e7e0cf85b442ed2aadb8be553c3f6699",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_edge",
+      "rust_test": "ShapeAnalysis_EdgeTest__HasCurve3d",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_EdgeTest.FirstVertex_LastVertex",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_Edge_Test.cxx",
+      "source_sha256": "ae6b16d5aa5d9ba0ca1d0f23244ae183e7e0cf85b442ed2aadb8be553c3f6699",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_edge",
+      "rust_test": "ShapeAnalysis_EdgeTest__FirstVertex_LastVertex",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_EdgeTest.IsClosed_OpenEdge",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_Edge_Test.cxx",
+      "source_sha256": "ae6b16d5aa5d9ba0ca1d0f23244ae183e7e0cf85b442ed2aadb8be553c3f6699",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_edge",
+      "rust_test": "ShapeAnalysis_EdgeTest__IsClosed_OpenEdge",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_EdgeTest.IsClosed_ClosedEdge",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_Edge_Test.cxx",
+      "source_sha256": "ae6b16d5aa5d9ba0ca1d0f23244ae183e7e0cf85b442ed2aadb8be553c3f6699",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_edge",
+      "rust_test": "ShapeAnalysis_EdgeTest__IsClosed_ClosedEdge",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_EdgeTest.IsSeam_NonSeam",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeAnalysis_Edge_Test.cxx",
+      "source_sha256": "ae6b16d5aa5d9ba0ca1d0f23244ae183e7e0cf85b442ed2aadb8be553c3f6699",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_analysis_edge",
+      "rust_test": "ShapeAnalysis_EdgeTest__IsSeam_NonSeam",
+      "rust_source": "crates/tkshhealing/tests/shape_analysis_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.ConnectsPairAtBoundingBoxMidpoint",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__ConnectsPairAtBoundingBoxMidpoint",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.HonorsEdgeOrientation",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__HonorsEdgeOrientation",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.MergesExistingConnectivityGroups",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__MergesExistingConnectivityGroups",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.AddsAllConsecutiveEdgesOfOpenWire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__AddsAllConsecutiveEdgesOfOpenWire",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.ConnectsLastAndFirstEdgesOfClosedWire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__ConnectsLastAndFirstEdgesOfClosedWire",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.RepeatedAddIsIdempotent",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__RepeatedAddIsIdempotent",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.ClearDiscardsPendingConnections",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__ClearDiscardsPendingConnections",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.BuildClearsCompletedConnections",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__BuildClearsCompletedConnections",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.UsesConfusionAsMinimumTolerance",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__UsesConfusionAsMinimumTolerance",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.ComputesThreeDimensionalBoundingBoxCenter",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__ComputesThreeDimensionalBoundingBoxCenter",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.AppendsUnboundVertexToExistingGroup",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__AppendsUnboundVertexToExistingGroup",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.PrependsUnboundVertexToExistingGroup",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__PrependsUnboundVertexToExistingGroup",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.ProcessesMultipleWiresIndependently",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__ProcessesMultipleWiresIndependently",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.IgnoresEdgesOutsideWiresInShapeOverload",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__IgnoresEdgesOutsideWiresInShapeOverload",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.AcceptsEmptyWire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__AcceptsEmptyWire",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.CanBeReusedAfterBuild",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__CanBeReusedAfterBuild",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.PreservesUnderlyingCurves",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__PreservesUnderlyingCurves",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnectTest.PreservesTotalLengthAgainstReference",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_EdgeConnect_Test.cxx",
+      "source_sha256": "5cfe43644a41e167aad5252f459a665d17db2dc3cda7c89ab2032d884cce61ae",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_edge_connect",
+      "rust_test": "ShapeFix_EdgeConnectTest__PreservesTotalLengthAgainstReference",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_edge_connect.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

@@ -40,3 +40,6 @@ pub mod shapes;
 #[allow(dead_code)]
 #[path = "../../../tktopalgo/examples/tp_probe/shapes_geometry.rs"]
 pub mod shapes_geometry;
+
+pub mod analysis_edge;
+pub mod healing_common;

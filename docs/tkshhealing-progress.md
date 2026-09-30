@@ -8,7 +8,7 @@ packages is one module of the crate, declared up front in `src/lib.rs`; a module
 package is not ported yet holds only its documentation. Ported so far: SHMessage (the
 message resource data), ShapeExtend and ShapeBuild, plus the ShapeAnalysis, ShapeFix,
 ShapeCustom and ShapeUpgrade classes listed below. The combined numeric corpus has
-3448 passing requests. The original 2178 requests cover:
+4809 passing requests. The original 2178 requests cover:
 ShapeExtend status codes 475, messages 85, WireData 92, Explorer 849, registrators 11,
 ComplexCurve 24 and CompositeSurface 126; ShapeBuild vertices 48, edges 457 and re-shapers
 11.
@@ -140,6 +140,7 @@ public member has an api row:
 
 | Class | Rust | Probe operations |
 | --- | --- | --- |
+| ShapeAnalysis_Edge | `ShapeAnalysisEdge` | `sh_edgeana` |
 | ShapeAnalysis_Geom | `ShapeAnalysisGeom` | `sh_geom` |
 | ShapeAnalysis_ShapeTolerance | `ShapeAnalysisShapeTolerance` | `sh_shapetol` |
 | ShapeAnalysis_Shell | `ShapeAnalysisShell` | `sh_shell` |
@@ -196,32 +197,25 @@ members belong to the classes not ported.
 
 ## GoogleTest suites
 
-The toolkit test inventory maps these suites (0 declarations):
+The toolkit test inventory now maps two complete suites (23 declarations):
 
-| Source | Rust target | Declarations | Native | Rust |
-| --- | --- | ---: | --- | --- |
+| Source | Rust target | Declarations |
+| --- | --- | ---: |
+| ShapeAnalysis_Edge_Test.cxx | shape_analysis_edge | 5 |
+| ShapeFix_EdgeConnect_Test.cxx | shape_fix_edge_connect | 18 |
 
-The upstream GTests directory holds 12 suites (143 declarations). None needs only
-SHMessage, ShapeExtend, ShapeBuild and the ported toolkits:
-
-- `ShapeBuild_ReShape_Test.cxx` (4 declarations) is not mapped: its case
-  `ShapeFix_ShapeStabilityTest.RepeatedPerformDoesNotMultiplyEdges` builds a box with
-  `BRepPrimAPI_MakeBox` of TKPrim and heals it with `ShapeFix_Shape`, which are not
-  ported (a suite is mapped whole). The unchanged suite compiles against the shared
-  build and passes natively (4 of 4). Its three `ShapeBuild_ReShapeTest` cases run as the
-  behavior tests of `crates/tkshhealing/tests/shape_build_reshape.rs` on the same shapes
-  (built with the ported BRepBuilderAPI makers) with the same assertions; the suite moves
-  to a 1:1 translation once TKPrim and ShapeFix are ported.
-- The other eleven suites exercise ShapeAnalysis, ShapeConstruct, ShapeFix and
-  ShapeUpgrade classes.
+Both translations retain the original builders, geometry, assertions and tolerances.
+The edge-analysis suite uses TKPrim's Rust box maker as a test dependency. Ten of the
+12 upstream suites remain unmapped. ShapeBuild_ReShape_Test.cxx still needs
+ShapeFix_Shape for its repeated-healing regression; its other three cases remain as
+supplemental behavior tests. TKPrim is now available.
 
 ## Verification
 
 `python3 tools/verify_toolkit.py TKShHealing --jobs 16 --source OCCT --native-build BUILD`
 compiles the unchanged upstream suites against the native closure, runs them and the
 Rust targets, checks exact runtime names, then runs `tools/verify_tkshhealing_numeric.py`.
-While no suite is mapped it runs the numeric verifier alone and reports 0 mapped
-declarations. Evidence is in `target/oracle-tkshhealing/`. CI runs it like the TKTopAlgo
+It checks the two complete mapped suites and then runs the combined numeric corpus. Evidence is in `target/oracle-tkshhealing/`. CI runs it like the TKTopAlgo
 verifier. The native closure builds and links `libTKShHealing` (`tools/native_build.py`);
 the shared build `target/occt-modeling-full` already has it.
 
@@ -512,3 +506,19 @@ ShapeUpgrade (tools/tkshhealing_corpus_shapeupgrade.py, 173 requests):
   handle natively; they return Standard_NullObject errors. Work-array indices that the
   native C0 split would read outside its arrays (impossible for a valid B-spline) are
   Standard_OutOfRange.
+
+## Recovered ShapeAnalysis_Edge implementation
+
+All 28 public members have API rows. The 1,361 `sh_edgeana` requests cover every
+overload: oriented curves and vertices, seams, located curves and surfaces, p-curve
+bounds, missing representations, vertex checks, sampled same-parameter deviation,
+tolerance updates, derivative and chord tangents, and full or partial overlap.
+The finite outputs match OCCT bit for bit; status flags and exceptions also match.
+
+The native quirks remain: GetEndTangent2d reverses a derivative tangent for a reversed
+edge, but does not reverse the oriented chord again; CheckVertexTolerance uses
+1.0000001 (despite the older source comment mentioning 1.0001); CheckOverlapping
+adds status bits without clearing earlier bits. Rust returns tuples for output
+parameters. Missing p-curve tangents return the origin, and missing-vertex tolerances
+return zero, where native callers retain their supplied output values. The probes
+initialize those outputs to zero before each native call.
