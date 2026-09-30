@@ -50,4 +50,5 @@ pub mod canonical;
 
 pub mod shape_construct;
 
+pub mod analysis_surface;
 pub mod shape_analysis_curve;
