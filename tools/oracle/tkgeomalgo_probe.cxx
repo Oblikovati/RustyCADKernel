@@ -61,6 +61,7 @@
 #include "tkgeomalgo_probe_intpatch.cxx"
 #include "tkgeomalgo_probe_intpatch_lines.cxx"
 #include "tkgeomalgo_probe_intpatch_tools.cxx"
+#include "tkgeomalgo_probe_intpatch_poly.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -250,6 +251,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ip_arcf", ga_ip_arcf_case},
  {"ip_csf", ga_ip_csf_case},
  {"ip_curvature", ga_ip_curvature_case},
+ {"ip_polyh", ga_ip_polyh_case},
+ {"ip_bvh", ga_ip_bvh_case},
+ {"ip_interf", ga_ip_interf_case},
+ {"ip_polyline", ga_ip_polyline_case},
+ {"ip_polyarc", ga_ip_polyarc_case},
+ {"ip_t3bits", ga_ip_t3bits_case},
 };
 int main() {
  std::string line;

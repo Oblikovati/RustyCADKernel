@@ -34,6 +34,7 @@ pub mod int_imp_par_gen;
 pub mod int_patch;
 pub mod int_patch_curves;
 pub mod int_patch_lines;
+pub mod int_patch_poly;
 pub mod int_patch_tools;
 pub mod int_polyh;
 pub mod int_polyh_records;
