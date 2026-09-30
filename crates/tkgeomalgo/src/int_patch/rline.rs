@@ -310,3 +310,22 @@ impl IntPatchPointLine for IntPatchRLine {
         Ok(self.points("IsOutBox")?.is_out_box(p))
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn duplicate_copies_the_vertices_and_shares_the_point_set() {
+        let line = IntPatchRLine::new(true, IntSurfTypeTrans::In, IntSurfTypeTrans::Out);
+        let points = Handle::new(IntSurfLineOn2S::new(None));
+        line.add(&points);
+        line.add_vertex(&IntPatchPoint::new(), false);
+        let copy = line.duplicate();
+        copy.clear_vertexes();
+        // The copy owns its vertices and fields, as the native copy constructor.
+        assert_eq!((line.nb_vertex(), copy.nb_vertex()), (1, 0));
+        assert!(copy.is_tangent() && copy.transition_on_s2() == IntSurfTypeTrans::Out);
+        assert_eq!(copy.curve().object_address(), points.object_address());
+    }
+}
