@@ -26,6 +26,10 @@
 #include "tkhlr_probe_frame.cxx"
 #include "tkhlr_probe_intrv.cxx"
 #include "tkhlr_probe_topcnx.cxx"
+#include "tkhlr_probe_hlralgo.cxx"
+#include "tkhlr_probe_hlralgo_projector.cxx"
+#include "tkhlr_probe_hlralgo_poly.cxx"
+#include "tkhlr_probe_hlralgo_internal.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // HLRAlgo_Projector viewing frame (tkhlr_probe_frame.cxx)
  {"hl_frame", hl_frame_case},
@@ -38,6 +42,20 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopBas and TopCnx (tkhlr_probe_topcnx.cxx)
  {"tb_interference", hl_tb_interference_case},
  {"tc_transition", hl_tc_transition_case},
+ // HLRAlgo (tkhlr_probe_hlralgo.cxx, tkhlr_probe_hlralgo_projector.cxx,
+ // tkhlr_probe_hlralgo_poly.cxx, tkhlr_probe_hlralgo_internal.cxx)
+ {"ha_minmax", hl_ha_minmax_case},
+ {"ha_encode", hl_ha_encode_case},
+ {"ha_bipoint", hl_ha_bipoint_case},
+ {"ha_edges", hl_ha_edges_case},
+ {"ha_wires", hl_ha_wires_case},
+ {"ha_status", hl_ha_status_case},
+ {"ha_records", hl_ha_records_case},
+ {"ha_projector", hl_ha_projector_case},
+ {"ha_polydata", hl_ha_polydata_case},
+ {"ha_polyalgo", hl_ha_polyalgo_case},
+ {"ha_internal", hl_ha_internal_case},
+ {"ha_grow", hl_ha_grow_case},
 };
 int main() {
  std::string line;

@@ -5,6 +5,7 @@ mod hl_probe;
 use hl_probe::frame;
 use hl_probe::intrv;
 use hl_probe::top_cnx;
+use hl_probe::{hlr_algo, hlr_algo_internal, hlr_algo_poly, hlr_algo_projector};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -23,6 +24,20 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // TopBas and TopCnx (hl_probe/top_cnx.rs)
     ("tb_interference", top_cnx::interference_case),
     ("tc_transition", top_cnx::transition_case),
+    // HLRAlgo (hl_probe/hlr_algo.rs, hlr_algo_projector.rs, hlr_algo_poly.rs,
+    // hlr_algo_internal.rs)
+    ("ha_minmax", hlr_algo::minmax_case),
+    ("ha_encode", hlr_algo::encode_case),
+    ("ha_bipoint", hlr_algo::bipoint_case),
+    ("ha_edges", hlr_algo::edges_case),
+    ("ha_wires", hlr_algo::wires_case),
+    ("ha_status", hlr_algo::status_case),
+    ("ha_records", hlr_algo::records_case),
+    ("ha_projector", hlr_algo_projector::projector_case),
+    ("ha_polydata", hlr_algo_poly::polydata_case),
+    ("ha_polyalgo", hlr_algo_poly::polyalgo_case),
+    ("ha_internal", hlr_algo_internal::internal_case),
+    ("ha_grow", hlr_algo_internal::grow_case),
 ];
 
 fn main() {

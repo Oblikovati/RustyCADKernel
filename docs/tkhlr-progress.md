@@ -1,11 +1,11 @@
 # TKHLR port status
 
-**Intrv, TopBas and TopCnx are ported; the other packages follow in the order below.**
+**Intrv, TopBas, TopCnx and HLRAlgo are ported; the other packages follow in the order below.**
 `crates/tkhlr` (`rustycad-tkhlr`) is the port of the ModelingAlgorithms toolkit TKHLR.
 It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo and
 TKTopAlgo ports, as the native toolkit does (its EXTERNLIB). Each of the 8 OCCT packages
 is one module of the crate, declared up front in `src/lib.rs`; a module whose package
-is not ported yet holds only its documentation. Ported: Intrv, TopBas, TopCnx.
+is not ported yet holds only its documentation. Ported: Intrv, TopBas, TopCnx, HLRAlgo.
 
 [hlr-design.md](hlr-design.md) fixes how the C++ constructs of the packages map to Rust
 and gives the class order of the HLRTopoBRep, HLRBRep and HLRAppli work.
@@ -53,6 +53,23 @@ after both resets and over seeded sequences of interferences (every orientation,
 transition and boundary transition; tangent, normal and opposite directions;
 curvatures and tolerances), with `Transition` and `BoundaryTransition` after each step.
 
+The HLRAlgo families (`tools/tkhlr_corpus_hlralgo.py` and
+`tools/tkhlr_corpus_hlralgo_poly.py`, 525 requests) compare the 16-direction boxes and
+their packing (in and beyond the 15-bit fields), the six `HLRAlgo_BiPoint`
+constructors and its flags, the edge and wire blocks with out-of-range ranks,
+`HLRAlgo_EdgeStatus` sequences with the visible and hidden walks of
+`HLRAlgo_EdgeIterator`, the interference records, and `HLRAlgo_Projector` on the four
+standard views, skew, scaled and translated frames, in parallel and in perspective
+(every projection, `Shoot`, `Transform`, `Set`, `Scaled`, and the null sight and zero
+scale failures). The polyhedral part compares `HideByPolyData` on faces with integer
+coordinates (segments through vertices, along edges and in the face plane) and random
+ones, with and without connexity and with packed boxes that pass or fail,
+`HLRAlgo_PolyAlgo` over one to three shells (Update with its packed boxes, hiding
+planes and edge flags, then the hide and show walks), `HLRAlgo_PolyInternalData` on
+grid triangulations (UpdateLinks, AddNode, the split UpdateLinks on interior and
+boundary segments with array growth, a segment that is not there, the flags and
+`Dump`), and the `Inc`/`Dec` members with shared and distinct array pointers.
+
 ## Intrv quirks kept
 
 - The default interval is `[RealFirst, RealLast]` with tolerances 0:
@@ -87,3 +104,49 @@ section 3).
 Deviation: the default `TopBas_TestInterference` is `0.0`, `0` and FORWARD, where the
 native default constructor leaves the fields uninitialized (docs/hlr-design.md
 section 4); the probe never reads a default record.
+
+## HLRAlgo quirks kept
+
+- `HLRAlgo_Projector::Project(P, Pout)` computes but never stores the projection for the
+  axonometric view of type 0, so `Pout` keeps its value; `Project(P, X, Y, Z)` uses
+  `0.7071067811865475` for that view and `0.7071067811865476` for the others.
+- A default projector keeps zero directions (its constructor does not call
+  `SetDirection`). Without `Scaled(true)` the projection drops the scale, and a
+  parallel projection drops the translation too: `Transformation` differs from
+  `FullTransformation`, and only then are the four standard views recognized.
+  `Focus` raises Standard_NoSuchObject for a parallel projection.
+- `MinMaxIndices::Minimize` lowers the maximum array as well, and `Maximize` raises
+  the minimum array; `EncodeMinMax` keeps 15 bits of each index; `SizeBox` multiplies
+  14 extents (the 8 minimum fields and the first 6 maximum fields).
+- `HLRAlgo_EdgeStatus::Initialize` keeps the visible intervals of the previous state
+  (unused while all is visible); `Hide` ignores `OnBoundary` and hides nothing with
+  `OnFace`; `VisiblePart` answers the whole range for any rank while all is visible.
+- The hidden walk of `HLRAlgo_EdgeIterator` skips the gaps whose fuzzy bounds meet.
+- `HLRAlgo_PolyAlgo::Update` keeps the plane normal of the previous hiding triangle of a
+  face for a degenerate triangle (the native locals live across the triangle loop), and
+  packs the boxes with `(int)` conversions that give `INT_MIN` for NaN or out-of-range
+  values (an empty global box).
+- `HideByPolyData` reads entry 1 of the hiding array even when the array is empty
+  (Standard_OutOfRange), and `hideByOneTriangle` keeps at most two crossing points.
+- `HLRAlgo_PolyInternalData(nbNod, nbTri)` reads node 1 before creating the nodes, so
+  no node raises Standard_OutOfRange; the arrays double when full (from index 1), and
+  a node array of size 0 cannot grow (`IncPINod` reads entry 1 first).
+- `AddNode` gives a node the normal `(1, 0, 0)` when the interpolated normal is null.
+- The split `UpdateLinks` grows the arrays before it looks for the segment; when the
+  segment is not there only the counts are restored.
+
+Not compared (the native code reads uninitialized memory there): a default
+`MinMaxIndices`, the edge and flag entries of a new `HLRAlgo_EdgesBlock` before they
+are set, the enumerations of a default `HLRAlgo_Intersection` and
+`HLRAlgo_Interference`, the POD entries of the poly arrays before they are written, the
+distance tolerance of `HLRAlgo_PolyAlgo::Hide` before `Update`, a hidden walk over a
+status with no visible interval that is not all hidden, `VisiblePart` outside the
+intervals, and a split `UpdateLinks` whose neighbour triangle does not hold the
+segment (the opposite node `itpk` stays uninitialized; the port reads 0). Negative
+block sizes make the native allocation fail; the port returns Standard_RangeError.
+
+Deviations: the transients return copies or write guards where the native accessors
+return references, and take `&mut` handles where the native members take array
+pointers (docs/hlr-design.md section 5); a null handle or an out-of-range read that
+crashes or is undefined natively is a Standard_NullObject or Standard_OutOfRange
+failure.

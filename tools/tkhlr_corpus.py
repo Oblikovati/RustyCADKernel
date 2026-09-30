@@ -17,3 +17,6 @@ def append_tkhlr_requests(requests: list[str]) -> None:
     __import__('tkhlr_corpus_intrv').append_intrv_requests(requests)
     # TopBas and TopCnx (tkhlr_corpus_topcnx.py)
     __import__('tkhlr_corpus_topcnx').append_topcnx_requests(requests)
+    # HLRAlgo (tkhlr_corpus_hlralgo.py, tkhlr_corpus_hlralgo_poly.py)
+    __import__('tkhlr_corpus_hlralgo').append_hlralgo_requests(requests)
+    __import__('tkhlr_corpus_hlralgo_poly').append_hlralgo_poly_requests(requests)

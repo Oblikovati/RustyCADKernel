@@ -1,5 +1,9 @@
 //! The TKHLR probe operations, one module per C++ probe file under tools/oracle.
 pub mod frame;
+pub mod hlr_algo;
+pub mod hlr_algo_internal;
+pub mod hlr_algo_poly;
+pub mod hlr_algo_projector;
 pub mod intrv;
 pub mod top_cnx;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
