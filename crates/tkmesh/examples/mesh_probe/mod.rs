@@ -243,3 +243,7 @@ pub mod model_healer;
 pub mod elements;
 
 pub mod cell_failure;
+
+pub mod vertex_inspector;
+
+pub mod vertex_tool;

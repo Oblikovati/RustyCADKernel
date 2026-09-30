@@ -49,3 +49,9 @@ pub use elements::{
     BRepMeshEdge, BRepMeshOrientedEdge, BRepMeshTriangle, BRepMeshVertex, DegreeOfFreedom,
     PairOfIndex,
 };
+
+mod vertex_tool;
+pub use vertex_tool::{
+    BRepMeshVertexInspector, BRepMeshVertexTool, DeletedVertexIndices, MeshVertexCollection,
+    MeshVertexCollectionSlot, VertexInspectorPoint, VertexInspectorTarget,
+};

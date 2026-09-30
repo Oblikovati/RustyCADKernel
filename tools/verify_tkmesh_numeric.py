@@ -62,6 +62,8 @@ def corpus() -> str:
     rows += ['mesh_element_triangle ' + ' '.join(map(str, v)) for v in product(range(6), range(6), range(8), range(7), range(7))]
     rows += ['mesh_element_pair ' + ' '.join(map(str, v)) for v in product(range(512), (-3,-1,0,7), (-1,0,1,2,3))]
     rows += ['mesh_cell_failure ' + ' '.join(map(str, v)) for v in product(range(5), range(2), range(2))]
+    rows += ['mesh_vertex_inspector ' + ' '.join(map(str, v)) for v in product(range(7), range(2), range(6), range(2), range(3))]
+    rows += ['mesh_vertex_tool ' + ' '.join(map(str, v)) for v in product(range(3), range(5), range(2), range(5))]
     return '\n'.join(rows) + '\n'
 
 
@@ -71,3 +73,5 @@ ORACLE = NumericOracle('TKMesh', 'tools/oracle/tkmesh_probe.cxx',
 
 if __name__ == '__main__':
     verify_numeric(ORACLE)
+    from verify_tkmesh_vertex_undefined import verify_vertex_undefined
+    verify_vertex_undefined(use_existing=True)
