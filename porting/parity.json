@@ -211199,6 +211199,60 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelHealer::perform_internal",
       "status": "implemented",
       "notes": "Native endpoint alias order, topological and strict vertex-tolerance adjacency, face intersection checks, five edge-amplification passes using real EdgeDiscret, native pointer maps and OSD parallel loops. Parameters copied into shared storage for FaceChecker references; successful completion releases model and intersection map. Native C7 face17 minimum-size override preserved."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
+      "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::new",
+      "status": "implemented",
+      "notes": "Native OCC966 Init, 2D single-spline segmentation even for Segment=false, knot snapping and recursive trimmed/offset curves; shared 2D/3D kernel retains dimensional policy differences. All 600 candidates accounted: 530 exact, 70 native SIGSEGV/Rust Standard_ConstructionError divergences in offset Build(false). Build is partial parity; crashes are never exact passes. Replay tools/verify_split_curve2d.py. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2d::Init(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
+      "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::init_curve",
+      "status": "implemented",
+      "notes": "Native OCC966 Init, 2D single-spline segmentation even for Segment=false, knot snapping and recursive trimmed/offset curves; shared 2D/3D kernel retains dimensional policy differences. All 600 candidates accounted: 530 exact, 70 native SIGSEGV/Rust Standard_ConstructionError divergences in offset Build(false). Build is partial parity; crashes are never exact passes. Replay tools/verify_split_curve2d.py. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2d::Init(const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
+      "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::init_curve_range",
+      "status": "implemented",
+      "notes": "Native OCC966 Init, 2D single-spline segmentation even for Segment=false, knot snapping and recursive trimmed/offset curves; shared 2D/3D kernel retains dimensional policy differences. All 600 candidates accounted: 530 exact, 70 native SIGSEGV/Rust Standard_ConstructionError divergences in offset Build(false). Build is partial parity; crashes are never exact passes. Replay tools/verify_split_curve2d.py. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2d::Build(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
+      "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::build",
+      "status": "partial",
+      "notes": "Native OCC966 Init, 2D single-spline segmentation even for Segment=false, knot snapping and recursive trimmed/offset curves; shared 2D/3D kernel retains dimensional policy differences. All 600 candidates accounted: 530 exact, 70 native SIGSEGV/Rust Standard_ConstructionError divergences in offset Build(false). Build is partial parity; crashes are never exact passes. Replay tools/verify_split_curve2d.py. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2d::GetCurves() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
+      "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::curves",
+      "status": "implemented",
+      "notes": "Native OCC966 Init, 2D single-spline segmentation even for Segment=false, knot snapping and recursive trimmed/offset curves; shared 2D/3D kernel retains dimensional policy differences. All 600 candidates accounted: 530 exact, 70 native SIGSEGV/Rust Standard_ConstructionError divergences in offset Build(false). Build is partial parity; crashes are never exact passes. Replay tools/verify_split_curve2d.py. No original legacy declarations for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve2d::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitCurve2d,ShapeUpgrade_SplitCurve)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
+      "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
+      "rust_item": "impl_transient!(ShapeUpgradeSplitCurve2d)",
+      "status": "excluded",
+      "notes": "Native RTTI maps to the shared Rust transient implementation; callable APIs counted separately."
     }
   ],
   "tests": [

@@ -661,3 +661,13 @@ accounts for all 650 candidates: 634 exact passes and 16 native SIGSEGV versus R
 construction-error divergences inherited from multipart offset curves. Build and
 Perform remain partial in the ledger. The earlier SplitCurve3d divergence gate also
 passes unchanged. Seven surface regressions and all 262 tooling tests pass.
+
+### 2D curve splitting
+
+SplitCurve2d shares the dimensional splitting kernel with SplitCurve3d while
+preserving the native 2D spline segmentation and range policies. Four APIs are
+implemented; Build remains partial. The integrated toolkit oracle passes 16,843
+exact requests. All 600 dedicated candidates are accounted: 530 exact comparisons
+and 70 replayed native-fault/Rust-error differences. Existing 3D accounting remains
+332 exact plus 16 differences, and surface accounting remains 634 plus 16.
+These differences are not parity passes; no original declaration is added here.
