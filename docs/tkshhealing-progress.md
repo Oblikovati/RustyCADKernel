@@ -600,3 +600,8 @@ Wire ordering and OuterWire/TotCross2D foundations add 29 API rows and preserve
 actual wire state, mixed-mode fallback and signed boundary sampling. Other wire
 checks remain pending. Their 8,448 differential cases run in the TKMesh oracle
 because they exercise the model-building closure.
+
+FillBndBox adds 960 exact comparisons (11,473 total). Native C2 intervals,
+ten-step coordinate extrema, previous-iterate return values and the no-op for
+nonpositive exact sample counts are preserved. Three focused regressions and
+strict clippy pass. Both IsPlanar overloads remain pending for ShapeAnalysis_Curve.

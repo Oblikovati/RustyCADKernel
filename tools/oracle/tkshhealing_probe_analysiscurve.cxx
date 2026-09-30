@@ -1,6 +1,7 @@
 // ShapeAnalysis_Curve projection overloads at pinned 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #include <ShapeAnalysis_Curve.hxx>
 #include <GeomAdaptor_Curve.hxx>
+#include <Bnd_Box2d.hxx>
 #include <ShapeAnalysis.hxx>
 struct ShProjectionRequest {
  int operation;occ::handle<Geom_Curve> curve;gp_Pnt point;double tolerance,first,last,previous;bool adjust;
@@ -58,4 +59,10 @@ void sh_analysis_validate_case(std::istream& in) {
  GaReader r{in};double first=0,last=0;occ::handle<Geom_Curve> curve;
  GA_TRY(curve=tp_geom_curve(r);first=r.real();last=r.real();double tolerance=r.real();std::cout<<ShapeAnalysis_Curve().ValidateRange(curve,first,last,tolerance)<<' ');
  ga_real(first);ga_real(last);shc_curve(curve);ga_end();
+}
+
+void sh_analysis_bounds_case(std::istream& in) {
+ GaReader r{in};Bnd_Box2d bounds;if(r.flag())bounds.Add(gp_Pnt2d(91,-37));
+ GA_TRY(auto curve=tp_geom2d_curve(r);double first=r.real(),last=r.real();int count=r.integer();bool exact=r.flag();ShapeAnalysis_Curve().FillBndBox(curve,first,last,count,exact,bounds));
+ ga_flag(bounds.IsVoid());GA_TRY(double a,b,c,d;bounds.Get(a,b,c,d);ga_real(a);ga_real(b);ga_real(c);ga_real(d));ga_end();
 }

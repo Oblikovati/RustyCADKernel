@@ -198,3 +198,32 @@ pub fn validate_case(values: &[f64]) {
     super::sh_common::curve(&curve);
     end();
 }
+
+/// Print native bounding-box accumulation including partial state after failures; `bounds_case(numbers)`.
+pub fn bounds_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    let mut bounds = rustycad_tkmath::bnd::BoundingBox2::default();
+    if reader.flag() {
+        bounds.add_point(rustycad_tkmath::gp::Point2::new(91.0, -37.0));
+    }
+    attempt(|| {
+        let curve = super::brep_lib_common::geom2d_curve(&mut reader)?;
+        let first = reader.real();
+        let last = reader.real();
+        ShapeAnalysisCurve.fill_bnd_box(
+            &curve,
+            first,
+            last,
+            reader.integer(),
+            reader.flag(),
+            &mut bounds,
+        )
+    });
+    super::common::flag(bounds.is_void());
+    super::common::show(bounds.get(), |limits| {
+        for value in limits {
+            real(value);
+        }
+    });
+    end();
+}

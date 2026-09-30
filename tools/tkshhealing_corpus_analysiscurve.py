@@ -31,3 +31,5 @@ def append_analysis_curve_requests(requests:list[str])->None:
     range_curves = construct_curves_3d() + [geom_bezier(closed), geom_bspline(2,False,nearly_closed,[(0,3),(1,3)])]
     for curve, bounds, tolerance in product(range_curves, [(0,1),(1,0),(-2,3),(0.5,0.5),(0.8,0.2),(1,0.2),(0.2,0),(7,-7)],[-1,0,1e-7,1e-3,10]):
         requests.append('sh_analysis_validate '+numbers([*curve,*bounds,tolerance]))
+    for curve, bounds, count, exact, initial in product(construct_curves_2d(),[(0,1),(-1,2),(1,0),(0.5,0.5)],[-1,0,1,2,5,20],range(2),range(2)):
+        requests.append('sh_analysis_bounds '+numbers([initial,*curve,*bounds,count,exact]))

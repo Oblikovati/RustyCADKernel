@@ -207855,6 +207855,14 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshShapeVisitor (RuntimeTyped/Transient)",
       "status": "implemented",
       "notes": "Actual native bounding-box, ShapeExplorer, ShapeAnalysis outer-wire and CheckOrder algorithms. Exact model/pcurve/incidence comparisons cover production boxes/spheres, free geometry, duplicate placements and malformed boundaries."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::FillBndBox",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::fill_bnd_box",
+      "status": "implemented",
+      "notes": "Native C2 interval sampling, ten-step coordinate Newton extrema, previous-iterate result, and nonpositive sample no-op behavior. 960 exact native comparisons; three focused regressions."
     }
   ],
   "tests": [
