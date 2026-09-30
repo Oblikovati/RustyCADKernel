@@ -1,5 +1,6 @@
 [package]
 name = "rustycad-tktopalgo"
+description = "OCCT TKTopAlgo toolkit: topological algorithms (classification, construction, checking, extrema and properties of shapes)"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -8,5 +9,10 @@ publish.workspace = true
 [lints]
 workspace = true
 [dependencies]
-rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tkernel = { path = "../tkernel" }
 rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo" }

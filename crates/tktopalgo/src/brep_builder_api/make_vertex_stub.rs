@@ -15,13 +15,16 @@
 // commercial license or contractual agreement.
 // Rust translation of ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeVertex.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! BRepBuilderAPI vertex construction with an explicit precision context.
+//! STUB of `BRepBuilderAPI_MakeVertex`, not its port: the minimal vertex builder that
+//! the TKernel tests use (see the `brep_builder_api` module documentation). The real
+//! port of BRepBuilderAPI replaces this file.
 use rustycad_tkbrep::{
     brep::BRepBuilder,
     topods::{Shape, Vertex},
 };
 use rustycad_tkmath::gp::Point3;
-/// Builds a vertex using BRepLib's default precision; `MakeVertex::new(Point3::default())`.
+/// STUB: builds a vertex using BRepLib's default precision;
+/// `MakeVertex::new(Point3::default())`.
 #[derive(Clone, Debug)]
 pub struct MakeVertex {
     vertex: Vertex,
