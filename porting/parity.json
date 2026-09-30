@@ -122532,14 +122532,6 @@
       "notes": "Extrema mapping (docs/tkgeombase-progress.md): each class drops the Extrema_ prefix; the class templates are generic Rust types over the ExtremaCurveTool trait (CurveTool, Curve2dTool) and the native aliases are type aliases; constructors and overloads take distinct Rust names (new, with_*, perform_*, initialize_*), default arguments are explicit, output references are returned values, Values(X, F, G, H) is values_hessian, objects that keep a curve or surface borrow it, and every native exception (including a null dereference, reported as Standard_NullObject) becomes a Failure error."
     },
     {
-      "upstream_id": "Extrema_GLocateExtPC::Initialize(const TheCurve&,double,double,double)",
-      "toolkit": "TKGeomBase",
-      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GLocateExtPC.hxx",
-      "rust_item": "rustycad_tkgeombase::extrema::GLocateExtPC::initialize",
-      "status": "implemented",
-      "notes": "Extrema mapping (docs/tkgeombase-progress.md): each class drops the Extrema_ prefix; the class templates are generic Rust types over the ExtremaCurveTool trait (CurveTool, Curve2dTool) and the native aliases are type aliases; constructors and overloads take distinct Rust names (new, with_*, perform_*, initialize_*), default arguments are explicit, output references are returned values, Values(X, F, G, H) is values_hessian, objects that keep a curve or surface borrow it, and every native exception (including a null dereference, reported as Standard_NullObject) becomes a Failure error."
-    },
-    {
       "upstream_id": "Extrema_GLocateExtPC::Perform(const ThePoint&,double)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GLocateExtPC.hxx",
@@ -208192,14 +208184,6 @@
       "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
     },
     {
-      "upstream_id": "IntTools_Tools::IntermediatePoint(double,double)",
-      "toolkit": "TKBO",
-      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
-      "rust_item": "rustycad_tkbo::int_tools::Tools::intermediate_point",
-      "status": "implemented",
-      "notes": "Exact pinned rounded PAR_T=0.43213918 expression and operation order; differential block cases and finite/infinite Rust regression. Remaining Tools APIs not claimed."
-    },
-    {
       "upstream_id": "BRepMesh_ModelPostProcessor",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPostProcessor.hxx",
@@ -208435,6 +208419,215 @@
       "rust_item": "rustycad_tkhlr::contap::ContapHCurve2dTool::nb_samples",
       "status": "implemented",
       "notes": "Native adaptor forwarding and Contap-specific NbSamples. Six hundred added exact differential cases exercise every callable API on rational, conic, spline, offset and trimmed arcs, including zero/reversed sampling ranges. Null handles return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Extrema_GLocateExtPC::Initialize(const TheCurve&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GLocateExtPC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GLocateExtPC::{initialize, initialize_owned}",
+      "status": "implemented",
+      "notes": "Borrowed initializer remains compatible; optional shared Handle ownership retains the same native projector objects, caches and reinitialization order. Safe CurveReference storage extends to nested generic projectors without resetting them per Perform. Full native corpus plus owned 2D/3D requests compares exact results.",
+      "source_sha256": "2a9c7b26b4a6bc5de0b984088c94b11261caee701513da7903a8d735fc6fb833"
+    },
+    {
+      "upstream_id": "IntTools_Tools::ComputeVV(const TopoDS_Vertex&,const TopoDS_Vertex&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::compute_vv",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::HasInternalEdge(const TopoDS_Wire&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::has_internal_edge",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::MakeFaceFromWireAndFace(const TopoDS_Wire&,const TopoDS_Face&,TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::make_face_from_wire_and_face",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::ClassifyPointByFace(const TopoDS_Face&,const gp_Pnt2d&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::classify_point_by_face",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsVertex(const TopoDS_Edge&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_vertex_on_edge",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsVertex(const TopoDS_Edge&,const TopoDS_Vertex&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_edge_vertex",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsVertex(const IntTools_CommonPrt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_common_vertex",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsMiddlePointsEqual(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_middle_points_equal",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsVertex(const gp_Pnt&,double,const TopoDS_Vertex&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_point_vertex",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IntermediatePoint(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::intermediate_point",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::SplitCurve(const IntTools_Curve&,NCollection_Sequence<IntTools_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::split_curve",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::RejectLines(const NCollection_Sequence<IntTools_Curve>&,NCollection_Sequence<IntTools_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::reject_lines",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsDirsCoinside(const gp_Dir&,const gp_Dir&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_dirs_coinside",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsDirsCoinside(const gp_Dir&,const gp_Dir&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_dirs_coinside_tolerance",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsClosed(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_closed",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::CurveTolerance(const occ::handle<Geom_Curve>&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::curve_tolerance",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::CheckCurve(const IntTools_Curve&,Bnd_Box&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::check_curve",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsOnPave(double,const IntTools_Range&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_on_pave",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::VertexParameters(const IntTools_CommonPrt&,double&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::vertex_parameters",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::VertexParameter(const IntTools_CommonPrt&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::vertex_parameter",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsOnPave1(double,const IntTools_Range&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_on_pave1",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IsInRange(const IntTools_Range&,const IntTools_Range&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::is_in_range",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::SegPln(const gp_Lin&,double,double,double,const gp_Pln&,double,gp_Pnt&,double&,double&,double&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::seg_pln",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::ComputeTolerance(const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double,double,double&,double&,double,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::compute_tolerance",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "IntTools_Tools::ComputeIntRange(double,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::compute_int_range",
+      "status": "implemented",
+      "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
     }
   ],
   "tests": [
