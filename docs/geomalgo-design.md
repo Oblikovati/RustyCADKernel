@@ -651,6 +651,50 @@ intersection algorithms build on it.
   shared state `IntPatchPolygoBase` (error and box); the `polygo_polygon2d!` macro gives
   `IntPatchPolyLine` and `IntPatchPolyArc` their `Polygon2d` members.
 
+## 18. IntPatch parametric intersection and front end
+
+The walking-line tools, the line splitter, the parametric-parametric intersection and
+the front end of IntPatch (`crates/tkgeomalgo/src/int_patch/{wline_tool,
+line_constructor, prm_prm, intersection}`) are classes without templates; the rules are:
+
+- **Static classes.** `IntPatch_WLineTool` is the unit struct `IntPatchWLineTool` with
+  associated functions and the constant `MY_MAX_CONCAT_ANGLE`. The file-static helpers
+  of each native source are private functions of submodules, one per step (the purge,
+  the tube, the join and the extension of `IntPatch_WLineTool.cxx`; the helpers,
+  `AddLine`, the restriction coding and the `Perform` branches of
+  `IntPatch_LineConstructor.cxx`).
+- **Domains.** The native algorithms take `occ::handle<Adaptor3d_TopolTool>`, a
+  virtual class; they take `&(dyn TheTopolTool + 'static)` (section 12), as the
+  analytic classes of section 17 do. The trait gets the members these algorithms call
+  (`IsThePointOn`, `DomainIsInfinite`, `SamplePnts`, `UParameters`, `VParameters`,
+  `IsUniformSampling`); `Tol3d(C)` is the `tol_3d_arc` of section 17.
+- **Flags.** The three trailing `bool` parameters of `IntPatch_Intersection::Perform`
+  (`isGeomInt`, `theIsReqToKeepRLine`, `theIsReqToPostWLProc`) are one
+  `IntPatchIntersectionOptions` with the native defaults.
+- **Line sequences.** `NCollection_Sequence<occ::handle<IntPatch_Line>>` is
+  `Vec<Handle<dyn IntPatchLine>>`, read 1-based with the native Standard_OutOfRange;
+  the `occ::down_cast` and the reinterpret casts of a line handle are `Handle::cast`.
+- **References into sequences.** The native code keeps `const IntSurf_PntOn2S&`
+  references to the points of a line while it edits the line. A reference to an
+  `NCollection_Sequence` item follows its node: an insertion before it leaves it on the
+  same point, `Value(i, P)` changes what it reads. Where the native code reads such a
+  reference after an edit (`ExtendTwoWLines`), the port keeps the rank of the node and
+  shifts it with each insertion before it, and reads the point again at each use.
+- **Uninitialized locals.** The locals that the native code declares once per
+  `Perform` and assigns in some branches only (`U1, V1, U2, V2` of
+  `SectionPointToParameters` for an unknown point type) keep their previous value, 0 at
+  first.
+- **Repeated bodies.** The `Perform` overloads of `IntPatch_PrmPrmIntersection` repeat
+  the same steps with small differences (a strict or a loose comparison, `&&` or `||`
+  between the end checks, the test of the vertices). Each step is one function with the
+  variant given as a parameter, so every overload runs the operations of its native
+  body in its order.
+- **Grid of `PointDepart`.** `IntPatch_InfoPD` is a struct of flat vectors indexed
+  `i * NBI + j`, as natively; the bit maps are the T3Bits class of the core.
+- **Casts.** `(int)` of a double is `intf::native_int_cast` (the x86-64 conversion)
+  and `std::min`/`std::max` of doubles are `intf::std_min`/`std_max`, so NaN operands
+  take the native branch.
+
 ## 17. IntPatch analytic intersections
 
 The analytic intersections of IntPatch (`IntPatch_ImpImpIntersection`,

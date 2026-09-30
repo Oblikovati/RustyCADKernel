@@ -22,6 +22,7 @@
 use crate::int_imp::{IntImpZerImpFunc, TheISurfaceTool, ThePSurfaceTool};
 use crate::int_surf::IntSurfQuadric;
 use rustycad_tkbrep::topods::Edge;
+use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dHVertex, Adaptor3dSurface, Adaptor3dTopolTool};
@@ -75,6 +76,20 @@ pub trait TheTopolTool {
     /// `Edge()`: the edge of the current arc, where the native member returns a `void*`
     /// to a `TopoDS_Edge` (or null).
     fn edge(&self) -> Option<Edge>;
+    // The members the IntPatch algorithms call on their domains (docs/geomalgo-design.md
+    // section 18).
+    /// `IsThePointOn(P, Tol, ReacdreOnPeriodic)`.
+    fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure>;
+    /// `DomainIsInfinite()`.
+    fn domain_is_infinite(&self) -> bool;
+    /// `SamplePnts(theDefl, theNUmin, theNVmin)`.
+    fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure>;
+    /// `UParameters(theArray)`: a copy of the U sample parameters.
+    fn u_parameters(&self) -> Result<Array1<'static, f64>, Failure>;
+    /// `VParameters(theArray)`: a copy of the V sample parameters.
+    fn v_parameters(&self) -> Result<Array1<'static, f64>, Failure>;
+    /// `IsUniformSampling()`.
+    fn is_uniform_sampling(&self) -> Result<bool, Failure>;
     /// `Has3d()`: whether the restrictions carry 3d data (false for the base
     /// `Adaptor3d_TopolTool`). IntPatch_RstInt reads it.
     fn has_3d(&self) -> bool {
@@ -323,6 +338,26 @@ impl TheTopolTool for Adaptor3dTopolTool {
     // The base class has no edge: its `Edge()` returns a null pointer.
     fn edge(&self) -> Option<Edge> {
         None
+    }
+    fn is_the_point_on(&self, point: Point2, tol: f64, reframe: bool) -> Result<bool, Failure> {
+        Ok(Adaptor3dTopolTool::is_the_point_on(
+            self, point, tol, reframe,
+        ))
+    }
+    fn domain_is_infinite(&self) -> bool {
+        Adaptor3dTopolTool::domain_is_infinite(self)
+    }
+    fn sample_pnts(&self, deflection: f64, nu_min: i32, nv_min: i32) -> Result<(), Failure> {
+        Adaptor3dTopolTool::sample_pnts(self, deflection, nu_min, nv_min)
+    }
+    fn u_parameters(&self) -> Result<Array1<'static, f64>, Failure> {
+        Adaptor3dTopolTool::u_parameters(self)
+    }
+    fn v_parameters(&self) -> Result<Array1<'static, f64>, Failure> {
+        Adaptor3dTopolTool::v_parameters(self)
+    }
+    fn is_uniform_sampling(&self) -> Result<bool, Failure> {
+        Adaptor3dTopolTool::is_uniform_sampling(self)
     }
     fn has_3d(&self) -> bool {
         Adaptor3dTopolTool::has_3d(self)

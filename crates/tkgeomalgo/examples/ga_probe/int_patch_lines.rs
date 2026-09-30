@@ -51,7 +51,7 @@ pub fn read_trans(r: &mut Reader) -> (bool, IntPatchLineTransitions) {
 }
 
 /// `ga_ip_line_base`, on the line viewed as an `IntPatch_Line` handle.
-pub fn line_base<L: IntPatchLine + RuntimeTyped>(line: &Handle<L>) {
+pub fn line_base<L: IntPatchLine + RuntimeTyped + ?Sized>(line: &Handle<L>) {
     let h: Handle<dyn IntPatchLine> = line.cast();
     let l: &dyn IntPatchLine = h.get().expect("probe line");
     text(l.dynamic_type().name().as_bytes());
@@ -123,7 +123,7 @@ pub fn vertices(fx: &Fixture, l: &dyn VertexLine) {
 }
 
 /// `ga_ip_points`.
-fn points(l: &dyn IntPatchPointLine) {
+pub fn points(l: &dyn IntPatchPointLine) {
     attempt(|| {
         let n = l.nb_pnts()?;
         int(n);
@@ -235,7 +235,7 @@ fn wline_command(r: &mut Reader, fx: &Fixture, l: &IntPatchWLine, c: i32) -> Res
     }
 }
 
-fn creating_way(k: i32) -> IntPatchWLType {
+pub fn creating_way(k: i32) -> IntPatchWLType {
     match k {
         1 => IntPatchWLType::ImpImp,
         2 => IntPatchWLType::ImpPrm,
@@ -244,7 +244,7 @@ fn creating_way(k: i32) -> IntPatchWLType {
     }
 }
 
-fn make_wline(
+pub fn make_wline(
     c: &Handle<IntSurfLineOn2S>,
     tang: bool,
     t: IntPatchLineTransitions,
@@ -338,7 +338,7 @@ fn rline_command(r: &mut Reader, fx: &Fixture, l: &IntPatchRLine, c: i32) -> Res
     }
 }
 
-fn make_rline(tang: bool, t: IntPatchLineTransitions) -> IntPatchRLine {
+pub fn make_rline(tang: bool, t: IntPatchLineTransitions) -> IntPatchRLine {
     match t {
         IntPatchLineTransitions::Types(a, b) => IntPatchRLine::new(tang, a, b),
         IntPatchLineTransitions::Touch(a, b) => IntPatchRLine::new_touch(tang, a, b),

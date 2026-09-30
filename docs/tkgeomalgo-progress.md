@@ -276,6 +276,22 @@ LU_Decompose`). Its GeomPlate content is also in the numeric corpus.
   (`surface`, `get_circle`, `get_circle_d1`, `get_circle_d2`, `get_shape`, `knots`,
   `mults`, `get_minimal_weights`, `get_tolerance`). The `GeomFill_Tensor` call
   operators are `value` and `change_value`.
+- IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18):
+  `IntPatch_WLineTool` is the unit struct `IntPatchWLineTool` (`compute_purged_wline`,
+  `join_wlines`, `extend_two_wlines`, the constant `MY_MAX_CONCAT_ANGLE`).
+  `IntPatch_LineConstructor` is `IntPatchLineConstructor` (`new`, `perform`, `nb_lines`,
+  `line`). `IntPatch_PrmPrmIntersection` is `IntPatchPrmPrmIntersection`; its `Perform`
+  overloads are `perform` (the main one, with `ClearFlag`), `perform_polyhedra`,
+  `perform_polyhedron1`, `perform_polyhedron2`, `perform_self`, `perform_self_polyhedron`,
+  `perform_with_points` and `perform_from_start`, the four marching tolerances of the
+  polyhedral and start-point overloads are one `IntPatchPrmPrmTolerances`, and the grid
+  members take arrays for the cell coordinates (`remplit_lin([x1, y1, z1], [x2, y2, z2],
+  map)`). `IntPatch_Intersection` is `IntPatchIntersection` (`new`, `with_surfaces`,
+  `with_surface`, `set_tolerances`, `perform` and `perform_with_points` with the three
+  flags in one `IntPatchIntersectionOptions`, `perform_from_start`, `perform_self`, the
+  result accessors, `dump`, and the static `check_singular_points`, `define_uv_max_step`
+  and `prepare_surfaces`). The domains are `&(dyn TheTopolTool + 'static)` (the virtual
+  `Adaptor3d_TopolTool`) and the line sequences `Vec<Handle<dyn IntPatchLine>>`.
 
 ## Verification
 
@@ -938,6 +954,30 @@ interference. `ip_polyline` and `ip_polyarc` build the 2d polygons of walking an
 restriction lines and of arcs (parabola deflection, resampling near the other box, offsets,
 the construction errors); `ip_t3bits` edits the bit sets.
 
+IntPatch parametric intersection: 333 requests (`tkgeomalgo_corpus_intpatch_wltool.py`,
+`tkgeomalgo_corpus_intpatch_prmprm.py`, `tkgeomalgo_corpus_intpatch_extend.py` and
+`tkgeomalgo_corpus_intpatch_inter.py`). `ip_purge` purges walking lines (two equal points,
+equal points among a few, long straight and curved lines for the tube criteria, lines leaving
+the domains at either end, periodic and C0 surfaces, uneven steps, the bad distributions,
+vertices out of the line). `ip_join` joins the walking lines of two cylinders in the four end
+orders, across the seam, with several candidates, a line of another kind, points at the ends,
+the same cylinder twice and a plane. `ip_lc` splits every line kind at its vertices against
+domains made of the fixture arcs, with and without a 3d tolerance (a probe subclass of
+`Adaptor3d_TopolTool` overriding the arc iteration and `Tol3d`), and codes walking lines on
+the arcs as restriction lines. `ip_ppgrid` and `ip_ppdepart` run the grid members and
+`PointDepart` on crossing, tangent, disjoint and far apart surface pairs. `ip_extend` (24)
+extends walking lines on two quadrics: gaps in the four end orders, shared ends, arcs of a
+sphere and a plane across the seam and at a pole, a cylinder and a tilted plane, a cone near
+its apex, lines whose tangents turn too much, critical points and three pieces in a row.
+`ip_isingular` (23) runs the static members of `IntPatch_Intersection` on poles and flat
+cones; `ip_inter` (107) runs the front end on every pair of surface kinds of the
+IntCurveSurface catalog (bounded and infinite), on nearly degenerated cones and tori, with
+the three flags, with start points, from a start point and on self-intersections;
+`ip_prmprm` (74) runs every `Perform` overload of the parametric intersection on Bezier,
+B-spline, offset and revolution surfaces with the deflection options, and `NewLine` on the
+lines found. Left out: a
+restriction line on neither surface, whose part between two vertices dereferences a null arc
+natively.
 IntPatch analytic intersections: 582 requests (`tkgeomalgo_corpus_intpatch_impimp.py`
 348, `tkgeomalgo_corpus_intpatch_impprm.py` 234). `ip_impimp` (153) intersects every pair
 of plane, cylinder, cone, sphere and torus patches in coaxial, secant, tangent,
@@ -1500,6 +1540,40 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
   incomplete word are not stored, and for `size^3 < 32` the native constructor writes before
   its empty array (undefined behaviour).
 
+### IntPatch parametric intersection
+
+- `IntPatch_WLineTool::ComputePurgedWLine` compares the point count of the last pass of
+  its equal-points step with 30 to skip the other steps; a vertex whose parameter is out
+  of the line raises Standard_OutOfRange in the later steps, and a line without vertices
+  that leaves a domain raises it when its end vertex is moved. `JoinWLines` reads the
+  radii of both surfaces as cylinders (Standard_NoSuchObject otherwise), even for lines
+  that will not be joined.
+- `IntPatch_LineConstructor`: the mode is unused. On a conic line the tolerance of the
+  first domain is taken when the second domain has an arc (`myDom1->Init(); if
+  (myDom2->More())`), the same test is made on a restriction on the second surface, and
+  the tolerance persists from one part to the next; with `Adaptor3d_TopolTool` itself,
+  `Tol3d` raises Standard_DomainError on a bounded domain. A restriction part gets the
+  last vertex index 2 even for a single vertex (`AppendSameVertexR` is compiled out).
+  UNKNOWN states count as OUT on conic lines only.
+- `IntPatch_PrmPrmIntersection::NewLine` adds the point `Indice`, not `Indice + 1`, when it
+  skips the points before the sampled abscissa, and compares `1 / (a + b)` with the step.
+  `PointDepart` clears the neighbours of a cell only in the first map. `RemplitLin` sets
+  only the first cell of each halved segment, so between cells two apart the middle cell
+  stays unset.
+- `IntPatch_WLineTool::ExtendTwoWLines` keeps references to the end points of the lines
+  while it inserts points, so a reference taken before an insertion at the start of a line
+  reads the new point after it; the tests that disable an extension read the bits set by
+  the previous lines of the sequence.
+- `IntPatch_PrmPrmIntersection::Perform`: the images of the start points on the opposite
+  bound of a closed direction share one point, whose 3d point is the origin; the flag of
+  the periodic adjustment of a new point is not reset between the parameters; the
+  processing of several walking lines keeps the vertex count of the first line when the
+  line is replaced; in the polyhedral overloads the first point of a section line is read
+  into the parameter minima of the previous line.
+- `IntPatch_Intersection::Dump` does nothing (its body needs `DUMPOFIntPatch_Intersection`).
+  `SetTolerances` clamps the values with two tests that keep a NaN. The infinite surfaces
+  are trimmed on the V bounds of both surfaces, then on the U bounds.
+
 ### IntPatch analytic intersections
 
 - `IntPatch_ImpImpIntersection`: the plane-plane and cone-torus pairs do not update the
@@ -1736,6 +1810,20 @@ glibc `MALLOC_PERTURB_` run of the native probe gives the same output for every 
   an uninitialized type) and Standard_NullObject for a null line.
   `IntPatch_PrmPrmIntersection_T3Bits` panics on a bit outside its words and is empty for
   `size^3 < 32`, where the native code writes out of bounds.
+
+## IntPatch parametric intersection deviations
+
+- The IntStart trait `TheTopolTool` has the domain members the IntPatch algorithms call
+  (`is_the_point_on`, `domain_is_infinite`, `sample_pnts`, `u_parameters`, `v_parameters`,
+  `is_uniform_sampling`; `Tol3d(C)` is the `tol_3d_arc` of the analytic classes).
+- `FUN_PL_Intersection` and the trimming of infinite surfaces in `IntPatch_Intersection`
+  cast the surface adaptor to `GeomAdaptor_Surface` without a check; another adaptor
+  raises Standard_NullObject.
+- A restriction line on neither surface raises Standard_NullObject in
+  `IntPatch_LineConstructor::Perform` where the native code dereferences a null arc.
+- The locals the native `Perform` bodies read before any assignment on some branches (the
+  parameters of a section point of the `Intf_EXTERNAL` type) keep their previous value, 0 at
+  first.
 
 ## IntPatch analytic-intersection deviations
 

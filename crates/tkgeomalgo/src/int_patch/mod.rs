@@ -38,8 +38,10 @@ mod imp_imp;
 mod imp_prm;
 mod instances;
 mod interference_polyhedron;
+mod intersection;
 mod iwline;
 mod line;
+mod line_constructor;
 mod path_point;
 mod point;
 mod point_dump;
@@ -50,6 +52,7 @@ mod polygo;
 mod polyhedron;
 mod polyhedron_bvh;
 mod polyline;
+mod prm_prm;
 mod rline;
 mod rline_compute;
 mod rst_int;
@@ -57,6 +60,7 @@ mod special_points;
 mod t3bits;
 mod vertices;
 mod wline;
+mod wline_tool;
 
 pub use aline::IntPatchALine;
 pub use aline_to_wline::IntPatchALineToWLine;
@@ -74,8 +78,10 @@ pub use instances::{
     IntPatchTheSurfFunction,
 };
 pub use interference_polyhedron::IntPatchInterferencePolyhedron;
+pub use intersection::{IntPatchIntersection, IntPatchIntersectionOptions};
 pub use iwline::IntPatchTheIWLineOfTheIWalking;
 pub use line::{IntPatchLine, IntPatchLineBase, IntPatchLineTransitions};
+pub use line_constructor::IntPatchLineConstructor;
 pub use path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds};
 pub use point::IntPatchPoint;
 pub use point_line::{IntPatchPointLine, curvature_radius_of_inters_line};
@@ -84,11 +90,13 @@ pub use polygo::{IntPatchPolygo, IntPatchPolygoBase};
 pub use polyhedron::IntPatchPolyhedron;
 pub use polyhedron_bvh::{IntPatchPolyhedronBVH, IntPatchPolyhedronTool};
 pub use polyline::IntPatchPolyLine;
+pub use prm_prm::{IntPatchPrmPrmIntersection, IntPatchPrmPrmTolerances};
 pub use rline::IntPatchRLine;
 pub use rst_int::IntPatchRstInt;
 pub use special_points::IntPatchSpecialPoints;
 pub use t3bits::IntPatchPrmPrmIntersectionT3Bits;
 pub use wline::{IntPatchWLType, IntPatchWLine};
+pub use wline_tool::IntPatchWLineTool;
 
 /// `IntPatch_SearchPnt`: `Intf_InterferencePolygon2d`.
 pub type IntPatchSearchPnt = crate::intf::InterferencePolygon2d;

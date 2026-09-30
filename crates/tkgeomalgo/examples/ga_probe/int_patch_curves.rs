@@ -12,7 +12,7 @@ use rustycad_tkmath::gp::{
     Sphere3, Vector3,
 };
 
-fn make_gline(
+pub fn make_gline(
     r: &mut Reader,
     kind: i32,
     (tang, t): (bool, IntPatchLineTransitions),
@@ -139,7 +139,7 @@ fn aline_command(r: &mut Reader, fx: &Fixture, l: &IntPatchALine, c: i32) -> Res
     }
 }
 
-fn aline_curve(r: &mut Reader) -> Result<IntAnaCurve, Failure> {
+pub fn aline_curve(r: &mut Reader) -> Result<IntAnaCurve, Failure> {
     let (p, d, rc) = (r.pnt(), r.dir(), r.real());
     let (sp, sr, tol) = (r.pnt(), r.real(), r.real());
     let cyl = Cylinder3::new(Axis3::from_normal(p, d)?, rc)?;
