@@ -29,6 +29,7 @@ NUMERIC_TIMEOUT_SECONDS = 3600
 
 # The numeric differential verifier of each toolkit: script, evidence directory.
 NUMERIC_VERIFIERS = {
+    'TKMesh': ('tools/verify_tkmesh_numeric.py', 'target/oracle-tkmesh/numeric'),
     'TKMath': ('tools/verify_tkmath_numeric.py', 'target/oracle-tkmath/numeric'),
     'TKG2d': ('tools/verify_tkg2d_numeric.py', 'target/oracle-tkg2d/numeric'),
     'TKG3d': ('tools/verify_tkg3d_numeric.py', 'target/oracle-tkg3d/numeric'),
