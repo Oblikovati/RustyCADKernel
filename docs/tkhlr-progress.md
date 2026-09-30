@@ -161,3 +161,9 @@ shared walking-point clearing. The complete numeric corpus passes 2,929 cases.
 Native uninitialized line type/radius are documented deterministic Rust defaults;
 native null walking dereferences become `Standard_NullObject`. Neither has a
 defined native value to compare. Contour algorithms and HLRBRep tests remain pending.
+
+`Contap_ContAna` now implements all nine sphere/cylinder/cone contour overloads
+and its five result accessors. An additional 4,086 native comparisons cover direct
+and indirect frames, draft angles, near-axis directions, zero/tiny/invalid radii,
+perspective eyes, fresh/reused state, and all accessor error branches. The full
+TKHLR numeric corpus passes 7,015 cases. Six focused analytic tests supplement it.

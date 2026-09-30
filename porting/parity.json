@@ -204925,6 +204925,126 @@
       "rust_item": "rustycad_tkhlr::contap::ContapTFunction",
       "status": "implemented",
       "notes": "Exact native record corpus; native uninitialized line type/radius have documented Rust defaults. Null walking dereference reports Standard_NullObject."
+    },
+    {
+      "upstream_id": "Contap_ContAna()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::new",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Sphere&,const gp_Dir&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_sphere",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Sphere&,const gp_Dir&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_sphere_draft",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Sphere&,const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_sphere_eye",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Cylinder&,const gp_Dir&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_cylinder",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Cylinder&,const gp_Dir&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_cylinder_draft",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Cylinder&,const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_cylinder_eye",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Cone&,const gp_Dir&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_cone",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Cone&,const gp_Dir&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_cone_draft",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Perform(const gp_Cone&,const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::perform_cone_eye",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::is_done",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::NbContours() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::nb_contours",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::TypeContour() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::type_contour",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Circle() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::circle",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
+    },
+    {
+      "upstream_id": "Contap_ContAna::Line(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ContAna.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapContAna::line",
+      "status": "implemented",
+      "notes": "All nine analytic contour overloads and accessor state/error behavior compared bitwise with native OCCT, including indirect frames and reused results."
     }
   ],
   "tests": [
