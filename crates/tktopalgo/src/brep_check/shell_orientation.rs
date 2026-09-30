@@ -1,18 +1,3 @@
-// Created on: 1995-12-12
-// Created by: Jacques GOUSSARD
-// Copyright (c) 1995-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
 // Rust translation of BRepCheck_Shell::Orientation (ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Shell.cxx) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepCheck_Shell::Orientation`: two faces sharing an edge must use it with
@@ -122,10 +107,13 @@ impl BRepCheckShell {
             Ok(scan) => scan,
             Err(leave) => return Ok(leave),
         };
-        if scan.status != BRepCheckStatus::BadOrientationOfSubshape
-            || scan.reference.is_null()
-            || map_ef.extent() == 0
-        {
+        if scan.status != BRepCheckStatus::BadOrientationOfSubshape {
+            return Ok(scan.status);
+        }
+        // With `update` the bad edge is recorded before the scan breaks (without it,
+        // the scan has returned).
+        record(list, update, scan.status);
+        if scan.reference.is_null() || map_ef.extent() == 0 {
             return Ok(scan.status);
         }
         check_orientable(map_ef, &mut orientations, scan.reference)
