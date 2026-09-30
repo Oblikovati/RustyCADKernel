@@ -14,19 +14,15 @@
 
 //! Behavior of the IntWalk port beyond the numeric probe, which compares the marching
 //! with native OCCT bit for bit.
-use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
 use rustycad_tkg3d::geom::{GeomPlane, GeomSphericalSurface, GeomSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
-use rustycad_tkgeomalgo::int_imp::{HSurfaceTool, IntImpZerImpFunc};
-use rustycad_tkgeomalgo::int_surf::{
-    IntSurfInteriorPoint, IntSurfLineOn2S, IntSurfPathPoint, IntSurfPntOn2S, IntSurfQuadric,
-    IntSurfQuadricTool,
-};
+use rustycad_tkgeomalgo::int_patch::{IntPatchTheIWalking, IntPatchTheSurfFunction};
+use rustycad_tkgeomalgo::int_surf::{IntSurfInteriorPoint, IntSurfQuadric};
 use rustycad_tkgeomalgo::int_walk::*;
-use rustycad_tkmath::gp::{Axis3, Direction3, Point3, Sphere3, Vector2, Vector3};
+use rustycad_tkmath::gp::{Axis3, Direction3, Point3, Sphere3, Vector2};
 use rustycad_tkmath::math::{Matrix, Vector};
 use std::f64::consts::{FRAC_PI_2, FRAC_PI_3, PI};
 
@@ -149,76 +145,6 @@ fn pwalking_minimizations_skip_analytic_surfaces() {
     assert_eq!(init, [0.9, 0.1, 0.1, -0.3]);
 }
 
-/// A named fake of the walking line of IntPatch: the points and the tangency flags.
-struct FakeIWLine {
-    parent: StandardTransient,
-    line: Handle<IntSurfLineOn2S>,
-    flags: SharedState<(bool, bool, Vector3, i32)>,
-}
-impl_transient!(FakeIWLine, "Test_FakeIWLine", StandardTransient, parent);
-
-impl TheIWLine for FakeIWLine {
-    fn with_inc_allocator() -> Self {
-        let flags = SharedState::new((false, false, Vector3::default(), -1));
-        Self {
-            parent: StandardTransient::default(),
-            line: Handle::new(IntSurfLineOn2S::new(None)),
-            flags,
-        }
-    }
-    fn reverse(&self) {
-        self.line.reverse();
-    }
-    fn cut(&self, index: i32) -> Result<(), Failure> {
-        self.line.split(index).map(|_| ())
-    }
-    fn add_point(&self, p: &IntSurfPntOn2S) {
-        self.line.add(p);
-    }
-    fn add_status_first(&self, _: bool, _: bool) {}
-    fn add_status_first_point(&self, _: bool, _: bool, _: i32, _: &IntSurfPathPoint) {}
-    fn add_status_first_last(&self, _: bool, _: bool, _: bool) {}
-    fn add_status_last(&self, _: bool) {}
-    fn add_status_last_point(&self, _: bool, _: i32, _: &IntSurfPathPoint) {}
-    fn add_index_passing(&self, _: i32) {}
-    fn set_tangent_vector(&self, v: Vector3, index: i32) {
-        let mut flags = self.flags.write();
-        (flags.2, flags.3) = (v, index);
-    }
-    fn set_tangency_at_begining(&self, is_tangent: bool) {
-        self.flags.write().0 = is_tangent;
-    }
-    fn set_tangency_at_end(&self, is_tangent: bool) {
-        self.flags.write().1 = is_tangent;
-    }
-    fn nb_points(&self) -> i32 {
-        self.line.nb_points()
-    }
-    fn value(&self, index: i32) -> Result<IntSurfPntOn2S, Failure> {
-        self.line.value(index)
-    }
-    fn line(&self) -> Handle<IntSurfLineOn2S> {
-        self.line.clone()
-    }
-    fn tangent_vector(&self) -> (Vector3, i32) {
-        let flags = self.flags.read();
-        (flags.2, flags.3)
-    }
-    fn is_tangent_at_begining(&self) -> bool {
-        self.flags.read().0
-    }
-    fn is_tangent_at_end(&self) -> bool {
-        self.flags.read().1
-    }
-}
-
-struct FakeTypes;
-impl IWalkingTypes for FakeTypes {
-    type SurfaceTool = HSurfaceTool;
-    type Function = IntImpZerImpFunc<HSurfaceTool, IntSurfQuadricTool>;
-    type Line = FakeIWLine;
-}
-
 #[test]
 fn iwalking_closes_a_circle_from_an_interior_point() {
     // The sphere of radius 0.8 centred at z = 0.3 cuts the plane z = 0 along a circle.
@@ -226,8 +152,7 @@ fn iwalking_closes_a_circle_from_an_interior_point() {
     let patch = adapted(square.cast(), (-1.0, 1.0, -1.0, 1.0));
     let ball = Sphere3::new(frame((0.0, 0.0, 0.3), (0.0, 0.0, 1.0)), 0.8).unwrap();
     let quadric = IntSurfQuadric::from_sphere(&ball);
-    let mut func =
-        IntImpZerImpFunc::<HSurfaceTool, IntSurfQuadricTool>::with_surfaces(&patch, &quadric);
+    let mut func = IntPatchTheSurfFunction::with_surfaces(&patch, &quadric);
     func.set_tolerance(1e-7);
     let r: f64 = (0.64f64 - 0.09).sqrt();
     // The interior point carries the tangents of the function there.
@@ -246,7 +171,7 @@ fn iwalking_closes_a_circle_from_an_interior_point() {
         func.direction3d().unwrap(),
         Vector2::new(d2.x(), d2.y()),
     );
-    let mut walk = IntWalkIWalking::<FakeTypes>::new(1e-6, 0.01, 0.1, false).unwrap();
+    let mut walk = IntPatchTheIWalking::new(1e-6, 0.01, 0.1, false).unwrap();
     assert_eq!(
         walk.nb_lines().unwrap_err().exception_type(),
         "StdFail_NotDone"

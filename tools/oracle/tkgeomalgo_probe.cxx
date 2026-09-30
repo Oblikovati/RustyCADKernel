@@ -58,6 +58,9 @@
 #include "tkgeomalgo_probe_gfill_cf.cxx"
 #include "tkgeomalgo_probe_intstart.cxx"
 #include "tkgeomalgo_probe_intpolyh.cxx"
+#include "tkgeomalgo_probe_intpatch.cxx"
+#include "tkgeomalgo_probe_intpatch_lines.cxx"
+#include "tkgeomalgo_probe_intpatch_tools.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -234,6 +237,19 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ph_array", ga_ph_array_case},
  {"ph_tools", ga_ph_tools_case},
  {"ph_couple", ga_ph_couple_case},
+ // IntPatch (tkgeomalgo_probe_intpatch*.cxx)
+ {"ip_point", ga_ip_point_case},
+ {"ip_iwline", ga_ip_iwline_case},
+ {"ip_pathpoint", ga_ip_pathpoint_case},
+ {"ip_wline", ga_ip_wline_case},
+ {"ip_rline", ga_ip_rline_case},
+ {"ip_gline", ga_ip_gline_case},
+ {"ip_aline", ga_ip_aline_case},
+ {"ip_hinter", ga_ip_hinter_case},
+ {"ip_hc2d", ga_ip_hc2d_case},
+ {"ip_arcf", ga_ip_arcf_case},
+ {"ip_csf", ga_ip_csf_case},
+ {"ip_curvature", ga_ip_curvature_case},
 };
 int main() {
  std::string line;

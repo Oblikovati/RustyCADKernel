@@ -13,51 +13,35 @@
 // commercial license or contractual agreement.
 
 //! Behavior of the IntStart templates beyond the numeric probe, which compares them with
-//! native OCCT bit for bit. The instances use the probe ports of the IntPatch classes
-//! (IntPatch is not ported yet), shared with the numeric probe.
+//! native OCCT bit for bit. The instances are the IntPatch ones (`IntPatchTheSOnBounds`,
+//! `IntPatchTheSearchInside`); the tool of seen arcs is the probe fixture shared with the
+//! numeric probe.
 #[allow(dead_code)]
-#[path = "../examples/ga_probe/int_start_tools.rs"]
-mod int_start_tools;
+#[path = "../examples/ga_probe/int_start_fixtures.rs"]
+mod int_start_fixtures;
 
-use int_start_tools::{
-    ProbeArcFunction, ProbeDomain, ProbeHInterTool, ProbePathPoint, ProbeSeenTool, ProbeSegment,
-    SEEN, SeenTable,
-};
+use int_start_fixtures::{ProbeSeenTool, SEEN, SeenTable};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool;
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
-use rustycad_tkgeomalgo::int_imp::{HSurfaceTool, IntImpZerImpFunc};
-use rustycad_tkgeomalgo::int_start::{
-    SearchInside, SearchInsideTypes, SearchOnBoundaries, SearchOnBoundariesTypes, ThePathPoint,
+use rustycad_tkgeomalgo::int_patch::{
+    IntPatchArcFunction, IntPatchThePathPointOfTheSOnBounds, IntPatchTheSOnBounds,
+    IntPatchTheSearchInside, IntPatchTheSegmentOfTheSOnBounds, IntPatchTheSurfFunction,
 };
-use rustycad_tkgeomalgo::int_surf::{IntSurfQuadric, IntSurfQuadricTool};
+use rustycad_tkgeomalgo::int_start::{SearchOnBoundaries, SearchOnBoundariesTypes, TheTopolTool};
+use rustycad_tkgeomalgo::int_surf::IntSurfQuadric;
 use rustycad_tkmath::gp::{Axis3, Cylinder3, Direction3, Point3, Sphere3};
 
-struct PatchTypes;
-impl SearchOnBoundariesTypes for PatchTypes {
-    type TopolTool = ProbeDomain;
-    type SOBTool = ProbeHInterTool;
-    type Function = ProbeArcFunction;
-    type PathPoint = ProbePathPoint;
-    type Segment = ProbeSegment;
-}
-
+/// The IntPatch instance on the tool whose arcs have been seen.
 struct SeenTypes;
 impl SearchOnBoundariesTypes for SeenTypes {
-    type TopolTool = ProbeDomain;
+    type TopolTool = dyn TheTopolTool;
     type SOBTool = ProbeSeenTool;
-    type Function = ProbeArcFunction;
-    type PathPoint = ProbePathPoint;
-    type Segment = ProbeSegment;
-}
-
-struct InsideTypes;
-impl SearchInsideTypes for InsideTypes {
-    type SurfaceTool = HSurfaceTool;
-    type TopolTool = Adaptor3dTopolTool;
-    type Function = IntImpZerImpFunc<HSurfaceTool, IntSurfQuadricTool>;
+    type Function = IntPatchArcFunction;
+    type PathPoint = IntPatchThePathPointOfTheSOnBounds;
+    type Segment = IntPatchTheSegmentOfTheSOnBounds;
 }
 
 fn frame() -> Axis3 {
@@ -78,23 +62,20 @@ fn sphere(radius: f64) -> IntSurfQuadric {
     IntSurfQuadric::from_sphere(&Sphere3::new(frame(), radius).unwrap())
 }
 
-fn arc_function(s: &Adaptor3dSurfaceHandle, q: &IntSurfQuadric) -> ProbeArcFunction {
-    let mut f = ProbeArcFunction::default();
+fn arc_function(s: &Adaptor3dSurfaceHandle, q: &IntSurfQuadric) -> IntPatchArcFunction {
+    let mut f = IntPatchArcFunction::new();
     f.set_quadric(q);
     f.set_surface(s);
     f
 }
 
-fn domain(s: &Adaptor3dSurfaceHandle) -> ProbeDomain {
-    ProbeDomain {
-        tool: Adaptor3dTopolTool::with_surface(s).unwrap(),
-        edge: None,
-    }
+fn domain(s: &Adaptor3dSurfaceHandle) -> Adaptor3dTopolTool {
+    Adaptor3dTopolTool::with_surface(s).unwrap()
 }
 
 #[test]
 fn search_on_boundaries_reads_nothing_before_perform() {
-    let search = SearchOnBoundaries::<PatchTypes>::new();
+    let search = IntPatchTheSOnBounds::new();
     assert!(!search.is_done());
     for failure in [
         search.nb_points().err(),
@@ -110,14 +91,14 @@ fn search_on_boundaries_reads_nothing_before_perform() {
 fn search_on_boundaries_finds_the_circle_crossings_of_the_square() {
     let s = square();
     let (mut f, d) = (arc_function(&s, &sphere(1.2)), domain(&s));
-    let mut search = SearchOnBoundaries::<PatchTypes>::new();
+    let mut search = IntPatchTheSOnBounds::new();
     search.perform(&mut f, &d, 1.0e-7, 1.0e-6, false).unwrap();
     // The circle of radius 1.2 crosses each side of the square twice.
     assert_eq!(search.nb_points().unwrap(), 8);
     assert_eq!(search.nb_segments().unwrap(), 0);
     assert!(!search.all_arc_solution().unwrap());
     for i in 1..=8 {
-        let p: &ProbePathPoint = search.point(i).unwrap();
+        let p: &IntPatchThePathPointOfTheSOnBounds = search.point(i).unwrap();
         assert!(p.is_new());
         assert!((p.value().distance(&Point3::new(0.0, 0.0, 0.0)) - 1.2).abs() < 1.0e-9);
         assert_eq!(
@@ -140,7 +121,7 @@ fn search_on_boundaries_keeps_the_vertices_on_the_quadric() {
     let s = square();
     // The sphere of radius sqrt(2) passes through the four corners of the square.
     let (mut f, d) = (arc_function(&s, &sphere(2.0_f64.sqrt())), domain(&s));
-    let mut search = SearchOnBoundaries::<PatchTypes>::new();
+    let mut search = IntPatchTheSOnBounds::new();
     search.perform(&mut f, &d, 1.0e-7, 1.0e-6, false).unwrap();
     let vertices = (1..=search.nb_points().unwrap())
         .filter(|&i| !search.point(i).unwrap().is_new())
@@ -172,19 +153,18 @@ fn search_on_boundaries_takes_the_known_points_of_seen_arcs() {
     assert_eq!(search.nb_segments().unwrap(), 4);
     assert!(search.all_arc_solution().unwrap());
     assert!(!search.point(2).unwrap().is_new());
-    let segment: &ProbeSegment = search.segment(4).unwrap();
-    assert_eq!(segment.first.as_ref().unwrap().parameter(), 0.5);
-    assert_eq!(segment.last.as_ref().unwrap().parameter(), 0.25);
+    let segment: &IntPatchTheSegmentOfTheSOnBounds = search.segment(4).unwrap();
+    assert_eq!(segment.first_point().unwrap().parameter(), 0.5);
+    assert_eq!(segment.last_point().unwrap().parameter(), 0.25);
 }
 
 #[test]
 fn search_inside_finds_points_of_the_circle_inside_the_square() {
     let s = square();
-    let mut f =
-        IntImpZerImpFunc::<HSurfaceTool, IntSurfQuadricTool>::with_surfaces(&s, &sphere(0.8));
+    let mut f = IntPatchTheSurfFunction::with_surfaces(&s, &sphere(0.8));
     f.set_tolerance(1.0e-6);
     let d = Adaptor3dTopolTool::with_surface(&s).unwrap();
-    let search = SearchInside::<InsideTypes>::with_domain(&mut f, &s, &d, 1.0e-6).unwrap();
+    let search = IntPatchTheSearchInside::with_domain(&mut f, &s, &d, 1.0e-6).unwrap();
     let n = search.nb_points().unwrap();
     assert!(n > 0);
     for i in 1..=n {
@@ -201,9 +181,9 @@ fn search_inside_finds_points_of_the_circle_inside_the_square() {
 fn search_inside_from_a_start_point_outside_the_bounds_finds_nothing() {
     let s = square();
     let q = IntSurfQuadric::from_cylinder(&Cylinder3::new(frame(), 0.5).unwrap());
-    let mut f = IntImpZerImpFunc::<HSurfaceTool, IntSurfQuadricTool>::with_surfaces(&s, &q);
+    let mut f = IntPatchTheSurfFunction::with_surfaces(&s, &q);
     f.set_tolerance(1.0e-6);
-    let mut search = SearchInside::<InsideTypes>::new();
+    let mut search = IntPatchTheSearchInside::new();
     assert_eq!(
         search.nb_points().err().unwrap().exception_type(),
         "StdFail_NotDone"

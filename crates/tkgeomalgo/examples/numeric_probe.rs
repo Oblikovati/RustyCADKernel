@@ -12,6 +12,7 @@ use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
+use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_tools};
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
@@ -195,6 +196,19 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ph_array", int_polyh_records::array_case),
     ("ph_tools", int_polyh_records::tools_case),
     ("ph_couple", int_polyh_records::couple_case),
+    // IntPatch (ga_probe/int_patch*.rs)
+    ("ip_point", int_patch::point_case),
+    ("ip_iwline", int_patch::iwline_case),
+    ("ip_pathpoint", int_patch::pathpoint_case),
+    ("ip_wline", int_patch_lines::wline_case),
+    ("ip_rline", int_patch_lines::rline_case),
+    ("ip_gline", int_patch_curves::gline_case),
+    ("ip_aline", int_patch_curves::aline_case),
+    ("ip_hinter", int_patch_tools::hinter_case),
+    ("ip_hc2d", int_patch_tools::hc2d_case),
+    ("ip_arcf", int_patch_tools::arcf_case),
+    ("ip_csf", int_patch_tools::csf_case),
+    ("ip_curvature", int_patch_tools::curvature_case),
 ];
 
 fn main() {
