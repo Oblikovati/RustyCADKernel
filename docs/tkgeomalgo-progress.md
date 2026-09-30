@@ -114,7 +114,13 @@ The toolkit test inventory maps these suites (80 declarations):
   traits; `GeomFill_Profiler` is a struct that `GeomFillSectionGenerator` embeds
   (`Deref`). Output arrays are assigned as natively (`NCollection_Array1::operator=`
   takes the source bounds and length), `GetShape` returns the four counts, and the two
-  `Section` overloads are `section_d1` and `section`.
+  `Section` overloads are `section_d1` and `section`. `GeomFill_Generator` embeds the
+  profiler too. `GeomFill_Coons`, `GeomFill_Curved` and `GeomFill_Stretch` embed their
+  `GeomFill_Filling` result (`Deref`); their four-row `Init` overloads take the rows as
+  an array (`init`, `init_weighted`, `with_poles`, `with_weights`), the two-row ones of
+  `GeomFill_Curved` are `init_two_rows` and `init_two_weighted_rows`. The `Init`
+  overloads of `GeomFill_BezierCurves` and `GeomFill_BSplineCurves` are `init_four`,
+  `init_three` and `init_two` (constructors `with_four`, `with_three`, `with_two`).
 
 ## Verification
 
@@ -639,7 +645,7 @@ polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
 `ics_quadcurv` the instance classes; `ics_estlim`, `ics_project` and
 `ics_interutils` the InterUtils functions.
 
-GeomFill filling part (gfill, 161 requests): `gfill_line` reads line points;
+GeomFill filling part (gfill, 464 requests): `gfill_line` reads line points;
 `gfill_profiler` adds B-splines (several degrees, rational, periodic, mixed periodic and
 not), Bezier curves, circles and ellipses (trimmed or not, through the C1
 approximation branch) and trimmed lines to a profiler and reads it before and after
@@ -648,7 +654,14 @@ knot vectors that the insertion cannot unify (the mean-knot branch, and one that
 raises); `gfill_secgen` runs every generator query and `SetParam` on arrays of lower
 bound 1, 0, 2 and -3; `gfill_appsurf` skins those sections through `GeomFill_AppSurf`
 in the four Perform modes, with imposed parameters, and on lines shorter and longer
-than the section list.
+than the section list. `gfill_generator` rules those sections; `gfill_scheme` runs the
+Stretch, Coons and Curved schemes (four and two rows) on rows of 1 to 8 poles, with and
+without weights, mismatched rows, rows of lower bound 0 and 2, and a second
+non-rational `Init`; `gfill_bezier` and `gfill_bspline` fill two, three and four
+boundaries in the three styles (chains in every order and orientation, rational
+boundaries, different knot ranges and distributions, closed boundaries, unjoined
+curves, too few poles for the Coons style, the OCC27704 curves, and the four ways two
+curves touch in the curved style).
 
 ## Preserved native behaviour
 
@@ -999,6 +1012,23 @@ than the section list.
   and when the knot insertion leaves different knot counts it sets the mean inner knots
   on the original curves, which raises when their knot counts differ. The consultation
   members all name `Degree` in their StdFail_NotDone message.
+- `GeomFill_Coons` puts `P2` and `P4` on the first and last rows of the grid, while
+  `GeomFill_Stretch`, `GeomFill_Curved` and the Coons weights put `W4`/`P4` first and
+  `W2`/`P2` last; `GeomFill_BezierCurves` and `GeomFill_BSplineCurves` pass the Coons
+  scheme `(P1, P4, P3, P2)`. With fewer than four poles in a direction the Coons
+  blending reads the cubic Hermite poles directly. A non-rational `Init` of a scheme
+  keeps the weights of an earlier rational one (`Weights` still returns them). The
+  weighted two-row `GeomFill_Curved` sizes its weight grid by the weight rows.
+- `Init(C1, C2)` of `GeomFill_BezierCurves` and `GeomFill_BSplineCurves` in the curved
+  style reverses the caller's `C1` (not its copy) when the end of `C1` meets the start
+  of `C2`, and raises Standard_OutOfRange when the curves do not touch. The B-spline
+  ruled surface is periodic in U only when a curve is rational (the non-rational
+  constructor call omits the flag). `SetSameDistribution` always inserts knots
+  through the weights, also for non-rational curves.
+- `GeomFill_Coons` with fewer than two poles in a direction allocates an array of
+  negative size natively (Standard_RangeError here; not in the corpus). A default
+  scheme (no `Init`) dereferences a null grid in `NbUPoles`, `Poles` and `Weights`
+  (Standard_NullObject here; not in the corpus).
 
 ## IntCurveSurface deviations
 
