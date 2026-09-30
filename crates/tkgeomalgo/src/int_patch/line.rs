@@ -88,6 +88,14 @@ impl IntPatchLineBase {
         }
     }
 
+    /// A copy of the fields, not shared with this line (the implicit copy constructor
+    /// of `IntPatch_Line`). `let copy = base.duplicate();`.
+    pub(crate) fn duplicate(&self) -> Self {
+        Self {
+            fields: SharedState::new(*self.fields.read()),
+        }
+    }
+
     /// `SetValue(Uiso1, Viso1, Uiso2, Viso2)`. `base.set_value(true, false, false, false)`.
     pub fn set_value(&self, uiso1: bool, viso1: bool, uiso2: bool, viso2: bool) {
         self.fields.write().iso = [uiso1, viso1, uiso2, viso2];

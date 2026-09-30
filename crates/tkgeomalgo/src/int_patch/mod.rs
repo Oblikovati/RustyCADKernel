@@ -36,6 +36,7 @@ mod h_curve2d_tool;
 mod h_inter_tool;
 mod instances;
 mod imp_imp;
+mod imp_prm;
 mod interference_polyhedron;
 mod iwline;
 mod line;
@@ -71,6 +72,7 @@ pub use instances::{
     IntPatchTheSurfFunction,
 };
 pub use imp_imp::{IntPatchImpImpIntersection, IntPatchImpImpStatus};
+pub use imp_prm::IntPatchImpPrmIntersection;
 pub use interference_polyhedron::IntPatchInterferencePolyhedron;
 pub use iwline::IntPatchTheIWLineOfTheIWalking;
 pub use line::{IntPatchLine, IntPatchLineBase, IntPatchLineTransitions};
