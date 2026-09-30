@@ -40,6 +40,38 @@ struct NewtonSettings {
     iter: i32,
 }
 
+/// The Newton settings of the trace search of `D0`, `D1` and `D2`.
+const NEWTON_D0: NewtonSettings = NewtonSettings {
+    x_tol: 0.00001,
+    f_tol: 0.0000001,
+    iter: 100,
+};
+const NEWTON_D1: NewtonSettings = NewtonSettings {
+    x_tol: 0.0001,
+    f_tol: 0.000001,
+    iter: 100,
+};
+const NEWTON_D2: NewtonSettings = NewtonSettings {
+    x_tol: 0.0001,
+    f_tol: 0.000001,
+    iter: 150,
+};
+
+/// The frame values of a law evaluation.
+fn value_frame(tangent: Vector3, normal: Vector3, binormal: Vector3) -> TrihedronD0 {
+    TrihedronD0 {
+        tangent,
+        normal,
+        binormal,
+    }
+}
+
+/// The two 2d poles of the trace root `r` (`(u, v)` on the surface, `(w, t)`).
+fn put_root(poles2d: &mut Array1<'_, Point2>, r: &Vector<'_>, param: f64) -> Result<(), Failure> {
+    put(poles2d, 1, Point2::new(r[2], r[3]))?;
+    put(poles2d, 2, Point2::new(r[1], param))
+}
+
 /// `myPoles2d->Value(index)` with the native Standard_OutOfRange check.
 fn pole(poles: &[Point2], index: i32) -> Result<Point2, Failure> {
     if index < 1 || index as usize > poles.len() {
@@ -163,16 +195,10 @@ impl GeomFillLocationDraft {
         if !self.fields.read().intersec {
             return Ok(true);
         }
-        let settings = NewtonSettings {
-            x_tol: 0.00001,
-            f_tol: 0.0000001,
-            iter: 100,
-        };
-        let Some((r, _)) = self.trace_root(p, &frame, param, settings)? else {
+        let Some((r, _)) = self.trace_root(p, &frame, param, NEWTON_D0)? else {
             return Ok(false);
         };
-        put(poles2d, 1, Point2::new(r[2], r[3]))?;
-        put(poles2d, 2, Point2::new(r[1], param))?;
+        put_root(poles2d, &r, param)?;
         Ok(true)
     }
 
@@ -230,21 +256,11 @@ impl GeomFillLocationDraft {
         if !self.fields.read().intersec {
             return Ok(true);
         }
-        let frame = TrihedronD0 {
-            tangent: f.tangent,
-            normal: f.normal,
-            binormal: f.binormal,
-        };
-        let settings = NewtonSettings {
-            x_tol: 0.0001,
-            f_tol: 0.000001,
-            iter: 100,
-        };
-        let Some((r, e)) = self.trace_root(p, &frame, param, settings)? else {
+        let frame = value_frame(f.tangent, f.normal, f.binormal);
+        let Some((r, e)) = self.trace_root(p, &frame, param, NEWTON_D1)? else {
             return Ok(false);
         };
-        put(poles2d, 1, Point2::new(r[2], r[3]))?;
-        put(poles2d, 2, Point2::new(r[1], param))?;
+        put_root(poles2d, &r, param)?;
         if let (_, _, Some(dsdt)) = self.root_speed(&e, &r, (param, f.d_normal))? {
             store_speed(d_poles2d, &dsdt)?;
         }
@@ -273,21 +289,11 @@ impl GeomFillLocationDraft {
         if !self.fields.read().intersec {
             return Ok(true);
         }
-        let frame = TrihedronD0 {
-            tangent: f.tangent,
-            normal: f.normal,
-            binormal: f.binormal,
-        };
-        let settings = NewtonSettings {
-            x_tol: 0.0001,
-            f_tol: 0.000001,
-            iter: 150,
-        };
-        let Some((r, e)) = self.trace_root(p, &frame, param, settings)? else {
+        let frame = value_frame(f.tangent, f.normal, f.binormal);
+        let Some((r, e)) = self.trace_root(p, &frame, param, NEWTON_D2)? else {
             return Ok(true);
         };
-        put(poles.poles2d, 1, Point2::new(r[2], r[3]))?;
-        put(poles.poles2d, 2, Point2::new(r[1], param))?;
+        put_root(poles.poles2d, &r, param)?;
         let (dsdt, dedx, speed) = self.root_speed(&e, &r, (param, f.d_normal))?;
         if let Some(speed) = &speed {
             store_speed(poles.d_poles2d, speed)?;

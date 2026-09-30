@@ -73,6 +73,49 @@ fn nearest_intersection(
     Ok(Some(p_int.w()))
 }
 
+/// The guide trimmed a hundredth of its half range beyond its ends (the guide itself
+/// when periodic), with the solver bounds half a range beyond; returns the trimmed
+/// guide and the half range.
+fn trimmed_guide(
+    law: &GeomFillGuideTrihedronPlan,
+    guide: &Handle<dyn Adaptor3dCurve>,
+) -> Result<(Handle<dyn Adaptor3dCurve>, f64), Failure> {
+    let g = guide.get().expect("checked");
+    let delta_g = (g.last_parameter()? - g.first_parameter()?) / 2.0;
+    {
+        let mut fields = law.fields.write();
+        fields.inf = g.first_parameter()? - delta_g;
+        fields.sup = g.last_parameter()? + delta_g;
+    }
+    let trim_g = if g.is_periodic()? {
+        guide.clone()
+    } else {
+        let (f, l) = (g.first_parameter()?, g.last_parameter()?);
+        g.trim(f - delta_g / 100.0, l + delta_g / 100.0, delta_g * 1.0e-7)?
+    };
+    Ok((trim_g, delta_g))
+}
+
+/// The guide parameter of sample `ii` at the path point `p`: the nearest plane
+/// intersection, else the guide end nearer to the previous parameter `w`.
+fn sample_guide_parameter(
+    law: &GeomFillGuideTrihedronPlan,
+    (g, trim_g): (&dyn Adaptor3dCurve, &Handle<dyn Adaptor3dCurve>),
+    (t, p): (f64, Point3),
+    w: f64,
+) -> Result<f64, Failure> {
+    let mut frame = TrihedronD0::default();
+    law.frenet().d0(t, &mut frame)?;
+    if let Some(found) = nearest_intersection(trim_g, p, &frame)? {
+        return Ok(found);
+    }
+    law.fields.write().status = GeomFillPipeError::PlaneNotIntersectGuide;
+    if (g.last_parameter()? - w).abs() > (g.first_parameter()? - w).abs() {
+        return g.first_parameter();
+    }
+    g.last_parameter()
+}
+
 /// `Init()` of the plane-guided law; `init_poles(&law)?`.
 pub(crate) fn init_poles(law: &GeomFillGuideTrihedronPlan) -> Result<(), Failure> {
     let curve = law.fields.read().my_curve.clone();
@@ -82,43 +125,15 @@ pub(crate) fn init_poles(law: &GeomFillGuideTrihedronPlan) -> Result<(), Failure
     law.frenet().set_curve(&curve)?;
     let guide = law.guide_curve("GeomFill_GuideTrihedronPlan::Init")?;
     let g = guide.get().expect("checked");
-    let mut delta_g = (g.last_parameter()? - g.first_parameter()?) / 2.0;
-    {
-        let mut fields = law.fields.write();
-        fields.inf = g.first_parameter()? - delta_g;
-        fields.sup = g.last_parameter()? + delta_g;
-    }
-    let trim_g = if g.is_periodic()? {
-        guide.clone()
-    } else {
-        g.trim(
-            g.first_parameter()? - delta_g / 100.0,
-            g.last_parameter()? + delta_g / 100.0,
-            delta_g * 1.0e-7,
-        )?
-    };
+    let (trim_g, delta_g) = trimmed_guide(law, &guide)?;
     law.set_trim_g(trim_g.clone());
-    delta_g /= 3.0;
     let mut w = 0.0;
     for ii in 1..=NB_PTS {
         let t = sample_parameter(ii, f, l);
-        let p = c.d0(t)?;
-        let mut frame = TrihedronD0::default();
-        law.frenet().d0(t, &mut frame)?;
-        match nearest_intersection(&trim_g, p, &frame)? {
-            Some(found) => w = found,
-            None => {
-                w = if (g.last_parameter()? - w).abs() > (g.first_parameter()? - w).abs() {
-                    g.first_parameter()?
-                } else {
-                    g.last_parameter()?
-                };
-                law.fields.write().status = GeomFillPipeError::PlaneNotIntersectGuide;
-            }
-        }
+        w = sample_guide_parameter(law, (g, &trim_g), (t, c.d0(t)?), w)?;
         if ii > 1 {
             let previous = law.fields.read().pole[ii - 2].y();
-            if (w - previous).abs() > delta_g && g.is_periodic()? {
+            if (w - previous).abs() > delta_g / 3.0 && g.is_periodic()? {
                 in_good_period(previous, g.period()?, &mut w);
             }
         }

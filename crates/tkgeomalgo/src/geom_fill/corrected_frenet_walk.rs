@@ -122,20 +122,21 @@ fn accept_step(
     if c.is_zero && angle_at.abs() > precision::p_confusion() {
         c.is_zero = false;
     }
-    walk.at += frame.tangent;
-    let cross = frame.tangent.crossed(frame.normal);
-    let offset = frame.normal + walk.an;
-    walk.an.set_linear_form_offset(
-        angle_at.sin(),
-        cross,
-        1.0 - angle_at.cos(),
-        frame.tangent.crossed(cross),
-        offset,
-    );
-    walk.prev_tangent = frame.tangent;
+    accumulate_frame(walk, frame, angle_at);
     c.param = c.curr_param;
     c.i += 1;
     Ok(())
+}
+
+/// Adds the tangent and the normal turned by `angle_at` to the running sums.
+fn accumulate_frame(walk: &mut IntervalWalk, frame: &TrihedronD0, angle_at: f64) {
+    walk.at += frame.tangent;
+    let cross = frame.tangent.crossed(frame.normal);
+    let offset = frame.normal + walk.an;
+    let turned = frame.tangent.crossed(cross);
+    walk.an
+        .set_linear_form_offset(angle_at.sin(), cross, 1.0 - angle_at.cos(), turned, offset);
+    walk.prev_tangent = frame.tangent;
 }
 
 /// The next step: `max(|CS(Param)| / 2, LengthMin) / |CS'(Param)|`, at most `step`.
