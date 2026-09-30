@@ -56,6 +56,8 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 }
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
+        "face_policy" => face_surface_case::case(v),
+        "face_pcurves" => face_surface_case::pcurves_case(v),
         "face_planes" => face_planes_case::case(v),
         "face_clip" => face_face::clip_case(v),
         "face_state" => face_face::case(v),
@@ -192,3 +194,7 @@ mod plane_clip;
 #[path = "../../src/int_tools/face_face/planes.rs"]
 mod face_planes;
 mod face_planes_case;
+
+mod face_surface_case;
+#[path = "../../src/int_tools/face_face/surface_policy.rs"]
+mod face_surface_policy;

@@ -18,3 +18,5 @@ pub use int_ss::{GeomIntIntSS, GeomIntIntSSApprox, GeomIntRLineCurves};
 pub use line_constructor::GeomIntLineConstructor;
 pub use line_tool::GeomIntLineTool;
 pub use parameter_and_orientation::GeomIntParameterAndOrientation;
+
+pub use line_constructor::helpers::quadric_parameters;
