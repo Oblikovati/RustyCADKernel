@@ -63,3 +63,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_geomapi').append_geomapi_requests(requests)
     # GeomFill Gordon (tkgeomalgo_corpus_gordon.py)
     __import__('tkgeomalgo_corpus_gordon').append_gordon_package_requests(requests)
+    # GeomPlate (tkgeomalgo_corpus_geomplate.py)
+    __import__('tkgeomalgo_corpus_geomplate').append_geomplate_requests(requests)

@@ -27,7 +27,7 @@ use rustycad_tkg3d::geom::{
     SurfaceBounds, dump_surface,
 };
 use rustycad_tkmath::geom_abs::Shape;
-use rustycad_tkmath::gp::{Point3, Transform3, Vector3, Xy, Xyz};
+use rustycad_tkmath::gp::{GeneralTransform2, Point3, Transform3, Vector3, Xy, Xyz};
 use std::io;
 
 /// The surface `S(u, v) = S0(u, v) + Plate(u, v)` of an initial surface `S0` and a
@@ -133,6 +133,17 @@ impl GeomSurface for GeomPlateSurface {
     }
     fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
         Ok(-v)
+    }
+    /// The parameters unchanged, as natively (`TransformParameters`).
+    fn transform_parameters(&self, u: f64, v: f64, _transform: Transform3) -> (f64, f64) {
+        (u, v)
+    }
+    /// The identity, as natively (`ParametricTransformation`).
+    fn parametric_transformation(
+        &self,
+        _transform: Transform3,
+    ) -> Result<GeneralTransform2, Failure> {
+        Ok(GeneralTransform2::default())
     }
     /// The bounds of the initial surface when it is a plate surface itself, else the
     /// bounds set by `SetBounds` (`Bounds`). A null initial surface (a null

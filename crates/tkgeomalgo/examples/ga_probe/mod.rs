@@ -20,6 +20,8 @@ pub mod geom2d_int;
 pub mod geom_api;
 pub mod geom_api_fit;
 pub mod geom_api_surface;
+pub mod geom_plate;
+pub mod geom_plate_build;
 pub mod gfill;
 pub mod gfill_cf;
 pub mod gfill_fill;
