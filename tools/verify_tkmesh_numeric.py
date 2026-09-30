@@ -54,6 +54,9 @@ def corpus() -> str:
     rows += ['mesh_editable_tree ' + ' '.join(map(str, v)) for v in product((1,2,8,33,700), range(2), range(2))]
     rows += ['mesh_face_checker ' + ' '.join(map(str, v)) for v in product(range(-1,8), range(2), range(3), range(4), range(2), range(2), range(2))]
     rows += ['mesh_face_checker 8 0 0 0 0 0 0', 'mesh_face_segment']
+    rows += ['mesh_healer ' + ' '.join(map(str, v)) for v in product((0,2,3,4,5,6,8,9), range(6), range(2), range(2), range(2))]
+    rows += ['mesh_healer ' + ' '.join(map(str, v)) for v in product(range(10,19), range(2), range(2), range(2), range(2))]
+    rows += ['mesh_healer ' + ' '.join(map(str, v)) for v in product((4,5), range(6,12), range(2), range(2), range(2))]
     return '\n'.join(rows) + '\n'
 
 

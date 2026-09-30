@@ -237,3 +237,5 @@ pub mod geom_tool;
 pub mod editable_tree;
 
 pub mod face_checker;
+
+pub mod model_healer;

@@ -40,3 +40,6 @@ pub use face_checker::{
     FaceCheckerParameters, FaceEdgeSet, FaceEdgeSetArray, FaceSegment, FaceSegmentArray,
     FaceSegments,
 };
+
+mod model_healer;
+pub use model_healer::BRepMeshModelHealer;

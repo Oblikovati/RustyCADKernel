@@ -8,7 +8,7 @@ use rustycad_tkmesh::{
     imesh_tools::MeshParameters,
 };
 #[path = "../../tests/support/face_checker_fixture.rs"]
-mod fixture;
+pub(super) mod fixture;
 pub fn face_checker_case(v: &[i32]) {
     let (model, face) = fixture::checker_model(v);
     let parameters = Handle::new(Shared::new(SharedState::new(MeshParameters {
