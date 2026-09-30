@@ -67,3 +67,31 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
         }
     }
 }
+
+impl<T: ?Sized + RuntimeTyped> WeakHandle<T> {
+    /// Stable non-owning identity, including after destruction; `pointer.object_address() == owner.object_address()`.
+    pub fn object_address(&self) -> *const () {
+        self.owner
+            .as_ref()
+            .map_or(std::ptr::null(), |owner| owner.as_ptr() as *const ())
+    }
+}
+impl<T: ?Sized + RuntimeTyped> PartialEq for WeakHandle<T> {
+    fn eq(&self, other: &Self) -> bool {
+        self.object_address() == other.object_address()
+    }
+}
+impl<T: ?Sized + RuntimeTyped> Eq for WeakHandle<T> {}
+impl<T: ?Sized + RuntimeTyped> std::fmt::Debug for WeakHandle<T> {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_tuple("WeakHandle")
+            .field(&self.object_address())
+            .finish()
+    }
+}
+impl<T: ?Sized + RuntimeTyped> crate::ncollection::HashKey for WeakHandle<T> {
+    fn occt_hash(&self) -> usize {
+        self.object_address() as usize
+    }
+}

@@ -52,6 +52,8 @@ def corpus() -> str:
     rows += ['mesh_geom_cells ' + ' '.join(map(str, v)) for v in product(range(13), range(6), range(4))]
     rows += ['mesh_range_overflow']
     rows += ['mesh_editable_tree ' + ' '.join(map(str, v)) for v in product((1,2,8,33,700), range(2), range(2))]
+    rows += ['mesh_face_checker ' + ' '.join(map(str, v)) for v in product(range(-1,8), range(2), range(3), range(4), range(2), range(2), range(2))]
+    rows += ['mesh_face_checker 8 0 0 0 0 0 0', 'mesh_face_segment']
     return '\n'.join(rows) + '\n'
 
 

@@ -1,0 +1,16 @@
+#include <BRepMesh_FaceChecker.hxx>
+static std::vector<gp_Pnt2d> checker_points(int kind){
+ switch(kind){case 0:return {{0,0},{1,0},{1,1},{0,1},{0,0}};case 1:return {{0,0},{1,1},{0,1},{1,0},{0,0}};case 2:return {{0,0},{.01,.01},{0,.01},{.01,0},{0,0}};case 3:return {{0,0},{1,0},{2,0}};case 4:return {{0,0},{2,0},{1,0},{1,1}};case 5:return {{0,0},{2,0},{1,0},{3,0}};case 6:return {{0,0},{1,.01},{0,.01},{1,0}};case 7:return {{0,0},{1,.01},{1,0},{0,.01}};default:return {};}
+}
+static void checker_append_edge(const occ::handle<IMeshData_Model>& model,const IMeshData::IFaceHandle& face,const IMeshData::IWireHandle& wire,const TopoDS_Edge& topology,const std::vector<gp_Pnt2d>& points){auto edge=model->AddEdge(topology);wire->AddEdge(edge.get(),TopAbs_FORWARD);auto curve=edge->AddPCurve(face.get(),TopAbs_FORWARD);for(size_t i=0;i<points.size();++i)curve->AddPoint(points[i],double(i));}
+static void checker_append_wire(const occ::handle<IMeshData_Model>& model,const IMeshData::IFaceHandle& face,const TopoDS_Wire& topology,const TopoDS_Edge& edge,const std::vector<gp_Pnt2d>& points,bool separate){auto wire=face->AddWire(topology,int(points.size()));if(!separate){checker_append_edge(model,face,wire,edge,points);return;}for(size_t i=1;i<points.size();++i)checker_append_edge(model,face,wire,edge,{points[i-1],points[i]});}
+static std::pair<occ::handle<IMeshData_Model>,IMeshData::IFaceHandle> checker_model(const std::array<int,7>& v){
+ auto[wire,topology,ordered]=order_fixture(0,0,0);occ::handle<IMeshData_Model> model=new BRepMeshData_Model(TopoDS_Shape());auto face=model->AddFace(topology);const double ds[]={0,.001,.03,.3};face->SetDeflection(ds[v[3]]);if(v[0]<0)return {model,face};
+ auto points=checker_points(v[0]);if(v[5])std::reverse(points.begin(),points.end());if(v[6])points.insert(points.begin()+1,points[0]);checker_append_wire(model,face,wire,ordered->Edge(1),points,v[1]);
+ if(v[2]){points=v[2]==1?std::vector<gp_Pnt2d>{{-1,.5},{2,.5}}:checker_points(0);checker_append_wire(model,face,wire,ordered->Edge(2),points,v[1]);}return {model,face};
+}
+static void report_checker(BRepMesh_FaceChecker& checker,const occ::handle<IMeshData_Model>& model){
+ try{ga_flag(checker.Perform());}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}auto edges=checker.GetIntersectingEdges();ga_flag(!edges.IsNull());ga_int(edges->Size());for(int i=0;i<model->EdgesNb();++i)ga_flag(edges->Contains(model->GetEdge(i).get()));
+}
+void mesh_face_checker(std::istream& input){std::array<int,7>v;for(auto& x:v)input>>x;auto[model,face]=checker_model(v);IMeshTools_Parameters p;p.InParallel=v[4];BRepMesh_FaceChecker checker(face,p);ga_flag(checker.GetIntersectingEdges().IsNull());report_checker(checker,model);p.InParallel=!v[4];report_checker(checker,model);ga_end();}
+void mesh_face_segment(std::istream&){auto[model,face]=checker_model({1,0,0,0,0,0,0});auto edge=model->GetEdge(0);auto curve=edge->GetPCurve(0);BRepMesh_FaceChecker::Segment segment(edge.get(),&curve->GetPoint(0),&curve->GetPoint(1));ga_flag(segment.EdgePtr==edge.get());BRepMesh_FaceChecker::Segment empty;ga_flag(empty.EdgePtr==nullptr);ga_flag(empty.Point1==nullptr);ga_flag(empty.Point2==nullptr);ga_pnt2d(*segment.Point1);curve->GetPoint(0)=gp_Pnt2d(7,8);ga_pnt2d(*segment.Point1);*segment.Point2=gp_Pnt2d(9,10);ga_pnt2d(curve->GetPoint(1));ga_end();}

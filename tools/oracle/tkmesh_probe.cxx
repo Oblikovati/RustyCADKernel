@@ -63,6 +63,7 @@ void mesh_pcurve(std::istream& input) {
 #include "tkmesh_probe_pre_processor.cxx"
 #include "tkmesh_probe_geom_tool.cxx"
 #include "tkmesh_probe_editable_tree.cxx"
+#include "tkmesh_probe_face_checker.cxx"
 int main(){
     std::string line;
     while(std::getline(std::cin,line)){
@@ -95,6 +96,8 @@ int main(){
         else if(operation=="mesh_geom_cells")mesh_geom_cells(input);
         else if(operation=="mesh_range_overflow")mesh_range_overflow(input);
         else if(operation=="mesh_editable_tree")mesh_editable_tree(input);
+        else if(operation=="mesh_face_checker")mesh_face_checker(input);
+        else if(operation=="mesh_face_segment")mesh_face_segment(input);
         else if(operation=="mesh_tools")mesh_tools(input);
         else if(operation=="mesh_explorer")mesh_explorer(input);
         else {std::cerr<<"Unknown probe operation: "<<operation<<'\n';return 2;}
