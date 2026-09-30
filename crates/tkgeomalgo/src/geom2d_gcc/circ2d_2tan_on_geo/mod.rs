@@ -50,7 +50,7 @@ const NB_SOL_MAX: i32 = 8;
 /// let line: Handle<dyn Geom2dCurve> =
 ///     Handle::new(Geom2dLine::from_point(Point2::new(0.0, -5.0), Direction2::new(0.0, 1.0)?)).cast();
 /// let on = Geom2dAdaptorCurve::with_range(&line, 0.0, 10.0)?;
-/// let circ = Circ2d2TanOnGeo::pnt_pnt(Point2::new(-1.0, 0.0), Point2::new(1.0, 0.0), &on, 1e-9)?;
+/// let circ = Circ2d2TanOnGeo::pnt_pnt(Point2::new(-1.0, 0.0), Point2::new(1.0, 2.0), &on, 1e-9)?;
 /// assert_eq!(circ.nb_solutions(), 1);
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
