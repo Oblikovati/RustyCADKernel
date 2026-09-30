@@ -8,6 +8,11 @@ mod localize;
 mod marked;
 mod records;
 mod surface_localize;
+mod tools;
+mod tools_curves;
+mod tools_geometry;
+mod tools_surface;
+mod tools_topology;
 mod topol;
 mod topol_surfaces;
 use rustycad_tkbo::int_tools::*;
@@ -47,6 +52,10 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
         "context_compute" => context_compute::case(v),
+        "tools_curves" => tools_curves::case(v),
+        "tools_topology" => tools_topology::case(v),
+        "tools_surface" => tools_surface::case(v),
+        "tools" => tools::case(v),
         "context" => context::case(v),
         "topol" => topol::case(v),
         "fclass" => fclass::case(v),
