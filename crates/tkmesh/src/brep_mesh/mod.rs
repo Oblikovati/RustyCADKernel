@@ -6,3 +6,6 @@ mod model_builder;
 mod shape_visitor;
 pub use model_builder::BRepMeshModelBuilder;
 pub use shape_visitor::BRepMeshShapeVisitor;
+
+mod deflection;
+pub use deflection::Deflection;
