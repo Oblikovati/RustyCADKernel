@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (864 declarations):
+The toolkit test inventory maps these suites (908 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -53,7 +53,7 @@ The toolkit test inventory maps these suites (864 declarations):
 | BRepGraph_LayerIterator_Test.cxx | brep_graph_layer_iterator | 4 | pass | pass |
 | BRepGraph_CacheMesh_Test.cxx | brep_graph_cache_mesh_suite | 22 | pass | pass |
 | BRepGraph_Polygon_Test.cxx | not mapped (phase 2) | 7 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepPrimAPI_MakeCylinder (TKPrim) |
-| BRepGraph_Geometry_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
+| BRepGraph_Geometry_Test.cxx | mapped | 44 | passed | original geometry, PCurve, component and representation-reuse inputs |
 | BRepGraph_Lock_Test.cxx | brep_graph_lock_suite | 19 | pass | pass |
 | BRepGraph_LayerHistory_Test.cxx | brep_graph_layer_history_suite | 39 | pass | pass |
 | BRepGraph_LayerTopoSupplement_Test.cxx | brep_graph_layer_topo_supplement | 22 | pass | pass |
