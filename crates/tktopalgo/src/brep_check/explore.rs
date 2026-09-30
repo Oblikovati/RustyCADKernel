@@ -9,7 +9,17 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 
 /// The sub-shapes of `kind` of `shape` in explorer order (`TopExp_Explorer(S, kind)`).
 pub(crate) fn sub_shapes(shape: &Shape, kind: ShapeEnum) -> Result<Vec<Shape>, Failure> {
-    let mut explorer = Explorer::new(shape, kind, ShapeEnum::Shape)?;
+    sub_shapes_avoiding(shape, kind, ShapeEnum::Shape)
+}
+
+/// The sub-shapes of `kind` of `shape` not inside a sub-shape of `avoid`, in explorer
+/// order (`TopExp_Explorer(S, kind, avoid)`; BRepGProp uses it too).
+pub(crate) fn sub_shapes_avoiding(
+    shape: &Shape,
+    kind: ShapeEnum,
+    avoid: ShapeEnum,
+) -> Result<Vec<Shape>, Failure> {
+    let mut explorer = Explorer::new(shape, kind, avoid)?;
     let mut found = Vec::new();
     while explorer.more() {
         found.push(explorer.current().clone());

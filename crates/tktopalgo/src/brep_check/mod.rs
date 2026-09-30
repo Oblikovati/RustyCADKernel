@@ -13,7 +13,7 @@ mod edge;
 mod edge_context;
 mod edge_tolerance;
 mod errors;
-mod explore;
+pub(crate) mod explore;
 mod face;
 mod face_classify;
 mod face_wires;
