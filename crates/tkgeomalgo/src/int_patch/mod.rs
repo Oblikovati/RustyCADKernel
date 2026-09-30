@@ -13,5 +13,98 @@
 // commercial license or contractual agreement.
 // Rust translation of ModelingAlgorithms/TKGeomAlgo/IntPatch at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! OCCT package IntPatch. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tkgeomalgo-progress.md lists the ported packages).
+//! OCCT package IntPatch: the surface-surface intersection (docs/geomalgo-design.md
+//! section 16).
+//!
+//! This module holds the core of the package: the intersection points and lines
+//! ([`IntPatchPoint`], the line hierarchy [`IntPatchLine`], [`IntPatchPointLine`],
+//! [`IntPatchWLine`], [`IntPatchRLine`], [`IntPatchGLine`], [`IntPatchALine`]), the tools
+//! and functions, and the IntPatch instances of the IntImp, IntStart and IntWalk
+//! templates. The intersection algorithms land on top of it.
+mod aline;
+mod aline_compute;
+mod arc_function;
+mod cs_function;
+mod dump;
+pub(crate) mod failures;
+mod gline;
+mod gline_compute;
+mod h_curve2d_tool;
+mod h_inter_tool;
+mod instances;
+mod iwline;
+mod line;
+mod path_point;
+mod point;
+mod point_dump;
+mod point_line;
+mod point_line_dump;
+mod rline;
+mod rline_compute;
+mod vertices;
+mod wline;
+
+pub use aline::IntPatchALine;
+pub use arc_function::IntPatchArcFunction;
+pub use cs_function::IntPatchCSFunction;
+pub use gline::IntPatchGLine;
+pub use h_curve2d_tool::IntPatchHCurve2dTool;
+pub use h_inter_tool::IntPatchHInterTool;
+pub use instances::{
+    IntPatchCurvIntSurf, IntPatchTheIWalking, IntPatchTheIWalkingTypes, IntPatchTheSOnBounds,
+    IntPatchTheSOnBoundsTypes, IntPatchTheSearchInside, IntPatchTheSearchInsideTypes,
+    IntPatchTheSurfFunction,
+};
+pub use iwline::IntPatchTheIWLineOfTheIWalking;
+pub use line::{IntPatchLine, IntPatchLineBase, IntPatchLineTransitions};
+pub use path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds};
+pub use point::IntPatchPoint;
+pub use point_line::{IntPatchPointLine, curvature_radius_of_inters_line};
+pub use rline::IntPatchRLine;
+pub use wline::{IntPatchWLType, IntPatchWLine};
+
+/// `IntPatch_SearchPnt`: `Intf_InterferencePolygon2d`.
+pub type IntPatchSearchPnt = crate::intf::InterferencePolygon2d;
+
+/// `IntPatch_IType`: the geometry of an intersection line.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
+#[repr(i32)]
+pub enum IntPatchIType {
+    /// `IntPatch_Lin`: a straight line.
+    #[default]
+    Lin,
+    /// `IntPatch_Circle`.
+    Circle,
+    /// `IntPatch_Ellipse`.
+    Ellipse,
+    /// `IntPatch_Parabola`.
+    Parabola,
+    /// `IntPatch_Hyperbola`.
+    Hyperbola,
+    /// `IntPatch_Analytic`: an analytic curve (`IntAna_Curve`).
+    Analytic,
+    /// `IntPatch_Walking`: the points of a walking.
+    Walking,
+    /// `IntPatch_Restriction`: a restriction of a surface.
+    Restriction,
+}
+
+/// `IntPatch_SpecPntType`: the kinds of special (singular) points of the surface-surface
+/// intersection (a pole of a sphere, the apex of a cone, a point on a seam).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
+#[repr(i32)]
+pub enum IntPatchSpecPntType {
+    /// `IntPatch_SPntNone`.
+    #[default]
+    SPntNone,
+    /// `IntPatch_SPntSeamU`.
+    SPntSeamU,
+    /// `IntPatch_SPntSeamV`.
+    SPntSeamV,
+    /// `IntPatch_SPntSeamUV`.
+    SPntSeamUV,
+    /// `IntPatch_SPntPoleSeamU`.
+    SPntPoleSeamU,
+    /// `IntPatch_SPntPole`.
+    SPntPole,
+}

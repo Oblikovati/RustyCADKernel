@@ -182,6 +182,22 @@ cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` a
   `gordon_reorder`, `gordon_reparam`, `gordon_rebuild`, `gordon_network`,
   `gordon_fallback`).
 
+- IntPatch (the core; docs/geomalgo-design.md section 16): `IntPatch_Line` and
+  `IntPatch_PointLine` are the traits `IntPatchLine` and `IntPatchPointLine` over an
+  embedded `IntPatchLineBase`; the lines are handle-shared transients whose members take
+  `&self`. The constructors by transition kind are `new`/`new_touch`/`new_undecided`
+  (WLine, RLine) or take an `IntPatchLineTransitions` (GLine `from_line`...`from_hyperbola`,
+  ALine `new`); `Vertex(i)`, `Point(i)` and `FirstPoint()` return copies, `ChangeVertex`
+  takes a closure, `FirstPoint(int&)` is `first_point_index`. `IntPatch_Point`'s
+  `SetValue` overloads are `set_value_tangent`, `set_value` and `set_pnt_on_2s`;
+  `IntPatch_ArcFunction`'s `Set` overloads are `set_arc`/`set_surface` and its
+  evaluations `value_at`/`derivative_at`/`values_at`; the path point constructors are
+  `on_vertex`/`on_arc`; `CurvatureRadiusOfIntersLine` is the free function
+  `curvature_radius_of_inters_line`. The template instances are aliases
+  (`IntPatchTheSurfFunction`, `IntPatchCurvIntSurf`, `IntPatchTheSOnBounds`,
+  `IntPatchTheSearchInside`, `IntPatchTheIWalking`) whose rows name the generic members.
+  `IntPatch_RLine::SetParamOnS1/S2` are declared but defined nowhere (excluded rows).
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomAlgo --jobs 16 --source OCCT --native-build BUILD`
@@ -484,13 +500,13 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 24844 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 25386 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
 with TopClass 1116, Geom2dGcc 3968, IntWalk 717, IntCurveSurface 3077, and the GeomFill
 filling classes 568, IntStart 674, IntPolyh 522, GeomAPI 1980, and GeomFill Gordon and
-NetworkSurface 145.
+NetworkSurface 145, and the IntPatch core 542.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -784,6 +800,23 @@ once and repeatedly; the record operations cover every member of the points, sta
 section lines, arrays, couples, edges and tools with their dumps. Not reached: the overlap
 cases that need the side to project backwards (see below), a coplanar next couple
 on the first chaining side, and a next point equal to the initial one.
+
+IntPatch: 542 requests for the core records, lines and tools (`tkgeomalgo_corpus_intpatch.py`,
+`_lines.py`, `_tools.py`). `ip_point` edits points by command scripts (values, parameters,
+vertices and arcs of both domains with the eight transition kinds, reversal, multiplicity,
+fixture ranks out of range) and compares the dumps of points without arcs, captured from the
+native process output. `ip_iwline` and `ip_pathpoint` edit the walking line of
+IntPatch_TheIWalking and the path points and segments of IntPatch_TheSOnBounds. `ip_wline`,
+`ip_rline`, `ip_gline` and `ip_aline` build each line kind with every transition kind, run
+every vertex edit on valid and out-of-range indices and run `ComputeVertexParameters` on
+vertices before, on, between and after the points, on the arcs of either surface, on seam
+pairs, with confused points, periods and the ImpImp creation way; the lines without arcs
+are dumped in every mode. `ip_hinter`, `ip_hc2d`, `ip_arcf`, `ip_csf` and `ip_curvature` run
+the tools on the IntCurveSurface surface catalog, the Geom2dInt curve catalog and the IntStart
+quadrics (the unset quadric included). The IntStart (`is_*`) and IntWalk (`iw_walk`)
+requests now run through the IntPatch instances on both sides. Left out: `SetPoint` on a
+restriction line without points and `Bezier()`/`BSpline()` of other curves, which dereference
+null handles natively.
 
 ## Preserved native behaviour
 
@@ -1257,6 +1290,43 @@ return.
   lines) and `GetTangentZonePoint` past the zones the default point; `AnalyzeIntersection`
   never fails, so `IsDone` is always true once the constructor returns.
 
+### IntPatch
+
+- `IntPatch_Point::SetValue(Pt, Tol, Tangent)` clears the domain, vertex and multiplicity
+  flags but keeps the arcs, vertices and transitions; `ReverseTransition` replaces each
+  transition by a fresh one, so a TOUCH or undecided transition becomes the default
+  undecided one. `IsTangencyPoint` never raises, despite its documentation.
+- `IntPatch_WLine`: the first and last indices are uninitialized until set.
+  `ComputeVertexParameters`: in the seam phase a vertex that already exists on the second
+  restriction resets `encoreunefois` even after the first restriction created one; a vertex
+  before the line inserted as its first point shifts the parameters of the vertices `j != 1`
+  (not `j != i`); a first vertex prepended at the end does not shift `indl`; the ImpImp way
+  keeps the 2d parameters of the line point and takes the 3d point of the vertex. The
+  confused points are removed while more than 2 points are left, then after a
+  substitution while more than 1 is. `InsertVertexBefore` clamps a copy of its index to 1
+  but inserts at the original one (Standard_OutOfRange below 1 on a non-empty line).
+- `IntPatch_RLine::ComputeVertexParameters` ignores its tolerance and always makes the
+  vertices 1 and `nbvtx` the first and last points; its duplicate filter also compares the
+  parameters on the arcs, and skips the pair when the arcs differ.
+- `IntPatch_GLine::Replace` appends the point and ignores the index (the assignment is
+  commented out). `AddVertex` brings a circle or ellipse parameter into `[first, last]` by
+  turns of 2 Pi and drops a point still 1e-6 before the first one; on the other conics it
+  drops the points outside `[first, last]`. `ComputeVertexParameters` shifts the indices
+  for `indl > j` (the other lines use `>=`), its S2 filter tests `IsVertexOnS1`, the seam
+  moves stop after the next sort once a pair leaves the U range of the first pair
+  (BUC61033), and at the end it resets `indf`/`indl` to 1 and `nbvtx` without setting the
+  `fipt`/`lapt` flags.
+- `IntPatch_ALine::ComputeVertexParameters` decreases `indl` for each end vertex removed
+  (and never `indf`); the branch that would prepend a copy of the last vertex at the first
+  parameter of a periodic line tests the first vertex against the first parameter inside the
+  branch where they are equal, so it never runs.
+- `IntPatch_HInterTool`: `NbSamplesU/V` ignore their range, `SamplePoint` perturbs the
+  third cell of four by `dv *= 1.001; dv *= 0.999`, the `SingularOn*` members answer false,
+  and the known-point members raise Standard_OutOfRange (no arc has been seen).
+  `IntPatch_HCurve2dTool::NbSamples` answers 25 for the non-spline curves and caps at 50.
+- `IntPatch_ArcFunction::Values` with a quadric that is not set leaves `F` unchanged and
+  gives a null derivative (the quadric writes nothing).
+
 ## IntStart deviations
 
 - The native code ignores the result of `Func.Value` in `FindVertex`, the recheck
@@ -1337,3 +1407,17 @@ return.
   approximation result or parameter array) raise Standard_NullObject.
 - `GeomFill_BoundWithSurf` keeps its own `Adaptor3d_CurveOnSurface` through the new
   `Adaptor3dCurveOnSurface::copy_of` of TKG3d (the implicit native copy constructor).
+
+## IntPatch deviations
+
+- The lines return copies of their vertices and points; `ChangeVertex` runs a closure on
+  the vertex in place (a reference cannot outlive the line's lock).
+- A walking or restriction line without a point set dereferences a null handle natively
+  in `SetPoint` and the box queries; the port raises Standard_NullObject (walking line) or
+  Standard_DomainError (restriction line, as its `NbPnts` natively). A null arc or surface
+  in the tools and functions raises Standard_NullObject.
+- The `Dump` members write to a `fmt::Write`; the addresses they print are those of the
+  Rust objects.
+- `IntPatch_CSFunction` keeps copies of the handles where the native one keeps pointers to
+  the caller's handles. `IntPatch_ArcFunction`'s IntStart side answers 0 for `F` where a
+  quadric that is not set leaves the caller's variable uninitialized.

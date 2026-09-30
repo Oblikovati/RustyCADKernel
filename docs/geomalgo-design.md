@@ -297,11 +297,9 @@ walking `IntWalk_IWalking.gxx/.lxx`, beside the concrete parametric walking
   keep across the iterations of their loops (`N`, `SaveN`, `Psol`, `aStatus`, the
   flags) live in one state struct per loop, so every step reads what the native code
   reads.
-- The probe (`tools/oracle/tkgeomalgo_probe_intwalk*.cxx`) includes the `.gxx` itself
-  on a probe class, as the `_0.cxx` files do, with `Adaptor3d_HSurfaceTool`,
-  `IntPatch_TheSurfFunction` and `IntPatch_TheIWLineOfTheIWalking`; its Rust twin
-  instantiates the generic with `HSurfaceTool`, `IntImpZerImpFunc` and a probe port of
-  that line class.
+- The probe (`tools/oracle/tkgeomalgo_probe_iwalk.cxx`) runs the template through its
+  IntPatch instance `IntPatch_TheIWalking`; its Rust twin runs the alias
+  `IntPatchTheIWalking` (section 16).
 
 ## 11. IntCurveSurface templates
 
@@ -395,14 +393,13 @@ varies. The port (`crates/tkgeomalgo/src/int_start`):
   failure caught by a tkmath solver callback is kept by the function and raised when the
   solver returns (section 6). `math_FunctionAllRoots` that is not done raises
   `Standard_Failure`, as natively.
-- **The probe.** `tools/oracle/tkgeomalgo_probe_intstart.cxx` includes both `.gxx` on
-  probe classes, as the `_0.cxx` files do, with the types of the IntPatch instances
-  (IntPatch_ArcFunction, IntPatch_HInterTool, the IntPatch path point and segment,
-  IntPatch_TheSurfFunction) and with a probe domain whose `Edge()` returns a real edge
-  and a probe tool whose arcs "have been seen", so that the branches unreachable with
-  IntPatch_HInterTool and Adaptor3d_TopolTool run too. The Rust twin
-  (`crates/tkgeomalgo/examples/ga_probe/int_start*.rs`) ports those IntPatch classes for
-  the probe only, as the IntWalk probe ports the IntPatch line class (section 10).
+- **The probe.** `tools/oracle/tkgeomalgo_probe_intstart.cxx` runs both templates through
+  their IntPatch instances (`IntPatch_TheSOnBounds`, `IntPatch_TheSearchInside`), with a
+  probe domain whose `Edge()` returns a real edge, and includes the boundary `.gxx` on a
+  probe class with a probe tool whose arcs "have been seen", so that the branches
+  unreachable with IntPatch_HInterTool and Adaptor3d_TopolTool run too. The Rust twin
+  (`crates/tkgeomalgo/examples/ga_probe/int_start*.rs`) uses the IntPatch classes
+  (section 16) and keeps only those two fixtures.
 
 IntPolyh has no template. Its classes are concrete structs in
 `crates/tkgeomalgo/src/int_polyh`:
@@ -530,3 +527,54 @@ need a rule.
   and the caller raises it after the call, as the native exception would leave it.
   `OSD_Parallel::For` over the contact searches is a sequential loop: each iteration
   writes only its own slot, so the order does not change the result.
+
+## 16. IntPatch core
+
+IntPatch (`crates/tkgeomalgo/src/int_patch`) is the surface-surface intersection. Its
+core (the records, the lines, the tools and the template instances) lands first; the
+intersection algorithms build on it.
+
+- **Lines.** The abstract transients `IntPatch_Line` and `IntPatch_PointLine` are the
+  traits `IntPatchLine` and `IntPatchPointLine: IntPatchLine`, reached through
+  `Handle<dyn IntPatchLine>` and `Handle<dyn IntPatchPointLine>` (docs/geom-design.md
+  sections 1 and 2). The fields of `IntPatch_Line` (the type, the transitions, the
+  situations and the iso flags) live in an embedded `IntPatchLineBase` behind a lock;
+  its protected constructors are `IntPatchLineBase::new(tang, IntPatchLineTransitions,
+  typ)`, where `IntPatchLineTransitions` names the three of them (IN/OUT types, TOUCH
+  situations, undecided). The concrete lines `IntPatchWLine`, `IntPatchRLine`,
+  `IntPatchGLine` and `IntPatchALine` keep their own fields in one `SharedState` each,
+  since the algorithms edit the lines through their handles. `IntPatch_PointLine` has
+  one static member, `CurvatureRadiusOfIntersLine`, which is the free function
+  `curvature_radius_of_inters_line`.
+- **Vertices.** The four lines declare the same vertex members (`svtx`, `fipt`, `lapt`,
+  `indf`, `indl` and their inline accessors); they share one `VertexList`. `Vertex(i)`
+  and `FirstPoint()` return copies; `ChangeVertex(i)` runs a closure on the vertex in
+  place. The `ComputeVertexParameters` bodies are split by phase (the WLine one into
+  the seam duplication, the restriction filters, the merge with the walking points and
+  the end vertices), and the locals the native loops keep across their phases (`Tol`,
+  `nbvtx`, `nbponline`) live in one state struct, so each phase reads the stale counts
+  the native code reads.
+- **Tools.** `IntPatch_HInterTool` is a struct with the sampled range and associated
+  functions; it implements the IntStart trait `TheSOBTool`. `IntPatch_HCurve2dTool`
+  implements the IntImp trait `TheCurveTool`: the IntImp curve tool is split into
+  `TheCurveTool` (the bounds and the resolution, all that `IntImp_IntCS` calls) and
+  `TheCurve3dTool` (the 3d `Value` and `D1` of `IntImp_ZerCSParFunc`), since the 2d
+  arcs of `IntPatch_CurvIntSurf` have no 3d value. `IntPatch_ArcFunction` implements
+  the IntStart `TheArcFunction` and `IntPatch_CSFunction` the IntImp `TheFunction`
+  (section 6); both keep a failure of their solver callbacks and raise it when the
+  solver returns.
+- **Instances.** The instances are aliases over type bundles, as the `_0.cxx` files
+  name their macros: `IntPatchTheSurfFunction = IntImpZerImpFunc<HSurfaceTool,
+  IntSurfQuadricTool>`, `IntPatchCurvIntSurf = IntImpIntCS<IntPatchCSFunction>`,
+  `IntPatchTheSOnBounds = SearchOnBoundaries<IntPatchTheSOnBoundsTypes>`,
+  `IntPatchTheSearchInside = SearchInside<IntPatchTheSearchInsideTypes>` and
+  `IntPatchTheIWalking = IntWalkIWalking<IntPatchTheIWalkingTypes>` (sections 10 and 12).
+  The domain of the IntStart instances is `dyn TheTopolTool`, since the native
+  `Adaptor3d_TopolTool` is virtual. The path point, the segment and the walking line
+  (`IntPatchThePathPointOfTheSOnBounds`, `IntPatchTheSegmentOfTheSOnBounds`,
+  `IntPatchTheIWLineOfTheIWalking`) are the classes the IntStart and IntWalk probes and
+  tests use; the probe-only copies of them are gone.
+- **Dumps.** The `Dump` members write to a `fmt::Write` the text the native ones print
+  with `printf` and `std::cout` (`%+10.20f`, the default `operator<<(double)`, and `%10p`
+  addresses, which are the Rust object addresses). The probe captures the native process
+  output to compare the dumps of points and lines without arcs or vertices.

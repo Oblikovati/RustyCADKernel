@@ -1,11 +1,11 @@
 // IntStart probe operations (tkgeomalgo_probe.cxx); the Rust twin is
-// crates/tkgeomalgo/examples/ga_probe/int_start.rs. Both templates are instantiated here
-// on probe classes, as the _0.cxx files do, with the types of the IntPatch instances
-// (IntPatch_ArcFunction, IntPatch_HInterTool, the IntPatch path point and segment,
-// IntPatch_TheSurfFunction, Adaptor3d_TopolTool), plus a probe domain whose Edge() returns
-// a real edge and a probe tool whose arcs "have been seen". Each instantiation of
-// IntStart_SearchOnBoundaries.gxx lives in its own namespace, as its file-static helpers
-// would collide in this single translation unit. Needs the surface readers of
+// crates/tkgeomalgo/examples/ga_probe/int_start.rs. Both templates run through their
+// IntPatch instances, IntPatch_TheSOnBounds and IntPatch_TheSearchInside, on the real
+// IntPatch classes. The boundary search is also instantiated here on a probe tool whose
+// arcs "have been seen" (in its own namespace, as its file-static helpers would collide
+// in this single translation unit), and both searches run on a probe domain whose Edge()
+// returns a real edge, so that the branches unreachable with IntPatch_HInterTool and
+// Adaptor3d_TopolTool run too. Needs the surface readers of
 // tkgeomalgo_probe_intcurvesurface.cxx and the quadric reader of tkgeomalgo_probe_intsurf.cxx.
 #include <Adaptor2d_Curve2d.hxx>
 #include <Adaptor3d_CurveOnSurface.hxx>
@@ -26,6 +26,8 @@
 #include <IntPatch_ArcFunction.hxx>
 #include <IntPatch_HCurve2dTool.hxx>
 #include <IntPatch_HInterTool.hxx>
+#include <IntPatch_TheSOnBounds.hxx>
+#include <IntPatch_TheSearchInside.hxx>
 #include <IntPatch_TheSurfFunction.hxx>
 #include <IntPatch_ThePathPointOfTheSOnBounds.hxx>
 #include <IntPatch_TheSegmentOfTheSOnBounds.hxx>
@@ -91,13 +93,6 @@ private: \
 #define IntStart_TheSegment IntPatch_TheSegmentOfTheSOnBounds
 #define IntStart_SequenceOfSegment NCollection_Sequence<IntPatch_TheSegmentOfTheSOnBounds>
 #define IntStart_SearchOnBoundaries GaProbeSOnBounds
-namespace ga_is_patch{
-GA_IS_SOB_CLASS(GaProbeSOnBounds)
-#define TheSOBTool IntPatch_HInterTool
-#include <IntStart_SearchOnBoundaries.lxx>
-#include <IntStart_SearchOnBoundaries.gxx>
-#undef TheSOBTool
-}
 namespace ga_is_seen_ns{
 GA_IS_SOB_CLASS(GaProbeSOnBounds)
 #define TheSOBTool GaProbeSeenTool
@@ -116,35 +111,6 @@ GA_IS_SOB_CLASS(GaProbeSOnBounds)
 #undef IntStart_TheSegment
 #undef IntStart_SequenceOfSegment
 #undef IntStart_SearchOnBoundaries
-// The declaration of IntPatch_TheSearchInside.hxx under the probe name.
-class GaProbeSearchInside{
-public:
- GaProbeSearchInside();
- GaProbeSearchInside(IntPatch_TheSurfFunction& F,const occ::handle<Adaptor3d_Surface>& Surf,const occ::handle<Adaptor3d_TopolTool>& T,const double Epsilon);
- void Perform(IntPatch_TheSurfFunction& F,const occ::handle<Adaptor3d_Surface>& Surf,const occ::handle<Adaptor3d_TopolTool>& T,const double Epsilon);
- void Perform(IntPatch_TheSurfFunction& F,const occ::handle<Adaptor3d_Surface>& Surf,const double UStart,const double VStart);
- bool IsDone() const; int NbPoints() const; const IntSurf_InteriorPoint& Value(const int Index) const;
-private:
- bool done; NCollection_Sequence<IntSurf_InteriorPoint> list;
-};
-#define ThePSurface occ::handle<Adaptor3d_Surface>
-#define ThePSurfaceTool Adaptor3d_HSurfaceTool
-#define Handle_TheTopolTool occ::handle<Adaptor3d_TopolTool>
-#define TheTopolTool Adaptor3d_TopolTool
-#define TheSITool IntPatch_HInterTool
-#define TheFunction IntPatch_TheSurfFunction
-#define IntStart_SearchInside GaProbeSearchInside
-#include <IntStart_SearchInside.lxx>
-#include <IntStart_SearchInside.gxx>
-#undef No_Standard_RangeError
-#undef No_Standard_OutOfRange
-#undef ThePSurface
-#undef ThePSurfaceTool
-#undef Handle_TheTopolTool
-#undef TheTopolTool
-#undef TheSITool
-#undef TheFunction
-#undef IntStart_SearchInside
 // A domain whose Edge() is a real edge, as BRepTopAdaptor_TopolTool gives one.
 class GaProbeEdgeTopolTool : public Adaptor3d_TopolTool{
 public:
@@ -189,10 +155,10 @@ void ga_is_sob_case(std::istream& input){
  int nperf=mode==0?1:(mode==1?2:0);
  GA_TRY(occ::handle<Adaptor3d_TopolTool> d=new GaProbeEdgeTopolTool(s,e);IntPatch_ArcFunction f;f.SetQuadric(q);f.Set(s);
   if(seen){ga_is_seen_ns::GaProbeSOnBounds sob;for(int k=0;k<nperf;++k)GA_TRY(sob.Perform(f,d,tolb,tolt,recheck));ga_is_sob_report(sob,d);}
-  else{ga_is_patch::GaProbeSOnBounds sob;for(int k=0;k<nperf;++k)GA_TRY(sob.Perform(f,d,tolb,tolt,recheck));ga_is_sob_report(sob,d);});
+  else{IntPatch_TheSOnBounds sob;for(int k=0;k<nperf;++k)GA_TRY(sob.Perform(f,d,tolb,tolt,recheck));ga_is_sob_report(sob,d);});
  ga_end();
 }
-void ga_is_inside_report(const GaProbeSearchInside& s){
+void ga_is_inside_report(const IntPatch_TheSearchInside& s){
  ga_flag(s.IsDone());
  GA_TRY(int n=s.NbPoints();ga_int(n);for(int i=1;i<=n;++i){const IntSurf_InteriorPoint& p=s.Value(i);
   ga_pnt(p.Value());ga_real(p.UParameter());ga_real(p.VParameter());ga_xyz(p.Direction().XYZ());ga_xy(p.Direction2d().XY());});
@@ -205,8 +171,8 @@ void ga_is_inside_case(std::istream& input){
  GaReader r{input};occ::handle<Adaptor3d_Surface> s=ga_ics_surface(r);IntSurf_Quadric q=ga_intsurf_quadric(r);
  double tol=r.real(),eps=r.real();int mode=r.integer();
  GA_TRY(IntPatch_TheSurfFunction f(s,q);f.Set(tol);occ::handle<Adaptor3d_TopolTool> d=new Adaptor3d_TopolTool(s);
-  if(mode==0){GA_TRY(GaProbeSearchInside w(f,s,d,eps);ga_is_inside_report(w));}
-  else if(mode==1){double u=r.real(),v=r.real();GaProbeSearchInside w;GA_TRY(w.Perform(f,s,u,v));ga_is_inside_report(w);}
-  else{GaProbeSearchInside w;ga_is_inside_report(w);});
+  if(mode==0){GA_TRY(IntPatch_TheSearchInside w(f,s,d,eps);ga_is_inside_report(w));}
+  else if(mode==1){double u=r.real(),v=r.real();IntPatch_TheSearchInside w;GA_TRY(w.Perform(f,s,u,v));ga_is_inside_report(w);}
+  else{IntPatch_TheSearchInside w;ga_is_inside_report(w);});
  ga_end();
 }

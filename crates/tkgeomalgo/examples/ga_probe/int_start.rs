@@ -1,52 +1,35 @@
 //! IntStart probe operations, the Rust twin of tools/oracle/tkgeomalgo_probe_intstart.cxx:
-//! the two generics instantiated with the probe ports of the IntPatch classes
-//! (`int_start_tools`), `HSurfaceTool`, `IntImpZerImpFunc` and `Adaptor3dTopolTool`.
+//! the two generics run through their IntPatch instances (`IntPatchTheSOnBounds`,
+//! `IntPatchTheSearchInside`) on the real IntPatch classes, and the boundary search also
+//! runs on the probe tool of seen arcs (`int_start_fixtures`).
 use super::common::{Reader, attempt, end, flag, int, pnt, pnt2d, real, xy, xyz};
 use super::ics_geometry::surface;
-use super::int_start_tools::{
-    ProbeArcFunction, ProbeDomain, ProbeHInterTool, ProbePathPoint, ProbeSeenTool, ProbeSegment,
-    SEEN, SeenTable,
-};
+use super::int_start_fixtures::{ProbeDomain, ProbeSeenTool, SEEN, SeenTable};
 use super::int_surf::quadric;
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topods::Edge;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool;
 use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface};
-use rustycad_tkgeomalgo::int_imp::{HSurfaceTool, IntImpZerImpFunc};
-use rustycad_tkgeomalgo::int_start::{
-    SearchInside, SearchInsideTypes, SearchOnBoundaries, SearchOnBoundariesTypes, TheArc,
-    ThePathPoint, TheTopolTool,
+use rustycad_tkgeomalgo::int_patch::{
+    IntPatchArcFunction, IntPatchThePathPointOfTheSOnBounds, IntPatchTheSOnBoundsTypes,
+    IntPatchTheSearchInside, IntPatchTheSegmentOfTheSOnBounds, IntPatchTheSurfFunction,
 };
-use rustycad_tkgeomalgo::int_surf::IntSurfQuadricTool;
+use rustycad_tkgeomalgo::int_start::{
+    SearchOnBoundaries, SearchOnBoundariesTypes, TheArc, TheTopolTool,
+};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis3, Direction3};
 use rustycad_tkmath::toploc::Location;
 
-/// The IntPatch_TheSOnBounds instance on the probe domain.
-struct PatchTypes;
-impl SearchOnBoundariesTypes for PatchTypes {
-    type TopolTool = ProbeDomain;
-    type SOBTool = ProbeHInterTool;
-    type Function = ProbeArcFunction;
-    type PathPoint = ProbePathPoint;
-    type Segment = ProbeSegment;
-}
-/// The instance on the tool whose arcs have been seen.
+/// The instance on the tool whose arcs have been seen, with the IntPatch classes.
 struct SeenTypes;
 impl SearchOnBoundariesTypes for SeenTypes {
-    type TopolTool = ProbeDomain;
+    type TopolTool = dyn TheTopolTool;
     type SOBTool = ProbeSeenTool;
-    type Function = ProbeArcFunction;
-    type PathPoint = ProbePathPoint;
-    type Segment = ProbeSegment;
-}
-/// The IntPatch_TheSearchInside instance.
-struct InsideTypes;
-impl SearchInsideTypes for InsideTypes {
-    type SurfaceTool = HSurfaceTool;
-    type TopolTool = Adaptor3dTopolTool;
-    type Function = IntImpZerImpFunc<HSurfaceTool, IntSurfQuadricTool>;
+    type Function = IntPatchArcFunction;
+    type PathPoint = IntPatchThePathPointOfTheSOnBounds;
+    type Segment = IntPatchTheSegmentOfTheSOnBounds;
 }
 
 /// `ga_is_edge`: no edge, or a straight edge with its flags and regularity.
@@ -90,7 +73,7 @@ fn arc_rank(d: &ProbeDomain, arc: &TheArc) -> i32 {
     0
 }
 
-fn path_point(d: &ProbeDomain, p: &ProbePathPoint) {
+fn path_point(d: &ProbeDomain, p: &IntPatchThePathPointOfTheSOnBounds) {
     pnt(p.value());
     real(p.tolerance());
     flag(p.is_new());
@@ -104,20 +87,20 @@ fn path_point(d: &ProbeDomain, p: &ProbePathPoint) {
     });
 }
 
-fn segment(d: &ProbeDomain, g: &ProbeSegment) {
-    int(arc_rank(d, &g.arc));
-    let domain_error = || print!("Standard_DomainError ");
-    flag(g.first.is_some());
-    g.first
-        .as_ref()
-        .map_or_else(domain_error, |p| path_point(d, p));
-    flag(g.last.is_some());
-    g.last
-        .as_ref()
-        .map_or_else(domain_error, |p| path_point(d, p));
+fn segment(d: &ProbeDomain, g: &IntPatchTheSegmentOfTheSOnBounds) {
+    int(arc_rank(d, &g.curve()));
+    flag(g.has_first_point());
+    attempt(|| g.first_point().map(|p| path_point(d, p)));
+    flag(g.has_last_point());
+    attempt(|| g.last_point().map(|p| path_point(d, p)));
 }
 
-fn sob_report<T: SearchOnBoundariesTypes<PathPoint = ProbePathPoint, Segment = ProbeSegment>>(
+fn sob_report<
+    T: SearchOnBoundariesTypes<
+            PathPoint = IntPatchThePathPointOfTheSOnBounds,
+            Segment = IntPatchTheSegmentOfTheSOnBounds,
+        >,
+>(
     s: &SearchOnBoundaries<T>,
     d: &ProbeDomain,
 ) {
@@ -161,13 +144,13 @@ fn seen_table(r: &mut Reader) -> SeenTable {
     t
 }
 
-fn run_sob<T>(f: &mut ProbeArcFunction, d: &ProbeDomain, tols: (f64, f64, bool), nperf: i32)
+fn run_sob<T>(f: &mut IntPatchArcFunction, d: &ProbeDomain, tols: (f64, f64, bool), nperf: i32)
 where
     T: SearchOnBoundariesTypes<
-            TopolTool = ProbeDomain,
-            Function = ProbeArcFunction,
-            PathPoint = ProbePathPoint,
-            Segment = ProbeSegment,
+            TopolTool = dyn TheTopolTool,
+            Function = IntPatchArcFunction,
+            PathPoint = IntPatchThePathPointOfTheSOnBounds,
+            Segment = IntPatchTheSegmentOfTheSOnBounds,
         >,
 {
     let mut sob = SearchOnBoundaries::<T>::new();
@@ -200,20 +183,20 @@ pub fn sob_case(values: &[f64]) {
             tool: Adaptor3dTopolTool::with_surface(&s)?,
             edge: e?,
         };
-        let mut f = ProbeArcFunction::default();
+        let mut f = IntPatchArcFunction::new();
         f.set_quadric(&q);
         f.set_surface(&s);
         if seen {
             run_sob::<SeenTypes>(&mut f, &d, (tolb, tolt, recheck), nperf);
         } else {
-            run_sob::<PatchTypes>(&mut f, &d, (tolb, tolt, recheck), nperf);
+            run_sob::<IntPatchTheSOnBoundsTypes>(&mut f, &d, (tolb, tolt, recheck), nperf);
         }
         Ok(())
     });
     end();
 }
 
-fn inside_report(s: &SearchInside<InsideTypes>) {
+fn inside_report(s: &IntPatchTheSearchInside) {
     flag(s.is_done());
     attempt(|| {
         let n = s.nb_points()?;
@@ -239,22 +222,22 @@ pub fn inside_case(values: &[f64]) {
     let q = quadric(&mut r);
     let (tol, eps, mode) = (r.real(), r.real(), r.integer());
     attempt(|| {
-        let mut f = IntImpZerImpFunc::<HSurfaceTool, IntSurfQuadricTool>::with_surfaces(&s, &q);
+        let mut f = IntPatchTheSurfFunction::with_surfaces(&s, &q);
         f.set_tolerance(tol);
         let d = Adaptor3dTopolTool::with_surface(&s)?;
         match mode {
             0 => attempt(|| {
-                let w = SearchInside::<InsideTypes>::with_domain(&mut f, &s, &d, eps)?;
+                let w = IntPatchTheSearchInside::with_domain(&mut f, &s, &d, eps)?;
                 inside_report(&w);
                 Ok(())
             }),
             1 => {
                 let (u, v) = (r.real(), r.real());
-                let mut w = SearchInside::<InsideTypes>::new();
+                let mut w = IntPatchTheSearchInside::new();
                 attempt(|| w.perform_from(&mut f, &s, u, v));
                 inside_report(&w);
             }
-            _ => inside_report(&SearchInside::<InsideTypes>::new()),
+            _ => inside_report(&IntPatchTheSearchInside::new()),
         }
         Ok(())
     });

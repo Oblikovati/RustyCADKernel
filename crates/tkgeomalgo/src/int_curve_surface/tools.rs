@@ -19,7 +19,7 @@
 //! bodies make on `CurveTool` and `SurfaceTool`, under their native names
 //! (docs/geomalgo-design.md section 11). They extend the IntImp tool traits, which
 //! hold the calls of the CS function and of the exact intersector.
-use crate::int_imp::{HSurfaceTool, TheCurveTool, ThePSurfaceTool};
+use crate::int_imp::{HSurfaceTool, TheCurve3dTool, ThePSurfaceTool};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
@@ -32,7 +32,7 @@ use rustycad_tkmath::gp::{
 
 /// `CurveTool` of the IntCurveSurface templates (IntCurveSurface_TheHCurveTool,
 /// HLRBRep_LineTool); `C::get_type(&curve)?` classifies a curve of a tool `C`.
-pub trait InterCurveTool: TheCurveTool {
+pub trait InterCurveTool: TheCurve3dTool {
     /// `GetType(C)`.
     fn get_type(curve: &Self::Curve) -> Result<CurveType, Failure>;
     /// `Line(C)`.
