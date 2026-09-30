@@ -580,3 +580,50 @@ as the native code got). The accessors of the current point raise StdFail_NotDon
 there is none, as natively; `Face()` raises Standard_OutOfRange when the face index is
 outside the sequence (a `Value` of the native sequence). The two `Init` overloads with
 a shape are `init_curve` and `init_line`, and `Init(curve)` is `init`.
+
+## 14. The last TKTopAlgo items: AddOBB, PointCloudShape, MakeShapeOnMesh and BRepMAT2d
+
+- **`BRepBndLib::AddOBB`** (BRepBndLib_1.cxx) is the associated function
+  `BRepBndLib::add_obb` of the unit struct of section 5; it takes the caller's
+  `OrientedBoundingBox` as `&mut` and returns `Result` (the adaptors, BRepGProp, the
+  Jacobi of the principal properties and the frame construction can raise). The
+  file-static helpers (`IsLinear`, `IsPlanar`, `PointsForOBB`, `IsWCS`, `CheckPoints`,
+  `ComputeProperties`, `ComputePCA`) are private functions of `add_obb.rs`.
+  `PointsForOBB` runs natively twice over the same exploration (a count, then a fill of
+  arrays of that size); the port gathers the points and tolerances in one pass into
+  vectors, which visits the same sub-shapes in the same order and gives the same arrays.
+- **`BRepLib_PointCloudShape`** is abstract (its `addPoint` is pure virtual, `clear` is
+  virtual) and has no derived class in TKTopAlgo, so it is mapped like
+  `BRepBuilderAPI_MakeShape` (section 10): the struct `BRepLibPointCloudShapeBase` holds
+  the protected fields under their native names in snake case (public, since derived
+  classes live in other crates; the two maps are `NCollection_DataMap`s with
+  `TopTools_ShapeMapHasher`), and the trait `BRepLibPointCloudShape` has two required
+  accessors of that base, the required `add_point` and the other members (public and
+  protected) as provided methods with the native bodies; `clear` is a provided method an
+  implementor may override. The random draws use `std::mt19937` and libstdc++ 13's
+  `std::uniform_real_distribution<double>` (`generate_canonical` from two 32-bit draws),
+  ported once in `rustycad_tkernel::stl` next to the libstdc++ sort; the twister moved
+  there from the UBTree filler, which uses it too.
+- **`BRepBuilderAPI_MakeShapeOnMesh`** (section 11) is the struct
+  `BRepBuilderAPIMakeShapeOnMesh`: the MakeShape base (dereferenced) and the mesh
+  handle; it implements `BRepBuilderAPIMakeShape` and overrides `build`. The node-to-vertex
+  `NCollection_IndexedDataMap<int, TopoDS_Vertex>` is a vector indexed by node, and the
+  `NCollection_IndexedDataMap<Edge, TopoDS_Edge>` of mesh edges a `HashMap` that keeps
+  the first edge of a key: natively both maps are only searched by key, so their order
+  is never observed.
+- **BRepMAT2d** has three plain classes, each a struct. `BRepMAT2d_Explorer` keeps its
+  contours as `Sequence<Handle<dyn Geom2dCurve>>` (the native sequences of
+  `Geom2d_Curve` handles) and its modified shapes in the native
+  `NCollection_IndexedDataMap` with `TopTools_ShapeMapHasher`; its private
+  `Add(Spine, aFace, aNewFace)` and the file-static `MakeEdge`, `GetCurveType` and
+  `AdjustCurveEnd` are in `explorer_wire.rs`, which fills the contour in place as the
+  native member does. `BRepMAT2d_BisectingLocus` owns its `MAT2d_Tool2d` and its graph
+  handle; its file-static `CutSketch` is private; the section counts
+  (`NCollection_DataMap<MAT2d_BiInt, int>`) are a `HashMap`, since they are only searched
+  by key. `BRepMAT2d_LinkTopoBilo` keeps the shape-to-elements map as the native
+  `NCollection_DataMap` (with `TopTools_ShapeMapHasher`) and the element-to-shape map
+  as a `HashMap` keyed by the handle identity (only searched by key); the
+  `NCollection_DataMap<int, int>` of `LinkToContour` is the native map, since its
+  iteration order decides the order of the links. The three classes reuse the MAT,
+  MAT2d and Bisector ports (section 3) without copying any of their code.
+

@@ -4,9 +4,10 @@ use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
     bisector, bisector_algo, brep_approx, brep_approx_parts, brep_approx_tool, brep_bnd_lib,
-    brep_builder_api, brep_builder_api_makers, brep_builder_api_modify, brep_check, brep_class,
-    brep_class3d, brep_gprop, brep_gprop_frames, brep_gprop_tools, brep_int_curve_surface,
-    brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor,
+    brep_bnd_lib_obb, brep_builder_api, brep_builder_api_makers, brep_builder_api_modify,
+    brep_builder_api_on_mesh, brep_check, brep_class, brep_class3d, brep_gprop, brep_gprop_frames,
+    brep_gprop_tools, brep_int_curve_surface, brep_lib_edge, brep_lib_face, brep_lib_fuse,
+    brep_lib_package, brep_lib_point_cloud, brep_lib_wire, brep_mat2d, brep_top_adaptor,
     brep_top_adaptor_domain, fast_sewing, int_curves_face, mat, mat_parts, sewing, sewing_helpers,
 };
 
@@ -93,6 +94,14 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bck_analyze", brep_check::analyze_case),
     // BRepBndLib (tp_probe/brep_bnd_lib.rs, shapes of tp_probe/shape.rs)
     ("bbl_add", brep_bnd_lib::add_case),
+    // BRepBndLib::AddOBB (tp_probe/brep_bnd_lib_obb.rs)
+    ("bbl_obb", brep_bnd_lib_obb::obb_case),
+    // BRepLib_PointCloudShape (tp_probe/brep_lib_point_cloud.rs)
+    ("blp_pointcloud", brep_lib_point_cloud::point_cloud_case),
+    // BRepBuilderAPI_MakeShapeOnMesh (tp_probe/brep_builder_api_on_mesh.rs)
+    ("bba_onmesh", brep_builder_api_on_mesh::on_mesh_case),
+    // BRepMAT2d (tp_probe/brep_mat2d.rs)
+    ("bm2_locus", brep_mat2d::locus_case),
     // BRepClass3d (tp_probe/brep_class3d.rs, shapes of tp_probe/shape.rs)
     ("bc3_classify", brep_class3d::classify_case),
     ("bc3_infinite", brep_class3d::infinite_case),

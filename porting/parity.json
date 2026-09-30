@@ -178724,6 +178724,14 @@
       "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place (the file-static CanUseEdges, FindExactUVBounds, AdjustFaceBox and IsModifySize are private helpers); native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
     },
     {
+      "upstream_id": "BRepBndLib::AddOBB(const TopoDS_Shape&,Bnd_OBB&,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add_obb",
+      "status": "implemented",
+      "notes": "BRepBndLib::AddOBB mapping (BRepBndLib_1.cxx, docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): associated function of the unit struct BRepBndLib extending the caller's Bnd_OBB in place; the file-static IsLinear, IsPlanar, PointsForOBB (one pass instead of the native count and fill passes over the same exploration), IsWCS, CheckPoints, ComputeProperties and ComputePCA are private helpers; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_obb requests)."
+    },
+    {
       "upstream_id": "BRepClass3d::OuterShell(const TopoDS_Solid&)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d.hxx",
@@ -185084,6 +185092,102 @@
       "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
     },
     {
+      "upstream_id": "BRepLib_PointCloudShape(const TopoDS_Shape&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::new",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::Shape() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::shape",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::SetShape(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::set_shape",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::Tolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::tolerance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::SetTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::set_tolerance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::GetDistance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::get_distance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::SetDistance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::set_distance",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::NbPointsByDensity(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::nb_points_by_density",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::NbPointsByTriangulation() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::nb_points_by_triangulation",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::GeneratePointsByDensity(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::generate_points_by_density",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::GeneratePointsByTriangulation()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::generate_points_by_triangulation",
+      "status": "implemented",
+      "notes": "BRepLib_PointCloudShape mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the abstract class is the trait BRepLibPointCloudShape over the embedded protected data BRepLibPointCloudShapeBase; the pure virtual addPoint is its required method and the virtual clear a provided one; std::mt19937 and libstdc++'s uniform_real_distribution are rustycad_tkernel::stl; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blp_pointcloud requests)."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::~BRepLib_PointCloudShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the embedded base and the implementor with the value; nothing to port."
+    },
+    {
       "upstream_id": "BRepGProp::LinearProperties(const TopoDS_Shape&,GProp_GProps&,bool,bool)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
@@ -191410,6 +191514,294 @@
       "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::inspect_target",
       "status": "implemented",
       "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeShapeOnMesh(const occ::handle<Poly_Triangulation>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeShapeOnMesh.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeOnMesh::new",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI_MakeShapeOnMesh mapping (docs/topalgo-design.md sections 11 and 14, docs/tktopalgo-progress.md): a struct holding the BRepBuilderAPIMakeShapeBase (dereferenced) and the mesh handle; it implements the trait BRepBuilderAPIMakeShape with its Build override; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_onmesh requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeShapeOnMesh::Build(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeShapeOnMesh.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeOnMesh::build",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI_MakeShapeOnMesh mapping (docs/topalgo-design.md sections 11 and 14): the Build override of the trait BRepBuilderAPIMakeShape; the vertex map is a vector by node index and the mesh-edge map a hash map keeping the first edge of a key (both only searched by key natively); the progress scope steps as natively; the edge, wire and face makers' exceptions are returned; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_onmesh requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::new",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::Compute(BRepMAT2d_Explorer&,int,MAT_Side,GeomAbs_JoinType,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::compute",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::is_done",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::Graph() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::graph",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::NumberOfContours() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::number_of_contours",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::NumberOfElts(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::number_of_elts",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::NumberOfSections(int,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::number_of_sections",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::BasicElt(int,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::basic_elt",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::GeomElt(const occ::handle<MAT_BasicElt>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::geom_elt_of_basic_elt",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::GeomElt(const occ::handle<MAT_Node>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::geom_elt_of_node",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_BisectingLocus::GeomBis(const occ::handle<MAT_Arc>&,bool&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dBisectingLocus::geom_bis",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct owning its MAT graph handle, its MAT2d_Tool2d and the section counts; the two GeomElt overloads are geom_elt_of_basic_elt and geom_elt_of_node, GeomBis returns the bisector with its Reverse flag; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::new",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::with_face",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::Clear()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::clear",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::Perform(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::perform",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::NumberOfContours() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::number_of_contours",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::NumberOfCurves(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::number_of_curves",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::Init(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::init",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::More() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::more",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::Next()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::next",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::Value() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::value",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::Shape() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::shape",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::Contour(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::contour",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::IsModified(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::is_modified",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::ModifiedShape(const TopoDS_Shape&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::modified_shape",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_Explorer::GetIsClosed() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_Explorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dExplorer::get_is_closed",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its contours (sequences of Geom2d curve handles), closed flags and modified-shape map; the private Add(Spine, aFace, aNewFace) is explorer_wire.rs, with the file-static MakeEdge, GetCurveType and AdjustCurveEnd; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::new",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo(const BRepMAT2d_Explorer&,const BRepMAT2d_BisectingLocus&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::with_locus",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo::Perform(const BRepMAT2d_Explorer&,const BRepMAT2d_BisectingLocus&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::perform",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo::Init(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::init",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo::More()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::more",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo::Next()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::next",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo::Value() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::value",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepMAT2d_LinkTopoBilo::GeneratingShape(const occ::handle<MAT_BasicElt>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_LinkTopoBilo.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::generating_shape",
+      "status": "implemented",
+      "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
     }
   ],
   "tests": [
@@ -281429,6 +281821,146 @@
       "rust_target": "brep_top_adaptor_fclass2d",
       "rust_test": "BRepTopAdaptorFClass2dTest__DisconnectedWire_FallsBackToStableExactClassification",
       "rust_source": "crates/tktopalgo/tests/brep_top_adaptor_fclass2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeEdgeTest.LinearEdge_TwoPoints",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeEdge_Test.cxx",
+      "source_sha256": "e28915287dc23560469f5dd31eaaa556b0970468926d326e66ca4071bf3bac83",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_edge",
+      "rust_test": "BRepBuilderAPI_MakeEdgeTest__LinearEdge_TwoPoints",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeEdgeTest.CircularEdge_Full",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeEdge_Test.cxx",
+      "source_sha256": "e28915287dc23560469f5dd31eaaa556b0970468926d326e66ca4071bf3bac83",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_edge",
+      "rust_test": "BRepBuilderAPI_MakeEdgeTest__CircularEdge_Full",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeEdgeTest.CircularEdge_Trimmed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeEdge_Test.cxx",
+      "source_sha256": "e28915287dc23560469f5dd31eaaa556b0970468926d326e66ca4071bf3bac83",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_edge",
+      "rust_test": "BRepBuilderAPI_MakeEdgeTest__CircularEdge_Trimmed",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeEdgeTest.EdgeFromLine_WithBounds",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeEdge_Test.cxx",
+      "source_sha256": "e28915287dc23560469f5dd31eaaa556b0970468926d326e66ca4071bf3bac83",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_edge",
+      "rust_test": "BRepBuilderAPI_MakeEdgeTest__EdgeFromLine_WithBounds",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeEdgeTest.VertexExtraction",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeEdge_Test.cxx",
+      "source_sha256": "e28915287dc23560469f5dd31eaaa556b0970468926d326e66ca4071bf3bac83",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_edge",
+      "rust_test": "BRepBuilderAPI_MakeEdgeTest__VertexExtraction",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeEdgeTest.ToleranceCheck",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeEdge_Test.cxx",
+      "source_sha256": "e28915287dc23560469f5dd31eaaa556b0970468926d326e66ca4071bf3bac83",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_edge",
+      "rust_test": "BRepBuilderAPI_MakeEdgeTest__ToleranceCheck",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_edge.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeFaceTest.FaceFromPlane",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeFace_Test.cxx",
+      "source_sha256": "beabc5f88717d1321a785fdb5a653648a33575c22133d303e2d9fd41f0d3a790",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_face",
+      "rust_test": "BRepBuilderAPI_MakeFaceTest__FaceFromPlane",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_face.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeFaceTest.FaceFromWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeFace_Test.cxx",
+      "source_sha256": "beabc5f88717d1321a785fdb5a653648a33575c22133d303e2d9fd41f0d3a790",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_face",
+      "rust_test": "BRepBuilderAPI_MakeFaceTest__FaceFromWire",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_face.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeFaceTest.FaceFromGeomPlane_WithBounds",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeFace_Test.cxx",
+      "source_sha256": "beabc5f88717d1321a785fdb5a653648a33575c22133d303e2d9fd41f0d3a790",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_face",
+      "rust_test": "BRepBuilderAPI_MakeFaceTest__FaceFromGeomPlane_WithBounds",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_face.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeFaceTest.FaceFromCylindricalSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBuilderAPI_MakeFace_Test.cxx",
+      "source_sha256": "beabc5f88717d1321a785fdb5a653648a33575c22133d303e2d9fd41f0d3a790",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_builder_api_make_face",
+      "rust_test": "BRepBuilderAPI_MakeFaceTest__FaceFromCylindricalSurface",
+      "rust_source": "crates/tktopalgo/tests/brep_builder_api_make_face.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

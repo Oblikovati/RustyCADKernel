@@ -50,6 +50,8 @@ The toolkit test inventory maps these suites (12 declarations):
 | BRepBuilderAPI_MakeWire_Test.cxx | brep_builder_api_make_wire | 1 | 1 of 1 | 1 of 1 |
 | BRepCheck_Face_Test.cxx | brep_check_face | 4 | 4 of 4 | 4 of 4 |
 | BRepTopAdaptor_FClass2d_Test.cxx | brep_top_adaptor_fclass2d | 5 | 5 of 5 | 5 of 5 |
+| BRepBuilderAPI_MakeEdge_Test.cxx | brep_builder_api_make_edge | 6 | 6 of 6 | 6 of 6 |
+| BRepBuilderAPI_MakeFace_Test.cxx | brep_builder_api_make_face | 4 | 4 of 4 | 4 of 4 |
 
 BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: its case
 `BRepClassFaceExplorerTest.DegenerateEdges_HaveNoNextEdge` builds its sphere face with
@@ -83,15 +85,13 @@ unit circle, which the reference bounds of the upstream cases pin), with the sam
 and tolerances; they move to a 1:1 translation once BRepPrimAPI is ported and TKMesh is
 in the native build.
 
-Four BRepBuilderAPI suites wait for other packages: BRepBuilderAPI_MakeEdge_Test.cxx
-(6 declarations; `LinearEdge_TwoPoints`, `CircularEdge_Full`, `CircularEdge_Trimmed` and
-`EdgeFromLine_WithBounds` measure the edge length with `BRepGProp::LinearProperties`) and
-BRepBuilderAPI_MakeFace_Test.cxx (4; `FaceFromWire`, `FaceFromGeomPlane_WithBounds` and
-`FaceFromCylindricalSurface` call `BRepGProp::SurfaceProperties`) need BRepGProp, ported
-in parallel; BRepBuilderAPI_Transform_Test.cxx (5) and BRepBuilderAPI_Copy_Test.cxx (6)
-build every input with `BRepPrimAPI_MakeBox` of TKPrim and measure it with
+BRepBuilderAPI_MakeEdge_Test.cxx (6 declarations) and BRepBuilderAPI_MakeFace_Test.cxx (4)
+are translated 1:1 since BRepGProp is ported (they measure the edges and faces with
+`BRepGProp::LinearProperties` and `SurfaceProperties`). Two BRepBuilderAPI suites still
+wait: BRepBuilderAPI_Transform_Test.cxx (5) and BRepBuilderAPI_Copy_Test.cxx (6) build
+every input with `BRepPrimAPI_MakeBox` of TKPrim and measure it with
 `BRepGProp::VolumeProperties` or `SurfaceProperties` (and `CafNamedShape_A4` translates
-with BRepBuilderAPI_Transform). The four unchanged suites pass natively (21 of 21); the
+with BRepBuilderAPI_Transform). The two unchanged suites pass natively (11 of 11); the
 behavior tests of `crates/tktopalgo/tests/brep_builder_api_behavior.rs` and the numeric
 probe cover the same members.
 
@@ -214,6 +214,10 @@ accessors without a current point and past the last face).
   `new` and `init` and the native accessors; `BRepLibFuseEdges` has `new`,
   `avoid_edges`, `set_concat_bspl`, `perform`, `nb_vertices`, `shape`, and `edges`,
   `result_edges` and `faces`, which return the maps the native members fill.
+  The abstract `BRepLib_PointCloudShape` (docs/topalgo-design.md section 14) is the trait
+  `BRepLibPointCloudShape` over the embedded protected data `BRepLibPointCloudShapeBase`;
+  an implementor provides `add_point`. The audit of the package reports 0 missing and
+  0 stale rows.
 
 - BRepBuilderAPI (docs/topalgo-design.md section 10): `BRepBuilderAPI_Command` is
   `BRepBuilderAPICommand` and the protected data of `BRepBuilderAPI_MakeShape` is
@@ -240,10 +244,18 @@ accessors without a current point and past the last face).
 - BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
   are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
   `add_optimal`); they extend the caller's `BoundingBox3` in place and return `Result`.
-  `AddOBB` (BRepBndLib_1.cxx) needs BRepGProp and BRepBuilderAPI_Transform (stage B) and
-  has no row yet: the audit lists it as the one missing member of the package.
+  `AddOBB` (BRepBndLib_1.cxx, docs/topalgo-design.md section 14) is `add_obb`; it extends
+  the caller's `OrientedBoundingBox` in place. The audit of the package reports 0 missing
+  and 0 stale rows.
   `Bnd_Box` implements the TKernel `BoundingVolume` trait (in TKMath), so
   `NCollection_UBTree<int, Bnd_Box>` is `UBTree<i32, BoundingBox3>`.
+- BRepMAT2d (docs/topalgo-design.md section 14): `BRepMAT2d_Explorer`,
+  `BRepMAT2d_BisectingLocus` and `BRepMAT2d_LinkTopoBilo` are the structs
+  `BRepMAT2dExplorer` (`new`, `with_face`; `More`, `Value`, `NumberOfCurves` and
+  `Contour` return `Result`), `BRepMAT2dBisectingLocus` (`compute` takes the explorer as
+  `&mut`; the `GeomElt` overloads are `geom_elt_of_basic_elt` and `geom_elt_of_node`,
+  `GeomBis` returns the bisector with its `Reverse` flag) and `BRepMAT2dLinkTopoBilo`
+  (`new`, `with_locus`). The audit of the package reports 0 missing and 0 stale rows.
 
 - BRepClass3d (docs/topalgo-design.md section 5): `BRepClass3d_SolidExplorer` is
   `BRepClass3dSolidExplorer` (its intersector map is `BRepClass3dMapOfInter`, the
@@ -319,8 +331,10 @@ accessors without a current point and past the last face).
   `TreeSelector<i32, BoundingBox3>`; `Reject` and `Accept` are `reject_box` and
   `accept_object`). The audit reports 0 missing and 0 stale rows for these four classes
   (Sewing 45 rows, FastSewing 10, VertexInspector 8, BndBoxTreeSelector 6, each RTTI
-  macro an implemented row). `BRepBuilderAPI_MakeShapeOnMesh` waits for
-  `BRepBuilderAPI_MakeShape` (another port).
+  macro an implemented row). `BRepBuilderAPI_MakeShapeOnMesh` is
+  `BRepBuilderAPIMakeShapeOnMesh` (`new(&mesh)`; it implements `BRepBuilderAPIMakeShape`
+  with its `build` override and dereferences to the base, docs/topalgo-design.md
+  section 14); with it the audit of BRepBuilderAPI reports 0 missing and 0 stale rows.
 
 ## Verification
 
@@ -564,6 +578,60 @@ the previous curve, and `Next` past the last face. Every exploration prints each
 (face index, `Point`, `Pnt`, `U`, `V`, `W`, `State`, `Transition`) and the accessors past
 the end.
 
+BRepBndLib::AddOBB: 424 requests (`tools/tktopalgo_corpus_brepbndlib_obb.py`,
+`tktopalgo_probe_brepbndlib_obb.cxx` and `tp_probe/brep_bnd_lib_obb.rs`). `bbl_obb` runs
+AddOBB with the eight flag triples (triangulation, optimal, shape tolerance) into a void
+box on every shape of the BRepBndLib corpus (so every shape kind: solids, a hollow and
+an open box, faces, free edges with and without 3d polygons, free vertices, an empty
+solid) and on a box shell, a cylinder shell, a sphere and a cylinder whose curved faces
+carry a triangulation (the DiTO path over their nodes), a located meshed cylinder, a
+rotated box and rotated cylinder and torus (the PCA path in a rotated frame of inertia)
+and a circle edge without polygon; eleven of the shapes also go into an axis-aligned and
+a rotated initial box with four flag triples. Each request prints every field of the
+box (void flag, centre, axes, half sizes, axis-aligned flag).
+
+BRepLib_PointCloudShape: 113 requests (`tools/tktopalgo_corpus_breplib_pointcloud.py`,
+`tktopalgo_probe_breplib_pointcloud.cxx` and `tp_probe/brep_lib_point_cloud.rs`). A
+`blp_pointcloud` request builds one cloud (a probe class that prints each point, its
+normal, its UV and the index of its face) and runs a list of operations: the counts and
+the points by density on boxes, a cylinder, a sphere, a torus, a sphere patch, natural
+and bounded Bezier patches, a REVERSED face, a box with a located face, a rotated box and
+a translated cylinder (given, zero and negative densities, offsets along the normal,
+negative and changed distances, counts kept between calls), the default density with
+faces below the square of the tolerance, and the node counts and points of the
+triangulations (boxes, a REVERSED face, meshed spheres and cylinders, located and
+rotated, with and without UV nodes, a face without surface, faces without mesh), and
+shapes without a usable face (free edges, an empty solid, an infinite plane). The
+random points check the port of `std::mt19937` and libstdc++'s
+`std::uniform_real_distribution<double>` bit for bit.
+
+BRepBuilderAPI_MakeShapeOnMesh: 60 requests
+(`tools/tktopalgo_corpus_brepbuilderapi_onmesh.py`,
+`tktopalgo_probe_brepbuilderapi_onmesh.cxx` and `tp_probe/brep_builder_api_on_mesh.rs`).
+A `bba_onmesh` request builds a triangulation and the maker, calls Build zero, one or
+two times and prints `tp_bba_made` (IsDone, Check, the digest of Shape() and its
+history): a null mesh, meshes without nodes (the probe's sized constructor raises
+Standard_RangeError) or without triangles, one triangle in the six index orders, two
+triangles with consistent and opposite orientations, a tetrahedron, an octahedron, flat
+and curved height-field grids, triangles with repeated indices, coincident and
+collinear nodes, and nodes 1e-4 and 1e-8 apart.
+
+BRepMAT2d: 75 requests (`tools/tktopalgo_corpus_brepmat2d.py`,
+`tktopalgo_probe_brepmat2d.cxx` and `tp_probe/brep_mat2d.rs`). A `bm2_locus` request
+builds a plane face with the shape reader, sets the Closed flags of its wires (the reader
+leaves them open), runs `BRepMAT2d_Explorer`, `BRepMAT2d_BisectingLocus::Compute` and
+`BRepMAT2d_LinkTopoBilo`, and prints the contours (every curve, the closed flags, the
+modified face, wires and edges with the new p-curves and 3d curves), the locus (IsDone,
+the graph through `GeomBis` with its Reverse flag and the two `GeomElt`, `BasicElt` and
+`NumberOfSections` of every line, one past the last curve) and the basic elements and
+generating shape of every edge and vertex. The faces: a square, a triangle, an L-shape, a
+stadium, two half circles, a square with a square hole, with a circular hole and with
+both, p-curves that leave gaps above 1e-8 (a line after a line, a half circle after a line
+and after a half circle, a REVERSED edge, the closing gap), a REVERSED square, and open
+contours (the square with an open wire, an open polyline) with the closed and the open
+results; each on both sides with the arc and the intersection joins, the holed faces also
+from their second contour.
+
 BRepBuilderAPI sewing: 652 requests. `tools/tktopalgo_corpus_sewing.py` (582 `bba_sew`
 requests, `tktopalgo_probe_sewing.cxx` and `tp_probe/sewing.rs`) sews the shape records of
 `tools/tktopalgo_corpus_sewing_shapes.py`: loose boxes whose faces are moved below and
@@ -717,6 +785,91 @@ Each ported package adds its own subsection.
 - `AdjustFaceBox` moves each side of the surface box towards the edge box in the order
   x min, x max, y min, y max, z min, z max, and each test uses the sides moved before it
   (the rectangle of `IsModifySize` spans the current box).
+
+### BRepBndLib::AddOBB
+
+- `ComputeProperties` passes one `true` positional flag to each BRepGProp call: for
+  `VolumeProperties` it is `OnlyClosed` (not `SkipShared`), so the volume of a solid
+  counts only its closed shells and every face use; for `SurfaceProperties` and
+  `LinearProperties` it is `SkipShared`. A vertex outside an edge adds a system of mass
+  0 at its point.
+- `PointsForOBB` gives up (and AddOBB falls back to the PCA box) as soon as one curved
+  face has no triangulation, or one curved free edge has no 3d polygon, even when
+  `isTriangulationUsed` is true; a planar face with a curved edge needs its
+  triangulation too. A free edge never uses its polygon on a triangulation. A shape
+  without vertex (an empty solid, a polygon-only edge without vertices) always takes the
+  PCA path.
+- The PCA path moves the shape by the frame of inertia only when the first or second
+  axis of inertia is not a world axis (up to the square of the angular precision); a
+  shape whose axes are world axes keeps the identity and gets an axis-aligned box. Its
+  axis-aligned box is `Add` with the meshes (the `isTriangulationUsed` flag is not
+  passed) unless `isOptimal` asks for `AddOptimal`, which gets both flags.
+- The PCA box of a non-void initial box is merged by `ReBuild` of the 16 corners without
+  tolerances and without the optimal flag. The axes of a new PCA box are normalized
+  again (the `gp_Dir` argument of `SetXComponent`), so they may differ from the columns
+  of the inverse transformation in the last bits.
+- `BRepBuilderAPI_Transform` is included by BRepBndLib_1.cxx but not used (the shape is
+  moved with `TopoDS_Shape::Moved`).
+
+### BRepBuilderAPI_MakeShapeOnMesh
+
+- A triangle is skipped when two of its indices are equal or a squared side is below
+  `gp::Resolution()` (about 1e-290), so two nodes closer than `Precision::Confusion()`
+  but farther than that reach `BRepBuilderAPI_MakeEdge`, which fails, and `Edge()`
+  raises StdFail_NotDone out of `Build` (the done flag is not set).
+- A mesh edge keeps the first edge built for it; each triangle builds its three edges
+  even when they exist, and a triangle whose first two sides are parallel (collinear
+  nodes) gets no face, although its edges are kept for its neighbours.
+- The face normal is the cross product of the lines of the first two edges, reversed
+  once per REVERSED edge among them; the plane goes through the first node.
+- `Build` called again rebuilds a new compound (new vertices and edges) and replaces the
+  shape; `Shape()` on a maker never built runs `Build` first.
+
+### BRepMAT2d
+
+- The explorer takes the Closed flag of each wire as the closed flag of its contour
+  (`TopoDS_Shape::Closed`, not a geometric test), so a wire built without the flag gives
+  an open contour even when its edges close.
+- A gap above 1e-8 (not `Precision::Confusion()`) between two consecutive p-curves is
+  closed by moving an end of the curve of the lower `GeomAbs_CurveType` (the current one
+  when the types are equal): a line becomes a new segment, any other curve its
+  quasi-angular B-spline with its end pole moved; the moved curve's edge is rebuilt on
+  the new face (its vertices kept). Then every edge of the wire and the wire are recorded
+  as modified, the new wire holds each edge once (the first use of an edge used twice),
+  and IsModified is true only for the rebuilt edges.
+- `Perform` always records the face as modified (the new face is another TShape), and
+  builds the 3d curves of its edges.
+- `Compute` on an explorer without contours returns with a new empty graph and leaves
+  `IsDone` as it was. `NumberOfSections` of a curve past the last raises
+  Standard_NoSuchObject.
+- `LinkTopoBilo` links the basic elements in the iteration order of an
+  `NCollection_DataMap<int, int>` keyed by the element index (bucket order), so the
+  elements of an edge are listed in that order; a point element before any curve links
+  to the edge of index 1 (the absolute value of the initial -1).
+- The iteration state of the explorer (`current`) and of the link (`current`,
+  `isEmpty`) is not set by the native constructors; the port starts them at 0 and empty.
+
+### BRepLib_PointCloudShape
+
+- `NbPointsByDensity` computes the default density when the given one is below
+  `Precision::Confusion()`, but divides each face area by the given density: with 0 the
+  quotient is infinite (NaN for a zero area) and `(int)std::ceil` gives `INT_MIN`
+  (x86 `cvttsd2si`), so every face gets `max(INT_MIN, 1) = 1` point; with a negative
+  density every face gets 1 point too. The computed density only decides whether 0 is
+  returned. The port keeps this.
+- `GeneratePointsByDensity` counts only when no face has a count, so the counts of an
+  earlier `NbPointsByDensity` (with another density) are reused.
+- Each face draws from its own `std::mt19937` seeded with 0, so equal faces get equal
+  UV samples; the offset distribution along the normal draws from the same generator
+  after the UV pair. A point is moved by the face's own location only (not by the
+  location of its surface representation), and a normal of magnitude below
+  `gp::Resolution()` is neither normalized nor moved.
+- A draw that classifies OUT is repeated without limit, so a face whose UV box holds no
+  inside point never returns natively (the port loops the same way).
+- `addTriangulationPoints` computes and stores the normals of the triangulation (it
+  changes the shape's mesh) and moves the nodes and normals by the triangulation
+  location; a mesh without UV nodes gives the UV (0, 0).
+- `myNbPoints` is set by the constructor and never used.
 
 ### BRepClass3d
 
@@ -1322,6 +1475,22 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   `BRepLib_FindSurface` dereferences raises Standard_NullObject (a crash natively);
   inside `Is2DClosed` it answers false, as the native signal handler does. A chain
   edge without 3d curve that `BRepLib_FuseEdges` dereferences raises it too.
+
+### BRepMAT2d
+- The bisecting locus of a contour of one closed curve (a disc) crashes natively inside
+  the MAT2d computation; the port returns Standard_NullObject from `Compute`, and the
+  request is not in the corpus. The null dereferences of the native classes (the circuit
+  before a Compute, a null arc, node or basic element) raise Standard_NullObject.
+- `More` of the explorer and of the link return `Result` (an unknown contour raises
+  Standard_OutOfRange, a link recomputed since `Init` Standard_NoSuchObject).
+
+### BRepLib_PointCloudShape
+- The density points of a face without surface and without wires crash natively
+  (`BRepTools::UVBounds` reads the bounds of the null surface before `addDensityPoints`
+  checks it); the port raises Standard_NullObject there, and those requests are not in
+  the corpus.
+- `addPoint` receives the points in native order; it returns nothing, as the native
+  pure virtual member.
 
 ### BRepBuilderAPI
 - `BRepBuilderAPI_MakeShape` is a trait and the virtual `ModifiedShape` of ModifyShape is

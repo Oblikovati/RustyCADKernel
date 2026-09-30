@@ -36,6 +36,8 @@
 #include "tktopalgo_probe_brepcheck.cxx"
 #include "tktopalgo_probe_shape.cxx"
 #include "tktopalgo_probe_brepbndlib.cxx"
+#include "tktopalgo_probe_brepbndlib_obb.cxx"
+#include "tktopalgo_probe_breplib_pointcloud.cxx"
 #include "tktopalgo_probe_brepclass3d.cxx"
 // The IntPatch line printers of the TKGeomAlgo probe (ga_ipl_*) with the readers they
 // need, for the BRepTopAdaptor domains of IntStart and IntPatch.
@@ -63,6 +65,8 @@
 #include "tktopalgo_probe_sewing.cxx"
 #include "tktopalgo_probe_fastsewing.cxx"
 #include "tktopalgo_probe_sewing_helpers.cxx"
+#include "tktopalgo_probe_brepbuilderapi_onmesh.cxx"
+#include "tktopalgo_probe_brepmat2d.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -140,6 +144,14 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bck_analyze", tp_bck_analyze_case},
  // BRepBndLib (tktopalgo_probe_brepbndlib.cxx, shapes of tktopalgo_probe_shape.cxx)
  {"bbl_add", tp_bbl_add_case},
+ // BRepBndLib::AddOBB (tktopalgo_probe_brepbndlib_obb.cxx)
+ {"bbl_obb", tp_bbl_obb_case},
+ // BRepLib_PointCloudShape (tktopalgo_probe_breplib_pointcloud.cxx)
+ {"blp_pointcloud", tp_blp_pointcloud_case},
+ // BRepBuilderAPI_MakeShapeOnMesh (tktopalgo_probe_brepbuilderapi_onmesh.cxx)
+ {"bba_onmesh", tp_bba_onmesh_case},
+ // BRepMAT2d (tktopalgo_probe_brepmat2d.cxx, faces of tktopalgo_probe_shape.cxx)
+ {"bm2_locus", tp_bm2_locus_case},
  // BRepClass3d (tktopalgo_probe_brepclass3d.cxx, shapes of tktopalgo_probe_shape.cxx)
  {"bc3_classify", tp_bc3_classify_case},
  {"bc3_infinite", tp_bc3_infinite_case},
