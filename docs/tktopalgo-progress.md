@@ -207,7 +207,17 @@ compared-equal vertex, refused segments), `blm_wire` (every MakeWire constructor
 Add: connected edges in every order and orientation, edges merged through vertex
 tolerances, branches, disconnected, closed and degenerated edges, null and empty wires)
 and `blm_solid` (every MakeSolid constructor, Add and FaceStatus, with a compsolid
-sharing a face).
+sharing a face). The package functions (`tools/tktopalgo_corpus_breplib_package.py`,
+`tktopalgo_probe_breplib_shapes.cxx` and `tp_probe/brep_lib_shapes.rs`) run on shape
+records: faces of the face readers, BRepLib_MakeShell shells of every surface kind (a
+B-spline surface of several C2 patches, segmented or not), compounds and
+BRepLib_MakeEdge edges with enlarged vertices; a grid mesher gives the faces
+triangulations (with or without UV nodes) and their edges polygons (two for a seam).
+The families: `blp_build3d`, `blp_samerange`, `blp_edgetol`, `blp_regularity`,
+`blp_continuity`, `blp_inner`, `blp_sort`, `blp_bounding`, `blp_validrange` and
+`blp_validrange2`, `blp_pcurveplane`, `blp_ccos` (BRepLib_CheckCurveOnSurface, one
+checker per edge and one reused), `blp_shell` (every MakeShell constructor and Init),
+`blp_normals`, `blp_deflection` and `blp_trinormals` (BRepLib_ToolTriangulatedShape).
 
 ## Preserved native behaviour
 
@@ -339,6 +349,41 @@ sharing a face).
   a hashed map (TShape addresses), so the face order of its shell differs from run to
   run natively too (the probe prints an order-free digest); a face met three times is
   deleted, then added again.
+- `BRepLib_MakeShell` asks the adaptor whether the surface is periodic, not whether the
+  range covers the period: on a cylinder, cone, sphere or torus restricted to part of
+  its period the right edge of the last patch is still the left edge of the first one,
+  so the face gets a seam between two distant isolines. On a V-periodic surface of one
+  interval the seam range is set from the V parameters. Its final degenerated check
+  adapts the 3d curve of each edge, so an edge whose 3d curve could not be built raises
+  Standard_NullObject.
+- `BRepLib::UpdateEdgeTol` looks for its reference curve on surface without advancing
+  its iterator: it reads the first representation again and again (an edge without 3d
+  curve whose first representation is not a curve on surface loops without end
+  natively), and then skips the second representation instead of the reference, which
+  is compared with itself. On a seam only the second p-curve is measured, and the edge
+  tolerance is set, also downwards. On a SameParameter edge without 3d curve the
+  parametric distance reads an unloaded 3d adaptor (a crash natively, Standard_NullObject
+  in the port); such edges are not in the corpus.
+- `BRepLib::BuildCurve3d` stores the image of a p-curve on a plane with the range of the
+  edge looked up on the plane at the identity location (not the location of the curve
+  on surface), and an edge without any curve reads an uninitialized first range
+  natively (Standard_NullObject in both, from the 2d adaptor of the null curve).
+- `BRepLib::SameRange` passes one output handle from one representation to the next, so
+  a GeomLib::SameRange that assigns nothing reuses the previous curve.
+- `BRepLib::EncodeRegularity` catches every exception of one shape (the edges before
+  it keep their regularity) and of each `ContinuityOfFaces`.
+- `BRepLib::EnsureNormalConsistency` reads the polygon of every edge shared by two
+  faces on both triangulations; a seam (its face twice) without a seam polygon is a null
+  dereference natively (Standard_NullObject in the port). The probe mesher gives seams
+  their two polygons.
+- `BRepLib::FindValidRange` may write `theFirst`, or both outputs, before it returns
+  false; the port returns them in `ValidRange`. `BRepLib::BoundingVertex` leaves its
+  outputs unchanged for fewer than two vertices (None in the port).
+- `BRepLib_CheckCurveOnSurface::Init` keeps the curves on surface of an earlier Init
+  when the new edge is degenerated or not geometric, and the second curve (of a seam)
+  of an earlier Init when the new edge is not a seam.
+- `BRepLib::ReverseSortFaces` classifies a rectangular trimmed surface through its own
+  adaptor, where `SortFaces` takes its basis first.
 
 ## BRepClass deviations
 

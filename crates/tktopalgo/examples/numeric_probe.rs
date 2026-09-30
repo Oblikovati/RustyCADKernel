@@ -3,7 +3,8 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    brep_builder_api, brep_class, brep_lib_edge, brep_lib_wire, brep_top_adaptor, int_curves_face,
+    brep_builder_api, brep_class, brep_lib_edge, brep_lib_package, brep_lib_wire, brep_top_adaptor,
+    int_curves_face,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -43,6 +44,22 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("blm_polygon", brep_lib_wire::polygon_case),
     ("blm_wire", brep_lib_wire::wire_case),
     ("blm_solid", brep_lib_wire::solid_case),
+    ("blp_build3d", brep_lib_package::build3d_case),
+    ("blp_samerange", brep_lib_package::samerange_case),
+    ("blp_edgetol", brep_lib_package::edgetol_case),
+    ("blp_regularity", brep_lib_package::regularity_case),
+    ("blp_continuity", brep_lib_package::continuity_case),
+    ("blp_inner", brep_lib_package::inner_case),
+    ("blp_sort", brep_lib_package::sort_case),
+    ("blp_bounding", brep_lib_package::bounding_case),
+    ("blp_validrange", brep_lib_package::validrange_case),
+    ("blp_validrange2", brep_lib_package::validrange2_case),
+    ("blp_pcurveplane", brep_lib_package::pcurveplane_case),
+    ("blp_ccos", brep_lib_package::ccos_case),
+    ("blp_shell", brep_lib_package::shell_case),
+    ("blp_normals", brep_lib_package::normals_case),
+    ("blp_deflection", brep_lib_package::deflection_case),
+    ("blp_trinormals", brep_lib_package::trinormals_case),
 ];
 
 fn main() {

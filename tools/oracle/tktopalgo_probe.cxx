@@ -32,6 +32,8 @@
 #include "tktopalgo_probe_breplib_common.cxx"
 #include "tktopalgo_probe_breplib_edge.cxx"
 #include "tktopalgo_probe_breplib_wire.cxx"
+#include "tktopalgo_probe_breplib_shapes.cxx"
+#include "tktopalgo_probe_breplib_package.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -64,6 +66,22 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"blm_polygon", tp_blm_polygon_case},
  {"blm_wire", tp_blm_wire_case},
  {"blm_solid", tp_blm_solid_case},
+ {"blp_build3d", tp_blp_build3d_case},
+ {"blp_samerange", tp_blp_samerange_case},
+ {"blp_edgetol", tp_blp_edgetol_case},
+ {"blp_regularity", tp_blp_regularity_case},
+ {"blp_continuity", tp_blp_continuity_case},
+ {"blp_inner", tp_blp_inner_case},
+ {"blp_sort", tp_blp_sort_case},
+ {"blp_bounding", tp_blp_bounding_case},
+ {"blp_validrange", tp_blp_validrange_case},
+ {"blp_validrange2", tp_blp_validrange2_case},
+ {"blp_pcurveplane", tp_blp_pcurveplane_case},
+ {"blp_ccos", tp_blp_ccos_case},
+ {"blp_shell", tp_blp_shell_case},
+ {"blp_normals", tp_blp_normals_case},
+ {"blp_deflection", tp_blp_deflection_case},
+ {"blp_trinormals", tp_blp_trinormals_case},
 };
 int main() {
  std::string line;
