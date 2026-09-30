@@ -39,3 +39,6 @@ pub use iwline::ContapTheIWLineOfTheIWalking;
 
 mod search_records;
 pub use search_records::{ContapThePathPointOfTheSearch, ContapTheSegmentOfTheSearch};
+
+mod search_inside;
+pub use search_inside::{ContapTheSearchInside, ContapTheSearchInsideTypes};

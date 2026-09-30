@@ -209870,6 +209870,62 @@
       "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::last_point",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
+    },
+    {
+      "upstream_id": "Contap_TheSearchInside()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::new",
+      "status": "implemented",
+      "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheSearchInside(Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::with_domain",
+      "status": "implemented",
+      "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheSearchInside::Perform(Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::perform",
+      "status": "implemented",
+      "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheSearchInside::Perform(Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::perform_from",
+      "status": "implemented",
+      "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheSearchInside::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::is_done",
+      "status": "implemented",
+      "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheSearchInside::NbPoints() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::nb_points",
+      "status": "implemented",
+      "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheSearchInside::Value(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::value",
+      "status": "implemented",
+      "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     }
   ],
   "tests": [

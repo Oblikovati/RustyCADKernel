@@ -40,7 +40,9 @@
 #include "tkhlr_probe_contap_arc_function.cxx"
 #include "tkhlr_probe_contap_iwline.cxx"
 #include "tkhlr_probe_contap_search_records.cxx"
+#include "tkhlr_probe_contap_search_inside.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"ct_inside",ct_inside_case},
  {"ct_search_records",ct_search_records_case},
  {"ct_iwline",ct_iwline_case},
  {"ct_arc_function",ct_arc_function_case},

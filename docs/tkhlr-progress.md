@@ -224,3 +224,10 @@ all crate tests and strict Clippy pass. Header audit has no missing or stale row
 The 11 path-point and eight segment APIs reuse the matching native IntStart
 specializations. The corpus passes 13,427 exact requests, including 288 new record
 requests. Direct regressions and strict Clippy pass; both header audits have no gaps.
+
+### Contap interior search
+
+All seven public APIs now instantiate the original IntStart search with the contour
+surface function. The exact corpus passes 13,571 requests (144 new), including sampled
+search, explicit starts, repeated performs and unset-result exceptions. Crate tests,
+two direct regressions and strict Clippy pass; the header audit has no gaps.
