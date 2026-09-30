@@ -97,6 +97,13 @@ def wire_requests() -> list[str]:
                  wire_request([0], [[1, 3, 0, F, 6, F, 1, F], add(3), add(2)]),
                  wire_request([0], [add(0), add(6), add(1)]), wire_request([1, 0, F], [add(4), add(13)]),
                  wire_request([1, 0, R], [add(4, R), add(1, R)]), wire_request([1, 10, F], [add(0), add(1), add(2)])]
+    lst = lambda refs: [2, len(refs)] + flat(refs)  # noqa: E731 - an Add(L) op
+    requests += [wire_request([0], [lst([[2, F], [0, F], [3, F], [1, F]])]), wire_request([0], [lst([])]),
+                 wire_request([0], [lst([[0, F], [6, F]])]), wire_request([0], [lst([[0, F], [4, F], [13, F]])]),
+                 wire_request([1, 0, F], [lst([[1, F], [2, F], [3, F]])]), wire_request([1, 0, F], [lst([[9, F], [11, F]])]),
+                 wire_request([0], [lst([[0, F], [4, F], [9, F]])]), wire_request([0], [lst([[3, R], [2, R], [1, F]])]),
+                 wire_request([2, 0, F, 1, F], [lst([[12, F], [2, F]])]), wire_request([0], [lst([[7, F], [0, F], [5, F]])]),
+                 wire_request([0], [lst([[10, F], [0, F], [1, F], [5, F]])]), wire_request([1, 15, F], [lst([[0, F]])])]
     return requests
 
 

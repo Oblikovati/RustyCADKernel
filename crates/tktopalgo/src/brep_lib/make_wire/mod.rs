@@ -2,6 +2,8 @@
 
 //! `BRepLib_MakeWire`: a wire from connected edges.
 mod add_edge;
+mod add_list;
+mod coincident;
 mod merge;
 
 use super::errors::BRepLibWireError;

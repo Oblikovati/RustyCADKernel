@@ -7,6 +7,7 @@ use super::common::{Reader, attempt, end, flag, int};
 use super::face::{TpFace, tp_face};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{CompSolid, Edge, Shape, ShapeIterator, Shell, Solid, Vertex, Wire};
+use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{GeomCircle, GeomCurve, GeomLine};
 use rustycad_tkg3d::top_abs::Orientation;
@@ -176,8 +177,17 @@ fn wire_body(r: &mut Reader<'_>, vs: &[Vertex]) -> Result<(), Failure> {
     }
     let n = r.integer();
     for _ in 0..n {
-        if r.integer() == 0 {
+        let op = r.integer();
+        if op == 0 {
             m.add_edge(&edge_ref(r, &es))?;
+            known = true;
+        } else if op == 2 {
+            let k = r.integer();
+            let mut list: List<Shape> = List::default();
+            for _ in 0..k {
+                list.append(edge_ref(r, &es).into_shape());
+            }
+            m.add_list(&list)?;
             known = true;
         } else {
             let w = wire_of(r, &es)?;

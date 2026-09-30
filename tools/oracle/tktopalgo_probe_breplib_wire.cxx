@@ -11,7 +11,8 @@
 // the close flag; op 0 Add(P), 1 Add(V), 2 Close(). Prints Added and IsDone after each op,
 // then both vertices, the last edge and the wire.
 // `blm_wire vertices edges ctor args nops (op)...`: ctor 0 default, 1..4 one to four edge
-// references, 5 a wire `n refs`, 6 a wire then an edge reference; op 0 Add(E), 1 Add(W).
+// references, 5 a wire `n refs`, 6 a wire then an edge reference; op 0 Add(E), 1 Add(W),
+// 2 Add(L) of a list `n refs`.
 // Prints IsDone and Error after the constructor and each op (Error only once an Add ran),
 // then the wire, the last edge and the last vertex.
 #include <BRepLib_MakePolygon.hxx>
@@ -76,7 +77,9 @@ void tp_blm_wire_case(std::istream& input){
   std::unique_ptr<BRepLib_MakeWire> m(tp_wire_first(r,es,known));ga_flag(m->IsDone());if(known)ga_int(m->Error());
   int n=r.integer();
   for(int i=0;i<n;++i){
-   if(r.integer()==0){m->Add(tp_edge_ref(r,es));known=true;}
+   int op=r.integer();
+   if(op==0){m->Add(tp_edge_ref(r,es));known=true;}
+   else if(op==2){NCollection_List<TopoDS_Shape> l;int k=r.integer();for(int j=0;j<k;++j)l.Append(tp_edge_ref(r,es));m->Add(l);known=true;}
    else{TopoDS_Wire w=tp_wire_of(r,es);known=known||w.NbChildren()>0;m->Add(w);}
    ga_flag(m->IsDone());if(known)ga_int(m->Error());}
   GA_TRY(tp_shape(m->Wire()))tp_shape(m->Edge());tp_shape(m->Vertex());ga_int(tp_vertex_index(m->Vertex(),vs));

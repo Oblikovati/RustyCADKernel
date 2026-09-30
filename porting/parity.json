@@ -183802,6 +183802,14 @@
       "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibToolTriangulatedShape::compute_normals_with_connect",
       "status": "implemented",
       "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepLib_MakeWire::Add(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeWire.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeWire::add_list",
+      "status": "implemented",
+      "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
     }
   ],
   "tests": [

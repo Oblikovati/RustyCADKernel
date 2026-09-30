@@ -4,7 +4,7 @@
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{CompSolid, Edge, Face, Shell, Solid, Vertex, Wire};
-use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::ncollection::{Array1, List};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
@@ -232,6 +232,50 @@ fn make_wire_connects_and_reports_disconnection() -> Result<(), Failure> {
         BRepLibMakeWire::from_two_edges(&e0, &segment(&near, &vertex(p(2., 0., 0.), 1e-7)?)?)?;
     assert_eq!(merged.error(), BRepLibWireError::WireDone);
     assert!(merged.vertex().is_same(&v[1]));
+    Ok(())
+}
+
+#[test]
+fn make_wire_list_merges_coincident_vertices() -> Result<(), Failure> {
+    let _guard = globals();
+    // Three segments in shuffled order whose ends miss each other by less than the
+    // tolerances: the list Add merges them into one open chain.
+    let a = segment(&vertex(p(0., 0., 0.), 1e-7)?, &vertex(p(1., 0., 0.), 1e-3)?)?;
+    let b = segment(
+        &vertex(p(1., 1e-4, 0.), 1e-3)?,
+        &vertex(p(2., 0., 0.), 1e-3)?,
+    )?;
+    let c = segment(
+        &vertex(p(2., 1e-4, 0.), 1e-3)?,
+        &vertex(p(3., 0., 0.), 1e-7)?,
+    )?;
+    let mut edges: List<rustycad_tkbrep::topods::Shape> = List::default();
+    for edge in [&c, &a, &b] {
+        edges.append(edge.clone().into_shape());
+    }
+    let mut maker = BRepLibMakeWire::default();
+    maker.add_list(&edges)?;
+    assert!(maker.is_done());
+    assert_eq!(maker.error(), BRepLibWireError::WireDone);
+    let wire = maker.wire()?;
+    assert_eq!(count(&wire, ShapeEnum::Edge)?, 3);
+    assert_eq!(count(&wire, ShapeEnum::Vertex)?, 6);
+    let mut distinct = rustycad_tkbrep::toptools::IndexedMapOfShape::default();
+    rustycad_tkbrep::topexp::map_shapes_of_type(&wire, ShapeEnum::Vertex, &mut distinct)?;
+    assert_eq!(distinct.extent(), 4);
+    // A far edge is never reached: the wire keeps the others and reports it.
+    let far = segment(&vertex(p(9., 9., 9.), 1e-7)?, &vertex(p(9., 8., 9.), 1e-7)?)?;
+    let mut rest: List<rustycad_tkbrep::topods::Shape> = List::default();
+    rest.append(a.into_shape());
+    rest.append(far.into_shape());
+    let mut broken = BRepLibMakeWire::default();
+    broken.add_list(&rest)?;
+    assert!(!broken.is_done());
+    assert_eq!(broken.error(), BRepLibWireError::DisconnectedWire);
+    // An empty list adds 0 of 0 edges: the maker is done.
+    let mut empty = BRepLibMakeWire::default();
+    empty.add_list(&List::default())?;
+    assert!(empty.is_done());
     Ok(())
 }
 

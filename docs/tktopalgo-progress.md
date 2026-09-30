@@ -130,7 +130,7 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `_points_params` and `_vertices_params`, and `init_*` for the Init members;
   `BRepLibMakePolygon::from_{two,three,four}_{points,vertices}`, `add_point`,
   `add_vertex`; `BRepLibMakeWire::from_{edge,two_edges,three_edges,four_edges,wire,
-  wire_edge}`, `add_edge`, `add_wire`; `BRepLibMakeSolid::from_{comp_solid,shell,
+  wire_edge}`, `add_edge`, `add_wire`, `add_list` (the list Add of BRepLib_MakeWire_1); `BRepLibMakeSolid::from_{comp_solid,shell,
   two_shells,three_shells,solid,solid_shell}`. The conversion operators map to the
   accessors (`edge`, `wire`, `vertex`, `solid`, `shape`), which return the typed shape by
   value. The status enumerations are `BRepLibEdgeError`, `BRepLibWireError`,
@@ -275,7 +275,7 @@ three PointInTheFace overloads from indices 0 to 2000, on and off the surface),
 vertices, along and across edges, every Accept index including 0 and Extent + 1, result
 indices 0 and past the end) and `bc3_inter3d` (Intersector3d on FORWARD and REVERSED
 faces).
-BRepLib: 1652 requests (1042 for the vertex and edge makers, 84 for the polygon, wire
+BRepLib: 1664 requests (1042 for the vertex and edge makers, 96 for the polygon, wire
 and solid makers, 526 for the package functions). `tools/tktopalgo_corpus_breplib.py`
 appends one module per family, with the
 record builders of `tools/tktopalgo_corpus_breplib_records.py`; both probes read the
@@ -294,7 +294,9 @@ BRepLib::Precision), `blm_edge2d` (MakeEdge2d on the default and a tilted
 BRepLib::Plane), `blm_polygon` (every constructor, Add, Close, closing on a
 compared-equal vertex, refused segments), `blm_wire` (every MakeWire constructor and
 Add: connected edges in every order and orientation, edges merged through vertex
-tolerances, branches, disconnected, closed and degenerated edges, null and empty wires)
+tolerances, branches, disconnected, closed and degenerated edges, null and empty wires,
+and the list Add on empty and started wires with coincident, chained and disconnected
+vertices)
 and `blm_solid` (every MakeSolid constructor, Add and FaceStatus, with a compsolid
 sharing a face). The package functions (`tools/tktopalgo_corpus_breplib_package.py`,
 `tktopalgo_probe_breplib_shapes.cxx` and `tp_probe/brep_lib_shapes.rs`) run on shape
@@ -494,6 +496,14 @@ checker per edge and one reused), `blp_shell` (every MakeShell constructor and I
   non-manifold wire forgets its free ends, so later edges keep their input orientation.
   A copied edge (connected through a vertex tolerance) replaces its vertex by the wire
   vertex, moved to the point weighted by the two tolerances and enlarged to cover both.
+- The list `BRepLib_MakeWire::Add(L)` makes the maker done on an empty list (0 of 0
+  edges added). The box of its vertex selector is never reset: it grows with every
+  vertex searched, so a later search accepts any vertex whose tolerance sphere touches
+  the current one inside the union of the earlier boxes (the sphere test still decides).
+  The groups start from the first vertex of a hashed map, so the group order, and with it
+  the order of new vertices, can differ from run to run natively; the merged points and
+  tolerances do not depend on it. The first edge of an empty wire goes through the
+  proximity check of `Add(E)`, the other edges connect without it.
 - `BRepLib_MakeSolid` built from a compsolid gathers the faces in the iteration order of
   a hashed map (TShape addresses), so the face order of its shell differs from run to
   run natively too (the probe prints an order-free digest); a face met three times is
