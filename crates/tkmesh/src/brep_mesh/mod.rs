@@ -67,3 +67,6 @@ pub use circle_tool::{
     BRepMeshCircle, BRepMeshCircleInspector, BRepMeshCircleTool, CircleInspectorPoint,
     CircleInspectorTarget,
 };
+
+mod delaun;
+pub use delaun::BRepMeshDelaun;

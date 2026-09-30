@@ -1,0 +1,15 @@
+"""The Delaun predicate inventory must retain both exact and native-crash candidates."""
+import unittest
+from tkmesh_delaun_core_corpus import core_rows,polygon_rows,corpus,partition
+
+class DelaunCoreCorpusTests(unittest.TestCase):
+    """No collinear cleanup case is silently removed."""
+    def test_complete_partition(self) -> None:
+        """All generated requests survive exactly once in the evidence partition."""
+        exact,crashes=partition()
+        candidates=core_rows()+polygon_rows()
+        self.assertEqual(len(exact),2128)
+        self.assertEqual(len(crashes),80)
+        self.assertEqual(set(candidates),set(exact+crashes))
+        self.assertEqual(corpus().splitlines(),candidates)
+        self.assertEqual(len(candidates),len(set(candidates)))
