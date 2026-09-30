@@ -5,6 +5,7 @@
 //! `BRepBuilderAPI_VertexInspector`: the cell-filter inspector that finds the points
 //! within a tolerance of a current point, coordinate by coordinate.
 use rustycad_tkernel::ncollection::{CellAction, CellInspector, List};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Xyz;
 
 /// `BRepBuilderAPI_VertexInspector` (docs/topalgo-design.md section 11): it keeps the
@@ -80,14 +81,21 @@ impl BRepBuilderAPIVertexInspector {
 
     /// `Inspect(theTarget)`: records `target` when each squared coordinate difference
     /// to the current point is at most the squared tolerance; always keeps the target.
-    /// A target without a point (natively an out-of-range read of the point vector) is
-    /// never recorded; `inspector.inspect_target(1)`.
-    pub fn inspect_target(&mut self, target: i32) -> CellAction {
+    /// Standard_OutOfRange for a target without a point (the check of the native point
+    /// vector); `inspector.inspect_target(1)?`.
+    pub fn inspect_target(&mut self, target: i32) -> Result<CellAction, Failure> {
+        let count = self.my_points.len() as i32;
         let Some(point) = usize::try_from(target - 1)
             .ok()
             .and_then(|i| self.my_points.get(i))
         else {
-            return CellAction::Keep;
+            return Err(Failure::with_type(
+                "Standard_OutOfRange",
+                &format!(
+                    "BRepBuilderAPI_VertexInspector::Inspect: target {target} is outside [1, {count}]"
+                ),
+                "",
+            ));
         };
         let dx: f64 = self.my_current.x() - point.x();
         let dy: f64 = self.my_current.y() - point.y();
@@ -95,7 +103,7 @@ impl BRepBuilderAPIVertexInspector {
         if dx * dx <= self.my_tol && dy * dy <= self.my_tol && dz * dz <= self.my_tol {
             self.my_res_ind.append(target);
         }
-        CellAction::Keep
+        Ok(CellAction::Keep)
     }
 }
 
@@ -109,7 +117,9 @@ impl CellInspector for BRepBuilderAPIVertexInspector {
     fn is_equal(first: &i32, second: &i32) -> bool {
         first == second
     }
+    // The cell filter only holds the targets added with their points, so the native
+    // range check never raises here; a failure would keep the target unrecorded.
     fn inspect(&mut self, target: &i32) -> CellAction {
-        self.inspect_target(*target)
+        self.inspect_target(*target).unwrap_or(CellAction::Keep)
     }
 }

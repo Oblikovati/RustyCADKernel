@@ -52,6 +52,9 @@
 #include "tktopalgo_probe_breplib_package.cxx"
 #include "tktopalgo_probe_breplib_face.cxx"
 #include "tktopalgo_probe_breplib_fuse.cxx"
+#include "tktopalgo_probe_sewing.cxx"
+#include "tktopalgo_probe_fastsewing.cxx"
+#include "tktopalgo_probe_sewing_helpers.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -157,6 +160,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"blp_sameparam", tp_blp_sameparam_case},
  {"blp_extendface", tp_blp_extendface_case},
  {"blp_fuseedges", tp_blp_fuseedges_case},
+ // BRepBuilderAPI sewing (tktopalgo_probe_sewing.cxx, tktopalgo_probe_fastsewing.cxx and
+ // tktopalgo_probe_sewing_helpers.cxx, shapes of tktopalgo_probe_shape.cxx)
+ {"bba_sew", tp_bba_sew_case},
+ {"bba_fastsew", tp_bba_fastsew_case},
+ {"bba_vertexinspector", tp_bba_vertexinspector_case},
+ {"bba_boxselector", tp_bba_boxselector_case},
 };
 int main() {
  std::string line;
