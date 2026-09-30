@@ -54,6 +54,10 @@
 #include "tktopalgo_probe_breplib_fuse.cxx"
 #include "tktopalgo_probe_brepgprop.cxx"
 #include "tktopalgo_probe_brepgprop_tools.cxx"
+#include "tktopalgo_probe_brepapprox.cxx"
+#include "tktopalgo_probe_brepapprox_parts.cxx"
+#include "tktopalgo_probe_brepapprox_tool.cxx"
+#include "tktopalgo_probe_brepintcurvesurface.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -176,6 +180,19 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bgp_domain", tp_bgp_domain_case},
  {"bgp_gauss", tp_bgp_gauss_case},
  {"bgp_functions", tp_bgp_functions_case},
+ // BRepApprox (tktopalgo_probe_brepapprox*.cxx, faces of tktopalgo_probe_face.cxx)
+ {"bra_approx", tp_bra_approx_case},
+ {"bra_line", tp_bra_line_case},
+ {"bra_mline", tp_bra_mline_case},
+ {"bra_sv", tp_bra_sv_case},
+ {"bra_zerimp", tp_bra_zerimp_case},
+ {"bra_int2s", tp_bra_int2s_case},
+ {"bra_tool", tp_bra_tool_case},
+ // BRepIntCurveSurface (tktopalgo_probe_brepintcurvesurface.cxx, shapes of
+ // tktopalgo_probe_shape.cxx)
+ {"bics_line", tp_bics_line_case},
+ {"bics_curve", tp_bics_curve_case},
+ {"bics_state", tp_bics_state_case},
 };
 int main() {
  std::string line;

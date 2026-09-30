@@ -403,3 +403,50 @@ the concrete `BRepGProp_Face` and `BRepGProp_Domain`), so section 1 does not app
   `volume_properties_gk` and `volume_properties_gk_plane`. The file-local
   `GPropTransformer` (the cache of shared solids) works on the public fields of
   `GProps`. Every member that can raise returns `Result`.
+
+## 12. BRepApprox and BRepIntCurveSurface
+
+BRepApprox is the second instantiation of the ApproxInt templates (GeomInt is the
+first, [geomalgo-design.md](geomalgo-design.md) section 20), over `BRepAdaptor_Surface`
+and the package's own line. Nothing of ApproxInt, IntImp, Approx or AppParCurves is
+copied; the package adds the two types the `_0.cxx` macros name and aliases:
+
+- **`ThePSurface` is `Handle<BRepAdaptorSurface>`.** The native templates take the
+  surface as `const BRepAdaptor_Surface&` and keep a `void*` to it (the IntImp
+  functions) or the reference itself, so they see the caller's object. The Rust
+  generics hold `T::Surface: Clone`; a handle is the shared object, as the native
+  pointer, and `BRepAdaptorSurface` is not `Clone` (its state is shared). The public
+  `Perform(Surf1, Surf2, ...)` of BRepApprox_Approx therefore takes
+  `&Handle<BRepAdaptorSurface>`.
+- **`BRepApprox_SurfaceTool`** is the unit struct `BRepApproxSurfaceTool`. Its static
+  members are associated functions that call the member of the same name on the
+  adaptor (the `.lxx`), and its four `NbSamplesU`/`NbSamplesV` answer 10, as the `.cxx`
+  (unlike `Adaptor3d_HSurfaceTool`, which counts by surface kind). It implements the
+  IntImp trait `ThePSurfaceTool` and the ApproxInt trait `ApproxIntSurfaceTool` with
+  those functions, so every template instance calls the BRepApprox tool, as natively.
+- **`BRepApprox_ApproxLine`** is the transient struct `BRepApproxApproxLine` (its four
+  handles are set by the constructors and never change, so it needs no shared state).
+  It implements `ApproxIntLine` (`NbPnts`, `Point`, the constructor from an
+  `IntSurf_LineOn2S`). `Point` is non-const natively but writes nothing, so it takes
+  `&self`. `NbPnts` on a line built from three null curves dereferences its null
+  `IntSurf_LineOn2S` natively; the port returns Standard_NullObject there.
+- **The instances** are aliases, as the GeomInt ones:
+  `BRepApprox_Approx = ApproxIntApprox<BRepApproxApproxTypes>`,
+  `BRepApprox_TheMultiLineOfApprox = ApproxIntMultiLine<BRepApproxApproxLine>` (its
+  `LineTool` implementation is `BRepApprox_TheMultiLineToolOfApprox`),
+  `BRepApprox_ThePrmPrmSvSurfacesOfApprox = ApproxIntPrmPrmSvSurfaces<BRepApproxSurfaceTool>`,
+  the IntImp functions over `BRepApproxSurfaceTool`, and the Approx and AppParCurves
+  classes (which take any `LineTool` per call) are the generic types themselves. The
+  api rows of each instance map its members to the generic's methods and cite this
+  section.
+
+`BRepIntCurveSurface_Inter` is the struct `BRepIntCurveSurfaceInter`. It owns its
+`IntCurveSurface_HInter`, its `BRepTopAdaptor_TopolTool` (by value: the native handle
+is private and never shared) and the lazily built face boxes (`Option<Vec<BoundingBox3>>`, one box per face, void until first needed, as
+the `NCollection_HArray1<Bnd_Box>`); the protected `Find`, `FindPoint` and `Clear` are
+private methods. `Init` and `Load` take `&mut self` and return `Result` (the adaptors,
+BndLib, BRepBndLib and the classifier can raise; the exploration state is left as far
+as the native code got). The accessors of the current point raise StdFail_NotDone when
+there is none, as natively; `Face()` raises Standard_OutOfRange when the face index is
+outside the sequence (a `Value` of the native sequence). The two `Init` overloads with
+a shape are `init_curve` and `init_line`, and `Init(curve)` is `init`.
