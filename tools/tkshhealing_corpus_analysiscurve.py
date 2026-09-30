@@ -16,3 +16,7 @@ def append_analysis_curve_requests(requests:list[str])->None:
         requests.append('sh_analysis_period '+numbers([value,first,last]))
     for curve, bounds in product(construct_curves_2d(), [(0,1),(-1,2),(1,0),(0.5,0.5),(1e-9,1-1e-9)]):
         requests.append('sh_analysis_samples2d '+numbers([*curve,*bounds]))
+    for curve, tolerance in product(construct_curves_3d(), [-1,0,1e-7,1,10]):
+        requests.append('sh_analysis_closure '+numbers([3,*curve,tolerance]))
+    for curve in construct_curves_2d():
+        requests.append('sh_analysis_closure '+numbers([2,*curve]))

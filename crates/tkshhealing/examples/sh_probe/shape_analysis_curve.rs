@@ -106,3 +106,26 @@ pub fn sampling_2d_case(values: &[f64]) {
     }
     end();
 }
+
+/// Native closure and wrapper-unwrapping checks; `closure_case(numbers)`.
+pub fn closure_case(values: &[f64]) {
+    let mut reader = Reader::new(values);
+    attempt(|| {
+        if reader.integer() == 2 {
+            let curve = super::brep_lib_common::geom2d_curve(&mut reader)?;
+            print!(
+                "{} ",
+                i32::from(ShapeAnalysisCurve::is_periodic_2d(&curve)?)
+            );
+        } else {
+            let curve = geom_curve(&mut reader)?;
+            print!(
+                "{} ",
+                i32::from(ShapeAnalysisCurve::is_closed(&curve, reader.real())?)
+            );
+            print!("{} ", i32::from(ShapeAnalysisCurve::is_periodic(&curve)?));
+        }
+        Ok(())
+    });
+    end();
+}

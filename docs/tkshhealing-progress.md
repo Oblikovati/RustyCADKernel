@@ -567,3 +567,8 @@ The 2D GetSamplePoints overload now preserves the native Geom2dInt sample
 count, fourfold refinement and append behavior. Fifty additional native cases
 pass (8,100 total), including reversed and zero-length ranges; three focused
 Rust regressions pass. This is the sampler required by OuterWire/TotCross2D.
+
+IsClosed and both IsPeriodic overloads add three mapped APIs and 65 exact
+native comparisons (8,165 total). OCC966 basis-curve unwrapping and the native
+closure tolerance floor are preserved. Null inputs return explicit errors in
+Rust; native dereferences them, so these safety cases are Rust-only regressions.

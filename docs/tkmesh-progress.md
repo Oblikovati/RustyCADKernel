@@ -20,3 +20,9 @@ shared state, enabling the remaining builder hierarchy. Its mutable status acces
 uses a scoped guard; report getters return owned snapshots to avoid holding locks
 across callbacks. Native Message/progress checks include derived-handle ancestry
 and reference counts. Context and builder implementations remain in progress.
+
+Context, ModelBuilder and MeshBuilder interfaces now add 39 mapped APIs; the
+complete BRepMesh ShapeTool utility adds 16. The integrated native corpus passes
+41,871 exact comparisons, including geometry, polygons, location and tolerance
+behavior. Concrete model construction still needs wire-analysis dependencies;
+triangulation and all 29 original TKMesh declarations remain pending.

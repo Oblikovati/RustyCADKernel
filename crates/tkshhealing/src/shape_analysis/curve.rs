@@ -15,4 +15,5 @@ pub type CurveProjectionResult = (f64, rustycad_tkmath::gp::Point3, f64);
 #[derive(Clone, Copy, Debug, Default)]
 pub struct ShapeAnalysisCurve;
 
+mod closure;
 mod sampling;

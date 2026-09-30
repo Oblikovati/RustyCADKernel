@@ -24,3 +24,8 @@ CurveRangeLocalizeData adds eight APIs and preserves native map iteration order
 through resize, cache replacement and exclusion behavior; cumulative numeric
 coverage is 3,099 cases. The missing IsValid symbol now has a permanent compiling
 probe and a verifier that requires precisely that linker failure.
+
+SurfaceRangeLocalizeData adds 34 APIs; TopolTool adds 11, with all nine native
+surface kinds, adaptive sampling and retained-array behavior exercised. The
+integrated 4,043-case native oracle passes. FClass2d and the ten original FaceFace
+test declarations remain pending; no Boolean algorithm acceptance is claimed.

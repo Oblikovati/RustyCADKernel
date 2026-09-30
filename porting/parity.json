@@ -207077,6 +207077,30 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::get_sample_points_2d",
       "status": "implemented",
       "notes": "Original Geom2dInt sampling distribution and sequence append behavior. Fifty added exact-native comparisons across ten curve kinds and five ranges; three focused Rust regressions."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::IsClosed(const occ::handle<Geom_Curve>&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::is_closed",
+      "status": "implemented",
+      "notes": "Native endpoint closure and OCC966 basis-curve periodicity; 65 additional exact numeric cases and focused regression tests. Null inputs return explicit Standard_NullObject instead of native null dereference."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::IsPeriodic(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Native endpoint closure and OCC966 basis-curve periodicity; 65 additional exact numeric cases and focused regression tests. Null inputs return explicit Standard_NullObject instead of native null dereference."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Curve::IsPeriodic(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Curve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCurve::is_periodic_2d",
+      "status": "implemented",
+      "notes": "Native endpoint closure and OCC966 basis-curve periodicity; 65 additional exact numeric cases and focused regression tests. Null inputs return explicit Standard_NullObject instead of native null dereference."
     }
   ],
   "tests": [
