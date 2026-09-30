@@ -188,7 +188,9 @@ boundary-tolerance lines of the toleranced squares), `icf_curve` (circles, segme
 a Bezier curve on every face) and `icf_shape` (compounds of three to four faces with
 Perform, PerformNearest and Perform on a curve adaptor, after one or two Loads).
 
-BRepLib: `tools/tktopalgo_corpus_breplib.py` appends one module per family, with the
+BRepLib: 1652 requests (1042 for the vertex and edge makers, 84 for the polygon, wire
+and solid makers, 526 for the package functions). `tools/tktopalgo_corpus_breplib.py`
+appends one module per family, with the
 record builders of `tools/tktopalgo_corpus_breplib_records.py`; both probes read the
 records and print the shapes with `tktopalgo_probe_breplib_common.cxx` and
 `tp_probe/brep_lib_common.rs`: vertices built with BRep_Builder, gp curves, Geom curves
