@@ -43,6 +43,8 @@
 #include "tkgeomalgo_probe_faircurve.cxx"
 #include "tkgeomalgo_probe_intimp.cxx"
 #include "tkgeomalgo_probe_appblend.cxx"
+#include "tkgeomalgo_probe_intwalk.cxx"
+#include "tkgeomalgo_probe_iwalk.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -137,6 +139,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // AppBlend (tkgeomalgo_probe_appblend.cxx)
  {"ab_appsurf", ga_ab_appsurf_case},
  {"ab_context", ga_ab_context_case},
+ // IntWalk (tkgeomalgo_probe_intwalk.cxx, tkgeomalgo_probe_iwalk.cxx)
+ {"pw_walk", ga_iw_pw_walk_case},
+ {"pw_first", ga_iw_pw_first_case},
+ {"pw_edit", ga_iw_pw_edit_case},
+ {"pw_min", ga_iw_pw_min_case},
+ {"iw_walk", ga_iw_iw_walk_case},
 };
 int main() {
  std::string line;

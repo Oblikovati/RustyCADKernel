@@ -7,6 +7,7 @@ use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
+use ga_probe::{int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -107,6 +108,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // AppBlend (ga_probe/app_blend.rs)
     ("ab_appsurf", app_blend::appsurf_case),
     ("ab_context", app_blend::context_case),
+    // IntWalk (ga_probe/int_walk.rs, ga_probe/int_walk_iw.rs)
+    ("pw_walk", int_walk::walk_case),
+    ("pw_first", int_walk::first_case),
+    ("pw_edit", int_walk::edit_case),
+    ("pw_min", int_walk::min_case),
+    ("iw_walk", int_walk_iw::walk_case),
 ];
 
 fn main() {
