@@ -72,7 +72,7 @@ fn wedge_call(
 }
 
 /// `pr_wedge_state`.
-fn wedge_state(w: &BRepPrimGWedge) {
+pub fn wedge_state(w: &BRepPrimGWedge) {
     print_ax2(w.axes());
     for value in [
         w.get_xmin(),

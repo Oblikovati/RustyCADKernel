@@ -2,7 +2,10 @@
 //! `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod pr_probe;
-use pr_probe::{brep_prim, brep_prim_one_axis, brep_sweep, brep_sweep_members, shape, sweep};
+use pr_probe::{
+    brep_prim, brep_prim_api, brep_prim_api_sweeps, brep_prim_one_axis, brep_sweep,
+    brep_sweep_members, shape, sweep,
+};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -26,6 +29,15 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bs_revol", brep_sweep::revol_case),
     ("bs_members", brep_sweep_members::members_case),
     ("bs_tools", brep_sweep_members::tools_case),
+    // BRepPrimAPI and BRepPreviewAPI (pr_probe/brep_prim_api.rs,
+    // pr_probe/brep_prim_api_sweeps.rs)
+    ("pa_box", brep_prim_api::box_case),
+    ("pa_wedge", brep_prim_api::wedge_case),
+    ("pa_oneaxis", brep_prim_api::oneaxis_case),
+    ("pa_prism", brep_prim_api_sweeps::prism_case),
+    ("pa_revol", brep_prim_api_sweeps::revol_case),
+    ("pa_halfspace", brep_prim_api_sweeps::halfspace_case),
+    ("pv_box", brep_prim_api::preview_case),
 ];
 
 fn main() {
