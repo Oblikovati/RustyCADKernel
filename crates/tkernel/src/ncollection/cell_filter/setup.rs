@@ -1,5 +1,5 @@
 //! CellFilter construction and the native `Reset` overloads.
-use super::{CellFilter, CellHash, CellInspector};
+use super::{CellFilter, CellGeometry, CellHash};
 use crate::ncollection::{Array1, BaseAllocator, DataMap};
 use crate::standard::Failure;
 use std::marker::PhantomData;
@@ -7,7 +7,7 @@ use std::marker::PhantomData;
 /// `NCollection_IncAllocator::THE_DEFAULT_BLOCK_SIZE`, used when no arena is supplied.
 const DEFAULT_ARENA_BLOCK: usize = 12 * 1024;
 
-impl<I: CellInspector> CellFilter<I> {
+impl<I: CellGeometry> CellFilter<I> {
     /// Use the policy dimension and a fresh arena; `CellFilter::<I>::new(1.0)`.
     pub fn new(size: f64) -> Self {
         Self::with_allocator(size, None)
@@ -15,7 +15,7 @@ impl<I: CellInspector> CellFilter<I> {
     /// Policy dimension, uniform `size` and an optional arena (a fresh incremental one when
     /// `None`); `CellFilter::<I>::with_allocator(1.0, Some(arena))`.
     pub fn with_allocator(size: f64, allocator: Option<BaseAllocator>) -> Self {
-        Self::with_dimension(I::DIMENSION, size, allocator)
+        Self::with_dimension(I::CELL_DIMENSION, size, allocator)
     }
     /// Explicit `dimension` overriding the policy's (native `CellFilter(theDim, ...)`);
     /// dimension 0 files every target in one cell. Example: `CellFilter::<I>::with_dimension(2, 1.0, None)`.

@@ -1,8 +1,11 @@
 //! Spatial hash cells with native truncation and newest-first inspection.
 use super::{Array1, BaseAllocator, DataMap, HashPolicy, List};
 use std::marker::PhantomData;
+mod fallible;
+mod geometry;
 mod indices;
 mod setup;
+pub use geometry::CellGeometry;
 use indices::{CellIndices, cell_coordinate};
 /// Callback decision; returning `CellAction::Purge` destroys this cell's target copy.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -46,34 +49,68 @@ impl HashPolicy<Vec<i32>> for CellHash {
 /// As natively, the range methods iterate the first `dimension` axes (fixed at
 /// construction), while a cell index has one entry per cell size, whose count
 /// `reset_sizes` may change.
-pub struct CellFilter<I: CellInspector> {
+pub struct CellFilter<I: CellGeometry> {
     dimension: usize,
     sizes: Array1<'static, f64>,
-    cells: DataMap<Vec<i32>, List<I::Target>, CellHash>,
+    cells: DataMap<Vec<i32>, List<I::CellTarget>, CellHash>,
     resource: BaseAllocator,
     inspector: PhantomData<I>,
 }
-impl<I: CellInspector> CellFilter<I> {
+impl<I: CellGeometry> CellFilter<I> {
     /// Add a copy to one cell; `filter.add(&target, &point)`.
-    pub fn add(&mut self, target: &I::Target, point: &I::Point) {
+    pub fn add(&mut self, target: &I::CellTarget, point: &I::CellPoint) {
         self.add_cell(self.indices(point), target);
     }
     /// Add an independent copy to every covered cell; `filter.add_range(&target, &min, &max)`.
-    pub fn add_range(&mut self, target: &I::Target, min: &I::Point, max: &I::Point) {
+    pub fn add_range(&mut self, target: &I::CellTarget, min: &I::CellPoint, max: &I::CellPoint) {
         for index in self.range(min, max) {
             self.add_cell(index, target);
         }
     }
     /// Remove all equal targets in one cell; `filter.remove(&target, &point)`.
-    pub fn remove(&mut self, target: &I::Target, point: &I::Point) {
-        self.retain_cell(&self.indices(point), |stored| !I::is_equal(stored, target));
+    pub fn remove(&mut self, target: &I::CellTarget, point: &I::CellPoint) {
+        self.retain_cell(&self.indices(point), |stored| {
+            !I::targets_equal(stored, target)
+        });
     }
     /// Remove equal targets throughout an inclusive range; `filter.remove_range(&target, &min, &max)`.
-    pub fn remove_range(&mut self, target: &I::Target, min: &I::Point, max: &I::Point) {
+    pub fn remove_range(&mut self, target: &I::CellTarget, min: &I::CellPoint, max: &I::CellPoint) {
         for index in self.range(min, max) {
-            self.retain_cell(&index, |stored| !I::is_equal(stored, target));
+            self.retain_cell(&index, |stored| !I::targets_equal(stored, target));
         }
     }
+    fn indices(&self, point: &I::CellPoint) -> Vec<i32> {
+        self.sizes
+            .as_slice()
+            .iter()
+            .enumerate()
+            .map(|(axis, size)| cell_coordinate(I::cell_coordinate(axis, point) / size))
+            .collect()
+    }
+    fn range(&self, min: &I::CellPoint, max: &I::CellPoint) -> CellIndices {
+        // Native iterateAdd/Remove/Inspect start at axis myDim - 1; axes beyond the cell
+        // index length would read past the native LocalArray, so they are clamped.
+        let axes: usize = self.dimension.min(self.sizes.len());
+        CellIndices::new(self.indices(min), self.indices(max), axes)
+    }
+    fn add_cell(&mut self, index: Vec<i32>, target: &I::CellTarget) {
+        let resource: BaseAllocator = self.resource.clone();
+        self.cells
+            .try_emplaced(index, || List::with_allocator(resource))
+            .prepend(target.clone());
+    }
+    fn retain_cell(&mut self, index: &Vec<i32>, mut keep: impl FnMut(&I::CellTarget) -> bool) {
+        let result = self.try_retain_cell(index, |stored| {
+            Ok::<bool, std::convert::Infallible>(keep(stored))
+        });
+        match result {
+            Ok(()) => (),
+            Err(never) => match never {},
+        }
+    }
+}
+
+impl<I: CellInspector> CellFilter<I> {
     /// Inspect newest-first, applying purge decisions immediately; `filter.inspect(&point, &mut inspector)`.
     pub fn inspect(&mut self, point: &I::Point, inspector: &mut I) {
         self.retain_cell(&self.indices(point), |stored| {
@@ -86,35 +123,6 @@ impl<I: CellInspector> CellFilter<I> {
             self.retain_cell(&index, |stored| {
                 inspector.inspect(stored) == CellAction::Keep
             });
-        }
-    }
-    fn indices(&self, point: &I::Point) -> Vec<i32> {
-        self.sizes
-            .as_slice()
-            .iter()
-            .enumerate()
-            .map(|(axis, size)| cell_coordinate(I::coord(axis, point) / size))
-            .collect()
-    }
-    fn range(&self, min: &I::Point, max: &I::Point) -> CellIndices {
-        // Native iterateAdd/Remove/Inspect start at axis myDim - 1; axes beyond the cell
-        // index length would read past the native LocalArray, so they are clamped.
-        let axes: usize = self.dimension.min(self.sizes.len());
-        CellIndices::new(self.indices(min), self.indices(max), axes)
-    }
-    fn add_cell(&mut self, index: Vec<i32>, target: &I::Target) {
-        let resource: BaseAllocator = self.resource.clone();
-        self.cells
-            .try_emplaced(index, || List::with_allocator(resource))
-            .prepend(target.clone());
-    }
-    fn retain_cell(&mut self, index: &Vec<i32>, keep: impl FnMut(&I::Target) -> bool) {
-        let Ok(targets) = self.cells.change_find(index) else {
-            return;
-        };
-        targets.retain(keep);
-        if targets.is_empty() {
-            self.cells.unbind(index);
         }
     }
 }

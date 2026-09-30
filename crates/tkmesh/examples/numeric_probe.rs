@@ -120,6 +120,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_geom_cells" => mesh_probe::geom_tool::cells_case(values),
         "mesh_range_overflow" => mesh_probe::geom_tool::overflow_steps_case(),
         "mesh_editable_tree" => mesh_probe::editable_tree::editable_tree_case(values),
+        "mesh_cell_failure" => mesh_probe::cell_failure::cell_failure_case(values),
         "mesh_element_vertex" => mesh_probe::elements::vertex_case(values),
         "mesh_element_edge" => mesh_probe::elements::edge_case(values),
         "mesh_element_triangle" => mesh_probe::elements::triangle_case(values),
