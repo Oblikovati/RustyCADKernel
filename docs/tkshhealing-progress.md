@@ -652,3 +652,12 @@ in the API ledger. The divergence inputs are retained, not counted as passing pa
 
 At integration commit cfce18d4, the full Rust workspace passed 11,379 tests with zero
 failures and 69 pre-existing ignored doctests; all 259 tooling tests passed.
+
+### SplitSurface integration
+
+The integrated source gate still passes all 101 mapped original declarations in both
+languages. Exact toolkit comparisons now total 16,313. The separate surface gate
+accounts for all 650 candidates: 634 exact passes and 16 native SIGSEGV versus Rust
+construction-error divergences inherited from multipart offset curves. Build and
+Perform remain partial in the ledger. The earlier SplitCurve3d divergence gate also
+passes unchanged. Seven surface regressions and all 262 tooling tests pass.

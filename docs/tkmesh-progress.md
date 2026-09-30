@@ -52,3 +52,15 @@ regression passes in both native OCCT and Rust. The integrated toolkit gate pass
 66,937 exact numeric requests and one mapped declaration; 28 original declarations
 remain pending. ConeRangeSplitter now preserves the native C++ integer conversion
 for overflowing/infinite values, covered by direct and differential regressions.
+
+### Editable tree and face checker
+
+UBTreeFiller now retains native virtual insertion into EBTree, and planar bounding
+boxes implement the shared tree-volume interface. The integrated toolkit gate passed
+66,957 exact requests and the original OCC25547 declaration.
+
+The 17 FaceChecker header rows are implemented. Its integrated native corpus passes
+68,687 exact requests, including live parameter updates, segment-slot mutation,
+multiple wires, contacts and repeated sequential/parallel checks. Pointer associations
+use weak identity and the existing NCollection containers. The remaining original
+mesh declarations still require the downstream pipeline.

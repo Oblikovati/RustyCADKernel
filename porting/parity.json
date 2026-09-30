@@ -210858,6 +210858,276 @@
       "rust_item": "<rustycad_tkernel::ncollection::UBTreeFiller as Drop>::drop",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. The destructor has an observable effect (it fills pending items), so it maps to the Drop implementation. Native virtual Add dispatch retained for UBTree and EBTree via BoundingTreeInsertion; editable index survives Fill and destructor flushing."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Segment",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegment",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Segment::EdgePtr",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegment::edge_ptr",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Segment::Point1",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegment::point1",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Segment::Point2",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegment::point2",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Segment()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegment::default",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Segment(const IMeshData::IEdgePtr&,gp_Pnt2d*,gp_Pnt2d*)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegment::new",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Segments",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegments",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::ArrayOfSegments",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceSegmentArray",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::ArrayOfBndBoxTree",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceBoundsTreeArray",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::ArrayOfMapOfIEdgePtr",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::FaceEdgeSetArray",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker(const IMeshData::IFaceHandle&,const IMeshTools_Parameters&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker::new",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::~BRepMesh_FaceChecker()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native checker state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Perform()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker::perform",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::Handle(IMeshData::MapOfIEdgePtr)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker::get_intersecting_edges",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::operator()(int) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker::process_wire",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "BRepMesh_FaceChecker::DEFINE_STANDARD_RTTIEXT(BRepMesh_FaceChecker,Standard_Transient)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
+      "source_sha256": "f5f4dfcf6c78c1196684b3c22a89cc28ebed5e699ed3264adb99381e7eb82498",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshFaceChecker (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native editable bounding trees and filler order, tangent-angle and signed-loop-area filtering, parallel per-wire checks and actual NCollection pointer-map union. Parameters use an explicit shared owner to preserve reference aliasing; segment point pointers use weak pcurve-slot references with live read/write behavior."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::new",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::Init(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::init_surface",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::Init(const occ::handle<Geom_Surface>&,double,double,double,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::init_surface_bounds",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::SetUSplitValues(const occ::handle<NCollection_HSequence<double>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::set_u_split_values",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::SetVSplitValues(const occ::handle<NCollection_HSequence<double>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::set_v_split_values",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::Build(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::build",
+      "status": "partial",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::Compute(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::compute",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::Perform(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::perform",
+      "status": "partial",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::USplitValues() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::u_split_values",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::VSplitValues() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::v_split_values",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::status_flag",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::ResSurfaces() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::result_surfaces",
+      "status": "implemented",
+      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurface::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitSurface,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
+      "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
+      "rust_item": "impl_transient!(ShapeUpgradeSplitSurface)",
+      "status": "excluded",
+      "notes": "RTTI maps to the shared Rust transient interface; callable APIs counted separately."
     }
   ],
   "tests": [
