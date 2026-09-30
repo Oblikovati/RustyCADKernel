@@ -15,3 +15,5 @@ def append_tkprim_requests(requests: list[str]) -> None:
     __import__('tkprim_corpus_shape').append_shape_requests(requests)
     # Sweep (tkprim_corpus_sweep.py)
     __import__('tkprim_corpus_sweep').append_sweep_requests(requests)
+    # BRepPrim (tkprim_corpus_brepprim.py)
+    __import__('tkprim_corpus_brepprim').append_brepprim_requests(requests)

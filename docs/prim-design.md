@@ -38,3 +38,42 @@ members, and the rules for the whole toolkit are:
 - **A value the native code leaves uninitialized** gets the value of the default
   constructor of its type (or 0 for a scalar), and docs/tkprim-progress.md lists it; the
   probes never read it.
+
+## 2. BRepPrim: the builder, the wedge and the one-axis primitives
+
+- `BRepPrim_Builder` is the struct `BRepPrimBuilder` over a `BRepBuilder`. Its members
+  keep the native names (`make_shell`, `make_face`, `add_edge_vertex`, ...) with distinct
+  names for the overloads (`make_edge_line`, `make_edge_circle`, `set_pcurve_line`,
+  `set_pcurve_lines`, `set_pcurve_circle`, `add_edge_vertex_closed`). A member that
+  rebuilds a shape or changes its orientation takes it by `&mut`; a member that only
+  updates the shared TShape (a p-curve, a range, the closed flag) takes it by `&`.
+- `BRepPrim_Direction` is the enum `BRepPrimDirection` with the native discriminants.
+- `BRepPrim_GWedge` is the struct `BRepPrimGWedge` with the native arrays of built
+  sub-shapes. `BRepPrim_Wedge` only adds constructors without a builder: it is the
+  newtype `BRepPrimWedge`, which dereferences to the wedge. The accessors that build on
+  demand (`Shell`, `Face`, `Wire`, `Edge`, `Vertex`, `Plane`, `Line`, `Point`) take
+  `&mut self`, return the built value (a shape is a handle, so the copy shares the TShape
+  of the stored one) and return `Result`: they raise Standard_DomainError for an open
+  direction, a degenerated wedge or two directions of the same axis.
+- `BRepPrim_OneAxis` is the trait `BRepPrimOneAxis` over the base struct
+  `BRepPrimOneAxisBase` (the builder, the axes, the angle, the meridian range and offset
+  and the arrays of built sub-shapes). The four pure virtual members
+  (`MakeEmptyLateralFace`, `MakeEmptyMeridianEdge`, `SetMeridianPCurve`, `MeridianValue`)
+  are required methods; the virtual members with a native body (`MeridianOnAxis`,
+  `MeridianClosed`, `VMaxInfinite`, `VMinInfinite`, `HasTop`, `HasBottom`, `HasSides`)
+  are provided methods with that body. The non-virtual members (the accessors of the
+  axes, angle and range, and every topology builder from `Shell` to `BottomEndVertex`)
+  are provided methods too; no implementor overrides them. Their bodies live in the
+  modules `one_axis_faces`, `one_axis_wires`, `one_axis_edges` and
+  `one_axis_vertices` as functions generic over the trait, each provided method calling
+  one of them. The private `isHeightInverted` and `areHeightsEqual` are crate-visible
+  functions of the same modules.
+- `BRepPrim_Revolution` is the struct `BRepPrimRevolution`: the base and the meridian
+  curves. It implements the trait with the four pure virtual members. Its protected
+  constructor without a meridian and its protected `Meridian` setter are public
+  (`without_meridian`, `set_meridian`), because the derived classes live in other modules.
+- `BRepPrim_Cylinder`, `BRepPrim_Cone`, `BRepPrim_Sphere` and `BRepPrim_Torus` hold a
+  `BRepPrimRevolution` and their own radii, and only override `MakeEmptyLateralFace`.
+  They implement the trait `BRepPrimRevolutionDerived` (the revolution they hold and
+  their lateral face); a blanket implementation of `BRepPrimOneAxis` forwards the other
+  members to the revolution, so the derived class keeps every member of its bases.

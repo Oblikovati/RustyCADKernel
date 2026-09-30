@@ -192002,6 +192002,1118 @@
       "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::last_vertex",
       "status": "implemented",
       "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder(const BRep_Builder&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::with_builder",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::Builder() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::builder",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::MakeShell(TopoDS_Shell&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::make_shell",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::MakeFace(TopoDS_Face&,const gp_Pln&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::make_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::MakeWire(TopoDS_Wire&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::make_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::MakeDegeneratedEdge(TopoDS_Edge&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::make_degenerated_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::MakeEdge(TopoDS_Edge&,const gp_Lin&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::make_edge_line",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::MakeEdge(TopoDS_Edge&,const gp_Circ&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::make_edge_circle",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::SetPCurve(TopoDS_Edge&,const TopoDS_Face&,const gp_Lin2d&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::set_pcurve_line",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::SetPCurve(TopoDS_Edge&,const TopoDS_Face&,const gp_Lin2d&,const gp_Lin2d&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::set_pcurve_lines",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::SetPCurve(TopoDS_Edge&,const TopoDS_Face&,const gp_Circ2d&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::set_pcurve_circle",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::MakeVertex(TopoDS_Vertex&,const gp_Pnt&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::make_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::ReverseFace(TopoDS_Face&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::reverse_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::AddEdgeVertex(TopoDS_Edge&,const TopoDS_Vertex&,double,bool) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::add_edge_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::AddEdgeVertex(TopoDS_Edge&,const TopoDS_Vertex&,double,double) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::add_edge_vertex_closed",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::SetParameters(TopoDS_Edge&,const TopoDS_Vertex&,double,double) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::set_parameters",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::AddWireEdge(TopoDS_Wire&,const TopoDS_Edge&,bool) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::add_wire_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::AddFaceWire(TopoDS_Face&,const TopoDS_Wire&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::add_face_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::AddShellFace(TopoDS_Shell&,const TopoDS_Face&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::add_shell_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::CompleteEdge(TopoDS_Edge&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::complete_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::CompleteWire(TopoDS_Wire&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::complete_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::CompleteFace(TopoDS_Face&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::complete_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Builder::CompleteShell(TopoDS_Shell&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Builder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimBuilder::complete_shell",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone(double,const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone::infinite",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone(double,const gp_Pnt&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone::infinite_at",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone(double,const gp_Ax2&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone::infinite_with_axes",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone(double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone::from_radii",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone(const gp_Pnt&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone::at_center",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCone::with_axes_radii",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cone::MakeEmptyLateralFace() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolutionDerived::derived_lateral_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder(const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCylinder::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCylinder::infinite",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder(const gp_Pnt&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCylinder::infinite_at",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder(const gp_Ax2&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCylinder::infinite_on",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder(double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCylinder::from_radius_height",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder(const gp_Pnt&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimCylinder::at_center",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Cylinder::MakeEmptyLateralFace() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Cylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolutionDerived::derived_lateral_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Direction",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Direction.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimDirection",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge(const BRepPrim_Builder&,const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::with_box",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge(const BRepPrim_Builder&,const gp_Ax2&,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::with_ltx",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge(const BRepPrim_Builder&,const gp_Ax2&,double,double,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::with_limits",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Axes() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::axes",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetXMin() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_xmin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetYMin() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_ymin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetZMin() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_zmin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetZ2Min() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_z2min",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetX2Min() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_x2min",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetXMax() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_xmax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetYMax() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_ymax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetZMax() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_zmax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetZ2Max() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_z2max",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::GetX2Max() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::get_x2max",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Open(BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::open",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Close(BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::close",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::IsInfinite(BRepPrim_Direction) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::is_infinite",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::shell",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::HasFace(BRepPrim_Direction) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::has_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Face(BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Plane(BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::plane",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::HasWire(BRepPrim_Direction) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::has_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Wire(BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::HasEdge(BRepPrim_Direction,BRepPrim_Direction) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::has_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Edge(BRepPrim_Direction,BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Line(BRepPrim_Direction,BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::line",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::HasVertex(BRepPrim_Direction,BRepPrim_Direction,BRepPrim_Direction) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::has_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Vertex(BRepPrim_Direction,BRepPrim_Direction,BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::Point(BRepPrim_Direction,BRepPrim_Direction,BRepPrim_Direction)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::point",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_GWedge::IsDegeneratedShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimGWedge::is_degenerated_shape",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::SetMeridianOffset(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::set_meridian_offset",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::Axes() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::axes",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::Axes(const gp_Ax2&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::set_axes",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::Angle() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::angle",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::Angle(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::set_angle",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::VMin() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::vmin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::VMin(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::set_vmin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::VMax() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::vmax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::VMax(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::set_vmax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::MakeEmptyLateralFace() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::make_empty_lateral_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::MakeEmptyMeridianEdge(double) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::make_empty_meridian_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::SetMeridianPCurve(TopoDS_Edge&,const TopoDS_Face&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::set_meridian_pcurve",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::MeridianValue(double) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::meridian_value",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::MeridianOnAxis(double) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::meridian_on_axis",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::MeridianClosed() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::meridian_closed",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::VMaxInfinite() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::vmax_infinite",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::VMinInfinite() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::vmin_infinite",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::HasTop() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::has_top",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::HasBottom() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::has_bottom",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::HasSides() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::has_sides",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::shell",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::LateralFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::lateral_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::TopFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::top_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::BottomFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::bottom_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::StartFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::start_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::EndFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::end_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::LateralWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::lateral_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::LateralStartWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::lateral_start_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::LateralEndWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::lateral_end_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::TopWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::top_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::BottomWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::bottom_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::StartWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::start_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::AxisStartWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::axis_start_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::EndWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::end_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::AxisEndWire()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::axis_end_wire",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::AxisEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::axis_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::StartEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::start_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::EndEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::end_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::StartTopEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::start_top_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::StartBottomEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::start_bottom_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::EndTopEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::end_top_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::EndBottomEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::end_bottom_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::TopEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::top_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::BottomEdge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::bottom_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::AxisTopVertex()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::axis_top_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::AxisBottomVertex()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::axis_bottom_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::TopStartVertex()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::top_start_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::TopEndVertex()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::top_end_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::BottomStartVertex()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::bottom_start_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::BottomEndVertex()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis::bottom_end_vertex",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::~BRepPrim_OneAxis()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxis",
+      "status": "excluded",
+      "notes": "C++ virtual destructor; the Rust implementors of BRepPrimOneAxis drop their base and shapes automatically, so there is no member to port."
+    },
+    {
+      "upstream_id": "BRepPrim_Revolution(const gp_Ax2&,double,double,const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Revolution::MakeEmptyLateralFace() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::make_empty_lateral_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Revolution::MakeEmptyMeridianEdge(double) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::make_empty_meridian_edge",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Revolution::MeridianValue(double) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::meridian_value",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Revolution::SetMeridianPCurve(TopoDS_Edge&,const TopoDS_Face&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::set_meridian_pcurve",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Sphere(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Sphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimSphere::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Sphere(const gp_Pnt&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Sphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimSphere::at_center",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Sphere(const gp_Ax2&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Sphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimSphere::with_axes",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Sphere::MakeEmptyLateralFace() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Sphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolutionDerived::derived_lateral_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Torus(const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Torus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimTorus::with_axes",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Torus(double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Torus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimTorus::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Torus(const gp_Pnt&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Torus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimTorus::at_center",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Torus::MakeEmptyLateralFace() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Torus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolutionDerived::derived_lateral_face",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Wedge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Wedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimWedge::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Wedge(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Wedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimWedge::with_box",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Wedge(const gp_Ax2&,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Wedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimWedge::with_ltx",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrim_Wedge(const gp_Ax2&,double,double,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Wedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimWedge::with_limits",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
     }
   ],
   "tests": [

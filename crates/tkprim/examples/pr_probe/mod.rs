@@ -1,4 +1,6 @@
 //! The TKPrim probe operations, one module per C++ probe file under tools/oracle.
+pub mod brep_prim;
+pub mod brep_prim_one_axis;
 pub mod shape;
 pub mod sweep;
 

@@ -32,6 +32,8 @@
 #include "tktopalgo_probe_breplib_common.cxx"
 #include "tkprim_probe_shape.cxx"
 #include "tkprim_probe_sweep.cxx"
+#include "tkprim_probe_brepprim.cxx"
+#include "tkprim_probe_brepprim_oneaxis.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // The shared shape digest (tkprim_probe_shape.cxx)
  {"pr_digest_vertex", pr_digest_vertex_case},
@@ -39,6 +41,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sw_numshape", pr_sw_numshape_case},
  {"sw_reinit", pr_sw_reinit_case},
  {"sw_init", pr_sw_init_case},
+ // BRepPrim (tkprim_probe_brepprim.cxx, tkprim_probe_brepprim_oneaxis.cxx)
+ {"bp_wedge", pr_bp_wedge_case},
+ {"bp_builder", pr_bp_builder_case},
+ {"bp_oneaxis", pr_bp_oneaxis_case},
 };
 int main() {
  std::string line;
