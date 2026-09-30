@@ -218,3 +218,9 @@ retaining the Contap runtime type. OCCT 3d097a0's Contap header writes the end-t
 flag in SetTangencyAtBegining; both direct and trait calls preserve that bug. The
 numeric corpus passes 13,139 exact requests (56 new scripts); three direct regressions,
 all crate tests and strict Clippy pass. Header audit has no missing or stale rows.
+
+### Contap search records
+
+The 11 path-point and eight segment APIs reuse the matching native IntStart
+specializations. The corpus passes 13,427 exact requests, including 288 new record
+requests. Direct regressions and strict Clippy pass; both header audits have no gaps.

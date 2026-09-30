@@ -35,3 +35,5 @@ pub mod contap_function;
 pub mod contap_arc_function;
 
 pub mod contap_iwline;
+
+pub mod contap_search_records;

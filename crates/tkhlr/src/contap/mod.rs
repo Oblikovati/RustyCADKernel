@@ -36,3 +36,6 @@ pub use arc_function::ContapArcFunction;
 
 mod iwline;
 pub use iwline::ContapTheIWLineOfTheIWalking;
+
+mod search_records;
+pub use search_records::{ContapThePathPointOfTheSearch, ContapTheSegmentOfTheSearch};
