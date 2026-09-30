@@ -26,7 +26,7 @@ pub fn post_processor_case(v: &[i32]) {
     }
     println!();
 }
-fn report_post_model(model: &Handle<dyn MeshModel>) {
+pub(super) fn report_post_model(model: &Handle<dyn MeshModel>) {
     let edge = model.get_edge(0).unwrap().get_edge().unwrap();
     let (polygon, _) = BRepTool::polygon3d(&edge).unwrap();
     flag(!polygon.is_null());

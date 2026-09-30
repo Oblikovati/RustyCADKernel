@@ -27,3 +27,6 @@ pub use edge_discret::BRepMeshEdgeDiscret;
 
 mod range_splitter;
 pub use range_splitter::{ConeRangeSplitter, DefaultRangeSplitter, RangeSplitter, SurfaceNodes};
+
+mod pre_processor;
+pub use pre_processor::BRepMeshModelPreProcessor;

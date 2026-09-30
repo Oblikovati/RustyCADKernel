@@ -44,6 +44,8 @@ def corpus() -> str:
     rows += ['mesh_edge_tessellate ' + ' '.join(map(str, v)) for v in product((4,6), range(3), range(2), range(2), range(2), range(2))]
     rows += ['mesh_edge_callback']
     rows += ['mesh_range ' + ' '.join(map(str, v)) for v in product(range(3), range(6), range(2), range(2))]
+    rows += ['mesh_pre ' + ' '.join(map(str, v)) for v in product((-1,0,1,2), (0,64), (0,4,64,128), range(3), range(3), range(3), range(2), range(2))]
+    rows += ['mesh_pre_cone ' + ' '.join(map(str, v)) for v in product(range(2), range(3), range(2), range(2), range(6))]
     return '\n'.join(rows) + '\n'
 
 

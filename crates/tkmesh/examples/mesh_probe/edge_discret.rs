@@ -36,7 +36,7 @@ fn edge_discret_model(v: &[i32], parameters: &MeshParameters) -> Handle<dyn Mesh
     existing::clear_model_curves(&model);
     model
 }
-fn report_edge_discret(model: &Handle<dyn MeshModel>) {
+pub(super) fn report_edge_discret(model: &Handle<dyn MeshModel>) {
     int(model.edges_nb());
     for index in 0..model.edges_nb() {
         let edge = model.get_edge(index).unwrap();
