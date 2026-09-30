@@ -4,9 +4,10 @@
 //!
 //! Each checker derives from the abstract [`BRepCheckResult`] (docs/topalgo-design.md
 //! section 6): [`BRepCheckVertex`], [`BRepCheckEdge`], [`BRepCheckWire`],
-//! [`BRepCheckFace`], [`BRepCheckShell`] and [`BRepCheckSolid`] record the defects
-//! ([`BRepCheckStatus`]) of their shape itself and of the shape in each context it
-//! was checked in, and [`BRepCheckAnalyzer`] runs them over a whole shape.
+//! [`BRepCheckFace`] and [`BRepCheckShell`] record the defects ([`BRepCheckStatus`]) of
+//! their shape itself and of the shape in each context it was checked in.
+//! `BRepCheck_Solid` and `BRepCheck_Analyzer`, which runs the checkers over a whole
+//! shape, wait for `BRepClass3d_SolidClassifier`.
 mod edge;
 mod edge_context;
 mod edge_tolerance;
