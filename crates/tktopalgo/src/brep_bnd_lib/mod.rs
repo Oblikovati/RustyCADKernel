@@ -1,6 +1,4 @@
-// Created on: 1993-07-22
-// Created by: Isabelle GRIGNON
-// Copyright (c) 1993-1999 Matra Datavision
+// Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -13,8 +11,7 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingAlgorithms/TKTopAlgo/BRepBndLib (BRepBndLib.hxx and
-// BRepBndLib.cxx) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingAlgorithms/TKTopAlgo/BRepBndLib at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! OCCT package BRepBndLib: the bounding box of a shape, from its triangulations and
 //! polygons or from its exact geometry.
