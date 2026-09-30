@@ -65,6 +65,7 @@
 #include "tktopalgo_probe_sewing.cxx"
 #include "tktopalgo_probe_fastsewing.cxx"
 #include "tktopalgo_probe_sewing_helpers.cxx"
+#include "tktopalgo_probe_brepbuilderapi_onmesh.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -146,6 +147,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bbl_obb", tp_bbl_obb_case},
  // BRepLib_PointCloudShape (tktopalgo_probe_breplib_pointcloud.cxx)
  {"blp_pointcloud", tp_blp_pointcloud_case},
+ // BRepBuilderAPI_MakeShapeOnMesh (tktopalgo_probe_brepbuilderapi_onmesh.cxx)
+ {"bba_onmesh", tp_bba_onmesh_case},
  // BRepClass3d (tktopalgo_probe_brepclass3d.cxx, shapes of tktopalgo_probe_shape.cxx)
  {"bc3_classify", tp_bc3_classify_case},
  {"bc3_infinite", tp_bc3_infinite_case},

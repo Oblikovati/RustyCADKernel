@@ -9,6 +9,7 @@ pub mod brep_bnd_lib_obb;
 pub mod brep_builder_api;
 pub mod brep_builder_api_makers;
 pub mod brep_builder_api_modify;
+pub mod brep_builder_api_on_mesh;
 pub mod brep_check;
 pub mod brep_class;
 pub mod brep_class3d;

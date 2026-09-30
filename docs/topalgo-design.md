@@ -604,4 +604,11 @@ a shape are `init_curve` and `init_line`, and `Init(curve)` is `init`.
   `std::uniform_real_distribution<double>` (`generate_canonical` from two 32-bit draws),
   ported once in `rustycad_tkernel::stl` next to the libstdc++ sort; the twister moved
   there from the UBTree filler, which uses it too.
+- **`BRepBuilderAPI_MakeShapeOnMesh`** (section 11) is the struct
+  `BRepBuilderAPIMakeShapeOnMesh`: the MakeShape base (dereferenced) and the mesh
+  handle; it implements `BRepBuilderAPIMakeShape` and overrides `build`. The node-to-vertex
+  `NCollection_IndexedDataMap<int, TopoDS_Vertex>` is a vector indexed by node, and the
+  `NCollection_IndexedDataMap<Edge, TopoDS_Edge>` of mesh edges a `HashMap` that keeps
+  the first edge of a key: natively both maps are only searched by key, so their order
+  is never observed.
 

@@ -191514,6 +191514,22 @@
       "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::inspect_target",
       "status": "implemented",
       "notes": "BRepBuilderAPI sewing mapping (docs/topalgo-design.md section 11): the CellInspector of the vertex gluing over gp_XYZ points and int targets; Inspect(target) is inspect_target and reports an out-of-range target (an unchecked read natively); compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_vertexinspector requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeShapeOnMesh(const occ::handle<Poly_Triangulation>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeShapeOnMesh.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeOnMesh::new",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI_MakeShapeOnMesh mapping (docs/topalgo-design.md sections 11 and 14, docs/tktopalgo-progress.md): a struct holding the BRepBuilderAPIMakeShapeBase (dereferenced) and the mesh handle; it implements the trait BRepBuilderAPIMakeShape with its Build override; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_onmesh requests)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeShapeOnMesh::Build(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeShapeOnMesh.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeOnMesh::build",
+      "status": "implemented",
+      "notes": "BRepBuilderAPI_MakeShapeOnMesh mapping (docs/topalgo-design.md sections 11 and 14): the Build override of the trait BRepBuilderAPIMakeShape; the vertex map is a vector by node index and the mesh-edge map a hash map keeping the first edge of a key (both only searched by key natively); the progress scope steps as natively; the edge, wire and face makers' exceptions are returned; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_onmesh requests)."
     }
   ],
   "tests": [

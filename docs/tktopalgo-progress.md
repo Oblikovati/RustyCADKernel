@@ -324,8 +324,10 @@ accessors without a current point and past the last face).
   `TreeSelector<i32, BoundingBox3>`; `Reject` and `Accept` are `reject_box` and
   `accept_object`). The audit reports 0 missing and 0 stale rows for these four classes
   (Sewing 45 rows, FastSewing 10, VertexInspector 8, BndBoxTreeSelector 6, each RTTI
-  macro an implemented row). `BRepBuilderAPI_MakeShapeOnMesh` waits for
-  `BRepBuilderAPI_MakeShape` (another port).
+  macro an implemented row). `BRepBuilderAPI_MakeShapeOnMesh` is
+  `BRepBuilderAPIMakeShapeOnMesh` (`new(&mesh)`; it implements `BRepBuilderAPIMakeShape`
+  with its `build` override and dereferences to the base, docs/topalgo-design.md
+  section 14); with it the audit of BRepBuilderAPI reports 0 missing and 0 stale rows.
 
 ## Verification
 
@@ -596,6 +598,17 @@ shapes without a usable face (free edges, an empty solid, an infinite plane). Th
 random points check the port of `std::mt19937` and libstdc++'s
 `std::uniform_real_distribution<double>` bit for bit.
 
+BRepBuilderAPI_MakeShapeOnMesh: 60 requests
+(`tools/tktopalgo_corpus_brepbuilderapi_onmesh.py`,
+`tktopalgo_probe_brepbuilderapi_onmesh.cxx` and `tp_probe/brep_builder_api_on_mesh.rs`).
+A `bba_onmesh` request builds a triangulation and the maker, calls Build zero, one or
+two times and prints `tp_bba_made` (IsDone, Check, the digest of Shape() and its
+history): a null mesh, meshes without nodes (the probe's sized constructor raises
+Standard_RangeError) or without triangles, one triangle in the six index orders, two
+triangles with consistent and opposite orientations, a tetrahedron, an octahedron, flat
+and curved height-field grids, triangles with repeated indices, coincident and
+collinear nodes, and nodes 1e-4 and 1e-8 apart.
+
 BRepBuilderAPI sewing: 652 requests. `tools/tktopalgo_corpus_sewing.py` (582 `bba_sew`
 requests, `tktopalgo_probe_sewing.cxx` and `tp_probe/sewing.rs`) sews the shape records of
 `tools/tktopalgo_corpus_sewing_shapes.py`: loose boxes whose faces are moved below and
@@ -774,6 +787,20 @@ Each ported package adds its own subsection.
   of the inverse transformation in the last bits.
 - `BRepBuilderAPI_Transform` is included by BRepBndLib_1.cxx but not used (the shape is
   moved with `TopoDS_Shape::Moved`).
+
+### BRepBuilderAPI_MakeShapeOnMesh
+
+- A triangle is skipped when two of its indices are equal or a squared side is below
+  `gp::Resolution()` (about 1e-290), so two nodes closer than `Precision::Confusion()`
+  but farther than that reach `BRepBuilderAPI_MakeEdge`, which fails, and `Edge()`
+  raises StdFail_NotDone out of `Build` (the done flag is not set).
+- A mesh edge keeps the first edge built for it; each triangle builds its three edges
+  even when they exist, and a triangle whose first two sides are parallel (collinear
+  nodes) gets no face, although its edges are kept for its neighbours.
+- The face normal is the cross product of the lines of the first two edges, reversed
+  once per REVERSED edge among them; the plane goes through the first node.
+- `Build` called again rebuilds a new compound (new vertices and edges) and replaces the
+  shape; `Shape()` on a maker never built runs `Build` first.
 
 ### BRepLib_PointCloudShape
 
