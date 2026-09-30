@@ -15,6 +15,7 @@ mod tools_surface;
 mod tools_topology;
 mod topol;
 mod topol_surfaces;
+mod wline;
 use rustycad_tkbo::int_tools::*;
 use rustycad_tkg3d::top_abs::State;
 fn real(value: f64) {
@@ -55,6 +56,7 @@ fn dispatch_scalar(operation: &str, v: &[f64]) {
         "tools_curves" => tools_curves::case(v),
         "tools_topology" => tools_topology::case(v),
         "tools_surface" => tools_surface::case(v),
+        "wline" => wline::case(v),
         "tools" => tools::case(v),
         "context" => context::case(v),
         "topol" => topol::case(v),
