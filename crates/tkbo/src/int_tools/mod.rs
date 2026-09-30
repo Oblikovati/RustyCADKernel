@@ -19,3 +19,6 @@ pub use common_prt::CommonPrt;
 pub use curve::Curve;
 pub use pnt_on_face::PntOnFace;
 pub use pnt_on_two_faces::PntOn2Faces;
+
+mod curve_range_localize;
+pub use curve_range_localize::CurveRangeLocalizeData;
