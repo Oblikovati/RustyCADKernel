@@ -69,7 +69,12 @@ impl<S: InterpolateSpace> System<S> {
         Ok(inversion_problem == 0)
     }
     // A pole and its derivative condition: the tangent as a pole, contact order 1.
-    fn add_tangent(&mut self, index: i32, parameter: f64, tangent: S::Vector) -> Result<(), Failure> {
+    fn add_tangent(
+        &mut self,
+        index: i32,
+        parameter: f64,
+        tangent: S::Vector,
+    ) -> Result<(), Failure> {
         put(&mut self.contact_order_array, index, 1)?;
         put(&mut self.parameters, index, parameter)?;
         put(&mut self.poles, index, vector_as_point::<S>(&tangent))
