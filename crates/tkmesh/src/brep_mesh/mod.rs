@@ -21,3 +21,6 @@ pub use tessellation_extractor::EdgeTessellationExtractor;
 
 mod curve_tessellator;
 pub use curve_tessellator::BRepMeshCurveTessellator;
+
+mod edge_discret;
+pub use edge_discret::BRepMeshEdgeDiscret;

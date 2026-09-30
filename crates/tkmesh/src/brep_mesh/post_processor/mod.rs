@@ -7,8 +7,7 @@ use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkernel::{
     impl_transient,
     message::ProgressRange,
-    osd::Parallel,
-    standard::{Failure, Handle, SharedState, StandardTransient},
+    standard::{Failure, Handle, StandardTransient},
 };
 use rustycad_tkmath::poly::{TriangulationParameters, mesh_purpose};
 mod polygons;
@@ -51,33 +50,9 @@ fn estimate_faces(
         parameters.angle,
         parameters.min_size,
     ));
-    if !parameters.in_parallel {
-        for index in 0..model.faces_nb() {
-            estimate_face(&model.get_face(index)?, &settings)?;
-        }
-        return Ok(());
-    }
-    estimate_parallel_faces(model, &settings)
-}
-fn estimate_parallel_faces(
-    model: &Handle<dyn MeshModel>,
-    settings: &Handle<TriangulationParameters>,
-) -> Result<(), Failure> {
-    let result = SharedState::new(Ok(()));
-    Parallel::for_range(
-        0,
-        model.faces_nb(),
-        |index| {
-            if let Err(error) = model
-                .get_face(index)
-                .and_then(|face| estimate_face(&face, settings))
-            {
-                *result.write() = Err(error);
-            }
-        },
-        false,
-    )?;
-    std::mem::replace(&mut *result.write(), Ok(()))
+    crate::model_parallel::model_indices(model.faces_nb(), parameters.in_parallel, |index| {
+        estimate_face(&model.get_face(index)?, &settings)
+    })
 }
 fn estimate_face(
     face: &FaceHandle,
