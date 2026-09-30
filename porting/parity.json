@@ -207942,6 +207942,307 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::Deflection (RuntimeTyped/Transient)",
       "status": "implemented",
       "notes": "Native relative bounding-box scaling, endpoint discrepancy, wire/face averages, and strict consistency comparisons. Differential corpus includes actual boxes/spheres/free topology and NaN/infinity/boundary intervals."
+    },
+    {
+      "upstream_id": "IntTools_Context()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::default",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::~IntTools_Context()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::drop",
+      "status": "excluded",
+      "notes": "Rust Drop releases owned cache maps and allocated services; native explicit destructor has no callable Rust API counterpart."
+    },
+    {
+      "upstream_id": "IntTools_Context(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::with_allocator",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::FClass2d(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::fclass2d",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::ProjPS(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::proj_ps",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::ProjPC(const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::proj_pc",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::ProjPT(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::proj_pt",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::SurfaceData(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::surface_data",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::SolidClassifier(const TopoDS_Solid&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::solid_classifier",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::Hatcher(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::hatcher",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::SurfaceAdaptor(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::surface_adaptor",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::OBB(const TopoDS_Shape&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::obb",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::UVBounds(const TopoDS_Face&,double&,double&,double&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::uv_bounds",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::ComputePE(const gp_Pnt&,double,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::compute_pe",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::ComputeVE(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::compute_ve",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::ComputeVF(const TopoDS_Vertex&,const TopoDS_Face&,double&,double&,double&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::compute_vf",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::StatePointFace(const TopoDS_Face&,const gp_Pnt2d&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::state_point_face",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsPointInFace(const TopoDS_Face&,const gp_Pnt2d&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_point_in_face",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsPointInFace(const gp_Pnt&,const TopoDS_Face&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_point3d_in_face",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsPointInOnFace(const TopoDS_Face&,const gp_Pnt2d&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_point_in_on_face",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsValidPointForFace(const gp_Pnt&,const TopoDS_Face&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_valid_point_for_face",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsValidPointForFaces(const gp_Pnt&,const TopoDS_Face&,const TopoDS_Face&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_valid_point_for_faces",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsValidBlockForFace(double,double,const IntTools_Curve&,const TopoDS_Face&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_valid_block_for_face",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsValidBlockForFaces(double,double,const IntTools_Curve&,const TopoDS_Face&,const TopoDS_Face&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_valid_block_for_faces",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsVertexOnLine(const TopoDS_Vertex&,const IntTools_Curve&,double,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_vertex_on_line",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsVertexOnLine(const TopoDS_Vertex&,double,const IntTools_Curve&,double,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_vertex_on_line_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::ProjectPointOnEdge(const gp_Pnt&,const TopoDS_Edge&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::project_point_on_edge",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::BndBox(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::bnd_box",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::IsInfiniteFace(const TopoDS_Face&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::is_infinite_face",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::SetPOnSProjectionTolerance(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::set_pons_projection_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Context::DEFINE_STANDARD_RTTIEXT(IntTools_Context,Standard_Transient)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Context.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Context::dynamic_type",
+      "status": "implemented",
+      "notes": "Pinned native differential tools/verify_tkbo_foundations.py: cache identity, allocator, invalidation, real face/solid services, compute status/output mutation, vertex endpoint refinement, asymmetric blocks and pcurve preference."
+    },
+    {
+      "upstream_id": "IntTools_Tools::IntermediatePoint(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_Tools.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::Tools::intermediate_point",
+      "status": "implemented",
+      "notes": "Exact pinned rounded PAR_T=0.43213918 expression and operation order; differential block cases and finite/infinite Rust regression. Remaining Tools APIs not claimed."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPostProcessor",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPostProcessor.hxx",
+      "source_sha256": "bb239f0658f4ea56c366eba6ed835037aa1e4e23121f60e9d9ea1beb5b07ba31",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPostProcessor",
+      "status": "implemented",
+      "notes": "Native polygon publication, seam grouping, skip flags, BRepLib deflection estimation and shared triangulation parameters. Exact differential cases cover empty curves, absent meshes, 1/2/3 pcurves, multiple faces and both parallel modes."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPostProcessor()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPostProcessor.hxx",
+      "source_sha256": "bb239f0658f4ea56c366eba6ed835037aa1e4e23121f60e9d9ea1beb5b07ba31",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPostProcessor::new",
+      "status": "implemented",
+      "notes": "Native polygon publication, seam grouping, skip flags, BRepLib deflection estimation and shared triangulation parameters. Exact differential cases cover empty curves, absent meshes, 1/2/3 pcurves, multiple faces and both parallel modes."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPostProcessor::~BRepMesh_ModelPostProcessor()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPostProcessor.hxx",
+      "source_sha256": "bb239f0658f4ea56c366eba6ed835037aa1e4e23121f60e9d9ea1beb5b07ba31",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native model-builder and shape-visitor state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPostProcessor::DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelPostProcessor,IMeshTools_ModelAlgo)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPostProcessor.hxx",
+      "source_sha256": "bb239f0658f4ea56c366eba6ed835037aa1e4e23121f60e9d9ea1beb5b07ba31",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPostProcessor (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native polygon publication, seam grouping, skip flags, BRepLib deflection estimation and shared triangulation parameters. Exact differential cases cover empty curves, absent meshes, 1/2/3 pcurves, multiple faces and both parallel modes."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelPostProcessor::performInternal(const occ::handle<IMeshData_Model>&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelPostProcessor.hxx",
+      "source_sha256": "bb239f0658f4ea56c366eba6ed835037aa1e4e23121f60e9d9ea1beb5b07ba31",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPostProcessor::perform_internal",
+      "status": "implemented",
+      "notes": "Native polygon publication, seam grouping, skip flags, BRepLib deflection estimation and shared triangulation parameters. Exact differential cases cover empty curves, absent meshes, 1/2/3 pcurves, multiple faces and both parallel modes."
     }
   ],
   "tests": [

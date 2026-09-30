@@ -34,3 +34,9 @@ FClass2d adds seven callable APIs and a destructor mapped to Rust Drop. Its own
 5,051-case native gate passes, including repeated Init, infinite UV bounds,
 periodic surfaces, open/missing-pcurve wires and native fallback tolerances.
 Context and FaceFace remain in progress.
+
+Context now maps all 30 callable APIs, plus the destructor to Drop; the native
+IntermediatePoint helper is also ported. Shared cache identity, allocator ownership,
+projection, block validity and vertex-on-curve behavior pass the integrated
+7,919-case native gate and its required missing-IsValid-symbol check. FaceFace
+legacy declarations are still pending the remaining Tools/WLineTool chain.

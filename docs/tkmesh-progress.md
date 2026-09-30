@@ -32,3 +32,8 @@ pcurve incidence, reuse and malformed-boundary statuses are preserved. The
 integrated oracle passes 51,039 comparisons (8,448 wire-foundation and 720 model
 construction cases added). Model construction is available; edge discretization,
 triangulation and original TKMesh regression declarations are still pending.
+
+Deflection and ModelPostProcessor add 12 APIs. Relative deflection, endpoint
+checks, polygon publication, seam pcurves, retained skip flags and deflection
+updates pass the integrated 54,471-case native gate. Edge parameter projection and
+tessellation remain pending; no IncrementalMesh acceptance is claimed.
