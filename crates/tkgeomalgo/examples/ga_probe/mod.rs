@@ -15,6 +15,8 @@ pub mod geom2d_int;
 pub mod ginter;
 pub mod hatch;
 pub mod ics_geometry;
+pub mod ics_interutils;
+pub mod ics_polyhedron;
 pub mod int_curve;
 pub mod int_curve_surface;
 pub mod int_curve_surface_inter;
