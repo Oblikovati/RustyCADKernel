@@ -22,6 +22,7 @@ def corpus() -> str:
     requests += [f'surface {index} {depth} {index+1} {depth+1} 3 -2 4 2 -5 6'
                  for index, depth in product([-3, 0, 1, 7], [-2, 0, 1, 2, 7, 64])]
     requests += [f"face_state {a} {b} {c} {tol} {fuzzy} {n}" for a, b, c, tol, fuzzy, n in product([0,1], [0,1], [0,1], [-1,1e-7], [-1,0,1e-7,1e-3,99], [0,3])]
+    requests += [f"face_perform {a} {b} {x} {y} {z} {parallel} {split}" for (a, b), x, y, z, parallel, split in product([(0, 0), (0, 1), (1, 0), (0, 3), (3, 0), (1, 3), (3, 1)], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1])]
     requests += marked_requests()
     requests += bopds_requests()
     requests += intersection_requests()
