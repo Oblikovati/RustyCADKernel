@@ -166,11 +166,20 @@ def ss_items() -> list[tuple[ShapeSpec, list[int]]]:
     ]
 
 
+# The infinite plane face against the half-infinite and infinite line edges: the corners
+# of the (open) edge box do not project on the plane, so TRIM_INFINIT_FACE trims with
+# uninitialized parameters natively (the result follows the stack contents left by earlier
+# requests; see docs/tktopalgo-progress.md).
+UNDEFINED_TRIM_PAIRS = ({5, 11}, {6, 11})
+
+
 def _ss_requests(requests: list[str]) -> None:
     items = ss_items()
     for i, (a, sa) in enumerate(items):
         for j, (b, sb) in enumerate(items):
             if (i + 2 * j) % 3 != 0 and i != j:
+                continue
+            if {i, j} in UNDEFINED_TRIM_PAIRS:
                 continue
             requests.append(ss_request(a, sa, b, sb, 1, 1e30))
             requests.append(ss_request(a, sa, b, sb, (i + j) % 2, 1e30, 1e-3, 2 - (i % 3), j % 2))

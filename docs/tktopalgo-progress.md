@@ -633,7 +633,7 @@ diagonal of another (an exception inside Perform), with and without Perform.
 `bba_boxselector` (UB-trees of row, nested, touching and random boxes, Select, Reject
 and Accept).
 
-BRepExtrema: 1440 requests. `tools/tktopalgo_corpus_brepextrema.py` (with the shapes of
+BRepExtrema: 1436 requests. `tools/tktopalgo_corpus_brepextrema.py` (with the shapes of
 `tktopalgo_corpus_brepextrema_shapes.py`; `tktopalgo_probe_brepextrema.cxx` and
 `tp_probe/brep_extrema.rs`) runs `bxd_dist` on every pair of a vertex, a segment, an arc, a
 circle, a C0 B-spline, a Bezier curve, a half-infinite line, a rectangle, an infinite
@@ -662,7 +662,10 @@ requests leave out the solids with more than one vertex of the other shape insid
 tasks that each find a vertex inside before they see the flag of another report their
 solutions in an order that follows the thread timing. The statuses of a proximity value
 tool and of shape proximity are printed only once computed (natively they are
-uninitialized before).
+uninitialized before). DistanceSS leaves out the infinite plane face against the
+half-infinite and infinite line edges: no corner of the open edge box projects on the
+plane, so natively `TRIM_INFINIT_FACE` trims with uninitialized parameters and the result
+depends on the stack contents that earlier requests leave.
 
 ## Preserved native behaviour
 
