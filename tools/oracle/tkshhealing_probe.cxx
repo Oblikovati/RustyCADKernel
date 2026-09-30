@@ -56,10 +56,12 @@
 #include "tkshhealing_probe_split_surface.cxx"
 #include "tkshhealing_probe_edge_divide.cxx"
 #include "tkshhealing_probe_transfer_parameters.cxx"
+#include "tkshhealing_probe_transfer_parameters_proj.cxx"
 #include "tkshhealing_probe_fix_small_curves.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_fix_small_curves", sh_fix_small_curves_case},
  {"sh_transfer_parameters", sh_transfer_parameters_case},
+ {"sh_transfer_parameters_proj", sh_transfer_parameters_proj_case},
  {"sh_edge_divide", sh_edge_divide_case},
  {"sh_split_surface", sh_split_surface_case},
  {"sh_split_curve2d", sh_split_curve2d_case},

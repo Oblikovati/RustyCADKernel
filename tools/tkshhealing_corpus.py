@@ -64,3 +64,6 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
 
     # TransferParameters: independent parameter spaces and topology range copying.
     __import__('tkshhealing_corpus_transfer_parameters').append_transfer_parameter_requests(requests)
+
+    # TransferParametersProj: projection, per-representation ranges and non-manifold copies.
+    __import__('tkshhealing_corpus_transfer_proj').append_transfer_projection_requests(requests)
