@@ -159882,6 +159882,374 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillSectionGenerator::parameter",
       "status": "implemented",
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Generator()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Generator.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGenerator::new",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Generator::Perform(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Generator.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGenerator::perform",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Generator::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Generator.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGenerator::surface",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Filling()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFilling::new",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::NbUPoles() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFilling::nb_u_poles",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::NbVPoles() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFilling::nb_v_poles",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::Poles(NCollection_Array2<gp_Pnt>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFilling::poles",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::isRational() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFilling::is_rational",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::Weights(NCollection_Array2<double>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFilling::weights",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Coons()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Coons.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCoons::new",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Coons(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Coons.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCoons::with_poles",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Coons(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Coons.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCoons::with_weights",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Coons::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Coons.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCoons::init",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Coons::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Coons.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCoons::init_weighted",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Stretch()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Stretch.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillStretch::new",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Stretch(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Stretch.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillStretch::with_poles",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Stretch(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Stretch.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillStretch::with_weights",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Stretch::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Stretch.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillStretch::init",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Stretch::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Stretch.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillStretch::init_weighted",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::new",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::with_poles",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::with_weights",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::init",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::init_weighted",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::with_two_rows",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::with_two_weighted_rows",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::init_two_rows",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Curved::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Curved.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCurved::init_two_weighted_rows",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_FillingStyle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_FillingStyle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFillingStyle",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_ApproxStyle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_ApproxStyle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillApproxStyle",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::new",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves(const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::with_four",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves(const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::with_three",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves(const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::with_two",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves::Init(const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::init_four",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves::Init(const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::init_three",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves::Init(const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::init_two",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BezierCurves::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BezierCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBezierCurves::surface",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::new",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves(const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::with_four",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves(const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::with_three",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves(const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::with_two",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves::Init(const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::init_four",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves::Init(const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::init_three",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves::Init(const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&,GeomFill_FillingStyle)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::init_two",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_BSplineCurves::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BSplineCurves.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBSplineCurves::surface",
+      "status": "implemented",
+      "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     }
   ],
   "tests": [

@@ -28,12 +28,32 @@
 
 // Filling part (docs/geomalgo-design.md section 13).
 mod app_surf;
+mod approx_style;
+mod bezier_curves;
+mod bspline_curves;
+mod bspline_distribution;
+mod coons;
+mod curved;
+mod curves_filling;
+mod filling;
+mod filling_style;
+mod generator;
 mod line;
 mod profiler;
 mod profiler_unify;
 mod section_generator;
+mod stretch;
 
 pub use app_surf::GeomFillAppSurf;
+pub use approx_style::GeomFillApproxStyle;
+pub use bezier_curves::GeomFillBezierCurves;
+pub use bspline_curves::GeomFillBSplineCurves;
+pub use coons::GeomFillCoons;
+pub use curved::GeomFillCurved;
+pub use filling::GeomFillFilling;
+pub use filling_style::GeomFillFillingStyle;
+pub use generator::GeomFillGenerator;
 pub use line::GeomFillLine;
 pub use profiler::GeomFillProfiler;
 pub use section_generator::GeomFillSectionGenerator;
+pub use stretch::GeomFillStretch;
