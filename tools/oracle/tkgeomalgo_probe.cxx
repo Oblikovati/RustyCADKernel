@@ -77,6 +77,8 @@
 #include "tkgeomalgo_probe_intpatch_poly.cxx"
 #include "tkgeomalgo_probe_intpatch_wltool.cxx"
 #include "tkgeomalgo_probe_intpatch_prmprm.cxx"
+#include "tkgeomalgo_probe_intpatch_extend.cxx"
+#include "tkgeomalgo_probe_intpatch_inter.cxx"
 #include "tkgeomalgo_probe_geomplate.cxx"
 #include "tkgeomalgo_probe_geomplate_build.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
@@ -317,6 +319,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ip_lc", ga_ip_lc_case},
  {"ip_ppgrid", ga_ip_ppgrid_case},
  {"ip_ppdepart", ga_ip_ppdepart_case},
+ {"ip_extend", ga_ip_extend_case},
+ {"ip_prmprm", ga_ip_prmprm_case},
+ {"ip_inter", ga_ip_inter_case},
+ {"ip_isingular", ga_ip_isingular_case},
  // GeomPlate (tkgeomalgo_probe_geomplate*.cxx)
  {"gplate_point", ga_gp_point_case},
  {"gplate_curve", ga_gp_curve_case},

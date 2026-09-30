@@ -21,8 +21,8 @@ use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
 use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_poly, int_patch_tools};
+use ga_probe::{int_patch_extend, int_patch_inter, int_patch_prmprm, int_patch_wltool};
 use ga_probe::{int_patch_impimp, int_patch_impprm};
-use ga_probe::{int_patch_prmprm, int_patch_wltool};
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
@@ -268,6 +268,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_lc", int_patch_wltool::lc_case),
     ("ip_ppgrid", int_patch_prmprm::ppgrid_case),
     ("ip_ppdepart", int_patch_prmprm::ppdepart_case),
+    ("ip_extend", int_patch_extend::extend_case),
+    ("ip_prmprm", int_patch_inter::prmprm_case),
+    ("ip_inter", int_patch_inter::inter_case),
+    ("ip_isingular", int_patch_inter::isingular_case),
     // GeomPlate (ga_probe/geom_plate*.rs)
     ("gplate_point", geom_plate::point_case),
     ("gplate_curve", geom_plate::curve_case),
