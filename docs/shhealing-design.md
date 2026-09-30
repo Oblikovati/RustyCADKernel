@@ -129,3 +129,68 @@ number in code comments and ledger notes.
 - **Uninitialized fields.** A native field read before it is set (the `myTols` sum of
   `ShapeAnalysis_ShapeTolerance` before `InitTolerance`) starts at zero here; the progress
   document lists each one, and the corpus never reads it natively.
+## 7. ShapeCustom: the modifications
+
+Sections 4 to 6 are left to ShapeAnalysis, ShapeConstruct and ShapeFix, which are ported
+in parallel; the ShapeCustom, ShapeUpgrade and ShapeProcess sections take the numbers 7, 8
+and 9 in package order.
+
+- **ShapeCustom_Curve2d** has only static members: the unit struct `ShapeCustomCurve2d`.
+  `IsLinear` and `ConvertToLine2d` leave their output arguments unchanged when they return
+  false or a null line, so they return `Option` (`None` is the native false or null line).
+  `IsLinear` reads the poles by the indices 1..Length through `Array1::value`, as natively;
+  another lower bound is Standard_OutOfRange instead of an unchecked read.
+  `SimplifyBSpline2d` changes the B-spline through its shared handle (`&Geom2dBSplineCurve`).
+- **ShapeCustom_RestrictionParameters** is a Transient with its fields in one
+  `SharedState`; each accessor that returns a reference to a field is a getter and a `set_`
+  setter.
+- **ShapeCustom_Modification** is abstract and derives from `BRepTools_Modification`
+  (TKBRep's trait `BRepToolsModification`): it is the trait
+  `ShapeCustomModification: BRepToolsModification`, registered below
+  `BRepTools_Modification`. Its private `myMsgReg` is the struct
+  `ShapeCustomModificationFields` that each concrete modification embeds and lends through
+  the required method `modification_messages`; `SetMsgRegistrator` (virtual),
+  `MsgRegistrator` and `SendMsg` are provided methods. A concrete modification
+  (`ShapeCustomDirectModification`, `ShapeCustomConvertToRevolution`) lists both traits as
+  interfaces of its `impl_transient!`, so a `Handle<dyn BRepToolsModification>` casts to
+  `Handle<dyn ShapeCustomModification>` as the native `DownCast`.
+- **ShapeCustom_TrsfModification** derives from `BRepTools_TrsfModification`, a concrete
+  class: the struct `ShapeCustomTrsfModification` embeds a `TrsfModification` as its parent
+  (RTTI chain ShapeCustom_TrsfModification -> BRepTools_TrsfModification ->
+  BRepTools_Modification) and implements `BRepToolsModification` by calling the parent,
+  then overwriting the tolerance; the inherited `Trsf()`/`IsCopyMesh()` are reached through
+  `trsf_modification()`.
+- The `NewCurve` bodies that ShapeCustom_DirectModification and
+  ShapeCustom_ConvertToRevolution share (copy the 3D curve of an edge when one of its
+  p-curves lies on a surface that changes) are one private function with the surface test
+  as a closure.
+- The output parameters of the `New*` members are the `&mut` arguments and the
+  `NewSurface`/`NewCurve` structs of the TKBRep trait; a member leaves them as natively
+  (written or not) on every path.
+
+## 8. ShapeUpgrade: the package functions, the tool root and the curve splitter
+
+- **ShapeUpgrade** (package functions) is the unit struct `ShapeUpgrade`; the two
+  `C0BSplineToSequenceOfC1BSplineCurve` overloads are
+  `c0_bspline_to_sequence_of_c1_bspline_curve` (3D) and
+  `c0_bspline2d_to_sequence_of_c1_bspline_curve` (2D). They return the sequence of pieces
+  (`Handle<HSequence<Handle<dyn GeomBoundedCurve>>>`, and the 2D one) as `Some`; `None` is
+  the native false, whose output handle is left unchanged. The 3D member changes its
+  input through the shared handle (`SetNotPeriodic`), as natively.
+- **ShapeUpgrade_Tool** is a Transient with its fields in one `SharedState`; the tools
+  derived from it embed a `ShapeUpgradeTool` as their parent (`impl_transient!` with the
+  parent field). `Set(tool)` copies the fields of the other tool before writing its own,
+  so a tool can be set from itself.
+- **ShapeUpgrade_RemoveLocations** is a Transient; the recursion of `MakeNewShape` runs on
+  a private `Remover` that owns the map of new shapes while `Remove` runs (the map is taken
+  out of the shared state and put back, so no lock is held across the recursion).
+  `GetModifiedShapesMap()` returns a reference natively: it lends the map to a closure.
+- **ShapeUpgrade_SplitCurve** is a concrete base class whose `Build` and `Compute` are
+  virtual (ShapeUpgrade_SplitCurve2d and 3d override them): as TKBRep's
+  `BRepTools_ReShape`, it is the trait `SplitCurve` (provided methods with the native
+  bodies, so `Perform` calls the overrides of a derived class) and the struct
+  `ShapeUpgradeSplitCurve`. Its protected fields (`mySplitValues`, `myNbCurves`,
+  `myStatus`) are the public struct `SplitCurveFields` inside `SplitCurveData`, which a
+  derived class embeds and lends through `split_curve_data`. `Status(ShapeExtend_Status)`
+  is `status_flag`. `SetSplitValues` given the splitter's own sequence reads and edits
+  that one sequence, as natively.

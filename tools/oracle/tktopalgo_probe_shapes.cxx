@@ -162,10 +162,14 @@ void tp_other_op(GaReader& r,TpShapes& t,int op){
  else if(op==35){int f=r.integer();double first=r.real();B.Range(TopoDS::Edge(t.shapes.at(i)),TopoDS::Face(t.shapes.at(f)),first,r.real());}
  else{int c=r.integer();const TopoDS_Shape& e=t.shapes.at(i);
   occ::down_cast<BRep_TEdge>(e.TShape())->ChangeCurves().Append(new BRep_Curve3D(t.curves.at(c),t.locations.at(r.integer())));}}
-TpShapes tp_shapes(GaReader& r){
- TpShapes t;int nops=r.integer();
+// Runs the ops of one program on tables that may already hold geometry (a probe that
+// builds geometry the ops cannot describe adds it first).
+void tp_shapes_into(GaReader& r,TpShapes& t){
+ int nops=r.integer();
  for(int k=0;k<nops;++k){int op=r.integer();
-  if(!tp_create_op(r,t,op)&&!tp_edge_op(r,t,op))tp_other_op(r,t,op);}
+  if(!tp_create_op(r,t,op)&&!tp_edge_op(r,t,op))tp_other_op(r,t,op);}}
+TpShapes tp_shapes(GaReader& r){
+ TpShapes t;tp_shapes_into(r,t);
  return t;}
 // The index of `s` (IsEqual) in the table, -1 for a null shape, -2 when it is not there.
 int tp_shape_index(const TpShapes& t,const TopoDS_Shape& s){

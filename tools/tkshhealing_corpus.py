@@ -29,3 +29,7 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_analysis_basic').append_analysis_basic_requests(requests)
     # ShapeFix_Root, _ShapeTolerance, _EdgeConnect (tkshhealing_corpus_fix_basic.py)
     __import__('tkshhealing_corpus_fix_basic').append_fix_basic_requests(requests)
+    # ShapeCustom (tkshhealing_corpus_shapecustom.py)
+    __import__('tkshhealing_corpus_shapecustom').append_shapecustom_requests(requests)
+    # ShapeUpgrade (tkshhealing_corpus_shapeupgrade.py)
+    __import__('tkshhealing_corpus_shapeupgrade').append_shapeupgrade_requests(requests)

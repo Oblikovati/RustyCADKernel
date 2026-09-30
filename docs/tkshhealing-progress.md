@@ -152,6 +152,45 @@ setters are provided methods that a derived fixing tool overrides, and `ShapeFix
 the base class itself. `crates/tkshhealing/tests/shape_analysis_*.rs` and
 `shape_fix_*.rs` hold the behavior tests, on shapes built
 with the ported BRepBuilderAPI makers (`tests/healing_support`).
+## ShapeCustom
+
+Ported: ShapeCustom_Curve2d, ShapeCustom_RestrictionParameters, ShapeCustom_Modification,
+ShapeCustom_TrsfModification, ShapeCustom_DirectModification and
+ShapeCustom_ConvertToRevolution (docs/shhealing-design.md section 7 fixes the mapping).
+`ShapeCustomCurve2d` is a unit struct; `ShapeCustomRestrictionParameters` has a getter and
+a `set_` setter per native reference accessor; the abstract `ShapeCustom_Modification` is
+the trait `ShapeCustomModification: BRepToolsModification`; the three modifications are
+`ShapeCustomTrsfModification` (embedding TKBRep's `TrsfModification`),
+`ShapeCustomDirectModification` and `ShapeCustomConvertToRevolution`, applied with
+TKBRep's `Modifier`. `crates/tkshhealing/tests/shape_custom_*.rs` hold the behavior tests.
+
+Not ported yet, because they use classes of the parallel ShapeAnalysis/ShapeConstruct work
+that are not in this branch: ShapeCustom_BSplineRestriction (ShapeAnalysis,
+ShapeAnalysis_Curve, ShapeConstruct), ShapeCustom_ConvertToBSpline (ShapeConstruct),
+ShapeCustom_Surface (ShapeAnalysis_Geom, ShapeAnalysis_Surface),
+ShapeCustom_SweptToElementary (ShapeAnalysis_Surface) and the package functions of
+ShapeCustom.hxx (they use the four classes). The api audit of ShapeCustom is 0 stale with
+48 rows (6 of them the excluded RTTI macros); the 64 missing members belong to those
+classes.
+
+## ShapeUpgrade
+
+Ported: the package functions (C0BSplineToSequenceOfC1BSplineCurve in 3D and 2D),
+ShapeUpgrade_Tool, ShapeUpgrade_RemoveLocations and ShapeUpgrade_SplitCurve
+(docs/shhealing-design.md section 8 fixes the mapping): `ShapeUpgrade` is a unit struct,
+`ShapeUpgradeTool` and `ShapeUpgradeRemoveLocations` are Transients, and the curve
+splitter is the trait `SplitCurve` with the struct `ShapeUpgradeSplitCurve`.
+`crates/tkshhealing/tests/shape_upgrade_basics.rs` holds the behavior tests.
+
+Not ported yet, because they use classes of the parallel ShapeAnalysis/ShapeFix work that
+are not in this branch: ShapeUpgrade_ShellSewing (ShapeAnalysis_ShapeTolerance),
+ShapeUpgrade_SplitCurve2d and ShapeUpgrade_SplitCurve3d (ShapeAnalysis_Curve),
+ShapeUpgrade_RemoveInternalWires (ShapeAnalysis::OuterWire and ContourArea), and the level
+4 classes above them: ShapeUpgrade_ConvertCurve2dToBezier, ShapeUpgrade_ConvertCurve3dToBezier,
+ShapeUpgrade_SplitCurve2dContinuity, ShapeUpgrade_SplitCurve3dContinuity (the two
+splitters) and ShapeUpgrade_SplitSurface (ShapeUpgrade_SplitCurve3d). The api audit of
+ShapeUpgrade is 0 stale with 31 rows (4 of them the excluded RTTI macros); the 247 missing
+members belong to the classes not ported.
 
 ## GoogleTest suites
 
@@ -285,6 +324,46 @@ ShapeFix (tools/tkshhealing_corpus_fix_basic.py):
 - `sh_edgeconnect` (12): a triangle of separate lines with gaps (open and closed wires),
   lines whose p-curves end elsewhere, a closed circle edge, merged groups, repeated
   connections and `Clear`; the digest reads the ends of each edge by orientation.
+ShapeCustom (tools/tkshhealing_corpus_shapecustom.py, 342 requests). The ShapeCustom,
+ShapeUpgrade and ShapeProcess probes share a geometry prelude
+(`tools/oracle/tkshhealing_probe_shcommon.cxx`, `sh_probe/sh_common.rs`,
+`tools/tkshhealing_corpus_shcommon.py`) that adds to the tables of a TKTopAlgo shape
+program, before its ops run, the geometry those ops cannot describe (elementary surfaces
+on indirect frames, trimmed and offset surfaces of them, mirror locations), and digests of
+surfaces, curves and locations:
+
+- `sc_curve2d` (51): IsLinear on 15 pole sets (none, one, coincident, closer than
+  PConfusion, collinear with tolerance 0, near-collinear within and beyond the tolerance,
+  zigzags), ConvertToLine2d on 23 cases (linear B-splines of degree 1 to 3, rational
+  spacing, periodic, reversed and equal ends, a huge tolerance, Bezier curves, a circle, a
+  line and a trimmed curve), SimplifyBSpline2d on 13 B-splines (removable and fixed knots,
+  degrees 2 to 5, a straight cubic, periodic, without inner knots);
+- `sc_restriction` (34): the defaults, each field set twice and once, and all fields set;
+- `sc_modif` (257): one scene of 21 faces (direct and indirect planes, cylinders, spheres,
+  cones of positive and negative semi-angle and tori, trimmed and offset surfaces of them,
+  a Bezier patch, a face with a mirror location and a located negative cone), each with an
+  edge carrying a 3D line and a p-curve (a seam on the cylinders), and their compound.
+  Every member of the three modifications (the transformation one under the identity, a
+  translation, a rotation, scalings by 2.5, -1.5 and 0.5, the three mirrors and a product)
+  runs on each face, its edges and vertices from sentinel outputs, BRepTools_Modifier
+  rebuilds each face and the compound, and the messages that reached a
+  ShapeExtend_MsgRegistrator are printed with the RTTI of each modification.
+
+ShapeUpgrade (tools/tkshhealing_corpus_shapeupgrade.py, 173 requests):
+
+- `su_c0split` (24): C0BSplineToSequenceOfC1BSplineCurve on 15 3D and 7 2D B-splines
+  (polylines, quadratic, cubic and quartic curves with one or several C0 knots, mixed with
+  smooth knots, rational, periodic, C1 and single-span curves, far knots) and a null handle
+  of each dimension: the pieces with their knots, poles and weights, and the input after
+  the call;
+- `su_tool` (19): precision and tolerance settings of ShapeUpgrade_Tool in every order,
+  `Set` from another tool with and without a context, `LimitTolerance`;
+- `su_removeloc` (110): a scene with locations in a TFace, on faces, edges (on the 3D
+  curve), vertices, shells, solids and compounds, a seam and an edge shared by two faces;
+  `Remove` at the nine removal levels on twelve shapes, with `ModifiedShape` and the map
+  of new shapes, and two requests that remove twice with one remover;
+- `su_splitcurve` (20): Init and SetSplitValues with sorted, unsorted, close, outside,
+  empty, null and self-referencing sequences, then Perform, Compute and Build.
 
 ## Preserved native behaviour
 
@@ -364,6 +443,39 @@ ShapeFix (tools/tkshhealing_corpus_fix_basic.py):
   tolerances do not. The probe reads the ends of each edge by orientation. A shared
   vertex gets the centre of the bounding box of the used ends of every curve
   representation (p-curves included) and a tolerance of 1.0001 times the farthest end.
+### ShapeCustom
+
+- `ShapeCustom_Curve2d::ConvertToLine2d` locates the line at its own point of parameter
+  `c1` (`SetLocation(ElCLib::Value(c1, line))`), so the first point gets the parameter
+  `-c1`, not `c1`.
+- `ShapeCustom_RestrictionParameters::ConvertToroidalSurf()` returns a reference to
+  `myConvCylindricalSurf` and `ConvertCylindricalSurf()` one to `myConvToroidalSurf`; both
+  start false, so only the field behind each name differs.
+- `ShapeCustom_TrsfModification` overwrites the output tolerance with the tolerance stored
+  in the TShape times `|ScaleFactor|`, which is not raised to `Precision::Confusion()` as
+  `BRep_Tool::Tolerance` does (a face of tolerance 1e-9 keeps 1e-9 times the factor).
+- `ShapeCustom_DirectModification` walks only rectangular trimmed surfaces to their basis:
+  an offset surface of an indirect basis is not modified. Its indirection test,
+  `(IsNegative() != (det < 0)) == Direct()`, never depends on the location, since the
+  vectorial part of a gp_Trsf includes the scale factor. `NewSurface` writes the face's
+  surface and location even when it returns false.
+- `ShapeCustom_ConvertToRevolution` builds the meridian of a sphere as a half circle
+  trimmed to `[-PI/2, PI/2]`, which Geom_TrimmedCurve moves to `[3PI/2, 5PI/2]`: its
+  p-curves are moved by `(0, 2PI)`, and a rectangular trimmed sphere raises
+  Standard_ConstructionError, since its V bounds fall outside the new V range.
+
+### ShapeUpgrade
+
+- `ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve` (3D) makes its input curve
+  non-periodic in place before it splits it; the 2D overload lifts a copy to 3D, so a 2D
+  input keeps its periodicity.
+- `ShapeUpgrade_RemoveLocations` keeps its map of new shapes from one `Remove` to the
+  next; at the default level (TopAbs_SHAPE) compounds keep their location; the p-curves of
+  edges on a Geom_Plane face are not copied to the new edge; an edge shared by two faces is
+  rebuilt once and gets the p-curves of the second face on the same new edge.
+- `ShapeUpgrade_SplitCurve::SetSplitValues` compares each given value with the bounds of
+  the interval of the original values only: unsorted values are inserted unsorted and
+  values closer than `Precision::PConfusion()` to each other are all inserted.
 
 ## Deliberate deviations
 
@@ -381,3 +493,20 @@ ShapeFix (tools/tkshhealing_corpus_fix_basic.py):
 
 - A null curve given to `MakeEdge` without a range, and the other null dereferences of
   the native members, return Standard_NullObject errors.
+
+### ShapeCustom
+
+- A face without surface (natively a null dereference in DirectModification and
+  ConvertToRevolution), a null curve given to `ConvertToLine2d` and a null vertex given to
+  `ShapeCustom_TrsfModification::NewParameter` (dereferenced after the inherited call)
+  return Standard_NullObject errors; `IsLinear` on an array whose lower bound is not 1
+  returns Standard_OutOfRange instead of reading outside it. The corpus does not reach
+  these cases natively.
+
+### ShapeUpgrade
+
+- `ShapeUpgrade_RemoveLocations::Remove` of a null shape, `ShapeUpgrade_Tool::Set` of a
+  null tool and `ShapeUpgrade_SplitCurve::SetSplitValues` before `Init` dereference a null
+  handle natively; they return Standard_NullObject errors. Work-array indices that the
+  native C0 split would read outside its arrays (impossible for a valid B-spline) are
+  Standard_OutOfRange.

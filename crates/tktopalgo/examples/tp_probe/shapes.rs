@@ -283,18 +283,25 @@ pub fn tp_shapes(r: &mut Reader<'_>) -> Result<TpShapes, Failure> {
         triangulations: Vec::new(),
         shapes: Vec::new(),
     };
+    tp_shapes_into(r, &mut t)?;
+    Ok(t)
+}
+
+/// `tp_shapes_into`: runs the ops of one program on tables that may already hold
+/// geometry (a probe that builds geometry the ops cannot describe adds it first).
+pub fn tp_shapes_into(r: &mut Reader<'_>, t: &mut TpShapes) -> Result<(), Failure> {
     let nops = r.integer();
     for _ in 0..nops {
         let op = r.integer();
-        if create_op(r, &mut t, op)? || edge_op(r, &t, op)? {
+        if create_op(r, t, op)? || edge_op(r, t, op)? {
             continue;
         }
         let i = r.integer();
-        if !vertex_op(r, &mut t, op, i)? {
-            polygon_op(r, &t, op, i)?;
+        if !vertex_op(r, t, op, i)? {
+            polygon_op(r, t, op, i)?;
         }
     }
-    Ok(t)
+    Ok(())
 }
 
 /// `tp_shape_index`: the index of `s` (IsEqual) in the table, -1 for a null shape, -2

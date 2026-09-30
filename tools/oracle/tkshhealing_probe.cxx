@@ -38,6 +38,10 @@
 #include "tkshhealing_probe_reshape.cxx"
 #include "tkshhealing_probe_analysis_basic.cxx"
 #include "tkshhealing_probe_fix_basic.cxx"
+#include "tkshhealing_probe_shcommon.cxx"
+#include "tkshhealing_probe_shapecustom.cxx"
+#include "tkshhealing_probe_modification.cxx"
+#include "tkshhealing_probe_shapeupgrade.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ShapeExtend (tkshhealing_probe_shapeextend.cxx)
  {"sh_status", sh_status_case},
@@ -66,6 +70,15 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_fixroot", sh_fixroot_case},
  {"sh_fixtol", sh_fixtol_case},
  {"sh_edgeconnect", sh_edgeconnect_case},
+ // ShapeCustom (tkshhealing_probe_shapecustom.cxx, tkshhealing_probe_modification.cxx)
+ {"sc_curve2d", sc_curve2d_case},
+ {"sc_restriction", sc_restriction_case},
+ {"sc_modif", sc_modif_case},
+ // ShapeUpgrade (tkshhealing_probe_shapeupgrade.cxx)
+ {"su_c0split", su_c0split_case},
+ {"su_tool", su_tool_case},
+ {"su_removeloc", su_removeloc_case},
+ {"su_splitcurve", su_splitcurve_case},
 };
 int main() {
  std::string line;

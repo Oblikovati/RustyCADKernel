@@ -199130,6 +199130,638 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShapeTolerance::set_tolerance",
       "status": "implemented",
       "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixtol requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_Curve2d::IsLinear(const NCollection_Array1<gp_Pnt2d>&,double,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Curve2d.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomCurve2d::is_linear",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_Curve2d::ConvertToLine2d(const occ::handle<Geom2d_Curve>&,double,double,double,double&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Curve2d.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomCurve2d::convert_to_line2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_Curve2d::SimplifyBSpline2d(occ::handle<Geom2d_BSplineCurve>&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Curve2d.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomCurve2d::simplify_bspline2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_Modification::SetMsgRegistrator(const occ::handle<ShapeExtend_BasicMsgRegistrator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Modification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomModification::set_msg_registrator",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_Modification::MsgRegistrator() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Modification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomModification::msg_registrator",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_Modification::SendMsg(const TopoDS_Shape&,const Message_Msg&,Message_Gravity) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Modification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomModification::send_msg",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_Modification::DEFINE_STANDARD_RTTIEXT(ShapeCustom_Modification,BRepTools_Modification)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Modification.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::new",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::GMaxDegree()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::g_max_degree",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter g_max_degree and the setter set_g_max_degree replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::GMaxSeg()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::g_max_seg",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter g_max_seg and the setter set_g_max_seg replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertPlane()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_plane",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_plane and the setter set_convert_plane replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertBezierSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_bezier_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_bezier_surf and the setter set_convert_bezier_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertRevolutionSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_revolution_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_revolution_surf and the setter set_convert_revolution_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertExtrusionSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_extrusion_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_extrusion_surf and the setter set_convert_extrusion_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertOffsetSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_offset_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_offset_surf and the setter set_convert_offset_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertCylindricalSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_cylindrical_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_cylindrical_surf and the setter set_convert_cylindrical_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertConicalSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_conical_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_conical_surf and the setter set_convert_conical_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertToroidalSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_toroidal_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_toroidal_surf and the setter set_convert_toroidal_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertSphericalSurf()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_spherical_surf",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_spherical_surf and the setter set_convert_spherical_surf replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::SegmentSurfaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::segment_surface_mode",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter segment_surface_mode and the setter set_segment_surface_mode replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertCurve3d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_curve3d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_curve3d and the setter set_convert_curve3d replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertOffsetCurv3d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_offset_curv3d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_offset_curv3d and the setter set_convert_offset_curv3d replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertCurve2d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_curve2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_curve2d and the setter set_convert_curve2d replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::ConvertOffsetCurv2d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomRestrictionParameters::convert_offset_curv2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): the native accessor returns a reference to its field; the Rust getter convert_offset_curv2d and the setter set_convert_offset_curv2d replace it (compared by the sc_restriction requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_RestrictionParameters::DEFINE_STANDARD_RTTIEXT(ShapeCustom_RestrictionParameters,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_RestrictionParameters.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeCustom_TrsfModification(const gp_Trsf&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_TrsfModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomTrsfModification::new",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_TrsfModification::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_TrsfModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomTrsfModification::new_surface",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_TrsfModification::NewCurve(const TopoDS_Edge&,occ::handle<Geom_Curve>&,TopLoc_Location&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_TrsfModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomTrsfModification::new_curve",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_TrsfModification::NewPoint(const TopoDS_Vertex&,gp_Pnt&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_TrsfModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomTrsfModification::new_point",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_TrsfModification::NewCurve2d(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_TrsfModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomTrsfModification::new_curve2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_TrsfModification::NewParameter(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_TrsfModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomTrsfModification::new_parameter",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_TrsfModification::DEFINE_STANDARD_RTTIEXT(ShapeCustom_TrsfModification,BRepTools_TrsfModification)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_TrsfModification.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomDirectModification::new",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomDirectModification::new_surface",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification::NewCurve(const TopoDS_Edge&,occ::handle<Geom_Curve>&,TopLoc_Location&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomDirectModification::new_curve",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification::NewPoint(const TopoDS_Vertex&,gp_Pnt&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomDirectModification::new_point",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification::NewCurve2d(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomDirectModification::new_curve2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification::NewParameter(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomDirectModification::new_parameter",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification::Continuity(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomDirectModification::continuity",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_DirectModification::DEFINE_STANDARD_RTTIEXT(ShapeCustom_DirectModification,ShapeCustom_Modification)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_DirectModification.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToRevolution::new",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToRevolution::new_surface",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution::NewCurve(const TopoDS_Edge&,occ::handle<Geom_Curve>&,TopLoc_Location&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToRevolution::new_curve",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution::NewPoint(const TopoDS_Vertex&,gp_Pnt&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToRevolution::new_point",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution::NewCurve2d(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToRevolution::new_curve2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution::NewParameter(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToRevolution::new_parameter",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution::Continuity(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToRevolution::continuity",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 7): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sc_curve2d, sc_restriction and sc_modif requests)."
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToRevolution::DEFINE_STANDARD_RTTIEXT(ShapeCustom_ConvertToRevolution,ShapeCustom_Modification)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToRevolution.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom_BoundedCurve>>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgrade::c0_bspline_to_sequence_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom2d_BoundedCurve>>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgrade::c0_bspline2d_to_sequence_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::new",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::Set(const occ::handle<ShapeUpgrade_Tool>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetContext(const occ::handle<ShapeBuild_ReShape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_context",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::Context() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::context",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetPrecision(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_precision",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::Precision() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::precision",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetMinTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_min_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::MinTolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::min_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::SetMaxTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::set_max_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::MaxTolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::max_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::LimitTolerance(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeTool::limit_tolerance",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_Tool::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_Tool,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_Tool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::new",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::Remove(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::remove",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::GetResult() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::get_result",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::SetRemoveLevel(TopAbs_ShapeEnum)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::set_remove_level",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::RemoveLevel() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::remove_level",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::ModifiedShape(const TopoDS_Shape&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::modified_shape",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::GetModifiedShapesMap() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeRemoveLocations::get_modified_shapes_map",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_RemoveLocations::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_RemoveLocations,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_RemoveLocations.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve::new",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 8): overloads take distinct Rust names, C++ output references become returned values or &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (su_c0split, su_tool, su_removeloc and su_splitcurve requests)."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Init(double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::init",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::SetSplitValues(const occ::handle<NCollection_HSequence<double>>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::set_split_values",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Build(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::build",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::SplitValues() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::split_values",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Compute()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::compute",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Perform(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::perform",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitCurve::status_flag",
+      "status": "implemented",
+      "notes": "ShapeUpgrade mapping (docs/shhealing-design.md section 8): the concrete base class with virtual members is the trait SplitCurve (provided methods) with the struct ShapeUpgradeSplitCurve; compared with OCCT by the su_splitcurve requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitCurve,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
     }
   ],
   "tests": [
