@@ -13,3 +13,5 @@ def append_tkprim_requests(requests: list[str]) -> None:
     """Append every TKPrim request family in a fixed order."""
     # The shared shape digest (tkprim_corpus_shape.py)
     __import__('tkprim_corpus_shape').append_shape_requests(requests)
+    # Sweep (tkprim_corpus_sweep.py)
+    __import__('tkprim_corpus_sweep').append_sweep_requests(requests)

@@ -191802,6 +191802,206 @@
       "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::generating_shape",
       "status": "implemented",
       "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::default",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape(int,TopAbs_ShapeEnum,bool,bool,bool)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::with_flags",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape::Init(int,TopAbs_ShapeEnum,bool,bool,bool)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::init",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape::Index() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::index",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape::Type() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::kind",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape::Closed() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::closed",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape::BegInfinite() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::beg_infinite",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape::EndInfinite() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::end_infinite",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShape::Orientation() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::orientation",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeIterator()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeIterator.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeIterator::new",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeIterator::Init(const Sweep_NumShape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeIterator.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeIterator::init",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeIterator::More() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeIterator.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeIterator::more",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeIterator::Next()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeIterator.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeIterator::next",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeIterator::Value() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeIterator.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeIterator::value",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeIterator::Orientation() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeIterator.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeIterator::orientation",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool(const Sweep_NumShape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::new",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::NbShapes() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::nb_shapes",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::Index(const Sweep_NumShape&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::index",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::Shape(int) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::shape",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::Type(const Sweep_NumShape&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::kind",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::Orientation(const Sweep_NumShape&) const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::orientation",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::HasFirstVertex() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::has_first_vertex",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::HasLastVertex() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::has_last_vertex",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::FirstVertex() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::first_vertex",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
+    },
+    {
+      "upstream_id": "Sweep_NumShapeTool::LastVertex() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShapeTool.hxx",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShapeTool::last_vertex",
+      "status": "implemented",
+      "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
     }
   ],
   "tests": [

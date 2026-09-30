@@ -2,7 +2,7 @@
 //! `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod pr_probe;
-use pr_probe::shape;
+use pr_probe::{shape, sweep};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -12,6 +12,10 @@ type ProbeCase = fn(&[f64]);
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // The shared shape digest (pr_probe/shape.rs)
     ("pr_digest_vertex", shape::digest_vertex_case),
+    // Sweep (pr_probe/sweep.rs)
+    ("sw_numshape", sweep::numshape_case),
+    ("sw_reinit", sweep::reinit_case),
+    ("sw_init", sweep::init_case),
 ];
 
 fn main() {

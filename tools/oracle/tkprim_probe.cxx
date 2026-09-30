@@ -31,9 +31,14 @@
 // Rust twin includes crates/tktopalgo/examples/tp_probe/brep_lib_common.rs.
 #include "tktopalgo_probe_breplib_common.cxx"
 #include "tkprim_probe_shape.cxx"
+#include "tkprim_probe_sweep.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // The shared shape digest (tkprim_probe_shape.cxx)
  {"pr_digest_vertex", pr_digest_vertex_case},
+ // Sweep (tkprim_probe_sweep.cxx)
+ {"sw_numshape", pr_sw_numshape_case},
+ {"sw_reinit", pr_sw_reinit_case},
+ {"sw_init", pr_sw_init_case},
 };
 int main() {
  std::string line;

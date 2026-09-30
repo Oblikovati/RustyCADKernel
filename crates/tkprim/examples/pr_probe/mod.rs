@@ -1,5 +1,6 @@
 //! The TKPrim probe operations, one module per C++ probe file under tools/oracle.
 pub mod shape;
+pub mod sweep;
 
 // The reader and bit printers of the TKGeomAlgo probe and the shape digest of the TKTopAlgo
 // probe, shared so that every toolkit prints the same token stream
