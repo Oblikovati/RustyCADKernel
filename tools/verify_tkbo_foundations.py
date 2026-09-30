@@ -29,6 +29,8 @@ def corpus() -> str:
     requests += surface_grid_requests()
     requests += topol_requests()
     requests += fclass_requests()
+    requests += context_requests()
+    requests += context_compute_requests()
     return '\n'.join(requests) + '\n'
 
 
@@ -96,8 +98,25 @@ def fclass_requests() -> list[str]:
             for kind, radius, tol, (u, v), periodic in product(range(14), [0.1, 2], [1e-7, 1e-3], points, [0, 1])]
 
 
+def context_compute_requests() -> list[str]:
+    """Exercise exact status codes, vertex bounds, distances and asymmetric blocks."""
+    points = [(0, 0, -1), (0, 0, -1e-7), (0, 0, -1e-6), (0, 0, 0), (0, 0, 1e-7),
+              (0, 0, 1), (0, 0, 2), (0, 0, 2.0000001), (0, 0, 3),
+              (1, 1, 0), (3, 1, 0), (1e-7, 0, 1), (2, 0, 0), (4, 5, 6), (4, 5, 6.0000002), (0, 0, 2.0000002), (0, 0, 3.9999998)]
+    return [f'context_compute {edge} {x} {y} {z} {tol} {fuzz} {curve} {a} {b}'
+            for edge, (x, y, z), tol, fuzz, curve, (a, b) in product(
+                range(3), points, [1e-7, 1e-5, 0.1], [0, 1e-4], range(4), [(0, 1), (-1, 4)])]
+
+
+def context_requests() -> list[str]:
+    """Cache identity and visible mutations, native projector lifetimes, and box classifiers."""
+    points = [(0, 0, 0), (1, 1, 0), (1, 1, 1e-7), (10, -3, 4), (1, 2, 3)]
+    return [f'context {kind} {radius} {x} {y} {z} {tol}'
+            for kind, radius, (x, y, z), tol in product(range(14), [0.1, 2], points, [1e-7, 1e-5, 0.1])]
+
+
 ORACLE = NumericOracle('TKBO-foundations', 'tools/oracle/tkbo_foundations_probe.cxx',
-                       ['TKBO', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
+                       ['TKBO', 'TKPrim', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
                         'TKG3d', 'TKG2d', 'TKMath', 'TKernel'], 'rustycad-tkbo', corpus)
 
 if __name__ == '__main__':

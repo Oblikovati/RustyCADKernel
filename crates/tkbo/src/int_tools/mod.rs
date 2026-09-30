@@ -28,3 +28,7 @@ mod topol_tool;
 pub use topol_tool::TopolTool;
 mod fclass2d;
 pub use fclass2d::FClass2d;
+mod context;
+pub use context::{Cached, Context};
+mod tools;
+pub use tools::Tools;

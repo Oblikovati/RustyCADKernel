@@ -1,3 +1,5 @@
+mod context;
+mod context_compute;
 mod curves;
 mod fclass;
 mod fclass_faces;
@@ -44,6 +46,8 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 }
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
+        "context_compute" => context_compute::case(v),
+        "context" => context::case(v),
         "topol" => topol::case(v),
         "fclass" => fclass::case(v),
         "range" => range_case(v),

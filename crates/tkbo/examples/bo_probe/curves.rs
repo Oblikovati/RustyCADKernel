@@ -4,7 +4,7 @@ use rustycad_tkernel::{ncollection::Array1, standard::Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCircle, GeomCurve, GeomLine, GeomTrimmedCurve};
 use rustycad_tkmath::gp::{Axis1, Axis2, Axis2d, Point3};
-fn geometry(kind: i32) -> Handle<dyn GeomCurve> {
+pub(super) fn geometry(kind: i32) -> Handle<dyn GeomCurve> {
     let line: Handle<dyn GeomCurve> = Handle::new(GeomLine::new(Axis1::default())).into_cast();
     match kind {
         1 => Handle::new(GeomTrimmedCurve::new(&line, 2.0, 4.0, true, true).unwrap()).into_cast(),
