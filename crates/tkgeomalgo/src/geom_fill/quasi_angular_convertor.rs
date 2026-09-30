@@ -168,12 +168,12 @@ impl GeomFillQuasiAngularConvertor {
         let (b, bpr) = first_order_b(beta, betaprim);
         let value = QuasiTerms::value(beta, b);
         self.store_value_terms(&value)?;
-        let dp = first_order_terms(&value, betaprim, bpr).products(&self.b)?;
+        let [dpx, dpy, dpw] = first_order_terms(&value, betaprim, bpr).products(&self.b)?;
         for ii in 1..=ORDRE {
             let wi = self.w[ii];
             let mut p = Xyz::new(self.px[ii] / wi, self.py[ii] / wi, 0.0);
-            let mut d = Xyz::new(dp[0][ii] / wi, dp[1][ii] / wi, 0.0);
-            d -= (dp[2][ii] / wi) * p;
+            let mut d = Xyz::new(dpx[ii] / wi, dpy[ii] / wi, 0.0);
+            d -= (dpw[ii] / wi) * p;
             put(out.poles, ii, point_from_xyz(m * p + arc.arc.center.xyz()))?;
             p *= m_prim;
             d *= m;
@@ -181,7 +181,7 @@ impl GeomFillQuasiAngularConvertor {
             aux.set_linear_form_offset(1.0, p, 1.0, d, *arc.d_center.xyz());
             put(out.d_poles, ii, Vector3::from(aux))?;
             put(out.weights, ii, wi)?;
-            put(out.d_weights, ii, dp[2][ii])?;
+            put(out.d_weights, ii, dpw[ii])?;
         }
         Ok(())
     }

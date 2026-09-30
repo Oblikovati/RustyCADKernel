@@ -477,7 +477,7 @@ impl GeomFillLocationLaw for GeomFillLocationGuide {
             av += Vector3::from(c.value(u)?.xyz());
             u += delta;
         }
-        av = av / (NB_PTS + 1) as f64;
+        av /= (NB_PTS + 1) as f64;
         Ok(LocationD0 { m: am, v: av })
     }
     /// Always false.

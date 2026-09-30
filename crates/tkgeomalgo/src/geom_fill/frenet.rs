@@ -112,7 +112,7 @@ impl GeomFillFrenet {
         if ndu <= gp::resolution() {
             return self.null_tangent_d0(curve, the_param, a_param, frame);
         }
-        frame.tangent = frame.tangent / ndu;
+        frame.tangent /= ndu;
         frame.binormal = frame.tangent.crossed(frame.binormal);
         let norm = frame.binormal.magnitude();
         if norm <= gp::resolution() {
@@ -309,19 +309,19 @@ impl GeomFillTrihedronLaw for GeomFillFrenet {
     }
     fn d0(&self, param: f64, frame: &mut TrihedronD0) -> Result<bool, Failure> {
         let mut delta = 0.0;
-        if let Some(index) = self.is_singular(param) {
-            if self.singular_d0(param, index, frame, &mut delta)? {
-                return Ok(true);
-            }
+        if let Some(index) = self.is_singular(param)
+            && self.singular_d0(param, index, frame, &mut delta)?
+        {
+            return Ok(true);
         }
         self.regular_d0(param, delta, frame)
     }
     fn d1(&self, param: f64, frame: &mut TrihedronD1) -> Result<bool, Failure> {
         let mut delta = 0.0;
-        if let Some(index) = self.is_singular(param) {
-            if self.singular_d1(param, index, frame, &mut delta)? {
-                return Ok(true);
-            }
+        if let Some(index) = self.is_singular(param)
+            && self.singular_d1(param, index, frame, &mut delta)?
+        {
+            return Ok(true);
         }
         let trimmed = self.trimmed("GeomFill_Frenet::D1")?;
         let (_, dc1, dc2, dc3) =
@@ -346,10 +346,10 @@ impl GeomFillTrihedronLaw for GeomFillFrenet {
     }
     fn d2(&self, param: f64, frame: &mut TrihedronD2) -> Result<bool, Failure> {
         let mut delta = 0.0;
-        if let Some(index) = self.is_singular(param) {
-            if self.singular_d2(param, index, frame, &mut delta)? {
-                return Ok(true);
-            }
+        if let Some(index) = self.is_singular(param)
+            && self.singular_d2(param, index, frame, &mut delta)?
+        {
+            return Ok(true);
         }
         self.regular_d2(param + delta, frame)
     }

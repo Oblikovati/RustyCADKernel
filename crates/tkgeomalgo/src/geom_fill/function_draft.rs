@@ -160,9 +160,9 @@ impl GeomFillFunctionDraft {
     /// `DerivTX(dN, teta, D)`: `d2E/dtdx`, only the `w` column is not null.
     pub fn deriv_tx(&self, dn: Vector3, teta: f64, d: &mut Matrix<'_>) -> Result<bool, Failure> {
         let dn = coords(dn);
-        for i in 0..3 {
+        for (i, component) in dn.iter().enumerate() {
             let row = i as i32 + 1;
-            *d.change_value(row, 1)? = dn[i] * teta.sin();
+            *d.change_value(row, 1)? = component * teta.sin();
             *d.change_value(row, 2)? = 0.0;
             *d.change_value(row, 3)? = 0.0;
         }

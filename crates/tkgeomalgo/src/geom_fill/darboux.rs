@@ -48,11 +48,11 @@ impl_transient!(
     interfaces: [dyn GeomFillTrihedronLaw]
 );
 
+/// The 2d curve and the support surface of a curve on surface.
+type CurveOnSurfaceParts = (Handle<dyn Adaptor2dCurve2d>, Handle<dyn Adaptor3dSurface>);
+
 /// The 2d curve and the support of `myTrimmed`.
-fn curve_on_surface(
-    law: &GeomFillDarboux,
-    member: &str,
-) -> Result<(Handle<dyn Adaptor2dCurve2d>, Handle<dyn Adaptor3dSurface>), Failure> {
+fn curve_on_surface(law: &GeomFillDarboux, member: &str) -> Result<CurveOnSurfaceParts, Failure> {
     let trimmed = law.base.trimmed();
     live(&trimmed, member, "myTrimmed")?;
     let cos: Handle<Adaptor3dCurveOnSurface> = trimmed.cast();

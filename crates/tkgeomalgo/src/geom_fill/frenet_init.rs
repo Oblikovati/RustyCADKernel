@@ -177,17 +177,11 @@ fn second_zeros<'a>(
 fn merge_close(sngl_seq: &mut Vec<f64>) {
     let p_tol = precision::p_confusion();
     let mut j = 0;
-    let mut found = true;
-    while found {
-        found = false;
-        for i in j..sngl_seq.len().saturating_sub(1) {
-            if sngl_seq[i + 1] - sngl_seq[i] <= p_tol {
-                sngl_seq.remove(i + 1);
-                j = i;
-                found = true;
-                break;
-            }
-        }
+    while let Some(i) =
+        (j..sngl_seq.len().saturating_sub(1)).find(|&i| sngl_seq[i + 1] - sngl_seq[i] <= p_tol)
+    {
+        sngl_seq.remove(i + 1);
+        j = i;
     }
 }
 

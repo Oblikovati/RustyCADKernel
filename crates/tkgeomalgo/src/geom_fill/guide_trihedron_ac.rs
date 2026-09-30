@@ -66,6 +66,9 @@ impl_transient!(
     interfaces: [dyn GeomFillTrihedronLaw, dyn GeomFillTrihedronWithGuide]
 );
 
+/// `myTrimmed` and `myTrimG`.
+type CurvePair = (Handle<dyn Adaptor3dCurve>, Handle<dyn Adaptor3dCurve>);
+
 impl GeomFillGuideTrihedronAC {
     /// `GeomFill_GuideTrihedronAC(guide)`: the arc length function of the guide
     /// (tolerance 1e-7), origins 0 and 1.
@@ -117,10 +120,7 @@ impl GeomFillGuideTrihedronAC {
     }
 
     /// `myTrimmed` and `myTrimG`.
-    fn trimmed_pair(
-        &self,
-        member: &str,
-    ) -> Result<(Handle<dyn Adaptor3dCurve>, Handle<dyn Adaptor3dCurve>), Failure> {
+    fn trimmed_pair(&self, member: &str) -> Result<CurvePair, Failure> {
         let (trimmed, trim_g) = (self.base.trimmed(), self.guide_base.fields().trim_g);
         live(&trimmed, member, "myTrimmed")?;
         live(&trim_g, member, "myTrimG")?;

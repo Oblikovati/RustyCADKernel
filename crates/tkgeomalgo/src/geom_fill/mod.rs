@@ -120,6 +120,10 @@ mod quasi_angular_convertor;
 mod quasi_angular_terms;
 mod section_curve;
 mod section_law;
+mod section_placement;
+mod section_placement_axis;
+mod section_placement_frame;
+mod section_placement_search;
 mod snglr_func;
 mod sweep_failures;
 mod tensor;
@@ -152,6 +156,7 @@ pub use plan_func::GeomFillPlanFunc;
 pub use polynomial_convertor::GeomFillPolynomialConvertor;
 pub use quasi_angular_convertor::GeomFillQuasiAngularConvertor;
 pub use section_law::{GeomFillSectionLaw, SectionD1, SectionD2};
+pub use section_placement::GeomFillSectionPlacement;
 pub use snglr_func::GeomFillSnglrFunc;
 pub use tensor::GeomFillTensor;
 pub use trihedron_law::{
