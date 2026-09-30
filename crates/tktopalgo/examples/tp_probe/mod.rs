@@ -1,11 +1,15 @@
 //! The TKTopAlgo probe operations, one module per C++ probe file under tools/oracle.
 pub mod bisector;
 pub mod bisector_algo;
+pub mod brep_approx;
+pub mod brep_approx_parts;
+pub mod brep_approx_tool;
 pub mod brep_bnd_lib;
 pub mod brep_builder_api;
 pub mod brep_check;
 pub mod brep_class;
 pub mod brep_class3d;
+pub mod brep_int_curve_surface;
 pub mod brep_lib_common;
 pub mod brep_lib_edge;
 pub mod brep_lib_face;

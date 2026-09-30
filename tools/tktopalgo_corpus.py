@@ -34,3 +34,7 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_breptopadaptor_domain').append_breptopadaptor_domain_requests(requests)
     # BRepLib (tktopalgo_corpus_breplib.py and its family modules)
     __import__('tktopalgo_corpus_breplib').append_breplib_requests(requests)
+    # BRepApprox (tktopalgo_corpus_brepapprox.py, face pairs of tktopalgo_corpus_breptopadaptor_domain.py)
+    __import__('tktopalgo_corpus_brepapprox').append_brepapprox_requests(requests)
+    # BRepIntCurveSurface (tktopalgo_corpus_brepintcurvesurface.py, shapes of tktopalgo_corpus_solids.py)
+    __import__('tktopalgo_corpus_brepintcurvesurface').append_brepintcurvesurface_requests(requests)

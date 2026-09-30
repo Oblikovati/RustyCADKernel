@@ -3,8 +3,9 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_check, brep_class, brep_class3d,
-    brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor,
+    bisector, bisector_algo, brep_approx, brep_approx_parts, brep_approx_tool, brep_bnd_lib,
+    brep_builder_api, brep_check, brep_class, brep_class3d, brep_int_curve_surface, brep_lib_edge,
+    brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor,
     brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
 };
 
@@ -122,6 +123,18 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("blp_sameparam", brep_lib_face::sameparam_case),
     ("blp_extendface", brep_lib_face::extendface_case),
     ("blp_fuseedges", brep_lib_fuse::fuseedges_case),
+    // BRepApprox (tp_probe/brep_approx*.rs, faces of tp_probe/face.rs)
+    ("bra_approx", brep_approx::approx_case),
+    ("bra_line", brep_approx::line_case),
+    ("bra_mline", brep_approx_parts::mline_case),
+    ("bra_sv", brep_approx_parts::sv_case),
+    ("bra_zerimp", brep_approx_parts::zerimp_case),
+    ("bra_int2s", brep_approx_parts::int2s_case),
+    ("bra_tool", brep_approx_tool::tool_case),
+    // BRepIntCurveSurface (tp_probe/brep_int_curve_surface.rs, shapes of tp_probe/shape.rs)
+    ("bics_line", brep_int_curve_surface::line_case),
+    ("bics_curve", brep_int_curve_surface::curve_case),
+    ("bics_state", brep_int_curve_surface::state_case),
 ];
 
 fn main() {

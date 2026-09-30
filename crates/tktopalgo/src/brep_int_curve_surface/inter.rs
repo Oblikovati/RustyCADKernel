@@ -165,6 +165,7 @@ impl BRepIntCurveSurfaceInter {
 
     /// `Next()`: the next point IN or ON a face, on this face or a next one;
     /// `inter.next()?`.
+    #[allow(clippy::should_implement_trait)] // OCCT's More/Next protocol, which can fail.
     pub fn next(&mut self) -> Result<(), Failure> {
         if self.current_nb_points != 0 {
             self.current_index += 1;
