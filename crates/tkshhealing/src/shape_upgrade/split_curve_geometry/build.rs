@@ -1,16 +1,16 @@
 //! Wrapper recursion and range synchronization preserve native mutation order.
 use super::*;
-impl ShapeUpgradeSplitCurve3d {
+impl<G: CurveGeometry + 'static> CurveSplitKernel<G> {
     pub(super) fn build_curves(&self, segment: bool) -> Result<(), Failure> {
         let values = self.split_values();
         let (first, last) = self.build_endpoints()?;
         let curve = self.state.read().curve.clone();
-        require_curve(&curve)?;
-        if let Some(trimmed) = curve.cast::<GeomTrimmedCurve>().get() {
-            return self.build_trimmed(trimmed, first, last, segment);
+        require_curve::<G>(&curve)?;
+        if let Some(basis) = G::trimmed_basis(&curve) {
+            return self.build_trimmed(&basis, first, last, segment);
         }
-        if let Some(offset) = curve.cast::<GeomOffsetCurve>().get() {
-            return self.build_offset(offset, first, last, segment);
+        if let Some(basis) = G::offset_basis(&curve) {
+            return self.build_offset(&curve, &basis, first, last, segment);
         }
         let (first, last) = self.build_bounds(&curve, first, last)?;
         self.allocate_curves(values.sequence(|s| s.len()) as i32 - 1)?;
@@ -30,21 +30,21 @@ impl ShapeUpgradeSplitCurve3d {
         }
         Ok((first, last))
     }
-    fn result_curve(&self, index: i32) -> Result<Handle<dyn GeomCurve>, Failure> {
+    fn result_curve(&self, index: i32) -> Result<Handle<G::Curve>, Failure> {
         self.curves()
             .array1()
             .value(index)
             .cloned()
-            .map_err(|error| error.into_failure("ShapeUpgrade_SplitCurve3d::Build"))
+            .map_err(|error| error.into_failure(G::NAME))
     }
     fn nested_splitter(
         &self,
-        basis: &Handle<dyn GeomCurve>,
+        basis: &Handle<G::Curve>,
         first: f64,
         last: f64,
         segment: bool,
     ) -> Result<Self, Failure> {
-        let nested = Self::new();
+        let nested = Self::default();
         nested.init_curve_range(basis, first, last)?;
         nested.set_split_values(&self.split_values())?;
         nested.build(segment)?;
@@ -58,18 +58,15 @@ impl ShapeUpgradeSplitCurve3d {
     }
     fn build_trimmed(
         &self,
-        curve: &GeomTrimmedCurve,
+        basis: &Handle<G::Curve>,
         first: f64,
         last: f64,
         segment: bool,
     ) -> Result<(), Failure> {
-        let nested = self.nested_splitter(&curve.basis_curve(), first, last, segment)?;
+        let nested = self.nested_splitter(basis, first, last, segment)?;
         if nested.curves().array1().len() == 1 {
             let basis = nested.result_curve(1)?;
-            self.set_curve(
-                1,
-                Handle::new(GeomTrimmedCurve::new(&basis, first, last, true, true)?).cast(),
-            )?;
+            self.set_curve(1, G::trim(&basis, first, last)?)?;
         } else {
             self.state.write().result = nested.curves();
         }
@@ -78,39 +75,30 @@ impl ShapeUpgradeSplitCurve3d {
     }
     fn build_offset(
         &self,
-        curve: &GeomOffsetCurve,
+        curve: &Handle<G::Curve>,
+        basis: &Handle<G::Curve>,
         first: f64,
         last: f64,
         segment: bool,
     ) -> Result<(), Failure> {
-        let nested = self.nested_splitter(&curve.basis_curve(), first, last, segment)?;
+        let nested = self.nested_splitter(basis, first, last, segment)?;
         for index in 1..=nested.curves().array1().len() as i32 {
             let basis = nested.result_curve(index)?;
-            self.set_curve(
-                index,
-                Handle::new(GeomOffsetCurve::new(
-                    &basis,
-                    curve.offset(),
-                    curve.direction(),
-                    false,
-                )?)
-                .cast(),
-            )?;
+            self.set_curve(index, G::offset(curve, &basis)?)?;
         }
         self.inherit_status(&nested);
         Ok(())
     }
     fn build_bounds(
         &self,
-        curve: &Handle<dyn GeomCurve>,
+        curve: &Handle<G::Curve>,
         mut first: f64,
         mut last: f64,
     ) -> Result<(f64, f64), Failure> {
-        if ShapeAnalysisCurve::is_periodic(curve)? {
+        if !G::CLAMP_BUILD || G::periodic(curve)? {
             return Ok((first, last));
         }
-        let lower = curve.first_parameter();
-        let upper = curve.last_parameter();
+        let (lower, upper) = G::bounds(curve);
         (first, last) = snap_bounds(first, last, lower, upper);
         let values = self.split_values();
         if first < lower {

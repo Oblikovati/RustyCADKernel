@@ -55,3 +55,5 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_split_curve3d').append_split_curve3d_requests(requests)
     # Surface sweeps retain 16 crash divergences in verify_split_surface.py.
     __import__('tkshhealing_corpus_split_surface').append_split_surface_requests(requests)
+    # Offset recursion retains 70 crash divergences in verify_split_curve2d.py.
+    __import__('tkshhealing_corpus_split_curve2d').append_split_curve2d_requests(requests)

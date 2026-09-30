@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 import hashlib
+import json
+from typing import Callable
+from porting import snapshot
+from toolkit_numeric import NumericOracle, build_probes
 import subprocess
 from pathlib import Path
-from verify_tkmath_numeric import run_probe, compare
+from verify_tkmath_numeric import run_probe, compare, selected_paths
 
 
 def replay_crash(native: Path, rust: Path, request: str) -> dict[str, str | int]:
@@ -65,3 +69,48 @@ def partition_crash_requests(
     if found != manifest:
         raise ValueError(f"Native crash inventory {found}; expected {manifest}")
     return exact, crashes
+
+
+def verify_crash_oracle(
+    oracle: NumericOracle,
+    partition: Callable[[], tuple[list[str], list[str]]],
+    expected_revision: str,
+) -> None:
+    """Compare defined paths and replay each crash separately; verify_crash_oracle(oracle,partition,revision)."""
+    source, build = selected_paths()
+    revision = snapshot(source)["revision"]
+    if revision != expected_revision:
+        raise ValueError(
+            f"OCCT revision {revision}; expected {expected_revision}, reclassify crashes"
+        )
+    output = oracle.evidence
+    output.mkdir(parents=True, exist_ok=True)
+    (output / "report.json").unlink(missing_ok=True)
+    native = build_probes(oracle, build, output)
+    exact, crashes = partition()
+    verify_defined(native, oracle.rust_probe, exact, output)
+    divergent = [
+        replay_crash(native, oracle.rust_probe, request) for request in crashes
+    ]
+    write_crash_report(output, oracle.toolkit, revision, exact, divergent)
+
+
+def write_crash_report(
+    output: Path,
+    toolkit: str,
+    revision: str,
+    exact: list[str],
+    divergent: list[dict[str, str | int]],
+) -> None:
+    """Keep crashes separate from exact passes; write_crash_report(out,name,revision,rows,crashes)."""
+    report = {
+        "revision": revision,
+        "candidates": len(exact) + len(divergent),
+        "exact_passed": len(exact),
+        "native_crash_divergences": divergent,
+        "complete_parity": False,
+    }
+    (output / "report.json").write_text(json.dumps(report, indent=2) + "\n")
+    print(
+        f"{toolkit}: {len(exact)} exact passed + {len(divergent)} native-crash/Rust-error divergences; complete parity false"
+    )

@@ -61,3 +61,5 @@ pub mod free_bounds;
 pub mod split_curve_3d;
 
 pub mod split_surface;
+
+pub mod split_curve_2d;
