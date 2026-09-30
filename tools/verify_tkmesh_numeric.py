@@ -27,6 +27,10 @@ def corpus() -> str:
     rows += ['mesh_shape_tool ' + ' '.join(map(str, values))
              for values in product(range(5), range(3), range(3), range(8), range(4), range(2))]
     rows += [f'mesh_shape_polygons {located} {orient}' for located, orient in product(range(2), range(4))]
+    rows += ['mesh_wire_order ' + ' '.join(map(str, values))
+             for values in product(range(4), range(16), range(3), range(2), range(2), range(2), range(2), range(2))]
+    rows += ['mesh_outer_wire ' + ' '.join(map(str, values))
+             for values in product(range(4), range(16), range(3), range(4), range(3))]
     return '\n'.join(rows) + '\n'
 
 

@@ -211,3 +211,5 @@ pub(super) mod tools;
 pub mod pipeline;
 
 pub mod shape_tool;
+
+pub mod wire_foundation;

@@ -20,3 +20,9 @@ pub use edge::{Curve3dRange, EdgeTangent2d, PCurveRange, ShapeAnalysisEdge};
 
 mod canonical_recognition;
 pub use canonical_recognition::ShapeAnalysisCanonicalRecognition;
+
+mod wire;
+pub use wire::ShapeAnalysisWire;
+
+mod package;
+pub use package::ShapeAnalysis;
