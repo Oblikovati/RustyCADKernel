@@ -27,6 +27,7 @@
 #include "tkmesh_probe_model_builder.cxx"
 #include "tkmesh_probe_deflection.cxx"
 #include "tkmesh_probe_post_processor.cxx"
+#include "tkmesh_probe_edge_parameter.cxx"
 void mesh_curve(std::istream& input) {
     int count, keep; input >> count >> keep;
     occ::handle<NCollection_IncAllocator> allocator = new NCollection_IncAllocator;
@@ -71,6 +72,7 @@ int main(){
         else if(operation=="mesh_deflection")mesh_deflection(input);
         else if(operation=="mesh_consistent")mesh_consistent(input);
         else if(operation=="mesh_post_processor")mesh_post_processor(input);
+        else if(operation=="mesh_edge_parameter")mesh_edge_parameter(input);
         else if(operation=="mesh_tools")mesh_tools(input);
         else if(operation=="mesh_explorer")mesh_explorer(input);
         else {std::cerr<<"Unknown probe operation: "<<operation<<'\n';return 2;}

@@ -12,3 +12,6 @@ pub use deflection::Deflection;
 
 mod post_processor;
 pub use post_processor::BRepMeshModelPostProcessor;
+
+mod edge_parameter;
+pub use edge_parameter::{EdgeParameterCollection, EdgeParameterProvider};

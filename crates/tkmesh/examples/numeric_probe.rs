@@ -104,6 +104,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_deflection" => mesh_probe::deflection::deflection_case(values),
         "mesh_consistent" => mesh_probe::deflection::consistent_case(values),
         "mesh_post_processor" => mesh_probe::post_processor::post_processor_case(values),
+        "mesh_edge_parameter" => mesh_probe::edge_parameter::edge_parameter_case(values),
         "mesh_tools" => mesh_probe::tools::tools_case(values[0]),
         "mesh_explorer" => mesh_probe::tools::explorer_case(values[0], values[1] != 0),
         "mesh_model" => mesh_probe::model_case(values[0], values[1], orientation(values[2])),
