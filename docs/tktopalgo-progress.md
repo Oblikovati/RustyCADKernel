@@ -6,14 +6,14 @@ depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep and TKGeomAlgo 
 as the native toolkit does (its EXTERNLIB). Each of the 16 OCCT packages is one module
 of the crate, declared up front in `src/lib.rs`; a module whose package is not ported
 yet holds only its documentation. Ported so far: BRepClass, BRepTopAdaptor,
-IntCurvesFace, Bisector, MAT, MAT2d, BRepBndLib (without AddOBB), BRepClass3d,
-BRepCheck, BRepLib (without PointCloudShape), BRepGProp, BRepApprox, BRepIntCurveSurface
-and BRepBuilderAPI (without MakeShapeOnMesh). The numeric corpus has 22117 requests:
-BRepClass 4779, BRepTopAdaptor 650, IntCurvesFace 424, Bisector 455, MAT and MAT2d 84,
-BRepBndLib 266, BRepClass3d 996, BRepCheck with BRepLib_ValidateEdge 981, the BRep
-domains of IntStart and IntPatch 752, BRepLib 2688, BRepGProp 4492, BRepApprox 2148,
-BRepIntCurveSurface 314, the BRepBuilderAPI makers 2436, and the BRepBuilderAPI sewing
-group 652.
+IntCurvesFace, Bisector, MAT, MAT2d, BRepBndLib, BRepClass3d, BRepCheck, BRepLib,
+BRepGProp, BRepApprox, BRepIntCurveSurface BRepBuilderAPI and BRepMAT2d. The numeric
+corpus has 22789 requests: BRepClass 4779, BRepTopAdaptor 650, IntCurvesFace 424,
+Bisector 455, MAT and MAT2d 84, BRepBndLib 266, BRepClass3d 996, BRepCheck with
+BRepLib_ValidateEdge 981, the BRep domains of IntStart and IntPatch 752, BRepLib 2688,
+BRepGProp 4492, BRepApprox 2148, BRepIntCurveSurface 314, the BRepBuilderAPI makers
+2436, the BRepBuilderAPI sewing group 652, AddOBB 424, PointCloudShape 113,
+MakeShapeOnMesh 60, and BRepMAT2d 75.
 
 BRepBuilderAPI is ported without its sewing group (`BRepBuilderAPI_Sewing`,
 `FastSewing`, `MakeShapeOnMesh`, `BndBoxTreeSelector` and `VertexInspector`, ported
@@ -41,7 +41,7 @@ BRepCheck_Edge includes BRepLib; BRepBuilderAPI includes BRepLib, which includes
 BRepBndLib, which includes BRepBuilderAPI), so they are ported class by class in an
 order that follows the includes of each file.
 
-The toolkit test inventory maps these suites (12 declarations):
+The toolkit test inventory maps these suites (22 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
