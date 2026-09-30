@@ -46,7 +46,10 @@ def append_attachment_requests(lines: list[str]) -> None:
     """Compare boundary attachment and interior filtering on real search outputs."""
     for kind,mode,direction,radius in product(range(6),range(3),[(1,0,0),(0,0,1)], [0,2]):
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
-        lines.append('contour_attachment '+numbers([*surface,mode,*direction]))
+        fields=[*surface,mode,*direction]
+        lines.append('contour_attachment '+numbers(fields))
+        for scenario in range(4):
+            lines.append('contour_internal '+numbers([*fields,scenario]))
 
 
 def source_wrapper(source: Path, build: Path, output: Path, libraries: list[str]) -> Path:

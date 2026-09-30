@@ -267,3 +267,8 @@ Boundary attachment and interior-point exclusion now pass 72 additional exact
 requests using real Contap searches (1,224 combined). Every emitted point, transition
 and vertex flag is compared; singular normals and coincident restrictions are included.
 Strict all-target Clippy passes. Main contour orchestration remains incomplete.
+
+Restriction-curve internal-point search now passes 288 additional exact requests
+(1,512 combined), including bisection and marking or inserting internal vertices.
+All resulting vertices are compared on six real surface types with four initial
+vertex arrangements. Strict all-target Clippy passes.

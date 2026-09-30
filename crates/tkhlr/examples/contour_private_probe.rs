@@ -20,6 +20,8 @@ mod math_helpers;
 #[allow(dead_code)]
 #[path = "../../tkg2d/examples/g2_probe/print.rs"]
 mod print;
+#[path = "../src/contap/contour/restriction_internal.rs"]
+mod restriction_internal;
 fn main() {
     for line in io::stdin().lock().lines() {
         let line = line.expect("private contour probe input");
@@ -32,6 +34,7 @@ fn main() {
             .collect();
         match operation {
             "contour_attachment" => contour_private::attachment_case(&values),
+            "contour_internal" => contour_private::internal_case(&values),
             "contour_math" => contour_private::math_case(&values),
             "contour_sections" => contour_private::sections_case(&values),
             _ => {

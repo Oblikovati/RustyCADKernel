@@ -1,3 +1,5 @@
+mod internal;
+pub use internal::internal_case;
 mod attachment;
 pub use attachment::attachment_case;
 mod sections;

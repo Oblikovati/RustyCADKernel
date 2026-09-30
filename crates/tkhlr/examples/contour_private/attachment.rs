@@ -53,7 +53,7 @@ fn report(lines: &[ContapLine]) -> Result<(), Failure> {
     }
     Ok(())
 }
-fn functions(
+pub(super) fn functions(
     surface: &Adaptor3dSurfaceHandle,
     reader: &mut Reader,
 ) -> Result<(ContapArcFunction, ContapSurfFunction), Failure> {
