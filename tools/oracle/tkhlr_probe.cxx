@@ -42,7 +42,9 @@
 #include "tkhlr_probe_contap_search_records.cxx"
 #include "tkhlr_probe_contap_search_inside.cxx"
 #include "tkhlr_probe_contap_search_boundary.cxx"
+#include "tkhlr_probe_contap_walking.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"ct_walking",ct_walking_case},
  {"ct_boundary",ct_boundary_case},
  {"ct_inside",ct_inside_case},
  {"ct_search_records",ct_search_records_case},

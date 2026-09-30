@@ -239,3 +239,11 @@ functions and records. The exact corpus passes 13,787 requests (216 new), with
 complete point/segment output, repeated performs and all-arc cases. Two direct tests,
 all crate tests and strict Clippy pass. The probe registration parser now tolerates
 Rustfmt line breaks; all 253 tooling tests pass.
+
+### Contap walking algorithm
+
+All nine public walking APIs now instantiate IntWalk with the Contap function and
+walking-line behavior. All 14,003 exact requests pass (216 new walks), including
+boundary/interior seeds, both Perform overloads, reversal and hole filling. Complete
+polyline and single-point results are compared. Two direct regressions, all crate
+tests and strict Clippy pass. Contap_Contour orchestration remains unported.

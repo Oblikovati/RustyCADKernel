@@ -13,6 +13,7 @@ type ProbeCase = fn(&[f64]);
 /// The dispatch table of tools/oracle/tkhlr_probe.cxx (`probe_cases`); each
 /// package adds its operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
+    ("ct_walking", hl_probe::contap_walking::walking_case),
     (
         "ct_boundary",
         hl_probe::contap_search_boundary::boundary_case,

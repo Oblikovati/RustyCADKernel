@@ -45,3 +45,6 @@ pub use search_inside::{ContapTheSearchInside, ContapTheSearchInsideTypes};
 
 mod search_boundary;
 pub use search_boundary::{ContapTheSearch, ContapTheSearchTypes};
+
+mod walking;
+pub use walking::{ContapTheIWalking, ContapTheIWalkingTypes};

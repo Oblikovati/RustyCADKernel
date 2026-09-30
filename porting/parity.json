@@ -210363,6 +210363,78 @@
       "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::segment",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking(double,double,double,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::new",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::SetTolerance(double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::set_tolerance",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::Perform(const NCollection_Sequence<IntSurf_PathPoint>&,const NCollection_Sequence<IntSurf_InteriorPoint>&,Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::perform",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::Perform(const NCollection_Sequence<IntSurf_PathPoint>&,Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::perform_open",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::is_done",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::NbLines() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::nb_lines",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::Value(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::value",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::NbSinglePnts() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::nb_single_pnts",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::SinglePnt(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::single_pnt",
+      "status": "implemented",
+      "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     }
   ],
   "tests": [
