@@ -6,7 +6,7 @@ use rustycad_tkhlr::contap::{
     ContapArcFunction, ContapThePathPointOfTheSearch as Point, ContapTheSearch as Search,
     ContapTheSegmentOfTheSearch as Segment,
 };
-fn arc_rank(d: &Adaptor3dTopolTool, arc: &TheArc) -> i32 {
+pub(super) fn arc_rank(d: &Adaptor3dTopolTool, arc: &TheArc) -> i32 {
     let mut rank = 0;
     d.init();
     while d.more() {

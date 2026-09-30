@@ -19,7 +19,7 @@ fn transition(value: i32) -> IntSurfTypeTrans {
         IntSurfTypeTrans::Undecided,
     ][value as usize]
 }
-fn point_snapshot(point: &ContapPoint) {
+pub(super) fn point_snapshot(point: &ContapPoint) {
     pnt(point.value());
     let (u, v) = point.parameters();
     real(u);
@@ -102,7 +102,7 @@ pub fn point_case(values: &[f64]) {
     point_snapshot(&copy);
     end();
 }
-fn line_geometry(line: &ContapLine) {
+pub(super) fn line_geometry(line: &ContapLine) {
     int(line.type_contour() as i32);
     int(line.transition_on_s() as i32);
     attempt(|| {

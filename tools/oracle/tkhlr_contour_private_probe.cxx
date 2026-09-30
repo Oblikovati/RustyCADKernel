@@ -24,7 +24,8 @@ void ct_private_math(std::istream& input){
 #include "tkhlr_contour_private_attachment.cxx"
 #include "tkhlr_contour_private_internal.cxx"
 #include "tkhlr_contour_private_segments.cxx"
+#include "tkhlr_contour_private_analytic.cxx"
 int main(){
  std::string line;while(std::getline(std::cin,line)){std::istringstream input(line);std::string operation;input>>operation;
- if(operation.empty())continue;if(operation=="contour_segments"){ct_private_segments(input);continue;}if(operation=="contour_internal"){ct_private_internal(input);continue;}if(operation=="contour_attachment"){ct_private_attachment(input);continue;}if(operation=="contour_sections"){ct_private_sections(input);continue;}if(operation!="contour_math"){std::cerr<<"Unknown probe operation: "<<operation<<std::endl;return 2;}ct_private_math(input);}
+ if(operation.empty())continue;if(operation=="contour_analytic"){ct_private_analytic(input);continue;}if(operation=="contour_segments"){ct_private_segments(input);continue;}if(operation=="contour_internal"){ct_private_internal(input);continue;}if(operation=="contour_attachment"){ct_private_attachment(input);continue;}if(operation=="contour_sections"){ct_private_sections(input);continue;}if(operation!="contour_math"){std::cerr<<"Unknown probe operation: "<<operation<<std::endl;return 2;}ct_private_math(input);}
 }

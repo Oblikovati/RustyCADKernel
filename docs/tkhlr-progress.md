@@ -277,3 +277,18 @@ Restriction-segment processing passes 432 more exact requests (1,944 combined),
 including repeated endpoint matches, shared vertex mutation, negative tolerance and
 internal-vertex insertion. Strict all-target Clippy passes. Contap_Contour itself is
 still unregistered while its orchestration is being completed.
+
+### Elementary contour orchestration
+
+The analytic branch now passes 624 public-Perform comparisons on planes, spheres,
+cylinders and cones (2,568 combined private/orchestration requests). Fixtures cover
+translated frames, trimmed domains, degenerate radii, perspective and draft modes,
+and repeated calls. Complete analytic geometry, vertex flags and restriction identity
+are compared using the existing record probes. Strict all-target Clippy and 11 focused
+tooling tests pass.
+
+A translated-sphere case caught the native left-associative `parameter + PI + PI`
+closing-circle calculation; replacing it with `parameter + (PI + PI)` changes one bit.
+The source operation order is now retained. The probe also preserves Init's implicit
+vector-to-direction normalization. General surface orchestration remains incomplete,
+so no Contap_Contour API or original TKHLR legacy declaration is claimed complete.

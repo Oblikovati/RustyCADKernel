@@ -26,6 +26,7 @@ def requests() -> str:
             [(1,0,0),(1,2,3)], [0,2]):
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
         lines.append('contour_math '+numbers([*surface,*uv,*tangent,*direction,circle]))
+    append_analytic_requests(lines)
     append_attachment_requests(lines)
     append_section_requests(lines)
     return '\n'.join(lines)+'\n'
@@ -47,11 +48,22 @@ def append_attachment_requests(lines: list[str]) -> None:
     for kind,mode,direction,radius in product(range(6),range(3),[(1,0,0),(0,0,1)], [0,2]):
         surface=[kind,0,0,0,0,0,1,1,0,0,0,radius,0.4,-2,2,-1,1]
         fields=[*surface,mode,*direction]
+        if kind < 4:
+            lines.append('contour_analytic '+numbers(fields))
         lines.append('contour_attachment '+numbers(fields))
         for seeded,tolerance in product([0,1],[-1,0,1e-7]):
             lines.append('contour_segments '+numbers([*fields,seeded,tolerance]))
         for scenario in range(4):
             lines.append('contour_internal '+numbers([*fields,scenario]))
+
+
+def append_analytic_requests(lines: list[str]) -> None:
+    """Vary trimmed domains and translated frames for repeated elementary Perform."""
+    bounds=[(-2,2,-1,1),(0,6.283185307179586,-1.5,1.5),(-0.1,0.1,-0.1,0.1)]
+    for kind,mode,direction,radius,limits,origin in product(range(4),range(3),
+            [(1,2,3),(-1,0,1),(0,1,0),(0,0,-1)],[0.5,3],bounds,[(0,0,0),(1,-2,3)]):
+        surface=[kind,*origin,0,0,1,1,0,0,0,radius,0.4,*limits]
+        lines.append('contour_analytic '+numbers([*surface,mode,*direction]))
 
 
 def source_wrapper(source: Path, build: Path, output: Path, libraries: list[str]) -> Path:

@@ -1,3 +1,5 @@
+mod analytic_case;
+pub use analytic_case::analytic_case;
 mod segments;
 pub use segments::segments_case;
 mod internal;

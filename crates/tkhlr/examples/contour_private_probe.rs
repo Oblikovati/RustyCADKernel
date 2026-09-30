@@ -1,6 +1,8 @@
 //! Isolated oracle for private contour helpers; no public API completion is implied.
 pub use rustycad_tkhlr::contap;
 use std::io::{self, BufRead};
+#[path = "../src/contap/contour/analytic.rs"]
+mod analytic;
 #[path = "../src/contap/contour/boundary_points.rs"]
 mod boundary_points;
 #[allow(dead_code, unused_imports)]
@@ -12,7 +14,13 @@ mod contana;
 #[allow(dead_code)]
 #[path = "hl_probe/contap_surface.rs"]
 mod contap_surface;
+#[allow(dead_code)]
+#[path = "hl_probe/contap_search_boundary.rs"]
+mod contour_boundary;
 mod contour_private;
+#[allow(dead_code)]
+#[path = "hl_probe/contap.rs"]
+mod contour_records;
 #[path = "../src/contap/contour/line_constructor.rs"]
 mod line_constructor;
 #[path = "../src/contap/contour/math_helpers.rs"]
@@ -38,6 +46,7 @@ fn main() {
             "contour_attachment" => contour_private::attachment_case(&values),
             "contour_internal" => contour_private::internal_case(&values),
             "contour_segments" => contour_private::segments_case(&values),
+            "contour_analytic" => contour_private::analytic_case(&values),
             "contour_math" => contour_private::math_case(&values),
             "contour_sections" => contour_private::sections_case(&values),
             _ => {

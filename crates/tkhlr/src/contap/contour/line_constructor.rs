@@ -132,7 +132,8 @@ impl SectionConstructor<'_> {
             return self.analytic_section(output, (0., period), None);
         }
         let (first, last) = self.vertex_limits(count, 1)?;
-        let limits = (first, last + period);
+        // OCCT 3d097a0 adds PI twice left-to-right; regrouping changes closing vertices.
+        let limits = (first, last + std::f64::consts::PI + std::f64::consts::PI);
         if acceptable_span(limits, 1e-10) {
             self.analytic_section(output, limits, Some((count, 1, true)))?;
         }
