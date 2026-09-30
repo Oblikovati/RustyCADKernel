@@ -8,7 +8,7 @@ use rustycad_tkg3d::geom::{
     GeomBSplineCurve, GeomCurve, GeomEllipse, GeomHyperbola, GeomOffsetCurve,
 };
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
-pub(super) fn geometry(kind: i32, offset: f64) -> Result<Handle<dyn GeomCurve>, Failure> {
+pub(crate) fn geometry(kind: i32, offset: f64) -> Result<Handle<dyn GeomCurve>, Failure> {
     if kind <= 6 {
         return tools_geometry::geometry(kind, 0., 1.);
     }

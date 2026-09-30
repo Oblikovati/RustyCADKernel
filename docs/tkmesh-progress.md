@@ -114,3 +114,14 @@ histories. The integrated routine gate now passes 125,262 exact comparisons and
 replays 24 explicit divergences: nine vertex-index cases, eight connectivity-index
 cases and seven null-selector cases. Native empty selection sets and no-op neighbor
 expansion behavior are retained; this does not complete triangulation.
+
+### Circle construction and OCC24923
+
+Circle, CircleInspector and CircleTool add 29 audited API rows; four remain partial
+for unchecked native indices. Original OCC24923 is translated with its 100,000
+accepted random triangles, original random sequence and native acceptance threshold.
+Every accepted input and circle result is compared exactly. The integrated oracle
+passes 131,199 requests and separately replays 28 indexing/null-object differences.
+The shared CellFilter conversion now uses TKernel's existing native integer cast;
+all 251 existing tree comparisons remain green. TKMesh is now 2/29 mapped original
+declarations; overall mapping is 7,212/8,648 GoogleTest declaration candidates.

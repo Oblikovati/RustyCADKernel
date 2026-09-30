@@ -2,7 +2,7 @@
 use super::{integer, real};
 use rustycad_tkernel::standard::Failure;
 #[path = "../edge_private/fixtures.rs"]
-mod fixtures;
+pub(super) mod fixtures;
 #[path = "../edge_private/full.rs"]
 mod full;
 fn attempt(result: Result<(), Failure>) {

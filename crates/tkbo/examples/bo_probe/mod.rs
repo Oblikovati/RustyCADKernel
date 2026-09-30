@@ -1,3 +1,4 @@
+mod algorithm_cases;
 mod context;
 mod context_compute;
 mod curves;
@@ -44,6 +45,8 @@ pub fn dispatch(operation: &str, v: &[f64]) {
 }
 fn dispatch_case(operation: &str, v: &[f64]) {
     match operation {
+        "algorithms_roots" => algorithm_cases::roots(v),
+        "algorithms_geometry" => algorithm_cases::geometry(v),
         "edge_full" => edge_cases::case(v),
         "shrunk" => shrunk_range::case(v),
         "bop_range" => records::index_case(v),

@@ -4,6 +4,7 @@
 Usage: python3 tools/verify_tkbo_foundations.py --source OCCT --native-build BUILD
 """
 from itertools import product
+from tkbo_algorithms_corpus import algorithm_requests
 from tkbo_edge_corpus import edge_full_requests
 from toolkit_numeric import NumericOracle, verify_numeric
 from tkbo_upstream_gaps import verify_missing_isvalid
@@ -24,6 +25,7 @@ def corpus() -> str:
                  for index, depth in product([-3, 0, 1, 7], [-2, 0, 1, 2, 7, 64])]
     requests += [f"face_state {a} {b} {c} {tol} {fuzzy} {n}" for a, b, c, tol, fuzzy, n in product([0,1], [0,1], [0,1], [-1,1e-7], [-1,0,1e-7,1e-3,99], [0,3])]
     requests += [f"face_perform {a} {b} {x} {y} {z} {parallel} {split}" for (a, b), x, y, z, parallel, split in product([(0, 0), (0, 1), (1, 0), (0, 3), (3, 0), (1, 3), (3, 1)], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1])]
+    requests += algorithm_requests()
     requests += edge_full_requests()
     requests += shrunk_requests()
     requests += marked_requests()
@@ -166,3 +168,5 @@ if __name__ == '__main__':
     (ORACLE.evidence/'report.json').unlink(missing_ok=True)
     verify_missing_isvalid(selected_paths()[1], ORACLE.evidence)
     verify_numeric(ORACLE)
+    from tkbo_undefined_radius import verify_undefined_radius
+    verify_undefined_radius(ORACLE, selected_paths()[0])

@@ -214116,6 +214116,330 @@
       "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::is_coincidence_checked_quickly",
       "status": "implemented",
       "notes": "Native box clipping/subdivision, curve priority swapping, coincidence and extrema searches, analytic line intersection, and common-part merging. Retains default IsDone=true, sticky validation errors, retained swap state, repeated-Perform accumulation and whole-range result clearing. 1,362 exact public native histories plus 10,028 exact private helper requests; five direct Rust state regressions. No original standalone EdgeEdge GoogleTest declarations; TKBO remains 10/299 mapped."
+    },
+    {
+      "upstream_id": "BRepMesh_Circle()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Circle.hxx",
+      "source_sha256": "3950f266ba2182550ec9a9d15ee47c226b05fb1d8df5c5fe71c01d81160061b3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircle::default",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_Circle(const gp_XY&,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Circle.hxx",
+      "source_sha256": "3950f266ba2182550ec9a9d15ee47c226b05fb1d8df5c5fe71c01d81160061b3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircle::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_Circle::SetLocation(const gp_XY&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Circle.hxx",
+      "source_sha256": "3950f266ba2182550ec9a9d15ee47c226b05fb1d8df5c5fe71c01d81160061b3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircle::set_location",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_Circle::SetRadius(double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Circle.hxx",
+      "source_sha256": "3950f266ba2182550ec9a9d15ee47c226b05fb1d8df5c5fe71c01d81160061b3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircle::set_radius",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_Circle::Location() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Circle.hxx",
+      "source_sha256": "3950f266ba2182550ec9a9d15ee47c226b05fb1d8df5c5fe71c01d81160061b3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircle::location",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_Circle::Radius() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Circle.hxx",
+      "source_sha256": "3950f266ba2182550ec9a9d15ee47c226b05fb1d8df5c5fe71c01d81160061b3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircle::radius",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::Coord(int,const Point&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::coord",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::Shift(const Point&,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::shift",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector(double,int,const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::Bind(int,const BRepMesh_Circle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::bind",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::Circles() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::circles",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::Circle(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::circle",
+      "status": "partial",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency. Explicit gap: unchecked native DynamicArray access at negative and allocated-but-uninitialized circle indices versus Rust Standard_OutOfRange. tools/verify_tkmesh_circle_undefined.py retains four candidates with complete_parity=false; Select can reach a stale negative registration after Bind fails. These cases are not exact passes."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::SetPoint(const gp_XY&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::set_point",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::GetShotCircles()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::get_shot_circles",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::Inspect(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::inspect",
+      "status": "partial",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency. Explicit gap: unchecked native DynamicArray access at negative and allocated-but-uninitialized circle indices versus Rust Standard_OutOfRange. tools/verify_tkmesh_circle_undefined.py retains four candidates with complete_parity=false; Select can reach a stale negative registration after Bind fails. These cases are not exact passes."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleInspector::IsEqual(int,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleInspector.hxx",
+      "source_sha256": "715ecc45eaae52a253456f578c8294b46cfbcfae0401add8cac595778f59b2a4",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleInspector::is_equal",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool(const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool(int,const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::Init(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::init",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::SetCellSize(double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::set_cell_size",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::SetCellSize(double,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::set_cell_size",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::SetMinMaxSize(const gp_XY&,const gp_XY&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::set_min_max_size",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::IsEmpty() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::is_empty",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::Bind(int,const gp_Circ2d&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::bind",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::MakeCircle(const gp_XY&,const gp_XY&,const gp_XY&,gp_XY&,double&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::make_circle",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::Bind(int,const gp_XY&,const gp_XY&,const gp_XY&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::bind",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::MocBind(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::moc_bind",
+      "status": "implemented",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::Delete(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::delete",
+      "status": "partial",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency. Explicit gap: unchecked native DynamicArray access at negative and allocated-but-uninitialized circle indices versus Rust Standard_OutOfRange. tools/verify_tkmesh_circle_undefined.py retains four candidates with complete_parity=false; Select can reach a stale negative registration after Bind fails. These cases are not exact passes."
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool::Select(const gp_XY&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
+      "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::select",
+      "status": "partial",
+      "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency. Explicit gap: unchecked native DynamicArray access at negative and allocated-but-uninitialized circle indices versus Rust Standard_OutOfRange. tools/verify_tkmesh_circle_undefined.py retains four candidates with complete_parity=false; Select can reach a stale negative registration after Bind fails. These cases are not exact passes."
+    },
+    {
+      "upstream_id": "IntTools::Length(const TopoDS_Edge&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools.hxx",
+      "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
+      "rust_item": "rustycad_tkbo::int_tools::IntTools::length",
+      "status": "implemented",
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations."
+    },
+    {
+      "upstream_id": "IntTools::RemoveIdenticalRoots(NCollection_Sequence<IntTools_Root>&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools.hxx",
+      "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
+      "rust_item": "rustycad_tkbo::int_tools::IntTools::remove_identical_roots",
+      "status": "implemented",
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations."
+    },
+    {
+      "upstream_id": "IntTools::SortRoots(NCollection_Sequence<IntTools_Root>&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools.hxx",
+      "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
+      "rust_item": "rustycad_tkbo::int_tools::IntTools::sort_roots",
+      "status": "implemented",
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations."
+    },
+    {
+      "upstream_id": "IntTools::FindRootStates(NCollection_Sequence<IntTools_Root>&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools.hxx",
+      "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
+      "rust_item": "rustycad_tkbo::int_tools::IntTools::find_root_states",
+      "status": "implemented",
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations."
+    },
+    {
+      "upstream_id": "IntTools::Parameter(const gp_Pnt&,const occ::handle<Geom_Curve>&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools.hxx",
+      "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
+      "rust_item": "rustycad_tkbo::int_tools::IntTools::parameter",
+      "status": "implemented",
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations."
+    },
+    {
+      "upstream_id": "IntTools::GetRadius(const BRepAdaptor_Curve&,double,double,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools.hxx",
+      "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
+      "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
+      "status": "partial",
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status; Rust uses the existing deterministic zero-radius result. All such candidate calls stay outside exact parity even if this execution happens to agree."
+    },
+    {
+      "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools.hxx",
+      "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
+      "rust_item": "rustycad_tkbo::int_tools::IntTools::prepare_args",
+      "status": "implemented",
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations."
     }
   ],
   "tests": [
@@ -316223,6 +316547,20 @@
       "rust_target": "int_tools_face_face_legacy",
       "rust_test": "OCC23644_CoaxialConesNoRegularCurve",
       "rust_source": "crates/tkbo/tests/face_face_legacy/regressions.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepMesh_CircleTool_Test.OCC24923_CircumCirclePassesThroughAllVertices",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/GTests/BRepMesh_CircleTool_Test.cxx",
+      "source_sha256": "db01574f244d687cc8ea8f27eec8c9c80392e195f6d21ed061a7f622baf7bfc3",
+      "rust_package": "rustycad-tkmesh",
+      "rust_target": "brep_mesh_circle_tool_legacy",
+      "rust_test": "BRepMesh_CircleTool_Test__OCC24923_CircumCirclePassesThroughAllVertices",
+      "rust_source": "crates/tkmesh/tests/brep_mesh_circle_tool_legacy.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

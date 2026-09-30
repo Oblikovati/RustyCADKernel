@@ -43,3 +43,6 @@ pub use shrunk_range::ShrunkRange;
 
 mod edge_edge;
 pub use edge_edge::EdgeEdge;
+
+mod algorithms;
+pub use algorithms::IntTools;
