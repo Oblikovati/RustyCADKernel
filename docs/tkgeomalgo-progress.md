@@ -47,6 +47,13 @@ The toolkit test inventory maps these suites (80 declarations):
 | IntCurveSurface_ThePolygonOfHInter_Test.cxx | int_curve_surface_the_polygon_of_h_inter | 1 | pass | pass |
 | IntCurveSurface_ThePolyhedronOfHInter_Test.cxx | int_curve_surface_the_polyhedron_of_h_inter | 6 | pass | pass |
 
+GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
+build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
+of TKTopAlgo, TKOffset and TKShHealing, and GeomAPI::To3d), which neither the port nor
+the shared native build (no TKOffset or TKShHealing library) provides. Its two GeomFill
+cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` and
+`geom_fill_filling_behavior`) and in the numeric corpus.
+
 ## API mapping
 
 - GccEnt: the static members of the `GccEnt` class are free functions of
@@ -107,6 +114,27 @@ The toolkit test inventory maps these suites (80 declarations):
   `reset_fields` and the `done`/`my_is_parallel` fields). Overloads take distinct
   names, output references become returned tuples, and `Dump` members write to a
   `fmt::Write` where the native ones write to `std::cout`.
+
+- GeomFill (filling part, [geomalgo-design.md](geomalgo-design.md) section 13):
+  `GeomFill_AppSurf` is the alias `GeomFillAppSurf` of `AppBlendAppSurf`, with
+  `GeomFillLine` and `GeomFillSectionGenerator` implementing its line and generator
+  traits; `GeomFill_Profiler` is a struct that `GeomFillSectionGenerator` embeds
+  (`Deref`). Output arrays are assigned as natively (`NCollection_Array1::operator=`
+  takes the source bounds and length), `GetShape` returns the four counts, and the two
+  `Section` overloads are `section_d1` and `section`. `GeomFill_Generator` embeds the
+  profiler too. `GeomFill_Coons`, `GeomFill_Curved` and `GeomFill_Stretch` embed their
+  `GeomFill_Filling` result (`Deref`); their four-row `Init` overloads take the rows as
+  an array (`init`, `init_weighted`, `with_poles`, `with_weights`), the two-row ones of
+  `GeomFill_Curved` are `init_two_rows` and `init_two_weighted_rows`. The `Init`
+  overloads of `GeomFill_BezierCurves` and `GeomFill_BSplineCurves` are `init_four`,
+  `init_three` and `init_two` (constructors `with_four`, `with_three`, `with_two`).
+  `GeomFill_Boundary` and `GeomFill_TgtField` are the traits `GeomFillBoundary` and
+  `GeomFillTgtField` (the tolerance setters are `set_tol3d` and `set_tolang`, the
+  field's `D1(W, V, DV)` is `d1_with_value`); `GeomFill_CoonsAlgPatch::Func(f1, f2)` is
+  `func_pair`; `GeomFill_CornerState`'s overloaded setters are `set_gap`, `set_tgt_ang`
+  and `set_nor_ang`; `GeomFill_ConstrainedFilling`'s `Init` overloads are `init_three`
+  and `init_four`, `ReBuild` is `re_build`, `Eval` writes into a slice, and the
+  `Check` members write to a `fmt::Write` where the native ones write to `std::cout`.
 
 ## Verification
 
@@ -391,11 +419,12 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 20955 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 21523 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
-with TopClass 1116, Geom2dGcc 3968, IntWalk 717, and IntCurveSurface 3077.
+with TopClass 1116, Geom2dGcc 3968, IntWalk 717, IntCurveSurface 3077, and the GeomFill
+filling classes 568.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -630,6 +659,31 @@ too-short parameter arrays, every TriConnex case); `ics_utils` the polygon and
 polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
 `ics_quadcurv` the instance classes; `ics_estlim`, `ics_project` and
 `ics_interutils` the InterUtils functions.
+
+GeomFill filling part (gfill, 568 requests): `gfill_line` reads line points;
+`gfill_profiler` adds B-splines (several degrees, rational, periodic, mixed periodic and
+not), Bezier curves, circles and ellipses (trimmed or not, through the C1
+approximation branch) and trimmed lines to a profiler and reads it before and after
+`Perform` at three knot tolerances, with wrong array sizes, indices out of range, and
+knot vectors that the insertion cannot unify (the mean-knot branch, and one that
+raises); `gfill_secgen` runs every generator query and `SetParam` on arrays of lower
+bound 1, 0, 2 and -3; `gfill_appsurf` skins those sections through `GeomFill_AppSurf`
+in the four Perform modes, with imposed parameters, and on lines shorter and longer
+than the section list. `gfill_generator` rules those sections; `gfill_scheme` runs the
+Stretch, Coons and Curved schemes (four and two rows) on rows of 1 to 8 poles, with and
+without weights, mismatched rows, rows of lower bound 0 and 2, and a second
+non-rational `Init`; `gfill_bezier` and `gfill_bspline` fill two, three and four
+boundaries in the three styles (chains in every order and orientation, rational
+boundaries, different knot ranges and distributions, closed boundaries, unjoined
+curves, too few poles for the Coons style, the OCC27704 curves, and the four ways two
+curves touch in the curved style). `gfill_bound` evaluates the three boundaries
+(lines, arcs and B-splines; 2d segments on planes, cylinders and spheres) before and
+after `Reparametrize` (plain, reversed, with end derivatives, on other ranges);
+`gfill_corner` drives the corner state; `gfill_patch` evaluates the Coons patch, the
+tangent fields of its four sides and the patch with swapped laws; `gfill_cfill` fills
+three and four boundaries (constrained, free and mixed, in any order and orientation,
+with a degenerated side), with and without the corner checks, with `SetDomain` and
+`ReBuild`, the `Check` members' text, and a second `Init` on the same framework.
 
 ## Preserved native behaviour
 
@@ -964,6 +1018,54 @@ polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
   shared by every instance of the generic in the port); the probe masks the number.
 - `NbSamples` truncates a double count, `(int)` of NaN being undefined (0 here).
 
+### GeomFill (filling part)
+
+- `GeomFill_SectionGenerator::SetParam` shares the given array and copies it into itself
+  from index 1 (`myParams(i) = Params(Lower + i - 1)` on the same array): a lower bound
+  of 0 spreads the first value over the array, then raises Standard_OutOfRange at the
+  last index; any lower bound above 1 raises at once. The native constructor sets the
+  parameters only when the empty profile holds sections, so `Parameter` without
+  `SetParam` dereferences a null handle (a crash natively, Standard_NullObject here;
+  not in the corpus), and `GeomFill_AppSurf` with known parameters needs `SetParam`.
+- `GeomFill_SectionGenerator::Section` never computes derivatives and leaves the 2d
+  poles unchanged; the poles and weights are assigned, so the arrays take the section's
+  length.
+- `GeomFill_Profiler::Perform` segments periodic curves of a non-periodic profile,
+  and when the knot insertion leaves different knot counts it sets the mean inner knots
+  on the original curves, which raises when their knot counts differ. The consultation
+  members all name `Degree` in their StdFail_NotDone message.
+- `GeomFill_Coons` puts `P2` and `P4` on the first and last rows of the grid, while
+  `GeomFill_Stretch`, `GeomFill_Curved` and the Coons weights put `W4`/`P4` first and
+  `W2`/`P2` last; `GeomFill_BezierCurves` and `GeomFill_BSplineCurves` pass the Coons
+  scheme `(P1, P4, P3, P2)`. With fewer than four poles in a direction the Coons
+  blending reads the cubic Hermite poles directly. A non-rational `Init` of a scheme
+  keeps the weights of an earlier rational one (`Weights` still returns them). The
+  weighted two-row `GeomFill_Curved` sizes its weight grid by the weight rows.
+- `Init(C1, C2)` of `GeomFill_BezierCurves` and `GeomFill_BSplineCurves` in the curved
+  style reverses the caller's `C1` (not its copy) when the end of `C1` meets the start
+  of `C2`, and raises Standard_OutOfRange when the curves do not touch. The B-spline
+  ruled surface is periodic in U only when a curve is rational (the non-rational
+  constructor call omits the flag). `SetSameDistribution` always inserts knots
+  through the weights, also for non-rational curves.
+- `GeomFill_CoonsAlgPatch::Value(U, V)` evaluates all four boundaries at `V`; `D1U`
+  and `D1V` evaluate them at `U` or `V` by side. `GeomFill_TgtOnCoons::D1(W)` takes its
+  second-order term from the corrected tangent, `D1(W, T, DT)` from the uncorrected
+  one, so the two derivatives differ. `GeomFill_BoundWithSurf::D1Norm` at a point of
+  null Gram determinant multiplies the normal difference by `1e-12` instead of
+  dividing by it.
+- `GeomFill_ConstrainedFilling::MatchKnots` compares the domains with the knot
+  multiplicities (not the knots) when it looks for the index of a domain knot, so a
+  `Law::MixTgt` pivot moves only when a multiplicity lies within the tolerance of a
+  domain. A second `Init` keeps the tangent
+  fields, tangent poles, corner states (gaps included) and corner twists of the first
+  where it sets none; `SetDomain` matches the sorted boundaries by identity and
+  ignores any other boundary. `GeomFill_SimpleBound` and `GeomFill_BoundWithSurf`
+  store their new `Law_BSpFunc` before `SetCurve`.
+- `GeomFill_Coons` with fewer than two poles in a direction allocates an array of
+  negative size natively (Standard_RangeError here; not in the corpus). A default
+  scheme (no `Init`) dereferences a null grid in `NbUPoles`, `Poles` and `Weights`
+  (Standard_NullObject here; not in the corpus).
+
 ## IntCurveSurface deviations
 
 - The polyhedron arrays keep the native 1-based layout: index 0 is the origin with
@@ -973,3 +1075,19 @@ polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
 - Curve exceptions inside the quadric distance function are kept and raised when the
   root search returns, as for the IntImp functions (docs/geomalgo-design.md section 6).
 
+## GeomFill filling-part deviations
+
+- `GeomFill_CoonsAlgPatch::Bound`, `Corner` and `Func` read fixed arrays without a
+  bounds check natively; an index outside them raises Standard_OutOfRange here (and so
+  do `GeomFill_ConstrainedFilling::Boundary` and a `GeomFill_TgtOnCoons` of a side
+  outside 0..3).
+- `GeomFill_ConstrainedFilling::Eval` writes past a too short result natively; the
+  slice raises Standard_OutOfRange here. A boundary or field exception inside the
+  approximation evaluator is kept and raised when `AdvApprox_ApproxAFunction` returns
+  (docs/geomalgo-design.md section 13). A second `Init` whose kept tangent poles no
+  longer fit the new grid reads past the native temporary arrays (undefined
+  behaviour); `PerformS1` raises Standard_OutOfRange here (not in the corpus).
+- Null handles that the native code dereferences (a missing curve, surface, patch,
+  approximation result or parameter array) raise Standard_NullObject.
+- `GeomFill_BoundWithSurf` keeps its own `Adaptor3d_CurveOnSurface` through the new
+  `Adaptor3dCurveOnSurface::copy_of` of TKG3d (the implicit native copy constructor).

@@ -53,6 +53,9 @@
 #include "tkgeomalgo_probe_iwalk.cxx"
 #include "tkgeomalgo_probe_intcurvesurface.cxx"
 #include "tkgeomalgo_probe_intcurvesurface_inter.cxx"
+#include "tkgeomalgo_probe_gfill.cxx"
+#include "tkgeomalgo_probe_gfill_fill.cxx"
+#include "tkgeomalgo_probe_gfill_cf.cxx"
 #include "tkgeomalgo_probe_geomfill_sweep.cxx"
 #include "tkgeomalgo_probe_geomfill_trihedron.cxx"
 #include "tkgeomalgo_probe_geomfill_laws.cxx"
@@ -204,6 +207,19 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ics_estlim",ga_ics_estlim_case},
  {"ics_project",ga_ics_project_case},
  {"ics_interutils",ga_ics_interutils_case},
+ // GeomFill filling part (tkgeomalgo_probe_gfill*.cxx)
+ {"gfill_line", ga_gfill_line_case},
+ {"gfill_profiler", ga_gfill_profiler_case},
+ {"gfill_secgen", ga_gfill_secgen_case},
+ {"gfill_appsurf", ga_gfill_appsurf_case},
+ {"gfill_generator", ga_gfill_generator_case},
+ {"gfill_scheme", ga_gfill_scheme_case},
+ {"gfill_bezier", ga_gfill_bezier_case},
+ {"gfill_bspline", ga_gfill_bspline_case},
+ {"gfill_bound", ga_gfill_bound_case},
+ {"gfill_corner", ga_gfill_corner_case},
+ {"gfill_patch", ga_gfill_patch_case},
+ {"gfill_cfill", ga_gfill_cfill_case},
  // GeomFill sweep (tkgeomalgo_probe_geomfill_*.cxx)
  {"gfs_shape",ga_gfs_shape_case},
  {"gfs_circle",ga_gfs_circle_case},

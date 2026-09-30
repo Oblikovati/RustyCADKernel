@@ -13,11 +13,69 @@
 // commercial license or contractual agreement.
 // Rust translation of ModelingAlgorithms/TKGeomAlgo/GeomFill at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! OCCT package GeomFill. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tkgeomalgo-progress.md lists the ported packages).
+//! OCCT package GeomFill: surfaces filled between boundary curves, skinned through
+//! sections, and swept along paths.
 //!
-//! The sweep part (the trihedron, location and section laws, `GeomFill_Sweep`,
-//! `GeomFill_Pipe` and their helpers) follows docs/geomalgo-design.md, section 14.
+//! The package is ported in two parts, each class in its own file. The filling part
+//! (docs/geomalgo-design.md section 13) holds the skinning classes (`GeomFill_Line`,
+//! `GeomFill_Profiler`, `GeomFill_SectionGenerator`, `GeomFill_Generator`, the
+//! `GeomFill_AppSurf` instance of the AppBlend template), the filling of two to four
+//! curves (`GeomFill_BezierCurves`, `GeomFill_BSplineCurves` and the pole schemes
+//! `GeomFill_Filling`, `GeomFill_Coons`, `GeomFill_Curved`, `GeomFill_Stretch`) and
+//! the constrained filling of boundaries (`GeomFill_ConstrainedFilling` with its
+//! boundaries, tangent fields, Coons patch and corner states). The sweep part holds
+//! the trihedron, location and section laws and the sweeps.
+
+// Filling part (docs/geomalgo-design.md section 13).
+mod app_surf;
+mod approx_style;
+mod bezier_curves;
+mod bound_parameter;
+mod bound_with_surf;
+mod boundary;
+mod bspline_curves;
+mod bspline_distribution;
+mod constrained_filling;
+mod coons;
+mod coons_alg_patch;
+mod corner_state;
+mod curved;
+mod curves_filling;
+mod degenerated_bound;
+mod filling;
+mod filling_style;
+mod generator;
+mod line;
+mod profiler;
+mod profiler_unify;
+mod section_generator;
+mod simple_bound;
+mod stretch;
+mod tgt_field;
+mod tgt_on_coons;
+
+pub use app_surf::GeomFillAppSurf;
+pub use approx_style::GeomFillApproxStyle;
+pub use bezier_curves::GeomFillBezierCurves;
+pub use bound_with_surf::GeomFillBoundWithSurf;
+pub use boundary::{GeomFillBoundary, GeomFillBoundaryTolerances};
+pub use bspline_curves::GeomFillBSplineCurves;
+pub use constrained_filling::GeomFillConstrainedFilling;
+pub use coons::GeomFillCoons;
+pub use coons_alg_patch::GeomFillCoonsAlgPatch;
+pub use corner_state::GeomFillCornerState;
+pub use curved::GeomFillCurved;
+pub use degenerated_bound::GeomFillDegeneratedBound;
+pub use filling::GeomFillFilling;
+pub use filling_style::GeomFillFillingStyle;
+pub use generator::GeomFillGenerator;
+pub use line::GeomFillLine;
+pub use profiler::GeomFillProfiler;
+pub use section_generator::GeomFillSectionGenerator;
+pub use simple_bound::GeomFillSimpleBound;
+pub use stretch::GeomFillStretch;
+pub use tgt_field::GeomFillTgtField;
+pub use tgt_on_coons::GeomFillTgtOnCoons;
 
 // Sweep classes (docs/geomalgo-design.md, section 14).
 mod arc_section;
