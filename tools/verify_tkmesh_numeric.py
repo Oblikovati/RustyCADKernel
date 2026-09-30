@@ -64,6 +64,8 @@ def corpus() -> str:
     rows += ['mesh_cell_failure ' + ' '.join(map(str, v)) for v in product(range(5), range(2), range(2))]
     rows += ['mesh_vertex_inspector ' + ' '.join(map(str, v)) for v in product(range(7), range(2), range(6), range(2), range(3))]
     rows += ['mesh_vertex_tool ' + ' '.join(map(str, v)) for v in product(range(3), range(5), range(2), range(5))]
+    rows += ['mesh_delaun ' + ' '.join(map(str, v)) for v in product((1,3,100), range(7), range(7), range(7), range(21))]
+    rows += [f'mesh_delaun_dump {mode}' for mode in range(3)]
     return '\n'.join(rows) + '\n'
 
 
@@ -75,3 +77,6 @@ if __name__ == '__main__':
     verify_numeric(ORACLE)
     from verify_tkmesh_vertex_undefined import verify_vertex_undefined
     verify_vertex_undefined(use_existing=True)
+
+    from verify_tkmesh_delaun_undefined import verify_delaun_undefined
+    verify_delaun_undefined(use_existing=True)

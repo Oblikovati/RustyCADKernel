@@ -55,3 +55,6 @@ pub use vertex_tool::{
     BRepMeshVertexInspector, BRepMeshVertexTool, DeletedVertexIndices, MeshVertexCollection,
     MeshVertexCollectionSlot, VertexInspectorPoint, VertexInspectorTarget,
 };
+
+mod delaun_structure;
+pub use delaun_structure::BRepMeshDataStructureOfDelaun;
