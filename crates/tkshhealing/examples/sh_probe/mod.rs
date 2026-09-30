@@ -3,6 +3,7 @@ pub mod analysis_basic;
 pub mod complex_curve;
 pub mod composite_surface;
 pub mod explorer;
+pub mod fix_basic;
 pub mod registrator;
 pub mod reshape;
 pub mod shape_build;

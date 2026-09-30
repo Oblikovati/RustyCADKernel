@@ -3,6 +3,7 @@
 use std::io::{self, BufRead};
 mod sh_probe;
 use sh_probe::analysis_basic;
+use sh_probe::fix_basic;
 use sh_probe::{
     complex_curve, composite_surface, explorer, registrator, reshape, shape_build, shape_extend,
     wire_data,
@@ -37,6 +38,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sh_shell", analysis_basic::shell_case),
     ("sh_wireorder", analysis_basic::wireorder_case),
     ("sh_fbdata", analysis_basic::fbdata_case),
+    // ShapeFix_Root, _ShapeTolerance, _EdgeConnect (sh_probe/fix_basic.rs)
+    ("sh_fixroot", fix_basic::fixroot_case),
+    ("sh_fixtol", fix_basic::fixtol_case),
+    ("sh_edgeconnect", fix_basic::edgeconnect_case),
 ];
 
 fn main() {

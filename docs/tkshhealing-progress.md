@@ -143,8 +143,14 @@ public member has an api row:
 | ShapeAnalysis_Shell | `ShapeAnalysisShell` | `sh_shell` |
 | ShapeAnalysis_WireOrder | `ShapeAnalysisWireOrder` | `sh_wireorder` |
 | ShapeAnalysis_FreeBoundData | `ShapeAnalysisFreeBoundData` | `sh_fbdata` |
+| ShapeFix_Root | trait `FixRoot`, `FixRootData`, `ShapeFixRoot`, `need_fix` | `sh_fixroot` |
+| ShapeFix_ShapeTolerance | `ShapeFixShapeTolerance` | `sh_fixtol` |
+| ShapeFix_EdgeConnect | `ShapeFixEdgeConnect` | `sh_edgeconnect` |
 
-`crates/tkshhealing/tests/shape_analysis_*.rs` hold the behavior tests, on shapes built
+`ShapeFix_Root` is the trait `FixRoot` over the shared `FixRootData`: its native virtual
+setters are provided methods that a derived fixing tool overrides, and `ShapeFixRoot` is
+the base class itself. `crates/tkshhealing/tests/shape_analysis_*.rs` and
+`shape_fix_*.rs` hold the behavior tests, on shapes built
 with the ported BRepBuilderAPI makers (`tests/healing_support`).
 
 ## GoogleTest suites
@@ -269,6 +275,17 @@ ShapeAnalysis, ShapeConstruct and ShapeFix (tools/tkshhealing_corpus_analysis_ba
   a seam used twice, with and without the keep-loops mode, then chains and couples;
   adds in the wrong mode, `SetMode`, `Clear` and a second `Perform`.
 
+ShapeFix (tools/tkshhealing_corpus_fix_basic.py):
+
+- `sh_fixroot` (11): setter scripts (the precision above and below the limits, `Set` from
+  another root), the context, the three registrator kinds with messages on a shape and on
+  `myShape`, and `NeedFix`;
+- `sh_fixtol` (434): `LimitTolerance` and `SetTolerance` on the strip scene for each
+  sub-shape type and interval, then the tolerance of every vertex, edge and face;
+- `sh_edgeconnect` (12): a triangle of separate lines with gaps (open and closed wires),
+  lines whose p-curves end elsewhere, a closed circle edge, merged groups, repeated
+  connections and `Clear`; the digest reads the ends of each edge by orientation.
+
 ## Preserved native behaviour
 
 ### ShapeExtend
@@ -336,6 +353,17 @@ ShapeAnalysis, ShapeConstruct and ShapeFix (tools/tkshhealing_corpus_analysis_ba
   0) and does not implement `SetCouples` (no couple exists). `Clear` keeps the last order,
   so `IsDone` stays true, and `Perform` on no edge keeps it too. `Ordered(0)` and
   `Chain(-1)` raise Standard_OutOfRange once an order or chains exist.
+
+### ShapeFix (low classes)
+
+- `ShapeFix_ShapeTolerance::LimitTolerance` with `WIRE` returns true only when a vertex
+  tolerance changed: the result of the edge call is dropped.
+- `ShapeFix_EdgeConnect::Build` walks its groups in the order of a map hashed by TShape
+  address, so when one edge belongs to two groups, the order of its two vertices in the
+  TShape depends on addresses (natively too); the shared vertices, their points and
+  tolerances do not. The probe reads the ends of each edge by orientation. A shared
+  vertex gets the centre of the bounding box of the used ends of every curve
+  representation (p-curves included) and a tolerance of 1.0001 times the farthest end.
 
 ## Deliberate deviations
 

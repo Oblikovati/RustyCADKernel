@@ -195642,6 +195642,230 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireOrder::couple",
       "status": "implemented",
       "notes": "ShapeAnalysis mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_wireorder requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnect()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeConnect::new",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_edgeconnect requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnect::Add(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeConnect::add_edges",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_edgeconnect requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnect::Add(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeConnect::add_shape",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_edgeconnect requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnect::Build()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeConnect::build",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_edgeconnect requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeConnect::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeConnect::clear",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_edgeconnect requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixRoot::new",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::Set(const occ::handle<ShapeFix_Root>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::set",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SetContext(const occ::handle<ShapeBuild_ReShape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::set_context",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::Context() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::context",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SetMsgRegistrator(const occ::handle<ShapeExtend_BasicMsgRegistrator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::set_msg_registrator",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::MsgRegistrator() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::msg_registrator",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SetPrecision(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::set_precision",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::Precision() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::precision",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SetMinTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::set_min_tolerance",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::MinTolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::min_tolerance",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SetMaxTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::set_max_tolerance",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::MaxTolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::max_tolerance",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::LimitTolerance(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::limit_tolerance",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SendMsg(const TopoDS_Shape&,const Message_Msg&,Message_Gravity) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::send_msg",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SendMsg(const Message_Msg&,Message_Gravity) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::send_msg_on_shape",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SendWarning(const TopoDS_Shape&,const Message_Msg&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::send_warning",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SendWarning(const Message_Msg&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::send_warning_on_shape",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SendFail(const TopoDS_Shape&,const Message_Msg&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::send_fail",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::SendFail(const Message_Msg&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::FixRoot::send_fail_on_shape",
+      "status": "implemented",
+      "notes": "ShapeFix_Root is the trait FixRoot (virtual setters are provided methods a derived tool overrides) over FixRootData, with the base class ShapeFixRoot (docs/shhealing-design.md section 4); compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixroot requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_Root::DEFINE_STANDARD_RTTIEXT(ShapeFix_Root,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Root.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient! registers ShapeFix_Root below Standard_Transient (and impl_transient_interface! the trait FixRoot); nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeFix_ShapeTolerance()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShapeTolerance::new",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixtol requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_ShapeTolerance::LimitTolerance(const TopoDS_Shape&,double,double,TopAbs_ShapeEnum) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShapeTolerance::limit_tolerance",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixtol requests)."
+    },
+    {
+      "upstream_id": "ShapeFix_ShapeTolerance::SetTolerance(const TopoDS_Shape&,double,TopAbs_ShapeEnum) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_ShapeTolerance.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShapeTolerance::set_tolerance",
+      "status": "implemented",
+      "notes": "ShapeFix mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 4): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_fixtol requests)."
     }
   ],
   "tests": [

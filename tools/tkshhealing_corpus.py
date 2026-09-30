@@ -27,3 +27,5 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_shapebuild').append_shapebuild_requests(requests)
     # ShapeAnalysis_Geom, _ShapeTolerance, _Shell, _WireOrder, _FreeBoundData (tkshhealing_corpus_analysis_basic.py)
     __import__('tkshhealing_corpus_analysis_basic').append_analysis_basic_requests(requests)
+    # ShapeFix_Root, _ShapeTolerance, _EdgeConnect (tkshhealing_corpus_fix_basic.py)
+    __import__('tkshhealing_corpus_fix_basic').append_fix_basic_requests(requests)
