@@ -91,3 +91,5 @@ if __name__ == '__main__':
 
     from verify_tkmesh_circle_undefined import verify_circle_undefined
     verify_circle_undefined(use_existing=True)
+    from verify_tkmesh_delaun_core import verify_delaun_core
+    verify_delaun_core()

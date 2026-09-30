@@ -72,6 +72,7 @@ void mesh_pcurve(std::istream& input) {
 #include "tkmesh_probe_delaun.cxx"
 #include "tkmesh_probe_selector.cxx"
 #include "tkmesh_probe_circle.cxx"
+#include "tkmesh_probe_delaun_core.cxx"
 int main(){
     std::string line;
     while(std::getline(std::cin,line)){
@@ -111,6 +112,9 @@ int main(){
         else if(operation=="mesh_circle_inspector")mesh_circle_inspector(input);
         else if(operation=="mesh_circle_tool")mesh_circle_tool(input);
         else if(operation=="mesh_circle_make")mesh_circle_make(input);
+        else if(operation=="mesh_delaun_null")mesh_delaun_null(input);
+        else if(operation=="mesh_delaun_core")mesh_delaun_core(input);
+        else if(operation=="mesh_delaun_polygon")mesh_delaun_polygon(input);
         else if(operation=="mesh_circle_random")mesh_circle_random(input);
         else if(operation=="mesh_circle_invalid")mesh_circle_invalid(input);
         else if(operation=="mesh_delaun")mesh_delaun(input);
