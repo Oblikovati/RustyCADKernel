@@ -16,4 +16,11 @@ void bean_group(const std::vector<double>& v){
 void bean_sampling(const std::vector<double>& v){
  auto curve=bean_curve(0,int(v[0]));IntTools_SurfaceRangeSample surface(0,int(v[1]),0,int(v[2]));IntTools_CurveRangeLocalizeData curves(int(v[3]),v[6]);IntTools_SurfaceRangeLocalizeData surfaces(int(v[4]),int(v[5]),v[7],v[8]);bool a=false,b=false,c=false;CheckSampling(curve,surface,curves,surfaces,v[9],v[10],v[11],a,b,c);bo_int(a);bo_int(b);bo_int(c);
 }
-int main(){std::string line;while(std::getline(std::cin,line)){std::istringstream input(line);std::string operation;input>>operation;double number;std::vector<double> v;while(input>>number)v.push_back(number);try{if(operation=="bean_empty")bean_empty(v);else if(operation=="bean_group")bean_group(v);else if(operation=="bean_sampling")bean_sampling(v);else return 2;}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}std::cout<<'\n';}}
+void bean_box_snapshot(const Bnd_Box& box){bo_real(box.GetGap());double a,b,c,d,e,f;box.Get(a,b,c,d,e,f);for(double x:{a,b,c,d,e,f})bo_real(x);}
+void bean_box(const std::vector<double>& v){
+ BRepAdaptor_Surface surface(bo_fclass_face(int(v[0]),2.),false);IntTools_SurfaceRangeLocalizeData cache(3,3,0.01,0.01);int count=int(v[1]);cache.SetRangeUGrid(count);cache.SetRangeVGrid(count);
+ for(int i=1;i<=count;++i){cache.SetUParam(i,(i-2)*0.5);cache.SetVParam(i,(i-2)*0.25);for(int j=1;j<=count;++j)cache.SetGridPoint(i,j,gp_Pnt(i,-j,i*j));}
+ cache.SetGridDeflection(v[6]);Bnd_Box box;if(v[8]!=0.){box.Add(gp_Pnt(17.,-19.,23.));box.SetGap(0.125);}
+ BuildBox(surface,v[2],v[3],v[4],v[5],cache,box);bean_box_snapshot(box);bo_int(cache.GetNBUPointsInFrame());bo_int(cache.GetNBVPointsInFrame());bean_box_snapshot(GetSurfaceBox(surface,v[2],v[3],v[4],v[5],v[7],cache));
+}
+int main(){std::string line;while(std::getline(std::cin,line)){std::istringstream input(line);std::string operation;input>>operation;double number;std::vector<double> v;while(input>>number)v.push_back(number);try{if(operation=="bean_box")bean_box(v);else if(operation=="bean_empty")bean_empty(v);else if(operation=="bean_group")bean_group(v);else if(operation=="bean_sampling")bean_sampling(v);else return 2;}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}std::cout<<'\n';}}

@@ -1,5 +1,9 @@
 //! Observe private BeanFace helpers without advertising an unfinished public intersector.
 pub use rustycad_tkbo::int_tools;
+#[path = "../src/int_tools/bean_face/boxes.rs"]
+mod bean_boxes;
+#[path = "bo_probe/fclass_faces.rs"]
+mod bean_faces;
 mod bean_private;
 #[path = "../src/int_tools/bean_face/ranges.rs"]
 mod bean_ranges;

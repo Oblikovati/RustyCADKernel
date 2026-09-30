@@ -700,3 +700,13 @@ range updates and non-manifold vertex copying. No original legacy declaration is
 added by this dependency.
 The integrated toolkit gate passes 17,664 exact numeric comparisons and all 101
 mapped original declarations in both native and Rust executions.
+
+### Wire division
+
+WireDivide maps all 20 callable header APIs; Perform remains partial. Its integrated
+accounting gate passes 699 exact histories and separately retains two native
+SIGSEGV/Rust NullObject divergences (default null context and a pcurve-only internal
+vertex). The port includes parameter synchronization, shared split vertices,
+seams, small-piece removal and non-manifold vertex replacement. Twelve new Rust
+regressions accompany the port. No original legacy declaration exists for this
+class; the toolkit remains 101/143 mapped.

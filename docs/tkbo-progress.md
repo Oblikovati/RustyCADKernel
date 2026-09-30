@@ -92,3 +92,13 @@ native gce_MakeCirc status. Thirty-two differ in the current run; none of the 17
 counts as exact parity, including incidental matches. Rust retains the existing
 zero-radius GCE behavior. Seven direct Rust regressions cover each callable utility.
 No original legacy declaration is added by this dependency.
+
+### BeanFace private range and box dependencies
+
+Private range flags, stable sample grouping, subdivision limits and cached surface
+boxes pass 2,097 exact native comparisons. Box cases retain preexisting output,
+negative deflection, reversed frames and deliberately distinct stored grid points.
+The unchanged native translation unit is included before the observation probe;
+its source hash and compiler command are recorded. The shared wrapper also passes
+all 11,390 existing EdgeEdge comparisons. These dependencies add no public
+BeanFace API or original legacy declaration claim.

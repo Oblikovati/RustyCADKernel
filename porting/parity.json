@@ -57239,33 +57239,33 @@
       "upstream_id": "NCollection_HArray1(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::with_bounds",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::with_bounds",
       "status": "implemented",
-      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
     },
     {
       "upstream_id": "NCollection_HArray1(const Array1Type&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::from_array",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::from_array",
       "status": "implemented",
-      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. The copy owns its storage and keeps the lower bound."
     },
     {
       "upstream_id": "NCollection_HArray1::Array1() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::array1",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::array1",
       "status": "implemented",
-      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. Returns a read guard."
     },
     {
       "upstream_id": "NCollection_HArray1::ChangeArray1()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::change_array1",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::change_array1",
       "status": "implemented",
-      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. Returns a write guard seen by every handle holder."
     },
     {
       "upstream_id": "TopAbs::Compose(TopAbs_Orientation,TopAbs_Orientation)",
@@ -68644,14 +68644,6 @@
       "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
     },
     {
-      "upstream_id": "NCollection_HArray1(int,int)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1::with_bounds",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
-    },
-    {
       "upstream_id": "NCollection_HArray1(int,int,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
@@ -68666,30 +68658,6 @@
       "rust_item": "rustycad_tkernel::ncollection::HArray1::from_buffer",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. The C-array buffer is a static slice: viewed and detached on first write with theUseBuffer, ignored otherwise; a short buffer is an error instead of a native overread."
-    },
-    {
-      "upstream_id": "NCollection_HArray1(const Array1Type&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1::from_array",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. The copy owns its storage and keeps the lower bound."
-    },
-    {
-      "upstream_id": "NCollection_HArray1::Array1() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1::array1",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. Returns a read guard."
-    },
-    {
-      "upstream_id": "NCollection_HArray1::ChangeArray1()",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray1::change_array1",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. Returns a write guard seen by every handle holder."
     },
     {
       "upstream_id": "NCollection_HArray1::DEFINE_STANDARD_RTTI_INLINE(NCollection_HArray1,Standard_Transient)",
@@ -212910,7 +212878,7 @@
       "upstream_id": "HLRBRep_BSurfaceTool::NbSamplesU(const BRepAdaptor_Surface&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_u_range",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_u",
       "status": "implemented",
       "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
     },
@@ -212918,7 +212886,7 @@
       "upstream_id": "HLRBRep_BSurfaceTool::NbSamplesV(const BRepAdaptor_Surface&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BSurfaceTool.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_v_range",
+      "rust_item": "rustycad_tkhlr::hlr_brep::BSurfaceTool::nb_samples_v",
       "status": "implemented",
       "notes": "49 executable BSurfaceTool members: 600 exact native comparisons on analytic, swept, offset, rational/non-rational Bezier and BSpline faces with locations; full derivative/interval/trim and native exception comparisons; reversed/zero range sampling preserved; five Rust regression tests. No original HLRBRep legacy declaration or whole pipeline claim."
     },
@@ -214275,7 +214243,7 @@
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
       "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
-      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::new",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::with_reserved",
       "status": "implemented",
       "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
     },
@@ -214302,7 +214270,7 @@
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
       "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
-      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::set_cell_size",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::set_cell_sizes",
       "status": "implemented",
       "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
     },
@@ -214347,7 +214315,7 @@
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CircleTool.hxx",
       "source_sha256": "d8f3486b93f12a76c4dcef0c68053dc30bcefd3b1d30b15246e4a3f63ca6f0af",
-      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::bind",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCircleTool::bind_points",
       "status": "implemented",
       "notes": "Pinned OCCT circle storage, native squared-tolerance selection (bug27119), stale/duplicate cell registrations, and circumcircle arithmetic (OCC24923). Full TKMesh corpus: 131199 exact requests, including all coordinates/outputs for 100000 srand(42) triangles; original OCC24923 keeps retries and <=1% threshold. Native nonfinite cell conversion fixed using existing TKernel ElementCast; no higher toolkit dependency."
     },
@@ -214440,6 +214408,195 @@
       "rust_item": "rustycad_tkbo::int_tools::IntTools::prepare_args",
       "status": "implemented",
       "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (32 observed differences). Seven direct Rust regressions. No standalone original GoogleTest declarations."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::new",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::Init(const TopoDS_Wire&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::init",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::Init(const TopoDS_Wire&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::init_surface",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::Load(const TopoDS_Wire&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::load_wire",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::Load(const TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::load_edge",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_face",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetSurface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_surface",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetSurface(const occ::handle<Geom_Surface>&,const TopLoc_Location&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_surface_location",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::Perform()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::WireDivider::perform",
+      "status": "partial",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::Wire() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::wire",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::status_flag",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetSplitCurve3dTool(const occ::handle<ShapeUpgrade_SplitCurve3d>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_split_curve_3d_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetSplitCurve2dTool(const occ::handle<ShapeUpgrade_SplitCurve2d>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_split_curve_2d_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetTransferParamTool(const occ::handle<ShapeAnalysis_TransferParameters>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_transfer_param_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetEdgeDivideTool(const occ::handle<ShapeUpgrade_EdgeDivide>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_edge_divide_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::GetEdgeDivideTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::WireDivider::edge_divide_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::GetTransferParamTool()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::WireDivider::transfer_param_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetEdgeMode(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_edge_mode",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::SetFixSmallCurveTool(const occ::handle<ShapeUpgrade_FixSmallCurves>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::set_fix_small_curve_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::GetFixSmallCurveTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::fix_small_curve_tool",
+      "status": "implemented",
+      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_WireDivide::DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_WireDivide,ShapeUpgrade_Tool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
+      "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeWireDivide::RTTI",
+      "status": "excluded",
+      "notes": "Generated by impl_transient and impl_transient_interface; no standalone Rust API."
     }
   ],
   "tests": [

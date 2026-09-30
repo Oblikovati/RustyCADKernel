@@ -22,6 +22,8 @@ def requests() -> str:
            for curves,surfaces,groups in product([0,1,2,10,33],[0,1,3,10,35],[1,2,7])]
     rows+=['bean_sampling '+' '.join(map(str,[depth,depth+1,depth-1,samples,samples+1,samples-1,minimum,minimum*2,minimum/2,difference,difference*2,-difference]))
            for depth,samples,minimum,difference in product([-2,-1,0,1,2,3,10,1024],[-2,0,1,2,3,10,32],[-1,0,0.1],[0,1,10,1000])]
+    rows += ['bean_box '+' '.join(map(str,[kind,count,*bounds,deflection,tolerance,seed]))
+             for kind,count,bounds,deflection,tolerance,seed in product(range(5),[1,3,7],[(0,1,0,1),(-1,2,-1,2),(1,0,1,0),(0,0,0,0)],[-0.1,0,0.01],[-0.25,0,0.5],[0,1])]
     return '\n'.join(rows)+'\n'
 
 
