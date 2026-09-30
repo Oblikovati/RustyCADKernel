@@ -126,7 +126,7 @@ pub fn lintanobl_case(values: &[f64]) {
 }
 
 /// `q1 line param1 tolang angle`: Geom2dGcc_Lin2dTanOblIter and every consultation.
-pub fn lintanobl_iter_case(values: &[f64]) {
+pub fn obl_iter_case(values: &[f64]) {
     let mut r = Reader::new(values);
     attempt(|| {
         let q1 = r.g2gcc_q()?;

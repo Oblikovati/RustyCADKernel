@@ -76,10 +76,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g2gcc_lin2tan", geom2d_gcc_lines::lin2tan_case),
     ("g2gcc_lin2tan_iter", geom2d_gcc_lines::lin2tan_iter_case),
     ("g2gcc_lintanobl", geom2d_gcc_lines::lintanobl_case),
-    (
-        "g2gcc_lintanobl_iter",
-        geom2d_gcc_lines::lintanobl_iter_case,
-    ),
+    ("g2gcc_lintanobl_iter", geom2d_gcc_lines::obl_iter_case),
     ("g2gcc_tancen", geom2d_gcc_circles::tancen_case),
     ("g2gcc_tancen_geo", geom2d_gcc_circles::tancen_geo_case),
     ("g2gcc_2tanrad", geom2d_gcc_circles::tanrad_case),
