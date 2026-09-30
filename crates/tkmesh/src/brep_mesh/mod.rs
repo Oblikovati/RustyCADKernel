@@ -9,3 +9,6 @@ pub use shape_visitor::BRepMeshShapeVisitor;
 
 mod deflection;
 pub use deflection::Deflection;
+
+mod post_processor;
+pub use post_processor::BRepMeshModelPostProcessor;
