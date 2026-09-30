@@ -88,7 +88,7 @@ pub use polygo::{IntPatchPolygo, IntPatchPolygoBase};
 pub use polyhedron::IntPatchPolyhedron;
 pub use polyhedron_bvh::{IntPatchPolyhedronBVH, IntPatchPolyhedronTool};
 pub use polyline::IntPatchPolyLine;
-pub use prm_prm::IntPatchPrmPrmIntersection;
+pub use prm_prm::{IntPatchPrmPrmIntersection, IntPatchPrmPrmTolerances};
 pub use rline::IntPatchRLine;
 pub use rst_int::IntPatchRstInt;
 pub use special_points::IntPatchSpecialPoints;

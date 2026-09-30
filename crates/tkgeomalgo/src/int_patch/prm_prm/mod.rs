@@ -20,8 +20,18 @@
 //! here; the grid filling, `PointDepart`, `NewLine`, the static helpers and the
 //! `Perform` overloads are in the submodules.
 mod grid;
+mod grid_sections;
+mod helpers;
 mod new_line;
+mod perform_grid;
+mod perform_points;
+mod perform_poly;
+mod perform_self;
 mod point_depart;
+mod several_wlines;
+mod walk_steps;
+
+pub use perform_poly::IntPatchPrmPrmTolerances;
 
 use super::IntPatchLine;
 use crate::int_start::failures::sequence_value;
