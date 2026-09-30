@@ -345,3 +345,70 @@ The mapping:
 - The design adds no BRep case to TKG3d or TKGeomAlgo: any subclass of the two native
   classes (the Contap and BRepBlend domains of later toolkits) implements the same two
   traits.
+
+## 10. BRepBuilderAPI: the virtual MakeShape root, the wrapping makers and the modifications
+
+BRepBuilderAPI is the root of every shape-building algorithm of the higher toolkits:
+BRepPrimAPI, BRepAlgoAPI, BRepOffsetAPI, BRepFilletAPI and others derive from
+`BRepBuilderAPI_MakeShape` and override its virtual members (`Build`, `Shape`,
+`Generated`, `Modified`, `IsDeleted`, and `IsDone` of `BRepBuilderAPI_Command`), and
+`BRepBuilderAPI_Collect::Add` (and the history tools of later toolkits) call them through
+a `BRepBuilderAPI_MakeShape&`. BRepLib (section 7) needed no trait; this package does.
+
+- **`BRepBuilderAPI_Command` and `BRepBuilderAPI_MakeShape` are one trait over one
+  base struct.** The struct `BRepBuilderAPICommand` is the done flag with the native
+  bodies of `IsDone` and `Check` and the protected `Done`/`NotDone` (`set_done`,
+  `set_not_done`). The struct `BRepBuilderAPIMakeShapeBase` is the protected data of
+  `BRepBuilderAPI_MakeShape` (the command, `myShape`, `myGenerated`); it dereferences to
+  the command. The trait `BRepBuilderAPIMakeShape` has two required accessors of that
+  base and the virtual members as provided methods with the native bodies: `is_done`,
+  `build`, `shape`, `generated`, `modified` and `is_deleted`. `check` is a provided method
+  that no implementor overrides: `Check` is not virtual natively and reads the flag, not
+  `IsDone()`. A derived class implements the trait and overrides the members its header
+  overrides. The protected members are public in Rust, since the derived classes live in
+  other crates.
+- `Shape()` calls `Build()` and `Check()` when the virtual `IsDone()` is false, so the
+  provided `shape` takes `&mut self` and returns `Result`. `Build`, `Generated`,
+  `Modified` and `IsDeleted` return `Result` too: the base cannot fail, but overrides can
+  (a `Modified` of the modifications raises Standard_NoSuchObject for a foreign shape).
+  `Generated` and `Modified` return a borrow of `myGenerated`, as the native reference.
+  The conversion operators (`operator TopoDS_Shape()`, `operator TopoDS_Edge()`, ...)
+  map to the accessor they call.
+- **The makers wrap the BRepLib makers.** Each `BRepBuilderAPI_MakeX` is a struct with
+  the base and its private `BRepLib_MakeX`. Each constructor, `Init` and `Add` calls the
+  BRepLib member of the same Rust name (section 7: `from_lin_params`, `init_curve`, ...),
+  then, when the BRepLib maker is done, marks the command done and copies its shape, as
+  every native body does (one private helper, `adopt`, holds that step). The `IsDone`
+  overrides return the flag of the BRepLib maker; `Error()` converts the BRepLib error
+  with the native switch. `BRepBuilderAPI_MakeSolid::IsDeleted` is the only history
+  override of the makers.
+- **`BRepBuilderAPI_ModifyShape`** is the struct `BRepBuilderAPIModifyShape`: the base,
+  the `BRepTools_Modifier`, the initial shape and the modification handle (all protected
+  natively, public here because BRepOffsetAPI_DraftAngle of TKOffset derives from it).
+  It implements the trait (its `Modified` override). Its protected constructors and
+  `DoModif` overloads are public associated functions and methods with distinct names
+  (`with_shape`, `with_modification`, `with_shape_modification`, `do_modif_shape`,
+  `do_modif_modification`, `do_modif_shape_modification`); the private `DoModif()` stays
+  private. `DoModif(S)` reads `IsDone()`; no class derived from ModifyShape overrides
+  `IsDone`, so the port reads the command flag.
+- `Transform`, `GTransform`, `Copy` and `NurbsConvert` hold a `BRepBuilderAPIModifyShape`
+  and dereference to it. `ModifiedShape` is virtual natively but only called on a derived
+  object or explicitly on the base inside the package, so each override is an inherent
+  method that shadows the base one reached through `Deref`, as
+  `BRepLibMakeSolid::face_status` does (section 7). Each struct implements the trait with
+  its own `Modified` override; the calls the native code makes to
+  `BRepBuilderAPI_ModifyShape::Modified` go to the base struct's trait method.
+- The modification is `Handle<dyn BRepToolsModification>`; a derived class keeps no second
+  handle: it casts the shared handle to its concrete TKBRep class (`TrsfModification`,
+  `GTrsfModification`, `NurbsConvertModification`) where the native code `down_cast`s.
+- **`BRepBuilderAPI_Collect`** is a plain struct; `Add` takes `&mut dyn
+  BRepBuilderAPIMakeShape` and copies each list the algorithm returns before it calls the
+  next member (a native `const&` to `myGenerated` that the next call would overwrite is
+  read before that call). Its maps keep the native `NCollection_DataMap` with
+  `TopTools_ShapeMapHasher`; their iteration order follows the TShape addresses on both
+  sides, so the probes read them by key.
+- `BRepBuilderAPI_FindPlane` is a plain struct over its plane handle; the package class
+  `BRepBuilderAPI` becomes the free functions `plane`, `set_plane`, `precision` and
+  `set_precision` of the module, which call the BRepLib globals (section 7).
+- The enumerations (`EdgeError`, `WireError`, `FaceError`, `ShellError`, `PipeError`,
+  `TransitionMode`) are Rust enums with the native discriminants.

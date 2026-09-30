@@ -8,7 +8,7 @@ use rustycad_tkmath::{
     gp::{Point3, Transform3},
     toploc::Location,
 };
-use rustycad_tktopalgo::brep_builder_api::MakeVertex;
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeShape, BRepBuilderAPIMakeVertex};
 use std::io::{self, BufRead};
 fn unhex(text: &str) -> String {
     if text == "-" {
@@ -75,9 +75,10 @@ fn geometry(op: &str, input: &mut std::str::SplitWhitespace<'_>) {
     }
     let power: i32 = input.next().unwrap().parse().unwrap();
     let transform = Transform3::translation(coordinates).powered(power).unwrap();
-    let builder = MakeVertex::new(Point3::new(0.125, -0.25, 0.5));
+    let mut builder = BRepBuilderAPIMakeVertex::new(Point3::new(0.125, -0.25, 0.5)).unwrap();
     let moved = builder
         .shape()
+        .unwrap()
         .moved(&Location::new(transform), false)
         .unwrap();
     let point = BRepTool::pnt(&Vertex::unchecked(moved)).unwrap();

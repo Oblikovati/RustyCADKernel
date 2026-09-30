@@ -1,8 +1,8 @@
 """Deterministic requests for BRepBuilderAPI (tools/oracle/tktopalgo_probe_brepbuilderapi.cxx).
 
-`tp_make_vertex` builds a vertex with BRepBuilderAPI_MakeVertex (the Rust side is still
-the STUB MakeVertex) and compares its point and its tolerance: the origin, signed zeros,
-tiny, huge and non-representable decimal coordinates, and seeded random points.
+`tp_make_vertex` builds a vertex with BRepBuilderAPI_MakeVertex and compares its point
+and its tolerance: the origin, signed zeros, tiny, huge and non-representable decimal
+coordinates, and seeded random points.
 """
 from __future__ import annotations
 import random
