@@ -613,3 +613,11 @@ control polygons. The 1,158 new exact comparisons bring the integrated corpus to
 clippy passes. ShapeAnalysis_Curve now has all 16 callable APIs mapped, with zero
 header audit gaps or stale rows. This class has no original standalone GTest suite;
 its API oracle does not count as translated ProjectCurveOnSurface declarations.
+
+### ShapeConstruct_ProjectCurveOnSurface recovery
+
+All nine public projector APIs and all 29 original test declarations are now ported.
+The integrated source gate passes all 73 currently mapped TKShHealing declarations
+in both native OCCT and Rust, without skips. The combined numeric gate includes 648
+new projector cases covering cache reuse, status flags, polar crossings and complete
+output curve geometry. Toolkit completion remains false; unmapped declarations remain.

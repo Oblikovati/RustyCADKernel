@@ -208888,6 +208888,96 @@
       "rust_item": "rustycad_tkhlr::contap::ContapHContTool::is_all_solution",
       "status": "implemented",
       "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::new",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::Init(const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::init",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::Init(const occ::handle<ShapeAnalysis_Surface>&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::init_analysis",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::SetSurface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::set_surface",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::SetSurface(const occ::handle<ShapeAnalysis_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::set_analysis_surface",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::SetPrecision(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::set_precision",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::AdjustOverDegenMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::adjust_over_degen_mode",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::Status(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::status",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::Perform(const occ::handle<Geom_Curve>&,double,double,occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructProjectCurveOnSurface::perform",
+      "status": "implemented",
+      "notes": "Native sampled algorithm at OCCT3d097a0: planar analytic projection, uneven BSpline ProjLib fallback, 23+span sampling, normal-distance line fit, boundary isos, point walking/cache, degenerate/polar endpoint correction, seam insertion and interpolation. All29original legacy declarations preserved; 648 exact native differential requests and five focused Rust regressions. Protected ProjLib is also exposed/tested; unused protected approximatePCurve/checkPoints helpers are not claimed as callable public APIs. Full local TKShHealing numeric gate:7,880 exact requests; Rust crate219passed with one pre-existing ignored doctest. AdjustOverDegenMode mutability uses the paired Rust set_adjust_over_degen_mode setter."
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurface::DEFINE_STANDARD_RTTIEXT(ShapeConstruct_ProjectCurveOnSurface,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct_ProjectCurveOnSurface.hxx",
+      "source_sha256": "4192dc97fce29e29f28c43c31c3c25242071e42d46110cf780138532dfb0291d",
+      "rust_item": "impl_transient!(ShapeConstructProjectCurveOnSurface)",
+      "status": "excluded",
+      "notes": "Native macro replaced by the shared Rust runtime type/Handle implementation."
     }
   ],
   "tests": [
@@ -310043,6 +310133,412 @@
       "rust_target": "brep_graph_deduplicate_legacy",
       "rust_test": "BRepGraph_DeduplicateTest__DedupMerge_SelfLoopEdge_OrientationPreserved",
       "rust_source": "crates/tkbrep/tests/brep_graph_deduplicate_legacy/pipeline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.LineOnPlane_A1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "LineOnPlane_A1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.CircleOnCylinder_A2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "CircleOnCylinder_A2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.IsoparametricLineOnCylinder_A3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "IsoparametricLineOnCylinder_A3",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.BSplineOnPlane_B1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "BSplineOnPlane_B1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/splines.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.HelicalBSplineOnCylinder_B2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "HelicalBSplineOnCylinder_B2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/splines.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.HighDegreeBSpline_B3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "HighDegreeBSpline_B3",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/splines.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.EquatorOnSphere_C1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "EquatorOnSphere_C1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.LatitudeOnSphere_C2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "LatitudeOnSphere_C2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.CircleOnTorus_C3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "CircleOnTorus_C3",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.CircleOnCone_D1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "CircleOnCone_D1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.ArcOnPlane_E1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "ArcOnPlane_E1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.DoublyTrimmedCurve_E2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "DoublyTrimmedCurve_E2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/splines.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.EllipseOnPlane_F1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "EllipseOnPlane_F1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.InitWithGeomSurface_G1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "InitWithGeomSurface_G1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.SetSurfaceAndPrecision_G2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "SetSurfaceAndPrecision_G2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.AdjustOverDegenModeAccessor_G3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "AdjustOverDegenModeAccessor_G3",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.StatusMethod_G4",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "StatusMethod_G4",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.TightTolerance_H1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "TightTolerance_H1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.DifferentEndpointTolerances_H2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "DifferentEndpointTolerances_H2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/splines.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.PartialCircle_I1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "PartialCircle_I1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/analytical.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.MiddlePortionBSpline_I2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "MiddlePortionBSpline_I2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/splines.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.MultipleProjections_J1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "MultipleProjections_J1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.SurfaceReinitialization_J2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "SurfaceReinitialization_J2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.NearPoleOnSphere_K1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "NearPoleOnSphere_K1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/edge_cases.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.VeryShortCurve_L1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "VeryShortCurve_L1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/edge_cases.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.CurveFarFromSurface_L2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "CurveFarFromSurface_L2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/edge_cases.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.LargeTolerance_L3",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "LargeTolerance_L3",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/edge_cases.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.Bug27569_ManyKnotsBSpline_M1",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "Bug27569_ManyKnotsBSpline_M1",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/bug27569.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeConstruct_ProjectCurveOnSurfaceTest.Bug27569_HighMultiplicityBSpline_M2",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeConstruct_ProjectCurveOnSurface_Test.cxx",
+      "source_sha256": "21f2805d3f5f7168af89ad59f09e1d1d80511f1a327a7f520eb918f1954b219b",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_construct_project_curve_on_surface_legacy",
+      "rust_test": "Bug27569_HighMultiplicityBSpline_M2",
+      "rust_source": "crates/tkshhealing/tests/project_curve_legacy/bug27569.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
