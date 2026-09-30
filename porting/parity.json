@@ -210633,6 +210633,177 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelPreProcessor::perform_internal",
       "status": "implemented",
       "notes": "Native seam amplification, source-parameter deflection reuse checks, triangle index validation and outdated polygon cleanup. Exact oracle covers actual full/truncated cones, descending seam parameters, missing pcurves with retained earlier 3D mutation, degenerate UV span, skipped failed faces and quality-decrease settings."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::IntFlag",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::IntersectionFlag",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::NoIntersection",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::IntersectionFlag::NoIntersection",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::Cross",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::IntersectionFlag::Cross",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::EndPointTouch",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::IntersectionFlag::EndPointTouch",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::PointOnSegment",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::IntersectionFlag::PointOnSegment",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::Glued",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::IntersectionFlag::Glued",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::Same",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::IntersectionFlag::Same",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool(const BRepAdaptor_Curve&,double,double,double,double,int,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::new",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool(const occ::handle<BRepAdaptor_Surface>&,GeomAbs_IsoType,double,double,double,double,double,int,double)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::on_surface",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::AddPoint(const gp_Pnt&,double,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::add_point",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::NbPoints() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::nb_points",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::Value(int,double,double&,gp_Pnt&,gp_Pnt2d&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::value_iso",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::Value(int,const occ::handle<BRepAdaptor_Surface>&,double&,gp_Pnt&,gp_Pnt2d&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::value_surface",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::Normal(const occ::handle<BRepAdaptor_Surface>&,double,double,gp_Pnt&,gp_Dir&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::normal",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::IntLinLin(const gp_XY&,const gp_XY&,const gp_XY&,const gp_XY&,gp_XY&,double(&)[2])",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::int_lin_lin",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::IntSegSeg(const gp_XY&,const gp_XY&,const gp_XY&,const gp_XY&,bool,bool,gp_Pnt2d&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::int_seg_seg",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::SquareDeflectionOfSegment(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::square_deflection_of_segment",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool::CellsCount(const occ::handle<Adaptor3d_Surface>&,int,double,const BRepMesh_DefaultRangeSplitter*)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_GeomTool.hxx",
+      "source_sha256": "70af6ca9b4daf0a4e6043e9d2ed61dce60c2e5513d5223493a2c0a0f5ce33406",
+      "rust_item": "rustycad_tkmesh::brep_mesh::GeomTool::cells_count",
+      "status": "implemented",
+      "notes": "Exact native edge/iso sampling, shared adaptor edge identity, output mutation, CSLib derivative normals, segment classifications and surface-dependent cells counts. Native point-on-segment opposite-endpoint selection and C-style integer overflow behavior are preserved."
     }
   ],
   "tests": [
@@ -312586,6 +312757,20 @@
       "rust_target": "shape_analysis_free_bounds_legacy",
       "rust_test": "TwoDisjointFacesNoCrash",
       "rust_source": "crates/tkshhealing/tests/free_bounds_legacy/faces.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepMesh_GeomTool_Test.OCC25547_StaticMethodsExportAndFunctionality",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/GTests/BRepMesh_GeomTool_Test.cxx",
+      "source_sha256": "9593512eaf08b270f6e04a7f4386d2c624db74cc772aaba1b8f4d274b0d965dc",
+      "rust_package": "rustycad-tkmesh",
+      "rust_target": "brep_mesh_geom_tool_legacy",
+      "rust_test": "BRepMesh_GeomTool_Test__OCC25547_StaticMethodsExportAndFunctionality",
+      "rust_source": "crates/tkmesh/tests/brep_mesh_geom_tool_legacy.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

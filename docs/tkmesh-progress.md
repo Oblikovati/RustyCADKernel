@@ -44,3 +44,11 @@ The five ModelPreProcessor API rows now cover seam amplification, source-paramet
 checks and invalid triangulation cleanup. The integrated numeric gate passes 62,460
 exact requests. The original mesh regression declarations remain pending until their
 required meshing pipeline is implemented.
+
+### Geometry tool and first original mesh regression
+
+All 19 GeomTool header rows now have Rust implementations. The original OCC25547
+regression passes in both native OCCT and Rust. The integrated toolkit gate passes
+66,937 exact numeric requests and one mapped declaration; 28 original declarations
+remain pending. ConeRangeSplitter now preserves the native C++ integer conversion
+for overflowing/infinite values, covered by direct and differential regressions.
