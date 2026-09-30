@@ -39,6 +39,7 @@ NUMERIC_VERIFIERS = {
     'TKHelix': ('tools/verify_tkhelix_numeric.py', 'target/oracle-tkhelix/numeric'),
     'TKShHealing': ('tools/verify_tkshhealing_numeric.py', 'target/oracle-tkshhealing/numeric'),
     'TKPrim': ('tools/verify_tkprim_numeric.py', 'target/oracle-tkprim/numeric'),
+    'TKHLR': ('tools/verify_tkhlr_numeric.py', 'target/oracle-tkhlr/numeric'),
 }
 
 

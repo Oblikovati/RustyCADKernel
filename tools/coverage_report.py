@@ -62,6 +62,7 @@ PROBE_CORPORA: tuple[ProbeCorpus, ...] = (
     ProbeCorpus('rustycad-tkhelix', 'numeric_probe', 'target/oracle-tkhelix/numeric'),
     ProbeCorpus('rustycad-tkshhealing', 'numeric_probe', 'target/oracle-tkshhealing/numeric'),
     ProbeCorpus('rustycad-tkprim', 'numeric_probe', 'target/oracle-tkprim/numeric'),
+    ProbeCorpus('rustycad-tkhlr', 'numeric_probe', 'target/oracle-tkhlr/numeric'),
 )
 
 

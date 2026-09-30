@@ -26,11 +26,13 @@ Runner = Callable[..., str]
 ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKTopAlgo', 'TKPrim',
                                         'TKHelix',
                                         'TKShHealing',
+                                        'TKHLR',
                                         )
 # The closure's shared libraries in link order, dependants first.
 LINKED_TOOLKITS: tuple[str, ...] = ('TKPrim',
                                     'TKHelix',
                                     'TKShHealing',
+                                        'TKHLR',
                                     'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
                                     'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
 # The targets that build the whole closure plus GoogleTest: every additional toolkit,
