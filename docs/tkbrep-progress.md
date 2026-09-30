@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (756 declarations):
+The toolkit test inventory maps these suites (789 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -40,7 +40,7 @@ The toolkit test inventory maps these suites (756 declarations):
 | BRepGraph_RelatedIterator_Test.cxx | brep_graph_related_iterator | 15 | pass | pass |
 | BRepGraph_ChildExplorer_Test.cxx | brep_graph_child_explorer | 37 | pass | pass |
 | BRepGraph_ParentExplorer_Test.cxx | brep_graph_parent_explorer | 23 | pass | pass |
-| BRepGraph_Tool_Test.cxx | not mapped (phase 2) | 16 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_Tool_Test.cxx | mapped | 16 | passed | original production builders |
 | BRepGraph_RefId_Test.cxx | brep_graph_ref_id | 19 | pass | pass |
 | BRepGraph_VersionStamp_Test.cxx | brep_graph_version_stamp | 22 | pass | pass |
 | BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for BRepGProp, BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
@@ -65,7 +65,7 @@ The toolkit test inventory maps these suites (756 declarations):
 | BRepGraph_EventBus_Test.cxx | brep_graph_event_bus | 26 | pass | pass |
 | BRepGraph_Assembly_Test.cxx | not mapped (phase 2) | 45 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
 | BRepGraph_EdgeCases_Test.cxx | mapped | 12 | passed | original primitive builders |
-| BRepGraph_Convenience_Test.cxx | not mapped (phase 2) | 17 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_Convenience_Test.cxx | mapped | 17 | passed | original production builders |
 | BRepGraph_PermissionUpdate_Test.cxx | brep_graph_permission_update | 15 | pass | pass |
 | BRepGraph_ReplaceVertex_Test.cxx | brep_graph_replace_vertex | 6 | pass | pass |
 | BRepGraph_Reverse_Test.cxx | brep_graph_reverse | 16 | pass | pass |
