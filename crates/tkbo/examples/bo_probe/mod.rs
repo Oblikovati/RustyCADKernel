@@ -14,6 +14,7 @@ mod tools_geometry;
 mod tools_surface;
 mod tools_topology;
 mod topol;
+mod topol_domain;
 mod topol_surfaces;
 mod wline;
 mod wline_cases;

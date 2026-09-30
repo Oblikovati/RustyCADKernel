@@ -1,6 +1,7 @@
 use super::{flag, integer, real, topol_surfaces};
 use rustycad_tkbo::int_tools::TopolTool;
-fn state(tool: &TopolTool) {
+use rustycad_tkgeomalgo::int_start::TheTopolTool;
+fn state(tool: &dyn TheTopolTool) {
     integer(tool.nb_samples_u().unwrap());
     integer(tool.nb_samples_v().unwrap());
     integer(tool.nb_samples().unwrap());
@@ -12,7 +13,7 @@ fn state(tool: &TopolTool) {
         point(tool, index);
     }
 }
-fn point(tool: &TopolTool, index: i32) {
+fn point(tool: &dyn TheTopolTool, index: i32) {
     match tool.sample_point(index) {
         Ok((uv, p)) => {
             real(uv.x());
@@ -24,7 +25,7 @@ fn point(tool: &TopolTool, index: i32) {
         Err(error) => print!("{} ", error.exception_type()),
     }
 }
-fn parameters(tool: &TopolTool) {
+fn parameters(tool: &dyn TheTopolTool) {
     for array in [tool.u_parameters().unwrap(), tool.v_parameters().unwrap()] {
         integer(array.length());
         for value in array.as_slice() {
@@ -49,4 +50,5 @@ pub fn case(v: &[f64]) {
     parameters(&tool);
     tool.sample_pnts(0.2, 6, 7).unwrap();
     state(&tool);
+    super::topol_domain::emit(&tool).unwrap();
 }

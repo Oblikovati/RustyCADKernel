@@ -58,3 +58,23 @@ fn sampler_handles_retain_native_rtti_and_inherited_topology() {
     }
     assert_eq!(count, 4);
 }
+#[test]
+fn intersection_domain_dispatch_preserves_inttools_sampler() {
+    let domain: std::rc::Rc<dyn rustycad_tkgeomalgo::int_start::TheTopolTool> =
+        std::rc::Rc::new(TopolTool::with_surface(&plane()).unwrap());
+    assert_eq!(domain.nb_samples_u().unwrap(), 10);
+    assert_eq!(domain.nb_samples_v().unwrap(), 10);
+    assert_eq!(domain.nb_samples().unwrap(), 100);
+    assert_eq!(
+        domain.sample_point(0).unwrap().0,
+        rustycad_tkmath::gp::Point2::new(1., 2.)
+    );
+    domain.sample_pnts(0.1, 2, 3).unwrap();
+    assert_eq!(domain.u_parameters().unwrap().length(), 10);
+    assert_eq!(domain.v_parameters().unwrap().length(), 10);
+    assert_eq!(
+        domain.sample_point(1).unwrap().0,
+        rustycad_tkmath::gp::Point2::default()
+    );
+    assert!(domain.is_uniform_sampling().unwrap());
+}
