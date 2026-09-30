@@ -32,3 +32,6 @@ pub use wire::ShapeAnalysisWire;
 
 mod package;
 pub use package::ShapeAnalysis;
+
+mod free_bounds;
+pub use free_bounds::ShapeAnalysisFreeBounds;

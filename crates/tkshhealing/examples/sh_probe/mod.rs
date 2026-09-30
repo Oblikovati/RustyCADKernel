@@ -56,3 +56,5 @@ pub mod shape_analysis_curve;
 pub mod project_curve;
 
 pub mod shell_sewing;
+
+pub mod free_bounds;

@@ -48,3 +48,6 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
 
     # ShapeUpgrade_ShellSewing: topology, tolerance and persistent shell history.
     __import__('tkshhealing_corpus_shell_sewing').append_shell_sewing_requests(requests)
+
+    # ShapeAnalysis_FreeBounds and Wire connectivity: chaining and partial outputs.
+    __import__('tkshhealing_corpus_free_bounds').append_free_bounds_requests(requests)

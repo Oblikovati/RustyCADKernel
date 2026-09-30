@@ -1,4 +1,4 @@
-//! ShapeAnalysis_Wire state and ordering checks; the other native checks remain unported.
+//! ShapeAnalysis_Wire state, ordering and connection checks; other native checks remain unported.
 use super::{ShapeAnalysisEdge, ShapeAnalysisSurface, ShapeAnalysisWireOrder};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus, ShapeExtendWireData};
 use rustycad_tkbrep::{
@@ -11,6 +11,7 @@ use rustycad_tkernel::{
 };
 use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkmath::toploc::Location;
+mod connected;
 mod order;
 mod state;
 struct WireAnalysisFields {
@@ -20,9 +21,11 @@ struct WireAnalysisFields {
     precision: f64,
     status: i32,
     status_order: i32,
+    status_connected: i32,
+    min_3d: f64,
 }
 /// Native wire analyzer foundation; `ShapeAnalysisWire::from_wire(&wire, &face, 1e-7)?`.
-/// Only state initialization and ordering checks are currently implemented.
+/// Implements state initialization, ordering and connection checks.
 pub struct ShapeAnalysisWire {
     parent: StandardTransient,
     fields: SharedState<WireAnalysisFields>,
@@ -44,6 +47,8 @@ impl Default for ShapeAnalysisWire {
                 precision: precision::confusion(),
                 status: 0,
                 status_order: 0,
+                status_connected: 0,
+                min_3d: 0.,
             }),
         }
     }

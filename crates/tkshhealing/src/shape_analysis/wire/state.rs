@@ -6,6 +6,8 @@ impl ShapeAnalysisWire {
         let mut fields = self.fields.write();
         fields.status = 0;
         fields.status_order = 0;
+        fields.status_connected = 0;
+        fields.min_3d = 0.;
     }
     /// Assign precision without normalization; `analyzer.set_precision(-1.0)`.
     pub fn set_precision(&self, value: f64) {
