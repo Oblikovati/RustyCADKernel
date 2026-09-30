@@ -1,9 +1,12 @@
 //! The TKTopAlgo probe operations, one module per C++ probe file under tools/oracle.
+pub mod brep_bnd_lib;
 pub mod brep_builder_api;
 pub mod brep_class;
 pub mod brep_top_adaptor;
 pub mod face;
 pub mod int_curves_face;
+pub mod shape;
+pub mod shape_geometry;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tktopalgo_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.

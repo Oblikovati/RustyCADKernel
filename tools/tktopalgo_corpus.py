@@ -19,3 +19,5 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_breptopadaptor').append_breptopadaptor_requests(requests)
     # IntCurvesFace (tktopalgo_corpus_intcurvesface.py, faces of tktopalgo_corpus_adaptor_faces.py)
     __import__('tktopalgo_corpus_intcurvesface').append_intcurvesface_requests(requests)
+    # BRepBndLib (tktopalgo_corpus_brepbndlib.py, shapes of tktopalgo_corpus_solids.py)
+    __import__('tktopalgo_corpus_brepbndlib').append_brepbndlib_requests(requests)
