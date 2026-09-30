@@ -209700,6 +209700,24 @@
       "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::dynamic_type",
       "status": "excluded",
       "notes": "Native RTTI declaration macro maps to impl_transient runtime metadata; no separately callable macro in Rust. Runtime identity regression passes."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewing()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShellSewing.hxx",
+      "source_sha256": "4936d81449cd17eaae53bd497161458f907aea63406cad1ec5fc6b9e48cd9eb1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShellSewing::new",
+      "status": "implemented",
+      "notes": "Preserves persistent shell collection, native tolerance selection, sewing replacements and original-solid classification. All 17 original declarations and 345 exact native differential requests."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewing::ApplySewing(const TopoDS_Shape&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShellSewing.hxx",
+      "source_sha256": "4936d81449cd17eaae53bd497161458f907aea63406cad1ec5fc6b9e48cd9eb1",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShellSewing::apply_sewing",
+      "status": "implemented",
+      "notes": "Preserves persistent shell collection, native tolerance selection, sewing replacements and original-solid classification. All 17 original declarations and 345 exact native differential requests."
     }
   ],
   "tests": [
@@ -311261,6 +311279,244 @@
       "rust_target": "shape_construct_project_curve_on_surface_legacy",
       "rust_test": "Bug27569_HighMultiplicityBSpline_M2",
       "rust_source": "crates/tkshhealing/tests/project_curve_legacy/bug27569.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.NullInputReturnsNull",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "NullInputReturnsNull",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.ShapeWithoutShellReturnsNull",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "ShapeWithoutShellReturnsNull",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.EmptyShellReturnsNull",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "EmptyShellReturnsNull",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.SewsOpenShellWithExplicitTolerance",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "SewsOpenShellWithExplicitTolerance",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.AutomaticTolerancePreservesValidBox",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "AutomaticTolerancePreservesValidBox",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/solids.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.ExplicitTolerancePreservesValidBox",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "ExplicitTolerancePreservesValidBox",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/solids.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.ReorientsInsideOutSolid",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "ReorientsInsideOutSolid",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/solids.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.ProcessesMultipleShellsInCompound",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "ProcessesMultipleShellsInCompound",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/solids.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.InstanceCanProcessSuccessiveShapes",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "InstanceCanProcessSuccessiveShapes",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.SewsExactlyCoincidentOpenShell",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "SewsExactlyCoincidentOpenShell",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.KeepsEdgesBeyondExplicitToleranceSeparate",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "KeepsEdgesBeyondExplicitToleranceSeparate",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.NegativeToleranceUsesAutomaticTolerance",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "NegativeToleranceUsesAutomaticTolerance",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/solids.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.CompoundWithoutShellReturnsNull",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "CompoundWithoutShellReturnsNull",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.PreservesFaceOutsideProcessedShell",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "PreservesFaceOutsideProcessedShell",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.HandlesReversedOpenShell",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "HandlesReversedOpenShell",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.ReapplyingToSewedShapeIsStable",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "ReapplyingToSewedShapeIsStable",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/state.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShellSewingTest.ProcessesSingleFaceShell",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_ShellSewing_Test.cxx",
+      "source_sha256": "86d4b044395b793d0ece8d1baf591508298028ffba5f2fa53c8cfaa41b62e772",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_shell_sewing_legacy",
+      "rust_test": "ProcessesSingleFaceShell",
+      "rust_source": "crates/tkshhealing/tests/shell_sewing_legacy/basic.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

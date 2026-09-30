@@ -621,3 +621,11 @@ The integrated source gate passes all 73 currently mapped TKShHealing declaratio
 in both native OCCT and Rust, without skips. The combined numeric gate includes 648
 new projector cases covering cache reuse, status flags, polar crossings and complete
 output curve geometry. Toolkit completion remains false; unmapped declarations remain.
+
+### ShapeUpgrade_ShellSewing recovery
+
+Both public APIs and all 17 original declarations are ported, including persistent
+shell history across calls. The integrated gate passes all 90 currently mapped
+TKShHealing declarations in both unchanged native sources and Rust, without skips.
+The combined exact numeric corpus includes 345 new sewing/history requests. Toolkit
+completion remains false while other original declarations remain unmapped.
