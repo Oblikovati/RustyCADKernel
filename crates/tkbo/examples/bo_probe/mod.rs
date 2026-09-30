@@ -1,6 +1,7 @@
 mod context;
 mod context_compute;
 mod curves;
+mod face_face;
 mod fclass;
 mod fclass_faces;
 mod intersections;
@@ -55,6 +56,7 @@ fn dispatch_case(operation: &str, v: &[f64]) {
 }
 fn dispatch_scalar(operation: &str, v: &[f64]) {
     match operation {
+        "face_state" => face_face::case(v),
         "context_compute" => context_compute::case(v),
         "tools_curves" => tools_curves::case(v),
         "tools_topology" => tools_topology::case(v),

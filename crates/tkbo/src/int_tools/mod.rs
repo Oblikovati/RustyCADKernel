@@ -34,3 +34,6 @@ mod tools;
 pub use tools::Tools;
 mod wline_tool;
 pub use wline_tool::WLineTool;
+
+mod face_face;
+pub use face_face::FaceFace;
