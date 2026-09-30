@@ -391,6 +391,16 @@ impl BRepExtremaTriangleSet {
         Ok(original - num_triangles)
     }
 
+    /// `BVH()` of `BVH_PrimitiveSet`: the tree, built first while dirty, as a copy (the
+    /// native handle shares it); `set.bvh()?.length()`.
+    pub fn bvh(&self) -> Result<BvhTree<BvhVec3d>, Failure> {
+        let mut state = self.lock();
+        let tree: BvhTree<BvhVec3d> = state.take_primitive_bvh()?;
+        let copy: BvhTree<BvhVec3d> = tree.clone();
+        state.restore_primitive_bvh(tree);
+        Ok(copy)
+    }
+
     /// `BVH()` for a traversal: the tree (built first while dirty) moved out of the set;
     /// [`BRepExtremaTriangleSet::restore_bvh`] moves it back.
     pub(crate) fn take_bvh(&self) -> Result<BvhTree<BvhVec3d>, Failure> {

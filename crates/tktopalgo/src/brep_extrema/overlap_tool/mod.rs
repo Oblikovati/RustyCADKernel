@@ -20,8 +20,14 @@ use rustycad_tkmath::bvh::{BvhBaseTraverse, BvhPairTraverse, BvhTree, BvhVec3d};
 pub type BRepExtremaOverlapMap = DataMap<i32, PackedMap<i32>>;
 
 /// `getSetOfFaces`: the set of `face_idx`, bound empty first when missing.
-fn set_of_faces(faces: &mut BRepExtremaOverlapMap, face_idx: i32) -> &mut PackedMap<i32> {
-    faces.bound(face_idx, PackedMap::default())
+fn set_of_faces(
+    faces: &mut BRepExtremaOverlapMap,
+    face_idx: i32,
+) -> Result<&mut PackedMap<i32>, Failure> {
+    if !faces.is_bound(&face_idx) {
+        faces.bind(face_idx, PackedMap::default());
+    }
+    faces.change_find(&face_idx)
 }
 
 /// `BRepExtrema_OverlapTool` (docs/topalgo-design.md section 13): the faces of two
@@ -155,9 +161,10 @@ impl BRepExtremaOverlapTool {
     }
 
     /// Records the overlap of the faces of two triangles in both maps.
-    fn add_overlap(&mut self, face_idx1: i32, face_idx2: i32) {
-        set_of_faces(&mut self.my_overlap_sub_shapes1, face_idx1).add(face_idx2);
-        set_of_faces(&mut self.my_overlap_sub_shapes2, face_idx2).add(face_idx1);
+    fn add_overlap(&mut self, face_idx1: i32, face_idx2: i32) -> Result<(), Failure> {
+        set_of_faces(&mut self.my_overlap_sub_shapes1, face_idx1)?.add(face_idx2);
+        set_of_faces(&mut self.my_overlap_sub_shapes2, face_idx2)?.add(face_idx1);
+        Ok(())
     }
 
     /// The common start of both narrow phases: the face indices, or `None` when the
@@ -193,13 +200,13 @@ impl BRepExtremaOverlapTool {
             return Ok(());
         };
         if result == BRepExtremaFilterResult::Overlap {
-            self.add_overlap(face_idx1, face_idx2);
+            self.add_overlap(face_idx1, face_idx2)?;
         } else if result == BRepExtremaFilterResult::DoCheck {
             let vertices2 = self.my_set2.get_vertices(trg_idx2)?;
             let [a, b, c] = &vertices1;
             let [d, e, f] = &vertices2;
             if triangles_intersected([a, b, c], [d, e, f]) {
-                self.add_overlap(face_idx1, face_idx2);
+                self.add_overlap(face_idx1, face_idx2)?;
             }
         }
         Ok(())
@@ -219,14 +226,14 @@ impl BRepExtremaOverlapTool {
             return Ok(());
         };
         if result == BRepExtremaFilterResult::Overlap {
-            self.add_overlap(face_idx1, face_idx2);
+            self.add_overlap(face_idx1, face_idx2)?;
         } else if result == BRepExtremaFilterResult::DoCheck {
             if !prism1.is_inited {
                 prism1.init(vertices1, toler);
             }
             let prism2 = BoundingPrism::new(self.my_set2.get_vertices(trg_idx2)?, toler);
             if prisms_intersected(&prism1, &prism2) {
-                self.add_overlap(face_idx1, face_idx2);
+                self.add_overlap(face_idx1, face_idx2)?;
             }
         }
         Ok(())

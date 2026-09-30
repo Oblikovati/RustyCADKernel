@@ -47,3 +47,6 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_sewing').append_sewing_requests(requests)
     __import__('tktopalgo_corpus_fastsewing').append_fastsewing_requests(requests)
     __import__('tktopalgo_corpus_sewing_helpers').append_sewing_helpers_requests(requests)
+    # BRepExtrema (tktopalgo_corpus_brepextrema.py with tktopalgo_corpus_brepextrema_ext.py,
+    # tktopalgo_corpus_brepextrema_prox.py and the shapes of tktopalgo_corpus_brepextrema_shapes.py)
+    __import__('tktopalgo_corpus_brepextrema').append_brepextrema_requests(requests)
