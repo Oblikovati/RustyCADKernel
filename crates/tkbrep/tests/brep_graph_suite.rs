@@ -1,6 +1,6 @@
 //! Direct translation of BRepGraph_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871,
 //! split over the included `brep_graph_suite/suites_N.rs` files in the upstream order. `BRepPrimAPI_MakeBox`
-//! is the box of the test support module (TKPrim is not ported), the `BRepGraphTest`
+//! is called by the shared production-builder fixture, the `BRepGraphTest`
 //! fixture is [`SetUp`], and `BRepGraph_TestTools` is `support::ref_test_tools`.
 //!
 //! The native `static_assert`s on id conversions become the compile-time functions

@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (685 declarations):
+The toolkit test inventory maps these suites (697 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -64,7 +64,7 @@ The toolkit test inventory maps these suites (685 declarations):
 | BRepGraph_BatchOps_Test.cxx | brep_graph_batch_ops | 17 | pass | pass |
 | BRepGraph_EventBus_Test.cxx | brep_graph_event_bus | 26 | pass | pass |
 | BRepGraph_Assembly_Test.cxx | not mapped (phase 2) | 45 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
-| BRepGraph_EdgeCases_Test.cxx | not mapped (phase 2) | 12 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
+| BRepGraph_EdgeCases_Test.cxx | mapped | 12 | passed | original primitive builders |
 | BRepGraph_Convenience_Test.cxx | not mapped (phase 2) | 17 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim) |
 | BRepGraph_PermissionUpdate_Test.cxx | brep_graph_permission_update | 15 | pass | pass |
 | BRepGraph_ReplaceVertex_Test.cxx | brep_graph_replace_vertex | 6 | pass | pass |
@@ -80,15 +80,12 @@ The toolkit test inventory maps these suites (685 declarations):
 | BRepGraph_SeamRedesign_Test.cxx | not mapped (phase 2) | 9 | not run | waits for TKPrim cylinder and sphere |
 | BRepGraph_Fuzz_Test.cxx | not mapped (phase 2) | 2 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim); its two TEST_P declarations are instantiated per seed |
 
-The suites build their inputs with BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge
-(TKTopAlgo) and BRepPrimAPI_MakeBox (TKPrim). Those toolkits are not ported, so the Rust
-translations use the named fakes of `crates/tkbrep/tests/support`, which replay the
-native builders with the real BRep types: `BRep_Builder` vertices with the BRepLib
-precision, line and curve edges with the vertices, range and closed flag of
-BRepLib_MakeEdge, and the box of `BRepPrim_GWedge` (`support/wedge_box.rs`): the same
-axes, point, line and plane arithmetic, the same edge, wire, face and shell order, the
-same orientations, p-curves and completion steps, so a box graph matches the native one
-slot for slot. They are replaced by the real builders when those toolkits are ported.
+The shared fixtures in `crates/tkbrep/tests/support` now call the production
+BRepBuilderAPI_MakeVertex/MakeEdge/MakeWire and BRepPrimAPI_MakeBox ports. The previous
+builder replays served while TKTopAlgo and TKPrim were unavailable; their duplicated
+wedge-box implementation has been removed. A deliberately topology-only `edge_between`
+case retains repeated vertices that the geometric MakeEdge constructor would reject;
+ordinary distinct-vertex edges call MakeEdge. Both toolkits are dev dependencies.
 
 `TopExp_Test.cxx` calls BRepPrimAPI_MakeBox, so the shared native oracle closure builds
 TKPrim beside TKTopAlgo (`tools/native_build.py`), and the unchanged file runs natively
@@ -1093,3 +1090,11 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   transformed graph as source and destination and no poly source, so the Rust step
   takes the one graph; its per-handle maps are keyed by object address and keep the
   source handle alive, as the native handle keys do.
+
+## Recovered BRepGraph edge-case suite
+
+All 12 declarations from `BRepGraph_EdgeCases_Test.cxx` are now mapped using the original
+box, sphere and compound builders. They cover empty input, invalid IDs, rebuild counts,
+UID generations and the sequential/parallel import options. All previously mapped
+TKBRep tests also run with the shared production-builder fixtures. The broader graph
+source suites still require translation; toolkit acceptance is not complete.
