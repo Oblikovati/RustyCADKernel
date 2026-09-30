@@ -108,6 +108,15 @@ The toolkit test inventory maps these suites (80 declarations):
   names, output references become returned tuples, and `Dump` members write to a
   `fmt::Write` where the native ones write to `std::cout`.
 
+- IntStart: the package has no header; its two templates are the generics
+  `SearchOnBoundaries<T: SearchOnBoundariesTypes>` and `SearchInside<T: SearchInsideTypes>`
+  over the tool traits of `int_start::tools` (docs/geomalgo-design.md section 12), which
+  IntPatch and Contap will instantiate as aliases. The api rows name the template
+  members (`IntStart_SearchOnBoundaries::Perform`...) with the `.gxx`/`.lxx` source. The
+  performing constructor of `SearchInside` is `with_domain`, the Perform from a start
+  point `perform_from`; the output references of the tool members become returned
+  values (`Option` for `HasFirstPoint`/`HasLastPoint`).
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomAlgo --jobs 16 --source OCCT --native-build BUILD`
@@ -631,6 +640,22 @@ polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
 `ics_quadcurv` the instance classes; `ics_estlim`, `ics_project` and
 `ics_interutils` the InterUtils functions.
 
+IntStart: 674 requests (`tkgeomalgo_corpus_intstart.py`) over the surface catalog of
+IntCurveSurface and nine quadrics (planes, cylinders, spheres, cones including a nearly
+flat one, a torus). `is_sob` runs the boundary search with the IntPatch tools on every
+surface against every quadric (finite, periodic and infinite restrictions, the exact
+conic-quadric intersection and the sampled one), with the regularity recheck, twice in a
+row, never performed, on arcs on the quadric or tangent to it (spheres and tori of radius
+1 +- 1e-9 on the unit square), with larger tolerances (Brent refinement, merged tangent
+zeros), with an edge behind the domain (straight and tangent to a cylinder, off it,
+skew, degenerated, regular), and with a tool whose arcs have been seen (known points,
+vertices and segments, indices past the known points). `is_inside` runs the inside
+search on every surface against every quadric, from start points inside, outside and on
+the bounds, tangent and coincident, and without a Perform. Every consultation is printed
+from index 0 to Nb + 1. The branches not reached are the state of a math_FunctionAllRoots
+point at an end of the arc (`GetPointState`) and the merge with a new point already at
+the same parameter of the arc.
+
 ## Preserved native behaviour
 
 - TopTrans: a `CurveTransition` that was never reset answers the states of its
@@ -963,6 +988,41 @@ polyhedron utilities on degenerate data; `ics_interference`, `ics_exact` and
 - The polygon tool `Dump` numbers its output by a process-wide call counter (a static
   shared by every instance of the generic in the port); the probe masks the number.
 - `NbSamples` truncates a double count, `(int)` of NaN being undefined (0 here).
+
+### IntStart
+
+- `SearchOnBoundaries`: `FindVertex` gives the vertex solutions the boundary tolerance
+  as their tolerance. A new point of `PointProcess` has 1000 times the tolerance, at
+  most 0.005 (#24643), where `TreatLC` caps its point at 0.001; the new point is the
+  last point the loops copied, so it carries that point's vertex (unread, since
+  `Vertex()` raises on a new point).
+- A rejected arc (the six first-order samples keep one sign) is not solution. The
+  regularity recheck runs only when isolated zeros exist (`Nbp > 0`), and without the
+  recheck the null intervals are dropped whenever an isolated zero exists.
+- `TreatLC` and `IsRegularity` read the edge behind the domain: with
+  `Adaptor3d_TopolTool`, whose `Edge()` is null, the tangent line on a cylinder is
+  never special and no edge is regular. The branch of arcs that "have been seen" is
+  unreachable with IntPatch_HInterTool (its `HasBeenSeen` is false); the probe reaches
+  it through its own tool.
+- `ComputeBoundsfromInfinite` takes two Newton steps from far points and widens the
+  result tenfold; its `NbEchant` output is not read. `(1e10, -1e10)` is returned when
+  the distance is flat at 0.
+- The tangent zeros of an exact line intersection are merged only when the three
+  distances have one sign; the node count of the minimization is `ceil((b - a) / tol)`
+  with the parameters clamped to 1e9 ("floating point exception 569").
+- `SearchInside`: the sampling steps are the half-cells `2 (umax - umin) / NbSamplesU`,
+  the solver box is clipped with `std::max`/`std::min`, and the twelve extra starts are
+  the four corners at 2% of the steps twice, then at 0.5%. The classification tolerance
+  is `1000` times the larger resolution, at most 0.1% of the steps.
+
+## IntStart deviations
+
+- The native code ignores the result of `Func.Value` in `FindVertex`, the recheck
+  samples and `ComputeBoundsfromInfinite`, and reads the output variable, which is
+  uninitialized (or the previous value) when the function answers false. The port keeps
+  the previous value, 0 at first; the IntPatch and Contap functions never answer false.
+- `TheTopolTool` is a trait, as the native domain is virtual; `Edge()` returns the edge
+  itself (`Option<Edge>`) where the native one returns a `void*`.
 
 ## IntCurveSurface deviations
 

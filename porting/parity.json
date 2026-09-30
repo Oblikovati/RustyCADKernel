@@ -159426,6 +159426,126 @@
       "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TransitionOnCurve",
       "status": "implemented",
       "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 11): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.gxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::new",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries::Perform(TheFunction&,const occ::handle<TheTopolTool>&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.gxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::perform",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::is_done",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries::AllArcSolution() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::all_arc_solution",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::nb_points",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::point",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::nb_segments",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchOnBoundaries::Segment(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::segment",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
+    },
+    {
+      "upstream_id": "IntStart_SearchInside()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::new",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
+    },
+    {
+      "upstream_id": "IntStart_SearchInside(TheFunction&,const ThePSurface&,const occ::handle<TheTopolTool>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::with_domain",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
+    },
+    {
+      "upstream_id": "IntStart_SearchInside::Perform(TheFunction&,const ThePSurface&,const occ::handle<TheTopolTool>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::perform",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
+    },
+    {
+      "upstream_id": "IntStart_SearchInside::Perform(TheFunction&,const ThePSurface&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::perform_from",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
+    },
+    {
+      "upstream_id": "IntStart_SearchInside::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::is_done",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
+    },
+    {
+      "upstream_id": "IntStart_SearchInside::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::nb_points",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
+    },
+    {
+      "upstream_id": "IntStart_SearchInside::Value(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::value",
+      "status": "implemented",
+      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
     }
   ],
   "tests": [
