@@ -51,7 +51,7 @@ impl EndGaps {
 /// The static `CheckVertexTolerance(edge, face, checkAll, toler1, toler2)`: the status
 /// and the two tolerances. Natively the tolerances are left untouched when a vertex is
 /// missing (FAIL1); they are 0 here then.
-fn check_vertex_tolerance(
+pub(super) fn check_vertex_tolerance(
     edge: &Edge,
     face: &Face,
     check_all: bool,
@@ -103,17 +103,17 @@ impl ShapeAnalysisEdge {
         edge: &Edge,
         face: &Face,
     ) -> Result<(bool, f64, f64), Failure> {
-        let (status, toler1, toler2) = check_vertex_tolerance(edge, face, false)?;
-        self.status = status;
-        Ok((self.status_flag(ShapeExtendStatus::Done), toler1, toler2))
+        let mut tolerances = (0.0, 0.0);
+        let changed = self.check_vertex_tolerance_on_face_into(edge, face, &mut tolerances)?;
+        Ok((changed, tolerances.0, tolerances.1))
     }
 
     /// `CheckVertexTolerance(edge, toler1, toler2)`: the same with every p-curve stored in
     /// the edge; `sae.check_vertex_tolerance(&edge)?`.
     pub fn check_vertex_tolerance(&mut self, edge: &Edge) -> Result<(bool, f64, f64), Failure> {
-        let (status, toler1, toler2) = check_vertex_tolerance(edge, &Face::default(), true)?;
-        self.status = status;
-        Ok((self.status_flag(ShapeExtendStatus::Done), toler1, toler2))
+        let mut tolerances = (0.0, 0.0);
+        let changed = self.check_vertex_tolerance_into(edge, &mut tolerances)?;
+        Ok((changed, tolerances.0, tolerances.1))
     }
 }
 

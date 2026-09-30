@@ -16,4 +16,4 @@ pub use shape_tolerance::ShapeAnalysisShapeTolerance;
 pub use shell::ShapeAnalysisShell;
 pub use wire_order::ShapeAnalysisWireOrder;
 
-pub use edge::{Curve3dRange, PCurveRange, ShapeAnalysisEdge};
+pub use edge::{Curve3dRange, EdgeTangent2d, PCurveRange, ShapeAnalysisEdge};

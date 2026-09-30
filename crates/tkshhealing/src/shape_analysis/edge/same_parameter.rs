@@ -79,23 +79,10 @@ impl ShapeAnalysisEdge {
         face: &Face,
         nb_control: i32,
     ) -> Result<(bool, f64), Failure> {
-        self.set_status(ShapeExtendStatus::Ok);
-        if BRepTool::degenerated(edge)? {
-            return Ok((false, 0.0));
-        }
-        let Some(check) = SameParameterCheck::for_edge(edge, nb_control)? else {
-            self.add_status(ShapeExtendStatus::Fail1);
-            return Ok((false, 0.0));
-        };
         let mut deviation = 0.0;
-        self.check_face_representations(edge, face, &check, &mut deviation)?;
-        if deviation > check.tolerance {
-            self.add_status(ShapeExtendStatus::Done1);
-        }
-        if !check.same_parameter {
-            self.add_status(ShapeExtendStatus::Done2);
-        }
-        Ok((self.status_flag(ShapeExtendStatus::Done), deviation))
+        let changed =
+            self.check_same_parameter_on_face_into(edge, face, nb_control, &mut deviation)?;
+        Ok((changed, deviation))
     }
 
     /// The loop over the curves on surfaces of the edge (those on the face when it is
@@ -237,4 +224,45 @@ fn located_surface(
         .transformed(location.transformation())?
         .cast::<dyn GeomSurface>();
     Ok(moved)
+}
+
+impl ShapeAnalysisEdge {
+    /// Preserves the caller's deviation for a degenerate edge, as OCCT does;
+    /// `analyzer.check_same_parameter_into(&edge, 23, &mut deviation)?`.
+    pub fn check_same_parameter_into(
+        &mut self,
+        edge: &Edge,
+        nb_control: i32,
+        deviation: &mut f64,
+    ) -> Result<bool, Failure> {
+        self.check_same_parameter_on_face_into(edge, &Face::default(), nb_control, deviation)
+    }
+
+    /// Updates the supplied deviation only on the native update paths;
+    /// `analyzer.check_same_parameter_on_face_into(&edge, &face, 23, &mut deviation)?`.
+    pub fn check_same_parameter_on_face_into(
+        &mut self,
+        edge: &Edge,
+        face: &Face,
+        nb_control: i32,
+        deviation: &mut f64,
+    ) -> Result<bool, Failure> {
+        self.set_status(ShapeExtendStatus::Ok);
+        if BRepTool::degenerated(edge)? {
+            return Ok(false);
+        }
+        *deviation = 0.0;
+        let Some(check) = SameParameterCheck::for_edge(edge, nb_control)? else {
+            self.add_status(ShapeExtendStatus::Fail1);
+            return Ok(false);
+        };
+        self.check_face_representations(edge, face, &check, deviation)?;
+        if *deviation > check.tolerance {
+            self.add_status(ShapeExtendStatus::Done1);
+        }
+        if !check.same_parameter {
+            self.add_status(ShapeExtendStatus::Done2);
+        }
+        Ok(self.status_flag(ShapeExtendStatus::Done))
+    }
 }

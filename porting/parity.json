@@ -202007,17 +202007,17 @@
       "upstream_id": "ShapeAnalysis_Edge::GetEndTangent2d(const TopoDS_Edge&,const TopoDS_Face&,bool,gp_Pnt2d&,gp_Vec2d&,double) const",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
-      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::get_end_tangent_2d_on_face",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::get_end_tangent_2d_on_face_into",
       "status": "implemented",
-      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates. Caller-owned output preservation is checked with nonzero sentinels by sh_edgeoutputs requests; tuple-returning convenience methods start outputs at zero."
     },
     {
       "upstream_id": "ShapeAnalysis_Edge::GetEndTangent2d(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,bool,gp_Pnt2d&,gp_Vec2d&,double) const",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
-      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::get_end_tangent_2d_on_surface",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::get_end_tangent_2d_on_surface_into",
       "status": "implemented",
-      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates. Caller-owned output preservation is checked with nonzero sentinels by sh_edgeoutputs requests; tuple-returning convenience methods start outputs at zero."
     },
     {
       "upstream_id": "ShapeAnalysis_Edge::CheckVerticesWithCurve3d(const TopoDS_Edge&,double,int)",
@@ -202047,17 +202047,17 @@
       "upstream_id": "ShapeAnalysis_Edge::CheckVertexTolerance(const TopoDS_Edge&,const TopoDS_Face&,double&,double&)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
-      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertex_tolerance_on_face",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertex_tolerance_on_face_into",
       "status": "implemented",
-      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates. Caller-owned output preservation is checked with nonzero sentinels by sh_edgeoutputs requests; tuple-returning convenience methods start outputs at zero."
     },
     {
       "upstream_id": "ShapeAnalysis_Edge::CheckVertexTolerance(const TopoDS_Edge&,double&,double&)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
-      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertex_tolerance",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_vertex_tolerance_into",
       "status": "implemented",
-      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates. Caller-owned output preservation is checked with nonzero sentinels by sh_edgeoutputs requests; tuple-returning convenience methods start outputs at zero."
     },
     {
       "upstream_id": "ShapeAnalysis_Edge::CheckCurve3dWithPCurve(const TopoDS_Edge&,const TopoDS_Face&)",
@@ -202087,17 +202087,17 @@
       "upstream_id": "ShapeAnalysis_Edge::CheckSameParameter(const TopoDS_Edge&,double&,int)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
-      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_same_parameter",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_same_parameter_into",
       "status": "implemented",
-      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates. Caller-owned output preservation is checked with nonzero sentinels by sh_edgeoutputs requests; tuple-returning convenience methods start outputs at zero."
     },
     {
       "upstream_id": "ShapeAnalysis_Edge::CheckSameParameter(const TopoDS_Edge&,const TopoDS_Face&,double&,int)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Edge.hxx",
-      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_same_parameter_on_face",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisEdge::check_same_parameter_on_face_into",
       "status": "implemented",
-      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates."
+      "notes": "Faithful ShapeAnalysis_Edge port; output references become returned values (docs/shhealing-design.md section 4). All overloads compared against pinned OCCT by sh_edgeana requests, including orientation, status bits, derivative fallback, seam selection and tolerance updates. Caller-owned output preservation is checked with nonzero sentinels by sh_edgeoutputs requests; tuple-returning convenience methods start outputs at zero."
     },
     {
       "upstream_id": "ShapeAnalysis_Edge::CheckPCurveRange(double,double,const occ::handle<Geom2d_Curve>&)",

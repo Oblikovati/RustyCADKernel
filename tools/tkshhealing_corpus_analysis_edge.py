@@ -95,3 +95,19 @@ def append_analysis_edge_requests(requests: list[str]) -> None:
     tangent_requests(requests, scene)
     surface_check_requests(requests, scene)
     range_and_overlap_requests(requests, scene)
+    preserved_output_requests(requests, scene)
+
+
+def preserved_output_requests(out: list[str], scene: EdgeScene) -> None:
+    """Nonzero output values distinguish untouched fields from assigned zeroes."""
+    program = scene.program.tokens()
+    for edge, face in (('bare', 'f_cyl'), ('novert', 'f_cyl'), ('deg', 'f_sphere'),
+                       ('line', 'f_plane'), ('pc_point', 'f_plane')):
+        e, f = scene.shapes[edge], scene.shapes[face]
+        for first, last in ((17.0, -23.0), (-0.0, 1e-8)):
+            out.append(request('sh_edgeoutputs', program, 0, e, f, 0, 0.0, first, last, 3.0, -5.0))
+            out.append(request('sh_edgeoutputs', program, 1, e, scene.surfaces['cyl'], 0, 1, 0.01, first, last, 3.0, -5.0))
+            out.append(request('sh_edgeoutputs', program, 2, e, f, first, last))
+            out.append(request('sh_edgeoutputs', program, 3, e, first, last))
+            out.append(request('sh_edgeoutputs', program, 4, e, f, 23, first))
+            out.append(request('sh_edgeoutputs', program, 5, e, 23, first))

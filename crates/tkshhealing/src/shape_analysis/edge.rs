@@ -8,6 +8,7 @@
 //! `ShapeAnalysis_Edge`: the geometry of an edge (3D curve, p-curves, vertices) and the
 //! consistency checks between them.
 mod checks;
+mod outputs;
 mod overlap;
 mod same_parameter;
 mod tangent;
@@ -232,11 +233,16 @@ impl ShapeAnalysisEdge {
         at_end: bool,
         dparam: f64,
     ) -> Result<(bool, Point2, Vector2), Failure> {
-        let (pcurve, first, last) = self.pcurve_on_surface(edge, surface, location, true)?;
-        let Some(curve) = pcurve.get() else {
-            return Ok((false, Point2::default(), Vector2::new(0.0, 0.0)));
-        };
-        tangent::end_tangent(curve, (first, last), at_end, dparam, edge.orientation())
+        let mut outputs = EdgeTangent2d::default();
+        let found = self.get_end_tangent_2d_on_surface_into(
+            edge,
+            surface,
+            location,
+            at_end,
+            dparam,
+            &mut outputs,
+        )?;
+        Ok((found, outputs.point, outputs.tangent))
     }
 
     /// `Status(status)`: the flag in the status of the last check; `sae.status_flag(s)`.
@@ -244,3 +250,5 @@ impl ShapeAnalysisEdge {
         ShapeExtend::decode_status(self.status, status)
     }
 }
+
+pub use outputs::EdgeTangent2d;

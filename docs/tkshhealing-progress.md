@@ -8,7 +8,7 @@ packages is one module of the crate, declared up front in `src/lib.rs`; a module
 package is not ported yet holds only its documentation. Ported so far: SHMessage (the
 message resource data), ShapeExtend and ShapeBuild, plus the ShapeAnalysis, ShapeFix,
 ShapeCustom and ShapeUpgrade classes listed below. The combined numeric corpus has
-4809 passing requests. The original 2178 requests cover:
+4869 passing requests. The original 2178 requests cover:
 ShapeExtend status codes 475, messages 85, WireData 92, Explorer 849, registrators 11,
 ComplexCurve 24 and CompositeSurface 126; ShapeBuild vertices 48, edges 457 and re-shapers
 11.
@@ -518,7 +518,9 @@ The finite outputs match OCCT bit for bit; status flags and exceptions also matc
 The native quirks remain: GetEndTangent2d reverses a derivative tangent for a reversed
 edge, but does not reverse the oriented chord again; CheckVertexTolerance uses
 1.0000001 (despite the older source comment mentioning 1.0001); CheckOverlapping
-adds status bits without clearing earlier bits. Rust returns tuples for output
-parameters. Missing p-curve tangents return the origin, and missing-vertex tolerances
-return zero, where native callers retain their supplied output values. The probes
-initialize those outputs to zero before each native call.
+adds status bits without clearing earlier bits. The mapped `_into` methods accept caller-owned output values. They preserve the
+point when a p-curve is missing, both tolerances when vertices are missing, and the
+maximum deviation for a degenerated edge. Sixty `sh_edgeoutputs` differential requests
+check these branches with nonzero and signed-zero sentinels, through both overloads.
+The tuple-returning convenience methods start their outputs at zero. Three standalone
+Rust regressions also check output preservation.
