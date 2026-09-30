@@ -83,6 +83,30 @@ pub use stretch::GeomFillStretch;
 pub use tgt_field::GeomFillTgtField;
 pub use tgt_on_coons::GeomFillTgtOnCoons;
 
+// Gordon surfaces (docs/geomalgo-design.md section 15): GeomFill_GordonUtilities.pxx,
+// GeomFill_Gordon and GeomFill_NetworkSurface.
+mod gordon;
+mod gordon_contacts;
+mod gordon_fallback;
+mod gordon_network;
+mod gordon_normalize;
+mod gordon_order;
+mod gordon_params;
+mod gordon_perform;
+mod gordon_rebuild;
+mod gordon_reorder;
+mod gordon_reparam;
+mod network_surface;
+mod network_surface_align;
+mod network_surface_rational;
+mod network_surface_seam;
+mod network_surface_skin;
+
+pub use gordon::{
+    GeomFillGordon, GordonApproximationMode, GordonBuildReport, GordonBuildStage, GordonStatus,
+};
+pub use network_surface::{ClosedSeams, GeomFillNetworkSurface, NetworkSurfaceStatus};
+
 // Sweep classes (docs/geomalgo-design.md, section 14).
 mod app_sweep;
 mod arc_section;

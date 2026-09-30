@@ -69,7 +69,7 @@ pub trait TheISurfaceTool {
     );
 }
 
-/// `TheCurveTool`: the curve of `IntImp_ZerCSParFunc` and `IntImp_IntCS`.
+/// `TheCurveTool`: the curve bounds and resolution of `IntImp_IntCS`.
 pub trait TheCurveTool {
     /// `TheCurve`, held by value.
     type Curve: Clone;
@@ -79,6 +79,13 @@ pub trait TheCurveTool {
     fn last_parameter(curve: &Self::Curve) -> Result<f64, Failure>;
     /// `Resolution(C, R3d)`.
     fn resolution(curve: &Self::Curve, r3d: f64) -> Result<f64, Failure>;
+}
+
+/// The 3d evaluations of `TheCurveTool` that `IntImp_ZerCSParFunc` calls. `IntImp_IntCS`
+/// needs only [`TheCurveTool`], so the 2d curve tool of `IntPatch_CurvIntSurf`
+/// (`IntPatch_HCurve2dTool`, whose `Value` is a 2d point) implements only that trait
+/// (docs/geomalgo-design.md section 16).
+pub trait TheCurve3dTool: TheCurveTool {
     /// `Value(C, W)`.
     fn value(curve: &Self::Curve, w: f64) -> Result<Point3, Failure>;
     /// `D1(C, W, P, V)`.

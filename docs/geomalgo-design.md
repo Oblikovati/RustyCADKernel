@@ -297,11 +297,9 @@ walking `IntWalk_IWalking.gxx/.lxx`, beside the concrete parametric walking
   keep across the iterations of their loops (`N`, `SaveN`, `Psol`, `aStatus`, the
   flags) live in one state struct per loop, so every step reads what the native code
   reads.
-- The probe (`tools/oracle/tkgeomalgo_probe_intwalk*.cxx`) includes the `.gxx` itself
-  on a probe class, as the `_0.cxx` files do, with `Adaptor3d_HSurfaceTool`,
-  `IntPatch_TheSurfFunction` and `IntPatch_TheIWLineOfTheIWalking`; its Rust twin
-  instantiates the generic with `HSurfaceTool`, `IntImpZerImpFunc` and a probe port of
-  that line class.
+- The probe (`tools/oracle/tkgeomalgo_probe_iwalk.cxx`) runs the template through its
+  IntPatch instance `IntPatch_TheIWalking`; its Rust twin runs the alias
+  `IntPatchTheIWalking` (section 16).
 
 ## 11. IntCurveSurface templates
 
@@ -354,6 +352,78 @@ call the polygon and polyhedron utilities. The port (`crates/tkgeomalgo/src/int_
 - **Exceptions.** Tool calls, the IntAna and ProjLib constructors, and indexed reads
   can raise natively; every member that reaches one returns `Result`, and the
   exception leaves the algorithm where the native one would unwind.
+
+## 12. IntStart templates and IntPolyh
+
+IntStart has no header of its own: its two templates are instantiated by IntPatch
+(`IntPatch_TheSOnBounds`, `IntPatch_TheSearchInside`) and by Contap in TKHLR
+(`Contap_TheSearch`, `Contap_TheSearchInside`). Both instances use the same concrete
+arc, vertex and domain types, so the port fixes them and makes a trait only of what
+varies. The port (`crates/tkgeomalgo/src/int_start`):
+
+- **Fixed types.** `TheArc` is `Handle<dyn Adaptor2dCurve2d>` and `TheVertex` is
+  `Handle<Adaptor3dHVertex>` in every instance. `ThePSurfaceTool` is the IntImp trait
+  `ThePSurfaceTool` (Adaptor3d_HSurfaceTool in both instances). `TheArcTool` and
+  `TheSITool` are named by the macros but not called by the bodies, so the traits
+  leave them out.
+- **The domain.** `TheTopolTool` is `Adaptor3d_TopolTool` in both instances, but the
+  native class is virtual (BRepTopAdaptor_TopolTool overrides `Edge()` and the
+  iteration), so the calls the bodies make are the trait `TheTopolTool` (sampling,
+  classification, the arc and vertex iteration, `Identical`, `Edge`). `Edge()` returns
+  `Option<TopoDsEdge>` where the native one returns a `void*` to a `TopoDS_Edge`;
+  `Adaptor3dTopolTool` implements it with `None`, as its native `Edge()` returns null.
+- **The function and the tool.** `TheFunction` of `SearchOnBoundaries` is the trait
+  `TheArcFunction` (a tkmath `FunctionWithDerivative` with `Set(arc)`, `NbSamples`,
+  `GetStateNumber`, `Valpoint`, `Quadric`, `Surface`, `LastComputedPoint` and the direct
+  `Value`/`Values` calls, fallible); `TheSOBTool` is the trait `TheSOBTool` of static
+  members; `IntStart_ThePathPoint` and `IntStart_TheSegment` are the traits
+  `ThePathPoint` and `TheSegment`. `TheFunction` of `SearchInside` is the trait
+  `TheInsideFunction` (a `FunctionSetWithDerivatives` with the members the body calls),
+  implemented here for `IntImpZerImpFunc` (IntPatch_TheSurfFunction).
+- **The generics.** `IntStart_SearchOnBoundaries.gxx/.lxx` is
+  `SearchOnBoundaries<T: SearchOnBoundariesTypes>` and `IntStart_SearchInside.gxx/.lxx`
+  is `SearchInside<T: SearchInsideTypes>`; the type bundles name the traits above. IntPatch
+  and Contap declare their instances as aliases when they are ported.
+- **Static helpers.** The file-static functions of the `.gxx` (`FindVertex`,
+  `BoundedArc`, `PointProcess`, `TreatLC`, `IsRegularity`, `ComputeBoundsfromInfinite`,
+  the `MinFunction` wrapper and `SolInfo`) are private functions of the module. The
+  `std::sort` of `SolInfo` is the libstdc++ port `rustycad_tkernel::stl::sort::sort_by`,
+  so equal parameters keep the native order.
+- **Exceptions.** Tool, function and adaptor calls that can raise return `Result`; a
+  failure caught by a tkmath solver callback is kept by the function and raised when the
+  solver returns (section 6). `math_FunctionAllRoots` that is not done raises
+  `Standard_Failure`, as natively.
+- **The probe.** `tools/oracle/tkgeomalgo_probe_intstart.cxx` runs both templates through
+  their IntPatch instances (`IntPatch_TheSOnBounds`, `IntPatch_TheSearchInside`), with a
+  probe domain whose `Edge()` returns a real edge, and includes the boundary `.gxx` on a
+  probe class with a probe tool whose arcs "have been seen", so that the branches
+  unreachable with IntPatch_HInterTool and Adaptor3d_TopolTool run too. The Rust twin
+  (`crates/tkgeomalgo/examples/ga_probe/int_start*.rs`) uses the IntPatch classes
+  (section 16) and keeps only those two fixtures.
+
+IntPolyh has no template. Its classes are concrete structs in
+`crates/tkgeomalgo/src/int_polyh`:
+
+- `IntPolyh_Array<Type>` is the generic `IntPolyhArray<T>`, and the six array typedefs
+  are aliases of it. It keeps the native storage model: `Init(N)` sets element `N` of the
+  underlying `NCollection_DynamicArray` (so the storage holds `N + 1` default items),
+  `IncrementNbItems` grows it by the increment, and `operator=` (`Copy`) keeps the
+  target's increment where the copy constructor (`Clone`) copies it. Native `Value` and
+  `operator[]` do not check the index (reading past the storage is undefined behaviour):
+  the Rust `value`/`change_value` return Standard_OutOfRange and `Index` panics there.
+- `IntPolyh_Triangle::MiddleRefinement` and `MultipleMiddleRefinement` are methods on a
+  triangle that is usually an element of the array they grow. The port takes the
+  triangle out of the array (a copy), runs the body and writes it back; the body never
+  writes the refined triangle through the array before its last two assignments, so the
+  result is the native one.
+- `IntPolyh_MaillageAffinage` keeps its couples in an `NCollection_List`
+  (`rustycad_tkernel::ncollection::List`); `StartPointsChain` walks them by position in a
+  vector (the native iterators kept by `CheckCoupleAndGetAngle2` are positions) and puts
+  them back in order. The interfering triangles come from the tkmath BVH port
+  (`BvhBoxSet` with `BvhLinearBuilder(10)` and a pair traversal), as natively.
+- The `printf` dumps write the native text to a `fmt::Write`; the two diagnostics that
+  the native algorithm prints to standard output (`CheckSameSP` with undefined edges and
+  a null side in `TriangleEdgeContact`) print to standard output too.
 
 ## 13. GeomFill filling part
 
@@ -466,3 +536,105 @@ with its `GeomFill_Sweep_Eval`, and `GeomFill_SectionPlacement::SectionAxis`. Me
 that OCCT declares without a definition (`GeomFill_FunctionGuide::Deriv2T` and the
 four-argument `GeomFill_SweepSectionGenerator` constructor and `Init`) have excluded api
 rows.
+
+## 15. GeomAPI: the interpolation body and the Extrema members
+
+GeomAPI (`crates/tkgeomalgo/src/geom_api`) has no `.gxx` template, but two constructs
+need a rule.
+
+- **One interpolation body.** `GeomAPI_Interpolate.cxx` is `Geom2dAPI_Interpolate.cxx`
+  with `gp_Pnt`, `gp_Vec` and `Geom_BSplineCurve` for `gp_Pnt2d`, `gp_Vec2d` and
+  `Geom2d_BSplineCurve`, and with 3 in place of 2 in the coordinate loops and the
+  `PLib::EvalLagrange` dimension. The body is ported once, as the generic
+  `geom2d_api::InterpolateGen<S: InterpolateSpace>` (the files `interpolate`,
+  `interpolate_build` and `interpolate_perform`). The trait
+  `geom2d_api::interpolate_space::InterpolateSpace` names the point (a tkmath
+  `bsplclib::CurvePoint`, which gives the coordinates and the vector type), the curve
+  and the point, vector and curve members the body calls. `geom2d_api::Interpolate`
+  is the alias on `Interpolate2dSpace` and `geom_api::Interpolate` the alias on
+  `Interpolate3dSpace`, declared in the package of each class. The loops keep the
+  native order (`value += |Coord(jj)|` from 0, `ratio * Coord(jj)`), so each
+  instance runs the operations of its native class.
+- **Extrema members.** Each GeomAPI class holds an Extrema object and the adaptors
+  that the Extrema object points to natively; in Rust an Extrema object borrows its
+  adaptors, so it cannot live beside them in one struct. Each class takes the rule that
+  reproduces the native state:
+  - `GeomAPI_ProjectPointOnSurf` keeps its `Extrema_ExtPS` (the sampling grid, the tree
+    and the swept-surface algorithms persist between Performs, and `SetExtremaAlgo` and
+    `SetExtremaFlag` act between an Init and a Perform). `Extrema_ExtPS` takes its
+    surface through a shared handle (`ExtPS::initialize_shared`, as
+    `Extrema_GenExtPS` already does with `SurfaceRef`), so the object holds
+    `ExtPS<'static>` and the adaptor handle.
+  - `GeomAPI_ExtremaCurveCurve` keeps one `Extrema_ExtCC` from Init to Init, and
+    `Extrema_ExtCC` keeps its `Extrema_ECC` solutions and its end points across
+    Performs. The object records the arguments of each Init and replays them, in
+    order, on one `ExtCC` over its own adaptors (which each Init reloads, as natively);
+    the replay also rebuilds `Extrema()`. The cost is one Extrema computation per
+    earlier Init of the same object.
+  - `GeomAPI_ProjectPointOnCurve`, `GeomAPI_ExtremaCurveSurface` and
+    `GeomAPI_ExtremaSurfaceSurface` keep the results of their Extrema object: its
+    state does not carry from one computation to the next (`Extrema_ExtPC` resets
+    its samples and results at each Perform; the two others are initialized and
+    performed on local adaptors at each Init, and `Extrema_ExtSS` is even copied
+    from a new object). `Extrema()` rebuilds the same object on stored adaptors.
+- **GeomFill Gordon.** `GeomFill_GordonUtilities.pxx` is an internal header of free
+  functions and small structs; it is ported as private modules of `geom_fill`, one per
+  step (parameters, contacts, normalization, ordering, reordering, reparametrization,
+  rebuild, network preparation, fallback), which `GeomFill_Gordon` and
+  `GeomFill_NetworkSurface` call as natively. The rational denominator product of
+  `GeomFill_NetworkSurface` goes through the `bsplclib::EvaluatorFunction` callback,
+  which cannot return `Result`; the evaluator stores the first failure in a `RefCell`
+  and the caller raises it after the call, as the native exception would leave it.
+  `OSD_Parallel::For` over the contact searches is a sequential loop: each iteration
+  writes only its own slot, so the order does not change the result.
+
+## 16. IntPatch core
+
+IntPatch (`crates/tkgeomalgo/src/int_patch`) is the surface-surface intersection. Its
+core (the records, the lines, the tools and the template instances) lands first; the
+intersection algorithms build on it.
+
+- **Lines.** The abstract transients `IntPatch_Line` and `IntPatch_PointLine` are the
+  traits `IntPatchLine` and `IntPatchPointLine: IntPatchLine`, reached through
+  `Handle<dyn IntPatchLine>` and `Handle<dyn IntPatchPointLine>` (docs/geom-design.md
+  sections 1 and 2). The fields of `IntPatch_Line` (the type, the transitions, the
+  situations and the iso flags) live in an embedded `IntPatchLineBase` behind a lock;
+  its protected constructors are `IntPatchLineBase::new(tang, IntPatchLineTransitions,
+  typ)`, where `IntPatchLineTransitions` names the three of them (IN/OUT types, TOUCH
+  situations, undecided). The concrete lines `IntPatchWLine`, `IntPatchRLine`,
+  `IntPatchGLine` and `IntPatchALine` keep their own fields in one `SharedState` each,
+  since the algorithms edit the lines through their handles. `IntPatch_PointLine` has
+  one static member, `CurvatureRadiusOfIntersLine`, which is the free function
+  `curvature_radius_of_inters_line`.
+- **Vertices.** The four lines declare the same vertex members (`svtx`, `fipt`, `lapt`,
+  `indf`, `indl` and their inline accessors); they share one `VertexList`. `Vertex(i)`
+  and `FirstPoint()` return copies; `ChangeVertex(i)` runs a closure on the vertex in
+  place. The `ComputeVertexParameters` bodies are split by phase (the WLine one into
+  the seam duplication, the restriction filters, the merge with the walking points and
+  the end vertices), and the locals the native loops keep across their phases (`Tol`,
+  `nbvtx`, `nbponline`) live in one state struct, so each phase reads the stale counts
+  the native code reads.
+- **Tools.** `IntPatch_HInterTool` is a struct with the sampled range and associated
+  functions; it implements the IntStart trait `TheSOBTool`. `IntPatch_HCurve2dTool`
+  implements the IntImp trait `TheCurveTool`: the IntImp curve tool is split into
+  `TheCurveTool` (the bounds and the resolution, all that `IntImp_IntCS` calls) and
+  `TheCurve3dTool` (the 3d `Value` and `D1` of `IntImp_ZerCSParFunc`), since the 2d
+  arcs of `IntPatch_CurvIntSurf` have no 3d value. `IntPatch_ArcFunction` implements
+  the IntStart `TheArcFunction` and `IntPatch_CSFunction` the IntImp `TheFunction`
+  (section 6); both keep a failure of their solver callbacks and raise it when the
+  solver returns.
+- **Instances.** The instances are aliases over type bundles, as the `_0.cxx` files
+  name their macros: `IntPatchTheSurfFunction = IntImpZerImpFunc<HSurfaceTool,
+  IntSurfQuadricTool>`, `IntPatchCurvIntSurf = IntImpIntCS<IntPatchCSFunction>`,
+  `IntPatchTheSOnBounds = SearchOnBoundaries<IntPatchTheSOnBoundsTypes>`,
+  `IntPatchTheSearchInside = SearchInside<IntPatchTheSearchInsideTypes>` and
+  `IntPatchTheIWalking = IntWalkIWalking<IntPatchTheIWalkingTypes>` (sections 10 and 12).
+  The domain of the IntStart instances is `dyn TheTopolTool`, since the native
+  `Adaptor3d_TopolTool` is virtual. The path point, the segment and the walking line
+  (`IntPatchThePathPointOfTheSOnBounds`, `IntPatchTheSegmentOfTheSOnBounds`,
+  `IntPatchTheIWLineOfTheIWalking`) are the classes the IntStart and IntWalk probes and
+  tests use; the probe-only copies of them are gone.
+- **Dumps.** The `Dump` members write to a `fmt::Write` the text the native ones print
+  with `printf` and `std::cout` (`%+10.20f`, the default `operator<<(double)`, and `%10p`
+  addresses, which are the Rust object addresses). The probe captures the native process
+  output to compare the dumps of points and lines without arcs or vertices.

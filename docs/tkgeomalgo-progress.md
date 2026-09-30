@@ -22,7 +22,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (80 declarations):
+The toolkit test inventory maps these suites (174 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -46,6 +46,15 @@ The toolkit test inventory maps these suites (80 declarations):
 | IntCurveSurface_InterUtils_Test.cxx | int_curve_surface_inter_utils | 1 | pass | pass |
 | IntCurveSurface_ThePolygonOfHInter_Test.cxx | int_curve_surface_the_polygon_of_h_inter | 1 | pass | pass |
 | IntCurveSurface_ThePolyhedronOfHInter_Test.cxx | int_curve_surface_the_polyhedron_of_h_inter | 6 | pass | pass |
+| IntPolyh_Intersection_Test.cxx | int_polyh_intersection | 3 | pass | pass |
+| IntPolyh_Point_Test.cxx | int_polyh_point | 10 | pass | pass |
+| GeomAPI_ProjectPointOnSurf_Test.cxx | geomapi_project_point_on_surf | 2 | pass | pass |
+| GeomAPI_PointsToBSpline_Test.cxx | geomapi_points_to_bspline | 1 | pass | pass |
+| GeomAPI_IntCS_Test.cxx | geomapi_int_cs | 5 | pass | pass |
+| GeomAPI_ExtremaCurveSurface_Test.cxx | geomapi_extrema_curve_surface | 6 | pass | pass |
+| GeomAPI_ExtremaSurfaceSurface_Test.cxx | geomapi_extrema_surface_surface | 2 | pass | pass |
+| GeomAPI_PointsToBSplineSurface_Test.cxx | geomapi_points_to_bspline_surface | 1 | pass | pass |
+| GeomFill_Gordon_Test.cxx | geomfill_gordon | 64 | pass | pass |
 | GeomFill_NSections_Test.cxx | geom_fill_nsections | 1 | pass | pass |
 | GeomFill_GuideTrihedronAC_Test.cxx | geom_fill_guide_trihedron_ac | 4 | pass | pass |
 
@@ -143,6 +152,59 @@ behavior tests of `geom_fill_corrected_frenet_behavior`.
   and `set_nor_ang`; `GeomFill_ConstrainedFilling`'s `Init` overloads are `init_three`
   and `init_four`, `ReBuild` is `re_build`, `Eval` writes into a slice, and the
   `Check` members write to a `fmt::Write` where the native ones write to `std::cout`.
+
+- IntStart: the package has no header; its two templates are the generics
+  `SearchOnBoundaries<T: SearchOnBoundariesTypes>` and `SearchInside<T: SearchInsideTypes>`
+  over the tool traits of `int_start::tools` (docs/geomalgo-design.md section 12), which
+  IntPatch and Contap will instantiate as aliases. The api rows name the template
+  members (`IntStart_SearchOnBoundaries::Perform`...) with the `.gxx`/`.lxx` source. The
+  performing constructor of `SearchInside` is `with_domain`, the Perform from a start
+  point `perform_from`; the output references of the tool members become returned
+  values (`Option` for `HasFirstPoint`/`HasLastPoint`).
+
+- IntPolyh: concrete structs (docs/geomalgo-design.md section 12). `IntPolyh_Array<T>` is
+  `IntPolyhArray<T>` and the six array typedefs are aliases; `operator[]` is `Index`/`IndexMut`
+  and `Value`/`ChangeValue` return Standard_OutOfRange past the storage. The constructors are
+  named (`IntPolyhIntersection::with_samples`/`with_parameters`,
+  `IntPolyhMaillageAffinage::with_samples`, `IntPolyhSectionLine::with_size`), the
+  `FillArrayOfPnt` overloads are `fill_array_of_pnt`, `_shift`, `_params`, `_shift_params`
+  and `_normals` (an optional deflection for `const double*`), `CommonBox(B1, B2, ...)` is
+  `common_box_of`, the `Dump(int)` overloads are `dump_index`, `TriangleEdgeContact` takes its
+  fourteen geometric arguments in `IntPolyhTriangleEdge`, and output references become
+  returned arrays or tuples (`get_line_point` returns `[x, y, z, u1, v1, u2, v2, incidence]`).
+  The members that can raise (surface evaluations, `Bnd_Box::Get`, the coplanar `IsParallel`)
+  return `Result`.
+- GeomAPI (see the section below): one named constructor or `init_*` method per native
+  overload (`ProjectPointOnSurf::with_bounds_tolerance`, `init_surface`...), the
+  conversion operators as `as_int`, `as_real`, `as_point`, `as_curve` and `as_surface`,
+  output references as returned tuples, and `GeomAPI::To2d`/`To3d` as the free functions
+  `to_2d` and `to_3d`. `GeomAPI_IntCS::Parameters(Index, U1, V1, U2, V2)` is
+  `segment_parameters`. The PointsToBSplineSurface settings travel as the tuple
+  `SurfaceFitSettings` and the height grid as `HeightGrid`.
+- GeomFill Gordon: `GeomFill_Gordon` is `GeomFillGordon`, its nested enums and report are
+  `GordonStatus`, `GordonApproximationMode`, `GordonBuildStage` and `GordonBuildReport`;
+  `GeomFill_NetworkSurface` is `GeomFillNetworkSurface` with `NetworkSurfaceStatus`, and
+  its Init takes the curve families, the parameters, the grids and the closed seams as
+  tuples. `GeomFill_GordonUtilities.pxx` is internal: its functions are private modules
+  (`gordon_params`, `gordon_contacts`, `gordon_normalize`, `gordon_order`,
+  `gordon_reorder`, `gordon_reparam`, `gordon_rebuild`, `gordon_network`,
+  `gordon_fallback`).
+
+- IntPatch (the core; docs/geomalgo-design.md section 16): `IntPatch_Line` and
+  `IntPatch_PointLine` are the traits `IntPatchLine` and `IntPatchPointLine` over an
+  embedded `IntPatchLineBase`; the lines are handle-shared transients whose members take
+  `&self`. The constructors by transition kind are `new`/`new_touch`/`new_undecided`
+  (WLine, RLine) or take an `IntPatchLineTransitions` (GLine `from_line`...`from_hyperbola`,
+  ALine `new`); `Vertex(i)`, `Point(i)` and `FirstPoint()` return copies, `ChangeVertex`
+  takes a closure, `FirstPoint(int&)` is `first_point_index`. `IntPatch_Point`'s
+  `SetValue` overloads are `set_value_tangent`, `set_value` and `set_pnt_on_2s`;
+  `IntPatch_ArcFunction`'s `Set` overloads are `set_arc`/`set_surface` and its
+  evaluations `value_at`/`derivative_at`/`values_at`; the path point constructors are
+  `on_vertex`/`on_arc`; `CurvatureRadiusOfIntersLine` is the free function
+  `curvature_radius_of_inters_line`. The template instances are aliases
+  (`IntPatchTheSurfFunction`, `IntPatchCurvIntSurf`, `IntPatchTheSOnBounds`,
+  `IntPatchTheSearchInside`, `IntPatchTheIWalking`) whose rows name the generic members.
+  `IntPatch_RLine::SetParamOnS1/S2` are declared but defined nowhere (excluded rows).
 
 - GeomFill (sweep part, [geomalgo-design.md](geomalgo-design.md) section 14): the
   trihedron, location and section laws are the traits `GeomFillTrihedronLaw`,
@@ -436,6 +498,25 @@ Deliberate Rust deviations:
 - A null point handle raises Standard_NullObject where native code dereferences it.
 - Slots that native leaves uninitialized start at 0; the corpus avoids reading them.
 
+## GeomAPI and GeomFill Gordon
+
+GeomAPI (`geom_api`) ports every class except `GeomAPI_IntSS`, which waits for GeomInt:
+`to_2d`/`to_3d`, `ProjectPointOnCurve`, `ProjectPointOnSurf`, `ExtremaCurveCurve`,
+`ExtremaCurveSurface`, `ExtremaSurfaceSurface`, `IntCS`, `Interpolate` (the 3D instance
+of the interpolation body shared with Geom2dAPI), `PointsToBSpline` and
+`PointsToBSplineSurface`. `tools/audit_api_rows.py` reports for the package only the
+`GeomAPI_IntSS` members as missing, and 0 stale rows. How the classes hold their
+Extrema objects is in [geomalgo-design.md](geomalgo-design.md) section 15.
+
+GeomFill ports `GeomFill_GordonUtilities.pxx`, `GeomFill_Gordon` and
+`GeomFill_NetworkSurface` (the other GeomFill classes belong to the filling and sweep
+parts); every public member of the two classes has an api row. The three TKG3d suites
+that need GeomAPI (`Geom_CurveEval_Test.cxx`, 11; `GeomAPI_ExtremaCurveCurve_Test.cxx`,
+47; `GeomAPI_Interpolate_Test.cxx`, 1) are translated in this crate as
+`tkg3d_geom_curve_eval`, `tkg3d_geomapi_extrema_curve_curve` and
+`tkg3d_geomapi_interpolate`; their ledger rows keep the toolkit TKG3d, so the TKG3d
+verifier runs them.
+
 ## Numeric comparison policy
 
 `tools/verify_tkgeomalgo_numeric.py` uses the shared driver `tools/toolkit_numeric.py`.
@@ -449,12 +530,13 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 21523 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 25386 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
 LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
 with TopClass 1116, Geom2dGcc 3968, IntWalk 717, IntCurveSurface 3077, and the GeomFill
-filling classes 568.
+filling classes 568, IntStart 674, IntPolyh 522, GeomAPI 1980, and GeomFill Gordon and
+NetworkSurface 145, and the IntPatch core 542.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -715,6 +797,57 @@ three and four boundaries (constrained, free and mixed, in any order and orienta
 with a degenerated side), with and without the corner checks, with `SetDomain` and
 `ReBuild`, the `Check` members' text, and a second `Init` on the same framework.
 
+IntStart: 674 requests (`tkgeomalgo_corpus_intstart.py`) over the surface catalog of
+IntCurveSurface and nine quadrics (planes, cylinders, spheres, cones including a nearly
+flat one, a torus). `is_sob` runs the boundary search with the IntPatch tools on every
+surface against every quadric (finite, periodic and infinite restrictions, the exact
+conic-quadric intersection and the sampled one), with the regularity recheck, twice in a
+row, never performed, on arcs on the quadric or tangent to it (spheres and tori of radius
+1 +- 1e-9 on the unit square), with larger tolerances (Brent refinement, merged tangent
+zeros), with an edge behind the domain (straight and tangent to a cylinder, off it,
+skew, degenerated, regular), and with a tool whose arcs have been seen (known points,
+vertices and segments, indices past the known points). `is_inside` runs the inside
+search on every surface against every quadric, from start points inside, outside and on
+the bounds, tangent and coincident, and without a Perform. Every consultation is printed
+from index 0 to Nb + 1. The branches not reached are the state of a math_FunctionAllRoots
+point at an end of the arc (`GetPointState`) and the merge with a new point already at
+the same parameter of the arc.
+
+IntPolyh: 522 requests (`tkgeomalgo_corpus_intpolyh.py`) over the IntCurveSurface surface
+catalog. `ph_inter` intersects every pair of 15 surfaces (planes, cylinders, a cone, spheres,
+a torus, Bezier and B-spline surfaces, a revolution, offsets and trimmed surfaces) with the
+default sampling, then five pairs with given sample counts (2 to 30) and given parameters
+(short arrays included), and tangent, grazing, coincident, parallel, disjoint and very
+small-in-large pairs; it prints every section line and tangent zone with the reads past them
+that stay in the allocated storage. `ph_maillage` drives IntPolyh_MaillageAffinage step by
+step (standard, shifted and parameter fills, the enlarged zone, each refinement, the
+comparison and the chaining, and the error paths of void boxes and short parameters) and
+prints its whole state. `ph_tricontact` and `ph_edgecontact` test triangle pairs (crossing,
+apart, coplanar, touching, null, random) and triangle-edge pairs on both surfaces (every
+vertex and side crossing, coplanar overlaps and crossings, null edges, sliver triangles for
+the last coordinate combinations). `ph_triangle` refines grid triangles of five surfaces
+once and repeatedly; the record operations cover every member of the points, start points,
+section lines, arrays, couples, edges and tools with their dumps. Not reached: the overlap
+cases that need the side to project backwards (see below), a coplanar next couple
+on the first chaining side, and a next point equal to the initial one.
+
+IntPatch: 542 requests for the core records, lines and tools (`tkgeomalgo_corpus_intpatch.py`,
+`_lines.py`, `_tools.py`). `ip_point` edits points by command scripts (values, parameters,
+vertices and arcs of both domains with the eight transition kinds, reversal, multiplicity,
+fixture ranks out of range) and compares the dumps of points without arcs, captured from the
+native process output. `ip_iwline` and `ip_pathpoint` edit the walking line of
+IntPatch_TheIWalking and the path points and segments of IntPatch_TheSOnBounds. `ip_wline`,
+`ip_rline`, `ip_gline` and `ip_aline` build each line kind with every transition kind, run
+every vertex edit on valid and out-of-range indices and run `ComputeVertexParameters` on
+vertices before, on, between and after the points, on the arcs of either surface, on seam
+pairs, with confused points, periods and the ImpImp creation way; the lines without arcs
+are dumped in every mode. `ip_hinter`, `ip_hc2d`, `ip_arcf`, `ip_csf` and `ip_curvature` run
+the tools on the IntCurveSurface surface catalog, the Geom2dInt curve catalog and the IntStart
+quadrics (the unset quadric included). The IntStart (`is_*`) and IntWalk (`iw_walk`)
+requests now run through the IntPatch instances on both sides. Left out: `SetPoint` on a
+restriction line without points and `Bezier()`/`BSpline()` of other curves, which dereference
+null handles natively.
+
 GeomFill sweep part (gfs, 1075 requests): `gfs_shape`, `gfs_circle`, `gfs_convert` and
 `gfs_tensor` cover the `GeomFill` class functions, the two arc convertors and
 `GeomFill_Tensor` (104, 85, 42 and 4 requests: every parameterisation over angles
@@ -742,8 +875,7 @@ first sample of a corrected Frenet law (its `GetAngleAT` loops forever natively)
 draft law without stop surface, the evaluation of a copied guided law, `Section()` of a
 guided law without section, `SetStopSurf` before `SetCurve`, `Section` and
 `ModifiedSection` of a point section, and the evaluators of a single-section law (arrays
-of -1 poles):
-each reads a null or uninitialized value, or never returns, natively.
+of -1 poles): each reads a null or uninitialized value, or never returns, natively.
 
 ## Preserved native behaviour
 
@@ -1078,6 +1210,29 @@ each reads a null or uninitialized value, or never returns, natively.
   shared by every instance of the generic in the port); the probe masks the number.
 - `NbSamples` truncates a double count, `(int)` of NaN being undefined (0 here).
 
+GeomAPI (1980 requests) and GeomFill Gordon (145 requests): `gapi_ppc` and `gapi_pps`
+project points (on the geometry, at centres and axes, far away) on every curve and
+surface kind through every constructor and Init, with the out-of-range indices 0 and
+N+1, repeated Performs and switched Extrema algorithms and flags; `gapi_ecc`, `gapi_ecs`
+and `gapi_ess` run the extrema of curve pairs (parallel, concentric, tangent, repeated
+Inits on one object, the Total members), curve-surface and surface-surface pairs on
+whole and bounded domains; `gapi_to2d`/`gapi_to3d` the plane conversions of every curve
+kind; `gapi_intcs` curve-surface intersections with points and segments;
+`gapi_interpolate` periodic and open interpolations with parameters, end and full
+tangents, and too-close points; `gapi_points_to_bspline` and `gapi_p2bss` every
+approximation overload (least squares, smoothing, interpolation; every
+parametrization; periodic; heights; grids whose bounds do not start at 1).
+`gfill_gordon` runs 38 networks (trimmed-line grids, bumps, saddles, rational and
+degree-9 rational networks, periodic and closed curves, meanders with several contacts,
+arcs, Bezier and cubic iso-curve networks, disjoint and too small networks) in exact
+mode, in approximate-fallback mode with the parallel flag and two Performs, and at a
+second tolerance, printing every status and report field and the surface;
+`gfill_network` runs prepared networks: closed seams (with gaps within and beyond the
+tolerance, non-unit parameters), compatible and incompatible rational families, the
+degree overflow, zero and negative weights, too few curves, a wrong grid size and two
+Performs. The hyperbola-circle pair of `gapi_ecc` is left out: natively it does not
+return.
+
 ### GeomFill (filling part)
 
 - `GeomFill_SectionGenerator::SetParam` shares the given array and copies it into itself
@@ -1125,6 +1280,166 @@ each reads a null or uninitialized value, or never returns, natively.
   negative size natively (Standard_RangeError here; not in the corpus). A default
   scheme (no `Init`) dereferences a null grid in `NbUPoles`, `Poles` and `Weights`
   (Standard_NullObject here; not in the corpus).
+
+### IntStart
+
+- `SearchOnBoundaries`: `FindVertex` gives the vertex solutions the boundary tolerance
+  as their tolerance. A new point of `PointProcess` has 1000 times the tolerance, at
+  most 0.005 (#24643), where `TreatLC` caps its point at 0.001; the new point is the
+  last point the loops copied, so it carries that point's vertex (unread, since
+  `Vertex()` raises on a new point).
+- A rejected arc (the six first-order samples keep one sign) is not solution. The
+  regularity recheck runs only when isolated zeros exist (`Nbp > 0`), and without the
+  recheck the null intervals are dropped whenever an isolated zero exists.
+- `TreatLC` and `IsRegularity` read the edge behind the domain: with
+  `Adaptor3d_TopolTool`, whose `Edge()` is null, the tangent line on a cylinder is
+  never special and no edge is regular. The branch of arcs that "have been seen" is
+  unreachable with IntPatch_HInterTool (its `HasBeenSeen` is false); the probe reaches
+  it through its own tool.
+- `ComputeBoundsfromInfinite` takes two Newton steps from far points and widens the
+  result tenfold; its `NbEchant` output is not read. `(1e10, -1e10)` is returned when
+  the distance is flat at 0.
+- The tangent zeros of an exact line intersection are merged only when the three
+  distances have one sign; the node count of the minimization is `ceil((b - a) / tol)`
+  with the parameters clamped to 1e9 ("floating point exception 569").
+- `SearchInside`: the sampling steps are the half-cells `2 (umax - umin) / NbSamplesU`,
+  the solver box is clipped with `std::max`/`std::min`, and the twelve extra starts are
+  the four corners at 2% of the steps twice, then at 0.5%. The classification tolerance
+  is `1000` times the larger resolution, at most 0.1% of the steps.
+
+### IntPolyh
+
+- `IntPolyh_Array::Init(N)` sets the item `N` of its dynamic array: the storage holds `N + 1`
+  items, and a second `Init` resets only that item, so the points, edges and triangles of a
+  second fill (the enlarged-zone retry of `PerformMaillage`) keep the degenerated flags, the
+  intersection flags, deflections and cached boxes of the first one where they are not
+  rewritten. `operator=` (`Copy`) keeps the target's increment; the one-`int` constructor
+  cannot be called natively (it is ambiguous with the `(N, increment)` one). `Dump` titles
+  any array "ArrayOfSectionLines" and compiles only for points, start points and lines.
+- `IntPolyh_SectionLine` holds a spare point: `NbStartPoints()` is its length minus one
+  (-1 for a line never initialized), `Init` ignores its argument, `Destroy` is empty.
+- `IntPolyh_Point::Divide` returns the default point for a divisor not above
+  Precision::Computational (bug #18); the dumps print `%+8.3eg`, a stray `g` after each
+  number. `IntPolyh_StartPoint::CheckSameSP` compares `lambda1` with the other `lambda1`
+  (its comment says `lambda2`) and prints both points (numbered 128 and 129, the octal
+  `00200` and `00201`) when both edges are unknown.
+- `FillArrayOfPnt(SurfID, isShiftFwd, Upars, Vpars, theDeflTol)` always fills the first
+  surface (it passes 1 to the overload it calls). `IsDegenerated` samples the isoline at
+  `i * step`, not from the first bound. `CommonBox(B1, B2, ...)` ignores its box arguments.
+  `GetFinTE` and `GetFinTT` are declared but defined nowhere (excluded rows).
+- `TriContact` leaves the angle unchanged when a normal is null, so `TriangleCompare` stores
+  the angle of the previous couple in contact. `MiddleRefinement` numbers the new triangles
+  and edges differently for each longest side and leaves the split edge pointing at the two
+  killed triangles.
+- `CalculPtsInterTriEdgeCoplanaires` divides the edge and side vectors by their squared
+  magnitudes before `IsParallel`; on the crossing, the end `alpha == 0` is overwritten by
+  the inner case (the second test has no `else`) and the second point of surface 2 reads
+  the side orientation from the first triangle; on the overlap, surface 2 mixes the U of
+  one point with the V of the other, both points take `alpha1` and `lambda1`, one case
+  starts `PEP2` from `PE2`, and the two cases where the side's end projects before its start
+  need rounding to happen (the side runs from `PT1` to `PT2`, so only a side far shorter
+  than its coordinates can project backwards). `TriangleEdgeContact` compares
+  `V2` with `V1` after the first coplanar pair and gives surface 2 `alpha` instead of `beta`
+  on the side `PT2PT3`.
+- `StartPointsChain` stores several points of the next couple in the tangent zones on the
+  first side only: on the second side the test sits in the `else` of the single-point case.
+  The chaining shares one next point between both sides of a couple, so a step that finds
+  several points stores the previous point with the new couple.
+- `IntPolyh_Intersection::NbPointsInLine` past the lines answers -1 (the allocated empty
+  lines) and `GetTangentZonePoint` past the zones the default point; `AnalyzeIntersection`
+  never fails, so `IsDone` is always true once the constructor returns.
+
+### IntPatch
+
+- `IntPatch_Point::SetValue(Pt, Tol, Tangent)` clears the domain, vertex and multiplicity
+  flags but keeps the arcs, vertices and transitions; `ReverseTransition` replaces each
+  transition by a fresh one, so a TOUCH or undecided transition becomes the default
+  undecided one. `IsTangencyPoint` never raises, despite its documentation.
+- `IntPatch_WLine`: the first and last indices are uninitialized until set.
+  `ComputeVertexParameters`: in the seam phase a vertex that already exists on the second
+  restriction resets `encoreunefois` even after the first restriction created one; a vertex
+  before the line inserted as its first point shifts the parameters of the vertices `j != 1`
+  (not `j != i`); a first vertex prepended at the end does not shift `indl`; the ImpImp way
+  keeps the 2d parameters of the line point and takes the 3d point of the vertex. The
+  confused points are removed while more than 2 points are left, then after a
+  substitution while more than 1 is. `InsertVertexBefore` clamps a copy of its index to 1
+  but inserts at the original one (Standard_OutOfRange below 1 on a non-empty line).
+- `IntPatch_RLine::ComputeVertexParameters` ignores its tolerance and always makes the
+  vertices 1 and `nbvtx` the first and last points; its duplicate filter also compares the
+  parameters on the arcs, and skips the pair when the arcs differ.
+- `IntPatch_GLine::Replace` appends the point and ignores the index (the assignment is
+  commented out). `AddVertex` brings a circle or ellipse parameter into `[first, last]` by
+  turns of 2 Pi and drops a point still 1e-6 before the first one; on the other conics it
+  drops the points outside `[first, last]`. `ComputeVertexParameters` shifts the indices
+  for `indl > j` (the other lines use `>=`), its S2 filter tests `IsVertexOnS1`, the seam
+  moves stop after the next sort once a pair leaves the U range of the first pair
+  (BUC61033), and at the end it resets `indf`/`indl` to 1 and `nbvtx` without setting the
+  `fipt`/`lapt` flags.
+- `IntPatch_ALine::ComputeVertexParameters` decreases `indl` for each end vertex removed
+  (and never `indf`); the branch that would prepend a copy of the last vertex at the first
+  parameter of a periodic line tests the first vertex against the first parameter inside the
+  branch where they are equal, so it never runs.
+- `IntPatch_HInterTool`: `NbSamplesU/V` ignore their range, `SamplePoint` perturbs the
+  third cell of four by `dv *= 1.001; dv *= 0.999`, the `SingularOn*` members answer false,
+  and the known-point members raise Standard_OutOfRange (no arc has been seen).
+  `IntPatch_HCurve2dTool::NbSamples` answers 25 for the non-spline curves and caps at 50.
+- `IntPatch_ArcFunction::Values` with a quadric that is not set leaves `F` unchanged and
+  gives a null derivative (the quadric writes nothing).
+
+## IntStart deviations
+
+- The native code ignores the result of `Func.Value` in `FindVertex`, the recheck
+  samples and `ComputeBoundsfromInfinite`, and reads the output variable, which is
+  uninitialized (or the previous value) when the function answers false. The port keeps
+  the previous value, 0 at first; the IntPatch and Contap functions never answer false.
+- `TheTopolTool` is a trait, as the native domain is virtual; `Edge()` returns the edge
+  itself (`Option<Edge>`) where the native one returns a `void*`.
+
+## IntPolyh deviations
+
+- The native `Value` and `operator[]` of the arrays do not check the index: past the storage
+  the read is undefined. The port returns Standard_OutOfRange from `value`/`change_value` and
+  panics in `Index`/`IndexMut`; the corpus reads only inside the storage.
+- `MiddleRefinement` and `MultipleMiddleRefinement` run on an item of the array they grow;
+  the port refines a copy and writes it back, which gives the native result (the body never
+  writes the refined triangle through the array before its last two assignments).
+- `StartPointsChain` and `GetNextChainStartPoint` walk the couples by position in a vector
+  taken from the list and put back in order; the positions stand for the native iterators.
+- The diagnostics of `CheckSameSP` and of a null side in `TriangleEdgeContact` print to
+  standard output, as natively; the dumps write to a `fmt::Write`.
+
+### GeomAPI
+
+- `GeomAPI_ExtremaCurveCurve::Init(C1, C2, U1min, U1max, U2min, U2max)` loads the whole
+  curves into its adaptors: the Total members (`TotalPerform`) work on the full curves,
+  not on the ranges. `TotalPerform` compares each pair of end points with the squared
+  distance from before the end-point checks (it never updates it), so the last pair
+  nearer than that distance wins, not the nearest one; the NaN comparisons keep their
+  native result.
+- `GeomAPI_ExtremaCurveSurface` is done when the Extrema answers parallel, even with 0
+  extrema; its Extrema object is built on local adaptors at each Init.
+- `GeomAPI_Interpolate::ClearTangents` is declared but never defined natively; its row is
+  excluded. The interpolation keeps the Geom2dAPI quirks (the shared flag array, the
+  previous-parameter read of BuildParameters).
+- `GeomAPI_PointsToBSpline::Init(Points, Params, ...)` reads `Params(i)` from the lower
+  bound of `Points`; `GeomAPI_PointsToBSplineSurface` sets its multipoints at the grid
+  indices, so a grid that does not start at (1, 1) raises Standard_OutOfRange.
+  `operator occ::handle<Geom_BSplineSurface>()` calls `Surface()` and raises
+  StdFail_NotDone when not done.
+- Extrema_ExtPC on a periodic B-spline far outside its period (bounds near 1e100)
+  computes a period shift that overflows `int`; natively the overflow is undefined, the
+  port wraps as x86-64 does (`wrapping_sub`), which the corpus checks.
+
+### GeomFill Gordon
+
+- `SetParallelMode(true)` runs the contact search sequentially: each search is
+  independent and writes its own slot, so the contacts are the same; `IsParallelMode`
+  still answers true.
+- `GeomFill_NetworkSurface::Perform` makes the curve families compatible in place (the
+  stored copies are raised in degree and knot-refined), so a second Perform starts from
+  the prepared curves; its catch-all turns every exception into ConstructionFailed.
+- The approximate fallback measures its profile and guide deviations by mapping the fixed
+  parameter through the surface parameter mapping twice, as natively.
 
 ### GeomFill (sweep part)
 
@@ -1197,6 +1512,20 @@ each reads a null or uninitialized value, or never returns, natively.
   approximation result or parameter array) raise Standard_NullObject.
 - `GeomFill_BoundWithSurf` keeps its own `Adaptor3d_CurveOnSurface` through the new
   `Adaptor3dCurveOnSurface::copy_of` of TKG3d (the implicit native copy constructor).
+
+## IntPatch deviations
+
+- The lines return copies of their vertices and points; `ChangeVertex` runs a closure on
+  the vertex in place (a reference cannot outlive the line's lock).
+- A walking or restriction line without a point set dereferences a null handle natively
+  in `SetPoint` and the box queries; the port raises Standard_NullObject (walking line) or
+  Standard_DomainError (restriction line, as its `NbPnts` natively). A null arc or surface
+  in the tools and functions raises Standard_NullObject.
+- The `Dump` members write to a `fmt::Write`; the addresses they print are those of the
+  Rust objects.
+- `IntPatch_CSFunction` keeps copies of the handles where the native one keeps pointers to
+  the caller's handles. `IntPatch_ArcFunction`'s IntStart side answers 0 for `F` where a
+  quadric that is not set leaves the caller's variable uninitialized.
 
 ## GeomFill sweep-part deviations
 

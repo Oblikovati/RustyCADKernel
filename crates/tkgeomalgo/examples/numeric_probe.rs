@@ -13,12 +13,14 @@ use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, pl
 use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
+use ga_probe::{geom_api, geom_api_fit, geom_api_surface, gordon};
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
-use ga_probe::{int_walk, int_walk_iw};
+use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_tools};
+use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -186,6 +188,49 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfill_corner", gfill_cf::corner_case),
     ("gfill_patch", gfill_cf::patch_case),
     ("gfill_cfill", gfill_cf::cfill_case),
+    // IntStart (ga_probe/int_start.rs)
+    ("is_sob", int_start::sob_case),
+    ("is_inside", int_start::inside_case),
+    // IntPolyh (ga_probe/int_polyh*.rs)
+    ("ph_inter", int_polyh::inter_case),
+    ("ph_maillage", int_polyh::maillage_case),
+    ("ph_tricontact", int_polyh::tricontact_case),
+    ("ph_edgecontact", int_polyh::edgecontact_case),
+    ("ph_point", int_polyh_records::point_case),
+    ("ph_triangle", int_polyh::triangle_case),
+    ("ph_startpoint", int_polyh_records::startpoint_case),
+    ("ph_sectionline", int_polyh_records::sectionline_case),
+    ("ph_array", int_polyh_records::array_case),
+    ("ph_tools", int_polyh_records::tools_case),
+    ("ph_couple", int_polyh_records::couple_case),
+    // GeomAPI (ga_probe/geom_api*.rs)
+    ("gapi_ppc", geom_api::ppc_case),
+    ("gapi_pps", geom_api::pps_case),
+    ("gapi_ecc", geom_api::ecc_case),
+    ("gapi_ecs", geom_api::ecs_case),
+    ("gapi_ess", geom_api::ess_case),
+    ("gapi_to2d", geom_api_fit::to2d_case),
+    ("gapi_to3d", geom_api_fit::to3d_case),
+    ("gapi_intcs", geom_api_fit::intcs_case),
+    ("gapi_interpolate", geom_api_fit::interpolate_case),
+    ("gapi_points_to_bspline", geom_api_fit::p2bs_case),
+    ("gapi_p2bss", geom_api_surface::p2bss_case),
+    // GeomFill Gordon (ga_probe/gordon.rs)
+    ("gfill_gordon", gordon::gordon_case),
+    ("gfill_network", gordon::network_case),
+    // IntPatch (ga_probe/int_patch*.rs)
+    ("ip_point", int_patch::point_case),
+    ("ip_iwline", int_patch::iwline_case),
+    ("ip_pathpoint", int_patch::pathpoint_case),
+    ("ip_wline", int_patch_lines::wline_case),
+    ("ip_rline", int_patch_lines::rline_case),
+    ("ip_gline", int_patch_curves::gline_case),
+    ("ip_aline", int_patch_curves::aline_case),
+    ("ip_hinter", int_patch_tools::hinter_case),
+    ("ip_hc2d", int_patch_tools::hc2d_case),
+    ("ip_arcf", int_patch_tools::arcf_case),
+    ("ip_csf", int_patch_tools::csf_case),
+    ("ip_curvature", int_patch_tools::curvature_case),
     // GeomFill sweep (ga_probe/geom_fill_*.rs)
     ("gfs_shape", gfs::shape_case),
     ("gfs_circle", gfs::circle_case),

@@ -22,7 +22,7 @@
 //! ported once as generics over the traits of `tools` (`ThePSurfaceTool`,
 //! `TheISurfaceTool`, `TheCurveTool`, `TheFunction`). The packages that instantiate them natively
 //! (IntWalk, IntPatch, GeomInt, IntCurveSurface) declare the instances as aliases.
-mod captured;
+pub(crate) mod captured;
 mod compute_tangence;
 mod int2s;
 mod int_cs;
@@ -34,7 +34,9 @@ mod zer_par_func;
 pub use compute_tangence::{choix_ref, compute_tangence};
 pub use int_cs::IntImpIntCS;
 pub use int2s::IntImpInt2S;
-pub use tools::{HSurfaceTool, TheCurveTool, TheFunction, TheISurfaceTool, ThePSurfaceTool};
+pub use tools::{
+    HSurfaceTool, TheCurve3dTool, TheCurveTool, TheFunction, TheISurfaceTool, ThePSurfaceTool,
+};
 pub use zer_cs_par_func::IntImpZerCSParFunc;
 pub use zer_imp_func::IntImpZerImpFunc;
 pub use zer_par_func::IntImpZerParFunc;

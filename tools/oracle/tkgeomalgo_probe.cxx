@@ -56,6 +56,15 @@
 #include "tkgeomalgo_probe_gfill.cxx"
 #include "tkgeomalgo_probe_gfill_fill.cxx"
 #include "tkgeomalgo_probe_gfill_cf.cxx"
+#include "tkgeomalgo_probe_intstart.cxx"
+#include "tkgeomalgo_probe_intpolyh.cxx"
+#include "tkgeomalgo_probe_geomapi.cxx"
+#include "tkgeomalgo_probe_geomapi_fit.cxx"
+#include "tkgeomalgo_probe_geomapi_surface.cxx"
+#include "tkgeomalgo_probe_gordon.cxx"
+#include "tkgeomalgo_probe_intpatch.cxx"
+#include "tkgeomalgo_probe_intpatch_lines.cxx"
+#include "tkgeomalgo_probe_intpatch_tools.cxx"
 #include "tkgeomalgo_probe_geomfill_sweep.cxx"
 #include "tkgeomalgo_probe_geomfill_trihedron.cxx"
 #include "tkgeomalgo_probe_geomfill_laws.cxx"
@@ -223,6 +232,49 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gfill_corner", ga_gfill_corner_case},
  {"gfill_patch", ga_gfill_patch_case},
  {"gfill_cfill", ga_gfill_cfill_case},
+ // IntStart (tkgeomalgo_probe_intstart.cxx)
+ {"is_sob", ga_is_sob_case},
+ {"is_inside", ga_is_inside_case},
+ // IntPolyh (tkgeomalgo_probe_intpolyh.cxx)
+ {"ph_inter", ga_ph_inter_case},
+ {"ph_maillage", ga_ph_maillage_case},
+ {"ph_tricontact", ga_ph_tricontact_case},
+ {"ph_edgecontact", ga_ph_edgecontact_case},
+ {"ph_point", ga_ph_point_case},
+ {"ph_triangle", ga_ph_triangle_case},
+ {"ph_startpoint", ga_ph_startpoint_case},
+ {"ph_sectionline", ga_ph_sectionline_case},
+ {"ph_array", ga_ph_array_case},
+ {"ph_tools", ga_ph_tools_case},
+ {"ph_couple", ga_ph_couple_case},
+ // GeomAPI (tkgeomalgo_probe_geomapi*.cxx)
+ {"gapi_ppc", ga_gapi_ppc_case},
+ {"gapi_pps", ga_gapi_pps_case},
+ {"gapi_ecc", ga_gapi_ecc_case},
+ {"gapi_ecs", ga_gapi_ecs_case},
+ {"gapi_ess", ga_gapi_ess_case},
+ {"gapi_to2d", ga_gapi_to2d_case},
+ {"gapi_to3d", ga_gapi_to3d_case},
+ {"gapi_intcs", ga_gapi_intcs_case},
+ {"gapi_interpolate", ga_gapi_interpolate_case},
+ {"gapi_points_to_bspline", ga_gapi_points_to_bspline_case},
+ {"gapi_p2bss", ga_gapi_p2bss_case},
+ // GeomFill Gordon (tkgeomalgo_probe_gordon.cxx)
+ {"gfill_gordon", ga_gfill_gordon_case},
+ {"gfill_network", ga_gfill_network_case},
+ // IntPatch (tkgeomalgo_probe_intpatch*.cxx)
+ {"ip_point", ga_ip_point_case},
+ {"ip_iwline", ga_ip_iwline_case},
+ {"ip_pathpoint", ga_ip_pathpoint_case},
+ {"ip_wline", ga_ip_wline_case},
+ {"ip_rline", ga_ip_rline_case},
+ {"ip_gline", ga_ip_gline_case},
+ {"ip_aline", ga_ip_aline_case},
+ {"ip_hinter", ga_ip_hinter_case},
+ {"ip_hc2d", ga_ip_hc2d_case},
+ {"ip_arcf", ga_ip_arcf_case},
+ {"ip_csf", ga_ip_csf_case},
+ {"ip_curvature", ga_ip_curvature_case},
  // GeomFill sweep (tkgeomalgo_probe_geomfill_*.cxx)
  {"gfs_shape",ga_gfs_shape_case},
  {"gfs_circle",ga_gfs_circle_case},

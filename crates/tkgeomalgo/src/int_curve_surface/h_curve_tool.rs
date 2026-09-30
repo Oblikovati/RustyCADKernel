@@ -18,7 +18,7 @@
 //! over `Adaptor3d_Curve` handles.
 use super::sample_pars::bspline_sample_pars;
 use super::tools::InterCurveTool;
-use crate::int_imp::TheCurveTool;
+use crate::int_imp::{TheCurve3dTool, TheCurveTool};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -223,6 +223,9 @@ impl TheCurveTool for TheHCurveTool {
     fn resolution(curve: &HCurve, r3d: f64) -> Result<f64, Failure> {
         TheHCurveTool::resolution(curve, r3d)
     }
+}
+
+impl TheCurve3dTool for TheHCurveTool {
     fn value(curve: &HCurve, w: f64) -> Result<Point3, Failure> {
         TheHCurveTool::value(curve, w)
     }
