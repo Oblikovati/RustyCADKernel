@@ -7,6 +7,7 @@ use ga_probe::{app_blend, fair_curve, int_imp, int_surf, law, local_analysis, pl
 use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
+use ga_probe::{geom_api, geom_api_fit};
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
@@ -166,6 +167,20 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ics_estlim", ics_inter::estlim_case),
     ("ics_project", ics_inter::project_case),
     ("ics_interutils", ics_interutils::interutils_case),
+    // GeomAPI (ga_probe/geom_api*.rs)
+    ("gapi_ppc", geom_api::ppc_case),
+    ("gapi_pps", geom_api::pps_case),
+    ("gapi_ecc", geom_api::ecc_case),
+    ("gapi_ecs", geom_api::ecs_case),
+    ("gapi_ess", geom_api::ess_case),
+    ("gapi_to2d", geom_api_fit::to2d_case),
+    ("gapi_to3d", geom_api_fit::to3d_case),
+    ("gapi_intcs", geom_api_fit::intcs_case),
+    ("gapi_interpolate", geom_api_fit::interpolate_case),
+    (
+        "gapi_points_to_bspline",
+        geom_api_fit::points_to_bspline_case,
+    ),
 ];
 
 fn main() {

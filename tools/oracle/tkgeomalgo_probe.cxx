@@ -53,6 +53,8 @@
 #include "tkgeomalgo_probe_iwalk.cxx"
 #include "tkgeomalgo_probe_intcurvesurface.cxx"
 #include "tkgeomalgo_probe_intcurvesurface_inter.cxx"
+#include "tkgeomalgo_probe_geomapi.cxx"
+#include "tkgeomalgo_probe_geomapi_fit.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -201,6 +203,17 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ics_estlim",ga_ics_estlim_case},
  {"ics_project",ga_ics_project_case},
  {"ics_interutils",ga_ics_interutils_case},
+ // GeomAPI (tkgeomalgo_probe_geomapi*.cxx)
+ {"gapi_ppc", ga_gapi_ppc_case},
+ {"gapi_pps", ga_gapi_pps_case},
+ {"gapi_ecc", ga_gapi_ecc_case},
+ {"gapi_ecs", ga_gapi_ecs_case},
+ {"gapi_ess", ga_gapi_ess_case},
+ {"gapi_to2d", ga_gapi_to2d_case},
+ {"gapi_to3d", ga_gapi_to3d_case},
+ {"gapi_intcs", ga_gapi_intcs_case},
+ {"gapi_interpolate", ga_gapi_interpolate_case},
+ {"gapi_points_to_bspline", ga_gapi_points_to_bspline_case},
 };
 int main() {
  std::string line;
