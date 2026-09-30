@@ -15,8 +15,9 @@ use rustycad_tkmath::gp::{Point3, Vector3};
 /// ```
 /// use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
 /// use rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool;
-/// // An adaptor without curve fails to answer its type.
-/// assert!(BRepGPropEdgeTool::integration_order(&BRepAdaptorCurve::default()).is_err());
+/// // An adaptor without curve is of the other-curve type: 10 points.
+/// let empty = BRepAdaptorCurve::default();
+/// assert_eq!(BRepGPropEdgeTool::integration_order(&empty).unwrap(), 10);
 /// ```
 pub struct BRepGPropEdgeTool;
 
