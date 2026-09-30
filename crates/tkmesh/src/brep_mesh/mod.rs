@@ -33,3 +33,10 @@ pub use pre_processor::BRepMeshModelPreProcessor;
 
 mod geom_tool;
 pub use geom_tool::{GeomTool, IntersectionFlag};
+
+mod face_checker;
+pub use face_checker::{
+    BRepMeshFaceChecker, CurvePointReference, FaceBoundsTree, FaceBoundsTreeArray,
+    FaceCheckerParameters, FaceEdgeSet, FaceEdgeSetArray, FaceSegment, FaceSegmentArray,
+    FaceSegments,
+};
