@@ -249,6 +249,13 @@ accessors without a current point and past the last face).
   and 0 stale rows.
   `Bnd_Box` implements the TKernel `BoundingVolume` trait (in TKMath), so
   `NCollection_UBTree<int, Bnd_Box>` is `UBTree<i32, BoundingBox3>`.
+- BRepMAT2d (docs/topalgo-design.md section 14): `BRepMAT2d_Explorer`,
+  `BRepMAT2d_BisectingLocus` and `BRepMAT2d_LinkTopoBilo` are the structs
+  `BRepMAT2dExplorer` (`new`, `with_face`; `More`, `Value`, `NumberOfCurves` and
+  `Contour` return `Result`), `BRepMAT2dBisectingLocus` (`compute` takes the explorer as
+  `&mut`; the `GeomElt` overloads are `geom_elt_of_basic_elt` and `geom_elt_of_node`,
+  `GeomBis` returns the bisector with its `Reverse` flag) and `BRepMAT2dLinkTopoBilo`
+  (`new`, `with_locus`). The audit of the package reports 0 missing and 0 stale rows.
 
 - BRepClass3d (docs/topalgo-design.md section 5): `BRepClass3d_SolidExplorer` is
   `BRepClass3dSolidExplorer` (its intersector map is `BRepClass3dMapOfInter`, the
@@ -609,6 +616,22 @@ triangles with consistent and opposite orientations, a tetrahedron, an octahedro
 and curved height-field grids, triangles with repeated indices, coincident and
 collinear nodes, and nodes 1e-4 and 1e-8 apart.
 
+BRepMAT2d: 75 requests (`tools/tktopalgo_corpus_brepmat2d.py`,
+`tktopalgo_probe_brepmat2d.cxx` and `tp_probe/brep_mat2d.rs`). A `bm2_locus` request
+builds a plane face with the shape reader, sets the Closed flags of its wires (the reader
+leaves them open), runs `BRepMAT2d_Explorer`, `BRepMAT2d_BisectingLocus::Compute` and
+`BRepMAT2d_LinkTopoBilo`, and prints the contours (every curve, the closed flags, the
+modified face, wires and edges with the new p-curves and 3d curves), the locus (IsDone,
+the graph through `GeomBis` with its Reverse flag and the two `GeomElt`, `BasicElt` and
+`NumberOfSections` of every line, one past the last curve) and the basic elements and
+generating shape of every edge and vertex. The faces: a square, a triangle, an L-shape, a
+stadium, two half circles, a square with a square hole, with a circular hole and with
+both, p-curves that leave gaps above 1e-8 (a line after a line, a half circle after a line
+and after a half circle, a REVERSED edge, the closing gap), a REVERSED square, and open
+contours (the square with an open wire, an open polyline) with the closed and the open
+results; each on both sides with the arc and the intersection joins, the holed faces also
+from their second contour.
+
 BRepBuilderAPI sewing: 652 requests. `tools/tktopalgo_corpus_sewing.py` (582 `bba_sew`
 requests, `tktopalgo_probe_sewing.cxx` and `tp_probe/sewing.rs`) sews the shape records of
 `tools/tktopalgo_corpus_sewing_shapes.py`: loose boxes whose faces are moved below and
@@ -801,6 +824,30 @@ Each ported package adds its own subsection.
   once per REVERSED edge among them; the plane goes through the first node.
 - `Build` called again rebuilds a new compound (new vertices and edges) and replaces the
   shape; `Shape()` on a maker never built runs `Build` first.
+
+### BRepMAT2d
+
+- The explorer takes the Closed flag of each wire as the closed flag of its contour
+  (`TopoDS_Shape::Closed`, not a geometric test), so a wire built without the flag gives
+  an open contour even when its edges close.
+- A gap above 1e-8 (not `Precision::Confusion()`) between two consecutive p-curves is
+  closed by moving an end of the curve of the lower `GeomAbs_CurveType` (the current one
+  when the types are equal): a line becomes a new segment, any other curve its
+  quasi-angular B-spline with its end pole moved; the moved curve's edge is rebuilt on
+  the new face (its vertices kept). Then every edge of the wire and the wire are recorded
+  as modified, the new wire holds each edge once (the first use of an edge used twice),
+  and IsModified is true only for the rebuilt edges.
+- `Perform` always records the face as modified (the new face is another TShape), and
+  builds the 3d curves of its edges.
+- `Compute` on an explorer without contours returns with a new empty graph and leaves
+  `IsDone` as it was. `NumberOfSections` of a curve past the last raises
+  Standard_NoSuchObject.
+- `LinkTopoBilo` links the basic elements in the iteration order of an
+  `NCollection_DataMap<int, int>` keyed by the element index (bucket order), so the
+  elements of an edge are listed in that order; a point element before any curve links
+  to the edge of index 1 (the absolute value of the initial -1).
+- The iteration state of the explorer (`current`) and of the link (`current`,
+  `isEmpty`) is not set by the native constructors; the port starts them at 0 and empty.
 
 ### BRepLib_PointCloudShape
 
@@ -1428,6 +1475,14 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   `BRepLib_FindSurface` dereferences raises Standard_NullObject (a crash natively);
   inside `Is2DClosed` it answers false, as the native signal handler does. A chain
   edge without 3d curve that `BRepLib_FuseEdges` dereferences raises it too.
+
+### BRepMAT2d
+- The bisecting locus of a contour of one closed curve (a disc) crashes natively inside
+  the MAT2d computation; the port returns Standard_NullObject from `Compute`, and the
+  request is not in the corpus. The null dereferences of the native classes (the circuit
+  before a Compute, a null arc, node or basic element) raise Standard_NullObject.
+- `More` of the explorer and of the link return `Result` (an unknown contour raises
+  Standard_OutOfRange, a link recomputed since `Init` Standard_NoSuchObject).
 
 ### BRepLib_PointCloudShape
 - The density points of a face without surface and without wires crash natively

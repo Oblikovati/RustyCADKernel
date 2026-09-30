@@ -611,4 +611,19 @@ a shape are `init_curve` and `init_line`, and `Init(curve)` is `init`.
   `NCollection_IndexedDataMap<Edge, TopoDS_Edge>` of mesh edges a `HashMap` that keeps
   the first edge of a key: natively both maps are only searched by key, so their order
   is never observed.
+- **BRepMAT2d** has three plain classes, each a struct. `BRepMAT2d_Explorer` keeps its
+  contours as `Sequence<Handle<dyn Geom2dCurve>>` (the native sequences of
+  `Geom2d_Curve` handles) and its modified shapes in the native
+  `NCollection_IndexedDataMap` with `TopTools_ShapeMapHasher`; its private
+  `Add(Spine, aFace, aNewFace)` and the file-static `MakeEdge`, `GetCurveType` and
+  `AdjustCurveEnd` are in `explorer_wire.rs`, which fills the contour in place as the
+  native member does. `BRepMAT2d_BisectingLocus` owns its `MAT2d_Tool2d` and its graph
+  handle; its file-static `CutSketch` is private; the section counts
+  (`NCollection_DataMap<MAT2d_BiInt, int>`) are a `HashMap`, since they are only searched
+  by key. `BRepMAT2d_LinkTopoBilo` keeps the shape-to-elements map as the native
+  `NCollection_DataMap` (with `TopTools_ShapeMapHasher`) and the element-to-shape map
+  as a `HashMap` keyed by the handle identity (only searched by key); the
+  `NCollection_DataMap<int, int>` of `LinkToContour` is the native map, since its
+  iteration order decides the order of the links. The three classes reuse the MAT,
+  MAT2d and Bisector ports (section 3) without copying any of their code.
 

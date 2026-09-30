@@ -25,6 +25,7 @@ pub mod brep_lib_package;
 pub mod brep_lib_point_cloud;
 pub mod brep_lib_shapes;
 pub mod brep_lib_wire;
+pub mod brep_mat2d;
 pub mod brep_top_adaptor;
 pub mod brep_top_adaptor_domain;
 pub mod face;
