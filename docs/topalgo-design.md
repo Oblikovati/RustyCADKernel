@@ -63,3 +63,49 @@ reused, never copied:
   class declares, and is not a member of the Rust struct either.
 - C++ output references become returned tuples, and every member that can raise returns
   `Result`, as geomalgo-design.md section 8 fixes for the templates.
+
+## 4. BRepTopAdaptor and IntCurvesFace: the derived adaptors
+
+BRepTopAdaptor derives two classes from the virtual classes of Adaptor3d
+(`Adaptor3d_TopolTool` and `Adaptor3d_HVertex`). Their TKG3d ports are concrete
+structs (the subclasses were not ported when they were written), so:
+
+- `BRepTopAdaptor_TopolTool` is the struct `BRepTopAdaptorTopolTool`. It embeds a
+  default `Adaptor3dTopolTool` as its parent field (the RTTI chain
+  `BRepTopAdaptor_TopolTool` -> `Adaptor3d_TopolTool` -> `Standard_Transient`) and keeps
+  its own state (the face, the curves of its edges and their iterator, the vertex
+  iterator, the lazy `BRepTopAdaptor_FClass2d`, the surface and the sample grid) behind
+  one `SharedState`, so every member takes `&self` as the base does. The members its
+  header declares are inherent methods, with the overloads named as the base names them
+  (`initialize_surface`, `initialize_curve`, `curve_orientation`, `vertex_orientation`,
+  `curve_tol_3d`, `vertex_tol_3d`). The base members that the header does not redeclare
+  (`Identical`, `SamplePnts`, `BSplSamplePnts`, `UParameters`, `VParameters`,
+  `IsUniformSampling`) call the overrides through virtual dispatch natively; they are
+  not members of the struct, since the concrete base cannot dispatch to them.
+- `BRepTopAdaptor_HVertex` is the struct `BRepTopAdaptorHVertex`, with a default
+  `Adaptor3dHVertex` as its parent field. A `Handle<BRepTopAdaptorHVertex>` cast to
+  `Handle<Adaptor3dHVertex>` keeps the object, so `Vertex()` returns the base handle as
+  natively, and the members that take a base handle (`IsSame`, the `Orientation(V)`,
+  `Tol3d(V)` and `Pnt(V)` of the tool) cast it back, as the native `down_cast` does; a
+  base vertex gives the base behaviour (`Orientation(V)`) or the error of the native
+  null dereference.
+- Consequence: the tool does not implement the `TheTopolTool` trait of IntStart. The
+  generic consumers call `Resolution`, `Parameter` and `Value` directly on the
+  `Adaptor3d_HVertex` handles of the domain, and the concrete `Adaptor3dHVertex` would
+  answer with its own (default) fields, not with the overrides. A BRep domain can feed
+  IntStart and IntPatch once `Adaptor3d_HVertex` dispatches its virtual members (a
+  TKG3d change); no TKTopAlgo package needs it (IntCurvesFace calls the tool directly).
+- `BRepTopAdaptor_FClass2d` is a plain struct (not copyable natively). Its lazy exact
+  explorer (`myExactExplorer` under `myExactMutex`) is a `Mutex<Option<...>>`, so
+  `Perform` and `TestOnRestriction` take `&self` and reuse one `BRepClassFaceExplorer`
+  (its probing state carries over from one exact classification to the next, as
+  natively). The members return `Result`: the explorer, the adaptors and the
+  classifier can raise.
+- `BRepTopAdaptor_Tool` holds a `Handle<BRepTopAdaptorTopolTool>` and the surface
+  handle, as natively.
+- `IntCurvesFace_Intersector` is the transient struct `IntCurvesFaceIntersector`; its
+  Perform overloads take `&mut self` (`perform_line`, `perform_curve`), its lazy
+  polyhedron grid is an `Option<BoundSortBox>`, and the accessors of the i-th point
+  return `Result` (Standard_OutOfRange of the native sequences).
+  `IntCurvesFace_ShapeIntersector` owns its intersectors in a `Vec` (the native
+  sequence of handles is private and never shared).

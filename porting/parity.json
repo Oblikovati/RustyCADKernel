@@ -91825,7 +91825,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91857,7 +91857,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -174522,6 +174522,742 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIntersection::prepare_surfaces",
       "status": "implemented",
       "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_inter, ip_isingular requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_FClass2d(const TopoDS_Face&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::new",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_FClass2d::PerformInfinitePoint() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::perform_infinite_point",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_FClass2d::Perform(const gp_Pnt2d&,bool) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::perform",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_FClass2d::Destroy()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::destroy",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_FClass2d::~BRepTopAdaptor_FClass2d()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ destructor (it only calls Destroy): Rust drops the polygons and the exact explorer with the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_FClass2d::TestOnRestriction(const gp_Pnt2d&,double,bool) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_FClass2d.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorFClass2d::test_on_restriction",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex(const TopoDS_Vertex&,const occ::handle<BRepAdaptor_Curve2d>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::new",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::Vertex() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::vertex",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::ChangeVertex()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::change_vertex",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::Value()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::value",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::Parameter(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::parameter",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::Resolution(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::resolution",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::Orientation()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::orientation",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::IsSame(const occ::handle<Adaptor3d_HVertex>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::is_same",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_HVertex::DEFINE_STANDARD_RTTIEXT(BRepTopAdaptor_HVertex,Adaptor3d_HVertex)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_HVertex.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorHVertex::static_type",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::new",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool(const TopoDS_Face&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::with_face",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool(const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::with_surface",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool::Init(const TopoDS_Face&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::init_face",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool::Init(const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::init_surface",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool::GetTopolTool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::get_topol_tool",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool::SetTopolTool(const occ::handle<BRepTopAdaptor_TopolTool>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::set_topol_tool",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool::GetSurface()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::get_surface",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool::Destroy()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTool::destroy",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_Tool::~BRepTopAdaptor_Tool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_Tool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ destructor (it calls the empty Destroy): Rust drops the handles with the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::new",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::with_surface",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Initialize()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::initialize",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Initialize(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::initialize_surface",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Initialize(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::initialize_curve",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Init()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::init",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::More()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::more",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Value()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::value",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Next()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::next",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::edge",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::InitVertexIterator()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::init_vertex_iterator",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::MoreVertex()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::more_vertex",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Vertex()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::vertex",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::NextVertex()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::next_vertex",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Classify(const gp_Pnt2d&,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::classify",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::IsThePointOn(const gp_Pnt2d&,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::is_the_point_on",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Orientation(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::curve_orientation",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Orientation(const occ::handle<Adaptor3d_HVertex>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::vertex_orientation",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Destroy()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::destroy",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Has3d() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::has_3d",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Tol3d(const occ::handle<Adaptor2d_Curve2d>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::curve_tol_3d",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Tol3d(const occ::handle<Adaptor3d_HVertex>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::vertex_tol_3d",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::Pnt(const occ::handle<Adaptor3d_HVertex>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::pnt",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::ComputeSamplePoints()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::compute_sample_points",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::NbSamplesU()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::nb_samples_u",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::NbSamplesV()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::nb_samples_v",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::NbSamples()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::nb_samples",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::SamplePoint(int,gp_Pnt2d&,gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::sample_point",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::DomainIsInfinite()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::domain_is_infinite",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests)."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::~BRepTopAdaptor_TopolTool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ destructor (it calls Destroy): Rust drops the classifier with the tool; nothing to port."
+    },
+    {
+      "upstream_id": "BRepTopAdaptor_TopolTool::DEFINE_STANDARD_RTTIEXT(BRepTopAdaptor_TopolTool,Adaptor3d_TopolTool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepTopAdaptor/BRepTopAdaptor_TopolTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_top_adaptor::BRepTopAdaptorTopolTool::static_type",
+      "status": "implemented",
+      "notes": "BRepTopAdaptor mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): the classes derived from the concrete Adaptor3d_TopolTool and Adaptor3d_HVertex structs keep a default base as their parent field (RTTI chain) and implement the members their headers declare; overloads take distinct Rust names, output references become returned values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bta_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::DEFINE_STANDARD_RTTIEXT(IntCurvesFace_Intersector,Standard_Transient)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::static_type",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector(const TopoDS_Face&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::new",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::Perform(const gp_Lin&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::perform_line",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::Perform(const occ::handle<Adaptor3d_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::perform_curve",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::SurfaceType() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::surface_type",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::is_done",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::NbPnt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::nb_pnt",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::UParameter(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::u_parameter",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::VParameter(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::v_parameter",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::WParameter(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::w_parameter",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::Pnt(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::pnt",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::Transition(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::transition",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::State(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::state",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::IsParallel() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::is_parallel",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::Face() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::face",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::ClassifyUVPoint(const gp_Pnt2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::classify_uv_point",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::Bounding() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::bounding",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::SetUseBoundToler(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::set_use_bound_toler",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::GetUseBoundToler() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceIntersector::get_use_bound_toler",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_Intersector::~IntCurvesFace_Intersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_Intersector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ destructor (defaulted): Rust drops the polyhedron and its grid with the value; nothing to port."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::new",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::Load(const TopoDS_Shape&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::load",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::Perform(const gp_Lin&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::perform_line",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::PerformNearest(const gp_Lin&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::perform_nearest",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::Perform(const occ::handle<Adaptor3d_Curve>&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::perform_curve",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::is_done",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::NbPnt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::nb_pnt",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::UParameter(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::u_parameter",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::VParameter(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::v_parameter",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::WParameter(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::w_parameter",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::Pnt(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::pnt",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::Transition(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::transition",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::State(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::state",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::Face(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::face",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::SortResult()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": "rustycad_tktopalgo::int_curves_face::IntCurvesFaceShapeIntersector::sort_result",
+      "status": "implemented",
+      "notes": "IntCurvesFace mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 4): Perform overloads take distinct names (perform_line, perform_curve) and &mut self, the i-th point accessors return Standard_OutOfRange errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (icf_* requests)."
+    },
+    {
+      "upstream_id": "IntCurvesFace_ShapeIntersector::~IntCurvesFace_ShapeIntersector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/IntCurvesFace/IntCurvesFace_ShapeIntersector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the face intersectors with the value; nothing to port."
     }
   ],
   "tests": [

@@ -237,6 +237,24 @@ impl Adaptor3dTopolTool {
 }
 
 impl Adaptor3dTopolTool {
+    /// The file-static `Analyse(array2, nbup, nbvp, NbSamplesU, NbSamplesV)`: the U and
+    /// V sample counts of a pole grid, 5 plus the largest number of convexity changes
+    /// along one direction. BRepTopAdaptor_TopolTool.cxx holds an identical static
+    /// copy, which its port calls here;
+    /// `let (nbu, nbv) = Adaptor3dTopolTool::analyse_pole_grid(&poles)?;`.
+    pub fn analyse_pole_grid(
+        grid: &rustycad_tkernel::ncollection::Array2<'_, Point3>,
+    ) -> Result<(i32, i32), Failure> {
+        samples::analyse(grid)
+    }
+    /// The sampled box `(uinf, usup, vinf, vsup)` of ComputeSamplePoints and
+    /// SamplePnts: the adaptor range ordered, an infinite side replaced by 2e5 units
+    /// (a doubly infinite one by [-1e5, 1e5]); BRepTopAdaptor_TopolTool's
+    /// ComputeSamplePoints repeats it;
+    /// `let (u1, u2, v1, v2) = Adaptor3dTopolTool::sampled_box(&*surface)?;`.
+    pub fn sampled_box(surface: &dyn Adaptor3dSurface) -> Result<(f64, f64, f64, f64), Failure> {
+        samples::sampled_box(surface)
+    }
     // The surface, read without keeping the lock (the evaluations call other
     // objects); natively a null one is dereferenced.
     pub(super) fn live_surface(&self) -> Result<Handle<dyn Adaptor3dSurface>, Failure> {
