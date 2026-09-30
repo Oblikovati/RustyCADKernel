@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """Private EdgeEdge helpers compared with the unchanged pinned translation unit."""
-import hashlib
-import json
 from itertools import product
-from pathlib import Path
 from tkbo_edge_corpus import edge_full_requests
 from porting import ROOT
+from native_private_oracle import private_translation_unit
 from toolkit_numeric import NumericOracle, verify_numeric
 from verify_tkmath_numeric import selected_paths
 
@@ -50,14 +48,9 @@ def requests() -> str:
 def main() -> None:
     """Retain native source hash and build command before exact comparison."""
     source,build=selected_paths();output=ROOT/'target/oracle-tkbo-edge-helpers/numeric'
-    output.mkdir(parents=True,exist_ok=True)
     original=source/'src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.cxx'
-    wrapper=output/'native-translation-unit.cxx'
-    wrapper.write_text('#include '+json.dumps(str(original))+'\n#include '+json.dumps(str(ROOT/'tools/oracle/tkbo_edge_private_probe.cxx'))+'\n')
     libraries=['TKBO','TKPrim','TKTopAlgo','TKGeomAlgo','TKBRep','TKGeomBase','TKG3d','TKG2d','TKMath','TKernel']
-    linked=[str(next(build.rglob('lib'+name+'.so'))) for name in libraries]
-    command=['c++','-std=c++17','-O2','-I'+str(build/'include/opencascade'),str(wrapper),*linked,'-Wl,-rpath,'+str(Path(linked[0]).parent),'-o',str(output/'native-probe')]
-    (output/'native-source.json').write_text(json.dumps({'source':str(original),'source_sha256':hashlib.sha256(original.read_bytes()).hexdigest(),'native_command':command,'scope':'private helpers; no complete API or legacy declaration claim'},indent=2)+'\n')
+    wrapper=private_translation_unit(original,ROOT/'tools/oracle/tkbo_edge_private_probe.cxx',output,build,libraries)
     verify_numeric(EdgeHelperOracle('TKBO-edge-helpers',str(wrapper),libraries,'rustycad-tkbo',requests))
 
 
