@@ -35,13 +35,15 @@ use rustycad_tkmath::gp::Point3;
 ///
 /// ```
 /// use rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface;
-/// use rustycad_tkg3d::geom::{GeomPlane, GeomSphericalSurface, GeomSurface};
+/// use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
 /// use rustycad_tkernel::standard::Handle;
 /// use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
-/// let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
-/// let frame = Axis3::from_normal(Point3::new(0.0, 0.0, 5.0), Direction3::new(0.0, 0.0, 1.0).unwrap()).unwrap();
-/// let sphere: Handle<dyn GeomSurface> = Handle::new(GeomSphericalSurface::new(frame, 1.0).unwrap()).cast();
-/// let e = ExtremaSurfaceSurface::with_surfaces(&plane, &sphere).unwrap();
+/// let plane = |z: f64| -> Handle<dyn GeomSurface> {
+///     let frame = Axis3::from_normal(Point3::new(0.0, 0.0, z), Direction3::new(0.0, 0.0, 1.0).unwrap()).unwrap();
+///     Handle::new(GeomPlane::new(frame)).cast()
+/// };
+/// // Parallel planes: Extrema_ExtSS answers parallel, with their distance.
+/// let e = ExtremaSurfaceSurface::with_surfaces(&plane(0.0), &plane(4.0)).unwrap();
 /// assert!((e.lower_distance().unwrap() - 4.0).abs() < 1e-9);
 /// ```
 #[derive(Default)]
