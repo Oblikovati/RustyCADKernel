@@ -66,19 +66,27 @@ pub fn est_lim_for_inf_offs<S: InterSurfaceTool>(
     }
 }
 
-/// The meeting points of the line with an elementary quadric: `None` when the
-/// intersection is not done, an empty list for a parallel line or one lying on it
-/// (NoIntersection).
-fn meetings(inter: &IntConicQuad) -> Result<Option<Vec<Point3>>, Failure> {
+/// The outcome of the line against the equivalent elementary surface.
+enum Meetings {
+    /// The intersection is not done: the bounds stay.
+    NotDone,
+    /// The line is parallel to the surface or lies on it: NoIntersection.
+    Parallel,
+    /// The meeting points (possibly none, which still widens from RealLast).
+    Points(Vec<Point3>),
+}
+
+/// The meeting points of the line with an elementary quadric.
+fn meetings(inter: &IntConicQuad) -> Result<Meetings, Failure> {
     if !inter.is_done() {
-        return Ok(None);
+        return Ok(Meetings::NotDone);
     }
     if inter.is_parallel()? || inter.is_in_quadric()? {
-        return Ok(Some(Vec::new()));
+        return Ok(Meetings::Parallel);
     }
     let points: Result<Vec<Point3>, Failure> =
         (1..=inter.nb_points()?).map(|i| inter.point(i)).collect();
-    Ok(Some(points?))
+    Ok(Meetings::Points(points?))
 }
 
 /// The plane moved by the offset along its normal: the box of 10 around the
@@ -94,13 +102,12 @@ fn offset_plane(
     t *= off_val;
     pln.translate(t);
     let inter = IntConicQuad::line_plane(line, pln, THE_TOLERANCE_ANGULAIRE, 0.0, 0.0)?;
-    let Some(points) = meetings(&inter)? else {
-        return Ok(false);
-    };
-    let Some(&first) = points.first() else {
-        return Ok(true);
-    };
-    let (u, v) = elslib::plane_parameters(pln.position(), first);
+    match meetings(&inter)? {
+        Meetings::NotDone => return Ok(false),
+        Meetings::Parallel => return Ok(true),
+        Meetings::Points(_) => {}
+    }
+    let (u, v) = elslib::plane_parameters(pln.position(), inter.point(1)?);
     limits.u1 = std_max(limits.u1, u - 10.0);
     limits.u2 = std_min(limits.u2, u + 10.0);
     limits.v1 = std_max(limits.v1, v - 10.0);
@@ -108,19 +115,14 @@ fn offset_plane(
     Ok(false)
 }
 
-/// Widens and applies the V range of the meeting points, their V read by `v_of`;
-/// NoIntersection when none.
-fn apply_v_range(
-    points: Option<Vec<Point3>>,
-    v_of: impl Fn(Point3) -> f64,
-    limits: &mut UvLimits,
-) -> bool {
-    let Some(points) = points else {
-        return false;
+/// Widens and applies the V range of the meeting points, their V read by `v_of`
+/// (from RealLast, so no point gives [-10, 10]); NoIntersection for a parallel line.
+fn apply_v_range(meetings: Meetings, v_of: impl Fn(Point3) -> f64, limits: &mut UvLimits) -> bool {
+    let points: Vec<Point3> = match meetings {
+        Meetings::NotDone => return false,
+        Meetings::Parallel => return true,
+        Meetings::Points(points) => points,
     };
-    if points.is_empty() {
-        return true;
-    }
     let (mut vmin, mut vmax) = (real_last(), -real_last());
     for p in points {
         let v: f64 = v_of(p);
