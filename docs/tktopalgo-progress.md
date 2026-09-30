@@ -6,11 +6,11 @@ depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep and TKGeomAlgo 
 as the native toolkit does (its EXTERNLIB). Each of the 16 OCCT packages is one module
 of the crate, declared up front in `src/lib.rs`; a module whose package is not ported
 yet holds only its documentation. Ported so far: BRepClass, BRepTopAdaptor,
-IntCurvesFace, Bisector, MAT, MAT2d, BRepBndLib (without AddOBB), BRepClass3d, BRepCheck
-and BRepLib (without PointCloudShape). The numeric corpus has 12102 requests: BRepClass 4779,
+IntCurvesFace, Bisector, MAT, MAT2d, BRepBndLib (without AddOBB), BRepClass3d, BRepCheck,
+BRepLib (without PointCloudShape) and BRepGProp. The numeric corpus has 16594 requests: BRepClass 4779,
 BRepTopAdaptor 650, IntCurvesFace 424, Bisector 455, MAT and MAT2d 84, BRepBndLib 266,
 BRepClass3d 996, BRepCheck with BRepLib_ValidateEdge 981, the BRep domains of IntStart
-and IntPatch 752, BRepLib 2688, and the MakeVertex stub pipeline 27.
+and IntPatch 752, BRepLib 2688, BRepGProp 4492, and the MakeVertex stub pipeline 27.
 
 `brep_builder_api::MakeVertex` is a **stub**, not the port of
 `BRepBuilderAPI_MakeVertex`: a minimal vertex builder that the TKernel test
