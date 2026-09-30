@@ -56,6 +56,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         sh_probe::shape_analysis_curve::period_case,
     ),
     (
+        "sh_project_curve",
+        sh_probe::project_curve::project_curve_case,
+    ),
+    (
         "sh_construct",
         sh_probe::shape_construct::construct_curve_case,
     ),
