@@ -193474,6 +193474,422 @@
       "rust_item": "rustycad_tktopalgo::brep_extrema::uncompatible_shape",
       "status": "implemented",
       "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::SetApproxParameters(GeomAbs_Shape,int,int)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::set_approx_parameters",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::ApproxParameters(GeomAbs_Shape&,int&,int&) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::approx_parameters",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::SetTolerance(double)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::set_tolerance",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::Tolerance() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::tolerance",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::ToleranceReached() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::tolerance_reached",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::Curves() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::curves",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::ErrorStatus() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::error_status",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::WarningStatus() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::warning_status",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::Perform()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve::perform",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelix::new",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix::~HelixGeom_BuilderHelix()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the builder; nothing to port."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix::SetPosition(const gp_Ax2&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelix::set_position",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix::Position() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelix::position",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix::Perform()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomBuilderHelix as rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve>::perform",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixCoil()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixCoil.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixCoil::new",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixCoil::~HelixGeom_BuilderHelixCoil()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixCoil.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the builder; nothing to port."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixCoil::Perform()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixCoil.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixCoil as rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve>::perform",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::SetCurveParameters(double,double,double,double,double,bool)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGen::set_curve_parameters",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::CurveParameters(double&,double&,double&,double&,double&,bool&) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGen::curve_parameters",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::DEFINE_STANDARD_RTTIEXT(HelixGeom_HelixCurve,Adaptor3d_Curve)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::new",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::Load()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::load_current",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::Load(double,double,double,double,double,bool)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::load",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::FirstParameter() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::first_parameter",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::LastParameter() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::last_parameter",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::Continuity() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::continuity",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::nb_intervals",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::intervals",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::Resolution(double) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::resolution",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::IsClosed() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_closed",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::IsPeriodic() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_periodic",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::Period() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::period",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::EvalD0(double) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d0",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::EvalD1(double) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d1",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::EvalD2(double) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d2",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::EvalDN(double,int) const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_dn",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_Tools::ApprHelix(double,double,double,double,double,bool,double,occ::handle<Geom_BSplineCurve>&,double&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_Tools.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomTools::appr_helix",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixGeom_Tools::ApprCurve3D(const occ::handle<Adaptor3d_Curve>&,double,GeomAbs_Shape,int,int,occ::handle<Geom_BSplineCurve>&,double&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_Tools.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomTools::appr_curve_3d",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::new",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::~HelixBRep_BuilderHelix()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the builder; nothing to port."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<bool>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<bool>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_diam",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<bool>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_spiral",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_turns",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_diam_turns",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetParameters(const gp_Ax3&,double,double,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_parameters_spiral_turns",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::SetApproxParameters(double,int,GeomAbs_Shape)",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::set_approx_parameters",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::Perform()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::perform",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::ToleranceReached() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::tolerance_reached",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::ErrorStatus() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::error_status",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::WarningStatus() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::warning_status",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::Shape() const",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix::shape",
+      "status": "implemented",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests)."
     }
   ],
   "tests": [
@@ -283759,6 +284175,622 @@
       "rust_target": "brep_extrema_dist_shape_shape",
       "rust_test": "BRepExtrema_DistShapeShapeTest__EdgeFace_Null3DCurve_NoCrash",
       "rust_source": "crates/tktopalgo/tests/brep_extrema_dist_shape_shape.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.HelixCurve_Derivatives",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__HelixCurve_Derivatives",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.HelixCurve_ErrorConditions",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__HelixCurve_ErrorConditions",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.HelixCurve_CounterClockwise",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__HelixCurve_CounterClockwise",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.HelixCurve_AdaptorInterface",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__HelixCurve_AdaptorInterface",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.BuilderHelixCoil_Approximation",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__BuilderHelixCoil_Approximation",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.Tools_ApprCurve3D",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__Tools_ApprCurve3D",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.Tools_DifferentContinuity",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__Tools_DifferentContinuity",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.BuilderHelixCoil_DefaultParameters",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__BuilderHelixCoil_DefaultParameters",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeomTest.BuilderHelixCoil_ParameterSymmetry",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_HelixCurve_Test.cxx",
+      "source_sha256": "23be4aedb93899e04b543e3d145364b8b87b0933dd1a79820eeb6341abd9ac27",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_helix_curve",
+      "rust_test": "HelixGeomTest__BuilderHelixCoil_ParameterSymmetry",
+      "rust_source": "crates/tkhelix/tests/helix_geom_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_Tools_Test.ApprHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_Tools_Test.cxx",
+      "source_sha256": "9d7ab9d2254ca4fde45d1dbd798cedca4c11b51ef9e4ef14ce8d8128c5075072",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_tools",
+      "rust_test": "HelixGeom_Tools_Test__ApprHelix",
+      "rust_source": "crates/tkhelix/tests/helix_geom_tools.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_Tools_Test.ApprCurve3D",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_Tools_Test.cxx",
+      "source_sha256": "9d7ab9d2254ca4fde45d1dbd798cedca4c11b51ef9e4ef14ce8d8128c5075072",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_tools",
+      "rust_test": "HelixGeom_Tools_Test__ApprCurve3D",
+      "rust_source": "crates/tkhelix/tests/helix_geom_tools.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_Tools_Test.DifferentContinuity",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_Tools_Test.cxx",
+      "source_sha256": "9d7ab9d2254ca4fde45d1dbd798cedca4c11b51ef9e4ef14ce8d8128c5075072",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_tools",
+      "rust_test": "HelixGeom_Tools_Test__DifferentContinuity",
+      "rust_source": "crates/tkhelix/tests/helix_geom_tools.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix_Test.SingleCoil",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelix_Test.cxx",
+      "source_sha256": "c69499d4ec88bfd0c206bed900ff0d23ea179eb35040576bbb63d077831c5022",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix",
+      "rust_test": "HelixGeom_BuilderHelix_Test__SingleCoil",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix_Test.MultipleCoils",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelix_Test.cxx",
+      "source_sha256": "c69499d4ec88bfd0c206bed900ff0d23ea179eb35040576bbb63d077831c5022",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix",
+      "rust_test": "HelixGeom_BuilderHelix_Test__MultipleCoils",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix_Test.PositionGetterSetter",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelix_Test.cxx",
+      "source_sha256": "c69499d4ec88bfd0c206bed900ff0d23ea179eb35040576bbb63d077831c5022",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix",
+      "rust_test": "HelixGeom_BuilderHelix_Test__PositionGetterSetter",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelix_Test.ParameterManagement",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelix_Test.cxx",
+      "source_sha256": "c69499d4ec88bfd0c206bed900ff0d23ea179eb35040576bbb63d077831c5022",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix",
+      "rust_test": "HelixGeom_BuilderHelix_Test__ParameterManagement",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixCoil_Test.BasicConstruction",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelixCoil_Test.cxx",
+      "source_sha256": "a0d3ed87b5b033b9426517d189b3f1cdcfa571db2628a3390622d42462306637",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix_coil",
+      "rust_test": "HelixGeom_BuilderHelixCoil_Test__BasicConstruction",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix_coil.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixCoil_Test.DefaultParameters",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelixCoil_Test.cxx",
+      "source_sha256": "a0d3ed87b5b033b9426517d189b3f1cdcfa571db2628a3390622d42462306637",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix_coil",
+      "rust_test": "HelixGeom_BuilderHelixCoil_Test__DefaultParameters",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix_coil.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixCoil_Test.ParameterSymmetry",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelixCoil_Test.cxx",
+      "source_sha256": "a0d3ed87b5b033b9426517d189b3f1cdcfa571db2628a3390622d42462306637",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix_coil",
+      "rust_test": "HelixGeom_BuilderHelixCoil_Test__ParameterSymmetry",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix_coil.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixCoil_Test.TaperedHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixGeom_BuilderHelixCoil_Test.cxx",
+      "source_sha256": "a0d3ed87b5b033b9426517d189b3f1cdcfa571db2628a3390622d42462306637",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_geom_builder_helix_coil",
+      "rust_test": "HelixGeom_BuilderHelixCoil_Test__TaperedHelix",
+      "rust_source": "crates/tkhelix/tests/helix_geom_builder_helix_coil.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomHelixCurve_Basic",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomHelixCurve_Basic",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomHelixCurve_CustomParameters",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomHelixCurve_CustomParameters",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomHelixCurve_TaperedHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomHelixCurve_TaperedHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomBuilderHelixCoil_Basic",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomBuilderHelixCoil_Basic",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomBuilderHelix_SingleCoil",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomBuilderHelix_SingleCoil",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomBuilderHelix_MultipleCoils",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomBuilderHelix_MultipleCoils",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_PureCylindricalHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_PureCylindricalHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_SpiralHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_SpiralHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_MultiPartHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_MultiPartHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_NumberOfTurnsInterface",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_NumberOfTurnsInterface",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixGeomTools_ApprHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixGeomTools_ApprHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_ErrorConditions",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_ErrorConditions",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_ZeroPitch",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_ZeroPitch",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TKHelixTest.HelixBRepBuilder_ToleranceReached",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Test.cxx",
+      "source_sha256": "01296a04955903d9fb54e548470334ec4c3178991936450270919b2b2d3d1927",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix",
+      "rust_test": "TKHelixTest__HelixBRepBuilder_ToleranceReached",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_A1_PureCylindricalHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_A1_PureCylindricalHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_B1_CompositeCylindricalHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_B1_CompositeCylindricalHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_C1_SpiralHelix",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_C1_SpiralHelix",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_F1_Helix2Interface",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_F1_Helix2Interface",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.TCL_Test_E1_CustomerExample",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__TCL_Test_E1_CustomerExample",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ErrorConditions_InvalidDimensions",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ErrorConditions_InvalidDimensions",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ErrorConditions_TurnsInterface",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ErrorConditions_TurnsInterface",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ApproximationQuality",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ApproximationQuality",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.ParameterValidation",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__ParameterValidation",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HelixBRepTest.MultiPartContinuity",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/GTests/HelixBRep_BuilderHelix_Integration_Test.cxx",
+      "source_sha256": "21ae0ccf8902bba74bef4f80747d80b815984fb6246ab0e6b1342f5251798b7d",
+      "rust_package": "rustycad-tkhelix",
+      "rust_target": "helix_brep_builder_helix_integration",
+      "rust_test": "HelixBRepTest__MultiPartContinuity",
+      "rust_source": "crates/tkhelix/tests/helix_brep_builder_helix_integration.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
