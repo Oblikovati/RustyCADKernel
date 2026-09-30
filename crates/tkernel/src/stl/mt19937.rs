@@ -1,21 +1,28 @@
 //! `std::mt19937`, the 32-bit Mersenne Twister the native filler draws its order from.
 //!
 //! The C++ standard fixes the algorithm and its parameters ([rand.predef]), so every
-//! conforming library yields the same sequence; the filler seeds it with 5489.
+//! conforming library yields the same sequence; the NCollection_UBTreeFiller seeds it
+//! with 5489, BRepLib_PointCloudShape with 0.
 const STATE_WORDS: usize = 624;
 const SHIFT_WORDS: usize = 397;
 const MATRIX_A: u32 = 0x9908_b0df;
 const UPPER_MASK: u32 = 0x8000_0000;
 const LOWER_MASK: u32 = 0x7fff_ffff;
 
-/// Mersenne Twister state; `MersenneTwister::new(5489).next_u32() == 3_499_211_612`.
-pub(super) struct MersenneTwister {
+/// Mersenne Twister state (`std::mt19937`).
+///
+/// ```
+/// use rustycad_tkernel::stl::MersenneTwister;
+/// assert_eq!(MersenneTwister::new(5489).next_u32(), 3_499_211_612);
+/// ```
+pub struct MersenneTwister {
     state: [u32; STATE_WORDS],
     position: usize,
 }
 impl MersenneTwister {
-    /// Seeds with the standard's linear initialization (multiplier 1812433253).
-    pub(super) fn new(seed: u32) -> Self {
+    /// Seeds with the standard's linear initialization (multiplier 1812433253);
+    /// `MersenneTwister::new(0)`.
+    pub fn new(seed: u32) -> Self {
         let mut state: [u32; STATE_WORDS] = [0; STATE_WORDS];
         state[0] = seed;
         for index in 1..STATE_WORDS {
@@ -29,8 +36,9 @@ impl MersenneTwister {
             position: STATE_WORDS,
         }
     }
-    /// Next tempered 32-bit output, regenerating the state every 624 draws.
-    pub(super) fn next_u32(&mut self) -> u32 {
+    /// Next tempered 32-bit output, regenerating the state every 624 draws;
+    /// `generator.next_u32()`.
+    pub fn next_u32(&mut self) -> u32 {
         if self.position >= STATE_WORDS {
             self.twist();
         }

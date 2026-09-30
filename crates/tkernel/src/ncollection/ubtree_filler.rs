@@ -1,8 +1,7 @@
 //! Fills a UBTree in a pseudo-random order, which keeps nearby objects from forming chains.
 use super::{BaseAllocator, BoundingVolume, DynamicArray, UBTree};
 mod balance;
-mod mersenne;
-use mersenne::MersenneTwister;
+use crate::stl::MersenneTwister;
 
 /// A pending object with its bound (native `ObjBnd`, public fields `myObj`/`myBnd`).
 #[derive(Clone, Default)]
