@@ -4,6 +4,7 @@ use std::io::{self, BufRead};
 mod hl_probe;
 use hl_probe::frame;
 use hl_probe::intrv;
+use hl_probe::top_cnx;
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -19,6 +20,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("iv_relate", intrv::relate_case),
     ("iv_set", intrv::set_case),
     ("iv_value", intrv::value_case),
+    // TopBas and TopCnx (hl_probe/top_cnx.rs)
+    ("tb_interference", top_cnx::interference_case),
+    ("tc_transition", top_cnx::transition_case),
 ];
 
 fn main() {

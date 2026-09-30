@@ -15,3 +15,5 @@ def append_tkhlr_requests(requests: list[str]) -> None:
     __import__('tkhlr_corpus_frame').append_frame_requests(requests)
     # Intrv (tkhlr_corpus_intrv.py)
     __import__('tkhlr_corpus_intrv').append_intrv_requests(requests)
+    # TopBas and TopCnx (tkhlr_corpus_topcnx.py)
+    __import__('tkhlr_corpus_topcnx').append_topcnx_requests(requests)

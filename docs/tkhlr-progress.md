@@ -1,11 +1,11 @@
 # TKHLR port status
 
-**Intrv is ported; the other packages follow in the order below.**
+**Intrv, TopBas and TopCnx are ported; the other packages follow in the order below.**
 `crates/tkhlr` (`rustycad-tkhlr`) is the port of the ModelingAlgorithms toolkit TKHLR.
 It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo and
 TKTopAlgo ports, as the native toolkit does (its EXTERNLIB). Each of the 8 OCCT packages
 is one module of the crate, declared up front in `src/lib.rs`; a module whose package
-is not ported yet holds only its documentation. Ported: Intrv.
+is not ported yet holds only its documentation. Ported: Intrv, TopBas, TopCnx.
 
 [hlr-design.md](hlr-design.md) fixes how the C++ constructs of the packages map to Rust
 and gives the class order of the HLRTopoBRep, HLRBRep and HLRAppli work.
@@ -46,6 +46,13 @@ random pairs, the eight boolean operations of `Intrv_Intervals` on fixed and ran
 (empty sets and tools, touching, nested, split, infinite and reversed intervals), and
 `Value` inside and outside the sequence.
 
+The TopBas and TopCnx families (`tools/tkhlr_corpus_topcnx.py`, 227 requests) compare
+`TopBas_TestInterference` set by its setters, by its constructor and through
+`ChangeIntersection`/`ChangeBoundary`, and `TopCnx_EdgeFaceTransition` before any reset,
+after both resets and over seeded sequences of interferences (every orientation,
+transition and boundary transition; tangent, normal and opposite directions;
+curvatures and tolerances), with `Transition` and `BoundaryTransition` after each step.
+
 ## Intrv quirks kept
 
 - The default interval is `[RealFirst, RealLast]` with tolerances 0:
@@ -67,3 +74,16 @@ random pairs, the eight boolean operations of `Intrv_Intervals` on fixed and ran
 Deviation: a native call whose tool is the object itself (`x.Unite(x)`) edits the
 sequence while it walks it; Rust borrowing forbids that call (docs/hlr-design.md
 section 3).
+
+## TopBas and TopCnx quirks kept
+
+- A new `TopCnx_EdgeFaceTransition` answers FORWARD before its first reset: its
+  `TopTrans_CurveTransition` starts with `Init` false and FORWARD transitions, so the
+  states read OUT then IN.
+- `BoundaryTransition` is EXTERNAL when the FORWARD and REVERSED counts are equal, on
+  both branches of the native parity test; INTERNAL and EXTERNAL boundary transitions
+  are not counted.
+
+Deviation: the default `TopBas_TestInterference` is `0.0`, `0` and FORWARD, where the
+native default constructor leaves the fields uninitialized (docs/hlr-design.md
+section 4); the probe never reads a default record.

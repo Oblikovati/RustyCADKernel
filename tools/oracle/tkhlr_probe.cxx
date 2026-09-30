@@ -25,6 +25,7 @@
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkhlr_probe_frame.cxx"
 #include "tkhlr_probe_intrv.cxx"
+#include "tkhlr_probe_topcnx.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // HLRAlgo_Projector viewing frame (tkhlr_probe_frame.cxx)
  {"hl_frame", hl_frame_case},
@@ -34,6 +35,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"iv_relate", hl_iv_relate_case},
  {"iv_set", hl_iv_set_case},
  {"iv_value", hl_iv_value_case},
+ // TopBas and TopCnx (tkhlr_probe_topcnx.cxx)
+ {"tb_interference", hl_tb_interference_case},
+ {"tc_transition", hl_tc_transition_case},
 };
 int main() {
  std::string line;
