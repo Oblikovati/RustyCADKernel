@@ -36,7 +36,7 @@ use rustycad_tkmath::math::{FunctionSet, FunctionSetRoot, Vector};
 ///
 /// The consultations answer 0 for every parameter, as natively. The point variants
 /// search 4 unknowns with vectors of 3, so math_FunctionSetRoot raises
-/// Standard_OutOfRange when it reads the fourth tolerance, as natively.
+/// Standard_DimensionError on the start point, as natively.
 /// ```
 /// use rustycad_tkgeomalgo::geom2d_gcc::{Circ2d2TanOnIter, unqualified};
 /// use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
@@ -104,7 +104,12 @@ fn vector_of(values: &[f64]) -> Result<Vector<'static>, Failure> {
 fn solve(func: &mut FunctionTanCuCuOnCu<'_>, search: &Search) -> Result<Option<Vec<f64>>, Failure> {
     let (umin, umax) = (vector_of(&search.umin)?, vector_of(&search.umax)?);
     let mut ufirst = vector_of(&search.ufirst)?;
-    let mut root = FunctionSetRoot::new(&*func, &vector_of(&search.tol)?, 100)?;
+    // The point variants hand 3 tolerances for 4 unknowns: math_FunctionSetRoot.cxx
+    // (built with No_Standard_OutOfRange) reads the fourth past the end, and Perform
+    // then raises Standard_DimensionError on the 3-vector start point before using it.
+    let mut tol = search.tol.clone();
+    tol.resize(tol.len().max(func.variables() as usize), 0.0);
+    let mut root = FunctionSetRoot::new(&*func, &vector_of(&tol)?, 100)?;
     root.perform_bounded(func, &ufirst, &umin, &umax, false)?;
     func.raised()?;
     let mut values = vector_of(&search.umin)?;

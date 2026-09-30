@@ -42,7 +42,7 @@ const MEMBER: &str = "Geom2dGcc_Circ2d2TanRad";
 /// let line: Handle<dyn Geom2dCurve> =
 ///     Handle::new(Geom2dLine::from_point(Point2::new(0.0, 0.0), Direction2::new(1.0, 0.0)?)).cast();
 /// let q = unqualified(&Geom2dAdaptorCurve::with_curve(&line)?)?;
-/// let point: Handle<dyn Geom2dPoint> = Handle::new(Geom2dCartesianPoint::new(Point2::new(0.0, 1.0))).cast();
+/// let point: Handle<dyn Geom2dPoint> = Handle::new(Geom2dCartesianPoint::from_pnt2d(Point2::new(0.0, 1.0))).cast();
 /// let circ = Circ2d2TanRad::with_point(&q, &point, 1.0, 1e-9)?;
 /// assert!(circ.is_done());
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())

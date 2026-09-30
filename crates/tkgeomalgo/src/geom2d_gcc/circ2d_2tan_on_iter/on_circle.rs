@@ -220,8 +220,8 @@ impl Circ2d2TanOnIter {
     }
 
     /// `Geom2dGcc_Circ2d2TanOnIter(Qualified1, Point2, OnCirc, Param1, Param2,
-    /// Tolerance)`: Standard_OutOfRange from math_FunctionSetRoot, whose 4 tolerances
-    /// are read from a vector of 3, as natively;
+    /// Tolerance)`: Standard_DimensionError from math_FunctionSetRoot, whose start point
+    /// is a vector of 3 for 4 unknowns, as natively;
     /// `Circ2d2TanOnIter::curve_pnt_on_circle(&q1, point, on, [0.0; 2], 1e-9)`.
     pub fn curve_pnt_on_circle(
         qualified1: &QCurve,

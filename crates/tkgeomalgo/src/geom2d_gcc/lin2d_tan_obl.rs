@@ -44,7 +44,6 @@ use rustycad_tkmath::gp::{Direction2, Line2, Point2};
 #[derive(Clone, Debug)]
 pub struct Lin2dTanObl {
     well_done: bool,
-    paral2: bool,
     nbr_sol: i32,
     linsol: Slots<Line2>,
     qualifier1: Slots<Position>,
@@ -56,7 +55,6 @@ impl Lin2dTanObl {
     fn empty() -> Self {
         Self {
             well_done: false,
-            paral2: false,
             nbr_sol: 0,
             linsol: Slots::new(2),
             qualifier1: Slots::new(2),
@@ -227,11 +225,5 @@ impl Lin2dTanObl {
         let member = "Geom2dGcc_Lin2dTanObl::Intersection2";
         check_solution(self.well_done, self.nbr_sol, index, member)?;
         self.intersection2.raw(index)
-    }
-
-    /// `IsParallel2()`: always false, since no constructor sets it natively;
-    /// `lin.is_parallel2()`.
-    pub fn is_parallel2(&self) -> bool {
-        self.paral2
     }
 }

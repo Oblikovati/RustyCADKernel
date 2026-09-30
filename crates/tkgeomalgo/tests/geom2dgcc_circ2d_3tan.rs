@@ -18,7 +18,9 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
-use rustycad_tkgeomalgo::geom2d_gcc::{Circ2d3Tan as Geom2dGcc_Circ2d3Tan, QualifiedCurve, unqualified};
+use rustycad_tkgeomalgo::geom2d_gcc::{
+    Circ2d3Tan as Geom2dGcc_Circ2d3Tan, QualifiedCurve, unqualified,
+};
 use rustycad_tkgeombase::gcpnts::AbscissaPoint as GCPnts_AbscissaPoint;
 use rustycad_tkmath::gp::{Axis2d, Circle2, Direction2, Point2};
 
@@ -87,7 +89,12 @@ impl Geom2dGcc_Circ2d3TanTest {
     }
 
     /// Verify solution validity; the bounds are (MinX, MaxX, MinY, MaxY, MaxRadius).
-    fn verifySolutionValidity(&self, theSolution: &Circle2, theSolutionIndex: i32, theBounds: [f64; 5]) {
+    fn verifySolutionValidity(
+        &self,
+        theSolution: &Circle2,
+        theSolutionIndex: i32,
+        theBounds: [f64; 5],
+    ) {
         let [theMinX, theMaxX, theMinY, theMaxY, theMaxRadius] = theBounds;
         assert!(
             theSolution.radius() > 0.0,
@@ -99,14 +106,33 @@ impl Geom2dGcc_Circ2d3TanTest {
         );
 
         let aCenter: Point2 = theSolution.location();
-        assert!(aCenter.x() > theMinX, "Solution {theSolutionIndex} X coordinate should be reasonable");
-        assert!(aCenter.x() < theMaxX, "Solution {theSolutionIndex} X coordinate should be reasonable");
-        assert!(aCenter.y() > theMinY, "Solution {theSolutionIndex} Y coordinate should be reasonable");
-        assert!(aCenter.y() < theMaxY, "Solution {theSolutionIndex} Y coordinate should be reasonable");
+        assert!(
+            aCenter.x() > theMinX,
+            "Solution {theSolutionIndex} X coordinate should be reasonable"
+        );
+        assert!(
+            aCenter.x() < theMaxX,
+            "Solution {theSolutionIndex} X coordinate should be reasonable"
+        );
+        assert!(
+            aCenter.y() > theMinY,
+            "Solution {theSolutionIndex} Y coordinate should be reasonable"
+        );
+        assert!(
+            aCenter.y() < theMaxY,
+            "Solution {theSolutionIndex} Y coordinate should be reasonable"
+        );
     }
 
     fn solve(&self, theQuals: [&QualifiedCurve; 3], theTolerance: f64) -> Geom2dGcc_Circ2d3Tan {
-        Geom2dGcc_Circ2d3Tan::new(theQuals[0], theQuals[1], theQuals[2], theTolerance, [0.0, 0.0, 0.0]).unwrap()
+        Geom2dGcc_Circ2d3Tan::new(
+            theQuals[0],
+            theQuals[1],
+            theQuals[2],
+            theTolerance,
+            [0.0, 0.0, 0.0],
+        )
+        .unwrap()
     }
 }
 
@@ -147,7 +173,10 @@ fn Geom2dGcc_Circ2d3TanTest__BUC60622_RegressionCase() {
     let aNbSolutions: i32 = aTangentSolver.nb_solutions();
 
     // The regression test: we should find exactly 3 solutions for BUC60622 case
-    assert_eq!(aNbSolutions, 3, "BUC60622 case should find exactly 3 solutions");
+    assert_eq!(
+        aNbSolutions, 3,
+        "BUC60622 case should find exactly 3 solutions"
+    );
 
     // Verify each solution is geometrically valid and satisfies tangency constraints
     for i in 1..=aNbSolutions {
@@ -181,7 +210,8 @@ fn Geom2dGcc_Circ2d3TanTest__BUC60622_1_DegenerateThreeCircleCase() {
     let aQual3 = t.createQualifiedCircle(2900.0, 1000.0, 300.0);
 
     // EXPECT_NO_THROW: the constructor returns Ok.
-    let aSolver = Geom2dGcc_Circ2d3Tan::new(&aQual1, &aQual2, &aQual3, t.myTolerance, [0.0, 0.0, 0.0]);
+    let aSolver =
+        Geom2dGcc_Circ2d3Tan::new(&aQual1, &aQual2, &aQual3, t.myTolerance, [0.0, 0.0, 0.0]);
     assert!(aSolver.is_ok(), "{:?}", aSolver.err());
 }
 
@@ -273,17 +303,26 @@ fn Geom2dGcc_Circ2d3TanTest__ToleranceImpact_Analysis() {
     for aTol in aTestTolerances {
         let aSolver = t.solve([&aQual1, &aQual2, &aQual3], aTol);
 
-        assert!(aSolver.is_done(), "Algorithm should succeed with tolerance {aTol}");
+        assert!(
+            aSolver.is_done(),
+            "Algorithm should succeed with tolerance {aTol}"
+        );
 
         let aNbSol: i32 = aSolver.nb_solutions();
 
         if aTol == precision::confusion() {
             aDefaultSolCount = aNbSol;
-            assert!(aNbSol >= 1, "Should find at least 1 solution with default tolerance");
+            assert!(
+                aNbSol >= 1,
+                "Should find at least 1 solution with default tolerance"
+            );
         } else {
             // Solution count may vary with tolerance due to numerical precision effects
             // We allow some variation but expect reasonable bounds
-            assert!(aNbSol >= 1, "Should find at least 1 solution with tolerance {aTol}");
+            assert!(
+                aNbSol >= 1,
+                "Should find at least 1 solution with tolerance {aTol}"
+            );
             assert!(
                 aNbSol <= aDefaultSolCount + 2,
                 "Solution count shouldn't increase dramatically with tolerance {aTol}"
@@ -317,7 +356,10 @@ fn Geom2dGcc_Circ2d3TanTest__Simple_ThreeCircle_Case() {
     assert!(aSolver.is_done(), "Simple case should always work");
 
     let aNbSol: i32 = aSolver.nb_solutions();
-    assert!(aNbSol >= 1, "Should find at least one solution for simple case");
+    assert!(
+        aNbSol >= 1,
+        "Should find at least one solution for simple case"
+    );
 
     // Verify all solutions are valid and satisfy tangency constraints
     for i in 1..=aNbSol {
@@ -348,7 +390,10 @@ fn Geom2dGcc_Circ2d3TanTest__Concentric_Circles_EdgeCase() {
 
     let aNbSol: i32 = aSolver.nb_solutions();
     // This specific geometric configuration has no solutions - this is correct
-    assert_eq!(aNbSol, 0, "This concentric configuration geometrically has no solutions");
+    assert_eq!(
+        aNbSol, 0,
+        "This concentric configuration geometrically has no solutions"
+    );
 }
 
 // Test with very small circles
@@ -367,10 +412,16 @@ fn Geom2dGcc_Circ2d3TanTest__SmallCircles_PrecisionTest() {
 
     let aSolver = t.solve([&aQual1, &aQual2, &aQual3], t.myTolerance);
 
-    assert!(aSolver.is_done(), "Small circles should be handled correctly");
+    assert!(
+        aSolver.is_done(),
+        "Small circles should be handled correctly"
+    );
 
     let aNbSol: i32 = aSolver.nb_solutions();
-    assert!(aNbSol >= 1, "Should find at least one solution for small circles");
+    assert!(
+        aNbSol >= 1,
+        "Should find at least one solution for small circles"
+    );
 
     for i in 1..=aNbSol {
         let aSol: Circle2 = aSolver.this_solution(i).unwrap();
@@ -396,10 +447,16 @@ fn Geom2dGcc_Circ2d3TanTest__LargeCircles_ScalingTest() {
 
     let aSolver = t.solve([&aQual1, &aQual2, &aQual3], t.myTolerance);
 
-    assert!(aSolver.is_done(), "Large circles should be handled correctly");
+    assert!(
+        aSolver.is_done(),
+        "Large circles should be handled correctly"
+    );
 
     let aNbSol: i32 = aSolver.nb_solutions();
-    assert!(aNbSol >= 1, "Should find at least one solution for large circles");
+    assert!(
+        aNbSol >= 1,
+        "Should find at least one solution for large circles"
+    );
 
     for i in 1..=aNbSol {
         let aSol: Circle2 = aSolver.this_solution(i).unwrap();
@@ -428,7 +485,10 @@ fn Geom2dGcc_Circ2d3TanTest__LinearConfiguration_GeometricTest() {
     assert!(aSolver.is_done(), "Linear configuration should be solvable");
 
     let aNbSol: i32 = aSolver.nb_solutions();
-    assert!(aNbSol >= 1, "Should find at least one solution for linear configuration");
+    assert!(
+        aNbSol >= 1,
+        "Should find at least one solution for linear configuration"
+    );
 
     for i in 1..=aNbSol {
         let aSol: Circle2 = aSolver.this_solution(i).unwrap();
@@ -455,10 +515,16 @@ fn Geom2dGcc_Circ2d3TanTest__TouchingCircles_DegenerateCase() {
     let aSolver = t.solve([&aQual1, &aQual2, &aQual3], t.myTolerance);
 
     // For this specific touching configuration, the algorithm should succeed
-    assert!(aSolver.is_done(), "Touching circles configuration should be solvable");
+    assert!(
+        aSolver.is_done(),
+        "Touching circles configuration should be solvable"
+    );
 
     let aNbSol: i32 = aSolver.nb_solutions();
-    assert!(aNbSol >= 1, "Should find at least one solution for touching circles case");
+    assert!(
+        aNbSol >= 1,
+        "Should find at least one solution for touching circles case"
+    );
 
     // Verify all solutions are valid and satisfy tangency
     for i in 1..=aNbSol {

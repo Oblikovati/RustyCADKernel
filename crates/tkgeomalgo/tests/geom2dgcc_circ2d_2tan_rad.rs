@@ -65,7 +65,8 @@ fn Geom2dGcc_Circ2d2TanRadTest__BUC60897_TangentToLineAndBezier() {
 
     // Create a Geom2d_BezierCurve from three control points
     let aPoints = points(&[(0.0, 0.0), (50.0, 50.0), (0.0, 100.0)]);
-    let aCurve: Handle<dyn Geom2dCurve> = Handle::new(Geom2dBezierCurve::new(&aPoints).unwrap()).cast();
+    let aCurve: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dBezierCurve::new(&aPoints).unwrap()).cast();
 
     // Build qualified curves (outside tangency)
     let aCLine = Geom2dAdaptorCurve::with_curve(&aLine).unwrap();
@@ -79,7 +80,10 @@ fn Geom2dGcc_Circ2d2TanRadTest__BUC60897_TangentToLineAndBezier() {
     let aGccCirc2d =
         Geom2dGcc_Circ2d2TanRad::new(&aQualifCurve1, &aQualifCurve2, aRadius, aTolerance).unwrap();
 
-    assert!(aGccCirc2d.is_done(), "Geom2dGcc_Circ2d2TanRad failed to compute");
+    assert!(
+        aGccCirc2d.is_done(),
+        "Geom2dGcc_Circ2d2TanRad failed to compute"
+    );
     assert!(aGccCirc2d.nb_solutions() > 0, "No tangent circles found");
 
     // For each solution, verify tangency points are at the circle radius from its center
@@ -114,7 +118,10 @@ fn Geom2dGcc_Circ2d2TanRadTest__BUC60897_TangentToLineAndBezier() {
 // lengths produced by a point/line fixed-radius construction.
 #[test]
 fn Geom2dGcc_Circ2d2TanRadTest__BUC60607_1_PointLineFixedRadius() {
-    let aLine = line(Point2::new(0.0, 500.0), Direction2::new(2000.0, 500.0).unwrap());
+    let aLine = line(
+        Point2::new(0.0, 500.0),
+        Direction2::new(2000.0, 500.0).unwrap(),
+    );
     let anAdaptor = Geom2dAdaptorCurve::with_curve(&aLine).unwrap();
     let aQualifiedLine = unqualified(&anAdaptor).unwrap();
 
@@ -138,7 +145,10 @@ fn Geom2dGcc_Circ2d2TanRadTest__BUC60607_1_PointLineFixedRadius() {
 // print a result, but the construction is a valid no-solution configuration.
 #[test]
 fn Geom2dGcc_Circ2d2TanRadTest__BUC60607_2_PointLineFixedRadiusNoSolution() {
-    let aLine = line(Point2::new(0.0, 500.0), Direction2::new(2000.0, 500.0).unwrap());
+    let aLine = line(
+        Point2::new(0.0, 500.0),
+        Direction2::new(2000.0, 500.0).unwrap(),
+    );
     let anAdaptor = Geom2dAdaptorCurve::with_curve(&aLine).unwrap();
     let aQualifiedLine = unqualified(&anAdaptor).unwrap();
 
@@ -157,7 +167,10 @@ fn Geom2dGcc_Circ2d2TanRadTest__BUC60607_2_PointLineFixedRadiusNoSolution() {
 // line definition (the last two values are its direction, not an endpoint).
 #[test]
 fn Geom2dGcc_Circ2d2TanRadTest__BUC60607_3_PointLineFixedRadiusNoSolution() {
-    let aLine = line(Point2::new(3000.0, 1700.0), Direction2::new(1000.0, 1550.0).unwrap());
+    let aLine = line(
+        Point2::new(3000.0, 1700.0),
+        Direction2::new(1000.0, 1550.0).unwrap(),
+    );
     let anAdaptor = Geom2dAdaptorCurve::with_curve(&aLine).unwrap();
     let aQualifiedLine = unqualified(&anAdaptor).unwrap();
 
@@ -176,7 +189,10 @@ fn Geom2dGcc_Circ2d2TanRadTest__BUC60607_3_PointLineFixedRadiusNoSolution() {
 // as BUC60607_3 with the smaller requested radius.
 #[test]
 fn Geom2dGcc_Circ2d2TanRadTest__BUC60607_4_PointLineFixedRadiusNoSolution() {
-    let aLine = line(Point2::new(3000.0, 1700.0), Direction2::new(1000.0, 1550.0).unwrap());
+    let aLine = line(
+        Point2::new(3000.0, 1700.0),
+        Direction2::new(1000.0, 1550.0).unwrap(),
+    );
     let anAdaptor = Geom2dAdaptorCurve::with_curve(&aLine).unwrap();
     let aQualifiedLine = unqualified(&anAdaptor).unwrap();
 

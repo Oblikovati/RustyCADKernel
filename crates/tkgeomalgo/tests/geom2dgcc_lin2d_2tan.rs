@@ -31,9 +31,11 @@ use rustycad_tkmath::gp::{Axis2, Direction3, Plane3, Point2, Point3};
 // null curve for an offset or other projection. GeomAPI is not ported yet, so the
 // suite carries its five-line body.
 fn GeomAPI_To2d(C: &Handle<dyn GeomCurve>, P: &Plane3) -> Handle<dyn Geom2dCurve> {
-    let HC: Handle<dyn Adaptor3dCurve> = Handle::new(GeomAdaptorCurve::with_curve(C).unwrap()).cast();
+    let HC: Handle<dyn Adaptor3dCurve> =
+        Handle::new(GeomAdaptorCurve::with_curve(C).unwrap()).cast();
     let Plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::from_pln(*P)).cast();
-    let HS: Handle<dyn Adaptor3dSurface> = Handle::new(GeomAdaptorSurface::with_surface(&Plane).unwrap()).cast();
+    let HS: Handle<dyn Adaptor3dSurface> =
+        Handle::new(GeomAdaptorSurface::with_surface(&Plane).unwrap()).cast();
     let Proj = ProjectedCurve::with_curve(&HS, &HC).unwrap();
     let aType: CurveType = Proj.get_type().unwrap();
     if aType == CurveType::OffsetCurve || aType == CurveType::OtherCurve {
@@ -62,7 +64,8 @@ fn Geom2dGcc_Lin2d2TanTest__OCC813_EllipseAndPoint() {
         (-0.932169, 0.164367, -0.322560),
     );
 
-    let anEll: Handle<dyn GeomCurve> = Handle::new(GeomEllipse::new(anAx2, 150.0, 100.0).unwrap()).cast();
+    let anEll: Handle<dyn GeomCurve> =
+        Handle::new(GeomEllipse::new(anAx2, 150.0, 100.0).unwrap()).cast();
     let aPlane = GeomPlane::new(anAx2.axis3());
     let aPln: Plane3 = aPlane.pln();
 
@@ -75,7 +78,10 @@ fn Geom2dGcc_Lin2d2TanTest__OCC813_EllipseAndPoint() {
     let aPnt2d = Point2::new(200.0, 200.0);
     let aLinTan = Geom2dGcc_Lin2d2Tan::through_point(&aQCurve, aPnt2d, 0.1).unwrap();
 
-    assert!(aLinTan.nb_solutions() > 0, "Expected at least one tangent line solution");
+    assert!(
+        aLinTan.nb_solutions() > 0,
+        "Expected at least one tangent line solution"
+    );
 }
 
 // Test OCC814: Geom2dGcc_Lin2d2Tan - tangent line between a 2D circle and a 2D ellipse.
@@ -100,7 +106,8 @@ fn Geom2dGcc_Lin2d2TanTest__OCC814_CircleAndEllipse() {
         .unwrap(),
     )
     .cast();
-    let anEll: Handle<dyn GeomCurve> = Handle::new(GeomEllipse::new(anAx2, 150.0, 100.0).unwrap()).cast();
+    let anEll: Handle<dyn GeomCurve> =
+        Handle::new(GeomEllipse::new(anAx2, 150.0, 100.0).unwrap()).cast();
     let aPlane = GeomPlane::new(anAx2.axis3());
     let aPln: Plane3 = aPlane.pln();
 
@@ -114,5 +121,8 @@ fn Geom2dGcc_Lin2d2TanTest__OCC814_CircleAndEllipse() {
 
     let aLinTan = Geom2dGcc_Lin2d2Tan::new(&aQEll, &aQCir, 0.1).unwrap();
 
-    assert!(aLinTan.nb_solutions() > 0, "Expected at least one tangent line solution");
+    assert!(
+        aLinTan.nb_solutions() > 0,
+        "Expected at least one tangent line solution"
+    );
 }

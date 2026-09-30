@@ -36,7 +36,7 @@ use rustycad_tkmath::gp::{Circle2, Point2};
 /// let line: Handle<dyn Geom2dCurve> =
 ///     Handle::new(Geom2dLine::from_point(Point2::new(0.0, 0.0), Direction2::new(1.0, 0.0)?)).cast();
 /// let q = unqualified(&Geom2dAdaptorCurve::with_curve(&line)?)?;
-/// let center: Handle<dyn Geom2dPoint> = Handle::new(Geom2dCartesianPoint::new(Point2::new(1.0, 2.0))).cast();
+/// let center: Handle<dyn Geom2dPoint> = Handle::new(Geom2dCartesianPoint::from_pnt2d(Point2::new(1.0, 2.0))).cast();
 /// let circ = Circ2dTanCen::new(&q, &center, 1e-9)?;
 /// assert_eq!(circ.this_solution(1)?.radius(), 2.0);
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
