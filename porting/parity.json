@@ -208978,6 +208978,261 @@
       "rust_item": "impl_transient!(ShapeConstructProjectCurveOnSurface)",
       "status": "excluded",
       "notes": "Native macro replaced by the shared Rust runtime type/Handle implementation."
+    },
+    {
+      "upstream_id": "BRepMesh_CurveTessellator",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CurveTessellator.hxx",
+      "source_sha256": "ec3bb72434006de1cbe0233d2d3bbdc6e12cdac7d5aa5425f5d6e9cb93ff5c87",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCurveTessellator",
+      "status": "implemented",
+      "notes": "Native GCPnts tangential/abscissa sampling, minimum-size/deflection criteria, internal vertices, recursive pcurve refinement and surface-bound rejection. Exact production and mismatched cylinder/Bezier fixtures preserve located out-of-range Value rejection and disabled vertex rejection."
+    },
+    {
+      "upstream_id": "BRepMesh_CurveTessellator(const IMeshData::IEdgeHandle&,const IMeshTools_Parameters&,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CurveTessellator.hxx",
+      "source_sha256": "ec3bb72434006de1cbe0233d2d3bbdc6e12cdac7d5aa5425f5d6e9cb93ff5c87",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCurveTessellator::new",
+      "status": "implemented",
+      "notes": "Native GCPnts tangential/abscissa sampling, minimum-size/deflection criteria, internal vertices, recursive pcurve refinement and surface-bound rejection. Exact production and mismatched cylinder/Bezier fixtures preserve located out-of-range Value rejection and disabled vertex rejection."
+    },
+    {
+      "upstream_id": "BRepMesh_CurveTessellator(const IMeshData::IEdgeHandle&,TopAbs_Orientation,const IMeshData::IFaceHandle&,const IMeshTools_Parameters&,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CurveTessellator.hxx",
+      "source_sha256": "ec3bb72434006de1cbe0233d2d3bbdc6e12cdac7d5aa5425f5d6e9cb93ff5c87",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCurveTessellator::on_face",
+      "status": "implemented",
+      "notes": "Native GCPnts tangential/abscissa sampling, minimum-size/deflection criteria, internal vertices, recursive pcurve refinement and surface-bound rejection. Exact production and mismatched cylinder/Bezier fixtures preserve located out-of-range Value rejection and disabled vertex rejection."
+    },
+    {
+      "upstream_id": "BRepMesh_CurveTessellator::~BRepMesh_CurveTessellator()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CurveTessellator.hxx",
+      "source_sha256": "ec3bb72434006de1cbe0233d2d3bbdc6e12cdac7d5aa5425f5d6e9cb93ff5c87",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native model-builder and shape-visitor state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_CurveTessellator::PointsNb() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CurveTessellator.hxx",
+      "source_sha256": "ec3bb72434006de1cbe0233d2d3bbdc6e12cdac7d5aa5425f5d6e9cb93ff5c87",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCurveTessellator::points_nb",
+      "status": "implemented",
+      "notes": "Native GCPnts tangential/abscissa sampling, minimum-size/deflection criteria, internal vertices, recursive pcurve refinement and surface-bound rejection. Exact production and mismatched cylinder/Bezier fixtures preserve located out-of-range Value rejection and disabled vertex rejection."
+    },
+    {
+      "upstream_id": "BRepMesh_CurveTessellator::Value(int,gp_Pnt&,double&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CurveTessellator.hxx",
+      "source_sha256": "ec3bb72434006de1cbe0233d2d3bbdc6e12cdac7d5aa5425f5d6e9cb93ff5c87",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCurveTessellator::value",
+      "status": "implemented",
+      "notes": "Native GCPnts tangential/abscissa sampling, minimum-size/deflection criteria, internal vertices, recursive pcurve refinement and surface-bound rejection. Exact production and mismatched cylinder/Bezier fixtures preserve located out-of-range Value rejection and disabled vertex rejection."
+    },
+    {
+      "upstream_id": "BRepMesh_CurveTessellator::DEFINE_STANDARD_RTTIEXT(BRepMesh_CurveTessellator,IMeshTools_CurveTessellator)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_CurveTessellator.hxx",
+      "source_sha256": "ec3bb72434006de1cbe0233d2d3bbdc6e12cdac7d5aa5425f5d6e9cb93ff5c87",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshCurveTessellator (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native GCPnts tangential/abscissa sampling, minimum-size/deflection criteria, internal vertices, recursive pcurve refinement and surface-bound rejection. Exact production and mismatched cylinder/Bezier fixtures preserve located out-of-range Value rejection and disabled vertex rejection."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::new",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Set(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::set_surface",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Set(const gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::set_eye",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Set(const gp_Dir&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::set_direction",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Set(const gp_Dir&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::set_direction_angle",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Set(const gp_Pnt&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::set_eye_angle",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Set(double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::set_tolerance",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::NbVariables() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::nb_variables",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::NbEquations() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::nb_equations",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::value",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Derivatives(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::derivatives",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Values(const math_Vector&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::values",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Root() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::root",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Tolerance() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::tolerance",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Point() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::point",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::IsTangent()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::is_tangent",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Direction3d()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::direction3d",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Direction2d()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::direction2d",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::FunctionType() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::function_type",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Eye() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::eye",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Direction() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::direction",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Angle() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::angle",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::Surface() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::surface",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
+    },
+    {
+      "upstream_id": "Contap_SurfFunction::PSurface() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_SurfFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapSurfFunction::p_surface",
+      "status": "implemented",
+      "notes": "432 new exact differential requests exercise all public members, four modes, retained draft outputs, gradient and tangent cache state, all setters and singular elementary/polynomial surfaces. Three direct regressions cover retained output, tolerance NaN behavior and solver failure capture."
     }
   ],
   "tests": [

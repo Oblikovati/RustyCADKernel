@@ -25,3 +25,4 @@ def append_tkhlr_requests(requests: list[str]) -> None:
     __import__('tkhlr_corpus_contap_surface').append_contap_surface_requests(requests)
     __import__('tkhlr_corpus_hcurve').append_hcurve_requests(requests)
     __import__('tkhlr_corpus_hcont').append_hcont_requests(requests)
+    __import__('tkhlr_corpus_function').append_function_requests(requests)

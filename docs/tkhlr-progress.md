@@ -192,3 +192,12 @@ passes 11,787 exact requests, including 2,988 new requests for this class. Three
 regressions cover shared range, null surfaces, and empty restriction results; crate
 unit/integration tests and doctests pass. No standalone original declaration exists
 for this helper; TKHLR's four original legacy declarations remain pending.
+
+### Contap_SurfFunction recovery
+
+All 24 public members now reproduce the original surface contour function. The
+port preserves untouched DraftPrs output, tangent cache reuse across mode setters,
+normal-based scaling, singular-point failures and first-failure capture in solver
+callbacks. All 12,219 numeric requests pass exactly (432 new requests), the crate
+suite and three direct regressions pass, and strict Clippy passes. These helper APIs
+have no standalone original test declarations; overall toolkit completion is pending.

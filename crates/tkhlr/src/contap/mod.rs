@@ -24,3 +24,7 @@ pub use h_curve2d_tool::ContapHCurve2dTool;
 
 mod h_cont_tool;
 pub use h_cont_tool::ContapHContTool;
+
+mod surf_function;
+mod surf_function_traits;
+pub use surf_function::ContapSurfFunction;

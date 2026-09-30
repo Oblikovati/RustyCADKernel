@@ -40,7 +40,7 @@ fn make_surface(
         _ => return warped_surface(radius),
     })
 }
-fn surface_adaptor(r: &mut Reader) -> Result<Adaptor3dSurfaceHandle, Failure> {
+pub(super) fn surface_adaptor(r: &mut Reader) -> Result<Adaptor3dSurfaceHandle, Failure> {
     let kind = r.integer();
     let frame = contour_frame(r)?;
     let (radius, semi) = (r.real(), r.real());

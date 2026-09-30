@@ -29,3 +29,5 @@ pub mod curve2d;
 
 pub mod contap_hcont;
 mod contap_sampling_fixture;
+
+pub mod contap_function;
