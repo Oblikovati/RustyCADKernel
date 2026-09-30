@@ -55,3 +55,5 @@ pub mod analysis_surface;
 pub mod project_curve;
 
 pub mod shell_sewing;
+
+pub mod free_bounds;

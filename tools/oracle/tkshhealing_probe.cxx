@@ -50,7 +50,9 @@
 #include "tkshhealing_probe_analysis_surface.cxx"
 #include "tkshhealing_probe_project_curve.cxx"
 #include "tkshhealing_probe_shell_sewing.cxx"
+#include "tkshhealing_probe_free_bounds.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"sh_free_bounds", sh_free_bounds_case},
  {"sh_shell_sewing", sh_shell_sewing_case},
  {"sh_project_curve", sh_project_curve_case},
  {"sh_construct", sh_construct_case},

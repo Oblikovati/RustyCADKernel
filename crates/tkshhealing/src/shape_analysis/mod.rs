@@ -27,3 +27,9 @@ mod curve;
 pub use curve::{
     CurveProjection, CurveProjectionResult, ShapeAnalysisCurve, adjust_by_period, adjust_to_period,
 };
+
+mod wire;
+pub use wire::ShapeAnalysisWire;
+
+mod free_bounds;
+pub use free_bounds::ShapeAnalysisFreeBounds;
