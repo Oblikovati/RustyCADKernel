@@ -95,7 +95,7 @@ fn construct_knots(reader: &mut Reader<'_>, use_handle: bool) {
     array.iter().copied().for_each(real);
 }
 
-fn construct_spline_3d(input: &Handle<dyn GeomCurve>) {
+pub(super) fn construct_spline_3d(input: &Handle<dyn GeomCurve>) {
     let handle = input.cast::<GeomBSplineCurve>();
     let Some(spline) = handle.get() else {
         return;

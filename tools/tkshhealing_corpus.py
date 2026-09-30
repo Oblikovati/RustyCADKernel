@@ -51,3 +51,6 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
 
     # ShapeAnalysis_FreeBounds and Wire connectivity: chaining and partial outputs.
     __import__('tkshhealing_corpus_free_bounds').append_free_bounds_requests(requests)
+
+    # SplitCurve3d: defined cases only; all 16 native crashes require verify_split_curve3d.py.
+    __import__('tkshhealing_corpus_split_curve3d').append_split_curve3d_requests(requests)

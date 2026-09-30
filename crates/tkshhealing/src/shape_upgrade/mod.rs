@@ -21,3 +21,6 @@ pub use tool::ShapeUpgradeTool;
 
 mod shell_sewing;
 pub use shell_sewing::ShapeUpgradeShellSewing;
+
+mod split_curve_3d;
+pub use split_curve_3d::{ShapeUpgradeSplitCurve3d,SplitCurves3d};
