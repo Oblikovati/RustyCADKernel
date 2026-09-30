@@ -3,7 +3,7 @@
 // crates/tktopalgo/examples/tp_probe/brep_check.rs.
 //
 // `bck_check kind program index script`: the checker of kind (0 vertex, 1 edge, 2 wire,
-// 3 face, 4 shell) on shape `index`, then the script `n (code args)...`: the codes 90..99
+// 3 face, 4 shell, 5 solid) on shape `index`, then the script `n (code args)...`: the codes 90..99
 // call the BRepCheck_Result members, 1.. the members of the checker (see
 // tp_bck_member). After the script: the statuses of the shape and, in table order, of
 // every shape with statuses. A context iteration prints its shapes sorted by index,
@@ -12,6 +12,8 @@
 #include <BRepCheck_Edge.hxx>
 #include <BRepCheck_Face.hxx>
 #include <BRepCheck_Shell.hxx>
+#include <BRepCheck_Solid.hxx>
+#include <BRepCheck_Analyzer.hxx>
 #include <BRepCheck_Vertex.hxx>
 #include <BRepCheck_Wire.hxx>
 #include <BRepLib_ValidateEdge.hxx>
@@ -99,6 +101,7 @@ occ::handle<BRepCheck_Result> tp_bck_checker(int kind,const TopoDS_Shape& s){
  if(kind==1)return new BRepCheck_Edge(TopoDS::Edge(s));
  if(kind==2)return new BRepCheck_Wire(TopoDS::Wire(s));
  if(kind==3)return new BRepCheck_Face(TopoDS::Face(s));
+ if(kind==5)return new BRepCheck_Solid(TopoDS::Solid(s));
  return new BRepCheck_Shell(TopoDS::Shell(s));}
 void tp_bck_member(GaReader& r,const TpShapes& t,const occ::handle<BRepCheck_Result>& c,int kind,int code){
  if(tp_bck_result_member(r,t,c,code))return;
@@ -106,7 +109,7 @@ void tp_bck_member(GaReader& r,const TpShapes& t,const occ::handle<BRepCheck_Res
  else if(kind==1)tp_bck_edge_member(r,t,*occ::down_cast<BRepCheck_Edge>(c),code);
  else if(kind==2)tp_bck_wire_member(r,t,*occ::down_cast<BRepCheck_Wire>(c),code);
  else if(kind==3)tp_bck_face_member(r,t,*occ::down_cast<BRepCheck_Face>(c),code);
- else tp_bck_shell_member(r,t,*occ::down_cast<BRepCheck_Shell>(c),code);}
+ else if(kind==4)tp_bck_shell_member(r,t,*occ::down_cast<BRepCheck_Shell>(c),code);}
 void tp_bck_check_case(std::istream& in){
  GaReader r{in};int kind=r.integer();TpShapes t=tp_shapes(r);int index=r.integer();
  occ::handle<BRepCheck_Result> c;
@@ -164,4 +167,23 @@ void tp_ble_validate_case(std::istream& in){
   case 9:{double x=r.real();v.UpdateTolerance(x);ga_real(x);break;}
   case 10:ga_flag(v.IsExactMethod());break;
   default:ga_flag(v.IsParallel());break;}}
+ ga_end();}
+// The checker of one table shape in an analyzer: -1 for a null checker, else its
+// statuses and, in table order, those of every shape it has statuses on.
+void tp_bck_analyzer_result(const TpShapes& t,const BRepCheck_Analyzer& a,const TopoDS_Shape& s){
+ const occ::handle<BRepCheck_Result>& c=a.Result(s);
+ if(c.IsNull()){ga_int(-1);return;}
+ tp_bck_list(c->Status());
+ for(size_t j=0;j<t.shapes.size();++j)if(c->IsStatusOnShape(t.shapes[j])){ga_int(int(j));tp_bck_list(c->StatusOnShape(t.shapes[j]));}
+ ga_int(-9);}
+// `bck_analyze program index geomcontrols parallel exact`: the analyzer of shape
+// `index`, its flags, IsValid, then for each table shape IsValid(S) and its checker.
+void tp_bck_analyze_case(std::istream& in){
+ GaReader r{in};TpShapes t=tp_shapes(r);int index=r.integer();bool g=r.flag(),par=r.flag(),ex=r.flag();
+ try{
+  BRepCheck_Analyzer a(t.shapes.at(index),g,par,ex);
+  ga_flag(a.IsParallel());ga_flag(a.IsExactMethod());GA_TRY(ga_flag(a.IsValid()));
+  for(const TopoDS_Shape& s:t.shapes){GA_TRY(ga_flag(a.IsValid(s)));GA_TRY(tp_bck_analyzer_result(t,a,s));}
+  a.SetParallel(!par);a.SetExactMethod(!ex);ga_flag(a.IsParallel());ga_flag(a.IsExactMethod());
+ }catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}
  ga_end();}

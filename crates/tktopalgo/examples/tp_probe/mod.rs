@@ -11,10 +11,10 @@ pub mod face;
 pub mod int_curves_face;
 pub mod mat;
 pub mod mat_parts;
-pub mod shapes;
-pub mod shapes_geometry;
 pub mod shape;
 pub mod shape_geometry;
+pub mod shapes;
+pub mod shapes_geometry;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tktopalgo_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.

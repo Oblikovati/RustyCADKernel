@@ -93,6 +93,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bck_selfint", tp_bck_selfint_case},
  {"bck_check", tp_bck_check_case},
  {"ble_validate", tp_ble_validate_case},
+ {"bck_analyze", tp_bck_analyze_case},
  // BRepBndLib (tktopalgo_probe_brepbndlib.cxx, shapes of tktopalgo_probe_shape.cxx)
  {"bbl_add", tp_bbl_add_case},
  // BRepClass3d (tktopalgo_probe_brepclass3d.cxx, shapes of tktopalgo_probe_shape.cxx)

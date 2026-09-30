@@ -87,6 +87,7 @@ def append_brepcheck_requests(requests: list[str]) -> None:
                              ('tktopalgo_corpus_brepcheck_wire', 'append_wire_requests'),
                              ('tktopalgo_corpus_brepcheck_face', 'append_face_requests'),
                              ('tktopalgo_corpus_brepcheck_shell', 'append_shell_requests'),
+                             ('tktopalgo_corpus_brepcheck_solid', 'append_solid_requests'),
                              ('tktopalgo_corpus_brepcheck_validate', 'append_validate_requests')):
         getattr(__import__(module), function)(requests)
 

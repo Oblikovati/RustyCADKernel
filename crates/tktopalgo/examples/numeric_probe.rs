@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_check, brep_class,
-    brep_class3d, brep_top_adaptor, int_curves_face, mat, mat_parts,
+    bisector, bisector_algo, brep_bnd_lib, brep_builder_api, brep_check, brep_class, brep_class3d,
+    brep_top_adaptor, int_curves_face, mat, mat_parts,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -69,6 +69,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bck_selfint", brep_check::selfint_case),
     ("bck_check", brep_check::check_case),
     ("ble_validate", brep_check::validate_case),
+    ("bck_analyze", brep_check::analyze_case),
     // BRepBndLib (tp_probe/brep_bnd_lib.rs, shapes of tp_probe/shape.rs)
     ("bbl_add", brep_bnd_lib::add_case),
     // BRepClass3d (tp_probe/brep_class3d.rs, shapes of tp_probe/shape.rs)

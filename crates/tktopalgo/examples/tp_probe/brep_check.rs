@@ -4,7 +4,7 @@
 use super::common::{Reader, attempt, captured, end, flag, int, real, show};
 use super::shapes::{TpShapes, tp_same_index, tp_shape_index, tp_shapes};
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{Edge, Shape, edge, face, shell, vertex, wire};
+use rustycad_tkbrep::topods::{Edge, Shape, edge, face, shell, solid, vertex, wire};
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
@@ -13,8 +13,8 @@ use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dCurveOnSurface, Adaptor
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tktopalgo::brep_check::{
-    BRepCheck, BRepCheckEdge, BRepCheckFace, BRepCheckResult, BRepCheckShell, BRepCheckStatus,
-    BRepCheckVertex, BRepCheckWire, ListOfStatus,
+    BRepCheck, BRepCheckAnalyzer, BRepCheckEdge, BRepCheckFace, BRepCheckResult, BRepCheckShell,
+    BRepCheckSolid, BRepCheckStatus, BRepCheckVertex, BRepCheckWire, ListOfStatus,
 };
 use rustycad_tktopalgo::brep_lib::BRepLibValidateEdge;
 
@@ -207,6 +207,7 @@ fn checker(kind: i32, s: &Shape) -> Result<Handle<dyn BRepCheckResult>, Failure>
         1 => Handle::new(BRepCheckEdge::new(&edge(s)?)?).cast(),
         2 => Handle::new(BRepCheckWire::new(&wire(s)?)?).cast(),
         3 => Handle::new(BRepCheckFace::new(&face(s)?)?).cast(),
+        5 => Handle::new(BRepCheckSolid::new(&solid(s)?)?).cast(),
         _ => Handle::new(BRepCheckShell::new(&shell(s)?)?).cast(),
     })
 }
@@ -227,7 +228,8 @@ fn member(r: &mut Reader<'_>, t: &TpShapes, c: &Handle<dyn BRepCheckResult>, kin
         1 => edge_member(r, t, c.cast::<BRepCheckEdge>().get().expect("edge"), code),
         2 => wire_member(r, t, c.cast::<BRepCheckWire>().get().expect("wire"), code),
         3 => face_member(r, t, c.cast::<BRepCheckFace>().get().expect("face"), code),
-        _ => shell_member(r, t, c.cast::<BRepCheckShell>().get().expect("shell"), code),
+        4 => shell_member(r, t, c.cast::<BRepCheckShell>().get().expect("shell"), code),
+        _ => {}
     }
 }
 
@@ -387,6 +389,49 @@ pub fn validate_case(values: &[f64]) {
             10 => flag(v.is_exact_method()),
             _ => flag(v.is_parallel()),
         }
+    }
+    end();
+}
+
+/// `tp_bck_analyzer_result`.
+fn analyzer_result(t: &TpShapes, a: &BRepCheckAnalyzer, s: &Shape) -> Result<(), Failure> {
+    let checker = a.result(s)?;
+    let Some(c) = checker.get() else {
+        int(-1);
+        return Ok(());
+    };
+    list(&c.status()?);
+    for (j, other) in t.shapes.iter().enumerate() {
+        if c.is_status_on_shape(other) {
+            int(j as i32);
+            list(&c.status_on_shape_of(other)?);
+        }
+    }
+    int(-9);
+    Ok(())
+}
+
+/// `bck_analyze program index geomcontrols parallel exact`.
+pub fn analyze_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let t = tp_shapes(&mut r).expect("shape program");
+    let index = r.integer() as usize;
+    let (g, par, ex) = (r.flag(), r.flag(), r.flag());
+    match BRepCheckAnalyzer::new(&t.shapes[index], g, par, ex) {
+        Ok(mut a) => {
+            flag(a.is_parallel());
+            flag(a.is_exact_method());
+            show(a.is_valid(), flag);
+            for s in &t.shapes {
+                show(a.is_valid_shape(s), flag);
+                attempt(|| analyzer_result(&t, &a, s));
+            }
+            a.set_parallel(!par);
+            a.set_exact_method(!ex);
+            flag(a.is_parallel());
+            flag(a.is_exact_method());
+        }
+        Err(error) => print!("{} ", error.exception_type()),
     }
     end();
 }
