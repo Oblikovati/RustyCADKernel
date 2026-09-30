@@ -1,3 +1,5 @@
+mod curves;
+mod intersections;
 mod marked;
 mod records;
 use rustycad_tkbo::int_tools::*;
@@ -16,11 +18,18 @@ fn flag(value: bool) {
     integer(i32::from(value));
 }
 pub fn dispatch(operation: &str, v: &[f64]) {
+    dispatch_case(operation, v);
+    println!();
+}
+fn dispatch_case(operation: &str, v: &[f64]) {
     match operation {
         "bop_range" => records::index_case(v),
         "bop_pave" => records::pave_case(v),
         "bop_pair" => records::pair_case(v),
         "bop_point" => records::point_case(v),
+        "points" => intersections::points_case(v),
+        "common" => intersections::common_case(v),
+        "intersection_curve" => curves::case(v),
         "range" => range_case(v),
         "marked" => marked::case(v),
         "root" => root_case(v),
@@ -31,7 +40,6 @@ pub fn dispatch(operation: &str, v: &[f64]) {
             std::process::exit(2);
         }
     }
-    println!();
 }
 fn range_case(v: &[f64]) {
     range(Range::default());
