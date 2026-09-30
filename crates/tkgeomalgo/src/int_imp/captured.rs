@@ -62,4 +62,4 @@ macro_rules! captured_function_set {
         }
     };
 }
-pub(super) use captured_function_set;
+pub(crate) use captured_function_set;

@@ -17,7 +17,7 @@
 //! `IntImp_ZerCSParFunc`: the difference between a patch point and a curve point,
 //! a function of `(u, v, w)` whose zeros are the curve-surface intersections.
 use super::captured::captured_function_set;
-use super::{TheCurveTool, TheFunction, ThePSurfaceTool};
+use super::{TheCurve3dTool, TheFunction, ThePSurfaceTool};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkgeombase::failure_capture::FailureCapture;
 use rustycad_tkmath::gp::{Point3, Vector3};
@@ -28,7 +28,7 @@ use rustycad_tkmath::math::{Matrix, Vector};
 ///
 /// `IntCurveSurface_TheCSFunctionOfHInter` is an instance;
 /// `IntImpZerCSParFunc::<HSurfaceTool, MyCurveTool>::new(&surface, &curve)`.
-pub struct IntImpZerCSParFunc<P: ThePSurfaceTool, C: TheCurveTool> {
+pub struct IntImpZerCSParFunc<P: ThePSurfaceTool, C: TheCurve3dTool> {
     surface: P::Surface,
     curve: C::Curve,
     p: Point3,
@@ -36,7 +36,7 @@ pub struct IntImpZerCSParFunc<P: ThePSurfaceTool, C: TheCurveTool> {
     pub(super) failure: FailureCapture,
 }
 
-impl<P: ThePSurfaceTool, C: TheCurveTool> Clone for IntImpZerCSParFunc<P, C> {
+impl<P: ThePSurfaceTool, C: TheCurve3dTool> Clone for IntImpZerCSParFunc<P, C> {
     /// The native copy: the surfaces, the last point and root; no pending failure.
     fn clone(&self) -> Self {
         Self {
@@ -49,7 +49,7 @@ impl<P: ThePSurfaceTool, C: TheCurveTool> Clone for IntImpZerCSParFunc<P, C> {
     }
 }
 
-impl<P: ThePSurfaceTool, C: TheCurveTool> IntImpZerCSParFunc<P, C> {
+impl<P: ThePSurfaceTool, C: TheCurve3dTool> IntImpZerCSParFunc<P, C> {
     /// The function of `s` and `c` at the origin with a null root;
     /// `IntImpZerCSParFunc::<P, C>::new(&s, &c)`.
     pub fn new(s: &P::Surface, c: &C::Curve) -> Self {
@@ -136,9 +136,9 @@ impl<P: ThePSurfaceTool, C: TheCurveTool> IntImpZerCSParFunc<P, C> {
     }
 }
 
-captured_function_set!([P: ThePSurfaceTool, C: TheCurveTool] IntImpZerCSParFunc<P, C>);
+captured_function_set!([P: ThePSurfaceTool, C: TheCurve3dTool] IntImpZerCSParFunc<P, C>);
 
-impl<P: ThePSurfaceTool, C: TheCurveTool> TheFunction for IntImpZerCSParFunc<P, C> {
+impl<P: ThePSurfaceTool, C: TheCurve3dTool> TheFunction for IntImpZerCSParFunc<P, C> {
     type SurfaceTool = P;
     type CurveTool = C;
     fn auxillar_surface(&self) -> &P::Surface {
