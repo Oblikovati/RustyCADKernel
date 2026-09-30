@@ -136,9 +136,10 @@ structs (the subclasses were not ported when they were written), so:
   intersectors (`NCollection_DataMap<TopoDS_Shape, void*>`, the deprecated alias
   `BRepClass3d_MapOfInter`) owns `IntCurvesFaceIntersector` values keyed with
   `TopTools_ShapeMapHasher`; a second `Bind` of the same face replaces the value (the
-  native map leaks the old one). `Intersector(F)` returns `&mut` (a non-const
-  reference from a const member natively) and raises Standard_NoSuchObject for an
-  unbound face, as `Find` does. The virtual members (`Reject`, `RejectShell`,
+  native map leaks the old one). `Intersector(F)` (a non-const reference from a const
+  member natively) is `change_intersector` (`&mut`, to perform with) and
+  `intersector` (`&`, to pass to `ClassifyUVPoint`); both raise Standard_NoSuchObject
+  for an unbound face, as `Find` does. The virtual members (`Reject`, `RejectShell`,
   `RejectFace`, `DumpSegment`) have no override in OCCT and are plain methods. The
   protected `ClassifyUVPoint` is public. `Destroy` clears the map; the copy constructor
   is deleted natively and the struct is not `Clone`.
@@ -152,6 +153,9 @@ structs (the subclasses were not ported when they were written), so:
   disabled `MARCHEPASSIUNESEULEFACE` switch).
 - `BRepClass3d_Intersector3d` is `BRepClass3dIntersector3d`, with the inline accessors
   of its `.lxx`.
-- C++ output references become returned tuples (`FindAPointInTheFace`,
-  `PointInTheFace`, `Segment`, `OtherSegment`); the in/out arguments (`Param`,
-  `u`, `v`, `Index`, `P`) are passed by `&mut`. Overloads take distinct Rust names.
+- The reference arguments of `FindAPointInTheFace`, `PointInTheFace`, `Segment` and
+  `OtherSegment` are in/out natively (a member writes some of them even when it fails,
+  and leaves the others as the caller set them), so they stay `&mut` arguments; the
+  point, its parameters and its derivatives travel together in `FacePointSample`, and
+  the `U1, V1, U2, V2` bounds of `PointInTheFace` are one `UvRectangle`. The getters
+  of the tree selectors return tuples. Overloads take distinct Rust names.
