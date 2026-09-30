@@ -3,6 +3,7 @@ mod intersections;
 mod localize;
 mod marked;
 mod records;
+mod surface_localize;
 use rustycad_tkbo::int_tools::*;
 use rustycad_tkg3d::top_abs::State;
 fn real(value: f64) {
@@ -32,6 +33,13 @@ fn dispatch_case(operation: &str, v: &[f64]) {
         "common" => intersections::common_case(v),
         "intersection_curve" => curves::case(v),
         "localize" => localize::case(v),
+        "surface_grid" => surface_localize::grid_case(v),
+        "surface_cache" => surface_localize::cache_case(v),
+        _ => dispatch_scalar(operation, v),
+    }
+}
+fn dispatch_scalar(operation: &str, v: &[f64]) {
+    match operation {
         "range" => range_case(v),
         "marked" => marked::case(v),
         "root" => root_case(v),
