@@ -26,7 +26,10 @@ fn upgrade_of_a_destroyed_object_is_a_null_handle_but_the_pointer_is_not_null() 
     let pointer: WeakHandle<StandardTransient> = owner.downgrade();
     drop(owner);
     assert!(!pointer.is_null(), "C++ keeps a non-null dangling pointer");
-    assert!(pointer.upgrade().is_null(), "the upgrade must not revive the object");
+    assert!(
+        pointer.upgrade().is_null(),
+        "the upgrade must not revive the object"
+    );
 }
 
 #[test]
@@ -45,5 +48,9 @@ fn pointers_never_change_the_reference_count() {
     assert_eq!(owner.ref_count(), 1);
     let upgraded: Handle<StandardTransient> = copy.upgrade();
     assert!(upgraded == owner);
-    assert_eq!(owner.ref_count(), 2, "only the upgraded handle owns a reference");
+    assert_eq!(
+        owner.ref_count(),
+        2,
+        "only the upgraded handle owns a reference"
+    );
 }
