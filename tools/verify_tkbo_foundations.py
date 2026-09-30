@@ -20,6 +20,7 @@ def corpus() -> str:
     requests += [f'surface {index} {depth} {index+1} {depth+1} 3 -2 4 2 -5 6'
                  for index, depth in product([-3, 0, 1, 7], [-2, 0, 1, 2, 7, 64])]
     requests += marked_requests()
+    requests += bopds_requests()
     return '\n'.join(requests) + '\n'
 
 
@@ -33,6 +34,20 @@ def marked_requests() -> list[str]:
                         '2 0.5 1.5 7 1 1 1 1 9 0')
     requests += ['marked 2 0 2 0 2 1e-16 1.9999999999999998 8 1',
                  'marked 3 2 1 0 0 0 1.5 0.5 2 1']
+    return requests
+
+
+def bopds_requests() -> list[str]:
+    """Compare all scalar BOPDS records, native hashes, and formatted dumps."""
+    requests = [f'bop_range {a} {b} {b} {a} {query}'
+                for a, b, query in product([-3, -1, 0, 1, 9], repeat=3)]
+    requests += [f'bop_pave {a} {parameter} {b} {other}'
+                 for a, b, parameter, other in product([-1, 0, 2], [-1, 0, 2],
+                     [-1e20, -1.2345, -0.0, 0.0, 1.2345, 99.0],
+                     [-1.2345, -0.0, 0.0, 1.2345])]
+    requests += [f'bop_pair {a} {b} {c} {d}' for a, b, c, d in product([-1, 0, 2], repeat=4)]
+    requests += [f'bop_point {a} {b} {c} {b} {c} {c} {a} -7'
+                 for a, b, c in product([-3.0, -0.0, 0.0, 5.25], repeat=3)]
     return requests
 
 
