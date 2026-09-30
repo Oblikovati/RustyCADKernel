@@ -36,6 +36,7 @@ def corpus() -> str:
     rows += ['mesh_deflection ' + ' '.join(map(str, v)) for v in product(range(8), range(2), range(2), range(3), range(3), range(3))]
     rows += ['mesh_consistent ' + ' '.join(map(str, v)) for v in product(range(9), range(9), range(2), range(4))]
     rows += ['mesh_post_processor ' + ' '.join(map(str, v)) for v in product(range(-1,4), (0,4,128,132), (0,4,128,132), (0,2,3), (1,2), (0,1), (0,1))]
+    rows += ['mesh_edge_parameter ' + ' '.join(map(str, v)) for v in product((4,5,6), range(6), range(2), range(4), range(2), range(2), range(3))]
     return '\n'.join(rows) + '\n'
 
 

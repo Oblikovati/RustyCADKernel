@@ -219,3 +219,5 @@ pub mod model_builder;
 pub mod deflection;
 
 pub mod post_processor;
+
+pub mod edge_parameter;
