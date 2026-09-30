@@ -52,6 +52,8 @@
 #include "tktopalgo_probe_breplib_package.cxx"
 #include "tktopalgo_probe_breplib_face.cxx"
 #include "tktopalgo_probe_breplib_fuse.cxx"
+#include "tktopalgo_probe_brepgprop.cxx"
+#include "tktopalgo_probe_brepgprop_tools.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -157,6 +159,23 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"blp_sameparam", tp_blp_sameparam_case},
  {"blp_extendface", tp_blp_extendface_case},
  {"blp_fuseedges", tp_blp_fuseedges_case},
+ // BRepGProp (tktopalgo_probe_brepgprop.cxx, tktopalgo_probe_brepgprop_tools.cxx, shapes of
+ // tktopalgo_probe_shape.cxx)
+ {"bgp_package", tp_bgp_package_case},
+ {"bgp_cinert", tp_bgp_cinert_case},
+ {"bgp_mesh_cinert", tp_bgp_mesh_cinert_case},
+ {"bgp_mesh_nodes", tp_bgp_mesh_nodes_case},
+ {"bgp_mesh_props", tp_bgp_mesh_props_case},
+ {"bgp_mesh_calc", tp_bgp_mesh_calc_case},
+ {"bgp_sinert", tp_bgp_sinert_case},
+ {"bgp_vinert", tp_bgp_vinert_case},
+ {"bgp_vinert_gk", tp_bgp_vinert_gk_case},
+ {"bgp_face", tp_bgp_face_case},
+ {"bgp_knots", tp_bgp_knots_case},
+ {"bgp_arrays", tp_bgp_arrays_case},
+ {"bgp_domain", tp_bgp_domain_case},
+ {"bgp_gauss", tp_bgp_gauss_case},
+ {"bgp_functions", tp_bgp_functions_case},
 };
 int main() {
  std::string line;

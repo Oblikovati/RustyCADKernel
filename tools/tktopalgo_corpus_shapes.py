@@ -10,10 +10,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 # Curve kinds, surface kinds, pcurve kinds and top-level item kinds of the record.
-NO_CURVE, LINE, CIRCLE, BEZIER, BSPLINE = range(5)
+NO_CURVE, LINE, CIRCLE, BEZIER, BSPLINE, ELLIPSE, PARABOLA = range(7)
 NO_SURFACE, PLANE, CYLINDER, SPHERE, CONE, TORUS, BEZIER_SURFACE, BSPLINE_SURFACE = -1, 0, 1, 2, 3, 4, 5, 6
-NO_PCURVE, PLINE, PCIRCLE, PBEZIER = range(4)
-SOLID, SHELL, FACE, EDGE, VERTEX = range(5)
+EXTRUSION, REVOLUTION, OFFSET = 7, 8, 9
+NO_PCURVE, PLINE, PCIRCLE, PBEZIER, PBSPLINE, PELLIPSE = range(6)
+SOLID, SHELL, FACE, EDGE, VERTEX, AGAIN = range(6)
 FORWARD, REVERSED, INTERNAL, EXTERNAL = range(4)
 IDENTITY = [0]
 
@@ -26,6 +27,16 @@ def translation(dx: float, dy: float, dz: float) -> list[float]:
 def rotation(point: list[float], axis: list[float], angle: float) -> list[float]:
     """A location record: the rotation about the axis through `point`."""
     return [2, *point, *axis, angle]
+
+
+def point_mirror(point: list[float]) -> list[float]:
+    """A location record: the symmetry about `point` (not rigid: it reverses)."""
+    return [3, *point]
+
+
+def scaling(point: list[float], factor: float) -> list[float]:
+    """A location record: the scale about `point` (not rigid)."""
+    return [4, *point, factor]
 
 
 @dataclass
@@ -83,7 +94,9 @@ class ShapeSpec:
     edges: list[list[float]] = field(default_factory=list)
     faces: list[FaceRecord] = field(default_factory=list)
     shells: list[tuple[int, bool, list[tuple[int, int, list[float]]]]] = field(default_factory=list)
-    top: list[tuple[int, int]] = field(default_factory=lambda: [(SOLID, 0)])
+    # `(kind, index)` items, or `(AGAIN, item, *location, orientation)` for an earlier item
+    # again with the same TShape.
+    top: list[tuple[float, ...]] = field(default_factory=lambda: [(SOLID, 0)])
     location: list[float] = field(default_factory=lambda: list(IDENTITY))
 
     def vertex(self, point: list[float], tol: float = 1e-7) -> int:
@@ -135,7 +148,7 @@ class ShapeSpec:
             for face, face_orientation, location in uses:
                 values.extend([face, face_orientation, *location])
         values.append(len(self.top))
-        for kind, index in self.top:
-            values.extend([kind, index])
+        for item in self.top:
+            values.extend(item)
         values.extend(self.location)
         return values

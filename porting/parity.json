@@ -185082,6 +185082,1118 @@
       "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFuseEdges::perform",
       "status": "implemented",
       "notes": "BRepLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 7): the makers dereference to BRepLibMakeShape and BRepLibCommand, overloads take distinct Rust names, conversion operators map to their accessors, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (blm_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp::LinearProperties(const TopoDS_Shape&,GProp_GProps&,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGProp::linear_properties",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp::SurfaceProperties(const TopoDS_Shape&,GProp_GProps&,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGProp::surface_properties",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp::SurfaceProperties(const TopoDS_Shape&,GProp_GProps&,double,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGProp::surface_properties_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp::VolumeProperties(const TopoDS_Shape&,GProp_GProps&,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGProp::volume_properties",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp::VolumeProperties(const TopoDS_Shape&,GProp_GProps&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGProp::volume_properties_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp::VolumePropertiesGK(const TopoDS_Shape&,GProp_GProps&,double,bool,bool,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGProp::volume_properties_gk",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp::VolumePropertiesGK(const TopoDS_Shape&,GProp_GProps&,const gp_Pln&,double,bool,bool,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGProp::volume_properties_gk_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Cinert()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Cinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropCinert::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Cinert(const BRepAdaptor_Curve&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Cinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropCinert::with_curve",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Cinert::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Cinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropCinert::set_location",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Cinert::Perform(const BRepAdaptor_Curve&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Cinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropCinert::perform",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Domain()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Domain.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropDomain::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Domain(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Domain.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropDomain::with_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Domain::Init(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Domain.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropDomain::init_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Domain::More()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Domain.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropDomain::more",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Domain::Init()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Domain.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropDomain::init",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Domain::Value()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Domain.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropDomain::value",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Domain::Next()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Domain.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropDomain::next",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_EdgeTool::FirstParameter(const BRepAdaptor_Curve&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_EdgeTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool::first_parameter",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_EdgeTool::LastParameter(const BRepAdaptor_Curve&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_EdgeTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool::last_parameter",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_EdgeTool::IntegrationOrder(const BRepAdaptor_Curve&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_EdgeTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool::integration_order",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_EdgeTool::Value(const BRepAdaptor_Curve&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_EdgeTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool::value",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_EdgeTool::D1(const BRepAdaptor_Curve&,double,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_EdgeTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool::d1",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_EdgeTool::NbIntervals(const BRepAdaptor_Curve&,GeomAbs_Shape)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_EdgeTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool::nb_intervals",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_EdgeTool::Intervals(const BRepAdaptor_Curve&,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_EdgeTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropEdgeTool::intervals",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face(const TopoDS_Face&,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::with_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::Load(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::load_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::VIntegrationOrder() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::v_integration_order",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::NaturalRestriction() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::natural_restriction",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::GetFace() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::get_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::Value2d(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::value2d",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::SIntOrder(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::s_int_order",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::SVIntSubs() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::sv_int_subs",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::SUIntSubs() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::su_int_subs",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::UKnots(NCollection_Array1<double>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::u_knots",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::VKnots(NCollection_Array1<double>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::v_knots",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::LIntOrder(double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::l_int_order",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::LIntSubs() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::l_int_subs",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::LKnots(NCollection_Array1<double>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::l_knots",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::UIntegrationOrder() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::u_integration_order",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::Bounds(double&,double&,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::bounds",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::Normal(double,double,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::normal",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::Load(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::load_edge",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::FirstParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::first_parameter",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::LastParameter() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::last_parameter",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::IntegrationOrder() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::integration_order",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::D12d(double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::d12d",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::Load(bool,GeomAbs_IsoType)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::load_iso",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::GetUKnots(double,double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::get_u_knots",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::GetUKnots(double,double,occ::handle<NCollection_HArray1<double>>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::get_u_knots_into",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::GetTKnots(double,double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::get_t_knots",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Face::GetTKnots(double,double,occ::handle<NCollection_HArray1<double>>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropFace::get_t_knots_into",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::GaussType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::GaussType",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss(GaussType)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::Compute(const BRepGProp_Face&,const gp_Pnt&,const double*,bool,double&,gp_Pnt&,gp_Mat&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::compute_natural",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::Compute(const BRepGProp_Face&,const gp_Pnt&,double&,gp_Pnt&,gp_Mat&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::compute_natural_surface",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::Compute(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,const double*,bool,double&,gp_Pnt&,gp_Mat&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::compute_domain",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::Compute(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double&,gp_Pnt&,gp_Mat&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::compute_domain_surface",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::Compute(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double,const double*,bool,double&,gp_Pnt&,gp_Mat&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::compute_adaptive",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::Compute(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double,double&,gp_Pnt&,gp_Mat&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::compute_adaptive_surface",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshCinert()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshCinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshCinert::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshCinert::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshCinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshCinert::set_location",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshCinert::Perform(const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshCinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshCinert::perform",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshCinert::PreparePolygon(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshCinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshCinert::prepare_polygon",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshCinert::PreparePolygon(const TopoDS_Edge&,occ::handle<NCollection_HArray1<gp_Pnt>>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshCinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshCinert::prepare_polygon_into",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps(BRepGProp_MeshObjType)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::set_location",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::Perform(const occ::handle<Poly_Triangulation>&,const TopLoc_Location&,TopAbs_Orientation)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::perform_located",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::Perform(const occ::handle<Poly_Triangulation>&,TopAbs_Orientation)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::perform",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::CalculateProps(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,bool,double*,int,const double*)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::calculate_props",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::GetMeshObjType() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::get_mesh_obj_type",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert(const BRepGProp_Face&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::with_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::with_domain",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert(BRepGProp_Face&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::with_face_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::with_domain_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::set_location",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert::Perform(const BRepGProp_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::perform",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert::Perform(BRepGProp_Face&,BRepGProp_Domain&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::perform_domain",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert::Perform(BRepGProp_Face&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::perform_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert::Perform(BRepGProp_Face&,BRepGProp_Domain&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::perform_domain_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Sinert::GetEpsilon()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Sinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropSinert::get_epsilon",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction(const BRepGProp_Face&,const gp_Pnt&,bool,const double*,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::Init()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::init",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::SetNbKronrodPoints(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::set_nb_kronrod_points",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::SetValueType(GProp_ValueType)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::set_value_type",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::SetTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::set_tolerance",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::ErrorReached() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::error_reached",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::AbsolutError() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::absolut_error",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::Value(double,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::value",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_TFunction::GetStateNumber()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_TFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropTFunction::state_number",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_UFunction(const BRepGProp_Face&,const gp_Pnt&,bool,const double*)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_UFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropUFunction::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_UFunction::SetValueType(GProp_ValueType)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_UFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropUFunction::set_value_type",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_UFunction::SetVParam(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_UFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropUFunction::set_v_param",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_UFunction::Value(double,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_UFunction.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropUFunction::value",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(const BRepGProp_Face&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_face_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(const BRepGProp_Face&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_face_origin",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,const gp_Pnt&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_face_origin_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(const BRepGProp_Face&,const gp_Pln&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_face_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,const gp_Pln&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_face_plane_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_domain",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_domain_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_domain_origin",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_domain_origin_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pln&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_domain_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pln&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::with_domain_plane_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::set_location",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(const BRepGProp_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(const BRepGProp_Face&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_origin",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_origin_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(const BRepGProp_Face&,const gp_Pln&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,const gp_Pln&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_plane_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,BRepGProp_Domain&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_domain",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,BRepGProp_Domain&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_domain_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_domain_origin",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_domain_origin_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pln&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_domain_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::Perform(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pln&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::perform_domain_plane_eps",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_Vinert::GetEpsilon()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Vinert.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinert::get_epsilon",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::new",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK(BRepGProp_Face&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::with_face",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK(BRepGProp_Face&,const gp_Pnt&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::with_face_point",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::with_domain",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::with_domain_point",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK(BRepGProp_Face&,const gp_Pln&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::with_face_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pln&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::with_domain_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::set_location",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::Perform(BRepGProp_Face&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::perform",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::Perform(BRepGProp_Face&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::perform_point",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::Perform(BRepGProp_Face&,BRepGProp_Domain&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::perform_domain",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::Perform(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pnt&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::perform_domain_point",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::Perform(BRepGProp_Face&,const gp_Pln&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::perform_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::Perform(BRepGProp_Face&,BRepGProp_Domain&,const gp_Pln&,double,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::perform_domain_plane",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::GetErrorReached() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropVinertGK::get_error_reached",
+      "status": "implemented",
+      "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
+    },
+    {
+      "upstream_id": "BRepGProp_VinertGK::GetAbsolutError() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_VinertGK.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Declared in BRepGProp_VinertGK.hxx but defined nowhere in OCCT (a call does not link natively); the absolute error is the value every Perform returns."
     }
   ],
   "tests": [

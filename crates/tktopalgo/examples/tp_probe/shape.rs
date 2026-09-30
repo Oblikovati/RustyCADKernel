@@ -259,10 +259,17 @@ pub fn tp_shape(r: &mut Reader<'_>) -> Result<TpShape, Failure> {
     for _ in 0..r.integer() {
         s.shells.push(shell(r, &s.faces)?);
     }
-    let mut items = Vec::new();
+    let mut items: Vec<Shape> = Vec::new();
     for _ in 0..r.integer() {
-        let kind = r.integer();
-        items.push(item(&s, kind, r.integer() as usize)?);
+        let (kind, index) = (r.integer(), r.integer() as usize);
+        if kind == 5 {
+            let l = location(r)?;
+            let o = orientation(r);
+            let again = items[index].located(&l, false)?.oriented(o);
+            items.push(again);
+        } else {
+            items.push(item(&s, kind, index)?);
+        }
     }
     s.shape = if items.len() == 1 {
         items.remove(0)

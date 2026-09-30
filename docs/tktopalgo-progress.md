@@ -96,6 +96,19 @@ with BRep_Builder by the probe's shape reader (records in
 `crates/tktopalgo/tests/solid_records`); they move to a 1:1 translation once BRepPrimAPI
 is ported.
 
+BRepGProp_Test.cxx (17 declarations) is not mapped: its shapes come from
+BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, BRepPrimAPI_MakeBox, MakeSphere and
+MakeCylinder, and one case cuts a box out of a cylinder with BRepAlgoAPI_Cut of TKBO, which
+is not in the shared native build (the unchanged suite does not link there). Sixteen cases
+run as the behavior tests of `crates/tktopalgo/tests/brep_gprop_behavior.rs` on the same
+shapes built with BRep_Builder (the solids by the probe's shape reader, records in
+`tests/gprop_records`; the segment, arc, quarter disk and plane rectangle as MakeEdge and
+MakeFace give them, in `tests/gprop_builders`), with the same values and tolerances;
+`OCC49_CutShapeHasNoSymmetryAxis` needs the boolean cut and has no counterpart. They move
+to a 1:1 translation once BRepBuilderAPI, BRepPrimAPI and BRepAlgoAPI are ported and TKBO
+is in the native build. `tests/brep_gprop_units.rs` checks closed-form properties and the
+native behaviours below.
+
 BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBndLib
 (level 4, not ported), which it calls to box each face.
 
@@ -202,6 +215,27 @@ BRepIntCurveSurface is not ported: BRepIntCurveSurface_Inter.cxx includes BRepBn
   `Intersector(F)` is `change_intersector` (`&mut`) with the shared view `intersector`;
   the protected `ClassifyUVPoint`, `ForceIn` and `ForceOut` are public. The audit reports
   0 missing and 0 stale rows (the destructors are excluded rows).
+
+- BRepGProp (docs/topalgo-design.md section 9): `BRepGProp` is the unit struct
+  `BRepGProp` (`linear_properties`, `surface_properties`, `surface_properties_eps`,
+  `volume_properties`, `volume_properties_eps`, `volume_properties_gk` and
+  `volume_properties_gk_plane`, whose four flags are `VolumeGKFlags`). The frameworks
+  `BRepGProp_Cinert`, `_Sinert`, `_Vinert`, `_VinertGK`, `_MeshCinert` and `_MeshProps` are
+  `BRepGPropCinert`, `BRepGPropSinert`, `BRepGPropVinert`, `BRepGPropVinertGK`,
+  `BRepGPropMeshCinert` and `BRepGPropMeshProps` (with `MeshObjType`); they embed the
+  TKGeomBase `GProps`, whose protected members are public fields, and reach it through
+  `Deref`. The constructors are `with_face`, `with_domain`, `_eps`, `_origin` (`_point`
+  for VinertGK) and `_plane` variants, the Performs `perform`, `perform_domain` and the same
+  suffixes; the VinertGK tolerance and flags are `VinertGKOptions`. `BRepGProp_Face` is
+  `BRepGPropFace` (`load_face`, `load_edge`, `load_iso`; the knot members fill an
+  `Array1`, `GetUKnots`/`GetTKnots` return one), `BRepGProp_Domain` is `BRepGPropDomain`,
+  `BRepGProp_EdgeTool` is `BRepGPropEdgeTool`, `BRepGProp_Gauss` is `BRepGPropGauss`
+  (`compute_natural`, `compute_natural_surface`, `compute_domain`,
+  `compute_domain_surface`, `compute_adaptive`, `compute_adaptive_surface` over a
+  `GaussProps` output), and `BRepGProp_UFunction` and `_TFunction` are
+  `BRepGPropUFunction` and `BRepGPropTFunction` (TKMath `math::Function`). The audit
+  reports 0 missing and 0 stale rows (`GetAbsolutError`, declared but defined nowhere
+  natively, is an excluded row).
 
 ## Verification
 
@@ -761,6 +795,37 @@ BRepCheck_Face_Test) and `ble_validate` (lines,
 circles, ellipses on planes and cones, a curve on surface as reference, a B-spline
 against a Bezier pcurve, with the same and another parametrization and every option).
 
+BRepGProp: 4492 requests (`tools/tktopalgo_corpus_brepgprop.py` and
+`tktopalgo_corpus_brepgprop_tools.py`, shapes of `tktopalgo_corpus_gprop_shapes.py` and the
+earlier shape modules; the shape reader gains ellipse and parabola curves, extrusion,
+revolution and offset surfaces, B-spline and ellipse pcurves, mirror and scale locations
+and a top-level item repeating an earlier one with its own location and orientation, so
+solids share their TShape). The families: `bgp_package` (every package function and flag
+on boxes with tolerances, polygons and meshes, hollow, open, flat, located and rotated
+boxes, cylinders, spheres, a torus, cone frustums, a ring whose end faces are holed,
+cavities listed first or alone, an INTERNAL shell, compounds, a half-space, a solid
+without shells, a meshed box with a REVERSED face, shared solids moved, rotated and
+reversed, mirrored and scaled, then with a free face, the single faces below and free
+edges), `bgp_cinert`, `bgp_mesh_cinert` and `bgp_mesh_nodes` (lines, circles, Bezier,
+B-spline, ellipse and parabola edges, an edge with only a B-spline pcurve, 3d polygons,
+polygons on triangulations, one naming a node past the mesh, node arrays indexed from 0,
+1, 2 and -1), `bgp_mesh_props` and `bgp_mesh_calc` (both types and orientations with no,
+identity, translated, rotated, scaled, mirrored and scaled-rotated locations, a mesh
+naming a node past its end, a mesh without triangles; right, general, collinear, tiny and
+repeated-vertex triangles with one-point, three-point and empty rules), `bgp_sinert`,
+`bgp_vinert` and `bgp_vinert_gk` (every constructor and Perform by the location, a point
+and a plane, alone and chained on one framework, eps 1e-6, 5e-4, 0.01 and -1e-3), and
+`bgp_face`, `bgp_domain`, `bgp_gauss`, `bgp_knots`, `bgp_arrays` and `bgp_functions` on
+single faces: a plate with a hole, a plane face bounded by a B-spline edge, ellipse discs
+(flat and tilted), a spherical patch, Bezier and B-spline patches (natural and bounded by
+their iso pcurves), a B-spline surface with 62 U intervals (the interval arrays grow), a
+revolution, an extrusion (bounded, and whole with infinite V bounds), offsets of a Bezier
+patch and of a plane, the lateral faces of a cylinder and a frustum, a torus, a sphere, a
+box face, the faces of the ring, an infinite plane, a meshed face and a spherical patch
+whose edge has no pcurve (the Compute overloads then return early). The Gauss-Kronrod
+requests keep loose tolerances when they integrate the inertia, so that each request stays
+fast in the debug build of the Rust twin (the slowest takes about 1 s there).
+
 ## Preserved native behaviour
 
 Each ported package adds its own subsection.
@@ -907,6 +972,67 @@ Native null dereferences in these packages are Standard_NullObject errors.
 - `BRepLib_ValidateEdge` counts fewer than one control point as one, compares the ends
   first when the parametrizations differ, corrects the exit tolerance by the precisions
   of `BRepCheck`, and uses the exact method only for a same-parameter edge.
+
+### BRepGProp
+
+- `BRepGProp_Domain` skips the INTERNAL and EXTERNAL edges in `Next` only: its
+  constructor and `Init` return the first edge of the face whatever its orientation.
+  `Value()` past the last edge casts the face itself (Standard_TypeMismatch).
+- `BRepGProp_Face::VKnots` of a plane, cylinder, cone or any surface other than a
+  sphere, torus or B-spline writes the *U* bounds of the face, and the natural adaptive
+  integration searches them as V knots (a binary search on a possibly unsorted array).
+  `GetFace()` returns the face FORWARD. `GetUKnots` loads the basis curve of an extrusion
+  whatever the span flag; `GetTKnots` reads the V knots of a B-spline surface without
+  using them and splits only a B-spline pcurve. `Load(F)` of a face without surface keeps
+  the previous surface (`BRepAdaptor_Surface::Initialize`). `SIntOrder(0)` takes the
+  logarithm of 0 and gives the largest order.
+- `BRepGProp_Gauss` converts a by-plane volume with the by-point test: the mass and the
+  centre of `BRepGProp_Vinert` by a plane are always 0 (its inertia is kept). The fixed
+  natural Compute multiplies the mass by the half ranges after the centre is computed
+  from the unscaled sums. The fixed domain Compute clamps the boundary points to the U
+  and V bounds for a volume (OCC104), not for a surface.
+- The adaptive Compute takes the U error estimate once, when the knot intervals are
+  done; `EpsU` then stays 0, so the U intervals are never bisected, only the L
+  intervals. A tolerance in `[0.001, 1)` runs one pass and returns it as the error.
+- An edge without pcurve ends the fixed Compute and leaves its outputs unchanged, and
+  the adaptive one returns Precision::Infinite() with its outputs unchanged: the Sinert
+  or Vinert keeps the previous face's values, and the package functions (which reuse one
+  framework) add them again. `Perform(S, Eps)` integrates an empty domain: a face with
+  wires gives nothing.
+- `BRepGProp_VinertGK` ignores the result of `Load(E)`, so an edge without pcurve
+  integrates the previous boundary again; its centre and inertia keep their earlier
+  values when not requested (the package reuses one framework for all faces), and below
+  `Epsilon(AbsolutError)` the centre flag zeroes the mass and the centre.
+  `SetNbKronrodPoints` stores a count nothing reads and `GetStateNumber` returns 0.
+- `roughBaryCenter` averages the vertex points of the explorer (a shared vertex counts
+  once per occurrence), else takes the first triangulation node.
+- `volumeProperties` computes a shared solid once: an instance with the same location
+  and orientation is skipped only with SkipShared, a mirrored or scaled relative location
+  is integrated face by face, and the other orientation negates the mass and inertia (not
+  the centre).
+- `BRepGProp_MeshProps` keeps the static moments as the centre when the mass is below
+  1e-20, copies the nodes for a mirroring or scaling location and moves the computation
+  point for a rigid one. `BRepGProp_MeshCinert::Perform` reads the nodes from index 1
+  (Standard_OutOfRange for another lower bound), skips the segments shorter than
+  gp::Resolution() and takes the last Gauss point as the centre of a null length, as
+  `BRepGProp_Cinert` takes its last evaluated point.
+- `VolumePropertiesGK` adds the absolute errors of the faces and divides the sum by the
+  volume only above `Epsilon(1)`; with OnlyClosed and no shell that BRepCheck_Shell finds
+  closed it returns -1.
+
+## BRepGProp deviations
+
+- A copy of `BRepGProp_Face` shares the surface adaptor (docs/topalgo-design.md section
+  9): natively each copy owns one, so a later `Load(F)` of the original would not reach
+  it. No BRepGProp path loads a face while a copy lives.
+- The integrand functions keep an exception of the surface and answer false; the
+  integrators return it once the integration ends (natively it leaves the integration).
+- The face tool on a face without surface dereferences a null adaptor natively (a
+  crash); the port raises Standard_NullObject. Those requests are not in the corpus.
+- `CalculateProps` with fewer than `3 * NbGaussPoints` rule values raises
+  Standard_OutOfRange where the native loop reads past the array (not in the corpus).
+- The VinertGK tolerance and flags travel in `VinertGKOptions` and the package GK flags
+  in `VolumeGKFlags` (their native defaults are `Default`).
 
 ## BRepCheck and BRepLib_ValidateEdge deviations
 
