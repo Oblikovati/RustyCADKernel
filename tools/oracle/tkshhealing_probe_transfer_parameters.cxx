@@ -38,10 +38,10 @@ void sh_transfer_range(ShapeAnalysis_TransferParameters &tool,
   sh_transfer_geometry(target, face);
   sh_transfer_geometry(edge, face);
 }
-void sh_transfer_operation(ShapeAnalysis_TransferParameters &tool,
-                           const TpShapes &shapes, const TopoDS_Edge &edge,
-                           const TopoDS_Face &face, GaReader &reader) {
-  int operation = reader.integer();
+void sh_transfer_operation_code(int operation,
+                                ShapeAnalysis_TransferParameters &tool,
+                                const TpShapes &shapes, const TopoDS_Edge &edge,
+                                const TopoDS_Face &face, GaReader &reader) {
   if (operation == 0) {
     double parameter = reader.real();
     ga_real(tool.Perform(parameter, reader.flag()));
@@ -55,6 +55,12 @@ void sh_transfer_operation(ShapeAnalysis_TransferParameters &tool,
     tool.Init(next, support);
   } else
     tool.SetMaxTolerance(reader.real());
+}
+void sh_transfer_operation(ShapeAnalysis_TransferParameters &tool,
+                           const TpShapes &shapes, const TopoDS_Edge &edge,
+                           const TopoDS_Face &face, GaReader &reader) {
+  sh_transfer_operation_code(reader.integer(), tool, shapes, edge, face,
+                             reader);
 }
 void sh_transfer_parameters_case(std::istream &input) {
   GaReader reader{input};

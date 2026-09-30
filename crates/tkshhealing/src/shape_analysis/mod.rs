@@ -41,3 +41,5 @@ pub use transfer_parameters::{
     ShapeAnalysisTransferParameters, TransferParameterData, TransferParameterFields,
     TransferParameters,
 };
+mod transfer_parameters_proj;
+pub use transfer_parameters_proj::ShapeAnalysisTransferParametersProj;

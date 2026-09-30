@@ -43,13 +43,23 @@ fn transfer_request(reader: &mut Reader<'_>) -> Result<(), Failure> {
     Ok(())
 }
 fn transfer_operation(
-    tool: &ShapeAnalysisTransferParameters,
+    tool: &dyn TransferParameters,
     shapes: &TpShapes,
     edge: &Edge,
     face: &Face,
     reader: &mut Reader<'_>,
 ) -> Result<(), Failure> {
-    match reader.integer() {
+    transfer_operation_code(reader.integer(), tool, shapes, edge, face, reader)
+}
+pub(super) fn transfer_operation_code(
+    operation: i32,
+    tool: &dyn TransferParameters,
+    shapes: &TpShapes,
+    edge: &Edge,
+    face: &Face,
+    reader: &mut Reader<'_>,
+) -> Result<(), Failure> {
+    match operation {
         0 => {
             let parameter = reader.real();
             real(tool.perform_parameter(parameter, reader.flag())?);
@@ -60,12 +70,16 @@ fn transfer_operation(
             &sh_edge(shapes, reader.integer())?,
             &sh_face(shapes, reader.integer())?,
         )?,
-        _ => tool.set_max_tolerance(reader.real()),
+        _ => {
+            let tolerance = reader.real();
+            tool.transfer_parameter_data()
+                .with_mut(|fields| fields.max_tolerance = tolerance);
+        }
     }
     Ok(())
 }
 fn transfer_sequence(
-    tool: &ShapeAnalysisTransferParameters,
+    tool: &dyn TransferParameters,
     reader: &mut Reader<'_>,
 ) -> Result<(), Failure> {
     let to_2d = reader.flag();
@@ -84,7 +98,7 @@ fn transfer_sequence(
     Ok(())
 }
 fn transfer_edge_range(
-    tool: &ShapeAnalysisTransferParameters,
+    tool: &dyn TransferParameters,
     edge: &Edge,
     face: &Face,
     reader: &mut Reader<'_>,

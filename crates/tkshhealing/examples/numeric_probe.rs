@@ -39,6 +39,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "sh_transfer_parameters",
         sh_probe::transfer_parameters::transfer_parameters_case,
     ),
+    (
+        "sh_transfer_parameters_proj",
+        sh_probe::transfer_parameters_proj::transfer_parameters_proj_case,
+    ),
     ("sh_edge_divide", sh_probe::edge_divide::edge_divide_case),
     ("sh_free_bounds", sh_probe::free_bounds::free_bounds_case),
     ("sh_shell_sewing", sh_probe::shell_sewing::shell_sewing_case),
