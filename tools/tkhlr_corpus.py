@@ -27,3 +27,4 @@ def append_tkhlr_requests(requests: list[str]) -> None:
     __import__('tkhlr_corpus_hcont').append_hcont_requests(requests)
     __import__('tkhlr_corpus_function').append_function_requests(requests)
     __import__('tkhlr_corpus_arc_function').append_arc_function_requests(requests)
+    __import__('tkhlr_corpus_iwline').append_iwline_requests(requests)

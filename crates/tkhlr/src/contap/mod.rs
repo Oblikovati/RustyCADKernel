@@ -33,3 +33,6 @@ mod arc_function;
 mod equation;
 mod normal_sampling;
 pub use arc_function::ContapArcFunction;
+
+mod iwline;
+pub use iwline::ContapTheIWLineOfTheIWalking;

@@ -209369,6 +209369,337 @@
       "rust_item": "rustycad_tkhlr::contap::ContapArcFunction::last_computed_point",
       "status": "implemented",
       "notes": "864 additional exact differential requests exercise every public member, four modes, saved-point reset/retention, callback outputs and error capture. Values retains writes before derivative failure. Quadric preserves stable default member identity; native never initializes this quadric for contour computation. Shared normal scaling and equations match SurfFunction."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::new",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::~BRepMesh_EdgeDiscret()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native model-builder and shape-visitor state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::CreateEdgeTessellator(const IMeshData::IEdgeHandle&,const IMeshTools_Parameters&,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::create_edge_tessellator",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::CreateEdgeTessellator(const IMeshData::IEdgeHandle&,TopAbs_Orientation,const IMeshData::IFaceHandle&,const IMeshTools_Parameters&,int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::create_face_tessellator",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::CreateEdgeTessellationExtractor(const IMeshData::IEdgeHandle&,const IMeshData::IFaceHandle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::create_edge_tessellation_extractor",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::operator()(int) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::process_edge",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::Tessellate3d(const IMeshData::IEdgeHandle&,const occ::handle<IMeshTools_CurveTessellator>&,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::tessellate_3d",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::Tessellate2d(const IMeshData::IEdgeHandle&,bool)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::tessellate_2d",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::DEFINE_STANDARD_RTTIEXT(BRepMesh_EdgeDiscret,IMeshTools_ModelAlgo)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeDiscret::performInternal(const occ::handle<IMeshData_Model>&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeDiscret.hxx",
+      "source_sha256": "f403a99341caac74b5432598b3ef4b915eb3a886aaeb112ff19175d9d91342da",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshEdgeDiscret::perform_internal",
+      "status": "implemented",
+      "notes": "Native edge discretization, existing-polygon consistency/reuse, minimum-deflection selection, per-edge failure flags, 3D endpoint insertion and persistent-projection pcurve sampling. Exact stage/static-method oracle covers quality settings, invalid boundaries, reuse, degeneracy and callback-before-vertex-read ordering."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking(const IntSurf_Allocator&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::new",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::Reverse()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::reverse",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::Cut(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::cut",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::AddPoint(const IntSurf_PntOn2S&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::add_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::AddStatusFirst(bool,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::add_status_first",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::AddStatusFirst(bool,bool,int,const IntSurf_PathPoint&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::add_status_first_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::AddStatusFirstLast(bool,bool,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::add_status_first_last",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::AddStatusLast(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::add_status_last",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::AddStatusLast(bool,int,const IntSurf_PathPoint&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::add_status_last_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::AddIndexPassing(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::add_index_passing",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::SetTangentVector(const gp_Vec&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::set_tangent_vector",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::SetTangencyAtBegining(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::set_tangency_at_begining",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::SetTangencyAtEnd(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::set_tangency_at_end",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::NbPoints() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::nb_points",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::Value(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::value",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::Line() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::line",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::IsClosed() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::is_closed",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::HasFirstPoint() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::has_first_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::HasLastPoint() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::has_last_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::FirstPoint() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::first_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::FirstPointIndex() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::first_point_index",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::LastPoint() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::last_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::LastPointIndex() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::last_point_index",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::NbPassingPoint() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::nb_passing_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::PassingPoint(int,int&,int&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::passing_point",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::TangentVector(int&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::tangent_vector",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::IsTangentAtBegining() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::is_tangent_at_begining",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::IsTangentAtEnd() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::is_tangent_at_end",
+      "status": "implemented",
+      "notes": "56 exact differential requests cover every line member and mutation; preserved Contap-only beginning-setter bug at OCCT 3d097a0, distinct RTTI, shared line storage and native exceptions."
+    },
+    {
+      "upstream_id": "Contap_TheIWLineOfTheIWalking::DEFINE_STANDARD_RTTI_INLINE(Contap_TheIWLineOfTheIWalking,Standard_Transient)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWLineOfTheIWalking.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTheIWLineOfTheIWalking::dynamic_type",
+      "status": "excluded",
+      "notes": "Native RTTI declaration macro maps to impl_transient runtime metadata; no separately callable macro in Rust. Runtime identity regression passes."
     }
   ],
   "tests": [

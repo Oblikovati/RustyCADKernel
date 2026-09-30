@@ -210,3 +210,11 @@ and equation calculations. The exact corpus passes 13,083 requests (864 new), al
 crate tests/doctests and strict Clippy pass, and three direct regressions cover draft
 output retention, saved-state resets and failure capture. The default quadric member
 is retained without asserting meaningful geometry for native uninitialized fields.
+
+### Contap walking-line recovery
+
+All 28 callable walking-line members now forward shared IntPatch behavior while
+retaining the Contap runtime type. OCCT 3d097a0's Contap header writes the end-tangent
+flag in SetTangencyAtBegining; both direct and trait calls preserve that bug. The
+numeric corpus passes 13,139 exact requests (56 new scripts); three direct regressions,
+all crate tests and strict Clippy pass. Header audit has no missing or stale rows.
