@@ -206,9 +206,8 @@ Translate each complete source suite as its API slice becomes available, retain
 DRAW regressions in the backlog, and add the cross-toolkit test dependencies to the
 oracle. Finish TKernel acceptance before advancing to TKMath.
 
-Translated sources/tests retain OCCT notices and use
-`LGPL-2.1-only WITH OCCT-exception-1.0` in the TKernel crate. The accompanying license
-texts are under `licenses/`; the existing project root license is unchanged.
+Every crate uses the workspace license, GPL-2.0-only; source files carry no per-file
+copyright or license header.
 
 ## Allocator-backed collections
 
