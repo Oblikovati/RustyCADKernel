@@ -44,3 +44,6 @@ mod fix_small_curves;
 pub use fix_small_curves::{
     FixSmallCurves, FixSmallCurvesData, FixSmallCurvesFields, ShapeUpgradeFixSmallCurves,
 };
+
+mod wire_divide;
+pub use wire_divide::{ShapeUpgradeWireDivide, WireDivideData, WireDivideFields, WireDivider};

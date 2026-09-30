@@ -58,7 +58,11 @@
 #include "tkshhealing_probe_transfer_parameters.cxx"
 #include "tkshhealing_probe_transfer_parameters_proj.cxx"
 #include "tkshhealing_probe_fix_small_curves.cxx"
+#include "tkshhealing_probe_wire_divide.cxx"
+#include "tkshhealing_probe_wire_divide_state.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"sh_wire_state", sh_wire_state_case},
+ {"sh_wire_divide", sh_wire_divide_case},
  {"sh_fix_small_curves", sh_fix_small_curves_case},
  {"sh_transfer_parameters", sh_transfer_parameters_case},
  {"sh_transfer_parameters_proj", sh_transfer_parameters_proj_case},
