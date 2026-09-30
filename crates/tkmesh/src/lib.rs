@@ -5,3 +5,5 @@ pub mod imesh_data;
 pub mod imesh_tools;
 
 pub mod brep_mesh;
+
+mod model_parallel;

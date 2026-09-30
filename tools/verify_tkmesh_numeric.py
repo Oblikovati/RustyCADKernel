@@ -40,6 +40,9 @@ def corpus() -> str:
     rows += ['mesh_tessellation_extractor ' + ' '.join(map(str, v)) for v in product((1,2,3), range(2), range(-2,3), range(2))]
     rows += ['mesh_curve_tessellator ' + ' '.join(map(str, v)) for v in product((4,5,6), range(4), range(2), range(4), range(2), range(2), range(2), range(2))]
     rows += ['mesh_curve_refinement ' + ' '.join(map(str, v)) for v in product(range(2), range(2), range(2), range(2), range(4), range(2), range(2))]
+    rows += ['mesh_edge_discret ' + ' '.join(map(str, v)) for v in product((0,2,3,4,5,6,8,9,10,11), range(2), range(2), range(2), range(2), range(4))]
+    rows += ['mesh_edge_tessellate ' + ' '.join(map(str, v)) for v in product((4,6), range(3), range(2), range(2), range(2), range(2))]
+    rows += ['mesh_edge_callback']
     return '\n'.join(rows) + '\n'
 
 
