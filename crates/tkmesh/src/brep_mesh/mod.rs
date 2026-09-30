@@ -18,3 +18,6 @@ pub use edge_parameter::{EdgeParameterCollection, EdgeParameterProvider};
 
 mod tessellation_extractor;
 pub use tessellation_extractor::EdgeTessellationExtractor;
+
+mod curve_tessellator;
+pub use curve_tessellator::BRepMeshCurveTessellator;

@@ -223,3 +223,5 @@ pub mod post_processor;
 pub mod edge_parameter;
 
 pub mod tessellation_extractor;
+
+pub mod curve_tessellator;
