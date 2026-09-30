@@ -59,29 +59,26 @@ pub(super) fn y_samples(
     Ok((points, param))
 }
 
-/// The curve of the fitted Y poles whose X poles are those of the line `X0` to
-/// `X0 + length` raised to the degree and refined with the fitted knots; the knots
-/// are scaled to `[X0, X0 + length]`.
-pub(super) fn x_as_parameter(
-    the_curve: &MultiBSpCurve,
-    x0: f64,
+/// The coordinate poles (`nb_poles` of them), knots and multiplicities of the line
+/// from `start` to `start + length` raised to `degree` and refined with the fitted
+/// knots, the knots scaled to `[start, start + length]` (the X poles of
+/// Geom2dAPI_PointsToBSpline, the X and Y poles of GeomAPI_PointsToBSplineSurface).
+pub(crate) fn linear_coordinate(
+    (degree, nb_poles): (i32, i32),
+    (fitted_knots, fitted_mults): (&Array1<'_, f64>, &Array1<'_, i32>),
+    start: f64,
     length: f64,
-) -> Result<Geom2dBSplineCurve, Failure> {
-    let degree: i32 = the_curve.degree()?;
-    let mut poles: Array1<'static, Point2> = array(1, the_curve.nb_poles())?;
-    let fitted_knots = the_curve.knots()?;
-    let fitted_mults = the_curve.multiplicities()?;
+) -> Result<LinearCoordinate, Failure> {
     let nk: i32 = fitted_knots.len() as i32;
     let mut knots: Array1<'static, f64> = array(1, nk)?;
     let mut mults: Array1<'static, i32> = array(1, nk)?;
-    the_curve.curve_2d(1, &mut poles)?;
-    // compute X values for the poles, starting with a line
-    let mut x_poles: Array1<'static, f64> = array(1, poles.upper())?;
+    let mut poles: Array1<'static, f64> = array(1, nb_poles)?;
+    // start with a line
     let mut temp_poles: Array1<'static, f64> = array(1, 2)?;
     let mut temp_knots: Array1<'static, f64> = array(1, 2)?;
     let mut temp_mults: Array1<'static, i32> = array(1, 2)?;
     temp_mults.init(2);
-    (temp_poles[1], temp_poles[2]) = (x0, x0 + length);
+    (temp_poles[1], temp_poles[2]) = (start, start + length);
     (temp_knots[1], temp_knots[2]) = (0.0, 1.0);
     // increase the Degree
     let mut new_temp_poles: Array1<'static, f64> = array(1, degree + 1)?;
@@ -107,9 +104,9 @@ pub(super) fn x_as_parameter(
         &new_temp_poles,
         &new_temp_knots,
         &new_temp_mults,
-        &fitted_knots,
-        Some(&fitted_mults),
-        &mut x_poles,
+        fitted_knots,
+        Some(fitted_mults),
+        &mut poles,
         &mut knots,
         &mut mults,
         epsilon(1.0),
@@ -117,12 +114,41 @@ pub(super) fn x_as_parameter(
     )?;
     // scale the knots
     for i in 1..=nk {
-        knots[i] = x0 + length * knots[i];
+        knots[i] = start + length * knots[i];
     }
+    Ok(LinearCoordinate {
+        poles,
+        knots,
+        mults,
+    })
+}
+
+/// The poles, knots and multiplicities of [`linear_coordinate`].
+pub(crate) struct LinearCoordinate {
+    pub(crate) poles: Array1<'static, f64>,
+    pub(crate) knots: Array1<'static, f64>,
+    pub(crate) mults: Array1<'static, i32>,
+}
+
+/// The curve of the fitted Y poles whose X poles are those of the line `X0` to
+/// `X0 + length` raised to the degree and refined with the fitted knots; the knots
+/// are scaled to `[X0, X0 + length]`.
+pub(super) fn x_as_parameter(
+    the_curve: &MultiBSpCurve,
+    x0: f64,
+    length: f64,
+) -> Result<Geom2dBSplineCurve, Failure> {
+    let degree: i32 = the_curve.degree()?;
+    let mut poles: Array1<'static, Point2> = array(1, the_curve.nb_poles())?;
+    let (fitted_knots, fitted_mults) = (the_curve.knots()?, the_curve.multiplicities()?);
+    the_curve.curve_2d(1, &mut poles)?;
+    // compute X values for the poles
+    let fitted = (&fitted_knots, &fitted_mults);
+    let x = linear_coordinate((degree, poles.upper()), fitted, x0, length)?;
     // set the Poles
     for i in 1..=poles.upper() {
         let y: f64 = poles[i].y();
-        poles[i] = Point2::new(x_poles[i], y);
+        poles[i] = Point2::new(x.poles[i], y);
     }
-    Geom2dBSplineCurve::new(&poles, &knots, &mults, degree, false)
+    Geom2dBSplineCurve::new(&poles, &x.knots, &x.mults, degree, false)
 }

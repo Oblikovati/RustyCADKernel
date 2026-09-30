@@ -162666,6 +162666,1334 @@
       "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhTriangle::dump",
       "status": "implemented",
       "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "GeomAPI::To2d(const occ::handle<Geom_Curve>&,const gp_Pln&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::to_2d",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI::To3d(const occ::handle<Geom2d_Curve>&,const gp_Pln&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::to_3d",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::with_curves",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::with_ranges",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::Init(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::init",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::Init(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::init_ranges",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::NbExtrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::nb_extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::operator int() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::as_int",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::Points(int,gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::Distance(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::IsParallel() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::is_parallel",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::NearestPoints(gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::nearest_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::LowerDistanceParameters(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::lower_distance_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::LowerDistance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::lower_distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::operator double() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::as_real",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::Extrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::TotalNearestPoints(gp_Pnt&,gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::total_nearest_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::TotalLowerDistanceParameters(double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::total_lower_distance_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve::TotalLowerDistance()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveCurve::total_lower_distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::with_curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::with_ranges",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::Init(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::init",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::Init(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::init_ranges",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::NbExtrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::nb_extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::operator int() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::as_int",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::Points(int,gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::Parameters(int,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::Distance(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::IsParallel() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::is_parallel",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::NearestPoints(gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::nearest_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::LowerDistanceParameters(double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::lower_distance_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::LowerDistance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::lower_distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::operator double() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::as_real",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurface::Extrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaCurveSurface::extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface(const occ::handle<Geom_Surface>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::with_surfaces",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface(const occ::handle<Geom_Surface>&,const occ::handle<Geom_Surface>&,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::with_bounds",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::Init(const occ::handle<Geom_Surface>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::init",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::Init(const occ::handle<Geom_Surface>&,const occ::handle<Geom_Surface>&,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::init_bounds",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::NbExtrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::nb_extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::operator int() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::as_int",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::Points(int,gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::Parameters(int,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::Distance(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::IsParallel() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::is_parallel",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::NearestPoints(gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::nearest_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::LowerDistanceParameters(double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::lower_distance_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::LowerDistance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::lower_distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::operator double() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::as_real",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurface::Extrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaSurfaceSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ExtremaSurfaceSurface::extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::with_curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::Perform(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::perform",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::is_done",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::nb_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::point",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::Parameters(int,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::nb_segments",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::Segment(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::segment",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_IntCS::Parameters(int,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_IntCS.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::IntCS::segment_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate(const occ::handle<NCollection_HArray1<gp_Pnt>>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate(const occ::handle<NCollection_HArray1<gp_Pnt>>&,const occ::handle<NCollection_HArray1<double>>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::with_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate::Load(const gp_Vec&,const gp_Vec&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::load_ends",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate::Load(const NCollection_Array1<gp_Vec>&,const occ::handle<NCollection_HArray1<bool>>&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::load",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate::ClearTangents()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate",
+      "status": "excluded",
+      "notes": "Declared in GeomAPI_Interpolate.hxx but never defined natively (no body in the .cxx, so a call would not link); there is nothing to port."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate::Perform()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::perform",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate::operator occ::handle<Geom_BSplineCurve>() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::as_curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::is_done",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::with_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt>&,Approx_ParametrizationType,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::with_parametrization",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::with_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline(const NCollection_Array1<gp_Pnt>&,double,double,double,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::with_weights",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::init",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt>&,Approx_ParametrizationType,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::init_parametrization",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::init_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline::Init(const NCollection_Array1<gp_Pnt>&,double,double,double,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::init_weights",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline::operator occ::handle<Geom_BSplineCurve>() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::as_curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::is_done",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface(const NCollection_Array2<gp_Pnt>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::with_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface(const NCollection_Array2<gp_Pnt>&,Approx_ParametrizationType,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::with_parametrization",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface(const NCollection_Array2<gp_Pnt>&,double,double,double,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::with_weights",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface(const NCollection_Array2<double>&,double,double,double,double,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::with_heights",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Init(const NCollection_Array2<gp_Pnt>&,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::init",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Interpolate(const NCollection_Array2<gp_Pnt>&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::interpolate",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Interpolate(const NCollection_Array2<gp_Pnt>&,Approx_ParametrizationType,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::interpolate_parametrization",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Init(const NCollection_Array2<double>&,double,double,double,double,int,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::init_heights",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Interpolate(const NCollection_Array2<double>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::interpolate_heights",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Init(const NCollection_Array2<gp_Pnt>&,Approx_ParametrizationType,int,int,GeomAbs_Shape,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::init_parametrization",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Init(const NCollection_Array2<gp_Pnt>&,double,double,double,int,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::init_weights",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::surface",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::operator occ::handle<Geom_BSplineSurface>() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::as_surface",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::is_done",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve(const gp_Pnt&,const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::with_curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve(const gp_Pnt&,const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::with_range",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Init(const gp_Pnt&,const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::init",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Init(const gp_Pnt&,const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::init_range",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Init(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::init_curve",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Perform(const gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::perform",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::nb_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::operator int() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::as_int",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::point",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Parameter(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::parameter",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Parameter(int,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::parameter",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Distance(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::NearestPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::nearest_point",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::operator gp_Pnt() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::as_point",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::LowerDistanceParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::lower_distance_parameter",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::LowerDistance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::lower_distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::operator double() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::as_real",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnCurve::Extrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve::extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::new",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf(const gp_Pnt&,const occ::handle<Geom_Surface>&,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::with_surface",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf(const gp_Pnt&,const occ::handle<Geom_Surface>&,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::with_tolerance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf(const gp_Pnt&,const occ::handle<Geom_Surface>&,double,double,double,double,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::with_bounds_tolerance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf(const gp_Pnt&,const occ::handle<Geom_Surface>&,double,double,double,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::with_bounds",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Init(const gp_Pnt&,const occ::handle<Geom_Surface>&,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::init_tolerance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Init(const gp_Pnt&,const occ::handle<Geom_Surface>&,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::init",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Init(const gp_Pnt&,const occ::handle<Geom_Surface>&,double,double,double,double,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::init_bounds_tolerance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Init(const gp_Pnt&,const occ::handle<Geom_Surface>&,double,double,double,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::init_bounds",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Init(const occ::handle<Geom_Surface>&,double,double,double,double,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::init_surface_tolerance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Init(const occ::handle<Geom_Surface>&,double,double,double,double,Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::init_surface",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::SetExtremaAlgo(Extrema_ExtAlgo)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::set_extrema_algo",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::SetExtremaFlag(Extrema_ExtFlag)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::set_extrema_flag",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Perform(const gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::perform",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::is_done",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::nb_points",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::operator int() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::as_int",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::point",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Distance(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::NearestPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::nearest_point",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::operator gp_Pnt() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::as_point",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::LowerDistanceParameters(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::lower_distance_parameters",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::LowerDistance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::lower_distance",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::operator double() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::as_real",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurf::Extrema() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ProjectPointOnSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api::ProjectPointOnSurf::extrema",
+      "status": "implemented",
+      "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ApproximationMode",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonApproximationMode",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::new",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::Init(const NCollection_Array1<occ::handle<Geom_Curve>>&,const NCollection_Array1<occ::handle<Geom_Curve>>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::init",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::Perform()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::perform",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::SetParallelMode(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::set_parallel_mode",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::SetApproximationMode(ApproximationMode)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::set_approximation_mode",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::GetApproximationMode() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::get_approximation_mode",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::IsParallelMode() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::is_parallel_mode",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::is_done",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::IsApproximate() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::is_approximate",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::Status() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::status",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::Report() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::report",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::surface",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillNetworkSurface::new",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::Init(const NCollection_Array1<occ::handle<Geom_BSplineCurve>>&,const NCollection_Array1<occ::handle<Geom_BSplineCurve>>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&,double,bool,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillNetworkSurface::init",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::Perform()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillNetworkSurface::perform",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillNetworkSurface::is_done",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::Status() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillNetworkSurface::status",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::Surface() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillNetworkSurface::surface",
+      "status": "implemented",
+      "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
     }
   ],
   "tests": [
@@ -250221,6 +251549,1966 @@
       "rust_target": "int_polyh_point",
       "rust_test": "IntPolyh_Point__Dot_OrthogonalVectors_Zero",
       "rust_source": "crates/tkgeomalgo/tests/int_polyh_point.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurfTest.Bug867_InitWithTightBoundsNoException",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ProjectPointOnSurf_Test.cxx",
+      "source_sha256": "3f1f69c1db3b5b1e0b6e93c2719de7e009d497ecb97ef9e8e38fa01110ee5edf",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_project_point_on_surf",
+      "rust_test": "GeomAPI_ProjectPointOnSurfTest__Bug867_InitWithTightBoundsNoException",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_project_point_on_surf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ProjectPointOnSurfTest.OCC24138_ProjectPointOnEllipticalPrismFace",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ProjectPointOnSurf_Test.cxx",
+      "source_sha256": "3f1f69c1db3b5b1e0b6e93c2719de7e009d497ecb97ef9e8e38fa01110ee5edf",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_project_point_on_surf",
+      "rust_test": "GeomAPI_ProjectPointOnSurfTest__OCC24138_ProjectPointOnEllipticalPrismFace",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_project_point_on_surf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSpline_Test.DegenerateExplicitParametersResetDoneState",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_PointsToBSpline_Test.cxx",
+      "source_sha256": "53d569bb1be915397edaf6847269bcf403883a57ecbcd53c74e778cf165f506e",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_points_to_bspline",
+      "rust_test": "GeomAPI_PointsToBSpline_Test__DegenerateExplicitParametersResetDoneState",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_points_to_bspline.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_IntCSTest.OCC26979_ParabolaBezierSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_IntCS_Test.cxx",
+      "source_sha256": "d2de4f84edced39b96d4c073a1fe419f090ba9fae92ee1d8618e1d3cd0eb600c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_int_cs",
+      "rust_test": "GeomAPI_IntCSTest__OCC26979_ParabolaBezierSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_int_cs.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_IntCSTest.OCC26979_ParabolaBSplineSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_IntCS_Test.cxx",
+      "source_sha256": "d2de4f84edced39b96d4c073a1fe419f090ba9fae92ee1d8618e1d3cd0eb600c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_int_cs",
+      "rust_test": "GeomAPI_IntCSTest__OCC26979_ParabolaBSplineSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_int_cs.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_IntCSTest.OCC26979_ParabolaTorus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_IntCS_Test.cxx",
+      "source_sha256": "d2de4f84edced39b96d4c073a1fe419f090ba9fae92ee1d8618e1d3cd0eb600c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_int_cs",
+      "rust_test": "GeomAPI_IntCSTest__OCC26979_ParabolaTorus",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_int_cs.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_IntCSTest.OCC26979_ParabolaLinearExtrusion",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_IntCS_Test.cxx",
+      "source_sha256": "d2de4f84edced39b96d4c073a1fe419f090ba9fae92ee1d8618e1d3cd0eb600c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_int_cs",
+      "rust_test": "GeomAPI_IntCSTest__OCC26979_ParabolaLinearExtrusion",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_int_cs.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_IntCSTest.OCC26979_ParabolaRevolution",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_IntCS_Test.cxx",
+      "source_sha256": "d2de4f84edced39b96d4c073a1fe419f090ba9fae92ee1d8618e1d3cd0eb600c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_int_cs",
+      "rust_test": "GeomAPI_IntCSTest__OCC26979_ParabolaRevolution",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_int_cs.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurfaceTest.CircSph_ParallelConcentric",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaCurveSurface_Test.cxx",
+      "source_sha256": "fda7f9cd4d3e9f30a445e62c111ddcd1f89c9c9aef874da00b23597ddee291e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_curve_surface",
+      "rust_test": "GeomAPI_ExtremaCurveSurfaceTest__CircSph_ParallelConcentric",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_curve_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurfaceTest.CircSph_Intersection",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaCurveSurface_Test.cxx",
+      "source_sha256": "fda7f9cd4d3e9f30a445e62c111ddcd1f89c9c9aef874da00b23597ddee291e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_curve_surface",
+      "rust_test": "GeomAPI_ExtremaCurveSurfaceTest__CircSph_Intersection",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_curve_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurfaceTest.CircSph_Touch",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaCurveSurface_Test.cxx",
+      "source_sha256": "fda7f9cd4d3e9f30a445e62c111ddcd1f89c9c9aef874da00b23597ddee291e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_curve_surface",
+      "rust_test": "GeomAPI_ExtremaCurveSurfaceTest__CircSph_Touch",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_curve_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurfaceTest.CircSph_NoIntersection",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaCurveSurface_Test.cxx",
+      "source_sha256": "fda7f9cd4d3e9f30a445e62c111ddcd1f89c9c9aef874da00b23597ddee291e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_curve_surface",
+      "rust_test": "GeomAPI_ExtremaCurveSurfaceTest__CircSph_NoIntersection",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_curve_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurfaceTest.ModalgBug_25368_TrimmedLineSphere",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaCurveSurface_Test.cxx",
+      "source_sha256": "fda7f9cd4d3e9f30a445e62c111ddcd1f89c9c9aef874da00b23597ddee291e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_curve_surface",
+      "rust_test": "GeomAPI_ExtremaCurveSurfaceTest__ModalgBug_25368_TrimmedLineSphere",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_curve_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveSurfaceTest.ModalgBug_25368_RotatedSphereLine",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaCurveSurface_Test.cxx",
+      "source_sha256": "fda7f9cd4d3e9f30a445e62c111ddcd1f89c9c9aef874da00b23597ddee291e8",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_curve_surface",
+      "rust_test": "GeomAPI_ExtremaCurveSurfaceTest__ModalgBug_25368_RotatedSphereLine",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_curve_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurfaceTest.OCC29712_44_ParallelPlanes",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaSurfaceSurface_Test.cxx",
+      "source_sha256": "e25cd91a18bd793dbb67c2600119f66520b52d4c21ee9ef380208855511ef0a3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_surface_surface",
+      "rust_test": "GeomAPI_ExtremaSurfaceSurfaceTest__OCC29712_44_ParallelPlanes",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_surface_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaSurfaceSurfaceTest.OCC29712_44_SelfComparisonHasZeroDistance",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_ExtremaSurfaceSurface_Test.cxx",
+      "source_sha256": "e25cd91a18bd793dbb67c2600119f66520b52d4c21ee9ef380208855511ef0a3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_extrema_surface_surface",
+      "rust_test": "GeomAPI_ExtremaSurfaceSurfaceTest__OCC29712_44_SelfComparisonHasZeroDistance",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_extrema_surface_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_PointsToBSplineSurface_Test.FailedDegenerateRebuildResetsDoneState",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomAPI_PointsToBSplineSurface_Test.cxx",
+      "source_sha256": "f4f81ba8f4037b0c98d8683c6d23cf10024b7543eca0502d4b05fb102899e253",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomapi_points_to_bspline_surface",
+      "rust_test": "GeomAPI_PointsToBSplineSurface_Test__FailedDegenerateRebuildResetsDoneState",
+      "rust_source": "crates/tkgeomalgo/tests/geomapi_points_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.SimpleLineNetwork_ProducesValidSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__SimpleLineNetwork_ProducesValidSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.EmptyInput_NotDone",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__EmptyInput_NotDone",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.SingleProfileOrGuide_NotDone",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__SingleProfileOrGuide_NotDone",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NotDone_BeforePerform",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NotDone_BeforePerform",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ReinitResetsReportAndSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ReinitResetsReportAndSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DisjointNetworkReportsContactDiscoveryFailure",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DisjointNetworkReportsContactDiscoveryFailure",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ParallelMode_DefaultSingleThreadAndMatchesParallelResult",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ParallelMode_DefaultSingleThreadAndMatchesParallelResult",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.CurvedBSplineNetwork_ProducesValidSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__CurvedBSplineNetwork_ProducesValidSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NonAffineProfileReparametrization_PreservesProfilesAndGuideContinuity",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NonAffineProfileReparametrization_PreservesProfilesAndGuideContinuity",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.MixedCurveTypes_ProducesValidSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__MixedCurveTypes_ProducesValidSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.PeriodicBSplineProfiles_AreExpandedBeforeConstruction",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__PeriodicBSplineProfiles_AreExpandedBeforeConstruction",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.PeriodicBSplineGuides_AreExpandedBeforeConstruction",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__PeriodicBSplineGuides_AreExpandedBeforeConstruction",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.InterpolatedPeriodicProfilesWithAlignedSeams_InterpolateWithoutDeviation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__InterpolatedPeriodicProfilesWithAlignedSeams_InterpolateWithoutDeviation",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.MultipleIntersections_SelectsMonotoneBranch",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__MultipleIntersections_SelectsMonotoneBranch",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.FourByThreeGrid_NonUniformParams",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__FourByThreeGrid_NonUniformParams",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.SurfaceAlongInputCurves_IsAccurate",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__SurfaceAlongInputCurves_IsAccurate",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ReversedCurveNetwork_ProducesValidSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ReversedCurveNetwork_ProducesValidSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.CubicInterpolatedNetwork_ProducesValidSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__CubicInterpolatedNetwork_ProducesValidSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.SinusoidalProfiles_SurfacePreservesShape",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__SinusoidalProfiles_SurfacePreservesShape",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ThreeByThreeGrid_SurfaceInterpolatesAllCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ThreeByThreeGrid_SurfaceInterpolatesAllCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ScaledGeometry_LargeCoordinates",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ScaledGeometry_LargeCoordinates",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ScaledGeometry_SmallCoordinates",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ScaledGeometry_SmallCoordinates",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.AllReversedCurves_ProducesValidSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__AllReversedCurves_ProducesValidSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ShuffledInputOrder_ProducesValidSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ShuffledInputOrder_ProducesValidSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.SaddleSurface_BothDirectionsCurved",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__SaddleSurface_BothDirectionsCurved",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.AsymmetricNetwork_FiveProfilesTwoGuides",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__AsymmetricNetwork_FiveProfilesTwoGuides",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.AsymmetricNetwork_TwoProfilesFiveGuides",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__AsymmetricNetwork_TwoProfilesFiveGuides",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NonPlanarNetwork_CurvesInBothDirections",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NonPlanarNetwork_CurvesInBothDirections",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.SurfaceContinuity_IsSmooth",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__SurfaceContinuity_IsSmooth",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ArcLikeProfiles_NonRational",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ArcLikeProfiles_NonRational",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.RepeatPerform_GivesSameResult",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__RepeatPerform_GivesSameResult",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.HighDensityNetwork_SixBySix",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__HighDensityNetwork_SixBySix",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.QuadraticProfiles_SurfaceMatchesCurvesAtBoundaries",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__QuadraticProfiles_SurfaceMatchesCurvesAtBoundaries",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.OffsetPlane_NetworkAtNonZeroZ",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__OffsetPlane_NetworkAtNonZeroZ",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.TiltedPlane_DiagonalCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__TiltedPlane_DiagonalCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.RectangularNotSquare_2x3AspectRatio",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__RectangularNotSquare_2x3AspectRatio",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.WavySurface_SinusoidalProfilesAndGuides",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__WavySurface_SinusoidalProfilesAndGuides",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_UClosedNetwork_ProducesUPeriodicSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_UClosedNetwork_ProducesUPeriodicSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_UClosedNetwork_UsesInputToleranceForPeriodicity",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_UClosedNetwork_UsesInputToleranceForPeriodicity",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_InvalidPreparedNetworkReportsStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_InvalidPreparedNetworkReportsStatus",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_InvalidWeightsReportsInvalidInput",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_InvalidWeightsReportsInvalidInput",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_CompatibleRationalWeightsProducesRationalSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_CompatibleRationalWeightsProducesRationalSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_IncompatibleRationalFamilyReportsStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_IncompatibleRationalFamilyReportsStatus",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_RationalDegreeOverflowReportsStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_RationalDegreeOverflowReportsStatus",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.RationalProfilesWithPolynomialGuidesProducesSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__RationalProfilesWithPolynomialGuidesProducesSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.PolynomialProfilesWithRationalGuidesProducesSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__PolynomialProfilesWithRationalGuidesProducesSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ApproximateFallbackCanRecoverRationalDegreeOverflow",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ApproximateFallbackCanRecoverRationalDegreeOverflow",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ExactOnlyReportsRationalDegreeOverflow",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ExactOnlyReportsRationalDegreeOverflow",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ExactOnlyReparametrizesRationalCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ExactOnlyReparametrizesRationalCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ApproximationModeUsesExactRationalReparametrizationWhenPossible",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ApproximationModeUsesExactRationalReparametrizationWhenPossible",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ExactRationalReparametrizationRepeatPerformKeepsReportStable",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ExactRationalReparametrizationRepeatPerformKeepsReportStable",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_VClosedNetwork_ProducesVPeriodicSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_VClosedNetwork_ProducesVPeriodicSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseWavyFiveByFiveNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseWavyFiveByFiveNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseSaddleSevenByFourNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseSaddleSevenByFourNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseRippleFourBySevenNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseRippleFourBySevenNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseWavyEightByEightNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseWavyEightByEightNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.TranslatedScaledSixByFiveNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__TranslatedScaledSixByFiveNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.SmallScaledFiveBySixNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__SmallScaledFiveBySixNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseWavyNetwork_ParallelConstructionMatchesSerialQuality",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseWavyNetwork_ParallelConstructionMatchesSerialQuality",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseSaddleNetwork_RepeatedPerformMaintainsQuality",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseSaddleNetwork_RepeatedPerformMaintainsQuality",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseRippleNineByThreeNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseRippleNineByThreeNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.DenseWavyThreeByNineNetwork_InterpolatesAllInputCurves",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__DenseWavyThreeByNineNetwork_InterpolatesAllInputCurves",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.ClosedBSplineProfilesWithInteriorGuides_ProducePeriodicSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__ClosedBSplineProfilesWithInteriorGuides_ProducePeriodicSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomFill_Gordon.NetworkSurface_ClosedNetworkWithNonUnitUParameters_ProducesUPeriodicSurface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_Gordon_Test.cxx",
+      "source_sha256": "41c3d512488a7a6b10030770c495d612c67077911b380630db8cbbc1bafd7a40",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geomfill_gordon",
+      "rust_test": "GeomFill_Gordon__NetworkSurface_ClosedNetworkWithNonUnitUParameters_ProducesUPeriodicSurface",
+      "rust_source": "crates/tkgeomalgo/tests/geomfill_gordon.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.Circle_EvalD0_ReturnsValidPoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__Circle_EvalD0_ReturnsValidPoint",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.Circle_EvalD1D2D3_ReturnsValidDerivatives",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__Circle_EvalD1D2D3_ReturnsValidDerivatives",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.Line_EvalD2_ZeroSecondDerivative",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__Line_EvalD2_ZeroSecondDerivative",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.BSplineCurve_EvalD1_ConsistentWithOldAPI",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__BSplineCurve_EvalD1_ConsistentWithOldAPI",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.EvalDN_N1_ConsistentWithEvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__EvalDN_N1_ConsistentWithEvalD1",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.OffsetCurve_EvalD0_ReturnsNulloptAtSingular",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__OffsetCurve_EvalD0_ReturnsNulloptAtSingular",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.OffsetCurve_D0Wrapper_ThrowsAtSingular",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__OffsetCurve_D0Wrapper_ThrowsAtSingular",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.Parabola_EvalD3_ZeroThirdDerivative",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__Parabola_EvalD3_ZeroThirdDerivative",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.BSplineCurve_EvalDN_InvalidN_Throws",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__BSplineCurve_EvalDN_InvalidN_Throws",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.TrimmedCurve_EvalD1_DelegatesToBasis",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__TrimmedCurve_EvalD1_DelegatesToBasis",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_CurveEvalTest.OffsetCurve_EvalD1_DegenerateAtCollapsed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_CurveEval_Test.cxx",
+      "source_sha256": "66efeb8872243cc0312c2b7446546256b89f77e36ce2366f5f4a1f2afe8d40f3",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geom_curve_eval",
+      "rust_test": "Geom_CurveEvalTest__OffsetCurve_EvalD1_DegenerateAtCollapsed",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geom_curve_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC862_ExtremaBSplineAndLine",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC862_ExtremaBSplineAndLine",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC26269_1_TrimmedParallelLines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC26269_1_TrimmedParallelLines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC26269_2_TrimmedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC26269_2_TrimmedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29426_1_CircleSphereMinimumDistance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29426_1_CircleSphereMinimumDistance",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29426_2_CircleSphereMinimumDistance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29426_2_CircleSphereMinimumDistance",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_2_BoundedParallelBSplines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_2_BoundedParallelBSplines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_10_BoundedParallelLines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_10_BoundedParallelLines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_20_ConcentricTrimmedCircles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_20_ConcentricTrimmedCircles",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_30_ConcentricTrimmedCircles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_30_ConcentricTrimmedCircles",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_40_CircleAndAxisSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_40_CircleAndAxisSegment",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_43_CircleAndDegenerateSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_43_CircleAndDegenerateSegment",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_3_BoundedParallelSegments",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_3_BoundedParallelSegments",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_4_ParallelTrimmedLines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_4_ParallelTrimmedLines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_5_SeparatedTrimmedLines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_5_SeparatedTrimmedLines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_6_ParallelLines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_6_ParallelLines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_7_ParallelTrimmedLine",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_7_ParallelTrimmedLine",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_8_ParallelTrimmedFirstLine",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_8_ParallelTrimmedFirstLine",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_9_OppositeDirectionLines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_9_OppositeDirectionLines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_11_SeparatedOppositeLines",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_11_SeparatedOppositeLines",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_12_OppositeTrimmedSegments",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_12_OppositeTrimmedSegments",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_13_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_13_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_14_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_14_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_15_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_15_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_16_FiniteConcentricMinimum",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_16_FiniteConcentricMinimum",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_17_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_17_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_18_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_18_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_19_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_19_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_21_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_21_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_22_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_22_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_23_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_23_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_24_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_24_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_25_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_25_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_26_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_26_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_27_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_27_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_28_FiniteConcentricMinimum",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_28_FiniteConcentricMinimum",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_29_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_29_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_31_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_31_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_32_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_32_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_33_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_33_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_34_AsymmetricConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_34_AsymmetricConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_35_OppositeConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_35_OppositeConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_36_ParallelFullCircleAndArc",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_36_ParallelFullCircleAndArc",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_37_SeparatedConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_37_SeparatedConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_38_ParallelConcentricArcs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_38_ParallelConcentricArcs",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_39_CircleAndAxisSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_39_CircleAndAxisSegment",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_41_CircleAndNearAxisSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_41_CircleAndNearAxisSegment",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_ExtremaCurveCurve_Test.OCC29712_42_CircleAndTooNearAxisSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_ExtremaCurveCurve_Test.cxx",
+      "source_sha256": "8a571e6a1eded6914155b387e4a5aa909ec07135b258e9c531c895cbcd2b25d1",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_extrema_curve_curve",
+      "rust_test": "GeomAPI_ExtremaCurveCurve_Test__OCC29712_42_CircleAndTooNearAxisSegment",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_extrema_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomAPI_Interpolate_Test.BUC60902_TangentPreservation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomAPI_Interpolate_Test.cxx",
+      "source_sha256": "a4d7580b6a677f7bfdf3016b05072af65e3fbea63d1574889a7fffc8750a7c71",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "tkg3d_geomapi_interpolate",
+      "rust_test": "GeomAPI_Interpolate_Test__BUC60902_TangentPreservation",
+      "rust_source": "crates/tkgeomalgo/tests/tkg3d_geomapi_interpolate.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
