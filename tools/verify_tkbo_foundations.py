@@ -26,6 +26,7 @@ def corpus() -> str:
     requests += intersection_requests()
     requests += [f'localize {count} {minimum} {steps} {depth}'
                  for count, minimum, steps, depth in product([-1, 0, 4], [-0.0, 0.1], [0, 1, 101, 420], [-2, 0, 3])]
+    requests += surface_grid_requests()
     return '\n'.join(requests) + '\n'
 
 
@@ -64,6 +65,15 @@ def intersection_requests() -> list[str]:
                  for a, b, c in product([-0.0, 0.0, 2.5], [-3, 0, 4], [0, 1])]
     requests += [f'intersection_curve {kind} {parameter} {tol} {tol*3}'
                  for kind, parameter, tol in product(range(4), [-10, 0, 0.25, 1, 2, 3, 4, 5, 10], [0, 1e-7, -1])]
+    return requests
+
+
+def surface_grid_requests() -> list[str]:
+    """Exercise shared arrays, strict/reversed/empty frames and native map copy order."""
+    frames = [(-10, 10), (1, 3), (0, 0), (5, -5), (-3, -1)]
+    requests = [f'surface_grid {u} {v} {du} {dv} {a} {b} {c} {d}'
+                for u, v, du, dv, (a, b), (c, d) in product([1, 3], [1, 4], [-1, 0, 1], [-1, 0, 1], frames, frames)]
+    requests += [f'surface_cache {count}' for count in [0, 1, 101, 420, 1001]]
     return requests
 
 
