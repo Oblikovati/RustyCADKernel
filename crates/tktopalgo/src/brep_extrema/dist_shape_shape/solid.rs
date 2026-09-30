@@ -49,7 +49,12 @@ fn vertex_tasks(map: &IndexedMapOfShape) -> Result<Vec<Vec<Shape>>, Failure> {
 impl Treatment {
     /// `TreatmentFunctor::operator()`: the vertices of one task classified in the solid
     /// until one is IN (or another task found one).
-    fn run(&self, solid: &Shape, vertices: &[Shape], range: &ProgressRange<'_>) -> Result<(), Failure> {
+    fn run(
+        &self,
+        solid: &Shape,
+        vertices: &[Shape],
+        range: &ProgressRange<'_>,
+    ) -> Result<(), Failure> {
         let scope = ProgressScope::unnamed(range, vertices.len() as f64, false);
         let mut classifier = BRepClass3dSolidClassifier::with_shape(solid)?;
         for vertex in vertices {
@@ -67,7 +72,12 @@ impl Treatment {
                 let mut found = lock(&self.found);
                 self.inner_sol.store(true, Ordering::Release);
                 self.is_done.store(true, Ordering::Release);
-                found.push(BRepExtremaSolutionElem::with_vertex(0.0, point, BRepExtremaSupportType::IsVertex, &vertex));
+                found.push(BRepExtremaSolutionElem::with_vertex(
+                    0.0,
+                    point,
+                    BRepExtremaSupportType::IsVertex,
+                    &vertex,
+                ));
                 break;
             }
         }
@@ -82,16 +92,27 @@ impl BRepExtremaDistShapeShape {
     /// on both shapes. In a parallel run, tasks that find a vertex IN before seeing the
     /// flag of another add their own solution (their order follows the thread timing).
     /// Returns false when the progress is stopped.
-    pub(super) fn solid_treatment(&mut self, solid: &Shape, vertex_map: &IndexedMapOfShape, range: &ProgressRange<'_>) -> Result<bool, Failure> {
+    pub(super) fn solid_treatment(
+        &mut self,
+        solid: &Shape,
+        vertex_map: &IndexedMapOfShape,
+        range: &ProgressRange<'_>,
+    ) -> Result<bool, Failure> {
         let tasks: Vec<Vec<Shape>> = vertex_tasks(vertex_map)?;
         let treatment = Treatment {
             inner_sol: AtomicBool::new(self.my_inner_sol),
             is_done: AtomicBool::new(self.my_is_done),
             found: Mutex::new(Vec::new()),
         };
-        let scope = ProgressScope::with_literal(range, "Solid treatment", tasks.len() as f64, false);
+        let scope =
+            ProgressScope::with_literal(range, "Solid treatment", tasks.len() as f64, false);
         let functor_range = scope.next(1.0);
-        let functor_scope = ProgressScope::with_literal(&functor_range, "Search for the inner solid", tasks.len() as f64, false);
+        let functor_scope = ProgressScope::with_literal(
+            &functor_range,
+            "Search for the inner solid",
+            tasks.len() as f64,
+            false,
+        );
         let ranges = task_ranges(&functor_scope, tasks.len());
         let run = run_tasks(tasks.len() as i32, self.my_is_multi_thread, |index| {
             let i = index as usize;
@@ -99,7 +120,10 @@ impl BRepExtremaDistShapeShape {
         });
         // The tasks write the member solutions and reference directly: they are kept
         // when a task raises; the flags are copied back only after the loop.
-        let found: Vec<BRepExtremaSolutionElem> = treatment.found.into_inner().unwrap_or_else(|p| p.into_inner());
+        let found: Vec<BRepExtremaSolutionElem> = treatment
+            .found
+            .into_inner()
+            .unwrap_or_else(|p| p.into_inner());
         if !found.is_empty() {
             self.my_dist_ref = 0.0;
         }

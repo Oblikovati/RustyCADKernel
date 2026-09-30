@@ -123,13 +123,21 @@ impl C0Search<'_> {
             }
             let pt: Point3 = ext.point(ii)?;
             // Pt is on the other edge: S2 for the first side, S1 for the second one.
-            let known = if side.first { &*self.seq_sol2 } else { &*self.seq_sol1 };
+            let known = if side.first {
+                &*self.seq_sol2
+            } else {
+                &*self.seq_sol1
+            };
             if !tri_solution(known, &pt) {
                 continue;
             }
             let t: f64 = ext.parameter(ii)?;
             if (t - udeb).abs() >= eps_p && (t - ufin).abs() > eps_p {
-                self.append(side, (dst_min, point, side.e, parameter), (pt, side.e_other, t));
+                self.append(
+                    side,
+                    (dst_min, point, side.e, parameter),
+                    (pt, side.e_other, t),
+                );
             }
         }
         Ok(())
@@ -137,13 +145,29 @@ impl C0Search<'_> {
 
     /// Lowers the running minimum to `dst` and appends the pair of edge solutions, in
     /// the order of S1 and S2.
-    fn append(&mut self, side: &Side<'_>, (dst, point, e, t): (f64, Point3, &Edge, f64), (pt, e_other, t_other): (Point3, &Edge, f64)) {
+    fn append(
+        &mut self,
+        side: &Side<'_>,
+        (dst, point, e, t): (f64, Point3, &Edge, f64),
+        (pt, e_other, t_other): (Point3, &Edge, f64),
+    ) {
         if *self.m_dst_ref > dst {
             *self.m_dst_ref = dst;
         }
-        let sol1 = BRepExtremaSolutionElem::with_edge(dst, point, BRepExtremaSupportType::IsOnEdge, e, t);
-        let sol2 = BRepExtremaSolutionElem::with_edge(dst, pt, BRepExtremaSupportType::IsOnEdge, e_other, t_other);
-        let (first, second) = if side.first { (sol1, sol2) } else { (sol2, sol1) };
+        let sol1 =
+            BRepExtremaSolutionElem::with_edge(dst, point, BRepExtremaSupportType::IsOnEdge, e, t);
+        let sol2 = BRepExtremaSolutionElem::with_edge(
+            dst,
+            pt,
+            BRepExtremaSupportType::IsOnEdge,
+            e_other,
+            t_other,
+        );
+        let (first, second) = if side.first {
+            (sol1, sol2)
+        } else {
+            (sol2, sol1)
+        };
         self.seq_sol1.push(first);
         self.seq_sol2.push(second);
     }

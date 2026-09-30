@@ -37,7 +37,12 @@ pub(super) fn min_solution(
 
 /// `isOnBoundary`: true when a vertex of `edge` (visited with the iterator) has its
 /// parameter within `p_tol` of `param` and its point within its tolerance of `sol`.
-pub(super) fn is_on_boundary(edge: &Edge, sol: &Point3, param: f64, p_tol: f64) -> Result<bool, Failure> {
+pub(super) fn is_on_boundary(
+    edge: &Edge,
+    sol: &Point3,
+    param: f64,
+    p_tol: f64,
+) -> Result<bool, Failure> {
     for child in ShapeIterator::new(edge, true, true) {
         let vertex = topods::vertex(&child)?;
         let v_param: f64 = BRepTool::parameter(&vertex, edge)?;
@@ -57,7 +62,10 @@ pub(super) fn near(a: f64, b: f64, eps: f64) -> bool {
 
 /// The smallest of the square distances `1..=nb` that `square_distance` reads (the
 /// Dstmin loop of every overload), before its square root.
-pub(super) fn min_of(nb: i32, square_distance: impl Fn(i32) -> Result<f64, Failure>) -> Result<f64, Failure> {
+pub(super) fn min_of(
+    nb: i32,
+    square_distance: impl Fn(i32) -> Result<f64, Failure>,
+) -> Result<f64, Failure> {
     let mut dst_min: f64 = square_distance(1)?;
     for i in 2..=nb {
         let s_dst: f64 = square_distance(i)?;

@@ -236,13 +236,19 @@ impl BRepExtremaExtFF {
     /// `ParameterOnFace1(N, U, V)`: the first face parameters of the `N`-th kept
     /// extremum; `let (u, v) = ext.parameter_on_face1(1)?;`.
     pub fn parameter_on_face1(&self, n: i32) -> Result<(f64, f64), Failure> {
-        Ok(sequence_value("BRepExtrema_ExtFF::myPointsOnS1", &self.my_points_on_s1, n)?.parameter())
+        Ok(
+            sequence_value("BRepExtrema_ExtFF::myPointsOnS1", &self.my_points_on_s1, n)?
+                .parameter(),
+        )
     }
 
     /// `ParameterOnFace2(N, U, V)`: the second face parameters of the `N`-th kept
     /// extremum; `let (u, v) = ext.parameter_on_face2(1)?;`.
     pub fn parameter_on_face2(&self, n: i32) -> Result<(f64, f64), Failure> {
-        Ok(sequence_value("BRepExtrema_ExtFF::myPointsOnS2", &self.my_points_on_s2, n)?.parameter())
+        Ok(
+            sequence_value("BRepExtrema_ExtFF::myPointsOnS2", &self.my_points_on_s2, n)?
+                .parameter(),
+        )
     }
 
     /// `PointOnFace1(N)`: the first face point of the `N`-th kept extremum;

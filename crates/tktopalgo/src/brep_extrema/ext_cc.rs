@@ -157,7 +157,9 @@ impl BRepExtremaExtCC {
         for call in &self.calls {
             last = match call {
                 CurveCurveCall::Second(second) => second.load(&mut ext, 2),
-                CurveCurveCall::Perform(first) => first.load(&mut ext, 1).and_then(|()| ext.perform()),
+                CurveCurveCall::Perform(first) => {
+                    first.load(&mut ext, 1).and_then(|()| ext.perform())
+                }
             };
         }
         self.results = CurveCurveResults::read(&ext);

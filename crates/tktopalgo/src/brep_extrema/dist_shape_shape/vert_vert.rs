@@ -33,7 +33,12 @@ impl VertexTask<'_> {
     /// `VertexFunctor::operator()`: the vertices of the band against every vertex of the
     /// second map; a smaller distance (by more than the deflection) replaces the task
     /// solutions, an equal one (within it) is appended.
-    fn run(&self, (first, last): (i32, i32), range: &ProgressRange<'_>, solution: &mut TaskSolution) -> Result<(), Failure> {
+    fn run(
+        &self,
+        (first, last): (i32, i32),
+        range: &ProgressRange<'_>,
+        solution: &mut TaskSolution,
+    ) -> Result<(), Failure> {
         let count2: i32 = self.map2.extent() as i32;
         solution.dist = self.start_dist;
         let scope = ProgressScope::unnamed(range, f64::from(last) - f64::from(first), false);
@@ -46,8 +51,22 @@ impl VertexTask<'_> {
             for index2 in 1..=count2 {
                 let (vertex2, point2) = vertex_point(self.map2, index2)?;
                 let dist: f64 = point1.distance(&point2);
-                let sol1 = || BRepExtremaSolutionElem::with_vertex(dist, point1, BRepExtremaSupportType::IsVertex, &vertex1);
-                let sol2 = || BRepExtremaSolutionElem::with_vertex(dist, point2, BRepExtremaSupportType::IsVertex, &vertex2);
+                let sol1 = || {
+                    BRepExtremaSolutionElem::with_vertex(
+                        dist,
+                        point1,
+                        BRepExtremaSupportType::IsVertex,
+                        &vertex1,
+                    )
+                };
+                let sol2 = || {
+                    BRepExtremaSolutionElem::with_vertex(
+                        dist,
+                        point2,
+                        BRepExtremaSupportType::IsVertex,
+                        &vertex2,
+                    )
+                };
                 if dist < solution.dist - self.eps {
                     solution.shape1 = vec![sol1()];
                     solution.shape2 = vec![sol2()];
@@ -70,11 +89,19 @@ impl BRepExtremaDistShapeShape {
     /// bands of the first map (at least 10 vertices a band), one task per band; then the
     /// task results in order lower the reference (an equal one within the deflection is
     /// appended and replaces the reference). False when the progress is stopped.
-    pub(super) fn distance_vert_vert(&mut self, range: &ProgressRange<'_>) -> Result<bool, Failure> {
+    pub(super) fn distance_vert_vert(
+        &mut self,
+        range: &ProgressRange<'_>,
+    ) -> Result<bool, Failure> {
         let bands: Vec<(i32, i32)> = index_bands(self.maps1.vertices.extent() as i32, 10);
         let dist_scope = ProgressScope::unnamed(range, 1.0, false);
         let functor_range = dist_scope.next(1.0);
-        let scope = ProgressScope::with_literal(&functor_range, "Vertices distances calculating", bands.len() as f64, false);
+        let scope = ProgressScope::with_literal(
+            &functor_range,
+            "Vertices distances calculating",
+            bands.len() as f64,
+            false,
+        );
         let ranges = task_ranges(&scope, bands.len());
         let solutions: Vec<Mutex<TaskSolution>> = bands.iter().map(|_| Mutex::default()).collect();
         let task = VertexTask {
@@ -94,7 +121,9 @@ impl BRepExtremaDistShapeShape {
             return Ok(false);
         }
         for slot in solutions {
-            let solution: TaskSolution = slot.into_inner().unwrap_or_else(|poison| poison.into_inner());
+            let solution: TaskSolution = slot
+                .into_inner()
+                .unwrap_or_else(|poison| poison.into_inner());
             if solution.dist < self.my_dist_ref - self.my_eps {
                 self.my_solutions_shape1 = solution.shape1;
                 self.my_solutions_shape2 = solution.shape2;

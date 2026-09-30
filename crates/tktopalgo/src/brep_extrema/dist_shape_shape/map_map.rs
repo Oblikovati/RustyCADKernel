@@ -6,7 +6,9 @@
 //! The map-to-map steps of `BRepExtrema_DistShapeShape`: the box pairs within the
 //! reference distance, sorted by box distance, then the sub-shape distances.
 use super::BRepExtremaDistShapeShape;
-use super::tasks::{CheckPair, MapPair, TaskSolution, index_bands, lock, nb_threads, run_tasks, task_ranges};
+use super::tasks::{
+    CheckPair, MapPair, TaskSolution, index_bands, lock, nb_threads, run_tasks, task_ranges,
+};
 use crate::brep_extrema::BRepExtremaDistanceSS;
 use rustycad_tkernel::message::{ProgressRange, ProgressScope};
 use rustycad_tkernel::standard::Failure;
@@ -16,7 +18,12 @@ use std::sync::Mutex;
 
 /// `DistancePairFunctor::operator()`: the pairs of the band whose non-void boxes are
 /// within the reference distance (plus the deflection).
-fn pair_task(step: &MapPair<'_>, (first, last): (i32, i32), (dist_ref, eps): (f64, f64), range: &ProgressRange<'_>) -> Vec<CheckPair> {
+fn pair_task(
+    step: &MapPair<'_>,
+    (first, last): (i32, i32),
+    (dist_ref, eps): (f64, f64),
+    range: &ProgressRange<'_>,
+) -> Vec<CheckPair> {
     let mut pairs: Vec<CheckPair> = Vec::new();
     let scope = ProgressScope::unnamed(range, f64::from(last) - f64::from(first), false);
     for index1 in first..=last {
@@ -32,7 +39,11 @@ fn pair_task(step: &MapPair<'_>, (first, last): (i32, i32), (dist_ref, eps): (f6
             }
             let distance: f64 = box1.distance(box2);
             if distance - dist_ref < eps {
-                pairs.push(CheckPair { index1, index2, distance });
+                pairs.push(CheckPair {
+                    index1,
+                    index2,
+                    distance,
+                });
             }
         }
     }
@@ -68,7 +79,12 @@ struct DistanceTask<'a> {
 impl DistanceTask<'_> {
     /// `DistanceFunctor::operator()`: the sub-shape distances of the task pairs, until a
     /// pair whose box distance exceeds the task distance plus the deflection.
-    fn run(&self, pairs: &[CheckPair], range: &ProgressRange<'_>, solution: &mut TaskSolution) -> Result<(), Failure> {
+    fn run(
+        &self,
+        pairs: &[CheckPair],
+        range: &ProgressRange<'_>,
+        solution: &mut TaskSolution,
+    ) -> Result<(), Failure> {
         let scope = ProgressScope::unnamed(range, pairs.len() as f64, false);
         solution.dist = self.start_dist;
         for pair in pairs {
@@ -91,7 +107,8 @@ impl DistanceTask<'_> {
         let shape1 = self.step.map1.find_key(i1)?;
         let shape2 = self.step.map2.find_key(i2)?;
         let options = (ExtFlag::MinMax, ExtAlgo::Grad);
-        let tool = BRepExtremaDistanceSS::new(shape1, shape2, boxes, solution.dist, self.eps, options)?;
+        let tool =
+            BRepExtremaDistanceSS::new(shape1, shape2, boxes, solution.dist, self.eps, options)?;
         let dist: f64 = tool.dist_value();
         if !tool.is_done() {
             return Ok(());
@@ -116,7 +133,11 @@ impl BRepExtremaDistShapeShape {
     /// the box pairs within the reference (bands of the first map, one task a band),
     /// sorted by box distance and dealt to at most one task per thread; then the task
     /// results in order lower the reference. False when the progress is stopped.
-    pub(super) fn distance_map_map(&mut self, step: &MapPair<'_>, range: &ProgressRange<'_>) -> Result<bool, Failure> {
+    pub(super) fn distance_map_map(
+        &mut self,
+        step: &MapPair<'_>,
+        range: &ProgressRange<'_>,
+    ) -> Result<bool, Failure> {
         let count1: i32 = step.map1.extent() as i32;
         if count1 == 0 || step.map2.extent() == 0 {
             return Ok(true);
@@ -134,7 +155,8 @@ impl BRepExtremaDistShapeShape {
         pairs.sort_by(by_box_distance);
         let nb_tasks: usize = pairs.len().min(nb_threads() as usize);
         let dealt: Vec<Vec<CheckPair>> = deal(&pairs, nb_tasks);
-        let solutions: Option<Vec<TaskSolution>> = self.pair_distances(step, &dealt, &twin_scope)?;
+        let solutions: Option<Vec<TaskSolution>> =
+            self.pair_distances(step, &dealt, &twin_scope)?;
         let Some(solutions) = solutions else {
             return Ok(false);
         };
@@ -144,9 +166,19 @@ impl BRepExtremaDistShapeShape {
 
     /// The `DistancePairFunctor` run: the pairs of every band in band order, or `None`
     /// when the progress is stopped.
-    fn box_pairs(&self, step: &MapPair<'_>, bands: &[(i32, i32)], twin_scope: &ProgressScope<'_>) -> Result<Option<Vec<CheckPair>>, Failure> {
+    fn box_pairs(
+        &self,
+        step: &MapPair<'_>,
+        bands: &[(i32, i32)],
+        twin_scope: &ProgressScope<'_>,
+    ) -> Result<Option<Vec<CheckPair>>, Failure> {
         let functor_range = twin_scope.next(0.15);
-        let scope = ProgressScope::with_literal(&functor_range, "Boxes distances calculating", bands.len() as f64, false);
+        let scope = ProgressScope::with_literal(
+            &functor_range,
+            "Boxes distances calculating",
+            bands.len() as f64,
+            false,
+        );
         let ranges = task_ranges(&scope, bands.len());
         let lists: Vec<Mutex<Vec<CheckPair>>> = bands.iter().map(|_| Mutex::default()).collect();
         let limits = (self.my_dist_ref, self.my_eps);
@@ -158,15 +190,27 @@ impl BRepExtremaDistShapeShape {
         if !twin_scope.more() {
             return Ok(None);
         }
-        let lists = lists.into_iter().map(|list| list.into_inner().unwrap_or_else(|p| p.into_inner()));
+        let lists = lists
+            .into_iter()
+            .map(|list| list.into_inner().unwrap_or_else(|p| p.into_inner()));
         Ok(Some(lists.flatten().collect()))
     }
 
     /// The `DistanceFunctor` run over the dealt pairs: the task solutions, or `None` when
     /// the progress is stopped.
-    fn pair_distances(&self, step: &MapPair<'_>, dealt: &[Vec<CheckPair>], twin_scope: &ProgressScope<'_>) -> Result<Option<Vec<TaskSolution>>, Failure> {
+    fn pair_distances(
+        &self,
+        step: &MapPair<'_>,
+        dealt: &[Vec<CheckPair>],
+        twin_scope: &ProgressScope<'_>,
+    ) -> Result<Option<Vec<TaskSolution>>, Failure> {
         let functor_range = twin_scope.next(0.85);
-        let scope = ProgressScope::with_literal(&functor_range, "Shapes distances calculating", dealt.len() as f64, false);
+        let scope = ProgressScope::with_literal(
+            &functor_range,
+            "Shapes distances calculating",
+            dealt.len() as f64,
+            false,
+        );
         let ranges = task_ranges(&scope, dealt.len());
         let solutions: Vec<Mutex<TaskSolution>> = dealt.iter().map(|_| Mutex::default()).collect();
         let task = DistanceTask {
@@ -181,7 +225,12 @@ impl BRepExtremaDistShapeShape {
         if !twin_scope.more() {
             return Ok(None);
         }
-        Ok(Some(solutions.into_iter().map(|slot| slot.into_inner().unwrap_or_else(|p| p.into_inner())).collect()))
+        Ok(Some(
+            solutions
+                .into_iter()
+                .map(|slot| slot.into_inner().unwrap_or_else(|p| p.into_inner()))
+                .collect(),
+        ))
     }
 
     /// The merge of the task solutions of a map-to-map step, in task order.

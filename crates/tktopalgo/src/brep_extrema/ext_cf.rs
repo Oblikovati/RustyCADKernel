@@ -137,7 +137,10 @@ impl BRepExtremaExtCF {
         let curve = BRepAdaptorCurve::with_edge(edge)?;
         self.my_hs = Handle::new(surf);
         let tol_s: f64 = BRepTool::face_tolerance(face)?.min(precision::confusion());
-        let tol_s: f64 = self.my_hs.u_resolution(tol_s)?.min(self.my_hs.v_resolution(tol_s)?);
+        let tol_s: f64 = self
+            .my_hs
+            .u_resolution(tol_s)?
+            .min(self.my_hs.v_resolution(tol_s)?);
         let tol_s: f64 = tol_s.max(precision::p_confusion());
         let tol_c: f64 = BRepTool::edge_tolerance(edge)?.min(precision::confusion());
         let tol_c: f64 = curve.resolution(tol_c)?.max(precision::p_confusion());

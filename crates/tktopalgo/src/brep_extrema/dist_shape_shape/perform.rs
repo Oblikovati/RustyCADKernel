@@ -45,7 +45,10 @@ impl ShapeMaps {
 
 /// True for a solid or a compound of solids (the shapes of the inner treatment).
 fn is_solid(shape: &topods::Shape) -> Result<bool, Failure> {
-    Ok(matches!(shape.shape_type()?, ShapeEnum::Solid | ShapeEnum::CompSolid))
+    Ok(matches!(
+        shape.shape_type()?,
+        ShapeEnum::Solid | ShapeEnum::CompSolid
+    ))
 }
 
 impl BRepExtremaDistShapeShape {
@@ -72,7 +75,12 @@ impl BRepExtremaDistShapeShape {
         let is_solid2: bool = is_solid(&self.my_shape2)?;
         // One step per DistanceMapMap call, plus one per solid treatment.
         let root_steps: i32 = 9 + i32::from(is_solid1) + i32::from(is_solid2);
-        let root_scope = ProgressScope::with_literal(range, "calculating distance", f64::from(root_steps), false);
+        let root_scope = ProgressScope::with_literal(
+            range,
+            "calculating distance",
+            f64::from(root_steps),
+            false,
+        );
         if is_solid1 {
             let shape = self.my_shape1.clone();
             let vertices = self.maps2.vertices.clone();

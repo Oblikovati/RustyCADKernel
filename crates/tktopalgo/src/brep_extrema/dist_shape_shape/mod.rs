@@ -7,12 +7,13 @@
 //! parallel functors of the native file in `tasks`, the solid treatment in `solid`
 //! and `Dump` in `dump`.
 mod dump;
+mod map_map;
 mod perform;
 mod solid;
 mod tasks;
 mod vert_vert;
-mod map_map;
 
+use super::extrema_capture::sequence_value;
 use super::{BRepExtremaSolutionElem, BRepExtremaSupportType, uncompatible_shape};
 use rustycad_tkbrep::topexp;
 use rustycad_tkbrep::topods::Shape;
@@ -25,7 +26,6 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::extrema::{ExtAlgo, ExtFlag};
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::Point3;
-use super::extrema_capture::sequence_value;
 
 /// The vertex, edge and face maps of one shape and their boxes (`myMapV1`, `myBV1`, ...).
 #[derive(Clone, Default)]
@@ -135,7 +135,13 @@ impl BRepExtremaDistShapeShape {
         shape2: &Shape,
         options: BRepExtremaObsoleteOptions,
     ) -> Result<Self, Failure> {
-        Self::with_deflection(shape1, shape2, precision::confusion(), options, &ProgressRange::default())
+        Self::with_deflection(
+            shape1,
+            shape2,
+            precision::confusion(),
+            options,
+            &ProgressRange::default(),
+        )
     }
 
     /// `BRepExtrema_DistShapeShape(Shape1, Shape2, theDeflection, F, A, theRange)`: loads
@@ -191,7 +197,9 @@ impl BRepExtremaDistShapeShape {
     /// `dist.value()?`.
     pub fn value(&self) -> Result<f64, Failure> {
         if !self.my_is_done {
-            return Err(not_done("BRepExtrema_DistShapeShape::Value: There's no solution "));
+            return Err(not_done(
+                "BRepExtrema_DistShapeShape::Value: There's no solution ",
+            ));
         }
         Ok(self.my_dist_ref)
     }
@@ -238,7 +246,9 @@ impl BRepExtremaDistShapeShape {
     /// The support of a solution: its vertex, edge or face.
     fn support(&self, first: bool, n: i32, member: &str) -> Result<Shape, Failure> {
         if !self.my_is_done {
-            return Err(not_done(&format!("BRepExtrema_DistShapeShape::{member}: There's no solution ")));
+            return Err(not_done(&format!(
+                "BRepExtrema_DistShapeShape::{member}: There's no solution "
+            )));
         }
         let sol: BRepExtremaSolutionElem = self.solution(first, n)?;
         Ok(match sol.support_kind() {
@@ -262,9 +272,17 @@ impl BRepExtremaDistShapeShape {
 
     /// A solution whose support must have the kind `expected` for a parameter read;
     /// StdFail_NotDone when not done, BRepExtrema_UnCompatibleShape for another kind.
-    fn solution_on(&self, first: bool, n: i32, expected: BRepExtremaSupportType, member: &str) -> Result<BRepExtremaSolutionElem, Failure> {
+    fn solution_on(
+        &self,
+        first: bool,
+        n: i32,
+        expected: BRepExtremaSupportType,
+        member: &str,
+    ) -> Result<BRepExtremaSolutionElem, Failure> {
         if !self.my_is_done {
-            return Err(not_done(&format!("BRepExtrema_DistShapeShape::{member}: There's no solution")));
+            return Err(not_done(&format!(
+                "BRepExtrema_DistShapeShape::{member}: There's no solution"
+            )));
         }
         let sol: BRepExtremaSolutionElem = self.solution(first, n)?;
         if sol.support_kind() != expected {

@@ -6,7 +6,9 @@
 use super::SearchState;
 use super::helpers::{is_on_boundary, min_of, near, tri_solution};
 use crate::brep_class::BRepClassFaceClassifier;
-use crate::brep_extrema::{BRepExtremaExtPC, BRepExtremaExtPF, BRepExtremaSolutionElem, BRepExtremaSupportType};
+use crate::brep_extrema::{
+    BRepExtremaExtPC, BRepExtremaExtPF, BRepExtremaSolutionElem, BRepExtremaSupportType,
+};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::precision;
@@ -30,8 +32,18 @@ impl SearchState {
         let dst: f64 = p1.distance(&p2);
         if self.accepts(dst) {
             self.improve(dst);
-            seq1.push(BRepExtremaSolutionElem::with_vertex(dst, p1, BRepExtremaSupportType::IsVertex, s1));
-            seq2.push(BRepExtremaSolutionElem::with_vertex(dst, p2, BRepExtremaSupportType::IsVertex, s2));
+            seq1.push(BRepExtremaSolutionElem::with_vertex(
+                dst,
+                p1,
+                BRepExtremaSupportType::IsVertex,
+                s1,
+            ));
+            seq2.push(BRepExtremaSolutionElem::with_vertex(
+                dst,
+                p2,
+                BRepExtremaSupportType::IsVertex,
+                s2,
+            ));
         }
         Ok(())
     }
@@ -71,8 +83,19 @@ impl SearchState {
             let t: f64 = ext.parameter(i)?;
             if !is_on_boundary(s2, &pt, t, eps_p)? {
                 self.improve(dst_min);
-                seq1.push(BRepExtremaSolutionElem::with_vertex(dst_min, p1, BRepExtremaSupportType::IsVertex, s1));
-                seq2.push(BRepExtremaSolutionElem::with_edge(dst_min, pt, BRepExtremaSupportType::IsOnEdge, s2, t));
+                seq1.push(BRepExtremaSolutionElem::with_vertex(
+                    dst_min,
+                    p1,
+                    BRepExtremaSupportType::IsVertex,
+                    s1,
+                ));
+                seq2.push(BRepExtremaSolutionElem::with_edge(
+                    dst_min,
+                    pt,
+                    BRepExtremaSupportType::IsOnEdge,
+                    s2,
+                    t,
+                ));
             }
         }
         Ok(())
@@ -113,8 +136,20 @@ impl SearchState {
             classifier.perform(s2, &Point2::new(u, v), tol, false, 0.1)?;
             if classifier.state() == State::In {
                 self.improve(dst_min);
-                seq1.push(BRepExtremaSolutionElem::with_vertex(dst_min, p1, BRepExtremaSupportType::IsVertex, s1));
-                seq2.push(BRepExtremaSolutionElem::with_face(dst_min, pt, BRepExtremaSupportType::IsInFace, s2, u, v));
+                seq1.push(BRepExtremaSolutionElem::with_vertex(
+                    dst_min,
+                    p1,
+                    BRepExtremaSupportType::IsVertex,
+                    s1,
+                ));
+                seq2.push(BRepExtremaSolutionElem::with_face(
+                    dst_min,
+                    pt,
+                    BRepExtremaSupportType::IsInFace,
+                    s2,
+                    u,
+                    v,
+                ));
             }
         }
         Ok(())

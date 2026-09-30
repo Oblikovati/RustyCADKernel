@@ -14,7 +14,9 @@ use rustycad_tkernel::standard::exceptions::null_object;
 use rustycad_tkernel::standard::real::{real_first, real_last};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
-use rustycad_tkg3d::geom::{GeomCurve, GeomRectangularTrimmedSurface, GeomSurface, GeomTrimmedCurve};
+use rustycad_tkg3d::geom::{
+    GeomCurve, GeomRectangularTrimmedSurface, GeomSurface, GeomTrimmedCurve,
+};
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkgeomalgo::geom_api::{ProjectPointOnCurve, ProjectPointOnSurf};
 use rustycad_tkgeombase::extrema::ExtAlgo;
@@ -203,9 +205,9 @@ fn infinite_face_bounds(
         let is_trim: bool = [u1, u2, v1, v2].iter().all(|u| precision::is_infinite(*u));
         return Ok(is_trim.then_some(unknown));
     }
-    let geometry = surface
-        .get()
-        .ok_or_else(|| null_object("BRepExtrema_DistanceSS: TRIM_INFINIT_FACE on a face without surface"))?;
+    let geometry = surface.get().ok_or_else(|| {
+        null_object("BRepExtrema_DistanceSS: TRIM_INFINIT_FACE on a face without surface")
+    })?;
     let (u1, u2, v1, v2) = geometry.bounds();
     let mut known: [(bool, f64); 4] = unknown;
     let mut is_trim: bool = false;

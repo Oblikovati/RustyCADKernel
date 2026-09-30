@@ -140,6 +140,9 @@ pub(super) fn run_tasks(
 /// The scope of a functor (`Scope(theRange, name, n)`) is created by the caller; this
 /// is its `Ranges` array: one step of the scope per task, each behind its own lock so
 /// the tasks can open their scopes in parallel.
-pub(super) fn task_ranges<'s>(scope: &'s ProgressScope<'s>, nb_tasks: usize) -> Vec<Mutex<ProgressRange<'s>>> {
+pub(super) fn task_ranges<'s>(
+    scope: &'s ProgressScope<'s>,
+    nb_tasks: usize,
+) -> Vec<Mutex<ProgressRange<'s>>> {
     (0..nb_tasks).map(|_| Mutex::new(scope.next(1.0))).collect()
 }

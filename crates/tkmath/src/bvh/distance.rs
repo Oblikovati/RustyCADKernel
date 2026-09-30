@@ -52,6 +52,11 @@ impl<T: BvhScalar, O> BvhDistance<T, O> {
     pub fn set_distance(&mut self, distance: T) {
         self.distance = distance;
     }
+    /// Writes the protected `myIsDone`, as derived selectors do when they run their own
+    /// `ComputeDistance` (BRepExtrema_ProximityDistTool). Example: `state.set_done(false)`.
+    pub fn set_done(&mut self, is_done: bool) {
+        self.is_done = is_done;
+    }
     /// The smaller metric is better; `state.is_metric_better(&1.0, &2.0)`.
     pub fn is_metric_better(&self, left: &T, right: &T) -> bool {
         *left < *right

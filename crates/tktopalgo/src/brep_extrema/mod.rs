@@ -14,23 +14,40 @@
 //!   [`BRepExtremaProximityValueTool`] and [`BRepExtremaShapeProximity`] traverse it.
 mod dist_shape_shape;
 mod distance_ss;
+mod element_filter;
 mod ext_cc;
 mod ext_cf;
 mod ext_ff;
 mod ext_pc;
 mod ext_pf;
 mod extrema_capture;
+mod overlap_tool;
 mod poly;
+mod proximity_dist_tool;
+mod proximity_value_tool;
+mod self_intersection;
+mod shape_proximity;
 mod solution_elem;
 mod support_type;
+mod triangle_set;
 
-pub use dist_shape_shape::BRepExtremaDistShapeShape;
+pub use dist_shape_shape::{BRepExtremaDistShapeShape, BRepExtremaObsoleteOptions};
 pub use distance_ss::BRepExtremaDistanceSS;
+pub use element_filter::{BRepExtremaElementFilter, BRepExtremaFilterResult};
 pub use ext_cc::BRepExtremaExtCC;
 pub use ext_cf::BRepExtremaExtCF;
 pub use ext_ff::BRepExtremaExtFF;
 pub use ext_pc::BRepExtremaExtPC;
 pub use ext_pf::BRepExtremaExtPF;
+pub use overlap_tool::{BRepExtremaOverlapMap, BRepExtremaOverlapTool};
 pub use poly::{BRepExtremaPoly, BRepExtremaPolyDistance};
+pub use proximity_dist_tool::{
+    BRepExtremaPrjState, BRepExtremaProxPntStatus, BRepExtremaProximityDistTool,
+    BRepExtremaProximityInputs,
+};
+pub use proximity_value_tool::{BRepExtremaProximityValueTool, BRepExtremaVertexInspector};
+pub use self_intersection::BRepExtremaSelfIntersection;
+pub use shape_proximity::BRepExtremaShapeProximity;
 pub use solution_elem::BRepExtremaSolutionElem;
 pub use support_type::{BRepExtremaSupportType, uncompatible_shape};
+pub use triangle_set::BRepExtremaTriangleSet;

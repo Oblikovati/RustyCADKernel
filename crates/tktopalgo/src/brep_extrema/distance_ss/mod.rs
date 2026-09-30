@@ -19,7 +19,6 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::extrema::{ExtAlgo, ExtFlag};
 use rustycad_tkmath::bnd::BoundingBox3;
 
-
 /// The search state the `Perform` overloads share: `myDstRef`, `myModif`, `myEps`,
 /// `myFlag` and `myAlgo`.
 struct SearchState {
@@ -123,7 +122,13 @@ impl BRepExtremaDistanceSS {
     /// `Perform(theS1, theS2, theBox1, theBox2)`: nothing when the box distance exceeds
     /// the start distance by more than the deflection; otherwise the overload of the
     /// two shape types (compound and wire types give nothing).
-    fn perform(&mut self, s1: &Shape, s2: &Shape, box1: &BoundingBox3, box2: &BoundingBox3) -> Result<(), Failure> {
+    fn perform(
+        &mut self,
+        s1: &Shape,
+        s2: &Shape,
+        box1: &BoundingBox3,
+        box2: &BoundingBox3,
+    ) -> Result<(), Failure> {
         self.my_seq_sol_shape1.clear();
         self.my_seq_sol_shape2.clear();
         self.search.modif = false;
@@ -145,7 +150,9 @@ impl BRepExtremaDistanceSS {
         let v1 = topods::vertex(s1)?;
         let (seq1, seq2) = (&mut self.my_seq_sol_shape1, &mut self.my_seq_sol_shape2);
         match s2.shape_type()? {
-            ShapeEnum::Vertex => self.search.vertex_vertex(&v1, &topods::vertex(s2)?, seq1, seq2),
+            ShapeEnum::Vertex => self
+                .search
+                .vertex_vertex(&v1, &topods::vertex(s2)?, seq1, seq2),
             ShapeEnum::Edge => self.search.vertex_edge(&v1, &topods::edge(s2)?, seq1, seq2),
             ShapeEnum::Face => self.search.vertex_face(&v1, &topods::face(s2)?, seq1, seq2),
             _ => Ok(()),
@@ -157,7 +164,9 @@ impl BRepExtremaDistanceSS {
         let mut e1 = topods::edge(s1)?;
         let (seq1, seq2) = (&mut self.my_seq_sol_shape1, &mut self.my_seq_sol_shape2);
         match s2.shape_type()? {
-            ShapeEnum::Vertex => self.search.vertex_edge(&topods::vertex(s2)?, &e1, seq2, seq1),
+            ShapeEnum::Vertex => self
+                .search
+                .vertex_edge(&topods::vertex(s2)?, &e1, seq2, seq1),
             ShapeEnum::Edge => {
                 let mut e2 = topods::edge(s2)?;
                 let trimmed = trim::trim_infinite_edge(&e1, &e2)?;
@@ -183,7 +192,9 @@ impl BRepExtremaDistanceSS {
         let f1 = topods::face(s1)?;
         let (seq1, seq2) = (&mut self.my_seq_sol_shape1, &mut self.my_seq_sol_shape2);
         match s2.shape_type()? {
-            ShapeEnum::Vertex => self.search.vertex_face(&topods::vertex(s2)?, &f1, seq2, seq1),
+            ShapeEnum::Vertex => self
+                .search
+                .vertex_face(&topods::vertex(s2)?, &f1, seq2, seq1),
             ShapeEnum::Edge => {
                 let e2 = topods::edge(s2)?;
                 let f1 = trim::trim_infinite_face(&e2, &f1)?.unwrap_or(f1);

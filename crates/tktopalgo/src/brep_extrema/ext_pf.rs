@@ -81,13 +81,23 @@ impl BRepExtremaExtPF {
             return Ok(());
         }
         let tol: f64 = BRepTool::face_tolerance(face)?.min(precision::confusion());
-        let tol_u: f64 = self.my_surf.u_resolution(tol)?.max(precision::p_confusion());
-        let tol_v: f64 = self.my_surf.v_resolution(tol)?.max(precision::p_confusion());
+        let tol_u: f64 = self
+            .my_surf
+            .u_resolution(tol)?
+            .max(precision::p_confusion());
+        let tol_v: f64 = self
+            .my_surf
+            .v_resolution(tol)?
+            .max(precision::p_confusion());
         let (u1, u2, v1, v2) = brep_tools::uv_bounds(face)?;
         self.my_ext_ps.set_flag(flag);
         self.my_ext_ps.set_algo(algo);
-        self.my_ext_ps
-            .initialize_shared(&self.my_surf.clone().cast(), (u1, u2), (v1, v2), (tol_u, tol_v))
+        self.my_ext_ps.initialize_shared(
+            &self.my_surf.clone().cast(),
+            (u1, u2),
+            (v1, v2),
+            (tol_u, tol_v),
+        )
     }
 
     /// `Perform(TheVertex, TheFace)`: the extrema from the vertex point, kept when the

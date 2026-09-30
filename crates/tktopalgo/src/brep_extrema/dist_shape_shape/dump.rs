@@ -33,7 +33,8 @@ impl BRepExtremaDistShapeShape {
     pub fn dump(&self, out: &mut dyn Write) -> Result<(), Failure> {
         // C++17 sequences `o << "..." << Value()` left to right: the label is written
         // before Value() raises.
-        out.write_all(b"the distance  value is :  ").map_err(io_failure)?;
+        out.write_all(b"the distance  value is :  ")
+            .map_err(io_failure)?;
         let mut text: String = format!("{}\n", g(self.value()?));
         text += &format!("the number of solutions is :{}\n\n", self.nb_solution());
         for i in 1..=self.nb_solution() {
@@ -46,15 +47,24 @@ impl BRepExtremaDistShapeShape {
     fn solution_text(&self, i: i32) -> Result<String, Failure> {
         let (kind1, kind2) = (self.support_type_shape1(i)?, self.support_type_shape2(i)?);
         let mut text: String = format!("solution number {i}: \n");
-        text += &format!("the type of the solution on the first shape is {}\n", kind1 as i32);
-        text += &format!("the type of the solution on the second shape is {}\n", kind2 as i32);
+        text += &format!(
+            "the type of the solution on the first shape is {}\n",
+            kind1 as i32
+        );
+        text += &format!(
+            "the type of the solution on the second shape is {}\n",
+            kind2 as i32
+        );
         text += "the coordinates of  the point on the first shape are: \n";
         text += &coordinates(&self.point_on_shape1(i)?);
         text += "the coordinates of  the point on the second shape are: \n";
         text += &coordinates(&self.point_on_shape2(i)?);
         text += &match kind1 {
             BRepExtremaSupportType::IsVertex => String::new(),
-            BRepExtremaSupportType::IsOnEdge => format!("parameter on the first edge :  t= {}\n", g(self.par_on_edge_s1(i)?)),
+            BRepExtremaSupportType::IsOnEdge => format!(
+                "parameter on the first edge :  t= {}\n",
+                g(self.par_on_edge_s1(i)?)
+            ),
             BRepExtremaSupportType::IsInFace => {
                 let (u, v) = self.par_on_face_s1(i)?;
                 format!("parameters on the first face :  u= {} v={}\n", g(u), g(v))
@@ -62,7 +72,10 @@ impl BRepExtremaDistShapeShape {
         };
         text += &match kind2 {
             BRepExtremaSupportType::IsVertex => String::new(),
-            BRepExtremaSupportType::IsOnEdge => format!("parameter on the second edge : t={}\n", g(self.par_on_edge_s2(i)?)),
+            BRepExtremaSupportType::IsOnEdge => format!(
+                "parameter on the second edge : t={}\n",
+                g(self.par_on_edge_s2(i)?)
+            ),
             BRepExtremaSupportType::IsInFace => {
                 let (u, v) = self.par_on_face_s2(i)?;
                 format!("parameters on the second face : u= {} v={}\n", g(u), g(v))
