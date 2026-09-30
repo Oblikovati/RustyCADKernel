@@ -15,3 +15,6 @@ pub use post_processor::BRepMeshModelPostProcessor;
 
 mod edge_parameter;
 pub use edge_parameter::{EdgeParameterCollection, EdgeParameterProvider};
+
+mod tessellation_extractor;
+pub use tessellation_extractor::EdgeTessellationExtractor;

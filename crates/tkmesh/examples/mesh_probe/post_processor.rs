@@ -9,7 +9,7 @@ use rustycad_tkmesh::{
     imesh_tools::{MeshParameters, ModelAlgo},
 };
 #[path = "../../tests/support/post_processor_fixture.rs"]
-mod fixtures;
+pub(super) mod fixtures;
 pub fn post_processor_case(v: &[i32]) {
     let model = fixtures::post_model(v);
     let parameters = MeshParameters {
