@@ -177,9 +177,33 @@ static void msgp_printer_file(std::istream& in, std::ostream& out)
   out << ' ' << msgp_hex(aContent.str());
 }
 
+class Probe_MessageAlgorithm : public Message_Algorithm
+{
+public:
+  DEFINE_STANDARD_RTTIEXT(Probe_MessageAlgorithm, Message_Algorithm)
+};
+IMPLEMENT_STANDARD_RTTIEXT(Probe_MessageAlgorithm, Message_Algorithm)
+
+static void msgp_algo_handles(std::ostream& out)
+{
+  occ::handle<Probe_MessageAlgorithm> derived = new Probe_MessageAlgorithm;
+  occ::handle<Message_Algorithm> base = derived;
+  occ::handle<Standard_Transient> root = base;
+  base->SetStatus(Message_Fail2, 17);
+  const bool downcast = !occ::down_cast<Probe_MessageAlgorithm>(root).IsNull();
+  out << derived->GetStatus().IsSet(Message_Fail2) << ' ' << base->GetMessageNumbers(Message_Fail2)->Map().Extent()
+      << ' ' << root->DynamicType()->Name() << ' ' << base->DynamicType()->Name()
+      << ' ' << downcast << ' ' << root->GetRefCount();
+  base->ChangeStatus().Clear(Message_Fail2);
+  out << ' ' << derived->GetStatus().IsFail() << ' ' << derived->GetMessageNumbers(Message_Fail2)->Map().Contains(17);
+  base->ClearStatus();
+  out << ' ' << derived->GetMessageNumbers(Message_Fail2).IsNull();
+}
+
 static bool message_output_probe(const std::string& op, std::istream& in, std::ostream& out)
 {
   if (op == "algo_run") msgp_algo_run(in, out);
+  else if (op == "algo_handles") msgp_algo_handles(out);
   else if (op == "messenger_ops") msgp_messenger_ops(in, out);
   else if (op == "printer_file") msgp_printer_file(in, out);
   else if (op == "printer_badfile")

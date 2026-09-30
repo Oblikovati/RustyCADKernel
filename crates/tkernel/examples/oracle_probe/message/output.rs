@@ -6,7 +6,7 @@ use rustycad_tkernel::message::{
     PrinterOStream, PrinterToReport, PrinterType, Status,
 };
 use rustycad_tkernel::standard::dump::DumpStream;
-use rustycad_tkernel::standard::{Failure, Handle, RuntimeType, RuntimeTyped};
+use rustycad_tkernel::standard::{Failure, Handle, RuntimeType, RuntimeTyped, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::str::SplitWhitespace;
 use std::sync::Arc;
@@ -15,6 +15,7 @@ use std::sync::Arc;
 pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
     Some(match op {
         "algo_run" => algo_run(input),
+        "algo_handles" => algo_handles(),
         "messenger_ops" => messenger_ops(input),
         "printer_file" => printer_file(input),
         "printer_badfile" => {
@@ -60,8 +61,8 @@ impl Algorithms {
         let printer = Arc::new(MsgProbePrinter::default());
         printer.set_trace_level(Gravity::Trace);
         let messenger = Arc::new(Messenger::with_printer(printer.clone()));
-        let mut main = Algorithm::new();
-        let mut other = Algorithm::new();
+        let main = Algorithm::new();
+        let other = Algorithm::new();
         main.set_messenger(Some(messenger.clone()));
         other.set_messenger(Some(messenger));
         Self {
@@ -115,7 +116,7 @@ fn algo_query(algorithm: &Algorithm, step: &[&str]) -> String {
     if step[0] == "nums" {
         let report = algorithm
             .get_message_numbers(status)
-            .map(|numbers| Algorithm::prepare_report_numbers(numbers, max));
+            .map(|numbers| Algorithm::prepare_report_numbers(&numbers, max));
         return format!(
             " N{}",
             report.map_or_else(|| "-".to_owned(), |text| units(&text))
@@ -123,7 +124,7 @@ fn algo_query(algorithm: &Algorithm, step: &[&str]) -> String {
     }
     let report = algorithm
         .get_message_strings(status)
-        .map(|strings| Algorithm::prepare_report_strings(strings, max));
+        .map(|strings| Algorithm::prepare_report_strings(&strings, max));
     format!(
         " S{}",
         report.map_or_else(|| "-".to_owned(), |text| units(&text))
@@ -311,4 +312,49 @@ fn printer_file(input: &mut SplitWhitespace<'_>) -> String {
     let content = std::fs::read(&path).unwrap_or_default();
     out.push_str(&format!(" {}", hex(&content)));
     out
+}
+
+struct ProbeMessageAlgorithm {
+    parent: Algorithm,
+}
+rustycad_tkernel::impl_transient!(
+    ProbeMessageAlgorithm,
+    "Probe_MessageAlgorithm",
+    Algorithm,
+    parent
+);
+
+fn algo_handles() -> String {
+    let derived = Handle::new(ProbeMessageAlgorithm {
+        parent: Algorithm::with_runtime_type(ProbeMessageAlgorithm::static_type()),
+    });
+    let base: Handle<Algorithm> = derived.cast();
+    let root: Handle<StandardTransient> = base.cast();
+    base.set_status_with_integer(Status::FAIL2, 17);
+    let downcast = !root.cast::<ProbeMessageAlgorithm>().is_null();
+    let mut output = format!(
+        "{} {} {} {} {} {}",
+        bit(derived.parent.get_status().is_set(Status::FAIL2)),
+        base.get_message_numbers(Status::FAIL2).unwrap().len(),
+        root.dynamic_type().unwrap().name(),
+        base.dynamic_type().unwrap().name(),
+        bit(downcast),
+        root.ref_count()
+    );
+    base.change_status().clear_status(Status::FAIL2);
+    output.push_str(&format!(
+        " {} {}",
+        bit(derived.parent.get_status().is_fail()),
+        bit(derived
+            .parent
+            .get_message_numbers(Status::FAIL2)
+            .unwrap()
+            .contains(17))
+    ));
+    base.clear_status();
+    output.push_str(&format!(
+        " {}",
+        bit(derived.parent.get_message_numbers(Status::FAIL2).is_none())
+    ));
+    output
 }

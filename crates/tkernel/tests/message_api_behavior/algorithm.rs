@@ -8,7 +8,7 @@ use std::sync::Arc;
 
 fn recorded() -> (Algorithm, Arc<RecordingPrinter>) {
     let printer = Arc::new(RecordingPrinter::default());
-    let mut algorithm = Algorithm::new();
+    let algorithm = Algorithm::new();
     algorithm.set_messenger(Some(Arc::new(Messenger::with_printer(printer.clone()))));
     (algorithm, printer)
 }
@@ -23,7 +23,7 @@ fn strings(algorithm: &Algorithm, status: Status) -> Vec<String> {
 
 #[test]
 fn statuses_record_integers_and_strings() {
-    let (mut algorithm, _) = recorded();
+    let (algorithm, _) = recorded();
     algorithm.set_status_with_integer(Status::WARN1, 3);
     algorithm.set_status_with_integer(Status::WARN1, 1);
     algorithm.set_status_with_c_str(Status::FAIL2, b"edge", true);
@@ -81,7 +81,7 @@ fn report_text_limits_its_items() {
 
 #[test]
 fn status_messages_use_the_catalog_and_custom_messages() {
-    let (mut algorithm, printer) = recorded();
+    let (algorithm, printer) = recorded();
     MsgFile::global().add_msg(
         &AsciiString::new("Message_Algorithm.Warn7"),
         &ExtendedString::from_utf8("Warn %s"),
@@ -101,13 +101,13 @@ fn status_messages_use_the_catalog_and_custom_messages() {
 
 #[test]
 fn add_status_skips_the_last_string() {
-    let (mut other, _) = recorded();
+    let (other, _) = recorded();
     other.set_status_with_integer(Status::FAIL1, 5);
     for text in [&b"one"[..], b"two", b"three"] {
         other.set_status_with_c_str(Status::FAIL1, text, true);
     }
     other.set_status(Status::DONE4);
-    let (mut algorithm, _) = recorded();
+    let (algorithm, _) = recorded();
     algorithm.add_status_filtered(&ExecStatus::from_status(Status::DONE4), &other);
     assert!(algorithm.get_status().is_done() && !algorithm.get_status().is_fail());
     algorithm.add_status(&other);

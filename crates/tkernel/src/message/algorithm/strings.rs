@@ -8,25 +8,20 @@ use crate::tcollection::{AsciiString, ExtendedString, HAsciiString, HExtendedStr
 impl Algorithm {
     /// `SetStatus(stat, const char*)`: bytes widened one per unit (no UTF-8 decoding);
     /// `algorithm.set_status_with_c_str(s, b"x", true)`.
-    pub fn set_status_with_c_str(&mut self, status: Status, text: &[u8], no_repetitions: bool) {
+    pub fn set_status_with_c_str(&self, status: Status, text: &[u8], no_repetitions: bool) {
         let text = Handle::new(HExtendedString::from_c_string(text));
         self.set_status_with_h_extended(status, &text, no_repetitions);
     }
     /// `SetStatus(stat, const TCollection_AsciiString&)`: decoded as UTF-8 when valid;
     /// `algorithm.set_status_with_ascii(s, &text, true)`.
-    pub fn set_status_with_ascii(
-        &mut self,
-        status: Status,
-        text: &AsciiString,
-        no_repetitions: bool,
-    ) {
+    pub fn set_status_with_ascii(&self, status: Status, text: &AsciiString, no_repetitions: bool) {
         let text = Handle::new(HExtendedString::from(ExtendedString::from_ascii(text)));
         self.set_status_with_h_extended(status, &text, no_repetitions);
     }
     /// `SetStatus(stat, const occ::handle<TCollection_HAsciiString>&)`: decoded as UTF-8 when
     /// valid; `algorithm.set_status_with_h_ascii(s, &text, true)`.
     pub fn set_status_with_h_ascii(
-        &mut self,
+        &self,
         status: Status,
         text: &HAsciiString,
         no_repetitions: bool,
@@ -36,7 +31,7 @@ impl Algorithm {
     }
     /// `SetStatus(stat, const TCollection_ExtendedString&)`; `algorithm.set_status_with_extended(s, &text, true)`.
     pub fn set_status_with_extended(
-        &mut self,
+        &self,
         status: Status,
         text: &ExtendedString,
         no_repetitions: bool,
@@ -48,7 +43,7 @@ impl Algorithm {
     /// optionally skipping a handle whose string is equal;
     /// `algorithm.set_status_with_h_extended(s, &text, true)`.
     pub fn set_status_with_h_extended(
-        &mut self,
+        &self,
         status: Status,
         text: &Handle<HExtendedString>,
         no_repetitions: bool,
@@ -58,7 +53,8 @@ impl Algorithm {
         if text.is_null() || index == 0 {
             return;
         }
-        let slots = self.report_strings.get_or_insert_with(status_slots);
+        let mut recorded = self.report_strings.write();
+        let slots = recorded.get_or_insert_with(status_slots);
         let strings = slots[index].get_or_insert_with(Vec::new);
         let value = text.string().clone();
         if no_repetitions
@@ -70,13 +66,15 @@ impl Algorithm {
         }
         strings.push(text.clone());
     }
-    /// The string handles recorded for a status; `algorithm.get_message_strings(Status::FAIL1)`.
-    pub fn get_message_strings(&self, status: Status) -> Option<&[Handle<HExtendedString>]> {
+    /// Snapshot of the string handles recorded for a status; `algorithm.get_message_strings(Status::FAIL1)`.
+    pub fn get_message_strings(&self, status: Status) -> Option<Vec<Handle<HExtendedString>>> {
         let index = ExecStatus::status_index(status) as usize;
         self.report_strings
+            .read()
             .as_ref()?
             .get(index)?
-            .as_deref()
+            .as_ref()
             .filter(|_| index != 0)
+            .cloned()
     }
 }
