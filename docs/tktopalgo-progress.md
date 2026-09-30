@@ -5,7 +5,8 @@
 depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep and TKGeomAlgo ports,
 as the native toolkit does (its EXTERNLIB). Each of the 16 OCCT packages is one module
 of the crate, declared up front in `src/lib.rs`; a module whose package is not ported
-yet holds only its documentation. No package is ported in full yet.
+yet holds only its documentation. Ported so far: BRepClass. The numeric corpus has 4806
+requests: BRepClass 4779 and the MakeVertex stub pipeline 27.
 
 `brep_builder_api::MakeVertex` is a **stub**, not the port of
 `BRepBuilderAPI_MakeVertex`: a minimal vertex builder that the TKernel test
