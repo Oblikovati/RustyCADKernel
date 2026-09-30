@@ -50,6 +50,7 @@ The toolkit test inventory maps these suites (12 declarations):
 | BRepBuilderAPI_MakeWire_Test.cxx | brep_builder_api_make_wire | 1 | 1 of 1 | 1 of 1 |
 | BRepCheck_Face_Test.cxx | brep_check_face | 4 | 4 of 4 | 4 of 4 |
 | BRepTopAdaptor_FClass2d_Test.cxx | brep_top_adaptor_fclass2d | 5 | 5 of 5 | 5 of 5 |
+| BRepExtrema_DistShapeShape_Test.cxx | brep_extrema_dist_shape_shape | 3 | 3 of 3 | 3 of 3 |
 
 BRepClass_FaceExplorer_Test.cxx (8 declarations) is not mapped: its case
 `BRepClassFaceExplorerTest.DegenerateEdges_HaveNoNextEdge` builds its sphere face with
@@ -135,6 +136,24 @@ their behavior tests on faces built by the probe's face reader (the surface tool
 approximation line, a line of points approximated alone and on a plane and a cylinder;
 the exploration of lines and a circle across the holed square and the cylinder, the
 accessors without a current point and past the last face).
+
+BRepExtrema_ShapeProximity_Test.cxx (20 declarations) is not mapped: every case meshes
+its shapes with BRepMesh_IncrementalMesh of TKMesh, which the port does not provide and the
+shared native build does not hold (the unchanged suite does not link there). Its twenty
+cases run as the behavior tests of
+`crates/tktopalgo/tests/brep_extrema_shape_proximity_behavior.rs` on the same shapes built
+with BRepBuilderAPI, meshed by a stand-in (`tests/brep_extrema_support`: grid
+triangulations of the faces, tangential-deflection 3D polygons of the free edges), with
+the same expected values, tolerances and statuses. The stand-in puts fewer nodes near the
+extreme points than BRepMesh, so most cases mesh ten times finer (the spheres twice);
+`C3_ParallelCylinderPatches` keeps the BRepMesh density, because a finer grid holds facets
+whose perpendicular reaches the far side of the other cylinder (a proximity of 1.19). They
+move to a 1:1 translation once TKMesh is ported and in the native build.
+BRepExtrema_DistShapeShape_Test.cxx is translated 1:1. `tests/brep_extrema_distance_behavior.rs`
+and `tests/brep_extrema_proximity_behavior.rs` hold the behavior tests of the other classes
+(solutions and supports, inner solutions, the multithread mode, the accessor errors, Dump,
+DistanceSS, the Ext wrappers, Poly, triangle sets, the overlap tool with a filter,
+self-intersection, the proximity tools and shape proximity).
 
 ## API mapping
 
@@ -321,6 +340,26 @@ accessors without a current point and past the last face).
   (Sewing 45 rows, FastSewing 10, VertexInspector 8, BndBoxTreeSelector 6, each RTTI
   macro an implemented row). `BRepBuilderAPI_MakeShapeOnMesh` waits for
   `BRepBuilderAPI_MakeShape` (another port).
+
+- BRepExtrema (docs/topalgo-design.md section 13): `BRepExtrema_DistShapeShape` is
+  `BRepExtremaDistShapeShape` (constructors `new`, `with_shapes`, `with_deflection`;
+  `perform` takes a `ProgressRange`; the parameter accessors return their values; `Dump`
+  writes to `std::io::Write`); `BRepExtrema_DistanceSS` is `BRepExtremaDistanceSS::new`
+  with the boxes and the flag and algorithm as pairs; the Ext wrappers are
+  `BRepExtremaExtPC`, `ExtPF`, `ExtCC`, `ExtCF` and `ExtFF` (their Extrema member replayed,
+  see section 13); `BRepExtrema_Poly::Distance` returns the flag and the nearest pair;
+  `BRepExtrema_SolutionElem` and `SupportType` keep their names with the `BRepExtrema`
+  prefix; `BRepExtrema_UnCompatibleShape` is the `Failure` constructor
+  `uncompatible_shape`. The proximity group: `BRepExtremaTriangleSet` (a transient shared
+  by `Handle`; `Box(i)` is `element_box`, `GetVertices()` is `vertices`),
+  `BRepExtremaOverlapTool` (`BvhPairTraverse`; the filter is an owned
+  `Box<dyn BRepExtremaElementFilter>`), `BRepExtremaSelfIntersection` (its protected filter
+  members public), `BRepExtremaProximityDistTool` (`BvhTraverse` over the second set; its
+  loading constructor takes `BRepExtremaProximityInputs`), `BRepExtremaProxPntStatus`,
+  `BRepExtremaPrjState`, `BRepExtremaProximityValueTool` (`perform(&mut tolerance)`),
+  `BRepExtremaVertexInspector` (a `CellInspector`; `Inspect` is `inspect_target`) and
+  `BRepExtremaShapeProximity`. The audit reports 0 missing and 0 stale rows (209 rows;
+  the destructors and the `OVERLAP_TOOL_OUTPUT_TRIANGLES` members are excluded rows).
 
 ## Verification
 
@@ -593,6 +632,37 @@ diagonal of another (an exception inside Perform), with and without Perform.
 (clouds around a current point in a cell filter, Coord, Shift and direct Inspect) and
 `bba_boxselector` (UB-trees of row, nested, touching and random boxes, Select, Reject
 and Accept).
+
+BRepExtrema: 1440 requests. `tools/tktopalgo_corpus_brepextrema.py` (with the shapes of
+`tktopalgo_corpus_brepextrema_shapes.py`; `tktopalgo_probe_brepextrema.cxx` and
+`tp_probe/brep_extrema.rs`) runs `bxd_dist` on every pair of a vertex, a segment, an arc, a
+circle, a C0 B-spline, a Bezier curve, a half-infinite line, a rectangle, an infinite
+plane, a cylinder and a sphere face, a shell, a box, a cylinder, a sphere, a hollow box and
+a compound, with the deflections 1e-7, 1e-3, 0.5 and 2, the three construction modes, the
+multithread flag, the obsolete flag and algorithm, a second Perform and swapped shapes,
+and inner solutions (vertices, edges, faces and solids inside or across solids and
+cavities); every request prints each solution (supports, points, parameters and their
+exceptions) and the accessors at 0 and N+1. `bxd_dump` prints the Dump text, `bxd_ss` runs
+DistanceSS on the pairs of sub-shape kinds (void and real boxes, start distances below,
+at and above the minimum, trimmed infinite edges and faces, C0 break points, degenerated
+and polygon-only edges) and `bxd_poly` Poly on meshed and unmeshed shapes.
+`tools/tktopalgo_corpus_brepextrema_ext.py` (`bxx_pc`, `bxx_pf`, `bxx_cc`, `bxx_cf`,
+`bxx_ff`) builds, initializes and performs each Ext wrapper in its call sequences (the
+constructor, one Initialize and several Performs, a Perform without Initialize, other
+edges or faces on one object) and prints every accessor for the indices 0 to NbExt+1.
+`tools/tktopalgo_corpus_brepextrema_prox.py` (`tktopalgo_probe_brepextrema_prox.cxx`)
+reads triangle sets of meshed faces and edges (their boxes, centers, vertex data and BVH
+nodes; Init twice, Swap and Clear), overlap tools (exact and tolerant, one set against
+itself), self-intersections of meshed boxes and crossing, overlapping and touching
+rectangles (with the protected filter on triangle pairs and the shared vertex and edge
+tests), proximity distance and value tools, the border tests and shape proximity on arc,
+circle, Bezier and segment pairs and on plane, cylinder and sphere patches (sample
+counts, additional vertices, repeated runs), and the vertex inspector. The multithread
+requests leave out the solids with more than one vertex of the other shape inside: the
+tasks that each find a vertex inside before they see the flag of another report their
+solutions in an order that follows the thread timing. The statuses of a proximity value
+tool and of shape proximity are printed only once computed (natively they are
+uninitialized before).
 
 ## Preserved native behaviour
 
@@ -1142,6 +1212,52 @@ Native null dereferences in these packages are Standard_NullObject errors.
   the first. A side along the diagonal of an earlier patch raises
   Standard_ProgramError inside Perform, which sets FS_Exception.
 
+### BRepExtrema
+- `BRepExtrema_DistShapeShape` sizes its tasks with the thread count of the default pool
+  in both modes (bands of at least 10 indices, one band a thread; the box pairs dealt to at
+  most one task a thread), and each task starts from the reference distance and stops at
+  its own reference, so a result depends on the number of logical processors of the
+  machine (both sides run on the same one). The vertex-vertex merge replaces the
+  reference with an equal task distance; the map-to-map merges only lower it. The
+  face-face step is skipped when the reference is within the deflection of 0.
+- The final filter of `Perform` removes a solution farther than the reference plus the
+  deflection and advances the index anyway, so the solution that takes its place is not
+  checked.
+- The obsolete flag and algorithm of DistShapeShape are stored but never passed on:
+  DistanceSS always gets MINMAX and Grad. The progress of a map-to-map step spends 0.15,
+  0.15 and 0.85 of a scope of 1.
+- In a parallel run the solid treatment appends one inner solution per task that finds
+  a vertex inside before it sees the flag of another task (thread timing).
+- `Dump` writes its first label before `Value()` raises StdFail_NotDone on an empty object.
+- The edge-face C0 step of DistanceSS marks the distance improved even when
+  `MIN_SOLUTION` then drops all its break-point solutions. `BRepExtrema_ExtFF` classifies
+  the points of the first face with its parametric tolerance `Tol1`, those of the second
+  face with the face tolerance; `ExtCF` and `ExtFF` keep only the square distance in the
+  parallel case.
+- `BRepExtrema_ExtCC`, `ExtCF`, `ExtFF` and `ExtPC` keep the state of their Extrema member
+  from one call to the next (the general curve-curve solutions accumulate, `IsParallel`
+  survives a non-analytic Perform, the end points of an infinite range are kept);
+  `ExtPF` re-initializes its member adaptor in place, so a failed Initialize on a
+  non-geometric face leaves the Extrema member on the new face.
+- `BRepExtrema_TriangleSet::Init` returns true in every case and stops at the first shape
+  without a triangulation or 3D polygon; the shape index of each vertex and the vertex and
+  triangle counts of each shape are never cleared (a second Init keeps entries of the
+  first); edges store no triangle count; `Swap` does not mark the tree dirty.
+- `BRepExtrema_OverlapTool` is done when a pair of leaves was accepted (every accepted
+  pair counts, overlapping or not), and its maps accumulate over the Performs (they are
+  never cleared).
+- `BRepExtrema_ProximityValueTool` never resets its refinement flags or its additional
+  vertices, so a second Perform refines again and adds more vertices; its vertex
+  inspector answers with the last inspected target. `BRepExtrema_ShapeProximity` stores
+  the proximity value as its tolerance, so a second Perform after an infinite one runs the
+  overlap test with that value.
+- `BRepExtrema_ProximityDistTool` decides the border status of an edge polygon point with
+  the first and last vertices of the whole set (not of its edge).
+- Extrema_ExtCC on a zero-length (degenerated) edge overflows an `int` (`RealToInt(ratio)
+  + 1` in the curve-curve interval choice): undefined natively, and the debug build of
+  the TKGeomBase port stops there (gen_ext_cc/intervals.rs); the curve-curve requests
+  leave the pole edges of spheres out (DistanceSS skips degenerated edges itself).
+
 ## Deviations
 
 Each ported package lists where the port must differ from native behaviour.
@@ -1342,3 +1458,16 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   `FindFreeBoundaries` (a record gives each seam use its face), the degenerated sections
   whose ends are farther than both vertex tolerances, and the rectangular trimmed and
   offset surfaces of `IsUClosedSurface` (the shape reader has none).
+
+### BRepExtrema
+- The accessors that read `NCollection_LinearVector::operator[]` or
+  `NCollection_DynamicArray::Value(int)` unchecked natively (`TriangleSet` by triangle or
+  vertex index, `GetSubShape` of SelfIntersection and ShapeProximity, an empty shape list
+  of the proximity value tool) raise Standard_OutOfRange; a tool performed before its sets
+  are loaded raises Standard_NullObject (a crash natively).
+- The point statuses of `BRepExtrema_ProximityValueTool` and `BRepExtrema_ShapeProximity`
+  start as `Unknown` (uninitialized natively until a proximity is computed); the corner
+  parameters of `TRIM_INFINIT_FACE` start at 0 (uninitialized natively when a projection
+  fails).
+- The overlap tool owns its element filter (`Box<dyn BRepExtremaElementFilter>`) instead of
+  a pointer; `BRepExtrema_SelfIntersection` gives it a filter over its own triangle set.
