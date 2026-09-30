@@ -22,12 +22,15 @@ Runner = Callable[..., str]
 # Toolkits the shared oracle closure builds beyond FoundationClasses (with their
 # dependencies). TKPrim is here because unchanged TKBRep suites (TopExp_Test) build their
 # shapes with BRepPrimAPI_MakeBox; TKHelix for its own suites and numeric oracle.
+# TKHLR for its own suites and numeric oracle.
 ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKTopAlgo', 'TKPrim',
                                         'TKHelix',
+                                        'TKHLR',
                                         )
 # The closure's shared libraries in link order, dependants first.
 LINKED_TOOLKITS: tuple[str, ...] = ('TKPrim',
                                     'TKHelix',
+                                    'TKHLR',
                                     'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
                                     'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
 # The targets that build the whole closure plus GoogleTest: every additional toolkit,

@@ -36,6 +36,7 @@ NUMERIC_VERIFIERS = {
     'TKGeomAlgo': ('tools/verify_tkgeomalgo_numeric.py', 'target/oracle-tkgeomalgo/numeric'),
     'TKTopAlgo': ('tools/verify_tktopalgo_numeric.py', 'target/oracle-tktopalgo/numeric'),
     'TKHelix': ('tools/verify_tkhelix_numeric.py', 'target/oracle-tkhelix/numeric'),
+    'TKHLR': ('tools/verify_tkhlr_numeric.py', 'target/oracle-tkhlr/numeric'),
 }
 
 

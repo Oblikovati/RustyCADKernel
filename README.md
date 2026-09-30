@@ -51,6 +51,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tkgeomalgo` | TKGeomAlgo geometric algorithms (intersections, hatching, filling), in progress |
 | `crates/tktopalgo` | TKTopAlgo topological algorithms (classification, construction, checks), in progress |
 | `crates/tkhelix` | TKHelix helix curves (analytic helix, B-spline coils, composite helix wires), in progress |
+| `crates/tkhlr` | TKHLR hidden line removal (interval sets, contour lines, polyhedral and exact HLR), in progress |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |
