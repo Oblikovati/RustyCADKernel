@@ -181,3 +181,14 @@ native comparisons (8,799 total), including rational curves and zero/reversed
 sample ranges. Three focused Rust regressions pass. The native 2D curve reader
 is shared with TKGeomAlgo to preserve input construction. Null handles return
 explicit Rust errors instead of native null dereferences.
+
+### Contap_HContTool recovery
+
+All 18 public members now use native contour sampling and arc behavior. The surface
+range remains shared across instances, including partial writes when virtual adaptor
+calls fail. The B-spline grid preserves the original asymmetric index/divisor rules.
+Arc operations reuse the identical IntPatch implementations. The numeric corpus now
+passes 11,787 exact requests, including 2,988 new requests for this class. Three direct
+regressions cover shared range, null surfaces, and empty restriction results; crate
+unit/integration tests and doctests pass. No standalone original declaration exists
+for this helper; TKHLR's four original legacy declarations remain pending.

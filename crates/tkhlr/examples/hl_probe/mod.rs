@@ -26,3 +26,6 @@ pub mod contap_hcurve;
 #[allow(dead_code)]
 #[path = "../../../tkgeomalgo/examples/ga_probe/curve2d.rs"]
 pub mod curve2d;
+
+pub mod contap_hcont;
+mod contap_sampling_fixture;

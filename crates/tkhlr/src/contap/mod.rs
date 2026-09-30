@@ -21,3 +21,6 @@ pub use surf_props::{ContapDerivAndNorm, ContapNormAndDn, ContapSurfProps};
 
 mod h_curve2d_tool;
 pub use h_curve2d_tool::ContapHCurve2dTool;
+
+mod h_cont_tool;
+pub use h_cont_tool::ContapHContTool;

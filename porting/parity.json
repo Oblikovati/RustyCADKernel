@@ -208628,6 +208628,266 @@
       "rust_item": "rustycad_tkbo::int_tools::Tools::compute_int_range",
       "status": "implemented",
       "notes": "Pinned exact native differential tools/verify_tkbo_foundations.py covers topology, scalar boundaries, signed segment-plane statuses, curve bounds, split/reject mutation and surface/parabola tolerances. Source quirks preserved, including OR in common vertex test, fixed 1e-12 squared edge vertex tolerance, signed plane early return and RejectLines input mutation."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeParameterProvider",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeParameterProvider.hxx",
+      "source_sha256": "08562d72e53f6091cbcbf207004d03678c3255cafabd2e1031cc2ca778057e9a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeParameterProvider",
+      "status": "implemented",
+      "notes": "Native scaling, persistent Extrema_LocateExtPC cache and monotonic projection guard. ParametersCollection erased through explicit EdgeParameterCollection contract with shared HArray1OfReal and ParametersListArrayAdaptor handles; native template RTTI remains Standard_Transient. Exact native corpus covers range/orientation/order/SameParameter reinitialization on real faces."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeParameterProvider()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeParameterProvider.hxx",
+      "source_sha256": "08562d72e53f6091cbcbf207004d03678c3255cafabd2e1031cc2ca778057e9a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeParameterProvider::new",
+      "status": "implemented",
+      "notes": "Native scaling, persistent Extrema_LocateExtPC cache and monotonic projection guard. ParametersCollection erased through explicit EdgeParameterCollection contract with shared HArray1OfReal and ParametersListArrayAdaptor handles; native template RTTI remains Standard_Transient. Exact native corpus covers range/orientation/order/SameParameter reinitialization on real faces."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeParameterProvider(const IMeshData::IEdgeHandle&,TopAbs_Orientation,const IMeshData::IFaceHandle&,const ParametersCollection&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeParameterProvider.hxx",
+      "source_sha256": "08562d72e53f6091cbcbf207004d03678c3255cafabd2e1031cc2ca778057e9a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeParameterProvider::with_edge",
+      "status": "implemented",
+      "notes": "Native scaling, persistent Extrema_LocateExtPC cache and monotonic projection guard. ParametersCollection erased through explicit EdgeParameterCollection contract with shared HArray1OfReal and ParametersListArrayAdaptor handles; native template RTTI remains Standard_Transient. Exact native corpus covers range/orientation/order/SameParameter reinitialization on real faces."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeParameterProvider::Init(const IMeshData::IEdgeHandle&,TopAbs_Orientation,const IMeshData::IFaceHandle&,const ParametersCollection&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeParameterProvider.hxx",
+      "source_sha256": "08562d72e53f6091cbcbf207004d03678c3255cafabd2e1031cc2ca778057e9a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeParameterProvider::init",
+      "status": "implemented",
+      "notes": "Native scaling, persistent Extrema_LocateExtPC cache and monotonic projection guard. ParametersCollection erased through explicit EdgeParameterCollection contract with shared HArray1OfReal and ParametersListArrayAdaptor handles; native template RTTI remains Standard_Transient. Exact native corpus covers range/orientation/order/SameParameter reinitialization on real faces."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeParameterProvider::Parameter(int,const gp_Pnt&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeParameterProvider.hxx",
+      "source_sha256": "08562d72e53f6091cbcbf207004d03678c3255cafabd2e1031cc2ca778057e9a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeParameterProvider::parameter",
+      "status": "implemented",
+      "notes": "Native scaling, persistent Extrema_LocateExtPC cache and monotonic projection guard. ParametersCollection erased through explicit EdgeParameterCollection contract with shared HArray1OfReal and ParametersListArrayAdaptor handles; native template RTTI remains Standard_Transient. Exact native corpus covers range/orientation/order/SameParameter reinitialization on real faces."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeParameterProvider::GetPCurve() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeParameterProvider.hxx",
+      "source_sha256": "08562d72e53f6091cbcbf207004d03678c3255cafabd2e1031cc2ca778057e9a",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeParameterProvider::get_pcurve",
+      "status": "implemented",
+      "notes": "Native scaling, persistent Extrema_LocateExtPC cache and monotonic projection guard. ParametersCollection erased through explicit EdgeParameterCollection contract with shared HArray1OfReal and ParametersListArrayAdaptor handles; native template RTTI remains Standard_Transient. Exact native corpus covers range/orientation/order/SameParameter reinitialization on real faces."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeTessellationExtractor",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeTessellationExtractor.hxx",
+      "source_sha256": "b27ffb16fd6a0f43d15a0bb616279e47a7439627560035898fff0e93d2b76a28",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeTessellationExtractor",
+      "status": "implemented",
+      "notes": "Native polygon node indexing, face placement and EdgeParameterProvider evaluation. Raw mesh/node associations use non-owning WeakHandle references. Exact differential cases cover seams, both SameParameter settings, translated placements and repeated/reversed reads."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeTessellationExtractor(const IMeshData::IEdgeHandle&,const IMeshData::IFaceHandle&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeTessellationExtractor.hxx",
+      "source_sha256": "b27ffb16fd6a0f43d15a0bb616279e47a7439627560035898fff0e93d2b76a28",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeTessellationExtractor::new",
+      "status": "implemented",
+      "notes": "Native polygon node indexing, face placement and EdgeParameterProvider evaluation. Raw mesh/node associations use non-owning WeakHandle references. Exact differential cases cover seams, both SameParameter settings, translated placements and repeated/reversed reads."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeTessellationExtractor::~BRepMesh_EdgeTessellationExtractor()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeTessellationExtractor.hxx",
+      "source_sha256": "b27ffb16fd6a0f43d15a0bb616279e47a7439627560035898fff0e93d2b76a28",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops native model-builder and shape-visitor state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeTessellationExtractor::PointsNb() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeTessellationExtractor.hxx",
+      "source_sha256": "b27ffb16fd6a0f43d15a0bb616279e47a7439627560035898fff0e93d2b76a28",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeTessellationExtractor::points_nb",
+      "status": "implemented",
+      "notes": "Native polygon node indexing, face placement and EdgeParameterProvider evaluation. Raw mesh/node associations use non-owning WeakHandle references. Exact differential cases cover seams, both SameParameter settings, translated placements and repeated/reversed reads."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeTessellationExtractor::Value(int,gp_Pnt&,double&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeTessellationExtractor.hxx",
+      "source_sha256": "b27ffb16fd6a0f43d15a0bb616279e47a7439627560035898fff0e93d2b76a28",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeTessellationExtractor::value",
+      "status": "implemented",
+      "notes": "Native polygon node indexing, face placement and EdgeParameterProvider evaluation. Raw mesh/node associations use non-owning WeakHandle references. Exact differential cases cover seams, both SameParameter settings, translated placements and repeated/reversed reads."
+    },
+    {
+      "upstream_id": "BRepMesh_EdgeTessellationExtractor::DEFINE_STANDARD_RTTIEXT(BRepMesh_EdgeTessellationExtractor,IMeshTools_CurveTessellator)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_EdgeTessellationExtractor.hxx",
+      "source_sha256": "b27ffb16fd6a0f43d15a0bb616279e47a7439627560035898fff0e93d2b76a28",
+      "rust_item": "rustycad_tkmesh::brep_mesh::EdgeTessellationExtractor (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native polygon node indexing, face placement and EdgeParameterProvider evaluation. Raw mesh/node associations use non-owning WeakHandle references. Exact differential cases cover seams, both SameParameter settings, translated placements and repeated/reversed reads."
+    },
+    {
+      "upstream_id": "IntTools_WLineTool::NotUseSurfacesForApprox(const TopoDS_Face&,const TopoDS_Face&,const occ::handle<IntPatch_WLine>&,int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_WLineTool.hxx",
+      "rust_item": "rustycad_tkbo::int_tools::WLineTool::not_use_surfaces_for_approx",
+      "status": "implemented",
+      "notes": "Pinned native differential across plane/cylinder/cone/sphere/torus pairs, seams, poles and tiny radii. Preserves native reuse of surface1 bounds for surface2 and final negated bFlag after a non-degenerate boundary check. DecompositionOfWLine not yet ported; no completeness claim."
+    },
+    {
+      "upstream_id": "Contap_HContTool::NbSamplesU(const occ::handle<Adaptor3d_Surface>&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::nb_samples_u",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::NbSamplesV(const occ::handle<Adaptor3d_Surface>&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::nb_samples_v",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::NbSamplePoints(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::nb_sample_points",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::SamplePoint(const occ::handle<Adaptor3d_Surface>&,int,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::sample_point",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::HasBeenSeen(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::has_been_seen",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::NbSamplesOnArc(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::nb_samples_on_arc",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::Bounds(const occ::handle<Adaptor2d_Curve2d>&,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::bounds",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::Project(const occ::handle<Adaptor2d_Curve2d>&,const gp_Pnt2d&,double&,gp_Pnt2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::project",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::Tolerance(const occ::handle<Adaptor3d_HVertex>&,const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::tolerance",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::Parameter(const occ::handle<Adaptor3d_HVertex>&,const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::parameter",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::NbPoints(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::nb_points",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::Value(const occ::handle<Adaptor2d_Curve2d>&,int,gp_Pnt&,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::value",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::IsVertex(const occ::handle<Adaptor2d_Curve2d>&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::is_vertex",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::Vertex(const occ::handle<Adaptor2d_Curve2d>&,int,occ::handle<Adaptor3d_HVertex>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::vertex",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::NbSegments(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::nb_segments",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::HasFirstPoint(const occ::handle<Adaptor2d_Curve2d>&,int,int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::has_first_point",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::HasLastPoint(const occ::handle<Adaptor2d_Curve2d>&,int,int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::has_last_point",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
+    },
+    {
+      "upstream_id": "Contap_HContTool::IsAllSolution(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_HContTool.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapHContTool::is_all_solution",
+      "status": "implemented",
+      "notes": "Exact native sampling and arc behavior; 2988 additional differential requests cover every member, shared range, partial state after virtual-call failures, asymmetric spline grid and original exceptions. Direct regressions exercise shared range and empty restriction results. Null surfaces return explicit errors instead of native dereference."
     }
   ],
   "tests": [

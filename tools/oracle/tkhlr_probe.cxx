@@ -34,7 +34,11 @@
 #include "tkhlr_probe_contana.cxx"
 #include "tkhlr_probe_contap_surface.cxx"
 #include "tkhlr_probe_contap_hcurve.cxx"
+#include "tkhlr_probe_contap_sampling.cxx"
+#include "tkhlr_probe_contap_hcont.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"ct_sampling",ct_sampling_case},
+ {"ct_hcont_arc",ct_hcont_arc_case},
  {"ct_surface", hl_contap_surface_case},
  {"ct_hcurve", ct_hcurve_case},
  {"ct_analytic", hl_contana_case},
