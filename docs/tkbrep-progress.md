@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (822 declarations):
+The toolkit test inventory maps these suites (845 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -74,7 +74,7 @@ The toolkit test inventory maps these suites (822 declarations):
 | BRepGraph_Copy_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGProp, TKPrim cylinder and sphere, BRepBuilderAPI_Copy, BRepAlgoAPI_Fuse (TKBO) |
 | BRepGraph_Deduplicate_Test.cxx | not mapped (phase 2) | 82 | not run | waits for BRepBuilderAPI_Copy and MakeFace, BRepCheck_Analyzer, TKPrim cylinder, sphere and cone |
 | BRepGraph_Transform_Test.cxx | not mapped (phase 2) | 19 | not run | waits for BRepGProp, BRepBuilderAPI_Transform (TKTopAlgo) |
-| BRepGraph_Validate_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepBuilderAPI_Copy (TKTopAlgo), BRepPrimAPI_MakeSphere (TKPrim) |
+| BRepGraph_Validate_Test.cxx | mapped | 23 | passed | original mutations, guard scopes and synthetic graphs |
 | BRepGraph_SparseModel_Test.cxx | brep_graph_sparse_model | 28 | pass | pass |
 | BRepGraph_ScenarioMatrix_Test.cxx | not mapped (phase 2) | 18 | not run | waits for BRepGProp, TKPrim cylinder and sphere |
 | BRepGraph_SeamRedesign_Test.cxx | mapped | 9 | passed | original builders and seam connectivity |
