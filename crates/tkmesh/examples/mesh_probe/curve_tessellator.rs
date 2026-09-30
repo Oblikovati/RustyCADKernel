@@ -56,7 +56,7 @@ fn report_tessellator(tessellator: &BRepMeshCurveTessellator) {
 }
 
 #[path = "../../tests/support/curve_tessellator_fixture.rs"]
-mod refinement;
+pub(super) mod refinement;
 pub fn curve_refinement_case(v: &[i32]) {
     let (edge, face) = refinement::refinement_fixture(v[0], v[1] != 0, v[2] != 0);
     edge.set_deflection([0.01, 0.5][v[3] as usize]);

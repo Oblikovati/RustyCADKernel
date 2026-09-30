@@ -1,7 +1,8 @@
 use super::*;
 use crate::imesh_data::MEMORY_BLOCK_SIZE_HUGE;
-use rustycad_tkernel::{ncollection::IncrementalAllocatorObject, standard::real::real_to_int};
+use rustycad_tkernel::ncollection::IncrementalAllocatorObject;
 use rustycad_tkgeombase::gcpnts::TangentialDeflection;
+use rustycad_tkmath::bvh::BvhScalar;
 /// Conical interior-node distribution; `ConeRangeSplitter::default()`.
 #[derive(Default)]
 pub struct ConeRangeSplitter {
@@ -31,12 +32,12 @@ impl ConeRangeSplitter {
         let scale = step * radius;
         let ratio = std_max(1.0, (diff_v / scale).ln());
         *counts = (
-            real_to_int(diff_u / step),
-            real_to_int(diff_v / scale / ratio),
+            (diff_u / step).truncate_to_int(),
+            (diff_v / scale / ratio).truncate_to_int(),
         );
         Ok((
             diff_u / f64::from(counts.0.wrapping_add(1)),
-            diff_v / f64::from(counts.1.wrapping_add(real_to_int(ratio))),
+            diff_v / f64::from(counts.1.wrapping_add(ratio.truncate_to_int())),
         ))
     }
     fn angular_step(&self, parameters: &MeshParameters) -> Result<(f64, f64), Failure> {

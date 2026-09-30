@@ -231,3 +231,5 @@ pub mod edge_discret;
 pub mod range_splitter;
 
 pub mod pre_processor;
+
+pub mod geom_tool;

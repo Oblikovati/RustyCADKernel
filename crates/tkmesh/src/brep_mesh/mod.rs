@@ -30,3 +30,6 @@ pub use range_splitter::{ConeRangeSplitter, DefaultRangeSplitter, RangeSplitter,
 
 mod pre_processor;
 pub use pre_processor::BRepMeshModelPreProcessor;
+
+mod geom_tool;
+pub use geom_tool::{GeomTool, IntersectionFlag};
