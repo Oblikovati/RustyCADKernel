@@ -19,7 +19,7 @@ use rustycad_tktopalgo::brep_class3d::{
 };
 
 /// `tp_index_of`: the record index of `x` (IsSame), -1 for a null shape, -2 for another.
-fn index_of<S: AsRef<Shape>>(shapes: &[S], x: &Shape) -> i32 {
+pub(super) fn index_of<S: AsRef<Shape>>(shapes: &[S], x: &Shape) -> i32 {
     if x.is_null() {
         return -1;
     }
