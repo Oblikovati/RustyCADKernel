@@ -61,3 +61,11 @@ destructor. The integrated Boolean foundation oracle passes 15,095 exact request
 including 648 new range cases. Six direct regressions cover tolerance spheres,
 unsplittable short ranges, repeated failures, retained length and box accumulation.
 The ten original FaceFace declarations remain the only mapped TKBO originals.
+
+### Edge/edge private foundations
+
+Scalar subdivision, box distance, curve priority, deflection, closure and resolution
+helpers pass 2,196 exact comparisons against the unchanged IntTools_EdgeEdge source.
+Conic, spline and offset families are covered. Negative subdivision counts retain
+native behavior; their corpus uses bounded resolutions to avoid enormous native
+allocations. These private helpers add no complete public API or legacy-test claim.
