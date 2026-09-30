@@ -26,7 +26,10 @@ pub struct BRepPrimAPIMakeCylinder {
 
 impl BRepPrimAPIMakeCylinder {
     fn of(my_cylinder: BRepPrimCylinder) -> Self {
-        Self { base: BRepBuilderAPIMakeShapeBase::new(), my_cylinder }
+        Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_cylinder,
+        }
     }
 
     /// `BRepPrimAPI_MakeCylinder(R, H)`; `BRepPrimAPIMakeCylinder::new(1.0, 2.0)`.

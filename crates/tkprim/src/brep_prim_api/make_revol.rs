@@ -106,7 +106,11 @@ impl BRepPrimAPIMakeRevol {
     /// The degenerated-edge part of `Generated`: `generated` (a degenerated edge) and its
     /// copies when it is a recorded degenerated edge, else nothing.
     fn generated_degenerated(&mut self, generated: &Shape) -> Result<(), Failure> {
-        let same_count = self.my_degenerated.iter().filter(|edge| generated.is_same(edge)).count();
+        let same_count = self
+            .my_degenerated
+            .iter()
+            .filter(|edge| generated.is_same(edge))
+            .count();
         for _ in 0..same_count {
             self.base.my_generated.append(generated.clone());
             let Some(history) = self.my_hist.get() else {

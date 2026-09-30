@@ -7,11 +7,9 @@
 //! TKPrim depends on TKBRep, TKernel, TKMath, TKG2d, TKGeomBase, TKG3d and TKTopAlgo
 //! natively (TKTopAlgo brings TKGeomAlgo); this crate depends on their ports. Each of
 //! the 5 OCCT packages is one module named after it in snake case (`BRepPrimAPI` is
-//! `brep_prim_api`, `BRepPreviewAPI` is `brep_preview_api`). Every module is declared
-//! here up front so that packages ported in sequence never edit this file; a module
-//! whose package is not ported yet holds only its documentation.
+//! `brep_prim_api`, `BRepPreviewAPI` is `brep_preview_api`); every package is ported.
 //! docs/prim-design.md fixes how the C++ constructs of the toolkit map to Rust, and
-//! docs/tkprim-progress.md lists the ported packages.
+//! docs/tkprim-progress.md records the verification and the preserved native behaviour.
 pub mod brep_preview_api;
 pub mod brep_prim;
 pub mod brep_prim_api;

@@ -41,7 +41,10 @@ pub struct BRepPrimAPIMakePrism {
 impl BRepPrimAPIMakePrism {
     /// The maker of `my_prism`, built.
     fn built(my_prism: BRepSweepPrism) -> Result<Self, Failure> {
-        let mut maker = Self { base: BRepBuilderAPIMakeShapeBase::new(), my_prism };
+        let mut maker = Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_prism,
+        };
         maker.build(&ProgressRange::default())?;
         Ok(maker)
     }
@@ -49,15 +52,32 @@ impl BRepPrimAPIMakePrism {
     /// `BRepPrimAPI_MakePrism(S, V, Copy = false, Canonize = true)`: the prism of `shape`
     /// along `vector`; Standard_ConstructionError for a vector not longer than
     /// Precision::Confusion(); `BRepPrimAPIMakePrism::new(&shape, v, false, true)?`.
-    pub fn new(shape: &Shape, vector: Vector3, copy: bool, canonize: bool) -> Result<Self, Failure> {
+    pub fn new(
+        shape: &Shape,
+        vector: Vector3,
+        copy: bool,
+        canonize: bool,
+    ) -> Result<Self, Failure> {
         Self::built(BRepSweepPrism::new(check(shape)?, vector, copy, canonize)?)
     }
 
     /// `BRepPrimAPI_MakePrism(S, D, Inf = true, Copy = false, Canonize = true)`: the
     /// infinite prism of `shape` along `direction` (semi-infinite toward it unless
     /// `inf`); `BRepPrimAPIMakePrism::infinite(&shape, d, true, false, true)?`.
-    pub fn infinite(shape: &Shape, direction: Direction3, inf: bool, copy: bool, canonize: bool) -> Result<Self, Failure> {
-        Self::built(BRepSweepPrism::infinite(check(shape)?, direction, inf, copy, canonize)?)
+    pub fn infinite(
+        shape: &Shape,
+        direction: Direction3,
+        inf: bool,
+        copy: bool,
+        canonize: bool,
+    ) -> Result<Self, Failure> {
+        Self::built(BRepSweepPrism::infinite(
+            check(shape)?,
+            direction,
+            inf,
+            copy,
+            canonize,
+        )?)
     }
 
     /// `Prism()`: the sweep algorithm; `maker.prism()`.

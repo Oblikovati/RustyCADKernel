@@ -195818,6 +195818,926 @@
       "rust_item": "rustycad_tkprim::brep_sweep::trsf_set_continuity",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox(double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::from_sizes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox(const gp_Pnt&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::at_point",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::from_points",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::with_axes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Init(double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::init_sizes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Init(const gp_Pnt&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::init_at_point",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Init(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::init_points",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Init(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::init_axes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Wedge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::wedge",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Build(const Message_ProgressRange&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::build",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::shell",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::operator TopoDS_Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::shell",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::Solid()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::operator TopoDS_Solid()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::BottomFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::bottom_face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::BackFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::back_face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::FrontFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::front_face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::LeftFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::left_face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::RightFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::right_face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeBox::TopFace()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::top_face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCone(double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCone(double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::with_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCone(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::with_axes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCone(const gp_Ax2&,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::with_axes_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCone::OneAxis()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::one_axis",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCone::Cone()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::cone",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCylinder(double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCylinder(double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::with_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCylinder(const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::with_axes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCylinder(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::with_axes_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCylinder::OneAxis()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::one_axis",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeCylinder::Cylinder()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCylinder.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::cylinder",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeHalfSpace(const TopoDS_Face&,const gp_Pnt&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeHalfSpace.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeHalfSpace::with_face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeHalfSpace(const TopoDS_Shell&,const gp_Pnt&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeHalfSpace.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeHalfSpace::with_shell",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeHalfSpace::Solid() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeHalfSpace.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeHalfSpace::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeHalfSpace::operator TopoDS_Solid() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeHalfSpace.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeHalfSpace::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::OneAxis()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis::one_axis",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::Build(const Message_ProgressRange&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::one_axis_build",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::Face()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis::face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::operator TopoDS_Face()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis::face",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis::shell",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::operator TopoDS_Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis::shell",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::Solid()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeOneAxis::operator TopoDS_Solid()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeOneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism(const TopoDS_Shape&,const gp_Vec&,bool,bool)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism(const TopoDS_Shape&,const gp_Dir&,bool,bool,bool)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::infinite",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::Prism() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::prism",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::Build(const Message_ProgressRange&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::build",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::FirstShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::first_shape",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::LastShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::last_shape",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::generated",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::IsDeleted(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::is_deleted",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::FirstShape(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::first_shape_of",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakePrism::LastShape(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::last_shape_of",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol(const TopoDS_Shape&,const gp_Ax1&,double,bool)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol(const TopoDS_Shape&,const gp_Ax1&,bool)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::full",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::Revol() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::revol",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::Build(const Message_ProgressRange&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::build",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::FirstShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::first_shape",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::LastShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::last_shape",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::generated",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::IsDeleted(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::is_deleted",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::FirstShape(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::first_shape_of",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::LastShape(const TopoDS_Shape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::last_shape_of",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::HasDegenerated() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::has_degenerated",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevol::Degenerated() const",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::degenerated",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const occ::handle<Geom_Curve>&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::with_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::with_range",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const occ::handle<Geom_Curve>&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::with_range_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const gp_Ax2&,const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::with_axes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const gp_Ax2&,const occ::handle<Geom_Curve>&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::with_axes_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const gp_Ax2&,const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::with_axes_range",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution(const gp_Ax2&,const occ::handle<Geom_Curve>&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::with_axes_range_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution::OneAxis()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::one_axis",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeRevolution::Revolution()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::revolution",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::with_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::with_latitudes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::with_latitudes_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Pnt&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::at_center",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Pnt&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::at_center_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Pnt&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::at_center_latitudes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Pnt&,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::at_center_latitudes_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Ax2&,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::with_axis",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::with_axis_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::with_axis_latitudes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere(const gp_Ax2&,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::with_axis_latitudes_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere::OneAxis()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::one_axis",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSphere::Sphere()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::sphere",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSweep::FirstShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep::first_shape",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeSweep::LastShape()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep::last_shape",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::new",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::with_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::with_pipe",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(double,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::with_pipe_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::with_axes",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::with_axes_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(const gp_Ax2&,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::with_axes_pipe",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus(const gp_Ax2&,double,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::with_axes_pipe_angle",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus::OneAxis()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::one_axis",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeTorus::Torus()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::torus",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge(double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::with_ltx",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge(const gp_Ax2&,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::with_axes_ltx",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge(double,double,double,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::with_limits",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge(const gp_Ax2&,double,double,double,double,double,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::with_axes_limits",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge::Wedge()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::wedge",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge::Build(const Message_ProgressRange&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::build",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge::Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::shell",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge::operator TopoDS_Shell()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::shell",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge::Solid()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPrimAPI_MakeWedge::operator TopoDS_Solid()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::solid",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
+    },
+    {
+      "upstream_id": "BRepPreviewAPI_MakeBox()",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPreviewAPI/BRepPreviewAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_preview_api::BRepPreviewAPIMakeBox::new",
+      "status": "implemented",
+      "notes": "BRepPreviewAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 5): BRepPreviewAPIMakeBox holds a BRepPrimAPIMakeBox, dereferences to it and overrides build of BRepBuilderAPIMakeShape; compared with OCCT by tools/verify_tkprim_numeric.py (pv_* requests)."
+    },
+    {
+      "upstream_id": "BRepPreviewAPI_MakeBox::Build(const Message_ProgressRange&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPreviewAPI/BRepPreviewAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_preview_api::BRepPreviewAPIMakeBox::build",
+      "status": "implemented",
+      "notes": "BRepPreviewAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 5): BRepPreviewAPIMakeBox holds a BRepPrimAPIMakeBox, dereferences to it and overrides build of BRepBuilderAPIMakeShape; compared with OCCT by tools/verify_tkprim_numeric.py (pv_* requests)."
     }
   ],
   "tests": [

@@ -1,8 +1,8 @@
 // Rust translation of BRepPrimAPI_MakeBox.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepPrimAPI_MakeBox`: the maker of boxes.
-use crate::brep_prim::{BRepPrimDirection, BRepPrimWedge, standard_frame};
 use super::make_one_axis::{add_shell_done, reset_solid};
+use crate::brep_prim::{BRepPrimDirection, BRepPrimWedge, standard_frame};
 use rustycad_tkbrep::topods::{self, Face, Shell, Solid};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::Failure;
@@ -32,13 +32,22 @@ fn pmin_sizes(p: Point3, dx: f64, dy: f64, dz: f64) -> Point3 {
 
 /// `pmin(p1, p2)`: the componentwise `std::min` of two points.
 fn pmin_points(p1: Point3, p2: Point3) -> Point3 {
-    Point3::new(std_min(p1.x(), p2.x()), std_min(p1.y(), p2.y()), std_min(p1.z(), p2.z()))
+    Point3::new(
+        std_min(p1.x(), p2.x()),
+        std_min(p1.y(), p2.y()),
+        std_min(p1.z(), p2.z()),
+    )
 }
 
 /// The wedge of a box with the corner `corner` and the sizes `|dx|`, `|dy|`, `|dz|` on
 /// the frame `gp_Ax2(corner, Z, X)`.
 fn corner_wedge(corner: Point3, dx: f64, dy: f64, dz: f64) -> Result<BRepPrimWedge, Failure> {
-    Ok(BRepPrimWedge::with_box(standard_frame(corner)?, dx.abs(), dy.abs(), dz.abs()))
+    Ok(BRepPrimWedge::with_box(
+        standard_frame(corner)?,
+        dx.abs(),
+        dy.abs(),
+        dz.abs(),
+    ))
 }
 
 /// `BRepPrimAPI_MakeBox`: a box parallel to the axes of a frame, from its sizes (signed:
@@ -69,7 +78,10 @@ impl BRepPrimAPIMakeBox {
 
     /// The maker of a wedge.
     fn of(my_wedge: BRepPrimWedge) -> Self {
-        Self { base: BRepBuilderAPIMakeShapeBase::new(), my_wedge }
+        Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_wedge,
+        }
     }
 
     /// `BRepPrimAPI_MakeBox(dx, dy, dz)`: the box from the origin;
@@ -81,13 +93,23 @@ impl BRepPrimAPIMakeBox {
     /// `BRepPrimAPI_MakeBox(P, dx, dy, dz)`: the box from `point`;
     /// `BRepPrimAPIMakeBox::at_point(p, 1.0, 2.0, 3.0)?`.
     pub fn at_point(point: Point3, dx: f64, dy: f64, dz: f64) -> Result<Self, Failure> {
-        Ok(Self::of(corner_wedge(pmin_sizes(point, dx, dy, dz), dx, dy, dz)?))
+        Ok(Self::of(corner_wedge(
+            pmin_sizes(point, dx, dy, dz),
+            dx,
+            dy,
+            dz,
+        )?))
     }
 
     /// `BRepPrimAPI_MakeBox(P1, P2)`: the box of two corners;
     /// `BRepPrimAPIMakeBox::from_points(p1, p2)?`.
     pub fn from_points(p1: Point3, p2: Point3) -> Result<Self, Failure> {
-        let wedge = corner_wedge(pmin_points(p1, p2), p2.x() - p1.x(), p2.y() - p1.y(), p2.z() - p1.z())?;
+        let wedge = corner_wedge(
+            pmin_points(p1, p2),
+            p2.x() - p1.x(),
+            p2.y() - p1.y(),
+            p2.z() - p1.z(),
+        )?;
         Ok(Self::of(wedge))
     }
 
@@ -104,14 +126,25 @@ impl BRepPrimAPIMakeBox {
     }
 
     /// `Init(thePnt, theDX, theDY, theDZ)`; `maker.init_at_point(p, 1.0, 2.0, 3.0)?`.
-    pub fn init_at_point(&mut self, point: Point3, dx: f64, dy: f64, dz: f64) -> Result<(), Failure> {
+    pub fn init_at_point(
+        &mut self,
+        point: Point3,
+        dx: f64,
+        dy: f64,
+        dz: f64,
+    ) -> Result<(), Failure> {
         self.my_wedge = corner_wedge(pmin_sizes(point, dx, dy, dz), dx, dy, dz)?;
         Ok(())
     }
 
     /// `Init(thePnt1, thePnt2)`; `maker.init_points(p1, p2)?`.
     pub fn init_points(&mut self, p1: Point3, p2: Point3) -> Result<(), Failure> {
-        self.my_wedge = corner_wedge(pmin_points(p1, p2), p2.x() - p1.x(), p2.y() - p1.y(), p2.z() - p1.z())?;
+        self.my_wedge = corner_wedge(
+            pmin_points(p1, p2),
+            p2.x() - p1.x(),
+            p2.y() - p1.y(),
+            p2.z() - p1.z(),
+        )?;
         Ok(())
     }
 

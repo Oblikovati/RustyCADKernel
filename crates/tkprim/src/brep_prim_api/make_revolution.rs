@@ -21,7 +21,10 @@ fn project(meridian: &Handle<dyn GeomCurve>) -> Result<Handle<dyn Geom2dCurve>, 
 /// The parameter range of the meridian (`FirstParameter`, `LastParameter`).
 fn meridian_range(meridian: &Handle<dyn GeomCurve>) -> Result<(f64, f64), Failure> {
     let curve = meridian.get().ok_or_else(|| {
-        Failure::with_message("Standard_NullObject", "BRepPrimAPI_MakeRevolution: the meridian is null; expected a curve")
+        Failure::with_message(
+            "Standard_NullObject",
+            "BRepPrimAPI_MakeRevolution: the meridian is null; expected a curve",
+        )
     })?;
     Ok((curve.first_parameter(), curve.last_parameter()))
 }
@@ -51,12 +54,21 @@ pub struct BRepPrimAPIMakeRevolution {
 impl BRepPrimAPIMakeRevolution {
     /// The maker of the revolution of `meridian` on `axes` over `range`, limited to
     /// `angle` when given.
-    fn build_on(axes: Axis2, range: (f64, f64), meridian: &Handle<dyn GeomCurve>, angle: Option<f64>) -> Result<Self, Failure> {
-        let mut revolution = BRepPrimRevolution::new(axes, range.0, range.1, meridian.clone(), project(meridian)?);
+    fn build_on(
+        axes: Axis2,
+        range: (f64, f64),
+        meridian: &Handle<dyn GeomCurve>,
+        angle: Option<f64>,
+    ) -> Result<Self, Failure> {
+        let mut revolution =
+            BRepPrimRevolution::new(axes, range.0, range.1, meridian.clone(), project(meridian)?);
         if let Some(angle) = angle {
             revolution.set_angle(angle)?;
         }
-        Ok(Self { base: BRepBuilderAPIMakeShapeBase::new(), my_revolution: revolution })
+        Ok(Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_revolution: revolution,
+        })
     }
 
     /// `BRepPrimAPI_MakeRevolution(Meridian)`: on the reference frame (`gp::XOY()`), over
@@ -74,14 +86,23 @@ impl BRepPrimAPIMakeRevolution {
 
     /// `BRepPrimAPI_MakeRevolution(Meridian, VMin, VMax)`;
     /// `BRepPrimAPIMakeRevolution::with_range(&m, 0.0, 1.0)?`.
-    pub fn with_range(meridian: &Handle<dyn GeomCurve>, vmin: f64, vmax: f64) -> Result<Self, Failure> {
+    pub fn with_range(
+        meridian: &Handle<dyn GeomCurve>,
+        vmin: f64,
+        vmax: f64,
+    ) -> Result<Self, Failure> {
         let axes = standard_frame(Point3::new(0.0, 0.0, 0.0))?;
         Self::build_on(axes, (vmin, vmax), meridian, None)
     }
 
     /// `BRepPrimAPI_MakeRevolution(Meridian, VMin, VMax, angle)`;
     /// `BRepPrimAPIMakeRevolution::with_range_angle(&m, 0.0, 1.0, 3.0)?`.
-    pub fn with_range_angle(meridian: &Handle<dyn GeomCurve>, vmin: f64, vmax: f64, angle: f64) -> Result<Self, Failure> {
+    pub fn with_range_angle(
+        meridian: &Handle<dyn GeomCurve>,
+        vmin: f64,
+        vmax: f64,
+        angle: f64,
+    ) -> Result<Self, Failure> {
         let axes = standard_frame(Point3::new(0.0, 0.0, 0.0))?;
         Self::build_on(axes, (vmin, vmax), meridian, Some(angle))
     }
@@ -94,19 +115,34 @@ impl BRepPrimAPIMakeRevolution {
 
     /// `BRepPrimAPI_MakeRevolution(Axes, Meridian, angle)`;
     /// `BRepPrimAPIMakeRevolution::with_axes_angle(axes, &m, 3.0)?`.
-    pub fn with_axes_angle(axes: Axis2, meridian: &Handle<dyn GeomCurve>, angle: f64) -> Result<Self, Failure> {
+    pub fn with_axes_angle(
+        axes: Axis2,
+        meridian: &Handle<dyn GeomCurve>,
+        angle: f64,
+    ) -> Result<Self, Failure> {
         Self::build_on(axes, meridian_range(meridian)?, meridian, Some(angle))
     }
 
     /// `BRepPrimAPI_MakeRevolution(Axes, Meridian, VMin, VMax)`;
     /// `BRepPrimAPIMakeRevolution::with_axes_range(axes, &m, 0.0, 1.0)?`.
-    pub fn with_axes_range(axes: Axis2, meridian: &Handle<dyn GeomCurve>, vmin: f64, vmax: f64) -> Result<Self, Failure> {
+    pub fn with_axes_range(
+        axes: Axis2,
+        meridian: &Handle<dyn GeomCurve>,
+        vmin: f64,
+        vmax: f64,
+    ) -> Result<Self, Failure> {
         Self::build_on(axes, (vmin, vmax), meridian, None)
     }
 
     /// `BRepPrimAPI_MakeRevolution(Axes, Meridian, VMin, VMax, angle)`;
     /// `BRepPrimAPIMakeRevolution::with_axes_range_angle(axes, &m, 0.0, 1.0, 3.0)?`.
-    pub fn with_axes_range_angle(axes: Axis2, meridian: &Handle<dyn GeomCurve>, vmin: f64, vmax: f64, angle: f64) -> Result<Self, Failure> {
+    pub fn with_axes_range_angle(
+        axes: Axis2,
+        meridian: &Handle<dyn GeomCurve>,
+        vmin: f64,
+        vmax: f64,
+        angle: f64,
+    ) -> Result<Self, Failure> {
         Self::build_on(axes, (vmin, vmax), meridian, Some(angle))
     }
 

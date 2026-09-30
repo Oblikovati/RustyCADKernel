@@ -20,7 +20,10 @@ pub(crate) fn reset_solid(base: &mut BRepBuilderAPIMakeShapeBase) -> Result<(), 
 }
 
 /// The second half of the pattern: adds `shell` to the solid and marks the maker done.
-pub(crate) fn add_shell_done(base: &mut BRepBuilderAPIMakeShapeBase, shell: &Shell) -> Result<(), Failure> {
+pub(crate) fn add_shell_done(
+    base: &mut BRepBuilderAPIMakeShapeBase,
+    shell: &Shell,
+) -> Result<(), Failure> {
     BRepBuilder::default().add(&mut base.my_shape, shell)?;
     base.set_done();
     Ok(())
@@ -77,14 +80,21 @@ pub trait BRepPrimAPIMakeOneAxis: BRepBuilderAPIMakeShape {
 macro_rules! one_axis_maker {
     ($maker:ty, $algo:ident) => {
         impl rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape for $maker {
-            fn make_shape_base(&self) -> &rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeBase {
+            fn make_shape_base(
+                &self,
+            ) -> &rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeBase {
                 &self.base
             }
-            fn make_shape_base_mut(&mut self) -> &mut rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeBase {
+            fn make_shape_base_mut(
+                &mut self,
+            ) -> &mut rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeBase {
                 &mut self.base
             }
             /// `BRepPrimAPI_MakeOneAxis::Build()`.
-            fn build(&mut self, _range: &rustycad_tkernel::message::ProgressRange<'_>) -> Result<(), rustycad_tkernel::standard::Failure> {
+            fn build(
+                &mut self,
+                _range: &rustycad_tkernel::message::ProgressRange<'_>,
+            ) -> Result<(), rustycad_tkernel::standard::Failure> {
                 $crate::brep_prim_api::one_axis_build(self)
             }
         }

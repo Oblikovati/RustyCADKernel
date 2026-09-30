@@ -4,7 +4,6 @@
 //! The check that no edge of the swept shape crosses the axis of revolution.
 use super::make_revol::BRepPrimAPIMakeRevol;
 use rustycad_tkbrep::brep::BRepTool;
-use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Edge, Shape};
 use rustycad_tkernel::precision;
@@ -12,8 +11,9 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomTrimmedCurve};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
-use rustycad_tkmath::geom_abs::CurveType;
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::extrema::ExtCC;
+use rustycad_tkmath::geom_abs::CurveType;
 use rustycad_tkmath::gp::{Axis1, Line3};
 
 /// The default tolerances of `Extrema_ExtCC(C1, C2)`.
@@ -75,7 +75,8 @@ fn placed_curve(edge: &Edge) -> Result<(GeomAdaptorCurve, f64, f64), Failure> {
     }
     let (first, last) = (found.first, found.last);
     let copy: Handle<dyn GeomCurve> = found.curve.copy()?.cast();
-    let trimmed: Handle<dyn GeomCurve> = Handle::new(GeomTrimmedCurve::new(&copy, first, last, true, true)?).cast();
+    let trimmed: Handle<dyn GeomCurve> =
+        Handle::new(GeomTrimmedCurve::new(&copy, first, last, true, true)?).cast();
     trimmed.transform(found.location.transformation())?;
     let adaptor = GeomAdaptorCurve::default();
     adaptor.load_range(&trimmed, first, last)?;
@@ -84,7 +85,12 @@ fn placed_curve(edge: &Edge) -> Result<(GeomAdaptorCurve, f64, f64), Failure> {
 
 /// Whether the edge of `curve` lies on the axis: its points at `First + (Last -
 /// First) / Ratio`, Ratio = 1..99, all closer to the axis than Precision::Confusion().
-fn lies_on_axis(curve: &GeomAdaptorCurve, first: f64, last: f64, axe: Axis1) -> Result<bool, Failure> {
+fn lies_on_axis(
+    curve: &GeomAdaptorCurve,
+    first: f64,
+    last: f64,
+    axe: Axis1,
+) -> Result<bool, Failure> {
     let mut ratio = 1;
     loop {
         let point = curve.value(first + (last - first) / f64::from(ratio))?;

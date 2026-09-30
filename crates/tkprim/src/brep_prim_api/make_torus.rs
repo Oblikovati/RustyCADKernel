@@ -27,7 +27,11 @@ pub struct BRepPrimAPIMakeTorus {
 
 impl BRepPrimAPIMakeTorus {
     /// The maker of `torus` with its pipe range and angle set.
-    fn limited(mut torus: BRepPrimTorus, pipe: Option<(f64, f64)>, angle: Option<f64>) -> Result<Self, Failure> {
+    fn limited(
+        mut torus: BRepPrimTorus,
+        pipe: Option<(f64, f64)>,
+        angle: Option<f64>,
+    ) -> Result<Self, Failure> {
         if let Some((angle1, angle2)) = pipe {
             torus.set_vmin(angle1)?;
             torus.set_vmax(angle2)?;
@@ -35,7 +39,10 @@ impl BRepPrimAPIMakeTorus {
         if let Some(angle) = angle {
             torus.set_angle(angle)?;
         }
-        Ok(Self { base: BRepBuilderAPIMakeShapeBase::new(), my_torus: torus })
+        Ok(Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_torus: torus,
+        })
     }
 
     /// `BRepPrimAPI_MakeTorus(R1, R2)`; `BRepPrimAPIMakeTorus::new(10.0, 2.0)?`.
@@ -56,8 +63,18 @@ impl BRepPrimAPIMakeTorus {
 
     /// `BRepPrimAPI_MakeTorus(R1, R2, angle1, angle2, angle)`;
     /// `BRepPrimAPIMakeTorus::with_pipe_angle(10.0, 2.0, -1.0, 1.0, 3.0)?`.
-    pub fn with_pipe_angle(r1: f64, r2: f64, angle1: f64, angle2: f64, angle: f64) -> Result<Self, Failure> {
-        Self::limited(BRepPrimTorus::new(r1, r2)?, Some((angle1, angle2)), Some(angle))
+    pub fn with_pipe_angle(
+        r1: f64,
+        r2: f64,
+        angle1: f64,
+        angle2: f64,
+        angle: f64,
+    ) -> Result<Self, Failure> {
+        Self::limited(
+            BRepPrimTorus::new(r1, r2)?,
+            Some((angle1, angle2)),
+            Some(angle),
+        )
     }
 
     /// `BRepPrimAPI_MakeTorus(Axes, R1, R2)`; `BRepPrimAPIMakeTorus::with_axes(axes, 10.0, 2.0)?`.
@@ -73,14 +90,35 @@ impl BRepPrimAPIMakeTorus {
 
     /// `BRepPrimAPI_MakeTorus(Axes, R1, R2, angle1, angle2)`;
     /// `BRepPrimAPIMakeTorus::with_axes_pipe(axes, 10.0, 2.0, -1.0, 1.0)?`.
-    pub fn with_axes_pipe(axes: Axis2, r1: f64, r2: f64, angle1: f64, angle2: f64) -> Result<Self, Failure> {
-        Self::limited(BRepPrimTorus::with_axes(axes, r1, r2)?, Some((angle1, angle2)), None)
+    pub fn with_axes_pipe(
+        axes: Axis2,
+        r1: f64,
+        r2: f64,
+        angle1: f64,
+        angle2: f64,
+    ) -> Result<Self, Failure> {
+        Self::limited(
+            BRepPrimTorus::with_axes(axes, r1, r2)?,
+            Some((angle1, angle2)),
+            None,
+        )
     }
 
     /// `BRepPrimAPI_MakeTorus(Axes, R1, R2, angle1, angle2, angle)`;
     /// `BRepPrimAPIMakeTorus::with_axes_pipe_angle(axes, 10.0, 2.0, -1.0, 1.0, 3.0)?`.
-    pub fn with_axes_pipe_angle(axes: Axis2, r1: f64, r2: f64, angle1: f64, angle2: f64, angle: f64) -> Result<Self, Failure> {
-        Self::limited(BRepPrimTorus::with_axes(axes, r1, r2)?, Some((angle1, angle2)), Some(angle))
+    pub fn with_axes_pipe_angle(
+        axes: Axis2,
+        r1: f64,
+        r2: f64,
+        angle1: f64,
+        angle2: f64,
+        angle: f64,
+    ) -> Result<Self, Failure> {
+        Self::limited(
+            BRepPrimTorus::with_axes(axes, r1, r2)?,
+            Some((angle1, angle2)),
+            Some(angle),
+        )
     }
 
     /// `Torus()`: the algorithm; `maker.torus()`.

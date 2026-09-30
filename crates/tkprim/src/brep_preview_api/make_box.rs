@@ -8,8 +8,8 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tktopalgo::brep_builder_api::{
-    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeShapeBase,
-    BRepBuilderAPIMakeVertex, BRepBuilderAPIMakeWire,
+    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape,
+    BRepBuilderAPIMakeShapeBase, BRepBuilderAPIMakeVertex, BRepBuilderAPIMakeWire,
 };
 use std::ops::{Deref, DerefMut};
 
@@ -21,7 +21,7 @@ use std::ops::{Deref, DerefMut};
 /// ignored (docs/prim-design.md section 5).
 ///
 /// ```
-/// use rustycad_tkbrep::top_abs::ShapeEnum;
+/// use rustycad_tkg3d::top_abs::ShapeEnum;
 /// use rustycad_tkmath::gp::Point3;
 /// use rustycad_tkprim::brep_preview_api::BRepPreviewAPIMakeBox;
 /// use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
@@ -82,7 +82,9 @@ fn make_vertex(point: Point3) -> Result<Shape, Failure> {
 
 /// `makeEdge`: the segment between the points.
 fn make_edge(point1: Point3, point2: Point3) -> Result<Shape, Failure> {
-    Ok(BRepBuilderAPIMakeEdge::from_points(point1, point2)?.edge()?.into())
+    Ok(BRepBuilderAPIMakeEdge::from_points(point1, point2)?
+        .edge()?
+        .into())
 }
 
 /// `makeRectangle`: the planar face bounded by the four segments between the corners.

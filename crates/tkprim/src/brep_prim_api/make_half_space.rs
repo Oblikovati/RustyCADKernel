@@ -4,12 +4,14 @@
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorSurface;
 use rustycad_tkbrep::brep_lprop::BRepLPropSLProps;
-use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Edge, Face, Shape, Shell, Solid, Vertex};
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{self, Direction3, Point3, Xyz};
-use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeShape, BRepBuilderAPIMakeShapeBase, BRepBuilderAPIMakeVertex};
+use rustycad_tktopalgo::brep_builder_api::{
+    BRepBuilderAPIMakeShape, BRepBuilderAPIMakeShapeBase, BRepBuilderAPIMakeVertex,
+};
 use rustycad_tktopalgo::brep_extrema::{BRepExtremaDistShapeShape, BRepExtremaSupportType};
 
 /// `getNormalOnFace`: the normal of the face at (u, v) (BRepLProp_SLProps of order 2
@@ -83,7 +85,11 @@ fn normal_from_vertex(shape: &Shape, vertex: &Vertex) -> Result<Option<Direction
 }
 
 /// The nearest point of an edge or vertex solution with a defined normal.
-fn boundary_extremum(ext: &BRepExtremaDistShapeShape, shape: &Shape, iext: i32) -> Result<Option<(Point3, Direction3)>, Failure> {
+fn boundary_extremum(
+    ext: &BRepExtremaDistShapeShape,
+    shape: &Shape,
+    iext: i32,
+) -> Result<Option<(Point3, Direction3)>, Failure> {
     let normal = match ext.support_type_shape2(iext)? {
         BRepExtremaSupportType::IsOnEdge => {
             let par = ext.par_on_edge_s2(iext)?;
@@ -139,11 +145,11 @@ fn is_outside(pnt: Point3, ponf: Point3, normal: Direction3) -> Result<bool, Fai
 /// with a normal is found (docs/prim-design.md section 4).
 ///
 /// ```
-/// use rustycad_tkmath::gp::{Direction3, Plane, Point3};
+/// use rustycad_tkmath::gp::{Direction3, Plane3, Point3};
 /// use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeHalfSpace;
 /// use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape};
-/// let plane = Plane::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 0.0, 1.0)?);
-/// let face = BRepBuilderAPIMakeFace::with_plane_bounds(plane, -1.0, 1.0, -1.0, 1.0)?.face()?;
+/// let plane = Plane3::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 0.0, 1.0)?)?;
+/// let face = BRepBuilderAPIMakeFace::from_plane_bounds(plane, (-1.0, 1.0, -1.0, 1.0))?.face()?;
 /// let maker = BRepPrimAPIMakeHalfSpace::with_face(&face, Point3::new(0.0, 0.0, 1.0))?;
 /// assert!(maker.is_done());
 /// assert!(!maker.solid()?.is_null());
@@ -156,8 +162,15 @@ pub struct BRepPrimAPIMakeHalfSpace {
 
 impl BRepPrimAPIMakeHalfSpace {
     /// The maker of the half-space of `shell` (holding `boundary`) seen from `ref_pnt`.
-    fn bounded(boundary: &Shape, ref_pnt: Point3, make_shell: impl FnOnce() -> Result<Shell, Failure>) -> Result<Self, Failure> {
-        let mut maker = Self { base: BRepBuilderAPIMakeShapeBase::new(), my_solid: Solid::default() };
+    fn bounded(
+        boundary: &Shape,
+        ref_pnt: Point3,
+        make_shell: impl FnOnce() -> Result<Shell, Failure>,
+    ) -> Result<Self, Failure> {
+        let mut maker = Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_solid: Solid::default(),
+        };
         maker.base.set_not_done();
         let Some((min_pnt, normal)) = find_extrema(ref_pnt, boundary)? else {
             return Ok(maker);
@@ -197,7 +210,10 @@ impl BRepPrimAPIMakeHalfSpace {
     /// maker is not done; `maker.solid()?`.
     pub fn solid(&self) -> Result<&Solid, Failure> {
         if !self.is_done() {
-            return Err(Failure::with_message("StdFail_NotDone", "BRepPrimAPI_MakeHalfSpace::Solid"));
+            return Err(Failure::with_message(
+                "StdFail_NotDone",
+                "BRepPrimAPI_MakeHalfSpace::Solid",
+            ));
         }
         Ok(&self.my_solid)
     }

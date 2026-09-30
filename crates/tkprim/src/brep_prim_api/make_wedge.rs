@@ -1,8 +1,8 @@
 // Rust translation of BRepPrimAPI_MakeWedge.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepPrimAPI_MakeWedge`: the maker of wedges.
-use crate::brep_prim::{BRepPrimWedge, standard_frame};
 use super::make_one_axis::{add_shell_done, reset_solid};
+use crate::brep_prim::{BRepPrimWedge, standard_frame};
 use rustycad_tkbrep::topods::{self, Shell, Solid};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::Failure;
@@ -29,7 +29,10 @@ pub struct BRepPrimAPIMakeWedge {
 impl BRepPrimAPIMakeWedge {
     /// The maker of a wedge.
     fn of(my_wedge: BRepPrimWedge) -> Self {
-        Self { base: BRepBuilderAPIMakeShapeBase::new(), my_wedge }
+        Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_wedge,
+        }
     }
 
     /// `BRepPrimAPI_MakeWedge(dx, dy, dz, ltx)`: the right angular wedge from the
@@ -57,7 +60,11 @@ impl BRepPrimAPIMakeWedge {
     /// `axes`; `BRepPrimAPIMakeWedge::with_axes_limits(axes, 20.0, 10.0, 20.0, [5.0, 5.0, 15.0, 15.0])`.
     pub fn with_axes_limits(axes: Axis2, dx: f64, dy: f64, dz: f64, limits: [f64; 4]) -> Self {
         let [xmin, zmin, xmax, zmax] = limits;
-        Self::of(BRepPrimWedge::with_limits(axes, [0.0, 0.0, 0.0, zmin, xmin], [dx, dy, dz, zmax, xmax]))
+        Self::of(BRepPrimWedge::with_limits(
+            axes,
+            [0.0, 0.0, 0.0, zmin, xmin],
+            [dx, dy, dz, zmax, xmax],
+        ))
     }
 
     /// `Wedge()`: the wedge; `maker.wedge()`.

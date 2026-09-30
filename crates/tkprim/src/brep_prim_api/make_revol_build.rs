@@ -6,12 +6,12 @@
 use super::make_revol::BRepPrimAPIMakeRevol;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::{BRepToolsReShape, ReShape};
-use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Edge, Shape, ShapeIterator};
 use rustycad_tkbrep::toptools::ShapeMapHasher;
 use rustycad_tkernel::ncollection::DataMap;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tktopalgo::brep_lib;
 
 /// A `NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>,
@@ -63,7 +63,11 @@ fn degenerated_by_face(shape: &Shape) -> Result<ShapeListMap, Failure> {
 /// The substitution of the degenerated `edge` of a face by the first of its remaining
 /// copies with the same orientation, unless the face holds the recorded occurrence
 /// itself; the chosen entry leaves `copies`. Returns whether the edge is replaced.
-fn substitute_edge(edge: &Shape, copies: &mut Vec<Shape>, substitution: &BRepToolsReShape) -> Result<bool, Failure> {
+fn substitute_edge(
+    edge: &Shape,
+    copies: &mut Vec<Shape>,
+    substitution: &BRepToolsReShape,
+) -> Result<bool, Failure> {
     for index in 0..copies.len() {
         if copies[index].is_equal(edge) {
             copies.remove(index);
@@ -152,7 +156,12 @@ impl BRepPrimAPIMakeRevol {
 
     /// Replaces `face` by its substituted copy in the shape and merges both
     /// substitutions into `myHist`.
-    fn replace_face(&mut self, face: &Shape, substitution: &BRepToolsReShape, face_substitution: &BRepToolsReShape) -> Result<(), Failure> {
+    fn replace_face(
+        &mut self,
+        face: &Shape,
+        substitution: &BRepToolsReShape,
+        face_substitution: &BRepToolsReShape,
+    ) -> Result<(), Failure> {
         let new_face = substitution.apply(face, ShapeEnum::Shape)?;
         face_substitution.replace(face, &new_face)?;
         match self.my_hist.get() {

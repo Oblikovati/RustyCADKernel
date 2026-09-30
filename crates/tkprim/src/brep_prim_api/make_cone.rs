@@ -27,7 +27,10 @@ pub struct BRepPrimAPIMakeCone {
 
 impl BRepPrimAPIMakeCone {
     fn of(my_cone: BRepPrimCone) -> Self {
-        Self { base: BRepBuilderAPIMakeShapeBase::new(), my_cone }
+        Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_cone,
+        }
     }
 
     /// `BRepPrimAPI_MakeCone(R1, R2, H)`; `BRepPrimAPIMakeCone::new(1.0, 0.0, 2.0)?`.
@@ -51,7 +54,13 @@ impl BRepPrimAPIMakeCone {
 
     /// `BRepPrimAPI_MakeCone(Axes, R1, R2, H, angle)`;
     /// `BRepPrimAPIMakeCone::with_axes_angle(axes, 1.0, 0.0, 2.0, 3.0)?`.
-    pub fn with_axes_angle(axes: Axis2, r1: f64, r2: f64, h: f64, angle: f64) -> Result<Self, Failure> {
+    pub fn with_axes_angle(
+        axes: Axis2,
+        r1: f64,
+        r2: f64,
+        h: f64,
+        angle: f64,
+    ) -> Result<Self, Failure> {
         let mut cone = BRepPrimCone::with_axes_radii(axes, r1, r2, h)?;
         cone.set_angle(angle)?;
         Ok(Self::of(cone))

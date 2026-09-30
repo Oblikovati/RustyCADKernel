@@ -41,12 +41,21 @@ impl BRepPrimAPIMakeSphere {
         if let Some(angle) = limits.angle {
             sphere.set_angle(angle)?;
         }
-        Ok(Self { base: BRepBuilderAPIMakeShapeBase::new(), my_sphere: sphere })
+        Ok(Self {
+            base: BRepBuilderAPIMakeShapeBase::new(),
+            my_sphere: sphere,
+        })
     }
 
     /// `BRepPrimAPI_MakeSphere(R)`; `BRepPrimAPIMakeSphere::new(1.0)?`.
     pub fn new(r: f64) -> Result<Self, Failure> {
-        Self::limited(BRepPrimSphere::with_axes(xoy(), r)?, SphereLimits { latitudes: None, angle: None })
+        Self::limited(
+            BRepPrimSphere::with_axes(xoy(), r)?,
+            SphereLimits {
+                latitudes: None,
+                angle: None,
+            },
+        )
     }
 
     /// `BRepPrimAPI_MakeSphere(R, angle)`: the spherical wedge 0..|angle|, turning around
@@ -55,21 +64,35 @@ impl BRepPrimAPIMakeSphere {
         let sign = if angle < 0.0 { -1.0 } else { 1.0 };
         let normal = Direction3::from_vector(sign * Vector3::from(dz()))?;
         let axes = Axis2::with_x_direction(origin(), normal, dx())?;
-        let limits = SphereLimits { latitudes: None, angle: Some(angle.abs()) };
+        let limits = SphereLimits {
+            latitudes: None,
+            angle: Some(angle.abs()),
+        };
         Self::limited(BRepPrimSphere::with_axes(axes, r)?, limits)
     }
 
     /// `BRepPrimAPI_MakeSphere(R, angle1, angle2)`: the segment between two latitudes;
     /// `BRepPrimAPIMakeSphere::with_latitudes(1.0, 0.0, 1.0)?`.
     pub fn with_latitudes(r: f64, angle1: f64, angle2: f64) -> Result<Self, Failure> {
-        let limits = SphereLimits { latitudes: Some((angle1, angle2)), angle: None };
+        let limits = SphereLimits {
+            latitudes: Some((angle1, angle2)),
+            angle: None,
+        };
         Self::limited(BRepPrimSphere::new(r)?, limits)
     }
 
     /// `BRepPrimAPI_MakeSphere(R, angle1, angle2, angle3)`;
     /// `BRepPrimAPIMakeSphere::with_latitudes_angle(1.0, 0.0, 1.0, 3.0)?`.
-    pub fn with_latitudes_angle(r: f64, angle1: f64, angle2: f64, angle3: f64) -> Result<Self, Failure> {
-        let limits = SphereLimits { latitudes: Some((angle1, angle2)), angle: Some(angle3) };
+    pub fn with_latitudes_angle(
+        r: f64,
+        angle1: f64,
+        angle2: f64,
+        angle3: f64,
+    ) -> Result<Self, Failure> {
+        let limits = SphereLimits {
+            latitudes: Some((angle1, angle2)),
+            angle: Some(angle3),
+        };
         Self::limited(BRepPrimSphere::new(r)?, limits)
     }
 
@@ -86,14 +109,30 @@ impl BRepPrimAPIMakeSphere {
 
     /// `BRepPrimAPI_MakeSphere(Center, R, angle1, angle2)`;
     /// `BRepPrimAPIMakeSphere::at_center_latitudes(c, 1.0, 0.0, 1.0)?`.
-    pub fn at_center_latitudes(center: Point3, r: f64, angle1: f64, angle2: f64) -> Result<Self, Failure> {
+    pub fn at_center_latitudes(
+        center: Point3,
+        r: f64,
+        angle1: f64,
+        angle2: f64,
+    ) -> Result<Self, Failure> {
         Self::on_axis_limited(standard_frame(center)?, r, Some((angle1, angle2)), None)
     }
 
     /// `BRepPrimAPI_MakeSphere(Center, R, angle1, angle2, angle3)`;
     /// `BRepPrimAPIMakeSphere::at_center_latitudes_angle(c, 1.0, 0.0, 1.0, 3.0)?`.
-    pub fn at_center_latitudes_angle(center: Point3, r: f64, angle1: f64, angle2: f64, angle3: f64) -> Result<Self, Failure> {
-        Self::on_axis_limited(standard_frame(center)?, r, Some((angle1, angle2)), Some(angle3))
+    pub fn at_center_latitudes_angle(
+        center: Point3,
+        r: f64,
+        angle1: f64,
+        angle2: f64,
+        angle3: f64,
+    ) -> Result<Self, Failure> {
+        Self::on_axis_limited(
+            standard_frame(center)?,
+            r,
+            Some((angle1, angle2)),
+            Some(angle3),
+        )
     }
 
     /// `BRepPrimAPI_MakeSphere(Axis, R)`; `BRepPrimAPIMakeSphere::with_axis(axes, 1.0)?`.
@@ -109,19 +148,38 @@ impl BRepPrimAPIMakeSphere {
 
     /// `BRepPrimAPI_MakeSphere(Axis, R, angle1, angle2)`;
     /// `BRepPrimAPIMakeSphere::with_axis_latitudes(axes, 1.0, 0.0, 1.0)?`.
-    pub fn with_axis_latitudes(axis: Axis2, r: f64, angle1: f64, angle2: f64) -> Result<Self, Failure> {
+    pub fn with_axis_latitudes(
+        axis: Axis2,
+        r: f64,
+        angle1: f64,
+        angle2: f64,
+    ) -> Result<Self, Failure> {
         Self::on_axis_limited(axis, r, Some((angle1, angle2)), None)
     }
 
     /// `BRepPrimAPI_MakeSphere(Axis, R, angle1, angle2, angle3)`;
     /// `BRepPrimAPIMakeSphere::with_axis_latitudes_angle(axes, 1.0, 0.0, 1.0, 3.0)?`.
-    pub fn with_axis_latitudes_angle(axis: Axis2, r: f64, angle1: f64, angle2: f64, angle3: f64) -> Result<Self, Failure> {
+    pub fn with_axis_latitudes_angle(
+        axis: Axis2,
+        r: f64,
+        angle1: f64,
+        angle2: f64,
+        angle3: f64,
+    ) -> Result<Self, Failure> {
         Self::on_axis_limited(axis, r, Some((angle1, angle2)), Some(angle3))
     }
 
     /// The sphere on `axis` with its limits.
-    fn on_axis_limited(axis: Axis2, r: f64, latitudes: Option<(f64, f64)>, angle: Option<f64>) -> Result<Self, Failure> {
-        Self::limited(BRepPrimSphere::with_axes(axis, r)?, SphereLimits { latitudes, angle })
+    fn on_axis_limited(
+        axis: Axis2,
+        r: f64,
+        latitudes: Option<(f64, f64)>,
+        angle: Option<f64>,
+    ) -> Result<Self, Failure> {
+        Self::limited(
+            BRepPrimSphere::with_axes(axis, r)?,
+            SphereLimits { latitudes, angle },
+        )
     }
 
     /// `Sphere()`: the algorithm; `maker.sphere()`.
