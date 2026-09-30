@@ -1,21 +1,8 @@
-// Copyright (c) 1995-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
-
 // AppDef requests on the containers, the line tool, the Compute instantiation and
 // AppDef_LinearCriteria (tools/tkgeombase_corpus_appdef.py); AppDef_Variational is
 // in tkgeombase_probe_appdef_variational.cxx. The Rust twin is
 // crates/tkgeombase/examples/gb_probe/app_def.
+
 #include <AppDef_Compute.hxx>
 #include <AppDef_LinearCriteria.hxx>
 #include <AppDef_MultiLine.hxx>

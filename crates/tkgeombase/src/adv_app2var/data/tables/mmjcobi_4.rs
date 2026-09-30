@@ -1,15 +1,3 @@
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
 &[
     -0.1444439568736928338131301731248, -0.16282186042081172649820156323261, -0.18241319686261461085270580574036, -8.582024716081486523472092427923e-6,
     -4.7724430128453144569552123745523e-5, -1.5218368615930545274152468835743e-4, -3.6598465471007968393688360584286e-4, -7.3830404322387513234963792998708e-4,

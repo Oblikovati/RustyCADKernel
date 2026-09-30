@@ -1,6 +1,3 @@
-// Copyright (c) 2026 OPEN CASCADE SAS
-// This library is free software under LGPL version 2.1 with OCCT exception.
-// See licenses/LICENSE_LGPL_21.txt and licenses/OCCT_LGPL_EXCEPTION.txt.
 //! Poly_ArrayOfNodes_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #![allow(non_snake_case)]
 use rustycad_tkmath::{

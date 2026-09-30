@@ -1,19 +1,7 @@
-// Copyright (c) 2025 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
-
 // The static layout helpers and the int-typed size queries of NCollection_Array2.
 // Native `int` arithmetic is undefined on overflow; Rust wraps, which is what the
 // native build computes on every supported target.
+
 impl<T> Array2<'_, T> {
     /// Element count of a `rows x cols` rectangle; `Array2::<i32>::array_size(2, 3) == 6`.
     pub const fn array_size(rows: usize, cols: usize) -> usize {

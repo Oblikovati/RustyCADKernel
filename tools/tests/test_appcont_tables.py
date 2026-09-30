@@ -30,9 +30,9 @@ class AppContTableGeneratorTests(unittest.TestCase):
 
     def test_fragments_pack_literals_per_line_under_the_chunk_size(self):
         values = [f'{i}.5' for i in range(CHUNK + 5)]
-        files = fragments('THE_VBMATRIX_DATA', values, '// h\n')
+        files = fragments('THE_VBMATRIX_DATA', values)
         self.assertEqual(sorted(files, key=chunk_order), ['vbmatrix_0.rs', 'vbmatrix_1.rs'])
-        self.assertEqual(files['vbmatrix_1.rs'], f'// h\n&[\n    {", ".join(values[CHUNK:CHUNK + PER_LINE])},\n'
+        self.assertEqual(files['vbmatrix_1.rs'], f'&[\n    {", ".join(values[CHUNK:CHUNK + PER_LINE])},\n'
                                                  f'    {values[-1]},\n]\n')
         self.assertLess(files['vbmatrix_0.rs'].count('\n'), 500)
 

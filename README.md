@@ -60,5 +60,5 @@ plus passing behavioral comparisons. Rust line coverage is a separate metric.
 The current inventory counts source candidates; it does not yet enumerate the
 complete C++ API or instantiated runtime tests.
 
-The repository's existing GPLv2 license is retained. Preserve upstream copyright
-and license notices when translating OCCT source or tests; see the plan.
+The project is licensed GPL-2.0-only (`LICENSE`). Source files carry no per-file
+copyright or license header; do not copy OCCT headers into translated files.

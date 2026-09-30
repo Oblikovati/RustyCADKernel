@@ -276,7 +276,7 @@ them; keep their tests separate from translated upstream cases.
 
 1. Select a dependency-ready package/API slice and its upstream tests.
 2. Preserve original test IDs in Rust test names or mapping metadata; reference the
-   upstream path and assertion locations. Record source/test copyright notices.
+   upstream path and assertion locations. Do not copy OCCT copyright headers.
 3. Run the C++ tests and capture oracle cases, including error and boundary inputs.
 4. Translate the tests before implementing the Rust slice. Keep assertion counts,
    fixture setup and tolerances traceable. Splitting/merging tests is allowed only
