@@ -595,14 +595,15 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 27588 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
-Hatch 38, GccAna 2682, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
-Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
-LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, Geom2dHatch
-with TopClass 1116, Geom2dGcc 3968, IntWalk 717, IntCurveSurface 3077, and the GeomFill
-filling classes 568, IntStart 674, IntPolyh 522, GeomAPI 1980, and GeomFill Gordon and
-NetworkSurface 145, the IntPatch core 924, the GeomFill sweep classes 1075, and GeomPlate
-163, and the IntPatch analytic intersections 582.
+The numeric corpus has 27921 requests: TopTrans 981; Intf 2240; GccEnt 55; GccInt 15;
+Hatch 38; GccAna 2682; IntRes2d with IntImpParGen and IntCurve 2044; Geom2dInt and
+Geom2dAPI 962; the curve-curve classes 1077; IntSurf 334; Law 266; Plate 106;
+LocalAnalysis 406; FairCurve 178; IntImp 146; AppBlend 115; HatchGen 432; Geom2dHatch
+with TopClass 1116; Geom2dGcc 3968; IntWalk 717; IntCurveSurface 3077; the GeomFill
+filling classes 568; IntStart 674; IntPolyh 522; GeomAPI 1980; GeomFill Gordon and
+NetworkSurface 145; the IntPatch core 924; the GeomFill sweep classes 1075; GeomPlate
+163; the IntPatch analytic intersections 582; and the IntPatch parametric intersection
+and front end 333.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that

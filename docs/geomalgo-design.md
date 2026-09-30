@@ -56,6 +56,7 @@ over the data). OCCT instantiates it twice, as
 - The two private `Intersect` overloads have the same body after the plane equation;
   the five-argument one computes the plane equation and the distances and calls the
   nine-argument one, so the body exists once.
+
 ## 3. IntImpParGen_Intersector.gxx
 
 `IntImpParGen_Intersector` intersects an implicit curve with a bounded parametric one
@@ -651,6 +652,42 @@ intersection algorithms build on it.
   shared state `IntPatchPolygoBase` (error and box); the `polygo_polygon2d!` macro gives
   `IntPatchPolyLine` and `IntPatchPolyArc` their `Polygon2d` members.
 
+## 17. IntPatch analytic intersections
+
+The analytic intersections of IntPatch (`IntPatch_ImpImpIntersection`,
+`IntPatch_ImpPrmIntersection`, `IntPatch_ALineToWLine`, `IntPatch_RstInt` and
+`IntPatch_SpecialPoints`, in `crates/tkgeomalgo/src/int_patch/{imp_imp, imp_prm,
+aline_to_wline, rst_int, special_points}`) are long static functions in the native
+`.cxx` files. Four rules keep them native.
+
+- **One module per native function group.** Each pair solver of
+  `IntPatch_ImpImpIntersection.cxx` (plane, cylinder, cone, sphere and torus pairs, the
+  numerical walking of two cylinders) and each phase of the implicit-parametric
+  `Perform` (start points, walking, segments, restrictions, decomposition) is a module of
+  its own; the native helper names stay in the docs (`IntCyCy`, `DecomposeResult`,
+  `ToSmooth`, `SplitOnSegments`...). The public classes keep their members: the
+  constructors that run `Perform` are `with_surfaces`, the second `MakeWLine` overload is
+  `make_wline_range`, `IntPatch_ImpImpIntersection::IntStatus` is `IntPatchImpImpStatus`.
+- **Stale locals live in state structs.** The native loops keep locals from one
+  iteration to the next (the vertex `solpnt` and the underlying vertex of `PutPointsOnLine`,
+  the `aPrePointExist`/`PrePoint` pair of `DecomposeResult`, the counters of the arc
+  shifts of `IntPatch_RstInt`, the loop state of `MakeWLine`); they are fields of one
+  struct per loop, so every stale read is the native one.
+- **Lines and domains.** The surfaces are `Adaptor3dSurfaceHandle`; the domains are
+  `&(dyn TheTopolTool + 'static)` (the IntStart trait of section 12, which gains the
+  defaulted `has_3d`, `tol_3d_arc`, `tol_3d_vertex`, `arc_orientation` and
+  `vertex_orientation` that `Adaptor3dTopolTool` answers). The result lines are
+  `Handle<dyn IntPatchLine>`; a native `occ::down_cast` that the code then dereferences
+  is a `cast` whose null raises Standard_NullObject. `IntPatch_RLine`'s implicit copy
+  constructor, which `DecomposeResult` uses, is the crate method `duplicate` (the arcs and
+  the point set stay shared handles, as the native copy shares them).
+- **Native arithmetic.** `std::min`/`std::max` are the `std_min`/`std_max` of
+  `geom2d::native`, the negated comparisons (`!(d <= tol)`) keep the native branch for NaN
+  operands, and `std::sort` on the short arrays of `IntCyCy` is the libstdc++ insertion
+  sort of at most 16 elements. The protected members that the probe reaches
+  (`StepComputing`, `CheckDeflection`, `GetSectionRadius`, `CorrectEndPoint`,
+  `ProcessSphere`, `ProcessCone`, `GetTangentToIntLineForCone`) are public.
+
 ## 18. IntPatch parametric intersection and front end
 
 The walking-line tools, the line splitter, the parametric-parametric intersection and
@@ -694,42 +731,6 @@ line_constructor, prm_prm, intersection}`) are classes without templates; the ru
 - **Casts.** `(int)` of a double is `intf::native_int_cast` (the x86-64 conversion)
   and `std::min`/`std::max` of doubles are `intf::std_min`/`std_max`, so NaN operands
   take the native branch.
-
-## 17. IntPatch analytic intersections
-
-The analytic intersections of IntPatch (`IntPatch_ImpImpIntersection`,
-`IntPatch_ImpPrmIntersection`, `IntPatch_ALineToWLine`, `IntPatch_RstInt` and
-`IntPatch_SpecialPoints`, in `crates/tkgeomalgo/src/int_patch/{imp_imp, imp_prm,
-aline_to_wline, rst_int, special_points}`) are long static functions in the native
-`.cxx` files. Four rules keep them native.
-
-- **One module per native function group.** Each pair solver of
-  `IntPatch_ImpImpIntersection.cxx` (plane, cylinder, cone, sphere and torus pairs, the
-  numerical walking of two cylinders) and each phase of the implicit-parametric
-  `Perform` (start points, walking, segments, restrictions, decomposition) is a module of
-  its own; the native helper names stay in the docs (`IntCyCy`, `DecomposeResult`,
-  `ToSmooth`, `SplitOnSegments`...). The public classes keep their members: the
-  constructors that run `Perform` are `with_surfaces`, the second `MakeWLine` overload is
-  `make_wline_range`, `IntPatch_ImpImpIntersection::IntStatus` is `IntPatchImpImpStatus`.
-- **Stale locals live in state structs.** The native loops keep locals from one
-  iteration to the next (the vertex `solpnt` and the underlying vertex of `PutPointsOnLine`,
-  the `aPrePointExist`/`PrePoint` pair of `DecomposeResult`, the counters of the arc
-  shifts of `IntPatch_RstInt`, the loop state of `MakeWLine`); they are fields of one
-  struct per loop, so every stale read is the native one.
-- **Lines and domains.** The surfaces are `Adaptor3dSurfaceHandle`; the domains are
-  `&(dyn TheTopolTool + 'static)` (the IntStart trait of section 12, which gains the
-  defaulted `has_3d`, `tol_3d_arc`, `tol_3d_vertex`, `arc_orientation` and
-  `vertex_orientation` that `Adaptor3dTopolTool` answers). The result lines are
-  `Handle<dyn IntPatchLine>`; a native `occ::down_cast` that the code then dereferences
-  is a `cast` whose null raises Standard_NullObject. `IntPatch_RLine`'s implicit copy
-  constructor, which `DecomposeResult` uses, is the crate method `duplicate` (the arcs and
-  the point set stay shared handles, as the native copy shares them).
-- **Native arithmetic.** `std::min`/`std::max` are the `std_min`/`std_max` of
-  `geom2d::native`, the negated comparisons (`!(d <= tol)`) keep the native branch for NaN
-  operands, and `std::sort` on the short arrays of `IntCyCy` is the libstdc++ insertion
-  sort of at most 16 elements. The protected members that the probe reaches
-  (`StepComputing`, `CheckDeflection`, `GetSectionRadius`, `CorrectEndPoint`,
-  `ProcessSphere`, `ProcessCone`, `GetTangentToIntLineForCone`) are public.
 
 ## 19. GeomPlate
 
