@@ -91825,7 +91825,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91857,7 +91857,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -172202,6 +172202,174 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::and",
       "status": "implemented",
       "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_WLineTool::ComputePurgedWLine(const occ::handle<IntPatch_WLine>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_TopolTool>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLineTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLineTool::compute_purged_wline",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_purge, ip_join, ip_extend requests)."
+    },
+    {
+      "upstream_id": "IntPatch_WLineTool::JoinWLines(NCollection_Sequence<occ::handle<IntPatch_Line>>&,NCollection_Sequence<IntPatch_Point>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLineTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLineTool::join_wlines",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_purge, ip_join, ip_extend requests)."
+    },
+    {
+      "upstream_id": "IntPatch_LineConstructor(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_LineConstructor.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLineConstructor::new",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_lc requests)."
+    },
+    {
+      "upstream_id": "IntPatch_LineConstructor::Perform(const NCollection_Sequence<occ::handle<IntPatch_Line>>&,const occ::handle<IntPatch_Line>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_LineConstructor.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLineConstructor::perform",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_lc requests)."
+    },
+    {
+      "upstream_id": "IntPatch_LineConstructor::NbLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_LineConstructor.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLineConstructor::nb_lines",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_lc requests)."
+    },
+    {
+      "upstream_id": "IntPatch_LineConstructor::Line(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_LineConstructor.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLineConstructor::line",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_lc requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::new",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::is_done",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::is_empty",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::NbLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::nb_lines",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::Line(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::line",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::NewLine(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,int,int,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::new_line",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::GrilleInteger(int,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::grille_integer",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::IntegerGrille(int,int&,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::integer_grille",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::DansGrille(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::dans_grille",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::NbPointsGrille() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::nb_points_grille",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::RemplitLin(int,int,int,int,int,int,IntPatch_PrmPrmIntersection_T3Bits&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::remplit_lin",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::RemplitTri(int,int,int,int,int,int,int,int,int,IntPatch_PrmPrmIntersection_T3Bits&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::remplit_tri",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::Remplit(int,int,int,IntPatch_PrmPrmIntersection_T3Bits&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::remplit",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::CodeReject(double,double,double,double,double,double,double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::code_reject",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection::PointDepart(occ::handle<IntSurf_LineOn2S>&,const occ::handle<Adaptor3d_Surface>&,int,int,const occ::handle<Adaptor3d_Surface>&,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersection::point_depart",
+      "status": "implemented",
+      "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_ppgrid, ip_ppdepart, ip_prmprm requests)."
     }
   ],
   "tests": [

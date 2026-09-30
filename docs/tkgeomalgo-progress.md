@@ -242,6 +242,18 @@ behavior tests of `geom_fill_corrected_frenet_behavior`.
   (`surface`, `get_circle`, `get_circle_d1`, `get_circle_d2`, `get_shape`, `knots`,
   `mults`, `get_minimal_weights`, `get_tolerance`). The `GeomFill_Tensor` call
   operators are `value` and `change_value`.
+- IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18):
+  `IntPatch_WLineTool` is the unit struct `IntPatchWLineTool` (`compute_purged_wline`,
+  `join_wlines`, `extend_two_wlines`, the constant `MY_MAX_CONCAT_ANGLE`).
+  `IntPatch_LineConstructor` is `IntPatchLineConstructor` (`new`, `perform`, `nb_lines`,
+  `line`). `IntPatch_PrmPrmIntersection` is `IntPatchPrmPrmIntersection`; its `Perform`
+  overloads are `perform` (the main one, with `ClearFlag`), `perform_polyhedra`,
+  `perform_polyhedron1`, `perform_polyhedron2`, `perform_self`, `perform_self_polyhedron`,
+  `perform_with_points` and `perform_from_start`, the four marching tolerances of the
+  polyhedral and start-point overloads are one `IntPatchPrmPrmTolerances`, and the grid
+  members take arrays for the cell coordinates (`remplit_lin([x1, y1, z1], [x2, y2, z2],
+  map)`). The domains are `&dyn TheTopolTool` (the virtual `Adaptor3d_TopolTool`) and the
+  line sequences `Vec<Handle<dyn IntPatchLine>>`.
 
 ## Verification
 
@@ -903,6 +915,20 @@ interference. `ip_polyline` and `ip_polyarc` build the 2d polygons of walking an
 restriction lines and of arcs (parabola deflection, resampling near the other box, offsets,
 the construction errors); `ip_t3bits` edits the bit sets.
 
+IntPatch parametric intersection: 105 requests (`tkgeomalgo_corpus_intpatch_wltool.py` and
+`tkgeomalgo_corpus_intpatch_prmprm.py`). `ip_purge` purges walking lines (two equal points,
+equal points among a few, long straight and curved lines for the tube criteria, lines leaving
+the domains at either end, periodic and C0 surfaces, uneven steps, the bad distributions,
+vertices out of the line). `ip_join` joins the walking lines of two cylinders in the four end
+orders, across the seam, with several candidates, a line of another kind, points at the ends,
+the same cylinder twice and a plane. `ip_lc` splits every line kind at its vertices against
+domains made of the fixture arcs, with and without a 3d tolerance (a probe subclass of
+`Adaptor3d_TopolTool` overriding the arc iteration and `Tol3d`), and codes walking lines on
+the arcs as restriction lines. `ip_ppgrid` and `ip_ppdepart` run the grid members and
+`PointDepart` on crossing, tangent, disjoint and far apart surface pairs. Left out: a
+restriction line on neither surface, whose part between two vertices dereferences a null arc
+natively.
+
 ## Preserved native behaviour
 
 - TopTrans: a `CurveTransition` that was never reset answers the states of its
@@ -1425,6 +1451,25 @@ return.
   incomplete word are not stored, and for `size^3 < 32` the native constructor writes before
   its empty array (undefined behaviour).
 
+### IntPatch parametric intersection
+
+- `IntPatch_WLineTool::ComputePurgedWLine` compares the point count of the last pass of
+  its equal-points step with 30 to skip the other steps; a vertex whose parameter is out
+  of the line raises Standard_OutOfRange in the later steps, and a line without vertices
+  that leaves a domain raises it when its end vertex is moved. `JoinWLines` reads the
+  radii of both surfaces as cylinders (Standard_NoSuchObject otherwise), even for lines
+  that will not be joined.
+- `IntPatch_LineConstructor`: the mode is unused. On a conic line the tolerance of the
+  first domain is taken when the second domain has an arc (`myDom1->Init(); if
+  (myDom2->More())`), the same test is made on a restriction on the second surface, and
+  the tolerance persists from one part to the next; with `Adaptor3d_TopolTool` itself,
+  `Tol3d` raises Standard_DomainError on a bounded domain. A restriction part gets the
+  last vertex index 2 even for a single vertex (`AppendSameVertexR` is compiled out).
+  UNKNOWN states count as OUT on conic lines only.
+- `IntPatch_PrmPrmIntersection::NewLine` adds the point `Indice`, not `Indice + 1`, when it
+  skips the points before the sampled abscissa, and compares `1 / (a + b)` with the step.
+  `PointDepart` clears the neighbours of a cell only in the first map.
+
 ## IntStart deviations
 
 - The native code ignores the result of `Func.Value` in `FindVertex`, the recheck
@@ -1574,6 +1619,17 @@ return.
   an uninitialized type) and Standard_NullObject for a null line.
   `IntPatch_PrmPrmIntersection_T3Bits` panics on a bit outside its words and is empty for
   `size^3 < 32`, where the native code writes out of bounds.
+
+## IntPatch parametric intersection deviations
+
+- The IntStart trait `TheTopolTool` has the domain members the IntPatch algorithms call
+  (`is_the_point_on`, `tol3d`, `domain_is_infinite`, `sample_pnts`, `u_parameters`,
+  `v_parameters`, `is_uniform_sampling`).
+- A restriction line on neither surface raises Standard_NullObject in
+  `IntPatch_LineConstructor::Perform` where the native code dereferences a null arc.
+- The locals the native `Perform` bodies read before any assignment on some branches (the
+  parameters of a section point of the `Intf_EXTERNAL` type) keep their previous value, 0 at
+  first.
 
 ## GeomFill sweep-part deviations
 
