@@ -47,7 +47,8 @@ pub(super) fn adjust_periodic(
 
 /// `Parameters(myHS1, Ptref, U1, V1)`: the parameters of the point on the quadric of the
 /// surface; Standard_ConstructionError for another surface.
-pub(crate) fn quadric_parameters(
+/// Shared by the matching TKBO helper; `quadric_parameters(&surface, point, "IntTools")?`.
+pub fn quadric_parameters(
     hs: &GeomAdaptorSurface,
     ptref: Point3,
     member: &str,

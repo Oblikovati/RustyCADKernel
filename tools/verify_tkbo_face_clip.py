@@ -21,7 +21,7 @@ def clip_requests() -> str:
     directions = [(1,0),(-1,0),(0,1),(1,1),(1,-1),(1,1e-10)]
     clipped = '\n'.join(f"face_clip {a} {b} {c} {d} {x} {y} {dx} {dy} {tol}"
         for (a,b,c,d), (x,y), (dx,dy), tol in product(bounds, points, directions, [0,1e-7,1,10]))+'\n'
-    return clipped + plane_requests()
+    return clipped + plane_requests() + policy_requests()
 
 
 def plane_requests() -> str:
@@ -30,6 +30,17 @@ def plane_requests() -> str:
     return '\n'.join(f"face_planes {z} {dx} {dy} {dz} {size} {t1} {t2} {a} {b}"
         for z, (dx,dy,dz), size, t1, t2, a, b in product(
             [0,1e-7,1,100], normals, [0,1,10], [0,1e-7], [1e-7,1], [0,1], [0,1]))+'\n'
+
+
+def policy_requests() -> str:
+    """Exercise quadric parameters, surface ordering, radius equality and sphere poles."""
+    requests = [f"face_policy {a} {b} {r1} {r2} {tol} {x} {y} {z}"
+        for a, b, (r1,r2), tol, (x,y,z) in product(range(9), range(9),
+            [(3,3),(3,3.00000005),(3,4)], [0,1e-7,0.1], [(0,0,0),(1,2,3)])]
+    requests += [f"face_pcurves {r1} {r2} {x} {y} {axis} {reverse}"
+        for r1, r2, x, y, axis, reverse in product([0,1,2,10], [0,0.5,1],
+            [0,0.8,1,1.2,2,9,10,11,100], [0,1], [0,1], [0,1])]
+    return '\n'.join(requests)+'\n'
 
 
 def main() -> None:
@@ -53,7 +64,7 @@ def record_source(original: Path, build: Path, output: Path, libraries: list[str
                str(output/'native-translation-unit.cxx'), *linked,
                '-Wl,-rpath,'+str(Path(linked[0]).parent), '-o', str(output/'native-probe')]
     manifest = {'source': str(original), 'source_sha256': hashlib.sha256(original.read_bytes()).hexdigest(),
-                'native_command': command, 'scope': 'private ClassifyLin2d and PerformPlanes; no legacy declarations'}
+                'native_command': command, 'scope': 'private FaceFace plane and surface-policy helpers; no legacy declarations'}
     (output/'native-source.json').write_text(json.dumps(manifest, indent=2)+'\n')
 
 

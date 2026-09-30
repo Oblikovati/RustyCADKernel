@@ -52,4 +52,22 @@ void bo_face_planes_case(const std::vector<double>& v) {
   bo_int(tangent);bo_int(curves.Length());for(int i=2;i<=curves.Length();++i)bo_face_plane_curve(curves(i));
  }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
 }
+void bo_face_policy_case(const std::vector<double>& v) {
+ try {
+  auto first=occ::down_cast<GeomAdaptor_Surface>(bo_topol_surface({v[0],v[2],0,1,0,1}));
+  auto second=occ::down_cast<GeomAdaptor_Surface>(bo_topol_surface({v[1],v[3],0,1,0,1}));
+  bo_int(SortTypes(first->GetType(),second->GetType()));
+  int low,high,iterations;ApproxParameters(first,second,low,high,iterations);bo_int(low);bo_int(high);bo_int(iterations);
+  double tolerance=v[4];Tolerances(first,second,tolerance);bo_real(tolerance);
+  double u1,v1,u2,v2;Parameters(first,second,gp_Pnt(v[5],v[6],v[7]),u1,v1,u2,v2);
+  for(double t:{u1,v1,u2,v2})bo_real(t);
+ }catch(const Standard_Failure& error){std::cout<<error.ExceptionType()<<' ';}
+}
+void bo_face_pcurves_case(const std::vector<double>& v) {
+ gp_Cylinder cylinder(gp_Ax3(),v[0]);
+ gp_Dir direction=v[4]==0?gp_Dir(0,0,1):gp_Dir(1,0,0);
+ gp_Dir x=v[4]==0?gp_Dir(1,0,0):gp_Dir(0,1,0);
+ gp_Ax3 axes(gp_Pnt(v[2],v[3],0),direction,x);if(v[5]!=0)axes.XReverse();
+ gp_Sphere sphere(axes,v[1]);bo_int(ApproxWithPCurves(cylinder,sphere));
+}
 #endif
