@@ -766,3 +766,70 @@ need a rule.
   through the approximation. `GeomPlate_PlateG0Criterion` and
   `GeomPlate_PlateG1Criterion` implement `AdvApp2VarCriterion` and read the patch
   coefficients through `AdvApp2Var_Patch::Coefficients` as natively.
+
+## 20. ApproxInt and GeomInt
+
+ApproxInt (`crates/tkgeomalgo/src/approx_int`) is five generic sources that OCCT
+instantiates twice: in GeomInt (`GeomInt_WLApprox` and its classes, over
+`Adaptor3d_HSurfaceTool` and `IntPatch_WLine`) and in BRepApprox (TKTopAlgo, over
+`BRepApprox_SurfaceTool` and `BRepApprox_ApproxLine`). GeomInt
+(`crates/tkgeomalgo/src/geom_int`) holds the instances and the surface-surface
+intersection built on them. The rules of section 1 apply; the choices are:
+
+- **The approximation templates of TKGeomBase are Rust generics.** `Approx_ComputeLine`,
+  `Approx_BSplComputeLine` and the AppParCurves gradients, least squares, constraint
+  solvers and functions (tkgeombase `approx` and `app_par_curves`) are one Rust type
+  each, whose members are generic over the tkgeombase trait `LineTool`, and the AppDef
+  instantiations are aliases of them (docs/tkgeombase-progress.md). The GeomInt
+  instances are aliases too: `TheComputeLineOfWLApprox = BSplComputeLine`,
+  `TheComputeLineBezierOfWLApprox = ComputeLine`, `MyGradientOfTheComputeLineBezierOfWLApprox
+  = Gradient`, `ParFunctionOf... = Function<TheMultiLineOfWLApprox>`, and so on. No
+  template body is copied.
+- **The multi-line and its tool.** `ApproxInt_MultiLine.gxx` is
+  `ApproxIntMultiLine<L: ApproxIntLine>`, where the trait `ApproxIntLine` holds the
+  `TheLine` calls of the templates (`NbPnts`, `Point` and the constructor from an
+  `IntSurf_LineOn2S`); `IntPatchWLine` implements it here. `ApproxInt_MultiLineTool.lxx`
+  is the `LineTool` implementation of the multi-line (the static tool calls become the
+  trait methods, the `Curvature` members answer false), so
+  `GeomInt_TheMultiLineToolOfWLApprox` has no type of its own; its `Dump` is the
+  multi-line's `dump`.
+- **The `void*` to the SvSurfaces.** The multi-line keeps the native untyped pointer to an
+  `ApproxInt_SvSurfaces` as `Option<SvSurfacesRef>`, a shared
+  `Rc<RefCell<dyn ApproxIntSvSurfaces>>`: the lines that `MakeMLBetween` and
+  `MakeMLOneMorePoint` return share it (the native pointer is copied), and they switch its
+  `UseSolver` flag while they insert points. `ApproxInt_SvSurfaces` is the trait
+  `ApproxIntSvSurfaces`; its non-virtual `SetUseSolver` and virtual `GetUseSolver` are
+  defaulted methods over the embedded `ApproxIntSvSurfacesBase`. The output references of
+  `Compute` are one `ApproxIntSvComputed` record that the caller keeps, so the partial
+  writes of a failing `Compute` stay visible as natively.
+- **The SvSurfaces.** `ApproxInt_PrmPrmSvSurfaces.gxx` is
+  `ApproxIntPrmPrmSvSurfaces<T: ThePSurfaceTool>` over the IntImp `IntImpInt2S<T>`
+  (section 6). `ApproxInt_ImpPrmSvSurfaces.gxx` is
+  `ApproxIntImpPrmSvSurfaces<T: ApproxIntSurfaceTool>` over `IntImpZerImpFunc<T,
+  IntSurfQuadricTool>`: its body calls `IntSurf_Quadric` members directly
+  (`TypeQuadric`, `D1`, `Normale`, `Parameters`), and both native instances take
+  `IntSurf_Quadric` as `TheISurface`, so the implicit side is not a parameter. The trait
+  `ApproxIntSurfaceTool: ThePSurfaceTool` adds the surface-tool calls of ApproxInt that
+  IntImp does not make (`GetType`, the quadric accessors, the periods); `HSurfaceTool`
+  implements it.
+- **The driver.** `ApproxInt_Approx.gxx` is `ApproxIntApprox<B: ApproxIntApproxTypes>`,
+  where the bundle names `ThePSurfaceTool` and `TheWLine` as the `_0.cxx` macros do;
+  `GeomInt_WLApprox = ApproxIntApprox<GeomIntWLApproxTypes>`. The private
+  `Approx_Data` struct is `ApproxIntApproxData`; the SvSurfaces of a `Perform` live in an
+  `Rc` for the time of the call, as the native stack object does.
+- **KnotTools.** `ApproxInt_KnotTools` is the unit struct `ApproxIntKnotTools` with
+  associated functions; `DefineParType` names the GeomInt instances directly, as the
+  native source does. `NCollection_LocalArray<double>` is a slice, and
+  `NCollection_DynamicArray<int>` a `Vec<i32>` read 0-based as the native
+  `Lower() == 0` array.
+- **GeomInt.** `GeomInt` is the free function `adjust_periodic`; the static classes
+  `GeomInt_LineTool` and the static members of `GeomInt_IntSS` are associated functions.
+  The surfaces are `Handle<GeomAdaptorSurface>`, compared by address as the native
+  handles; the domains are `Rc<dyn TheTopolTool>` in `GeomInt_LineConstructor` (which
+  keeps them) and `&(dyn TheTopolTool + 'static)` elsewhere (section 18). The files follow
+  the native split: `GeomInt_IntSS.cxx` (the front end) and `GeomInt_IntSS_1.cxx` (the
+  curve making, split by line kind and by the static members).
+- **Sorting.** The two `std::sort` calls of GeomInt (the vertices of a circle in
+  `TreatCircle`, the trimming parameters in `TrimILineOnSurfBoundaries`) run the
+  libstdc++ algorithm of `rustycad_tkernel::stl::sort_by`, so equal keys end in the
+  native order.
