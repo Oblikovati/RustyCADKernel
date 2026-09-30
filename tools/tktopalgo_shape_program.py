@@ -8,6 +8,8 @@ from __future__ import annotations
 import math
 
 FORWARD, REVERSED, INTERNAL, EXTERNAL = 0, 1, 2, 3
+# The child keeps its own orientation in `add`.
+AS_IS = -1
 WIRE, SHELL, SOLID, COMPOUND, COMPSOLID = 0, 1, 2, 3, 4
 
 
@@ -104,7 +106,8 @@ class ShapeProgram:
     def edge_flags(self, edge: int, same_parameter: bool, same_range: bool, degenerated: bool) -> None:
         self._add(None, 17, edge, same_parameter, same_range, degenerated)
 
-    def add(self, parent: int, child: int, orientation: int = FORWARD) -> None:
+    def add(self, parent: int, child: int, orientation: int = AS_IS) -> None:
+        """B.Add(parent, child), the child re-oriented unless `orientation` is AS_IS."""
         self._add(None, 18, parent, child, orientation)
 
     def vertex_on_curve(self, vertex: int, parameter: float, edge: int, tol: float = 1e-7) -> None:

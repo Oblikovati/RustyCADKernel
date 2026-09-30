@@ -6,7 +6,7 @@ from __future__ import annotations
 import math
 from tktopalgo_corpus_brepcheck import CONTEXTS, FACE, FLAGS, IN_CONTEXT, STATUS, check
 from tktopalgo_corpus_brepcheck_shapes import PlanarShapes, square
-from tktopalgo_shape_program import FORWARD, REVERSED, SHELL, WIRE, ShapeProgram
+from tktopalgo_shape_program import AS_IS, FORWARD, REVERSED, SHELL, WIRE, ShapeProgram
 
 INTERSECT, CLASSIFY, ORIENTATION, SET_UNORIENTABLE, UNORIENTABLE, SET_STATUS, SET_GCTRL, GCTRL = range(1, 9)
 TWO_PI = 2*math.pi
@@ -43,7 +43,7 @@ def circle_hole(p: ShapeProgram, plane: int, face: int, centre, radius: float, r
     p.add(wire, e, FORWARD)
     if reverse:
         wire = p.oriented(wire, REVERSED)
-    p.add(face, wire, FORWARD)
+    p.add(face, wire, AS_IS)
     return wire
 
 
@@ -111,7 +111,7 @@ def thin_requests(requests: list[str]) -> None:
         p.add(wire, edges[0], FORWARD)
         p.add(wire, edges[1], second_orientation)
         face = p.face(plane)
-        p.add(face, p.oriented(wire, REVERSED), FORWARD)
+        p.add(face, p.oriented(wire, REVERSED), AS_IS)
         face_requests(requests, p, face)
 
 
@@ -148,8 +148,45 @@ def gtest_requests(requests: list[str]) -> None:
             face_requests(requests, p, face)
 
 
+def shared_vertex_requests(requests: list[str]) -> None:
+    """Holes that share a vertex with the outer wire (the non-manifold case of
+    Intersect): at a corner, and along a part of an outer edge; a hole whose first
+    edge is too short to be sampled; half-infinite and Bezier edges."""
+    points = [(0, 0, 0), (4, 0, 0), (4, 4, 0), (0, 4, 0), (1, 0.5, 0), (0.5, 1, 0), (3, 0, 0), (3.5, 1, 0),
+              (2, 2, 0), (2, 2+1e-10, 0), (2.5, 3, 0), (3, 2, 0)]
+    for holes in ([[0, 5, 4]], [[1, 7, 6]], [[0, 5, 4], [1, 7, 6]], [[8, 9, 10, 11]]):
+        shapes = PlanarShapes(ShapeProgram(), points)
+        shapes.face([[0, 1, 2, 3], *holes], normal=(0.0, 0.0, 1.0))
+        shapes.finish()
+        face_requests(requests, shapes.p, shapes.faces[0])
+    for first, last in ((0.0, 2e100), (-2e100, 0.0)):
+        sq = square(ShapeProgram(), 100.0)
+        p = sq.p
+        e = p.edge()
+        p.edge_curve(e, p.line((0.0, 120.0, 0.0), (1.0, 0.0, 0.0)))
+        p.edge_range(e, first, last)
+        wire = p.container(WIRE)
+        p.add(wire, e, FORWARD)
+        p.add(sq.faces[0], wire, FORWARD)
+        face_requests(requests, p, sq.faces[0])
+    sq = square(ShapeProgram(), 4.0)
+    p = sq.p
+    v = p.vertex((2.0, 1.0, 0.0))
+    e = p.edge()
+    p.edge_curve(e, p.curve(3, 4, 2, 1, 0, 3, 3, 0, 1, 3, 0, 2, 1, 0))
+    p.edge_pcurve(e, p.pcurve(3, 4, 2.0, 1.0, 3.0, 3.0, 1.0, 3.0, 2.0, 1.0), sq.surfaces[0])
+    p.edge_range(e, -0.25, 1.25)
+    p.add(e, v, FORWARD)
+    p.add(e, v, REVERSED)
+    wire = p.container(WIRE)
+    p.add(wire, e, REVERSED)
+    p.add(sq.faces[0], wire, FORWARD)
+    face_requests(requests, p, sq.faces[0])
+
+
 def append_face_requests(requests: list[str]) -> None:
     holed_requests(requests)
+    shared_vertex_requests(requests)
     special_requests(requests)
     thin_requests(requests)
     gtest_requests(requests)

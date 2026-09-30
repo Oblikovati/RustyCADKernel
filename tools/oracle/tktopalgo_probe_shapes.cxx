@@ -18,7 +18,8 @@
 //    21 oriented copy i o; 22 located copy i loc
 //  12 edge curve e c loc tol (c = -1: a null curve); 13 pcurve e pc s loc tol;
 //  14 closed pcurves e pc1 pc2 s loc tol; 15 range e f l only3d; 16 range on surface
-//    e s loc f l; 17 flags e sameparameter samerange degenerated; 18 add parent child o;
+//    e s loc f l; 17 flags e sameparameter samerange degenerated; 18 add parent child o
+//    (o = -1: the child with its own orientation);
 //  23 vertex on curve v t e tol; 24 vertex on pcurve v t e s loc tol; 25 vertex on
 //    face v u w f tol; 26 flag i which (0 Closed, 1 Infinite) value; 27 tolerance
 //    update i tol; 28 triangulation n (x y z)... nt (i j k)...;
@@ -141,7 +142,7 @@ bool tp_edge_op(GaReader& r,TpShapes& t,int op){
 // The ops on vertices, flags, tolerances, polygons and face-bound pcurves.
 void tp_other_op(GaReader& r,TpShapes& t,int op){
  BRep_Builder B;int i=r.integer();
- if(op==18){int c=r.integer();B.Add(t.shapes.at(i),t.shapes.at(c).Oriented(TopAbs_Orientation(r.integer())));}
+ if(op==18){int c=r.integer(),o=r.integer();B.Add(t.shapes.at(i),o<0?t.shapes.at(c):t.shapes.at(c).Oriented(TopAbs_Orientation(o)));}
  else if(op==23){double p=r.real();int e=r.integer();B.UpdateVertex(TopoDS::Vertex(t.shapes.at(i)),p,TopoDS::Edge(t.shapes.at(e)),r.real());}
  else if(op==24){double p=r.real();int e=r.integer(),s=r.integer(),l=r.integer();
   B.UpdateVertex(TopoDS::Vertex(t.shapes.at(i)),p,TopoDS::Edge(t.shapes.at(e)),t.surfaces.at(s),t.locations.at(l),r.real());}

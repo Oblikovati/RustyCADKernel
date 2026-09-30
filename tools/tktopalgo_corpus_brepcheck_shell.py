@@ -79,6 +79,20 @@ def other_requests(requests: list[str]) -> None:
     shell_requests(requests, p, single.shell())
 
 
+def multi_edge_requests(requests: list[str]) -> None:
+    """An edge of three and of four faces, the faces otherwise connected so that
+    NbConnectedSet finds one set: Orientation counts the uses of the edge."""
+    points = [(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1), (0, -1, 0)]
+    for loops in ([[0, 1, 2], [1, 0, 2], [0, 1, 3]], [[0, 1, 2], [1, 0, 2], [0, 1, 3], [1, 0, 3]],
+                  [[0, 1, 2], [1, 0, 2], [0, 1, 3], [0, 1, 4]]):
+        p = ShapeProgram()
+        shapes = PlanarShapes(p, points)
+        for loop in loops:
+            shapes.face([loop])
+        shapes.finish()
+        shell_requests(requests, p, shapes.shell())
+
+
 def moebius_requests(requests: list[str]) -> None:
     """A band of three quads glued in a cycle, then with the last gluing twisted: its
     orientation cannot be made coherent (only the topology is read)."""
@@ -98,4 +112,5 @@ def moebius_requests(requests: list[str]) -> None:
 def append_shell_requests(requests: list[str]) -> None:
     cube_requests(requests)
     other_requests(requests)
+    multi_edge_requests(requests)
     moebius_requests(requests)

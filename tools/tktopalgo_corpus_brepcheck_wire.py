@@ -134,8 +134,40 @@ def missing_pcurve_requests(requests: list[str]) -> None:
     requests.append(f"bck_selfint {sq.p.tokens()} {sq.wires[0][0]} {sq.faces[0]} {sq.edges[(0, 1)]} {sq.edges[(1, 2)]}")
 
 
+def pair_requests(requests: list[str]) -> None:
+    """Pairs of edges: collinear edges overlapping (common segments at the ends of both
+    lines), and a Bezier edge from the vertex of a line crossing it (the chord check
+    from the common vertex, within and beyond the edge tolerances)."""
+    shapes = polygon_face([(0, 0), (2, 0), (1, 0)], [[0, 1, 2]])
+    wire_requests(requests, shapes.p, shapes.wires[0][0], shapes.faces[0])
+    shapes = polygon_face([(0, 0), (2, 0), (1, 0), (0, 1)], [[0, 1, 2, 3]])
+    wire_requests(requests, shapes.p, shapes.wires[0][0], shapes.faces[0])
+    for tol in (1e-7, 0.5):
+        p = ShapeProgram()
+        plane = p.surface(0, 0, 0, 0, 0, 0, 1)
+        v0, v1, v2 = p.vertex((0, 0, 0), tol), p.vertex((2, 0, 0), tol), p.vertex((2, -1, 0), tol)
+        line = p.edge()
+        p.edge_curve(line, p.line((0, 0, 0), (1, 0, 0)), 0, tol)
+        p.edge_pcurve(line, p.line2d((0.0, 0.0), (1.0, 0.0)), plane, 0, tol)
+        p.edge_range(line, 0.0, 2.0)
+        bezier = p.edge()
+        p.edge_curve(bezier, p.curve(3, 4, 0, 0, 0, 1, 0.3, 0, 1.5, -1.5, 0, 2, -1, 0), 0, tol)
+        p.edge_pcurve(bezier, p.pcurve(3, 4, 0.0, 0.0, 1.0, 0.3, 1.5, -1.5, 2.0, -1.0), plane, 0, tol)
+        p.edge_range(bezier, 0.0, 1.0)
+        for e, first, last in ((line, v0, v1), (bezier, v0, v2)):
+            p.add(e, first, FORWARD)
+            p.add(e, last, REVERSED)
+        wire = p.container(WIRE)
+        p.add(wire, line, FORWARD)
+        p.add(wire, bezier, REVERSED)
+        face = p.face(plane)
+        p.add(face, wire, FORWARD)
+        wire_requests(requests, p, wire, face)
+
+
 def append_wire_requests(requests: list[str]) -> None:
     planar_requests(requests)
+    pair_requests(requests)
     topology_requests(requests)
     curve_requests(requests)
     missing_pcurve_requests(requests)

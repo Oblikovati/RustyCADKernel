@@ -186,8 +186,13 @@ fn vertex_op(r: &mut Reader<'_>, t: &mut TpShapes, op: i32, i: i32) -> Result<bo
     let b = BRepBuilder::default();
     match op {
         18 => {
-            let c = r.integer();
-            let child = t.shape(c).oriented(orientation(r));
+            let (c, o) = (r.integer(), r.integer());
+            // o = -1: the child with its own orientation.
+            let child = if o < 0 {
+                t.shape(c)
+            } else {
+                t.shape(c).oriented(Orientation::ALL[o as usize])
+            };
             b.add(&mut t.shapes[i as usize], &child)?;
         }
         23 => {

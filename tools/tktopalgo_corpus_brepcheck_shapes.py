@@ -7,7 +7,7 @@ of a cylinder with its seam. Every builder returns the table indices it created.
 """
 from __future__ import annotations
 import math
-from tktopalgo_shape_program import (FORWARD, REVERSED, SHELL, SOLID, WIRE, ShapeProgram, cross, dot,
+from tktopalgo_shape_program import (AS_IS, FORWARD, REVERSED, SHELL, SOLID, WIRE, ShapeProgram, cross, dot,
                                      sub, unit)
 
 
@@ -83,7 +83,7 @@ class PlanarShapes:
             wire_orientation = (orientations or [FORWARD]*len(loops))[k]
             if wire_orientation != FORWARD:
                 wire = self.p.oriented(wire, wire_orientation)
-            self.p.add(face, wire, FORWARD)
+            self.p.add(face, wire, AS_IS)
             wires.append(wire)
         self.faces.append(face)
         self.wires.append(wires)
