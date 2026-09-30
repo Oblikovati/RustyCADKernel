@@ -21,6 +21,8 @@ from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
 from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
+from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
+                                     active_native_cases, forced_disabled_observations)
 
 # The whole numeric verifier of one toolkit (both probes over its full corpus) may run this
 # long. It is a hang guard, not a budget: a corpus must never be trimmed to fit it. The
@@ -53,7 +55,7 @@ def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
     candidates = {row['name'] for entry in inventory['toolkits'] if entry['name'] == toolkit
                   for row in entry['gtest_declaration_candidates']}
     if len({row['upstream_id'] for row in rows}) != len(rows): raise ValueError('Duplicate declaration mappings')
-    if any(row['status'] != 'translated' for row in rows): raise ValueError('This verifier accepts only translated, unskipped suites')
+    source_disabled_rows(rows)
     if {row['upstream_id'] for row in rows} - candidates: raise ValueError('Mappings outside selected toolkit inventory')
     return rows
 
@@ -123,7 +125,7 @@ def run_native_suites(command: list, log: Path, environment: dict, has_approved_
         if not has_approved_failures: raise
 
 
-def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict, approved: dict[str, str]) -> list[Path]:
+def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict, approved: dict[str, str], disabled: dict[str, SourceDisabledCase] | None = None) -> list[Path]:
     """Run complete native suites; only the approved native failures may fail; native_tests(...)."""
     compiler = re.search(r'^CMAKE_CXX_COMPILER:FILEPATH=(.*)$',(build/'CMakeCache.txt').read_text(),re.M)[1]
     common = [compiler,'-std=c++17','-O2','-pthread','-I'+str(build/'include/opencascade'),
@@ -134,11 +136,29 @@ def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs
     run([*common,*objects,*libraries,'-Wl,-rpath,'+str(libraries[0].parent),'-o',executable],output/'link.log',env=environment)
     listing = run([executable,'--gtest_list_tests'],output/'native-list.txt',env=environment)
     if listed_runtime_cases(listing) != expected: raise ValueError('Native runtime enumeration differs from mappings')
+    (output/"native.xml").unlink(missing_ok=True)
     run_native_suites([executable,f'--gtest_output=xml:{output/"native.xml"}'],output/'native-run.log',environment,bool(approved))
     cases = ET.parse(output/'native.xml').findall('.//testcase')
     if {case.attrib['classname']+'.'+case.attrib['name'] for case in cases} != expected: raise ValueError('Incomplete native results')
-    check_native_cases(cases, approved)
+    check_native_cases(active_native_cases(cases, disabled or {}), approved)
+    verify_forced_disabled(executable, output, environment, disabled or {})
     return libraries
+
+
+def verify_forced_disabled(executable: Path, output: Path, environment: dict[str, str], disabled: dict[str, SourceDisabledCase]) -> None:
+    """Run disabled originals separately and retain their failure evidence; verify_forced_disabled(...)."""
+    evidence = output/'source-disabled.json'
+    evidence.unlink(missing_ok=True)
+    if not disabled:
+        return
+    xml_path = output/'native-forced-disabled.xml'
+    xml_path.unlink(missing_ok=True)
+    command = [executable, '--gtest_also_run_disabled_tests', '--gtest_filter='+':'.join(sorted(disabled)),
+               f'--gtest_output=xml:{xml_path}']
+    run_native_suites(command, output/'native-forced-disabled.log', environment, True)
+    cases = ET.parse(xml_path).findall('.//testcase')
+    observations = forced_disabled_observations(cases, disabled)
+    evidence.write_text(json.dumps(observations, indent=2)+'\n')
 
 
 def rust_tests(output: Path, rows: list[dict], expected: set, environment: dict) -> None:
@@ -175,7 +195,10 @@ def main() -> None:
     native,rust,approved,libraries = mapped_suites(source,output,build,rows,args.jobs,environment)
     numeric = None
     if args.only:
-        print(f'PARTIAL PASS (--only {args.only}): {len(rows)} declarations; not a toolkit gate')
+        disabled = source_disabled_rows(rows)
+        print(f'PARTIAL PASS (--only {args.only}): {len(rows)} declarations; '
+              f'{len(native)-len(approved)-len(disabled)} native passed, '
+              f'{len(disabled)} source-disabled expected failures, {len(rust)} Rust passed; not a toolkit gate')
         return
     script, evidence = NUMERIC_VERIFIERS[args.toolkit]
     run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment,timeout=NUMERIC_TIMEOUT_SECONDS)
@@ -192,7 +215,8 @@ def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], job
         return set(), set(), {}, [unique(build,f'lib{name}.so') for name in LINKED_TOOLKITS]
     paths = verify_sources(source,rows); native,rust = mapped_runtime_sets(rows)
     approved = approved_native_failures(rows)
-    libraries = native_tests(source,output,build,paths,jobs,native,environment,approved)
+    disabled = source_disabled_rows(rows)
+    libraries = native_tests(source,output,build,paths,jobs,native,environment,approved,disabled)
     rust_tests(output,rows,rust,environment)
     return native,rust,approved,libraries
 
@@ -203,16 +227,18 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     inputs += list((ROOT/'tools/oracle').glob('*.cxx'))
     inputs += sorted((ROOT/'tools').rglob('*.py'))
     inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py',ROOT/'tools/native_build.py']
+    disabled = source_disabled_rows(rows)
+    observations = json.loads((output/'source-disabled.json').read_text()) if disabled else []
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
-              'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native)-len(approved),
+              'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native)-len(approved)-len(disabled),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,
-              'native_expected_failures':approved,
+              'native_expected_failures':approved, 'source_disabled_cases':observations,
               'scope':'Mapped GoogleTest suites only; full toolkit API and test inventories pending',
               'source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
               'oracle_libraries_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in libraries}}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     failures = f' ({len(approved)} approved native failures)' if approved else ''
-    print(f'PASS: {toolkit}: {len(rows)} mapped declarations, {len(native)-len(approved)} native and {len(rust)} Rust runtime cases{failures}')
+    print(f'PASS: {toolkit}: {len(rows)} mapped declarations, {len(native)-len(approved)-len(disabled)} native and {len(rust)} Rust runtime cases{failures}; {len(disabled)} source-disabled expected failures')
 
 
 if __name__ == '__main__':
