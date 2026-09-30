@@ -5,6 +5,7 @@ pub mod brep_approx;
 pub mod brep_approx_parts;
 pub mod brep_approx_tool;
 pub mod brep_bnd_lib;
+pub mod brep_bnd_lib_obb;
 pub mod brep_builder_api;
 pub mod brep_builder_api_makers;
 pub mod brep_builder_api_modify;

@@ -580,3 +580,16 @@ as the native code got). The accessors of the current point raise StdFail_NotDon
 there is none, as natively; `Face()` raises Standard_OutOfRange when the face index is
 outside the sequence (a `Value` of the native sequence). The two `Init` overloads with
 a shape are `init_curve` and `init_line`, and `Init(curve)` is `init`.
+
+## 14. The last TKTopAlgo items: AddOBB, PointCloudShape, MakeShapeOnMesh and BRepMAT2d
+
+- **`BRepBndLib::AddOBB`** (BRepBndLib_1.cxx) is the associated function
+  `BRepBndLib::add_obb` of the unit struct of section 5; it takes the caller's
+  `OrientedBoundingBox` as `&mut` and returns `Result` (the adaptors, BRepGProp, the
+  Jacobi of the principal properties and the frame construction can raise). The
+  file-static helpers (`IsLinear`, `IsPlanar`, `PointsForOBB`, `IsWCS`, `CheckPoints`,
+  `ComputeProperties`, `ComputePCA`) are private functions of `add_obb.rs`.
+  `PointsForOBB` runs natively twice over the same exploration (a count, then a fill of
+  arrays of that size); the port gathers the points and tolerances in one pass into
+  vectors, which visits the same sub-shapes in the same order and gives the same arrays.
+

@@ -240,8 +240,9 @@ accessors without a current point and past the last face).
 - BRepBndLib (docs/topalgo-design.md section 5): the static members of BRepBndLib.cxx
   are associated functions of the unit struct `BRepBndLib` (`add`, `add_close`,
   `add_optimal`); they extend the caller's `BoundingBox3` in place and return `Result`.
-  `AddOBB` (BRepBndLib_1.cxx) needs BRepGProp and BRepBuilderAPI_Transform (stage B) and
-  has no row yet: the audit lists it as the one missing member of the package.
+  `AddOBB` (BRepBndLib_1.cxx, docs/topalgo-design.md section 14) is `add_obb`; it extends
+  the caller's `OrientedBoundingBox` in place. The audit of the package reports 0 missing
+  and 0 stale rows.
   `Bnd_Box` implements the TKernel `BoundingVolume` trait (in TKMath), so
   `NCollection_UBTree<int, Bnd_Box>` is `UBTree<i32, BoundingBox3>`.
 
@@ -564,6 +565,18 @@ the previous curve, and `Next` past the last face. Every exploration prints each
 (face index, `Point`, `Pnt`, `U`, `V`, `W`, `State`, `Transition`) and the accessors past
 the end.
 
+BRepBndLib::AddOBB: 424 requests (`tools/tktopalgo_corpus_brepbndlib_obb.py`,
+`tktopalgo_probe_brepbndlib_obb.cxx` and `tp_probe/brep_bnd_lib_obb.rs`). `bbl_obb` runs
+AddOBB with the eight flag triples (triangulation, optimal, shape tolerance) into a void
+box on every shape of the BRepBndLib corpus (so every shape kind: solids, a hollow and
+an open box, faces, free edges with and without 3d polygons, free vertices, an empty
+solid) and on a box shell, a cylinder shell, a sphere and a cylinder whose curved faces
+carry a triangulation (the DiTO path over their nodes), a located meshed cylinder, a
+rotated box and rotated cylinder and torus (the PCA path in a rotated frame of inertia)
+and a circle edge without polygon; eleven of the shapes also go into an axis-aligned and
+a rotated initial box with four flag triples. Each request prints every field of the
+box (void flag, centre, axes, half sizes, axis-aligned flag).
+
 BRepBuilderAPI sewing: 652 requests. `tools/tktopalgo_corpus_sewing.py` (582 `bba_sew`
 requests, `tktopalgo_probe_sewing.cxx` and `tp_probe/sewing.rs`) sews the shape records of
 `tools/tktopalgo_corpus_sewing_shapes.py`: loose boxes whose faces are moved below and
@@ -717,6 +730,31 @@ Each ported package adds its own subsection.
 - `AdjustFaceBox` moves each side of the surface box towards the edge box in the order
   x min, x max, y min, y max, z min, z max, and each test uses the sides moved before it
   (the rectangle of `IsModifySize` spans the current box).
+
+### BRepBndLib::AddOBB
+
+- `ComputeProperties` passes one `true` positional flag to each BRepGProp call: for
+  `VolumeProperties` it is `OnlyClosed` (not `SkipShared`), so the volume of a solid
+  counts only its closed shells and every face use; for `SurfaceProperties` and
+  `LinearProperties` it is `SkipShared`. A vertex outside an edge adds a system of mass
+  0 at its point.
+- `PointsForOBB` gives up (and AddOBB falls back to the PCA box) as soon as one curved
+  face has no triangulation, or one curved free edge has no 3d polygon, even when
+  `isTriangulationUsed` is true; a planar face with a curved edge needs its
+  triangulation too. A free edge never uses its polygon on a triangulation. A shape
+  without vertex (an empty solid, a polygon-only edge without vertices) always takes the
+  PCA path.
+- The PCA path moves the shape by the frame of inertia only when the first or second
+  axis of inertia is not a world axis (up to the square of the angular precision); a
+  shape whose axes are world axes keeps the identity and gets an axis-aligned box. Its
+  axis-aligned box is `Add` with the meshes (the `isTriangulationUsed` flag is not
+  passed) unless `isOptimal` asks for `AddOptimal`, which gets both flags.
+- The PCA box of a non-void initial box is merged by `ReBuild` of the 16 corners without
+  tolerances and without the optimal flag. The axes of a new PCA box are normalized
+  again (the `gp_Dir` argument of `SetXComponent`), so they may differ from the columns
+  of the inverse transformation in the last bits.
+- `BRepBuilderAPI_Transform` is included by BRepBndLib_1.cxx but not used (the shape is
+  moved with `TopoDS_Shape::Moved`).
 
 ### BRepClass3d
 

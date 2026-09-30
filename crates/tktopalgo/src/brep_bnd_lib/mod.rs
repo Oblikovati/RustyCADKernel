@@ -4,9 +4,9 @@
 //! polygons or from its exact geometry.
 //!
 //! [`BRepBndLib`] holds the static members of BRepBndLib.cxx (docs/topalgo-design.md
-//! section 5). `AddOBB` (BRepBndLib_1.cxx) needs BRepGProp and
-//! BRepBuilderAPI_Transform, which are not ported yet, and is not a member.
+//! section 5) and `AddOBB` of BRepBndLib_1.cxx (section 14).
 mod add;
+mod add_obb;
 mod add_optimal;
 mod face_box;
 mod uv_bounds;

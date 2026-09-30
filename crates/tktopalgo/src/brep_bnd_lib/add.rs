@@ -179,7 +179,10 @@ pub(super) fn add_mesh_polygon_nodes(
 }
 
 /// `l.IsIdentity() ? P : P.Transformed(l)`.
-fn located(point: rustycad_tkmath::gp::Point3, location: &Location) -> rustycad_tkmath::gp::Point3 {
+pub(super) fn located(
+    point: rustycad_tkmath::gp::Point3,
+    location: &Location,
+) -> rustycad_tkmath::gp::Point3 {
     if location.is_identity() {
         point
     } else {

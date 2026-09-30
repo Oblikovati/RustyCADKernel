@@ -178724,6 +178724,14 @@
       "notes": "BRepBndLib mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): static members of BRepBndLib.cxx as associated functions of the unit struct BRepBndLib extending the caller's Bnd_Box in place (the file-static CanUseEdges, FindExactUVBounds, AdjustFaceBox and IsModifySize are private helpers); native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_add requests)."
     },
     {
+      "upstream_id": "BRepBndLib::AddOBB(const TopoDS_Shape&,Bnd_OBB&,bool,bool,bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBndLib/BRepBndLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_bnd_lib::BRepBndLib::add_obb",
+      "status": "implemented",
+      "notes": "BRepBndLib::AddOBB mapping (BRepBndLib_1.cxx, docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): associated function of the unit struct BRepBndLib extending the caller's Bnd_OBB in place; the file-static IsLinear, IsPlanar, PointsForOBB (one pass instead of the native count and fill passes over the same exploration), IsWCS, CheckPoints, ComputeProperties and ComputePCA are private helpers; native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bbl_obb requests)."
+    },
+    {
       "upstream_id": "BRepClass3d::OuterShell(const TopoDS_Solid&)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d.hxx",
