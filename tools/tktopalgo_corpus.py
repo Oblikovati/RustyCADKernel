@@ -19,3 +19,7 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_breptopadaptor').append_breptopadaptor_requests(requests)
     # IntCurvesFace (tktopalgo_corpus_intcurvesface.py, faces of tktopalgo_corpus_adaptor_faces.py)
     __import__('tktopalgo_corpus_intcurvesface').append_intcurvesface_requests(requests)
+    # Bisector (tktopalgo_corpus_bisector.py)
+    __import__('tktopalgo_corpus_bisector').append_bisector_requests(requests)
+    # MAT and MAT2d (tktopalgo_corpus_mat.py)
+    __import__('tktopalgo_corpus_mat').append_mat_requests(requests)
