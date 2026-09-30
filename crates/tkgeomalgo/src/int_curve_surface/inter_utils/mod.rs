@@ -26,8 +26,8 @@ mod points;
 mod sampling;
 
 pub use analytic::{
-    compute_append_point, compute_params_on_quadric, compute_transitions, perform_curve_quadric,
-    process_int_ana, process_lin_torus,
+    IntAnaPoints, compute_append_point, compute_params_on_quadric, compute_transitions,
+    perform_curve_quadric, process_int_ana, process_lin_torus,
 };
 pub use est_lim::{
     est_lim_for_inf_extr, est_lim_for_inf_revl, est_lim_for_inf_surf, project_intersect_and_est_lim,
