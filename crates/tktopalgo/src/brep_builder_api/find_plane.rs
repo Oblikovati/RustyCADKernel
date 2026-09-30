@@ -195,15 +195,7 @@ fn plane_through_points(
         return Ok(None);
     }
     let p0: Point3 = points[0];
-    let mut dis_max: f64 = 0.0;
-    let mut p1 = Point3::default();
-    for point in &points[1..] {
-        let dist: f64 = p0.square_distance(point);
-        if dist > dis_max {
-            dis_max = dist;
-            p1 = *point;
-        }
-    }
+    let (dis_max, p1) = farthest_from(points, p0);
     // A NaN distance or tolerance fails every test below, as natively.
     let v1 = Vector3::between(p0, p1);
     let p2: Point3 = farthest_from_line(points, p0, v1);
@@ -218,6 +210,21 @@ fn plane_through_points(
     }
     let frame = Axis3::new(p0, d1.crossed(d2)?, d1)?;
     Ok(Some(Handle::new(GeomPlane::new(frame))))
+}
+
+/// The largest square distance from `p0` to the other points and the point at it (the
+/// origin, stored natively to avoid a search, when none is above 0).
+fn farthest_from(points: &[Point3], p0: Point3) -> (f64, Point3) {
+    let mut dis_max: f64 = 0.0;
+    let mut p1 = Point3::default();
+    for point in &points[1..] {
+        let dist: f64 = p0.square_distance(point);
+        if dist > dis_max {
+            dis_max = dist;
+            p1 = *point;
+        }
+    }
+    (dis_max, p1)
 }
 
 /// The point with the largest `|V1 ^ P0P|` (the first point when none is above 0).
