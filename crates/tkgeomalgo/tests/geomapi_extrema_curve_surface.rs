@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! Direct translation of GeomAPI_ExtremaCurveSurface_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-#![allow(non_snake_case)]
+#![allow(non_snake_case, clippy::excessive_precision)]
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{
     GeomCircle, GeomCurve, GeomGeometry, GeomLine, GeomSphericalSurface, GeomSurface,

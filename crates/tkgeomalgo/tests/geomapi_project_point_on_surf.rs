@@ -19,7 +19,7 @@
 //! BRepSweep_Translation::MakeEmptyFace builds for an edge of a non-planar
 //! extrusion, a Geom_SurfaceOfLinearExtrusion of a copy of the edge curve along the
 //! reversed sweep direction (the face has no location).
-#![allow(non_snake_case)]
+#![allow(non_snake_case, clippy::excessive_precision)]
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{
     GeomCurve, GeomCylindricalSurface, GeomEllipse, GeomRectangularTrimmedSurface, GeomSurface,
