@@ -191834,6 +191834,998 @@
       "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendParametrisation",
       "status": "implemented",
       "notes": "ShapeExtend enumeration (docs/tkshhealing-progress.md): the enumerators keep the native order; the composite surface reads it when ShapeExtend is ported."
+    },
+    {
+      "upstream_id": "ShapeExtend::Init()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtend::init",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_BasicMsgRegistrator()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_BasicMsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendBasicMsgRegistrator::new",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_BasicMsgRegistrator::Send(const occ::handle<Standard_Transient>&,const Message_Msg&,Message_Gravity)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_BasicMsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::BasicMsgRegistrator::send_transient",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_BasicMsgRegistrator::Send(const TopoDS_Shape&,const Message_Msg&,Message_Gravity)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_BasicMsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::BasicMsgRegistrator::send_shape",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_BasicMsgRegistrator::Send(const Message_Msg&,Message_Gravity)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_BasicMsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::BasicMsgRegistrator::send",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_BasicMsgRegistrator::DEFINE_STANDARD_RTTIEXT(ShapeExtend_BasicMsgRegistrator,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_BasicMsgRegistrator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::NbCurves() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::nb_curves",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::Curve(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::curve",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::LocateParameter(double,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::locate_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::LocalToGlobal(int,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::local_to_global",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::Transform(const gp_Trsf&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_transform",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::ReversedParameter(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_reversed_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::FirstParameter() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_first_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::LastParameter() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_last_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::IsClosed() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_is_closed",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::IsPeriodic() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend_complex_curve_members",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::Continuity() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend_complex_curve_members",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::IsCN(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_is_cn",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::EvalD0(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_eval_d0",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::EvalD1(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_eval_d1",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::EvalD2(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_eval_d2",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::EvalD3(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_eval_d3",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::EvalDN(double,int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::complex_eval_dn",
+      "status": "implemented",
+      "notes": "ShapeExtend_ComplexCurve override of a Geom_Curve member (docs/shhealing-design.md section 2): the provided trait method complex_*; the macro shape_extend_complex_curve_members! puts it in the GeomCurve impl of a concrete class (IsPeriodic and Continuity are written in the macro)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::GetScaleFactor(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::get_scale_factor",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::CheckConnectivity(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendComplexCurve::check_connectivity",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_ComplexCurve::DEFINE_STANDARD_RTTIEXT(ShapeExtend_ComplexCurve,Geom_Curve)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_ComplexCurve.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::new",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface(const occ::handle<NCollection_HArray2<occ::handle<Geom_Surface>>>&,ShapeExtend_Parametrisation)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::with_grid",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface(const occ::handle<NCollection_HArray2<occ::handle<Geom_Surface>>>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::with_joints",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Init(const occ::handle<NCollection_HArray2<occ::handle<Geom_Surface>>>&,ShapeExtend_Parametrisation)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::init",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Init(const occ::handle<NCollection_HArray2<occ::handle<Geom_Surface>>>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::init_with_joints",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::NbUPatches() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::nb_u_patches",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::NbVPatches() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::nb_v_patches",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Patch(int,int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::patch",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Patches() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::patches",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::UJointValues() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::u_joint_values",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::VJointValues() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::v_joint_values",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::UJointValue(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::u_joint_value",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::VJointValue(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::v_joint_value",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::SetUJointValues(const NCollection_Array1<double>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::set_u_joint_values",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::SetVJointValues(const NCollection_Array1<double>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::set_v_joint_values",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::SetUFirstValue(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::set_u_first_value",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::SetVFirstValue(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::set_v_first_value",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::LocateUParameter(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::locate_u_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::LocateVParameter(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::locate_v_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::LocateUVPoint(const gp_Pnt2d&,int&,int&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::locate_uv_point",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Patch(double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::patch_at",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Patch(const gp_Pnt2d&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::patch_at_point",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::ULocalToGlobal(int,int,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::u_local_to_global",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::VLocalToGlobal(int,int,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::v_local_to_global",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::LocalToGlobal(int,int,const gp_Pnt2d&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::local_to_global",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::UGlobalToLocal(int,int,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::u_global_to_local",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::VGlobalToLocal(int,int,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::v_global_to_local",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::GlobalToLocal(int,int,const gp_Pnt2d&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::global_to_local",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::GlobalToLocalTransformation(int,int,double&,gp_Trsf2d&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::global_to_local_transformation",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Transform(const gp_Trsf&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::transform",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Copy() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::copy",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::UReverse()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::u_reverse",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::UReversedParameter(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::VReverse()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::v_reverse",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::VReversedParameter(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Bounds(double&,double&,double&,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::bounds",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::IsUClosed() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::IsVClosed() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::IsUPeriodic() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::IsVPeriodic() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::UIso(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::u_iso",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::VIso(double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::v_iso",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Continuity() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::continuity",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::IsCNu(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::is_cn_u",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::IsCNv(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::is_cn_v",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::EvalD0(double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::eval_d0",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::EvalD1(double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::eval_d1",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::EvalD2(double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::eval_d2",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::EvalD3(double,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::eval_d3",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::EvalDN(double,double,int,int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::eval_dn",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::Value(const gp_Pnt2d&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::value_at",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::ComputeJointValues(ShapeExtend_Parametrisation)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::compute_joint_values",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::CheckConnectivity(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendCompositeSurface::check_connectivity",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_CompositeSurface::DEFINE_STANDARD_RTTIEXT(ShapeExtend_CompositeSurface,Geom_Surface)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_CompositeSurface.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::new",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer::CompoundFromSeq(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::compound_from_seq",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer::SeqFromCompound(const TopoDS_Shape&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::seq_from_compound",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer::ListFromSeq(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,NCollection_List<TopoDS_Shape>&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::list_from_seq",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer::SeqFromList(const NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::seq_from_list",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer::ShapeType(const TopoDS_Shape&,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::shape_type",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer::SortedCompound(const TopoDS_Shape&,TopAbs_ShapeEnum,bool,bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::sorted_compound",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Explorer::DispatchList(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&,occ::handle<NCollection_HSequence<TopoDS_Shape>>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Explorer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendExplorer::dispatch_list",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_MsgRegistrator()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_MsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendMsgRegistrator::new",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_MsgRegistrator::Send(const occ::handle<Standard_Transient>&,const Message_Msg&,Message_Gravity)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_MsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendMsgRegistrator::send_transient",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_MsgRegistrator::Send(const TopoDS_Shape&,const Message_Msg&,Message_Gravity)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_MsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendMsgRegistrator::send_shape",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_MsgRegistrator::MapTransient() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_MsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendMsgRegistrator::map_transient",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_MsgRegistrator::MapShape() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_MsgRegistrator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendMsgRegistrator::map_shape",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_MsgRegistrator::DEFINE_STANDARD_RTTIEXT(ShapeExtend_MsgRegistrator,ShapeExtend_BasicMsgRegistrator)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_MsgRegistrator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::new",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData(const TopoDS_Wire&,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::from_wire",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Init(const occ::handle<ShapeExtend_WireData>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::init",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Init(const TopoDS_Wire&,bool,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::init_wire",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::clear",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::ComputeSeams(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::compute_seams",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::SetLast(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::set_last",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::SetDegeneratedLast()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::set_degenerated_last",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Add(const TopoDS_Edge&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::add_edge",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Add(const TopoDS_Wire&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::add_wire",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Add(const occ::handle<ShapeExtend_WireData>&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::add_wire_data",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Add(const TopoDS_Shape&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::add_shape",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::AddOriented(const TopoDS_Edge&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::add_oriented_edge",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::AddOriented(const TopoDS_Wire&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::add_oriented_wire",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::AddOriented(const TopoDS_Shape&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::add_oriented_shape",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Remove(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::remove",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Set(const TopoDS_Edge&,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::set",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Reverse()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::reverse",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Reverse(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::reverse_on_face",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::NbEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::nb_edges",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::NbNonManifoldEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::nb_non_manifold_edges",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::NonmanifoldEdge(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::nonmanifold_edge",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::NonmanifoldEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::nonmanifold_edges",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::ManifoldMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::manifold_mode",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Edge(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::edge",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Index(const TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::index",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::IsSeam(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::is_seam",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::Wire() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::wire",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::WireAPIMake() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendWireData::wire_api_make",
+      "status": "implemented",
+      "notes": "ShapeExtend mapping (docs/tkshhealing-progress.md, docs/shhealing-design.md section 2): overloads take distinct Rust names, C++ output references become returned values, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_msg, sh_wiredata, sh_explorer, sh_registrator, sh_complex and sh_composite requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_WireData::DEFINE_STANDARD_RTTIEXT(ShapeExtend_WireData,Standard_Transient)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_WireData.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro: impl_transient!/impl_transient_interface! register the class and its parent; nothing else to port."
     }
   ],
   "tests": [

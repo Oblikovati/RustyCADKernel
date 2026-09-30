@@ -6,8 +6,9 @@ Healing). It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, T
 and TKTopAlgo ports, as the native toolkit does (its EXTERNLIB). Each of the 11 OCCT
 packages is one module of the crate, declared up front in `src/lib.rs`; a module whose
 package is not ported yet holds only its documentation. Ported so far: SHMessage (the
-message resource data) and the ShapeExtend status flags and their bit codes. The numeric
-corpus has 475 requests: ShapeExtend status codes 475.
+message resource data) and ShapeExtend. The numeric corpus has 1662 requests: ShapeExtend
+status codes 475, messages 85, WireData 92, Explorer 849, registrators 11, ComplexCurve 24
+and CompositeSurface 126.
 
 ## SHMessage: the message resources
 
@@ -26,6 +27,21 @@ difference; the numeric verifier runs it before any comparison, and
 `.pxx` files declare no member, so the api audit of SHMessage is 0 missing and 0 stale
 with no row. The embedded `us` text equals `resources/SHMessage/SHAPE.us` byte for byte.
 The messages are compared with OCCT through `ShapeExtend::Init` (see ShapeExtend).
+
+## ShapeExtend
+
+Every public member is ported (the api audit is 0 missing and 0 stale: 128 rows, 5 of
+them the excluded RTTI macros); docs/shhealing-design.md section 2 fixes the mapping of
+its transient classes. `ShapeExtend_Status` and `ShapeExtend_Parametrisation` are
+`ShapeExtendStatus` and `ShapeExtendParametrisation`; the package functions are
+`ShapeExtend::init`, `encode_status` and `decode_status`; the classes are
+`ShapeExtendWireData`, `ShapeExtendExplorer` (with `ShapeDispatch` for the eight outputs
+of `DispatchList`), the trait `ShapeExtendComplexCurve` (with the macro
+`shape_extend_complex_curve_members!`), `ShapeExtendCompositeSurface`, the trait
+`BasicMsgRegistrator` with `ShapeExtendBasicMsgRegistrator`, and
+`ShapeExtendMsgRegistrator`. `crates/tkshhealing/tests/shape_extend_*.rs` hold the
+behavior tests (with a fake message source for `ShapeExtend::load_messages`, the body of
+`Init` on any catalog).
 
 How C++ constructs map is fixed in [shhealing-design.md](shhealing-design.md); each
 package adds its section there before it codes a construct, and cites it by its number.
@@ -146,6 +162,82 @@ ShapeExtend status codes: `sh_status` encodes each of the 19 `ShapeExtend_Status
 enumerators and decodes it from 25 bit fields (no bit, each of the 16 single bits, each
 byte, every bit, bits above the 16 the flags use, and -1): 475 requests.
 
+The ShapeExtend classes (tools/tkshhealing_corpus_*.py) build their shapes with the
+TKTopAlgo shape programs (`tools/tktopalgo_shape_program.py`, read natively by
+`tktopalgo_probe_shapes.cxx` and in Rust by the `tp_probe` modules the `sh_probe` module
+includes by path) and print them with the TKTopAlgo shape digest, so both toolkits build
+and print shapes the same way:
+
+- `sh_msg` (85): `ShapeExtend::Init`, then `HasMsg` and the text of `Msg` for each of the
+  79 keys of the compiled resource and for 6 missing keys (each missing key once, since
+  `Msg` binds it);
+- `sh_wiredata` (92): a square wire on a plane face, the wire reversed, a wire with an
+  INTERNAL and an EXTERNAL edge, a broken chain, a degenerated edge and a cylinder face
+  whose wire holds a seam twice; scripts of every member (both constructors and `Init`
+  in both modes, chained or not, `Add` of each kind at every position and at bad ranks,
+  `AddOriented` in the four modes and above, `Remove`, `Set`, `SetLast`,
+  `SetDegeneratedLast`, `Reverse` with and without a face, `ComputeSeams`, `Init` from
+  another list and from itself, the shared non-manifold handle), then the edges, seams,
+  indices, `Wire()` and `WireAPIMake()`;
+- `sh_explorer` (849): every member on a scene with a shape of each type and compounds of
+  edges, edges and wires, faces and shells, mixed, nested, empty, with an empty
+  sub-compound, single and of solids: `ShapeType` of each shape, `SortedCompound` of each
+  shape for 7 types, both exploration modes and both compound modes, the sequence and list
+  conversions, and `DispatchList` with null and pre-filled outputs;
+- `sh_registrator` (11): messages sent to objects, shapes (the same edge reversed is the
+  same key, a moved edge another), a null object and a null shape, through both
+  registrators, then the kept lists;
+- `sh_complex` (24): the probe's test subclass (segment i of n on `[(i - 1)/n, i/n]`) on
+  connected, closed, broken, single and repeated chains of Bezier, trimmed, circular and
+  B-spline segments, with the connectivity check at several precisions, every evaluator
+  at inner points, joints, ends and outside `[0, 1]`, `Period()` and a translation or a
+  rotation;
+- `sh_composite` (126): grids of trimmed planes (a row, a column, a square, with a gap),
+  Bezier patches sharing an edge, an infinite plane, a cylinder and a sphere (closed in
+  U), built with each parametrisation and with explicit joints (valid, of the wrong
+  length, not increasing, with another lower bound); at 10 global points the located cell
+  and patch, the mappings, the global-to-local transformation and every evaluator; then
+  new joint values, first values, the connectivity check, `Copy()` and `Transform()`, and
+  the members of an empty surface that do not dereference its null grid.
+
 ## Preserved native behaviour
 
-None recorded yet; each ported package adds its own subsection.
+### ShapeExtend
+
+- `ShapeExtend_WireData::Add(edge)` tests the orientation before the null check, and a null
+  `TopoDS_Shape` is EXTERNAL: in the manifold mode a null edge joins the non-manifold
+  edges. `Wire()` then adds that null edge to the wire, which crashes natively
+  (`BRep_Builder::Add` of a null TShape) and is Standard_NullObject here; the probe does
+  not ask `Wire()` then.
+- `Init(wire)` checks the chain in iteration order but prepends the edges of a REVERSED
+  wire, so a reversed closed wire reports a broken chain (false), with the edges in the
+  reversed order.
+- Without the manifold mode, `Add(other wire data)` inserts `other->Edge(i)` (an ordinary
+  edge) for each of the non-manifold edges of `other`, not the non-manifold edge itself.
+- `Add(other wire data)` reads the counts of `other` again at each step, so adding a list
+  to itself does not end (natively neither); `Init(other)` clears first, so `Init` from the
+  list itself gives an empty list.
+- `ShapeExtend_ComplexCurve::CheckConnectivity` sets the closed flag inside the loop over
+  the joints: a curve of one segment never sets it. `TransformDN` multiplies the
+  derivative by the scale factor once per order.
+- `ShapeExtend_CompositeSurface::Copy` initializes the copy with the natural
+  parametrisation: joint values that were set or shifted are not copied. Its derivatives
+  are those of the patch at the local parameters, not scaled to the global ones;
+  `UReverse`/`VReverse` do nothing, the reversed parameters are the identity and the iso
+  curves are null.
+- `ShapeExtend_Explorer::SortedCompound` keeps the last sorted item before flattening it
+  (`sh = sh0`), which it returns when a single item was added.
+- `ShapeExtend_MsgRegistrator` does not keep the gravity of a message.
+- `ShapeExtend::Init` sets its flag before loading: a failed first call is not retried.
+
+## Deliberate deviations
+
+### ShapeExtend
+
+- Members that dereference a null handle natively (the grid or joints of a
+  default-constructed `ShapeExtend_CompositeSurface`, a null patch or segment, a null
+  sequence handle in `CompoundFromSeq`, a null shape in `WireData::Add(shape)` and
+  `AddOriented(shape)`) return Standard_NullObject errors. `Bounds`, which cannot fail
+  in the `GeomSurface` trait, returns zeros then, and the closed flags of a composite
+  surface start false (uninitialized natively until `CheckConnectivity`). The corpus does
+  not reach these cases natively.

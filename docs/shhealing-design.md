@@ -31,3 +31,44 @@ number in code comments and ledger notes.
 - **Generic C++ code.** The toolkit has no `.gxx` template, and its only `.pxx` files are
   the compiled message resources of SHMessage (data, not code); an `.lxx` file
   holds the inline members of one class and is ported with that class.
+
+## 2. ShapeExtend: the transient classes
+
+- **ShapeExtend_WireData** is the struct `ShapeExtendWireData`, a Transient shared through
+  handles; its fields sit in one `SharedState` and every member takes `&self`. The
+  members that take another wire data (`Init(other)`, `Add(other, atnum)`) read it between
+  their own locks, so the other object can be the same one: `Init` clears first and then
+  copies nothing, and `Add` re-reads the counts of `other` at each step as natively (a
+  list added to itself does not end, natively neither). `myEdges` is a plain sequence
+  (never shared); `myNonmanifoldEdges` stays a handle, since `NonmanifoldEdges()` returns
+  it and `Clear` replaces it. `ManifoldMode()` returns a reference natively: it is the
+  pair `manifold_mode`/`set_manifold_mode`. The overloads are named by argument
+  (`add_edge`, `add_wire`, `add_wire_data`, `add_shape`, `add_oriented_edge`...,
+  `init`/`init_wire`, `reverse`/`reverse_on_face`).
+- **ShapeExtend_BasicMsgRegistrator** has three virtual `Send` members with empty bodies:
+  it is the trait `BasicMsgRegistrator` (provided methods `send_transient`, `send_shape`,
+  `send`) and the struct `ShapeExtendBasicMsgRegistrator`. `ShapeExtend_MsgRegistrator`
+  embeds it as its parent, overrides the two object `Send`s, and lends its maps through
+  `map_transient`/`map_shape` (natively references to its fields). The transient map key
+  is `TransientKey`, a `Handle<StandardTransient>` hashed by address with pointer
+  equality, as `NCollection_DefaultHasher` of a handle.
+- **ShapeExtend_ComplexCurve** is abstract and derives from `Geom_Curve`: it is the trait
+  `ShapeExtendComplexCurve: GeomCurve`. Its pure virtual members are required methods, its
+  protected `myClosed` is reached through two required accessors (geom-design.md section
+  1), and the `Geom_Curve` members it overrides are provided `complex_*` methods that the
+  macro `shape_extend_complex_curve_members!` puts in the `impl GeomCurve` of a concrete
+  class (its `transform` calls `complex_transform`). No OCCT class derives from it; the
+  probes define one segment-per-range test class on both sides.
+- **ShapeExtend_CompositeSurface** is the struct `ShapeExtendCompositeSurface`, a
+  `Geom_Surface` like `GeomPlate_Surface` in TKGeomAlgo: the grid and the joint values are
+  shared handles (`Patches()`, `UJointValues()` return them, `SetUFirstValue` edits the
+  joints in place) and the fields sit in one `SharedState` that is never held while a
+  patch is called. Members that dereference the null grid of a default-constructed surface
+  crash natively; they return Standard_NullObject here, and the infallible `Bounds`
+  returns zeros. `myUClosed`/`myVClosed` are uninitialized natively until
+  `CheckConnectivity`; they start false here.
+- **ShapeExtend_Explorer** is a value class (`ShapeExtendExplorer`); the eight output
+  handles of `DispatchList` are the struct `ShapeDispatch`.
+- **ShapeExtend::Init** keeps the native function-local flag as a process-wide atomic set
+  before the first load, and loads into the global catalog (`MsgFile::global`); the
+  public `load_messages(catalog)` is its body on any catalog, for tests.

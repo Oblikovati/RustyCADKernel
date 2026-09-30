@@ -24,9 +24,30 @@
 // token stream; the Rust twin includes crates/tkgeomalgo/examples/ga_probe/common.rs.
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkshhealing_probe_shapeextend.cxx"
+// The TKTopAlgo shape programs, face and surface readers and shape digest (tp_*), shared so
+// both toolkits build and print shapes the same way; the Rust twin includes their modules.
+#include "tktopalgo_probe_face.cxx"
+#include "tktopalgo_probe_breplib_common.cxx"
+#include "tktopalgo_probe_shapes.cxx"
+#include "tkshhealing_probe_wiredata.cxx"
+#include "tkshhealing_probe_explorer.cxx"
+#include "tkshhealing_probe_registrator.cxx"
+#include "tkshhealing_probe_complexcurve.cxx"
+#include "tkshhealing_probe_composite.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ShapeExtend (tkshhealing_probe_shapeextend.cxx)
  {"sh_status", sh_status_case},
+ {"sh_msg", sh_message_case},
+ // ShapeExtend_WireData (tkshhealing_probe_wiredata.cxx)
+ {"sh_wiredata", sh_wiredata_case},
+ // ShapeExtend_Explorer (tkshhealing_probe_explorer.cxx)
+ {"sh_explorer", sh_explorer_case},
+ // ShapeExtend registrators (tkshhealing_probe_registrator.cxx)
+ {"sh_registrator", sh_registrator_case},
+ // ShapeExtend_ComplexCurve (tkshhealing_probe_complexcurve.cxx)
+ {"sh_complex", sh_complex_case},
+ // ShapeExtend_CompositeSurface (tkshhealing_probe_composite.cxx)
+ {"sh_composite", sh_composite_case},
 };
 int main() {
  std::string line;

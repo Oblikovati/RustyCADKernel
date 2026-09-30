@@ -1,7 +1,19 @@
 // Rust translation of ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! `ShapeExtend`: the package functions (the status bit codes).
+//! `ShapeExtend`: the package functions (the message loader and the status bit codes).
 use super::status::ShapeExtendStatus;
+use crate::sh_message::SHAPE_US;
+use rustycad_tkernel::message::MsgFile;
+use rustycad_tkernel::standard::Failure;
+use rustycad_tkernel::tcollection::AsciiString;
+use std::sync::atomic::{AtomicBool, Ordering};
+
+/// The message whose presence tells that the Shape Healing messages are loaded.
+const PROBE_KEY: &str = "ShapeFix.FixSmallSolid.MSG0";
+
+/// The `static bool init` of `ShapeExtend::Init`: set before the first load, so a later
+/// call does nothing even when the first one failed.
+static INITIALIZED: AtomicBool = AtomicBool::new(false);
 
 /// `ShapeExtend`: the tools common to the Shape Healing packages.
 ///
@@ -15,6 +27,41 @@ use super::status::ShapeExtendStatus;
 pub struct ShapeExtend;
 
 impl ShapeExtend {
+    /// `Init`: loads the Shape Healing messages into the process-wide catalog once
+    /// ([`MsgFile::global`]); Standard_ProgramError when they are still missing. Only the
+    /// first call works, as the native function-local flag;
+    /// `ShapeExtend::init()?`.
+    pub fn init() -> Result<(), Failure> {
+        if INITIALIZED.swap(true, Ordering::SeqCst) {
+            return Ok(());
+        }
+        Self::load_messages(MsgFile::global())
+    }
+
+    /// The body of `Init` on `catalog`: unless the catalog knows the messages already,
+    /// loads `SHAPE.<lang>` from the `CSF_SHMessage` directory, else the compiled
+    /// [`SHAPE_US`] text; Standard_ProgramError when the check key is still missing.
+    /// `ShapeExtend::load_messages(&catalog)?`.
+    pub fn load_messages(catalog: &MsgFile) -> Result<(), Failure> {
+        let key = AsciiString::new(PROBE_KEY);
+        if catalog.has_msg(&key) {
+            return Ok(());
+        }
+        if !catalog.load_from_env(Some("CSF_SHMessage"), "SHAPE", Some(""))? {
+            // sizeof(SHMessage_SHAPE_us) - 1: the literal without its NUL.
+            catalog.load_from_string(SHAPE_US, SHAPE_US.len() as i32)?;
+        }
+        if catalog.has_msg(&key) {
+            return Ok(());
+        }
+        Err(Failure::with_message(
+            "Standard_ProgramError",
+            &format!(
+                "Critical Error - message resources for ShapeExtend are invalid or undefined! (no {PROBE_KEY:?} message)"
+            ),
+        ))
+    }
+
     /// `EncodeStatus`: the bit flag of `status`: `DONEi` is bit `i - 1`, `FAILi` is bit
     /// `i + 7`, `DONE` and `FAIL` are all eight bits of their byte, `OK` is 0;
     /// `ShapeExtend::encode_status(ShapeExtendStatus::Fail1) == 0x0100`.

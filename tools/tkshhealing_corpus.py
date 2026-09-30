@@ -13,3 +13,13 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     """Append every TKShHealing request family in a fixed order."""
     # ShapeExtend (tkshhealing_corpus_shapeextend.py)
     __import__('tkshhealing_corpus_shapeextend').append_shapeextend_requests(requests)
+    # ShapeExtend_WireData (tkshhealing_corpus_wiredata.py)
+    __import__('tkshhealing_corpus_wiredata').append_wiredata_requests(requests)
+    # ShapeExtend_Explorer (tkshhealing_corpus_explorer.py)
+    __import__('tkshhealing_corpus_explorer').append_explorer_requests(requests)
+    # ShapeExtend registrators (tkshhealing_corpus_registrator.py)
+    __import__('tkshhealing_corpus_registrator').append_registrator_requests(requests)
+    # ShapeExtend_ComplexCurve (tkshhealing_corpus_complexcurve.py)
+    __import__('tkshhealing_corpus_complexcurve').append_complexcurve_requests(requests)
+    # ShapeExtend_CompositeSurface (tkshhealing_corpus_composite.py)
+    __import__('tkshhealing_corpus_composite').append_composite_requests(requests)
