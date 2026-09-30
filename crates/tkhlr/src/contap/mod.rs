@@ -1,4 +1,9 @@
 // Rust translation of ModelingAlgorithms/TKHLR/Contap at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! OCCT package Contap. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tkhlr-progress.md lists the ported packages).
+//! Contour records; the contour algorithms are being ported separately.
+mod line;
+mod point;
+mod types;
+pub use line::ContapLine;
+pub use point::ContapPoint;
+pub use types::{ContapIType, ContapTFunction};

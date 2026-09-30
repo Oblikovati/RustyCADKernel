@@ -30,7 +30,10 @@
 #include "tkhlr_probe_hlralgo_projector.cxx"
 #include "tkhlr_probe_hlralgo_poly.cxx"
 #include "tkhlr_probe_hlralgo_internal.cxx"
+#include "tkhlr_probe_contap.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"ct_point", hl_contap_point_case},
+ {"ct_line", hl_contap_line_case},
  // HLRAlgo_Projector viewing frame (tkhlr_probe_frame.cxx)
  {"hl_frame", hl_frame_case},
  // Intrv (tkhlr_probe_intrv.cxx)

@@ -1,0 +1,11 @@
+# TKMesh port status
+
+Acceptance is incomplete. IMeshData interfaces and six BRepMeshData concrete
+model entities are implemented with shared-handle runtime ancestry and mutation.
+Their 156 API rows pass the header audit; non-model triangulation/collection
+aliases in IMeshData_Types remain pending. No meshing algorithm is claimed complete.
+
+The model foundation oracle compares 10,300 cases with the pinned native TKMesh:
+all 512 status masks, four orientations, sample retention, container mutation,
+and native pcurve lookup behavior. Twelve focused Rust tests also pass.
+No original TKMesh legacy declarations are mapped by this foundation slice.

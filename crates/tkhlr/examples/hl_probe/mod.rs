@@ -15,3 +15,5 @@ pub mod common;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
+
+pub mod contap;

@@ -150,3 +150,14 @@ return references, and take `&mut` handles where the native members take array
 pointers (docs/hlr-design.md section 5); a null handle or an out-of-range read that
 crashes or is undefined natively is a Standard_NullObject or Standard_OutOfRange
 failure.
+
+## Recovered Contap records
+
+`Contap_Point`, `Contap_Line`, `Contap_IType`, and `Contap_TFunction` are ported
+with 42 audited API rows. The 1,120 new native comparisons exercise every point
+flag combination and transition pair, null and non-null handles, all four line
+kinds, duplicate parameter ordering, shared vertex edits, reset detachment, and
+shared walking-point clearing. The complete numeric corpus passes 2,929 cases.
+Native uninitialized line type/radius are documented deterministic Rust defaults;
+native null walking dereferences become `Standard_NullObject`. Neither has a
+defined native value to compare. Contour algorithms and HLRBRep tests remain pending.
