@@ -49,7 +49,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tkmath` | Mathematical and geometry foundations, in progress |
 | `crates/tkbrep` | TKBRep topology (TopoDS, TopExp, TopTools), in progress |
 | `crates/tkgeomalgo` | TKGeomAlgo geometric algorithms (intersections, hatching, filling), in progress |
-| `crates/tktopalgo` | Vertex dependency path required by TKernel legacy tests |
+| `crates/tktopalgo` | TKTopAlgo topological algorithms (classification, construction, checks), in progress |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |
