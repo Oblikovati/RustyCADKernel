@@ -62,7 +62,11 @@ pub(in super::super) struct AddFlags {
 
 /// The parameters of a line point on the surface of varying U1 (`on_s2` when reversed).
 fn params_on(p: &IntSurfPntOn2S, on_s2: bool) -> (f64, f64) {
-    if on_s2 { p.parameters_on_s2() } else { p.parameters_on_s1() }
+    if on_s2 {
+        p.parameters_on_s2()
+    } else {
+        p.parameters_on_s1()
+    }
 }
 
 impl WlContext<'_> {
@@ -173,7 +177,11 @@ pub(in super::super) fn add_point_into_wl(
 
 /// Adds points before the last one when the step before the last one is more than
 /// twice (and less than 2000 times) the last step.
-fn precise_last_steps(ctx: &WlContext<'_>, line: &IntSurfLineOn2S, wl_index: i32) -> Result<(), Failure> {
+fn precise_last_steps(
+    ctx: &WlContext<'_>,
+    line: &IntSurfLineOn2S,
+    wl_index: i32,
+) -> Result<(), Failure> {
     let nb_pnts: i32 = line.nb_points();
     if nb_pnts < 3 {
         return Ok(());
@@ -248,7 +256,8 @@ fn insert_middle(
         return Ok(false);
     }
     let u1prec: f64 = 0.5 * (u1f + u1l);
-    let Some((mut u2prec, v1prec, v2prec)) = cyl_cyl_compute_uvv(u1prec, wl_index, ctx.coeffs)? else {
+    let Some((mut u2prec, v1prec, v2prec)) = cyl_cyl_compute_uvv(u1prec, wl_index, ctx.coeffs)?
+    else {
         return Ok(false);
     };
     min_max(&mut u2f, &mut u2l);

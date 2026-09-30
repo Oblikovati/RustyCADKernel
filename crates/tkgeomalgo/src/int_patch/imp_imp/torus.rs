@@ -32,7 +32,11 @@ type Quads<'a> = (&'a IntSurfQuadric, &'a IntSurfQuadric);
 
 /// The torus of the pair and the other quadric, by `reversed`.
 fn torus_of(quads: Quads<'_>, reversed: bool) -> Result<Torus3, Failure> {
-    if reversed { quads.0.torus() } else { quads.1.torus() }
+    if reversed {
+        quads.0.torus()
+    } else {
+        quads.1.torus()
+    }
 }
 
 /// The other quadric of the pair.
@@ -147,7 +151,10 @@ fn treat_result_torus(
                 }
                 let (ptref, tgt) = elclib::d1(0.0, &c);
                 let qwe: f64 = dot_cross(tgt, quads.0, quads.1, ptref)?;
-                push(slin, IntPatchGLine::from_circle(&c, false, by_sign_tol(qwe, 0.00000001)));
+                push(
+                    slin,
+                    IntPatchGLine::from_circle(&c, false, by_sign_tol(qwe, 0.00000001)),
+                );
             }
         }
         _ => return Ok(false),

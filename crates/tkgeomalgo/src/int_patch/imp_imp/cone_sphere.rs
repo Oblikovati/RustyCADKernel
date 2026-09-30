@@ -64,7 +64,10 @@ pub(super) fn int_cosp(
                 let cirsol: Circle3 = inter.circle(i)?;
                 let (ptref, tgt) = elclib::d1(0.0, &cirsol);
                 let qwe: f64 = dot_cross(tgt, quads.0, quads.1, ptref)?;
-                push(slin, IntPatchGLine::from_circle(&cirsol, false, by_sign_tol(qwe, 0.00000001)));
+                push(
+                    slin,
+                    IntPatchGLine::from_circle(&cirsol, false, by_sign_tol(qwe, 0.00000001)),
+                );
             }
         }
         ResultType::PointAndCircle => {
@@ -106,7 +109,11 @@ fn contact_points(
 
 /// The circle of a point-and-circle result: its transitions are reversed below the
 /// apex (PConfusion as threshold).
-fn apex_side_circle(cirsol: &Circle3, co: &Cone3, quads: Quads<'_>) -> Result<IntPatchGLine, Failure> {
+fn apex_side_circle(
+    cirsol: &Circle3,
+    co: &Cone3,
+    quads: Quads<'_>,
+) -> Result<IntPatchGLine, Failure> {
     let paramapex: f64 = elclib::line_parameter(co.axis(), co.apex());
     let param: f64 = elclib::line_parameter(co.axis(), cirsol.location());
     let (ptref, tgt) = elclib::d1(0.0, cirsol);
@@ -114,7 +121,11 @@ fn apex_side_circle(cirsol: &Circle3, co: &Cone3, quads: Quads<'_>) -> Result<In
     let transitions = if param >= paramapex {
         by_sign_tol(qwe, precision::p_confusion())
     } else {
-        let (out, inn, und) = (IntSurfTypeTrans::Out, IntSurfTypeTrans::In, IntSurfTypeTrans::Undecided);
+        let (out, inn, und) = (
+            IntSurfTypeTrans::Out,
+            IntSurfTypeTrans::In,
+            IntSurfTypeTrans::Undecided,
+        );
         let (t1, t2) = if qwe < -precision::p_confusion() {
             (out, inn)
         } else if qwe > precision::p_confusion() {
@@ -144,10 +155,22 @@ fn analytic_curves(
         return Ok(true);
     }
     analytic_points(anaint, quads, tol, spnt)?;
-    let opts = CurveOptions { check_tangent: false, tol_trans: 0.000000001, open_ends: true, eval_on_fail: true };
+    let opts = CurveOptions {
+        check_tangent: false,
+        tol_trans: 0.000000001,
+        open_ends: true,
+        eval_on_fail: true,
+    };
     let mut ends: (Point3, Point3) = (Point3::default(), Point3::default());
     for i in 1..=anaint.nb_curve()? {
-        analytic_line(anaint.curve(i)?, quads, &opts, (slin, multpoint), tol, &mut ends)?;
+        analytic_line(
+            anaint.curve(i)?,
+            quads,
+            &opts,
+            (slin, multpoint),
+            tol,
+            &mut ends,
+        )?;
     }
     Ok(true)
 }

@@ -28,9 +28,9 @@ use super::aline::IntPatchALine;
 use super::line::IntPatchLine;
 use super::point_line::curvature_radius_of_inters_line;
 use crate::int_surf::{IntSurfLineOn2S, IntSurfPntOn2S, IntSurfQuadric};
-use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::{Direction2, Point2, Point3, Vector2, Xyz};
@@ -209,7 +209,11 @@ impl IntPatchALineToWLine {
         };
         let pnt_on_2s: IntSurfPntOn2S = points.value(index)?;
         for is_on_first in [true, false] {
-            let quad: &IntSurfQuadric = if is_on_first { &self.quad1 } else { &self.quad2 };
+            let quad: &IntSurfQuadric = if is_on_first {
+                &self.quad1
+            } else {
+                &self.quad2
+            };
             if !self.is_pole_of(quad, &pnt_on_2s, is_on_first)? {
                 continue;
             }
@@ -287,7 +291,14 @@ impl IntPatchALineToWLine {
         *step = std_min((eps * (2.0 * r + eps)).sqrt() / tg_magnitude, max_step);
         *step = std_max(*step, min_step);
         let bounds = [min_step, max_step];
-        self.refine_step(aline, p_on_2s.value(), cur_param, bounds, max_deflection, step)
+        self.refine_step(
+            aline,
+            p_on_2s.value(),
+            cur_param,
+            bounds,
+            max_deflection,
+            step,
+        )
     }
 
     /// The bisection loop of `StepComputing`: a range of 1e6 gives an error near 1e-9

@@ -53,14 +53,19 @@ pub(in super::super) fn cycy_analytical_intersect(
         ResultType::Empty => *empty = true,
         ResultType::Same => *same = true,
         ResultType::Point => spnt.push(tangent_point(inter.point(1)?, quads, tol, true)),
-        ResultType::Line if nb_sol == 1 => push(slin, tangency_line(&inter.line(1)?, (&cy1, &cy2), quads)?),
+        ResultType::Line if nb_sol == 1 => {
+            push(slin, tangency_line(&inter.line(1)?, (&cy1, &cy2), quads)?)
+        }
         ResultType::Line => {
             for i in 1..=nb_sol {
                 let linsol: Line3 = inter.line(i)?;
                 let lsd = Vector3::from(linsol.direction());
                 // Theoretically, qwe = +/- 1.0.
                 let qwe: f64 = dot_cross(lsd, quads.0, quads.1, linsol.location())?;
-                push(slin, IntPatchGLine::from_line(&linsol, false, by_sign_tol(qwe, 0.00000001))?);
+                push(
+                    slin,
+                    IntPatchGLine::from_line(&linsol, false, by_sign_tol(qwe, 0.00000001))?,
+                );
             }
         }
         ResultType::Ellipse => {
@@ -70,7 +75,9 @@ pub(in super::super) fn cycy_analytical_intersect(
         ResultType::Parabola | ResultType::Hyperbola => {
             return Err(Failure::with_message(
                 "Standard_Failure",
-                &format!("IntCyCy(): Wrong intersection type! ({typint:?}; expected a point, lines or ellipses)"),
+                &format!(
+                    "IntCyCy(): Wrong intersection type! ({typint:?}; expected a point, lines or ellipses)"
+                ),
             ));
         }
         // A circle is useful with trimmed surfaces (tangent by their bases).
@@ -82,7 +89,11 @@ pub(in super::super) fn cycy_analytical_intersect(
 /// The situations of the tangency line of two cylinders from the radius vectors toward
 /// their axes; for opposite centers of curvature, the normal and radius vector of the
 /// first cylinder give the situation of the second one.
-fn tangency_line(linsol: &Line3, (cy1, cy2): (&Cylinder3, &Cylinder3), quads: Quads<'_>) -> Result<IntPatchGLine, Failure> {
+fn tangency_line(
+    linsol: &Line3,
+    (cy1, cy2): (&Cylinder3, &Cylinder3),
+    quads: Quads<'_>,
+) -> Result<IntPatchGLine, Failure> {
     use IntSurfSituation::{Inside, Outside};
     let ptref: Point3 = linsol.location();
     // Radius vectors.
@@ -101,7 +112,11 @@ fn tangency_line(linsol: &Line3, (cy1, cy2): (&Cylinder3, &Cylinder3), quads: Qu
     } else {
         (pick(pos2, Inside, Outside), pick(pos1, Outside, Inside))
     };
-    IntPatchGLine::from_line(linsol, true, IntPatchLineTransitions::Touch(situcyl1, situcyl2))
+    IntPatchGLine::from_line(
+        linsol,
+        true,
+        IntPatchLineTransitions::Touch(situcyl1, situcyl2),
+    )
 }
 
 /// A multiple vertex at a tangent point of the two ellipses.
@@ -135,7 +150,12 @@ fn ellipse_line(
 }
 
 /// The two ellipses through the tangent points at PI/2 and 3PI/2 of the first one.
-fn two_ellipses(inter: &QuadQuadGeo, quads: Quads<'_>, tol: f64, slin: &mut Lines) -> Result<(), Failure> {
+fn two_ellipses(
+    inter: &QuadQuadGeo,
+    quads: Quads<'_>,
+    tol: f64,
+    slin: &mut Lines,
+) -> Result<(), Failure> {
     let elipsol: Ellipse3 = inter.ellipse(1)?;
     let pttang1: Point3 = elclib::value(0.5 * PI, &elipsol);
     let pttang2: Point3 = elclib::value(1.5 * PI, &elipsol);
@@ -151,7 +171,10 @@ fn two_ellipses(inter: &QuadQuadGeo, quads: Quads<'_>, tol: f64, slin: &mut Line
     };
     pmult1.set_parameter(0.5 * PI);
     pmult2.set_parameter(1.5 * PI);
-    push(slin, ellipse_line(&elipsol, swapped, quads, tol, (&pmult1, &pmult2))?);
+    push(
+        slin,
+        ellipse_line(&elipsol, swapped, quads, tol, (&pmult1, &pmult2))?,
+    );
     // The second ellipse.
     let elipsol: Ellipse3 = inter.ellipse(2)?;
     let param1: f64 = elclib::parameter(&elipsol, pttang1)?;
@@ -168,6 +191,15 @@ fn two_ellipses(inter: &QuadQuadGeo, quads: Quads<'_>, tol: f64, slin: &mut Line
     // The transition is computed on a point of this line.
     let (ptref, tgt) = elclib::d1(parampourtransition, &elipsol);
     let qwe: f64 = dot_cross(tgt, quads.0, quads.1, ptref)?;
-    push(slin, ellipse_line(&elipsol, by_sign_tol(qwe, 0.00000001), quads, tol, (&pmult1, &pmult2))?);
+    push(
+        slin,
+        ellipse_line(
+            &elipsol,
+            by_sign_tol(qwe, 0.00000001),
+            quads,
+            tol,
+            (&pmult1, &pmult2),
+        )?,
+    );
     Ok(())
 }

@@ -114,10 +114,18 @@ fn tangency_situations(
 ) -> (IntSurfSituation, IntSurfSituation) {
     let same_side: bool = normp.dot(normcyl) > 0.0;
     if normp.dot(test_curvature) > 0.0 {
-        let situp = if same_side { IntSurfSituation::Inside } else { IntSurfSituation::Outside };
+        let situp = if same_side {
+            IntSurfSituation::Inside
+        } else {
+            IntSurfSituation::Outside
+        };
         return (situp, IntSurfSituation::Outside);
     }
-    let situp = if same_side { IntSurfSituation::Outside } else { IntSurfSituation::Inside };
+    let situp = if same_side {
+        IntSurfSituation::Outside
+    } else {
+        IntSurfSituation::Inside
+    };
     (situp, IntSurfSituation::Inside)
 }
 

@@ -34,9 +34,9 @@ mod gline;
 mod gline_compute;
 mod h_curve2d_tool;
 mod h_inter_tool;
-mod instances;
 mod imp_imp;
 mod imp_prm;
+mod instances;
 mod interference_polyhedron;
 mod iwline;
 mod line;
@@ -66,13 +66,13 @@ pub use cs_function::IntPatchCSFunction;
 pub use gline::IntPatchGLine;
 pub use h_curve2d_tool::IntPatchHCurve2dTool;
 pub use h_inter_tool::IntPatchHInterTool;
+pub use imp_imp::{IntPatchImpImpIntersection, IntPatchImpImpStatus};
+pub use imp_prm::IntPatchImpPrmIntersection;
 pub use instances::{
     IntPatchCurvIntSurf, IntPatchTheIWalking, IntPatchTheIWalkingTypes, IntPatchTheSOnBounds,
     IntPatchTheSOnBoundsTypes, IntPatchTheSearchInside, IntPatchTheSearchInsideTypes,
     IntPatchTheSurfFunction,
 };
-pub use imp_imp::{IntPatchImpImpIntersection, IntPatchImpImpStatus};
-pub use imp_prm::IntPatchImpPrmIntersection;
 pub use interference_polyhedron::IntPatchInterferencePolyhedron;
 pub use iwline::IntPatchTheIWLineOfTheIWalking;
 pub use line::{IntPatchLine, IntPatchLineBase, IntPatchLineTransitions};

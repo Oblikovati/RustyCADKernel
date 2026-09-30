@@ -155,7 +155,13 @@ impl<'a> WalkSetup<'a> {
             return Ok(Err(IntPatchImpImpStatus::InfiniteSectionCurve));
         }
         let opt_du: Option<f64> = good_intersection(cyl1, cyl2)?;
-        Ok(Ok(Self::with_steps(cyl1, bw, b, (range_s1, range_s2), opt_du)?))
+        Ok(Ok(Self::with_steps(
+            cyl1,
+            bw,
+            b,
+            (range_s1, range_s2),
+            opt_du,
+        )?))
     }
 
     fn with_steps(
@@ -170,7 +176,10 @@ impl<'a> WalkSetup<'a> {
             Some(du) => (200, 50, du),
             None => (1000, 200, 2.0 * PI / 1000.0),
         };
-        let nb_pts: i32 = std::cmp::min(real_to_int((b.u1l - b.u1f) / du) + 1, real_to_int(20.0 * cyl1.radius()));
+        let nb_pts: i32 = std::cmp::min(
+            real_to_int((b.u1l - b.u1f) / du) + 1,
+            real_to_int(20.0 * cyl1.radius()),
+        );
         let nb_points: i32 = std::cmp::min(std::cmp::max(nb_min_points, nb_pts), nb_max_points);
         let step_min: f64 = std_max(bw.tol_2d, precision::p_confusion());
         let step_max: f64 = if b.u1l - b.u1f > PI / 100.0 {
@@ -223,7 +232,8 @@ pub(in super::super) fn cycy_no_geometric(
     // The critical points are the U1 values where the lines must be broken.
     let mut u1crit: [f64; NB_CRIT_POINTS_MAX] = [precision::infinite(); NB_CRIT_POINTS_MAX];
     let bounds = (b.u1f, b.u1l, b.u2f, b.u2l);
-    let nb_crit: usize = critical_points_computing(bw.coeffs, bounds, setup.period, bw.tol_2d, &mut u1crit);
+    let nb_crit: usize =
+        critical_points_computing(bw.coeffs, bounds, setup.period, bw.tol_2d, &mut u1crit);
     for r in range.iter() {
         let mut walk = IntervalWalk::new(&setup, (&mut u1crit, nb_crit), empty, (slin, spnt));
         walk.run(*r)?;
@@ -299,5 +309,3 @@ impl<'s, 'o> IntervalWalk<'s, 'o> {
         delta
     }
 }
-
-

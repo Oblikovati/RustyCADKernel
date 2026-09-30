@@ -101,7 +101,12 @@ pub(in super::super) fn inscribe_interval(
 /// sorted neighbours nearer than `tol`, the lower one becomes infinite (forgotten) and
 /// the upper one their middle (or the lower one when it is 0 or a bound of the
 /// surface); true when an element changed. The finite elements are in `[0, T]`.
-pub(in super::super) fn exclude_near_elements(arr: &mut [f64], usurf1f: f64, usurf1l: f64, tol: f64) -> bool {
+pub(in super::super) fn exclude_near_elements(
+    arr: &mut [f64],
+    usurf1f: f64,
+    usurf1l: f64,
+    tol: f64,
+) -> bool {
     let mut ret_val: bool = false;
     for i in 1..arr.len() {
         let (a, b) = (arr[i], arr[i - 1]);
@@ -110,7 +115,11 @@ pub(in super::super) fn exclude_near_elements(arr: &mut [f64], usurf1f: f64, usu
             break;
         }
         if (a - b) < tol {
-            arr[i] = if b != 0.0 && b != usurf1f && b != usurf1l { (a + b) / 2.0 } else { b };
+            arr[i] = if b != 0.0 && b != usurf1f && b != usurf1l {
+                (a + b) / 2.0
+            } else {
+                b
+            };
             arr[i - 1] = precision::infinite();
             ret_val = true;
         }

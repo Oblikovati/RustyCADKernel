@@ -24,7 +24,9 @@ use crate::int_surf::IntSurfQuadric;
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkgeombase::int_ana::{Curve as IntAnaCurve, IntQuadQuad, QuadQuadGeo, Quadric, ResultType};
+use rustycad_tkgeombase::int_ana::{
+    Curve as IntAnaCurve, IntQuadQuad, QuadQuadGeo, Quadric, ResultType,
+};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{Circle3, Cone3, Cylinder3, Point3};
 
@@ -57,13 +59,21 @@ pub(super) fn int_cyco(
     *empty = false;
     match typint {
         ResultType::Empty => *empty = true,
-        ResultType::Point => spnt.push(tangent_point(inter.point(1)?, (quads.0, quads.0), tol, true)),
+        ResultType::Point => spnt.push(tangent_point(
+            inter.point(1)?,
+            (quads.0, quads.0),
+            tol,
+            true,
+        )),
         ResultType::Circle => {
             for j in 1..=2 {
                 let cirsol: Circle3 = inter.circle(j)?;
                 let (ptref, tgt) = elclib::d1(0.0, &cirsol);
                 let qwe: f64 = dot_cross(tgt, quads.0, quads.1, ptref)?;
-                push(slin, IntPatchGLine::from_circle(&cirsol, false, by_sign_tol(qwe, 0.00000001)));
+                push(
+                    slin,
+                    IntPatchGLine::from_circle(&cirsol, false, by_sign_tol(qwe, 0.00000001)),
+                );
             }
         }
         ResultType::NoGeometricSolution => {
@@ -93,7 +103,12 @@ fn split_curves(
         return Ok(true);
     }
     analytic_points(anaint, quads, tol, spnt)?;
-    let opts = CurveOptions { check_tangent: false, tol_trans: 0.00000001, open_ends: true, eval_on_fail: true };
+    let opts = CurveOptions {
+        check_tangent: false,
+        tol_trans: 0.00000001,
+        open_ends: true,
+        eval_on_fail: true,
+    };
     let mut ends: (Point3, Point3) = (Point3::default(), Point3::default());
     for i in 1..=anaint.nb_curve()? {
         let mut pieces: Vec<IntAnaCurve> = Vec::new();

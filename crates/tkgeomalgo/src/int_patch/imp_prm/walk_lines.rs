@@ -17,15 +17,17 @@
 
 //! The lines of the walking become walking lines: their quadric parameters
 //! recomputed and reframed, their transitions, and their end vertices.
+use super::super::IntPatchTheIWalking;
 use super::super::iwline::IntPatchTheIWLineOfTheIWalking;
 use super::super::point::IntPatchPoint;
 use super::super::point_line::IntPatchPointLine;
 use super::super::wline::{IntPatchWLType, IntPatchWLine};
-use super::super::IntPatchTheIWalking;
 use super::IntPatchImpPrmIntersection;
 use super::perform::PrmInput;
 use super::setup::recadre;
-use crate::int_surf::{IntSurfLineOn2S, IntSurfPathPoint, IntSurfTransition, IntSurfTypeTrans, make_transition};
+use crate::int_surf::{
+    IntSurfLineOn2S, IntSurfPathPoint, IntSurfTransition, IntSurfTypeTrans, make_transition,
+};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::{Direction3, Point3, Vector3};
@@ -63,7 +65,10 @@ fn near(mut u: f64, r: f64) -> f64 {
 }
 
 fn is_revolved(t: SurfaceType) -> bool {
-    matches!(t, SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Torus)
+    matches!(
+        t,
+        SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Torus
+    )
 }
 
 /// The parameters of the previous point (quadric U, parametric U and V).
@@ -82,7 +87,10 @@ impl IntPatchImpPrmIntersection {
         (seqpdep, destination): (&[IntSurfPathPoint], &[i32]),
     ) -> Result<(), Failure> {
         let q = input.qsurf();
-        let vr = VRange { vmin: q.first_v_parameter()?, vmax: q.last_v_parameter()? };
+        let vr = VRange {
+            vmin: q.first_v_parameter()?,
+            vmax: q.last_v_parameter()?,
+        };
         for j in 1..=iwalk.nb_lines()? {
             let iwline: Handle<IntPatchTheIWLineOfTheIWalking> = iwalk.value(j)?.clone();
             let iw: &IntPatchTheIWLineOfTheIWalking = iwline.get().expect("walking line");
@@ -95,7 +103,13 @@ impl IntPatchImpPrmIntersection {
             self.adjust_line_parameters(input, &thelin, vr)?;
             let wline = IntPatchWLine::new(&thelin, false, trans1, trans2);
             wline.set_creating_way_info(IntPatchWLType::ImpPrm);
-            let ends = LineEnds { iwline: iw, seqpdep, destination, vr, nbpts };
+            let ends = LineEnds {
+                iwline: iw,
+                seqpdep,
+                destination,
+                vr,
+                nbpts,
+            };
             self.first_vertices(input, &wline, &ends)?;
             self.last_vertices(input, &wline, &ends)?;
             self.slin.push(Handle::new(wline).cast());
@@ -136,16 +150,32 @@ impl IntPatchImpPrmIntersection {
     /// The quadric parameters of the points recomputed from their 3d points (V snapped
     /// to the range, U continuous by turns of 2 PI, NIZNHY-PKV 28 Mar 2008), and the
     /// periodic parameters of the parametric surface made continuous too.
-    fn adjust_line_parameters(&self, input: &PrmInput<'_>, thelin: &IntSurfLineOn2S, vr: VRange) -> Result<(), Failure> {
+    fn adjust_line_parameters(
+        &self,
+        input: &PrmInput<'_>,
+        thelin: &IntSurfLineOn2S,
+        vr: VRange,
+    ) -> Result<(), Failure> {
         let quad = &input.quad;
-        let (an_u1, v1) = quad.parameters(thelin.value(1)?.value()).unwrap_or((0.0, 0.0));
+        let (an_u1, v1) = quad
+            .parameters(thelin.value(1)?.value())
+            .unwrap_or((0.0, 0.0));
         let v1 = vr.snap(v1);
         thelin.set_uv(1, !input.reversed, an_u1, v1)?;
         let (an_u2, an_v2) = thelin.value(1)?.parameters_on_surface(input.reversed);
-        let mut prev = Previous { an_u1, an_u2, an_v2 };
-        let arecadr: bool = matches!(quad.type_quadric(), SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere);
+        let mut prev = Previous {
+            an_u1,
+            an_u2,
+            an_v2,
+        };
+        let arecadr: bool = matches!(
+            quad.type_quadric(),
+            SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere
+        );
         for k in 2..=thelin.nb_points() {
-            let (mut u1, v1) = quad.parameters(thelin.value(k)?.value()).unwrap_or((0.0, 0.0));
+            let (mut u1, v1) = quad
+                .parameters(thelin.value(k)?.value())
+                .unwrap_or((0.0, 0.0));
             let v1 = vr.snap(v1);
             if arecadr {
                 u1 = recadr_u(u1, prev.an_u1);
@@ -153,7 +183,11 @@ impl IntPatchImpPrmIntersection {
             thelin.set_uv(k, !input.reversed, u1, v1)?;
             let (mut u2, mut v2) = thelin.value(k)?.parameters_on_surface(input.reversed);
             // The periodic type of the other surface (typeS1 when reversed, as natively).
-            let t_u: SurfaceType = if input.reversed { input.types.0 } else { input.types.1 };
+            let t_u: SurfaceType = if input.reversed {
+                input.types.0
+            } else {
+                input.types.1
+            };
             if is_revolved(t_u) {
                 u2 = near(u2, prev.an_u2);
             }
@@ -161,7 +195,11 @@ impl IntPatchImpPrmIntersection {
                 v2 = near(v2, prev.an_v2);
             }
             thelin.set_uv(k, input.reversed, u2, v2)?;
-            prev = Previous { an_u1: u1, an_u2: u2, an_v2: v2 };
+            prev = Previous {
+                an_u1: u1,
+                an_u2: u2,
+                an_v2: v2,
+            };
         }
         Ok(())
     }
@@ -194,7 +232,12 @@ struct LineEnds<'a> {
 
 impl IntPatchImpPrmIntersection {
     /// A vertex at a line end without path point: tangent or not.
-    fn plain_end(input: &PrmInput<'_>, wline: &IntPatchWLine, thelin: &IntSurfLineOn2S, (index, tangent): (i32, bool)) -> Result<(), Failure> {
+    fn plain_end(
+        input: &PrmInput<'_>,
+        wline: &IntPatchWLine,
+        thelin: &IntSurfLineOn2S,
+        (index, tangent): (i32, bool),
+    ) -> Result<(), Failure> {
         let p = thelin.value(index)?;
         let (u1, v1, u2, v2) = p.parameters();
         let mut pt = IntPatchPoint::new();
@@ -207,7 +250,12 @@ impl IntPatchImpPrmIntersection {
 
     /// The first vertices: one per restriction point of the first path point (the
     /// multiplicities of the path point), or the first point of the line.
-    fn first_vertices(&self, input: &PrmInput<'_>, wline: &IntPatchWLine, ends: &LineEnds<'_>) -> Result<(), Failure> {
+    fn first_vertices(
+        &self,
+        input: &PrmInput<'_>,
+        wline: &IntPatchWLine,
+        ends: &LineEnds<'_>,
+    ) -> Result<(), Failure> {
         let iw = ends.iwline;
         let thelin = iw.line();
         if iw.has_first_point() && !iw.is_tangent_at_begining() {
@@ -222,7 +270,12 @@ impl IntPatchImpPrmIntersection {
     }
 
     /// The last vertices, as the first ones with the reversed tangent.
-    fn last_vertices(&self, input: &PrmInput<'_>, wline: &IntPatchWLine, ends: &LineEnds<'_>) -> Result<(), Failure> {
+    fn last_vertices(
+        &self,
+        input: &PrmInput<'_>,
+        wline: &IntPatchWLine,
+        ends: &LineEnds<'_>,
+    ) -> Result<(), Failure> {
         let iw = ends.iwline;
         let thelin = iw.line();
         if iw.has_last_point() && !iw.is_tangent_at_end() {
@@ -282,7 +335,11 @@ impl IntPatchImpPrmIntersection {
         let psurf = input.psurf().0;
         let d1 = psurf.d1(pu, pv)?;
         let vec_normale: Vector3 = d1.d1u.crossed(d1.d1v);
-        let [u1, v1, u2, v2] = if input.reversed { [pu, pv, qu, qv] } else { [qu, qv, pu, pv] };
+        let [u1, v1, u2, v2] = if input.reversed {
+            [pu, pv, qu, qv]
+        } else {
+            [qu, qv, pu, pv]
+        };
         let mut pt = IntPatchPoint::new();
         pt.set_value_tangent(ppoint.value(), input.tol_arc, false);
         pt.set_parameters(u1, v1, u2, v2);
@@ -296,7 +353,13 @@ impl IntPatchImpPrmIntersection {
         tgrst.set_linear_form(d2d.x(), d1.d1u, d2d.y(), d1.d1v);
         let (mut tline, mut tarc) = (IntSurfTransition::default(), IntSurfTransition::default());
         if vec_normale.square_magnitude() > 1e-13 {
-            make_transition(tgline, tgrst, Direction3::from_vector(vec_normale)?, &mut tline, &mut tarc);
+            make_transition(
+                tgline,
+                tgrst,
+                Direction3::from_vector(vec_normale)?,
+                &mut tline,
+                &mut tarc,
+            );
         } else {
             tline.set_type(true, IntSurfTypeTrans::Undecided);
             tarc.set_type(true, IntSurfTypeTrans::Undecided);
@@ -319,7 +382,11 @@ fn tangent_end(w: &IntPatchWLine, first: bool) -> Result<Option<(IntPatchPoint, 
     if first && !w.has_first_point() || !first && !w.has_last_point() {
         return Ok(None);
     }
-    let (p, ind) = if first { w.first_point_index()? } else { w.last_point_index()? };
+    let (p, ind) = if first {
+        w.first_point_index()?
+    } else {
+        w.last_point_index()?
+    };
     Ok(p.is_tangency_point().then_some((p, ind)))
 }
 
@@ -381,4 +448,3 @@ fn join(
     }
     Ok(())
 }
-

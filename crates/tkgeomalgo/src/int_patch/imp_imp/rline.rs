@@ -28,6 +28,7 @@ use super::lines::VertexLine;
 use crate::int_start::TheArc;
 use crate::int_surf::{IntSurfQuadric, IntSurfTransition, IntSurfTypeTrans, make_transition};
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::std_min;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::geom::{GeomCurve, GeomEllipse, GeomHyperbola, GeomParabola};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
@@ -48,29 +49,26 @@ fn square_distance(gline: &IntPatchGLine, p: Point3, extr: &mut ExtPC<'_>) -> Re
             }
             let mut sq_dist: f64 = extr.square_distance(1)?;
             for i in 2..=extr.nb_ext()? {
-                sq_dist = sq_dist.min_native(extr.square_distance(i)?);
+                // `if (aSQD < aSQDist) aSQDist = aSQD;`
+                sq_dist = std_min(sq_dist, extr.square_distance(i)?);
             }
             Ok(sq_dist)
         }
     }
 }
 
-/// `if (aSQD < aSQDist) aSQDist = aSQD;`.
-trait MinNative {
-    fn min_native(self, other: f64) -> f64;
-}
-impl MinNative for f64 {
-    fn min_native(self, other: f64) -> f64 {
-        if other < self { other } else { self }
-    }
-}
-
 /// The Geom curve of an ellipse, parabola or hyperbola line, loaded over its bounds.
 fn conic_curve(gline: &IntPatchGLine) -> Result<Option<Handle<dyn GeomCurve>>, Failure> {
     Ok(match gline.arc_type() {
-        IntPatchIType::Ellipse => Some(Handle::new(GeomEllipse::from_elips(gline.ellipse()?)).cast()),
-        IntPatchIType::Parabola => Some(Handle::new(GeomParabola::from_parab(gline.parabola()?)).cast()),
-        IntPatchIType::Hyperbola => Some(Handle::new(GeomHyperbola::from_hypr(gline.hyperbola()?)).cast()),
+        IntPatchIType::Ellipse => {
+            Some(Handle::new(GeomEllipse::from_elips(gline.ellipse()?)).cast())
+        }
+        IntPatchIType::Parabola => {
+            Some(Handle::new(GeomParabola::from_parab(gline.parabola()?)).cast())
+        }
+        IntPatchIType::Hyperbola => {
+            Some(Handle::new(GeomHyperbola::from_hypr(gline.hyperbola()?)).cast())
+        }
         _ => None,
     })
 }
@@ -94,12 +92,20 @@ fn is_rline_good(
     tol: f64,
 ) -> Result<bool, Failure> {
     let sq_tol: f64 = tol * tol;
-    let nb_pnts_m1: i32 = if rline.has_polygon() { rline.nb_pnts()? } else { rline.nb_vertex() } - 1;
+    let nb_pnts_m1: i32 = if rline.has_polygon() {
+        rline.nb_pnts()?
+    } else {
+        rline.nb_vertex()
+    } - 1;
     if nb_pnts_m1 < 1 {
         return Ok(false);
     }
     let adaptor: Option<GeomAdaptorCurve> = match conic_curve(gline)? {
-        Some(curve) => Some(GeomAdaptorCurve::with_range(&curve, curve.first_parameter(), curve.last_parameter())?),
+        Some(curve) => Some(GeomAdaptorCurve::with_range(
+            &curve,
+            curve.first_parameter(),
+            curve.last_parameter(),
+        )?),
         None => None,
     };
     let mut extr = ExtPC::new();
@@ -125,7 +131,10 @@ fn is_rline_good(
 }
 
 /// The point of the quadric at the middle of the arc of the restriction line.
-fn middle_of_arc((quad1, quad2): (&IntSurfQuadric, &IntSurfQuadric), rline: &IntPatchRLine) -> Result<Point3, Failure> {
+fn middle_of_arc(
+    (quad1, quad2): (&IntSurfQuadric, &IntSurfQuadric),
+    rline: &IntPatchRLine,
+) -> Result<Point3, Failure> {
     let (arc, quad) = if rline.is_arc_on_s1() {
         (rline.arc_on_s1(), quad1)
     } else {
@@ -167,7 +176,7 @@ pub(super) fn process_rline(
     tol_arc_in: f64,
     is_req_to_keep_rline: bool,
 ) -> Result<(), Failure> {
-    let tol_arc: f64 = (100.0 * tol_arc_in).min_native(0.1);
+    let tol_arc: f64 = std_min(100.0 * tol_arc_in, 0.1);
     let mut st = RLineState::default();
     let mut i: usize = 0;
     while i < slin.len() {
@@ -176,7 +185,13 @@ pub(super) fn process_rline(
         if slini.arc_type() == IntPatchIType::Restriction {
             let rline: Handle<IntPatchRLine> = slini.cast();
             (st.seq_pnt3d, st.seq_real) = (Vec::new(), Vec::new());
-            has_to_delete = rline_against(&mut st, slin, &rline, quads, (tol_arc_in, tol_arc, is_req_to_keep_rline))?;
+            has_to_delete = rline_against(
+                &mut st,
+                slin,
+                &rline,
+                quads,
+                (tol_arc_in, tol_arc, is_req_to_keep_rline),
+            )?;
         }
         if has_to_delete {
             slin.remove(i);
@@ -230,13 +245,26 @@ fn restriction_side(st: &mut RLineState, rline: &IntPatchRLine) -> Result<(), Fa
         st.arcref = rline.arc_on_s2();
         st.on_first = false;
     }
-    st.paramf = if rline.has_first_point() { rline.first_point()?.parameter_on_line() } else { -f64::MAX };
-    st.paraml = if rline.has_last_point() { rline.last_point()?.parameter_on_line() } else { f64::MAX };
+    st.paramf = if rline.has_first_point() {
+        rline.first_point()?.parameter_on_line()
+    } else {
+        -f64::MAX
+    };
+    st.paraml = if rline.has_last_point() {
+        rline.last_point()?.parameter_on_line()
+    } else {
+        f64::MAX
+    };
     Ok(())
 }
 
 /// The quadric derivatives at the arc point of `prm`, with the arc derivative.
-fn derivatives_at(st: &mut RLineState, quad: &IntSurfQuadric, arc: &TheArc, prm: f64) -> Result<Vector2, Failure> {
+fn derivatives_at(
+    st: &mut RLineState,
+    quad: &IntSurfQuadric,
+    arc: &TheArc,
+    prm: f64,
+) -> Result<Vector2, Failure> {
     let (p2d, d2d): (Point2, Vector2) = arc.d1(prm)?;
     if let Some((_, d1u, d1v)) = quad.d1(p2d.x(), p2d.y()) {
         (st.d1u, st.d1v) = (d1u, d1v);
@@ -245,7 +273,10 @@ fn derivatives_at(st: &mut RLineState, quad: &IntSurfQuadric, arc: &TheArc, prm:
 }
 
 /// Whether the U derivative of the quadric is null at the 11 samples of the arc range.
-fn is_degenerated(st: &mut RLineState, (quad1, quad2): (&IntSurfQuadric, &IntSurfQuadric)) -> Result<bool, Failure> {
+fn is_degenerated(
+    st: &mut RLineState,
+    (quad1, quad2): (&IntSurfQuadric, &IntSurfQuadric),
+) -> Result<bool, Failure> {
     let quad = if st.on_first { quad1 } else { quad2 };
     let arc = st.arcref.clone();
     for edg in 0..=10 {
@@ -269,12 +300,18 @@ fn vertex_on_rline(
     (nbpt, tol_in, tol_arc): (usize, f64, f64),
 ) -> Result<(), Failure> {
     st.ptvtx = vline.vertex(k)?;
-    let off = if st.on_first { !st.ptvtx.is_on_dom_s1() } else { !st.ptvtx.is_on_dom_s2() };
+    let off = if st.on_first {
+        !st.ptvtx.is_on_dom_s1()
+    } else {
+        !st.ptvtx.is_on_dom_s2()
+    };
     if !off {
         return Ok(());
     }
     let toproj: Point3 = st.ptvtx.value();
-    let known: Option<usize> = st.seq_pnt3d[..nbpt].iter().position(|p| toproj.distance(p) < tol_in);
+    let known: Option<usize> = st.seq_pnt3d[..nbpt]
+        .iter()
+        .position(|p| toproj.distance(p) < tol_in);
     let keeppoint: bool = match known {
         Some(jj) => {
             st.newptvtx = st.ptvtx.clone();
@@ -299,13 +336,21 @@ fn project_on_rline(
     toproj: Point3,
     tol_arc: f64,
 ) -> Result<bool, Failure> {
-    (st.u, st.v) = if st.on_first { st.ptvtx.parameters_on_s1() } else { st.ptvtx.parameters_on_s2() };
-    let Some((paramproj, p2d)) = IntPatchHInterTool::project(&st.arcref, Point2::new(st.u, st.v))? else {
+    (st.u, st.v) = if st.on_first {
+        st.ptvtx.parameters_on_s1()
+    } else {
+        st.ptvtx.parameters_on_s2()
+    };
+    let Some((paramproj, p2d)) = IntPatchHInterTool::project(&st.arcref, Point2::new(st.u, st.v))?
+    else {
         return Ok(false);
     };
     let quad = if st.on_first { quad1 } else { quad2 };
     let ptproj: Point3 = quad.value(p2d.x(), p2d.y());
-    if !(toproj.distance(&ptproj) <= 100.0 * tol_arc && paramproj >= st.paramf && paramproj <= st.paraml) {
+    if !(toproj.distance(&ptproj) <= 100.0 * tol_arc
+        && paramproj >= st.paramf
+        && paramproj <= st.paraml)
+    {
         return Ok(false);
     }
     st.newptvtx = st.ptvtx.clone();
@@ -320,7 +365,9 @@ fn project_on_rline(
         let same_arc = if st.on_first {
             r.is_arc_on_s1() && r.arc_on_s1().object_address() == st.arcref.object_address()
         } else {
-            !st.on_first && r.is_arc_on_s2() && r.arc_on_s2().object_address() == st.arcref.object_address()
+            !st.on_first
+                && r.is_arc_on_s2()
+                && r.arc_on_s2().object_address() == st.arcref.object_address()
         };
         if same_arc {
             r.add_vertex(&st.newptvtx, false);
@@ -346,7 +393,11 @@ fn keep_vertex(
         let arcref = st.arcref.clone();
         let prm: f64 = st.newptvtx.parameter_on_line();
         // On the first domain means on the domain of S2 here, and conversely.
-        let (own, other) = if st.on_first { (quad1, quad2) } else { (quad2, quad1) };
+        let (own, other) = if st.on_first {
+            (quad1, quad2)
+        } else {
+            (quad2, quad1)
+        };
         let d2d = derivatives_at(st, own, &arcref, prm)?;
         let mut tgrest = Vector3::default();
         tgrest.set_linear_form(d2d.x(), st.d1u, d2d.y(), st.d1v);
@@ -364,9 +415,16 @@ fn keep_vertex(
             st.trest.set_type(true, IntSurfTypeTrans::Undecided);
             st.tarc.set_type(true, IntSurfTypeTrans::Undecided);
         } else {
-            make_transition(tgrest, tgarc, Direction3::from_vector(norm)?, &mut st.trest, &mut st.tarc);
+            make_transition(
+                tgrest,
+                tgarc,
+                Direction3::from_vector(norm)?,
+                &mut st.trest,
+                &mut st.tarc,
+            );
         }
-        st.newptvtx.set_arc(on_s1, &arc, prm_arc, &st.trest, &st.tarc);
+        st.newptvtx
+            .set_arc(on_s1, &arc, prm_arc, &st.trest, &st.tarc);
     }
     rline.add_vertex(&st.newptvtx, false);
     Ok(())

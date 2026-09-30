@@ -39,9 +39,9 @@ mod sphere_sphere;
 mod torus;
 mod transitions;
 
+use super::IntPatchTheSOnBounds;
 use super::line::IntPatchLine;
 use super::point::IntPatchPoint;
-use super::IntPatchTheSOnBounds;
 use crate::int_start::TheTopolTool;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
@@ -177,7 +177,11 @@ impl IntPatchImpImpIntersection {
     /// `Point(Index)`: Standard_OutOfRange outside `1..=NbPnts()`. `inter.point(1)?`.
     pub fn point(&self, index: i32) -> Result<&IntPatchPoint, Failure> {
         self.check_done("Point")?;
-        crate::int_start::failures::sequence_value(&self.spnt, index, "IntPatch_ImpImpIntersection::Point")
+        crate::int_start::failures::sequence_value(
+            &self.spnt,
+            index,
+            "IntPatch_ImpImpIntersection::Point",
+        )
     }
 
     /// `NbLines()`: the number of lines. `inter.nb_lines()?`.
@@ -189,6 +193,10 @@ impl IntPatchImpImpIntersection {
     /// `Line(Index)`: Standard_OutOfRange outside `1..=NbLines()`. `inter.line(1)?`.
     pub fn line(&self, index: i32) -> Result<&Handle<dyn IntPatchLine>, Failure> {
         self.check_done("Line")?;
-        crate::int_start::failures::sequence_value(&self.slin, index, "IntPatch_ImpImpIntersection::Line")
+        crate::int_start::failures::sequence_value(
+            &self.slin,
+            index,
+            "IntPatch_ImpImpIntersection::Line",
+        )
     }
 }

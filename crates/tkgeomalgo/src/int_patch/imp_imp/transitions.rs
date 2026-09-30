@@ -67,6 +67,12 @@ pub(super) fn line_arc_transitions(
         transarc.set_type(true, IntSurfTypeTrans::Undecided);
         return Ok(());
     }
-    make_transition(vtgint, vtgrst, Direction3::from_vector(normale)?, transline, transarc);
+    make_transition(
+        vtgint,
+        vtgrst,
+        Direction3::from_vector(normale)?,
+        transline,
+        transarc,
+    );
     Ok(())
 }

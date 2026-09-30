@@ -85,14 +85,25 @@ pub(super) fn is_pole_or_seam(
         let added = match q.get_type()? {
             SurfaceType::Sphere | SurfaceType::Cone => {
                 let found = IntPatchSpecialPoints::add_singular_pole(
-                    q, p, p_iso_ref, vertex, &mut apex_point, is_reversed, true,
+                    q,
+                    p,
+                    p_iso_ref,
+                    vertex,
+                    &mut apex_point,
+                    is_reversed,
+                    true,
                 )?;
                 found.then_some(IntPatchSpecPntType::SPntPole)
             }
             SurfaceType::Torus => {
                 let tol: f64 = input.tol_3d;
                 let found = IntPatchSpecialPoints::add_cross_uv_iso_point(
-                    q, p, p_iso_ref, tol, &mut apex_point, is_reversed,
+                    q,
+                    p,
+                    p_iso_ref,
+                    tol,
+                    &mut apex_point,
+                    is_reversed,
                 )?;
                 found.then_some(IntPatchSpecPntType::SPntSeamUV)
             }

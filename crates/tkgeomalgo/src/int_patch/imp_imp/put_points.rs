@@ -27,8 +27,8 @@ use super::multiple::{Marks, multiple_point, point_on_second_dom};
 use super::transitions::line_arc_transitions;
 use crate::int_start::{TheArc, TheTopolTool, TheVertex};
 use crate::int_surf::{IntSurfQuadric, IntSurfTransition};
-use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
 use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3, resolution};
 
@@ -65,12 +65,18 @@ struct PutState {
 
 /// The tangent of the restriction at the point of the arc: the arc derivative through
 /// the quadric derivatives (kept in the state for the vertices that follow).
-fn arc_tangent(st: &mut PutState, quad: &IntSurfQuadric, arc: &TheArc, prm: f64) -> Result<(), Failure> {
+fn arc_tangent(
+    st: &mut PutState,
+    quad: &IntSurfQuadric,
+    arc: &TheArc,
+    prm: f64,
+) -> Result<(), Failure> {
     (st.p2d, st.d2d) = arc.d1(prm)?;
     if let Some((_, d1u, d1v)) = quad.d1(st.p2d.x(), st.p2d.y()) {
         (st.d1u, st.d1v) = (d1u, d1v);
     }
-    st.vtgrst.set_linear_form(st.d2d.x(), st.d1u, st.d2d.y(), st.d1v);
+    st.vtgrst
+        .set_linear_form(st.d2d.x(), st.d1u, st.d2d.y(), st.d1v);
     Ok(())
 }
 
@@ -88,7 +94,10 @@ pub(super) fn put_points_on_line(
         return Ok(());
     }
     let mut st = PutState::default();
-    let mut marks = Marks { done: vec![0; nbpnt], used_line: vec![0; slin.len()] };
+    let mut marks = Marks {
+        done: vec![0; nbpnt],
+        used_line: vec![0; slin.len()],
+    };
     for i in 0..nbpnt {
         if marks.done[i] == 1 {
             continue;
@@ -178,7 +187,12 @@ fn try_line(
         return Ok(());
     };
     st.vtgint = args.vtgint;
-    let found_line = FoundLine { psurf, currentparameter, linenumber, args };
+    let found_line = FoundLine {
+        psurf,
+        currentparameter,
+        linenumber,
+        args,
+    };
     add_found_point(input, slin, st, done, i, found_line)
 }
 
@@ -207,7 +221,13 @@ fn add_found_point(
     let vline = VertexLine::analytic_or_conic(lin)?;
     if !input.on_first {
         // The correspondence between the points on the domains of the two surfaces.
-        let args = (input.listpnt, input.domain, input.quad_surf, st.normale, st.vtgint);
+        let args = (
+            input.listpnt,
+            input.domain,
+            input.quad_surf,
+            st.normale,
+            st.vtgint,
+        );
         st.goon = point_on_second_dom(args, &vline, done, i, found.args.vert_tol)?;
     }
     if !st.goon {
@@ -234,9 +254,13 @@ fn set_solution(
     (i, currentarc): (usize, &TheArc),
 ) -> Result<(), Failure> {
     let current: &IntPatchThePathPointOfTheSOnBounds = &input.listpnt[i];
-    st.solpnt.set_value_tangent(found.psurf, found.args.vert_tol, false);
+    st.solpnt
+        .set_value_tangent(found.psurf, found.args.vert_tol, false);
     let (u1, v1) = (st.p2d.x(), st.p2d.y());
-    let (u2, v2) = input.other_quad.parameters(found.psurf).unwrap_or((0.0, 0.0));
+    let (u2, v2) = input
+        .other_quad
+        .parameters(found.psurf)
+        .unwrap_or((0.0, 0.0));
     if input.on_first {
         let [a, b, c, d] = recadre(input.s1, input.s2, [u1, v1, u2, v2])?;
         st.solpnt.set_parameters(a, b, c, d);
@@ -251,7 +275,8 @@ fn set_solution(
     let (normale, vtgint, vtgrst) = (st.normale, st.vtgint, st.vtgrst);
     line_arc_transitions(vtgint, vtgrst, normale, &mut st.transline, &mut st.transarc)?;
     let prm: f64 = found.currentparameter;
-    st.solpnt.set_arc(input.on_first, currentarc, prm, &st.transline, &st.transarc);
+    st.solpnt
+        .set_arc(input.on_first, currentarc, prm, &st.transline, &st.transarc);
     Ok(())
 }
 
@@ -278,10 +303,12 @@ fn same_vertex_points(
         st.solpnt.set_tolerance(input.tolarc);
         let (arc, prm) = (other.arc(), other.parameter());
         (st.p2d, st.d2d) = arc.d1(prm)?;
-        st.vtgrst.set_linear_form(st.d2d.x(), st.d1u, st.d2d.y(), st.d1v);
+        st.vtgrst
+            .set_linear_form(st.d2d.x(), st.d1u, st.d2d.y(), st.d1v);
         let (normale, vtgint, vtgrst) = (st.normale, st.vtgint, st.vtgrst);
         line_arc_transitions(vtgint, vtgrst, normale, &mut st.transline, &mut st.transarc)?;
-        st.solpnt.set_arc(input.on_first, &arc, prm, &st.transline, &st.transarc);
+        st.solpnt
+            .set_arc(input.on_first, &arc, prm, &st.transline, &st.transarc);
         vline.add_vertex(&st.solpnt)?;
         done[k] = 1;
     }

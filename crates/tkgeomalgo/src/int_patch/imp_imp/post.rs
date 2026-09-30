@@ -21,7 +21,9 @@ use super::super::IntPatchIType;
 use super::super::aline::IntPatchALine;
 use super::super::gline::IntPatchGLine;
 use super::super::line::IntPatchLine;
-use super::super::path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds};
+use super::super::path_point::{
+    IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds,
+};
 use super::super::point::IntPatchPoint;
 use super::super::rline::IntPatchRLine;
 use super::perform::{PairFlags, PerformInput, arc_function};
@@ -56,16 +58,24 @@ impl IntPatchImpImpIntersection {
     /// fails.
     fn domain_solutions(
         &mut self,
-        (quad, s, d): (&IntSurfQuadric, &Adaptor3dSurfaceHandle, &(dyn TheTopolTool + 'static)),
+        (quad, s, d): (
+            &IntSurfQuadric,
+            &Adaptor3dSurfaceHandle,
+            &(dyn TheTopolTool + 'static),
+        ),
         (tol_arc, tol_tang): (f64, f64),
         same_type: bool,
     ) -> Result<Option<DomainSolutions>, Failure> {
         let mut afunc = arc_function(quad, s);
-        self.solrst.perform(&mut afunc, d, tol_arc, tol_tang, false)?;
+        self.solrst
+            .perform(&mut afunc, d, tol_arc, tol_tang, false)?;
         if !self.solrst.is_done() {
             return Ok(None);
         }
-        let mut sol = DomainSolutions { all: self.solrst.all_arc_solution()? && same_type, ..DomainSolutions::default() };
+        let mut sol = DomainSolutions {
+            all: self.solrst.all_arc_solution()? && same_type,
+            ..DomainSolutions::default()
+        };
         let (nbpt, nbseg) = (self.solrst.nb_points()?, self.solrst.nb_segments()?);
         for i in 1..=nbpt {
             sol.pnt.push(self.solrst.point(i)?.clone());
@@ -92,7 +102,10 @@ impl IntPatchImpImpIntersection {
     ) -> Result<bool, Failure> {
         let tols = (input.tol_arc, input.tol_tang);
         let same: bool = typs1 == typs2;
-        let nosol_same = DomainSolutions { nosol: true, ..DomainSolutions::default() };
+        let nosol_same = DomainSolutions {
+            nosol: true,
+            ..DomainSolutions::default()
+        };
         let sol1 = if flags.same_surf {
             nosol_same
         } else {
@@ -102,7 +115,10 @@ impl IntPatchImpImpIntersection {
             }
         };
         let sol2 = if flags.same_surf {
-            DomainSolutions { nosol: true, ..DomainSolutions::default() }
+            DomainSolutions {
+                nosol: true,
+                ..DomainSolutions::default()
+            }
         } else {
             match self.domain_solutions((quad1, input.s2, input.d2), tols, same)? {
                 Some(sol) => sol,
@@ -142,7 +158,10 @@ impl IntPatchImpImpIntersection {
             SurfaceType::Torus => elslib::value(0.0, 0.0, &s1.torus()?),
             _ => Point3::default(),
         };
-        self.oppo = quad1.normale_at(ptreference)?.dot(quad2.normale_at(ptreference)?) < 0.0;
+        self.oppo = quad1
+            .normale_at(ptreference)?
+            .dot(quad2.normale_at(ptreference)?)
+            < 0.0;
         self.my_done = IntPatchImpImpStatus::Ok;
         Ok(())
     }
@@ -158,16 +177,46 @@ impl IntPatchImpImpIntersection {
     ) -> Result<(), Failure> {
         let tolarc: f64 = input.tol_arc;
         let (s1, s2) = (input.s1, input.s2);
-        let put1 = PutPointsInput { s1, s2, listpnt: &sol1.pnt, on_first: true, domain: input.d1, quad_surf: quad1, other_quad: quad2, multpoint, tolarc };
+        let put1 = PutPointsInput {
+            s1,
+            s2,
+            listpnt: &sol1.pnt,
+            on_first: true,
+            domain: input.d1,
+            quad_surf: quad1,
+            other_quad: quad2,
+            multpoint,
+            tolarc,
+        };
         put_points_on_line(&put1, &self.slin)?;
-        let put2 = PutPointsInput { s1, s2, listpnt: &sol2.pnt, on_first: false, domain: input.d2, quad_surf: quad2, other_quad: quad1, multpoint, tolarc };
+        let put2 = PutPointsInput {
+            s1,
+            s2,
+            listpnt: &sol2.pnt,
+            on_first: false,
+            domain: input.d2,
+            quad_surf: quad2,
+            other_quad: quad1,
+            multpoint,
+            tolarc,
+        };
         put_points_on_line(&put2, &self.slin)?;
         if !sol1.edg.is_empty() {
-            let seg = SegmentInput { quad1, quad2, on_first: true, tol_arc: tolarc };
+            let seg = SegmentInput {
+                quad1,
+                quad2,
+                on_first: true,
+                tol_arc: tolarc,
+            };
             process_segments(&sol1.edg, &mut self.slin, &seg)?;
         }
         if !sol2.edg.is_empty() {
-            let seg = SegmentInput { quad1, quad2, on_first: false, tol_arc: tolarc };
+            let seg = SegmentInput {
+                quad1,
+                quad2,
+                on_first: false,
+                tol_arc: tolarc,
+            };
             process_segments(&sol2.edg, &mut self.slin, &seg)?;
         }
         if !sol1.edg.is_empty() || !sol2.edg.is_empty() {
@@ -178,14 +227,22 @@ impl IntPatchImpImpIntersection {
 
     /// The isolated points inside both domains, the vertex parameters of the lines, two
     /// vertices on the closed conics without one; the computation is done.
-    pub(super) fn finish(&mut self, input: &PerformInput<'_>, quads: (&IntSurfQuadric, &IntSurfQuadric)) -> Result<(), Failure> {
+    pub(super) fn finish(
+        &mut self,
+        input: &PerformInput<'_>,
+        quads: (&IntSurfQuadric, &IntSurfQuadric),
+    ) -> Result<(), Failure> {
         let nblin: usize = self.slin.len();
         if !self.spnt.is_empty() {
             let mut kept: Vec<IntPatchPoint> = Vec::new();
             for ip in &self.spnt {
                 let (u1, v1, u2, v2) = ip.parameters();
-                let state1: State = input.d1.classify(Point2::new(u1, v1), input.tol_arc, true)?;
-                let state2: State = input.d2.classify(Point2::new(u2, v2), input.tol_arc, true)?;
+                let state1: State = input
+                    .d1
+                    .classify(Point2::new(u1, v1), input.tol_arc, true)?;
+                let state2: State = input
+                    .d2
+                    .classify(Point2::new(u2, v2), input.tol_arc, true)?;
                 if state1 != State::Out && state2 != State::Out {
                     kept.push(ip.clone());
                 }
@@ -206,18 +263,30 @@ impl IntPatchImpImpIntersection {
 /// `ComputeVertexParameters(TolArc)` of a conic, analytic or restriction line.
 fn compute_vertex_parameters(line: &Handle<dyn IntPatchLine>, tol_arc: f64) -> Result<(), Failure> {
     match line.arc_type() {
-        IntPatchIType::Ellipse | IntPatchIType::Circle | IntPatchIType::Lin | IntPatchIType::Parabola | IntPatchIType::Hyperbola => {
-            line.cast::<IntPatchGLine>().compute_vertex_parameters(tol_arc)
-        }
-        IntPatchIType::Analytic => line.cast::<IntPatchALine>().compute_vertex_parameters(tol_arc),
-        IntPatchIType::Restriction => line.cast::<IntPatchRLine>().compute_vertex_parameters(tol_arc),
+        IntPatchIType::Ellipse
+        | IntPatchIType::Circle
+        | IntPatchIType::Lin
+        | IntPatchIType::Parabola
+        | IntPatchIType::Hyperbola => line
+            .cast::<IntPatchGLine>()
+            .compute_vertex_parameters(tol_arc),
+        IntPatchIType::Analytic => line
+            .cast::<IntPatchALine>()
+            .compute_vertex_parameters(tol_arc),
+        IntPatchIType::Restriction => line
+            .cast::<IntPatchRLine>()
+            .compute_vertex_parameters(tol_arc),
         IntPatchIType::Walking => Ok(()),
     }
 }
 
 /// Two vertices (at 0 and 2 PI, on the point of parameter 0) on a circle or an ellipse
 /// without vertices.
-fn closed_conic_vertices(line: &Handle<dyn IntPatchLine>, (quad1, quad2): (&IntSurfQuadric, &IntSurfQuadric), tol_arc: f64) -> Result<(), Failure> {
+fn closed_conic_vertices(
+    line: &Handle<dyn IntPatchLine>,
+    (quad1, quad2): (&IntSurfQuadric, &IntSurfQuadric),
+    tol_arc: f64,
+) -> Result<(), Failure> {
     let typ: IntPatchIType = line.arc_type();
     if typ != IntPatchIType::Circle && typ != IntPatchIType::Ellipse {
         return Ok(());

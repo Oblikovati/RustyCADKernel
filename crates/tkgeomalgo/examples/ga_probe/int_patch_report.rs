@@ -31,7 +31,10 @@ fn collect(d: &Adaptor3dTopolTool) -> Vec<TheArc> {
 
 impl Domains {
     pub fn new(d1: &Adaptor3dTopolTool, d2: &Adaptor3dTopolTool) -> Self {
-        Self { a1: collect(d1), a2: collect(d2) }
+        Self {
+            a1: collect(d1),
+            a2: collect(d2),
+        }
     }
     /// The rank of an arc: 1.. on the first domain, 101.. on the second one; 0 null, -1
     /// another arc.
@@ -134,7 +137,12 @@ fn gline(dm: &Domains, g: &IntPatchGLine) {
         }
         Ok(())
     });
-    vertices(dm, g.nb_vertex(), |i| g.vertex(i), (g.has_first_point(), g.has_last_point()));
+    vertices(
+        dm,
+        g.nb_vertex(),
+        |i| g.vertex(i),
+        (g.has_first_point(), g.has_last_point()),
+    );
 }
 
 /// `ga_ipl_aline`.
@@ -167,7 +175,12 @@ fn aline(dm: &Domains, a: &IntPatchALine) {
         }
         Ok(())
     });
-    vertices(dm, a.nb_vertex(), |i| a.vertex(i), (a.has_first_point(), a.has_last_point()));
+    vertices(
+        dm,
+        a.nb_vertex(),
+        |i| a.vertex(i),
+        (a.has_first_point(), a.has_last_point()),
+    );
 }
 
 fn wline(dm: &Domains, w: &IntPatchWLine) {
@@ -186,7 +199,12 @@ fn wline(dm: &Domains, w: &IntPatchWLine) {
     int(dm.rank(&w.get_arc_on_s1()));
     flag(w.has_arc_on_s2());
     int(dm.rank(&w.get_arc_on_s2()));
-    vertices(dm, w.nb_vertex(), |i| w.vertex(i), (w.has_first_point(), w.has_last_point()));
+    vertices(
+        dm,
+        w.nb_vertex(),
+        |i| w.vertex(i),
+        (w.has_first_point(), w.has_last_point()),
+    );
 }
 
 fn rline(dm: &Domains, r: &IntPatchRLine) {
@@ -203,7 +221,12 @@ fn rline(dm: &Domains, r: &IntPatchRLine) {
         }
         Ok(())
     });
-    vertices(dm, r.nb_vertex(), |i| r.vertex(i), (r.has_first_point(), r.has_last_point()));
+    vertices(
+        dm,
+        r.nb_vertex(),
+        |i| r.vertex(i),
+        (r.has_first_point(), r.has_last_point()),
+    );
 }
 
 /// `ga_ipl_line`.
@@ -219,11 +242,14 @@ pub fn line(dm: &Domains, l: &Handle<dyn IntPatchLine>) {
     flag(l.is_u_iso_on_s2());
     flag(l.is_v_iso_on_s2());
     match l.arc_type() {
-        IntPatchIType::Analytic => aline(dm, l.cast::<IntPatchALine>().get().expect("analytic line")),
-        IntPatchIType::Walking => wline(dm, l.cast::<IntPatchWLine>().get().expect("walking line")),
-        IntPatchIType::Restriction => {
-            rline(dm, l.cast::<IntPatchRLine>().get().expect("restriction line"))
+        IntPatchIType::Analytic => {
+            aline(dm, l.cast::<IntPatchALine>().get().expect("analytic line"))
         }
+        IntPatchIType::Walking => wline(dm, l.cast::<IntPatchWLine>().get().expect("walking line")),
+        IntPatchIType::Restriction => rline(
+            dm,
+            l.cast::<IntPatchRLine>().get().expect("restriction line"),
+        ),
         _ => gline(dm, l.cast::<IntPatchGLine>().get().expect("conic line")),
     }
 }

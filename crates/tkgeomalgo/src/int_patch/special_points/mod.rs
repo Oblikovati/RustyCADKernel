@@ -103,7 +103,13 @@ impl IntPatchSpecialPoints {
         let found = extr.point()?;
         let p0: Point3 = *found.value();
         let uv0 = found.parameter();
-        set_middle(added_point, (p0, p_quad), uv0, (u_quad, v_quad), is_reversed);
+        set_middle(
+            added_point,
+            (p0, p_quad),
+            uv0,
+            (u_quad, v_quad),
+            is_reversed,
+        );
         Self::adjust_point_and_vertex(ref_pt, &periods, added_point, None);
         Ok(true)
     }
@@ -141,7 +147,13 @@ impl IntPatchSpecialPoints {
         let v_quad: f64 = if is_u { root3 } else { 0.0 };
         let p_quad: Point3 = q_surf.value(u_quad, v_quad)?;
         let p0: Point3 = p_surf.value(u0, v0)?;
-        set_middle(added_point, (p0, p_quad), (u0, v0), (u_quad, v_quad), is_reversed);
+        set_middle(
+            added_point,
+            (p0, p_quad),
+            (u0, v0),
+            (u_quad, v_quad),
+            is_reversed,
+        );
         Self::adjust_point_and_vertex(ref_pt, &periods, added_point, None);
         Ok(true)
     }
@@ -196,11 +208,23 @@ impl IntPatchSpecialPoints {
             return Ok(false);
         };
         // Pole is an intersection point (lies in the quadric and the parametric surface)
-        set_middle(added_point, (p0, p_quad), (u0, v0), (u_quad, v_quad), is_reversed);
+        set_middle(
+            added_point,
+            (p0, p_quad),
+            (u0, v0),
+            (u_quad, v_quad),
+            is_reversed,
+        );
         let is_same: bool = added_point.is_same(&vertex.pnt_on_2s(), precision::confusion(), -1.0);
         let pole = PoleSolve { u0, v0, v_quad };
         let (u_quad, is_iso) = Self::pole_u_parameter(q_surf, p_surf, pt_iso, &pole, is_reversed)?;
-        set_middle(added_point, (p0, p_quad), (u0, v0), (u_quad, v_quad), is_reversed);
+        set_middle(
+            added_point,
+            (p0, p_quad),
+            (u0, v0),
+            (u_quad, v_quad),
+            is_reversed,
+        );
         if is_same || is_iso {
             vertex.set_pnt_on_2s(added_point);
             return Ok(true);
@@ -293,8 +317,7 @@ impl IntPatchSpecialPoints {
         let tr = Transform3::transformation_to(cone.position());
         vec_du.transform(tr);
         vec_dv.transform(tr);
-        let (u_quad, _) =
-            Self::process_cone(ref_pt, vec_du, vec_dv, &cone, is_reversed, u_quad)?;
+        let (u_quad, _) = Self::process_cone(ref_pt, vec_du, vec_dv, &cone, is_reversed, u_quad)?;
         new_point.set_parameters_on(!is_reversed, u_quad, v_quad);
         Ok(())
     }
@@ -306,9 +329,17 @@ impl IntPatchSpecialPoints {
         period: f64,
         is_reversed: bool,
     ) -> Result<[f64; 4], Failure> {
-        let up: f64 = if p_surf.is_u_periodic()? { p_surf.u_period()? } else { 0.0 };
+        let up: f64 = if p_surf.is_u_periodic()? {
+            p_surf.u_period()?
+        } else {
+            0.0
+        };
         let uq: f64 = if q_surf.is_u_periodic()? { period } else { 0.0 };
-        let vp: f64 = if p_surf.is_v_periodic()? { p_surf.v_period()? } else { 0.0 };
+        let vp: f64 = if p_surf.is_v_periodic()? {
+            p_surf.v_period()?
+        } else {
+            0.0
+        };
         let vq: f64 = if q_surf.is_v_periodic()? { period } else { 0.0 };
         if is_reversed {
             return Ok([up, vp, uq, vq]);

@@ -25,10 +25,10 @@ use super::super::special_points::IntPatchSpecialPoints;
 use super::specials::add_point_into_line;
 use super::{IntPatchALineToWLine, aline_of};
 use crate::int_surf::{IntSurfLineOn2S, IntSurfPntOn2S, set_period};
-use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::real::epsilon;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkmath::gp::{Point3, Vector3};
 use std::f64::consts::PI;
 
@@ -239,7 +239,11 @@ impl<'a> Walk<'a> {
             // The current last point is wrong.
             self.lin_on_2s.remove_point(self.lin_on_2s.nb_points())?;
         }
-        Ok((point_on_quadrics(self.conv, pnt_3d), is_point_valid, tg.magnitude()))
+        Ok((
+            point_on_quadrics(self.conv, pnt_3d),
+            is_point_valid,
+            tg.magnitude(),
+        ))
     }
 
     /// The body of the inner loop.
@@ -327,7 +331,10 @@ impl<'a> Walk<'a> {
     /// the point of the line halfway to the next vertex that is not the pole itself (or
     /// to the end); when the current point is the previous one, its V parameter on the
     /// singular surface is taken from the previous step.
-    fn reference_after_pole(&self, p_on_2s: &mut IntSurfPntOn2S) -> Result<IntSurfPntOn2S, Failure> {
+    fn reference_after_pole(
+        &self,
+        p_on_2s: &mut IntSurfPntOn2S,
+    ) -> Result<IntSurfPntOn2S, Failure> {
         let mut prt: f64 = 0.5 * (self.prev_param + self.l_par);
         for &param in &self.vertex_params {
             if param <= self.prev_param {
@@ -413,7 +420,8 @@ impl<'a> Walk<'a> {
     /// point in the parameters of either surface.
     fn jumps_after(&self, rpt: &IntSurfPntOn2S) -> Result<bool, Failure> {
         let (mut pnt_3d_next, mut tg) = (Point3::default(), Vector3::default());
-        self.aline.d1(self.parameter + self.step, &mut pnt_3d_next, &mut tg)?;
+        self.aline
+            .d1(self.parameter + self.step, &mut pnt_3d_next, &mut tg)?;
         let next: IntSurfPntOn2S = point_on_quadrics(self.conv, pnt_3d_next);
         let far = |on_first: bool| {
             next.value_on_surface(on_first)

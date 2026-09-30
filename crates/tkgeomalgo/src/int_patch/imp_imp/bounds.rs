@@ -65,7 +65,14 @@ pub(super) fn process_bounds(
                     "ProcessBounds() - a line of the list is not analytic; expected IntPatch_ALine only",
                 ));
             }
-            shared_vertices(alig, &line.cast(), (first, last), multpoint, tol, &mut ptsol)?;
+            shared_vertices(
+                alig,
+                &line.cast(),
+                (first, last),
+                multpoint,
+                tol,
+                &mut ptsol,
+            )?;
             if first.proc && last.proc {
                 break;
             }
@@ -196,7 +203,12 @@ pub(super) struct CurveOptions {
 }
 
 /// The isolated points of the analytic intersection (tangent points).
-pub(super) fn analytic_points(anaint: &IntQuadQuad, quads: Quads<'_>, tol: f64, spnt: &mut Points) -> Result<(), Failure> {
+pub(super) fn analytic_points(
+    anaint: &IntQuadQuad,
+    quads: Quads<'_>,
+    tol: f64,
+    spnt: &mut Points,
+) -> Result<(), Failure> {
     for i in 1..=anaint.nb_pnt()? {
         spnt.push(tangent_point(anaint.point(i)?, quads, tol, true));
     }
@@ -225,8 +237,16 @@ pub(super) fn analytic_line(
     }
     let transitions = curve_transitions(curvsol, quads, opts, (first, last))?;
     let alig = Handle::new(IntPatchALine::new(curvsol, false, transitions));
-    let mut f = LineEnd { proc: !firstp, pt: ends.0, param: first };
-    let mut l = LineEnd { proc: !lastp, pt: ends.1, param: last };
+    let mut f = LineEnd {
+        proc: !firstp,
+        pt: ends.0,
+        param: first,
+    };
+    let mut l = LineEnd {
+        proc: !lastp,
+        pt: ends.1,
+        param: last,
+    };
     process_bounds(&alig, slin, quads, (&mut f, &mut l), multpoint, tol)?;
     slin.push(alig.cast());
     Ok(())

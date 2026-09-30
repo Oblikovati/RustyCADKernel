@@ -103,13 +103,28 @@ pub(super) fn int_cycy(
     let empty: &mut bool = flags.empty;
     if is_to_reverse {
         let bw = WorkWithBoundaries {
-            quad1: quad2, quad2: quad1, coeffs: &coeffs2, uv_surf1: uv_surf2, uv_surf2: uv_surf1,
-            period, tol_3d, tol_2d, is_reverse: true,
+            quad1: quad2,
+            quad2: quad1,
+            coeffs: &coeffs2,
+            uv_surf1: uv_surf2,
+            uv_surf2: uv_surf1,
+            period,
+            tol_3d,
+            tol_2d,
+            is_reverse: true,
         };
         return cycy_no_geometric(&cyl2, &cyl1, &bw, &mut urange[1], empty, (slin, spnt));
     }
     let bw = WorkWithBoundaries {
-        quad1, quad2, coeffs: &coeffs1, uv_surf1, uv_surf2, period, tol_3d, tol_2d, is_reverse: false,
+        quad1,
+        quad2,
+        coeffs: &coeffs1,
+        uv_surf1,
+        uv_surf2,
+        period,
+        tol_3d,
+        tol_2d,
+        is_reverse: false,
     };
     cycy_no_geometric(&cyl1, &cyl2, &bw, &mut urange[0], empty, (slin, spnt))
 }
@@ -123,7 +138,12 @@ fn u_bounds(uv: &BoundingBox2) -> Result<[f64; 2], Failure> {
 /// The summary length of the ranges inside `[Ufirst, Ulast]` of the cylinder: each
 /// range is split by the bounds and the seam, shifted into the bounds and cut by them
 /// (e.g. [5, 7] on a full cylinder gives [5, 2PI] and [0, 7-2PI], of length 2).
-fn sum_range(ranges: &[Range1; 2], usbou: [f64; 2], tol_2d: f64, period: f64) -> Result<f64, Failure> {
+fn sum_range(
+    ranges: &[Range1; 2],
+    usbou: [f64; 2],
+    tol_2d: f64,
+    period: f64,
+) -> Result<f64, Failure> {
     let mut list: List<Range1> = List::default();
     list.append(ranges[0]);
     list.append(ranges[1]);

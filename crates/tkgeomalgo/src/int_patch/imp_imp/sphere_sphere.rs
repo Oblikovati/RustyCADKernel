@@ -50,7 +50,10 @@ pub(super) fn int_spsp(
             let cirsol: Circle3 = inter.circle(1)?;
             let (ptref, tgt) = elclib::d1(0.0, &cirsol);
             let qwe: f64 = dot_cross(tgt, quads.0, quads.1, ptref)?;
-            push(slin, IntPatchGLine::from_circle(&cirsol, false, by_sign_tol(qwe, 0.00000001)));
+            push(
+                slin,
+                IntPatchGLine::from_circle(&cirsol, false, by_sign_tol(qwe, 0.00000001)),
+            );
         }
         _ => return Ok(false), // must not happen
     }

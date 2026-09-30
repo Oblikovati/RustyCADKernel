@@ -35,9 +35,17 @@ pub(super) fn adjust_to_seam(position: &Axis3, circ: &mut Circle3) -> Result<(),
 
 /// `AdjustToSeam(aQuad, aCirc, aTolAng)` of a sphere: only a circle whose axis is
 /// parallel to the sphere axis.
-pub(super) fn adjust_to_sphere_seam(quad: &Sphere3, circ: &mut Circle3, tol_ang: f64) -> Result<(), Failure> {
+pub(super) fn adjust_to_sphere_seam(
+    quad: &Sphere3,
+    circ: &mut Circle3,
+    tol_ang: f64,
+) -> Result<(), Failure> {
     let pos: Axis3 = quad.position();
-    if circ.axis().direction().is_parallel(pos.axis().direction(), tol_ang) {
+    if circ
+        .axis()
+        .direction()
+        .is_parallel(pos.axis().direction(), tol_ang)
+    {
         circ.set_position(seam_position(circ.location(), &pos)?);
     }
     Ok(())

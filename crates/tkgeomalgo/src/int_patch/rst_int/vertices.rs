@@ -60,9 +60,21 @@ impl RstInput<'_> {
     }
 
     /// The vertex of the domain at the point, and the vertex tolerance.
-    fn vertex_on_arc(&self, st: &mut RstState, run: &ArcRun<'_>, toler: f64) -> Result<bool, Failure> {
+    fn vertex_on_arc(
+        &self,
+        st: &mut RstState,
+        run: &ArcRun<'_>,
+        toler: f64,
+    ) -> Result<bool, Failure> {
         let mut vtx: TheVertex = st.vtxarc.clone();
-        let found = coincide_on_arc(st.ptsommet, run.arc, self.surf, toler, self.domain, &mut vtx)?;
+        let found = coincide_on_arc(
+            st.ptsommet,
+            run.arc,
+            self.surf,
+            toler,
+            self.domain,
+            &mut vtx,
+        )?;
         st.vtxarc = vtx;
         Ok(found)
     }
@@ -92,7 +104,11 @@ impl RstInput<'_> {
             }
         }
         self.line_arc_transitions(st, run.edge_tol)?;
-        let ctx = VertexCtx { arc: run.arc, vtx_on_arc, vtx_tol };
+        let ctx = VertexCtx {
+            arc: run.arc,
+            vtx_on_arc,
+            vtx_tol,
+        };
         if ivtx == 0 {
             return self.new_vertex(st, &ctx);
         }
@@ -101,7 +117,12 @@ impl RstInput<'_> {
 
     /// The index of the vertex the point merges into (0 for none): the nearest vertex
     /// not on this arc; a nearer one out of its tolerance cancels the choice.
-    fn nearest_vertex(&self, st: &mut RstState, arc: &TheArc, vtx_tol: f64) -> Result<i32, Failure> {
+    fn nearest_vertex(
+        &self,
+        st: &mut RstState,
+        arc: &TheArc,
+        vtx_tol: f64,
+    ) -> Result<i32, Failure> {
         let mut ivtx: i32 = 0;
         let mut dmin: f64 = f64::MAX;
         for j in 1..=st.nbvtx {
@@ -114,7 +135,11 @@ impl RstInput<'_> {
             if dist < dmin {
                 if dist <= dt {
                     st.ptline = rptline;
-                    ivtx = if self.surfacetype == SurfaceType::Cone { 0 } else { j };
+                    ivtx = if self.surfacetype == SurfaceType::Cone {
+                        0
+                    } else {
+                        j
+                    };
                 } else {
                     // This point is better, but its tolerance is not large enough.
                     ivtx = 0;
@@ -131,7 +156,11 @@ impl RstInput<'_> {
             return true;
         }
         if self.closed[0] || self.closed[1] {
-            (st.u, st.v) = if self.on_first { rptline.parameters_on_s1() } else { rptline.parameters_on_s2() };
+            (st.u, st.v) = if self.on_first {
+                rptline.parameters_on_s1()
+            } else {
+                rptline.parameters_on_s2()
+            };
             if (self.closed[0] && (st.u - st.u1).abs() > self.tol_closed[0])
                 || (self.closed[1] && (st.v - st.v1).abs() > self.tol_closed[1])
             {
@@ -139,7 +168,11 @@ impl RstInput<'_> {
             }
         }
         if self.closed[2] || self.closed[3] {
-            (st.u, st.v) = if self.on_first { rptline.parameters_on_s2() } else { rptline.parameters_on_s1() };
+            (st.u, st.v) = if self.on_first {
+                rptline.parameters_on_s2()
+            } else {
+                rptline.parameters_on_s1()
+            };
             if (self.closed[2] && (st.u - st.u2).abs() > self.tol_closed[2])
                 || (self.closed[3] && (st.v - st.v2).abs() > self.tol_closed[3])
             {
@@ -160,7 +193,11 @@ pub(super) struct VertexCtx<'a> {
 impl RstInput<'_> {
     /// The line tangent (lengthened on a walking line) and the transitions against the
     /// arc tangent on the surface; undecided on a null surface normal.
-    pub(super) fn line_arc_transitions(&self, st: &mut RstState, edge_tol: f64) -> Result<(), Failure> {
+    pub(super) fn line_arc_transitions(
+        &self,
+        st: &mut RstState,
+        edge_tol: f64,
+    ) -> Result<(), Failure> {
         if let PointLineRef::Walking(w) = &self.line {
             verify_tgline(w, st.paramline as i32, edge_tol, &mut st.tgline)?;
         }
@@ -190,15 +227,33 @@ impl RstInput<'_> {
             st.sommet.set_vertex(self.on_first, &st.vtxarc);
         }
         st.sommet.set_parameter(st.paramline);
-        st.sommet.set_arc(self.on_first, ctx.arc, st.paramarc, &st.transline, &st.transarc);
+        st.sommet.set_arc(
+            self.on_first,
+            ctx.arc,
+            st.paramarc,
+            &st.transline,
+            &st.transarc,
+        );
         let sommet = st.sommet.clone();
         self.add_vertex(st, &sommet);
         Ok(())
     }
 
     /// The arc and vertex of the crossing set on a copy of `pnt`.
-    fn with_arc(&self, st: &RstState, pnt: &mut IntPatchPoint, ctx: &VertexCtx<'_>, with_vertex: bool) {
-        pnt.set_arc(self.on_first, ctx.arc, st.paramarc, &st.transline, &st.transarc);
+    fn with_arc(
+        &self,
+        st: &RstState,
+        pnt: &mut IntPatchPoint,
+        ctx: &VertexCtx<'_>,
+        with_vertex: bool,
+    ) {
+        pnt.set_arc(
+            self.on_first,
+            ctx.arc,
+            st.paramarc,
+            &st.transline,
+            &st.transarc,
+        );
         if with_vertex && ctx.vtx_on_arc {
             pnt.set_vertex(self.on_first, &st.vtxarc);
         }
@@ -206,22 +261,39 @@ impl RstInput<'_> {
 
     /// Whether the vertex is a vertex of the domain on this side.
     fn is_vertex_here(&self, p: &IntPatchPoint) -> bool {
-        if self.on_first { p.is_vertex_on_s1() } else { p.is_vertex_on_s2() }
+        if self.on_first {
+            p.is_vertex_on_s1()
+        } else {
+            p.is_vertex_on_s2()
+        }
     }
 
     /// Whether the vertex is on the domain of the other side.
     fn is_on_other_dom(&self, p: &IntPatchPoint) -> bool {
-        if self.on_first { p.is_on_dom_s2() } else { p.is_on_dom_s1() }
+        if self.on_first {
+            p.is_on_dom_s2()
+        } else {
+            p.is_on_dom_s1()
+        }
     }
 
     /// Whether the vertex is a vertex of the domain of the other side.
     fn is_vertex_other(&self, p: &IntPatchPoint) -> bool {
-        if self.on_first { p.is_vertex_on_s2() } else { p.is_vertex_on_s1() }
+        if self.on_first {
+            p.is_vertex_on_s2()
+        } else {
+            p.is_vertex_on_s1()
+        }
     }
 
     /// The crossing merged into the vertex `ivtx` (`ptline`): see the cases of the
     /// native comment (a point on S1 found on S2, with or without vertices).
-    fn merge_vertex(&self, st: &mut RstState, ctx: &VertexCtx<'_>, ivtx: i32) -> Result<(), Failure> {
+    fn merge_vertex(
+        &self,
+        st: &mut RstState,
+        ctx: &VertexCtx<'_>,
+        ivtx: i32,
+    ) -> Result<(), Failure> {
         let on_different_rst: bool = {
             let p = &st.ptline;
             (self.on_first && p.is_on_dom_s1() && !same_arc(&p.arc_on_s1()?, ctx.arc))
@@ -235,8 +307,18 @@ impl RstInput<'_> {
     }
 
     /// The vertex is no vertex of this domain (or is on another restriction).
-    fn merge_point(&self, st: &mut RstState, ctx: &VertexCtx<'_>, ivtx: i32, on_different_rst: bool) -> Result<(), Failure> {
-        let own_dom: bool = if self.on_first { st.ptline.is_on_dom_s1() } else { st.ptline.is_on_dom_s2() };
+    fn merge_point(
+        &self,
+        st: &mut RstState,
+        ctx: &VertexCtx<'_>,
+        ivtx: i32,
+        on_different_rst: bool,
+    ) -> Result<(), Failure> {
+        let own_dom: bool = if self.on_first {
+            st.ptline.is_on_dom_s1()
+        } else {
+            st.ptline.is_on_dom_s2()
+        };
         if !own_dom || on_different_rst {
             let mut p = st.ptline.clone();
             self.with_arc(st, &mut p, ctx, true);
@@ -257,8 +339,17 @@ impl RstInput<'_> {
 
     /// The vertex is a vertex of this domain: the other vertices of the same domain
     /// vertex get the arc too.
-    fn merge_domain_vertex(&self, st: &mut RstState, ctx: &VertexCtx<'_>, ivtx: i32) -> Result<(), Failure> {
-        let vtxref: TheVertex = if self.on_first { st.ptline.vertex_on_s1()? } else { st.ptline.vertex_on_s2()? };
+    fn merge_domain_vertex(
+        &self,
+        st: &mut RstState,
+        ctx: &VertexCtx<'_>,
+        ivtx: i32,
+    ) -> Result<(), Failure> {
+        let vtxref: TheVertex = if self.on_first {
+            st.ptline.vertex_on_s1()?
+        } else {
+            st.ptline.vertex_on_s2()?
+        };
         if !self.is_on_other_dom(&st.ptline) {
             let mut p = st.ptline.clone();
             self.with_arc(st, &mut p, ctx, true);
@@ -280,13 +371,23 @@ impl RstInput<'_> {
     /// The vertices `k != ivtx` of the domain vertex `vtxref` get the arc: replaced in
     /// place, or (`duplicate`) kept and added again with the arc. The vertex count is
     /// read again at each step, so the added vertices are visited too.
-    fn same_domain_vertices(&self, st: &mut RstState, ctx: &VertexCtx<'_>, (ivtx, vtxref): (i32, &TheVertex), duplicate: bool) -> Result<(), Failure> {
+    fn same_domain_vertices(
+        &self,
+        st: &mut RstState,
+        ctx: &VertexCtx<'_>,
+        (ivtx, vtxref): (i32, &TheVertex),
+        duplicate: bool,
+    ) -> Result<(), Failure> {
         let mut k: i32 = 1;
         while k <= st.nbvtx {
             if k != ivtx {
                 st.ptline = self.line.line().vertex(k)?;
                 if self.is_vertex_here(&st.ptline) {
-                    let other: TheVertex = if self.on_first { st.ptline.vertex_on_s1()? } else { st.ptline.vertex_on_s2()? };
+                    let other: TheVertex = if self.on_first {
+                        st.ptline.vertex_on_s1()?
+                    } else {
+                        st.ptline.vertex_on_s2()?
+                    };
                     if self.domain.identical(vtxref, &other)? {
                         self.same_vertex(st, ctx, k, duplicate)?;
                     }
@@ -297,7 +398,13 @@ impl RstInput<'_> {
         Ok(())
     }
 
-    fn same_vertex(&self, st: &mut RstState, ctx: &VertexCtx<'_>, k: i32, duplicate: bool) -> Result<(), Failure> {
+    fn same_vertex(
+        &self,
+        st: &mut RstState,
+        ctx: &VertexCtx<'_>,
+        k: i32,
+        duplicate: bool,
+    ) -> Result<(), Failure> {
         if st.ptline.tolerance() < ctx.vtx_tol {
             st.ptline.set_tolerance(ctx.vtx_tol);
         }

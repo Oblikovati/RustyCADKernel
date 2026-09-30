@@ -46,10 +46,14 @@ pub fn impimp_case(values: &[f64]) {
     attempt(|| {
         let (s1, s2) = (surface(&mut r), surface(&mut r));
         let (tolarc, toltang, keep) = (r.real(), r.real(), r.flag());
-        let (d1, d2) = (Adaptor3dTopolTool::with_surface(&s1)?, Adaptor3dTopolTool::with_surface(&s2)?);
+        let (d1, d2) = (
+            Adaptor3dTopolTool::with_surface(&s1)?,
+            Adaptor3dTopolTool::with_surface(&s2)?,
+        );
         let dm = Domains::new(&d1, &d2);
         impimp(&dm, &IntPatchImpImpIntersection::new());
-        let x = IntPatchImpImpIntersection::with_surfaces(&s1, &d1, &s2, &d2, tolarc, toltang, keep)?;
+        let x =
+            IntPatchImpImpIntersection::with_surfaces(&s1, &d1, &s2, &d2, tolarc, toltang, keep)?;
         impimp(&dm, &x);
         Ok(())
     });
@@ -57,9 +61,20 @@ pub fn impimp_case(values: &[f64]) {
 }
 
 /// `ga_ipl_convert`.
-fn convert(dm: &Domains, c: &IntPatchALineToWLine, a: &Handle<IntPatchALine>, (ranged, fp, lp): (bool, f64, f64)) {
+fn convert(
+    dm: &Domains,
+    c: &IntPatchALineToWLine,
+    a: &Handle<IntPatchALine>,
+    (ranged, fp, lp): (bool, f64, f64),
+) {
     let mut lines: Vec<Handle<dyn IntPatchLine>> = Vec::new();
-    attempt(|| if ranged { c.make_wline_range(a, fp, lp, &mut lines) } else { c.make_wline(a, &mut lines) });
+    attempt(|| {
+        if ranged {
+            c.make_wline_range(a, fp, lp, &mut lines)
+        } else {
+            c.make_wline(a, &mut lines)
+        }
+    });
     int(lines.len() as i32);
     lines.iter().for_each(|l| line(dm, l));
     let al: &IntPatchALine = a.get().expect("analytic line");
@@ -84,7 +99,16 @@ fn convert(dm: &Domains, c: &IntPatchALineToWLine, a: &Handle<IntPatchALine>, (r
         let mut q = IntSurfPntOn2S::new();
         q.set_value_all(p, 0.0, 0.0, 0.0, 0.0);
         let mut step: f64 = 0.1;
-        let ok = c.step_computing(al, &q, l, 0.5 * (f + l), v.magnitude(), [1e-3, 1.0], c.tol_3d(), &mut step)?;
+        let ok = c.step_computing(
+            al,
+            &q,
+            l,
+            0.5 * (f + l),
+            v.magnitude(),
+            [1e-3, 1.0],
+            c.tol_3d(),
+            &mut step,
+        )?;
         flag(ok);
         real(step);
         Ok(())
@@ -123,9 +147,13 @@ pub fn aline2wline_case(values: &[f64]) {
         let (tolarc, toltang, nb) = (r.real(), r.real(), r.integer());
         let (topen, ttrans, t3d) = (r.real(), r.real(), r.real());
         let range = (r.flag(), r.real(), r.real());
-        let (d1, d2) = (Adaptor3dTopolTool::with_surface(&s1)?, Adaptor3dTopolTool::with_surface(&s2)?);
+        let (d1, d2) = (
+            Adaptor3dTopolTool::with_surface(&s1)?,
+            Adaptor3dTopolTool::with_surface(&s2)?,
+        );
         let dm = Domains::new(&d1, &d2);
-        let x = IntPatchImpImpIntersection::with_surfaces(&s1, &d1, &s2, &d2, tolarc, toltang, false)?;
+        let x =
+            IntPatchImpImpIntersection::with_surfaces(&s1, &d1, &s2, &d2, tolarc, toltang, false)?;
         let mut c = IntPatchALineToWLine::new(&s1, &s2, nb)?;
         real(c.tol_open_domain());
         real(c.tol_transition());
@@ -172,11 +200,26 @@ type S = IntPatchSpecialPoints;
 
 fn spec_type(t: i32) -> IntPatchSpecPntType {
     use IntPatchSpecPntType::*;
-    [SPntNone, SPntSeamU, SPntSeamV, SPntSeamUV, SPntPoleSeamU, SPntPole][t as usize]
+    [
+        SPntNone,
+        SPntSeamU,
+        SPntSeamV,
+        SPntSeamUV,
+        SPntPoleSeamU,
+        SPntPole,
+    ][t as usize]
 }
 
 /// The body of `ga_ip_special_case` after its surfaces.
-fn special(op: i32, r: &mut Reader, (q, p, rev): (&rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle, &rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle, bool)) -> Result<(), Failure> {
+fn special(
+    op: i32,
+    r: &mut Reader,
+    (q, p, rev): (
+        &rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle,
+        &rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle,
+        bool,
+    ),
+) -> Result<(), Failure> {
     let mut out = IntSurfPntOn2S::new();
     match op {
         0 => {
@@ -193,7 +236,15 @@ fn special(op: i32, r: &mut Reader, (q, p, rev): (&rustycad_tkg3d::adaptor3d::h_
             let (isu, iso) = (r.flag(), r.real());
             let (t, i0, lo, hi) = (read_vec3(r), read_vec3(r), read_vec3(r), read_vec3(r));
             attempt(|| {
-                flag(S::add_point_on_u_or_v_iso(q, p, &rf, (isu, iso), [&t, &i0, &lo, &hi], &mut out, rev)?);
+                flag(S::add_point_on_u_or_v_iso(
+                    q,
+                    p,
+                    &rf,
+                    (isu, iso),
+                    [&t, &i0, &lo, &hi],
+                    &mut out,
+                    rev,
+                )?);
                 pnt2s(&out);
                 Ok(())
             });
@@ -206,7 +257,9 @@ fn special(op: i32, r: &mut Reader, (q, p, rev): (&rustycad_tkg3d::adaptor3d::h_
             v.set_pnt_on_2s(&vp);
             v.set_tolerance(vt);
             attempt(|| {
-                flag(S::add_singular_pole(q, p, &iso, &mut v, &mut out, rev, chk)?);
+                flag(S::add_singular_pole(
+                    q, p, &iso, &mut v, &mut out, rev, chk,
+                )?);
                 pnt2s(&out);
                 Ok(())
             });
@@ -217,7 +270,15 @@ fn special(op: i32, r: &mut Reader, (q, p, rev): (&rustycad_tkg3d::adaptor3d::h_
             let (t, tol2d) = (r.integer(), r.real());
             out = read_pnt2s(r);
             attempt(|| {
-                flag(S::continue_after_special_point(q, p, &rf, spec_type(t), tol2d, &mut out, rev)?);
+                flag(S::continue_after_special_point(
+                    q,
+                    p,
+                    &rf,
+                    spec_type(t),
+                    tol2d,
+                    &mut out,
+                    rev,
+                )?);
                 pnt2s(&out);
                 Ok(())
             });

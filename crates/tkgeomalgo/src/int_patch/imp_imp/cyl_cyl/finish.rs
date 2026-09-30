@@ -71,7 +71,10 @@ impl IntervalWalk<'_, '_> {
         ap.set_tolerance(self.setup.bw.tol_3d);
         ap.set_value(p1.value());
         // It is enough to check the last point.
-        let same_as_last = self.spnt.last().is_some_and(|l| l.pnt_on_2s().is_same(&ap.pnt_on_2s(), precision::confusion(), -1.0));
+        let same_as_last = self.spnt.last().is_some_and(|l| {
+            l.pnt_on_2s()
+                .is_same(&ap.pnt_on_2s(), precision::confusion(), -1.0)
+        });
         if !same_as_last {
             self.spnt.push(ap);
         }
@@ -95,7 +98,12 @@ impl IntervalWalk<'_, '_> {
 
     /// One refinement at an end (the last one when `at_end`): true when points were
     /// added and the check must be repeated.
-    fn bend_end(&self, i: usize, wline: &Handle<IntPatchWLine>, at_end: bool) -> Result<bool, Failure> {
+    fn bend_end(
+        &self,
+        i: usize,
+        wline: &Handle<IntPatchWLine>,
+        at_end: bool,
+    ) -> Result<bool, Failure> {
         let s = self.setup;
         let nb: i32 = wline.nb_pnts()?;
         if nb >= s.nb_max_points {
@@ -132,7 +140,11 @@ impl IntervalWalk<'_, '_> {
 
 impl WalkSetup<'_> {
     /// The isolated points at an end of a line are removed.
-    pub(super) fn remove_points_on_lines(&self, slin: &Lines, spnt: &mut Points) -> Result<(), Failure> {
+    pub(super) fn remove_points_on_lines(
+        &self,
+        slin: &Lines,
+        spnt: &mut Points,
+    ) -> Result<(), Failure> {
         let mut k: usize = 0;
         while k < spnt.len() {
             let cur = spnt[k].pnt_on_2s();
@@ -158,7 +170,11 @@ impl WalkSetup<'_> {
     /// A small curve near each isolated point that the walking missed (bug25292_35 and
     /// _36): two points found by bisection in `[u1 - step, u1]` and `[u1, u1 + step]`,
     /// farthest from `u1`, are joined by a new line which replaces the point.
-    pub(super) fn points_neighborhood(&self, slin: &mut Lines, spnt: &mut Points) -> Result<(), Failure> {
+    pub(super) fn points_neighborhood(
+        &self,
+        slin: &mut Lines,
+        spnt: &mut Points,
+    ) -> Result<(), Failure> {
         let mut k: usize = 0;
         while k < spnt.len() {
             if self.neighborhood_line(&spnt[k], slin)? {
@@ -194,7 +210,11 @@ impl WalkSetup<'_> {
         let wline = IntPatchWLine::new_undecided(&Handle::new(IntSurfLineOn2S::new(None)), false);
         wline.set_creating_way_info(IntPatchWLType::ImpImp);
         let b = &self.b;
-        let (up, cur_u2) = if self.bw.is_reverse { (u2, u1) } else { (u1, u2) };
+        let (up, cur_u2) = if self.bw.is_reverse {
+            (u2, u1)
+        } else {
+            (u1, u2)
+        };
         let uinf: f64 = std_max(up - self.step_max, b.u1f);
         let usup: f64 = std_min(up + self.step_max, b.u1l);
         let umid: f64 = 0.5 * (uinf + usup);
@@ -202,16 +222,31 @@ impl WalkSetup<'_> {
         let mut added: [f64; 2] = [up, up];
         let curve: Handle<IntSurfLineOn2S> = wline.curve();
         for par_id in 0..2 {
-            let (uf, ul) = if par_id == 0 { (uinf, umid) } else { (umid, usup) };
+            let (uf, ul) = if par_id == 0 {
+                (uinf, umid)
+            } else {
+                (umid, usup)
+            };
             self.bisect(par_id, (uf, ul), index, &curve, &mut added)?;
         }
         if !(added[1] - added[0] > self.step_min) {
             return Ok(false);
         }
         for par in added {
-            let (u2, v1, v2) = cyl_cyl_compute_uvv(par, index, self.bw.coeffs)?.unwrap_or((0.0, 0.0, 0.0));
-            let flags = AddFlags { precise: true, before: false, only_check: false };
-            add_point_into_wl(&self.ctx, flags, (Point2::new(par, v1), Point2::new(u2, v2)), &curve, index)?;
+            let (u2, v1, v2) =
+                cyl_cyl_compute_uvv(par, index, self.bw.coeffs)?.unwrap_or((0.0, 0.0, 0.0));
+            let flags = AddFlags {
+                precise: true,
+                before: false,
+                only_check: false,
+            };
+            add_point_into_wl(
+                &self.ctx,
+                flags,
+                (Point2::new(par, v1), Point2::new(u2, v2)),
+                &curve,
+                index,
+            )?;
         }
         let npts: i32 = wline.nb_pnts()?;
         seek_additional_points(&self.ctx, &curve, index, self.nb_min_points, (1, npts))?;
@@ -222,7 +257,14 @@ impl WalkSetup<'_> {
 
     /// The bisection of one half interval: the point farthest from the middle that is
     /// an intersection point in the domain (only checked, not added).
-    fn bisect(&self, par_id: usize, (mut uf, mut ul): (f64, f64), index: i32, curve: &Handle<IntSurfLineOn2S>, added: &mut [f64; 2]) -> Result<(), Failure> {
+    fn bisect(
+        &self,
+        par_id: usize,
+        (mut uf, mut ul): (f64, f64),
+        index: i32,
+        curve: &Handle<IntSurfLineOn2S>,
+        added: &mut [f64; 2],
+    ) -> Result<(), Failure> {
         let b = &self.b;
         let tol: f64 = self.bw.tol_2d;
         loop {
@@ -236,11 +278,23 @@ impl WalkSetup<'_> {
             if let Some((u2, mut v1, mut v2)) = cyl_cyl_compute_uvv(uc, index, self.bw.coeffs)? {
                 v1 = snap(snap(v1, b.v1f, tol), b.v1l, tol);
                 v2 = snap(snap(v2, b.v2f, tol), b.v2l, tol);
-                let flags = AddFlags { precise: true, before: false, only_check: true };
-                is_done = add_point_into_wl(&self.ctx, flags, (Point2::new(uc, v1), Point2::new(u2, v2)), curve, index)?;
+                let flags = AddFlags {
+                    precise: true,
+                    before: false,
+                    only_check: true,
+                };
+                is_done = add_point_into_wl(
+                    &self.ctx,
+                    flags,
+                    (Point2::new(uc, v1), Point2::new(u2, v2)),
+                    curve,
+                    index,
+                )?;
             }
-            let set_far = |v: f64, uf: &mut f64, ul: &mut f64| if par_id == 0 { *ul = v } else { *uf = v };
-            let set_near = |v: f64, uf: &mut f64, ul: &mut f64| if par_id == 0 { *uf = v } else { *ul = v };
+            let set_far =
+                |v: f64, uf: &mut f64, ul: &mut f64| if par_id == 0 { *ul = v } else { *uf = v };
+            let set_near =
+                |v: f64, uf: &mut f64, ul: &mut f64| if par_id == 0 { *uf = v } else { *ul = v };
             if is_done {
                 added[0] = std_min(added[0], uc);
                 added[1] = std_max(added[1], uc);

@@ -57,7 +57,13 @@ struct StPInfo {
 
 impl Default for StPInfo {
     fn default() -> Self {
-        Self { surf_id: 0, u1: f64::MAX, v1: f64::MAX, u2: f64::MAX, v2: f64::MAX }
+        Self {
+            surf_id: 0,
+            u1: f64::MAX,
+            v1: f64::MAX,
+            u2: f64::MAX,
+            v2: f64::MAX,
+        }
     }
 }
 
@@ -79,7 +85,16 @@ impl WorkWithBoundaries<'_> {
     pub(in super::super) fn bounds(&self) -> Result<SurfBounds, Failure> {
         let [u1f, v1f, u1l, v1l] = self.uv_surf1.get()?;
         let [u2f, v2f, u2l, v2l] = self.uv_surf2.get()?;
-        Ok(SurfBounds { u1f, u1l, u2f, u2l, v1f, v1l, v2f, v2l })
+        Ok(SurfBounds {
+            u1f,
+            u1l,
+            u2f,
+            u2l,
+            v1f,
+            v1l,
+            v2f,
+            v2l,
+        })
     }
 
     /// The context of `AddPointIntoWL`.
@@ -99,7 +114,13 @@ impl WorkWithBoundaries<'_> {
     /// The crossing of `V(U1) = v_bound` on the line `wl_index` in `[u_lo, u_hi]`: a
     /// bracketed 1D root (MathRoot::Brent to Precision::PConfusion), which replaced the
     /// rank-deficient 3x3 Newton near a V extremum.
-    fn find_v_bound_crossing(&self, wl_index: i32, is_v1: bool, v_bound: f64, (u_lo, u_hi): (f64, f64)) -> Result<Option<f64>, Failure> {
+    fn find_v_bound_crossing(
+        &self,
+        wl_index: i32,
+        is_v1: bool,
+        v_bound: f64,
+        (u_lo, u_hi): (f64, f64),
+    ) -> Result<Option<f64>, Failure> {
         if !(u_lo < u_hi) {
             return Ok(None);
         }
@@ -131,7 +152,10 @@ impl WorkWithBoundaries<'_> {
         if flo * fhi > 0.0 {
             return Ok(None); // no bracketed crossing
         }
-        let cfg = Config { x_tolerance: precision::p_confusion(), ..Config::default() };
+        let cfg = Config {
+            x_tolerance: precision::p_confusion(),
+            ..Config::default()
+        };
         let res = brent(&mut func, u_lo, u_hi, &cfg);
         if let Some(e) = failure {
             return Err(e);
@@ -144,16 +168,32 @@ impl WorkWithBoundaries<'_> {
 
     /// The point on the bound `index` (V first or last of S1, then of S2) when the V
     /// segment of the step reaches it, `RealLast` in U1 otherwise.
-    fn boundary_point(&self, step: &BoundaryStep, wl_index: i32, index: usize, arr_vzad: &[f64; 4]) -> Result<StPInfo, Failure> {
+    fn boundary_point(
+        &self,
+        step: &BoundaryStep,
+        wl_index: i32,
+        index: usize,
+        arr_vzad: &[f64; 4],
+    ) -> Result<StPInfo, Failure> {
         let on_first: bool = index < 2;
-        let mut pt = StPInfo { surf_id: if on_first { 0 } else { 2 }, ..StPInfo::default() };
-        let (vf, vl) = if on_first { (step.v1, step.v1_prev) } else { (step.v2, step.v2_prev) };
+        let mut pt = StPInfo {
+            surf_id: if on_first { 0 } else { 2 },
+            ..StPInfo::default()
+        };
+        let (vf, vl) = if on_first {
+            (step.v1, step.v1_prev)
+        } else {
+            (step.v2, step.v2_prev)
+        };
         let vz: f64 = arr_vzad[index];
         if (vf - vz).abs() > self.tol_2d && (vf - vz) * (vl - vz) > 0.0 {
             return Ok(pt);
         }
         // [Vf, Vl] crosses a V bound: resolved by bisection on the analytical curve.
-        let range = (std_min(step.u1_prev, step.u1), std_max(step.u1_prev, step.u1));
+        let range = (
+            std_min(step.u1_prev, step.u1),
+            std_max(step.u1_prev, step.u1),
+        );
         let found = self.find_v_bound_crossing(wl_index, on_first, vz, range)?;
         let Some(u1) = found.filter(|&u| !(u >= step.u1) && !(u < step.u1_min)) else {
             // Not found, or out of the domain.
@@ -194,7 +234,11 @@ impl WorkWithBoundaries<'_> {
         // Sort with ascending U1.
         insertion_sort(&mut uv_point, |a, b| a.u1 < b.u1);
         let ctx = self.context()?;
-        let flags = AddFlags { precise: false, before: fl_force, only_check: false };
+        let flags = AddFlags {
+            precise: false,
+            before: fl_force,
+            only_check: false,
+        };
         let (mut found1, mut found2) = (false, false);
         for p in &uv_point {
             if p.u1 == f64::MAX {
@@ -217,7 +261,11 @@ impl WorkWithBoundaries<'_> {
     /// the parallelogram of the projections of both cylinders on the plane of their
     /// axes, enlarged by Precision::Confusion and cut by the surface ranges (void for
     /// nearly parallel axes).
-    pub(in super::super) fn boundary_estimation(&self, cy1: &Cylinder3, cy2: &Cylinder3) -> Result<(Range1, Range1), Failure> {
+    pub(in super::super) fn boundary_estimation(
+        &self,
+        cy1: &Cylinder3,
+        cy2: &Cylinder3,
+    ) -> Result<(Range1, Range1), Failure> {
         let (mut out1, mut out2) = (Range1::default(), Range1::default());
         let (d1, d2) = (cy1.axis().direction(), cy2.axis().direction());
         let (r1, r2) = (cy1.radius(), cy2.radius());
@@ -252,7 +300,10 @@ fn extrema_line_line(c1: &Axis1, c2: &Axis1, cos_a: f64, sq_sin_a: f64) -> (f64,
     let (d1, d2) = (c1.direction(), c2.direction());
     let l1l2 = c2.location().xyz() - c1.location().xyz();
     let (d1l, d2l) = (d1.xyz().dot(l1l2), d2.xyz().dot(l1l2));
-    ((d1l - cos_a * d2l) / sq_sin_a, (cos_a * d1l - d2l) / sq_sin_a)
+    (
+        (d1l - cos_a * d2l) / sq_sin_a,
+        (cos_a * d1l - d2l) / sq_sin_a,
+    )
 }
 
 /// Adds `[a, b]` to a range.
@@ -269,7 +320,11 @@ fn clamped_acos(arg: f64) -> f64 {
 
 /// `BoundariesComputing(theCoeffs, thePeriod, theURange)`: the U1 ranges (one or two)
 /// where `-1 <= B*cos(U1-FI1) + C <= 1`; false when there is none.
-pub(in super::super) fn boundaries_computing(coeffs: &CoeffsValue, period: f64, u_range: &mut [Range1; 2]) -> bool {
+pub(in super::super) fn boundaries_computing(
+    coeffs: &CoeffsValue,
+    period: f64,
+    u_range: &mut [Range1; 2],
+) -> bool {
     let (b, c, fi1) = (coeffs.b, coeffs.c, coeffs.fi1);
     if b > 0.0 {
         return positive_b(b, c, fi1, period, u_range);

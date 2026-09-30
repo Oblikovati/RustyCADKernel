@@ -38,20 +38,32 @@ fn quad_u(line: &IntSurfLineOn2S, index: i32, is_reversed: bool) -> Result<(f64,
 
 /// The mean U change and 3d step of the test points (the second loop of the last end
 /// does not run when its start is past the count, as natively).
-fn mean_steps(line: &IntSurfLineOn2S, is_reversed: bool, is_first: bool, d3d: &mut f64) -> Result<f64, Failure> {
+fn mean_steps(
+    line: &IntSurfLineOn2S,
+    is_reversed: bool,
+    is_first: bool,
+    d3d: &mut f64,
+) -> Result<f64, Failure> {
     *d3d = 0.0;
     let mut nb_test_pnts: i32 = line.nb_points() / 5;
     if nb_test_pnts < 5 {
         nb_test_pnts = 5;
     }
-    let startp: i32 = if is_first { 2 } else { line.nb_points() - nb_test_pnts - 2 };
+    let startp: i32 = if is_first {
+        2
+    } else {
+        line.nb_points() - nb_test_pnts - 2
+    };
     let mut ddu: f64 = 0.0;
     for ip in startp..=nb_test_pnts {
         let (uc, _) = quad_u(line, ip, is_reversed)?;
         let (un, _) = quad_u(line, ip + 1, is_reversed)?;
         ddu += (uc.abs() - un.abs()).abs();
         if ip > startp {
-            *d3d += line.value(ip)?.value().distance(&line.value(ip - 1)?.value());
+            *d3d += line
+                .value(ip)?
+                .value()
+                .distance(&line.value(ip - 1)?.value());
         }
     }
     ddu /= f64::from(nb_test_pnts) + 1.0;
@@ -67,7 +79,10 @@ fn needs_smoothing(quad: &IntSurfQuadric, (u1, v1): (f64, f64), u2: f64) -> Resu
         if (u1.abs() - u2.abs()).abs() > (PI / 16.0) {
             do_u = true;
         }
-        if do_u && (u1.abs() <= 1.0e-9 || (u1 - 2.0 * PI).abs() <= 1.0e-9) && !((v1 - PI / 2.0).abs() <= 1.0e-9 || (v1 + PI / 2.0).abs() <= 1.0e-9) {
+        if do_u
+            && (u1.abs() <= 1.0e-9 || (u1 - 2.0 * PI).abs() <= 1.0e-9)
+            && !((v1 - PI / 2.0).abs() <= 1.0e-9 || (v1 + PI / 2.0).abs() <= 1.0e-9)
+        {
             do_u = false;
         }
     }
@@ -76,7 +91,10 @@ fn needs_smoothing(quad: &IntSurfQuadric, (u1, v1): (f64, f64), u2: f64) -> Resu
         if (u1.abs() - u2.abs()).abs() > PI / 32.0 {
             do_u = true;
         }
-        if do_u && (u1.abs() <= 1.0e-9 || (u1 - 2.0 * PI).abs() <= 1.0e-9) && !((v1 - vapx).abs() <= 1.0e-9) {
+        if do_u
+            && (u1.abs() <= 1.0e-9 || (u1 - 2.0 * PI).abs() <= 1.0e-9)
+            && !((v1 - vapx).abs() <= 1.0e-9)
+        {
             do_u = false;
         }
     }
@@ -86,13 +104,23 @@ fn needs_smoothing(quad: &IntSurfQuadric, (u1, v1): (f64, f64), u2: f64) -> Resu
 /// `ToSmooth(Line, IsReversed, Quad, IsFirst, D3D)`: on a line of more than 10 points,
 /// the quadric U of the end point in a pole or apex is set near the U of its neighbour
 /// (by at most 5e-8); `d3d` gets the mean 3d step.
-pub(super) fn to_smooth(line: &IntSurfLineOn2S, is_reversed: bool, quad: &IntSurfQuadric, is_first: bool, d3d: &mut f64) -> Result<(), Failure> {
+pub(super) fn to_smooth(
+    line: &IntSurfLineOn2S,
+    is_reversed: bool,
+    quad: &IntSurfQuadric,
+    is_first: bool,
+    d3d: &mut f64,
+) -> Result<(), Failure> {
     if line.nb_points() <= 10 {
         return Ok(());
     }
     let ddu: f64 = mean_steps(line, is_reversed, is_first, d3d)?;
     let n: i32 = line.nb_points();
-    let (i1, i2, i3) = if is_first { (1, 2, 3) } else { (n, n - 1, n - 2) };
+    let (i1, i2, i3) = if is_first {
+        (1, 2, 3)
+    } else {
+        (n, n - 1, n - 2)
+    };
     let (u1, v1) = quad_u(line, i1, is_reversed)?;
     let (u2, _) = quad_u(line, i2, is_reversed)?;
     let (u3, _) = quad_u(line, i3, is_reversed)?;
@@ -130,14 +158,29 @@ pub(super) fn detect_of_boundary_achievement(
     new_line: &IntSurfLineOn2S,
     is_on_boundary: &mut bool,
 ) -> Result<(), Failure> {
-    let u_period: f64 = if q_surf.is_u_periodic()? { q_surf.u_period()? } else { 0.0 };
-    let v_period: f64 = if q_surf.is_v_periodic()? { q_surf.v_period()? } else { 0.0 };
-    let (uf, ul, vf, vl) = (q_surf.first_u_parameter()?, q_surf.last_u_parameter()?, q_surf.first_v_parameter()?, q_surf.last_v_parameter()?);
+    let u_period: f64 = if q_surf.is_u_periodic()? {
+        q_surf.u_period()?
+    } else {
+        0.0
+    };
+    let v_period: f64 = if q_surf.is_v_periodic()? {
+        q_surf.v_period()?
+    } else {
+        0.0
+    };
+    let (uf, ul, vf, vl) = (
+        q_surf.first_u_parameter()?,
+        q_surf.last_u_parameter()?,
+        q_surf.first_v_parameter()?,
+        q_surf.last_v_parameter()?,
+    );
     let pprev: IntSurfPntOn2S = source.value(point_index - 1)?;
     let pcurr: IntSurfPntOn2S = source.value(point_index)?;
     let (uprev, vprev) = pprev.parameters_on_surface(!is_reversed);
     let (mut ucurr, mut vcurr) = pcurr.parameters_on_surface(!is_reversed);
-    let reaches = |b: f64, p: f64, cur: f64, prev: f64| is_point_on_boundary(toler_2d, b, p, cur) && !is_point_on_boundary(toler_2d, b, p, prev);
+    let reaches = |b: f64, p: f64, cur: f64, prev: f64| {
+        is_point_on_boundary(toler_2d, b, p, cur) && !is_point_on_boundary(toler_2d, b, p, prev)
+    };
     if reaches(uf, u_period, ucurr, uprev)
         || reaches(ul, u_period, ucurr, uprev)
         || reaches(vf, v_period, vcurr, vprev)
@@ -163,7 +206,12 @@ pub(super) fn detect_of_boundary_achievement(
 }
 
 /// A vertex at the point of rank `index` of the line (parameter `param`).
-pub(super) fn end_vertex(line: &IntSurfLineOn2S, index: i32, arc_tol: f64, param: f64) -> Result<IntPatchPoint, Failure> {
+pub(super) fn end_vertex(
+    line: &IntSurfLineOn2S,
+    index: i32,
+    arc_tol: f64,
+    param: f64,
+) -> Result<IntPatchPoint, Failure> {
     let p: IntSurfPntOn2S = line.value(index)?;
     let (u1, v1, u2, v2) = p.parameters();
     let mut pt = IntPatchPoint::new();
@@ -175,7 +223,12 @@ pub(super) fn end_vertex(line: &IntSurfLineOn2S, index: i32, arc_tol: f64, param
 
 /// `MakeSplitWLine(WLine, Tang, Trans1, Trans2, ArcTol, ParFirst, ParLast)`: the part
 /// of the walking line between two point indices, with its end vertices.
-fn make_split_wline(wline: &IntPatchWLine, (tang, trans1, trans2): (bool, IntSurfTypeTrans, IntSurfTypeTrans), arc_tol: f64, (par_first, par_last): (i32, i32)) -> Result<Handle<IntPatchWLine>, Failure> {
+fn make_split_wline(
+    wline: &IntPatchWLine,
+    (tang, trans1, trans2): (bool, IntSurfTypeTrans, IntSurfTypeTrans),
+    arc_tol: f64,
+    (par_first, par_last): (i32, i32),
+) -> Result<Handle<IntPatchWLine>, Failure> {
     let sline_src: Handle<IntSurfLineOn2S> = wline.curve();
     let sline = Handle::new(IntSurfLineOn2S::new(None));
     for ip in par_first..=par_last {

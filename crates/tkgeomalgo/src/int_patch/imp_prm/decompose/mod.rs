@@ -25,10 +25,10 @@ mod smooth;
 mod vertices;
 
 use super::super::IntPatchIType;
+use super::super::IntPatchTheSurfFunction;
 use super::super::line::IntPatchLine;
 use super::super::point_line::IntPatchPointLine;
 use super::super::rline::IntPatchRLine;
-use super::super::IntPatchTheSurfFunction;
 use super::IntPatchImpPrmIntersection;
 use super::cleanup::point_line;
 use super::perform::PrmInput;
@@ -57,9 +57,16 @@ const TOL_3D: f64 = 1.0e-10;
 impl IntPatchImpPrmIntersection {
     /// The lines on a cone, sphere, cylinder or torus are decomposed (`DecomposeResult`
     /// on each); when one is, the decomposed lines replace the result.
-    pub(super) fn decompose(&mut self, input: &PrmInput<'_>, func: &mut IntPatchTheSurfFunction) -> Result<(), Failure> {
+    pub(super) fn decompose(
+        &mut self,
+        input: &PrmInput<'_>,
+        func: &mut IntPatchTheSurfFunction,
+    ) -> Result<(), Failure> {
         let t: SurfaceType = input.quad.type_quadric();
-        if !matches!(t, SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Cylinder | SurfaceType::Torus) {
+        if !matches!(
+            t,
+            SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Cylinder | SurfaceType::Torus
+        ) {
             return Ok(());
         }
         let tol_3d: f64 = std_max(func.tolerance(), input.tol_tang);
@@ -95,7 +102,11 @@ fn is_unsupported_restriction(line: &Handle<dyn IntPatchPointLine>) -> Result<bo
     let Some(r) = rl.get() else {
         return Ok(false);
     };
-    let arc = if r.is_arc_on_s1() { r.arc_on_s1() } else { r.arc_on_s2() };
+    let arc = if r.is_arc_on_s1() {
+        r.arc_on_s1()
+    } else {
+        r.arc_on_s2()
+    };
     Ok(arc.get_type()? != CurveType::Line)
 }
 
@@ -104,7 +115,10 @@ fn is_unsupported_restriction(line: &Handle<dyn IntPatchPointLine>) -> Result<bo
 fn line_points(line: &Handle<dyn IntPatchPointLine>) -> Result<Handle<IntSurfLineOn2S>, Failure> {
     let c: Handle<IntSurfLineOn2S> = line.curve();
     if c.is_null() {
-        return Err(super::super::failures::null_object("IntPatch_ImpPrmIntersection::Perform - DecomposeResult", "IntSurf_LineOn2S"));
+        return Err(super::super::failures::null_object(
+            "IntPatch_ImpPrmIntersection::Perform - DecomposeResult",
+            "IntSurf_LineOn2S",
+        ));
     }
     Ok(c)
 }
@@ -114,7 +128,11 @@ fn line_points(line: &Handle<dyn IntPatchPointLine>) -> Result<Handle<IntSurfLin
 /// or apex, or a bound of the quadric; its parts go into `lines`. Its point set is
 /// adjusted in place (`[0, 2 PI]` quadric U, seam points inserted into a walking line).
 /// Returns whether the line was decomposed.
-fn decompose_result(line: &Handle<dyn IntPatchPointLine>, ctx: &DecomposeCtx<'_>, lines: &mut Vec<Handle<dyn IntPatchLine>>) -> Result<bool, Failure> {
+fn decompose_result(
+    line: &Handle<dyn IntPatchPointLine>,
+    ctx: &DecomposeCtx<'_>,
+    lines: &mut Vec<Handle<dyn IntPatchLine>>,
+) -> Result<bool, Failure> {
     if is_unsupported_restriction(line)? {
         // The restriction line must be an isoline: other cases are not supported.
         return Ok(false);
@@ -136,6 +154,11 @@ fn decompose_result(line: &Handle<dyn IntPatchPointLine>, ctx: &DecomposeCtx<'_>
         }
     }
     let mut state = scan::DecomposeState::new(ssline.nb_points());
-    let parts = emit::PartSink { line, ctx, vline: &vline, lines };
+    let parts = emit::PartSink {
+        line,
+        ctx,
+        vline: &vline,
+        lines,
+    };
     state.run(&ssline, ctx, parts)
 }

@@ -18,13 +18,15 @@
 //! The restriction arcs that lie on the other quadric become restriction lines, with
 //! the multiple points of the other lines at their ends.
 use super::super::line::IntPatchLine;
-use super::super::path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds};
+use super::super::line::IntPatchLineTransitions;
+use super::super::path_point::{
+    IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds,
+};
 use super::super::point::IntPatchPoint;
 use super::super::point_line::IntPatchPointLine;
 use super::super::rline::IntPatchRLine;
 use super::lines::VertexLine;
 use super::transitions::by_sign_tol;
-use super::super::line::IntPatchLineTransitions;
 use crate::int_start::TheArc;
 use crate::int_surf::{IntSurfQuadric, IntSurfTransition, IntSurfTypeTrans, make_transition};
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -56,14 +58,23 @@ pub(super) struct SegmentInput<'a> {
 impl SegmentInput<'_> {
     /// The quadric of the restrictions.
     fn own_quad(&self) -> &IntSurfQuadric {
-        if self.on_first { self.quad1 } else { self.quad2 }
+        if self.on_first {
+            self.quad1
+        } else {
+            self.quad2
+        }
     }
 }
 
 impl SegmentState {
     /// The quadric derivatives at the arc point of parameter `prm` (kept when the
     /// quadric is undefined, as natively); returns the arc derivative and the point.
-    fn derivatives_at(&mut self, quad: &IntSurfQuadric, arc: &TheArc, prm: f64) -> Result<(Vector2, Option<Point3>), Failure> {
+    fn derivatives_at(
+        &mut self,
+        quad: &IntSurfQuadric,
+        arc: &TheArc,
+        prm: f64,
+    ) -> Result<(Vector2, Option<Point3>), Failure> {
         let (p2d, d2d): (Point2, Vector2) = arc.d1(prm)?;
         let valpt = quad.d1(p2d.x(), p2d.y()).map(|(p, d1u, d1v)| {
             (self.d1u, self.d1v) = (d1u, d1v);
@@ -74,7 +85,11 @@ impl SegmentState {
 }
 
 /// The restriction line of an arc, with its arc on the side of the segments.
-fn new_rline(arc: &TheArc, on_first: bool, transitions: Option<(IntSurfTypeTrans, IntSurfTypeTrans)>) -> Handle<IntPatchRLine> {
+fn new_rline(
+    arc: &TheArc,
+    on_first: bool,
+    transitions: Option<(IntSurfTypeTrans, IntSurfTypeTrans)>,
+) -> Handle<IntPatchRLine> {
     let rline = match transitions {
         Some((t1, t2)) => IntPatchRLine::new(false, t1, t2),
         None => IntPatchRLine::new_undecided(false),
@@ -101,9 +116,20 @@ pub(super) fn process_segments(
         let arc_ref: TheArc = thesegsol.curve();
         let (pstartf, pstartl) = (end_point(thesegsol, true)?, end_point(thesegsol, false)?);
         let (rline, edge_degenere) = segment_line(input, &mut st, &arc_ref, (&pstartf, &pstartl))?;
-        let mut ends = Ends { dofirst: pstartf.is_some(), dolast: pstartl.is_some(), procf: false, procl: false };
+        let mut ends = Ends {
+            dofirst: pstartf.is_some(),
+            dolast: pstartl.is_some(),
+            procf: false,
+            procl: false,
+        };
         if ends.dofirst || ends.dolast {
-            let segment = Segment { arc_ref: &arc_ref, rline: &rline, pstartf: &pstartf, pstartl: &pstartl, edge_degenere };
+            let segment = Segment {
+                arc_ref: &arc_ref,
+                rline: &rline,
+                pstartf: &pstartf,
+                pstartl: &pstartl,
+                edge_degenere,
+            };
             for slinj in slin.iter() {
                 ends_on_line(input, &mut st, &segment, slinj, &mut ends)?;
             }
@@ -119,11 +145,20 @@ fn end_point(
     seg: &IntPatchTheSegmentOfTheSOnBounds,
     first: bool,
 ) -> Result<Option<(IntPatchThePathPointOfTheSOnBounds, f64)>, Failure> {
-    let has = if first { seg.has_first_point() } else { seg.has_last_point() };
+    let has = if first {
+        seg.has_first_point()
+    } else {
+        seg.has_last_point()
+    };
     if !has {
         return Ok(None);
     }
-    let p = if first { seg.first_point()? } else { seg.last_point()? }.clone();
+    let p = if first {
+        seg.first_point()?
+    } else {
+        seg.last_point()?
+    }
+    .clone();
     let prm: f64 = p.parameter();
     Ok(Some((p, prm)))
 }
@@ -198,7 +233,11 @@ fn ends_on_line(
     for k in 1..=nbpts {
         st.ptvtx = vline.vertex(k)?;
         if !seg.edge_degenere && ends.dofirst {
-            let (p, prm) = seg.pstartf.as_ref().map(|(p, prm)| (p.value(), *prm)).unwrap_or_default();
+            let (p, prm) = seg
+                .pstartf
+                .as_ref()
+                .map(|(p, prm)| (p.value(), *prm))
+                .unwrap_or_default();
             if st.ptvtx.value().distance(&p) <= input.tol_arc {
                 end_vertex(input, st, seg, (&vline, k), prm)?;
                 if !ends.procf {
@@ -208,7 +247,11 @@ fn ends_on_line(
             }
         }
         if !seg.edge_degenere && ends.dolast {
-            let (p, prm) = seg.pstartl.as_ref().map(|(p, prm)| (p.value(), *prm)).unwrap_or_default();
+            let (p, prm) = seg
+                .pstartl
+                .as_ref()
+                .map(|(p, prm)| (p.value(), *prm))
+                .unwrap_or_default();
             if st.ptvtx.value().distance(&p) <= input.tol_arc {
                 end_vertex(input, st, seg, (&vline, k), prm)?;
                 if !ends.procl {
@@ -280,7 +323,13 @@ fn arc_transitions(
         st.tarc.set_type(true, IntSurfTypeTrans::Undecided);
         return Ok(());
     }
-    make_transition(st.tgline, st.tgarc, Direction3::from_vector(norm)?, &mut st.trest, &mut st.tarc);
+    make_transition(
+        st.tgline,
+        st.tgarc,
+        Direction3::from_vector(norm)?,
+        &mut st.trest,
+        &mut st.tarc,
+    );
     Ok(())
 }
 
@@ -322,7 +371,13 @@ fn own_end(
     if !p.is_new() {
         let (transline, transarc) = (IntSurfTransition::default(), IntSurfTransition::default());
         st.ptvtx.set_vertex(input.on_first, &p.vertex()?);
-        st.ptvtx.set_arc(input.on_first, &p.arc(), p.parameter(), &transline, &transarc);
+        st.ptvtx.set_arc(
+            input.on_first,
+            &p.arc(),
+            p.parameter(),
+            &transline,
+            &transarc,
+        );
     }
     rline.add_vertex(&st.ptvtx, false);
     Ok(())

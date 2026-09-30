@@ -34,7 +34,11 @@ const TWO_PI: f64 = 2.0 * PI;
 
 /// `GetVertices(thePLine, TOL3D, TOL2D)`: the points of the vertices of the line,
 /// without the vertices equal (in 3d and in the four parameters) to an earlier one.
-pub(super) fn get_vertices(pline: &dyn IntPatchPointLine, tol_3d: f64, tol_2d: f64) -> Result<Handle<IntSurfLineOn2S>, Failure> {
+pub(super) fn get_vertices(
+    pline: &dyn IntPatchPointLine,
+    tol_3d: f64,
+    tol_2d: f64,
+) -> Result<Handle<IntSurfLineOn2S>, Failure> {
     let vertices = Handle::new(IntSurfLineOn2S::new(None));
     let nb_vrt: i32 = pline.nb_vertex();
     let mut an_vrts: Vec<i32> = vec![0; nb_vrt as usize + 1];
@@ -65,18 +69,28 @@ pub(super) fn get_vertices(pline: &dyn IntPatchPointLine, tol_3d: f64, tol_2d: f
 fn same_parameters(pi: &IntPatchPoint, pk: &IntPatchPoint, tol_2d: f64) -> bool {
     let (a, b, c, d) = pi.parameters();
     let (e, f, g, h) = pk.parameters();
-    (a - e).abs() <= tol_2d && (b - f).abs() <= tol_2d && (c - g).abs() <= tol_2d && (d - h).abs() <= tol_2d
+    (a - e).abs() <= tol_2d
+        && (b - f).abs() <= tol_2d
+        && (c - g).abs() <= tol_2d
+        && (d - h).abs() <= tol_2d
 }
 
 /// `SearchVertices(Line, Vertices, PTypes)`: for each point of the line the rank of the
 /// first vertex it is (1-based `ptypes`, 0 for none).
-pub(super) fn search_vertices(line: &IntSurfLineOn2S, vertices: &IntSurfLineOn2S) -> Result<Vec<i32>, Failure> {
+pub(super) fn search_vertices(
+    line: &IntSurfLineOn2S,
+    vertices: &IntSurfLineOn2S,
+) -> Result<Vec<i32>, Failure> {
     let (nbp, nbv) = (line.nb_points(), vertices.nb_points());
     let mut ptypes: Vec<i32> = vec![0; nbp as usize + 1];
     for ip in 1..=nbp {
         let ap: IntSurfPntOn2S = line.value(ip)?;
         for iv in 1..=nbv {
-            if ap.is_same(&vertices.value(iv)?, precision::confusion(), precision::p_confusion()) {
+            if ap.is_same(
+                &vertices.value(iv)?,
+                precision::confusion(),
+                precision::p_confusion(),
+            ) {
                 ptypes[ip as usize] = iv;
                 break;
             }
@@ -87,7 +101,13 @@ pub(super) fn search_vertices(line: &IntSurfLineOn2S, vertices: &IntSurfLineOn2S
 
 /// `TestMiddleOnPrm(aP, aV, IsReversed, ArcTol, PDomain)`: whether the middle of the
 /// point and the vertex on the parametric surface is in (or on) its domain.
-fn test_middle_on_prm(ap: &IntSurfPntOn2S, av: &IntSurfPntOn2S, is_reversed: bool, arc_tol: f64, pdomain: &(dyn TheTopolTool + 'static)) -> Result<bool, Failure> {
+fn test_middle_on_prm(
+    ap: &IntSurfPntOn2S,
+    av: &IntSurfPntOn2S,
+    is_reversed: bool,
+    arc_tol: f64,
+    pdomain: &(dyn TheTopolTool + 'static),
+) -> Result<bool, Failure> {
     let (up, vp) = ap.parameters_on_surface(is_reversed);
     let (uv, vv) = av.parameters_on_surface(is_reversed);
     let pm = Point2::new((up + uv) * 0.5, (vp + vv) * 0.5);
@@ -104,10 +124,20 @@ struct Nearest {
     conjugated: i32,
 }
 
-fn nearest_vertex(end: &IntSurfPntOn2S, vertices: &IntSurfLineOn2S, is_reversed: bool, tol_2d: f64) -> Result<Nearest, Failure> {
+fn nearest_vertex(
+    end: &IntSurfPntOn2S,
+    vertices: &IntSurfLineOn2S,
+    is_reversed: bool,
+    tol_2d: f64,
+) -> Result<Nearest, Failure> {
     let (ue, ve) = end.parameters_on_surface(!is_reversed);
     let p2d = Point2::new(ue, ve);
-    let mut n = Nearest { same: 0, near: 0, dist_min: 1.0e+100, conjugated: 0 };
+    let mut n = Nearest {
+        same: 0,
+        near: 0,
+        dist_min: 1.0e+100,
+        conjugated: 0,
+    };
     for iv in 1..=vertices.nb_points() {
         let av: IntSurfPntOn2S = vertices.value(iv)?;
         if end.is_same(&av, precision::confusion(), precision::p_confusion()) {
@@ -122,7 +152,11 @@ fn nearest_vertex(end: &IntSurfPntOn2S, vertices: &IntSurfLineOn2S, is_reversed:
             n.conjugated = 0;
         }
         if is_seam_parameter(uv, tol_2d) {
-            let ucv: f64 = if uv.abs() < (TWO_PI - uv).abs() { TWO_PI } else { 0.0 };
+            let ucv: f64 = if uv.abs() < (TWO_PI - uv).abs() {
+                TWO_PI
+            } else {
+                0.0
+            };
             let cdist: f64 = Point2::new(ucv, vv).distance(p2d);
             if cdist < n.dist_min {
                 n.dist_min = cdist;
@@ -136,7 +170,13 @@ fn nearest_vertex(end: &IntSurfPntOn2S, vertices: &IntSurfLineOn2S, is_reversed:
 
 /// The vertex to add at an end: a seam vertex whose middle with the end is in the
 /// domain, farther than 1.5e-7 and than `tol_2d` (in the quadric parameters).
-fn end_vertex(end: &IntSurfPntOn2S, vertices: &IntSurfLineOn2S, n: &Nearest, (is_reversed, tol_2d, arc_tol, pdomain): (bool, f64, f64, &(dyn TheTopolTool + 'static)), vrt: &mut IntSurfPntOn2S) -> Result<bool, Failure> {
+fn end_vertex(
+    end: &IntSurfPntOn2S,
+    vertices: &IntSurfLineOn2S,
+    n: &Nearest,
+    (is_reversed, tol_2d, arc_tol, pdomain): (bool, f64, f64, &(dyn TheTopolTool + 'static)),
+    vrt: &mut IntSurfPntOn2S,
+) -> Result<bool, Failure> {
     if n.same != 0 || n.near == 0 {
         return Ok(false);
     }
@@ -146,7 +186,11 @@ fn end_vertex(end: &IntSurfPntOn2S, vertices: &IntSurfLineOn2S, n: &Nearest, (is
         // To do: analyze an internal vertex.
         return Ok(false);
     }
-    let ucv: f64 = if uv.abs() < (TWO_PI - uv).abs() { TWO_PI } else { 0.0 };
+    let ucv: f64 = if uv.abs() < (TWO_PI - uv).abs() {
+        TWO_PI
+    } else {
+        0.0
+    };
     if !test_middle_on_prm(end, &av, is_reversed, arc_tol, pdomain)? {
         return Ok(false);
     }
@@ -188,7 +232,12 @@ pub(super) fn verify_vertices(
 
 /// `AddVertices(Line, VrtF, AddFirst, VrtL, AddLast, D3DF, D3DL)`: the end vertices
 /// inserted when they are nearer than twice the mean step and farther than 1.5e-7.
-pub(super) fn add_vertices(line: &IntSurfLineOn2S, (vrt_f, add_first): (&IntSurfPntOn2S, bool), (vrt_l, add_last): (&IntSurfPntOn2S, bool), (d3df, d3dl): (f64, f64)) -> Result<bool, Failure> {
+pub(super) fn add_vertices(
+    line: &IntSurfLineOn2S,
+    (vrt_f, add_first): (&IntSurfPntOn2S, bool),
+    (vrt_l, add_last): (&IntSurfPntOn2S, bool),
+    (d3df, d3dl): (f64, f64),
+) -> Result<bool, Failure> {
     let mut result: bool = false;
     if add_first {
         let df: f64 = line.value(1)?.value().distance(&vrt_f.value());
@@ -198,7 +247,10 @@ pub(super) fn add_vertices(line: &IntSurfLineOn2S, (vrt_f, add_first): (&IntSurf
         }
     }
     if add_last {
-        let dl: f64 = line.value(line.nb_points())?.value().distance(&vrt_l.value());
+        let dl: f64 = line
+            .value(line.nb_points())?
+            .value()
+            .distance(&vrt_l.value());
         if (d3dl * 2.0) > dl && dl > 1.5e-7 {
             line.add(vrt_l);
             result = true;
@@ -210,7 +262,13 @@ pub(super) fn add_vertices(line: &IntSurfLineOn2S, (vrt_f, add_first): (&IntSurf
 /// `PutIntVertices(Line, Result, theIsReversed, Vertices, ArcTol)`: a vertex on the line
 /// at each inner point that is a vertex (its parameter is the point index, or the
 /// parameter on the arc of a restriction line).
-pub(super) fn put_int_vertices(pline: &dyn IntPatchPointLine, rline: Option<&IntPatchRLine>, result: &IntSurfLineOn2S, is_reversed: bool, (vertices, arc_tol): (&IntSurfLineOn2S, f64)) -> Result<(), Failure> {
+pub(super) fn put_int_vertices(
+    pline: &dyn IntPatchPointLine,
+    rline: Option<&IntPatchRLine>,
+    result: &IntSurfLineOn2S,
+    is_reversed: bool,
+    (vertices, arc_tol): (&IntSurfLineOn2S, f64),
+) -> Result<(), Failure> {
     let (nbp, nbv) = (result.nb_points(), vertices.nb_points());
     if nbp < 3 {
         return Ok(());
@@ -219,7 +277,11 @@ pub(super) fn put_int_vertices(pline: &dyn IntPatchPointLine, rline: Option<&Int
     for ip in 2..nbp {
         let ap: IntSurfPntOn2S = result.value(ip)?;
         for iv in 1..=nbv {
-            if !ap.is_same(&vertices.value(iv)?, precision::confusion(), precision::p_confusion()) {
+            if !ap.is_same(
+                &vertices.value(iv)?,
+                precision::confusion(),
+                precision::p_confusion(),
+            ) {
                 continue;
             }
             let pnt: Point3 = ap.value();
@@ -229,9 +291,17 @@ pub(super) fn put_int_vertices(pline: &dyn IntPatchPointLine, rline: Option<&Int
             let param: f64 = match rline {
                 // The restriction line is on the parametric surface.
                 Some(r) => {
-                    let arc: TheArc = if r.is_arc_on_s1() { r.arc_on_s1() } else { r.arc_on_s2() };
+                    let arc: TheArc = if r.is_arc_on_s1() {
+                        r.arc_on_s1()
+                    } else {
+                        r.arc_on_s2()
+                    };
                     let lin: Line2 = arc.line()?;
-                    let ps = if is_reversed { Point2::new(u1, v1) } else { Point2::new(u2, v2) };
+                    let ps = if is_reversed {
+                        Point2::new(u1, v1)
+                    } else {
+                        Point2::new(u2, v2)
+                    };
                     elclib::parameter(&lin, ps)?
                 }
                 None => f64::from(ip),
@@ -244,7 +314,10 @@ pub(super) fn put_int_vertices(pline: &dyn IntPatchPointLine, rline: Option<&Int
 }
 
 /// `HasInternals(Line, Vertices)`: whether an inner point of the line is a vertex.
-pub(super) fn has_internals(line: &IntSurfLineOn2S, vertices: &IntSurfLineOn2S) -> Result<bool, Failure> {
+pub(super) fn has_internals(
+    line: &IntSurfLineOn2S,
+    vertices: &IntSurfLineOn2S,
+) -> Result<bool, Failure> {
     let (nbp, nbv) = (line.nb_points(), vertices.nb_points());
     if nbp < 3 {
         return Ok(false);
@@ -252,7 +325,11 @@ pub(super) fn has_internals(line: &IntSurfLineOn2S, vertices: &IntSurfLineOn2S) 
     for ip in 2..nbp {
         let ap: IntSurfPntOn2S = line.value(ip)?;
         for iv in 1..=nbv {
-            if ap.is_same(&vertices.value(iv)?, precision::confusion(), precision::p_confusion()) {
+            if ap.is_same(
+                &vertices.value(iv)?,
+                precision::confusion(),
+                precision::p_confusion(),
+            ) {
                 return Ok(true);
             }
         }

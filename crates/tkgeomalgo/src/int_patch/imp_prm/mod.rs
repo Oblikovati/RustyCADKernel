@@ -139,7 +139,11 @@ impl IntPatchImpPrmIntersection {
     /// `Point(Index)`: Standard_OutOfRange outside `1..=NbPnts()`. `inter.point(1)?`.
     pub fn point(&self, index: i32) -> Result<&IntPatchPoint, Failure> {
         self.check_done("Point")?;
-        crate::int_start::failures::sequence_value(&self.spnt, index, "IntPatch_ImpPrmIntersection::Point")
+        crate::int_start::failures::sequence_value(
+            &self.spnt,
+            index,
+            "IntPatch_ImpPrmIntersection::Point",
+        )
     }
 
     /// `NbLines()`. `inter.nb_lines()?`.
@@ -151,6 +155,10 @@ impl IntPatchImpPrmIntersection {
     /// `Line(Index)`: Standard_OutOfRange outside `1..=NbLines()`. `inter.line(1)?`.
     pub fn line(&self, index: i32) -> Result<&Handle<dyn IntPatchLine>, Failure> {
         self.check_done("Line")?;
-        crate::int_start::failures::sequence_value(&self.slin, index, "IntPatch_ImpPrmIntersection::Line")
+        crate::int_start::failures::sequence_value(
+            &self.slin,
+            index,
+            "IntPatch_ImpPrmIntersection::Line",
+        )
     }
 }

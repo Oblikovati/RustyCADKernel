@@ -21,9 +21,9 @@ use super::super::super::IntPatchSpecPntType as Spt;
 use super::super::super::point::IntPatchPoint;
 use super::super::super::special_points::IntPatchSpecialPoints;
 use super::super::setup::is_seam_or_pole;
+use super::DecomposeCtx;
 use super::emit::PartSink;
 use super::smooth::detect_of_boundary_achievement;
-use super::DecomposeCtx;
 use crate::int_surf::{IntSurfLineOn2S, IntSurfPntOn2S};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -44,13 +44,25 @@ pub(super) struct DecomposeState {
 impl DecomposeState {
     /// The state before the first part of a line of `lindex` points.
     pub(super) fn new(lindex: i32) -> Self {
-        Self { lindex, findex: 1, bindex: 0, has_been_decomposed: false, pre_exist: Spt::SPntNone, pre_point: IntSurfPntOn2S::new() }
+        Self {
+            lindex,
+            findex: 1,
+            bindex: 0,
+            has_been_decomposed: false,
+            pre_exist: Spt::SPntNone,
+            pre_point: IntSurfPntOn2S::new(),
+        }
     }
 
     /// The parts of the line, from the first point (or the point after the special point
     /// of the previous part) to the next special point or bound. A part of one point is
     /// skipped (the walk goes on after it). Returns whether the line was decomposed.
-    pub(super) fn run(&mut self, ssline: &IntSurfLineOn2S, ctx: &DecomposeCtx<'_>, mut sink: PartSink<'_, '_>) -> Result<bool, Failure> {
+    pub(super) fn run(
+        &mut self,
+        ssline: &IntSurfLineOn2S,
+        ctx: &DecomposeCtx<'_>,
+        mut sink: PartSink<'_, '_>,
+    ) -> Result<bool, Failure> {
         let mut fl_next_line: bool = true;
         while fl_next_line {
             fl_next_line = false;
@@ -84,7 +96,12 @@ impl DecomposeState {
     }
 
     /// The part starts at the point after the special point; false when there is none.
-    fn continue_after(&mut self, ssline: &IntSurfLineOn2S, ctx: &DecomposeCtx<'_>, sline: &IntSurfLineOn2S) -> Result<bool, Failure> {
+    fn continue_after(
+        &mut self,
+        ssline: &IntSurfLineOn2S,
+        ctx: &DecomposeCtx<'_>,
+        sline: &IntSurfLineOn2S,
+    ) -> Result<bool, Failure> {
         let ref_pt: IntSurfPntOn2S = ssline.value(self.findex)?;
         let ures: f64 = ctx.q_surf.u_resolution(ctx.arc_tol)?;
         let vres: f64 = ctx.q_surf.v_resolution(ctx.arc_tol)?;
@@ -94,13 +111,24 @@ impl DecomposeState {
             Spt::SPntSeamUV => std_max(ures, vres),
             _ => ures,
         };
-        if !IntPatchSpecialPoints::continue_after_special_point(ctx.q_surf, ctx.p_surf, &ref_pt, self.pre_exist, tol_2d, &mut self.pre_point, ctx.is_reversed)? {
+        if !IntPatchSpecialPoints::continue_after_special_point(
+            ctx.q_surf,
+            ctx.p_surf,
+            &ref_pt,
+            self.pre_exist,
+            tol_2d,
+            &mut self.pre_point,
+            ctx.is_reversed,
+        )? {
             return Ok(false);
         }
         sline.add(&self.pre_point);
         // Avoid adding duplicate points.
         while self.findex <= self.lindex {
-            if !self.pre_point.is_same(&ssline.value(self.findex)?, ctx.tol_tang, -1.0) {
+            if !self
+                .pre_point
+                .is_same(&ssline.value(self.findex)?, ctx.tol_tang, -1.0)
+            {
                 break;
             }
             self.findex += 1;
@@ -110,7 +138,12 @@ impl DecomposeState {
 
     /// The points of the part up to the first special point or bound; returns whether
     /// the line is cut there.
-    fn scan(&mut self, ssline: &IntSurfLineOn2S, ctx: &DecomposeCtx<'_>, sline: &IntSurfLineOn2S) -> Result<bool, Failure> {
+    fn scan(
+        &mut self,
+        ssline: &IntSurfLineOn2S,
+        ctx: &DecomposeCtx<'_>,
+        sline: &IntSurfLineOn2S,
+    ) -> Result<bool, Failure> {
         for k in self.findex..=self.lindex {
             if k == self.findex {
                 self.pre_point = ssline.value(k)?;
@@ -119,8 +152,22 @@ impl DecomposeState {
             }
             // A point on a bound of the quadric (not a seam or pole) cuts the line simply.
             let mut is_on_boundary: bool = false;
-            detect_of_boundary_achievement(ctx.q_surf, ctx.is_reversed, ssline, k, precision::p_confusion(), sline, &mut is_on_boundary)?;
-            self.pre_exist = is_seam_or_pole(ctx.q_surf, ssline, ctx.is_reversed, k - 1, (ctx.tol_tang, FRAC_PI_2))?;
+            detect_of_boundary_achievement(
+                ctx.q_surf,
+                ctx.is_reversed,
+                ssline,
+                k,
+                precision::p_confusion(),
+                sline,
+                &mut is_on_boundary,
+            )?;
+            self.pre_exist = is_seam_or_pole(
+                ctx.q_surf,
+                ssline,
+                ctx.is_reversed,
+                k - 1,
+                (ctx.tol_tang, FRAC_PI_2),
+            )?;
             if is_on_boundary && self.pre_exist != Spt::SPntPoleSeamU {
                 // On the seam the parameters are known within the period; a pole or apex
                 // on the bound is computed below (bugs modalg_6 bug26684_2).
@@ -144,18 +191,36 @@ impl DecomposeState {
 
     /// The special point between the points `k - 1` and `k` is computed and ends the
     /// part (unless it is the reference point).
-    fn special_point(&mut self, ssline: &IntSurfLineOn2S, ctx: &DecomposeCtx<'_>, sline: &IntSurfLineOn2S, (k, mut is_on_boundary): (i32, bool)) -> Result<(), Failure> {
+    fn special_point(
+        &mut self,
+        ssline: &IntSurfLineOn2S,
+        ctx: &DecomposeCtx<'_>,
+        sline: &IntSurfLineOn2S,
+        (k, mut is_on_boundary): (i32, bool),
+    ) -> Result<(), Failure> {
         let ref_pt: IntSurfPntOn2S = ssline.value(self.bindex - 1)?;
         let compare_tol_3d: f64 = precision::confusion();
         let mut compare_tol_2d: f64 = precision::p_confusion();
         let mut new_point: IntSurfPntOn2S = ref_pt;
         let mut last_type: Spt = Spt::SPntNone;
-        let iso = IsoInput { ssline, ctx, ref_pt: &ref_pt, k };
+        let iso = IsoInput {
+            ssline,
+            ctx,
+            ref_pt: &ref_pt,
+            k,
+        };
         match self.pre_exist {
             Spt::SPntSeamUV => {
                 self.pre_exist = Spt::SPntNone;
                 last_type = Spt::SPntSeamUV;
-                IntPatchSpecialPoints::add_cross_uv_iso_point(ctx.q_surf, ctx.p_surf, &ref_pt, ctx.tol_tang, &mut new_point, ctx.is_reversed)?;
+                IntPatchSpecialPoints::add_cross_uv_iso_point(
+                    ctx.q_surf,
+                    ctx.p_surf,
+                    &ref_pt,
+                    ctx.tol_tang,
+                    &mut new_point,
+                    ctx.is_reversed,
+                )?;
             }
             Spt::SPntSeamV => {
                 // The line goes through the seam.
@@ -168,7 +233,15 @@ impl DecomposeState {
                 let mut vert = IntPatchPoint::new();
                 vert.set_pnt_on_2s(&ref_pt);
                 vert.set_tolerance(ctx.tol_tang);
-                if IntPatchSpecialPoints::add_singular_pole(ctx.q_surf, ctx.p_surf, &ref_pt, &mut vert, &mut new_point, ctx.is_reversed, false)? {
+                if IntPatchSpecialPoints::add_singular_pole(
+                    ctx.q_surf,
+                    ctx.p_surf,
+                    &ref_pt,
+                    &mut vert,
+                    &mut new_point,
+                    ctx.is_reversed,
+                    false,
+                )? {
                     self.pre_exist = Spt::SPntPole;
                     last_type = Spt::SPntPole;
                     if is_on_boundary {
@@ -201,7 +274,11 @@ impl DecomposeState {
             // The first point of the part is the pole, or the point on the bound is
             // already a vertex: no decomposition.
             self.pre_point = ref_pt;
-            self.pre_exist = if is_on_boundary { Spt::SPntNone } else { last_type };
+            self.pre_exist = if is_on_boundary {
+                Spt::SPntNone
+            } else {
+                last_type
+            };
         }
         Ok(())
     }
@@ -222,26 +299,58 @@ impl IsoInput<'_> {
         let (p, q, arc_tol) = (self.ctx.p_surf, self.ctx.q_surf, self.ctx.arc_tol);
         let (a, b, c, d) = self.ref_pt.parameters();
         // The parametric point and the quadric point.
-        let ((u0, v0), (uq_ref, vq_ref)) = if self.ctx.is_reversed { ((a, b), (c, d)) } else { ((c, d), (a, b)) };
+        let ((u0, v0), (uq_ref, vq_ref)) = if self.ctx.is_reversed {
+            ((a, b), (c, d))
+        } else {
+            ((c, d), (a, b))
+        };
         let (a, b, c, d) = self.ssline.value(self.k)?.parameters();
-        let ((up, vp), (uq, vq)) = if self.ctx.is_reversed { ((a, b), (c, d)) } else { ((c, d), (a, b)) };
+        let ((up, vp), (uq, vq)) = if self.ctx.is_reversed {
+            ((a, b), (c, d))
+        } else {
+            ((c, d), (a, b))
+        };
         let mut tol = Vector::with_bounds(1, 3)?;
         let mut start = Vector::with_bounds(1, 3)?;
         let mut inf = Vector::with_bounds(1, 3)?;
         let mut sup = Vector::with_bounds(1, 3)?;
         tol[1] = p.u_resolution(arc_tol)?;
         tol[2] = p.v_resolution(arc_tol)?;
-        tol[3] = if is_u { q.v_resolution(arc_tol)? } else { q.u_resolution(arc_tol)? };
+        tol[3] = if is_u {
+            q.v_resolution(arc_tol)?
+        } else {
+            q.u_resolution(arc_tol)?
+        };
         start[1] = 0.5 * (u0 + up);
         start[2] = 0.5 * (v0 + vp);
-        start[3] = if is_u { 0.5 * (vq_ref + vq) } else { 0.5 * (uq_ref + uq) };
+        start[3] = if is_u {
+            0.5 * (vq_ref + vq)
+        } else {
+            0.5 * (uq_ref + uq)
+        };
         inf[1] = p.first_u_parameter()?;
         inf[2] = p.first_v_parameter()?;
-        inf[3] = if is_u { q.first_v_parameter()? } else { q.first_u_parameter()? };
+        inf[3] = if is_u {
+            q.first_v_parameter()?
+        } else {
+            q.first_u_parameter()?
+        };
         sup[1] = p.last_u_parameter()?;
         sup[2] = p.last_v_parameter()?;
-        sup[3] = if is_u { q.last_v_parameter()? } else { q.last_u_parameter()? };
-        IntPatchSpecialPoints::add_point_on_u_or_v_iso(q, p, self.ref_pt, (is_u, 0.0), [&tol, &start, &inf, &sup], new_point, self.ctx.is_reversed)?;
+        sup[3] = if is_u {
+            q.last_v_parameter()?
+        } else {
+            q.last_u_parameter()?
+        };
+        IntPatchSpecialPoints::add_point_on_u_or_v_iso(
+            q,
+            p,
+            self.ref_pt,
+            (is_u, 0.0),
+            [&tol, &start, &inf, &sup],
+            new_point,
+            self.ctx.is_reversed,
+        )?;
         Ok(())
     }
 }

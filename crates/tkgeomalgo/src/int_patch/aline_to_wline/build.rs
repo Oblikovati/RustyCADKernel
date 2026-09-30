@@ -34,7 +34,11 @@ impl Walk<'_> {
     /// The reference point for the parameters that cannot be made precise: the last
     /// point of the line, or (on an empty line) the point halfway to the next vertex of
     /// greater parameter, or the vertex point itself.
-    fn reference_iso(&self, vertex_number: usize, vtx: &IntPatchPoint) -> Result<IntSurfPntOn2S, Failure> {
+    fn reference_iso(
+        &self,
+        vertex_number: usize,
+        vtx: &IntPatchPoint,
+    ) -> Result<IntSurfPntOn2S, Failure> {
         let nb: i32 = self.lin_on_2s.nb_points();
         if nb >= 1 {
             return self.lin_on_2s.value(nb);
@@ -152,12 +156,15 @@ impl Walk<'_> {
     /// `aSeqVertex(++aNewVertID) = aLVtx`, with the bound check of NCollection_Array1.
     fn store_vertex(&mut self, vtx: IntPatchPoint) -> Result<(), Failure> {
         let len: usize = self.seq_vertex.len();
-        let slot = self.seq_vertex.get_mut(self.new_vert_id - 1).ok_or_else(|| {
-            Failure::out_of_range(&format!(
-                "IntPatch_ALineToWLine::MakeWLine() - vertex slot {}; expected 1..={len}",
-                self.new_vert_id
-            ))
-        })?;
+        let slot = self
+            .seq_vertex
+            .get_mut(self.new_vert_id - 1)
+            .ok_or_else(|| {
+                Failure::out_of_range(&format!(
+                    "IntPatch_ALineToWLine::MakeWLine() - vertex slot {}; expected 1..={len}",
+                    self.new_vert_id
+                ))
+            })?;
         *slot = vtx;
         Ok(())
     }
@@ -231,7 +238,8 @@ impl Walk<'_> {
                 self.conv.correct_end_point(&self.lin_on_2s, 1)?;
             }
             if self.last_degenerated {
-                self.conv.correct_end_point(&self.lin_on_2s, self.lin_on_2s.nb_points())?;
+                self.conv
+                    .correct_end_point(&self.lin_on_2s, self.lin_on_2s.nb_points())?;
             }
         }
         let wline: IntPatchWLine = self.new_wline()?;

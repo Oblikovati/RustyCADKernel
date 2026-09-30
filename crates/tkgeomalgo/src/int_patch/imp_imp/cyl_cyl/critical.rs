@@ -115,14 +115,24 @@ fn count_significant(u1crit: &mut [f64; NB_CRIT_POINTS_MAX], period: f64, tol_2d
 }
 
 /// A column of the 3x3 system from the column `col` of the 3x5 matrix.
-fn set_col_from(syst: &mut Matrix<'_>, col: i32, matr: &Matrix<'_>, from: i32) -> Result<(), Failure> {
+fn set_col_from(
+    syst: &mut Matrix<'_>,
+    col: i32,
+    matr: &Matrix<'_>,
+    from: i32,
+) -> Result<(), Failure> {
     syst.set_col(col, &matr.col(from)?)
 }
 
 /// `VBoundaryPrecise(theMatr, theV1AfterDecrByDelta, theV2AfterDecrByDelta, theV1Set,
 /// theV2Set)`: when V1 (or V2) decreases as U1 increases (Cramer on the linearized
 /// system), its target becomes the decreased value.
-fn v_boundary_precise(matr: &Matrix<'_>, (v1_decr, v2_decr): (f64, f64), v1_set: &mut f64, v2_set: &mut f64) -> Result<(), Failure> {
+fn v_boundary_precise(
+    matr: &Matrix<'_>,
+    (v1_decr, v2_decr): (f64, f64),
+    v1_set: &mut f64,
+    v2_set: &mut f64,
+) -> Result<(), Failure> {
     let mut syst = Matrix::with_bounds(1, 3, 1, 3).map_err(|e| e.into_failure("math_Matrix"))?;
     set_col_from(&mut syst, 1, matr, 1)?;
     set_col_from(&mut syst, 2, matr, 2)?;
@@ -178,7 +188,12 @@ pub(in super::super) fn step_computing(
     let mut delta_u1: f64 = f64::MAX;
     // By default, V1(U1) and V2(U1) are considered increasing; what is indeed?
     let (mut v1_set, mut v2_set) = (v1_cur + delta_v1, v2_cur + delta_v2);
-    v_boundary_precise(matr, (v1_cur - delta_v1, v2_cur - delta_v2), &mut v1_set, &mut v2_set)?;
+    v_boundary_precise(
+        matr,
+        (v1_cur - delta_v1, v2_cur - delta_v2),
+        &mut v1_set,
+        &mut v2_set,
+    )?;
     let mut syst = Matrix::with_bounds(1, 3, 1, 3).map_err(|e| e.into_failure("math_Matrix"))?;
     set_col_from(&mut syst, 2, matr, 3)?;
     set_col_from(&mut syst, 3, matr, 4)?;
@@ -207,7 +222,10 @@ pub(in super::super) fn step_computing(
 
 /// The overdetermined system of `dU1, dU2` with both V known: the couple of equations
 /// of the greatest determinant.
-fn overdetermined_step(matr: &Matrix<'_>, (v1_set, v2_set): (f64, f64)) -> Result<Option<f64>, Failure> {
+fn overdetermined_step(
+    matr: &Matrix<'_>,
+    (v1_set, v2_set): (f64, f64),
+) -> Result<Option<f64>, Failure> {
     let m = |r: i32, c: i32| -> f64 { matr[(r, c)] };
     let (col5, col1, col2) = (matr.col(5)?, matr.col(1)?, matr.col(2)?);
     let free = |i: i32| -> f64 { col5[i] - v1_set * col1[i] - v2_set * col2[i] };
@@ -220,12 +238,15 @@ fn overdetermined_step(matr: &Matrix<'_>, (v1_set, v2_set): (f64, f64)) -> Resul
     };
     if abs1 >= abs2 {
         if abs1 >= abs3 {
-            return Ok((!(abs1 <= NUL_VALUE)).then(|| (free(1) * m(2, 4) - free(2) * m(1, 4)).abs() / abs1));
+            return Ok((!(abs1 <= NUL_VALUE))
+                .then(|| (free(1) * m(2, 4) - free(2) * m(1, 4)).abs() / abs1));
         }
         return Ok(by_det3());
     }
     if abs2 >= abs3 {
-        return Ok((!(abs2 <= NUL_VALUE)).then(|| (free(1) * m(3, 4) - free(3) * m(1, 4)).abs() / abs2));
+        return Ok(
+            (!(abs2 <= NUL_VALUE)).then(|| (free(1) * m(3, 4) - free(3) * m(1, 4)).abs() / abs2)
+        );
     }
     Ok(by_det3())
 }

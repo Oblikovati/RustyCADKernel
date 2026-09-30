@@ -96,7 +96,11 @@ fn apex_vertex(apex: Point3, quads: Quads<'_>, tol: f64, para: f64) -> IntPatchP
 /// The situations of the tangency line: both outside for opposite normals; otherwise
 /// the cone farther from the point 5 along the line is outside (the line goes from the
 /// first apex to the second, so the second cone is inside the first).
-fn situations(cones: (&Cone3, &Cone3), quads: Quads<'_>, ptbid: Point3) -> Result<(IntSurfSituation, IntSurfSituation), Failure> {
+fn situations(
+    cones: (&Cone3, &Cone3),
+    quads: Quads<'_>,
+    ptbid: Point3,
+) -> Result<(IntSurfSituation, IntSurfSituation), Failure> {
     use IntSurfSituation::{Inside, Outside};
     let (norm_c1, norm_c2) = (quads.0.normale_at(ptbid)?, quads.1.normale_at(ptbid)?);
     if norm_c1.dot(norm_c2) < 0.0 {
@@ -112,20 +116,34 @@ fn situations(cones: (&Cone3, &Cone3), quads: Quads<'_>, ptbid: Point3) -> Resul
 }
 
 /// The tangency line from the first apex, then its reverse with swapped situations.
-fn tangency_line(inter: &QuadQuadGeo, cones: (&Cone3, &Cone3), quads: Quads<'_>, tol: f64, slin: &mut Lines) -> Result<(), Failure> {
+fn tangency_line(
+    inter: &QuadQuadGeo,
+    cones: (&Cone3, &Cone3),
+    quads: Quads<'_>,
+    tol: f64,
+    slin: &mut Lines,
+) -> Result<(), Failure> {
     let apex1: Point3 = cones.0.apex();
     let mut linsol: Line3 = inter.line(1)?;
     let para: f64 = elclib::parameter(&linsol, apex1)?;
     let ptbid: Point3 = elclib::value(para + 5.0, &linsol);
     let mut ptsol: IntPatchPoint = apex_vertex(apex1, quads, tol, para);
     let (situ_c1, situ_c2) = situations(cones, quads, ptbid)?;
-    let glig = IntPatchGLine::from_line(&linsol, true, IntPatchLineTransitions::Touch(situ_c1, situ_c2))?;
+    let glig = IntPatchGLine::from_line(
+        &linsol,
+        true,
+        IntPatchLineTransitions::Touch(situ_c1, situ_c2),
+    )?;
     glig.add_vertex(&ptsol)?;
     glig.set_first_point(1);
     push(slin, glig);
     linsol.set_direction(linsol.direction().reversed());
     ptsol.set_parameter(elclib::parameter(&linsol, apex1)?);
-    let glig = IntPatchGLine::from_line(&linsol, true, IntPatchLineTransitions::Touch(situ_c2, situ_c1))?;
+    let glig = IntPatchGLine::from_line(
+        &linsol,
+        true,
+        IntPatchLineTransitions::Touch(situ_c2, situ_c1),
+    )?;
     glig.add_vertex(&ptsol)?;
     glig.set_first_point(1);
     push(slin, glig);
@@ -134,11 +152,22 @@ fn tangency_line(inter: &QuadQuadGeo, cones: (&Cone3, &Cone3), quads: Quads<'_>,
 
 /// A crossing line through the first apex, in both directions with the same
 /// transitions and a multiple apex vertex.
-fn crossing_lines(linsol: &Line3, apex1: Point3, quads: Quads<'_>, tol: f64, slin: &mut Lines) -> Result<(), Failure> {
+fn crossing_lines(
+    linsol: &Line3,
+    apex1: Point3,
+    quads: Quads<'_>,
+    tol: f64,
+    slin: &mut Lines,
+) -> Result<(), Failure> {
     let mut linsol: Line3 = *linsol;
     let para: f64 = elclib::parameter(&linsol, apex1)?;
     let ptbid: Point3 = elclib::value(para + 5.0, &linsol);
-    let transitions = by_sign(dot_cross(Vector3::from(linsol.direction()), quads.0, quads.1, ptbid)?);
+    let transitions = by_sign(dot_cross(
+        Vector3::from(linsol.direction()),
+        quads.0,
+        quads.1,
+        ptbid,
+    )?);
     let mut ptsol: IntPatchPoint = apex_vertex(apex1, quads, tol, para);
     ptsol.set_multiple(true);
     for side in 0..2 {
@@ -181,35 +210,57 @@ fn contact_points(
 
 /// The circles, ellipse, hyperbola branches or parabola, each with the characteristic
 /// point of a common generatrix as vertex at parameter 0.
-fn conics(inter: &QuadQuadGeo, typint: ResultType, quads: Quads<'_>, tol: f64, slin: &mut Lines) -> Result<(), Failure> {
+fn conics(
+    inter: &QuadQuadGeo,
+    typint: ResultType,
+    quads: Quads<'_>,
+    tol: f64,
+    slin: &mut Lines,
+) -> Result<(), Failure> {
     let lines: Vec<IntPatchGLine> = match typint {
         ResultType::Circle => {
             let mut out = Vec::new();
             for i in 1..=inter.nb_solutions()? {
                 let c: Circle3 = inter.circle(i)?;
                 let (ptref, tgt) = elclib::d1(0.0, &c);
-                out.push(IntPatchGLine::from_circle(&c, false, conic_transitions(tgt, quads, ptref)?));
+                out.push(IntPatchGLine::from_circle(
+                    &c,
+                    false,
+                    conic_transitions(tgt, quads, ptref)?,
+                ));
             }
             out
         }
         ResultType::Ellipse => {
             let e = inter.ellipse(1)?;
             let (ptref, tgt) = elclib::d1(0.0, &e);
-            vec![IntPatchGLine::from_ellipse(&e, false, conic_transitions(tgt, quads, ptref)?)]
+            vec![IntPatchGLine::from_ellipse(
+                &e,
+                false,
+                conic_transitions(tgt, quads, ptref)?,
+            )]
         }
         ResultType::Hyperbola => {
             let mut out = Vec::new();
             for i in 1..=2 {
                 let h = inter.hyperbola(i)?;
                 let (ptref, tgt) = elclib::d1(0.0, &h);
-                out.push(IntPatchGLine::from_hyperbola(&h, false, conic_transitions(tgt, quads, ptref)?));
+                out.push(IntPatchGLine::from_hyperbola(
+                    &h,
+                    false,
+                    conic_transitions(tgt, quads, ptref)?,
+                ));
             }
             out
         }
         _ => {
             let p = inter.parabola(1)?;
             let tgtorig = Vector3::from(p.y_axis().direction());
-            vec![IntPatchGLine::from_parabola(&p, false, conic_transitions(tgtorig, quads, p.location())?)]
+            vec![IntPatchGLine::from_parabola(
+                &p,
+                false,
+                conic_transitions(tgtorig, quads, p.location())?,
+            )]
         }
     };
     for glig in lines {
@@ -223,13 +274,25 @@ fn conics(inter: &QuadQuadGeo, typint: ResultType, quads: Quads<'_>, tol: f64, s
     Ok(())
 }
 
-fn conic_transitions(tgt: Vector3, quads: Quads<'_>, p: Point3) -> Result<IntPatchLineTransitions, Failure> {
-    Ok(by_sign_tol(dot_cross(tgt, quads.0, quads.1, p)?, 0.00000001))
+fn conic_transitions(
+    tgt: Vector3,
+    quads: Quads<'_>,
+    p: Point3,
+) -> Result<IntPatchLineTransitions, Failure> {
+    Ok(by_sign_tol(
+        dot_cross(tgt, quads.0, quads.1, p)?,
+        0.00000001,
+    ))
 }
 
 /// The common generatrix through both apexes, undecided and tangent, with the
 /// characteristic point as vertex.
-fn common_generatrix(inter: &QuadQuadGeo, (co1, co2): (&Cone3, &Cone3), quads: Quads<'_>, tol: f64) -> Result<IntPatchGLine, Failure> {
+fn common_generatrix(
+    inter: &QuadQuadGeo,
+    (co1, co2): (&Cone3, &Cone3),
+    quads: Quads<'_>,
+    tol: f64,
+) -> Result<IntPatchGLine, Failure> {
     let linsol: Line3 = MakeLin::from_points(co1.apex(), co2.apex())?.value()?;
     let und = IntSurfTypeTrans::Undecided;
     let glig = IntPatchGLine::from_line(&linsol, true, IntPatchLineTransitions::Types(und, und))?;
@@ -257,10 +320,22 @@ fn analytic_curves(
         return Ok(true);
     }
     analytic_points(anaint, quads, tol, spnt)?;
-    let opts = CurveOptions { check_tangent: true, tol_trans: 0.000000001, open_ends: true, eval_on_fail: true };
+    let opts = CurveOptions {
+        check_tangent: true,
+        tol_trans: 0.000000001,
+        open_ends: true,
+        eval_on_fail: true,
+    };
     let mut ends: (Point3, Point3) = (Point3::default(), Point3::default());
     for i in 1..=anaint.nb_curve()? {
-        analytic_line(anaint.curve(i)?, quads, &opts, (slin, multpoint), tol, &mut ends)?;
+        analytic_line(
+            anaint.curve(i)?,
+            quads,
+            &opts,
+            (slin, multpoint),
+            tol,
+            &mut ends,
+        )?;
     }
     Ok(true)
 }

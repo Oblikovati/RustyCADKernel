@@ -16,13 +16,13 @@
 
 //! The local helpers of `IntPatch_SpecialPoints.cxx`: the seam function and the point
 //! projection.
+use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkgeombase::extrema::{ExtAlgo, ExtFlag, ExtPS, GenLocateExtPS};
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::{Point3, Vector3};
 use rustycad_tkmath::math::{FunctionSet, FunctionSetWithDerivatives, Matrix, Vector};
-use rustycad_tkernel::precision;
 
 /// `FuncPreciseSeam`: the distance `P(x1, x2) - Q(iso, x3)` (or `Q(x3, iso)`) between
 /// the parametric surface and the seam iso of the quadric. The native evaluations catch

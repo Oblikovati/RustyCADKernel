@@ -24,9 +24,9 @@
 //! `K*cos(U1-FIV) + L*cos(U2-PSIV) + M`, and the third one `cos(U2-FI2) = B*cos(U1-FI1)
 //! + C`, whose two solutions `U2 = FI2 +/- f(U1)` are the two intersection lines.
 use super::inscribe::inscribe_point;
+use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::real::{epsilon, is_equal, real_small};
-use rustycad_tkernel::precision;
 use rustycad_tkg2d::geom2d::native::std_min;
 use rustycad_tkmath::gp::{Cylinder3, Xyz};
 use std::f64::consts::PI;
@@ -130,7 +130,9 @@ impl CoeffsValue {
         if det.abs() < precision::angular() {
             return Err(Failure::with_message(
                 "Standard_Failure",
-                &format!("Error. Exception in divide by zerro (IntCyCyTrim)!!!! (determinant {det}; expected at least the angular precision)"),
+                &format!(
+                    "Error. Exception in divide by zerro (IntCyCyTrim)!!!! (determinant {det}; expected at least the angular precision)"
+                ),
             ));
         }
         vecs.iter_mut().for_each(|v| reorder(v, couple));
@@ -143,19 +145,48 @@ impl CoeffsValue {
 
     fn with_vectors([a1, a2, b1, b2, c1, c2, d]: [Coeff3; 7]) -> Self {
         Self {
-            vec_a1: a1, vec_a2: a2, vec_b1: b1, vec_b2: b2, vec_c1: c1, vec_c2: c2, vec_d: d,
-            k21: 0.0, k11: 0.0, l21: 0.0, l11: 0.0, m1: 0.0,
-            k22: 0.0, k12: 0.0, l22: 0.0, l12: 0.0, m2: 0.0,
-            k1: 0.0, l1: 0.0, k2: 0.0, l2: 0.0,
-            fiv1: 0.0, psiv1: 0.0, fiv2: 0.0, psiv2: 0.0,
-            b: 0.0, c: 0.0, fi1: 0.0, fi2: 0.0,
+            vec_a1: a1,
+            vec_a2: a2,
+            vec_b1: b1,
+            vec_b2: b2,
+            vec_c1: c1,
+            vec_c2: c2,
+            vec_d: d,
+            k21: 0.0,
+            k11: 0.0,
+            l21: 0.0,
+            l11: 0.0,
+            m1: 0.0,
+            k22: 0.0,
+            k12: 0.0,
+            l22: 0.0,
+            l12: 0.0,
+            m2: 0.0,
+            k1: 0.0,
+            l1: 0.0,
+            k2: 0.0,
+            l2: 0.0,
+            fiv1: 0.0,
+            psiv1: 0.0,
+            fiv2: 0.0,
+            psiv2: 0.0,
+            b: 0.0,
+            c: 0.0,
+            fi1: 0.0,
+            fi2: 0.0,
         }
     }
 
     /// V1 and V2 from the first two equations (Cramer), in short cosine forms.
     fn solve_v(&mut self, det: f64) {
         let (c1, c2) = (self.vec_c1, self.vec_c2);
-        let (a1, a2, b1, b2, d) = (self.vec_a1, self.vec_a2, self.vec_b1, self.vec_b2, self.vec_d);
+        let (a1, a2, b1, b2, d) = (
+            self.vec_a1,
+            self.vec_a2,
+            self.vec_b1,
+            self.vec_b2,
+            self.vec_d,
+        );
         self.k21 = (c2[1] * b2[0] - c2[0] * b2[1]) / det;
         self.k11 = (c2[1] * b1[0] - c2[0] * b1[1]) / det;
         self.l21 = (c2[1] * a2[0] - c2[0] * a2[1]) / det;
@@ -277,7 +308,9 @@ pub(in super::super) fn cyl_cyl_compute_u2(
         if dl * dl < real_small() || dl >= 2.0 {
             return Err(Failure::with_message(
                 "Standard_DivideByZero",
-                &format!("IntPatch_ImpImpIntersection_4.gxx, CylCylComputeParameters() (delta {dl}; expected in ]0, 2[)"),
+                &format!(
+                    "IntPatch_ImpImpIntersection_4.gxx, CylCylComputeParameters() (delta {dl}; expected in ]0, 2[)"
+                ),
             ));
         }
         *d = tol0 / (dl * (2.0 - dl)).sqrt();
@@ -287,10 +320,14 @@ pub(in super::super) fn cyl_cyl_compute_u2(
 
 /// `CylCylComputeParameters(theU1, theU2, theCoeffs, theV1, theV2)`: V1 and V2.
 pub(in super::super) fn cyl_cyl_compute_v(u1: f64, u2: f64, coeffs: &CoeffsValue) -> (f64, f64) {
-    let v1: f64 = coeffs.k21 * u2.sin() + coeffs.k11 * u1.sin() + coeffs.l21 * u2.cos()
+    let v1: f64 = coeffs.k21 * u2.sin()
+        + coeffs.k11 * u1.sin()
+        + coeffs.l21 * u2.cos()
         + coeffs.l11 * u1.cos()
         + coeffs.m1;
-    let v2: f64 = coeffs.k22 * u2.sin() + coeffs.k12 * u1.sin() + coeffs.l22 * u2.cos()
+    let v2: f64 = coeffs.k22 * u2.sin()
+        + coeffs.k12 * u1.sin()
+        + coeffs.l22 * u2.cos()
         + coeffs.l12 * u1.cos()
         + coeffs.m2;
     (v1, v2)

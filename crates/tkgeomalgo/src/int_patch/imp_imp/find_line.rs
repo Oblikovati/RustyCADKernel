@@ -24,10 +24,10 @@ use super::super::line::IntPatchLine;
 use super::arc::intersection_with_an_arc;
 use crate::int_start::TheArc;
 use crate::int_surf::IntSurfQuadric;
-use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{Point3, Vector3};
 use std::f64::consts::PI;
@@ -62,7 +62,10 @@ impl FindLineArgs {
 fn gline(line: &Handle<dyn IntPatchLine>) -> Result<Handle<IntPatchGLine>, Failure> {
     let g: Handle<IntPatchGLine> = line.cast();
     if g.is_null() {
-        return Err(super::super::failures::null_object("FindLine", "IntPatch_GLine"));
+        return Err(super::super::failures::null_object(
+            "FindLine",
+            "IntPatch_GLine",
+        ));
     }
     Ok(g)
 }
@@ -70,7 +73,10 @@ fn gline(line: &Handle<dyn IntPatchLine>) -> Result<Handle<IntPatchGLine>, Failu
 fn aline(line: &Handle<dyn IntPatchLine>) -> Result<Handle<IntPatchALine>, Failure> {
     let a: Handle<IntPatchALine> = line.cast();
     if a.is_null() {
-        return Err(super::super::failures::null_object("FindLine", "IntPatch_ALine"));
+        return Err(super::super::failures::null_object(
+            "FindLine",
+            "IntPatch_ALine",
+        ));
     }
     Ok(a)
 }
@@ -101,8 +107,16 @@ fn line_range(line: &Handle<dyn IntPatchLine>) -> Result<(f64, f64), Failure> {
         return Ok((a.first_parameter()?.0, a.last_parameter()?.0));
     }
     let g = gline(line)?;
-    let lower: f64 = if g.has_first_point() { g.first_point()?.parameter_on_line() } else { -f64::MAX };
-    let upper: f64 = if g.has_last_point() { g.last_point()?.parameter_on_line() } else { f64::MAX };
+    let lower: f64 = if g.has_first_point() {
+        g.first_point()?.parameter_on_line()
+    } else {
+        -f64::MAX
+    };
+    let upper: f64 = if g.has_last_point() {
+        g.last_point()?.parameter_on_line()
+    } else {
+        f64::MAX
+    };
     Ok((lower, upper))
 }
 
@@ -140,8 +154,18 @@ pub(super) fn find_line(
     if quad1.distance(*psurf) > tol || quad2.distance(*psurf) > tol {
         return Ok(None);
     }
-    let mut best = Best { sq_dist_min: f64::MAX, para_int: f64::MAX, line_idx: 0 };
-    let mut target = Target { psurf, sq_tol: tol * tol, arc: thearc, param_on_arc, quad1 };
+    let mut best = Best {
+        sq_dist_min: f64::MAX,
+        para_int: f64::MAX,
+        line_idx: 0,
+    };
+    let mut target = Target {
+        psurf,
+        sq_tol: tol * tol,
+        arc: thearc,
+        param_on_arc,
+        quad1,
+    };
     let mut i: i32 = 1;
     let mut nblin: i32 = slin.len() as i32;
     while i <= nblin {
@@ -161,7 +185,10 @@ pub(super) fn find_line(
     Ok(Some(best.line_idx))
 }
 
-fn sequence_line(slin: &[Handle<dyn IntPatchLine>], i: i32) -> Result<&Handle<dyn IntPatchLine>, Failure> {
+fn sequence_line(
+    slin: &[Handle<dyn IntPatchLine>],
+    i: i32,
+) -> Result<&Handle<dyn IntPatchLine>, Failure> {
     crate::int_start::failures::sequence_value(slin, i, "NCollection_Sequence::Value")
 }
 
@@ -311,7 +338,11 @@ fn search_analytic(
 /// The tangent of the chosen line at its parameter (a conic appends the parameter of
 /// its projection); a singular analytic point gives a null tangent (#29807: the
 /// singularities are handled by IntPatch_SpecialPoints).
-fn tangent_of(line: &Handle<dyn IntPatchLine>, para_int: f64, args: &mut FindLineArgs) -> Result<(), Failure> {
+fn tangent_of(
+    line: &Handle<dyn IntPatchLine>,
+    para_int: f64,
+    args: &mut FindLineArgs,
+) -> Result<(), Failure> {
     let conic_tangent: Option<Vector3> = match line.arc_type() {
         IntPatchIType::Lin => Some(Vector3::from(gline(line)?.line()?.direction())),
         IntPatchIType::Circle => Some(elclib::dn(para_int, &gline(line)?.circle()?, 1)),
@@ -367,7 +398,9 @@ pub(super) fn single_line(
             }
             (parproj, psurf, tgint)
         }
-        IntPatchIType::Walking | IntPatchIType::Restriction => (0.0, Point3::default(), Vector3::default()),
+        IntPatchIType::Walking | IntPatchIType::Restriction => {
+            (0.0, Point3::default(), Vector3::default())
+        }
     };
     if psurf.distance(&ptproj) <= tol {
         return Ok(Some((parproj, tgint)));

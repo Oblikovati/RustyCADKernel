@@ -71,7 +71,9 @@ pub(super) fn int_pco(
     *empty = false;
     match typint {
         ResultType::Point => spnt.push(tangent_point(inter.point(1)?, quads, tol_tang, false)),
-        ResultType::Line if nb_sol == 1 => tangency_lines(&inter, &co, apex, (quads, tol_tang, reversed), slin)?,
+        ResultType::Line if nb_sol == 1 => {
+            tangency_lines(&inter, &co, apex, (quads, tol_tang, reversed), slin)?
+        }
         ResultType::Line => {
             *multpoint = true;
             two_lines(&inter, &co, apex, (quads, tol_tang), slin)?;
@@ -102,14 +104,26 @@ fn apex_point(apex: Point3, quads: Quads<'_>, tol_tang: f64, para: f64) -> IntPa
 
 /// The TOUCH situations `((plane, cone), (plane, cone) on the other side)` of a
 /// tangency line.
-fn cone_situations(normp: Vector3, normco: Vector3, test: Vector3) -> [(IntSurfSituation, IntSurfSituation); 2] {
+fn cone_situations(
+    normp: Vector3,
+    normco: Vector3,
+    test: Vector3,
+) -> [(IntSurfSituation, IntSurfSituation); 2] {
     use IntSurfSituation::{Inside, Outside};
     let same_side: bool = normp.dot(normco) > 0.0;
     if normp.dot(test) > 0.0 {
-        let (situp, situp_other) = if same_side { (Inside, Outside) } else { (Outside, Inside) };
+        let (situp, situp_other) = if same_side {
+            (Inside, Outside)
+        } else {
+            (Outside, Inside)
+        };
         return [(situp, Outside), (situp_other, Inside)];
     }
-    let (situp, situp_other) = if same_side { (Outside, Inside) } else { (Inside, Outside) };
+    let (situp, situp_other) = if same_side {
+        (Outside, Inside)
+    } else {
+        (Inside, Outside)
+    };
     [(situp, Inside), (situp_other, Outside)]
 }
 
@@ -158,12 +172,22 @@ fn two_lines(
     slin: &mut Lines,
 ) -> Result<(), Failure> {
     let (linsol, para, ptbid) = oriented(inter.line(1)?, co, apex)?;
-    let transitions = by_sign(dot_cross(Vector3::from(linsol.direction()), quads.0, quads.1, ptbid)?);
+    let transitions = by_sign(dot_cross(
+        Vector3::from(linsol.direction()),
+        quads.0,
+        quads.1,
+        ptbid,
+    )?);
     let mut ptsol: IntPatchPoint = apex_point(apex, quads, tol_tang, para);
     ptsol.set_multiple(true);
     both_directions(linsol, apex, transitions, &mut ptsol, slin)?;
     let (linsol, para, ptbid) = oriented(inter.line(2)?, co, apex)?;
-    let transitions = by_sign(dot_cross(Vector3::from(linsol.direction()), quads.0, quads.1, ptbid)?);
+    let transitions = by_sign(dot_cross(
+        Vector3::from(linsol.direction()),
+        quads.0,
+        quads.1,
+        ptbid,
+    )?);
     ptsol.set_parameter(para);
     both_directions(linsol, apex, transitions, &mut ptsol, slin)
 }
@@ -193,13 +217,22 @@ fn both_directions(
 fn parabola_line(parabsol: &Parabola3, quads: Quads<'_>) -> Result<IntPatchGLine, Failure> {
     let tgtorig = Vector3::from(parabsol.y_axis().direction());
     let ptran: f64 = dot_cross(tgtorig, quads.0, quads.1, parabsol.location())?;
-    Ok(IntPatchGLine::from_parabola(parabsol, false, by_sign_tol(ptran, 0.00000001)))
+    Ok(IntPatchGLine::from_parabola(
+        parabsol,
+        false,
+        by_sign_tol(ptran, 0.00000001),
+    ))
 }
 
 /// A hyperbola branch, oriented by the mixed product of its Y axis at its top.
 fn hyperbola_line(hyprsol: &Hyperbola3, quads: Quads<'_>) -> Result<IntPatchGLine, Failure> {
-    let tophypr: Point3 = elclib::value(hyprsol.major_radius(), &Line3::from_axis(hyprsol.x_axis()));
+    let tophypr: Point3 =
+        elclib::value(hyprsol.major_radius(), &Line3::from_axis(hyprsol.x_axis()));
     let tgttop = Vector3::from(hyprsol.y_axis().direction());
     let qwe: f64 = dot_cross(tgttop, quads.0, quads.1, tophypr)?;
-    Ok(IntPatchGLine::from_hyperbola(hyprsol, false, by_sign_tol(qwe, 0.00000001)))
+    Ok(IntPatchGLine::from_hyperbola(
+        hyprsol,
+        false,
+        by_sign_tol(qwe, 0.00000001),
+    ))
 }

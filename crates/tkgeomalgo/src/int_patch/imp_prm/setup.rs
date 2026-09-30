@@ -34,7 +34,11 @@ use std::f64::consts::{FRAC_PI_2, PI};
 /// The smallest C1 interval of a C0 direction relative to its range, or None when the
 /// direction has one interval.
 fn min_interval(s: &Adaptor3dSurfaceHandle, is_u: bool) -> Result<Option<f64>, Failure> {
-    let nb_int: i32 = if is_u { s.nb_u_intervals(Shape::C1)? } else { s.nb_v_intervals(Shape::C1)? };
+    let nb_int: i32 = if is_u {
+        s.nb_u_intervals(Shape::C1)?
+    } else {
+        s.nb_v_intervals(Shape::C1)?
+    };
     if nb_int <= 1 {
         return Ok(None);
     }
@@ -66,7 +70,10 @@ pub(super) fn get_local_step(s: &Adaptor3dSurfaceHandle, step: f64) -> Result<f6
         let st: SurfaceType = s.get_type()?;
         if st == SurfaceType::BezierSurface || st == SurfaceType::BSplineSurface {
             let lim_res: f64 = 1.0e-10;
-            let min_res: f64 = std_min(s.u_resolution(precision::confusion())?, s.v_resolution(precision::confusion())?);
+            let min_res: f64 = std_min(
+                s.u_resolution(precision::confusion())?,
+                s.v_resolution(precision::confusion())?,
+            );
             let max_deg: i32 = std::cmp::max(s.u_degree()?, s.v_degree()?);
             if min_res < lim_res && max_deg > 3 {
                 local_step = 0.0001;
@@ -74,7 +81,11 @@ pub(super) fn get_local_step(s: &Adaptor3dSurfaceHandle, step: f64) -> Result<f6
         }
     }
     for is_u in [true, false] {
-        let c0 = if is_u { s.u_continuity()? } else { s.v_continuity()? } == Shape::C0;
+        let c0 = if is_u {
+            s.u_continuity()?
+        } else {
+            s.v_continuity()?
+        } == Shape::C0;
         if c0 && min_interval(s, is_u)?.is_some_and(|m| m < 0.002) {
             local_step = 0.0001;
         }

@@ -103,7 +103,12 @@ pub(super) fn compute_tangency(
 }
 
 /// The point `i`: its arc, the function at its 2d point.
-fn start_point(input: &TangencyInput<'_>, st: &mut TangencyState, func: &mut IntPatchTheSurfFunction, i: i32) -> Result<(), Failure> {
+fn start_point(
+    input: &TangencyInput<'_>,
+    st: &mut TangencyState,
+    func: &mut IntPatchTheSurfFunction,
+    i: i32,
+) -> Result<(), Failure> {
     st.pstart = input.solrst.point(i)?.clone();
     let thearc: TheArc = st.pstart.arc();
     st.arcorien = input.domain.arc_orientation(&thearc);
@@ -120,7 +125,13 @@ fn start_point(input: &TangencyInput<'_>, st: &mut TangencyState, func: &mut Int
 }
 
 /// A tangent path point with the parameters of the other points of its vertex.
-fn tangent_point(input: &TangencyInput<'_>, st: &mut TangencyState, seqpdep: &mut Vec<IntSurfPathPoint>, destination: &mut [i32], i: i32) -> Result<(), Failure> {
+fn tangent_point(
+    input: &TangencyInput<'_>,
+    st: &mut TangencyState,
+    seqpdep: &mut Vec<IntSurfPathPoint>,
+    destination: &mut [i32],
+    i: i32,
+) -> Result<(), Failure> {
     st.ppoint.set_tangency(true);
     destination[i as usize] = st.seqlength + 1;
     if !st.pstart.is_new() {
@@ -167,7 +178,9 @@ fn oriented_point(
     if !st.pstart.is_new() {
         return vertex_transition(input, st, seqpdep, destination, (i, test));
     }
-    if (test < 0.0 && st.arcorien == Orientation::Forward) || (test > 0.0 && st.arcorien == Orientation::Reversed) {
+    if (test < 0.0 && st.arcorien == Orientation::Forward)
+        || (test > 0.0 && st.arcorien == Orientation::Reversed)
+    {
         st.vectg.reverse();
         st.dirtg.reverse();
     }
@@ -184,14 +197,21 @@ fn local_transition(test: f64, arcorien: Orientation, tole: f64) -> Orientation 
     if test.abs() <= tole {
         return Orientation::External; // and why not INTERNAL
     }
-    if (test > 0.0 && arcorien == Orientation::Forward) || (test < 0.0 && arcorien == Orientation::Reversed) {
+    if (test > 0.0 && arcorien == Orientation::Forward)
+        || (test < 0.0 && arcorien == Orientation::Reversed)
+    {
         return Orientation::Forward;
     }
     Orientation::Reversed
 }
 
 /// Adds the arc of the vertex at the point to the transition of the vertex.
-fn compare_arc(input: &TangencyInput<'_>, st: &mut TangencyState, comptrans: &mut CurveTransition, (test, vertex): (f64, &TheVertex)) -> Result<(), Failure> {
+fn compare_arc(
+    input: &TangencyInput<'_>,
+    st: &mut TangencyState,
+    comptrans: &mut CurveTransition,
+    (test, vertex): (f64, &TheVertex),
+) -> Result<(), Failure> {
     let tole: f64 = 1.0e-8;
     let bidnorm = Direction3::new(1.0, 1.0, 1.0)?;
     let vtxorien: Orientation = input.domain.vertex_orientation(vertex)?;
@@ -199,7 +219,14 @@ fn compare_arc(input: &TangencyInput<'_>, st: &mut TangencyState, comptrans: &mu
     if test.abs() > tole && st.arcorien == Orientation::Reversed {
         st.v2.reverse();
     }
-    comptrans.compare(tole, Direction3::from_vector(st.v2)?, bidnorm, 0.0, loc_trans, vtxorien);
+    comptrans.compare(
+        tole,
+        Direction3::from_vector(st.v2)?,
+        bidnorm,
+        0.0,
+        loc_trans,
+        vtxorien,
+    );
     Ok(())
 }
 
@@ -240,7 +267,13 @@ fn vertex_transition(
 }
 
 /// The other points of the vertex: their parameters and arcs join the transition.
-fn same_vertex_arcs(input: &TangencyInput<'_>, st: &mut TangencyState, comptrans: &mut CurveTransition, destination: &mut [i32], i: i32) -> Result<(), Failure> {
+fn same_vertex_arcs(
+    input: &TangencyInput<'_>,
+    st: &mut TangencyState,
+    comptrans: &mut CurveTransition,
+    destination: &mut [i32],
+    i: i32,
+) -> Result<(), Failure> {
     for k in i + 1..=input.solrst.nb_points()? {
         if destination[k as usize] != 0 {
             continue;

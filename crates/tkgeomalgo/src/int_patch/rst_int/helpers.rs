@@ -61,7 +61,10 @@ fn near(mut u: f64, up: f64) -> f64 {
 }
 
 fn is_periodic_u(t: SurfaceType) -> bool {
-    matches!(t, SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Torus)
+    matches!(
+        t,
+        SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Torus
+    )
 }
 
 /// `Recadre(typeS1, typeS2, wlin, Param, U1, V1, U2, V2)`: the periodic parameters near
@@ -107,19 +110,35 @@ pub(super) fn recadre(
 
 /// `Tol3d(vtx, Domain, tolDef)`: the 3d tolerance of the vertex, or the default one
 /// (at least Precision::Confusion) on a domain without 3d data.
-pub(super) fn tol3d_vertex(vtx: &TheVertex, domain: &(dyn TheTopolTool + 'static), tol_def: f64) -> Result<f64, Failure> {
+pub(super) fn tol3d_vertex(
+    vtx: &TheVertex,
+    domain: &(dyn TheTopolTool + 'static),
+    tol_def: f64,
+) -> Result<f64, Failure> {
     if domain.has_3d() {
         return domain.tol_3d_vertex(vtx);
     }
-    Ok(if tol_def < precision::confusion() { precision::confusion() } else { tol_def })
+    Ok(if tol_def < precision::confusion() {
+        precision::confusion()
+    } else {
+        tol_def
+    })
 }
 
 /// `Tol3d(arc, Domain, tolDef)`.
-pub(super) fn tol3d_arc(arc: &TheArc, domain: &(dyn TheTopolTool + 'static), tol_def: f64) -> Result<f64, Failure> {
+pub(super) fn tol3d_arc(
+    arc: &TheArc,
+    domain: &(dyn TheTopolTool + 'static),
+    tol_def: f64,
+) -> Result<f64, Failure> {
     if domain.has_3d() {
         return domain.tol_3d_arc(arc);
     }
-    Ok(if tol_def < precision::confusion() { precision::confusion() } else { tol_def })
+    Ok(if tol_def < precision::confusion() {
+        precision::confusion()
+    } else {
+        tol_def
+    })
 }
 
 /// `CoincideOnArc(Ptsommet, A, Surf, Toler, Domain, Vtx)`: the vertex of the arc nearest
@@ -161,7 +180,12 @@ fn is_small(t: Vector3, tol: f64) -> bool {
 /// `VerifyTgline(wlin, param, Tol, Tgl)`: a null tangent becomes the chord to the
 /// nearest point of the line not within `tol` (to avoid very close walking points),
 /// toward the farther end first.
-pub(super) fn verify_tgline(wlin: &IntPatchWLine, param: i32, tol: f64, tgl: &mut Vector3) -> Result<(), Failure> {
+pub(super) fn verify_tgline(
+    wlin: &IntPatchWLine,
+    param: i32,
+    tol: f64,
+    tgl: &mut Vector3,
+) -> Result<(), Failure> {
     if !is_small(*tgl, tol) {
         return Ok(());
     }
@@ -183,11 +207,21 @@ pub(super) fn verify_tgline(wlin: &IntPatchWLine, param: i32, tol: f64, tgl: &mu
 }
 
 /// The first chord of the point `param` to the points `others` that is not small.
-fn chord(wlin: &IntPatchWLine, param: i32, others: Vec<i32>, tol: f64, forward: bool) -> Result<Option<Vector3>, Failure> {
+fn chord(
+    wlin: &IntPatchWLine,
+    param: i32,
+    others: Vec<i32>,
+    tol: f64,
+    forward: bool,
+) -> Result<Option<Vector3>, Failure> {
     let p: Point3 = wlin.point(param)?.value();
     for i in others {
         let q: Point3 = wlin.point(i)?.value();
-        let t = if forward { Vector3::between(p, q) } else { Vector3::between(q, p) };
+        let t = if forward {
+            Vector3::between(p, q)
+        } else {
+            Vector3::between(q, p)
+        };
         if !is_small(t, tol) {
             return Ok(Some(t));
         }
@@ -197,7 +231,11 @@ fn chord(wlin: &IntPatchWLine, param: i32, others: Vec<i32>, tol: f64, forward: 
 
 /// `GetLinePoint2d(L, param, OnFirst, U, V)`: the parameters on one surface of the
 /// point of the line of (real) index `param`, interpolated between its neighbours.
-pub(super) fn get_line_point_2d(l: &PointLineRef, param: f64, on_first: bool) -> Result<(f64, f64), Failure> {
+pub(super) fn get_line_point_2d(
+    l: &PointLineRef,
+    param: f64,
+    on_first: bool,
+) -> Result<(f64, f64), Failure> {
     let line: &dyn IntPatchPointLine = l.line();
     let nbptlin: i32 = line.nb_pnts()?;
     let mut par: f64 = param.trunc();
@@ -228,7 +266,12 @@ pub(super) struct FindInput<'a> {
 /// projection on a restriction line of the other surface; the interpolated index of the
 /// crossing, or the nearest index, on a walking line, searched near `ParamApproche`,
 /// then toward the nearer end, then the farther one) and the tangent there.
-pub(super) fn find_parameter(l: &PointLineRef, input: &FindInput<'_>, param: &mut f64, tgl: &mut Vector3) -> Result<bool, Failure> {
+pub(super) fn find_parameter(
+    l: &PointLineRef,
+    input: &FindInput<'_>,
+    param: &mut f64,
+    tgl: &mut Vector3,
+) -> Result<bool, Failure> {
     *tgl = Vector3::new(0.0, 0.0, 0.0);
     match l {
         PointLineRef::Restriction(rlin) => find_on_restriction(rlin, input, param, tgl),
@@ -236,7 +279,12 @@ pub(super) fn find_parameter(l: &PointLineRef, input: &FindInput<'_>, param: &mu
     }
 }
 
-fn find_on_restriction(rlin: &IntPatchRLine, input: &FindInput<'_>, param: &mut f64, tgl: &mut Vector3) -> Result<bool, Failure> {
+fn find_on_restriction(
+    rlin: &IntPatchRLine,
+    input: &FindInput<'_>,
+    param: &mut f64,
+    tgl: &mut Vector3,
+) -> Result<bool, Failure> {
     let arc: TheArc = if !input.on_first && rlin.is_arc_on_s1() {
         rlin.arc_on_s1()
     } else if input.on_first && rlin.is_arc_on_s2() {
@@ -275,7 +323,12 @@ fn search_ranges(nbpt: i32, param_approche: i32) -> [(i32, i32); 3] {
     [(inf, sup), (sup, nbpt), (1, inf)]
 }
 
-fn find_on_walking(wlin: &IntPatchWLine, input: &FindInput<'_>, param: &mut f64, tgl: &mut Vector3) -> Result<bool, Failure> {
+fn find_on_walking(
+    wlin: &IntPatchWLine,
+    input: &FindInput<'_>,
+    param: &mut f64,
+    tgl: &mut Vector3,
+) -> Result<bool, Failure> {
     let tol2: f64 = input.tol * input.tol;
     let nbpt: i32 = wlin.nb_pnts()?;
     for (inf, sup) in search_ranges(nbpt, input.param_approche) {
@@ -314,7 +367,9 @@ fn find_on_walking(wlin: &IntPatchWLine, input: &FindInput<'_>, param: &mut f64,
 pub(super) fn not_point_line(typ: IntPatchIType) -> Failure {
     Failure::with_message(
         "Standard_DomainError",
-        &format!("IntPatch_RstInt::PutVertexOnLine() - a line of type {typ:?}; expected a walking or restriction line"),
+        &format!(
+            "IntPatch_RstInt::PutVertexOnLine() - a line of type {typ:?}; expected a walking or restriction line"
+        ),
     )
 }
 

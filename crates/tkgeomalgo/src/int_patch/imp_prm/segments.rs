@@ -20,7 +20,9 @@
 // The negated comparisons keep the native result for NaN operands.
 #![allow(clippy::neg_cmp_op_on_partial_ord)]
 use super::super::IntPatchIType;
-use super::super::path_point::{IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds};
+use super::super::path_point::{
+    IntPatchThePathPointOfTheSOnBounds, IntPatchTheSegmentOfTheSOnBounds,
+};
 use super::super::point::IntPatchPoint;
 use super::super::point_line::IntPatchPointLine;
 use super::super::rline::IntPatchRLine;
@@ -58,10 +60,22 @@ impl IntPatchImpPrmIntersection {
     }
 
     /// The restriction line of one segment.
-    fn segment_line(&mut self, input: &PrmInput<'_>, thesegm: &IntPatchTheSegmentOfTheSOnBounds) -> Result<Handle<IntPatchRLine>, Failure> {
+    fn segment_line(
+        &mut self,
+        input: &PrmInput<'_>,
+        thesegm: &IntPatchTheSegmentOfTheSOnBounds,
+    ) -> Result<Handle<IntPatchRLine>, Failure> {
         let arc: TheArc = thesegm.curve();
-        let first: Option<SegmentEnd> = if thesegm.has_first_point() { Some(segment_end(input, &arc, thesegm.first_point()?)?) } else { None };
-        let last: Option<SegmentEnd> = if thesegm.has_last_point() { Some(segment_end(input, &arc, thesegm.last_point()?)?) } else { None };
+        let first: Option<SegmentEnd> = if thesegm.has_first_point() {
+            Some(segment_end(input, &arc, thesegm.first_point()?)?)
+        } else {
+            None
+        };
+        let last: Option<SegmentEnd> = if thesegm.has_last_point() {
+            Some(segment_end(input, &arc, thesegm.last_point()?)?)
+        } else {
+            None
+        };
         // The transitions of the last end win (TransitionOK is set by each end).
         let transitions = match (&first, &last) {
             (_, Some(l)) => l.transitions,
@@ -97,7 +111,12 @@ impl IntPatchImpPrmIntersection {
 
     /// The vertices of the lines at the ends of the segment are made multiple and added
     /// to the restriction line.
-    fn segment_ends_on_lines(&self, rline: &Handle<IntPatchRLine>, (first, last): (&Option<SegmentEnd>, &Option<SegmentEnd>), tol_arc: f64) -> Result<(), Failure> {
+    fn segment_ends_on_lines(
+        &self,
+        rline: &Handle<IntPatchRLine>,
+        (first, last): (&Option<SegmentEnd>, &Option<SegmentEnd>),
+        tol_arc: f64,
+    ) -> Result<(), Failure> {
         let (mut procf, mut procl) = (false, false);
         for slinj in &self.slin {
             let vline = SegLine::of(slinj)?;
@@ -133,7 +152,12 @@ impl IntPatchImpPrmIntersection {
 
 /// The vertex `k` of the line made multiple, replaced, and added to the restriction line
 /// at the parameter of the end.
-fn mark_end(vline: &SegLine, rline: &IntPatchRLine, (ptdeb, k): (&mut IntPatchPoint, i32), param: f64) -> Result<(), Failure> {
+fn mark_end(
+    vline: &SegLine,
+    rline: &IntPatchRLine,
+    (ptdeb, k): (&mut IntPatchPoint, i32),
+    param: f64,
+) -> Result<(), Failure> {
     ptdeb.set_multiple(true);
     vline.replace(k, ptdeb)?;
     ptdeb.set_parameter(param);
@@ -154,7 +178,10 @@ impl SegLine {
         }
         let r: Handle<IntPatchRLine> = l.cast();
         if r.is_null() {
-            return Err(super::super::failures::null_object("IntPatch_ImpPrmIntersection::Perform", "IntPatch_RLine"));
+            return Err(super::super::failures::null_object(
+                "IntPatch_ImpPrmIntersection::Perform",
+                "IntPatch_RLine",
+            ));
         }
         Ok(Self::Restriction(r))
     }
@@ -174,7 +201,10 @@ impl SegLine {
 
 /// Whether the segment is degenerated: its ends are the same point and so is its
 /// point at `.57735 * f + .42265 * l`.
-fn is_degenerated(input: &PrmInput<'_>, seg: &IntPatchTheSegmentOfTheSOnBounds) -> Result<bool, Failure> {
+fn is_degenerated(
+    input: &PrmInput<'_>,
+    seg: &IntPatchTheSegmentOfTheSOnBounds,
+) -> Result<bool, Failure> {
     if !(seg.has_first_point() && seg.has_last_point()) {
         return Ok(false);
     }
@@ -183,21 +213,31 @@ fn is_degenerated(input: &PrmInput<'_>, seg: &IntPatchTheSegmentOfTheSOnBounds) 
     if !(pf.value().square_distance(&pl.value()) <= tol2) {
         return Ok(false);
     }
-    let p2d: Point2 = seg.curve().value(0.57735 * pf.parameter() + 0.42265 * pl.parameter())?;
+    let p2d: Point2 = seg
+        .curve()
+        .value(0.57735 * pf.parameter() + 0.42265 * pl.parameter())?;
     let pm: Point3 = input.psurf().0.d0(p2d.x(), p2d.y())?;
     Ok(pm.square_distance(&pf.value()) <= tol2)
 }
 
 /// The vertex at an end of the segment (the quadric parameters of its point, the
 /// parametric ones of the arc) and the transitions of the line from the arc tangent.
-fn segment_end(input: &PrmInput<'_>, arc: &TheArc, pstart: &IntPatchThePathPointOfTheSOnBounds) -> Result<SegmentEnd, Failure> {
+fn segment_end(
+    input: &PrmInput<'_>,
+    arc: &TheArc,
+    pstart: &IntPatchThePathPointOfTheSOnBounds,
+) -> Result<SegmentEnd, Failure> {
     let param: f64 = pstart.parameter();
     let p2d: Point2 = arc.value(param)?;
     let pp: Point3 = pstart.value();
     let mut point = IntPatchPoint::new();
     point.set_value_tangent(pp, pstart.tolerance(), false);
     let (qu, qv) = input.quad.parameters(pp).unwrap_or((0.0, 0.0));
-    let [u1, v1, u2, v2] = if !input.reversed { [qu, qv, p2d.x(), p2d.y()] } else { [p2d.x(), p2d.y(), qu, qv] };
+    let [u1, v1, u2, v2] = if !input.reversed {
+        [qu, qv, p2d.x(), p2d.y()]
+    } else {
+        [p2d.x(), p2d.y(), qu, qv]
+    };
     point.set_parameters(u1, v1, u2, v2);
     point.set_parameter(param);
     if !pstart.is_new() {
@@ -206,11 +246,21 @@ fn segment_end(input: &PrmInput<'_>, arc: &TheArc, pstart: &IntPatchThePathPoint
     let unk = IntSurfTransition::default();
     point.set_arc(input.reversed, arc, param, &unk, &unk);
     let transitions = end_transitions(input, arc, param, [u1, v1, u2, v2])?;
-    Ok(SegmentEnd { point, pstart: pstart.clone(), param, transitions })
+    Ok(SegmentEnd {
+        point,
+        pstart: pstart.clone(),
+        param,
+        transitions,
+    })
 }
 
 /// The mixed product of the arc tangent (on the parametric surface) and the normals.
-fn end_transitions(input: &PrmInput<'_>, arc: &TheArc, param: f64, [u1, v1, u2, v2]: [f64; 4]) -> Result<Option<(IntSurfTypeTrans, IntSurfTypeTrans)>, Failure> {
+fn end_transitions(
+    input: &PrmInput<'_>,
+    arc: &TheArc,
+    param: f64,
+    [u1, v1, u2, v2]: [f64; 4],
+) -> Result<Option<(IntSurfTypeTrans, IntSurfTypeTrans)>, Failure> {
     let s1 = input.surf1.d1(u1, v1)?;
     let norm1: Vector3 = s1.d1u.crossed(s1.d1v);
     let s2 = input.surf2.d1(u2, v2)?;
@@ -234,7 +284,11 @@ fn end_transitions(input: &PrmInput<'_>, arc: &TheArc, param: f64, [u1, v1, u2, 
 
 /// The polygon of 100 points of the segment on the parametric surface, with the
 /// quadric parameters of its points.
-fn polygon(input: &PrmInput<'_>, arc: &TheArc, (paramf, paraml): (f64, f64)) -> Result<Handle<IntSurfLineOn2S>, Failure> {
+fn polygon(
+    input: &PrmInput<'_>,
+    arc: &TheArc,
+    (paramf, paraml): (f64, f64),
+) -> Result<Handle<IntSurfLineOn2S>, Failure> {
     let thelin = Handle::new(IntSurfLineOn2S::new(None));
     let nbsample: i32 = 100;
     let psurf = input.psurf().0;

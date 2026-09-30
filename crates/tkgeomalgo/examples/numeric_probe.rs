@@ -20,8 +20,8 @@ use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
-use ga_probe::{int_patch_impimp, int_patch_impprm};
 use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_poly, int_patch_tools};
+use ga_probe::{int_patch_impimp, int_patch_impprm};
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.

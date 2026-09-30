@@ -32,7 +32,11 @@ fn uv_on(quad: &IntSurfQuadric, p: Point3) -> (f64, f64) {
 }
 
 /// The line parameter nearest to `psurf` among the samples at a hundredth of the range.
-fn nearest_sample(alin: &IntPatchALine, psurf: Point3, (u0, u1): (f64, f64)) -> Result<f64, Failure> {
+fn nearest_sample(
+    alin: &IntPatchALine,
+    psurf: Point3,
+    (u0, u1): (f64, f64),
+) -> Result<f64, Failure> {
     let dtheta: f64 = (u1 - u0) * 0.01;
     let mut distmin: f64 = f64::MAX;
     let mut thetamin: f64 = 0.0;
@@ -141,7 +145,14 @@ pub(super) fn intersection_with_an_arc(
     }
     let (bestpara, besttheta, bestdist) = search.best;
     if bestdist < distinit {
-        return finish(alin, (besttheta, bestpara), psurf, para, param_on_arc, point_on_arc);
+        return finish(
+            alin,
+            (besttheta, bestpara),
+            psurf,
+            para,
+            param_on_arc,
+            point_on_arc,
+        );
     }
     Ok(false)
 }
@@ -186,7 +197,12 @@ impl ArcSearch<'_> {
     }
 
     /// The parameters brought back into the arc range and the line range.
-    fn clamp_params(&self, mut theta: f64, mut prm: f64, (af, al): (f64, f64)) -> Result<(f64, f64), Failure> {
+    fn clamp_params(
+        &self,
+        mut theta: f64,
+        mut prm: f64,
+        (af, al): (f64, f64),
+    ) -> Result<(f64, f64), Failure> {
         let (u0, u1) = self.bounds;
         if prm > al {
             prm = al;

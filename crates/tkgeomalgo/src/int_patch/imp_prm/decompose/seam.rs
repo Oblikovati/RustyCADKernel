@@ -85,9 +85,19 @@ pub(super) fn adjust_u(mut u: f64) -> f64 {
 
 /// `Correct2DBounds(UF, UL, VF, VL, TOL2D, U, V)`: a parameter within `tol_2d` (and
 /// above 1e-16) of a bound takes it.
-fn correct_2d_bounds((uf, ul, vf, vl): (f64, f64, f64, f64), tol_2d: f64, u: &mut f64, v: &mut f64) {
+fn correct_2d_bounds(
+    (uf, ul, vf, vl): (f64, f64, f64, f64),
+    tol_2d: f64,
+    u: &mut f64,
+    v: &mut f64,
+) {
     let eps: f64 = 1.0e-16;
-    let (duf, dul, dvf, dvl) = ((*u - uf).abs(), (*u - ul).abs(), (*v - vf).abs(), (*v - vl).abs());
+    let (duf, dul, dvf, dvl) = (
+        (*u - uf).abs(),
+        (*u - ul).abs(),
+        (*v - vf).abs(),
+        (*v - vl).abs(),
+    );
     if duf <= tol_2d && duf > eps {
         *u = uf;
     }
@@ -104,8 +114,18 @@ fn correct_2d_bounds((uf, ul, vf, vl): (f64, f64, f64, f64), tol_2d: f64, u: &mu
 
 /// `AdjustLine(Line, IsReversed, QSurf, TOL2D)`: the quadric parameters of every point
 /// in `[0, 2 PI]` and snapped to the bounds.
-pub(super) fn adjust_line(line: &IntSurfLineOn2S, is_reversed: bool, q_surf: &Adaptor3dSurfaceHandle, tol_2d: f64) -> Result<(), Failure> {
-    let bounds = (q_surf.first_u_parameter()?, q_surf.last_u_parameter()?, q_surf.first_v_parameter()?, q_surf.last_v_parameter()?);
+pub(super) fn adjust_line(
+    line: &IntSurfLineOn2S,
+    is_reversed: bool,
+    q_surf: &Adaptor3dSurfaceHandle,
+    tol_2d: f64,
+) -> Result<(), Failure> {
+    let bounds = (
+        q_surf.first_u_parameter()?,
+        q_surf.last_u_parameter()?,
+        q_surf.first_v_parameter()?,
+        q_surf.last_v_parameter()?,
+    );
     let bounds = (bounds.0, bounds.1, bounds.2, bounds.3);
     for ip in 1..=line.nb_points() {
         let (mut u, mut v) = line.value(ip)?.parameters_on_surface(!is_reversed);
@@ -118,7 +138,13 @@ pub(super) fn adjust_line(line: &IntSurfLineOn2S, is_reversed: bool, q_surf: &Ad
 
 /// A point with the quadric U `nu` (and V `v`) and the parametric parameters of the
 /// point `ip`.
-fn seam_point(line: &IntSurfLineOn2S, ap: &IntSurfPntOn2S, ip: i32, (nu, v): (f64, f64), is_reversed: bool) -> Result<IntSurfPntOn2S, Failure> {
+fn seam_point(
+    line: &IntSurfLineOn2S,
+    ap: &IntSurfPntOn2S,
+    ip: i32,
+    (nu, v): (f64, f64),
+    is_reversed: bool,
+) -> Result<IntSurfPntOn2S, Failure> {
     let mut np = IntSurfPntOn2S::new();
     np.set_point(ap.value());
     let (u3, v3) = line.value(ip)?.parameters_on_surface(is_reversed);
@@ -162,7 +188,13 @@ pub(super) fn insert_seam_vertices(
 }
 
 /// An end point on the seam: moved to the other seam end when the neighbour says so.
-fn end_on_seam(line: &IntSurfLineOn2S, _ap: &IntSurfPntOn2S, (ip, nbp): (i32, i32), (u, v): (f64, f64), is_reversed: bool) -> Result<(), Failure> {
+fn end_on_seam(
+    line: &IntSurfLineOn2S,
+    _ap: &IntSurfPntOn2S,
+    (ip, nbp): (i32, i32),
+    (u, v): (f64, f64),
+    is_reversed: bool,
+) -> Result<(), Failure> {
     let ipp: i32 = if ip == 1 { ip + 1 } else { ip - 1 };
     let (u1, _) = line.value(ipp)?.parameters_on_surface(!is_reversed);
     let nu: f64 = adjust_u_first(u, u1);

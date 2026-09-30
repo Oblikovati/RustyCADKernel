@@ -60,26 +60,46 @@ struct VertexEdit {
 
 impl VertexEdit {
     /// The tangent of the arc at `prm` through the quadric derivatives, recomputed.
-    fn tangent_on_quadric(&mut self, quad: &IntSurfQuadric, arc: &TheArc, prm: f64) -> Result<(), Failure> {
+    fn tangent_on_quadric(
+        &mut self,
+        quad: &IntSurfQuadric,
+        arc: &TheArc,
+        prm: f64,
+    ) -> Result<(), Failure> {
         let (p2d, d2d): (Point2, Vector2) = arc.d1(prm)?;
         if let Some((_, d1u, d1v)) = quad.d1(p2d.x(), p2d.y()) {
             (self.d1u, self.d1v) = (d1u, d1v);
         }
-        self.vtgrst.set_linear_form(d2d.x(), self.d1u, d2d.y(), self.d1v);
+        self.vtgrst
+            .set_linear_form(d2d.x(), self.d1u, d2d.y(), self.d1v);
         Ok(())
     }
 
     /// The tangent of the arc at `prm` with the quadric derivatives kept from before.
     fn tangent_kept(&mut self, arc: &TheArc, prm: f64) -> Result<(), Failure> {
         let (_, d2d): (Point2, Vector2) = arc.d1(prm)?;
-        self.vtgrst.set_linear_form(d2d.x(), self.d1u, d2d.y(), self.d1v);
+        self.vtgrst
+            .set_linear_form(d2d.x(), self.d1u, d2d.y(), self.d1v);
         Ok(())
     }
 
     /// The transitions at the point, then the arc of the vertex.
-    fn set_arc(&mut self, on_first: bool, (arc, prm): (&TheArc, f64), vtgint: Vector3, normale: Vector3) -> Result<(), Failure> {
-        line_arc_transitions(vtgint, self.vtgrst, normale, &mut self.transline, &mut self.transarc)?;
-        self.intpt.set_arc(on_first, arc, prm, &self.transline, &self.transarc);
+    fn set_arc(
+        &mut self,
+        on_first: bool,
+        (arc, prm): (&TheArc, f64),
+        vtgint: Vector3,
+        normale: Vector3,
+    ) -> Result<(), Failure> {
+        line_arc_transitions(
+            vtgint,
+            self.vtgrst,
+            normale,
+            &mut self.transline,
+            &mut self.transarc,
+        )?;
+        self.intpt
+            .set_arc(on_first, arc, prm, &self.transline, &self.transarc);
         Ok(())
     }
 }
@@ -108,7 +128,11 @@ pub(super) fn multiple_point(
         let nbvtx: i32 = vline.nb_vertex();
         for jj in 1..=nbvtx {
             edit.intpt = vline.vertex(jj)?;
-            let off_domain = if on_first { !edit.intpt.is_on_dom_s1() } else { !edit.intpt.is_on_dom_s2() };
+            let off_domain = if on_first {
+                !edit.intpt.is_on_dom_s1()
+            } else {
+                !edit.intpt.is_on_dom_s2()
+            };
             if !(edit.intpt.is_multiple() && off_domain) {
                 continue;
             }
@@ -119,9 +143,21 @@ pub(super) fn multiple_point(
             let Some((_, vtgint)) = single_line(point, line, edit.intpt.tolerance())? else {
                 return Ok(false); // must not happen
             };
-            let found = MultipleFound { vline: &vline, jj, ii, vtgint };
+            let found = MultipleFound {
+                vline: &vline,
+                jj,
+                ii,
+                vtgint,
+            };
             let args = (listpnt, domain, quad, normale);
-            if replace_multiple(args, &mut edit, &found, (index, on_first, toler), marks, &mut localdone)? {
+            if replace_multiple(
+                args,
+                &mut edit,
+                &found,
+                (index, on_first, toler),
+                marks,
+                &mut localdone,
+            )? {
                 retvalue = true;
             }
         }
@@ -216,7 +252,9 @@ pub(super) fn point_on_second_dom(
     while jj <= nbvtx {
         edit.intpt = vline.vertex(jj)?;
         let current: &IntPatchThePathPointOfTheSOnBounds = &listpnt[cur];
-        if !edit.intpt.is_on_dom_s2() && current.value().distance(&edit.intpt.value()) <= edit.intpt.tolerance() {
+        if !edit.intpt.is_on_dom_s2()
+            && current.value().distance(&edit.intpt.value()) <= edit.intpt.tolerance()
+        {
             retvalue = false;
             let args = (listpnt, domain, quad, normale, vtgint);
             cur = second_dom_vertex(args, &mut edit, vline, (jj, index, cur, toler), done)?;

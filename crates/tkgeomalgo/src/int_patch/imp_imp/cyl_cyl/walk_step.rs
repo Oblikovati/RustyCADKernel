@@ -18,7 +18,9 @@
 //! One pass of the walking over U1: the parameters of both lines at each U1, the points
 //! added to them, and the adaptive step.
 use super::boundaries::BoundaryStep;
-use super::coeffs::{cyl_cyl_compute_u2, cyl_cyl_compute_uvv, cyl_cyl_compute_v, cyl_cyl_monotonicity};
+use super::coeffs::{
+    cyl_cyl_compute_u2, cyl_cyl_compute_uvv, cyl_cyl_compute_v, cyl_cyl_monotonicity,
+};
 use super::critical::{NB_CRIT_POINTS_MAX, step_computing};
 use super::inscribe::inscribe_point;
 use super::walk::{IntervalWalk, LinesState, NB_WLINES, WlfStatus};
@@ -43,7 +45,11 @@ impl IntervalWalk<'_, '_> {
     /// The pass `while (anU1 <= anUl)`: stops at the first step that breaks a line.
     pub(super) fn walk_lines(&mut self, lines: &mut LinesState) -> Result<(), Failure> {
         let crit_delta: [f64; NB_CRIT_POINTS_MAX] = self.critical_delta();
-        let mut w = U1Walk { u1: self.uf, u1_prev: self.uf, min_critical_param: self.uf };
+        let mut w = U1Walk {
+            u1: self.uf,
+            u1_prev: self.uf,
+            min_critical_param: self.uf,
+        };
         let mut is_first: bool = true;
         while w.u1 <= self.ul {
             self.cross_critical(&mut w.u1, lines, &crit_delta);
@@ -78,7 +84,12 @@ impl IntervalWalk<'_, '_> {
 
     /// A line that went through a critical point stops there: U1 takes its value and
     /// both lines are broken.
-    fn cross_critical(&self, u1: &mut f64, lines: &mut LinesState, crit_delta: &[f64; NB_CRIT_POINTS_MAX]) {
+    fn cross_critical(
+        &self,
+        u1: &mut f64,
+        lines: &mut LinesState,
+        crit_delta: &[f64; NB_CRIT_POINTS_MAX],
+    ) {
         for (&crit, &delta) in self.u1crit.iter().zip(crit_delta).take(self.nb_crit) {
             if (*u1 - crit) * delta < 0.0 {
                 *u1 = crit;
@@ -104,13 +115,20 @@ impl IntervalWalk<'_, '_> {
                     continue;
                 }
             }
-            lines.adding_enabled[i] = (tol_2d >= (lines.u_expect[i] - u1)) || lines.status[i] == WlfStatus::Absent;
+            lines.adding_enabled[i] =
+                (tol_2d >= (lines.u_expect[i] - u1)) || lines.status[i] == WlfStatus::Absent;
         }
     }
 
     /// U2 of the line `i` (on the seam or a bound of S2 at the ends of a line), then V1
     /// and V2.
-    fn line_params(&self, i: usize, u1: f64, lines: &mut LinesState, is_first: bool) -> Result<(), Failure> {
+    fn line_params(
+        &self,
+        i: usize,
+        u1: f64,
+        lines: &mut LinesState,
+        is_first: bool,
+    ) -> Result<(), Failure> {
         let (b, bw) = (&self.setup.b, self.setup.bw);
         let (tol_2d, period) = (bw.tol_2d, self.setup.period);
         let nb_pnts_wl: i32 = lines.curve(i).nb_points();
@@ -148,24 +166,42 @@ impl IntervalWalk<'_, '_> {
     fn first_u2(&self, i: usize, u1: f64, lines: &mut LinesState) {
         let (b, tol_2d, period) = (&self.setup.b, self.setup.bw.tol_2d, self.setup.period);
         let u2: f64 = lines.u2[i];
-        if (b.u2f + period - b.u2l) <= 2.0 * tol_2d && ((u2 - b.u2f).abs() < tol_2d || (u2 - b.u2l).abs() < tol_2d) {
+        if (b.u2f + period - b.u2l) <= 2.0 * tol_2d
+            && ((u2 - b.u2f).abs() < tol_2d || (u2 - b.u2l).abs() < tol_2d)
+        {
             let coeffs = self.setup.bw.coeffs;
-            let inc = cyl_cyl_monotonicity(u1 + self.setup.step_min, i as i32, coeffs, period).unwrap_or(true);
+            let inc = cyl_cyl_monotonicity(u1 + self.setup.step_min, i as i32, coeffs, period)
+                .unwrap_or(true);
             lines.u2[i] = if inc { b.u2f } else { b.u2l };
         }
     }
 
     /// The end of a line on the seam of a full S2: U2 is brought near the last point.
-    fn continued_u2(&self, i: usize, nb_pnts_wl: i32, lines: &mut LinesState) -> Result<(), Failure> {
+    fn continued_u2(
+        &self,
+        i: usize,
+        nb_pnts_wl: i32,
+        lines: &mut LinesState,
+    ) -> Result<(), Failure> {
         let (b, tol_2d, period) = (&self.setup.b, self.setup.bw.tol_2d, self.setup.period);
         let u2: f64 = lines.u2[i];
-        if !((b.u2l - b.u2f) >= period && ((u2 - b.u2f).abs() < tol_2d || (u2 - b.u2l).abs() < tol_2d)) {
+        if !((b.u2l - b.u2f) >= period
+            && ((u2 - b.u2f).abs() < tol_2d || (u2 - b.u2l).abs() < tol_2d))
+        {
             return Ok(());
         }
         let last = lines.curve(i).value(nb_pnts_wl)?;
-        let (u2prev, _) = if self.setup.bw.is_reverse { last.parameters_on_s1() } else { last.parameters_on_s2() };
+        let (u2prev, _) = if self.setup.bw.is_reverse {
+            last.parameters_on_s1()
+        } else {
+            last.parameters_on_s2()
+        };
         if 2.0 * (u2prev - u2).abs() > period {
-            lines.u2[i] = if u2prev > u2 { u2 + period } else { u2 - period };
+            lines.u2[i] = if u2prev > u2 {
+                u2 + period
+            } else {
+                u2 - period
+            };
         }
         Ok(())
     }
@@ -251,8 +287,12 @@ impl IntervalWalk<'_, '_> {
         let (tol, period) = (bw.tol_2d, self.setup.period);
         let (u2, v1, v2) = (lines.u2[i], lines.v1[i], lines.v2[i]);
         // True if the current point is already in the domain.
-        let is_inscribe: bool = (b.u2f - u2) <= tol && (u2 - b.u2l) <= tol && (b.v1f - v1) <= tol
-            && (v1 - b.v1l) <= tol && (b.v2f - v2) <= tol && (v2 - b.v2l) <= tol;
+        let is_inscribe: bool = (b.u2f - u2) <= tol
+            && (u2 - b.u2l) <= tol
+            && (b.v1f - v1) <= tol
+            && (v1 - b.v1l) <= tol
+            && (b.v2f - v2) <= tol
+            && (v2 - b.v2l) <= tol;
         // The line crosses the two V bounds of one cylinder.
         let is_v_intersect: bool = crosses_both(v1, lines.v1_prev[i], (b.v1f, b.v1l))
             || crosses_both(v2, lines.v2_prev[i], (b.v2f, b.v2l));
@@ -263,7 +303,10 @@ impl IntervalWalk<'_, '_> {
         let (found1, found2) = bw.add_boundary_point(&lines.curve(i), &step, i as i32, is_force)?;
         let (v1p, v2p) = (lines.v1_prev[i], lines.v2_prev[i]);
         let is_prev_v_bound: bool = !is_v_intersect
-            && ((v1p - b.v1f).abs() <= tol || (v1p - b.v1l).abs() <= tol || (v2p - b.v2f).abs() <= tol || (v2p - b.v2l).abs() <= tol);
+            && ((v1p - b.v1f).abs() <= tol
+                || (v1p - b.v1l).abs() <= tol
+                || (v2p - b.v2f).abs() <= tol
+                || (v2p - b.v2l).abs() <= tol);
         lines.v1_prev[i] = v1;
         lines.v2_prev[i] = v2;
         let found: bool = found1 || found2;
@@ -285,7 +328,11 @@ impl IntervalWalk<'_, '_> {
             return Ok(());
         }
         let last = lines.wline[i].point(nb)?;
-        let (u2p, _) = if self.setup.bw.is_reverse { last.parameters_on_s1() } else { last.parameters_on_s2() };
+        let (u2p, _) = if self.setup.bw.is_reverse {
+            last.parameters_on_s1()
+        } else {
+            last.parameters_on_s2()
+        };
         let delta: f64 = lines.u2[i] - u2p;
         if 2.0 * delta.abs() > self.setup.period {
             if delta > 0.0 {
@@ -298,16 +345,32 @@ impl IntervalWalk<'_, '_> {
     }
 
     /// The point of a line in the domain.
-    fn inscribed_point(&mut self, u1: f64, i: usize, lines: &mut LinesState, (found, is_force): (bool, bool)) -> Result<(), Failure> {
+    fn inscribed_point(
+        &mut self,
+        u1: f64,
+        i: usize,
+        lines: &mut LinesState,
+        (found, is_force): (bool, bool),
+    ) -> Result<(), Failure> {
         if lines.status[i] == WlfStatus::Absent && found {
             lines.status[i] = WlfStatus::Exist;
         }
-        if !(lines.status[i] != WlfStatus::Broken || lines.wline[i].nb_pnts()? >= 1 || is_equal(u1, self.ul)) {
+        if !(lines.status[i] != WlfStatus::Broken
+            || lines.wline[i].nb_pnts()? >= 1
+            || is_equal(u1, self.ul))
+        {
             return Ok(());
         }
         self.u2_near_last(i, lines)?;
-        let flags = AddFlags { precise: true, before: is_force, only_check: false };
-        let pnts = (Point2::new(u1, lines.v1[i]), Point2::new(lines.u2[i], lines.v2[i]));
+        let flags = AddFlags {
+            precise: true,
+            before: is_force,
+            only_check: false,
+        };
+        let pnts = (
+            Point2::new(u1, lines.v1[i]),
+            Point2::new(lines.u2[i], lines.v2[i]),
+        );
         if add_point_into_wl(&self.setup.ctx, flags, pnts, &lines.curve(i), i as i32)? {
             if lines.status[i] == WlfStatus::Absent {
                 lines.status[i] = WlfStatus::Exist;
@@ -336,8 +399,15 @@ impl IntervalWalk<'_, '_> {
                 is_added = true;
             }
             self.u2_near_last(i, lines)?;
-            let flags = AddFlags { precise: true, before: false, only_check: false };
-            let pnts = (Point2::new(w.u1, lines.v1[i]), Point2::new(lines.u2[i], lines.v2[i]));
+            let flags = AddFlags {
+                precise: true,
+                before: false,
+                only_check: false,
+            };
+            let pnts = (
+                Point2::new(w.u1, lines.v1[i]),
+                Point2::new(lines.u2[i], lines.v2[i]),
+            );
             if add_point_into_wl(&self.setup.ctx, flags, pnts, &lines.curve(i), i as i32)? {
                 is_added = true;
             }
@@ -356,8 +426,15 @@ impl IntervalWalk<'_, '_> {
             if let Some((u2, v1, v2)) = cyl_cyl_compute_uvv(umax_added, i as i32, bw.coeffs)? {
                 (lines.u2[i], lines.v1[i], lines.v2[i]) = (u2, v1, v2);
             }
-            let flags = AddFlags { precise: true, before: false, only_check: false };
-            let pnts = (Point2::new(umax_added, lines.v1[i]), Point2::new(lines.u2[i], lines.v2[i]));
+            let flags = AddFlags {
+                precise: true,
+                before: false,
+                only_check: false,
+            };
+            let pnts = (
+                Point2::new(umax_added, lines.v1[i]),
+                Point2::new(lines.u2[i], lines.v2[i]),
+            );
             add_point_into_wl(&self.setup.ctx, flags, pnts, &lines.curve(i), i as i32)?;
         }
         Ok(())
@@ -373,7 +450,11 @@ impl IntervalWalk<'_, '_> {
                 continue;
             }
             let last = lines.curve(i).value(nb)?;
-            let (u1c, _) = if self.setup.bw.is_reverse { last.parameters_on_s2() } else { last.parameters_on_s1() };
+            let (u1c, _) = if self.setup.bw.is_reverse {
+                last.parameters_on_s2()
+            } else {
+                last.parameters_on_s1()
+            };
             umax = std_max(umax, u1c);
             is_changed = true;
         }
@@ -399,7 +480,9 @@ impl IntervalWalk<'_, '_> {
                 continue;
             }
             let matr: Matrix<'static> = self.linear_system(w.u1, lines.u2[i])?;
-            let Some(mut step_tmp) = step_computing(&matr, (lines.v1[i], lines.v2[i]), (delta_v1, delta_v2))? else {
+            let Some(mut step_tmp) =
+                step_computing(&matr, (lines.v1[i], lines.v2[i]), (delta_v1, delta_v2))?
+            else {
                 // To avoid cycling-up.
                 lines.u_expect[i] += s.step_max;
                 min_uexp = std_min(min_uexp, lines.u_expect[i]);
@@ -424,13 +507,20 @@ impl IntervalWalk<'_, '_> {
     fn linear_system(&self, u1: f64, u2: f64) -> Result<Matrix<'static>, Failure> {
         let c = self.setup.bw.coeffs;
         let (su1, cu1, su2, cu2) = (u1.sin(), u1.cos(), u2.sin(), u2.cos());
-        let mut matr = Matrix::with_bounds(1, 3, 1, 5).map_err(|e| e.into_failure("math_Matrix"))?;
+        let mut matr =
+            Matrix::with_bounds(1, 3, 1, 5).map_err(|e| e.into_failure("math_Matrix"))?;
         let cols: [[f64; 3]; 5] = [
             c.vec_c1,
             c.vec_c2,
             std::array::from_fn(|k| c.vec_a1[k] * su1 - c.vec_b1[k] * cu1),
             std::array::from_fn(|k| c.vec_a2[k] * su2 - c.vec_b2[k] * cu2),
-            std::array::from_fn(|k| c.vec_a1[k] * cu1 + c.vec_b1[k] * su1 + c.vec_a2[k] * cu2 + c.vec_b2[k] * su2 + c.vec_d[k]),
+            std::array::from_fn(|k| {
+                c.vec_a1[k] * cu1
+                    + c.vec_b1[k] * su1
+                    + c.vec_a2[k] * cu2
+                    + c.vec_b2[k] * su2
+                    + c.vec_d[k]
+            }),
         ];
         for (j, col) in cols.iter().enumerate() {
             for (k, value) in col.iter().enumerate() {

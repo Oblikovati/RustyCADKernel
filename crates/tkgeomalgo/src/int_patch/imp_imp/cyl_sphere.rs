@@ -58,15 +58,28 @@ pub(super) fn int_cysp(
     match typint {
         ResultType::Empty => *empty = true,
         ResultType::Point => spnt.push(tangent_point(inter.point(1)?, quads, tol, true)),
-        ResultType::Circle if nb_sol == 1 => push(slin, tangency_circle(&inter.circle(1)?, &sp, quads, reversed)?),
+        ResultType::Circle if nb_sol == 1 => push(
+            slin,
+            tangency_circle(&inter.circle(1)?, &sp, quads, reversed)?,
+        ),
         ResultType::Circle => {
             let c1: Circle3 = inter.circle(1)?;
             let (ptref, tgt) = elclib::d1(0.0, &c1);
-            push(slin, IntPatchGLine::from_circle(&c1, false, by_sign(dot_cross(tgt, quads.0, quads.1, ptref)?)));
+            push(
+                slin,
+                IntPatchGLine::from_circle(
+                    &c1,
+                    false,
+                    by_sign(dot_cross(tgt, quads.0, quads.1, ptref)?),
+                ),
+            );
             let c2: Circle3 = inter.circle(2)?;
             let (ptref, tgt) = elclib::d1(0.0, &c2);
             let qwe: f64 = dot_cross(tgt, quads.0, quads.1, ptref)?;
-            push(slin, IntPatchGLine::from_circle(&c2, false, by_sign_tol(qwe, 0.0000001)));
+            push(
+                slin,
+                IntPatchGLine::from_circle(&c2, false, by_sign_tol(qwe, 0.0000001)),
+            );
         }
         ResultType::NoGeometricSolution => {
             let anaint = IntQuadQuad::cylinder(cy, &Quadric::from_sphere(sp), tol)?;
@@ -79,7 +92,12 @@ pub(super) fn int_cysp(
 
 /// The tangency circle, with TOUCH transitions from the curvature toward the sphere
 /// center.
-fn tangency_circle(cirsol: &Circle3, sp: &Sphere3, quads: Quads<'_>, reversed: bool) -> Result<IntPatchGLine, Failure> {
+fn tangency_circle(
+    cirsol: &Circle3,
+    sp: &Sphere3,
+    quads: Quads<'_>,
+    reversed: bool,
+) -> Result<IntPatchGLine, Failure> {
     use IntSurfSituation::{Inside, Outside};
     let (ptref, _) = elclib::d1(0.0, cirsol);
     let test_curvature = Vector3::between(ptref, sp.location());
@@ -119,10 +137,22 @@ fn analytic_curves(
         return Ok(true);
     }
     analytic_points(anaint, quads, tol, spnt)?;
-    let opts = CurveOptions { check_tangent: false, tol_trans: 0.00000001, open_ends: false, eval_on_fail: false };
+    let opts = CurveOptions {
+        check_tangent: false,
+        tol_trans: 0.00000001,
+        open_ends: false,
+        eval_on_fail: false,
+    };
     let mut ends: (Point3, Point3) = (Point3::default(), Point3::default());
     for i in 1..=anaint.nb_curve()? {
-        analytic_line(anaint.curve(i)?, quads, &opts, (slin, multpoint), tol, &mut ends)?;
+        analytic_line(
+            anaint.curve(i)?,
+            quads,
+            &opts,
+            (slin, multpoint),
+            tol,
+            &mut ends,
+        )?;
     }
     Ok(true)
 }

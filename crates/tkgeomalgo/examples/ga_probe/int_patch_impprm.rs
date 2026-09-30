@@ -44,11 +44,16 @@ pub fn impprm_case(values: &[f64]) {
         let (tolarc, toltang, fleche, pas) = (r.real(), r.real(), r.real(), r.real());
         let mode: i32 = r.integer();
         let (u, v) = (r.real(), r.real());
-        let (d1, d2) = (Adaptor3dTopolTool::with_surface(&s1)?, Adaptor3dTopolTool::with_surface(&s2)?);
+        let (d1, d2) = (
+            Adaptor3dTopolTool::with_surface(&s1)?,
+            Adaptor3dTopolTool::with_surface(&s2)?,
+        );
         let dm = Domains::new(&d1, &d2);
         impprm(&dm, &IntPatchImpPrmIntersection::new());
         if mode == 0 {
-            let x = IntPatchImpPrmIntersection::with_surfaces(&s1, &d1, &s2, &d2, tolarc, toltang, fleche, pas)?;
+            let x = IntPatchImpPrmIntersection::with_surfaces(
+                &s1, &d1, &s2, &d2, tolarc, toltang, fleche, pas,
+            )?;
             impprm(&dm, &x);
             return Ok(());
         }
@@ -82,7 +87,12 @@ fn arc_of_rank(d: &Adaptor3dTopolTool, rank: i32) -> Result<TheArc, Failure> {
 }
 
 /// The line of `ga_ip_rstint_case`: walking (kind 0) or restriction on the arc.
-fn rst_line(kind: i32, pts: &Handle<IntSurfLineOn2S>, arc: &TheArc, onfirst: bool) -> Handle<dyn IntPatchPointLine> {
+fn rst_line(
+    kind: i32,
+    pts: &Handle<IntSurfLineOn2S>,
+    arc: &TheArc,
+    onfirst: bool,
+) -> Handle<dyn IntPatchPointLine> {
     let (tin, tout) = (IntSurfTypeTrans::In, IntSurfTypeTrans::Out);
     if kind == 0 {
         return Handle::new(IntPatchWLine::new(pts, false, tin, tout)).cast();
@@ -100,7 +110,11 @@ fn rst_line(kind: i32, pts: &Handle<IntSurfLineOn2S>, arc: &TheArc, onfirst: boo
 }
 
 /// The end vertices of the line (parameters 1 and `n`), then its first and last points.
-fn add_ends(l: &Handle<dyn IntPatchPointLine>, pts: &IntSurfLineOn2S, tol: f64) -> Result<(), Failure> {
+fn add_ends(
+    l: &Handle<dyn IntPatchPointLine>,
+    pts: &IntSurfLineOn2S,
+    tol: f64,
+) -> Result<(), Failure> {
     let n: i32 = pts.nb_points();
     for i in [1, n] {
         let q = pts.value(i)?;
@@ -137,9 +151,20 @@ pub fn rstint_case(values: &[f64]) {
         for _ in 0..n {
             pts.add(&read_pnt2s(&mut r));
         }
-        let (ds, dother) = (Adaptor3dTopolTool::with_surface(&s)?, Adaptor3dTopolTool::with_surface(&o)?);
-        let dm = if onfirst { Domains::new(&ds, &dother) } else { Domains::new(&dother, &ds) };
-        let arc: TheArc = if kind == 0 { TheArc::default() } else { arc_of_rank(&dother, arc)? };
+        let (ds, dother) = (
+            Adaptor3dTopolTool::with_surface(&s)?,
+            Adaptor3dTopolTool::with_surface(&o)?,
+        );
+        let dm = if onfirst {
+            Domains::new(&ds, &dother)
+        } else {
+            Domains::new(&dother, &ds)
+        };
+        let arc: TheArc = if kind == 0 {
+            TheArc::default()
+        } else {
+            arc_of_rank(&dother, arc)?
+        };
         let pl: Handle<dyn IntPatchPointLine> = rst_line(kind, &pts, &arc, onfirst);
         if ends && n > 0 {
             add_ends(&pl, &pts, tol)?;

@@ -96,8 +96,16 @@ struct RstState {
 }
 
 /// The closed directions of both surfaces and their tolerances.
-fn closed_directions(surf: &Adaptor3dSurfaceHandle, other: &Adaptor3dSurfaceHandle) -> Result<([bool; 4], [f64; 4]), Failure> {
-    let closed = [surf.is_u_closed()?, surf.is_v_closed()?, other.is_u_closed()?, other.is_v_closed()?];
+fn closed_directions(
+    surf: &Adaptor3dSurfaceHandle,
+    other: &Adaptor3dSurfaceHandle,
+) -> Result<([bool; 4], [f64; 4]), Failure> {
+    let closed = [
+        surf.is_u_closed()?,
+        surf.is_v_closed()?,
+        other.is_u_closed()?,
+        other.is_v_closed()?,
+    ];
     let mut tols = [0.0; 4];
     if closed.iter().any(|&c| c) {
         if closed[0] {
@@ -165,17 +173,41 @@ impl IntPatchRstInt {
 
     fn input<'a>(
         line: PointLineRef,
-        (surf, domain, other_surf): (&'a Adaptor3dSurfaceHandle, &'a (dyn TheTopolTool + 'static), &'a Adaptor3dSurfaceHandle),
+        (surf, domain, other_surf): (
+            &'a Adaptor3dSurfaceHandle,
+            &'a (dyn TheTopolTool + 'static),
+            &'a Adaptor3dSurfaceHandle,
+        ),
         on_first: bool,
         tol: f64,
     ) -> Result<RstInput<'a>, Failure> {
         let (closed, tol_closed) = closed_directions(surf, other_surf)?;
-        let (surf1, surf2) = if on_first { (surf, other_surf) } else { (other_surf, surf) };
+        let (surf1, surf2) = if on_first {
+            (surf, other_surf)
+        } else {
+            (other_surf, surf)
+        };
         let types = (surf1.get_type()?, surf2.get_type()?);
         let surfacetype: SurfaceType = if on_first { types.0 } else { types.1 };
-        let periodic: bool = matches!(surfacetype, SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Torus | SurfaceType::Sphere);
+        let periodic: bool = matches!(
+            surfacetype,
+            SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Torus | SurfaceType::Sphere
+        );
         let bi_periodic: bool = surfacetype == SurfaceType::Torus;
-        Ok(RstInput { line, surf, domain, other_surf, on_first, tol, closed, tol_closed, types, surfacetype, periodic, bi_periodic })
+        Ok(RstInput {
+            line,
+            surf,
+            domain,
+            other_surf,
+            on_first,
+            tol,
+            closed,
+            tol_closed,
+            types,
+            surfacetype,
+            periodic,
+            bi_periodic,
+        })
     }
 }
 
@@ -211,7 +243,11 @@ impl RstInput<'_> {
     fn finish_line(&self) -> Result<(), Failure> {
         match &self.line {
             PointLineRef::Walking(w) => {
-                let (surf1, surf2) = if self.on_first { (self.surf, self.other_surf) } else { (self.other_surf, self.surf) };
+                let (surf1, surf2) = if self.on_first {
+                    (self.surf, self.other_surf)
+                } else {
+                    (self.other_surf, self.surf)
+                };
                 let (pu1, pv1) = line_periods(surf1, self.types.0)?;
                 let (pu2, pv2) = line_periods(surf2, self.types.1)?;
                 w.set_period(pu1, pv1, pu2, pv2);

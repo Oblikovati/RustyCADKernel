@@ -25,7 +25,9 @@ use super::super::instances::IntPatchCurvIntSurf;
 use super::super::polyarc::IntPatchPolyArc;
 use super::super::polygo::IntPatchPolygo;
 use super::super::polyline::IntPatchPolyLine;
-use super::helpers::{FindInput, PointLineRef, find_parameter, get_line_point_2d, recadre, tol3d_arc};
+use super::helpers::{
+    FindInput, PointLineRef, find_parameter, get_line_point_2d, recadre, tol3d_arc,
+};
 use super::{RstInput, RstState};
 use crate::int_start::TheArc;
 use crate::intf::{InterferencePolygon2d, Polygon2d};
@@ -76,7 +78,12 @@ impl RstInput<'_> {
 
     /// The number of samples of the arc polygon and the offsets that bring a line arc
     /// (an axis-aligned restriction) into the period of the line polygon box.
-    fn samples(&self, arc: &TheArc, bplin: &BoundingBox2, (pfirst, plast): (f64, f64)) -> Result<(i32, f64, f64), Failure> {
+    fn samples(
+        &self,
+        arc: &TheArc,
+        bplin: &BoundingBox2,
+        (pfirst, plast): (f64, f64),
+    ) -> Result<(i32, f64, f64), Failure> {
         let clamp = |n: i32| n.clamp(10, 50);
         match arc.get_type()? {
             CurveType::Line => {
@@ -124,7 +131,12 @@ impl RstInput<'_> {
 
     /// One arc of the domain: its polygon is intersected with the line one, shifted by
     /// -2PI, 0 and +2PI in U (and V) on a periodic surface.
-    pub(super) fn process_arc(&self, st: &mut RstState, plin: &IntPatchPolyLine, arc: &TheArc) -> Result<(), Failure> {
+    pub(super) fn process_arc(
+        &self,
+        st: &mut RstState,
+        plin: &IntPatchPolyLine,
+        arc: &TheArc,
+    ) -> Result<(), Failure> {
         // MSV Oct 15, 2001: the tolerance of this edge if possible.
         let edge_tol: f64 = tol3d_arc(arc, self.domain, self.tol)?;
         let bounds = self.arc_bounds(arc)?;
@@ -132,7 +144,11 @@ impl RstInput<'_> {
         let (nb_echant, ref_ou, ref_ov) = self.samples(arc, &bplin, bounds)?;
         let bplin = self.widened_box(bplin)?;
         let brise = IntPatchPolyArc::new(arc, nb_echant, bounds.0, bounds.1, &bplin)?;
-        let mut run = ArcRun { arc, edge_tol, brise };
+        let mut run = ArcRun {
+            arc,
+            edge_tol,
+            brise,
+        };
         // The periodic counter is not reset for the shifts in V (a torus runs the three
         // U shifts with the first V shift only), as natively.
         let (mut ibi, mut ip) = (0, 0);
@@ -166,7 +182,12 @@ impl RstInput<'_> {
 
     /// The crossings of the line and arc polygons (only the section points: the
     /// tangent zones need no vertex, #29494).
-    fn section_points(&self, st: &mut RstState, plin: &IntPatchPolyLine, run: &ArcRun<'_>) -> Result<(), Failure> {
+    fn section_points(
+        &self,
+        st: &mut RstState,
+        plin: &IntPatchPolyLine,
+        run: &ArcRun<'_>,
+    ) -> Result<(), Failure> {
         let mut commun = InterferencePolygon2d::new();
         commun.perform(plin as &dyn Polygon2d, &run.brise as &dyn Polygon2d)?;
         st.locpt.clear();
@@ -194,7 +215,12 @@ impl RstInput<'_> {
 
     /// One crossing: the approximate 2d point is refined by the curve-surface
     /// intersection, then put on the line unless a point near it was already found.
-    fn section_point(&self, st: &mut RstState, run: &ArcRun<'_>, (aw1, aw2): (f64, f64)) -> Result<(), Failure> {
+    fn section_point(
+        &self,
+        st: &mut RstState,
+        run: &ArcRun<'_>,
+        (aw1, aw2): (f64, f64),
+    ) -> Result<(), Failure> {
         (st.u, st.v) = get_line_point_2d(&self.line, aw1 + 1.0, !self.on_first)?;
         st.w = Self::arc_parameter(&run.brise, aw2)?;
         if !self.refine(st, run)? {
@@ -207,7 +233,11 @@ impl RstInput<'_> {
         let (p2d, d2d) = run.arc.d1(st.paramarc)?;
         (st.u1, st.v1, st.d2d) = (p2d.x(), p2d.y(), d2d);
         if let (PointLineRef::Walking(w), true) = (&self.line, self.periodic) {
-            let p = if self.on_first { [st.u1, st.v1, st.u2, st.v2] } else { [st.u2, st.v2, st.u1, st.v1] };
+            let p = if self.on_first {
+                [st.u1, st.v1, st.u2, st.v2]
+            } else {
+                [st.u2, st.v2, st.u1, st.v1]
+            };
             let [a, b, c, d] = recadre(self.types, w, param_approx, p)?;
             if self.on_first {
                 (st.u1, st.v1, st.u2, st.v2) = (a, b, c, d);
@@ -229,7 +259,8 @@ impl RstInput<'_> {
     fn refine(&self, st: &mut RstState, run: &ArcRun<'_>) -> Result<bool, Failure> {
         let thefunc = IntPatchCSFunction::new(self.other_surf, run.arc, self.surf);
         let marg_coef: f64 = 0.004;
-        let int_cs = IntPatchCurvIntSurf::new([st.u, st.v, st.w], &thefunc, run.edge_tol, marg_coef)?;
+        let int_cs =
+            IntPatchCurvIntSurf::new([st.u, st.v, st.w], &thefunc, run.edge_tol, marg_coef)?;
         if !int_cs.is_done() || int_cs.is_empty()? {
             return Ok(false);
         }
@@ -267,7 +298,12 @@ impl RstInput<'_> {
 
     /// The parameter of the point on the line and the tangent there; on a closed
     /// surface of a walking line, the 2d parameters of the line point must match.
-    fn found_on_line(&self, st: &mut RstState, edge_tol: f64, param_approx: i32) -> Result<bool, Failure> {
+    fn found_on_line(
+        &self,
+        st: &mut RstState,
+        edge_tol: f64,
+        param_approx: i32,
+    ) -> Result<bool, Failure> {
         let input = FindInput {
             other_surf: self.other_surf,
             tol: edge_tol,

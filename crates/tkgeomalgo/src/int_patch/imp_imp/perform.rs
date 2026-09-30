@@ -19,7 +19,10 @@
 //! points on the restrictions of both domains put on the lines.
 use super::super::arc_function::IntPatchArcFunction;
 use super::cyl_cyl::{CyCyFlags, int_cycy};
-use super::{IntPatchImpImpIntersection, IntPatchImpImpStatus, cone_cone, cone_sphere, cyl_cone, cyl_sphere, plane, plane_cone, sphere_sphere, torus};
+use super::{
+    IntPatchImpImpIntersection, IntPatchImpImpStatus, cone_cone, cone_sphere, cyl_cone, cyl_sphere,
+    plane, plane_cone, sphere_sphere, torus,
+};
 use crate::int_start::TheTopolTool;
 use crate::int_surf::IntSurfQuadric;
 use rustycad_tkernel::precision;
@@ -86,7 +89,9 @@ pub(super) struct PairFlags {
 fn not_quadrics(t1: SurfaceType, t2: SurfaceType) -> Failure {
     Failure::with_message(
         "Standard_ConstructionError",
-        &format!("IntPatch_ImpImpIntersection::Perform() - surfaces {t1:?} and {t2:?}; expected two quadrics"),
+        &format!(
+            "IntPatch_ImpImpIntersection::Perform() - surfaces {t1:?} and {t2:?}; expected two quadrics"
+        ),
     )
 }
 
@@ -110,13 +115,24 @@ impl IntPatchImpImpIntersection {
         self.spnt.clear();
         self.slin.clear();
         (self.empt, self.tgte, self.oppo) = (true, false, false);
-        let input = PerformInput { s1, d1, s2, d2, tol_arc, tol_tang, keep_rline: is_req_to_keep_rline };
+        let input = PerformInput {
+            s1,
+            d1,
+            s2,
+            d2,
+            tol_arc,
+            tol_tang,
+            keep_rline: is_req_to_keep_rline,
+        };
         let (typs1, quad1, it1) = set_quad(s1)?;
         let (typs2, quad2, it2) = set_quad(s2)?;
         if it1 == 0 || it2 == 0 {
             return Err(not_quadrics(typs1, typs2));
         }
-        let mut flags = PairFlags { post_processing: true, ..PairFlags::default() };
+        let mut flags = PairFlags {
+            post_processing: true,
+            ..PairFlags::default()
+        };
         if !self.pair(&input, (&quad1, &quad2), (it1, it2), &mut flags)? {
             return Ok(());
         }
@@ -126,7 +142,9 @@ impl IntPatchImpImpIntersection {
             }
             return Ok(());
         }
-        if flags.post_processing && !self.post_process(&input, (&quad1, &quad2), (typs1, typs2), &flags)? {
+        if flags.post_processing
+            && !self.post_process(&input, (&quad1, &quad2), (typs1, typs2), &flags)?
+        {
             return Ok(());
         }
         self.finish(&input, (&quad1, &quad2))
@@ -151,25 +169,58 @@ impl IntPatchImpImpIntersection {
             12 | 21 => {
                 let cyl = if reverse { input.s1 } else { input.s2 };
                 let (vmin, vmax) = (cyl.first_v_parameter()?, cyl.last_v_parameter()?);
-                let h: f64 = if precision::is_negative_infinite(vmin) || precision::is_positive_infinite(vmax) { 0.0 } else { vmax - vmin };
+                let h: f64 = if precision::is_negative_infinite(vmin)
+                    || precision::is_positive_infinite(vmax)
+                {
+                    0.0
+                } else {
+                    vmax - vmin
+                };
                 plane::int_pcy(quads, (tolang, tt), reverse, empt, slin, h)?
             }
-            13 | 31 => plane_cone::int_pco(quads, (tolang, tt), reverse, empt, &mut flags.multpoint, slin, spnt)?,
+            13 | 31 => plane_cone::int_pco(
+                quads,
+                (tolang, tt),
+                reverse,
+                empt,
+                &mut flags.multpoint,
+                slin,
+                spnt,
+            )?,
             14 | 41 => plane::int_psp(quads, (tolang, tt), reverse, empt, slin, spnt)?,
             15 | 51 => torus::int_pto(quads, tt, reverse, empt, slin)?,
             22 => return self.pair_cycy(input, quads, flags),
-            23 | 32 => cyl_cone::int_cyco(quads, tt, reverse, empt, &mut flags.multpoint, slin, spnt)?,
-            24 | 42 => cyl_sphere::int_cysp(quads, tt, reverse, empt, &mut flags.multpoint, slin, spnt)?,
+            23 | 32 => {
+                cyl_cone::int_cyco(quads, tt, reverse, empt, &mut flags.multpoint, slin, spnt)?
+            }
+            24 | 42 => {
+                cyl_sphere::int_cysp(quads, tt, reverse, empt, &mut flags.multpoint, slin, spnt)?
+            }
             25 | 52 | 45 | 54 => torus::int_quadric_torus(quads, tt, reverse, empt, slin)?,
-            33 => cone_cone::int_coco(quads, tt, empt, &mut flags.same_surf, &mut flags.multpoint, slin, spnt)?,
-            34 | 43 => cone_sphere::int_cosp(quads, tt, reverse, empt, &mut flags.multpoint, slin, spnt)?,
+            33 => cone_cone::int_coco(
+                quads,
+                tt,
+                empt,
+                &mut flags.same_surf,
+                &mut flags.multpoint,
+                slin,
+                spnt,
+            )?,
+            34 | 43 => {
+                cone_sphere::int_cosp(quads, tt, reverse, empt, &mut flags.multpoint, slin, spnt)?
+            }
             35 | 53 => {
                 // The cone and torus case does not update the empty flag, as natively.
                 return torus::int_quadric_torus(quads, tt, reverse, empt, slin);
             }
             44 => sphere_sphere::int_spsp(quads, tt, (empt, &mut flags.same_surf), slin, spnt)?,
             55 => torus::int_toto(quads, tt, &mut flags.same_surf, empt, slin)?,
-            _ => return Err(Failure::with_message("Standard_ConstructionError", "IntPatch_ImpImpIntersection::Perform() - unknown pair of quadrics")),
+            _ => {
+                return Err(Failure::with_message(
+                    "Standard_ConstructionError",
+                    "IntPatch_ImpImpIntersection::Perform() - unknown pair of quadrics",
+                ));
+            }
         };
         // Plane/plane does not update the empty flag either.
         flags.b_empty = ok && it1 * 10 + it2 != 11 && self.empt;
@@ -202,15 +253,34 @@ impl IntPatchImpImpIntersection {
         box2.add_point(Point2::new(u2f, s2.first_v_parameter()?));
         box2.add_point(Point2::new(u2l, s2.last_v_parameter()?));
         // The resolution is too big for a small radius: bound it by a constant.
-        let tol_2d: f64 = std_min(1.0e-4, std_min(s1.u_resolution(input.tol_tang)?, s2.u_resolution(input.tol_tang)?));
-        let cyflags = CyCyFlags { empty: &mut self.empt, same: &mut flags.same_surf, multpoint: &mut flags.multpoint };
-        self.my_done = int_cycy(quads, input.tol_tang, tol_2d, (&box1, &box2), cyflags, &mut self.slin, &mut self.spnt)?;
+        let tol_2d: f64 = std_min(
+            1.0e-4,
+            std_min(
+                s1.u_resolution(input.tol_tang)?,
+                s2.u_resolution(input.tol_tang)?,
+            ),
+        );
+        let cyflags = CyCyFlags {
+            empty: &mut self.empt,
+            same: &mut flags.same_surf,
+            multpoint: &mut flags.multpoint,
+        };
+        self.my_done = int_cycy(
+            quads,
+            input.tol_tang,
+            tol_2d,
+            (&box1, &box2),
+            cyflags,
+            &mut self.slin,
+            &mut self.spnt,
+        )?;
         if self.my_done == IntPatchImpImpStatus::Fail {
             return Ok(false);
         }
         flags.b_empty = self.empt;
         if let Some(first) = self.slin.first() {
-            let w: rustycad_tkernel::standard::Handle<super::super::wline::IntPatchWLine> = first.cast();
+            let w: rustycad_tkernel::standard::Handle<super::super::wline::IntPatchWLine> =
+                first.cast();
             if !w.is_null() {
                 // No geometric solution.
                 flags.post_processing = false;
@@ -221,7 +291,10 @@ impl IntPatchImpImpIntersection {
 }
 
 /// The arc function of the quadric `quad` on the surface `s`.
-pub(super) fn arc_function(quad: &IntSurfQuadric, s: &Adaptor3dSurfaceHandle) -> IntPatchArcFunction {
+pub(super) fn arc_function(
+    quad: &IntSurfQuadric,
+    s: &Adaptor3dSurfaceHandle,
+) -> IntPatchArcFunction {
     let mut f = IntPatchArcFunction::new();
     f.set_quadric(quad);
     f.set_surface(s);

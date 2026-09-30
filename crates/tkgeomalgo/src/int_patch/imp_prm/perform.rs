@@ -47,12 +47,20 @@ pub(super) struct PrmInput<'a> {
 impl PrmInput<'_> {
     /// The parametric surface and its domain.
     pub(super) fn psurf(&self) -> (&Adaptor3dSurfaceHandle, &(dyn TheTopolTool + 'static)) {
-        if self.reversed { (self.surf1, self.d1) } else { (self.surf2, self.d2) }
+        if self.reversed {
+            (self.surf1, self.d1)
+        } else {
+            (self.surf2, self.d2)
+        }
     }
 
     /// The quadric surface.
     pub(super) fn qsurf(&self) -> &Adaptor3dSurfaceHandle {
-        if self.reversed { self.surf2 } else { self.surf1 }
+        if self.reversed {
+            self.surf2
+        } else {
+            self.surf1
+        }
     }
 }
 
@@ -99,12 +107,26 @@ impl IntPatchImpPrmIntersection {
                 None => {
                     return Err(Failure::with_message(
                         "Standard_ConstructionError",
-                        &format!("IntPatch_ImpPrmIntersection::Perform() - surfaces {:?} and {:?}; expected a plane, cylinder, sphere or cone", types.0, types.1),
+                        &format!(
+                            "IntPatch_ImpPrmIntersection::Perform() - surfaces {:?} and {:?}; expected a plane, cylinder, sphere or cone",
+                            types.0, types.1
+                        ),
                     ));
                 }
             },
         };
-        let input = PrmInput { surf1, d1, surf2, d2, tol_arc, tol_tang, fleche, reversed, types, quad };
+        let input = PrmInput {
+            surf1,
+            d1,
+            surf2,
+            d2,
+            tol_arc,
+            tol_tang,
+            fleche,
+            reversed,
+            types,
+            quad,
+        };
         let local_pas: f64 = get_local_step(input.psurf().0, pas)?;
         let mut func = IntPatchTheSurfFunction::new();
         func.set_implicit_surface(&input.quad);
@@ -113,7 +135,8 @@ impl IntPatchImpPrmIntersection {
         let mut afunc = IntPatchArcFunction::new();
         afunc.set_quadric(&input.quad);
         afunc.set_surface(input.psurf().0);
-        self.solrst.perform(&mut afunc, input.psurf().1, tol_arc, tol_tang, false)?;
+        self.solrst
+            .perform(&mut afunc, input.psurf().1, tol_arc, tol_tang, false)?;
         if !self.solrst.is_done() {
             return Ok(());
         }
@@ -122,18 +145,28 @@ impl IntPatchImpPrmIntersection {
 
     /// The start points and the walking, then the segments, the vertices on the
     /// restrictions of the quadric and the decomposition.
-    fn walk(&mut self, input: &PrmInput<'_>, func: &mut IntPatchTheSurfFunction, local_pas: f64) -> Result<(), Failure> {
+    fn walk(
+        &mut self,
+        input: &PrmInput<'_>,
+        func: &mut IntPatchTheSurfFunction,
+        local_pas: f64,
+    ) -> Result<(), Failure> {
         let nb_point_rst: i32 = self.solrst.nb_points()?;
         let mut destination: Vec<i32> = vec![0; nb_point_rst as usize + 2];
         let mut seqpdep: Vec<IntSurfPathPoint> = Vec::new();
         if nb_point_rst != 0 {
             let (psurf, domain) = input.psurf();
-            let tin = TangencyInput { solrst: &self.solrst, domain, psurf };
+            let tin = TangencyInput {
+                solrst: &self.solrst,
+                domain,
+                psurf,
+            };
             compute_tangency(&tin, &mut seqpdep, func, &mut destination)?;
         }
         let seqpins: Vec<IntSurfInteriorPoint> = self.interior_points(input, func)?;
         if !seqpdep.is_empty() || !seqpins.is_empty() {
-            let mut iwalk = IntPatchTheIWalking::new(input.tol_tang, input.fleche, local_pas, false)?;
+            let mut iwalk =
+                IntPatchTheIWalking::new(input.tol_tang, input.fleche, local_pas, false)?;
             iwalk.perform(&seqpdep, &seqpins, func, input.psurf().0, input.reversed)?;
             if !iwalk.is_done() {
                 return Ok(());
@@ -153,7 +186,11 @@ impl IntPatchImpPrmIntersection {
 
     /// Whether the plane crosses the patch (a sample on the other side of it): with a
     /// segment on the plane, the patch may only touch it, without interior points.
-    fn plane_crosses(&self, input: &PrmInput<'_>, func: &mut IntPatchTheSurfFunction) -> Result<bool, Failure> {
+    fn plane_crosses(
+        &self,
+        input: &PrmInput<'_>,
+        func: &mut IntPatchTheSurfFunction,
+    ) -> Result<bool, Failure> {
         let t: &(dyn TheTopolTool + 'static) = input.psurf().1;
         let nb_samples: i32 = t.nb_samples()?;
         let mut valf = Vector::with_bounds(1, 1)?;
@@ -174,18 +211,24 @@ impl IntPatchImpPrmIntersection {
     }
 
     /// The interior start points (from the start point when one is set).
-    fn interior_points(&mut self, input: &PrmInput<'_>, func: &mut IntPatchTheSurfFunction) -> Result<Vec<IntSurfInteriorPoint>, Failure> {
-        let search_ins: bool = if input.quad.type_quadric() == SurfaceType::Plane && self.solrst.nb_segments()? > 0 {
-            self.plane_crosses(input, func)?
-        } else {
-            true
-        };
+    fn interior_points(
+        &mut self,
+        input: &PrmInput<'_>,
+        func: &mut IntPatchTheSurfFunction,
+    ) -> Result<Vec<IntSurfInteriorPoint>, Failure> {
+        let search_ins: bool =
+            if input.quad.type_quadric() == SurfaceType::Plane && self.solrst.nb_segments()? > 0 {
+                self.plane_crosses(input, func)?
+            } else {
+                true
+            };
         if !search_ins {
             return Ok(Vec::new());
         }
         let (psurf, domain) = input.psurf();
         if self.my_is_start_pnt {
-            self.solins.perform_from(func, psurf, self.my_u_start, self.my_v_start)?;
+            self.solins
+                .perform_from(func, psurf, self.my_u_start, self.my_v_start)?;
         } else {
             self.solins.perform(func, psurf, domain, input.tol_tang)?;
         }

@@ -19,11 +19,11 @@
 //! The vertices on the restrictions of the quadric, the lines too short, and the lines
 //! that coincide with a restriction line.
 use super::super::IntPatchIType;
+use super::super::IntPatchTheSurfFunction;
 use super::super::line::IntPatchLine;
 use super::super::point_line::IntPatchPointLine;
 use super::super::rline::IntPatchRLine;
 use super::super::rst_int::IntPatchRstInt;
-use super::super::IntPatchTheSurfFunction;
 use super::IntPatchImpPrmIntersection;
 use super::perform::PrmInput;
 use crate::int_start::TheArc;
@@ -36,17 +36,26 @@ use rustycad_tkmath::gp::{Line2, Point2};
 use rustycad_tkmath::math::Vector;
 
 /// The point line of a line of the result.
-pub(super) fn point_line(l: &Handle<dyn IntPatchLine>) -> Result<Handle<dyn IntPatchPointLine>, Failure> {
+pub(super) fn point_line(
+    l: &Handle<dyn IntPatchLine>,
+) -> Result<Handle<dyn IntPatchPointLine>, Failure> {
     let p: Handle<dyn IntPatchPointLine> = l.cast();
     if p.is_null() {
-        return Err(super::super::failures::null_object("IntPatch_ImpPrmIntersection::Perform", "IntPatch_PointLine"));
+        return Err(super::super::failures::null_object(
+            "IntPatch_ImpPrmIntersection::Perform",
+            "IntPatch_PointLine",
+        ));
     }
     Ok(p)
 }
 
 /// The arc of a restriction line.
 fn arc_of(r: &IntPatchRLine) -> TheArc {
-    if r.is_arc_on_s1() { r.arc_on_s1() } else { r.arc_on_s2() }
+    if r.is_arc_on_s1() {
+        r.arc_on_s1()
+    } else {
+        r.arc_on_s2()
+    }
 }
 
 impl IntPatchImpPrmIntersection {
@@ -54,7 +63,11 @@ impl IntPatchImpPrmIntersection {
     /// a line of fewer than two distinct points is removed, a walking line goes to the
     /// end (the restriction lines come first); then the lines that coincide with an
     /// isoline restriction line are removed.
-    pub(super) fn restrictions(&mut self, input: &PrmInput<'_>, func: &mut IntPatchTheSurfFunction) -> Result<(), Failure> {
+    pub(super) fn restrictions(
+        &mut self,
+        input: &PrmInput<'_>,
+        func: &mut IntPatchTheSurfFunction,
+    ) -> Result<(), Failure> {
         self.put_vertices_on_lines(input)?;
         let tol_3d: f64 = std_max(func.tolerance(), input.tol_tang);
         self.remove_coincident(input, func, tol_3d)
@@ -66,13 +79,32 @@ impl IntPatchImpPrmIntersection {
         while i < nb_lin {
             let l: Handle<dyn IntPatchLine> = self.slin[i].clone();
             if !input.reversed {
-                IntPatchRstInt::put_vertex_on_line(&l, input.surf1, input.d1, input.surf2, true, input.tol_tang)?;
+                IntPatchRstInt::put_vertex_on_line(
+                    &l,
+                    input.surf1,
+                    input.d1,
+                    input.surf2,
+                    true,
+                    input.tol_tang,
+                )?;
             } else {
-                IntPatchRstInt::put_vertex_on_line(&l, input.surf2, input.d2, input.surf1, false, input.tol_tang)?;
+                IntPatchRstInt::put_vertex_on_line(
+                    &l,
+                    input.surf2,
+                    input.d2,
+                    input.surf1,
+                    false,
+                    input.tol_tang,
+                )?;
             }
             let pl = point_line(&l)?;
             let nb: i32 = pl.nb_pnts()?;
-            if nb <= 2 && (nb < 2 || pl.point(1)?.is_same(&pl.point(2)?, precision::confusion(), -1.0)) {
+            if nb <= 2
+                && (nb < 2
+                    || pl
+                        .point(1)?
+                        .is_same(&pl.point(2)?, precision::confusion(), -1.0))
+            {
                 self.slin.remove(i);
                 nb_lin -= 1;
                 continue;
@@ -91,8 +123,17 @@ impl IntPatchImpPrmIntersection {
     /// The restriction lines (first in the list) against the lines after them: a
     /// walking line along an isoline restriction is removed, of two coincident
     /// restriction lines the shorter one.
-    fn remove_coincident(&mut self, input: &PrmInput<'_>, func: &mut IntPatchTheSurfFunction, tol_3d: f64) -> Result<(), Failure> {
-        let other = if input.reversed { input.surf1 } else { input.surf2 };
+    fn remove_coincident(
+        &mut self,
+        input: &PrmInput<'_>,
+        func: &mut IntPatchTheSurfFunction,
+        tol_3d: f64,
+    ) -> Result<(), Failure> {
+        let other = if input.reversed {
+            input.surf1
+        } else {
+            input.surf2
+        };
         let mut i: usize = 0;
         while i < self.slin.len() {
             let arl1: Handle<IntPatchRLine> = self.slin[i].cast();
@@ -118,13 +159,30 @@ impl IntPatchImpPrmIntersection {
                 }
                 // The direction is {0, +-1} or {+-1, 0}: the domain is rectangular.
                 let dir = arc.line()?.direction();
-                let (mut tol_2d, mut period) = (other.u_resolution(tol_3d)?, if other.is_v_periodic()? { other.v_period()? } else { 0.0 });
+                let (mut tol_2d, mut period) = (
+                    other.u_resolution(tol_3d)?,
+                    if other.is_v_periodic()? {
+                        other.v_period()?
+                    } else {
+                        0.0
+                    },
+                );
                 if dir.x().abs() < 0.5 {
                     // The restriction goes along V.
                     tol_2d = other.v_resolution(tol_3d)?;
-                    period = if other.is_u_periodic()? { other.u_period()? } else { 0.0 };
+                    period = if other.is_u_periodic()? {
+                        other.u_period()?
+                    } else {
+                        0.0
+                    };
                 }
-                let coincide = is_coincide(func, &point_line(&l2)?, &arc, rl1.is_arc_on_s1(), (tol_3d, tol_2d, period))?;
+                let coincide = is_coincide(
+                    func,
+                    &point_line(&l2)?,
+                    &arc,
+                    rl1.is_arc_on_s1(),
+                    (tol_3d, tol_2d, period),
+                )?;
                 if !coincide {
                     j += 1;
                     continue;
@@ -203,9 +261,22 @@ pub(super) fn is_coincide(
 
 /// Whether the points between the line point and its projection on the arc are on the
 /// quadric (a tangent zone of the two surfaces).
-fn in_tangent_zone(func: &mut IntPatchTheSurfFunction, (uf, vf): (f64, f64), pmin: Point2, toler_3d: f64) -> Result<bool, Failure> {
+fn in_tangent_zone(
+    func: &mut IntPatchTheSurfFunction,
+    (uf, vf): (f64, f64),
+    pmin: Point2,
+    toler_3d: f64,
+) -> Result<bool, Failure> {
     // sin(x)*sin(x)
-    let coeffs: [f64; 7] = [0.02447174185, 0.09549150281, 0.20610737385, 0.34549150281, 0.5, 0.65450849719, 0.79389262615];
+    let coeffs: [f64; 7] = [
+        0.02447174185,
+        0.09549150281,
+        0.20610737385,
+        0.34549150281,
+        0.5,
+        0.65450849719,
+        0.79389262615,
+    ];
     let (du, dv) = (pmin.x() - uf, pmin.y() - vf);
     let mut x = Vector::with_bounds(1, 2)?;
     let mut val = Vector::with_bounds(1, 1)?;
@@ -224,13 +295,20 @@ fn in_tangent_zone(func: &mut IntPatchTheSurfFunction, (uf, vf): (f64, f64), pmi
 
 /// Two restriction lines: parallel isolines at a null (or period) distance with one
 /// segment in the other.
-fn rline_coincide(arc: &TheArc, rl2: &IntPatchRLine, (toler_2d, period): (f64, f64)) -> Result<bool, Failure> {
+fn rline_coincide(
+    arc: &TheArc,
+    rl2: &IntPatchRLine,
+    (toler_2d, period): (f64, f64),
+) -> Result<bool, Failure> {
     let arc2: TheArc = arc_of(rl2);
     if arc2.get_type()? != CurveType::Line {
         return Ok(false);
     }
     let (lin1, lin2): (Line2, Line2) = (arc.line()?, arc2.line()?);
-    if !lin1.direction().is_parallel(lin2.direction(), precision::angular()) {
+    if !lin1
+        .direction()
+        .is_parallel(lin2.direction(), precision::angular())
+    {
         return Ok(false);
     }
     let dist: f64 = arc.line()?.distance_line(arc2.line()?);
