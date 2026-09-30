@@ -55,3 +55,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intcurvesurface').append_intcurvesurface_requests(requests)
     # GeomFill filling part (tkgeomalgo_corpus_gfill*.py)
     __import__('tkgeomalgo_corpus_gfill').append_gfill_requests(requests)
+    # GeomFill sweep part (tkgeomalgo_corpus_geomfill_*.py)
+    __import__('tkgeomalgo_corpus_geomfill_sweep').append_geomfill_sweep_requests(requests)
