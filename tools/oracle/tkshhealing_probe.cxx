@@ -48,7 +48,9 @@
 #include "tkshhealing_probe_canonical.cxx"
 #include "tkshhealing_probe_shapeconstruct.cxx"
 #include "tkshhealing_probe_analysis_surface.cxx"
+#include "tkshhealing_probe_project_curve.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"sh_project_curve", sh_project_curve_case},
  {"sh_construct", sh_construct_case},
  {"sh_analysis_surface", sh_analysis_surface_case},
  {"sh_canonical", sh_canonical_case},

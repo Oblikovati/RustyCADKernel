@@ -131,7 +131,9 @@ fn degenerate_points_digest(
     Ok(())
 }
 
-fn analysis_surface_geometry(reader: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
+pub(super) fn analysis_surface_geometry(
+    reader: &mut Reader<'_>,
+) -> Result<Handle<dyn GeomSurface>, Failure> {
     match reader.integer() {
         0 => surface(reader),
         1 => {

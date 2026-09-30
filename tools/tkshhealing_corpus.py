@@ -41,3 +41,6 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_shapeconstruct').append_shapeconstruct_requests(requests)
     # ShapeAnalysis_Surface: singularity state, projection and closure.
     __import__('tkshhealing_corpus_analysis_surface').append_analysis_surface_requests(requests)
+
+    # ShapeConstruct_ProjectCurveOnSurface: geometry, cache and statuses.
+    __import__('tkshhealing_corpus_project_curve').append_project_curve_requests(requests)

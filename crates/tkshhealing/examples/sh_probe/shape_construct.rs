@@ -114,7 +114,7 @@ fn construct_spline_3d(input: &Handle<dyn GeomCurve>) {
     }
 }
 
-fn construct_spline_2d(input: &Handle<dyn Geom2dCurve>) {
+pub(super) fn construct_spline_2d(input: &Handle<dyn Geom2dCurve>) {
     let handle = input.cast::<Geom2dBSplineCurve>();
     let Some(spline) = handle.get() else {
         return;
