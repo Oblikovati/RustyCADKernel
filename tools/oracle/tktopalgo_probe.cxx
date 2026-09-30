@@ -67,6 +67,9 @@
 #include "tktopalgo_probe_sewing_helpers.cxx"
 #include "tktopalgo_probe_brepbuilderapi_onmesh.cxx"
 #include "tktopalgo_probe_brepmat2d.cxx"
+#include "tktopalgo_probe_brepextrema.cxx"
+#include "tktopalgo_probe_brepextrema_ext.cxx"
+#include "tktopalgo_probe_brepextrema_prox.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
@@ -234,6 +237,26 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bba_fastsew", tp_bba_fastsew_case},
  {"bba_vertexinspector", tp_bba_vertexinspector_case},
  {"bba_boxselector", tp_bba_boxselector_case},
+ // BRepExtrema (tktopalgo_probe_brepextrema.cxx, tktopalgo_probe_brepextrema_ext.cxx and
+ // tktopalgo_probe_brepextrema_prox.cxx, shapes of tktopalgo_probe_shape.cxx)
+ {"bxd_dist", tp_bxd_dist_case},
+ {"bxd_dump", tp_bxd_dump_case},
+ {"bxd_ss", tp_bxd_ss_case},
+ {"bxd_poly", tp_bxd_poly_case},
+ {"bxx_pc", tp_bxx_pc_case},
+ {"bxx_pf", tp_bxx_pf_case},
+ {"bxx_cc", tp_bxx_cc_case},
+ {"bxx_cf", tp_bxx_cf_case},
+ {"bxx_ff", tp_bxx_ff_case},
+ {"bxp_tset", tp_bxp_tset_case},
+ {"bxp_overlap", tp_bxp_overlap_case},
+ {"bxp_self", tp_bxp_self_case},
+ {"bxp_shared", tp_bxp_shared_case},
+ {"bxp_pdist", tp_bxp_pdist_case},
+ {"bxp_border", tp_bxp_border_case},
+ {"bxp_pval", tp_bxp_pval_case},
+ {"bxp_prox", tp_bxp_prox_case},
+ {"bxp_insp", tp_bxp_insp_case},
 };
 int main() {
  std::string line;

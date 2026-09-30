@@ -1,4 +1,53 @@
 // Rust translation of ModelingAlgorithms/TKTopAlgo/BRepExtrema at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! OCCT package BRepExtrema. Not ported yet: its classes land in this module when
-//! the package is ported (docs/tktopalgo-progress.md lists the ported packages).
+//! OCCT package BRepExtrema: the minimum distance between shapes and the proximity
+//! tools on their triangulations (docs/topalgo-design.md section 13).
+//!
+//! - [`BRepExtremaDistShapeShape`] finds the minimum distance between two shapes with
+//!   its solutions, by [`BRepExtremaDistanceSS`] on every pair of sub-shapes, with the
+//!   extrema classes [`BRepExtremaExtPC`], [`BRepExtremaExtPF`], [`BRepExtremaExtCC`],
+//!   [`BRepExtremaExtCF`] and [`BRepExtremaExtFF`]; [`BRepExtremaPoly`] compares
+//!   triangulation nodes.
+//! - [`BRepExtremaTriangleSet`] holds the triangles of faces (and the segments of
+//!   edge polygons) of a shape under a BVH; [`BRepExtremaOverlapTool`],
+//!   [`BRepExtremaSelfIntersection`], [`BRepExtremaProximityDistTool`],
+//!   [`BRepExtremaProximityValueTool`] and [`BRepExtremaShapeProximity`] traverse it.
+mod dist_shape_shape;
+mod distance_ss;
+mod element_filter;
+mod ext_cc;
+mod ext_cf;
+mod ext_ff;
+mod ext_pc;
+mod ext_pf;
+mod extrema_capture;
+mod overlap_tool;
+mod poly;
+mod proximity_dist_tool;
+mod proximity_value_tool;
+mod self_intersection;
+mod shape_proximity;
+mod solution_elem;
+mod support_type;
+mod triangle_set;
+
+pub use dist_shape_shape::{BRepExtremaDistShapeShape, BRepExtremaObsoleteOptions};
+pub use distance_ss::BRepExtremaDistanceSS;
+pub use element_filter::{BRepExtremaElementFilter, BRepExtremaFilterResult};
+pub use ext_cc::BRepExtremaExtCC;
+pub use ext_cf::BRepExtremaExtCF;
+pub use ext_ff::BRepExtremaExtFF;
+pub use ext_pc::BRepExtremaExtPC;
+pub use ext_pf::BRepExtremaExtPF;
+pub use overlap_tool::{BRepExtremaOverlapMap, BRepExtremaOverlapTool};
+pub use poly::{BRepExtremaPoly, BRepExtremaPolyDistance};
+pub use proximity_dist_tool::{
+    BRepExtremaPrjState, BRepExtremaProxPntStatus, BRepExtremaProximityDistTool,
+    BRepExtremaProximityInputs,
+};
+pub use proximity_value_tool::{BRepExtremaProximityValueTool, BRepExtremaVertexInspector};
+pub use self_intersection::BRepExtremaSelfIntersection;
+pub use shape_proximity::BRepExtremaShapeProximity;
+pub use solution_elem::BRepExtremaSolutionElem;
+pub use support_type::{BRepExtremaSupportType, uncompatible_shape};
+pub use triangle_set::BRepExtremaTriangleSet;

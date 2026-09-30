@@ -191802,6 +191802,1678 @@
       "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::generating_shape",
       "status": "implemented",
       "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::new",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape(const TopoDS_Shape&,const TopoDS_Shape&,Extrema_ExtFlag,Extrema_ExtAlgo,const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::with_shapes",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape(const TopoDS_Shape&,const TopoDS_Shape&,double,Extrema_ExtFlag,Extrema_ExtAlgo,const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::with_deflection",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SetDeflection(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::set_deflection",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::LoadS1(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::load_s1",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::LoadS2(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::load_s2",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::NbSolution() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::nb_solution",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::Value() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::value",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::InnerSolution() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::inner_solution",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::PointOnShape1(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::point_on_shape1",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::PointOnShape2(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::point_on_shape2",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SupportTypeShape1(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::support_type_shape1",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SupportTypeShape2(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::support_type_shape2",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SupportOnShape1(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::support_on_shape1",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SupportOnShape2(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::support_on_shape2",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::ParOnEdgeS1(int,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::par_on_edge_s1",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::ParOnEdgeS2(int,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::par_on_edge_s2",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::ParOnFaceS1(int,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::par_on_face_s1",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::ParOnFaceS2(int,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::par_on_face_s2",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::Dump(Standard_OStream&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::dump",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SetFlag(Extrema_ExtFlag)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::set_flag",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SetAlgo(Extrema_ExtAlgo)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::set_algo",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::SetMultiThread(bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::set_multi_thread",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShape::IsMultiThread() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistShapeShape::is_multi_thread",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistanceSS(const TopoDS_Shape&,const TopoDS_Shape&,const Bnd_Box&,const Bnd_Box&,double,double,Extrema_ExtFlag,Extrema_ExtAlgo)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistanceSS.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistanceSS::new",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistanceSS::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistanceSS.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistanceSS::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistanceSS::DistValue() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistanceSS.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistanceSS::dist_value",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistanceSS::Seq1Value() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistanceSS.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistanceSS::seq1_value",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_DistanceSS::Seq2Value() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistanceSS.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaDistanceSS::seq2_value",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ElementFilter::FilterResult",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ElementFilter.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaFilterResult",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ElementFilter::~BRepExtrema_ElementFilter()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ElementFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepExtrema_ElementFilter::PreCheckElements(int,int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ElementFilter.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaElementFilter::pre_check_elements",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::new",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::with_edges",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::Initialize(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::initialize",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::Perform(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::NbExt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::nb_ext",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::IsParallel() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::is_parallel",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::SquareDistance(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::square_distance",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::ParameterOnE1(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::parameter_on_e1",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::PointOnE1(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::point_on_e1",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::ParameterOnE2(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::parameter_on_e2",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::PointOnE2(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::point_on_e2",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCC::TrimmedSquareDistances(double&,double&,double&,double&,gp_Pnt&,gp_Pnt&,gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCC::trimmed_square_distances",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::new",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::with_edge_face",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::Initialize(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::initialize",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::Perform(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::NbExt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::nb_ext",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::SquareDistance(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::square_distance",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::IsParallel() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::is_parallel",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::ParameterOnEdge(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::parameter_on_edge",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::ParameterOnFace(int,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::parameter_on_face",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::PointOnEdge(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::point_on_edge",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtCF::PointOnFace(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtCF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtCF::point_on_face",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::new",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF(const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::with_faces",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::Initialize(const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::initialize",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::Perform(const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::IsParallel() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::is_parallel",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::NbExt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::nb_ext",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::SquareDistance(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::square_distance",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::ParameterOnFace1(int,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::parameter_on_face1",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::ParameterOnFace2(int,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::parameter_on_face2",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::PointOnFace1(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::point_on_face1",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtFF::PointOnFace2(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtFF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtFF::point_on_face2",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::new",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC(const TopoDS_Vertex&,const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::with_vertex_edge",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::Initialize(const TopoDS_Edge&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::initialize",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::Perform(const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::NbExt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::nb_ext",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::IsMin(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::is_min",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::SquareDistance(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::square_distance",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::Parameter(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::parameter",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::Point(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::point",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPC::TrimmedSquareDistances(double&,double&,gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPC.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPC::trimmed_square_distances",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::new",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF(const TopoDS_Vertex&,const TopoDS_Face&,Extrema_ExtFlag,Extrema_ExtAlgo)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::with_vertex_face",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::Initialize(const TopoDS_Face&,Extrema_ExtFlag,Extrema_ExtAlgo)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::initialize",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::Perform(const TopoDS_Vertex&,const TopoDS_Face&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::NbExt() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::nb_ext",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::SquareDistance(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::square_distance",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::Parameter(int,double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::parameter",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::Point(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::point",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::SetFlag(Extrema_ExtFlag)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::set_flag",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ExtPF::SetAlgo(Extrema_ExtAlgo)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ExtPF.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaExtPF::set_algo",
+      "status": "implemented",
+      "notes": "BRepExtrema Ext wrappers (docs/topalgo-design.md section 13): the calls made on the Extrema member are recorded and replayed on a new Extrema object at each call (ExtPF keeps its Extrema_ExtPS on the shared adaptor), so the member keeps its native state; the wrapper sequences are Vecs read with the check of NCollection_Sequence::Value; output references become returned values; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxx_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool(const occ::handle<BRepExtrema_TriangleSet>&,const occ::handle<BRepExtrema_TriangleSet>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::with_sets",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::LoadTriangleSets(const occ::handle<BRepExtrema_TriangleSet>&,const occ::handle<BRepExtrema_TriangleSet>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::load_triangle_sets",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::Perform(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::MarkDirty()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::mark_dirty",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::OverlapSubShapes1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::overlap_sub_shapes1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::OverlapSubShapes2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::overlap_sub_shapes2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::OverlapTriangles1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Declared only under #ifdef OVERLAP_TOOL_OUTPUT_TRIANGLES, a debug macro that no OCCT build defines (the member and its set are not compiled); nothing to port."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::OverlapTriangles2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Declared only under #ifdef OVERLAP_TOOL_OUTPUT_TRIANGLES, a debug macro that no OCCT build defines (the member and its set are not compiled); nothing to port."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::SetElementFilter(BRepExtrema_ElementFilter*)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::set_element_filter",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::RejectNode(const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::reject_node",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::Accept(int,int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaOverlapTool::accept",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_Poly::Distance(const TopoDS_Shape&,const TopoDS_Shape&,gp_Pnt&,gp_Pnt&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_Poly.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPoly::distance",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProxPnt_Status",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProxPntStatus",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState::default",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState(int,BVH_PrjState,int,int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState::GetTrgIdx() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState::get_trg_idx",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState::GetPrjState() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState::get_prj_state",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState::GetNumberOfFirstNode() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState::get_number_of_first_node",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState::GetNumberOfLastNode() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState::get_number_of_last_node",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool(const occ::handle<BRepExtrema_TriangleSet>&,int,const BVH_Array3d&,const NCollection_DynamicArray<ProxPnt_Status>&,const occ::handle<BRepExtrema_TriangleSet>&,const NCollection_DynamicArray<TopoDS_Shape>&,const NCollection_DynamicArray<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::with_inputs",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::LoadTriangleSets(const occ::handle<BRepExtrema_TriangleSet>&,const occ::handle<BRepExtrema_TriangleSet>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::load_triangle_sets",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::LoadShapeLists(const NCollection_DynamicArray<TopoDS_Shape>&,const NCollection_DynamicArray<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::load_shape_lists",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::LoadAdditionalPointsFirstSet(const BVH_Array3d&,const NCollection_DynamicArray<ProxPnt_Status>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::load_additional_points_first_set",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::Perform()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::RejectNode(const BVH_Vec3d&,const BVH_Vec3d&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::reject_node",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::Accept(int,const double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::accept",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::IsNodeOnBorder(int,const occ::handle<Poly_Triangulation>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::is_node_on_border",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::IsEdgeOnBorder(int,int,int,const occ::handle<Poly_Triangulation>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::is_edge_on_border",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProximityPoints(BVH_Vec3d&,BVH_Vec3d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::proximity_points",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProximityPointsStatus(ProxPnt_Status&,ProxPnt_Status&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::proximity_points_status",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProximityDistance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::proximity_distance",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::Coord(int,const Point&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::coord",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::Shift(const Point&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::shift",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::Add(const gp_XYZ&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::add",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::SetTol(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::set_tol",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::SetCurrent(const gp_XYZ&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::set_current",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::IsNeedAdd() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::is_need_add",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::Inspect(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::inspect_target",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool(const occ::handle<BRepExtrema_TriangleSet>&,const occ::handle<BRepExtrema_TriangleSet>&,const NCollection_DynamicArray<TopoDS_Shape>&,const NCollection_DynamicArray<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::with_sets",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::LoadTriangleSets(const occ::handle<BRepExtrema_TriangleSet>&,const occ::handle<BRepExtrema_TriangleSet>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::load_triangle_sets",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::LoadShapeLists(const NCollection_DynamicArray<TopoDS_Shape>&,const NCollection_DynamicArray<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::load_shape_lists",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::SetNbSamplePoints(int,int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::set_nb_sample_points",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::Perform(double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::MarkDirty()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::mark_dirty",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::Distance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::distance",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::ProximityPoints(gp_Pnt&,gp_Pnt&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::proximity_points",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityValueTool::ProximityPointsStatus(ProxPnt_Status&,ProxPnt_Status&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityValueTool::proximity_points_status",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection(const TopoDS_Shape&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::with_shape",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::Tolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::tolerance",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::SetTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::set_tolerance",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::LoadShape(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::load_shape",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::Perform()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::OverlapElements() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::overlap_elements",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::GetSubShape(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::get_sub_shape",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::ElementSet() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::element_set",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::OverlapTriangles() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Declared only under #ifdef OVERLAP_TOOL_OUTPUT_TRIANGLES, a debug macro that no OCCT build defines (the member and its set are not compiled); nothing to port."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity(const TopoDS_Shape&,const TopoDS_Shape&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::with_shapes",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::Tolerance() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::tolerance",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::SetTolerance(double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::set_tolerance",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::Proximity() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::proximity",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::LoadShape1(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::load_shape1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::LoadShape2(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::load_shape2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::SetNbSamples1(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::set_nb_samples1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::SetNbSamples2(int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::set_nb_samples2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::Perform()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::perform",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::IsDone() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::is_done",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::OverlapSubShapes1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::overlap_sub_shapes1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::OverlapSubShapes2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::overlap_sub_shapes2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::GetSubShape1(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::get_sub_shape1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::GetSubShape2(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::get_sub_shape2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::ElementSet1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::element_set1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::ElementSet2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::element_set2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::ProximityPoint1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::proximity_point1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::ProximityPoint2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::proximity_point2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::ProxPntStatus1() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::prox_pnt_status1",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ShapeProximity::ProxPntStatus2() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ShapeProximity.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaShapeProximity::prox_pnt_status2",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::new",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem(double,const gp_Pnt&,BRepExtrema_SupportType,const TopoDS_Vertex&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::with_vertex",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem(double,const gp_Pnt&,BRepExtrema_SupportType,const TopoDS_Edge&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::with_edge",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem(double,const gp_Pnt&,BRepExtrema_SupportType,const TopoDS_Face&,double,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::with_face",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::Dist() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::dist",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::Point() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::point",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::SupportKind() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::support_kind",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::Vertex() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::vertex",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::Edge() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::edge",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::Face() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::face",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::EdgeParameter(double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::edge_parameter",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SolutionElem::FaceParameter(double&,double&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SolutionElem.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSolutionElem::face_parameter",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_SupportType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SupportType.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSupportType",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::new",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet(const NCollection_DynamicArray<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::with_shapes",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::~BRepExtrema_TriangleSet()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor (defaulted): Rust drops the value; nothing to port."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::Size() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::size",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::Box(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::element_box",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::Center(int,int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::center",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::Swap(int,int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::swap",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::Clear()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::clear",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::Init(const NCollection_DynamicArray<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::init",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::GetVertices() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::vertices",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::GetVertices(int,BVH_Vec3d&,BVH_Vec3d&,BVH_Vec3d&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::get_vertices",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::GetVtxIndices(int,NCollection_Array1<int>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::get_vtx_indices",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::GetFaceID(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::get_face_id",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::GetShapeIDOfVtx(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::get_shape_id_of_vtx",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::GetVtxIdxInShape(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::get_vtx_idx_in_shape",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::GetTrgIdxInShape(int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::get_trg_idx_in_shape",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::DEFINE_STANDARD_RTTIEXT(BRepExtrema_TriangleSet,BVH_PrimitiveSet3d)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet::static_type",
+      "status": "implemented",
+      "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration (impl_transient!, below Standard_Transient: the BVH object classes are not transient types in the port) gives the descriptor through RuntimeTyped::static_type."
+    },
+    {
+      "upstream_id": "BRepExtrema_UnCompatibleShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_UnCompatibleShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::uncompatible_shape",
+      "status": "implemented",
+      "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
     }
   ],
   "tests": [
@@ -282045,6 +283717,48 @@
       "rust_target": "geom_plate_build_plate_surface",
       "rust_test": "GeomPlate_BuildPlateSurface__Progress_A4_OneHundredPointContour",
       "rust_source": "crates/tkgeomalgo/tests/geom_plate_build_plate_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShapeTest.BUC60870_EdgeToVertexMinimumDistance",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepExtrema_DistShapeShape_Test.cxx",
+      "source_sha256": "899d8ae27160f5900ade6db5e7687148d8ed816fa5f42b4c1a1344be221c3b35",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_extrema_dist_shape_shape",
+      "rust_test": "BRepExtrema_DistShapeShapeTest__BUC60870_EdgeToVertexMinimumDistance",
+      "rust_source": "crates/tktopalgo/tests/brep_extrema_dist_shape_shape.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShapeTest.EdgeEdge_Null3DCurve_NoCrash",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepExtrema_DistShapeShape_Test.cxx",
+      "source_sha256": "899d8ae27160f5900ade6db5e7687148d8ed816fa5f42b4c1a1344be221c3b35",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_extrema_dist_shape_shape",
+      "rust_test": "BRepExtrema_DistShapeShapeTest__EdgeEdge_Null3DCurve_NoCrash",
+      "rust_source": "crates/tktopalgo/tests/brep_extrema_dist_shape_shape.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepExtrema_DistShapeShapeTest.EdgeFace_Null3DCurve_NoCrash",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepExtrema_DistShapeShape_Test.cxx",
+      "source_sha256": "899d8ae27160f5900ade6db5e7687148d8ed816fa5f42b4c1a1344be221c3b35",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_extrema_dist_shape_shape",
+      "rust_test": "BRepExtrema_DistShapeShapeTest__EdgeFace_Null3DCurve_NoCrash",
+      "rust_source": "crates/tktopalgo/tests/brep_extrema_dist_shape_shape.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
