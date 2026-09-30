@@ -246,11 +246,5 @@ pub(super) fn normal_of(line: Line2) -> Result<Direction2, Failure> {
 // Check the qualifier of every argument (GccEnt_BadQualifier), as each native
 // constructor opens; lines accept no GccEnt_enclosing.
 pub(super) fn check_line_qualifier(qualified: QualifiedLin) -> Result<(), Failure> {
-    if qualified.is_enclosed() || qualified.is_outside() || qualified.is_unqualified() {
-        return Ok(());
-    }
-    Err(crate::gcc_ent::bad_qualifier(&format!(
-        "{NAME}: line qualifier {:?}; expected enclosed, outside or unqualified",
-        qualified.qualifier()
-    )))
+    super::check_line_position(qualified.qualifier(), NAME)
 }

@@ -77,6 +77,24 @@ pub(crate) fn check_qualifier(
     Ok(())
 }
 
+/// The accepted-qualifier test of a line argument: GccEnt_BadQualifier unless the
+/// qualifier is enclosed, outside or unqualified (a line encloses nothing).
+pub(crate) fn check_line_position(
+    position: crate::gcc_ent::Position,
+    member: &str,
+) -> Result<(), Failure> {
+    use crate::gcc_ent::Position;
+    if matches!(
+        position,
+        Position::Enclosed | Position::Outside | Position::Unqualified
+    ) {
+        return Ok(());
+    }
+    Err(crate::gcc_ent::bad_qualifier(&format!(
+        "{member}: line qualifier {position:?}; expected enclosed, outside or unqualified"
+    )))
+}
+
 /// `occ::handle<GccInt_Bisec> h = new T(...)`: a bisecting locus behind the
 /// abstract handle the bisector algorithms return.
 pub(crate) fn bisector<T>(value: T) -> rustycad_tkernel::standard::Handle<dyn crate::gcc_int::Bisec>

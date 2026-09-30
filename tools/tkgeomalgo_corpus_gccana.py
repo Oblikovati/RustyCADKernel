@@ -290,6 +290,23 @@ def small_solvers(requests: list[str], rng: random.Random) -> None:
         requests.append(req('gccana_bisec', 2, *rand_circ(rng), *rand_pnt(rng)))
 
 
+def touching_circles(requests: list[str]) -> None:
+    """Circ2d3Tan of circles that touch (IsTouch): native reuses the resolvent's
+    A, B, C for the x quadratic of each double root (the Geom2dGcc BUC60622 cases)."""
+    op = 'gccana_circ3tan'
+    triples = (
+        (circ(500, 1800, 500), circ(500, 1900, 400), circ(700, 1900, 200)),
+        (circ(2900, 800, 500), circ(2900, 900, 400), circ(2900, 1000, 300)),
+        (circ(625, 3000, 125), circ(375, 3000, 125), circ(500, 3000, 250)),
+        (C0, CT, circ(1.5, 4.0, 1.0)),
+        (C0, CN, circ(-4.0, 1.0, 1.0)),
+        (circ(0, 0, 2), circ(4, 0, 2), circ(2, 5, 1.5)),
+    )
+    for c1, c2, c3 in triples:
+        for tol in (1e-7, 1e-10):
+            requests.append(req(op, 0, 15, *qc(0, c1), *qc(0, c2), *qc(0, c3), tol))
+
+
 def append_gccana_requests(requests: list[str]) -> None:
     """Append the GccAna requests in a fixed order."""
     rng = random.Random(20260930)
@@ -298,3 +315,4 @@ def append_gccana_requests(requests: list[str]) -> None:
     tanon(requests, rng)
     tanonrad(requests, rng)
     small_solvers(requests, rng)
+    touching_circles(requests)

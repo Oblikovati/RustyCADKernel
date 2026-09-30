@@ -381,18 +381,23 @@ fn regular_first(
         }
         return Ok(());
     }
-    let quartic: [f64; 5] = quartic_regular(p, coefficients);
+    // Native keeps the resolvent in the locals A, B, C, D, E and reuses A, B, C for
+    // the x quadratic of each accepted double root: the later derivative tests and
+    // the quartic solved afterwards read the overwritten A, B, C.
+    let mut quartic: [f64; 5] = quartic_regular(p, coefficients);
     if touch {
         let [a, b, c, d, _] = quartic;
         let ys1: Vec<f64> = roots(&DirectPolynomialRoots::cubic(4.0 * a, 3.0 * b, 2.0 * c, d))?;
         for &y in &ys1 {
             let is_same: bool = out.repeats(i, y, tolerance)?;
-            let epsilon: f64 = derivative_epsilon(quartic, y).abs() + d.abs();
+            let epsilon: f64 = derivative_epsilon(quartic, y).abs() + quartic[3].abs();
             if quartic_value(quartic, y).abs() <= epsilon * tolerance
                 && !is_same
                 && real_x(p, y, tolerance)
             {
-                push_x_roots(out, first_conic_x(p, y), y, tolerance)?;
+                let x_quadratic: (f64, f64, f64) = first_conic_x(p, y);
+                (quartic[0], quartic[1], quartic[2]) = x_quadratic;
+                push_x_roots(out, x_quadratic, y, tolerance)?;
             }
         }
     }

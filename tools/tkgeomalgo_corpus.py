@@ -47,3 +47,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_hatchgen').append_hatchgen_requests(requests)
     # Geom2dHatch, TopClass (tkgeomalgo_corpus_geom2dhatch.py)
     __import__('tkgeomalgo_corpus_geom2dhatch').append_geom2dhatch_requests(requests)
+    # Geom2dGcc (tkgeomalgo_corpus_geom2dgcc.py, _geom2dgcc_circles.py)
+    __import__('tkgeomalgo_corpus_geom2dgcc').append_geom2dgcc_requests(requests)

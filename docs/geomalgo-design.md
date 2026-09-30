@@ -227,3 +227,30 @@ namespace functions as its methods, so each instance class is an alias:
 - Instantiations: Geom2dHatch declares `FClass2dOfClassifier = Classifier2d<Intersector>`
   and `Classifier = FaceClassifier<Elements>`, with `Geom2dHatch_Intersector` and
   `Geom2dHatch_Elements` implementing the traits.
+
+## 9. Geom2dGcc: the expanded GccIter and GccGeo classes
+
+At the pinned commit Geom2dGcc no longer includes `.gxx` templates: the former
+GccIter and GccGeo generics are expanded in the package as concrete classes over
+`Geom2dAdaptor_Curve` (`Geom2dGcc_Circ2d3TanIter`, `Geom2dGcc_Circ2d2TanOnGeo`,
+`Geom2dGcc_Lin2dTanOblIter`...), and `Geom2dGcc_CurveTool` is a plain class of static
+members. There is nothing to instantiate, so the port has no generic and no trait of
+its own:
+
+- Each class is a concrete struct in `geom2d_gcc` over `Geom2dAdaptorCurve`, and
+  `CurveTool` is a unit struct of associated functions.
+- `Geom2dGcc_QCurve` and `Geom2dGcc_QualifiedCurve` have identical members and bodies;
+  the port has one struct, `QualifiedCurve`, and `QCurve` is its alias.
+- The function classes implement the tkmath traits their native base classes stand for
+  (`math_FunctionWithDerivative`, `math_FunctionSetWithDerivatives`) and borrow their
+  curves, where the native classes hold copies of the adaptors: nothing mutates an
+  adaptor during a solve, so a borrow gives the same values. A curve evaluation failure
+  is kept and reported as `false` (the traits carry no error); the solver that ran the
+  function returns it once the tkmath algorithm stops, where the native exception
+  would have left it.
+- The `Geom2dGcc_Type1`/`Type2`/`Type3` enums are public enums; a curve slot that the
+  selected type does not fill is `None`, and evaluating it gives the
+  Standard_NullObject that the native null handle stands for.
+- The fixed-size solution arrays reuse `gcc_ana::solutions` (`Slots`, `Tangencies`):
+  the same bounds check and the same zero start for slots that native leaves
+  uninitialized.
