@@ -46,6 +46,8 @@ The toolkit test inventory maps these suites (80 declarations):
 | IntCurveSurface_InterUtils_Test.cxx | int_curve_surface_inter_utils | 1 | pass | pass |
 | IntCurveSurface_ThePolygonOfHInter_Test.cxx | int_curve_surface_the_polygon_of_h_inter | 1 | pass | pass |
 | IntCurveSurface_ThePolyhedronOfHInter_Test.cxx | int_curve_surface_the_polyhedron_of_h_inter | 6 | pass | pass |
+| IntPolyh_Intersection_Test.cxx | int_polyh_intersection | 3 | pass | pass |
+| IntPolyh_Point_Test.cxx | int_polyh_point | 10 | pass | pass |
 
 ## API mapping
 
@@ -116,6 +118,19 @@ The toolkit test inventory maps these suites (80 declarations):
   performing constructor of `SearchInside` is `with_domain`, the Perform from a start
   point `perform_from`; the output references of the tool members become returned
   values (`Option` for `HasFirstPoint`/`HasLastPoint`).
+
+- IntPolyh: concrete structs (docs/geomalgo-design.md section 12). `IntPolyh_Array<T>` is
+  `IntPolyhArray<T>` and the six array typedefs are aliases; `operator[]` is `Index`/`IndexMut`
+  and `Value`/`ChangeValue` return Standard_OutOfRange past the storage. The constructors are
+  named (`IntPolyhIntersection::with_samples`/`with_parameters`,
+  `IntPolyhMaillageAffinage::with_samples`, `IntPolyhSectionLine::with_size`), the
+  `FillArrayOfPnt` overloads are `fill_array_of_pnt`, `_shift`, `_params`, `_shift_params`
+  and `_normals` (an optional deflection for `const double*`), `CommonBox(B1, B2, ...)` is
+  `common_box_of`, the `Dump(int)` overloads are `dump_index`, `TriangleEdgeContact` takes its
+  fourteen geometric arguments in `IntPolyhTriangleEdge`, and output references become
+  returned arrays or tuples (`get_line_point` returns `[x, y, z, u1, v1, u2, v2, incidence]`).
+  The members that can raise (surface evaluations, `Bnd_Box::Get`, the coplanar `IsParallel`)
+  return `Result`.
 
 ## Verification
 
@@ -656,6 +671,24 @@ from index 0 to Nb + 1. The branches not reached are the state of a math_Functio
 point at an end of the arc (`GetPointState`) and the merge with a new point already at
 the same parameter of the arc.
 
+IntPolyh: 522 requests (`tkgeomalgo_corpus_intpolyh.py`) over the IntCurveSurface surface
+catalog. `ph_inter` intersects every pair of 15 surfaces (planes, cylinders, a cone, spheres,
+a torus, Bezier and B-spline surfaces, a revolution, offsets and trimmed surfaces) with the
+default sampling, then five pairs with given sample counts (2 to 30) and given parameters
+(short arrays included), and tangent, grazing, coincident, parallel, disjoint and very
+small-in-large pairs; it prints every section line and tangent zone with the reads past them
+that stay in the allocated storage. `ph_maillage` drives IntPolyh_MaillageAffinage step by
+step (standard, shifted and parameter fills, the enlarged zone, each refinement, the
+comparison and the chaining, and the error paths of void boxes and short parameters) and
+prints its whole state. `ph_tricontact` and `ph_edgecontact` test triangle pairs (crossing,
+apart, coplanar, touching, null, random) and triangle-edge pairs on both surfaces (every
+vertex and side crossing, coplanar overlaps and crossings, null edges, sliver triangles for
+the last coordinate combinations). `ph_triangle` refines grid triangles of five surfaces
+once and repeatedly; the record operations cover every member of the points, start points,
+section lines, arrays, couples, edges and tools with their dumps. Not reached: the overlap
+cases that need the side to project backwards (see below), a coplanar next couple
+on the first chaining side, and a next point equal to the initial one.
+
 ## Preserved native behaviour
 
 - TopTrans: a `CurveTransition` that was never reset answers the states of its
@@ -1015,6 +1048,48 @@ the same parameter of the arc.
   the four corners at 2% of the steps twice, then at 0.5%. The classification tolerance
   is `1000` times the larger resolution, at most 0.1% of the steps.
 
+### IntPolyh
+
+- `IntPolyh_Array::Init(N)` sets the item `N` of its dynamic array: the storage holds `N + 1`
+  items, and a second `Init` resets only that item, so the points, edges and triangles of a
+  second fill (the enlarged-zone retry of `PerformMaillage`) keep the degenerated flags, the
+  intersection flags, deflections and cached boxes of the first one where they are not
+  rewritten. `operator=` (`Copy`) keeps the target's increment; the one-`int` constructor
+  cannot be called natively (it is ambiguous with the `(N, increment)` one). `Dump` titles
+  any array "ArrayOfSectionLines" and compiles only for points, start points and lines.
+- `IntPolyh_SectionLine` holds a spare point: `NbStartPoints()` is its length minus one
+  (-1 for a line never initialized), `Init` ignores its argument, `Destroy` is empty.
+- `IntPolyh_Point::Divide` returns the default point for a divisor not above
+  Precision::Computational (bug #18); the dumps print `%+8.3eg`, a stray `g` after each
+  number. `IntPolyh_StartPoint::CheckSameSP` compares `lambda1` with the other `lambda1`
+  (its comment says `lambda2`) and prints both points (numbered 128 and 129, the octal
+  `00200` and `00201`) when both edges are unknown.
+- `FillArrayOfPnt(SurfID, isShiftFwd, Upars, Vpars, theDeflTol)` always fills the first
+  surface (it passes 1 to the overload it calls). `IsDegenerated` samples the isoline at
+  `i * step`, not from the first bound. `CommonBox(B1, B2, ...)` ignores its box arguments.
+  `GetFinTE` and `GetFinTT` are declared but defined nowhere (excluded rows).
+- `TriContact` leaves the angle unchanged when a normal is null, so `TriangleCompare` stores
+  the angle of the previous couple in contact. `MiddleRefinement` numbers the new triangles
+  and edges differently for each longest side and leaves the split edge pointing at the two
+  killed triangles.
+- `CalculPtsInterTriEdgeCoplanaires` divides the edge and side vectors by their squared
+  magnitudes before `IsParallel`; on the crossing, the end `alpha == 0` is overwritten by
+  the inner case (the second test has no `else`) and the second point of surface 2 reads
+  the side orientation from the first triangle; on the overlap, surface 2 mixes the U of
+  one point with the V of the other, both points take `alpha1` and `lambda1`, one case
+  starts `PEP2` from `PE2`, and the two cases where the side's end projects before its start
+  need rounding to happen (the side runs from `PT1` to `PT2`, so only a side far shorter
+  than its coordinates can project backwards). `TriangleEdgeContact` compares
+  `V2` with `V1` after the first coplanar pair and gives surface 2 `alpha` instead of `beta`
+  on the side `PT2PT3`.
+- `StartPointsChain` stores several points of the next couple in the tangent zones on the
+  first side only: on the second side the test sits in the `else` of the single-point case.
+  The chaining shares one next point between both sides of a couple, so a step that finds
+  several points stores the previous point with the new couple.
+- `IntPolyh_Intersection::NbPointsInLine` past the lines answers -1 (the allocated empty
+  lines) and `GetTangentZonePoint` past the zones the default point; `AnalyzeIntersection`
+  never fails, so `IsDone` is always true once the constructor returns.
+
 ## IntStart deviations
 
 - The native code ignores the result of `Func.Value` in `FindVertex`, the recheck
@@ -1023,6 +1098,19 @@ the same parameter of the arc.
   the previous value, 0 at first; the IntPatch and Contap functions never answer false.
 - `TheTopolTool` is a trait, as the native domain is virtual; `Edge()` returns the edge
   itself (`Option<Edge>`) where the native one returns a `void*`.
+
+## IntPolyh deviations
+
+- The native `Value` and `operator[]` of the arrays do not check the index: past the storage
+  the read is undefined. The port returns Standard_OutOfRange from `value`/`change_value` and
+  panics in `Index`/`IndexMut`; the corpus reads only inside the storage.
+- `MiddleRefinement` and `MultipleMiddleRefinement` run on an item of the array they grow;
+  the port refines a copy and writes it back, which gives the native result (the body never
+  writes the refined triangle through the array before its last two assignments).
+- `StartPointsChain` and `GetNextChainStartPoint` walk the couples by position in a vector
+  taken from the list and put back in order; the positions stand for the native iterators.
+- The diagnostics of `CheckSameSP` and of a null side in `TriangleEdgeContact` print to
+  standard output, as natively; the dumps write to a `fmt::Write`.
 
 ## IntCurveSurface deviations
 

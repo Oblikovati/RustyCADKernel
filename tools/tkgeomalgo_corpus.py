@@ -55,3 +55,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intcurvesurface').append_intcurvesurface_requests(requests)
     # IntStart (tkgeomalgo_corpus_intstart.py)
     __import__('tkgeomalgo_corpus_intstart').append_intstart_requests(requests)
+    # IntPolyh (tkgeomalgo_corpus_intpolyh.py)
+    __import__('tkgeomalgo_corpus_intpolyh').append_intpolyh_requests(requests)

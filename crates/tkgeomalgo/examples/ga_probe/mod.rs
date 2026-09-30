@@ -28,6 +28,8 @@ pub mod int_curve_surface;
 pub mod int_curve_surface_inter;
 pub mod int_imp;
 pub mod int_imp_par_gen;
+pub mod int_polyh;
+pub mod int_polyh_records;
 pub mod int_res2d;
 pub mod int_start;
 pub mod int_start_tools;

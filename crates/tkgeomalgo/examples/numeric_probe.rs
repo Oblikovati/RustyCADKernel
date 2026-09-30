@@ -11,7 +11,7 @@ use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_r
 use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
-use ga_probe::{int_start, int_walk, int_walk_iw};
+use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -169,6 +169,18 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // IntStart (ga_probe/int_start.rs)
     ("is_sob", int_start::sob_case),
     ("is_inside", int_start::inside_case),
+    // IntPolyh (ga_probe/int_polyh*.rs)
+    ("ph_inter", int_polyh::inter_case),
+    ("ph_maillage", int_polyh::maillage_case),
+    ("ph_tricontact", int_polyh::tricontact_case),
+    ("ph_edgecontact", int_polyh::edgecontact_case),
+    ("ph_point", int_polyh_records::point_case),
+    ("ph_triangle", int_polyh::triangle_case),
+    ("ph_startpoint", int_polyh_records::startpoint_case),
+    ("ph_sectionline", int_polyh_records::sectionline_case),
+    ("ph_array", int_polyh_records::array_case),
+    ("ph_tools", int_polyh_records::tools_case),
+    ("ph_couple", int_polyh_records::couple_case),
 ];
 
 fn main() {
