@@ -171490,6 +171490,718 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillUniformSection as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::TrianglePair(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTrianglePair::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::~IntPatch_BVHTraversal()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::~int_patch_bvh_traversal",
+      "status": "excluded",
+      "notes": "C++ destructor: Rust drops the object; nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::Perform(IntPatch_PolyhedronBVH&,IntPatch_PolyhedronBVH&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::perform",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::Pairs() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::pairs",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::Clear()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::clear",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::RejectNode(const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::reject_node",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::Accept(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::perform",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_InterferencePolyhedron()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_InterferencePolyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchInterferencePolyhedron::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_InterferencePolyhedron(const IntPatch_Polyhedron&,const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_InterferencePolyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchInterferencePolyhedron::between",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_InterferencePolyhedron(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_InterferencePolyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchInterferencePolyhedron::of_self",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_InterferencePolyhedron::Perform(const IntPatch_Polyhedron&,const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_InterferencePolyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchInterferencePolyhedron::perform",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_InterferencePolyhedron::Perform(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_InterferencePolyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchInterferencePolyhedron::perform_self",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyArc(const occ::handle<Adaptor2d_Curve2d>&,int,double,double,const Bnd_Box2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyArc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyArc::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyArc::Closed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyArc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyArc::is_closed",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyArc::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyArc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::nb_points",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyArc::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyArc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::point",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyArc::Parameter(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyArc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyArc::parameter",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyArc::SetOffset(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyArc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyArc::set_offset",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyLine::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyLine::with_deflection",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine::SetWLine(bool,const occ::handle<IntPatch_WLine>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyLine::set_w_line",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine::SetRLine(bool,const occ::handle<IntPatch_RLine>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyLine::set_r_line",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine::ResetError()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyLine::reset_error",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::nb_points",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::point",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::Error() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::error",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::nb_points",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::point",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::DeflectionOverEstimation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::Segment(int,gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::dump",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron(const occ::handle<Adaptor3d_Surface>&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::with_subdivisions",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Destroy()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::destroy",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::~IntPatch_Polyhedron()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::~int_patch_polyhedron",
+      "status": "excluded",
+      "notes": "C++ destructor calling Destroy(): Rust drops the point arrays with the polyhedron; nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Perform(const occ::handle<Adaptor3d_Surface>&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::perform",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::DeflectionOverEstimation(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::set_deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::UMinSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::u_min_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::UMaxSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::u_max_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::VMinSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::v_min_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::VMaxSingularity(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::v_max_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Size(int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::size",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::NbTriangles() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::nb_triangles",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Triangle(int,int&,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::triangle",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::TriConnex(int,int,int,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::tri_connex",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::nb_points",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Point(const gp_Pnt&,int,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::set_point",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Point(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::point_with_parameters",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::point",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Point(int,gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::point",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Bounding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::bounding",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::FillBounding()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::fill_bounding",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::ComponentsBounding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::components_bounding",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::DeflectionOverEstimation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::HasUMinSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_u_min_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::HasUMaxSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_u_max_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::HasVMinSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_v_min_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::HasVMaxSingularity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_v_max_singularity",
+      "status": "excluded",
+      "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::PlaneEquation(int,gp_XYZ&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::plane_equation",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Contain(int,const gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::contain",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::parameters",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::dump",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::with_polyhedron",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::~IntPatch_PolyhedronBVH()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::~int_patch_polyhedron_bvh",
+      "status": "excluded",
+      "notes": "C++ destructor: Rust drops the object; nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::Init(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::init",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::Clear()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::clear",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::Size() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::size",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::Box(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::element_box",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::Center(int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSet::center",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::Swap(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSet::swap",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::OriginalIndex(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::original_index",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVH::IsInitialized() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::is_initialized",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronTool::Bounding(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronTool::bounding",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronTool::ComponentsBounding(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronTool::components_bounding",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronTool::DeflectionOverEstimation(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronTool::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronTool::NbTriangles(const IntPatch_Polyhedron&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronTool::nb_triangles",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronTool::Triangle(const IntPatch_Polyhedron&,int,int&,int&,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronTool::triangle",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronTool::Point(const IntPatch_Polyhedron&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronTool::point",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronTool::TriConnex(const IntPatch_Polyhedron&,int,int,int,int&,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronTool::tri_connex",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::new",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits::~IntPatch_PrmPrmIntersection_T3Bits()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::~int_patch_prm_prm_intersection_t3_bits",
+      "status": "excluded",
+      "notes": "C++ destructor: Rust drops the object; nothing to port."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits::Add(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::add",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits::Val(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::val",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits::Raz(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::raz",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits::ResetAnd()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::reset_and",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits::And(IntPatch_PrmPrmIntersection_T3Bits&,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::and",
+      "status": "implemented",
+      "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
     }
   ],
   "tests": [
@@ -261075,6 +261787,188 @@
       "rust_target": "geom_fill_guide_trihedron_ac",
       "rust_test": "GeomFill_GuideTrihedronAC__D2_ConsistentAtMultipleParams",
       "rust_source": "crates/tkgeomalgo/tests/geom_fill_guide_trihedron_ac.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron.DefaultConstructor_ProducesValidMesh",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_Polyhedron_Test.cxx",
+      "source_sha256": "f88d987a8d82ed5329ff63cf6d70445b7a411e67e2e5d6066a64759e265ea12c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron",
+      "rust_test": "IntPatch_Polyhedron__DefaultConstructor_ProducesValidMesh",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron.ZeroSubdivision_ClampedToMinimum",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_Polyhedron_Test.cxx",
+      "source_sha256": "f88d987a8d82ed5329ff63cf6d70445b7a411e67e2e5d6066a64759e265ea12c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron",
+      "rust_test": "IntPatch_Polyhedron__ZeroSubdivision_ClampedToMinimum",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron.SmallSubdivision_ProducesValidMesh",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_Polyhedron_Test.cxx",
+      "source_sha256": "f88d987a8d82ed5329ff63cf6d70445b7a411e67e2e5d6066a64759e265ea12c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron",
+      "rust_test": "IntPatch_Polyhedron__SmallSubdivision_ProducesValidMesh",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron.TriConnex_PedgeZero_NoCrash",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_Polyhedron_Test.cxx",
+      "source_sha256": "f88d987a8d82ed5329ff63cf6d70445b7a411e67e2e5d6066a64759e265ea12c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron",
+      "rust_test": "IntPatch_Polyhedron__TriConnex_PedgeZero_NoCrash",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_Polyhedron.TriConnex_AllVertices_NoCrash",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_Polyhedron_Test.cxx",
+      "source_sha256": "f88d987a8d82ed5329ff63cf6d70445b7a411e67e2e5d6066a64759e265ea12c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron",
+      "rust_test": "IntPatch_Polyhedron__TriConnex_AllVertices_NoCrash",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.Construction",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__Construction",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.Box",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__Box",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.Center",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__Center",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.OriginalIndex",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__OriginalIndex",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.Traversal",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__Traversal",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.SelfInterference",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__SelfInterference",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.InterferencePolyhedron",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__InterferencePolyhedron",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntPatch_PolyhedronBVHTest.NoOverlap",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntPatch_PolyhedronBVH_Test.cxx",
+      "source_sha256": "02e6f0cb50555027e5d679edfbc96a23b773c249ee3a1685910631af48af6733",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_patch_polyhedron_bvh",
+      "rust_test": "IntPatch_PolyhedronBVHTest__NoOverlap",
+      "rust_source": "crates/tkgeomalgo/tests/int_patch_polyhedron_bvh.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

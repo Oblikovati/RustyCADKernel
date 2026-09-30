@@ -19,7 +19,7 @@ use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
-use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_tools};
+use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_poly, int_patch_tools};
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
 /// One probe operation over the numeric fields of a request.
@@ -246,6 +246,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfs_sweepsec", gfg::sweepsec_case),
     ("gfs_pipe", gfg::pipe_case),
     ("gfs_surface", gfg::surface_case),
+    ("ip_polyh", int_patch_poly::polyh_case),
+    ("ip_bvh", int_patch_poly::bvh_case),
+    ("ip_interf", int_patch_poly::interf_case),
+    ("ip_polyline", int_patch_poly::polyline_case),
+    ("ip_polyarc", int_patch_poly::polyarc_case),
+    ("ip_t3bits", int_patch_poly::t3bits_case),
 ];
 
 fn main() {

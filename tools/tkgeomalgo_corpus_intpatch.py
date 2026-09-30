@@ -7,7 +7,8 @@ of IntPatch_TheIWalking and the path points and segments of IntPatch_TheSOnBound
 The line requests (tkgeomalgo_corpus_intpatch_lines.py) edit the four line kinds and run
 their ComputeVertexParameters; the tool requests (tkgeomalgo_corpus_intpatch_tools.py)
 run IntPatch_HInterTool, IntPatch_HCurve2dTool, IntPatch_ArcFunction, IntPatch_CSFunction
-with IntPatch_CurvIntSurf, and the curvature radius of IntPatch_PointLine.
+with IntPatch_CurvIntSurf, and the curvature radius of IntPatch_PointLine; the polyhedron
+and polygon requests are in tkgeomalgo_corpus_intpatch_poly.py.
 """
 from __future__ import annotations
 from tkgeomalgo_corpus_intcurvesurface import line_of
@@ -121,3 +122,4 @@ def append_intpatch_requests(requests: list[str]) -> None:
     _pathpoint_requests(requests)
     __import__('tkgeomalgo_corpus_intpatch_lines').append_intpatch_line_requests(requests)
     __import__('tkgeomalgo_corpus_intpatch_tools').append_intpatch_tool_requests(requests)
+    __import__('tkgeomalgo_corpus_intpatch_poly').append_intpatch_poly_requests(requests)

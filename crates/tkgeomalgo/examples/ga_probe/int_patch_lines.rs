@@ -142,7 +142,7 @@ fn points(l: &dyn IntPatchPointLine) {
 }
 
 /// `ga_ip_read_line2s`.
-fn read_line2s(r: &mut Reader) -> Handle<IntSurfLineOn2S> {
+pub fn read_line2s(r: &mut Reader) -> Handle<IntSurfLineOn2S> {
     let c = IntSurfLineOn2S::new(None);
     for _ in 0..r.integer() {
         let x = r.pnt();

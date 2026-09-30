@@ -638,3 +638,15 @@ intersection algorithms build on it.
   with `printf` and `std::cout` (`%+10.20f`, the default `operator<<(double)`, and `%10p`
   addresses, which are the Rust object addresses). The probe captures the native process
   output to compare the dumps of points and lines without arcs or vertices.
+- **Polyhedra and polygons.** `IntPatch_Polyhedron` has the layout of the
+  IntCurveSurface polyhedron (section 11) and reuses its free helpers (the arrays, the
+  uniform sampling, the deflection, `Contain`, `Triangle`, `TriConnex`); its own members
+  add the null-point checks of `TriConnex` and the bounding of the triangle boxes.
+  `IntPatch_PolyhedronTool` is a struct of associated functions. `IntPatch_PolyhedronBVH`
+  borrows its polyhedron and implements the TKMath BVH traits (`BvhSet`,
+  `BvhPrimitiveSetAccess`, `BvhObject`) with the native linear builder (5, 32);
+  `IntPatch_BVHTraversal` keeps the pairs and implements `BvhPairTraverse` in a private
+  selector. `IntPatch_InterferencePolyhedron` derefs to `Interference` (Intf) as its
+  native base class. `IntPatch_Polygo` is the trait `IntPatchPolygo: Polygon2d` with the
+  shared state `IntPatchPolygoBase` (error and box); the `polygo_polygon2d!` macro gives
+  `IntPatchPolyLine` and `IntPatchPolyArc` their `Polygon2d` members.
