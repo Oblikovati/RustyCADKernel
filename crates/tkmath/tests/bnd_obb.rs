@@ -1,12 +1,10 @@
-//! Supplemental translation of GTests/Bnd_OBB_Test.cxx.
-//!
-//! The upstream file links BRepPrimAPI/BRepBndLib (modeling toolkits), so its native
-//! GoogleTest run is not mapped yet; every body is translated here with the B-rep
-//! inputs replaced by the equivalent plain points. Each test names its upstream case.
+//! Translation of Bnd_OBB_Test.cxx at pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #![allow(non_snake_case)]
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkmath::bnd::{ObbHalfSizes, OrientedBoundingBox};
 use rustycad_tkmath::gp::{Direction3, Point3};
+use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+use rustycad_tktopalgo::{brep_bnd_lib::BRepBndLib, brep_builder_api::BRepBuilderAPIMakeShape};
 
 // GoogleTest EXPECT_DOUBLE_EQ uses a four-ULP comparison.
 fn double_eq(a: f64, b: f64) {
@@ -44,17 +42,16 @@ fn Bnd_OBB_Test__OCC33009_ReBuildWithPoints() {
 ///
 /// `BRepBndLib::AddOBB(BRepPrimAPI_MakeBox(gp_Pnt(100,100,100),100,100,100), aOBB,
 /// false, false, false)` rebuilds the void OBB from the box vertices without tolerances
-/// (`CheckPoints`); the eight corners of [100,200]^3 are those vertices.
+/// (`CheckPoints`); this now uses those builders instead of the earlier plain-point surrogate.
 #[test]
 fn Bnd_OBB_Test__OCC30704_AddBoundingBoxToVoidBox() {
-    let mut aCorners = Array1::with_bounds(0, 7).unwrap();
-    for i in 0..8 {
-        let aCoord = |aBit: i32| if i & aBit == 0 { 100.0 } else { 200.0 };
-        aCorners[i] = Point3::new(aCoord(1), aCoord(2), aCoord(4));
-    }
+    let mut maker =
+        BRepPrimAPIMakeBox::at_point(Point3::new(100.0, 100.0, 100.0), 100.0, 100.0, 100.0)
+            .unwrap();
+    let shape = maker.shape().unwrap();
     let mut aVoidBox = OrientedBoundingBox::default();
     let mut aOBB = OrientedBoundingBox::default();
-    aOBB.rebuild(&aCorners, None, false).unwrap();
+    BRepBndLib::add_obb(shape, &mut aOBB, false, false, false).unwrap();
     aVoidBox.add_box(&aOBB).unwrap();
 
     // Check the center point of the bounding box

@@ -1,12 +1,12 @@
-//! Supplemental translation of GTests/Bnd_BoundSortBox_Test.cxx.
-//!
-//! The upstream file links BRepPrimAPI/BRepBndLib (modeling toolkits), so its native
-//! GoogleTest run is not mapped yet; every body is translated here, the B-rep boxes of
-//! BUC60729 replaced by the equivalent plain boxes. Each test names its upstream case.
+//! Translation of Bnd_BoundSortBox_Test.cxx at pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #![allow(non_snake_case)]
+use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkernel::ncollection::{Array1, List};
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::{BoundSortBox, BoundingBox3};
 use rustycad_tkmath::gp::{Direction3, Plane3, Point3};
+use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+use rustycad_tktopalgo::brep_bnd_lib::BRepBndLib;
 
 // Helper function to create a box from min and max points
 fn CreateBox(xmin: f64, ymin: f64, zmin: f64, xmax: f64, ymax: f64, zmax: f64) -> BoundingBox3 {
@@ -271,12 +271,15 @@ fn Bnd_BoundSortBoxTest__DegenerateBoxes() {
 ///
 /// `BRepBndLib::Add` of `BRepPrimAPI_MakeBox(1,1,1)` and of each of its six faces gives the
 /// unit cube and its face rectangles, each enlarged by the vertex/edge/face tolerance
-/// `Precision::Confusion()`; those plain boxes replace the B-rep here.
+/// `Precision::Confusion()`; this now uses the original solid and face traversal, replacing the earlier surrogate.
 #[test]
 fn Bnd_BoundSortBox_Test__BUC60729_InitializeWithFaceBoxes() {
-    let tolerance = rustycad_tkernel::precision::confusion();
-    let mut aMainBox = CreateBox(0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
-    aMainBox.enlarge(tolerance);
+    let shape = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0)
+        .unwrap()
+        .solid()
+        .unwrap();
+    let mut aMainBox = BoundingBox3::default();
+    BRepBndLib::add(&shape, &mut aMainBox, true).unwrap();
 
     // Initialize BoundSortBox with 6 boxes (for 6 faces of the cube)
     let aMaxNbrBox = 6;
@@ -287,16 +290,10 @@ fn Bnd_BoundSortBox_Test__BUC60729_InitializeWithFaceBoxes() {
 
     // Iterate through faces and add their bounding boxes
     let mut i = 1;
-    for aFace in 0..6 {
-        let (axis, side) = (aFace / 2, f64::from(aFace % 2));
-        let mut low = [0.0; 3];
-        let mut high = [1.0; 3];
-        low[axis as usize] = side;
-        high[axis as usize] = side;
-        let mut aBox = BoundingBox3::default();
-        aBox.update_bounds(low, high);
-        aBox.enlarge(tolerance);
-        aBoundSortBox.add(&aBox, i).unwrap();
+    for face in Explorer::new(&shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap() {
+        let mut bounds = BoundingBox3::default();
+        BRepBndLib::add(&face, &mut bounds, true).unwrap();
+        aBoundSortBox.add(&bounds, i).unwrap();
         i += 1;
     }
 

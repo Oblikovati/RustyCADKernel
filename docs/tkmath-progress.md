@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 114 complete source suites
-currently account for 2,002 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 118 complete source suites
+currently account for 2,020 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -548,8 +548,9 @@ an error. Native exceptions keep their types.
 ### ElCLib, ElSLib and the gp conics and quadrics
 
 All 12 ElCLib declarations pass in both kernels. ElSLib has no upstream suite, and
-gp_Torus_Test needs Geom_ToroidalSurface from TKG3d, so it is not mapped; supplemental
-tests cover ElSLib, gp_Elips/Hypr/Parab, their 2D counterparts, gp_Ax22d and the
+gp_Torus_Test now uses the Rust Geom_ToroidalSurface and its original OCC26746
+inputs, 36 samples and sequential polynomial evaluation; its declaration passes in both
+kernels. Supplemental tests cover ElSLib, gp_Elips/Hypr/Parab, their 2D counterparts, gp_Ax22d and the
 quadrics. The 5,200 elementary differential requests (25,607 in the whole corpus)
 match exactly. They cover every ElCLib and ElSLib static function, the gp-object
 overloads, To3d, and all members of the new gp types, including degenerate frames,
@@ -640,9 +641,12 @@ validity check runs at test time. Uninitialized ray-hit locals start as NaN.
 
 All 91 declarations of the six phase 2 suites (binned builder, triangulation,
 linear, spatial-median and sweep-plane builders, traversal) pass in both kernels.
-`BVH_ShapeSelect_Test`, `BVH_PairDistance_Test` and `BVH_DistanceField_Test` are
-not mapped, because they mesh shapes with BRepPrimAPI and BRepMesh. Their BVH
-classes are ported. The 912 phase 2 differential requests (30,090 in the whole
+`BVH_ShapeSelect_Test` now maps both declarations using the original MakeBox,
+topology maps, BRepBndLib bounds and typed/explicit-tree traversal paths. The Rust
+pair-with-self case uses the documented explicit-tree API to avoid two mutable borrows
+of the same set. `BVH_PairDistance_Test` and `BVH_DistanceField_Test` still need the Rust
+BRepMesh_IncrementalMesh implementation for their original meshed inputs: these three
+declarations remain unmapped. Their BVH classes are ported. The 912 phase 2 differential requests (30,090 in the whole
 corpus) match exactly. They compare whole tree layouts of every builder, the
 element order, and the logs of each `RejectNode` metric and `Accept` call of
 single and pair traversals. They also compare `BVH_Distance`, `BVH_PairDistance`
@@ -1321,14 +1325,10 @@ Bnd_B2/Bnd_B3 (`is_out_transformed_box`, `is_in_transformed_box`). The Box2d
 `limits()` now returns `BoxLimits2` in the native Xmin, Xmax, Ymin, Ymax field order;
 before, it returned the `Get(x,y,X,Y)` order under the structured-Get name.
 
-Bnd_OBB_Test.cxx and Bnd_BoundSortBox_Test.cxx link BRepPrimAPI/BRepBndLib, so their
-native GoogleTest runs are not mapped and their 15 declarations are not counted
-above. Every body is translated in `bnd_obb_supplemental.rs` and
-`bnd_bound_sort_box_supplemental.rs` (named after the upstream case); the B-rep
-inputs become plain data: the eight corners of the MakeBox cube for OCC30704 (the
-native CheckPoints list repeats each vertex once per incident edge and face, which
-changes nothing for an axis-aligned cube), and the cube and face boxes enlarged by
-`Precision::Confusion()` for BUC60729. Another 2,909 differential requests
+Bnd_OBB_Test.cxx and Bnd_BoundSortBox_Test.cxx now map all 15 declarations in
+`bnd_obb.rs` and `bnd_bound_sort_box.rs`. The original MakeBox/BRepBndLib construction
+and face traversal replace the previous plain-point and plain-box surrogate fixtures.
+Their native and Rust legacy runs pass. Another 2,909 differential requests
 (`tools/tkmath_bnd_corpus.py`) match with raw bits; the numeric gate now passes
 58,478 cases. They cover ReBuild on random, box-corner,
 grid, collinear, coplanar, duplicate, elongated, spherical, tiny and huge clouds in
@@ -1651,3 +1651,11 @@ bounds with a regular, zero and negative scalar; 4 `empty_solvers` requests run 
 FRPR, Powell, both set roots and the decompositions over no variable with succeeding
 and failing callbacks. All match the native bits. `empty_bounds_behavior` holds the
 regression tests.
+
+## Recovered foundation legacy mappings
+
+Eighteen newly mapped declarations bring TKMath to 2,020 of 2,023 declaration candidates
+across 118 complete source suites. These tests use higher-level crates as dev dependencies,
+so the production TKMath dependency layer is unchanged. The three remaining declarations
+are the meshed box distance field and meshed box/sphere pair distances; no synthetic mesh
+has been substituted for their native BRepMesh setup. Toolkit acceptance remains incomplete.

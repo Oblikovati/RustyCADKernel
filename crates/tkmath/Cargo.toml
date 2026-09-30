@@ -16,3 +16,9 @@ rustycad-tkernel = { path = "../tkernel" }
 [features]
 # Matches checks compiled into OCCT's out-of-line gp_Mat methods under OCCT_DEBUG.
 occt-debug-checks = []
+
+[dev-dependencies]
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tktopalgo = { path = "../tktopalgo" }
+rustycad-tkprim = { path = "../tkprim" }
