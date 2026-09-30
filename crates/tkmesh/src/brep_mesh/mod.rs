@@ -1,3 +1,8 @@
 //! Concrete BRepMesh algorithms and topology support.
 mod shape_tool;
 pub use shape_tool::ShapeTool;
+
+mod model_builder;
+mod shape_visitor;
+pub use model_builder::BRepMeshModelBuilder;
+pub use shape_visitor::BRepMeshShapeVisitor;

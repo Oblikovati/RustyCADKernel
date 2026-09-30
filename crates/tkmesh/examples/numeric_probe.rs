@@ -100,6 +100,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         }
         "mesh_wire_order" => mesh_probe::wire_foundation::wire_order_case(values),
         "mesh_outer_wire" => mesh_probe::wire_foundation::outer_wire_case(values),
+        "mesh_model_builder" => mesh_probe::model_builder::model_builder_case(values),
         "mesh_tools" => mesh_probe::tools::tools_case(values[0]),
         "mesh_explorer" => mesh_probe::tools::explorer_case(values[0], values[1] != 0),
         "mesh_model" => mesh_probe::model_case(values[0], values[1], orientation(values[2])),
@@ -164,3 +165,6 @@ fn pcurve_errors(object: &dyn MeshPCurve, count: i32) {
         object.get_parameter(-1).unwrap_err().exception_type()
     );
 }
+
+#[path = "../../tkshhealing/tests/support/wire_foundation.rs"]
+mod wire_fixture;
