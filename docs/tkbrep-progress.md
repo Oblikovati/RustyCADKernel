@@ -14,7 +14,7 @@ algorithms (Copy, Compact, Deduplicate, Transform, Validate) follow, and its aud
 The Rust mapping of the topology is fixed in [topology-design.md](topology-design.md),
 which extends [geom-design.md](geom-design.md). TopLoc is the TKMath port.
 
-The toolkit test inventory maps these suites (955 declarations; 967 runtime cases):
+The toolkit test inventory maps these suites (1178 declarations; 1190 runtime cases):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -45,10 +45,10 @@ The toolkit test inventory maps these suites (955 declarations; 967 runtime case
 | BRepGraph_VersionStamp_Test.cxx | brep_graph_version_stamp | 22 | pass | pass |
 | BRepGraph_Reconstruct_Test.cxx | mapped | 24 | passed | original builders and BRepGProp integration |
 | BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh) |
-| BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepBuilderAPI_Copy (TKTopAlgo) |
+| BRepGraph_ShapesViewImport_Test.cxx | brep_graph_shapes_view_import_legacy | 44 | passed | original import, copy, mutation and adjacency inputs |
 | BRepGraph_Build_Test.cxx | mapped | 59 | passed | original production builders |
-| BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for BRepGProp, TKPrim cylinder and sphere, BRepBuilderAPI_MakeFace and Transform |
-| BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for TKPrim sphere, BRepBuilderAPI_Copy |
+| BRepGraphInc_Test.cxx | brep_graph_inc_legacy | 80 | passed | original storage, geometry, relations, locations and mutation inputs |
+| BRepGraph_Views_Test.cxx | brep_graph_views_legacy | 81 | passed | original views, editor, UID, cache and supplement inputs |
 | BRepGraph_Test.cxx | brep_graph_suite | 95 | pass | pass |
 | BRepGraph_LayerIterator_Test.cxx | brep_graph_layer_iterator | 4 | pass | pass |
 | BRepGraph_CacheMesh_Test.cxx | brep_graph_cache_mesh_suite | 22 | pass | pass |
@@ -76,7 +76,7 @@ The toolkit test inventory maps these suites (955 declarations; 967 runtime case
 | BRepGraph_Transform_Test.cxx | mapped | 19 | passed | original geometry, placement and mesh policies |
 | BRepGraph_Validate_Test.cxx | mapped | 23 | passed | original mutations, guard scopes and synthetic graphs |
 | BRepGraph_SparseModel_Test.cxx | brep_graph_sparse_model | 28 | pass | pass |
-| BRepGraph_ScenarioMatrix_Test.cxx | not mapped (phase 2) | 18 | not run | waits for BRepGProp, TKPrim cylinder and sphere |
+| BRepGraph_ScenarioMatrix_Test.cxx | brep_graph_scenario_matrix_legacy | 18 | passed | original mutation, reconstruction, population and seam-split scenarios |
 | BRepGraph_SeamRedesign_Test.cxx | mapped | 9 | passed | original builders and seam connectivity |
 | BRepGraph_Fuzz_Test.cxx | brep_graph_fuzz_legacy | 2 (14 runtime cases) | passed | original seven seeds and 630 mutation inputs |
 
