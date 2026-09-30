@@ -78,6 +78,7 @@ pub use tgt_field::GeomFillTgtField;
 pub use tgt_on_coons::GeomFillTgtOnCoons;
 
 // Sweep classes (docs/geomalgo-design.md, section 14).
+mod app_sweep;
 mod arc_section;
 mod circle_spans;
 mod circular_blend_func;
@@ -134,11 +135,14 @@ mod sweep_function;
 mod sweep_function_eval;
 mod sweep_kpart;
 mod sweep_kpart_rotation;
+mod sweep_section_generator;
+mod sweep_section_generator_section;
 mod tensor;
 mod trihedron_law;
 mod trihedron_with_guide;
 mod uniform_section;
 
+pub use app_sweep::GeomFillAppSweep;
 pub use arc_section::{ArcPolesD1, ArcPolesD2, ArcSectionD0, ArcSectionD1, ArcSectionD2};
 pub use circular_blend_func::GeomFillCircularBlendFunc;
 pub use constant_bi_normal::GeomFillConstantBiNormal;
@@ -169,6 +173,7 @@ pub use section_placement::GeomFillSectionPlacement;
 pub use snglr_func::GeomFillSnglrFunc;
 pub use sweep::GeomFillSweep;
 pub use sweep_function::GeomFillSweepFunction;
+pub use sweep_section_generator::GeomFillSweepSectionGenerator;
 pub use tensor::GeomFillTensor;
 pub use trihedron_law::{
     GeomFillTrihedronLaw, GeomFillTrihedronLawBase, TrihedronD0, TrihedronD1, TrihedronD2,

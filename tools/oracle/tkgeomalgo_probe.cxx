@@ -61,6 +61,7 @@
 #include "tkgeomalgo_probe_geomfill_laws.cxx"
 #include "tkgeomalgo_probe_geomfill_placement.cxx"
 #include "tkgeomalgo_probe_geomfill_sweepalgo.cxx"
+#include "tkgeomalgo_probe_geomfill_pipe.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -234,6 +235,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gfs_sweepfunc",ga_gfw_function_case},
  {"gfs_sweep",ga_gfw_sweep_case},
  {"gfs_blendfunc",ga_gfw_blend_case},
+ {"gfs_sweepsec",ga_gfg_sweepsec_case},
 };
 int main() {
  std::string line;

@@ -3,6 +3,7 @@
 use std::io::{self, BufRead};
 mod ga_probe;
 use ga_probe::geom_fill_laws as gfl;
+use ga_probe::geom_fill_pipe as gfg;
 use ga_probe::geom_fill_placement as gfp;
 use ga_probe::geom_fill_sweep as gfs;
 use ga_probe::geom_fill_sweepalgo as gfw;
@@ -197,6 +198,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gfs_sweepfunc", gfw::function_case),
     ("gfs_sweep", gfw::sweep_case),
     ("gfs_blendfunc", gfw::blend_case),
+    ("gfs_sweepsec", gfg::sweepsec_case),
 ];
 
 fn main() {

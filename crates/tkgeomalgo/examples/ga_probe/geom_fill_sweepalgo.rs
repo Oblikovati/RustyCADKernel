@@ -214,7 +214,7 @@ fn curve2d(c: Handle<dyn Geom2dCurve>) {
 }
 
 /// `ga_gfw_surface`.
-fn surface(s: &Handle<dyn GeomSurface>) {
+pub fn surface(s: &Handle<dyn GeomSurface>) {
     let Some(surf) = s.get() else {
         return int(-1);
     };

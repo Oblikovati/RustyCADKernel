@@ -123,3 +123,4 @@ def append_geomfill_sweep_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_geomfill_laws').append_laws_requests(requests)
     __import__('tkgeomalgo_corpus_geomfill_placement').append_placement_requests(requests)
     __import__('tkgeomalgo_corpus_geomfill_sweepalgo').append_sweepalgo_requests(requests)
+    __import__('tkgeomalgo_corpus_geomfill_pipe').append_pipe_requests(requests)
