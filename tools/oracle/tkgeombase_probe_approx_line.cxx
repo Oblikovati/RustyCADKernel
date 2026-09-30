@@ -1,22 +1,9 @@
-// Copyright (c) 1995-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
-
 // The Approx multi-line drivers (tools/tkgeombase_corpus_approx.py): Approx_ComputeLine
 // instantiated here over AppDef_MultiLine with a line tool whose WhatStatus,
 // MakeMLBetween and MakeMLOneMorePoint follow scripted rules (AppDef_MyLineTool never
 // adds points), AppDef_BSplineCompute, Approx_FitAndDivide(2d) and
 // Approx_MCurvesToBSpCurve. The Rust twin is crates/tkgeombase/examples/gb_probe/approx.
+
 #include <AppCont_Function.hxx>
 #include <AppDef_BSplineCompute.hxx>
 #include <AppDef_MultiLine.hxx>

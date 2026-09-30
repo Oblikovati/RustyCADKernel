@@ -64,7 +64,8 @@ class CorpusTests(unittest.TestCase):
         native = (ROOT/'tools/oracle/tktopalgo_probe.cxx').read_text()
         rust = (ROOT/'crates/tktopalgo/examples/numeric_probe.rs').read_text()
         self.assertEqual(set(re.findall(r'\{"(\w+)",', native)), operations)
-        self.assertEqual(set(re.findall(r'\("(\w+)",', rust)), operations)
+        # rustfmt may wrap a long row, so the name can start on the next line.
+        self.assertEqual(set(re.findall(r'\(\s*"(\w+)",', rust)), operations)
 
     def test_make_vertex_request_is_three_exact_coordinates(self):
         self.assertEqual(make_vertex_request([0.1, -0.0, 2]), 'tp_make_vertex 0.1 -0.0 2.0')

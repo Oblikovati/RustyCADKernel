@@ -29,6 +29,9 @@
 #include "tktopalgo_probe_brepclass.cxx"
 #include "tktopalgo_probe_breptopadaptor.cxx"
 #include "tktopalgo_probe_intcurvesface.cxx"
+#include "tktopalgo_probe_bisector.cxx"
+#include "tktopalgo_probe_mat.cxx"
+#include "tktopalgo_probe_mat_parts.cxx"
 #include "tktopalgo_probe_breplib_common.cxx"
 #include "tktopalgo_probe_breplib_edge.cxx"
 #include "tktopalgo_probe_breplib_wire.cxx"
@@ -59,6 +62,29 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"icf_line", tp_icf_line_case},
  {"icf_curve", tp_icf_curve_case},
  {"icf_shape", tp_icf_shape_case},
+ // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
+ {"tp_make_vertex", tp_make_vertex_case},
+ // Bisector (tktopalgo_probe_bisector.cxx)
+ {"tp_bisec_curves", tp_bisec_curves_case},
+ {"tp_bisec_curve_point", tp_bisec_curve_point_case},
+ {"tp_bisec_points", tp_bisec_points_case},
+ {"tp_bisec_ana", tp_bisec_ana_case},
+ {"tp_bisec_cc", tp_bisec_cc_case},
+ {"tp_bisec_pc", tp_bisec_pc_case},
+ {"tp_bisec_inter", tp_bisec_inter_case},
+ {"tp_bisec_function_h", tp_bisec_function_h_case},
+ {"tp_bisec_function_inter", tp_bisec_function_inter_case},
+ {"tp_bisec_poly", tp_bisec_poly_case},
+ {"tp_bisec_is_convex", tp_bisec_is_convex_case},
+ // MAT and MAT2d (tktopalgo_probe_mat.cxx, tktopalgo_probe_mat_parts.cxx)
+ {"tp_mat2d_locus", tp_mat2d_locus_case},
+ {"tp_mat_list", tp_mat_list_case},
+ {"tp_mat_bisector", tp_mat_bisector_case},
+ {"tp_mat_arc", tp_mat_arc_case},
+ {"tp_mat2d_connexion", tp_mat2d_connexion_case},
+ {"tp_mat2d_cut", tp_mat2d_cut_case},
+ {"tp_mat2d_minipath", tp_mat2d_minipath_case},
+ {"tp_mat2d_tool", tp_mat2d_tool_case},
  // BRepLib (tktopalgo_probe_breplib_*.cxx)
  {"blm_vertex", tp_blm_vertex_case},
  {"blm_edge", tp_blm_edge_case},

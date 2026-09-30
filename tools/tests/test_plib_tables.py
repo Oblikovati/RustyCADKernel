@@ -24,8 +24,8 @@ class TableGeneratorTests(unittest.TestCase):
 
     def test_fragments_are_slice_expressions_named_like_rust_constants(self):
         self.assertEqual(rust_name('WeightsDB0_C1'), 'WEIGHTS_DB0_C1')
-        files = fragments('MaxValuesDB_C0', ['1.5', '-2.5'], '// header\n')
-        self.assertEqual(files, {'max_values_db_c0_0.rs': '// header\n&[\n    1.5,\n    -2.5,\n]\n'})
+        files = fragments('MaxValuesDB_C0', ['1.5', '-2.5'])
+        self.assertEqual(files, {'max_values_db_c0_0.rs': '&[\n    1.5,\n    -2.5,\n]\n'})
 
 
 class PlibCorpusTests(unittest.TestCase):

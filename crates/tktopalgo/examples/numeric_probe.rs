@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod tp_probe;
 use tp_probe::{
-    brep_builder_api, brep_class, brep_lib_edge, brep_lib_package, brep_lib_wire, brep_top_adaptor,
-    int_curves_face,
+    bisector, bisector_algo, brep_builder_api, brep_class, brep_lib_edge, brep_lib_package,
+    brep_lib_wire, brep_top_adaptor, int_curves_face, mat, mat_parts,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -37,6 +37,30 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("icf_line", int_curves_face::line_case),
     ("icf_curve", int_curves_face::curve_case),
     ("icf_shape", int_curves_face::shape_case),
+    // Bisector (tp_probe/bisector.rs)
+    ("tp_bisec_curves", bisector::bisec_curves_case),
+    ("tp_bisec_curve_point", bisector::bisec_curve_point_case),
+    ("tp_bisec_points", bisector::bisec_points_case),
+    ("tp_bisec_ana", bisector::bisec_ana_case),
+    ("tp_bisec_cc", bisector_algo::bisec_cc_case),
+    ("tp_bisec_pc", bisector_algo::bisec_pc_case),
+    ("tp_bisec_inter", bisector_algo::bisec_inter_case),
+    ("tp_bisec_function_h", bisector_algo::bisec_function_h_case),
+    (
+        "tp_bisec_function_inter",
+        bisector_algo::bisec_function_inter_case,
+    ),
+    ("tp_bisec_poly", bisector_algo::bisec_poly_case),
+    ("tp_bisec_is_convex", bisector_algo::bisec_is_convex_case),
+    // MAT and MAT2d (tp_probe/mat.rs, tp_probe/mat_parts.rs)
+    ("tp_mat2d_locus", mat::mat2d_locus_case),
+    ("tp_mat_list", mat_parts::mat_list_case),
+    ("tp_mat_bisector", mat_parts::mat_bisector_case),
+    ("tp_mat_arc", mat_parts::mat_arc_case),
+    ("tp_mat2d_connexion", mat_parts::mat2d_connexion_case),
+    ("tp_mat2d_cut", mat_parts::mat2d_cut_case),
+    ("tp_mat2d_minipath", mat_parts::mat2d_minipath_case),
+    ("tp_mat2d_tool", mat_parts::mat2d_tool_case),
     // BRepLib (tp_probe/brep_lib_*.rs)
     ("blm_vertex", brep_lib_edge::vertex_case),
     ("blm_edge", brep_lib_edge::edge_case),

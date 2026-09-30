@@ -1,4 +1,6 @@
 //! The TKTopAlgo probe operations, one module per C++ probe file under tools/oracle.
+pub mod bisector;
+pub mod bisector_algo;
 pub mod brep_builder_api;
 pub mod brep_class;
 pub mod brep_lib_common;
@@ -9,6 +11,8 @@ pub mod brep_lib_wire;
 pub mod brep_top_adaptor;
 pub mod face;
 pub mod int_curves_face;
+pub mod mat;
+pub mod mat_parts;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tktopalgo_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.
@@ -23,3 +27,8 @@ pub mod print;
 #[allow(dead_code)]
 #[path = "../../../tkgeomalgo/examples/ga_probe/int_res2d.rs"]
 pub mod int_res2d;
+
+// The 2D curve reader of the TKGeomAlgo probe (ga_curve2d), which the Bisector, MAT and
+// MAT2d probes share with it.
+#[path = "../../../tkgeomalgo/examples/ga_probe/curve2d.rs"]
+pub mod curve2d;

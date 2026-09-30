@@ -1,21 +1,8 @@
-// Copyright (c) 1995-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
-
 // The requests of the Approx multi-line drivers (tools/tkgeombase_corpus_approx.py)
 // over the line and the ComputeLine instantiation of tkgeombase_probe_approx_line.cxx.
 // `kind` 0 then an AppDef line (gb_apc_read_line), or kind 1 `nb3d nb2d n` then per
 // point `t tangent` sampled on the source curves; then `mode cap` of the rules.
+
 AppDef_MultiLine gb_ax_read_line(GbReader& r){
  gb_ax_rules.params.clear();
  const int kind=r.integer();gb_ax_rules.source=kind==1;
