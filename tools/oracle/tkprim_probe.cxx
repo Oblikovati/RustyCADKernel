@@ -34,6 +34,13 @@
 #include "tkprim_probe_sweep.cxx"
 #include "tkprim_probe_brepprim.cxx"
 #include "tkprim_probe_brepprim_oneaxis.cxx"
+// The TKTopAlgo face and shape program readers (tp_surface, tp_shapes), so both probes build
+// the generating shapes of the sweeps identically; the Rust twin includes
+// crates/tktopalgo/examples/tp_probe/face.rs, shapes.rs and shapes_geometry.rs.
+#include "tktopalgo_probe_face.cxx"
+#include "tktopalgo_probe_shapes.cxx"
+#include "tkprim_probe_brepsweep.cxx"
+#include "tkprim_probe_brepsweep_members.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // The shared shape digest (tkprim_probe_shape.cxx)
  {"pr_digest_vertex", pr_digest_vertex_case},
@@ -45,6 +52,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bp_wedge", pr_bp_wedge_case},
  {"bp_builder", pr_bp_builder_case},
  {"bp_oneaxis", pr_bp_oneaxis_case},
+ // BRepSweep (tkprim_probe_brepsweep.cxx, tkprim_probe_brepsweep_members.cxx, shapes of
+ // tktopalgo_probe_shapes.cxx)
+ {"bs_prism", pr_bs_prism_case},
+ {"bs_revol", pr_bs_revol_case},
+ {"bs_members", pr_bs_members_case},
+ {"bs_tools", pr_bs_tools_case},
 };
 int main() {
  std::string line;

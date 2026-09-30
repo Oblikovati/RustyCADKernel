@@ -1,6 +1,8 @@
 //! The TKPrim probe operations, one module per C++ probe file under tools/oracle.
 pub mod brep_prim;
 pub mod brep_prim_one_axis;
+pub mod brep_sweep;
+pub mod brep_sweep_members;
 pub mod shape;
 pub mod sweep;
 
@@ -17,3 +19,15 @@ pub mod common;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
+
+// The face and shape program readers of the TKTopAlgo probe (tktopalgo_probe_face.cxx and
+// tktopalgo_probe_shapes.cxx natively), which build the generating shapes of the sweeps.
+#[allow(dead_code)]
+#[path = "../../../tktopalgo/examples/tp_probe/face.rs"]
+pub mod face;
+#[allow(dead_code)]
+#[path = "../../../tktopalgo/examples/tp_probe/shapes.rs"]
+pub mod shapes;
+#[allow(dead_code)]
+#[path = "../../../tktopalgo/examples/tp_probe/shapes_geometry.rs"]
+pub mod shapes_geometry;

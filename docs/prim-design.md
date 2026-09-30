@@ -77,3 +77,40 @@ members, and the rules for the whole toolkit are:
   They implement the trait `BRepPrimRevolutionDerived` (the revolution they hold and
   their lateral face); a blanket implementation of `BRepPrimOneAxis` forwards the other
   members to the revolution, so the derived class keeps every member of its bases.
+
+## 3. BRepSweep: the generic linear regular sweep and its transformations
+
+- `BRepSweep_NumLinearRegularSweep` is the trait `BRepSweepNumLinearRegularSweep` over the
+  base struct `BRepSweepNumLinearRegularSweepBase` (the builder, the generating shape and
+  directing edge with their tools, and the three `NCollection_Array2` grids of shapes,
+  built flags and used flags, whose range checks raise Standard_OutOfRange for a foreign
+  shape as natively). The seventeen pure virtual members are required methods;
+  `SplitShell`, the only virtual member with a body, is a provided method; the shape
+  accessors (`Shape` in its three overloads `shape`, `shape_of`, `shape_at`, `FirstShape`,
+  `LastShape` and their `_of` overloads, `IsUsed`, `GenIsUsed`, `Closed`) are provided
+  methods that no implementor overrides. The recursive construction of one grid cell is in
+  `sweep_shape.rs`, as functions generic over the trait.
+- The native code builds a cell in place (`myShapes(i, j)`) while it recurses and calls the
+  geometric members, which read the cell back (`SetContinuity` asks for `Shape(aGenS,
+  aDirS)` before the cell is complete). The port stores a new cell in the grid as soon as
+  it is made and keeps working on a copy: a shape is a handle, so every sub-shape added
+  to the copy is added to the TShape the grid holds.
+- The members with many shape arguments group the address of the new shape in a tuple
+  (`SweepAddress`: the generating shape, its generating sub-shape and the directing
+  shape; the pair of directing shapes of the directing members).
+- `BRepSweep_Trsf` is the trait `BRepSweepTrsf` (a sub-trait of the generic sweep) over
+  `BRepSweepTrsfBase` (the location and copy flag), with `Init` and `Process` as provided
+  methods. Its override of `SetContinuity` is the function `trsf_set_continuity`, which
+  `BRepSweepTranslation` and `BRepSweepRotation` call from their implementation of the
+  generic trait (neither overrides it natively).
+- `BRepSweep_Translation` and `BRepSweep_Rotation` are structs holding both bases; their
+  constructors return `Result` (the vector and angle checks, and the geometric members
+  that `Init` runs). The members the two classes write identically (`SetParameters`,
+  `SetGeneratingParameter`, the copy of a generating edge, the static `SetThePCurve` with
+  its tolerance as a parameter) are shared in `sweep_geometry.rs`.
+- `BRepSweep_Prism` and `BRepSweep_Revol` hold their sweep and forward its accessors;
+  their private `NumShape`, `Location`, `Axe` and `Angle` helpers are private functions.
+- `BRepSweep_Builder`, `BRepSweep_Iterator` and `BRepSweep_Tool` are plain structs; the
+  builder members that make a container fill a `&mut Shape` slot through the typed cast
+  of the native code (`TopoDS::Wire(aWire)`, Standard_TypeMismatch for a slot of another
+  type).
