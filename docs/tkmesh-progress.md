@@ -64,3 +64,12 @@ The 17 FaceChecker header rows are implemented. Its integrated native corpus pas
 multiple wires, contacts and repeated sequential/parallel checks. Pointer associations
 use weak identity and the existing NCollection containers. The remaining original
 mesh declarations still require the downstream pipeline.
+
+### Model healer
+
+The seven ModelHealer header rows are mapped, including Rust ownership for its
+explicit destructor. The integrated native gate passes 69,311 exact requests.
+Endpoint alias order, strict vertex tolerance, face intersections, five refinement
+passes, minimum-size overrides, status flags and repeated serial/parallel calls are
+covered. The concrete triangulation pipeline and 28 original declarations remain
+pending; this dependency does not establish IncrementalMesh completion.

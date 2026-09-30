@@ -211136,6 +211136,69 @@
       "rust_item": "rustycad_tkbo::int_tools::FaceFace::perform",
       "status": "implemented",
       "notes": "Pinned 3d097a0 FaceFace behavior; all ten unchanged original declarations pass native and Rust; 224 complete Perform differential requests plus 7434 separate private-helper exact comparisons. Native ordering, retained point state and approximation retries preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelHealer",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
+      "source_sha256": "86b76a23464be0f25c343eee7bbe765174cc2df54c1e5335443ba998a04ab2c0",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelHealer",
+      "status": "implemented",
+      "notes": "Native endpoint alias order, topological and strict vertex-tolerance adjacency, face intersection checks, five edge-amplification passes using real EdgeDiscret, native pointer maps and OSD parallel loops. Parameters copied into shared storage for FaceChecker references; successful completion releases model and intersection map. Native C7 face17 minimum-size override preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelHealer()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
+      "source_sha256": "86b76a23464be0f25c343eee7bbe765174cc2df54c1e5335443ba998a04ab2c0",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelHealer::new",
+      "status": "implemented",
+      "notes": "Native endpoint alias order, topological and strict vertex-tolerance adjacency, face intersection checks, five edge-amplification passes using real EdgeDiscret, native pointer maps and OSD parallel loops. Parameters copied into shared storage for FaceChecker references; successful completion releases model and intersection map. Native C7 face17 minimum-size override preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelHealer::~BRepMesh_ModelHealer()",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
+      "source_sha256": "86b76a23464be0f25c343eee7bbe765174cc2df54c1e5335443ba998a04ab2c0",
+      "rust_item": "std::ops::Drop",
+      "status": "excluded",
+      "notes": "Rust ownership drops healer state; no explicit destructor entry point."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelHealer::operator()(int) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
+      "source_sha256": "86b76a23464be0f25c343eee7bbe765174cc2df54c1e5335443ba998a04ab2c0",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelHealer::process_index",
+      "status": "implemented",
+      "notes": "Native endpoint alias order, topological and strict vertex-tolerance adjacency, face intersection checks, five edge-amplification passes using real EdgeDiscret, native pointer maps and OSD parallel loops. Parameters copied into shared storage for FaceChecker references; successful completion releases model and intersection map. Native C7 face17 minimum-size override preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelHealer::operator()(const IMeshData::IFaceHandle&) const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
+      "source_sha256": "86b76a23464be0f25c343eee7bbe765174cc2df54c1e5335443ba998a04ab2c0",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelHealer::process_face",
+      "status": "implemented",
+      "notes": "Native endpoint alias order, topological and strict vertex-tolerance adjacency, face intersection checks, five edge-amplification passes using real EdgeDiscret, native pointer maps and OSD parallel loops. Parameters copied into shared storage for FaceChecker references; successful completion releases model and intersection map. Native C7 face17 minimum-size override preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelHealer::DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelHealer,IMeshTools_ModelAlgo)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
+      "source_sha256": "86b76a23464be0f25c343eee7bbe765174cc2df54c1e5335443ba998a04ab2c0",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelHealer (RuntimeTyped/Transient)",
+      "status": "implemented",
+      "notes": "Native endpoint alias order, topological and strict vertex-tolerance adjacency, face intersection checks, five edge-amplification passes using real EdgeDiscret, native pointer maps and OSD parallel loops. Parameters copied into shared storage for FaceChecker references; successful completion releases model and intersection map. Native C7 face17 minimum-size override preserved."
+    },
+    {
+      "upstream_id": "BRepMesh_ModelHealer::performInternal(const occ::handle<IMeshData_Model>&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
+      "source_sha256": "86b76a23464be0f25c343eee7bbe765174cc2df54c1e5335443ba998a04ab2c0",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshModelHealer::perform_internal",
+      "status": "implemented",
+      "notes": "Native endpoint alias order, topological and strict vertex-tolerance adjacency, face intersection checks, five edge-amplification passes using real EdgeDiscret, native pointer maps and OSD parallel loops. Parameters copied into shared storage for FaceChecker references; successful completion releases model and intersection map. Native C7 face17 minimum-size override preserved."
     }
   ],
   "tests": [
