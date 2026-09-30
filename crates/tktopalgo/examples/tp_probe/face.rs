@@ -5,17 +5,22 @@
 //! `Reader::real`, so the behavior tests include it by path with the bare reader.
 use super::print::Reader;
 use rustycad_tkbrep::brep::BRepBuilder;
+use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Edge, Face, Shape, Vertex, Wire};
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCircle, Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{
-    GeomCylindricalSurface, GeomPlane, GeomRectangularTrimmedSurface, GeomSphericalSurface,
-    GeomSurface,
+    GeomBSplineSurface, GeomBezierSurface, GeomConicalSurface, GeomCurve, GeomCylindricalSurface,
+    GeomLine, GeomPlane, GeomRectangularTrimmedSurface, GeomSphericalSurface, GeomSurface,
+    GeomToroidalSurface,
 };
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
-use rustycad_tkmath::gp::{Axis2d, Axis3, Direction2, Direction3, Point2, Point3, Vector2};
+use rustycad_tkmath::gp::{
+    Axis2d, Axis3, Direction2, Direction3, Point2, Point3, Vector2, Vector3,
+};
 
 /// `TpFace`: the face and its edges in record order.
 pub struct TpFace {
@@ -39,10 +44,78 @@ fn orientation(r: &mut Reader<'_>) -> Orientation {
     Orientation::ALL[r.integer() as usize]
 }
 
-/// `tp_surface`: a plane, cylinder, sphere or trimmed plane.
+fn array_failure<E: std::fmt::Debug>(error: E) -> Failure {
+    Failure::new(&format!("{error:?}"))
+}
+
+/// `tp_poles`: a grid of nu x nv poles, U rows first.
+fn poles(r: &mut Reader<'_>, nu: i32, nv: i32) -> Result<Array2<'static, Point3>, Failure> {
+    let mut grid = Array2::with_bounds(1, nu, 1, nv).map_err(array_failure)?;
+    for i in 1..=nu {
+        for j in 1..=nv {
+            grid.set_value(i, j, point(r)).map_err(array_failure)?;
+        }
+    }
+    Ok(grid)
+}
+
+/// `tp_knots`: `n (knot mult)...` of one direction.
+fn knots(r: &mut Reader<'_>) -> Result<(Array1<'static, f64>, Array1<'static, i32>), Failure> {
+    let n = r.integer();
+    let mut values = Array1::<f64>::with_bounds(1, n).map_err(array_failure)?;
+    let mut mults = Array1::<i32>::with_bounds(1, n).map_err(array_failure)?;
+    for i in 1..=n {
+        values[i] = r.real();
+        mults[i] = r.integer();
+    }
+    Ok((values, mults))
+}
+
+/// `tp_bspline_surface`: degrees, poles, then the U and V knots.
+fn bspline_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
+    let (udeg, vdeg) = (r.integer(), r.integer());
+    let (nu, nv) = (r.integer(), r.integer());
+    let grid = poles(r, nu, nv)?;
+    let (uk, um) = knots(r)?;
+    let (vk, vm) = knots(r)?;
+    let surface =
+        GeomBSplineSurface::new(&grid, (&uk, &um), (&vk, &vm), (udeg, vdeg), (false, false))?;
+    Ok(Handle::new(surface).cast())
+}
+
+/// The surface kinds 4 (cone), 5 (torus), 6 (Bezier) and 7 (B-spline).
+fn other_surface(
+    r: &mut Reader<'_>,
+    kind: i32,
+    (p, n): (Point3, Direction3),
+) -> Result<Handle<dyn GeomSurface>, Failure> {
+    Ok(match kind {
+        4 => {
+            let radius = r.real();
+            let frame = Axis3::from_normal(p, n)?;
+            Handle::new(GeomConicalSurface::new(frame, r.real(), radius)?).cast()
+        }
+        5 => {
+            let major = r.real();
+            let frame = Axis3::from_normal(p, n)?;
+            Handle::new(GeomToroidalSurface::new(frame, major, r.real())?).cast()
+        }
+        6 => {
+            let (nu, nv) = (r.integer(), r.integer());
+            Handle::new(GeomBezierSurface::new(&poles(r, nu, nv)?)?).cast()
+        }
+        _ => bspline_surface(r)?,
+    })
+}
+
+/// `tp_surface`: a plane, cylinder, sphere, trimmed plane, cone, torus, Bezier or
+/// B-spline surface.
 fn surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
     let kind = r.integer();
     let (p, n) = (point(r), direction(r)?);
+    if kind >= 4 {
+        return other_surface(r, kind, (p, n));
+    }
     Ok(match kind {
         0 => Handle::new(GeomPlane::from_point(p, n)?).cast(),
         1 => Handle::new(GeomCylindricalSurface::new(
@@ -95,9 +168,27 @@ fn pcurves(r: &mut Reader<'_>, e: &Edge, face: &Face, kind: i32, tol: f64) -> Re
         b.update_edge_pcurves_on_face(e, (&c1, &c2), face, tol)?;
         return b.range_on_face(e, face, 0.0, last);
     }
+    if kind == 6 {
+        return segment_with_line(r, e, face, tol);
+    }
     let (c, first, last) = single_pcurve(r, kind)?;
     b.update_edge_pcurve_on_face(e, &c, face, tol)?;
     b.range_on_face(e, face, first, last)
+}
+
+/// The kind 6: the segment pcurve and the 3d line from S(u1, v1) towards S(u2, v2),
+/// both on [0, length].
+fn segment_with_line(r: &mut Reader<'_>, e: &Edge, face: &Face, tol: f64) -> Result<(), Failure> {
+    let b = BRepBuilder::default();
+    let (a, end) = (point2d(r), point2d(r));
+    let (c, last) = segment(a, end)?;
+    let s = BRepTool::surface(face)?;
+    let (pa, pb) = (s.value(a.x(), a.y())?, s.value(end.x(), end.y())?);
+    let line = GeomLine::from_point(pa, Direction3::from_vector(Vector3::between(pa, pb))?);
+    let curve: Handle<dyn GeomCurve> = Handle::new(line).cast();
+    b.update_edge_curve(e, &curve, tol)?;
+    b.update_edge_pcurve_on_face(e, &c, face, tol)?;
+    b.range(e, 0.0, last, false)
 }
 
 /// The pcurve of the kinds 0 (segment), 1 (arc), 2 (Bezier) and 4 (line on a range).

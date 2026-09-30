@@ -15,3 +15,7 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_brepbuilderapi').append_brepbuilderapi_requests(requests)
     # BRepClass (tktopalgo_corpus_brepclass.py, faces of tktopalgo_corpus_faces.py)
     __import__('tktopalgo_corpus_brepclass').append_brepclass_requests(requests)
+    # BRepTopAdaptor (tktopalgo_corpus_breptopadaptor.py, faces of tktopalgo_corpus_adaptor_faces.py)
+    __import__('tktopalgo_corpus_breptopadaptor').append_breptopadaptor_requests(requests)
+    # IntCurvesFace (tktopalgo_corpus_intcurvesface.py, faces of tktopalgo_corpus_adaptor_faces.py)
+    __import__('tktopalgo_corpus_intcurvesface').append_intcurvesface_requests(requests)

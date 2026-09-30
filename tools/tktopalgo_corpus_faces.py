@@ -14,9 +14,9 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 
-PLANE, CYLINDER, SPHERE, TRIMMED = range(4)
+PLANE, CYLINDER, SPHERE, TRIMMED, CONE, TORUS, BEZIER_SURFACE, BSPLINE_SURFACE = range(8)
 FORWARD, REVERSED, INTERNAL, EXTERNAL = range(4)
-SEGMENT, ARC, BEZIER, SEAM, LINE, NO_PCURVE = range(6)
+SEGMENT, ARC, BEZIER, SEAM, LINE, NO_PCURVE, SEGMENT_3D = range(7)
 # Precision::Infinite(): a parameter at least half of it is infinite.
 INFINITE = 2e100
 Z_PLANE = [PLANE, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
@@ -257,13 +257,32 @@ def named_faces() -> dict[str, FaceSpec]:
 
 
 # The number of pcurve fields of each edge kind (a Bezier curve counts its poles).
-PCURVE_FIELDS = {SEGMENT: 4, ARC: 6, SEAM: 6, LINE: 6, NO_PCURVE: 0}
+PCURVE_FIELDS = {SEGMENT: 4, ARC: 6, SEAM: 6, LINE: 6, NO_PCURVE: 0, SEGMENT_3D: 4}
+
+
+def surface_length(values: list[float], start: int) -> int:
+    """The number of fields of the surface record at `start` (kind, P, N and its own)."""
+    kind, index = values[start], start + 7
+    if kind in (CYLINDER, SPHERE):
+        return 8
+    if kind in (CONE, TORUS):
+        return 9
+    if kind == TRIMMED:
+        return 11
+    if kind == BEZIER_SURFACE:
+        return 9 + 3 * int(values[index]) * int(values[index + 1])
+    if kind == BSPLINE_SURFACE:
+        index += 4 + 3 * int(values[index + 2]) * int(values[index + 3])
+        index += 1 + 2 * int(values[index])
+        index += 1 + 2 * int(values[index])
+        return index - start
+    return 7
 
 
 def record_length(values: list[float], start: int = 0) -> int:
     """The number of fields of the face record at `start`, read as `tp_face` reads it;
     record_length(square_face().numbers()) == 70."""
-    index = start + (7 if values[start] == PLANE else 8 if values[start] in (CYLINDER, SPHERE) else 11)
+    index = start + surface_length(values, start)
     index += 1  # the face tolerance
     index += 1 + 3 * int(values[index])
     nb_edges, index = int(values[index]), index + 1
