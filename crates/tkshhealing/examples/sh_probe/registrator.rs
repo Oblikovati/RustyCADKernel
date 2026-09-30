@@ -11,13 +11,13 @@ use rustycad_tkshhealing::shape_extend::{
 };
 
 /// `sh_rg_message`: the message whose text is `m<k>`.
-fn message(k: i32) -> Msg {
+pub fn message(k: i32) -> Msg {
     let mut msg = Msg::new();
     msg.set_text(format!("m{k}").as_bytes());
     msg
 }
 
-fn gravity(value: i32) -> Gravity {
+pub fn gravity(value: i32) -> Gravity {
     [
         Gravity::Trace,
         Gravity::Info,
@@ -28,14 +28,14 @@ fn gravity(value: i32) -> Gravity {
 }
 
 /// `sh_rg_list`: the count and the texts of a message list.
-fn list(messages: &List<Msg>) {
+pub fn list(messages: &List<Msg>) {
     int(messages.extent());
     messages
         .iter()
         .for_each(|m| text(m.value().to_utf8().as_bytes()));
 }
 
-fn maps(t: &TpShapes, reg: &ShapeExtendMsgRegistrator, objects: &[Handle<StandardTransient>]) {
+pub fn maps(t: &TpShapes, reg: &ShapeExtendMsgRegistrator, objects: &[Handle<StandardTransient>]) {
     reg.map_transient(|map| {
         int(map.len() as i32);
         for object in objects {
