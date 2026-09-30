@@ -10,3 +10,14 @@
 mod make_vertex_stub;
 
 pub use make_vertex_stub::MakeVertex;
+
+// The sewing group of BRepBuilderAPI (docs/topalgo-design.md section 11).
+mod bnd_box_tree_selector;
+mod fast_sewing;
+mod sewing;
+mod vertex_inspector;
+
+pub use bnd_box_tree_selector::BRepBuilderAPIBndBoxTreeSelector;
+pub use fast_sewing::{BRepBuilderAPIFastSewing, FastSewingStatus, FastSewingStatuses};
+pub use sewing::{BRepBuilderAPISewing, SewingShapeIndexedMap, SewingShapeListMap, SewingShapeMap};
+pub use vertex_inspector::BRepBuilderAPIVertexInspector;
