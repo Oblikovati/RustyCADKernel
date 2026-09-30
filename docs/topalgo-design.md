@@ -116,21 +116,21 @@ structs (the subclasses were not ported when they were written), so:
   (`initialize_surface`, `initialize_curve`, `curve_orientation`, `vertex_orientation`,
   `curve_tol_3d`, `vertex_tol_3d`). The base members that the header does not redeclare
   (`Identical`, `SamplePnts`, `BSplSamplePnts`, `UParameters`, `VParameters`,
-  `IsUniformSampling`) call the overrides through virtual dispatch natively; they are
-  not members of the struct, since the concrete base cannot dispatch to them.
+  `IsUniformSampling`) call the overrides through virtual dispatch natively; they were
+  not members of the struct, since the concrete base cannot dispatch to them (section 8
+  adds them).
 - `BRepTopAdaptor_HVertex` is the struct `BRepTopAdaptorHVertex`, with a default
-  `Adaptor3dHVertex` as its parent field. A `Handle<BRepTopAdaptorHVertex>` cast to
+  `Adaptor3dHVertex` as its parent field (section 8 replaces it: the struct implements
+  the `Adaptor3dHVertex` trait). A `Handle<BRepTopAdaptorHVertex>` cast to
   `Handle<Adaptor3dHVertex>` keeps the object, so `Vertex()` returns the base handle as
   natively, and the members that take a base handle (`IsSame`, the `Orientation(V)`,
   `Tol3d(V)` and `Pnt(V)` of the tool) cast it back, as the native `down_cast` does; a
   base vertex gives the base behaviour (`Orientation(V)`) or the error of the native
   null dereference.
-- Consequence: the tool does not implement the `TheTopolTool` trait of IntStart. The
-  generic consumers call `Resolution`, `Parameter` and `Value` directly on the
-  `Adaptor3d_HVertex` handles of the domain, and the concrete `Adaptor3dHVertex` would
-  answer with its own (default) fields, not with the overrides. A BRep domain can feed
-  IntStart and IntPatch once `Adaptor3d_HVertex` dispatches its virtual members (a
-  TKG3d change); no TKTopAlgo package needs it (IntCurvesFace calls the tool directly).
+- Consequence (superseded by section 8): the tool did not implement the `TheTopolTool`
+  trait of IntStart, since the concrete `Adaptor3dHVertex` answered with its own fields,
+  not with the overrides. Section 8 makes `Adaptor3d_HVertex` a trait, so the vertex no
+  longer has a base parent field and the tool is an IntStart and IntPatch domain.
 - `BRepTopAdaptor_FClass2d` is a plain struct (not copyable natively). Its lazy exact
   explorer (`myExactExplorer` under `myExactMutex`) is a `Mutex<Option<...>>`, so
   `Perform` and `TestOnRestriction` take `&self` and reuse one `BRepClassFaceExplorer`
@@ -195,3 +195,65 @@ structs (the subclasses were not ported when they were written), so:
   point, its parameters and its derivatives travel together in `FacePointSample`, and
   the `U1, V1, U2, V2` bounds of `PointInTheFace` are one `UvRectangle`. The getters
   of the tree selectors return tuples. Overloads take distinct Rust names.
+
+## 8. Virtual Adaptor3d_HVertex and the BRep domain of IntStart and IntPatch
+
+Section 4 mapped the two derived adaptors of BRepTopAdaptor on the concrete TKG3d
+structs, so `BRepTopAdaptor_HVertex` could not override the members of its base and a
+BRep face could not be the domain of IntStart and IntPatch. This section replaces the
+last bullet of section 4.
+
+The native virtual members and the callers that reach them through the base:
+
+| Member | Override | Callers through the base class |
+| --- | --- | --- |
+| `Adaptor3d_HVertex::Value()` | BRepTopAdaptor_HVertex | the IntPatch probes and dumps |
+| `Parameter(C)` | BRepTopAdaptor_HVertex | `IntPatch_HInterTool::Parameter` (IntStart_SearchOnBoundaries, IntPatch_RstInt), `Contap_HContTool::Parameter` |
+| `Resolution(C)` | BRepTopAdaptor_HVertex | `IntPatch_HInterTool::Tolerance`, IntPatch_ImpImpIntersection (`PutPointsOnLine`), `Contap_HContTool::Tolerance` |
+| `Orientation()` | BRepTopAdaptor_HVertex | `Adaptor3d_TopolTool::Orientation(V)` (IntPatch_RstInt, IntPatch_ImpPrmIntersection) |
+| `IsSame(Other)` | BRepTopAdaptor_HVertex | `Adaptor3d_TopolTool::Identical` (IntStart, IntPatch) |
+| every `Adaptor3d_TopolTool` member but `UParameters`, `VParameters` and `GetConeApexParam` | BRepTopAdaptor_TopolTool overrides the iteration, the classification, the orientations, `Has3d`, `Tol3d`, `Pnt`, the samples, `DomainIsInfinite` and `Edge` | IntStart and IntPatch through `occ::handle<Adaptor3d_TopolTool>`; the base `SamplePnts` calls the virtual `ComputeSamplePoints` and `BSplSamplePnts`, `NbSamplesU`/`V` call `ComputeSamplePoints`, `Identical` and `Orientation(V)` call the vertex members |
+
+The mapping:
+
+- **`Adaptor3d_HVertex` is a trait.** It follows the Adaptor2d and Adaptor3d curve and
+  surface classes (docs/geom-design.md section 7): the trait `Adaptor3dHVertex:
+  Transient` holds the five virtual members under their native names, is registered as
+  `Adaptor3d_HVertex` with `impl_transient_interface!`, and is reached through
+  `Handle<dyn Adaptor3dHVertex>`. The native base class is not abstract, but its members
+  read its private fields, so the trait members are required and the struct
+  `Adaptor3dHVertexBase` is an instance of the base class itself (registered as
+  `Adaptor3d_HVertex` too, as `Adaptor2dCurve2dBase` is). `Resolution`, `Parameter` and
+  `IsSame` return `Result` in the trait, since the override can raise where the base
+  cannot.
+- **`BRepTopAdaptor_HVertex` implements the trait.** Its RTTI parent is
+  `dyn Adaptor3dHVertex` (the chain `BRepTopAdaptor_HVertex -> Adaptor3d_HVertex ->
+  Standard_Transient`, as `Geom2dAdaptor_Curve` registers below `Adaptor2d_Curve2d`). It
+  keeps no base fields: the native ones are private and every member that reads them is
+  overridden.
+- **The IntStart vertex type** `TheVertex` is `Handle<dyn Adaptor3dHVertex>`, so the
+  generics and the IntPatch tools call `Parameter`, `Resolution`, `Orientation`,
+  `IsSame` and `Value` through the trait object and reach the override, as natively.
+- **`Adaptor3d_TopolTool` stays a struct; the IntStart trait `TheTopolTool` is its
+  virtual interface.** Sections 12, 16, 17 and 18 of docs/geomalgo-design.md already pass
+  every domain as `&dyn TheTopolTool`; moving that trait into TKG3d would change every
+  IntStart and IntPatch signature for no behaviour. `BRepTopAdaptorTopolTool` implements
+  `TheTopolTool` in its own crate (TKTopAlgo depends on TKGeomAlgo), each member mapped to
+  its override. The trait members whose BRep override can raise where the base cannot
+  (`InitVertexIterator`, `NextVertex`, `DomainIsInfinite`, `Edge`, `Orientation(C)`)
+  return `Result`; the base implementation answers `Ok`.
+- **Base members that call virtual members.** A member that BRepTopAdaptor_TopolTool
+  inherits and that reads no base state (`Identical`, `Orientation(V)`) is called on the
+  embedded base (`parent`), whose body now dispatches through the vertex trait. The
+  sample members (`SamplePnts`, `UParameters`, `VParameters`, `IsUniformSampling`)
+  read and write the base's protected `myS`, `myNbSamplesU`/`V` and `myUPars`/`myVPars`,
+  which the BRep struct keeps in its own state (section 4). Their base bodies are
+  associated functions of `Adaptor3dTopolTool` over the surface: `SamplePnts` takes the
+  virtual `ComputeSamplePoints` as a closure that returns the counts it set, so the base
+  tool passes its own count computation and the BRep tool its override (which also sets
+  its sample grid); the result is the pair of parameter arrays, whose lengths are the
+  counts, which each tool stores. `BSplSamplePnts` is not overridden: both tools run
+  the associated function `bspl_sample_parameters` on their own state.
+- The design adds no BRep case to TKG3d or TKGeomAlgo: any subclass of the two native
+  classes (the Contap and BRepBlend domains of later toolkits) implements the same two
+  traits.
