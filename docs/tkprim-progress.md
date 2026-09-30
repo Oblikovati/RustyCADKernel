@@ -1,12 +1,12 @@
 # TKPrim port status
 
-**In progress; toolkit acceptance is not complete.** `crates/tkprim` (`rustycad-tkprim`)
-is the port of the ModelingAlgorithms toolkit TKPrim. It depends on the TKernel, TKMath,
-TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo and TKTopAlgo ports, as the native toolkit
-does (its EXTERNLIB lists TKBRep, TKernel, TKMath, TKG2d, TKGeomBase, TKG3d and
-TKTopAlgo; TKTopAlgo brings TKGeomAlgo). Each of the 5 OCCT packages is one module of the
-crate, declared up front in `src/lib.rs`; a module whose package is not ported yet holds
-only its documentation. Ported so far: Sweep, BRepPrim and BRepSweep.
+**Complete: every package is ported and every upstream suite is mapped.**
+`crates/tkprim` (`rustycad-tkprim`) is the port of the ModelingAlgorithms toolkit TKPrim.
+It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo and
+TKTopAlgo ports, as the native toolkit does (its EXTERNLIB lists TKBRep, TKernel, TKMath,
+TKG2d, TKGeomBase, TKG3d and TKTopAlgo; TKTopAlgo brings TKGeomAlgo). Each of the 5 OCCT
+packages is one module of the crate, declared in `src/lib.rs`: Sweep, BRepPrim, BRepSweep,
+BRepPrimAPI and BRepPreviewAPI.
 
 [prim-design.md](prim-design.md) fixes how the C++ constructs of the toolkit (the
 abstract sweep with its virtual geometric members, the one-axis primitives with their
@@ -27,18 +27,30 @@ BRepPrimAPI includes BRepPrim and BRepSweep, BRepPreviewAPI includes BRepPrimAPI
 Outside TKPrim, the packages need BRepTools, BRepAdaptor and BRepLProp (TKBRep), GeomProjLib
 and Extrema (TKGeomBase), and BRepLib, BRepBuilderAPI and BRepExtrema (TKTopAlgo).
 
-The toolkit test inventory maps these suites (0 declarations):
+The toolkit test inventory maps these suites (46 declarations), each translated 1:1 into
+`crates/tkprim/tests`:
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
+| `GTests/BRepPrimAPI_MakeBox_Test.cxx` | `brep_prim_api_make_box` | 6 | pass | pass |
+| `GTests/BRepPrimAPI_MakeCone_Test.cxx` | `brep_prim_api_make_cone` | 6 | pass | pass |
+| `GTests/BRepPrimAPI_MakeCylinder_Test.cxx` | `brep_prim_api_make_cylinder` | 5 | pass | pass |
+| `GTests/BRepPrimAPI_MakePrism_Test.cxx` | `brep_prim_api_make_prism` | 1 | pass | pass |
+| `GTests/BRepPrimAPI_MakeRevol_Test.cxx` | `brep_prim_api_make_revol` | 3 | pass | pass |
+| `GTests/BRepPrimAPI_MakeSphere_Test.cxx` | `brep_prim_api_make_sphere` | 5 | pass | pass |
+| `GTests/BRepPrimAPI_MakeTorus_Test.cxx` | `brep_prim_api_make_torus` | 15 | pass | pass |
+| `GTests/BRepPrimAPI_MakeWedge_Test.cxx` | `brep_prim_api_make_wedge` | 5 | pass | pass |
+
+The suites check the makers through BRepCheck_Analyzer, BRepGProp and TopExp_Explorer of
+the lower ports; the toroidal cases of MakeTorus include the equal-height ranges whose
+shapes BRepCheck rejects natively (the suite expects them invalid, and so does the port).
 
 ## Verification
 
 `python3 tools/verify_toolkit.py TKPrim --jobs 16 --source OCCT --native-build BUILD`
 compiles the unchanged upstream suites against the native closure, runs them and the
 Rust targets, checks exact runtime names, then runs `tools/verify_tkprim_numeric.py`.
-While no suite is mapped it runs the numeric verifier alone and reports 0 mapped
-declarations. Evidence is in `target/oracle-tkprim/`. CI runs it like the TKTopAlgo
+Evidence is in `target/oracle-tkprim/`. CI runs it like the TKTopAlgo
 verifier. The shared native build already builds and links `libTKPrim`.
 
 ## Numeric comparison policy
@@ -110,6 +122,32 @@ Standard_ConstructionError), the add tests of the side faces and SplitShell. `bs
 (14) runs the Tool (Standard_OutOfRange past both ends), the Iterator and the Builder
 (Standard_TypeMismatch for a slot of another type).
 
+BRepPrimAPI and BRepPreviewAPI: 1377 requests (tools/tkprim_corpus_brepprimapi.py).
+`pa_box` (200) builds every box constructor (the default box; signed, flat, tiny and large
+sizes; a corner and signed sizes; two corners in any order, equal or spanning a flat box; a
+frame and sizes, negative included) and runs ten call sequences: Shape, Solid then Shell,
+Shell then Solid, the six faces and the wedge, IsDone around Build, every Init before and
+after a build, and Shell, Shape, Solid. `pv_box` (40) sets the preview box by every Init
+(all sizes null, one, two or three sizes null, tiny sizes, two corners, frames whose
+directions are ignored), prints the shape (a vertex, an edge, a rectangle in each plane or
+the solid) and the rebuild orders. `pa_wedge` (136) builds the four wedge constructors on
+the wedge shapes of the BRepPrim corpus (ltx and limited wedges, flat and inverted ones)
+on the reference frame and another frame. `pa_oneaxis` (725) builds every constructor of
+MakeCylinder, MakeCone, MakeSphere (at the origin, a center and a frame), MakeTorus and
+MakeRevolution (trimmed lines on and off the axis, a circle, a B-spline and an infinite
+line as meridians) with valid, degenerate and invalid values (null, negative and equal
+radii, null heights, angles 0, 1e-13, negative, 2PI, 3PI and 7, latitude and pipe ranges
+inverted, out of range and of equal heights), then runs Shape, Face, Shell, Solid, Build,
+IsDone and the algorithm state through OneAxis() and the typed accessor in five orders.
+`pa_prism` (70) and `pa_revol` (170) sweep the generating shapes of the BRepSweep corpus
+(with, for the revolutions, a segment crossing the axis, a wire and a triangle touching
+it at a vertex) and print IsDone, the shape, the bottom and top, and for every program
+shape Generated, Modified, IsDeleted and the first and last shapes; `pa_revol` also prints
+HasDegenerated and Degenerated (the per-face copies). `pa_halfspace` (36) bounds
+half-spaces by a square face, a cylindrical face and a closed cube shell, seen from points
+on both sides, beside the face (its nearest point on an edge or a vertex), on the face and
+inside the cube, and with the other cast of the boundary (Standard_TypeMismatch).
+
 ## Preserved native behaviour
 
 ### Sweep
@@ -180,3 +218,51 @@ Standard_ConstructionError), the add tests of the side faces and SplitShell. `bs
   without curve, the rotation's copy of such an edge, `SetGeneratingPCurve` in a planar
   face whose new edge is not a line) crash natively; the port raises Standard_NullObject.
   The corpus never builds them.
+
+### BRepPrimAPI
+
+- `BRepPrimAPI_MakeBox::Init` replaces the wedge only: the shape and the done flag of an
+  earlier build stay, so `Shape()` returns the old box until `Build()`, `Shell()` or
+  `Solid()` runs again.
+- `Solid()` of the box and wedge makers and `Build()` of every solid maker start with
+  `B.MakeSolid(TopoDS::Solid(myShape))`: after `Shell()` the shape is a shell and they
+  raise Standard_TypeMismatch. `Face()`, `Shell()` and `Solid()` of the one-axis makers
+  call `Build()` each time, so each call makes a new solid around the same shell.
+- `BRepPrimAPI_MakeSphere(R, angle)` builds the spherical wedge 0..|angle| on a frame
+  turned to -Z for a negative angle; the constructors at a center and on a frame pass
+  the angle unchanged. The frames at a center, and the revolution frames other than the
+  one of `BRepPrimAPI_MakeRevolution(Meridian)` (which is `gp::XOY()`), are the general
+  `gp_Ax2(P, Z, X)` constructor with its signed zeros (see BRepPrim).
+- `BRepPrimAPI_MakeRevolution` projects the meridian on the plane of
+  `gp_Ax2(gp::Origin(), -gp::DY(), gp::DX())` for its 2D meridian, whatever the frame; the
+  3D meridian is used as given.
+- `BRepPrimAPI_MakeRevol(S, A, Copy)` sweeps by the angle 2PI through the angle
+  constructor of BRepSweep_Revol, not through its closed-revolution constructor.
+- `BRepPrimAPI_MakeRevol` with an edge crossing the axis (an extremum with the axis inside
+  the edge range) leaves a null shape and the maker not done: `Shape()` raises
+  StdFail_NotDone, while `FirstShape`, `LastShape` and the history still answer from the
+  sweep. `CheckValidity` dereferences the 3D curve of every edge that is not degenerated
+  (a crash natively for an edge without one after `BRepLib::BuildCurves3d`; the port
+  raises Standard_NullObject); the corpus never builds such an edge.
+- The per-face copies of a degenerated edge are chosen while iterating an
+  `NCollection_DataMap` keyed by faces, whose order follows the TShape addresses natively
+  and in the port; when two faces hold the same degenerated edge with the same
+  orientation, which face keeps the original edge follows that order. The corpus
+  profiles touching the axis gave the same tokens in six native runs in shuffled orders
+  and in the port.
+- `BRepPrimAPI_MakeHalfSpace` raises Standard_ConstructionError for a reference point on
+  the boundary (the direction from the nearest point is null), stays not done when no
+  nearest point with a normal is found (`Solid()` then raises StdFail_NotDone), and
+  dereferences a missing p-curve of a nearest edge natively (the port raises
+  Standard_NullObject; the corpus never builds such an edge).
+- `BRepPrimAPI_MakePrism::Generated` of a shape that is not a sub-shape of the base is
+  empty (OCC31294), as is the one of a base sub-shape whose generated shape is not used.
+
+### BRepPreviewAPI
+
+- `BRepPreviewAPI_MakeBox::Build` measures the box between the frame location and that
+  location plus (XMax, YMax, ZMax) of the wedge in world coordinates: the directions of a
+  frame given to `Init` are ignored for the thin tests and the vertex, edge and rectangle.
+- When the box is thin in no direction and the shape is not null, `Build` only marks the
+  maker done: after an Init to a solid box it keeps the vertex, edge, face or shell of an
+  earlier build.
