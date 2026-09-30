@@ -108,6 +108,8 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_tessellation_extractor" => {
             mesh_probe::tessellation_extractor::tessellation_extractor_case(values)
         }
+        "mesh_curve_tessellator" => mesh_probe::curve_tessellator::curve_tessellator_case(values),
+        "mesh_curve_refinement" => mesh_probe::curve_tessellator::curve_refinement_case(values),
         "mesh_tools" => mesh_probe::tools::tools_case(values[0]),
         "mesh_explorer" => mesh_probe::tools::explorer_case(values[0], values[1] != 0),
         "mesh_model" => mesh_probe::model_case(values[0], values[1], orientation(values[2])),
