@@ -50,6 +50,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tkbrep` | TKBRep topology (TopoDS, TopExp, TopTools), in progress |
 | `crates/tkgeomalgo` | TKGeomAlgo geometric algorithms (intersections, hatching, filling), in progress |
 | `crates/tktopalgo` | TKTopAlgo topological algorithms (classification, construction, checks), in progress |
+| `crates/tkshhealing` | TKShHealing Shape Healing (analysis, fixing, conversion of shapes), in progress |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |

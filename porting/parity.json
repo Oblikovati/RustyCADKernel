@@ -191802,6 +191802,38 @@
       "rust_item": "rustycad_tktopalgo::brep_mat2d::BRepMAT2dLinkTopoBilo::generating_shape",
       "status": "implemented",
       "notes": "BRepMAT2d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 14): the class is a struct of its shape-to-basic-elements map (NCollection_DataMap with TopTools_ShapeMapHasher) and its basic-element-to-shape map; the file-static LinkToContour and the private LinkToWire keep the native DataMap<int,int> iteration order; native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bm2_locus requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend::EncodeStatus(ShapeExtend_Status)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtend::encode_status",
+      "status": "implemented",
+      "notes": "ShapeExtend status mapping (docs/tkshhealing-progress.md): the enumerators keep the native order; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_status requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend::DecodeStatus(int,ShapeExtend_Status)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtend::decode_status",
+      "status": "implemented",
+      "notes": "ShapeExtend status mapping (docs/tkshhealing-progress.md): the enumerators keep the native order; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_status requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Status",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Status.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendStatus",
+      "status": "implemented",
+      "notes": "ShapeExtend status mapping (docs/tkshhealing-progress.md): the enumerators keep the native order; compared with OCCT by tools/verify_tkshhealing_numeric.py (sh_status requests)."
+    },
+    {
+      "upstream_id": "ShapeExtend_Parametrisation",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeExtend/ShapeExtend_Parametrisation.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_extend::ShapeExtendParametrisation",
+      "status": "implemented",
+      "notes": "ShapeExtend enumeration (docs/tkshhealing-progress.md): the enumerators keep the native order; the composite surface reads it when ShapeExtend is ported."
     }
   ],
   "tests": [
