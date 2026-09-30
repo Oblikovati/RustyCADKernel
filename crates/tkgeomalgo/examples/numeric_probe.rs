@@ -7,6 +7,7 @@ use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
+use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 
 /// One probe operation over the numeric fields of a request.
@@ -65,6 +66,29 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g2int_proj", geom2d_int::proj_case),
     ("g2int_conic_curve", geom2d_int::conic_curve_case),
     ("g2int_functions", geom2d_int::functions_case),
+    // Geom2dGcc (ga_probe/geom2d_gcc*.rs)
+    ("g2gcc_qualified", geom2d_gcc::qualified_case),
+    ("g2gcc_tool", geom2d_gcc::tool_case),
+    ("g2gcc_func1", geom2d_gcc::func1_case),
+    ("g2gcc_func2", geom2d_gcc::func2_case),
+    ("g2gcc_func3", geom2d_gcc::func3_case),
+    ("g2gcc_func4", geom2d_gcc::func4_case),
+    ("g2gcc_lin2tan", geom2d_gcc_lines::lin2tan_case),
+    ("g2gcc_lin2tan_iter", geom2d_gcc_lines::lin2tan_iter_case),
+    ("g2gcc_lintanobl", geom2d_gcc_lines::lintanobl_case),
+    (
+        "g2gcc_lintanobl_iter",
+        geom2d_gcc_lines::lintanobl_iter_case,
+    ),
+    ("g2gcc_tancen", geom2d_gcc_circles::tancen_case),
+    ("g2gcc_tancen_geo", geom2d_gcc_circles::tancen_geo_case),
+    ("g2gcc_2tanrad", geom2d_gcc_circles::tanrad_case),
+    ("g2gcc_2tanrad_geo", geom2d_gcc_circles::tanrad_geo_case),
+    ("g2gcc_3tan", geom2d_gcc_circles::circ3tan_case),
+    ("g2gcc_3tan_iter", geom2d_gcc_circles::circ3tan_iter_case),
+    ("g2gcc_2tanon", geom2d_gcc_circles::tanon_case),
+    ("g2gcc_2tanon_geo", geom2d_gcc_circles::tanon_geo_case),
+    ("g2gcc_2tanon_iter", geom2d_gcc_circles::tanon_iter_case),
     // Geom2dAPI (ga_probe/geom2d_api.rs)
     ("g2api_extrema", geom2d_api::extrema_case),
     ("g2api_project", geom2d_api::project_case),

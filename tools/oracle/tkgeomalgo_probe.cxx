@@ -46,6 +46,9 @@
 #include "tkgeomalgo_probe_hatchgen.cxx"
 #include "tkgeomalgo_probe_geom2dhatch.cxx"
 #include "tkgeomalgo_probe_geom2dhatcher.cxx"
+#include <type_traits>
+#include "tkgeomalgo_probe_geom2dgcc.cxx"
+#include "tkgeomalgo_probe_geom2dgcc_circles.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -153,6 +156,26 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g2hatch_fclass", ga_g2hatch_fclass_case},
  {"g2hatch_hatcher", ga_g2hatch_hatcher_case},
  {"g2hatch_hatching", ga_g2hatch_hatching_case},
+ // Geom2dGcc (tkgeomalgo_probe_geom2dgcc*.cxx)
+ {"g2gcc_qualified", ga_g2gcc_qualified_case},
+ {"g2gcc_tool", ga_g2gcc_tool_case},
+ {"g2gcc_func1", ga_g2gcc_func1_case},
+ {"g2gcc_func2", ga_g2gcc_func2_case},
+ {"g2gcc_func3", ga_g2gcc_func3_case},
+ {"g2gcc_func4", ga_g2gcc_func4_case},
+ {"g2gcc_lin2tan", ga_g2gcc_lin2tan_case},
+ {"g2gcc_lin2tan_iter", ga_g2gcc_lin2tan_iter_case},
+ {"g2gcc_lintanobl", ga_g2gcc_lintanobl_case},
+ {"g2gcc_lintanobl_iter", ga_g2gcc_lintanobl_iter_case},
+ {"g2gcc_tancen", ga_g2gcc_tancen_case},
+ {"g2gcc_tancen_geo", ga_g2gcc_tancen_geo_case},
+ {"g2gcc_2tanrad", ga_g2gcc_2tanrad_case},
+ {"g2gcc_2tanrad_geo", ga_g2gcc_2tanrad_geo_case},
+ {"g2gcc_3tan", ga_g2gcc_3tan_case},
+ {"g2gcc_3tan_iter", ga_g2gcc_3tan_iter_case},
+ {"g2gcc_2tanon", ga_g2gcc_2tanon_case},
+ {"g2gcc_2tanon_geo", ga_g2gcc_2tanon_geo_case},
+ {"g2gcc_2tanon_iter", ga_g2gcc_2tanon_iter_case},
 };
 int main() {
  std::string line;
