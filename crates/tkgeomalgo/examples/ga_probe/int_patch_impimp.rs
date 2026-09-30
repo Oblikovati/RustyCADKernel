@@ -151,7 +151,7 @@ pub fn aline2wline_case(values: &[f64]) {
 }
 
 /// `ga_ipl_pnt2s`.
-fn read_pnt2s(r: &mut Reader) -> IntSurfPntOn2S {
+pub fn read_pnt2s(r: &mut Reader) -> IntSurfPntOn2S {
     let x = r.pnt();
     let (a, b, c, d) = (r.real(), r.real(), r.real(), r.real());
     let mut p = IntSurfPntOn2S::new();

@@ -20,7 +20,7 @@ use ga_probe::{geom2d_gcc, geom2d_gcc_circles, geom2d_gcc_lines};
 use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 use ga_probe::{gfill, gfill_cf, gfill_fill};
 use ga_probe::{ics_interutils, ics_polyhedron, int_curve_surface};
-use ga_probe::int_patch_impimp;
+use ga_probe::{int_patch_impimp, int_patch_impprm};
 use ga_probe::{int_patch, int_patch_curves, int_patch_lines, int_patch_poly, int_patch_tools};
 use ga_probe::{int_polyh, int_polyh_records, int_start, int_walk, int_walk_iw};
 
@@ -238,6 +238,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ip_aline2wline", int_patch_impimp::aline2wline_case),
     ("ip_special", int_patch_impimp::special_case),
     ("ip_special_pole", int_patch_impimp::special_pole_case),
+    // IntPatch quadric-parametric intersections (ga_probe/int_patch_impprm.rs)
+    ("ip_impprm", int_patch_impprm::impprm_case),
+    ("ip_rstint", int_patch_impprm::rstint_case),
     // GeomFill sweep (ga_probe/geom_fill_*.rs)
     ("gfs_shape", gfs::shape_case),
     ("gfs_circle", gfs::circle_case),

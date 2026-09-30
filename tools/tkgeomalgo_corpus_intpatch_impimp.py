@@ -117,12 +117,33 @@ PAIRS = [
 
 TOLS = [(1.0e-7, 1.0e-6), (1.0e-3, 1.0e-4)]
 
+# Near-degenerate positions: almost parallel axes, almost tangent or coincident surfaces.
+EPS_ANG = 1.0e-9
+NEAR = [
+    (CY_Z, sad(cyl([0.3, 0.0, 0.0], nd([EPS_ANG, 0.0, 1.0]), 1.0), (0.0, TWO_PI, -1.5, 1.5))),
+    (CY_Z, sad(cyl(O, Z, 1.0 + 1.0e-10), (0.0, TWO_PI, -1.0, 1.0))),
+    (CY_Z, sad(cyl([2.0 + 1.0e-9, 0.0, 0.0], Z, 1.0), (0.0, TWO_PI, -1.0, 1.0))),
+    (sad(plane([1.0 - 1.0e-9, 0.0, 0.0], X), (-3.0, 3.0, -3.0, 3.0)), CY_Z),
+    (sad(plane([0.0, 0.0, 0.0], nd([EPS_ANG, 0.0, 1.0])), (-3.0, 3.0, -3.0, 3.0)), sad(plane(O, Z), (-2.0, 2.0, -2.0, 2.0))),
+    (SP, sad(sphere([0.0, 0.0, 2.5 + 1.0e-9], Z, 1.0))),
+    (SP, sad(sphere([1.0e-11, 0.0, 0.0], Z, 1.5))),
+    (CY_Z, sad(sphere([2.0 - 1.0e-9, 0.0, 0.0], Z, 1.0))),
+    (sad(plane([0.0, 0.0, 1.5 - 1.0e-10], Z), (-2.0, 2.0, -2.0, 2.0)), SP),
+    (sad(plane(O, nd([1.0, 0.0, math.tan(0.6) + 1.0e-9])), (-3.0, 3.0, -3.0, 3.0)), CO_APEX),
+    (CO_Z, sad(cone([0.0, 0.0, -1.0], nd([EPS_ANG, 0.0, 1.0]), 0.5, 1.0), (0.0, TWO_PI, -1.0, 3.0))),
+    (CY_Z, sad(cone([0.0, 0.0, -1.0], Z, 1.0e-9, 1.0), (0.0, TWO_PI, -1.0, 1.0))),
+    (TO, sad(torus([0.0, 0.0, 1.0e-10], Z, 3.0, 1.0))),
+    (sad(plane([0.0, 0.0, 1.0 - 1.0e-10], Z), (-5.0, 5.0, -5.0, 5.0)), TO),
+]
+
 
 def _impimp_requests(requests: list[str]) -> None:
     for s1, s2 in PAIRS:
         requests.append(line_of('ip_impimp', [*s1, *s2, *TOLS[0], 0]))
     for s1, s2 in PAIRS[::4]:
         requests.append(line_of('ip_impimp', [*s1, *s2, *TOLS[1], 1]))
+    for s1, s2 in NEAR:
+        requests.append(line_of('ip_impimp', [*s1, *s2, *TOLS[0], 0]))
     # A surface that is no quadric raises Standard_ConstructionError.
     requests.append(line_of('ip_impimp', [*P_Z, *sad(bez_s([[[0.0, 0.0, 0.0], [0.0, 1.0, 0.0]], [[1.0, 0.0, 0.0], [1.0, 1.0, 1.0]]])), *TOLS[0], 0]))
 
