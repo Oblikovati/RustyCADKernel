@@ -354,3 +354,76 @@ call the polygon and polyhedron utilities. The port (`crates/tkgeomalgo/src/int_
 - **Exceptions.** Tool calls, the IntAna and ProjLib constructors, and indexed reads
   can raise natively; every member that reaches one returns `Result`, and the
   exception leaves the algorithm where the native one would unwind.
+
+## 12. IntStart templates and IntPolyh
+
+IntStart has no header of its own: its two templates are instantiated by IntPatch
+(`IntPatch_TheSOnBounds`, `IntPatch_TheSearchInside`) and by Contap in TKHLR
+(`Contap_TheSearch`, `Contap_TheSearchInside`). Both instances use the same concrete
+arc, vertex and domain types, so the port fixes them and makes a trait only of what
+varies. The port (`crates/tkgeomalgo/src/int_start`):
+
+- **Fixed types.** `TheArc` is `Handle<dyn Adaptor2dCurve2d>` and `TheVertex` is
+  `Handle<Adaptor3dHVertex>` in every instance. `ThePSurfaceTool` is the IntImp trait
+  `ThePSurfaceTool` (Adaptor3d_HSurfaceTool in both instances). `TheArcTool` and
+  `TheSITool` are named by the macros but not called by the bodies, so the traits
+  leave them out.
+- **The domain.** `TheTopolTool` is `Adaptor3d_TopolTool` in both instances, but the
+  native class is virtual (BRepTopAdaptor_TopolTool overrides `Edge()` and the
+  iteration), so the calls the bodies make are the trait `TheTopolTool` (sampling,
+  classification, the arc and vertex iteration, `Identical`, `Edge`). `Edge()` returns
+  `Option<TopoDsEdge>` where the native one returns a `void*` to a `TopoDS_Edge`;
+  `Adaptor3dTopolTool` implements it with `None`, as its native `Edge()` returns null.
+- **The function and the tool.** `TheFunction` of `SearchOnBoundaries` is the trait
+  `TheArcFunction` (a tkmath `FunctionWithDerivative` with `Set(arc)`, `NbSamples`,
+  `GetStateNumber`, `Valpoint`, `Quadric`, `Surface`, `LastComputedPoint` and the direct
+  `Value`/`Values` calls, fallible); `TheSOBTool` is the trait `TheSOBTool` of static
+  members; `IntStart_ThePathPoint` and `IntStart_TheSegment` are the traits
+  `ThePathPoint` and `TheSegment`. `TheFunction` of `SearchInside` is the trait
+  `TheInsideFunction` (a `FunctionSetWithDerivatives` with the members the body calls),
+  implemented here for `IntImpZerImpFunc` (IntPatch_TheSurfFunction).
+- **The generics.** `IntStart_SearchOnBoundaries.gxx/.lxx` is
+  `SearchOnBoundaries<T: SearchOnBoundariesTypes>` and `IntStart_SearchInside.gxx/.lxx`
+  is `SearchInside<T: SearchInsideTypes>`; the type bundles name the traits above. IntPatch
+  and Contap declare their instances as aliases when they are ported.
+- **Static helpers.** The file-static functions of the `.gxx` (`FindVertex`,
+  `BoundedArc`, `PointProcess`, `TreatLC`, `IsRegularity`, `ComputeBoundsfromInfinite`,
+  the `MinFunction` wrapper and `SolInfo`) are private functions of the module. The
+  `std::sort` of `SolInfo` is the libstdc++ port `rustycad_tkernel::stl::sort::sort_by`,
+  so equal parameters keep the native order.
+- **Exceptions.** Tool, function and adaptor calls that can raise return `Result`; a
+  failure caught by a tkmath solver callback is kept by the function and raised when the
+  solver returns (section 6). `math_FunctionAllRoots` that is not done raises
+  `Standard_Failure`, as natively.
+- **The probe.** `tools/oracle/tkgeomalgo_probe_intstart.cxx` includes both `.gxx` on
+  probe classes, as the `_0.cxx` files do, with the types of the IntPatch instances
+  (IntPatch_ArcFunction, IntPatch_HInterTool, the IntPatch path point and segment,
+  IntPatch_TheSurfFunction) and with a probe domain whose `Edge()` returns a real edge
+  and a probe tool whose arcs "have been seen", so that the branches unreachable with
+  IntPatch_HInterTool and Adaptor3d_TopolTool run too. The Rust twin
+  (`crates/tkgeomalgo/examples/ga_probe/int_start*.rs`) ports those IntPatch classes for
+  the probe only, as the IntWalk probe ports the IntPatch line class (section 10).
+
+IntPolyh has no template. Its classes are concrete structs in
+`crates/tkgeomalgo/src/int_polyh`:
+
+- `IntPolyh_Array<Type>` is the generic `IntPolyhArray<T>`, and the six array typedefs
+  are aliases of it. It keeps the native storage model: `Init(N)` sets element `N` of the
+  underlying `NCollection_DynamicArray` (so the storage holds `N + 1` default items),
+  `IncrementNbItems` grows it by the increment, and `operator=` (`Copy`) keeps the
+  target's increment where the copy constructor (`Clone`) copies it. Native `Value` and
+  `operator[]` do not check the index (reading past the storage is undefined behaviour):
+  the Rust `value`/`change_value` return Standard_OutOfRange and `Index` panics there.
+- `IntPolyh_Triangle::MiddleRefinement` and `MultipleMiddleRefinement` are methods on a
+  triangle that is usually an element of the array they grow. The port takes the
+  triangle out of the array (a copy), runs the body and writes it back; the body never
+  writes the refined triangle through the array before its last two assignments, so the
+  result is the native one.
+- `IntPolyh_MaillageAffinage` keeps its couples in an `NCollection_List`
+  (`rustycad_tkernel::ncollection::List`); `StartPointsChain` walks them by position in a
+  vector (the native iterators kept by `CheckCoupleAndGetAngle2` are positions) and puts
+  them back in order. The interfering triangles come from the tkmath BVH port
+  (`BvhBoxSet` with `BvhLinearBuilder(10)` and a pair traversal), as natively.
+- The `printf` dumps write the native text to a `fmt::Write`; the two diagnostics that
+  the native algorithm prints to standard output (`CheckSameSP` with undefined edges and
+  a null side in `TriangleEdgeContact`) print to standard output too.
