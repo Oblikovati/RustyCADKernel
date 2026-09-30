@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 
 # Curve kinds, surface kinds, pcurve kinds and top-level item kinds of the record.
 NO_CURVE, LINE, CIRCLE, BEZIER, BSPLINE = range(5)
-NO_SURFACE, PLANE, CYLINDER, SPHERE, CONE, TORUS, BEZIER_SURFACE = -1, 0, 1, 2, 3, 4, 5
+NO_SURFACE, PLANE, CYLINDER, SPHERE, CONE, TORUS, BEZIER_SURFACE, BSPLINE_SURFACE = -1, 0, 1, 2, 3, 4, 5, 6
 NO_PCURVE, PLINE, PCIRCLE, PBEZIER = range(4)
 SOLID, SHELL, FACE, EDGE, VERTEX = range(5)
 FORWARD, REVERSED, INTERNAL, EXTERNAL = range(4)

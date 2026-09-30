@@ -135,15 +135,16 @@ def open_box(low: list[float], high: list[float], missing: int = 5) -> ShapeSpec
     return spec
 
 
-def add_cylinder(spec: ShapeSpec, origin: list[float], radius: float, height: float) -> list[int]:
-    """A z-axis cylinder of `radius` and `height` from `origin`: its three faces."""
+def add_cylinder(spec: ShapeSpec, origin: list[float], radius: float, height: float, tol: float = 1e-7) -> list[int]:
+    """A z-axis cylinder of `radius` and `height` from `origin`: its three faces (its
+    vertices and edges of tolerance `tol`)."""
     n, x = axis(2), axis(0)
     top = [origin[0], origin[1], origin[2] + height]
-    vb = spec.vertex([origin[0] + radius, origin[1], origin[2]])
-    vt = spec.vertex([top[0] + radius, top[1], top[2]])
-    bottom = spec.edge([CIRCLE, *origin, *n, *x, radius], vb, vb, (0.0, TWO_PI))
-    upper = spec.edge([CIRCLE, *top, *n, *x, radius], vt, vt, (0.0, TWO_PI))
-    seam = spec.edge([LINE, *spec.vertices[vb][:3], *n], vb, vt, (0.0, height))
+    vb = spec.vertex([origin[0] + radius, origin[1], origin[2]], tol)
+    vt = spec.vertex([top[0] + radius, top[1], top[2]], tol)
+    bottom = spec.edge([CIRCLE, *origin, *n, *x, radius], vb, vb, (0.0, TWO_PI), tol)
+    upper = spec.edge([CIRCLE, *top, *n, *x, radius], vt, vt, (0.0, TWO_PI), tol)
+    seam = spec.edge([LINE, *spec.vertices[vb][:3], *n], vb, vt, (0.0, height), tol)
     lateral = FaceRecord([CYLINDER, *origin, *n, *x, radius])
     lateral.wire([(bottom, FORWARD, [PLINE, 0.0, 0.0, 1.0, 0.0]), (seam, FORWARD, [PLINE, TWO_PI, 0.0, 0.0, 1.0]),
                   (upper, REVERSED, [PLINE, 0.0, height, 1.0, 0.0]), (seam, REVERSED, [PLINE, 0.0, 0.0, 0.0, 1.0])])
@@ -154,31 +155,31 @@ def add_cylinder(spec: ShapeSpec, origin: list[float], radius: float, height: fl
     return [spec.face(lateral), spec.face(floor), spec.face(roof)]
 
 
-def cylinder(origin: list[float], radius: float, height: float) -> ShapeSpec:
+def cylinder(origin: list[float], radius: float, height: float, tol: float = 1e-7) -> ShapeSpec:
     """The solid of a z-axis cylinder."""
     spec = ShapeSpec()
-    spec.shell(add_cylinder(spec, origin, radius, height))
+    spec.shell(add_cylinder(spec, origin, radius, height, tol))
     return spec
 
 
-def add_sphere(spec: ShapeSpec, centre: list[float], radius: float) -> list[int]:
+def add_sphere(spec: ShapeSpec, centre: list[float], radius: float, tol: float = 1e-7) -> list[int]:
     """A sphere face about the z axis (seam at u = 0, degenerated poles): [face]."""
     n, x = axis(2), axis(0)
-    south = spec.vertex([centre[0], centre[1], centre[2] - radius])
-    north = spec.vertex([centre[0], centre[1], centre[2] + radius])
-    low = spec.edge([NO_CURVE], south, south, (0.0, TWO_PI), degenerated=True)
-    seam = spec.edge([CIRCLE, *centre, *axis(1, -1.0), *x, radius], south, north, (-HALF_PI, HALF_PI))
-    high = spec.edge([NO_CURVE], north, north, (0.0, TWO_PI), degenerated=True)
+    south = spec.vertex([centre[0], centre[1], centre[2] - radius], tol)
+    north = spec.vertex([centre[0], centre[1], centre[2] + radius], tol)
+    low = spec.edge([NO_CURVE], south, south, (0.0, TWO_PI), tol, degenerated=True)
+    seam = spec.edge([CIRCLE, *centre, *axis(1, -1.0), *x, radius], south, north, (-HALF_PI, HALF_PI), tol)
+    high = spec.edge([NO_CURVE], north, north, (0.0, TWO_PI), tol, degenerated=True)
     face = FaceRecord([SPHERE, *centre, *n, *x, radius])
     face.wire([(low, FORWARD, [PLINE, 0.0, -HALF_PI, 1.0, 0.0]), (seam, FORWARD, [PLINE, TWO_PI, 0.0, 0.0, 1.0]),
                (high, REVERSED, [PLINE, 0.0, HALF_PI, 1.0, 0.0]), (seam, REVERSED, [PLINE, 0.0, 0.0, 0.0, 1.0])])
     return [spec.face(face)]
 
 
-def sphere(centre: list[float], radius: float) -> ShapeSpec:
+def sphere(centre: list[float], radius: float, tol: float = 1e-7) -> ShapeSpec:
     """The solid of a sphere."""
     spec = ShapeSpec()
-    spec.shell(add_sphere(spec, centre, radius))
+    spec.shell(add_sphere(spec, centre, radius, tol))
     return spec
 
 

@@ -16,7 +16,8 @@
 //   npol (edge n (node)... defl)...] orientation`: surface -1 none (the face is its
 //   triangulation), 0 plane P N X, 1 cylinder P N X R, 2 sphere P N X R, 3 cone
 //   P N X R semi-angle, 4 torus P N X R r (gp_Ax3(P, N, X) frames), 5 Bezier surface
-//   nu nv (x y z)... (U rows); a wire is `orientation n (edge orientation pcurve)...`
+//   nu nv (x y z)... (U rows), 6 B-spline surface udeg vdeg nu nv (x y z)... nuk (knot
+//   mult)... nvk (knot mult)... (tp_bspline_surface); a wire is `orientation n (edge orientation pcurve)...`
 //   with pcurve 0 none, 1 line u v du dv, 2 circle cu cv r sense, 3 Bezier n (u v)...;
 //   an edge used twice in a face (a seam) gets the pcurves of its FORWARD and REVERSED
 //   uses; nt > 0 adds a triangulation of nt nodes and polygons on it for some edges;
@@ -76,6 +77,7 @@ TopoDS_Edge tp_shape_edge(GaReader& r,const std::vector<TopoDS_Vertex>& vertices
  B.Degenerated(e,degenerated);return e;}
 occ::handle<Geom_Surface> tp_shape_surface(GaReader& r,int kind){
  if(kind==5){int nu=r.integer(),nv=r.integer();return new Geom_BezierSurface(tp_poles(r,nu,nv));}
+ if(kind==6)return tp_bspline_surface(r);
  gp_Pnt p=r.pnt();gp_Dir n=r.dir();gp_Dir x=r.dir();gp_Ax3 frame(p,n,x);
  if(kind==0)return new Geom_Plane(frame);
  if(kind==1)return new Geom_CylindricalSurface(frame,r.real());

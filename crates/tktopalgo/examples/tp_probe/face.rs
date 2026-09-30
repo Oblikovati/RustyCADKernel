@@ -72,7 +72,7 @@ pub fn knots(r: &mut Reader<'_>) -> Result<(Array1<'static, f64>, Array1<'static
 }
 
 /// `tp_bspline_surface`: degrees, poles, then the U and V knots.
-fn bspline_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
+pub fn bspline_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
     let (udeg, vdeg) = (r.integer(), r.integer());
     let (nu, nv) = (r.integer(), r.integer());
     let grid = poles(r, nu, nv)?;

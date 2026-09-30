@@ -2,6 +2,7 @@
 pub mod brep_bnd_lib;
 pub mod brep_builder_api;
 pub mod brep_class;
+pub mod brep_class3d;
 pub mod brep_top_adaptor;
 pub mod face;
 pub mod int_curves_face;

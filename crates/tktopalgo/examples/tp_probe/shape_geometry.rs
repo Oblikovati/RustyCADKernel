@@ -2,7 +2,7 @@
 //! the Rust twin of the geometry readers of tools/oracle/tktopalgo_probe_shape.cxx
 //! (`tp_shape_curve`, `tp_shape_surface`, `tp_shape_pcurve`, `tp_shape_location`).
 //! The record layout is documented in the native file.
-use super::face::{array_failure, direction, knots, point, point2d, poles};
+use super::face::{array_failure, bspline_surface, direction, knots, point, point2d, poles};
 use super::print::Reader;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -58,11 +58,14 @@ pub fn curve(r: &mut Reader<'_>) -> Result<Handle<dyn GeomCurve>, Failure> {
 }
 
 /// `tp_shape_surface`: a plane, cylinder, sphere, cone or torus on a `P N X` frame,
-/// or a Bezier surface.
+/// or a Bezier or B-spline surface.
 pub fn surface(r: &mut Reader<'_>, kind: i32) -> Result<Handle<dyn GeomSurface>, Failure> {
     if kind == 5 {
         let (nu, nv) = (r.integer(), r.integer());
         return Ok(Handle::new(GeomBezierSurface::new(&poles(r, nu, nv)?)?).cast());
+    }
+    if kind == 6 {
+        return bspline_surface(r);
     }
     let (p, n, x) = (point(r), direction(r)?, direction(r)?);
     let frame = Axis3::new(p, n, x)?;
