@@ -7,7 +7,7 @@ use tp_probe::{
     brep_builder_api, brep_builder_api_makers, brep_builder_api_modify, brep_check, brep_class,
     brep_class3d, brep_gprop, brep_gprop_frames, brep_gprop_tools, brep_int_curve_surface,
     brep_lib_edge, brep_lib_face, brep_lib_fuse, brep_lib_package, brep_lib_wire, brep_top_adaptor,
-    brep_top_adaptor_domain, int_curves_face, mat, mat_parts,
+    brep_top_adaptor_domain, fast_sewing, int_curves_face, mat, mat_parts, sewing, sewing_helpers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -171,6 +171,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bics_line", brep_int_curve_surface::line_case),
     ("bics_curve", brep_int_curve_surface::curve_case),
     ("bics_state", brep_int_curve_surface::state_case),
+    // BRepBuilderAPI sewing (tp_probe/sewing.rs, tp_probe/fast_sewing.rs and
+    // tp_probe/sewing_helpers.rs, shapes of tp_probe/shape.rs)
+    ("bba_sew", sewing::sew_request),
+    ("bba_fastsew", fast_sewing::fastsew_request),
+    ("bba_vertexinspector", sewing_helpers::vertexinspector_case),
+    ("bba_boxselector", sewing_helpers::boxselector_case),
 ];
 
 fn main() {

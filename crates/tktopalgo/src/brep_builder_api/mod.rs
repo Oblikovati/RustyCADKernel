@@ -6,8 +6,8 @@
 //! `BRepTools_Modifier`; [`BRepBuilderAPIMakeShape`] is the virtual root that the
 //! algorithms of the higher toolkits implement (docs/topalgo-design.md section 10).
 //!
-//! The sewing classes (`BRepBuilderAPI_Sewing`, `FastSewing`, `MakeShapeOnMesh`,
-//! `BndBoxTreeSelector`, `VertexInspector`) are ported separately.
+//! The sewing group (`BRepBuilderAPI_Sewing`, `FastSewing`, `BndBoxTreeSelector`,
+//! `VertexInspector`) is ported below (section 11); `MakeShapeOnMesh` is not ported yet.
 mod collect;
 mod command;
 mod copy;
@@ -51,3 +51,14 @@ pub use modify_shape::BRepBuilderAPIModifyShape;
 pub use nurbs_convert::BRepBuilderAPINurbsConvert;
 pub use package::{plane, precision, set_plane, set_precision};
 pub use transform::BRepBuilderAPITransform;
+
+// The sewing group of BRepBuilderAPI (docs/topalgo-design.md section 11).
+mod bnd_box_tree_selector;
+mod fast_sewing;
+mod sewing;
+mod vertex_inspector;
+
+pub use bnd_box_tree_selector::BRepBuilderAPIBndBoxTreeSelector;
+pub use fast_sewing::{BRepBuilderAPIFastSewing, FastSewingStatus, FastSewingStatuses};
+pub use sewing::{BRepBuilderAPISewing, SewingShapeIndexedMap, SewingShapeListMap, SewingShapeMap};
+pub use vertex_inspector::BRepBuilderAPIVertexInspector;

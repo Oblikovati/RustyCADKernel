@@ -41,3 +41,9 @@ def append_tktopalgo_requests(requests: list[str]) -> None:
     __import__('tktopalgo_corpus_brepapprox').append_brepapprox_requests(requests)
     # BRepIntCurveSurface (tktopalgo_corpus_brepintcurvesurface.py, shapes of tktopalgo_corpus_solids.py)
     __import__('tktopalgo_corpus_brepintcurvesurface').append_brepintcurvesurface_requests(requests)
+    # BRepBuilderAPI sewing (tktopalgo_corpus_sewing.py with the shapes of
+    # tktopalgo_corpus_sewing_shapes.py, tktopalgo_corpus_fastsewing.py and
+    # tktopalgo_corpus_sewing_helpers.py)
+    __import__('tktopalgo_corpus_sewing').append_sewing_requests(requests)
+    __import__('tktopalgo_corpus_fastsewing').append_fastsewing_requests(requests)
+    __import__('tktopalgo_corpus_sewing_helpers').append_sewing_helpers_requests(requests)

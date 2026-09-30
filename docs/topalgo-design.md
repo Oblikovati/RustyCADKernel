@@ -471,6 +471,69 @@ a `BRepBuilderAPI_MakeShape&`. BRepLib (section 7) needed no trait; this package
 - The enumerations (`EdgeError`, `WireError`, `FaceError`, `ShellError`, `PipeError`,
   `TransitionMode`) are Rust enums with the native discriminants.
 
+## 11. BRepBuilderAPI sewing: Sewing, FastSewing, MakeShapeOnMesh and the two helpers
+
+The sewing group of BRepBuilderAPI does not derive from the makers (except
+MakeShapeOnMesh), so it has its own mapping:
+
+- **`BRepBuilderAPI_Sewing`** is the transient struct `BRepBuilderAPISewing`
+  (`impl_transient!`, registered as `BRepBuilderAPI_Sewing` below `Standard_Transient`).
+  Its protected fields are the struct's fields, under their native names in snake case,
+  with the native collections and `TopTools_ShapeMapHasher`
+  (`IndexedDataMap`, `IndexedMap`, `DataMap`, `Map`, `List`, `Sequence`), so every
+  loop visits the native order. The members that change the state (`Init`, `Load`,
+  `Add`, `Perform`, the setters, `SetContext`) take `&mut self`; the queries take
+  `&self`.
+- **Virtual members.** The protected virtual members (`FaceAnalysis`,
+  `FindFreeBoundaries`, `VerticesAssembling`, `CreateSewedShape`, `GetFreeWires`,
+  `EvaluateAngulars`, `EvaluateDistances`, `SameRange`, `SameParameter`, both
+  `SameParameterEdge`, `CreateCuttingNodes`, `CreateSections`, `SameParameterShape`,
+  `IsUClosedSurface`, `IsVClosedSurface`) have no override in OCCT; they are
+  crate-visible inherent methods, as are the other protected members (`Cutting`,
+  `Merging`, `FindCandidates`, `AnalysisNearestEdges`, `MergedNearestEdges`,
+  `EdgeProcessing`, `EdgeRegularity`, `CreateOutputInformations`,
+  `ProjectPointsOnCurve`, `IsMergedClosed`). The file-static helpers of
+  BRepBuilderAPI_Sewing.cxx (`IsClosedShape`, `IsClosedByIsos`, `findNMVertices`,
+  both `ComputeToleranceVertex`, `CreateNewNodes`, `IsMergedVertices`, `GlueVertices`,
+  `replaceNMVertices`, `ReplaceEdge`, `GetSeqEdges`, `IsDegeneratedWire`,
+  `DegeneratedSection`) are private functions of the modules that use them.
+- **Context.** `myReShape` is a `Handle<dyn ReShape>` (TKBRep's trait of
+  `BRepTools_ReShape`), so `SetContext` takes any re-shaper, as the native handle to the
+  base class does; `locReShape != myReShape` compares the objects, as the native handle
+  comparison.
+- **Exceptions.** Every member that can raise returns `Result`. `Perform` returns the
+  first exception that leaves a step natively (it is not caught there), with the state
+  the native object keeps at that point. The native `try`/`catch (Standard_Failure)`
+  blocks (`SameRange`, `SameParameter`, the merge of `SameParameterEdge`,
+  `ProjectPointsOnCurve`, `SameParameterShape`) catch every `Failure` of the port. The
+  accessors by index raise Standard_OutOfRange outside `[1, N]` (the `_Raise_if` check
+  admits 0, then the map raises), `SectionToBoundary` Standard_NoSuchObject.
+- **Output references.** `EvaluateDistances`, `EvaluateAngulars`,
+  `ProjectPointsOnCurve`, `CreateCuttingNodes` and `CreateSections` fill `&mut` arrays
+  and sequences as natively (they read some of them back); `SameParameterEdge(edge1,
+  edge2, ...)` keeps `whichSec` as `&mut i32`. `ContigousEdgeCouple` returns the stored
+  list; `FreeEdge`, `MultipleEdge`, `ContigousEdge`, `SectionToBoundary`,
+  `DeletedFace` return the typed shape by value.
+- **Progress.** `Perform` and the steps take a `ProgressRange`; the scopes are opened
+  and advanced in the native order, so an indicator sees the same steps; a user break
+  returns at the native points.
+- **`Dump`** writes the native text to a `std::io::Write` instead of `std::cout`.
+- **`BRepBuilderAPI_VertexInspector`** is `BRepBuilderAPIVertexInspector`, an
+  implementation of TKernel's `CellInspector` over `gp_XYZ` points and `int` targets;
+  **`BRepBuilderAPI_BndBoxTreeSelector`** is `BRepBuilderAPIBndBoxTreeSelector`, an
+  implementation of `TreeSelector<i32, BoundingBox3>` (its `Stop` is the base one, never
+  set). `ResInd` returns the list of the found indices in the native order.
+- **`BRepBuilderAPI_FastSewing`** is the transient struct `BRepBuilderAPIFastSewing`.
+  `Add(Shape)` and `Add(Surface)` are `add_shape` and `add_surface`; `FS_Statuses` is
+  the enum `FastSewingStatus` with the native bit values and `FS_VARStatuses` a `u32`.
+  The protected nested classes (`FS_Vertex`, `FS_Edge`, `FS_Face`, `NodeInspector`)
+  are private structs; their `NCollection_DynamicArray` vectors are `Vec`s indexed from
+  0, as natively. `Perform` catches every `Failure` into `FS_Exception`, as the native
+  `catch (Standard_Failure)`. `GetStatuses` writes its messages to an optional
+  `std::io::Write`.
+- **`BRepBuilderAPI_MakeShapeOnMesh`** derives from `BRepBuilderAPI_MakeShape`; it holds
+  the port of that class and dereferences to it, as the other makers of the package.
+
 ## 12. BRepApprox and BRepIntCurveSurface
 
 BRepApprox is the second instantiation of the ApproxInt templates (GeomInt is the
