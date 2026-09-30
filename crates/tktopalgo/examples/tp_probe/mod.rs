@@ -1,5 +1,7 @@
 //! The TKTopAlgo probe operations, one module per C++ probe file under tools/oracle.
 pub mod brep_builder_api;
+pub mod brep_class;
+pub mod face;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tktopalgo_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.
@@ -9,3 +11,8 @@ pub mod common;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
+// The IntRes2d result printers of the TKGeomAlgo probe (tkgeomalgo_probe_intres2d.cxx
+// natively); its own request operations are not in this probe's table.
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/int_res2d.rs"]
+pub mod int_res2d;

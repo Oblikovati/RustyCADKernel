@@ -24,9 +24,23 @@
 // token stream; the Rust twin includes crates/tkgeomalgo/examples/ga_probe/common.rs.
 #include "tkgeomalgo_probe_common.cxx"
 #include "tktopalgo_probe_brepbuilderapi.cxx"
+#include "tkgeomalgo_probe_intres2d.cxx"
+#include "tktopalgo_probe_face.cxx"
+#include "tktopalgo_probe_brepclass.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBuilderAPI (tktopalgo_probe_brepbuilderapi.cxx)
  {"tp_make_vertex", tp_make_vertex_case},
+ // BRepClass (tktopalgo_probe_brepclass.cxx, faces of tktopalgo_probe_face.cxx)
+ {"brc_edge", tp_brc_edge_case},
+ {"brc_explorer", tp_brc_explorer_case},
+ {"brc_segment", tp_brc_segment_case},
+ {"brc_checkpoint", tp_brc_checkpoint_case},
+ {"brc_intersect", tp_brc_intersect_case},
+ {"brc_intersect2", tp_brc_intersect2_case},
+ {"brc_classify", tp_brc_classify_case},
+ {"brc_classify3d", tp_brc_classify3d_case},
+ {"brc_passive", tp_brc_passive_case},
+ {"brc_defaults", tp_brc_defaults_case},
 };
 int main() {
  std::string line;
