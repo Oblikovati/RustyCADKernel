@@ -1,20 +1,3 @@
-// Copyright (c) 1995-1999 Matra Datavision
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
-//
-// This file is part of Open CASCADE Technology software library.
-//
-// This library is free software; you can redistribute it and/or modify it under
-// the terms of the GNU Lesser General Public License version 2.1 as published
-// by the Free Software Foundation, with special exception defined in the file
-// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
-// distribution for complete text of the license and disclaimer of any warranty.
-//
-// Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement.
-// Rust translation of ApproxInt_ImpPrmSvSurfaces::Compute of
-// ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_ImpPrmSvSurfaces.gxx
-// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-
 //! `Compute`: the point of the line from the solver, the middle of its images on both
 //! surfaces, and the 3d and 2d tangents from the normals (or from the derivatives at a
 //! singular point).
