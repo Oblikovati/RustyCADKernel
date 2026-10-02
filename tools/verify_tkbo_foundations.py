@@ -97,6 +97,7 @@ def bopds_requests() -> list[str]:
     requests += [f'bop_shape_info {shape} {reference} {flag} -1 -2 -3 4 5 6 3 1 3 {gap}'
                  for shape, reference, flag, gap in product(
                      range(9), [-1, 4], [-1, 7], [-0.0, 0.25])]
+    requests.append('bop_face_info')
     return requests
 
 

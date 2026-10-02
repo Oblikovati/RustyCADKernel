@@ -215718,6 +215718,150 @@
       "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::dump",
       "status": "implemented",
       "notes": "Matches TopAbs::ShapeTypeToString and preserves subshape order."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::default",
+      "status": "implemented",
+      "notes": "Creates empty In, On and section maps with index -1."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::~BOPDS_FaceInfo()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust releases its owned maps and shared handles through Drop."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "Rust owned map storage",
+      "status": "excluded",
+      "notes": "The allocator selects native map storage; Rust map wrappers own their storage."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::clear",
+      "status": "implemented",
+      "notes": "Clears In and On maps while deliberately retaining section maps, matching the pinned implementation."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::SetIndex(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::set_index",
+      "status": "implemented",
+      "notes": "Stores the face index without validation."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::Index() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::index",
+      "status": "implemented",
+      "notes": "Reads the stored face index; Clear leaves it unchanged."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::PaveBlocksIn() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::pave_blocks_in",
+      "status": "implemented",
+      "notes": "Returns the insertion-ordered unique handle map keyed by object identity."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::ChangePaveBlocksIn()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_pave_blocks_in",
+      "status": "implemented",
+      "notes": "Returns mutable access to the unique identity-keyed handle map."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::VerticesIn() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::vertices_in",
+      "status": "implemented",
+      "notes": "Returns the unique integer set classified inside the face."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::ChangeVerticesIn()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_vertices_in",
+      "status": "implemented",
+      "notes": "Returns mutable access to the In vertex set."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::PaveBlocksOn() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::pave_blocks_on",
+      "status": "implemented",
+      "notes": "Returns the insertion-ordered unique handle map keyed by object identity."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::ChangePaveBlocksOn()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_pave_blocks_on",
+      "status": "implemented",
+      "notes": "Returns mutable access to the unique identity-keyed handle map."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::VerticesOn() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::vertices_on",
+      "status": "implemented",
+      "notes": "Returns the unique integer set classified on the face."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::ChangeVerticesOn()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_vertices_on",
+      "status": "implemented",
+      "notes": "Returns mutable access to the On vertex set."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::PaveBlocksSc() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::pave_blocks_section",
+      "status": "implemented",
+      "notes": "Returns section pave blocks; these survive Clear."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::ChangePaveBlocksSc()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_pave_blocks_section",
+      "status": "implemented",
+      "notes": "Returns mutable access to section blocks, which survive Clear."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::VerticesSc() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::vertices_section",
+      "status": "implemented",
+      "notes": "Returns section vertices; these survive Clear."
+    },
+    {
+      "upstream_id": "BOPDS_FaceInfo::ChangeVerticesSc()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_FaceInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_vertices_section",
+      "status": "implemented",
+      "notes": "Returns mutable access to section vertices, which survive Clear."
     }
   ],
   "tests": [
