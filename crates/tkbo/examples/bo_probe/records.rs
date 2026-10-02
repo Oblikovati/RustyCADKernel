@@ -1,8 +1,9 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
-    CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, Pair, Pave, PaveBlock, Point, ShapeInfo,
-    common_block_handle, pave_block_handle,
+    BopdsCurve, CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, Pair, Pave, PaveBlock,
+    Point, ShapeInfo, common_block_handle, pave_block_handle,
 };
+use rustycad_tkbo::int_tools::Curve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Point2, Point3};
@@ -388,6 +389,67 @@ pub fn data_structure_common_block_case(_: &[f64]) {
     flag(structure.is_common_block_on_edge(&first));
     structure.clear();
     flag(structure.is_common_block(&first));
+}
+
+pub fn bopds_curve_case(_: &[f64]) {
+    let mut value = BopdsCurve::default();
+    real(value.tolerance());
+    real(value.tangential_tolerance());
+    flag(value.box_bounds().is_void());
+    integer(value.pave_blocks().len() as i32);
+    integer(value.techno_vertices().len() as i32);
+    flag(value.has_edge());
+    let error = value.change_pave_block1().unwrap_err();
+    flag(error.exception_type() == "Standard_NoSuchObject");
+    value.init_pave_block1();
+    value.init_pave_block1();
+    integer(value.pave_blocks().len() as i32);
+    value
+        .change_pave_block1()
+        .unwrap()
+        .lock()
+        .unwrap()
+        .set_edge(12);
+    flag(value.has_edge());
+
+    let mut curve = Curve::default();
+    curve.set_tangential_tolerance(4.5e-5);
+    value.set_curve(&curve);
+    real(value.tangential_tolerance());
+    let mut bounds = BoundingBox3::new(Point3::new(-1., -2., -3.), Point3::new(4., 5., 6.));
+    bounds.set_gap(0.125);
+    value.set_box(&bounds);
+    bounds.set_gap(9.);
+    real(value.box_bounds().gap());
+    value.change_box().set_gap(0.25);
+    real(value.box_bounds().gap());
+    for coordinate in value.box_bounds().get().unwrap() {
+        real(coordinate);
+    }
+
+    let first = pave_block_handle(PaveBlock::default());
+    let edge = block_with_edge(7);
+    value.set_pave_blocks(&[first.clone(), edge.clone(), edge.clone()]);
+    integer(value.pave_blocks().len() as i32);
+    flag(Arc::ptr_eq(&value.pave_blocks()[0], &first));
+    flag(Arc::ptr_eq(&value.pave_blocks()[1], &edge));
+    flag(Arc::ptr_eq(&value.pave_blocks()[2], &edge));
+    flag(value.has_edge());
+    value.change_pave_blocks().remove(0);
+    integer(value.pave_blocks().len() as i32);
+    value.change_techno_vertices().extend([8, 3, 8]);
+    integer(value.techno_vertices().len() as i32);
+    for index in value.techno_vertices() {
+        integer(*index);
+    }
+    value.set_tolerance(-0.);
+    real(value.tolerance());
+}
+
+fn block_with_edge(edge: i32) -> rustycad_tkbo::bop_ds::PaveBlockHandle {
+    let mut block = PaveBlock::default();
+    block.set_edge(edge);
+    pave_block_handle(block)
 }
 
 fn block_with_source_edge(edge: i32) -> rustycad_tkbo::bop_ds::PaveBlockHandle {
