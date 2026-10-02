@@ -12,6 +12,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkmath::toploc::Location;
 mod connected;
+mod gaps;
 mod order;
 mod state;
 struct WireAnalysisFields {
@@ -22,7 +23,11 @@ struct WireAnalysisFields {
     status: i32,
     status_order: i32,
     status_connected: i32,
+    status_gaps3d: i32,
+    status_gaps2d: i32,
     min_3d: f64,
+    min_2d: f64,
+    max_2d: f64,
 }
 /// Native wire analyzer foundation; `ShapeAnalysisWire::from_wire(&wire, &face, 1e-7)?`.
 /// Implements state initialization, ordering and connection checks.
@@ -48,7 +53,11 @@ impl Default for ShapeAnalysisWire {
                 status: 0,
                 status_order: 0,
                 status_connected: 0,
+                status_gaps3d: 0,
+                status_gaps2d: 0,
                 min_3d: 0.,
+                min_2d: 0.,
+                max_2d: 0.,
             }),
         }
     }

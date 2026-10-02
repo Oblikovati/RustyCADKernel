@@ -7,7 +7,11 @@ impl ShapeAnalysisWire {
         fields.status = 0;
         fields.status_order = 0;
         fields.status_connected = 0;
+        fields.status_gaps3d = 0;
+        fields.status_gaps2d = 0;
         fields.min_3d = 0.;
+        fields.min_2d = 0.;
+        fields.max_2d = 0.;
     }
     /// Assign precision without normalization; `analyzer.set_precision(-1.0)`.
     pub fn set_precision(&self, value: f64) {
