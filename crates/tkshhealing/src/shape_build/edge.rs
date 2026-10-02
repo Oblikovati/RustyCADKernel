@@ -136,6 +136,32 @@ impl ShapeBuildEdge {
         Ok(copy)
     }
 
+    /// Splits a forward edge at a shared vertex while preserving its curve representations.
+    /// The parameter uses the face p-curve range; `edge.split_at_parameter(&e, 0.5, &v, &f)?`.
+    pub fn split_at_parameter(
+        &self,
+        edge: &Edge,
+        face: &Face,
+        parameter: f64,
+        vertex: &Vertex,
+    ) -> Result<(Edge, Edge), Failure> {
+        let (first_vertex, last_vertex) = rustycad_tkbrep::topexp::vertices(edge, false);
+        let (first, last) = rustycad_tkbrep::brep::BRepTool::range_on_face(edge, face)?;
+        let fraction = (parameter - first) / (last - first);
+        if edge.orientation() != Orientation::Forward || !(0.0 < fraction && fraction < 1.0) {
+            return Err(invalid_split_parameter(edge, parameter, (first, last)));
+        }
+        let first_half = self.copy_replace_vertices(edge, &first_vertex, vertex)?;
+        let second_half = self.copy_replace_vertices(edge, vertex, &last_vertex)?;
+        self.copy_ranges(&first_half, edge, 0.0, fraction)?;
+        self.copy_ranges(&second_half, edge, fraction, 1.0)?;
+        BRepBuilder::default().same_range(&first_half, false)?;
+        BRepBuilder::default().same_parameter(&first_half, false)?;
+        BRepBuilder::default().same_range(&second_half, false)?;
+        BRepBuilder::default().same_parameter(&second_half, false)?;
+        Ok((first_half, second_half))
+    }
+
     /// Copies a B-spline p-curve and moves its endpoint poles;
     /// `ShapeBuildEdge.copy_bspline_pcurve_with_endpoints(&pc, point, point)?`.
     pub fn copy_bspline_pcurve_with_endpoints(
@@ -175,6 +201,17 @@ fn unsupported_pcurve_copy(pcurve: &Handle<dyn Geom2dCurve>) -> Failure {
         "Standard_NotImplemented",
         &format!(
             "ShapeBuild_Edge pcurve endpoint copy requires Geom2d_BSplineCurve; found {found}"
+        ),
+    )
+}
+
+fn invalid_split_parameter(edge: &Edge, parameter: f64, range: (f64, f64)) -> Failure {
+    Failure::with_message(
+        "Standard_DomainError",
+        &format!(
+            "ShapeBuild_Edge::SplitAtParameter: edge orientation {:?}, parameter {parameter}; expected a forward edge parameter inside {:?}",
+            edge.orientation(),
+            range
         ),
     )
 }

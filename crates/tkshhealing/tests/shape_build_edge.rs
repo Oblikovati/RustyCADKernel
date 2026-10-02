@@ -90,6 +90,42 @@ fn native_fix_gap_edge_copy_replaces_vertices_and_pcurve_range() {
     assert!(fixed_last.is_same(&last));
 }
 
+#[test]
+fn split_at_parameter_reuses_crossing_vertex_and_preserves_ranges() {
+    let (edge, face) = edge_on_plane();
+    let mut crossing = Vertex::default();
+    BRepBuilder::default()
+        .make_vertex_at(&mut crossing, Point3::new(0.5, 0.0, 0.0), 1e-7)
+        .unwrap();
+    let (first, second) = ShapeBuildEdge
+        .split_at_parameter(&edge, &face, 0.5, &crossing)
+        .unwrap();
+    assert_eq!(BRepTool::range_on_face(&first, &face).unwrap(), (0.0, 0.5));
+    assert_eq!(BRepTool::range_on_face(&second, &face).unwrap(), (0.5, 1.0));
+    let (_, first_end) = rustycad_tkbrep::topexp::vertices(&first, false);
+    let (second_start, _) = rustycad_tkbrep::topexp::vertices(&second, false);
+    assert!(first_end.is_same(&crossing));
+    assert!(second_start.is_same(&crossing));
+    assert_eq!(
+        BRepTool::curve_on_face(&first, &face)
+            .unwrap()
+            .pcurve
+            .value(0.5)
+            .unwrap()
+            .x(),
+        0.5
+    );
+    assert_eq!(
+        BRepTool::curve_on_face(&second, &face)
+            .unwrap()
+            .pcurve
+            .value(0.5)
+            .unwrap()
+            .x(),
+        0.5
+    );
+}
+
 fn replacement_vertices() -> (Vertex, Vertex) {
     let builder = BRepBuilder::default();
     let mut first = Vertex::default();

@@ -803,6 +803,16 @@ shared-vertex edge splitting and insertion, before `ShapeFix_Face::FixLoopWire` 
 extract the two triangular loops. These probes do not map any of the seven Shape source
 declarations.
 
+The reusable intersection slice detects strict interior crossings between line-backed
+p-curves and returns both curve parameters plus the crossing point. It is tested against
+the pinned bowtie's diagonal pair at UV `(0, 0)`, along with endpoint, parallel and
+out-of-range rejection. `ShapeBuildEdge::split_at_parameter` now copies a forward edge
+into two ranges sharing a supplied crossing vertex and preserves its curve/p-curve
+representations; a focused plane-edge test checks both ranges and vertex identity. The
+wire path still lacks surface-to-3D crossing vertex construction, context replacement,
+edge insertion/order, and native DONE status propagation, so the detector and split
+helper do not enable the ShapeFix_Shape bowtie declaration.
+
 `ShapeBuild_Edge::CopyReplaceVertices` and the p-curve update tail are now available as
 `ShapeBuildEdge::copy_replace_vertices_with_pcurve_range`. It copies the original edge,
 uses supplied endpoint vertices and p-curve, sets the face-specific range, and clears
