@@ -294,6 +294,16 @@ fn cleanup_polygon_removes_interior_victim_spokes_and_triangles() {
 }
 
 #[test]
+fn internal_constraint_walks_each_missing_side() {
+    let mesh = fixture::polygon_mesh_with_one_sided_fixed_diagonal();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+
+    delaun.insert_internal_edges_probe().unwrap();
+
+    assert_eq!(delaun.result().elements_of_domain().extent(), 2);
+}
+
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();

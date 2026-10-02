@@ -82,6 +82,18 @@ pub fn cleanup_victim_case() {
     }
     println!();
 }
+pub fn internal_constraint_case() {
+    let mesh = fixture::polygon_mesh_with_one_sided_fixed_diagonal();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    print!("OK ");
+    if let Err(error) = delaun.insert_internal_edges_probe() {
+        print!("{} ", error.exception_type());
+    }
+    if let Err(error) = polygon_mesh_snapshot(&delaun) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
 fn report_center_left_polygon(values: &[i32]) {
     let mesh = fixture::polygon_mesh_with_center();
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();

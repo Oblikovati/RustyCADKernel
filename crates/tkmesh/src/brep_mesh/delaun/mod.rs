@@ -1,5 +1,5 @@
 //! Existing-mesh Delaun core from OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
-//! Insertion and constraint orchestration are separate, still unported dependencies.
+//! Multi-vertex insertion and frontier adjustment remain unported dependencies.
 use super::{
     BRepMeshCircleTool, BRepMeshDataStructureOfDelaun, BRepMeshEdge, BRepMeshTriangle,
     BRepMeshVertex, DegreeOfFreedom,
@@ -13,6 +13,7 @@ mod circles;
 mod cleanup;
 mod cleanup_mesh;
 mod cleanup_polygon;
+mod constraints;
 mod contains;
 mod frontier_reachability;
 mod insertion;

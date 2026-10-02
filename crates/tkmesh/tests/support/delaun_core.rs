@@ -96,6 +96,32 @@ pub fn polygon_mesh_with_center() -> Handle<Mesh> {
     mesh
 }
 
+pub fn polygon_mesh_with_one_sided_fixed_diagonal() -> Handle<Mesh> {
+    let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 6));
+    for point in coordinates(0) {
+        mesh.add_node(&Vertex::new(point, 0, Freedom::Free), true)
+            .unwrap();
+    }
+    for (offset, (first, last)) in [(1, 2), (2, 3), (3, 4), (4, 1), (1, 3)]
+        .into_iter()
+        .enumerate()
+    {
+        let freedom = if offset == 4 {
+            Freedom::Fixed
+        } else {
+            Freedom::Free
+        };
+        mesh.add_link(&Edge::new(first, last, freedom)).unwrap();
+    }
+    mesh.add_element(&Triangle::new(
+        [1, 2, 5],
+        [true, true, false],
+        Freedom::Free,
+    ))
+    .unwrap();
+    mesh
+}
+
 fn add_center_mesh_links(mesh: &Handle<Mesh>) {
     for (first, last, movability) in [
         (1, 2, Freedom::Frontier),

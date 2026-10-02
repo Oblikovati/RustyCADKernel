@@ -129,7 +129,7 @@ declarations; overall mapping is 7,215/8,648 GoogleTest declaration candidates.
 ### Populated-mesh Delaun predicates
 
 The existing-mesh Delaun core adds audited API rows, including exact
-`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,278 exact
+`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,279 exact
 populated-mesh cases and reports 80 native-crash/Rust-error divergences separately;
 nine supplemental null-mesh divergences remain outside that corpus. Supermesh bounds,
 first-vertex fan creation, native insertion ordering, frontier reachability, free-triangle
@@ -140,7 +140,9 @@ direction, bounds, and untouched outputs when no candidate is accepted. Focused 
 regression and the complete TKMesh test suite pass. A separate exact `cleanupPolygon`
 case starts with four triangles around an interior vertex; cleanup removes its four free
 spokes and triangles while preserving the four frontier edges. Multi-vertex insertion
-and full constraint processing still need implementation. The six declarations in
+now has a first exact `insertInternalEdges` step: a one-sided fixed diagonal triggers
+loop recovery on its missing side. `ProcessConstraints` still needs frontier adjustment,
+and multi-vertex insertion remains incomplete. The six declarations in
 `BRepMesh_Delaun_Test.cxx` remain unmapped as a source file; TKMesh remains at 2/29
 mapped original declarations.
 
