@@ -203,3 +203,16 @@ existing Message and TopoDS alert macros. The native and Rust checks cover each
 runtime name, parent type, merge policy, and shape payload access. The base
 verification command runs all 41 alert cases alongside the 11 options/progress
 cases; all pass. Macro-generated members still need compiler inventory accounting.
+
+`BRepAlgoAPI_Algo` now composes the shape-builder state with Boolean options and
+forwards its public inherited methods. Its Shape method returns the stored shape
+without building or checking IsDone, as confirmed by the native oracle. Glue and
+Operation enums preserve native discriminants. This integrates agent commits
+`739ad00d` and `337c750d` over the new options/alerts/progress foundation; concrete
+BuilderAlgo, PaveFiller and Fuse are still missing.
+
+The BuilderAlgo configuration slice (`0537bcb3`) adds copied argument storage,
+non-destructive mode, glue selection, inverted-solid checks, and history collection
+flags. Native defaults and setter/copy behavior are checked by an additional C++
+oracle and three Rust tests. Build, intersection execution, and result/history
+queries still need the concrete Boolean pipeline.

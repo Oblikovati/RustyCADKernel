@@ -6,10 +6,10 @@ occt_build="${OCCT_BUILD:?Set OCCT_BUILD to the pinned OCCT modeling build}"
 occt_lib="${OCCT_LIB_DIR:-$occt_build/lin64/gcc/libi}"
 cd "$repo_root"
 mkdir -p target/tkbo-base-oracle
-for suite in options progress alerts; do
+for suite in options progress alerts brep_algo_base brep_algo_builder; do
   "${CXX:-c++}" -std=c++17 -I"$occt_build/include/opencascade" \
     "tools/oracle/tkbo_${suite}.cxx" -L"$occt_lib" -Wl,-rpath,"$occt_lib" \
-    -lTKBO -lTKBRep -lTKMath -lTKernel -o "target/tkbo-base-oracle/$suite"
+    -lTKBO -lTKTopAlgo -lTKBRep -lTKMath -lTKernel -o "target/tkbo-base-oracle/$suite"
   "target/tkbo-base-oracle/$suite"
 done
-cargo test --locked -p rustycad-tkbo --test bop_algo_options --test bop_algo_progress --test bop_algo_alerts
+cargo test --locked -p rustycad-tkbo --test bop_algo_options --test bop_algo_progress --test bop_algo_alerts --test bop_algo_enums --test brep_algo_api_algo --test brep_algo_api_builder_algo
