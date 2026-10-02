@@ -900,17 +900,21 @@ has not implemented general collinear-edge merging or p-curve-aware transformati
 the three boolean/split declarations still need TKBO operations, so the full target is not
 green in Rust.
 
-The same focused suite now mirrors two internal-wire no-op declarations as well:
-`InternalEdgesTermination_Issue925` returns a nonnull shell with at least one face, and
-`ClosedInternalWire` returns a nonnull result. The open-path fixture matches the native
-square, two-edge internal wire, shared middle vertex, tolerances, and shell setup, and its
-Rust assertion passes. However, `Build()` currently finds no adjacent face pair in this
-single-face input and returns the unchanged shape; it does not enter OCCT's internal-edge
-face-unification path or maintain the `InternalEdges`/`IntVEmap` state whose cleanup fixed
-the upstream infinite loop. The current case therefore checks fixture construction and a
-no-op result, not the termination fix itself, and remains unmapped. The Rust target covers
-assertions from 4/9 declarations, while all nine native declarations remain green. No
-parity rows have been added.
+The focused Rust target also mirrors the no-op results for `InternalEdgesTermination_Issue925`
+and `ClosedInternalWire`. The Issue925 fixture matches the native square, two-edge internal
+wire, shared middle vertex, tolerances, and shell setup. Its exact one-face input returns
+unchanged in both implementations, but neither implementation enters the `InternalEdges` /
+`IntVEmap` assembly branch: OCCT guards that code behind selection of more than one face.
+Therefore that declaration checks completion and result shape, not the historical map
+cleanup, and remains unmapped as coverage of the fix.
+
+Rust now reconstructs internal-edge chains during an actual coplanar face merge. Its
+vertex-to-edge map removes every consumed edge from both endpoint lists and the pending set,
+then a shared-middle-vertex path fixture verifies termination, one merged face, one retained
+internal wire, and both internal edges. The exact pinned `MultipleCoplanarFacesWithInternalWires`
+and `InternalEdgesTermination_Issue925` CTests pass. The focused Rust target still covers
+assertions from 4/9 declarations; all nine native declarations remain green, and no parity
+rows have been added.
 
 The focused Rust suite now also exercises missing and stored p-curves on adjacent
 cylindrical panels. Its two cases preserve the two cylinder faces when a source p-curve
