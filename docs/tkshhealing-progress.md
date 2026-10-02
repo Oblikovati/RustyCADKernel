@@ -892,67 +892,28 @@ passes 9/9.
 
 `ShapeUpgrade_UnifySameDomain` now also handles the pinned coplanar face scenario with
 internal wires. It finds adjacent planar faces sharing one outer edge, joins the
-remaining boundary edges on the first face's support, preserves each internal wire, and
-replaces the pair through `ShapeBuild_ReShape`. The Rust focused target now passes BasicBox and the two-face internal-wire fixture; it covers
-assertions from two declarations (2/9), while the pinned native source target
-passes 9/9. The complete crate suite passes, but no legacy rows are mapped. This slice
-has not implemented general collinear-edge merging or p-curve-aware transformations, and
-the three boolean/split declarations still need TKBO operations, so the full target is not
-green in Rust.
-
-The focused Rust target also mirrors the no-op results for `InternalEdgesTermination_Issue925`
-and `ClosedInternalWire`. The Issue925 fixture matches the native square, two-edge internal
-wire, shared middle vertex, tolerances, and shell setup. Its exact one-face input returns
-unchanged in both implementations, but neither implementation enters the `InternalEdges` /
-`IntVEmap` assembly branch: OCCT guards that code behind selection of more than one face.
-Therefore that declaration checks completion and result shape, not the historical map
-cleanup, and remains unmapped as coverage of the fix.
-
-Rust now reconstructs internal-edge chains during an actual coplanar face merge. Its
-vertex-to-edge map removes every consumed edge from both endpoint lists and the pending set,
-then a shared-middle-vertex path fixture verifies termination, one merged face, one retained
-internal wire, and both internal edges. The exact pinned `MultipleCoplanarFacesWithInternalWires`
-and `InternalEdgesTermination_Issue925` CTests pass. The focused Rust target still covers
-assertions from 4/9 declarations; all nine native declarations remain green, and no parity
-rows have been added.
-
-The focused Rust suite now also exercises missing and stored p-curves on adjacent
-cylindrical panels. Its two cases preserve the two cylinder faces when a source p-curve
-is absent and still merge an unrelated planar pair, producing the expected three faces.
-These fixtures cover key assertions from the two p-curve declarations, but they do not yet
-reproduce OCCT's exact self-touching wire and transformation topology. The target currently
-covers assertions from six declarations; rows remain unmapped until all nine exact source
-fixtures and behaviors pass together.
-
-The p-curve fixtures have since been replaced with the pinned test topologies: the first
-uses the self-touching cylinder wire with a repeated reversed common edge, and the second
-uses two adjacent cylinder wires that share a reversed boundary edge. Rust verifies the
-missing edge has no stored p-curve, the reference edge has one where required, and Build
-preserves two cylinder faces while merging the unrelated planar pair to three total faces.
-The fixtures now cover source assertions from six declarations, though the Rust production
-path still treats nonplanar face pairs as unchanged; this does not yet prove the p-curve
-transformation branch itself.
+The Rust merge path combines adjacent coplanar faces with a shared edge identity, retains
+internal wires, and replaces the source faces through `ShapeBuild_ReShape`. The focused
+target covers `BasicBoxUnification`, `MultipleCoplanarFacesWithInternalWires`,
+`ClosedInternalWire`, and `InternalEdgesTermination_Issue925`. Issue925's exact one-face
+fixture checks completion and unchanged face count; it does not enter the multi-face
+`InternalEdges` / `IntVEmap` traversal branch, so it is not evidence for that historical fix.
 
 ### Individual `ShapeUpgrade_UnifySameDomain` declaration mappings
 
-Six declarations are now mapped individually: `BasicBoxUnification`,
-`MultipleCoplanarFacesWithInternalWires`, `ClosedInternalWire`,
-`InternalEdgesTermination_Issue925`, `MissingPCurveDoesNotAbortShellProcessing`, and
-`MissingSourcePCurveDuringTransformation`. The Rust box uses the source's two-corner
-constructor and default flags. The internal-wire fixtures use the source coordinates,
-tolerances, `AllowInternalEdges(true)`, and result assertions. Issue925's row records only
-its actual completion, non-null, and face-count assertions; its one-face case remains a
-no-candidate path and does not validate the multi-face `InternalEdges`/`IntVEmap` traversal
-fix.
+Four declarations are mapped individually. The box and internal-wire fixtures preserve the
+source coordinates, tolerances, options, and observable assertions. Issue925 records only
+its actual completion, non-null, and face-count assertions.
 
-For the two p-curve cases, Build now identifies adjacent faces on the same cylindrical
-support, checks their source edge p-curves, and skips a pair when either face has an edge
-without a stored p-curve. The shell-processing case still continues to merge the
-independent planar pair. Its fixture now creates those planar faces independently, as the
-source does; matching linear endpoints identify their common boundary even though the
-edges are separate TShapes. The focused Rust targets pass 7/7; the selected pinned native
-cases pass 3/3, and the complete native suite passes 9/9. TKShHealing now maps 140/143
-declarations.
+The two p-curve declarations remain unmapped. In the native shell-processing source fixture,
+the planar faces share the exact `anEdge23` TShape: the right wire contains a reversed copy
+of the edge used by the left wire. The native oracle changes 4 faces (2 cylindrical, 2
+planar) to 3 (2 cylindrical, 1 planar). A separate native probe with independently built
+coincident planar boundaries leaves both faces unchanged. The prior Rust endpoint-coordinate
+matching therefore generalized beyond the source topology and has been removed. Rust also
+does not yet implement p-curve-aware face transformations, so output-count/no-error tests
+were removed rather than mapped as transformation coverage. The selected native p-curve
+tests pass 2/2; the full native suite passes 9/9. TKShHealing has 138/143 mapped declarations.
 
 `OCC29382_CommonShapeHasStableTopology`, `OCC30927_FusedSolidKeepsClosedWires`, and
 `OCC29544_NearbyLinearSplitIsUnified` remain open pending TKBO `Common`, `Fuse`, and

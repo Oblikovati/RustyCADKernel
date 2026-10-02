@@ -13,7 +13,6 @@ use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
-use rustycad_tkmath::gp::Point3;
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeWire};
 
 #[derive(Clone)]
@@ -165,7 +164,7 @@ fn shape_faces(shape: &Shape) -> Result<Vec<Face>, Failure> {
         .collect()
 }
 
-/// Chooses the supported merge or skips cylindrical pairs whose source p-curve is absent.
+/// Chooses the supported planar merge for the shared boundary.
 fn supported_face_pair(
     first: &Face,
     second: &Face,
@@ -180,25 +179,7 @@ fn supported_face_pair(
     {
         return Ok(Some((first.clone(), second.clone())));
     }
-    if skip_missing_cylindrical_pair(first, second)? {
-        return Ok(None);
-    }
     Ok(None)
-}
-
-/// Skips source pairs that cannot transfer an absent cylindrical p-curve.
-fn skip_missing_cylindrical_pair(first: &Face, second: &Face) -> Result<bool, Failure> {
-    if !cylinders_share_support(first, second)? {
-        return Ok(false);
-    }
-    if pair_has_missing_pcurve(first, second)? {
-        return Ok(true);
-    }
-    Err(Failure::with_type(
-        "Standard_NotImplemented",
-        "ShapeUpgrade_UnifySameDomain::Build requires cylindrical face merging",
-        "",
-    ))
 }
 
 /// Checks the `AllowInternalEdges` gate used before a face pair can be merged.
@@ -209,36 +190,6 @@ fn internal_merge_allowed(
 ) -> Result<bool, Failure> {
     Ok(fields.allow_internal_edges
         || has_no_internal_wires(first)? && has_no_internal_wires(second)?)
-}
-
-/// Whether the two faces carry the same located cylindrical support.
-fn cylinders_share_support(first: &Face, second: &Face) -> Result<bool, Failure> {
-    let first = BRepAdaptorSurface::with_face(first, false)?;
-    let second = BRepAdaptorSurface::with_face(second, false)?;
-    if first.get_type()? != SurfaceType::Cylinder || second.get_type()? != SurfaceType::Cylinder {
-        return Ok(false);
-    }
-    Ok(first.cylinder()?.coefficients() == second.cylinder()?.coefficients())
-}
-
-/// Whether either source face has a boundary edge without a stored p-curve.
-fn pair_has_missing_pcurve(first: &Face, second: &Face) -> Result<bool, Failure> {
-    Ok(face_has_missing_pcurve(first)? || face_has_missing_pcurve(second)?)
-}
-
-/// The native face transform skips an edge when its source representation is absent.
-fn face_has_missing_pcurve(face: &Face) -> Result<bool, Failure> {
-    let edges = Explorer::new(
-        &face.clone().into_shape(),
-        ShapeEnum::Edge,
-        ShapeEnum::Shape,
-    )?;
-    for edge in edges {
-        if !BRepTool::curve_on_face(&topods::edge(&edge)?, face)?.is_stored {
-            return Ok(true);
-        }
-    }
-    Ok(false)
 }
 
 /// Compares two planar supports; this slice leaves other shared surfaces untouched.
@@ -290,7 +241,7 @@ fn merged_boundary(first: &Face, second: &Face) -> Result<Wire, Failure> {
     wire.wire()
 }
 
-/// Finds the shared outer boundary by identity or coincident linear endpoints.
+/// Finds the shared outer boundary by topological identity.
 fn shared_outer_edge(first: &Face, second: &Face) -> Result<Option<topods::Edge>, Failure> {
     let first_edges = outer_edges(first)?;
     let second_edges = outer_edges(second)?;
@@ -332,34 +283,9 @@ fn match_shared_edge(
     Ok(shared)
 }
 
-/// Matches a shared edge identity or a linear segment with the same endpoints.
+/// Matches the same edge occurrence across both face wires.
 fn edges_share_boundary(first: &topods::Edge, second: &topods::Edge) -> Result<bool, Failure> {
-    if first.is_same(second) {
-        return Ok(true);
-    }
-    let first_curve = BRepAdaptorCurve::with_edge(first)?;
-    let second_curve = BRepAdaptorCurve::with_edge(second)?;
-    if first_curve.get_type()? != CurveType::Line || second_curve.get_type()? != CurveType::Line {
-        return Ok(false);
-    }
-    coincident_line_endpoints(first, second)
-}
-
-/// Compares segment endpoints in either orientation using OCCT confusion tolerance.
-fn coincident_line_endpoints(first: &topods::Edge, second: &topods::Edge) -> Result<bool, Failure> {
-    let first = edge_endpoints(first)?;
-    let second = edge_endpoints(second)?;
-    let tolerance = precision::confusion();
-    Ok(
-        first.0.is_equal(&second.0, tolerance) && first.1.is_equal(&second.1, tolerance)
-            || first.0.is_equal(&second.1, tolerance) && first.1.is_equal(&second.0, tolerance),
-    )
-}
-
-/// Reads an edge's endpoint vertices using cumulative orientation.
-fn edge_endpoints(edge: &topods::Edge) -> Result<(Point3, Point3), Failure> {
-    let (first, last) = topexp::vertices(edge, true);
-    Ok((BRepTool::pnt(&first)?, BRepTool::pnt(&last)?))
+    Ok(first.is_same(second))
 }
 
 /// Adds every boundary edge except the shared edge to the new wire.
