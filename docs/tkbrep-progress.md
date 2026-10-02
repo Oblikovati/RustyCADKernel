@@ -1123,6 +1123,13 @@ uniform distributions and GCC's coordinate argument evaluation order. Every one 
 630 captured operations applies; no retry or skip is omitted from these fixtures.
 The source excludes split/removal from this stream under its Phase 5.10/5.11 comment.
 
+### BRepGraph polygon suite in progress
+
+A Rust draft covers all seven assertions from `BRepGraph_Polygon_Test.cxx`, and
+the pinned native cases and Rust target pass. Its seam-edge fixture currently
+attaches a constructed triangulation instead of exercising Rust incremental
+meshing, so these declarations remain unmapped until the end-to-end path matches.
+
 Fixture SHA-256:
 
 - `box.txt`: `34689d0d04d03e8322fe5b394970327c69876ac9e55b0d35028dbe4efe97b323`
