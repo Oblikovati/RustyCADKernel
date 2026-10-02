@@ -772,9 +772,10 @@ behavior (intersection selection, exact edge subranges, and shared vertex), foll
 `ShapeFix_Face::FixLoopWire` and nested reshape application. The same source also needs
 `ShapeFix_Wire::FixReorder`, `FixGaps3d`, and `FixGaps2d` for OCC24881, plus empty-wire
 `ShapeAnalysis_Wire::CheckOrder` and `ShapeFix_Wire::FixReorder` for OCC25014. These
-operations are absent too, so the entire source cannot be mapped by implementing only
-the bowtie path. Do not mark the source green until all seven original declarations pass
-together. No declaration rows were added.
+paths now have a bounded port for the pinned no-gap box wires and the empty wire. The
+remaining shape-level blocker is the bowtie repair path below. Do not mark the source
+green until all seven original declarations pass together. No declaration rows were
+added.
 
 A bounded `ShapeFix_Wire` foundation is now implemented for the unchanged cases: exact
 signed-order application, empty-order handling, 3D/2D gap measurement and the no-gap fix
