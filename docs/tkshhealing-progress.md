@@ -906,3 +906,11 @@ The same focused suite now mirrors two internal-wire no-op declarations as well:
 wire paths; they do not establish the upstream infinite-loop fix under adversarial
 `IntVEmap` states. The Rust target currently passes 4/9 declaration assertions, while all
 nine native declarations remain green. No parity rows have been added.
+
+The focused Rust suite now also exercises missing and stored p-curves on adjacent
+cylindrical panels. Its two cases preserve the two cylinder faces when a source p-curve
+is absent and still merge an unrelated planar pair, producing the expected three faces.
+These fixtures cover key assertions from the two p-curve declarations, but they do not yet
+reproduce OCCT's exact self-touching wire and transformation topology. The target currently
+covers assertions from six declarations; rows remain unmapped until all nine exact source
+fixtures and behaviors pass together.
