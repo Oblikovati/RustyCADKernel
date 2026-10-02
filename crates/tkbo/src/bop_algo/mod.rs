@@ -2,8 +2,10 @@
 mod enums;
 mod options;
 pub use enums::{Glue, Operation};
+mod parallel;
 mod progress;
 pub use options::Options;
+pub use parallel::{ParallelAlgo, ParallelAlgoBase};
 pub use progress::{Algo, PISteps};
 
 mod alerts;

@@ -953,3 +953,18 @@ native transformation. `OCC29382_CommonShapeHasStableTopology`,
 `OCC30927_FusedSolidKeepsClosedWires`, and `OCC29544_NearbyLinearSplitIsUnified` remain
 blocked by the unported TKBO `Common`, `Fuse`, and `BOPAlgo_Splitter` paths. The complete
 source suite therefore remains partial at 3/9 mapped.
+
+## Issue925 declaration and p-curve review
+
+The exact Issue925 single-face shell test now uses the source constructor flags
+(`ConcatBSplines=false`) and is mapped. This raises TKShHealing to 138/143 and
+UnifySameDomain to 4/9. The test confirms completion, non-null output and retained
+face count; it does not exercise a multi-face internal-edge traversal.
+
+The two p-curve declarations remain unmapped. Reviewing their native helpers
+confirmed the independent planar merge fixture shares one edge TShape between the
+faces. A native probe with independent coincident boundaries keeps two faces;
+matching endpoints is therefore insufficient to justify merging them. The proposed
+endpoint matching and cylindrical skip/error changes were not integrated. Existing
+supplemental p-curve fixtures remain regression tests, with no declaration parity
+claim until the cylindrical p-curve transformation path is implemented.

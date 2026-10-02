@@ -217943,6 +217943,22 @@
       "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIBuilderAlgo::has_history",
       "status": "implemented",
       "notes": "Constructor/configuration/argument copy slice only; Build and geometric Boolean pipeline remain unimplemented."
+    },
+    {
+      "upstream_id": "BOPAlgo_ParallelAlgo::Perform()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Algo.hxx",
+      "rust_item": "rustycad_tkbo::bop_algo::ParallelAlgo::perform_parallel",
+      "status": "implemented",
+      "notes": "Native range-overload no-op and progress ownership verified by tkbo_parallel.cxx; compiler crosswalk pending."
+    },
+    {
+      "upstream_id": "BOPAlgo_ParallelAlgo::SetProgressRange",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Algo.hxx",
+      "rust_item": "rustycad_tkbo::bop_algo::ParallelAlgo::set_progress_range",
+      "status": "implemented",
+      "notes": "Native range-overload no-op and progress ownership verified by tkbo_parallel.cxx; compiler crosswalk pending."
     }
   ],
   "tests": [
@@ -322627,6 +322643,20 @@
       "rust_target": "brep_graph_compact_legacy",
       "rust_test": "rebuild::BRepGraph_CompactTest__HistorySurvivesCompactWithRemappedIds",
       "rust_source": "crates/tkbrep/tests/brep_graph_compact_legacy/rebuild.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomainTest.InternalEdgesTermination_Issue925",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
+      "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_test": "internal_open_path_terminates_and_keeps_its_face",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

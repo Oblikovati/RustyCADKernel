@@ -216,3 +216,10 @@ non-destructive mode, glue selection, inverted-solid checks, and history collect
 flags. Native defaults and setter/copy behavior are checked by an additional C++
 oracle and three Rust tests. Build, intersection execution, and result/history
 queries still need the concrete Boolean pipeline.
+
+`ParallelAlgo` and its base state now implement the parallel task entry point,
+range assignment and dispatch through the range-taking base overload. The native
+base overload does nothing. Assigning a new progress range disarms the source and
+overwrites the old range without advancing it; `clone_from` preserves this native
+behavior. Three Rust regressions and the native parallel oracle pass. This fills
+the parallel infrastructure gap noted above; concrete Boolean builders remain open.
