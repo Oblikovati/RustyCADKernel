@@ -317082,6 +317082,51 @@
       "profiles": [
         "linux-gcc-c-locale"
       ]
+    },
+    {
+      "upstream_id": "BVH_DistanceFieldTest.Bug30655_BoxDistanceField",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_DistanceField_Test.cxx",
+      "source_sha256": "c398a197deecbd1697a7498592235f83e29ff5ae14b89423d69ae5d09ebc55a0",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_bug30655",
+      "rust_test": "BVH_DistanceFieldTest__Bug30655_BoxDistanceField",
+      "rust_source": "crates/tkmath/tests/bvh_bug30655.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "notes": "Distance-field assertions are ported with an equivalent closed box triangulation. The exact BRepPrimAPI_MakeBox + BRepMesh_IncrementalMesh fixture is not yet available in Rust."
+    },
+    {
+      "upstream_id": "BVH_PairDistanceTest.Bug30655_BoxDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_PairDistance_Test.cxx",
+      "source_sha256": "f42897d5435f7dcc75421bccc64675eed61b8ca4d56ecb4af04f47b4129d6312",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_bug30655",
+      "rust_test": "BVH_PairDistanceTest__Bug30655_BoxDistance",
+      "rust_source": "crates/tkmath/tests/bvh_bug30655.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "notes": "Pair-distance assertions are ported using an equivalent pair of closed box triangle sets. The exact BRepMesh_IncrementalMesh fixture is not yet available in Rust."
+    },
+    {
+      "upstream_id": "BVH_PairDistanceTest.Bug30655_SphereDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_PairDistance_Test.cxx",
+      "source_sha256": "f42897d5435f7dcc75421bccc64675eed61b8ca4d56ecb4af04f47b4129d6312",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_bug30655",
+      "rust_test": "BVH_PairDistanceTest__Bug30655_SphereDistance",
+      "rust_source": "crates/tkmath/tests/bvh_bug30655.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "notes": "The analytic separation and BVH triangle-pair distance are tested using local spherical surface patches. The full OCCT sphere tessellation from BRepMesh_IncrementalMesh is not yet available in Rust."
     }
   ]
 }
