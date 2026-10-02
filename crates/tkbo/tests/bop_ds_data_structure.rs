@@ -2,9 +2,9 @@
 use rustycad_tkbo::bop_ds::{DataStructure, IndexRange, ShapeInfo};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::Wire;
-use rustycad_tkbrep::topods::{Compound, Shape, Vertex};
-use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::Point3;
+use rustycad_tkbrep::topods::{Compound, Edge, Shape, Vertex};
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+use rustycad_tkmath::gp::{Direction3, Line3, Point3};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 
 fn vertex_at(x: f64) -> Shape {
@@ -122,6 +122,60 @@ fn init_flattens_single_argument_solid_to_face_edge_and_vertex_indices() {
             ShapeEnum::Face | ShapeEnum::Edge | ShapeEnum::Vertex
         )
     }));
+}
+
+#[test]
+fn init_materializes_both_infinite_line_endpoints_before_pave_creation() {
+    let line = Line3::new(Point3::default(), Direction3::X);
+    let infinity = rustycad_tkernel::precision::infinite();
+    let edge = BRepBuilderAPIMakeEdge::from_lin_params(line, -infinity, infinity)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape();
+    let mut structure = DataStructure::default();
+    structure.set_arguments(std::slice::from_ref(&edge));
+    structure.init(1e-4).unwrap();
+    let edge_index = structure.index(&edge);
+    let vertex_indices = structure
+        .shape_info(edge_index)
+        .unwrap()
+        .sub_shapes()
+        .to_vec();
+    assert_eq!(vertex_indices.len(), 2);
+    for vertex_index in &vertex_indices {
+        let vertex = structure.shape_info(*vertex_index).unwrap();
+        assert_eq!(vertex.shape_type(), ShapeEnum::Vertex);
+        assert_eq!(vertex.flag(), 1);
+        assert!(vertex.box_bounds().is_void());
+    }
+
+    let blocks = structure.change_pave_blocks(edge_index).unwrap();
+    assert_eq!(blocks.len(), 1);
+    let block = blocks[0].lock().unwrap();
+    assert_eq!(block.indices(), (vertex_indices[0], vertex_indices[1]));
+    assert_eq!(block.range(), (-infinity, infinity));
+}
+
+#[test]
+fn change_pave_blocks_reads_internal_edge_topological_vertices() {
+    let line = Line3::new(Point3::default(), Direction3::X);
+    let edge = BRepBuilderAPIMakeEdge::from_lin_params(line, -2.0, 3.0)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape();
+    let internal = Edge::unchecked(edge.oriented(Orientation::Internal));
+    let mut structure = DataStructure::default();
+    structure.set_arguments(std::slice::from_ref(&internal.clone().into_shape()));
+    structure.init(1e-4).unwrap();
+    let edge_index = structure.index(&internal.clone().into_shape());
+    structure.change_pave_blocks(edge_index).unwrap();
+    let block = structure.pave_blocks(edge_index).unwrap()[0]
+        .lock()
+        .unwrap();
+    assert_eq!(block.indices(), (1, 2));
+    assert_eq!(block.range(), (-2.0, 3.0));
 }
 
 fn topology_arguments(builder: &BRepBuilder) -> (Shape, Shape, Shape, Shape) {

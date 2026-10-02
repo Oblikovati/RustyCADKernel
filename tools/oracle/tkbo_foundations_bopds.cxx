@@ -13,6 +13,8 @@
 #include <BRepBuilderAPI_MakeVertex.hxx>
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
+#include <Precision.hxx>
+#include <gp_Lin.hxx>
 #include <BRep_Builder.hxx>
 #include <Bnd_Box.hxx>
 #include <cstdio>
@@ -139,4 +141,11 @@ void bo_data_structure_box_case(const std::vector<double>& v) {
  TopoDS_Solid solid=BRepPrimAPI_MakeBox(1.,2.,3.).Solid();NCollection_List<TopoDS_Shape> arguments;arguments.Append(solid);BOPDS_DS ds;ds.SetArguments(arguments);ds.Init(v[0]);
  bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Index(solid));
  for(int i=0;i<ds.NbShapes();++i){const BOPDS_ShapeInfo& info=ds.ShapeInfo(i);bo_int(info.ShapeType());bo_int(info.SubShapes().Extent());for(int child:info.SubShapes())bo_int(child);bo_int(info.Box().IsVoid());if(!info.Box().IsVoid()){bo_real(info.Box().GetGap());double x0,y0,z0,x1,y1,z1;info.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);}}
+}
+void bo_data_structure_infinite_case(const std::vector<double>& v) {
+ const double infinity=Precision::Infinite();double first=-infinity,last=infinity;if(int(v[1])==1)last=2.;if(int(v[1])==2)first=-2.;if(int(v[1])==3||int(v[1])==4){first=-2.;last=3.;}
+ TopoDS_Edge edge=BRepBuilderAPI_MakeEdge(gp_Lin(),first,last);if(int(v[1])==4)edge.Orientation(TopAbs_INTERNAL);NCollection_List<TopoDS_Shape> arguments;arguments.Append(edge);BOPDS_DS ds;ds.SetArguments(arguments);ds.Init(v[0]);
+ bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Index(edge));
+ for(int i=0;i<ds.NbShapes();++i){const BOPDS_ShapeInfo& info=ds.ShapeInfo(i);bo_int(info.ShapeType());bo_int(info.HasFlag());bo_int(info.Flag());bo_int(info.SubShapes().Extent());for(int child:info.SubShapes())bo_int(child);bo_int(info.Box().IsVoid());if(!info.Box().IsVoid()){bo_real(info.Box().GetGap());double x0,y0,z0,x1,y1,z1;info.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);}}
+ const int edgeIndex=ds.Index(edge);auto& blocks=ds.ChangePaveBlocks(edgeIndex);bo_int(ds.PaveBlocksPool().Length());bo_int(ds.ShapeInfo(edgeIndex).Reference());bo_int(blocks.Extent());for(const auto& block:blocks){int i1,i2;double p1,p2;block->Indices(i1,i2);block->Range(p1,p2);bo_int(block->OriginalEdge());bo_int(i1);bo_int(i2);bo_real(p1);bo_real(p2);}
 }

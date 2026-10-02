@@ -3,7 +3,7 @@ use super::{
     FaceInfo, IndexRange, Pave, PaveBlock, PaveBlockHandle, ShapeInfo, VertexIndexSet,
     pave_block_handle,
 };
-use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, Vertex};
 use rustycad_tkbrep::toptools::ShapeMapHasher;
 use rustycad_tkernel::ncollection::DataMap;
@@ -307,14 +307,56 @@ impl DataStructure {
 
     fn prepare_edge(&mut self, index: i32, added_gap: f64) -> Result<(), Failure> {
         let edge = Edge::unchecked(self.shape(index)?.clone());
-        let mut bounds = self.shape_info(index)?.box_bounds().clone();
         if BRepTool::degenerated(&edge)? {
             self.change_shape_info(index)?.set_flag(index);
+        } else {
+            self.append_infinite_edge_vertices(index, &edge)?;
         }
+        let mut bounds = self.shape_info(index)?.box_bounds().clone();
         BRepBndLib::add(&edge, &mut bounds, true)?;
         self.add_child_boxes(index, &mut bounds)?;
         bounds.set_gap(bounds.gap() + added_gap);
         self.change_shape_info(index)?.set_box(&bounds);
+        Ok(())
+    }
+
+    fn append_infinite_edge_vertices(
+        &mut self,
+        edge_index: i32,
+        edge: &Edge,
+    ) -> Result<(), Failure> {
+        let forward = Edge::unchecked(edge.oriented(Orientation::Forward));
+        let (curve, first, last) = BRepTool::curve(&forward)?;
+        self.append_infinite_edge_endpoint(edge_index, &curve, first)?;
+        self.append_infinite_edge_endpoint(edge_index, &curve, last)?;
+        Ok(())
+    }
+
+    fn append_infinite_edge_endpoint(
+        &mut self,
+        edge_index: i32,
+        curve: &rustycad_tkernel::standard::Handle<dyn rustycad_tkg3d::geom::GeomCurve>,
+        parameter: f64,
+    ) -> Result<(), Failure> {
+        if !rustycad_tkernel::precision::is_infinite(parameter) {
+            return Ok(());
+        }
+        let point = curve
+            .get()
+            .expect("BOPDS_DS: infinite edge range requires a curve")
+            .d0(parameter)?;
+        let edge = Edge::unchecked(self.shape(edge_index)?.clone());
+        let tolerance = BRepTool::edge_tolerance(&edge)?;
+        let mut vertex = Vertex::default();
+        BRepBuilder::default().make_vertex_at(&mut vertex, point, tolerance)?;
+        let mut info = ShapeInfo::default();
+        info.set_shape_type(ShapeEnum::Vertex);
+        info.set_shape(&vertex.into_shape());
+        info.set_flag(1);
+        let vertex_index = self.append_shape_info(&info);
+        self.change_shape_info(edge_index)?
+            .change_sub_shapes()
+            .push(vertex_index);
         Ok(())
     }
 
@@ -510,7 +552,9 @@ impl DataStructure {
         }
         let mut block = PaveBlock::default();
         block.set_original_edge(index);
-        if edge.orientation() != Orientation::Internal {
+        if edge.orientation() == Orientation::Internal {
+            self.append_internal_edge_paves(&edge, &mut block)?;
+        } else {
             self.append_endpoint_paves(index, &vertex_indices, &edge, &mut block)?;
         }
         let mut splits = Vec::new();
@@ -536,13 +580,38 @@ impl DataStructure {
         let degenerated = self.shape_info(edge_index)?.has_flag();
         for vertex_index in vertex_indices {
             let vertex = Vertex::unchecked(self.shape(*vertex_index)?.clone());
-            let parameter = BRepTool::parameter(&vertex, edge)?;
+            let parameter = if self.shape_info(*vertex_index)?.has_flag() {
+                compute_endpoint_parameter(&vertex, edge)?
+            } else {
+                BRepTool::parameter(&vertex, edge)?
+            };
             let pave = Pave::new(*vertex_index, parameter);
             if degenerated {
                 block.append_ext_pave1(pave);
             } else {
                 block.append_ext_pave(pave);
             }
+        }
+        Ok(())
+    }
+
+    fn append_internal_edge_paves(
+        &self,
+        edge: &Edge,
+        block: &mut PaveBlock,
+    ) -> Result<(), Failure> {
+        let mut vertices = ShapeIterator::new(edge, false, true);
+        while vertices.more() {
+            let vertex_shape = vertices.value()?.clone();
+            let vertex_index = self.index(&vertex_shape);
+            let vertex = Vertex::unchecked(vertex_shape);
+            let parameter = if self.shape_info(vertex_index)?.has_flag() {
+                compute_endpoint_parameter(&vertex, edge)?
+            } else {
+                BRepTool::parameter(&vertex, edge)?
+            };
+            block.append_ext_pave1(Pave::new(vertex_index, parameter));
+            vertices.next();
         }
         Ok(())
     }
@@ -555,6 +624,24 @@ fn additional_tolerance(fuzz: f64) -> f64 {
     } else {
         fuzz * 0.5
     }
+}
+
+fn compute_endpoint_parameter(vertex: &Vertex, edge: &Edge) -> Result<f64, Failure> {
+    let tolerance = BRepTool::edge_tolerance(edge)?;
+    let tolerance_square = tolerance * tolerance;
+    let vertex_point = BRepTool::pnt(vertex)?;
+    let forward = Edge::unchecked(edge.oriented(Orientation::Forward));
+    let (curve, first, last) = BRepTool::curve(&forward)?;
+    let curve = curve
+        .get()
+        .expect("BOPDS_DS: flagged infinite endpoint requires an edge curve");
+    if curve.d0(first)?.square_distance(&vertex_point) < tolerance_square {
+        return Ok(first);
+    }
+    if curve.d0(last)?.square_distance(&vertex_point) < tolerance_square {
+        return Ok(last);
+    }
+    Ok(0.0)
 }
 
 fn checked_slot(index: i32, length: usize, operation: &str) -> Result<usize, Failure> {
