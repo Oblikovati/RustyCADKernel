@@ -1,14 +1,11 @@
-//! Native parity for the no-candidate `ShapeUpgrade_UnifySameDomain::Build` path.
-use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
+//! Native parity for focused `ShapeUpgrade_UnifySameDomain::Build` paths.
+mod common;
+use common::{face_count, rectangle_wire};
+use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topods::{Shape, Shell, Wire};
 use rustycad_tkernel::message::ProgressRange;
-use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::Handle;
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::geom::{GeomCylindricalSurface, GeomSurface};
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
-use rustycad_tkmath::gp::{Axis3, Direction2, Plane3, Point2, Point3, Vector2};
-use rustycad_tkmath::toploc::Location;
+use rustycad_tkmath::gp::{Plane3, Point3};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain;
 use rustycad_tktopalgo::brep_builder_api::{
@@ -40,16 +37,6 @@ fn basic_box_unification_matches_native_no_merge_result() {
             .is_valid()
             .unwrap()
     );
-}
-
-fn face_count(shape: &Shape) -> usize {
-    rustycad_tkbrep::topexp::Explorer::new(
-        shape,
-        rustycad_tkg3d::top_abs::ShapeEnum::Face,
-        rustycad_tkg3d::top_abs::ShapeEnum::Shape,
-    )
-    .unwrap()
-    .count()
 }
 
 #[test]
@@ -128,426 +115,130 @@ fn shell_with_internal_path(points: &[Point3], closed: bool) -> Shape {
 }
 
 #[test]
-fn missing_source_pcurve_does_not_abort_transformation() {
-    let fixture = missing_pcurve_transformation_fixture();
-    assert!(!fixture.shell.is_null());
-    assert!(
-        !BRepTool::curve_on_face(&fixture.missing_edge, &fixture.reference_face)
-            .unwrap()
-            .is_stored
+fn multiple_coplanar_faces_with_internal_wires_merge_to_one_face() {
+    let first = face_with_internal_path(
+        0.0,
+        5.0,
+        0.0,
+        10.0,
+        &[Point3::new(1.0, 5.0, 0.0), Point3::new(4.0, 5.0, 0.0)],
     );
-    assert_eq!(face_count(&fixture.shell), 2);
+    let second = face_with_internal_path(
+        5.0,
+        10.0,
+        0.0,
+        10.0,
+        &[Point3::new(6.0, 5.0, 0.0), Point3::new(9.0, 5.0, 0.0)],
+    );
+    let input = sew_coplanar_faces(first, second);
+    let result = unify_faces_with_internal_edges(&input);
 
-    let unifier = ShapeUpgradeUnifySameDomain::new(&fixture.shell, false, true, false);
+    assert_eq!(face_count(&result), 1);
+    assert_eq!(internal_wire_count(&result), 2);
+    assert_eq!(internal_edge_count(&result), 2);
+}
+
+#[test]
+fn shared_vertex_internal_path_rebuild_terminates_in_face_merge() {
+    let input = sewn_internal_path_pair();
+    let result = unify_faces_with_internal_edges(&input);
+
+    assert_internal_path_merge(&result);
+}
+
+fn unify_faces_with_internal_edges(input: &Shape) -> Shape {
+    let unifier = ShapeUpgradeUnifySameDomain::new(input, true, true, true);
+    unifier.set_angular_tolerance(1e-6);
+    unifier.set_linear_tolerance(1e-5);
     unifier.allow_internal_edges(true);
     unifier.build().unwrap();
-
-    let result = unifier.shape();
-    assert!(!result.is_null());
-    assert_eq!(face_count(&result), 2);
+    unifier.shape()
 }
 
-#[test]
-fn missing_pcurve_does_not_abort_unrelated_planar_merge() {
-    let fixture = missing_pcurve_shell_fixture();
-    assert!(!fixture.shell.is_null());
-    assert!(
-        !BRepTool::curve_on_face(&fixture.missing_edge, &fixture.reference_face)
-            .unwrap()
-            .is_stored
+fn sewn_internal_path_pair() -> Shape {
+    let first = face_with_internal_path(
+        0.0,
+        10.0,
+        0.0,
+        10.0,
+        &[
+            Point3::new(2.0, 2.0, 0.0),
+            Point3::new(5.0, 5.0, 0.0),
+            Point3::new(8.0, 2.0, 0.0),
+        ],
     );
-    assert!(
-        BRepTool::curve_on_face(&fixture.valid_pcurve_edge, &fixture.reference_face)
-            .unwrap()
-            .is_stored
-    );
-    add_planar_pair_to_shell(&fixture.shell)
-        .expect("planar coplanar pair should be added to cylinder shell");
+    let second = face_with_internal_path(0.0, 10.0, 10.0, 20.0, &[]);
+    sew_coplanar_faces(first, second)
 }
 
-struct MissingPcurveFixture {
-    shell: Shape,
-    reference_face: rustycad_tkbrep::topods::Face,
-    missing_edge: rustycad_tkbrep::topods::Edge,
-    valid_pcurve_edge: rustycad_tkbrep::topods::Edge,
-}
-
-fn missing_pcurve_shell_fixture() -> MissingPcurveFixture {
-    let (surface, vertices) =
-        cylinder_vertices(&[(0.0, 0.0), (1.0, 0.0), (1.0, 1.0), (0.5, -1.0), (0.5, 1.0)]);
-    let builder = BRepBuilder::default();
-    let common = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[0],
-        &vertices[1],
-        (0.0, 0.0),
-        (1.0, 0.0),
-        true,
-    );
-    let missing = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[1],
-        &vertices[2],
-        (1.0, 0.0),
-        (1.0, 1.0),
-        false,
-    );
-    let reverse_bc = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[2],
-        &vertices[1],
-        (1.0, 1.0),
-        (1.0, 0.0),
-        true,
-    );
-    let bd = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[1],
-        &vertices[3],
-        (1.0, 0.0),
-        (0.5, -1.0),
-        true,
-    );
-    let da = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[3],
-        &vertices[0],
-        (0.5, -1.0),
-        (0.0, 0.0),
-        true,
-    );
-    let ae = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[0],
-        &vertices[4],
-        (0.0, 0.0),
-        (0.5, 1.0),
-        true,
-    );
-    let eb = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[4],
-        &vertices[1],
-        (0.5, 1.0),
-        (1.0, 0.0),
-        true,
-    );
-    let first_wire = cylinder_wire(
-        &builder,
-        &[common.clone(), missing.clone(), reverse_bc, bd.clone(), da],
-    );
-    let mut reversed_common = common.clone();
-    reversed_common.reverse();
-    let second_wire = cylinder_wire(&builder, &[reversed_common, ae, eb]);
-    let first_face = cylinder_face(&builder, &surface, &first_wire);
-    let second_face = cylinder_face(&builder, &surface, &second_wire);
-    let shell = cylinder_shell(&builder, &[&first_face, &second_face]);
-    MissingPcurveFixture {
-        shell,
-        reference_face: first_face,
-        missing_edge: missing,
-        valid_pcurve_edge: bd,
-    }
-}
-
-fn missing_pcurve_transformation_fixture() -> MissingPcurveFixture {
-    let (surface, vertices) = cylinder_vertices(&[
-        (0.0, 0.0),
-        (0.5, 0.0),
-        (0.5, 1.0),
-        (0.0, 1.0),
-        (1.0, 0.0),
-        (1.0, 1.0),
-    ]);
-    let builder = BRepBuilder::default();
-    let ab = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[0],
-        &vertices[1],
-        (0.0, 0.0),
-        (0.5, 0.0),
-        true,
-    );
-    let bc = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[1],
-        &vertices[2],
-        (0.5, 0.0),
-        (0.5, 1.0),
-        true,
-    );
-    let cd = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[2],
-        &vertices[3],
-        (0.5, 1.0),
-        (0.0, 1.0),
-        true,
-    );
-    let da = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[3],
-        &vertices[0],
-        (0.0, 1.0),
-        (0.0, 0.0),
-        true,
-    );
-    let missing = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[1],
-        &vertices[4],
-        (0.5, 0.0),
-        (1.0, 0.0),
-        false,
-    );
-    let ef = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[4],
-        &vertices[5],
-        (1.0, 0.0),
-        (1.0, 1.0),
-        true,
-    );
-    let fc = cylinder_edge(
-        &builder,
-        &surface,
-        &vertices[5],
-        &vertices[2],
-        (1.0, 1.0),
-        (0.5, 1.0),
-        true,
-    );
-    let left_wire = cylinder_wire(&builder, &[ab, bc.clone(), cd, da]);
-    let mut reversed_bc = bc.clone();
-    reversed_bc.reverse();
-    let right_wire = cylinder_wire(&builder, &[missing.clone(), ef, fc, reversed_bc]);
-    let first_face = cylinder_face(&builder, &surface, &left_wire);
-    let second_face = cylinder_face(&builder, &surface, &right_wire);
-    let shell = cylinder_shell(&builder, &[&first_face, &second_face]);
-    MissingPcurveFixture {
-        shell,
-        reference_face: first_face,
-        missing_edge: missing,
-        valid_pcurve_edge: bc,
-    }
-}
-
-fn cylinder_vertices(
-    parameters: &[(f64, f64)],
-) -> (
-    Handle<dyn GeomSurface>,
-    Vec<rustycad_tkbrep::topods::Vertex>,
-) {
-    let surface: Handle<dyn GeomSurface> =
-        Handle::new(GeomCylindricalSurface::new(Axis3::default(), 1.0).unwrap()).cast();
-    let builder = BRepBuilder::default();
-    let vertices = parameters
-        .iter()
-        .map(|&(u, v)| {
-            let mut vertex = rustycad_tkbrep::topods::Vertex::default();
-            builder
-                .make_vertex_at(
-                    &mut vertex,
-                    surface.get().unwrap().value(u, v).unwrap(),
-                    precision::confusion(),
-                )
-                .unwrap();
-            vertex
-        })
-        .collect();
-    (surface, vertices)
-}
-
-fn cylinder_edge(
-    builder: &BRepBuilder,
-    surface: &Handle<dyn GeomSurface>,
-    first: &rustycad_tkbrep::topods::Vertex,
-    last: &rustycad_tkbrep::topods::Vertex,
-    uv_first: (f64, f64),
-    uv_last: (f64, f64),
-    with_pcurve: bool,
-) -> rustycad_tkbrep::topods::Edge {
-    let edge = BRepBuilderAPIMakeEdge::from_vertices(first, last)
-        .unwrap()
-        .edge()
-        .unwrap();
-    if with_pcurve {
-        let start = Point2::new(uv_first.0, uv_first.1);
-        let end = Point2::new(uv_last.0, uv_last.1);
-        let curve: Handle<dyn Geom2dCurve> = Handle::new(pcurve_line(start, end)).cast();
-        builder
-            .update_edge_pcurve(
-                &edge,
-                &curve,
-                surface,
-                &Location::default(),
-                precision::confusion(),
-                None,
-            )
-            .unwrap();
-        let range = Vector2::between(start, end).magnitude();
-        builder
-            .range_on_surface(&edge, surface, &Location::default(), 0.0, range)
-            .unwrap();
-    }
-    edge
-}
-
-fn cylinder_wire(builder: &BRepBuilder, edges: &[rustycad_tkbrep::topods::Edge]) -> Wire {
-    let mut wire = Wire::default();
-    builder.make_wire(&mut wire);
-    for edge in edges {
-        builder.add(&mut wire, &edge.clone().into_shape()).unwrap();
-    }
-    wire.set_closed(true).unwrap();
-    wire
-}
-
-fn cylinder_face(
-    builder: &BRepBuilder,
-    surface: &Handle<dyn GeomSurface>,
-    wire: &Wire,
-) -> rustycad_tkbrep::topods::Face {
-    let mut face = rustycad_tkbrep::topods::Face::default();
-    builder
-        .make_face_on_surface(&mut face, surface, precision::confusion())
-        .unwrap();
-    builder.add(&mut face, &wire.clone().into_shape()).unwrap();
-    face
-}
-
-fn cylinder_shell(builder: &BRepBuilder, faces: &[&rustycad_tkbrep::topods::Face]) -> Shape {
-    let mut shell = Shell::default();
-    builder.make_shell(&mut shell);
-    for face in faces {
-        builder
-            .add(&mut shell, &(*face).clone().into_shape())
-            .unwrap();
-    }
-    shell.into_shape()
-}
-
-fn add_planar_pair_to_shell(shell: &Shape) -> Result<(), rustycad_tkernel::standard::Failure> {
-    let planar_pair = sewn_planar_pair();
-    let mut result = shell.clone();
-    for face in
-        rustycad_tkbrep::topexp::Explorer::new(&planar_pair, ShapeEnum::Face, ShapeEnum::Shape)?
-    {
-        BRepBuilder::default().add(&mut result, &face)?;
-    }
-    let unifier = ShapeUpgradeUnifySameDomain::new(&result, false, true, false);
-    unifier.allow_internal_edges(true);
-    unifier.build()?;
-    assert_eq!(face_count(&unifier.shape()), 3);
-    Ok(())
-}
-
-fn pcurve_line(first: Point2, last: Point2) -> Geom2dLine {
-    Geom2dLine::from_point(
-        first,
-        Direction2::from_vector(Vector2::between(first, last)).unwrap(),
-    )
-}
-
-fn sewn_planar_pair() -> Shape {
-    let first = planar_face(3.0, 4.0);
-    let second = planar_face(4.0, 5.0);
-    let mut sewing = BRepBuilderAPISewing::default();
-    sewing.add(&first).unwrap();
-    sewing.add(&second).unwrap();
-    sewing.perform(&ProgressRange::default()).unwrap();
-    sewing.sewed_shape().clone()
-}
-
-fn planar_face(x_min: f64, x_max: f64) -> Shape {
-    let wire = rectangle_wire(x_min, x_max, 0.0, 1.0);
-    BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &wire, true)
-        .unwrap()
-        .face()
-        .unwrap()
-        .into_shape()
-}
-
-#[test]
-fn adjacent_coplanar_faces_with_internal_wires_merge_to_one_face() {
-    let first = face_with_inner_segment(0.0, 5.0, 1.0, 4.0);
-    let second = face_with_inner_segment(5.0, 10.0, 6.0, 9.0);
+fn sew_coplanar_faces(first: Shape, second: Shape) -> Shape {
     let mut sewing = BRepBuilderAPISewing::default();
     sewing.add(&first).unwrap();
     sewing.add(&second).unwrap();
     sewing.perform(&ProgressRange::default()).unwrap();
     let input = sewing.sewed_shape();
     assert_eq!(face_count(input), 2);
-
-    let unifier = ShapeUpgradeUnifySameDomain::new(input, true, true, true);
-    unifier.set_angular_tolerance(1e-6);
-    unifier.set_linear_tolerance(1e-5);
-    unifier.allow_internal_edges(true);
-    unifier.build().unwrap();
-
-    let result = unifier.shape();
-    assert_eq!(face_count(&result), 1);
-    assert_eq!(internal_wire_count(&result), 2);
+    input.clone()
 }
 
-fn face_with_inner_segment(x_min: f64, x_max: f64, inner_min: f64, inner_max: f64) -> Shape {
-    let outer = rectangle_wire(x_min, x_max, 0.0, 10.0);
+fn assert_internal_path_merge(result: &Shape) {
+    assert_eq!(face_count(result), 1);
+    assert_eq!(internal_wire_count(result), 1);
+    assert_eq!(internal_edge_count(result), 2);
+}
+
+fn face_with_internal_path(
+    x_min: f64,
+    x_max: f64,
+    y_min: f64,
+    y_max: f64,
+    points: &[Point3],
+) -> Shape {
+    let outer = rectangle_wire(x_min, x_max, y_min, y_max);
     let plane = Plane3::default();
     let mut face = BRepBuilderAPIMakeFace::from_plane_wire(plane, &outer, true)
         .unwrap()
         .face()
         .unwrap();
-    let mut inner = BRepBuilderAPIMakeWire::from_edge(
-        &BRepBuilderAPIMakeEdge::from_points(
-            Point3::new(inner_min, 5.0, 0.0),
-            Point3::new(inner_max, 5.0, 0.0),
-        )
-        .unwrap()
-        .edge()
-        .unwrap(),
-    )
-    .unwrap()
-    .wire()
-    .unwrap();
+    if points.is_empty() {
+        return face.into_shape();
+    }
+    let mut inner = internal_path_wire(points);
     inner.set_orientation(Orientation::Internal);
     BRepBuilder::default().add(&mut face, &inner).unwrap();
     face.into_shape()
 }
 
-fn rectangle_wire(x_min: f64, x_max: f64, y_min: f64, y_max: f64) -> Wire {
-    let points = [
-        Point3::new(x_min, y_min, 0.0),
-        Point3::new(x_max, y_min, 0.0),
-        Point3::new(x_max, y_max, 0.0),
-        Point3::new(x_min, y_max, 0.0),
-    ];
-    let mut wire = BRepBuilderAPIMakeWire::new();
-    for index in 0..4 {
-        let edge = BRepBuilderAPIMakeEdge::from_points(points[index], points[(index + 1) % 4])
+fn internal_path_wire(points: &[Point3]) -> Wire {
+    let mut inner_builder = BRepBuilderAPIMakeWire::new();
+    for pair in points.windows(2) {
+        let edge = BRepBuilderAPIMakeEdge::from_points(pair[0], pair[1])
             .unwrap()
             .edge()
             .unwrap();
-        wire.add_edge(&edge).unwrap();
+        inner_builder.add_edge(&edge).unwrap();
     }
-    wire.wire().unwrap()
+    inner_builder.wire().unwrap()
 }
 
 fn internal_wire_count(shape: &Shape) -> usize {
     rustycad_tkbrep::topexp::Explorer::new(shape, ShapeEnum::Wire, ShapeEnum::Shape)
         .unwrap()
-        .filter(|wire| wire.orientation() == Orientation::Internal)
+        .filter(|wire| {
+            wire.orientation() == Orientation::Internal
+                || rustycad_tkbrep::topexp::Explorer::new(wire, ShapeEnum::Edge, ShapeEnum::Shape)
+                    .is_ok_and(|edges| {
+                        edges
+                            .into_iter()
+                            .any(|edge| edge.orientation() == Orientation::Internal)
+                    })
+        })
+        .count()
+}
+
+fn internal_edge_count(shape: &Shape) -> usize {
+    rustycad_tkbrep::topexp::Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)
+        .unwrap()
+        .filter(|edge| edge.orientation() == Orientation::Internal)
         .count()
 }

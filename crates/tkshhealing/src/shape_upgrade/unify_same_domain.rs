@@ -1,10 +1,11 @@
 //! Focused same-domain face merge and no-merge behavior for `ShapeUpgrade_UnifySameDomain`.
+mod internal_wires;
 use crate::shape_build::ShapeBuildReShape;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_adaptor::{BRepAdaptorCurve, BRepAdaptorSurface};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topexp::{self, Explorer};
-use rustycad_tkbrep::topods::{self, Builder, Face, Shape, ShapeIterator, Wire};
+use rustycad_tkbrep::topods::{self, Face, Shape, ShapeIterator, Wire};
 use rustycad_tkbrep::toptools::IndexedDataMapOfShapeListOfShape;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
@@ -205,7 +206,7 @@ fn merge_face_pair(
     let boundary = merged_boundary(first, second)?;
     let mut merged = make_merged_face(first, &boundary)?;
     if allow_internal {
-        add_internal_wires(&mut merged, first, second)?;
+        internal_wires::add_internal_wires(&mut merged, first, second)?;
     }
     replace_merged_pair(shape, first, second, &merged)
 }
@@ -272,26 +273,8 @@ fn make_merged_face(first: &Face, boundary: &Wire) -> Result<Shape, Failure> {
     Ok(merged)
 }
 
-/// Adds the original internal wires of both faces to the merged face once each.
-fn add_internal_wires(merged: &mut Shape, first: &Face, second: &Face) -> Result<(), Failure> {
-    let builder = Builder;
-    let mut seen = Vec::new();
-    for face in [first, second] {
-        for wire in face_wires(face)? {
-            if wire.orientation() != rustycad_tkg3d::top_abs::Orientation::Internal
-                || seen.iter().any(|old: &Wire| old.is_same(&wire))
-            {
-                continue;
-            }
-            builder.add(merged, &wire.clone().into_shape())?;
-            seen.push(wire);
-        }
-    }
-    Ok(())
-}
-
 /// Lists the face's direct wire children in stored order.
-fn face_wires(face: &Face) -> Result<Vec<Wire>, Failure> {
+pub(super) fn face_wires(face: &Face) -> Result<Vec<Wire>, Failure> {
     ShapeIterator::new(&face.clone().into_shape(), true, true)
         .filter(|child| child.shape_type().ok() == Some(ShapeEnum::Wire))
         .map(|child| topods::wire(&child))
