@@ -1,5 +1,7 @@
 //! Shape-interference records corresponding to `BOPDS_Interf` and vertex subtypes.
+use super::{BopdsCurve, Point};
 use crate::int_tools::CommonPrt;
+use rustycad_tkernel::ncollection::DynamicArray;
 use std::ops::{Deref, DerefMut};
 
 /// Shared shape indices carried by every interference record; use `InterfVV::default()`.
@@ -127,6 +129,25 @@ pub struct InterfEF {
     common_part: CommonPrt,
 }
 
+/// Face/face interference with dynamic curve/point results; `InterfFF::default()`.
+pub struct InterfFF {
+    base: Interference,
+    tangent_faces: bool,
+    curves: DynamicArray<BopdsCurve>,
+    points: DynamicArray<Point>,
+}
+
+impl Default for InterfFF {
+    fn default() -> Self {
+        Self {
+            base: Interference::default(),
+            tangent_faces: false,
+            curves: DynamicArray::with_increment(1),
+            points: DynamicArray::with_increment(1),
+        }
+    }
+}
+
 impl InterfVE {
     /// Replaces the vertex parameter on the edge; `record.set_parameter(0.25)`.
     pub fn set_parameter(&mut self, parameter: f64) {
@@ -172,6 +193,48 @@ impl InterfEF {
     /// Borrows the stored common portion; `record.common_part().ranges2()`.
     pub fn common_part(&self) -> &CommonPrt {
         &self.common_part
+    }
+}
+
+impl InterfFF {
+    /// Selects initial array block sizes without clearing contents; `record.init(4, 2)`.
+    pub fn init(&mut self, curve_count: i32, point_count: i32) {
+        if curve_count > 0 {
+            self.curves.set_increment(curve_count as usize);
+        }
+        if point_count > 0 {
+            self.points.set_increment(point_count as usize);
+        }
+    }
+
+    /// Stores whether the intersected faces are tangent; `record.set_tangent_faces(true)`.
+    pub fn set_tangent_faces(&mut self, tangent: bool) {
+        self.tangent_faces = tangent;
+    }
+
+    /// Reads the tangent-face flag; `record.tangent_faces()`.
+    pub fn tangent_faces(&self) -> bool {
+        self.tangent_faces
+    }
+
+    /// Borrows curves; `record.curves().length()`.
+    pub fn curves(&self) -> &DynamicArray<BopdsCurve> {
+        &self.curves
+    }
+
+    /// Mutably borrows intersection curves; `record.change_curves().appended()`.
+    pub fn change_curves(&mut self) -> &mut DynamicArray<BopdsCurve> {
+        &mut self.curves
+    }
+
+    /// Borrows points; `record.points().length()`.
+    pub fn points(&self) -> &DynamicArray<Point> {
+        &self.points
+    }
+
+    /// Mutably borrows intersection points; `record.change_points().appended()`.
+    pub fn change_points(&mut self) -> &mut DynamicArray<Point> {
+        &mut self.points
     }
 }
 
@@ -240,6 +303,20 @@ impl Deref for InterfEF {
 }
 
 impl DerefMut for InterfEF {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.base
+    }
+}
+
+impl Deref for InterfFF {
+    type Target = Interference;
+
+    fn deref(&self) -> &Self::Target {
+        &self.base
+    }
+}
+
+impl DerefMut for InterfFF {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.base
     }

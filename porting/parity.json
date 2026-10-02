@@ -216304,6 +216304,78 @@
       "notes": "Borrows the stored common edge or vertex portion."
     },
     {
+      "upstream_id": "BOPDS_InterfFF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::default",
+      "status": "implemented",
+      "notes": "Creates empty curve and point arrays with native default indices and tangent state."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::~BOPDS_InterfFF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops curve and point arrays without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::Init(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::init",
+      "status": "implemented",
+      "notes": "Sets positive dynamic-array increments without clearing existing curves or points."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::SetTangentFaces(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::set_tangent_faces",
+      "status": "implemented",
+      "notes": "Stores the tangent-face flag."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::TangentFaces() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::tangent_faces",
+      "status": "implemented",
+      "notes": "Returns the stored tangent-face flag."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::Curves() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::curves",
+      "status": "implemented",
+      "notes": "Borrows the stored intersection-curve array."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::ChangeCurves()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::change_curves",
+      "status": "implemented",
+      "notes": "Mutably borrows the stored intersection-curve array."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::Points() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::points",
+      "status": "implemented",
+      "notes": "Borrows the stored intersection-point array."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFF::ChangePoints()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFF::change_points",
+      "status": "implemented",
+      "notes": "Mutably borrows the stored intersection-point array."
+    },
+    {
       "upstream_id": "BOPDS_DS",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",

@@ -22,7 +22,9 @@ interference indices plus `InterfVV`, `InterfVE`, and `InterfVF` add another 26
 rows, with the native `-1` new-index sentinel behavior and parameter fields
 checked against the oracle. `InterfEE` and `InterfEF` add 10 rows for common-part
 storage; assignment preserves the upstream append behavior for the second-edge
-range sequence.
+range sequence. `InterfFF` adds nine rows for tangent-face state and its curve
+and point arrays; positive `Init` counts change array increments without erasing
+stored results, matching the pinned native fixture.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered
