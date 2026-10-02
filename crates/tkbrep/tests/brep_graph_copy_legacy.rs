@@ -5,9 +5,13 @@ use rustycad_tkbrep::brep_graph::copy::{self, CachePolicy, GeomPolicy, MeshPolic
 use rustycad_tkbrep::brep_graph::layer_history::{HistoryKind, LayerHistory};
 use rustycad_tkbrep::brep_graph::*;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkernel::tcollection::AsciiString;
+use rustycad_tkernel::{standard::Handle, tcollection::AsciiString};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
+use rustycad_tkmath::gp::{Point2, Point3};
+use rustycad_tkmath::poly::{
+    Polygon2D, Polygon3D, PolygonOnTriangulation, Triangle, Triangulation,
+};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
 use support::make_box;
@@ -28,6 +32,8 @@ fn copy_graph(source: &BRepGraph, target: &mut BRepGraph, geometry: GeomPolicy) 
     )
     .unwrap();
 }
+
+include!("brep_graph_copy_legacy/mesh_copy_cases.rs");
 
 fn surface_area(shape: &rustycad_tkbrep::topods::Shape) -> f64 {
     let mut properties = GProps::default();
