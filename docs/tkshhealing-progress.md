@@ -776,6 +776,15 @@ operations are absent too, so the entire source cannot be mapped by implementing
 the bowtie path. Do not mark the source green until all seven original declarations pass
 together. No declaration rows were added.
 
+A bounded `ShapeFix_Wire` foundation is now implemented for the unchanged cases: exact
+signed-order application, empty-order handling, 3D/2D gap measurement and the no-gap fix
+path. Rust oracle tests use the pinned empty wire and all six box-face wires; nonzero gap
+correction still returns a typed unsupported failure, and `ShapeFix_Wire::Perform`,
+general reordering repair, and self-intersection splitting remain unported. The Shape
+source remains unmapped. Native member probes report empty `CheckOrder`/`FixReorder`
+false with zero edges and no status flags. On every box wire, `FixReorder` returns true
+with DONE1 and DONE5, while both gap fixers return false and report neither DONE nor FAIL.
+
 The nine declarations in `ShapeUpgrade_UnifySameDomain_Test.cxx` also remain unmapped.
 The pinned production implementation is 4,761 lines and its tests require genuine
 coplanar-face unification and pcurve-safe transformations. The boolean cases additionally
