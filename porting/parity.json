@@ -91761,7 +91761,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91793,7 +91793,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -317136,6 +317136,90 @@
         "linux-gcc-c-locale"
       ],
       "notes": "The analytic separation and BVH triangle-pair distance are tested using local spherical surface patches. The full OCCT sphere tessellation from BRepMesh_IncrementalMesh is not yet available in Rust."
+    },
+    {
+      "upstream_id": "BRepBndLibTest.OCC30292_GeometricEdgeWithoutDiscreteRepresentation",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBndLib_Test.cxx",
+      "source_sha256": "e285f13c6d446e8ab117128b4b141d8b245450528bf29ac1269052500d927324",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_bnd_lib_legacy",
+      "rust_test": "occ30292_geometric_edge_without_discrete_representation",
+      "rust_source": "crates/tktopalgo/tests/brep_bnd_lib_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBndLibTest.OCC30292_MeshedGeometricEdgeUsesRequestedRepresentation",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBndLib_Test.cxx",
+      "source_sha256": "e285f13c6d446e8ab117128b4b141d8b245450528bf29ac1269052500d927324",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_bnd_lib_legacy",
+      "rust_test": "occ30292_meshed_geometric_edge_uses_requested_representation",
+      "rust_source": "crates/tktopalgo/tests/brep_bnd_lib_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBndLibTest.OCC30292_MeshedCylinderEdgeUsesPolygon3d",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBndLib_Test.cxx",
+      "source_sha256": "e285f13c6d446e8ab117128b4b141d8b245450528bf29ac1269052500d927324",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_bnd_lib_legacy",
+      "rust_test": "occ30292_meshed_cylinder_edge_uses_polygon3d",
+      "rust_source": "crates/tktopalgo/tests/brep_bnd_lib_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBndLibTest.OCC30292_Polygon3dEdgeIgnoresRepresentationFlag",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBndLib_Test.cxx",
+      "source_sha256": "e285f13c6d446e8ab117128b4b141d8b245450528bf29ac1269052500d927324",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_bnd_lib_legacy",
+      "rust_test": "occ30292_polygon3d_edge_ignores_representation_flag",
+      "rust_source": "crates/tktopalgo/tests/brep_bnd_lib_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBndLibTest.OCC23575_PlanarBSplineEdgeBounds",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBndLib_Test.cxx",
+      "source_sha256": "e285f13c6d446e8ab117128b4b141d8b245450528bf29ac1269052500d927324",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_bnd_lib_legacy",
+      "rust_test": "occ23575_planar_bspline_edge_bounds",
+      "rust_source": "crates/tktopalgo/tests/brep_bnd_lib_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepBndLibTest.OCC6503_InfinitePlaneBounds",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepBndLib_Test.cxx",
+      "source_sha256": "e285f13c6d446e8ab117128b4b141d8b245450528bf29ac1269052500d927324",
+      "rust_package": "rustycad-tktopalgo",
+      "rust_target": "brep_bnd_lib_legacy",
+      "rust_test": "occ6503_infinite_plane_bounds",
+      "rust_source": "crates/tktopalgo/tests/brep_bnd_lib_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }
