@@ -127,6 +127,20 @@ void bo_data_structure_case(const std::vector<double>&) {
  BOPDS_ShapeInfo info;info.SetShape(second);info.SetFlag(17);bo_int(ds.Append(info));bo_int(ds.ShapeInfo(3).Flag());ds.ChangeShapeInfo(3).SetFlag(21);bo_int(ds.ShapeInfo(3).Flag());
  ds.Clear();bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Arguments().Extent());bo_int(ds.Index(first));
 }
+void bo_data_structure_common_block_case(const std::vector<double>&) {
+ BOPDS_DS ds;occ::handle<BOPDS_PaveBlock> first=new BOPDS_PaveBlock(),real=new BOPDS_PaveBlock(),unrelated=new BOPDS_PaveBlock();
+ first->SetOriginalEdge(8);real->SetOriginalEdge(3);unrelated->SetOriginalEdge(3);
+ NCollection_List<occ::handle<BOPDS_PaveBlock>> blocks;blocks.Append(first);blocks.Append(real);
+ occ::handle<BOPDS_CommonBlock> common=new BOPDS_CommonBlock();common->SetPaveBlocks(blocks);
+ bo_int(ds.IsCommonBlock(first));bo_int(ds.CommonBlock(first).IsNull());bo_int(ds.RealPaveBlock(first)==first);bo_int(ds.IsCommonBlockOnEdge(first));
+ ds.SetCommonBlock(first,common);ds.SetCommonBlock(real,common);
+ bo_int(ds.IsCommonBlock(first));bo_int(ds.IsCommonBlock(real));bo_int(ds.IsCommonBlock(unrelated));bo_int(ds.CommonBlock(first)==common);
+ bo_int(ds.RealPaveBlock(first)==real);bo_int(ds.IsCommonBlockOnEdge(first));
+ NCollection_List<occ::handle<BOPDS_PaveBlock>> replacementBlocks;replacementBlocks.Append(first);
+ occ::handle<BOPDS_CommonBlock> replacement=new BOPDS_CommonBlock();replacement->SetPaveBlocks(replacementBlocks);ds.SetCommonBlock(first,replacement);
+ bo_int(ds.CommonBlock(first)==replacement);bo_int(ds.RealPaveBlock(first)==first);bo_int(ds.IsCommonBlockOnEdge(first));
+ ds.Clear();bo_int(ds.IsCommonBlock(first));
+}
 void bo_data_structure_init_case(const std::vector<double>& v) {
  BRep_Builder builder;TopoDS_Vertex first,second,third;builder.MakeVertex(first,gp_Pnt(1.,2.,3.),2e-5);builder.MakeVertex(second,gp_Pnt(4.,5.,6.),5e-7);builder.MakeVertex(third,gp_Pnt(7.,8.,9.),1e-4);
  TopoDS_Compound root;builder.MakeCompound(root);builder.Add(root,first);builder.Add(root,second);builder.Add(root,first);

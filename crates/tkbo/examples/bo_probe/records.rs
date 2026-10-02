@@ -1,7 +1,7 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
     CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, Pair, Pave, PaveBlock, Point, ShapeInfo,
-    pave_block_handle,
+    common_block_handle, pave_block_handle,
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::BoundingBox3;
@@ -342,6 +342,58 @@ pub fn data_structure_case(_: &[f64]) {
     write_appended_metadata(&mut structure, &second);
     structure.clear();
     write_cleared_ds_state(&structure, &first);
+}
+
+pub fn data_structure_common_block_case(_: &[f64]) {
+    let first = block_with_source_edge(8);
+    let real = block_with_source_edge(3);
+    let unrelated = block_with_source_edge(3);
+    let mut common = CommonBlock::default();
+    common.set_pave_blocks(&[first.clone(), real.clone()]);
+    let common = common_block_handle(common);
+    let mut structure = rustycad_tkbo::bop_ds::DataStructure::default();
+    flag(structure.is_common_block(&first));
+    flag(structure.common_block(&first).is_none());
+    flag(Arc::ptr_eq(
+        &structure.real_pave_block(&first).unwrap(),
+        &first,
+    ));
+    flag(structure.is_common_block_on_edge(&first));
+    structure.set_common_block(&first, &common);
+    structure.set_common_block(&real, &common);
+    flag(structure.is_common_block(&first));
+    flag(structure.is_common_block(&real));
+    flag(structure.is_common_block(&unrelated));
+    flag(Arc::ptr_eq(
+        &structure.common_block(&first).unwrap(),
+        &common,
+    ));
+    flag(Arc::ptr_eq(
+        &structure.real_pave_block(&first).unwrap(),
+        &real,
+    ));
+    flag(structure.is_common_block_on_edge(&first));
+    let mut replacement_group = CommonBlock::default();
+    replacement_group.set_pave_blocks(std::slice::from_ref(&first));
+    let replacement = common_block_handle(replacement_group);
+    structure.set_common_block(&first, &replacement);
+    flag(Arc::ptr_eq(
+        &structure.common_block(&first).unwrap(),
+        &replacement,
+    ));
+    flag(Arc::ptr_eq(
+        &structure.real_pave_block(&first).unwrap(),
+        &first,
+    ));
+    flag(structure.is_common_block_on_edge(&first));
+    structure.clear();
+    flag(structure.is_common_block(&first));
+}
+
+fn block_with_source_edge(edge: i32) -> rustycad_tkbo::bop_ds::PaveBlockHandle {
+    let mut block = PaveBlock::default();
+    block.set_original_edge(edge);
+    pave_block_handle(block)
 }
 
 /// The recursive `BOPDS_DS::Init` order and vertex-bound preparation slice.

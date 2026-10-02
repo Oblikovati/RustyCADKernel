@@ -9,7 +9,7 @@ mod pave;
 mod pave_block;
 mod point;
 mod shape_info;
-pub use common_block::{CommonBlock, pave_block_handle};
+pub use common_block::{CommonBlock, CommonBlockHandle, common_block_handle, pave_block_handle};
 pub use couple_of_pave_blocks::CoupleOfPaveBlocks;
 pub use data_structure::DataStructure;
 pub use face_info::{FaceInfo, PaveBlockIndexMap, VertexIndexSet};
