@@ -203,3 +203,13 @@ sensitivity, and quality-decrease remeshing. The cylinder seam fixture checks on
 face; cone and sphere fixtures have much coarser triangulations than the source's primitive
 solids. Four declarations still need full source parity: torus Boolean fusion,
 closed-cylinder solid polygons, the complete cone-solid check and sphere mesh reuse. The source remains unmapped until all nine declarations pass together.
+
+### Discret algorithm factory suite blocker
+
+All nine declarations in `BRepMesh_DiscretAlgoFactory_Test.cxx` remain unmapped.
+The pinned native suite passes 9/9, but Rust has no equivalent discret-algorithm
+factory registry, default-factory selection, or `BRepMesh_DiscretFactory` adapter.
+The existing `IMeshTools_MeshAlgoFactory` selects per-face strategies and does not
+represent these registry semantics. The two `CreateAlgorithm` cases also require
+the missing factory API. No registry behavior was inferred or stubbed; port these
+APIs before mapping this source suite.
