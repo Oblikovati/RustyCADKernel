@@ -1,8 +1,6 @@
 #![allow(non_snake_case)]
-//! Rust translations of the declarations in `BRepGProp_Test.cxx`. Their shape records and
-//! builder fixtures preserve the primitive, edge, and face inputs. Since Rust TKBO does not
-//! yet provide Boolean Cut, the OCC49 cut assertion uses an asymmetric box to exercise the
-//! same `HasSymmetryAxis` result.
+//! Source-faithful support tests for the non-cut behavior in `BRepGProp_Test.cxx`. The
+//! suite remains unmapped until Rust TKBO can build the original OCC49 Boolean Cut fixture.
 #[allow(dead_code)]
 #[path = "../examples/tp_probe/face.rs"]
 mod face;
@@ -302,14 +300,6 @@ fn BRepGPropTest__OCC49_CylinderHasSymmetryAxis() {
     let mut props = GProps::new();
     BRepGProp::volume_properties(&shape(&CYLINDER_10_20), &mut props, false, false, false).unwrap();
     assert!(props.principal_properties().unwrap().has_symmetry_axis());
-}
-
-// BRepGPropTest.OCC49_CutShapeHasNoSymmetryAxis
-#[test]
-fn BRepGPropTest__OCC49_CutShapeHasNoSymmetryAxis() {
-    let mut props = GProps::new();
-    BRepGProp::volume_properties(&shape(&BOX_10_20_30), &mut props, false, false, false).unwrap();
-    assert!(!props.principal_properties().unwrap().has_symmetry_axis());
 }
 
 // BRepGPropTest.OCC8797_BSplineLengthConsistencyAbscissaVsLinearProperties

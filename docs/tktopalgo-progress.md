@@ -89,13 +89,12 @@ use the Rust TKPrim box maker. The translation retains the native dimensions, tr
 settings, property calculations, assertion order and tolerances, including the caf/nam/A4
 face identity and translated center checks. All 11 pass against the unchanged native suites.
 
-BRepGProp_Test.cxx (17 declarations) is mapped. The unchanged native suite passes all 17
-cases. Rust tests in `crates/tktopalgo/tests/brep_gprop_behavior.rs` use BRep_Builder shape
-records for the solids (`tests/gprop_records`) and builder fixtures for the edges, arc,
-quarter disk, and plane rectangle (`tests/gprop_builders`), preserving the legacy inputs
-and assertions. The single exception is `OCC49_CutShapeHasNoSymmetryAxis`: until Rust TKBO
-provides Boolean Cut, its Rust test uses the asymmetric 10x20x30 box to exercise the same
-no-symmetry-axis result. The filtered native/Rust source gate passed 17/17 on both sides.
+BRepGProp_Test.cxx (17 declarations) remains unmapped because `OCC49_CutShapeHasNoSymmetryAxis`
+requires the original BRepAlgoAPI_Cut result, which Rust TKBO does not yet produce. Sixteen
+source-faithful supporting cases remain in `crates/tktopalgo/tests/brep_gprop_behavior.rs`
+with BRep_Builder shape records for solids (`tests/gprop_records`) and builder fixtures for
+edges, the arc, quarter disk, and plane rectangle (`tests/gprop_builders`). They are not
+counted as legacy declaration mappings until all 17 can run together on equivalent inputs.
 `tests/brep_gprop_units.rs` checks closed-form properties and the native behaviours below.
 
 BRepBuilderAPI_Sewing_Test.cxx (TKOffset GTests, 5 declarations) is not mapped: its box
@@ -1629,5 +1628,5 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   source gate passed all six native cases and all six Rust cases. Rust fixtures build
   equivalent BRep records and attach the pinned polygon directly while the higher-level
   edge, face, cylinder and incremental-meshing constructors remain unported.
-- TKTopAlgo now has 72 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`,
+- TKTopAlgo now has 55 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`,
   `BRepGProp` and `BRepOffsetAPI_ThruSections` source files still contain unmapped cases.
