@@ -321119,6 +321119,48 @@
       "profiles": [
         "linux-gcc-c-locale"
       ]
+    },
+    {
+      "upstream_id": "BRepGraph_CopyTest.CopyGraph_RemovedOccurrenceActiveCountsMatchFlags",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Copy_Test.cxx",
+      "source_sha256": "b1fbd468fb9512e99773399ba056a36133fa38b03fe9eda49a854b587e5598fb",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_copy_legacy",
+      "rust_test": "copy_graph_preserves_removed_occurrence_active_counts",
+      "rust_source": "crates/tkbrep/tests/brep_graph_copy_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CopyTest.CopyGraph_CopiesHistoryThroughLayerRemap",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Copy_Test.cxx",
+      "source_sha256": "b1fbd468fb9512e99773399ba056a36133fa38b03fe9eda49a854b587e5598fb",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_copy_legacy",
+      "rust_test": "copy_graph_copies_history_through_uid_remapping",
+      "rust_source": "crates/tkbrep/tests/brep_graph_copy_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CopyTest.CopyGraph_PreservesDeletedHistory",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Copy_Test.cxx",
+      "source_sha256": "b1fbd468fb9512e99773399ba056a36133fa38b03fe9eda49a854b587e5598fb",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_copy_legacy",
+      "rust_test": "copy_graph_preserves_deleted_history",
+      "rust_source": "crates/tkbrep/tests/brep_graph_copy_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }

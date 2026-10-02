@@ -71,7 +71,7 @@ The toolkit test inventory maps these suites (1260 declarations; 1271 active nat
 | BRepGraph_Reverse_Test.cxx | brep_graph_reverse | 16 | pass | pass |
 | BRepGraph_Sharing_Test.cxx | brep_graph_sharing | 17 | pass | pass |
 | BRepGraph_Compact_Test.cxx | not mapped (phase 2) | 26 | not run | waits for BRepBuilderAPI_Copy, BRepCheck_Analyzer, BRepAlgoAPI_Cut (TKBO), TKPrim cylinder |
-| BRepGraph_Copy_Test.cxx | brep_graph_copy_legacy (8/23) | 23 | 8 Rust mirrors pass; native 23/23 | 15 declarations remain: cache and persistent mesh copy cases, transient service and layer remapping, removed occurrences/history, compound/cylinder inputs, and fused-box regularity |
+| BRepGraph_Copy_Test.cxx | brep_graph_copy_legacy (11/23) | 23 | 11 Rust mirrors pass; native 23/23 | 12 declarations remain: cache services and mesh representations, supplement attachment remapping, cylinder and compound-only-face inputs, and fused-box regularity |
 | BRepGraph_Deduplicate_Test.cxx | not mapped (phase 2) | 82 | not run | waits for BRepBuilderAPI_Copy and MakeFace, BRepCheck_Analyzer, TKPrim cylinder, sphere and cone |
 | BRepGraph_Transform_Test.cxx | mapped | 19 | passed | original geometry, placement and mesh policies |
 | BRepGraph_Validate_Test.cxx | mapped | 23 | passed | original mutations, guard scopes and synthetic graphs |
