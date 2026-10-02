@@ -710,3 +710,12 @@ vertex). The port includes parameter synchronization, shared split vertices,
 seams, small-piece removal and non-manifold vertex replacement. Twelve new Rust
 regressions accompany the port. No original legacy declaration exists for this
 class; the toolkit remains 101/143 mapped.
+
+### Wire segment storage
+
+WireSegment maps 25 callable declarations; one additional constructor is excluded
+because the pinned source and library have no definition. Its focused oracle passes
+176 exact cases and separately reproduces two native SIGSEGV cases where Rust
+returns `Standard_NullObject`. No original WireSegment or ComposeShell declaration
+exists, so the TKShHealing legacy count remains 101/143. The full source gate passes
+all 101 mapped declarations in native and Rust executions.
