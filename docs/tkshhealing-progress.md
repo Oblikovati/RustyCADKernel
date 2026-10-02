@@ -743,17 +743,19 @@ cases cover null and duplicate registration, clear/reuse, coincident and toleran
 boundaries, orientation, chains, independent pairs, and stable rebuilds. `Build` remains
 an API-level partial: its fixing-tolerance argument and the later `ShapeFix_Wire` /
 `ShapeFix_Face` repair phase are not yet ported; the pinned rectangular-face suite needs
-no such repair. TKShHealing now maps 123/143 source declarations. Remaining unmapped
-suites are Face (4), Shape (7), and UnifySameDomain (9).
+no such repair. TKShHealing now maps 127/143 source declarations. Remaining unmapped
+suites are Shape (7) and UnifySameDomain (9).
 
 ### Pending whole-source suite blockers
 
-The four declarations in `ShapeFix_Face_Test.cxx` remain unmapped. Its two context
-replacement/removal cases can use `ShapeBuild_ReShape`, but its periodic-cone cases need
-`ShapeFix_Face::FixPeriodicDegenerated` and `IsPeriodicConicalLoop`; the pinned face
-implementation is 3,273 lines, and `GeomAPI_Interpolate` used to construct the fixture is
-not yet present in Rust. One case explicitly requires the repaired face to pass
-`BRepCheck_Analyzer`, so a context-only or unchanged-face approximation is not sufficient.
+All four declarations in `ShapeFix_Face_Test.cxx` are mapped and pass the filtered native
++ Rust source gate (4/4 in each). The Rust slice preserves context replacement and
+removal, repairs the pinned periodic-cone fixture through the apex and missing-seam path,
+and makes the final face pass `BRepCheck_Analyzer`. `GeomAPI_Interpolate` was already
+available from TKGeomAlgo and builds the source fixture. The seam path reproduces the
+native four-edge UV boundary; the final same-parameter pass is required because Rust's
+new-edge default flag differs from OCCT's 3D-only edge state. The broader `ShapeFix_Face`
+API and its other repair paths remain incomplete.
 
 The seven declarations in `ShapeFix_Shape_Test.cxx` remain unmapped as a file. Existing
 `ShapeFixShape`, inherited precision state and `ShapeFix_Wire` cover the unchanged-shape,
@@ -768,4 +770,5 @@ The pinned production implementation is 4,761 lines and its tests require genuin
 coplanar-face unification and pcurve-safe transformations. The boolean cases additionally
 need the currently missing `BRepAlgoAPI_Common`, `BRepAlgoAPI_Fuse` and
 `BOPAlgo_Splitter` operations from TKBO; they are not available as Rust dependencies yet.
-TKShHealing remains at 123/143 mapped declarations.
+TKShHealing now maps 127/143 declarations; the Shape and UnifySameDomain suites remain
+unmapped.
