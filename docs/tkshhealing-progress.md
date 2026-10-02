@@ -914,3 +914,12 @@ These fixtures cover key assertions from the two p-curve declarations, but they 
 reproduce OCCT's exact self-touching wire and transformation topology. The target currently
 covers assertions from six declarations; rows remain unmapped until all nine exact source
 fixtures and behaviors pass together.
+
+The p-curve fixtures have since been replaced with the pinned test topologies: the first
+uses the self-touching cylinder wire with a repeated reversed common edge, and the second
+uses two adjacent cylinder wires that share a reversed boundary edge. Rust verifies the
+missing edge has no stored p-curve, the reference edge has one where required, and Build
+preserves two cylinder faces while merging the unrelated planar pair to three total faces.
+The fixtures now cover source assertions from six declarations, though the Rust production
+path still treats nonplanar face pairs as unchanged; this does not yet prove the p-curve
+transformation branch itself.
