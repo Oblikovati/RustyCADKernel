@@ -1,11 +1,12 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
-    CommonBlock, CoupleOfPaveBlocks, IndexRange, Pair, Pave, PaveBlock, Point, ShapeInfo,
+    CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, Pair, Pave, PaveBlock, Point, ShapeInfo,
     pave_block_handle,
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Point2, Point3};
+use std::sync::Arc;
 fn index_state(value: &IndexRange, query: i32) {
     integer(value.first());
     integer(value.last());
@@ -291,6 +292,54 @@ pub fn shape_info_case(v: &[f64]) {
     let mut dump = String::new();
     info.dump(&mut dump).unwrap();
     print!("{dump}");
+}
+
+/// The `BOPDS_FaceInfo` map insertion and partial-clear oracle request.
+pub fn face_info_case(_: &[f64]) {
+    let mut info = FaceInfo::default();
+    integer(info.index());
+    integer(info.pave_blocks_in().extent() as i32);
+    integer(info.vertices_in().extent() as i32);
+    integer(info.pave_blocks_on().extent() as i32);
+    integer(info.vertices_on().extent() as i32);
+    integer(info.pave_blocks_section().extent() as i32);
+    integer(info.vertices_section().extent() as i32);
+    let a = common_pave_block(0, -1);
+    let b = common_pave_block(0, -1);
+    let c = common_pave_block(0, -1);
+    integer(info.change_pave_blocks_in().add(Arc::clone(&a)) as i32);
+    integer(info.change_pave_blocks_in().add(Arc::clone(&b)) as i32);
+    integer(info.change_pave_blocks_in().add(Arc::clone(&a)) as i32);
+    flag(info.change_vertices_in().add(4));
+    flag(info.change_vertices_in().add(9));
+    flag(info.change_vertices_in().add(4));
+    integer(info.change_pave_blocks_on().add(Arc::clone(&b)) as i32);
+    flag(info.change_vertices_on().add(9));
+    integer(info.change_pave_blocks_section().add(Arc::clone(&c)) as i32);
+    integer(info.change_pave_blocks_section().add(Arc::clone(&a)) as i32);
+    flag(info.change_vertices_section().add(6));
+    flag(info.change_vertices_section().add(7));
+    info.set_index(12);
+    write_face_info_counts(&info);
+    flag(info.pave_blocks_in().contains(&a));
+    flag(info.pave_blocks_in().contains(&c));
+    flag(info.vertices_in().contains(9));
+    info.clear();
+    write_face_info_counts(&info);
+    flag(info.pave_blocks_section().contains(&c));
+    flag(info.pave_blocks_section().contains(&a));
+    flag(info.vertices_section().contains(7));
+}
+
+/// Writes FaceInfo collections in native In, On and section order.
+fn write_face_info_counts(info: &FaceInfo) {
+    integer(info.index());
+    integer(info.pave_blocks_in().extent() as i32);
+    integer(info.vertices_in().extent() as i32);
+    integer(info.pave_blocks_on().extent() as i32);
+    integer(info.vertices_on().extent() as i32);
+    integer(info.pave_blocks_section().extent() as i32);
+    integer(info.vertices_section().extent() as i32);
 }
 
 /// Appends the three test paves; `append_extra_paves(&mut block, &request)`.

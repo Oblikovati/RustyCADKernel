@@ -6,6 +6,7 @@
 #include <BOPDS_CommonBlock.hxx>
 #include <BOPDS_CoupleOfPaveBlocks.hxx>
 #include <BOPDS_ShapeInfo.hxx>
+#include <BOPDS_FaceInfo.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
 #include <Bnd_Box.hxx>
@@ -91,4 +92,14 @@ void bo_shape_info_case(const std::vector<double>& v) {
  value.SetShape(TopoDS_Shape());value.SetShapeType(TopAbs_ShapeEnum(int(v[0])));Bnd_Box box;box.Update(v[3],v[4],v[5],v[6],v[7],v[8]);value.SetBox(box);value.SetReference(int(v[1]));value.SetFlag(int(v[2]));for(int i=9;i<12;i++)value.ChangeSubShapes().Append(int(v[i]));value.ChangeBox().SetGap(v[12]);
  flag=99;bo_int(value.ShapeType());bo_int(value.Shape().IsNull());bo_int(value.Box().IsVoid());bo_int(value.SubShapes().Extent());for(int index:value.SubShapes())bo_int(index);bo_int(value.HasSubShape(int(v[9])));bo_int(value.HasSubShape(-999));bo_int(value.Reference());bo_int(value.HasReference());bo_int(value.HasBRep());bo_int(value.IsInterfering());bo_int(value.HasFlag());bo_int(value.HasFlag(flag));bo_int(flag);
  double xmin,ymin,zmin,xmax,ymax,zmax;value.Box().Get(xmin,ymin,zmin,xmax,ymax,zmax);for(double x:{xmin,ymin,zmin,xmax,ymax,zmax})bo_real(x);value.Dump();
+}
+void bo_face_info_case(const std::vector<double>&) {
+ BOPDS_FaceInfo info;bo_int(info.Index());bo_int(info.PaveBlocksIn().Extent());bo_int(info.VerticesIn().Extent());bo_int(info.PaveBlocksOn().Extent());bo_int(info.VerticesOn().Extent());bo_int(info.PaveBlocksSc().Extent());bo_int(info.VerticesSc().Extent());
+ occ::handle<BOPDS_PaveBlock> a=new BOPDS_PaveBlock(),b=new BOPDS_PaveBlock(),c=new BOPDS_PaveBlock();
+ bo_int(info.ChangePaveBlocksIn().Add(a));bo_int(info.ChangePaveBlocksIn().Add(b));bo_int(info.ChangePaveBlocksIn().Add(a));
+ bo_int(info.ChangeVerticesIn().Add(4));bo_int(info.ChangeVerticesIn().Add(9));bo_int(info.ChangeVerticesIn().Add(4));
+ bo_int(info.ChangePaveBlocksOn().Add(b));bo_int(info.ChangeVerticesOn().Add(9));bo_int(info.ChangePaveBlocksSc().Add(c));bo_int(info.ChangePaveBlocksSc().Add(a));bo_int(info.ChangeVerticesSc().Add(6));bo_int(info.ChangeVerticesSc().Add(7));
+ info.SetIndex(12);bo_int(info.Index());bo_int(info.PaveBlocksIn().Extent());bo_int(info.VerticesIn().Extent());bo_int(info.PaveBlocksOn().Extent());bo_int(info.VerticesOn().Extent());bo_int(info.PaveBlocksSc().Extent());bo_int(info.VerticesSc().Extent());
+ bo_int(info.PaveBlocksIn().Contains(a));bo_int(info.PaveBlocksIn().Contains(c));bo_int(info.VerticesIn().Contains(9));
+ info.Clear();bo_int(info.Index());bo_int(info.PaveBlocksIn().Extent());bo_int(info.VerticesIn().Extent());bo_int(info.PaveBlocksOn().Extent());bo_int(info.VerticesOn().Extent());bo_int(info.PaveBlocksSc().Extent());bo_int(info.VerticesSc().Extent());bo_int(info.PaveBlocksSc().Contains(c));bo_int(info.PaveBlocksSc().Contains(a));bo_int(info.VerticesSc().Contains(7));
 }
