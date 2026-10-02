@@ -39,7 +39,7 @@ impl BRepMeshPlanarFaceDiscret {
     fn discretize_face(face: &FaceHandle, parameters: &MeshParameters) -> Result<(), Failure> {
         if !matches!(
             face.get_surface().get_type()?,
-            SurfaceType::Plane | SurfaceType::Cylinder | SurfaceType::Cone
+            SurfaceType::Plane | SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere
         ) {
             return Err(Failure::with_message(
                 "Standard_NotImplemented",

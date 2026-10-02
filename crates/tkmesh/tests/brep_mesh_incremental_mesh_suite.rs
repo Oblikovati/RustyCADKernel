@@ -9,7 +9,7 @@ use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::{
     gp::{
-        Axis2, Axis3, Circle3, Cone3, Cylinder3, Direction3, Plane3, Point2, Point3,
+        Axis2, Axis3, Circle3, Cone3, Cylinder3, Direction3, Plane3, Point2, Point3, Sphere3,
         StandardDirection3, Vector3,
     },
     poly::mesh_purpose,
@@ -41,16 +41,12 @@ fn BRepMesh_IncrementalMeshTest__TrimmedCylinder_RespectsUVRangeAndDeflection() 
 
 #[test]
 fn BRepMesh_IncrementalMeshTest__OCC31461_AllowQualityDecreaseRebuildsMesh() {
-    let cylinder = Cylinder3::new(
+    let sphere = Sphere3::new(
         Axis3::with_standard(Point3::default(), StandardDirection3::Z),
         10.0,
     )
     .unwrap();
-    let maker = BRepBuilderAPIMakeFace::from_cylinder_bounds(
-        cylinder,
-        (0.0, std::f64::consts::TAU, 0.0, 10.0),
-    )
-    .unwrap();
+    let maker = BRepBuilderAPIMakeFace::from_sphere(sphere).unwrap();
     let face = maker.face().unwrap();
     let shape = face.clone().into_shape();
     mesh_face(&shape, 0.01, false).unwrap();
