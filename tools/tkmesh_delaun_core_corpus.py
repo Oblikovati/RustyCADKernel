@@ -81,9 +81,13 @@ def perform_rows() -> list[str]:
     """Run the public constructor's complete supermesh and insertion flow."""
     return [f'mesh_delaun_perform {mode}' for mode in range(1, 4)]
 
+def legacy_angle_rows() -> list[str]:
+    """Compare the source suite's signed Vec2d angles and both winding loops."""
+    return [f'mesh_delaun_legacy_angle {mode}' for mode in range(3)]
+
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows()+internal_constraint_rows()+process_constraints_rows()+create_triangles_rows()+insert_vertex_rows()+perform_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows()+internal_constraint_rows()+process_constraints_rows()+create_triangles_rows()+insert_vertex_rows()+perform_rows()+legacy_angle_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -92,4 +96,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows()+internal_constraint_rows()+process_constraints_rows()+create_triangles_rows()+insert_vertex_rows()+perform_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows()+internal_constraint_rows()+process_constraints_rows()+create_triangles_rows()+insert_vertex_rows()+perform_rows()+legacy_angle_rows(),frozenset(manifest['input_sha256']))

@@ -2,9 +2,11 @@
 // This does not alter OCCT headers or translation units: member-pointer access bypass only.
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <tuple>
 #include <vector>
 #include <BRepMesh_Delaun.hxx>
+#include <gp_Vec2d.hxx>
 template<class Tag,typename Tag::type Member>struct DelaunAccess{friend typename Tag::type delaun_member(Tag){return Member;}};
 struct DelaunWindingTag{using type=bool(BRepMesh_Delaun::*)(const int&,const IMeshData::VectorOfInteger&)const;friend type delaun_member(DelaunWindingTag);};
 struct DelaunAreaTag{using type=double(BRepMesh_Delaun::*)(const IMeshData::SequenceOfInteger&,int,int)const;friend type delaun_member(DelaunAreaTag);};
@@ -160,6 +162,10 @@ void mesh_delaun_perform(std::istream&input){
  std::vector<gp_XY>points;if(mode==1)points={gp_XY(0,0),gp_XY(2,0),gp_XY(0,2)};else if(mode==2)points={gp_XY(0,0),gp_XY(2,0),gp_XY(2,2),gp_XY(0,2)};else points={gp_XY(0,0),gp_XY(2,0),gp_XY(2,2),gp_XY(0,2),gp_XY(1,1)};
  IMeshData::VectorOfInteger vertices((int)points.size());for(auto&point:points)vertices.Append(mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true));
  BRepMesh_Delaun delaun(mesh,vertices);std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
+}
+void mesh_delaun_legacy_angle(std::istream&input){
+ int mode;input>>mode;gp_Vec2d right(1.,0.),up(0.,1.);if(mode==0){ga_real(up.Angle(right));ga_real(right.Angle(up));}
+ else{gp_XY points[5]={gp_XY(1.,0.),gp_XY(0.,mode==1?1.:-1.),gp_XY(-1.,0.),gp_XY(0.,mode==1?-1.:1.),gp_XY(1.,0.)};gp_Vec2d previous(points[0].X(),points[0].Y());double total=0.;for(int i=1;i<5;++i){gp_Vec2d current(points[i].X(),points[i].Y());total+=current.Angle(previous);previous=current;}ga_real(total);ga_flag(std::abs(2.*M_PI-total)<=Precision::Angular());ga_flag(std::abs(std::abs(total)-2.*M_PI)<=Precision::Angular());}ga_end();
 }
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
