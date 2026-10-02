@@ -214723,6 +214723,240 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDelaun::remove_aux_elements",
       "status": "partial",
       "notes": "Existing-mesh Delaun dependency core only. 2128 exact populated triangle/polygon requests cover containment, native edge sets, circle initialization, auxiliary deletion, and private winding/area/intersection. UseEdge preserves the pinned always-false implementation. Insertion constructors, Init, AddVertices, RemoveVertex and ProcessConstraints remain unported; none of the six original Delaun declarations is claimed. Explicit inherited gaps: nine null-mesh queries native-SIGSEGV versus Rust NullObject; unsafe native node/triangle indexing versus Rust typed errors. RemoveAuxElements additionally has 80 retained collinear-circumcircle SIGSEGV cases versus Rust OutOfRange, complete_parity=false. tools/verify_tkmesh_delaun_core.py reproduces both domains without modifying native sources."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::new",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment(const occ::handle<ShapeExtend_WireData>&,TopAbs_Orientation)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::from_wire_data",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment(const TopoDS_Wire&,TopAbs_Orientation)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "The pinned header declares this constructor, but ShapeFix_WireSegment.cxx has no definition and libTKShHealing exports no matching symbol. It cannot be called by the native oracle at OCCT 3d097a0."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::clear",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::Load(const occ::handle<ShapeExtend_WireData>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::load",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::WireData() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::wire_data",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::Orientation(TopAbs_Orientation)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::set_orientation",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::Orientation() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::orientation",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::FirstVertex() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::first_vertex",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::LastVertex() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::last_vertex",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::IsClosed() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::is_closed",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::NbEdges() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::nb_edges",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::Edge(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::edge",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::SetEdge(int,const TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::set_edge",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::AddEdge(int,const TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::add_edge",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::AddEdge(int,const TopoDS_Edge&,int,int,int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::add_edge_with_patch",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::SetPatchIndex(int,int,int,int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::set_patch_index",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::DefineIUMin(int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::define_u_min",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::DefineIUMax(int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::define_u_max",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::DefineIVMin(int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::define_v_min",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::DefineIVMax(int,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::define_v_max",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::GetPatchIndex(int,int&,int&,int&,int&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::patch_index",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::CheckPatchIndex(int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::check_patch_index",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::SetVertex(const TopoDS_Vertex&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::set_vertex",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::GetVertex() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::vertex",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "ShapeFix_WireSegment::IsVertex() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireSegment.hxx",
+      "source_sha256": "12f701eb686787bfc08e5d9ba3a5cdc9bb6ba6458913ee9959dc23a0eae14fff",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::is_vertex",
+      "status": "implemented",
+      "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
     }
   ],
   "tests": [

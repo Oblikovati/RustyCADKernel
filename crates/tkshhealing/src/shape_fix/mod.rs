@@ -10,3 +10,6 @@ mod shape_tolerance;
 pub use edge_connect::ShapeFixEdgeConnect;
 pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
 pub use shape_tolerance::ShapeFixShapeTolerance;
+
+mod wire_segment;
+pub use wire_segment::{ShapeFixWireSegment,WirePatchIndex};

@@ -61,7 +61,9 @@
 #include "tkshhealing_probe_fix_small_curves.cxx"
 #include "tkshhealing_probe_wire_divide.cxx"
 #include "tkshhealing_probe_wire_divide_state.cxx"
+#include "tkshhealing_probe_wire_segment.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"sh_wire_segment", sh_wire_segment_case},
  {"sh_analysis_projection",sh_analysis_curve_projection_case},
  {"sh_analysis_period",sh_analysis_period_case},
  {"sh_analysis_planar",sh_analysis_planar_case},
