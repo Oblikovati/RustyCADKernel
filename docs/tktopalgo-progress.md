@@ -1641,3 +1641,26 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   mass, centre-of-mass and inertia assertions while TKBO cut construction remains unported.
 - TKTopAlgo now has 92 of 95 GoogleTest declarations mapped; `BRepOffsetAPI_ThruSections`
   is the remaining unmapped source file.
+
+### `BRepOffsetAPI_ThruSections_Test.cxx` audit
+
+The three source declarations remain unmapped. The pinned native CTest filter passed all
+three (7,125–7,127); none has a faithful Rust counterpart yet. They exercise the loft
+builder’s result, so testing only their profile-construction inputs would not preserve
+the source assertions.
+
+- `OCC10006_LoftAndFusion` needs two ruled-solid lofts followed by `BRepAlgoAPI_Fuse`.
+  Polygon wires can be built in Rust, but `BRepOffsetAPI_ThruSections` and the high-level
+  Boolean fusion builder are not implemented.
+- `BSplineProfilesWithDifferentPoleCount` needs `BSplCLib` full-knot expansion into
+  distinct knots and multiplicities, `Geom_BSplineCurve` construction, edge/wire creation,
+  and smoothed solid lofting across five closed profiles with different pole counts.
+  The Rust port does not yet expose this B-spline constructor or compatible-wire loft path.
+- `OCC895_TwoCircularArcWires_NoTwist` needs rotated circular-arc wire construction, a
+  ruled-shell loft that preserves segment orientation, and the resulting surface-area
+  check. Lower-level geometry/property routines do not replace the missing loft behavior.
+
+The main implementation dependency is TKOffset’s `BRepOffsetAPI_ThruSections`, backed by
+TKBool `BRepFill_CompatibleWires` and `BRepFill_Generator`; the first declaration also
+requires a high-level TKBO fusion API. Keep all three declarations unmapped until their
+corresponding Rust operation and assertions pass together.
