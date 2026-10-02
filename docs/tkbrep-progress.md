@@ -1139,3 +1139,12 @@ when forced (eight vertices remain, so `8 < 8` is false). Its assertion is retai
 as a Rust reference, alongside a separate passing current-behavior regression.
 The gate records that original as `upstream_disabled`, never as a passing legacy
 test, and requires the expected native failure when explicitly enabled.
+
+### BRepGraphInc population regressions
+
+All nine declarations in `BRepGraphInc_PopulateRegression_Test.cxx` are mapped and
+pass in the filtered native and Rust gate. The two mesh-sensitive box cases use
+deterministic face-local fixtures captured from pinned OCCT: at deflections 0.5 and
+0.2, each planar box face has four corner nodes and two triangles. The Rust fixtures
+preserve the native node ordering, triangle diagonals, and edge-to-face polygon
+associations, while avoiding a dependency on the not-yet-ported `BRepMesh_IncrementalMesh`.
