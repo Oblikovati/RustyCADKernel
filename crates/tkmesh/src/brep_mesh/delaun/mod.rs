@@ -8,6 +8,7 @@ use rustycad_tkernel::{
     ncollection::{DynamicArray, IncrementalAllocatorObject, Map},
     standard::{Failure, Handle},
 };
+mod check_intersection;
 mod circles;
 mod cleanup;
 mod cleanup_mesh;

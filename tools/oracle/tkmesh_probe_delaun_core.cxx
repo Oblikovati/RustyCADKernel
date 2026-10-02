@@ -12,6 +12,7 @@ struct DelaunSuperMeshTag{using type=void(BRepMesh_Delaun::*)(const Bnd_Box2d&);
 struct DelaunCreateTrianglesTag{using type=void(BRepMesh_Delaun::*)(const int,IMeshData::MapOfIntegerInteger&);friend type delaun_member(DelaunCreateTrianglesTag);};
 struct DelaunFrontierReachabilityTag{using type=bool(BRepMesh_Delaun::*)(const int,const int);friend type delaun_member(DelaunFrontierReachabilityTag);};
 struct DelaunCleanupTag{using type=void(BRepMesh_Delaun::*)();friend type delaun_member(DelaunCleanupTag);};
+struct DelaunCheckIntersectionTag{using type=bool(BRepMesh_Delaun::*)(const BRepMesh_Edge&,const IMeshData::SequenceOfInteger&,const IMeshData::SequenceOfBndB2d&,bool,bool,bool,Bnd_B2d&)const;friend type delaun_member(DelaunCheckIntersectionTag);};
 template struct DelaunAccess<DelaunWindingTag,&BRepMesh_Delaun::isVertexInsidePolygon>;
 template struct DelaunAccess<DelaunAreaTag,&BRepMesh_Delaun::polyArea>;
 template struct DelaunAccess<DelaunIntersectionTag,&BRepMesh_Delaun::intSegSeg>;
@@ -20,6 +21,7 @@ template struct DelaunAccess<DelaunSuperMeshTag,&BRepMesh_Delaun::superMesh>;
 template struct DelaunAccess<DelaunCreateTrianglesTag,&BRepMesh_Delaun::createTriangles>;
 template struct DelaunAccess<DelaunFrontierReachabilityTag,&BRepMesh_Delaun::isBoundToFrontier>;
 template struct DelaunAccess<DelaunCleanupTag,&BRepMesh_Delaun::cleanupMesh>;
+template struct DelaunAccess<DelaunCheckIntersectionTag,&BRepMesh_Delaun::checkIntersection>;
 static auto delaun_core_mesh(int kind,int flags){
  occ::handle<NCollection_IncAllocator> arena=new NCollection_IncAllocator;
  occ::handle<BRepMesh_DataStructureOfDelaun> mesh=new BRepMesh_DataStructureOfDelaun(arena,10);
@@ -88,6 +90,12 @@ static void delaun_polygon_mesh_snapshot(const BRepMesh_Delaun&delaun){
 void mesh_delaun_cleanup(std::istream&input){
  int kind,flags;input>>kind>>flags;auto mesh=delaun_core_mesh(kind,flags);BRepMesh_Delaun delaun(mesh,-1,-1,false);
  (delaun.*delaun_member(DelaunCleanupTag{}))();std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
+}
+void mesh_delaun_intersections(std::istream&input){
+ int kind,flags;input>>kind>>flags;auto mesh=delaun_core_mesh(kind,flags);BRepMesh_Delaun delaun(mesh,-1,-1,false);
+ IMeshData::SequenceOfInteger polygon;IMeshData::SequenceOfBndB2d boxes;
+ for(int i=1;i<=5;++i){polygon.Append(i);auto&e=delaun.GetEdge(i);Bnd_B2d box;box.Add(delaun.GetVertex(e.FirstNode()).Coord());box.Add(delaun.GetVertex(e.LastNode()).Coord());box.Enlarge(Precision::PConfusion());boxes.Append(box);}
+ std::cout<<"OK ";for(int link=1;link<=5;++link)for(int endpoint=0;endpoint<=1;++endpoint)for(int onEdge=0;onEdge<=1;++onEdge)for(int skip=0;skip<=1;++skip){Bnd_B2d bounds;GA_TRY(ga_flag((delaun.*delaun_member(DelaunCheckIntersectionTag{}))(delaun.GetEdge(link),polygon,boxes,endpoint!=0,onEdge!=0,skip!=0,bounds)));gp_XY minimum=bounds.CornerMin(),maximum=bounds.CornerMax();ga_real(minimum.X());ga_real(minimum.Y());ga_real(maximum.X());ga_real(maximum.Y());}ga_end();
 }
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
