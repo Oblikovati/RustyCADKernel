@@ -129,7 +129,7 @@ declarations; overall mapping is 7,215/8,648 GoogleTest declaration candidates.
 ### Populated-mesh Delaun predicates
 
 The existing-mesh Delaun core adds audited API rows, including exact
-`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,290 exact
+`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,293 exact
 populated-mesh cases and reports 80 native-crash/Rust-error divergences separately;
 nine supplemental null-mesh divergences remain outside that corpus. Supermesh bounds,
 first-vertex fan creation, native insertion ordering, frontier reachability, free-triangle
@@ -152,6 +152,9 @@ The public vector constructor's whole supermesh-to-cleanup sequence also matches
 three-point simplex, a square, and the same square with a center point; OCCT itself leaves
 the first two with empty domain topology. Full multi-vertex constraint fixtures and
 IncrementalMesh integration remain incomplete.
+The three standalone angle and signed-winding declarations in the legacy source now have
+focused Rust tests and native numeric comparisons; the source file remains unmapped until
+its hole, box, and cylinder meshing cases pass too.
 The six declarations in
 `BRepMesh_Delaun_Test.cxx` remain unmapped as a source file; TKMesh remains at 2/29
 mapped original declarations.
