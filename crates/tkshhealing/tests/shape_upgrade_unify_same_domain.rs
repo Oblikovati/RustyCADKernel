@@ -16,20 +16,18 @@ use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
 
 #[test]
 fn basic_box_unification_matches_native_no_merge_result() {
-    let input = BRepPrimAPIMakeBox::from_sizes(10.0, 10.0, 10.0)
-        .unwrap()
-        .shape()
-        .unwrap()
-        .clone();
-    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, true);
-    unifier.set_angular_tolerance(1e-6);
-    unifier.set_linear_tolerance(1e-5);
-    unifier.allow_internal_edges(true);
-    unifier.initialize(&input, true, true, true);
+    let mut box_maker =
+        BRepPrimAPIMakeBox::from_points(Point3::new(0.0, 0.0, 0.0), Point3::new(10.0, 10.0, 10.0))
+            .unwrap();
+    box_maker.build(&ProgressRange::default()).unwrap();
+    assert!(box_maker.is_done());
+    let input = box_maker.shape().unwrap().clone();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, false);
 
     unifier.build().unwrap();
 
     let result = unifier.shape();
+    assert!(!result.is_null());
     assert_eq!(face_count(&result), 6);
     assert!(
         BRepCheckAnalyzer::new(&result, true, false, false)
@@ -71,7 +69,7 @@ fn closed_internal_wire_keeps_nonnull_result() {
         ],
         true,
     );
-    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, true);
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, false);
     unifier.set_angular_tolerance(1e-6);
     unifier.set_linear_tolerance(1e-5);
     unifier.allow_internal_edges(true);
@@ -133,6 +131,7 @@ fn multiple_coplanar_faces_with_internal_wires_merge_to_one_face() {
     let input = sew_coplanar_faces(first, second);
     let result = unify_faces_with_internal_edges(&input);
 
+    assert!(!result.is_null());
     assert_eq!(face_count(&result), 1);
     assert_eq!(internal_wire_count(&result), 2);
     assert_eq!(internal_edge_count(&result), 2);
@@ -147,7 +146,7 @@ fn shared_vertex_internal_path_rebuild_terminates_in_face_merge() {
 }
 
 fn unify_faces_with_internal_edges(input: &Shape) -> Shape {
-    let unifier = ShapeUpgradeUnifySameDomain::new(input, true, true, true);
+    let unifier = ShapeUpgradeUnifySameDomain::new(input, true, true, false);
     unifier.set_angular_tolerance(1e-6);
     unifier.set_linear_tolerance(1e-5);
     unifier.allow_internal_edges(true);

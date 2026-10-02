@@ -321192,7 +321192,6 @@
       ],
       "notes": "Uses two BRepPrimAPIMakeCone::new(100.0, 10.0, 100.0) solids, deflection 0.01, and angular deflections 10/1 degrees. Sums nodes and triangles over all face triangulations and asserts both totals differ, matching source observable; Rust target runtime is about 68 seconds."
     },
-
     {
       "upstream_id": "BRepGraph_CompactTest.NoRemovedNodes_Noop",
       "toolkit": "TKBRep",
@@ -321468,6 +321467,48 @@
       "rust_target": "brep_tools_legacy",
       "rust_test": "BRepTools_Test__ModDataBug_31946_TriangleOptions",
       "rust_source": "crates/tkmesh/tests/brep_tools_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomainTest.BasicBoxUnification",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
+      "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_test": "basic_box_unification_matches_native_no_merge_result",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomainTest.ClosedInternalWire",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
+      "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_test": "closed_internal_wire_keeps_nonnull_result",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomainTest.MultipleCoplanarFacesWithInternalWires",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
+      "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_test": "multiple_coplanar_faces_with_internal_wires_merge_to_one_face",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
