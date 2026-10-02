@@ -786,6 +786,21 @@ source remains unmapped. Native member probes report empty `CheckOrder`/`FixReor
 false with zero edges and no status flags. On every box wire, `FixReorder` returns true
 with DONE1 and DONE5, while both gap fixers return false and report neither DONE nor FAIL.
 
+Additional native probes narrowed the nonzero-gap prerequisite. On the pinned periodic
+cone, `FixGaps3d` before pcurve construction returns false with no flags. After the first
+`ShapeFix_Wire::Perform` pass creates the pcurve, `FixGaps2d` returns true with DONE1 and
+sets both pcurve endpoint coordinates to `(0, 0.5)` while retaining range `0..1.04977`
+and edge tolerance `1e-7`. Native `FixGap2d` achieves this by making a curve copy, moving
+its endpoint poles, replacing endpoint vertices and the affected edge through the
+reshape context, and setting `SameRange(false)`. Rust's current path only measures that
+gap; directly moving poles on the existing edge would miss the topology and context
+semantics. The bowtie oracle probe also confirms that `ShapeFix_Wire::Perform` splits the
+four input pcurve edges into six edges and records self-intersection DONE1/DONE5. Its
+missing prerequisite is the exact `ShapeAnalysis_Wire` intersection selection plus
+shared-vertex edge splitting and insertion, before `ShapeFix_Face::FixLoopWire` can
+extract the two triangular loops. These probes do not map any of the seven Shape source
+declarations.
+
 The nine declarations in `ShapeUpgrade_UnifySameDomain_Test.cxx` also remain unmapped.
 The pinned production implementation is 4,761 lines and its tests require genuine
 coplanar-face unification and pcurve-safe transformations. The boolean cases additionally
