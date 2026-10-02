@@ -150,7 +150,7 @@ void mesh_delaun_create_triangles(std::istream&){
 }
 void mesh_delaun_insert_vertex(std::istream&input){
  int mode;input>>mode;auto mesh=delaun_core_mesh(0,mode==3?1:0);std::vector<gp_XY>points;
- if(mode==2)points={gp_XY(1,.5),gp_XY(.5,1.5)};else if(mode==3)points={gp_XY(1,0)};else if(mode==4)points={gp_XY(1,1)};else if(mode==5)points={gp_XY(3,3)};else points={gp_XY(1,.5)};
+ if(mode==2)points={gp_XY(1,.5),gp_XY(.5,1.5)};else if(mode==3)points={gp_XY(1,0)};else if(mode==4)points={gp_XY(1,1)};else if(mode==5)points={gp_XY(3,3)};else if(mode==6)points={gp_XY(1,.5),gp_XY(.5,1.5),gp_XY(1.5,1.5),gp_XY(1.5,.5)};else points={gp_XY(1,.5)};
  IMeshData::VectorOfInteger vertices((int)points.size());for(auto&point:points)vertices.Append(mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true));
  BRepMesh_Delaun delaun(mesh,-1,-1,false);delaun.InitCirclesTool(8,8);delaun.AddVertices(vertices,Message_ProgressRange());std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
 }

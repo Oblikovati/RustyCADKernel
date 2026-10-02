@@ -133,6 +133,12 @@ pub fn insert_vertex_case(values: &[i32]) {
         3 => vec![Xy::new(1., 0.)],
         4 => vec![Xy::new(1., 1.)],
         5 => vec![Xy::new(3., 3.)],
+        6 => vec![
+            Xy::new(1., 0.5),
+            Xy::new(0.5, 1.5),
+            Xy::new(1.5, 1.5),
+            Xy::new(1.5, 0.5),
+        ],
         _ => vec![Xy::new(1., 0.5)],
     };
     let mut vertices = points

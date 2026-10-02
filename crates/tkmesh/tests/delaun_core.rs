@@ -380,6 +380,26 @@ fn batch_insertion_skips_frontier_edge_and_outside_points() {
 }
 
 #[test]
+fn batch_insertion_retriangulates_a_four_point_sequence() {
+    let mesh = fixture::mesh(0, 0);
+    let mut vertices = [
+        Vertex::from_uv(1., 0.5, Freedom::Free),
+        Vertex::from_uv(0.5, 1.5, Freedom::Free),
+        Vertex::from_uv(1.5, 1.5, Freedom::Free),
+        Vertex::from_uv(1.5, 0.5, Freedom::Free),
+    ]
+    .iter()
+    .map(|vertex| mesh.add_node(vertex, true).unwrap())
+    .collect::<Vec<_>>();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    delaun.init_circles_tool(8, 8).unwrap();
+
+    delaun.insert_vertices_probe(&mut vertices).unwrap();
+
+    assert_eq!(delaun.result().elements_of_domain().extent(), 10);
+}
+
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();
