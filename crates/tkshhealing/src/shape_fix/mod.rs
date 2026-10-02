@@ -6,6 +6,7 @@
 mod edge_connect;
 mod face;
 mod face_connect;
+mod face_loops;
 mod intersection;
 mod root;
 mod shape;

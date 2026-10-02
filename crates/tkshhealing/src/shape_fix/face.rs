@@ -69,6 +69,12 @@ impl ShapeFixFace {
             return Ok(false);
         }
         let face = topods::face(&applied)?;
+        if let Some(split) = super::face_loops::split_bowtie_face(&face, tolerance)? {
+            *self.status.write() = ShapeExtend::encode_status(ShapeExtendStatus::Done7);
+            *self.result.write() = split.clone();
+            replace_context(&context, &face, &split)?;
+            return Ok(true);
+        }
         let fixed = repair_periodic_cone(&face, tolerance)?;
         let result = fixed.clone().unwrap_or(applied);
         *self.result.write() = result.clone();
