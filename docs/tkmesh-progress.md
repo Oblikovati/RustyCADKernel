@@ -163,8 +163,15 @@ mapped original declarations.
 
 The parameter-based `BRepMesh_IncrementalMesh` constructor now preserves the
 native no-op behavior for an empty compound and validates linear deflection
-parameters. Nonempty shapes still report the unported discretization stage. Its
-focused Rust tests and the filtered native OCC31125 regression pass, but the
+parameters. A Rust planar face strategy now registers ordered pcurve boundary
+samples as constrained Delaun nodes and links, runs the existing batch insertion
+and constraint recovery, and publishes the face triangulation. The pinned
+square-with-square-hole case matches all eight nodes, UV nodes, and both triangle
+indices exactly. Parameter normalization supplies the native minimum size before
+edge tessellation. Nonplane faces and shapes with no faces still report the
+unsupported meshing stage; box and cylinder results have not yet been oracle
+validated. The focused Rust tests and filtered native OCC31125 regression pass, but the
 original test declaration is not counted as mapped: the source file contains
 nine declarations and the source gate requires mapping the whole file together.
-This adds one partial API row; TKMesh remains at 2/29 mapped declarations.
+This keeps the existing partial API accounting unchanged; TKMesh remains at
+2/29 mapped declarations, and the six Delaun source declarations remain unmapped.
