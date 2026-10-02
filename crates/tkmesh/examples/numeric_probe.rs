@@ -131,6 +131,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_delaun_core" => mesh_probe::delaun_core::core_case(values),
         "mesh_delaun_polygon" => mesh_probe::delaun_core::polygon_case(values),
         "mesh_delaun_polygon_mesh" => mesh_probe::delaun_core::polygon_mesh_case(values),
+        "mesh_delaun_super_mesh" => mesh_probe::delaun_core::super_mesh_case(values),
         "mesh_circle_random" => mesh_probe::circle_tool::random_case(),
         "mesh_circle_invalid" => mesh_probe::circle_tool::invalid_case(values),
         "mesh_delaun" => mesh_probe::delaun_structure::delaun_case(values),

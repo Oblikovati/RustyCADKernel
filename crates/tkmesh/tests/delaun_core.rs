@@ -5,7 +5,8 @@ use rustycad_tkernel::{
 };
 use rustycad_tkmath::gp::{Point2, Xy};
 use rustycad_tkmesh::brep_mesh::{
-    BRepMeshDelaun as Delaun, BRepMeshVertex as Vertex, DegreeOfFreedom as Freedom,
+    BRepMeshDataStructureOfDelaun as Mesh, BRepMeshDelaun as Delaun, BRepMeshVertex as Vertex,
+    DegreeOfFreedom as Freedom,
 };
 #[path = "support/delaun_core.rs"]
 mod fixture;
@@ -107,6 +108,19 @@ fn frontier_and_free_polygon_loops_recover_the_same_two_triangles() {
             assert!(links.is_empty());
         }
     }
+}
+#[test]
+fn supermesh_adds_the_native_three_vertices_and_oriented_edges() {
+    let allocator = Handle::new(Default::default());
+    let mesh = Handle::new(Mesh::new(&allocator, 3));
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    let (nodes, edges) = delaun.build_super_mesh([0., 0., 2., 2.]).unwrap();
+    assert_eq!(nodes, [1, 2, 3]);
+    assert_eq!(edges, [1, 2, 3]);
+    assert_eq!(delaun.get_vertex(nodes[0]).unwrap().coord().x(), 1.);
+    assert_eq!(delaun.get_vertex(nodes[0]).unwrap().coord().y(), 4.);
+    assert_eq!(delaun.get_edge(edges[0]).unwrap().first_node(), nodes[0]);
+    assert_eq!(delaun.get_edge(edges[2]).unwrap().last_node(), nodes[0]);
 }
 #[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {

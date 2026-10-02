@@ -11,6 +11,7 @@ use rustycad_tkernel::{
 mod circles;
 mod cleanup;
 mod contains;
+mod insertion;
 mod polygon;
 mod polygon_decompose;
 mod polygon_mesh;
@@ -21,6 +22,7 @@ pub struct BRepMeshDelaun {
     mesh: Handle<BRepMeshDataStructureOfDelaun>,
     circles: BRepMeshCircleTool,
     auxiliary: DynamicArray<i32>,
+    super_edges: [i32; 3],
     initialized_circles: bool,
 }
 impl BRepMeshDelaun {
@@ -38,6 +40,7 @@ impl BRepMeshDelaun {
             mesh: mesh.clone(),
             circles: BRepMeshCircleTool::new(&allocator),
             auxiliary: DynamicArray::with_increment(3),
+            super_edges: [0; 3],
             initialized_circles: false,
         };
         if fill {
