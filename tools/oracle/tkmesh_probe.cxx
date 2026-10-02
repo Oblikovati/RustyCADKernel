@@ -126,6 +126,7 @@ int main(){
         else if(operation=="mesh_delaun_perform")mesh_delaun_perform(input);
         else if(operation=="mesh_delaun_legacy_angle")mesh_delaun_legacy_angle(input);
         else if(operation=="mesh_incremental_planar_hole")mesh_incremental_planar_hole(input);
+        else if(operation=="mesh_incremental_box")mesh_incremental_box(input);
         else if(operation=="mesh_delaun_use_edge")mesh_delaun_use_edge(input);
         else if(operation=="mesh_delaun_sort")mesh_delaun_sort(input);
         else if(operation=="mesh_delaun_polygon")mesh_delaun_polygon(input);
