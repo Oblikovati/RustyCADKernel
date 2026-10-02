@@ -165,6 +165,14 @@ fn core(v: &[i32]) -> Result<(), Failure> {
     flag(delaun.circles().is_empty());
     flag(delaun.use_edge(-1));
     mesh_snapshot(&delaun)?;
+    for node in 1..=4 {
+        for link in 1..=5 {
+            match delaun.is_bound_to_frontier(node, link) {
+                Ok(reaches_constraint) => flag(reaches_constraint),
+                Err(error) => print!("{} ", error.exception_type()),
+            }
+        }
+    }
     for triangle in 1..=2 {
         containment(&delaun, triangle, v[0]);
     }

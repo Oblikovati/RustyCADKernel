@@ -10,12 +10,14 @@ struct DelaunIntersectionTag{using type=BRepMesh_GeomTool::IntFlag(BRepMesh_Dela
 struct DelaunMeshPolygonTag{using type=void(BRepMesh_Delaun::*)(IMeshData::SequenceOfInteger&,IMeshData::SequenceOfBndB2d&,Handle(IMeshData::MapOfInteger));friend type delaun_member(DelaunMeshPolygonTag);};
 struct DelaunSuperMeshTag{using type=void(BRepMesh_Delaun::*)(const Bnd_Box2d&);friend type delaun_member(DelaunSuperMeshTag);};
 struct DelaunCreateTrianglesTag{using type=void(BRepMesh_Delaun::*)(const int,IMeshData::MapOfIntegerInteger&);friend type delaun_member(DelaunCreateTrianglesTag);};
+struct DelaunFrontierReachabilityTag{using type=bool(BRepMesh_Delaun::*)(const int,const int);friend type delaun_member(DelaunFrontierReachabilityTag);};
 template struct DelaunAccess<DelaunWindingTag,&BRepMesh_Delaun::isVertexInsidePolygon>;
 template struct DelaunAccess<DelaunAreaTag,&BRepMesh_Delaun::polyArea>;
 template struct DelaunAccess<DelaunIntersectionTag,&BRepMesh_Delaun::intSegSeg>;
 template struct DelaunAccess<DelaunMeshPolygonTag,&BRepMesh_Delaun::meshPolygon>;
 template struct DelaunAccess<DelaunSuperMeshTag,&BRepMesh_Delaun::superMesh>;
 template struct DelaunAccess<DelaunCreateTrianglesTag,&BRepMesh_Delaun::createTriangles>;
+template struct DelaunAccess<DelaunFrontierReachabilityTag,&BRepMesh_Delaun::isBoundToFrontier>;
 static auto delaun_core_mesh(int kind,int flags){
  occ::handle<NCollection_IncAllocator> arena=new NCollection_IncAllocator;
  occ::handle<BRepMesh_DataStructureOfDelaun> mesh=new BRepMesh_DataStructureOfDelaun(arena,10);
@@ -44,6 +46,7 @@ void mesh_delaun_core(std::istream&input){
  std::array<int,6>v;for(auto& value:v)input>>value;
  DC_TRY(auto mesh=delaun_core_mesh(v[0],v[1]);BRepMesh_Delaun delaun(mesh,v[2],v[3],v[4]!=0);
  ga_flag(delaun.Result()==mesh);ga_flag(delaun.Circles().IsEmpty());ga_flag(delaun.UseEdge(-1));delaun_core_snapshot(delaun);
+ for(int node=1;node<=4;++node)for(int link=1;link<=5;++link)GA_TRY(ga_flag((delaun.*delaun_member(DelaunFrontierReachabilityTag{}))(node,link)));
  for(int triangle=1;triangle<=2;++triangle)delaun_core_contains(delaun,triangle,v[0]);
  IMeshData::VectorOfInteger auxiliary(3);for(int i=1;i<=4;++i)if(v[5]&(1<<(i-1)))auxiliary.Append(i);
  delaun.SetAuxVertices(auxiliary);auxiliary.Clear();DC_TRY(delaun.RemoveAuxElements());delaun_core_snapshot(delaun);

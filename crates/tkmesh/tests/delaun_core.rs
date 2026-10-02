@@ -143,6 +143,13 @@ fn use_edge_preserves_native_always_false_behavior_for_signed_indices() {
     }
 }
 #[test]
+fn frontier_reachability_stops_at_constraints_and_open_boundaries() {
+    let free = Delaun::from_mesh(&fixture::mesh(0, 0), -1, -1, false).unwrap();
+    assert!(!free.is_bound_to_frontier(1, 1).unwrap());
+    let constrained = Delaun::from_mesh(&fixture::mesh(0, 31), -1, -1, false).unwrap();
+    assert!(constrained.is_bound_to_frontier(1, 2).unwrap());
+}
+#[test]
 fn insertion_order_matches_native_heap_ties_in_projected_coordinates() {
     let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 4));
     for point in [

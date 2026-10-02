@@ -11,6 +11,7 @@ use rustycad_tkernel::{
 mod circles;
 mod cleanup;
 mod contains;
+mod frontier_reachability;
 mod insertion;
 mod insertion_order;
 mod polygon;
