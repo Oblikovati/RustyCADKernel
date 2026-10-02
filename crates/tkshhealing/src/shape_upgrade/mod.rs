@@ -13,11 +13,13 @@ mod package;
 mod remove_locations;
 mod split_curve;
 mod tool;
+mod unify_same_domain;
 
 pub use package::{BoundedCurve2dSequence, BoundedCurveSequence, ShapeUpgrade};
 pub use remove_locations::{ShapeReplacements, ShapeUpgradeRemoveLocations};
 pub use split_curve::{ShapeUpgradeSplitCurve, SplitCurve, SplitCurveData, SplitCurveFields};
 pub use tool::ShapeUpgradeTool;
+pub use unify_same_domain::ShapeUpgradeUnifySameDomain;
 
 mod shell_sewing;
 pub use shell_sewing::ShapeUpgradeShellSewing;
