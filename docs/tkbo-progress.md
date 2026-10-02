@@ -6,7 +6,7 @@ SurfaceRangeSample, and MarkedRangeSet. The 80 API rows use the header audit
 identities; the remainder of IntTools and the Boolean algorithms remain pending.
 
 `tools/verify_tkbo_foundations.py --source ../OCCT --native-build BUILD` passes
-19,097 exact native comparisons, including signed zero, all root transitions,
+19,102 exact native comparisons, including signed zero, all root transitions,
 range subdivision and hashing, duplicate boundaries, pave-block splitting and
 common-block ordering. Its companion radius-status replay still records 176 undefined-status
 native calls and 32 differences; complete TKBO parity remains false.
@@ -37,12 +37,14 @@ FaceInfo adds sixteen callable rows for its In, On and section maps. Its two Rus
 regressions and native differential probe cover identity-keyed handle maps, unique
 vertex sets, and `Clear()` retaining section state while clearing In and On.
 
-DataStructure adds the complete `BOPDS_DS` header inventory. Its pre-Init storage
-slice and recursive source-shape initialization pass native differential probes for
-depth-first child ordering, duplicate-shape index rebinding, inclusive argument
-ranges, source counts and vertex tolerance boxes. `Init` remains partial: edge, face,
-solid preparation, vertex-edge links and operation pools are pending; no original
-GTest declaration is mapped by this storage slice.
+DataStructure adds the complete `BOPDS_DS` header inventory. Its initialization pass
+prepares vertex, edge and face bounds, flattens face and single-solid child indices,
+builds shared-vertex edge links, and initializes endpoint pave blocks on demand.
+Native differential probes cover depth-first ordering, shared-vertex links and paves,
+face/edge/vertex flattening in a single-solid box, and the resulting shape bounds.
+`Init` and `ChangePaveBlocks` remain partial: infinite-edge synthetic vertices,
+exact open/inverted shell behavior, same-domain mapping, and internal/seam-edge paves
+are pending. No original GTest declaration is mapped by this storage slice.
 
 IntTools Curve, CommonPrt and point-on-face records add 62 implemented APIs.
 The cumulative oracle passes 3,027 cases. `IntTools_PntOnFace::IsValid()` is

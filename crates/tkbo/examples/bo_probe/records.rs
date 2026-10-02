@@ -356,6 +356,142 @@ pub fn data_structure_init_case(v: &[f64]) {
     write_initialized_records(&structure);
 }
 
+/// Writes edge initialization, shared-vertex links and endpoint pave blocks.
+pub fn data_structure_edges_case(v: &[f64]) {
+    use rustycad_tkbo::bop_ds::DataStructure;
+    use rustycad_tkbrep::brep::BRepBuilder;
+    use rustycad_tkbrep::topods::{Shape, Vertex, Wire};
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
+    let builder = BRepBuilder::default();
+    let first = initialized_vertex(&builder, [-1.0, 0.0, 0.0], 1e-7);
+    let shared = initialized_vertex(&builder, [0.0, 0.0, 0.0], 2e-7);
+    let last = initialized_vertex(&builder, [1.0, 1.0, 0.0], 3e-7);
+    let first_vertex = Vertex::unchecked(first.clone());
+    let shared_vertex = Vertex::unchecked(shared.clone());
+    let last_vertex = Vertex::unchecked(last.clone());
+    let first_edge = BRepBuilderAPIMakeEdge::from_vertices(&first_vertex, &shared_vertex)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape();
+    let second_edge = BRepBuilderAPIMakeEdge::from_vertices(&shared_vertex, &last_vertex)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape();
+    let mut wire = Wire::default();
+    builder.make_wire(&mut wire);
+    let mut root: Shape = wire.into_shape();
+    builder.add(&mut root, &first_edge).unwrap();
+    builder.add(&mut root, &second_edge).unwrap();
+    let mut structure = DataStructure::default();
+    structure.set_arguments(&[root]);
+    structure.init(v[0]).unwrap();
+    write_edge_source_state(
+        &structure,
+        &first,
+        &shared,
+        &last,
+        &first_edge,
+        &second_edge,
+    );
+    let shared_index = structure.index(&shared);
+    structure.init_pave_blocks_for_vertex(shared_index).unwrap();
+    write_edge_pave_state(
+        &structure,
+        &[structure.index(&first_edge), structure.index(&second_edge)],
+    );
+}
+
+/// Writes native box face/edge flattening and bounds after a single-solid initialization.
+pub fn data_structure_box_case(v: &[f64]) {
+    use rustycad_tkbo::bop_ds::DataStructure;
+    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+    let solid = BRepPrimAPIMakeBox::from_sizes(1.0, 2.0, 3.0)
+        .unwrap()
+        .solid()
+        .unwrap()
+        .into_shape();
+    let mut structure = DataStructure::default();
+    structure.set_arguments(std::slice::from_ref(&solid));
+    structure.init(v[0]).unwrap();
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    integer(structure.nb_ranges());
+    integer(structure.index(&solid));
+    for index in 0..structure.nb_shapes() {
+        let info = structure.shape_info(index).unwrap();
+        integer(info.shape_type() as i32);
+        integer(info.sub_shapes().len() as i32);
+        for child in info.sub_shapes() {
+            integer(*child);
+        }
+        flag(info.box_bounds().is_void());
+        if !info.box_bounds().is_void() {
+            real(info.box_bounds().gap());
+            for coordinate in info.box_bounds().get().unwrap() {
+                real(coordinate);
+            }
+        }
+    }
+}
+
+fn write_edge_source_state(
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    first: &rustycad_tkbrep::topods::Shape,
+    shared: &rustycad_tkbrep::topods::Shape,
+    last: &rustycad_tkbrep::topods::Shape,
+    first_edge: &rustycad_tkbrep::topods::Shape,
+    second_edge: &rustycad_tkbrep::topods::Shape,
+) {
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    integer(structure.nb_ranges());
+    for shape in [first, shared, last, first_edge, second_edge] {
+        integer(structure.index(shape));
+    }
+    for index in 0..structure.nb_shapes() {
+        let info = structure.shape_info(index).unwrap();
+        integer(info.shape_type() as i32);
+        integer(info.sub_shapes().len() as i32);
+        for child in info.sub_shapes() {
+            integer(*child);
+        }
+        flag(info.box_bounds().is_void());
+        if !info.box_bounds().is_void() {
+            real(info.box_bounds().gap());
+            for coordinate in info.box_bounds().get().unwrap() {
+                real(coordinate);
+            }
+        }
+    }
+}
+
+fn write_edge_pave_state(structure: &rustycad_tkbo::bop_ds::DataStructure, edge_indices: &[i32]) {
+    integer(structure.pave_blocks_pool().len() as i32);
+    for index in edge_indices {
+        flag(structure.has_pave_blocks(*index).unwrap());
+        integer(structure.shape_info(*index).unwrap().reference());
+        let blocks = structure.pave_blocks(*index).unwrap();
+        integer(blocks.len() as i32);
+        for block in blocks {
+            let block = block.lock().unwrap();
+            integer(block.original_edge());
+            let (first, last) = block.indices();
+            let (first_parameter, last_parameter) = block.range();
+            integer(first);
+            integer(last);
+            real(first_parameter);
+            real(last_parameter);
+            integer(block.ext_paves().len() as i32);
+            for pave in block.ext_paves() {
+                integer(pave.index());
+                real(pave.parameter());
+            }
+        }
+    }
+}
+
 fn data_structure_init_shapes() -> (
     rustycad_tkbrep::topods::Shape,
     rustycad_tkbrep::topods::Shape,

@@ -60,6 +60,8 @@ fn dispatch_case(operation: &str, v: &[f64]) {
         "bop_face_info" => records::face_info_case(v),
         "bop_data_structure" => records::data_structure_case(v),
         "bop_data_structure_init" => records::data_structure_init_case(v),
+        "bop_data_structure_edges" => records::data_structure_edges_case(v),
+        "bop_data_structure_box" => records::data_structure_box_case(v),
         "points" => intersections::points_case(v),
         "common" => intersections::common_case(v),
         "intersection_curve" => curves::case(v),
