@@ -216016,6 +216016,214 @@
       "notes": "Returns the IntTools curve tangential tolerance."
     },
     {
+      "upstream_id": "BOPDS_Interf::SetIndices(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::set_indices",
+      "status": "implemented",
+      "notes": "Replaces both source indices."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::Indices(int&,int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::indices",
+      "status": "implemented",
+      "notes": "Returns source indices in order."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::SetIndex1(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::set_index1",
+      "status": "implemented",
+      "notes": "Replaces the first source index."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::SetIndex2(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::set_index2",
+      "status": "implemented",
+      "notes": "Replaces the second source index."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::Index1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::index1",
+      "status": "implemented",
+      "notes": "Returns the first source index."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::Index2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::index2",
+      "status": "implemented",
+      "notes": "Returns the second source index."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::OppositeIndex(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::opposite_index",
+      "status": "implemented",
+      "notes": "Returns the other source index, or -1 when absent."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::Contains(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::contains",
+      "status": "implemented",
+      "notes": "Tests either source index."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::SetIndexNew(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::set_index_new",
+      "status": "implemented",
+      "notes": "Stores the generated shape index."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::IndexNew() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::index_new",
+      "status": "implemented",
+      "notes": "Returns the generated shape index."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::HasIndexNew(int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::has_index_new_into",
+      "status": "implemented",
+      "notes": "Writes the generated index and reports whether it is nonnegative."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::HasIndexNew() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::has_index_new",
+      "status": "implemented",
+      "notes": "Uses the native not-equal-to-minus-one sentinel check."
+    },
+    {
+      "upstream_id": "BOPDS_Interf::GetIndexNew() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::get_index_new",
+      "status": "implemented",
+      "notes": "Returns Some(index) unless the index equals the native -1 sentinel."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVV()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVV::default",
+      "status": "implemented",
+      "notes": "Creates the subtype with native default field values."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVV(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator controls native arenas; Rust owns record memory."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVV::~BOPDS_InterfVV()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the subtype fields without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVE()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVE::default",
+      "status": "implemented",
+      "notes": "Creates the subtype with native default field values."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVE(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator controls native arenas; Rust owns record memory."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVE::~BOPDS_InterfVE()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the subtype fields without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVF::default",
+      "status": "implemented",
+      "notes": "Creates the subtype with native default field values."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVF(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator controls native arenas; Rust owns record memory."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVF::~BOPDS_InterfVF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the subtype fields without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVE::SetParameter(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVE::set_parameter",
+      "status": "implemented",
+      "notes": "Stores the vertex parameter on the edge without normalization."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVE::Parameter() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVE::parameter",
+      "status": "implemented",
+      "notes": "Returns the stored edge parameter."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVF::SetUV(double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVF::set_uv",
+      "status": "implemented",
+      "notes": "Stores the vertex parameters in U/V order."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVF::UV(double&,double&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVF::uv",
+      "status": "implemented",
+      "notes": "Returns the stored parameters in U/V order."
+    },
+    {
       "upstream_id": "BOPDS_DS",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",

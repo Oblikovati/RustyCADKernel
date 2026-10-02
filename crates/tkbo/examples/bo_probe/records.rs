@@ -1,7 +1,7 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
-    BopdsCurve, CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, Pair, Pave, PaveBlock,
-    Point, ShapeInfo, common_block_handle, pave_block_handle,
+    BopdsCurve, CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, InterfVE, InterfVF,
+    InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo, common_block_handle, pave_block_handle,
 };
 use rustycad_tkbo::int_tools::Curve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -444,6 +444,65 @@ pub fn bopds_curve_case(_: &[f64]) {
     }
     value.set_tolerance(-0.);
     real(value.tolerance());
+}
+
+pub fn bopds_interf_case(_: &[f64]) {
+    let mut vv = InterfVV::default();
+    integer(vv.index1());
+    integer(vv.index2());
+    integer(vv.index_new());
+    flag(vv.has_index_new());
+    let mut new_index = 77;
+    flag(vv.has_index_new_into(&mut new_index));
+    integer(new_index);
+    optional_index(vv.get_index_new());
+    vv.set_indices(3, 8);
+    let (first, second) = vv.indices();
+    integer(first);
+    integer(second);
+    vv.set_index1(-4);
+    vv.set_index2(0);
+    integer(vv.index1());
+    integer(vv.index2());
+    integer(vv.opposite_index(-4));
+    integer(vv.opposite_index(0));
+    integer(vv.opposite_index(19));
+    flag(vv.contains(-4));
+    flag(vv.contains(8));
+    vv.set_index_new(-2);
+    new_index = 77;
+    integer(vv.index_new());
+    flag(vv.has_index_new_into(&mut new_index));
+    integer(new_index);
+    flag(vv.has_index_new());
+    optional_index(vv.get_index_new());
+    vv.set_index_new(-1);
+    flag(vv.has_index_new());
+    optional_index(vv.get_index_new());
+
+    let mut ve = InterfVE::default();
+    real(ve.parameter());
+    ve.set_parameter(-0.);
+    real(ve.parameter());
+    ve.set_indices(6, 9);
+    integer(ve.opposite_index(9));
+    let mut vf = InterfVF::default();
+    let (u, v) = vf.uv();
+    real(u);
+    real(v);
+    vf.set_uv(-1.25, 2.5);
+    let (u, v) = vf.uv();
+    real(u);
+    real(v);
+    vf.set_indices(11, 13);
+    flag(vf.contains(13));
+}
+
+fn optional_index(index: Option<i32>) {
+    flag(index.is_some());
+    if let Some(index) = index {
+        integer(index);
+    }
 }
 
 fn block_with_edge(edge: i32) -> rustycad_tkbo::bop_ds::PaveBlockHandle {
