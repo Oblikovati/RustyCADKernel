@@ -5,6 +5,13 @@ pub use shape_tool::ShapeTool;
 mod incremental_mesh;
 pub use incremental_mesh::BRepMeshIncrementalMesh;
 
+mod discret_factory;
+pub use discret_factory::{
+    BRepMeshDiscretAlgoFactory, BRepMeshDiscretFactory, BRepMeshDiscretRoot,
+    BRepMeshIncrementalMeshFactory, default_factory, factories, find_factory, register_factory,
+    unregister_factory,
+};
+
 mod planar_face_discret;
 
 mod model_builder;
