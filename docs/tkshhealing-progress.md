@@ -757,13 +757,24 @@ native four-edge UV boundary; the final same-parameter pass is required because 
 new-edge default flag differs from OCCT's 3D-only edge state. The broader `ShapeFix_Face`
 API and its other repair paths remain incomplete.
 
-The seven declarations in `ShapeFix_Shape_Test.cxx` remain unmapped as a file. Existing
-`ShapeFixShape`, inherited precision state and `ShapeFix_Wire` cover the unchanged-shape,
-precision and wire-regression paths, but `HealPrismFromSelfIntersectingFace` needs
-`ShapeFix_Face` to split and heal its bowtie cap. A Rust probe using the translated
-bowtie face/prism fixture confirmed the current unchanged-shape implementation still
-fails `BRepCheck_Analyzer::IsValid`; do not count this source green until that repair is
-implemented. No declaration rows were added for this audit.
+The seven declarations in `ShapeFix_Shape_Test.cxx` remain unmapped as a file. The
+pinned native source suite passes 7/7. A direct native probe of its bowtie fixture
+isolated the missing prerequisite: `ShapeFix_Wire::Perform` turns the four-edge boundary
+into six edges, splitting both non-adjacent crossing p-curves at UV `(0, 0)` and reusing
+one intersection vertex. `ShapeFix_Face::FixLoopWire` then groups those edges into two
+triangular wires and returns two faces in a compound. `ShapeFix_Shape` must carry those
+context replacements into the prism shell so its adjacent side faces share the split
+edges. Rust currently has no `ShapeFix_Wire` implementation or equivalent p-curve
+intersection/split plus loop-extraction path; `ShapeFix_Face` only handles the periodic
+cone regression. This is the lowest missing dependency for the self-intersecting prism
+case. It needs the `ShapeAnalysis_Wire`/`ShapeFix_IntersectionTool::FixSelfIntersectWire`
+behavior (intersection selection, exact edge subranges, and shared vertex), followed by
+`ShapeFix_Face::FixLoopWire` and nested reshape application. The same source also needs
+`ShapeFix_Wire::FixReorder`, `FixGaps3d`, and `FixGaps2d` for OCC24881, plus empty-wire
+`ShapeAnalysis_Wire::CheckOrder` and `ShapeFix_Wire::FixReorder` for OCC25014. These
+operations are absent too, so the entire source cannot be mapped by implementing only
+the bowtie path. Do not mark the source green until all seven original declarations pass
+together. No declaration rows were added.
 
 The nine declarations in `ShapeUpgrade_UnifySameDomain_Test.cxx` also remain unmapped.
 The pinned production implementation is 4,761 lines and its tests require genuine
