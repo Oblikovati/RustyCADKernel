@@ -6,6 +6,7 @@
 mod edge_connect;
 mod face;
 mod face_connect;
+mod intersection;
 mod root;
 mod shape;
 mod shape_tolerance;
@@ -14,6 +15,7 @@ mod wire;
 pub use edge_connect::ShapeFixEdgeConnect;
 pub use face::ShapeFixFace;
 pub use face_connect::ShapeFixFaceConnect;
+pub use intersection::{PcurveCrossing, line_pcurve_crossing};
 pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
 pub use shape::ShapeFixShape;
 pub use shape_tolerance::ShapeFixShapeTolerance;
