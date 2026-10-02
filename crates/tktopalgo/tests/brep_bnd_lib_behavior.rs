@@ -1,14 +1,13 @@
-//! Behavior tests of BRepBndLib after the cases of the upstream suite
-//! `BRepBndLib_Test.cxx`, which is not mapped: it builds its shapes with
-//! BRepBuilderAPI_MakeEdge/MakeFace and BRepPrimAPI_MakeCylinder and meshes them with
-//! BRepMesh_IncrementalMesh (TKMesh), none of which the port provides (TKMesh is not in
-//! the shared native build either, so the unchanged suite does not link there). Here the
-//! same shapes are built with BRep_Builder: the edge MakeEdge gives on a curve (its
-//! vertices at the curve ends, tolerance 1e-7), the plane face MakeFace gives on an
-//! infinite plane (no wire, natural restriction), and the 26-segment 3d polygon of
-//! deflection 0.1 that BRepMesh gives the unit circle (its nodes at the angles
-//! 2 pi k / 26, which the reference bounds of the upstream cases pin). Each case checks
-//! the same properties with the same values and tolerances.
+//! Additional BRepBndLib behavior tests beyond the mapped declarations in
+//! `brep_bnd_lib_legacy.rs`. They use Rust-native helpers to exercise supporting API
+//! behavior such as optimal and close bounds.
+//!
+//! The mapped legacy tests construct equivalent shapes directly because the Rust port
+//! does not yet provide the higher-level MakeEdge/MakeFace/MakeCylinder and incremental
+//! mesher APIs used by OCCT.
+//!
+//! The legacy oracle runs unchanged from OCCT and includes the original constructors.
+//!
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::ncollection::Array1;
