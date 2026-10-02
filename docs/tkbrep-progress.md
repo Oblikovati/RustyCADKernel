@@ -70,8 +70,25 @@ The toolkit test inventory maps these suites (1260 declarations; 1271 active nat
 | BRepGraph_ReplaceVertex_Test.cxx | brep_graph_replace_vertex | 6 | pass | pass |
 | BRepGraph_Reverse_Test.cxx | brep_graph_reverse | 16 | pass | pass |
 | BRepGraph_Sharing_Test.cxx | brep_graph_sharing | 17 | pass | pass |
-| BRepGraph_Compact_Test.cxx | not mapped (phase 2) | 26 | not run | waits for BRepBuilderAPI_Copy, BRepCheck_Analyzer, BRepAlgoAPI_Cut (TKBO), TKPrim cylinder |
+| BRepGraph_Compact_Test.cxx | brep_graph_compact_legacy (15/26) | 26 | 15 Rust mirrors pass; native 26/26 | remaining declarations are listed below; source suite not complete |
 | BRepGraph_Copy_Test.cxx | brep_graph_copy_legacy (11/23) | 23 | 11 Rust mirrors pass; native 23/23 | 12 declarations remain: cache services and mesh representations, supplement attachment remapping, cylinder and compound-only-face inputs, and fused-box regularity |
+
+The 15 direct `BRepGraph_Compact_Test.cxx` mirrors use the source's 10×20×30 box,
+two deep-copied box faces, or a box compound with a loose edge, and compare each
+legacy assertion in the Rust target. Eleven declarations remain unmapped:
+`RemovalCompact_PreservesBounds_AndDoesNotGrowTopology` (exact six-coordinate
+`Bnd_Box` comparison), `RemovalCompact_PreservesClosedTopologyAndValidShape`
+(`BRepCheck_Analyzer` on the reconstructed compound),
+`CoEdgeUID_AfterCompaction` and `UIDRoundTrip_RefUIDs_AfterCompaction` (source
+reference selection and per-kind UID round trips),
+`OwnGen_PreservedForAllTopologyKindsAfterCompact` (six distinct editor mutation
+paths), `Compact_AfterDedupMerge_NoBoundsErrors` (three copied solids merged by
+deduplication), `Compact_FaceWithInnerWires_WireCountPreserved` (TKBO cut and
+cylindrical primitive), `HistorySurvivesCompactWithRemappedIds` (two-root merge
+history), and the three `CacheMesh_*` declarations (driver lifetime, mesh entry
+invalidation, and fresh mesh-entry copy). The native 26-test CTest suite passes;
+the toolkit verifier correctly refuses to call this source complete while 11
+declarations lack parity rows.
 | BRepGraph_Deduplicate_Test.cxx | not mapped (phase 2) | 82 | not run | waits for BRepBuilderAPI_Copy and MakeFace, BRepCheck_Analyzer, TKPrim cylinder, sphere and cone |
 | BRepGraph_Transform_Test.cxx | mapped | 19 | passed | original geometry, placement and mesh policies |
 | BRepGraph_Validate_Test.cxx | mapped | 23 | passed | original mutations, guard scopes and synthetic graphs |
