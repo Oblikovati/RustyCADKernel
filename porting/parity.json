@@ -215862,6 +215862,646 @@
       "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_vertices_section",
       "status": "implemented",
       "notes": "Returns mutable access to section vertices, which survive Clear."
+    },
+    {
+      "upstream_id": "BOPDS_DS",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::default",
+      "status": "implemented",
+      "notes": "Creates empty BOPDS argument and shape storage."
+    },
+    {
+      "upstream_id": "BOPDS_DS()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::default",
+      "status": "implemented",
+      "notes": "Creates empty BOPDS argument and shape storage."
+    },
+    {
+      "upstream_id": "BOPDS_DS::~BOPDS_DS()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership releases the ported storage fields without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_DS(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator chooses native memory arenas; Rust collections own their storage."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::clear",
+      "status": "partial",
+      "notes": "Clears the currently ported argument, shape, range and shape-index storage; unported BOPDS pools remain outside this Rust slice."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Allocator() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::SetArguments(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::set_arguments",
+      "status": "implemented",
+      "notes": "Copies the argument sequence in order."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Arguments() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::arguments",
+      "status": "implemented",
+      "notes": "Borrows the copied argument sequence in insertion order."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Init(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::NbShapes() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::nb_shapes",
+      "status": "implemented",
+      "notes": "Returns the number of appended shape records."
+    },
+    {
+      "upstream_id": "BOPDS_DS::NbSourceShapes() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::nb_source_shapes",
+      "status": "partial",
+      "notes": "Matches the native zero value before Init; geometric Init has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::NbRanges() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::nb_ranges",
+      "status": "partial",
+      "notes": "Matches the empty pre-Init ranges; Init is not yet ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Range(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::range",
+      "status": "partial",
+      "notes": "Provides checked access to currently empty pre-Init ranges; Init and range population are not yet ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Rank(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::rank",
+      "status": "partial",
+      "notes": "Returns -1 for the empty pre-Init range set; Init and range population are not yet ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::IsNewShape(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::is_new_shape",
+      "status": "partial",
+      "notes": "Uses native source count zero before Init; source initialization remains unported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Append(const BOPDS_ShapeInfo&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::append_shape_info",
+      "status": "implemented",
+      "notes": "Copies shape metadata, appends it, then binds its shape to the new zero-based index."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Append(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::append_shape",
+      "status": "implemented",
+      "notes": "Appends default metadata carrying the supplied shape and binds the shape index."
+    },
+    {
+      "upstream_id": "BOPDS_DS::ShapeInfo(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::shape_info",
+      "status": "implemented",
+      "notes": "Returns checked access to an appended shape-info record."
+    },
+    {
+      "upstream_id": "BOPDS_DS::ChangeShapeInfo(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::change_shape_info",
+      "status": "implemented",
+      "notes": "Returns checked mutable access to an appended shape-info record."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Shape(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::shape",
+      "status": "implemented",
+      "notes": "Returns checked access to the shape held by a record."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Index(const TopoDS_Shape&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::index",
+      "status": "implemented",
+      "notes": "Uses TopTools shape-map IsSame identity and returns -1 for an absent shape."
+    },
+    {
+      "upstream_id": "BOPDS_DS::PaveBlocksPool() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::ChangePaveBlocksPool()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::HasPaveBlocks(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::PaveBlocks(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::ChangePaveBlocks(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdatePaveBlocks()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdatePaveBlock(const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdateCommonBlock(const occ::handle<BOPDS_CommonBlock>&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::IsCommonBlock(const occ::handle<BOPDS_PaveBlock>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::CommonBlock(const occ::handle<BOPDS_PaveBlock>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::SetCommonBlock(const occ::handle<BOPDS_PaveBlock>&,const occ::handle<BOPDS_CommonBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::RealPaveBlock(const occ::handle<BOPDS_PaveBlock>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::IsCommonBlockOnEdge(const occ::handle<BOPDS_PaveBlock>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::FaceInfoPool() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::HasFaceInfo(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::FaceInfo(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::ChangeFaceInfo(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdateFaceInfoIn(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdateFaceInfoIn(const NCollection_Map<int>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdateFaceInfoOn(const NCollection_Map<int>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::FaceInfoOn(int,NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,NCollection_Map<int>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::FaceInfoIn(int,NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,NCollection_Map<int>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::AloneVertices(int,NCollection_List<int>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::RefineFaceInfoOn()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::RefineFaceInfoIn()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::SubShapesOnIn(int,int,NCollection_Map<int>&,NCollection_Map<int>&,NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,NCollection_Map<occ::handle<BOPDS_PaveBlock>>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::SharedEdges(int,int,NCollection_List<int>&,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::ShapesSD()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::AddShapeSD(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::HasShapeSD(int,int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::GetSameDomainIndex(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfVV()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfVE()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfVF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfEE()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfEF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfFF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfVZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfEZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfFZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InterfZZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::NbInterfTypes()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::AddInterf(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::HasInterf(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::HasInterf(int,int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::HasInterfShapeSubShapes(int,int,bool) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::HasInterfSubShapes(int,int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Interferences() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Dump() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::IsSubShape(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::Paves(int,NCollection_List<BOPDS_Pave>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdatePaveBlocksWithSDVertices()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdatePaveBlockWithSDVertices(const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::UpdateCommonBlockWithSDVertices(const occ::handle<BOPDS_CommonBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::InitPaveBlocksForVertex(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::ReleasePaveBlocks()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::IsValidShrunkData(const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+    },
+    {
+      "upstream_id": "BOPDS_DS::BuildBndBoxSolid(int,Bnd_Box&,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
+      "rust_item": "",
+      "status": "partial",
+      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
     }
   ],
   "tests": [

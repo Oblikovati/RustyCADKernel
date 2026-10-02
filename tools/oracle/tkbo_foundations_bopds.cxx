@@ -7,8 +7,10 @@
 #include <BOPDS_CoupleOfPaveBlocks.hxx>
 #include <BOPDS_ShapeInfo.hxx>
 #include <BOPDS_FaceInfo.hxx>
+#include <BOPDS_DS.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
+#include <BRepBuilderAPI_MakeVertex.hxx>
 #include <Bnd_Box.hxx>
 #include <cstdio>
 #include <unistd.h>
@@ -102,4 +104,14 @@ void bo_face_info_case(const std::vector<double>&) {
  info.SetIndex(12);bo_int(info.Index());bo_int(info.PaveBlocksIn().Extent());bo_int(info.VerticesIn().Extent());bo_int(info.PaveBlocksOn().Extent());bo_int(info.VerticesOn().Extent());bo_int(info.PaveBlocksSc().Extent());bo_int(info.VerticesSc().Extent());
  bo_int(info.PaveBlocksIn().Contains(a));bo_int(info.PaveBlocksIn().Contains(c));bo_int(info.VerticesIn().Contains(9));
  info.Clear();bo_int(info.Index());bo_int(info.PaveBlocksIn().Extent());bo_int(info.VerticesIn().Extent());bo_int(info.PaveBlocksOn().Extent());bo_int(info.VerticesOn().Extent());bo_int(info.PaveBlocksSc().Extent());bo_int(info.VerticesSc().Extent());bo_int(info.PaveBlocksSc().Contains(c));bo_int(info.PaveBlocksSc().Contains(a));bo_int(info.VerticesSc().Contains(7));
+}
+void bo_data_structure_case(const std::vector<double>&) {
+ BOPDS_DS ds;TopoDS_Shape first=BRepBuilderAPI_MakeVertex(gp_Pnt(1.,0.,0.)),second=BRepBuilderAPI_MakeVertex(gp_Pnt(2.,0.,0.));
+ NCollection_List<TopoDS_Shape> arguments;arguments.Append(first);arguments.Append(second);ds.SetArguments(arguments);
+ bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Arguments().Extent());
+ bo_int(ds.Append(first));bo_int(ds.Append(second));TopoDS_Shape reversed=first;reversed.Reverse();bo_int(ds.Append(reversed));
+ bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Rank(0));bo_int(ds.Rank(1));bo_int(ds.IsNewShape(0));bo_int(ds.IsNewShape(-1));
+ bo_int(ds.Index(first));bo_int(ds.Index(reversed));bo_int(ds.Index(second));bo_int(ds.Shape(0).IsSame(first));bo_int(ds.ShapeInfo(0).Shape().IsSame(first));
+ BOPDS_ShapeInfo info;info.SetShape(second);info.SetFlag(17);bo_int(ds.Append(info));bo_int(ds.ShapeInfo(3).Flag());ds.ChangeShapeInfo(3).SetFlag(21);bo_int(ds.ShapeInfo(3).Flag());
+ ds.Clear();bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Arguments().Extent());bo_int(ds.Index(first));
 }
