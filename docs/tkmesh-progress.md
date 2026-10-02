@@ -124,7 +124,7 @@ Every accepted input and circle result is compared exactly. The integrated oracl
 passes 131,199 requests and separately replays 28 indexing/null-object differences.
 The shared CellFilter conversion now uses TKernel's existing native integer cast;
 all 251 existing tree comparisons remain green. TKMesh is now 2/29 mapped original
-declarations; overall mapping is 7,212/8,648 GoogleTest declaration candidates.
+declarations; overall mapping is 7,215/8,648 GoogleTest declaration candidates.
 
 ### Populated-mesh Delaun predicates
 

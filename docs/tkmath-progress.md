@@ -1,8 +1,10 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 118 complete source suites
-currently account for 2,020 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. All 2023 declarations are
+mapped and pass the integrated source gate in native and Rust. The three Bug30655
+tests use equivalent Rust triangulation fixtures; they do not yet reproduce the
+native full-face meshing setup described below.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
