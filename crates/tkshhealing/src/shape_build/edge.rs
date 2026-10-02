@@ -13,7 +13,9 @@ use rustycad_tkbrep::brep::{BRepBuilder, BRepCurveRepresentation, BRepGCurve};
 use rustycad_tkbrep::topods::{self, Edge, Face, ShapeIterator, Vertex};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dOffsetCurve, Geom2dTrimmedCurve};
+use rustycad_tkg2d::geom2d::{
+    Geom2dBSplineCurve, Geom2dCurve, Geom2dOffsetCurve, Geom2dTrimmedCurve,
+};
 use rustycad_tkg3d::geom::{GeomCurve, GeomOffsetCurve, GeomSurface, GeomTrimmedCurve};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::toploc::Location;
@@ -133,6 +135,24 @@ impl ShapeBuildEdge {
         set_face_pcurve_range(&copy, pcurve, face, range)?;
         Ok(copy)
     }
+
+    /// Copies a B-spline p-curve and moves its endpoint poles;
+    /// `ShapeBuildEdge.copy_bspline_pcurve_with_endpoints(&pc, point, point)?`.
+    pub fn copy_bspline_pcurve_with_endpoints(
+        &self,
+        pcurve: &Handle<dyn Geom2dCurve>,
+        first: rustycad_tkmath::gp::Point2,
+        last: rustycad_tkmath::gp::Point2,
+    ) -> Result<Handle<dyn Geom2dCurve>, Failure> {
+        let source = pcurve.cast::<Geom2dBSplineCurve>();
+        let source = source
+            .get()
+            .ok_or_else(|| unsupported_pcurve_copy(pcurve))?;
+        let copy = Geom2dBSplineCurve::copy_of(source)?;
+        copy.set_pole(1, first)?;
+        copy.set_pole(copy.nb_poles(), last)?;
+        Ok(Handle::new(copy).cast())
+    }
 }
 
 /// Replaces the p-curve representation and clears SameRange when its range changes.
@@ -146,6 +166,17 @@ fn set_face_pcurve_range(
     builder.update_edge_pcurve_on_face(edge, pcurve, face, 0.0)?;
     builder.range_on_face(edge, face, first, last)?;
     builder.same_range(edge, false)
+}
+
+/// Reports the precise curve kind required by the endpoint-pole operation.
+fn unsupported_pcurve_copy(pcurve: &Handle<dyn Geom2dCurve>) -> Failure {
+    let found = pcurve.dynamic_type().map_or("null", |kind| kind.name());
+    Failure::with_message(
+        "Standard_NotImplemented",
+        &format!(
+            "ShapeBuild_Edge pcurve endpoint copy requires Geom2d_BSplineCurve; found {found}"
+        ),
+    )
 }
 
 /// The vertex loop of `CopyReplaceVertices`: fills the null vertices with the first

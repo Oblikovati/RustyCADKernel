@@ -779,9 +779,10 @@ added.
 
 A bounded `ShapeFix_Wire` foundation is now implemented for the unchanged cases: exact
 signed-order application, empty-order handling, 3D/2D gap measurement and the no-gap fix
-path. Rust oracle tests use the pinned empty wire and all six box-face wires; nonzero gap
-correction still returns a typed unsupported failure, and `ShapeFix_Wire::Perform`,
-general reordering repair, and self-intersection splitting remain unported. The Shape
+path. Rust oracle tests use the pinned empty wire and all six box-face wires. The
+periodic-cone single-edge `FixGaps2d` path now repairs its nonzero gap; other nonzero gaps
+still return a typed unsupported failure. `ShapeFix_Wire::Perform`, general reordering
+repair, and self-intersection splitting remain unported. The Shape
 source remains unmapped. Native member probes report empty `CheckOrder`/`FixReorder`
 false with zero edges and no status flags. On every box wire, `FixReorder` returns true
 with DONE1 and DONE5, while both gap fixers return false and report neither DONE nor FAIL.
@@ -792,9 +793,10 @@ cone, `FixGaps3d` before pcurve construction returns false with no flags. After 
 sets both pcurve endpoint coordinates to `(0, 0.5)` while retaining range `0..1.04977`
 and edge tolerance `1e-7`. Native `FixGap2d` achieves this by making a curve copy, moving
 its endpoint poles, replacing endpoint vertices and the affected edge through the
-reshape context, and setting `SameRange(false)`. Rust's current path only measures that
-gap; directly moving poles on the existing edge would miss the topology and context
-semantics. The bowtie oracle probe also confirms that `ShapeFix_Wire::Perform` splits the
+reshape context, and setting `SameRange(false)`. Rust now copies the p-curve and edge,
+replaces the closed vertex and edge through context, and matches the native endpoint,
+range, tolerance and status assertions on the pinned ring-edge fixture. The bowtie oracle
+probe also confirms that `ShapeFix_Wire::Perform` splits the
 four input pcurve edges into six edges and records self-intersection DONE1/DONE5. Its
 missing prerequisite is the exact `ShapeAnalysis_Wire` intersection selection plus
 shared-vertex edge splitting and insertion, before `ShapeFix_Face::FixLoopWire` can
@@ -803,13 +805,14 @@ declarations.
 
 `ShapeBuild_Edge::CopyReplaceVertices` and the p-curve update tail are now available as
 `ShapeBuildEdge::copy_replace_vertices_with_pcurve_range`. It copies the original edge,
-uses the supplied endpoint vertices and p-curve, sets the face-specific range, and clears
-SameRange without mutating the input edge. A focused test checks replacement identity,
-the `(0.25, 0.75)` range, and preservation of the original `(0, 1)` range. The existing
-periodic-cone face test now also checks the native final ring p-curve endpoints and range
-`0..1.0497704792601261`. This is a prerequisite slice only; the periodic `FixGap2d`
-pole movement, tolerance update, and context registration are not yet wired into the
-fixer, and no Shape declarations are mapped.
+uses supplied endpoint vertices and p-curve, sets the face-specific range, and clears
+SameRange without mutating the input edge. The narrow periodic `FixGap2d` implementation
+copies a B-spline p-curve, moves both endpoint poles to the closest periodic midpoint,
+copies the closed edge with a new vertex, resets tolerances, records replacements and
+updates wire data. Focused tests check that helper and the native endpoint `(0,0.5)`,
+range `0..1.0497704792601261`, confusion tolerances, status, and context-applied edge.
+General curve conversion and multi-edge gap repair remain unsupported. No Shape
+declarations are mapped.
 
 The nine declarations in `ShapeUpgrade_UnifySameDomain_Test.cxx` also remain unmapped.
 The pinned production implementation is 4,761 lines and its tests require genuine
