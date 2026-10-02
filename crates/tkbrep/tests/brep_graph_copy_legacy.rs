@@ -2,10 +2,13 @@
 mod support;
 
 use rustycad_tkbrep::brep_graph::copy::{self, CachePolicy, GeomPolicy, MeshPolicy};
+use rustycad_tkbrep::brep_graph::layer_history::{HistoryKind, LayerHistory};
 use rustycad_tkbrep::brep_graph::*;
 use rustycad_tkbrep::topexp::Explorer;
+use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
+use rustycad_tkmath::toploc::Location;
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
 use support::make_box;
 
@@ -30,6 +33,45 @@ fn surface_area(shape: &rustycad_tkbrep::topods::Shape) -> f64 {
     let mut properties = GProps::default();
     BRepGProp::surface_properties(shape, &mut properties, false, false).unwrap();
     properties.mass()
+}
+
+fn graph_with_removed_occurrence() -> (BRepGraph, OccurrenceId, OccurrenceRefId) {
+    let mut graph = box_graph();
+    let part = ProductId::start();
+    let assembly = graph.editor().products().add_empty();
+    graph
+        .editor()
+        .products()
+        .append_document_root(assembly)
+        .unwrap();
+    let (occurrence, reference) = graph
+        .editor()
+        .products()
+        .append(
+            assembly,
+            part,
+            &Location::default(),
+            OccurrenceId::default(),
+        )
+        .unwrap();
+    graph
+        .editor()
+        .generic()
+        .remove_subgraph(occurrence.into())
+        .unwrap();
+    (graph, occurrence, reference)
+}
+
+fn active_occurrence_count(graph: &BRepGraph) -> u32 {
+    (0..graph.topo().occurrences().nb())
+        .filter(|index| !OccurrenceId::new(*index).is_removed(graph))
+        .count() as u32
+}
+
+fn active_occurrence_ref_count(graph: &BRepGraph) -> u32 {
+    (0..graph.refs().occurrences().nb())
+        .filter(|index| !OccurrenceRefId::new(*index).is_removed(graph))
+        .count() as u32
 }
 
 #[test]
@@ -174,4 +216,79 @@ fn copy_graph_preserves_ref_uids() {
         stamp.item_uid(),
         ItemUid::reference(reference_uid.kind, reference_uid.counter as usize)
     );
+}
+
+#[test]
+fn copy_graph_preserves_removed_occurrence_active_counts() {
+    let (source, occurrence, reference) = graph_with_removed_occurrence();
+    assert!(occurrence.is_removed(&source));
+    assert!(reference.is_removed(&source));
+    let mut target = BRepGraph::new();
+    copy_graph(&source, &mut target, GeomPolicy::Copy);
+    assert!(occurrence.is_removed(&target));
+    assert!(reference.is_removed(&target));
+    assert_eq!(
+        target.topo().occurrences().nb_active(),
+        active_occurrence_count(&target)
+    );
+    assert_eq!(
+        target.refs().occurrences().nb_active(),
+        active_occurrence_ref_count(&target)
+    );
+}
+
+#[test]
+fn copy_graph_copies_history_through_uid_remapping() {
+    let source = box_graph();
+    let history = source.layer_registry().ensure::<LayerHistory>().unwrap();
+    let (original, replacement) = (FaceId::new(0), FaceId::new(1));
+    let original_uid = source.uids().of_node(original.into());
+    let replacement_uid = source.uids().of_node(replacement.into());
+    history.record(
+        &source,
+        &AsciiString::new("CopyHistory"),
+        original.into(),
+        &[replacement.into()],
+        HistoryKind::Modified,
+    );
+    let mut target = BRepGraph::new();
+    copy_graph(&source, &mut target, GeomPolicy::Copy);
+    let copied_history = target.layer_registry().find::<LayerHistory>();
+    let copied_history = copied_history.get().expect("the copy carries history");
+    let copied_original = target.uids().node_id_from(&original_uid);
+    let copied_replacement = target.uids().node_id_from(&replacement_uid);
+    assert_eq!(
+        copied_history.find_modified(copied_original),
+        Some(vec![copied_replacement])
+    );
+    let original_item_uid = target.uids().of_item(copied_original.into());
+    let replacement_item_uid = target.uids().of_item(copied_replacement.into());
+    assert_eq!(
+        copied_history.find_modified_item_uid(&original_item_uid),
+        Some(vec![replacement_item_uid])
+    );
+}
+
+#[test]
+fn copy_graph_preserves_deleted_history() {
+    let mut source = box_graph();
+    let history = source.layer_registry().ensure::<LayerHistory>().unwrap();
+    let deleted = FaceId::start();
+    let deleted_uid = source.uids().of_item(NodeId::from(deleted).into());
+    source
+        .editor()
+        .generic()
+        .remove_node(deleted.into())
+        .unwrap();
+    assert!(deleted.is_removed(&source));
+    assert!(history.is_deleted(deleted.into()));
+    assert!(history.is_deleted_item_uid(&deleted_uid));
+    assert_eq!(history.nb_records(), 1);
+    let mut target = BRepGraph::new();
+    copy_graph(&source, &mut target, GeomPolicy::Copy);
+    let copied_history = target.layer_registry().find::<LayerHistory>();
+    let copied_history = copied_history.get().expect("the copy carries history");
+    assert!(copied_history.is_deleted(deleted.into()));
+    assert!(copied_history.is_deleted_item_uid(&deleted_uid));
+    assert_eq!(copied_history.nb_records(), history.nb_records());
 }
