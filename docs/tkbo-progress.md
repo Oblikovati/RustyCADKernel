@@ -17,7 +17,10 @@ association slice now covers `IsCommonBlock`, `CommonBlock`, `SetCommonBlock`,
 `RealPaveBlock` and `IsCommonBlockOnEdge`, with handle-identity and first-block
 selection checked by a pinned native probe. The complete `BOPDS_Curve` storage
 record adds 19 API rows, including box/curve copies, pave-block and vertex list
-mutations, initial-block creation, `HasEdge`, and both tolerances.
+mutations, initial-block creation, `HasEdge`, and both tolerances. The shared
+interference indices plus `InterfVV`, `InterfVE`, and `InterfVF` add another 26
+rows, with the native `-1` new-index sentinel behavior and parameter fields
+checked against the oracle.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered

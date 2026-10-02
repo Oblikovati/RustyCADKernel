@@ -151,6 +151,13 @@ void bo_bopds_curve_case(const std::vector<double>&) {
  occ::handle<BOPDS_PaveBlock> first=new BOPDS_PaveBlock(),edge=new BOPDS_PaveBlock();edge->SetEdge(7);NCollection_List<occ::handle<BOPDS_PaveBlock>> blocks;blocks.Append(first);blocks.Append(edge);blocks.Append(edge);value.SetPaveBlocks(blocks);bo_int(value.PaveBlocks().Extent());bo_int(value.PaveBlocks().First()==first);NCollection_List<occ::handle<BOPDS_PaveBlock>>::Iterator aIt(value.PaveBlocks());aIt.Next();bo_int(aIt.Value()==edge);aIt.Next();bo_int(aIt.Value()==edge);bo_int(value.HasEdge());value.ChangePaveBlocks().RemoveFirst();bo_int(value.PaveBlocks().Extent());
  value.ChangeTechnoVertices().Append(8);value.ChangeTechnoVertices().Append(3);value.ChangeTechnoVertices().Append(8);bo_int(value.TechnoVertices().Extent());NCollection_List<int>::Iterator aItVertex(value.TechnoVertices());for(;aItVertex.More();aItVertex.Next())bo_int(aItVertex.Value());value.SetTolerance(-0.);bo_real(value.Tolerance());
 }
+void bo_bopds_interf_case(const std::vector<double>&) {
+ BOPDS_InterfVV vv;bo_int(vv.Index1());bo_int(vv.Index2());bo_int(vv.IndexNew());bo_int(vv.HasIndexNew());int newIndex=77;bo_int(vv.HasIndexNew(newIndex));bo_int(newIndex);bo_int(vv.GetIndexNew().has_value());
+ vv.SetIndices(3,8);int first,second;vv.Indices(first,second);bo_int(first);bo_int(second);vv.SetIndex1(-4);vv.SetIndex2(0);bo_int(vv.Index1());bo_int(vv.Index2());bo_int(vv.OppositeIndex(-4));bo_int(vv.OppositeIndex(0));bo_int(vv.OppositeIndex(19));bo_int(vv.Contains(-4));bo_int(vv.Contains(8));
+ vv.SetIndexNew(-2);newIndex=77;bo_int(vv.IndexNew());bo_int(vv.HasIndexNew(newIndex));bo_int(newIndex);bo_int(vv.HasIndexNew());bo_int(vv.GetIndexNew().has_value());bo_int(*vv.GetIndexNew());vv.SetIndexNew(-1);bo_int(vv.HasIndexNew());bo_int(vv.GetIndexNew().has_value());
+ BOPDS_InterfVE ve;bo_int(ve.Parameter());ve.SetParameter(-0.);bo_real(ve.Parameter());ve.SetIndices(6,9);bo_int(ve.OppositeIndex(9));
+ BOPDS_InterfVF vf;double u=7.,v=8.;vf.UV(u,v);bo_real(u);bo_real(v);vf.SetUV(-1.25,2.5);vf.UV(u,v);bo_real(u);bo_real(v);vf.SetIndices(11,13);bo_int(vf.Contains(13));
+}
 void bo_data_structure_init_case(const std::vector<double>& v) {
  BRep_Builder builder;TopoDS_Vertex first,second,third;builder.MakeVertex(first,gp_Pnt(1.,2.,3.),2e-5);builder.MakeVertex(second,gp_Pnt(4.,5.,6.),5e-7);builder.MakeVertex(third,gp_Pnt(7.,8.,9.),1e-4);
  TopoDS_Compound root;builder.MakeCompound(root);builder.Add(root,first);builder.Add(root,second);builder.Add(root,first);
