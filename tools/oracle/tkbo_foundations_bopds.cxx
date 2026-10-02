@@ -8,6 +8,7 @@
 #include <BOPDS_ShapeInfo.hxx>
 #include <BOPDS_FaceInfo.hxx>
 #include <BOPDS_DS.hxx>
+#include <BOPDS_Interf.hxx>
 #include <BOPDS_Curve.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
@@ -27,6 +28,21 @@
 #include <Bnd_Box.hxx>
 #include <cstdio>
 #include <unistd.h>
+template <typename T> void bo_bopds_solid_interf(T& value) {
+ bo_int(value.Index1());bo_int(value.Index2());bo_int(value.IndexNew());
+ value.SetIndices(4,9);value.SetIndexNew(13);
+ int first=0,second=0,newIndex=77;value.Indices(first,second);
+ bo_int(first);bo_int(second);bo_int(value.OppositeIndex(4));bo_int(value.OppositeIndex(9));bo_int(value.OppositeIndex(27));
+ bo_int(value.Contains(4));bo_int(value.Contains(9));bo_int(value.Contains(27));
+ bo_int(value.IndexNew());bo_int(value.HasIndexNew());bo_int(value.HasIndexNew(newIndex));bo_int(newIndex);
+ value.SetIndexNew(-1);bo_int(value.HasIndexNew());
+}
+void bo_bopds_solid_interferences(const std::vector<double>&) {
+ BOPDS_InterfVZ vz;bo_bopds_solid_interf(vz);
+ BOPDS_InterfEZ ez;bo_bopds_solid_interf(ez);
+ BOPDS_InterfFZ fz;bo_bopds_solid_interf(fz);
+ BOPDS_InterfZZ zz;bo_bopds_solid_interf(zz);
+}
 void bo_index_state(const BOPDS_IndexRange& value,int query) {
  bo_int(value.First());bo_int(value.Last());int first,last;value.Indices(first,last);bo_int(first);bo_int(last);
  bo_int(value.Contains(query));value.Dump();std::cout<<' ';

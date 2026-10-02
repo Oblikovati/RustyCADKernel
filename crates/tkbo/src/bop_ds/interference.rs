@@ -129,6 +129,45 @@ pub struct InterfEF {
     common_part: CommonPrt,
 }
 
+macro_rules! solid_interference_record {
+    ($name:ident, $description:literal) => {
+        #[doc = $description]
+        #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+        pub struct $name(Interference);
+
+        impl Deref for $name {
+            type Target = Interference;
+
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+
+        impl DerefMut for $name {
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+    };
+}
+
+solid_interference_record!(
+    InterfVZ,
+    "Vertex/solid interference sharing the base indices; `InterfVZ::default()`."
+);
+solid_interference_record!(
+    InterfEZ,
+    "Edge/solid interference sharing the base indices; `InterfEZ::default()`."
+);
+solid_interference_record!(
+    InterfFZ,
+    "Face/solid interference sharing the base indices; `InterfFZ::default()`."
+);
+solid_interference_record!(
+    InterfZZ,
+    "Solid/solid interference sharing the base indices; `InterfZZ::default()`."
+);
+
 /// Face/face interference with dynamic curve/point results; `InterfFF::default()`.
 pub struct InterfFF {
     base: Interference,

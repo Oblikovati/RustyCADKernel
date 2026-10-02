@@ -216376,6 +216376,102 @@
       "notes": "Mutably borrows the stored intersection-point array."
     },
     {
+      "upstream_id": "BOPDS_InterfVZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfVZ::default",
+      "status": "implemented",
+      "notes": "Creates the empty vertex/solid record with the native base-index sentinels."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVZ(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native memory arenas; Rust owned records use the shared base record."
+    },
+    {
+      "upstream_id": "BOPDS_InterfVZ::~BOPDS_InterfVZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the base record without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfEZ::default",
+      "status": "implemented",
+      "notes": "Creates the empty edge/solid record with the native base-index sentinels."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEZ(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native memory arenas; Rust owned records use the shared base record."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEZ::~BOPDS_InterfEZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the base record without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfFZ::default",
+      "status": "implemented",
+      "notes": "Creates the empty face/solid record with the native base-index sentinels."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFZ(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native memory arenas; Rust owned records use the shared base record."
+    },
+    {
+      "upstream_id": "BOPDS_InterfFZ::~BOPDS_InterfFZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the base record without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfZZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfZZ::default",
+      "status": "implemented",
+      "notes": "Creates the empty solid/solid record with the native base-index sentinels."
+    },
+    {
+      "upstream_id": "BOPDS_InterfZZ(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native memory arenas; Rust owned records use the shared base record."
+    },
+    {
+      "upstream_id": "BOPDS_InterfZZ::~BOPDS_InterfZZ()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the base record without a callable destructor."
+    },
+    {
       "upstream_id": "BOPDS_DS",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",

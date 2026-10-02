@@ -62,6 +62,7 @@ fn dispatch_case(operation: &str, v: &[f64]) {
         "bop_data_structure_common_block" => records::data_structure_common_block_case(v),
         "bopds_curve" => records::bopds_curve_case(v),
         "bopds_interf" => records::bopds_interf_case(v),
+        "bopds_solid_interferences" => records::bopds_solid_interferences_case(v),
         "bopds_interf_common" => records::bopds_interf_common_case(v),
         "bopds_interf_ff" => records::bopds_interf_ff_case(v),
         "bop_data_structure_init" => records::data_structure_init_case(v),
