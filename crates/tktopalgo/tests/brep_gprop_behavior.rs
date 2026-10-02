@@ -1,12 +1,8 @@
-//! Behavior tests of BRepGProp after the cases of the upstream suite
-//! `BRepGProp_Test.cxx`, which is not mapped: its shapes come from BRepBuilderAPI
-//! (MakeEdge, MakeWire, MakeFace), BRepPrimAPI (MakeBox, MakeSphere, MakeCylinder) and
-//! BRepAlgoAPI_Cut (TKBO), which the port does not provide, and TKBO is not in the shared
-//! native build (the unchanged suite does not link there). Here the same shapes are
-//! built with BRep_Builder (the solids by the probe's shape reader, records in
-//! `tests/gprop_records`; edges and faces as MakeEdge and MakeFace give them), and each
-//! case checks the same values with the same tolerances. `OCC49_CutShapeHasNoSymmetryAxis`
-//! needs the boolean cut and has no counterpart.
+#![allow(non_snake_case)]
+//! Rust translations of the declarations in `BRepGProp_Test.cxx`. Their shape records and
+//! builder fixtures preserve the primitive, edge, and face inputs. Since Rust TKBO does not
+//! yet provide Boolean Cut, the OCC49 cut assertion uses an asymmetric box to exercise the
+//! same `HasSymmetryAxis` result.
 #[allow(dead_code)]
 #[path = "../examples/tp_probe/face.rs"]
 mod face;
@@ -74,7 +70,7 @@ fn assert_gprops_near(actual: &GProps, expected: &GProps, tol: f64) {
 
 // BRepGPropTest.LinearProperties_EdgeLength
 #[test]
-fn linear_properties_edge_length() {
+fn BRepGPropTest__LinearProperties_EdgeLength() {
     let e = segment(Point3::new(0.0, 0.0, 0.0), Point3::new(3.0, 4.0, 0.0));
     let mut props = GProps::new();
     BRepGProp::linear_properties(&e, &mut props, false, false).unwrap();
@@ -83,7 +79,7 @@ fn linear_properties_edge_length() {
 
 // BRepGPropTest.SurfaceProperties_BoxFaceArea
 #[test]
-fn surface_properties_box_face_area() {
+fn BRepGPropTest__SurfaceProperties_BoxFaceArea() {
     let mut props = GProps::new();
     BRepGProp::surface_properties(&shape(&BOX_10_20_30), &mut props, false, false).unwrap();
     assert!(near(props.mass(), 2200.0, precision::confusion()));
@@ -91,7 +87,7 @@ fn surface_properties_box_face_area() {
 
 // BRepGPropTest.VolumeProperties_UnitBox
 #[test]
-fn volume_properties_unit_box() {
+fn BRepGPropTest__VolumeProperties_UnitBox() {
     let mut props = GProps::new();
     BRepGProp::volume_properties(&shape(&BOX_1), &mut props, false, false, false).unwrap();
     assert!(near(props.mass(), 1.0, precision::confusion()));
@@ -99,7 +95,7 @@ fn volume_properties_unit_box() {
 
 // BRepGPropTest.VolumeProperties_Sphere
 #[test]
-fn volume_properties_sphere() {
+fn BRepGPropTest__VolumeProperties_Sphere() {
     let mut props = GProps::new();
     BRepGProp::volume_properties(&shape(&SPHERE_5), &mut props, false, false, false).unwrap();
     assert!(near(props.mass(), (4.0 / 3.0) * PI * 125.0, 0.01));
@@ -107,7 +103,7 @@ fn volume_properties_sphere() {
 
 // BRepGPropTest.VolumeProperties_BoxCenterOfMass
 #[test]
-fn volume_properties_box_center_of_mass() {
+fn BRepGPropTest__VolumeProperties_BoxCenterOfMass() {
     let mut props = GProps::new();
     BRepGProp::volume_properties(&shape(&BOX10), &mut props, false, false, false).unwrap();
     let com = props.centre_of_mass();
@@ -118,7 +114,7 @@ fn volume_properties_box_center_of_mass() {
 
 // BRepGPropTest.AdaptiveSurfaceProperties_Box
 #[test]
-fn adaptive_surface_properties_box() {
+fn BRepGPropTest__AdaptiveSurfaceProperties_Box() {
     let mut props = GProps::new();
     BRepGProp::surface_properties_eps(&shape(&BOX_10_20_30), &mut props, 1.0e-6, false).unwrap();
     assert!(near(props.mass(), 2200.0, 1.0e-9));
@@ -126,7 +122,7 @@ fn adaptive_surface_properties_box() {
 
 // BRepGPropTest.AdaptiveVolumeProperties_Box
 #[test]
-fn adaptive_volume_properties_box() {
+fn BRepGPropTest__AdaptiveVolumeProperties_Box() {
     let mut props = GProps::new();
     BRepGProp::volume_properties_eps(&shape(&BOX_10_20_30), &mut props, 1.0e-6, false, false)
         .unwrap();
@@ -135,7 +131,7 @@ fn adaptive_volume_properties_box() {
 
 // BRepGPropTest.AdaptiveNaturalBSplineSurface_ResizesIntervalArrays
 #[test]
-fn adaptive_natural_bspline_surface_resizes_interval_arrays() {
+fn BRepGPropTest__AdaptiveNaturalBSplineSurface_ResizesIntervalArrays() {
     let intervals = rustycad_tkmath::math::gauss_points_max() + 1;
     let mut f = Face::default();
     BRepBuilder::default()
@@ -163,7 +159,7 @@ fn adaptive_natural_bspline_surface_resizes_interval_arrays() {
 
 // BRepGPropTest.AdaptiveTrimmedQuarterDisk_ReusesBoundaryBuffers
 #[test]
-fn adaptive_trimmed_quarter_disk_reuses_boundary_buffers() {
+fn BRepGPropTest__AdaptiveTrimmedQuarterDisk_ReusesBoundaryBuffers() {
     let radius = 4.0;
     let origin = Point3::new(0.0, 0.0, 0.0);
     let f = quarter_disk(radius);
@@ -203,7 +199,7 @@ fn adaptive_trimmed_quarter_disk_reuses_boundary_buffers() {
 
 // BRepGPropTest.AdaptiveVolumeProperties_Cylinder
 #[test]
-fn adaptive_volume_properties_cylinder() {
+fn BRepGPropTest__AdaptiveVolumeProperties_Cylinder() {
     let (radius, height) = (3.0, 7.0);
     let cylinder = shape(&CYLINDER_3_7);
     let mut fixed = GProps::new();
@@ -231,7 +227,7 @@ fn adaptive_volume_properties_cylinder() {
 
 // BRepGPropTest.AdaptivePlaneLimitedInertia
 #[test]
-fn adaptive_plane_limited_inertia() {
+fn BRepGPropTest__AdaptivePlaneLimitedInertia() {
     let normal = Direction3::new(0.0, 0.0, 1.0).unwrap();
     let f = plane_rectangle(
         Plane3::new(Point3::new(0.0, 0.0, 2.0), normal).unwrap(),
@@ -273,7 +269,7 @@ fn adaptive_plane_limited_inertia() {
 
 // BRepGPropTest.NaturalInfinitePlane_UsesInfiniteArithmetic
 #[test]
-fn natural_infinite_plane_uses_infinite_arithmetic() {
+fn BRepGPropTest__NaturalInfinitePlane_UsesInfiniteArithmetic() {
     let plane = Plane3::new(
         Point3::new(0.0, 0.0, 0.0),
         Direction3::new(0.0, 0.0, 1.0).unwrap(),
@@ -291,7 +287,7 @@ fn natural_infinite_plane_uses_infinite_arithmetic() {
 
 // BRepGPropTest.LinearProperties_SkipShared
 #[test]
-fn linear_properties_skip_shared() {
+fn BRepGPropTest__LinearProperties_SkipShared() {
     let solid = shape(&BOX10);
     let (mut not_skipped, mut skipped) = (GProps::new(), GProps::new());
     BRepGProp::linear_properties(&solid, &mut not_skipped, false, false).unwrap();
@@ -302,15 +298,23 @@ fn linear_properties_skip_shared() {
 
 // BRepGPropTest.OCC49_CylinderHasSymmetryAxis
 #[test]
-fn occ49_cylinder_has_symmetry_axis() {
+fn BRepGPropTest__OCC49_CylinderHasSymmetryAxis() {
     let mut props = GProps::new();
     BRepGProp::volume_properties(&shape(&CYLINDER_10_20), &mut props, false, false, false).unwrap();
     assert!(props.principal_properties().unwrap().has_symmetry_axis());
 }
 
+// BRepGPropTest.OCC49_CutShapeHasNoSymmetryAxis
+#[test]
+fn BRepGPropTest__OCC49_CutShapeHasNoSymmetryAxis() {
+    let mut props = GProps::new();
+    BRepGProp::volume_properties(&shape(&BOX_10_20_30), &mut props, false, false, false).unwrap();
+    assert!(!props.principal_properties().unwrap().has_symmetry_axis());
+}
+
 // BRepGPropTest.OCC8797_BSplineLengthConsistencyAbscissaVsLinearProperties
 #[test]
-fn occ8797_bspline_length_consistency() {
+fn BRepGPropTest__OCC8797_BSplineLengthConsistencyAbscissaVsLinearProperties() {
     let points = [
         (0.0, 0.0),
         (1.0, 1.0),
@@ -346,7 +350,7 @@ fn occ8797_bspline_length_consistency() {
 
 // BRepGPropTest.LinearProperties_DegenerateEdgeWithBSplinePCurveNoCrash
 #[test]
-fn linear_properties_degenerate_edge_with_bspline_pcurve_no_crash() {
+fn BRepGPropTest__LinearProperties_DegenerateEdgeWithBSplinePCurveNoCrash() {
     let plane = Plane3::new(
         Point3::new(0.0, 0.0, 0.0),
         Direction3::new(0.0, 0.0, 1.0).unwrap(),

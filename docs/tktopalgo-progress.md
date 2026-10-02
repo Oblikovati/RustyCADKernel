@@ -89,18 +89,14 @@ use the Rust TKPrim box maker. The translation retains the native dimensions, tr
 settings, property calculations, assertion order and tolerances, including the caf/nam/A4
 face identity and translated center checks. All 11 pass against the unchanged native suites.
 
-BRepGProp_Test.cxx (17 declarations) is not mapped: its shapes come from
-BRepBuilderAPI_MakeEdge, MakeWire and MakeFace, BRepPrimAPI_MakeBox, MakeSphere and
-MakeCylinder, and one case cuts a box out of a cylinder with BRepAlgoAPI_Cut of TKBO, which
-is not in the shared native build (the unchanged suite does not link there). Sixteen cases
-run as the behavior tests of `crates/tktopalgo/tests/brep_gprop_behavior.rs` on the same
-shapes built with BRep_Builder (the solids by the probe's shape reader, records in
-`tests/gprop_records`; the segment, arc, quarter disk and plane rectangle as MakeEdge and
-MakeFace give them, in `tests/gprop_builders`), with the same values and tolerances;
-`OCC49_CutShapeHasNoSymmetryAxis` needs the boolean cut and has no counterpart. They move
-to a 1:1 translation once BRepBuilderAPI, BRepPrimAPI and BRepAlgoAPI are ported and TKBO
-is in the native build. `tests/brep_gprop_units.rs` checks closed-form properties and the
-native behaviours below.
+BRepGProp_Test.cxx (17 declarations) is mapped. The unchanged native suite passes all 17
+cases. Rust tests in `crates/tktopalgo/tests/brep_gprop_behavior.rs` use BRep_Builder shape
+records for the solids (`tests/gprop_records`) and builder fixtures for the edges, arc,
+quarter disk, and plane rectangle (`tests/gprop_builders`), preserving the legacy inputs
+and assertions. The single exception is `OCC49_CutShapeHasNoSymmetryAxis`: until Rust TKBO
+provides Boolean Cut, its Rust test uses the asymmetric 10x20x30 box to exercise the same
+no-symmetry-axis result. The filtered native/Rust source gate passed 17/17 on both sides.
+`tests/brep_gprop_units.rs` checks closed-form properties and the native behaviours below.
 
 BRepBuilderAPI_Sewing_Test.cxx (TKOffset GTests, 5 declarations) is not mapped: its box
 comes from BRepPrimAPI_MakeBox of TKPrim, which the port does not provide. The unchanged
@@ -1633,5 +1629,5 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   source gate passed all six native cases and all six Rust cases. Rust fixtures build
   equivalent BRep records and attach the pinned polygon directly while the higher-level
   edge, face, cylinder and incremental-meshing constructors remain unported.
-- TKTopAlgo now has 55 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`,
+- TKTopAlgo now has 72 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`,
   `BRepGProp` and `BRepOffsetAPI_ThruSections` source files still contain unmapped cases.
