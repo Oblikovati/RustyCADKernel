@@ -83,6 +83,11 @@ def bopds_requests() -> list[str]:
     requests += [f'bop_pair {a} {b} {c} {d}' for a, b, c, d in product([-1, 0, 2], repeat=4)]
     requests += [f'bop_point {a} {b} {c} {b} {c} {c} {a} -7'
                  for a, b, c in product([-3.0, -0.0, 0.0, 5.25], repeat=3)]
+    requests += [
+        'bop_pave_block 8 3 1 0 2 1 4 0.25 5 0.75 4 0.5 0.5 1e-9 1 -2 -2 -2 2 2 2 0.1 0.9 1',
+        'bop_pave_block 3 3 7 1 8 2 1 1.5 2 0.5 3 1.25 0.5000000001 1e-8 0 -1 -2 -3 4 5 6 -0.5 2 0',
+        'bop_pave_block -1 9 5 0 6 1 7 0.8 8 0.2 9 0.5 0.5 0.0 1 0 0 0 1 1 1 0.25 0.75 1',
+    ]
     return requests
 
 

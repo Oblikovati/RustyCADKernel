@@ -2,8 +2,10 @@
 mod index_range;
 mod pair;
 mod pave;
+mod pave_block;
 mod point;
 pub use index_range::IndexRange;
 pub use pair::Pair;
 pub use pave::Pave;
+pub use pave_block::PaveBlock;
 pub use point::Point;

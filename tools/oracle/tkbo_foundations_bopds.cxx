@@ -2,7 +2,9 @@
 #include <BOPDS_IndexRange.hxx>
 #include <BOPDS_Pave.hxx>
 #include <BOPDS_Pair.hxx>
+#include <BOPDS_PaveBlock.hxx>
 #include <BOPDS_Point.hxx>
+#include <Bnd_Box.hxx>
 void bo_index_state(const BOPDS_IndexRange& value,int query) {
  bo_int(value.First());bo_int(value.Last());int first,last;value.Indices(first,last);bo_int(first);bo_int(last);
  bo_int(value.Contains(query));value.Dump();std::cout<<' ';
@@ -36,4 +38,19 @@ void bo_point_state(const BOPDS_Point& value) {
 void bo_point_case(const std::vector<double>& v) {
  BOPDS_Point value;bo_point_state(value);value.SetPnt(gp_Pnt(v[0],v[1],v[2]));value.SetPnt2D1(gp_Pnt2d(v[3],v[4]));
  value.SetPnt2D2(gp_Pnt2d(v[5],v[6]));value.SetIndex(int(v[7]));bo_point_state(value);
+}
+void bo_pave_block_case(const std::vector<double>& v) {
+ BOPDS_PaveBlock block;int edge=99;double first,last;int i1,i2;
+ bo_int(block.Edge());bo_int(block.OriginalEdge());bo_int(block.HasEdge());bo_int(block.HasEdge(edge));bo_int(edge);
+ block.SetEdge(int(v[0]));block.SetOriginalEdge(int(v[1]));block.SetPave1(BOPDS_Pave(int(v[2]),v[3]));block.SetPave2(BOPDS_Pave(int(v[4]),v[5]));
+ bo_int(block.IsSplitEdge());block.Range(first,last);bo_real(first);bo_real(last);block.Indices(i1,i2);bo_int(i1);bo_int(i2);
+ block.AppendExtPave(BOPDS_Pave(int(v[6]),v[7]));block.AppendExtPave(BOPDS_Pave(int(v[8]),v[9]));block.AppendExtPave(BOPDS_Pave(int(v[10]),v[11]));
+ bo_int(block.ExtPaves().Extent());int found=-7;bo_int(block.ContainsParameter(v[12],v[13],found));bo_int(found);bo_int(block.IsToUpdate());
+ NCollection_List<occ::handle<BOPDS_PaveBlock>> splits;block.Update(splits,v[14]!=0);bo_int(splits.Extent());
+ for(NCollection_List<occ::handle<BOPDS_PaveBlock>>::Iterator it(splits);it.More();it.Next()) {
+  const auto& split=it.Value();split->Range(first,last);split->Indices(i1,i2);bo_real(first);bo_real(last);bo_int(i1);bo_int(i2);bo_int(split->OriginalEdge());
+ }
+ Bnd_Box box;box.Update(v[15],v[16],v[17],v[18],v[19],v[20]);block.SetShrunkData(v[21],v[22],box,v[23]!=0);
+ Bnd_Box result;bool splittable=false;block.ShrunkData(first,last,result,splittable);bo_int(block.HasShrunkData());bo_real(first);bo_real(last);bo_int(splittable);
+ double xmin,ymin,zmin,xmax,ymax,zmax;result.Get(xmin,ymin,zmin,xmax,ymax,zmax);for(double x:{xmin,ymin,zmin,xmax,ymax,zmax})bo_real(x);
 }
