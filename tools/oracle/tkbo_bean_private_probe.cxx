@@ -3,6 +3,7 @@
 #include "tkbo_foundations_probe.cxx"
 #undef main
 #include "tkbo_bean_private_probe_grid.cxx"
+#include "tkbo_bean_private_probe_line_plane.cxx"
 IntTools_CurveRangeSample bean_curve(int index,int depth){IntTools_CurveRangeSample range(index);range.SetDepth(depth);return range;}
 IntTools_SurfaceRangeSample bean_surface(int index,int depth){return IntTools_SurfaceRangeSample(index,depth,index%3,depth-1);}
 void bean_snapshot(const IntTools_MarkedRangeSet& ranges){bo_int(ranges.Length());for(int i=1;i<=ranges.Length();++i){bo_int(ranges.Flag(i));bo_range(ranges.Range(i));}}
@@ -24,4 +25,4 @@ void bean_box(const std::vector<double>& v){
  cache.SetGridDeflection(v[6]);Bnd_Box box;if(v[8]!=0.){box.Add(gp_Pnt(17.,-19.,23.));box.SetGap(0.125);}
  BuildBox(surface,v[2],v[3],v[4],v[5],cache,box);bean_box_snapshot(box);bo_int(cache.GetNBUPointsInFrame());bo_int(cache.GetNBVPointsInFrame());bean_box_snapshot(GetSurfaceBox(surface,v[2],v[3],v[4],v[5],v[7],cache));
 }
-int main(){std::string line;while(std::getline(std::cin,line)){std::istringstream input(line);std::string operation;input>>operation;double number;std::vector<double> v;while(input>>number)v.push_back(number);try{if(operation=="bean_box")bean_box(v);else if(operation=="bean_grid")bean_grid(v);else if(operation=="bean_empty")bean_empty(v);else if(operation=="bean_group")bean_group(v);else if(operation=="bean_sampling")bean_sampling(v);else return 2;}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}std::cout<<'\n';}}
+int main(){std::string line;while(std::getline(std::cin,line)){std::istringstream input(line);std::string operation;input>>operation;double number;std::vector<double> v;while(input>>number)v.push_back(number);try{if(operation=="bean_box")bean_box(v);else if(operation=="bean_grid")bean_grid(v);else if(operation=="bean_line_plane")bean_line_plane(v);else if(operation=="bean_empty")bean_empty(v);else if(operation=="bean_group")bean_group(v);else if(operation=="bean_sampling")bean_sampling(v);else return 2;}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';}std::cout<<'\n';}}

@@ -96,10 +96,12 @@ No original legacy declaration is added by this dependency.
 ### BeanFace private range and box dependencies
 
 Private range flags, stable sample grouping, subdivision limits, cached surface
-boxes, and trimmed B-spline knot grids pass 2,961 exact native comparisons. The grid
-cases cover knot clipping, degenerate and reversed bounds, derivative-based
-deflection, and reuse of prior cache values. Box cases retain preexisting output,
-negative deflection, reversed frames and deliberately distinct stored grid points.
+boxes, trimmed B-spline knot grids, and analytic line/plane intersections pass
+3,933 exact native comparisons. The grid cases cover knot clipping, degenerate and
+reversed bounds, derivative-based deflection, and reuse of prior cache values. The
+line/plane cases cover parallel and coincident lines, UV clipping and tolerance
+expansion. Box cases retain preexisting output, negative deflection, reversed frames
+and deliberately distinct stored grid points.
 The unchanged native translation unit is included before the observation probe;
 its source hash and compiler command are recorded. The shared wrapper also passes
 all 11,390 existing EdgeEdge comparisons. These dependencies add no public

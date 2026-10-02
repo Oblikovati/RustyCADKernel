@@ -3,7 +3,7 @@
 from itertools import product
 from porting import ROOT
 from native_private_oracle import private_translation_unit
-from tkbo_bean_private_corpus import grid_requests
+from tkbo_bean_private_corpus import grid_requests, line_plane_requests
 from toolkit_numeric import NumericOracle,verify_numeric
 from verify_tkmath_numeric import selected_paths
 
@@ -26,6 +26,7 @@ def requests() -> str:
     rows += ['bean_box '+' '.join(map(str,[kind,count,*bounds,deflection,tolerance,seed]))
              for kind,count,bounds,deflection,tolerance,seed in product(range(5),[1,3,7],[(0,1,0,1),(-1,2,-1,2),(1,0,1,0),(0,0,0,0)],[-0.1,0,0.01],[-0.25,0,0.5],[0,1])]
     rows += grid_requests()
+    rows += line_plane_requests()
     return '\n'.join(rows)+'\n'
 
 

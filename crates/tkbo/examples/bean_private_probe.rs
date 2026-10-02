@@ -6,6 +6,8 @@ mod bean_boxes;
 mod bean_faces;
 #[path = "../src/int_tools/bean_face/grid.rs"]
 mod bean_grid;
+#[path = "../src/int_tools/bean_face/line_plane.rs"]
+mod bean_line_plane;
 mod bean_private;
 #[path = "../src/int_tools/bean_face/ranges.rs"]
 mod bean_ranges;
