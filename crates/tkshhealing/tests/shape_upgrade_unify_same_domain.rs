@@ -95,7 +95,8 @@ fn closed_internal_wire_keeps_nonnull_result() {
 }
 
 fn shell_with_internal_path(points: &[Point3], closed: bool) -> Shape {
-    let outer = rectangle_wire(0.0, 20.0, 0.0, 20.0);
+    let extent = if closed { 20.0 } else { 10.0 };
+    let outer = rectangle_wire(0.0, extent, 0.0, extent);
     let mut face = BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &outer, true)
         .unwrap()
         .face()
