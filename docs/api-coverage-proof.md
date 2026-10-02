@@ -81,9 +81,8 @@ tools/probe_occt_header_ast.py \
   --compile-commands target/api-proof/occt-build/compile_commands.json \
   --header src/FoundationClasses/TKernel/Standard/Standard_Real.hxx \
   --output target/api-proof/probes/Standard_Real.ast.json
-PATH="$HOME/.cargo/bin:$PATH" cargo +nightly-2026-09-25 rustdoc \
-  -p rustycad-tkernel --lib -Z unstable-options \
-  -- --output-format json -Z unstable-options
+tools/capture_rustdoc_json.py capture
+tools/capture_rustdoc_json.py verify
 ```
 
 The current compiler pin targets Linux x86_64. Its official zstd release
@@ -102,14 +101,27 @@ commands. These absences are inventory failures, not API exclusions.
 The bootstrap only creates compiler flags and configuration evidence; the
 single-header probe below captures raw AST output but cannot form a complete
 declaration inventory. The proof still needs declaration normalization across
-all 6,316 headers, rustdoc JSON extraction for every crate, and an ambiguity-free
-crosswalk to the API mapping ledger before any completeness flag may change.
+all 6,316 headers, rustdoc item normalization for every crate, and an
+ambiguity-free crosswalk to the API mapping ledger before any completeness flag
+may change.
 On this host, parsing `Standard_Real.hxx` completed without Clang diagnostics
 and produced a 37.7 MB raw AST with 703,520 nodes (45,312 `*Decl` nodes). Those
 counts include transitive headers and are only a toolchain smoke measurement.
-The pinned nightly also emitted rustdoc JSON for `rustycad-tkernel` (14,452
-indexed items), but no workspace-wide Rust inventory or OCCT crosswalk has been
-generated.
+`tools/capture_rustdoc_json.py` enumerates workspace packages through Cargo
+metadata and captures one JSON artifact for each library target. Cargo's
+`rustdoc` command does not offer workspace selection, so it invokes
+`cargo rustdoc --package ... --lib` once per crate with `--all-features`. The capture
+records package source and artifact hashes, Cargo metadata/lockfile, Rust
+toolchain versions, active build flags, and configuration file fingerprints.
+It verifies that every workspace package has exactly one library target and
+that every JSON artifact has a valid root and index. In this workspace it
+captured all 17 library crates with 96,272 combined indexed items.
+
+Those JSON files are raw compiler outputs, not a normalized public API
+inventory. The capture does not yet filter private or `doc(hidden)` items,
+normalize signatures, account for each independent feature combination or
+target platform, or crosswalk Rust items to OCCT declarations. Its manifest
+keeps `normalized_public_inventory` false.
 
 ## Completeness limitations
 
@@ -126,9 +138,9 @@ completeness. The manifest also records a generated-header template rather than
 the generated file; its configured content and the exact CMake options must be
 captured alongside any AST output.
 
-Before enabling the proof gate, pin and provision a Clang/libclang version,
-configure OCCT with every in-scope module/toolkit and generated header, pin the
-nightly rustdoc JSON compiler, validate the schema against representative
+Before enabling the proof gate, configure OCCT with every in-scope module/toolkit
+and generated header, normalize the pinned rustdoc JSON under a versioned public
+visibility policy, validate the schema against representative
 templates/macros/overloads/re-exports, then run the extractor over all 6,316
 installed source headers and account for every declaration kind. The gate must
 also bind output to the OCCT SHA, header hashes, tool versions, CMake config, and
