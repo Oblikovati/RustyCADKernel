@@ -853,5 +853,23 @@ The pinned production implementation is 4,761 lines and its tests require genuin
 coplanar-face unification and pcurve-safe transformations. The boolean cases additionally
 need the currently missing `BRepAlgoAPI_Common`, `BRepAlgoAPI_Fuse` and
 `BOPAlgo_Splitter` operations from TKBO; they are not available as Rust dependencies yet.
-TKShHealing now maps 127/143 declarations; the Shape and UnifySameDomain suites remain
-unmapped.
+At that checkpoint, TKShHealing mapped 127/143 declarations; ShapeFix_Shape and
+UnifySameDomain remained unmapped.
+
+The pinned `ShapeFix_Shape_Test.cxx` source is now ported as one complete seven-test
+target. `ShapeFix_Shape::Perform` passes the shared reshape context through its face
+fixers, adopts the face compound replacement through the prism topology, then repairs
+shell face directions by propagating shared-edge orientation constraints. The bowtie
+prism has eight faces and one solid and passes solid-level `BRepCheck_Analyzer`; face
+orientation is derived from edge adjacency rather than face indices. Rust traversal order
+differs from native traversal order, but both results pass the source's topology-validity
+assertion.
+
+All seven exact source declarations now have Rust assertions in
+`shape_fix_shape_parity.rs`, including the OCC24881 six-wire 3D/2D gap loop and
+OCC25014 empty-wire ordering calls. The filtered pinned native target and the Rust
+source-mirror target both pass 7/7. The complete TKShHealing crate suite passes (18 unit
+tests, all integration tests, 44 doctests; one ignored), and clippy passes with warnings
+denied. The seven ShapeFix_Shape test rows are mapped atomically, bringing the toolkit
+test inventory to 134/143 mapped declarations. The broader ShapeFix API still has
+unsupported behaviors beyond these tested paths, and UnifySameDomain remains unmapped.

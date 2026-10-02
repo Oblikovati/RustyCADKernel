@@ -69,7 +69,7 @@ impl ShapeFixFace {
             return Ok(false);
         }
         let face = topods::face(&applied)?;
-        if let Some(split) = super::face_loops::split_bowtie_face(&face, tolerance)? {
+        if let Some(split) = super::face_loops::split_bowtie_face(&face, tolerance, &context)? {
             *self.status.write() = ShapeExtend::encode_status(ShapeExtendStatus::Done7);
             *self.result.write() = split.clone();
             replace_context(&context, &face, &split)?;
