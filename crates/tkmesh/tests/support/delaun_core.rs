@@ -78,3 +78,42 @@ pub fn polygon_mesh(kind: i32, frontier: bool) -> Handle<Mesh> {
     }
     mesh
 }
+
+pub fn polygon_mesh_with_center() -> Handle<Mesh> {
+    let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 12));
+    for point in [
+        Xy::new(0., 0.),
+        Xy::new(2., 0.),
+        Xy::new(2., 2.),
+        Xy::new(0., 2.),
+        Xy::new(1., 1.),
+    ] {
+        mesh.add_node(&Vertex::new(point, 0, Freedom::Free), true)
+            .unwrap();
+    }
+    add_center_mesh_links(&mesh);
+    add_center_mesh_triangles(&mesh);
+    mesh
+}
+
+fn add_center_mesh_links(mesh: &Handle<Mesh>) {
+    for (first, last, movability) in [
+        (1, 2, Freedom::Frontier),
+        (2, 3, Freedom::Frontier),
+        (3, 4, Freedom::Frontier),
+        (4, 1, Freedom::Frontier),
+        (1, 5, Freedom::Free),
+        (2, 5, Freedom::Free),
+        (3, 5, Freedom::Free),
+        (4, 5, Freedom::Free),
+    ] {
+        mesh.add_link(&Edge::new(first, last, movability)).unwrap();
+    }
+}
+
+fn add_center_mesh_triangles(mesh: &Handle<Mesh>) {
+    for edges in [[1, 6, 5], [2, 7, 6], [3, 8, 7], [4, 5, 8]] {
+        mesh.add_element(&Triangle::new(edges, [true, true, false], Freedom::Free))
+            .unwrap();
+    }
+}

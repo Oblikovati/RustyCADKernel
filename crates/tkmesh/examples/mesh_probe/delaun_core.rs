@@ -44,6 +44,14 @@ pub fn next_link_case(values: &[i32]) {
     println!();
 }
 pub fn left_polygon_case(values: &[i32]) {
+    if values[0] == 4 {
+        report_center_left_polygon(values);
+        return;
+    }
+    if values[0] == 3 {
+        report_populated_left_polygon(values);
+        return;
+    }
     let (mesh_kind, frontier) = match values[0] {
         1 => (0, true),
         2 => (1, false),
@@ -56,6 +64,49 @@ pub fn left_polygon_case(values: &[i32]) {
         Ok(result) => {
             flag(result);
             let _ = polygon_mesh_snapshot(&delaun);
+        }
+        Err(error) => print!("{} ", error.exception_type()),
+    }
+    println!();
+}
+pub fn cleanup_victim_case() {
+    let mesh = fixture::polygon_mesh_with_center();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    let polygon = Sequence::from_iter([1, 2, 3, 4]);
+    print!("OK ");
+    if let Err(error) = delaun.cleanup_polygon_probe(&polygon) {
+        print!("{} ", error.exception_type());
+    }
+    if let Err(error) = polygon_mesh_snapshot(&delaun) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
+fn report_center_left_polygon(values: &[i32]) {
+    let mesh = fixture::polygon_mesh_with_center();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    print!("OK ");
+    match delaun.mesh_left_polygon(values[1], values[2] != 0, None) {
+        Ok(result) => {
+            flag(result);
+            if let Err(error) = polygon_mesh_snapshot(&delaun) {
+                print!("{} ", error.exception_type());
+            }
+        }
+        Err(error) => print!("{} ", error.exception_type()),
+    }
+    println!();
+}
+fn report_populated_left_polygon(values: &[i32]) {
+    let mesh = fixture::mesh(0, 0);
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    print!("OK ");
+    match delaun.mesh_left_polygon(values[1], values[2] != 0, None) {
+        Ok(result) => {
+            flag(result);
+            if let Err(error) = polygon_mesh_snapshot(&delaun) {
+                print!("{} ", error.exception_type());
+            }
         }
         Err(error) => print!("{} ", error.exception_type()),
     }
