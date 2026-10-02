@@ -42,9 +42,14 @@ def cleanup_rows() -> list[str]:
     return [f'mesh_delaun_cleanup {kind} {flags}' for kind in range(6)
             for flags in (0,1,2,7,31)]
 
+def intersection_rows() -> list[str]:
+    """Compare candidate constraint links against polygon edge bounds and flags."""
+    return [f'mesh_delaun_intersections {kind} {flags}' for kind in range(6)
+            for flags in (0,1,2,7,31)]
+
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -53,4 +58,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows(),frozenset(manifest['input_sha256']))

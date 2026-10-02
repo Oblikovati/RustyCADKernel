@@ -29,6 +29,64 @@ fn cleanup_snapshot(delaun: &mut Delaun) -> Result<(), Failure> {
     delaun.cleanup_mesh()?;
     polygon_mesh_snapshot(delaun)
 }
+pub fn intersection_case(values: &[i32]) {
+    print!("OK ");
+    if let Err(error) = report_intersections(values) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
+fn report_intersections(values: &[i32]) -> Result<(), Failure> {
+    let mesh = fixture::mesh(values[0], values[1]);
+    let delaun = Delaun::from_mesh(&mesh, -1, -1, false)?;
+    let mut polygon = Sequence::default();
+    for index in 1..=5 {
+        polygon.append(index);
+    }
+    let boxes = intersection_boxes(&delaun)?;
+    for link in 1..=5 {
+        for endpoint_touch in [false, true] {
+            for point_on_edge in [false, true] {
+                for skip_last in [false, true] {
+                    let mut bounds = rustycad_tkmath::bnd::CompactBox2::default();
+                    let candidate = delaun.get_edge(link)?;
+                    flag(delaun.check_intersection(
+                        &candidate,
+                        &polygon,
+                        &boxes,
+                        endpoint_touch,
+                        point_on_edge,
+                        skip_last,
+                        &mut bounds,
+                    )?);
+                    let minimum = bounds.corner_min();
+                    let maximum = bounds.corner_max();
+                    real(minimum.x());
+                    real(minimum.y());
+                    real(maximum.x());
+                    real(maximum.y());
+                }
+            }
+        }
+    }
+    Ok(())
+}
+fn intersection_boxes(
+    delaun: &Delaun,
+) -> Result<Sequence<rustycad_tkmath::bnd::CompactBox2>, Failure> {
+    let mut boxes = Sequence::default();
+    for index in 1..=5 {
+        let edge = delaun.get_edge(index)?;
+        let first = *delaun.get_vertex(edge.first_node())?.coord();
+        let last = *delaun.get_vertex(edge.last_node())?.coord();
+        let mut bounds = rustycad_tkmath::bnd::CompactBox2::default();
+        bounds.add_xy(first);
+        bounds.add_xy(last);
+        bounds.enlarge(rustycad_tkernel::precision::p_confusion());
+        boxes.append(bounds);
+    }
+    Ok(boxes)
+}
 pub fn use_edge_case(index: i32) {
     let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 0));
     let delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
