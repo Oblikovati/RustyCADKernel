@@ -28,7 +28,7 @@ The toolkit test inventory maps these suites (1260 declarations; 1271 active nat
 | BRepTools_TrsfModification_Test.cxx | brep_tools_trsf_modification | 4 | pass | pass |
 | BRepTools_GTrsfModification_Test.cxx | brep_tools_gtrsf_modification | 13 | pass | pass |
 | BRepAdaptor_CompCurve_Test.cxx | brep_adaptor_comp_curve | 4 | pass | pass |
-| BRepTools_Test.cxx | brep_tools (not mapped) | 11 | not built (TKBO, TKMesh) | pass (3 translated) |
+| BRepTools_Test.cxx | brep_tools (3/11 mapped) | 11 | pass (11/11) | pass (3/3 mapped) |
 | BRepGraph_RepId_Test.cxx | brep_graph_rep_id | 10 | pass | pass |
 | BRepGraph_ItemId_Test.cxx | brep_graph_item_id | 4 | pass | pass |
 | BRepGraph_NodeId_Test.cxx | brep_graph_node_id | 15 | pass | pass |
@@ -673,6 +673,16 @@ of `CurveOnSurface`, and `Parameter` for an internal vertex through it) projects
 curve with `GeomProjLib::ProjectOnPlane` and `ProjLib_ProjectedCurve` from the
 TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` through
 `brep_tools::update_face`; its former private copy is deleted.
+
+`BRepTools_Test.cxx` has three mapped declarations: ASCII shape save/restore, empty-shape
+save/restore for all eight topology kinds, and box face/edge/vertex tolerances. Its pinned
+OCCT CTest filter passes 11/11; Rust `brep_tools` passes the three mapped tests. The other
+eight declarations remain unmapped: parallel reads need the Rust OSD parallel API; format
+version and binary round trips need the corresponding NURBS conversion, BinTools, mesh,
+validity, bounds and global-property behavior; triangle-option and Clean regressions need
+TKMesh meshing; exact versus triangulated properties needs TKBO Fuse plus mesh and global
+properties; the UV-bounds regression needs TKBO Cut. Passing native CTest results are not
+counted as Rust mappings.
 
 ## Preserved native behaviour
 

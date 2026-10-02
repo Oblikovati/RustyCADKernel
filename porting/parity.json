@@ -91761,7 +91761,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91793,7 +91793,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -214398,7 +214398,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -320765,6 +320765,48 @@
       "rust_target": "geom_fill_filling_behavior",
       "rust_test": "occ27704_two_pole_curves_raise_construction_error",
       "rust_source": "crates/tkgeomalgo/tests/geom_fill_filling_behavior.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_Test.DemoBug_25344_4_SaveRestoreShapeType",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepTools_Test.cxx",
+      "source_sha256": "e8c15fa03d5f2e6f01e39b4cb2be7693118d95f4d8633247f28673ce3a7604e7",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tools",
+      "rust_test": "BRepTools_Test__DemoBug_25344_4_SaveRestoreShapeType",
+      "rust_source": "crates/tkbrep/tests/brep_tools.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_Test.ModDataBug_20616_EmptyShapeSaveRestore",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepTools_Test.cxx",
+      "source_sha256": "e8c15fa03d5f2e6f01e39b4cb2be7693118d95f4d8633247f28673ce3a7604e7",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tools",
+      "rust_test": "BRepTools_Test__ModDataBug_20616_EmptyShapeSaveRestore",
+      "rust_source": "crates/tkbrep/tests/brep_tools.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_Test.DemoBug_23130_BoxMaxTolerance",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepTools_Test.cxx",
+      "source_sha256": "e8c15fa03d5f2e6f01e39b4cb2be7693118d95f4d8633247f28673ce3a7604e7",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tools",
+      "rust_test": "BRepTools_Test__DemoBug_23130_BoxMaxTolerance",
+      "rust_source": "crates/tkbrep/tests/brep_tools.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
