@@ -4,6 +4,8 @@ pub use rustycad_tkbo::int_tools;
 mod bean_boxes;
 #[path = "bo_probe/fclass_faces.rs"]
 mod bean_faces;
+#[path = "../src/int_tools/bean_face/grid.rs"]
+mod bean_grid;
 mod bean_private;
 #[path = "../src/int_tools/bean_face/ranges.rs"]
 mod bean_ranges;

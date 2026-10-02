@@ -1,5 +1,6 @@
 //! Intermediate grouping and range flags are compared to unchanged OCCT helpers.
 mod boxes;
+mod grid;
 use super::bean_ranges;
 use rustycad_tkbo::int_tools::{
     CurveRangeLocalizeData, CurveRangeSample, MarkedRangeSet, SurfaceRangeLocalizeData,
@@ -83,6 +84,7 @@ fn sampling(values: &[f64]) {
 pub fn run(operation: &str, values: &[f64]) {
     let result = match operation {
         "bean_box" => boxes::run(values),
+        "bean_grid" => grid::run(values),
         "bean_empty" => empty(values),
         "bean_group" => grouping(values),
         "bean_sampling" => {
