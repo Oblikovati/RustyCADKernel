@@ -3,8 +3,12 @@
 #include <BOPDS_Pave.hxx>
 #include <BOPDS_Pair.hxx>
 #include <BOPDS_PaveBlock.hxx>
+#include <BOPDS_CommonBlock.hxx>
+#include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
 #include <Bnd_Box.hxx>
+#include <cstdio>
+#include <unistd.h>
 void bo_index_state(const BOPDS_IndexRange& value,int query) {
  bo_int(value.First());bo_int(value.Last());int first,last;value.Indices(first,last);bo_int(first);bo_int(last);
  bo_int(value.Contains(query));value.Dump();std::cout<<' ';
@@ -53,4 +57,20 @@ void bo_pave_block_case(const std::vector<double>& v) {
  Bnd_Box box;box.Update(v[15],v[16],v[17],v[18],v[19],v[20]);block.SetShrunkData(v[21],v[22],box,v[23]!=0);
  Bnd_Box result;bool splittable=false;block.ShrunkData(first,last,result,splittable);bo_int(block.HasShrunkData());bo_real(first);bo_real(last);bo_int(splittable);
  double xmin,ymin,zmin,xmax,ymax,zmax;result.Get(xmin,ymin,zmin,xmax,ymax,zmax);for(double x:{xmin,ymin,zmin,xmax,ymax,zmax})bo_real(x);
+}
+void bo_common_block_case(const std::vector<double>& v) {
+ BOPDS_CommonBlock group;bo_real(group.Tolerance());try{group.PaveBlock1();bo_int(0);}catch(const Standard_NoSuchObject&){bo_int(1);}try{group.Edge();bo_int(0);}catch(const Standard_NoSuchObject&){bo_int(1);}bo_int(group.PaveBlocks().Extent());bo_int(group.Faces().Extent());
+ occ::handle<BOPDS_PaveBlock> a=new BOPDS_PaveBlock(),b=new BOPDS_PaveBlock(),c=new BOPDS_PaveBlock();
+ a->SetOriginalEdge(int(v[0]));a->SetEdge(int(v[1]));b->SetOriginalEdge(int(v[2]));b->SetEdge(int(v[3]));c->SetOriginalEdge(int(v[4]));c->SetEdge(int(v[5]));
+ group.AddPaveBlock(a);group.AddPaveBlock(b);group.AddPaveBlock(c);
+ bo_int(group.PaveBlocks().Extent());for(const auto& pb:group.PaveBlocks())bo_int(pb->OriginalEdge());
+ bo_int(group.IsPaveBlockOnEdge(int(v[8])));bo_int(group.Contains(c));bo_int(group.IsPaveBlockOnFace(int(v[9])));
+ group.SetEdge(int(v[10]));for(const auto& pb:group.PaveBlocks())bo_int(pb->Edge());bo_int(group.Edge());
+ group.SetRealPaveBlock(c);bo_int(group.PaveBlock1()==c);for(const auto& pb:group.PaveBlocks())bo_int(pb->OriginalEdge());
+ NCollection_List<int> faces;faces.Append(int(v[6]));faces.Append(int(v[7]));group.SetFaces(faces);
+ NCollection_List<int> appended;appended.Append(int(v[11]));appended.Append(int(v[12]));group.AppendFaces(appended);
+ bo_int(appended.Extent());bo_int(group.Faces().Extent());for(int face:group.Faces())bo_int(face);
+ bo_int(group.Contains(int(v[11])));bo_int(group.IsPaveBlockOnFace(int(v[9])));
+ auto& selected=group.PaveBlockOnEdge(int(v[8]));bo_int(selected==c);selected->SetEdge(int(v[13]));bo_int(c->Edge());
+ group.SetTolerance(v[14]);bo_real(group.Tolerance());std::fflush(stdout);FILE* capture=std::tmpfile();int saved=dup(STDOUT_FILENO);dup2(fileno(capture),STDOUT_FILENO);group.Dump();std::fflush(stdout);dup2(saved,STDOUT_FILENO);close(saved);std::rewind(capture);int character;while((character=std::fgetc(capture))!=EOF){if(character=='\n')std::cout<<"\\n";else std::cout<<char(character);}std::fclose(capture);
 }

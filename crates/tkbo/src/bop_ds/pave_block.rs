@@ -5,6 +5,10 @@ use super::Pave;
 use rustycad_tkmath::bnd::BoundingBox3;
 use std::cmp::Ordering;
 use std::collections::HashSet;
+use std::sync::{Arc, Mutex};
+
+/// Shared mutable ownership mirrors an OCCT `occ::handle<BOPDS_PaveBlock>`.
+pub type PaveBlockHandle = Arc<Mutex<PaveBlock>>;
 
 /// `BOPDS_PaveBlock`; two endpoint paves define one interval on an original edge.
 #[derive(Clone, Debug)]

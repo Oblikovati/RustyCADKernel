@@ -215206,6 +215206,182 @@
       "rust_item": "Rust static type metadata",
       "status": "excluded",
       "notes": "Standard RTTI metadata is not a Rust callable API; Rust type identity is static."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::default",
+      "status": "implemented",
+      "notes": "Native empty state and tolerance are covered by bop_ds_common_block and native differential cases."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native storage arenas; Rust owns its vectors and shared pave-block handles."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::AddPaveBlock(const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::add_pave_block",
+      "status": "implemented",
+      "notes": "Preserves the native prepend-only-when-less-than-first ordering rule."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::SetPaveBlocks(const NCollection_List<occ::handle<BOPDS_PaveBlock>>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::set_pave_blocks",
+      "status": "implemented",
+      "notes": "Rebuilds the list through AddPaveBlock and therefore preserves its first-minimum ordering behavior."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::AddFace(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::add_face",
+      "status": "implemented",
+      "notes": "Face indices append in order and duplicates are retained."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::SetFaces(const NCollection_List<int>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::set_faces",
+      "status": "implemented",
+      "notes": "Replaces face indices while retaining order and duplicates."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::AppendFaces(NCollection_List<int>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::append_faces",
+      "status": "implemented",
+      "notes": "Appends and empties the input sequence, matching NCollection_List move append semantics."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::PaveBlocks() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::pave_blocks",
+      "status": "implemented",
+      "notes": "Returns the ordered shared pave-block handles."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::Faces() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::faces",
+      "status": "implemented",
+      "notes": "Returns face indices in native list order."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::PaveBlock1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::pave_block1",
+      "status": "implemented",
+      "notes": "Returns Standard_NoSuchObject for an empty list, matching native First."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::PaveBlockOnEdge(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::pave_block_on_edge",
+      "status": "implemented",
+      "notes": "Looks up by original edge and returns shared mutable ownership when present."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::IsPaveBlockOnFace(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::is_pave_block_on_face",
+      "status": "implemented",
+      "notes": "Tests face-list membership."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::IsPaveBlockOnEdge(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::is_pave_block_on_edge",
+      "status": "implemented",
+      "notes": "Tests original-edge membership."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::Contains(const occ::handle<BOPDS_PaveBlock>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::contains_pave_block",
+      "status": "implemented",
+      "notes": "Uses shared-handle object identity rather than comparing pave-block values."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::Contains(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::contains_face",
+      "status": "implemented",
+      "notes": "Tests face-index membership."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::SetEdge(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::set_edge",
+      "status": "implemented",
+      "notes": "Mutates the result edge on each shared pave block."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::Edge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::edge",
+      "status": "implemented",
+      "notes": "Reads the first block edge and returns Standard_NoSuchObject for an empty group."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::Dump() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::dump",
+      "status": "implemented",
+      "notes": "Matches native block and face dump structure."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::SetRealPaveBlock(const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::set_real_pave_block",
+      "status": "implemented",
+      "notes": "Moves an identical handle to the list front and leaves nonmembers untouched."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::SetTolerance(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::set_tolerance",
+      "status": "implemented",
+      "notes": "Stores tolerance without validation, as the native inline setter does."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::Tolerance() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::tolerance",
+      "status": "implemented",
+      "notes": "Reads the exact stored tolerance, including signed zero and NaN."
+    },
+    {
+      "upstream_id": "BOPDS_CommonBlock::DEFINE_STANDARD_RTTIEXT(BOPDS_CommonBlock,Standard_Transient)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
+      "rust_item": "Rust static type metadata",
+      "status": "excluded",
+      "notes": "Standard RTTI metadata is not a callable API; Rust type identity is static."
     }
   ],
   "tests": [
