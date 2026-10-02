@@ -1,8 +1,8 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
     BopdsCurve, CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, InterfEE, InterfEF,
-    InterfVE, InterfVF, InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo, common_block_handle,
-    pave_block_handle,
+    InterfFF, InterfVE, InterfVF, InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo,
+    common_block_handle, pave_block_handle,
 };
 use rustycad_tkbo::int_tools::Curve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -521,6 +521,100 @@ pub fn bopds_interf_common_case(_: &[f64]) {
     integer(edge_face.index1());
     integer(edge_face.index2());
     write_common_part(edge_face.common_part());
+}
+
+pub fn bopds_interf_ff_case(_: &[f64]) {
+    let mut value = InterfFF::default();
+    let (first_index, second_index) = value.indices();
+    integer(first_index);
+    integer(second_index);
+    flag(value.tangent_faces());
+    write_dynamic_bounds(
+        value.curves().lower(),
+        value.curves().upper(),
+        value.curves().length(),
+    );
+    write_dynamic_bounds(
+        value.points().lower(),
+        value.points().upper(),
+        value.points().length(),
+    );
+    value.init(3, 2);
+    integer(value.curves().length());
+    integer(value.points().length());
+    value.set_indices(7, 11);
+    value.set_tangent_faces(true);
+    append_probe_curve(&mut value, 0, 0.125);
+    append_probe_curve(&mut value, 4, 0.875);
+    append_probe_point(&mut value, 0, [1., 2., 3.], [4., 5.], [6., 7.], 10);
+    append_probe_point(&mut value, 2, [-1., -2., -3.], [-4., -5.], [-6., -7.], 12);
+    value.init(1, 1);
+    write_interf_ff_results(&value);
+}
+
+fn append_probe_curve(record: &mut InterfFF, index: i32, tolerance: f64) {
+    let mut curve = BopdsCurve::default();
+    curve.set_tolerance(tolerance);
+    record.change_curves().set_value(index, curve).unwrap();
+}
+
+fn append_probe_point(
+    record: &mut InterfFF,
+    index: i32,
+    point: [f64; 3],
+    first_uv: [f64; 2],
+    second_uv: [f64; 2],
+    vertex: i32,
+) {
+    let mut value = Point::default();
+    value.set_pnt(Point3::new(point[0], point[1], point[2]));
+    value.set_pnt2d1(Point2::new(first_uv[0], first_uv[1]));
+    value.set_pnt2d2(Point2::new(second_uv[0], second_uv[1]));
+    value.set_index(vertex);
+    record.change_points().set_value(index, value).unwrap();
+}
+
+fn write_dynamic_bounds(lower: i32, upper: i32, length: i32) {
+    integer(length);
+    integer(lower);
+    integer(upper);
+}
+
+fn write_interf_ff_results(value: &InterfFF) {
+    let (first_index, second_index) = value.indices();
+    integer(first_index);
+    integer(second_index);
+    flag(value.tangent_faces());
+    write_dynamic_bounds(
+        value.curves().lower(),
+        value.curves().upper(),
+        value.curves().length(),
+    );
+    for index in [0, 1, 4] {
+        real(value.curves().value(index).unwrap().tolerance());
+    }
+    write_dynamic_bounds(
+        value.points().lower(),
+        value.points().upper(),
+        value.points().length(),
+    );
+    write_probe_point(value.points().value(0).unwrap());
+    write_probe_point(value.points().value(2).unwrap());
+}
+
+fn write_probe_point(value: &Point) {
+    for coordinate in [
+        value.pnt().x(),
+        value.pnt().y(),
+        value.pnt().z(),
+        value.pnt2d1().x(),
+        value.pnt2d1().y(),
+        value.pnt2d2().x(),
+        value.pnt2d2().y(),
+    ] {
+        real(coordinate);
+    }
+    integer(value.index());
 }
 
 fn common_part(

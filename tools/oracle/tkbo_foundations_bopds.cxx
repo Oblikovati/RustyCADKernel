@@ -167,6 +167,14 @@ void bo_bopds_interf_common_case(const std::vector<double>&) {
  IntTools_CommonPrt second;second.SetType(TopAbs_VERTEX);second.SetRange1(-1.,-2.);second.SetVertexParameter1(1.25);second.SetVertexParameter2(-2.5);second.AppendRange2(7.,8.);second.SetAllNullFlag(false);second.SetBoundingPoints(gp_Pnt(-1.,-2.,-3.),gp_Pnt(-4.,-5.,-6.));ee.SetCommonPart(second);bo_common_part_state(ee.CommonPart());
  BOPDS_InterfEF ef;ef.SetIndices(11,19);ef.SetCommonPart(first);bo_int(ef.Index1());bo_int(ef.Index2());bo_common_part_state(ef.CommonPart());
 }
+void bo_bopds_interf_ff_case(const std::vector<double>&) {
+ BOPDS_InterfFF value;int index1,index2;value.Indices(index1,index2);bo_int(index1);bo_int(index2);bo_int(value.TangentFaces());bo_int(value.Curves().Length());bo_int(value.Curves().Lower());bo_int(value.Curves().Upper());bo_int(value.Points().Length());bo_int(value.Points().Lower());bo_int(value.Points().Upper());
+ value.Init(3,2);bo_int(value.Curves().Length());bo_int(value.Points().Length());value.SetIndices(7,11);value.SetTangentFaces(true);
+ BOPDS_Curve firstCurve;firstCurve.SetTolerance(0.125);value.ChangeCurves().SetValue(0,firstCurve);BOPDS_Curve lastCurve;lastCurve.SetTolerance(0.875);value.ChangeCurves().SetValue(4,lastCurve);
+ BOPDS_Point firstPoint;firstPoint.SetPnt(gp_Pnt(1.,2.,3.));firstPoint.SetPnt2D1(gp_Pnt2d(4.,5.));firstPoint.SetPnt2D2(gp_Pnt2d(6.,7.));firstPoint.SetIndex(10);value.ChangePoints().SetValue(0,firstPoint);
+ BOPDS_Point lastPoint;lastPoint.SetPnt(gp_Pnt(-1.,-2.,-3.));lastPoint.SetPnt2D1(gp_Pnt2d(-4.,-5.));lastPoint.SetPnt2D2(gp_Pnt2d(-6.,-7.));lastPoint.SetIndex(12);value.ChangePoints().SetValue(2,lastPoint);value.Init(1,1);
+ value.Indices(index1,index2);bo_int(index1);bo_int(index2);bo_int(value.TangentFaces());bo_int(value.Curves().Length());bo_int(value.Curves().Lower());bo_int(value.Curves().Upper());for(int index:{0,1,4})bo_real(value.Curves().Value(index).Tolerance());bo_int(value.Points().Length());bo_int(value.Points().Lower());bo_int(value.Points().Upper());const BOPDS_Point& first=value.Points().Value(0);const BOPDS_Point& last=value.Points().Value(2);for(double x:{first.Pnt().X(),first.Pnt().Y(),first.Pnt().Z(),first.Pnt2D1().X(),first.Pnt2D1().Y(),first.Pnt2D2().X(),first.Pnt2D2().Y()})bo_real(x);bo_int(first.Index());for(double x:{last.Pnt().X(),last.Pnt().Y(),last.Pnt().Z(),last.Pnt2D1().X(),last.Pnt2D1().Y(),last.Pnt2D2().X(),last.Pnt2D2().Y()})bo_real(x);bo_int(last.Index());
+}
 void bo_data_structure_init_case(const std::vector<double>& v) {
  BRep_Builder builder;TopoDS_Vertex first,second,third;builder.MakeVertex(first,gp_Pnt(1.,2.,3.),2e-5);builder.MakeVertex(second,gp_Pnt(4.,5.,6.),5e-7);builder.MakeVertex(third,gp_Pnt(7.,8.,9.),1e-4);
  TopoDS_Compound root;builder.MakeCompound(root);builder.Add(root,first);builder.Add(root,second);builder.Add(root,first);
