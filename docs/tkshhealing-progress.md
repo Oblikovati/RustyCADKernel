@@ -873,3 +873,29 @@ tests, all integration tests, 44 doctests; one ignored), and clippy passes with 
 denied. The seven ShapeFix_Shape test rows are mapped atomically, bringing the toolkit
 test inventory to 134/143 mapped declarations. The broader ShapeFix API still has
 unsupported behaviors beyond these tested paths, and UnifySameDomain remains unmapped.
+
+The pinned `ShapeUpgrade_UnifySameDomain_Test.cxx` oracle target passes all nine native
+declarations. Rust now ports the candidate-free `Build()` path exercised by
+`BasicBoxUnification`: it checks incident face supports and edge directions, preserves an
+input whose adjacent faces/edges have no same-domain merge, and returns a typed
+`Standard_NotImplemented` when a candidate needs the unported merge. The Rust baseline
+test passes the native nonnull, six-face, and valid-result assertions. This is 1/9 Rust
+source coverage; none of the nine declarations are mapped.
+
+The remaining six geometric test declarations require actual coplanar face and collinear
+edge rebuilding, including preservation of internal wires and p-curves. The two missing
+p-curve cases additionally require topology transformation that skips absent source
+p-curves without aborting unrelated face merging. OCC29382, OCC30927, and OCC29544 depend
+on TKBO `Common`, `Fuse`, and `BOPAlgo_Splitter` respectively, which are not available in
+the Rust API yet. The complete nine-test source remains unmapped until its Rust target
+passes 9/9.
+
+`ShapeUpgrade_UnifySameDomain` now also handles the pinned coplanar face scenario with
+internal wires. It finds adjacent planar faces sharing one outer edge, joins the
+remaining boundary edges on the first face's support, preserves each internal wire, and
+replaces the pair through `ShapeBuild_ReShape`. The Rust focused target now passes BasicBox and the two-face internal-wire fixture; it covers
+assertions from two declarations (2/9), while the pinned native source target
+passes 9/9. The complete crate suite passes, but no legacy rows are mapped. This slice
+has not implemented general collinear-edge merging or p-curve-aware transformations, and
+the three boolean/split declarations still need TKBO operations, so the full target is not
+green in Rust.
