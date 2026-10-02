@@ -899,3 +899,10 @@ passes 9/9. The complete crate suite passes, but no legacy rows are mapped. This
 has not implemented general collinear-edge merging or p-curve-aware transformations, and
 the three boolean/split declarations still need TKBO operations, so the full target is not
 green in Rust.
+
+The same focused suite now mirrors two internal-wire no-op declarations as well:
+`InternalEdgesTermination_Issue925` returns a nonnull shell with at least one face, and
+`ClosedInternalWire` returns a nonnull result. These are checks of the unchanged internal
+wire paths; they do not establish the upstream infinite-loop fix under adversarial
+`IntVEmap` states. The Rust target currently passes 4/9 declaration assertions, while all
+nine native declarations remain green. No parity rows have been added.
