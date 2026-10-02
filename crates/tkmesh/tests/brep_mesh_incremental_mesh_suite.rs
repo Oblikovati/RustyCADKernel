@@ -40,6 +40,50 @@ fn BRepMesh_IncrementalMeshTest__TrimmedCylinder_RespectsUVRangeAndDeflection() 
 }
 
 #[test]
+fn BRepMesh_IncrementalMeshTest__OCC31461_AllowQualityDecreaseRebuildsMesh() {
+    let cylinder = Cylinder3::new(
+        Axis3::with_standard(Point3::default(), StandardDirection3::Z),
+        10.0,
+    )
+    .unwrap();
+    let maker = BRepBuilderAPIMakeFace::from_cylinder_bounds(
+        cylinder,
+        (0.0, std::f64::consts::TAU, 0.0, 10.0),
+    )
+    .unwrap();
+    let face = maker.face().unwrap();
+    let shape = face.clone().into_shape();
+    mesh_face(&shape, 0.01, false).unwrap();
+    let fine = face_mesh_counts(&face);
+    mesh_face(&shape, 0.1, true).unwrap();
+    let coarse = face_mesh_counts(&face);
+    assert!(coarse.0 < fine.0);
+    assert!(coarse.1 < fine.1);
+}
+
+fn mesh_face(
+    shape: &rustycad_tkbrep::topods::Shape,
+    deflection: f64,
+    allow_quality_decrease: bool,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    BRepMeshIncrementalMesh::with_parameters(
+        shape,
+        &MeshParameters {
+            deflection,
+            allow_quality_decrease,
+            ..Default::default()
+        },
+        &ProgressRange::default(),
+    )?;
+    Ok(())
+}
+
+fn face_mesh_counts(face: &rustycad_tkbrep::topods::Face) -> (i32, i32) {
+    let triangulation = BRepTool::triangulation(face, mesh_purpose::NONE).unwrap().0;
+    (triangulation.nb_nodes(), triangulation.nb_triangles())
+}
+
+#[test]
 fn BRepMesh_IncrementalMeshTest__OCC25445_AngularDeflectionChangesMesh() {
     let coarse = cone_mesh_counts(10.0_f64.to_radians()).unwrap();
     let fine = cone_mesh_counts(1.0_f64.to_radians()).unwrap();
