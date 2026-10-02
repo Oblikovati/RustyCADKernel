@@ -129,8 +129,8 @@ declarations; overall mapping is 7,215/8,648 GoogleTest declaration candidates.
 ### Populated-mesh Delaun predicates
 
 The existing-mesh Delaun core adds 14 audited API rows: four implemented and ten
-partial. Its focused oracle passes 2,136 exact populated-mesh cases; it separately
+partial. Its focused oracle passes 2,140 exact populated-mesh cases; it separately
 replays 89 native crash differences for null-mesh queries and collinear circle
-cleanup. The inserted-triangle and constraint pipeline is still in progress, and
-this slice maps no original Delaun test declaration. TKMesh remains at 2/29 mapped
-original declarations.
+cleanup. Supermesh bounds are included; free-vertex insertion and constraint
+processing remain in progress. This slice maps no original Delaun test declaration.
+TKMesh remains at 2/29 mapped original declarations.
