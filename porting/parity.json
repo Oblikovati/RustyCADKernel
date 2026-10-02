@@ -215502,6 +215502,190 @@
       "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::tolerance",
       "status": "implemented",
       "notes": "Reads the exact stored tolerance."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::default",
+      "status": "implemented",
+      "notes": "Native null shape, SHAPE type, void box, empty subshape list and -1 sentinels are covered by Rust tests and the numeric oracle."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::~BOPDS_ShapeInfo()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust releases owned shape and bounds fields through Drop; there is no callable destructor counterpart."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator chooses native list storage; Rust owns its subshape vector."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::SetShape(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::set_shape",
+      "status": "implemented",
+      "notes": "Copies the TopoDS shape handle."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::Shape() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::shape",
+      "status": "implemented",
+      "notes": "Borrows the stored shape."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::SetShapeType(TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::set_shape_type",
+      "status": "implemented",
+      "notes": "Stores the type independently of the shape value."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::ShapeType() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::shape_type",
+      "status": "implemented",
+      "notes": "Reads the stored TopAbs shape type."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::SetBox(const Bnd_Box&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::set_box",
+      "status": "implemented",
+      "notes": "Copies the full bounding box state."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::Box() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::box_bounds",
+      "status": "implemented",
+      "notes": "Borrows the stored bounding box."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::ChangeBox()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::change_box",
+      "status": "implemented",
+      "notes": "Provides mutable access to the stored bounding box."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::SubShapes() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::sub_shapes",
+      "status": "implemented",
+      "notes": "Borrows subshape indices in native insertion order."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::ChangeSubShapes()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::change_sub_shapes",
+      "status": "implemented",
+      "notes": "Provides mutable access to the stored subshape list."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::HasSubShape(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::has_sub_shape",
+      "status": "implemented",
+      "notes": "Tests list membership and preserves duplicate indices."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::HasReference() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::has_reference",
+      "status": "implemented",
+      "notes": "Returns true exactly when the reference index is nonnegative."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::SetReference(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::set_reference",
+      "status": "implemented",
+      "notes": "Stores the reference without validation."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::Reference() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::reference",
+      "status": "implemented",
+      "notes": "Reads the stored reference index."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::HasBRep() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::has_brep",
+      "status": "implemented",
+      "notes": "Matches BOPDS_Tools::HasBRep for vertex, edge and face only."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::IsInterfering() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::is_interfering",
+      "status": "implemented",
+      "notes": "Matches HasBRep or SOLID."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::HasFlag() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::has_flag",
+      "status": "implemented",
+      "notes": "Returns true exactly when the flag is nonnegative."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::HasFlag(int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::has_flag_into",
+      "status": "implemented",
+      "notes": "Writes the stored flag even when false, then returns whether it is nonnegative."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::SetFlag(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::set_flag",
+      "status": "implemented",
+      "notes": "Stores the flag without validation."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::Flag() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::flag",
+      "status": "implemented",
+      "notes": "Reads the stored flag."
+    },
+    {
+      "upstream_id": "BOPDS_ShapeInfo::Dump() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::ShapeInfo::dump",
+      "status": "implemented",
+      "notes": "Matches TopAbs::ShapeTypeToString and preserves subshape order."
     }
   ],
   "tests": [

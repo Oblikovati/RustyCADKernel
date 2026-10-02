@@ -6,13 +6,13 @@ SurfaceRangeSample, and MarkedRangeSet. The 80 API rows use the header audit
 identities; the remainder of IntTools and the Boolean algorithms remain pending.
 
 `tools/verify_tkbo_foundations.py --source ../OCCT --native-build BUILD` passes
-19,024 exact native comparisons, including signed zero, all root transitions,
+19,096 exact native comparisons, including signed zero, all root transitions,
 range subdivision and hashing, duplicate boundaries, pave-block splitting and
 common-block ordering. Its companion radius-status replay still records 176 undefined-status
 native calls and 32 differences; complete TKBO parity remains false.
 
-BOPDS IndexRange, Pave, Pair, Point, PaveBlock, CommonBlock and CoupleOfPaveBlocks
-add 109 API rows.
+BOPDS IndexRange, Pave, Pair, Point, PaveBlock, CommonBlock, CoupleOfPaveBlocks and
+ShapeInfo add 132 API rows.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered
@@ -28,6 +28,10 @@ CoupleOfPaveBlocks adds fourteen callable rows for sentinel indices, nullable sh
 handles, output-parameter copying and raw tolerance storage. Two Rust regressions and
 native differential cases cover the constructor and setter paths; the default
 destructor is recorded as Rust Drop glue.
+
+ShapeInfo adds twenty-one callable rows for shape type, box, subshape list, reference,
+flag and interference queries. Three Rust regressions and 72 native type/state cases
+cover the BRep participation rules, signed flags, bound gaps and exact Dump text.
 
 IntTools Curve, CommonPrt and point-on-face records add 62 implemented APIs.
 The cumulative oracle passes 3,027 cases. `IntTools_PntOnFace::IsValid()` is
