@@ -172,7 +172,8 @@ indices exactly. `MeshBoxAllFaces` now matches all six native face triangulation
 exactly, including local XYZ/UV node order and triangle indices; native status
 flags and Rust face status masks are both zero. Parameter normalization supplies
 the native minimum size before edge tessellation. Other unsupported surfaces and
-shapes with no faces still report the unsupported meshing stage; the cylinder path
+no-face shapes besides empty compounds and zero-length free edges still report the
+unsupported meshing stage; the cylinder path
 is verified in the later Delaun source gate. The focused Rust tests and filtered native OCC31125 regression pass, but the
 original test declaration is not counted as mapped: the source file contains
 nine declarations and the source gate requires mapping the whole file together.
@@ -189,3 +190,14 @@ declarations pass in native OCCT and Rust, including three individual points, a 
 grid, and disabled internal-vertex mode. TKMesh is now 11/29 mapped declarations;
 the remaining complete-source candidates are the algorithm factory and IncrementalMesh
 regression suites.
+
+### IncrementalMesh free-edge and planar-polygon cases
+
+The full nine-case `BRepMesh_IncrementalMesh_Test.cxx` source remains unmapped while
+its curved-surface and mesh-reuse cases are implemented. Two source cases now have Rust
+mirrors: a bounded eight-edge planar polygon meshes with triangles, and an isolated
+zero-radius circular edge runs through free-edge discretization without face triangles.
+Both native regressions and their Rust cases pass; the empty-compound behavior remains
+green. Six other declarations still need support for trimmed cylinders, torus Boolean
+fusion, seam edge polygons, unbounded-face status, cone angular deflection and quality
+decrease rebuilding.

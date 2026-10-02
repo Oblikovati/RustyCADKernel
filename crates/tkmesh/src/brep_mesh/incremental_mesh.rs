@@ -34,8 +34,11 @@ impl BRepMeshIncrementalMesh {
     ) -> Result<(), Failure> {
         let builder = BRepMeshModelBuilder::new();
         let model = builder.perform(shape, parameters);
-        if model.is_null() || model_faces(&model) == 0 {
+        if model.is_null() {
             return Err(unsupported_shape(shape));
+        }
+        if model_faces(&model) == 0 {
+            return mesh_free_edges(shape, &model, parameters, range);
         }
         if !BRepMeshEdgeDiscret::new().perform(&model, parameters, range) {
             return Err(unsupported_shape(shape));
@@ -59,6 +62,21 @@ impl BRepMeshIncrementalMesh {
 
 fn model_faces(model: &rustycad_tkernel::standard::Handle<dyn MeshModel>) -> i32 {
     model.faces_nb()
+}
+
+fn mesh_free_edges(
+    shape: &Shape,
+    model: &rustycad_tkernel::standard::Handle<dyn MeshModel>,
+    parameters: &MeshParameters,
+    range: &ProgressRange<'_>,
+) -> Result<(), Failure> {
+    if model.edges_nb() == 0 {
+        return Err(unsupported_shape(shape));
+    }
+    if !BRepMeshEdgeDiscret::new().perform(model, parameters, range) {
+        return Err(unsupported_shape(shape));
+    }
+    Ok(())
 }
 
 fn unsupported_shape(shape: &Shape) -> Failure {
