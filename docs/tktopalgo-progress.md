@@ -1627,3 +1627,11 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   fails).
 - The overlap tool owns its element filter (`Box<dyn BRepExtremaElementFilter>`) instead of
   a pointer; `BRepExtrema_SelfIntersection` gives it a filter over its own triangle set.
+
+### BRepBndLib legacy suite
+- All six declarations in `BRepBndLib_Test.cxx` are mapped. The filtered pinned-OCCT
+  source gate passed all six native cases and all six Rust cases. Rust fixtures build
+  equivalent BRep records and attach the pinned polygon directly while the higher-level
+  edge, face, cylinder and incremental-meshing constructors remain unported.
+- TKTopAlgo now has 55 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`,
+  `BRepGProp` and `BRepOffsetAPI_ThruSections` source files still contain unmapped cases.
