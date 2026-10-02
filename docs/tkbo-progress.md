@@ -44,10 +44,9 @@ Native differential probes cover depth-first ordering, shared-vertex links and p
 face/edge/vertex flattening in a single-solid box, and the resulting shape bounds.
 Two-sided and one-sided infinite line ranges also match the native synthetic endpoint
 vertices and pave parameters; internal finite-edge paves use the topological endpoint
-orientations. Forward and reversed one-vertex pcurve-only seam edges produce the native
-duplicate endpoint index and full-period pave interval. The OCCT circle-edge branch is
-still partial because the Rust edge builder exposes different curve representations;
-open/inverted shells and same-domain mapping also remain incomplete.
+orientations. Forward and reversed one-vertex pcurve-only and 3D circle seam edges produce
+the native duplicate endpoint index and full-period pave interval; their curve and pcurve
+presence also match. Open/inverted shells and same-domain mapping remain incomplete.
 No original GTest declaration is mapped by this storage slice.
 
 IntTools Curve, CommonPrt and point-on-face records add 62 implemented APIs.

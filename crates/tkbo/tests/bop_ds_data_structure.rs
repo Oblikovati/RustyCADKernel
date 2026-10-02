@@ -208,6 +208,22 @@ fn pcurve_seam_edge() -> Shape {
     .into_shape()
 }
 
+#[test]
+fn change_pave_blocks_repeats_single_circle_vertex_at_both_period_bounds() {
+    let circle = circle_seam_edge();
+    assert_single_vertex_seam_paves(circle.clone());
+    assert_single_vertex_seam_paves(circle.reversed());
+}
+
+fn circle_seam_edge() -> Shape {
+    use rustycad_tkmath::gp::{Axis2, Circle3};
+    BRepBuilderAPIMakeEdge::from_circ(Circle3::new(Axis2::default(), 1.0).unwrap())
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape()
+}
+
 fn assert_single_vertex_seam_paves(seam: Shape) {
     use std::f64::consts::TAU;
     let mut structure = DataStructure::default();
