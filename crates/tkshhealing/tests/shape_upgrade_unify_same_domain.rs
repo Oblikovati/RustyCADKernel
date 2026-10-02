@@ -1,6 +1,6 @@
 //! Native parity for the no-candidate `ShapeUpgrade_UnifySameDomain::Build` path.
 use rustycad_tkbrep::brep::BRepBuilder;
-use rustycad_tkbrep::topods::{Shape, Wire};
+use rustycad_tkbrep::topods::{Shape, Shell, Wire};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{Plane3, Point3};
@@ -45,6 +45,80 @@ fn face_count(shape: &Shape) -> usize {
     )
     .unwrap()
     .count()
+}
+
+#[test]
+fn internal_open_path_terminates_and_keeps_its_face() {
+    let input = shell_with_internal_path(
+        &[
+            Point3::new(2.0, 2.0, 0.0),
+            Point3::new(5.0, 5.0, 0.0),
+            Point3::new(8.0, 2.0, 0.0),
+        ],
+        false,
+    );
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, true);
+    unifier.set_angular_tolerance(1e-6);
+    unifier.set_linear_tolerance(1e-5);
+    unifier.allow_internal_edges(true);
+
+    unifier.build().unwrap();
+
+    let result = unifier.shape();
+    assert!(!result.is_null());
+    assert!(face_count(&result) >= 1);
+}
+
+#[test]
+fn closed_internal_wire_keeps_nonnull_result() {
+    let input = shell_with_internal_path(
+        &[
+            Point3::new(5.0, 5.0, 0.0),
+            Point3::new(15.0, 5.0, 0.0),
+            Point3::new(10.0, 15.0, 0.0),
+        ],
+        true,
+    );
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, true);
+    unifier.set_angular_tolerance(1e-6);
+    unifier.set_linear_tolerance(1e-5);
+    unifier.allow_internal_edges(true);
+
+    unifier.build().unwrap();
+
+    assert!(!unifier.shape().is_null());
+}
+
+fn shell_with_internal_path(points: &[Point3], closed: bool) -> Shape {
+    let outer = rectangle_wire(0.0, 20.0, 0.0, 20.0);
+    let mut face = BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &outer, true)
+        .unwrap()
+        .face()
+        .unwrap();
+    let mut internal = BRepBuilderAPIMakeWire::new();
+    let edge_count = if closed {
+        points.len()
+    } else {
+        points.len() - 1
+    };
+    for index in 0..edge_count {
+        let edge =
+            BRepBuilderAPIMakeEdge::from_points(points[index], points[(index + 1) % points.len()])
+                .unwrap()
+                .edge()
+                .unwrap();
+        internal.add_edge(&edge).unwrap();
+    }
+    let mut internal = internal.wire().unwrap();
+    internal.set_orientation(Orientation::Internal);
+    BRepBuilder::default().add(&mut face, &internal).unwrap();
+
+    let mut shell = Shell::default();
+    BRepBuilder::default().make_shell(&mut shell);
+    BRepBuilder::default()
+        .add(&mut shell, &face.into_shape())
+        .unwrap();
+    shell.into_shape()
 }
 
 #[test]
