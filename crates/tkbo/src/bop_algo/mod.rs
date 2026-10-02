@@ -4,4 +4,5 @@ mod progress;
 pub use options::Options;
 pub use progress::{Algo, PISteps};
 
-rustycad_tkernel::define_simple_alert!(AlertUserBreak, "BOPAlgo_AlertUserBreak");
+mod alerts;
+pub use alerts::*;

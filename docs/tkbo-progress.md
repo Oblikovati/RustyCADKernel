@@ -197,3 +197,9 @@ OCCT_BUILD=/path/to/pinned/occt-modeling-full tools/verify_tkbo_base.sh
 
 The manual API ledger remains provisional until the compiler inventories and
 crosswalk establish coverage.
+
+All 41 declarations in `BOPAlgo_Alerts.hxx` now have typed Rust alerts using the
+existing Message and TopoDS alert macros. The native and Rust checks cover each
+runtime name, parent type, merge policy, and shape payload access. The base
+verification command runs all 41 alert cases alongside the 11 options/progress
+cases; all pass. Macro-generated members still need compiler inventory accounting.
