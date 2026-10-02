@@ -745,3 +745,27 @@ an API-level partial: its fixing-tolerance argument and the later `ShapeFix_Wire
 `ShapeFix_Face` repair phase are not yet ported; the pinned rectangular-face suite needs
 no such repair. TKShHealing now maps 123/143 source declarations. Remaining unmapped
 suites are Face (4), Shape (7), and UnifySameDomain (9).
+
+### Pending whole-source suite blockers
+
+The four declarations in `ShapeFix_Face_Test.cxx` remain unmapped. Its two context
+replacement/removal cases can use `ShapeBuild_ReShape`, but its periodic-cone cases need
+`ShapeFix_Face::FixPeriodicDegenerated` and `IsPeriodicConicalLoop`; the pinned face
+implementation is 3,273 lines, and `GeomAPI_Interpolate` used to construct the fixture is
+not yet present in Rust. One case explicitly requires the repaired face to pass
+`BRepCheck_Analyzer`, so a context-only or unchanged-face approximation is not sufficient.
+
+The seven declarations in `ShapeFix_Shape_Test.cxx` remain unmapped as a file. Existing
+`ShapeFixShape`, inherited precision state and `ShapeFix_Wire` cover the unchanged-shape,
+precision and wire-regression paths, but `HealPrismFromSelfIntersectingFace` needs
+`ShapeFix_Face` to split and heal its bowtie cap. A Rust probe using the translated
+bowtie face/prism fixture confirmed the current unchanged-shape implementation still
+fails `BRepCheck_Analyzer::IsValid`; do not count this source green until that repair is
+implemented. No declaration rows were added for this audit.
+
+The nine declarations in `ShapeUpgrade_UnifySameDomain_Test.cxx` also remain unmapped.
+The pinned production implementation is 4,761 lines and its tests require genuine
+coplanar-face unification and pcurve-safe transformations. The boolean cases additionally
+need the currently missing `BRepAlgoAPI_Common`, `BRepAlgoAPI_Fuse` and
+`BOPAlgo_Splitter` operations from TKBO; they are not available as Rust dependencies yet.
+TKShHealing remains at 123/143 mapped declarations.
