@@ -1,12 +1,13 @@
 //! Shape storage and the ported topology-preparation slice of `BOPDS_DS::Init`.
 use super::{
-    CommonBlockHandle, FaceInfo, IndexRange, Pave, PaveBlock, PaveBlockHandle, ShapeInfo,
-    VertexIndexSet, pave_block_handle,
+    CommonBlockHandle, FaceInfo, IndexRange, InterfEE, InterfEF, InterfFF, InterfVE, InterfVF,
+    InterfVV, Pave, PaveBlock, PaveBlockHandle, ShapeInfo, VertexIndexSet, pave_block_handle,
 };
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, Vertex};
 use rustycad_tkbrep::toptools::ShapeMapHasher;
 use rustycad_tkernel::ncollection::DataMap;
+use rustycad_tkernel::ncollection::DynamicArray;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::bnd::BoundingBox3;
@@ -26,6 +27,12 @@ pub struct DataStructure {
     pave_blocks_pool: Vec<Vec<PaveBlockHandle>>,
     pave_block_common_blocks: Vec<(PaveBlockHandle, CommonBlockHandle)>,
     face_info_pool: Vec<FaceInfo>,
+    interf_vv: DynamicArray<InterfVV>,
+    interf_ve: DynamicArray<InterfVE>,
+    interf_vf: DynamicArray<InterfVF>,
+    interf_ee: DynamicArray<InterfEE>,
+    interf_ef: DynamicArray<InterfEF>,
+    interf_ff: DynamicArray<InterfFF>,
     source_shape_count: i32,
 }
 
@@ -160,6 +167,36 @@ impl DataStructure {
         &self.face_info_pool
     }
 
+    /// Mutably borrows vertex/vertex records; `ds.interf_vv().append(InterfVV::default())`.
+    pub fn interf_vv(&mut self) -> &mut DynamicArray<InterfVV> {
+        &mut self.interf_vv
+    }
+
+    /// Mutably borrows vertex/edge records; `ds.interf_ve().append(InterfVE::default())`.
+    pub fn interf_ve(&mut self) -> &mut DynamicArray<InterfVE> {
+        &mut self.interf_ve
+    }
+
+    /// Mutably borrows vertex/face records; `ds.interf_vf().append(InterfVF::default())`.
+    pub fn interf_vf(&mut self) -> &mut DynamicArray<InterfVF> {
+        &mut self.interf_vf
+    }
+
+    /// Mutably borrows edge/edge records; `ds.interf_ee().append(InterfEE::default())`.
+    pub fn interf_ee(&mut self) -> &mut DynamicArray<InterfEE> {
+        &mut self.interf_ee
+    }
+
+    /// Mutably borrows edge/face records; `ds.interf_ef().append(InterfEF::default())`.
+    pub fn interf_ef(&mut self) -> &mut DynamicArray<InterfEF> {
+        &mut self.interf_ef
+    }
+
+    /// Mutably borrows face/face records; `ds.interf_ff().append(InterfFF::default())`.
+    pub fn interf_ff(&mut self) -> &mut DynamicArray<InterfFF> {
+        &mut self.interf_ff
+    }
+
     /// Returns whether shape metadata points to a pave-block pool entry.
     /// `ds.has_pave_blocks(edge_index)`.
     pub fn has_pave_blocks(&self, index: i32) -> Result<bool, Failure> {
@@ -270,6 +307,12 @@ impl DataStructure {
         self.pave_blocks_pool.clear();
         self.pave_block_common_blocks.clear();
         self.face_info_pool.clear();
+        self.interf_vv.clear(false);
+        self.interf_ve.clear(false);
+        self.interf_vf.clear(false);
+        self.interf_ee.clear(false);
+        self.interf_ef.clear(false);
+        self.interf_ff.clear(false);
         self.source_shape_count = 0;
         if let Some(indices) = &mut self.shape_indices {
             indices.clear(false);

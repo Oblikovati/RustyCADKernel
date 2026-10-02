@@ -175,6 +175,18 @@ void bo_bopds_interf_ff_case(const std::vector<double>&) {
  BOPDS_Point lastPoint;lastPoint.SetPnt(gp_Pnt(-1.,-2.,-3.));lastPoint.SetPnt2D1(gp_Pnt2d(-4.,-5.));lastPoint.SetPnt2D2(gp_Pnt2d(-6.,-7.));lastPoint.SetIndex(12);value.ChangePoints().SetValue(2,lastPoint);value.Init(1,1);
  value.Indices(index1,index2);bo_int(index1);bo_int(index2);bo_int(value.TangentFaces());bo_int(value.Curves().Length());bo_int(value.Curves().Lower());bo_int(value.Curves().Upper());for(int index:{0,1,4})bo_real(value.Curves().Value(index).Tolerance());bo_int(value.Points().Length());bo_int(value.Points().Lower());bo_int(value.Points().Upper());const BOPDS_Point& first=value.Points().Value(0);const BOPDS_Point& last=value.Points().Value(2);for(double x:{first.Pnt().X(),first.Pnt().Y(),first.Pnt().Z(),first.Pnt2D1().X(),first.Pnt2D1().Y(),first.Pnt2D2().X(),first.Pnt2D2().Y()})bo_real(x);bo_int(first.Index());for(double x:{last.Pnt().X(),last.Pnt().Y(),last.Pnt().Z(),last.Pnt2D1().X(),last.Pnt2D1().Y(),last.Pnt2D2().X(),last.Pnt2D2().Y()})bo_real(x);bo_int(last.Index());
 }
+void bo_bopds_interference_arrays_case(const std::vector<double>&) {
+ BOPDS_DS ds;
+ ds.InterfVV().Append(BOPDS_InterfVV());ds.InterfVV().ChangeValue(0).SetIndices(1,2);
+ ds.InterfVE().Append(BOPDS_InterfVE());ds.InterfVE().ChangeValue(0).SetIndices(3,4);
+ ds.InterfVF().Append(BOPDS_InterfVF());ds.InterfVF().ChangeValue(0).SetIndices(5,6);
+ ds.InterfEE().Append(BOPDS_InterfEE());ds.InterfEE().ChangeValue(0).SetIndices(7,8);
+ ds.InterfEF().Append(BOPDS_InterfEF());ds.InterfEF().ChangeValue(0).SetIndices(9,10);
+ ds.InterfFF().Append(BOPDS_InterfFF());ds.InterfFF().ChangeValue(0).SetIndices(11,12);
+ for(int count:{ds.InterfVV().Length(),ds.InterfVE().Length(),ds.InterfVF().Length(),ds.InterfEE().Length(),ds.InterfEF().Length(),ds.InterfFF().Length()})bo_int(count);
+ for(const auto& record:{std::pair<int,int>{ds.InterfVV().Value(0).Index1(),ds.InterfVV().Value(0).Index2()},std::pair<int,int>{ds.InterfVE().Value(0).Index1(),ds.InterfVE().Value(0).Index2()},std::pair<int,int>{ds.InterfVF().Value(0).Index1(),ds.InterfVF().Value(0).Index2()},std::pair<int,int>{ds.InterfEE().Value(0).Index1(),ds.InterfEE().Value(0).Index2()},std::pair<int,int>{ds.InterfEF().Value(0).Index1(),ds.InterfEF().Value(0).Index2()},std::pair<int,int>{ds.InterfFF().Value(0).Index1(),ds.InterfFF().Value(0).Index2()}}){bo_int(record.first);bo_int(record.second);}
+ ds.Clear();for(int count:{ds.InterfVV().Length(),ds.InterfVE().Length(),ds.InterfVF().Length(),ds.InterfEE().Length(),ds.InterfEF().Length(),ds.InterfFF().Length()})bo_int(count);
+}
 void bo_data_structure_init_case(const std::vector<double>& v) {
  BRep_Builder builder;TopoDS_Vertex first,second,third;builder.MakeVertex(first,gp_Pnt(1.,2.,3.),2e-5);builder.MakeVertex(second,gp_Pnt(4.,5.,6.),5e-7);builder.MakeVertex(third,gp_Pnt(7.,8.,9.),1e-4);
  TopoDS_Compound root;builder.MakeCompound(root);builder.Add(root,first);builder.Add(root,second);builder.Add(root,first);

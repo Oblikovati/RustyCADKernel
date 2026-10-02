@@ -1,7 +1,7 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
-    BopdsCurve, CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, InterfEE, InterfEF,
-    InterfFF, InterfVE, InterfVF, InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo,
+    BopdsCurve, CommonBlock, CoupleOfPaveBlocks, DataStructure, FaceInfo, IndexRange, InterfEE,
+    InterfEF, InterfFF, InterfVE, InterfVF, InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo,
     common_block_handle, pave_block_handle,
 };
 use rustycad_tkbo::int_tools::Curve;
@@ -550,6 +550,66 @@ pub fn bopds_interf_ff_case(_: &[f64]) {
     append_probe_point(&mut value, 2, [-1., -2., -3.], [-4., -5.], [-6., -7.], 12);
     value.init(1, 1);
     write_interf_ff_results(&value);
+}
+
+/// Emits each BOPDS interference array's contents before and after Clear.
+pub fn bopds_interference_arrays_case() {
+    let mut structure = DataStructure::default();
+    populate_interference_arrays(&mut structure);
+    write_interference_array_counts(&mut structure);
+    write_interference_array_values(&mut structure);
+    structure.clear();
+    write_interference_array_counts(&mut structure);
+}
+
+fn populate_interference_arrays(structure: &mut DataStructure) {
+    structure
+        .interf_vv()
+        .append(InterfVV::default())
+        .set_indices(1, 2);
+    structure
+        .interf_ve()
+        .append(InterfVE::default())
+        .set_indices(3, 4);
+    structure
+        .interf_vf()
+        .append(InterfVF::default())
+        .set_indices(5, 6);
+    structure
+        .interf_ee()
+        .append(InterfEE::default())
+        .set_indices(7, 8);
+    structure
+        .interf_ef()
+        .append(InterfEF::default())
+        .set_indices(9, 10);
+    structure
+        .interf_ff()
+        .append(InterfFF::default())
+        .set_indices(11, 12);
+}
+
+fn write_interference_array_counts(structure: &mut DataStructure) {
+    integer(structure.interf_vv().length());
+    integer(structure.interf_ve().length());
+    integer(structure.interf_vf().length());
+    integer(structure.interf_ee().length());
+    integer(structure.interf_ef().length());
+    integer(structure.interf_ff().length());
+}
+
+fn write_interference_array_values(structure: &mut DataStructure) {
+    for indices in [
+        structure.interf_vv().value(0).unwrap().indices(),
+        structure.interf_ve().value(0).unwrap().indices(),
+        structure.interf_vf().value(0).unwrap().indices(),
+        structure.interf_ee().value(0).unwrap().indices(),
+        structure.interf_ef().value(0).unwrap().indices(),
+        structure.interf_ff().value(0).unwrap().indices(),
+    ] {
+        integer(indices.0);
+        integer(indices.1);
+    }
 }
 
 fn append_probe_curve(record: &mut InterfFF, index: i32, tolerance: f64) {
