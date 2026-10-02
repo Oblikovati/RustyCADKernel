@@ -15,7 +15,9 @@ BOPDS IndexRange, Pave, Pair, Point, PaveBlock, CommonBlock, CoupleOfPaveBlocks,
 ShapeInfo, FaceInfo and DataStructure add 235 API rows. The DS common-block
 association slice now covers `IsCommonBlock`, `CommonBlock`, `SetCommonBlock`,
 `RealPaveBlock` and `IsCommonBlockOnEdge`, with handle-identity and first-block
-selection checked by a pinned native probe.
+selection checked by a pinned native probe. The complete `BOPDS_Curve` storage
+record adds 19 API rows, including box/curve copies, pave-block and vertex list
+mutations, initial-block creation, `HasEdge`, and both tolerances.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered

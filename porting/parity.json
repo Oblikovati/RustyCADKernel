@@ -91761,7 +91761,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91793,7 +91793,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -214398,7 +214398,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -215862,6 +215862,158 @@
       "rust_item": "rustycad_tkbo::bop_ds::FaceInfo::change_vertices_section",
       "status": "implemented",
       "notes": "Returns mutable access to section vertices, which survive Clear."
+    },
+    {
+      "upstream_id": "BOPDS_Curve()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::default",
+      "status": "implemented",
+      "notes": "Creates an empty intersection-curve record."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::~BOPDS_Curve()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the record fields without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_Curve(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native memory arenas; Rust collections own the record storage."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::SetCurve(const IntTools_Curve&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::set_curve",
+      "status": "implemented",
+      "notes": "Copies the IntTools curve record and its shared geometry handles."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::Curve() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::curve",
+      "status": "implemented",
+      "notes": "Borrows the stored IntTools curve."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::SetBox(const Bnd_Box&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::set_box",
+      "status": "implemented",
+      "notes": "Copies the bounding-box values."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::Box() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::box_bounds",
+      "status": "implemented",
+      "notes": "Borrows the stored bounding box."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::ChangeBox()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::change_box",
+      "status": "implemented",
+      "notes": "Mutably borrows the stored bounding box."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::SetPaveBlocks(const NCollection_List<occ::handle<BOPDS_PaveBlock>>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::set_pave_blocks",
+      "status": "implemented",
+      "notes": "Copies pave-block handles in native order, retaining duplicate handles."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::PaveBlocks() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::pave_blocks",
+      "status": "implemented",
+      "notes": "Borrows pave-block handles in list order."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::ChangePaveBlocks()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::change_pave_blocks",
+      "status": "implemented",
+      "notes": "Mutably borrows pave-block handles in list order."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::InitPaveBlock1()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::init_pave_block1",
+      "status": "implemented",
+      "notes": "Creates one default block only when the list is empty."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::ChangePaveBlock1()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::change_pave_block1",
+      "status": "implemented",
+      "notes": "Returns the first shared block or reports Standard_NoSuchObject on an empty list."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::TechnoVertices() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::techno_vertices",
+      "status": "implemented",
+      "notes": "Borrows technological-vertex indices in list order."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::ChangeTechnoVertices()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::change_techno_vertices",
+      "status": "implemented",
+      "notes": "Mutably borrows the technological-vertex index list."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::HasEdge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::has_edge",
+      "status": "implemented",
+      "notes": "Reports whether any stored block has a result edge."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::SetTolerance(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::set_tolerance",
+      "status": "implemented",
+      "notes": "Stores the supplied tolerance without normalization."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::Tolerance() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::tolerance",
+      "status": "implemented",
+      "notes": "Returns the stored spatial tolerance."
+    },
+    {
+      "upstream_id": "BOPDS_Curve::TangentialTolerance() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Curve.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::BopdsCurve::tangential_tolerance",
+      "status": "implemented",
+      "notes": "Returns the IntTools curve tangential tolerance."
     },
     {
       "upstream_id": "BOPDS_DS",

@@ -8,6 +8,7 @@
 #include <BOPDS_ShapeInfo.hxx>
 #include <BOPDS_FaceInfo.hxx>
 #include <BOPDS_DS.hxx>
+#include <BOPDS_Curve.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
 #include <BRepBuilderAPI_MakeVertex.hxx>
@@ -140,6 +141,15 @@ void bo_data_structure_common_block_case(const std::vector<double>&) {
  occ::handle<BOPDS_CommonBlock> replacement=new BOPDS_CommonBlock();replacement->SetPaveBlocks(replacementBlocks);ds.SetCommonBlock(first,replacement);
  bo_int(ds.CommonBlock(first)==replacement);bo_int(ds.RealPaveBlock(first)==first);bo_int(ds.IsCommonBlockOnEdge(first));
  ds.Clear();bo_int(ds.IsCommonBlock(first));
+}
+void bo_bopds_curve_case(const std::vector<double>&) {
+ BOPDS_Curve value;bo_real(value.Tolerance());bo_real(value.TangentialTolerance());bo_int(value.Box().IsVoid());bo_int(value.PaveBlocks().Extent());bo_int(value.TechnoVertices().Extent());bo_int(value.HasEdge());
+ try {value.ChangePaveBlock1();bo_int(0);} catch(const Standard_NoSuchObject&) {bo_int(1);}
+ value.InitPaveBlock1();value.InitPaveBlock1();bo_int(value.PaveBlocks().Extent());value.ChangePaveBlock1()->SetEdge(12);bo_int(value.HasEdge());
+ IntTools_Curve curve;curve.SetTangentialTolerance(4.5e-5);value.SetCurve(curve);bo_real(value.TangentialTolerance());
+ Bnd_Box box;box.Update(-1.,-2.,-3.,4.,5.,6.);box.SetGap(0.125);value.SetBox(box);box.SetGap(9.);bo_real(value.Box().GetGap());value.ChangeBox().SetGap(0.25);bo_real(value.Box().GetGap());double x0,y0,z0,x1,y1,z1;value.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);
+ occ::handle<BOPDS_PaveBlock> first=new BOPDS_PaveBlock(),edge=new BOPDS_PaveBlock();edge->SetEdge(7);NCollection_List<occ::handle<BOPDS_PaveBlock>> blocks;blocks.Append(first);blocks.Append(edge);blocks.Append(edge);value.SetPaveBlocks(blocks);bo_int(value.PaveBlocks().Extent());bo_int(value.PaveBlocks().First()==first);NCollection_List<occ::handle<BOPDS_PaveBlock>>::Iterator aIt(value.PaveBlocks());aIt.Next();bo_int(aIt.Value()==edge);aIt.Next();bo_int(aIt.Value()==edge);bo_int(value.HasEdge());value.ChangePaveBlocks().RemoveFirst();bo_int(value.PaveBlocks().Extent());
+ value.ChangeTechnoVertices().Append(8);value.ChangeTechnoVertices().Append(3);value.ChangeTechnoVertices().Append(8);bo_int(value.TechnoVertices().Extent());NCollection_List<int>::Iterator aItVertex(value.TechnoVertices());for(;aItVertex.More();aItVertex.Next())bo_int(aItVertex.Value());value.SetTolerance(-0.);bo_real(value.Tolerance());
 }
 void bo_data_structure_init_case(const std::vector<double>& v) {
  BRep_Builder builder;TopoDS_Vertex first,second,third;builder.MakeVertex(first,gp_Pnt(1.,2.,3.),2e-5);builder.MakeVertex(second,gp_Pnt(4.,5.,6.),5e-7);builder.MakeVertex(third,gp_Pnt(7.,8.,9.),1e-4);

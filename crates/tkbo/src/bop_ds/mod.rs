@@ -1,6 +1,7 @@
 //! BOPDS records used by Boolean intersection bookkeeping, at OCCT 3d097a0.
 mod common_block;
 mod couple_of_pave_blocks;
+mod curve;
 mod data_structure;
 mod face_info;
 mod index_range;
@@ -11,6 +12,7 @@ mod point;
 mod shape_info;
 pub use common_block::{CommonBlock, CommonBlockHandle, common_block_handle, pave_block_handle};
 pub use couple_of_pave_blocks::CoupleOfPaveBlocks;
+pub use curve::BopdsCurve;
 pub use data_structure::DataStructure;
 pub use face_info::{FaceInfo, PaveBlockIndexMap, VertexIndexSet};
 pub use index_range::IndexRange;
