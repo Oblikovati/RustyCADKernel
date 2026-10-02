@@ -158,6 +158,15 @@ void bo_bopds_interf_case(const std::vector<double>&) {
  BOPDS_InterfVE ve;bo_int(ve.Parameter());ve.SetParameter(-0.);bo_real(ve.Parameter());ve.SetIndices(6,9);bo_int(ve.OppositeIndex(9));
  BOPDS_InterfVF vf;double u=7.,v=8.;vf.UV(u,v);bo_real(u);bo_real(v);vf.SetUV(-1.25,2.5);vf.UV(u,v);bo_real(u);bo_real(v);vf.SetIndices(11,13);bo_int(vf.Contains(13));
 }
+void bo_common_part_state(const IntTools_CommonPrt& part) {
+ bo_int(int(part.Type()));double first,last;part.Range1(first,last);bo_real(first);bo_real(last);bo_real(part.VertexParameter1());bo_real(part.VertexParameter2());bo_int(part.AllNullFlag());gp_Pnt p1,p2;part.BoundingPoints(p1,p2);for(double c:{p1.X(),p1.Y(),p1.Z(),p2.X(),p2.Y(),p2.Z()})bo_real(c);bo_int(part.Ranges2().Length());for(int i=1;i<=part.Ranges2().Length();++i){double a,b;part.Ranges2()(i).Range(a,b);bo_real(a);bo_real(b);}
+}
+void bo_bopds_interf_common_case(const std::vector<double>&) {
+ IntTools_CommonPrt first;first.SetType(TopAbs_EDGE);first.SetRange1(1.,2.);first.SetVertexParameter1(1.25);first.SetVertexParameter2(-2.5);first.AppendRange2(3.,4.);first.SetAllNullFlag(true);first.SetBoundingPoints(gp_Pnt(1.,2.,3.),gp_Pnt(4.,5.,6.));
+ BOPDS_InterfEE ee;bo_int(ee.Index1());bo_int(ee.Index2());bo_common_part_state(ee.CommonPart());ee.SetIndices(7,9);ee.SetCommonPart(first);bo_int(ee.Index1());bo_int(ee.Index2());bo_common_part_state(ee.CommonPart());
+ IntTools_CommonPrt second;second.SetType(TopAbs_VERTEX);second.SetRange1(-1.,-2.);second.SetVertexParameter1(1.25);second.SetVertexParameter2(-2.5);second.AppendRange2(7.,8.);second.SetAllNullFlag(false);second.SetBoundingPoints(gp_Pnt(-1.,-2.,-3.),gp_Pnt(-4.,-5.,-6.));ee.SetCommonPart(second);bo_common_part_state(ee.CommonPart());
+ BOPDS_InterfEF ef;ef.SetIndices(11,19);ef.SetCommonPart(first);bo_int(ef.Index1());bo_int(ef.Index2());bo_common_part_state(ef.CommonPart());
+}
 void bo_data_structure_init_case(const std::vector<double>& v) {
  BRep_Builder builder;TopoDS_Vertex first,second,third;builder.MakeVertex(first,gp_Pnt(1.,2.,3.),2e-5);builder.MakeVertex(second,gp_Pnt(4.,5.,6.),5e-7);builder.MakeVertex(third,gp_Pnt(7.,8.,9.),1e-4);
  TopoDS_Compound root;builder.MakeCompound(root);builder.Add(root,first);builder.Add(root,second);builder.Add(root,first);

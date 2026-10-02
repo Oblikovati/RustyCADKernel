@@ -1,4 +1,5 @@
 //! Shape-interference records corresponding to `BOPDS_Interf` and vertex subtypes.
+use crate::int_tools::CommonPrt;
 use std::ops::{Deref, DerefMut};
 
 /// Shared shape indices carried by every interference record; use `InterfVV::default()`.
@@ -112,6 +113,20 @@ pub struct InterfVF {
     uv: (f64, f64),
 }
 
+/// Edge/edge interference carrying its common portion; `InterfEE::default()`.
+#[derive(Clone, Debug, Default)]
+pub struct InterfEE {
+    base: Interference,
+    common_part: CommonPrt,
+}
+
+/// Edge/face interference carrying its common portion; `InterfEF::default()`.
+#[derive(Clone, Debug, Default)]
+pub struct InterfEF {
+    base: Interference,
+    common_part: CommonPrt,
+}
+
 impl InterfVE {
     /// Replaces the vertex parameter on the edge; `record.set_parameter(0.25)`.
     pub fn set_parameter(&mut self, parameter: f64) {
@@ -133,6 +148,30 @@ impl InterfVF {
     /// Reads the vertex UV parameters in U/V order; `record.uv() == (0.25, 0.75)`.
     pub fn uv(&self) -> (f64, f64) {
         self.uv
+    }
+}
+
+impl InterfEE {
+    /// Assigns common-part state with OCCT `operator=` semantics; `record.set_common_part(&part)`.
+    pub fn set_common_part(&mut self, part: &CommonPrt) {
+        self.common_part.assign(part);
+    }
+
+    /// Borrows the stored common portion; `record.common_part().ranges2()`.
+    pub fn common_part(&self) -> &CommonPrt {
+        &self.common_part
+    }
+}
+
+impl InterfEF {
+    /// Assigns common-part state with OCCT `operator=` semantics; `record.set_common_part(&part)`.
+    pub fn set_common_part(&mut self, part: &CommonPrt) {
+        self.common_part.assign(part);
+    }
+
+    /// Borrows the stored common portion; `record.common_part().ranges2()`.
+    pub fn common_part(&self) -> &CommonPrt {
+        &self.common_part
     }
 }
 
@@ -173,6 +212,34 @@ impl Deref for InterfVF {
 }
 
 impl DerefMut for InterfVF {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.base
+    }
+}
+
+impl Deref for InterfEE {
+    type Target = Interference;
+
+    fn deref(&self) -> &Self::Target {
+        &self.base
+    }
+}
+
+impl DerefMut for InterfEE {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.base
+    }
+}
+
+impl Deref for InterfEF {
+    type Target = Interference;
+
+    fn deref(&self) -> &Self::Target {
+        &self.base
+    }
+}
+
+impl DerefMut for InterfEF {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.base
     }
