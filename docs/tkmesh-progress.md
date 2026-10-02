@@ -129,7 +129,7 @@ declarations; overall mapping is 7,215/8,648 GoogleTest declaration candidates.
 ### Populated-mesh Delaun predicates
 
 The existing-mesh Delaun core adds audited API rows, including exact
-`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,283 exact
+`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,286 exact
 populated-mesh cases and reports 80 native-crash/Rust-error divergences separately;
 nine supplemental null-mesh divergences remain outside that corpus. Supermesh bounds,
 first-vertex fan creation, native insertion ordering, frontier reachability, free-triangle
@@ -146,9 +146,9 @@ the empty frontier-square case passes exactly. Multi-vertex insertion and broade
 constraint fixtures remain incomplete. `createTriangles` now fans one interior point
 across a convex boundary with exact native topology. The ordered batch path selects
 containing circumcircles, expands adjacent cavities, fans the point, and invokes
-constraint processing; one- and two-point batches on two-triangle fixtures pass exact
-native comparison. Broader batch sizes, boundary corner cases, and full IncrementalMesh
-integration remain incomplete. The six declarations in
+constraint processing. One- and two-point batches, a free vertex on a frontier edge, a
+free-diagonal point, and an outside-circle no-op pass exact native comparison. Broader
+batch sizes and full IncrementalMesh integration remain incomplete. The six declarations in
 `BRepMesh_Delaun_Test.cxx` remain unmapped as a source file; TKMesh remains at 2/29
 mapped original declarations.
 

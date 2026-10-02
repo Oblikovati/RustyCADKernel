@@ -363,6 +363,23 @@ fn batch_insertion_orders_and_replaces_two_triangle_cavities() {
 }
 
 #[test]
+fn batch_insertion_skips_frontier_edge_and_outside_points() {
+    for (flags, point, expected_links) in [(1, Xy::new(1., 0.), 1), (0, Xy::new(3., 3.), 0)] {
+        let mesh = fixture::mesh(0, flags);
+        let vertex = mesh
+            .add_node(&Vertex::new(point, 0, Freedom::Free), true)
+            .unwrap();
+        let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+        delaun.init_circles_tool(8, 8).unwrap();
+
+        delaun.insert_vertices_probe(&mut [vertex]).unwrap();
+
+        assert!(delaun.result().elements_of_domain().is_empty());
+        assert_eq!(delaun.result().links_of_domain().extent(), expected_links);
+    }
+}
+
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();
