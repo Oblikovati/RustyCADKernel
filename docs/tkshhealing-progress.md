@@ -801,6 +801,16 @@ shared-vertex edge splitting and insertion, before `ShapeFix_Face::FixLoopWire` 
 extract the two triangular loops. These probes do not map any of the seven Shape source
 declarations.
 
+`ShapeBuild_Edge::CopyReplaceVertices` and the p-curve update tail are now available as
+`ShapeBuildEdge::copy_replace_vertices_with_pcurve_range`. It copies the original edge,
+uses the supplied endpoint vertices and p-curve, sets the face-specific range, and clears
+SameRange without mutating the input edge. A focused test checks replacement identity,
+the `(0.25, 0.75)` range, and preservation of the original `(0, 1)` range. The existing
+periodic-cone face test now also checks the native final ring p-curve endpoints and range
+`0..1.0497704792601261`. This is a prerequisite slice only; the periodic `FixGap2d`
+pole movement, tolerance update, and context registration are not yet wired into the
+fixer, and no Shape declarations are mapped.
+
 The nine declarations in `ShapeUpgrade_UnifySameDomain_Test.cxx` also remain unmapped.
 The pinned production implementation is 4,761 lines and its tests require genuine
 coplanar-face unification and pcurve-safe transformations. The boolean cases additionally
