@@ -125,3 +125,12 @@ passes 131,199 requests and separately replays 28 indexing/null-object differenc
 The shared CellFilter conversion now uses TKernel's existing native integer cast;
 all 251 existing tree comparisons remain green. TKMesh is now 2/29 mapped original
 declarations; overall mapping is 7,212/8,648 GoogleTest declaration candidates.
+
+### Populated-mesh Delaun predicates
+
+The existing-mesh Delaun core adds 14 audited API rows: four implemented and ten
+partial. Its focused oracle passes 2,128 exact populated-mesh cases; it separately
+replays 89 native crash differences for null-mesh queries and collinear circle
+cleanup. The inserted-triangle and constraint pipeline is still in progress, and
+this slice maps no original Delaun test declaration. TKMesh remains at 2/29 mapped
+original declarations.
