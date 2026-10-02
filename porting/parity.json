@@ -215933,7 +215933,7 @@
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::init",
       "status": "partial",
-      "notes": "Ported source argument ordering, recursive shape metadata, argument ranges and vertex boxes with native fuzz tolerance. Edge/face/solid preparation, vertex-edge links and pools remain unported."
+      "notes": "Ports argument ordering, recursive shape metadata, ranges, vertex/edge/face/solid bounds and child indices, vertex-edge links, and empty operation pools. Native tests cover shared-vertex edge paves and a single-solid box. Infinite-edge synthetic vertices, exact inverted/open-shell handling, same-domain paves, and special internal/seam edge cases remain incomplete."
     },
     {
       "upstream_id": "BOPDS_DS::NbShapes() const",
@@ -215948,40 +215948,40 @@
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::nb_source_shapes",
-      "status": "partial",
-      "notes": "Matches the native zero value before Init; geometric Init has not yet been ported."
+      "status": "implemented",
+      "notes": "Reports zero before Init and the indexed source-shape count after initialization."
     },
     {
       "upstream_id": "BOPDS_DS::NbRanges() const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::nb_ranges",
-      "status": "partial",
-      "notes": "Matches the empty pre-Init ranges; Init is not yet ported."
+      "status": "implemented",
+      "notes": "Reports the number of argument ranges populated by Init."
     },
     {
       "upstream_id": "BOPDS_DS::Range(int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::range",
-      "status": "partial",
-      "notes": "Provides checked access to currently empty pre-Init ranges; Init and range population are not yet ported."
+      "status": "implemented",
+      "notes": "Returns the checked inclusive argument range after Init."
     },
     {
       "upstream_id": "BOPDS_DS::Rank(int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::rank",
-      "status": "partial",
-      "notes": "Returns -1 for the empty pre-Init range set; Init and range population are not yet ported."
+      "status": "implemented",
+      "notes": "Returns the first inclusive argument range containing the index, or -1."
     },
     {
       "upstream_id": "BOPDS_DS::IsNewShape(int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::is_new_shape",
-      "status": "partial",
-      "notes": "Uses native source count zero before Init; source initialization remains unported."
+      "status": "implemented",
+      "notes": "Compares the index against the initialized source count."
     },
     {
       "upstream_id": "BOPDS_DS::Append(const BOPDS_ShapeInfo&)",
@@ -216035,41 +216035,41 @@
       "upstream_id": "BOPDS_DS::PaveBlocksPool() const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::pave_blocks_pool",
+      "status": "implemented",
+      "notes": "Borrows the initialized pave-block lists in pool order."
     },
     {
       "upstream_id": "BOPDS_DS::ChangePaveBlocksPool()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::change_pave_blocks_pool",
+      "status": "implemented",
+      "notes": "Mutably borrows the pave-block pool."
     },
     {
       "upstream_id": "BOPDS_DS::HasPaveBlocks(int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::has_pave_blocks",
+      "status": "implemented",
+      "notes": "Reads the shape-info reference state."
     },
     {
       "upstream_id": "BOPDS_DS::PaveBlocks(int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::pave_blocks",
+      "status": "implemented",
+      "notes": "Returns the referenced pave-block list or an empty slice."
     },
     {
       "upstream_id": "BOPDS_DS::ChangePaveBlocks(int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::change_pave_blocks",
       "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "notes": "Creates and returns endpoint paves for ordinary finite edges. Infinite endpoints, same-domain vertex mapping, internal edge topology and the one-vertex seam path remain incomplete."
     },
     {
       "upstream_id": "BOPDS_DS::UpdatePaveBlocks()",
@@ -216139,9 +216139,9 @@
       "upstream_id": "BOPDS_DS::FaceInfoPool() const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::face_info_pool",
+      "status": "implemented",
+      "notes": "Borrows the initialized face-state pool."
     },
     {
       "upstream_id": "BOPDS_DS::HasFaceInfo(int) const",

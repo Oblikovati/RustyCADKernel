@@ -11,6 +11,8 @@
 #include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
 #include <BRepBuilderAPI_MakeVertex.hxx>
+#include <BRepBuilderAPI_MakeEdge.hxx>
+#include <BRepPrimAPI_MakeBox.hxx>
 #include <BRep_Builder.hxx>
 #include <Bnd_Box.hxx>
 #include <cstdio>
@@ -123,4 +125,18 @@ void bo_data_structure_init_case(const std::vector<double>& v) {
  bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());for(int i=0;i<ds.NbRanges();++i){bo_int(ds.Range(i).First());bo_int(ds.Range(i).Last());}
  bo_int(ds.Rank(0));bo_int(ds.Rank(2));bo_int(ds.Rank(3));bo_int(ds.Index(root));bo_int(ds.Index(first));bo_int(ds.Index(second));bo_int(ds.Index(third));
  for(int i=0;i<ds.NbShapes();++i){const BOPDS_ShapeInfo& info=ds.ShapeInfo(i);bo_int(info.ShapeType());bo_int(info.SubShapes().Extent());for(int child:info.SubShapes())bo_int(child);bo_int(info.Box().IsVoid());if(info.ShapeType()==TopAbs_VERTEX){bo_real(info.Box().GetGap());double x0,y0,z0,x1,y1,z1;info.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);}}
+}
+void bo_data_structure_edges_case(const std::vector<double>& v) {
+ BRep_Builder builder;TopoDS_Vertex first,shared,last;builder.MakeVertex(first,gp_Pnt(-1.,0.,0.),1e-7);builder.MakeVertex(shared,gp_Pnt(0.,0.,0.),2e-7);builder.MakeVertex(last,gp_Pnt(1.,1.,0.),3e-7);
+ TopoDS_Edge firstEdge=BRepBuilderAPI_MakeEdge(first,shared),secondEdge=BRepBuilderAPI_MakeEdge(shared,last);TopoDS_Wire wire;builder.MakeWire(wire);builder.Add(wire,firstEdge);builder.Add(wire,secondEdge);
+ NCollection_List<TopoDS_Shape> arguments;arguments.Append(wire);BOPDS_DS ds;ds.SetArguments(arguments);ds.Init(v[0]);
+ bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Index(first));bo_int(ds.Index(shared));bo_int(ds.Index(last));bo_int(ds.Index(firstEdge));bo_int(ds.Index(secondEdge));
+ for(int i=0;i<ds.NbShapes();++i){const BOPDS_ShapeInfo& info=ds.ShapeInfo(i);bo_int(info.ShapeType());bo_int(info.SubShapes().Extent());for(int child:info.SubShapes())bo_int(child);bo_int(info.Box().IsVoid());if(!info.Box().IsVoid()){bo_real(info.Box().GetGap());double x0,y0,z0,x1,y1,z1;info.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);}}
+ ds.InitPaveBlocksForVertex(ds.Index(shared));bo_int(ds.PaveBlocksPool().Length());
+ for(int edgeIndex:{ds.Index(firstEdge),ds.Index(secondEdge)}){bo_int(ds.HasPaveBlocks(edgeIndex));bo_int(ds.ShapeInfo(edgeIndex).Reference());const auto& blocks=ds.PaveBlocks(edgeIndex);bo_int(blocks.Extent());for(const auto& block:blocks){bo_int(block->OriginalEdge());int i1,i2;double p1,p2;block->Indices(i1,i2);block->Range(p1,p2);bo_int(i1);bo_int(i2);bo_real(p1);bo_real(p2);bo_int(block->ExtPaves().Extent());for(const auto& pave:block->ExtPaves()){bo_int(pave.Index());bo_real(pave.Parameter());}}}
+}
+void bo_data_structure_box_case(const std::vector<double>& v) {
+ TopoDS_Solid solid=BRepPrimAPI_MakeBox(1.,2.,3.).Solid();NCollection_List<TopoDS_Shape> arguments;arguments.Append(solid);BOPDS_DS ds;ds.SetArguments(arguments);ds.Init(v[0]);
+ bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Index(solid));
+ for(int i=0;i<ds.NbShapes();++i){const BOPDS_ShapeInfo& info=ds.ShapeInfo(i);bo_int(info.ShapeType());bo_int(info.SubShapes().Extent());for(int child:info.SubShapes())bo_int(child);bo_int(info.Box().IsVoid());if(!info.Box().IsVoid()){bo_real(info.Box().GetGap());double x0,y0,z0,x1,y1,z1;info.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);}}
 }

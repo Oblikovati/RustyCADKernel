@@ -1,9 +1,11 @@
 //! Exact storage and source-vertex initialization behavior of BOPDS_DS.
 use rustycad_tkbo::bop_ds::{DataStructure, IndexRange, ShapeInfo};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
+use rustycad_tkbrep::topods::Wire;
 use rustycad_tkbrep::topods::{Compound, Shape, Vertex};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::Point3;
+use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 
 fn vertex_at(x: f64) -> Shape {
     let builder = BRepBuilder::default();
@@ -53,6 +55,73 @@ fn init_preserves_depth_first_shape_order_ranges_and_vertex_gaps() {
     assert_vertex_bounds(&structure, 1, &first, 4e-3);
     assert_vertex_bounds(&structure, 2, &second, 4e-3);
     assert_vertex_bounds(&structure, 3, &third, 4e-3);
+}
+
+#[test]
+fn init_builds_shared_vertex_edge_links_and_endpoint_paves() {
+    let builder = BRepBuilder::default();
+    let first = vertex_with_tolerance(&builder, [-1.0, 0.0, 0.0], 1e-7);
+    let shared = vertex_with_tolerance(&builder, [0.0, 0.0, 0.0], 2e-7);
+    let last = vertex_with_tolerance(&builder, [1.0, 1.0, 0.0], 3e-7);
+    let first_vertex = Vertex::unchecked(first.clone());
+    let shared_vertex = Vertex::unchecked(shared.clone());
+    let last_vertex = Vertex::unchecked(last.clone());
+    let first_edge = BRepBuilderAPIMakeEdge::from_vertices(&first_vertex, &shared_vertex)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape();
+    let second_edge = BRepBuilderAPIMakeEdge::from_vertices(&shared_vertex, &last_vertex)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape();
+    let mut wire = Wire::default();
+    builder.make_wire(&mut wire);
+    let mut wire_shape = wire.into_shape();
+    builder.add(&mut wire_shape, &first_edge).unwrap();
+    builder.add(&mut wire_shape, &second_edge).unwrap();
+
+    let mut structure = DataStructure::default();
+    structure.set_arguments(&[wire_shape, first_edge.clone(), second_edge.clone()]);
+    structure.init(1e-4).unwrap();
+    let shared_index = structure.index(&shared);
+    let first_edge_index = structure.index(&first_edge);
+    let second_edge_index = structure.index(&second_edge);
+    assert_eq!(
+        structure.edges_at_vertex(shared_index),
+        &[first_edge_index, second_edge_index]
+    );
+    assert_eq!(structure.pave_blocks_pool().len(), 0);
+
+    structure.init_pave_blocks_for_vertex(shared_index).unwrap();
+    assert!(structure.has_pave_blocks(first_edge_index).unwrap());
+    assert!(structure.has_pave_blocks(second_edge_index).unwrap());
+    assert_eq!(structure.pave_blocks_pool().len(), 2);
+    assert_eq!(structure.pave_blocks(first_edge_index).unwrap().len(), 1);
+    assert_eq!(structure.pave_blocks(second_edge_index).unwrap().len(), 1);
+}
+
+#[test]
+fn init_flattens_single_argument_solid_to_face_edge_and_vertex_indices() {
+    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+
+    let solid = BRepPrimAPIMakeBox::from_sizes(1.0, 2.0, 3.0)
+        .unwrap()
+        .solid()
+        .unwrap()
+        .into_shape();
+    let mut structure = DataStructure::default();
+    structure.set_arguments(std::slice::from_ref(&solid));
+    structure.init(1e-4).unwrap();
+    let solid_info = structure.shape_info(structure.index(&solid)).unwrap();
+    assert_eq!(solid_info.sub_shapes().len(), 26);
+    assert!(solid_info.sub_shapes().iter().all(|index| {
+        matches!(
+            structure.shape_info(*index).unwrap().shape_type(),
+            ShapeEnum::Face | ShapeEnum::Edge | ShapeEnum::Vertex
+        )
+    }));
 }
 
 fn topology_arguments(builder: &BRepBuilder) -> (Shape, Shape, Shape, Shape) {
