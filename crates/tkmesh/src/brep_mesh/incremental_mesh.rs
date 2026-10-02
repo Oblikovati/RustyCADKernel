@@ -5,7 +5,11 @@ use super::{
 };
 use crate::imesh_data::{MeshModel, Status};
 use crate::imesh_tools::{MeshParameters, ModelAlgo, ModelBuilder};
-use rustycad_tkbrep::topods::{Shape, ShapeIterator};
+use rustycad_tkbrep::{
+    brep::BRepTool,
+    topexp::Explorer,
+    topods::{self, Shape, ShapeIterator},
+};
 use rustycad_tkernel::{message::ProgressRange, standard::Failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
@@ -23,6 +27,9 @@ impl BRepMeshIncrementalMesh {
     ) -> Result<Self, Failure> {
         validate_parameters(parameters)?;
         if is_empty_compound(shape)? {
+            return Ok(Self { status_flags: 0 });
+        }
+        if has_mesh_without_face_geometry(shape)? {
             return Ok(Self { status_flags: 0 });
         }
         let status_flags =
@@ -67,6 +74,24 @@ impl BRepMeshIncrementalMesh {
         }
         model_status_flags(&model)
     }
+}
+
+fn has_mesh_without_face_geometry(shape: &Shape) -> Result<bool, Failure> {
+    let mut faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?;
+    let mut has_mesh = false;
+    while faces.more() {
+        let face = topods::face(faces.current())?;
+        faces.next()?;
+        if BRepTool::is_geometric_face(&face)? {
+            return Ok(false);
+        }
+        let triangulation =
+            BRepTool::triangulation(&face, rustycad_tkmath::poly::mesh_purpose::NONE)?.0;
+        if !triangulation.is_null() {
+            has_mesh = true;
+        }
+    }
+    Ok(has_mesh)
 }
 
 fn model_faces(model: &rustycad_tkernel::standard::Handle<dyn MeshModel>) -> i32 {

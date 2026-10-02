@@ -203,11 +203,16 @@ polygon indices within that face's mesh-node range. The cone case uses independe
 `BRepPrimAPIMakeCone::new(100.0, 10.0, 100.0)` solids with linear deflection `0.01` and
 angles of 10 and 1 degrees; it sums nodes and triangles across all faces and requires both
 totals to differ, as the source does. The cone regression takes about 68 seconds in the
-Rust target. The full native CTest passes 9/9; the Rust target passes eight tests (seven
-source mirrors and the focused sphere-face quality-decrease probe).
-The remaining two declarations are
-the torus Boolean fusion and sphere solid cleanup/reuse regression. The source suite
-remains incomplete until all nine declarations have faithful passing Rust mirrors.
+Rust target. The full native CTest passes 9/9; the Rust target has seven source mirrors
+and focused sphere quality/cleanup probes. Rust `BRepTools::CleanGeometry` and `Clean`
+preserve the stored coarse mesh through the source cleanup/reuse call order. Incremental
+meshing after `CleanGeometry` now succeeds as a no-op when faces have stored triangulations
+but no longer have geometry. The source sphere declaration remains unmapped: on the exact
+radius-10 primitive and deflection 0.01, Rust produces 102 nodes/100 triangles while
+pinned OCCT requires 5106/10108. The missing surface-deflection control sampler must add
+the native interior points before the full sphere case can pass. The only other open
+declaration is torus Boolean fusion. The source suite remains incomplete until all nine
+declarations have faithful passing Rust mirrors.
 
 ### Discret algorithm factory suite
 
