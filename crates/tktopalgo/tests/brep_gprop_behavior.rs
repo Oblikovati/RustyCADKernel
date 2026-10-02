@@ -1,12 +1,7 @@
-//! Behavior tests of BRepGProp after the cases of the upstream suite
-//! `BRepGProp_Test.cxx`, which is not mapped: its shapes come from BRepBuilderAPI
-//! (MakeEdge, MakeWire, MakeFace), BRepPrimAPI (MakeBox, MakeSphere, MakeCylinder) and
-//! BRepAlgoAPI_Cut (TKBO), which the port does not provide, and TKBO is not in the shared
-//! native build (the unchanged suite does not link there). Here the same shapes are
-//! built with BRep_Builder (the solids by the probe's shape reader, records in
-//! `tests/gprop_records`; edges and faces as MakeEdge and MakeFace give them), and each
-//! case checks the same values with the same tolerances. `OCC49_CutShapeHasNoSymmetryAxis`
-//! needs the boolean cut and has no counterpart.
+//! Rust translations of the 17 declarations in pinned `BRepGProp_Test.cxx`.
+//! Primitive shapes use pinned native records where direct builders are unavailable.
+//! The OCC49 boolean-cut result is a captured native BRep fixture with topology and
+//! global properties checked, because TKBO cut construction is not yet ported.
 #[allow(dead_code)]
 #[path = "../examples/tp_probe/face.rs"]
 mod face;

@@ -1633,5 +1633,8 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   source gate passed all six native cases and all six Rust cases. Rust fixtures build
   equivalent BRep records and attach the pinned polygon directly while the higher-level
   edge, face, cylinder and incremental-meshing constructors remain unported.
-- TKTopAlgo now has 55 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`,
-  `BRepGProp` and `BRepOffsetAPI_ThruSections` source files still contain unmapped cases.
+- All 17 declarations in `BRepGProp_Test.cxx` are mapped and pass natively and in Rust.
+  The OCC49 cut-result case uses a pinned native BRep fixture with additional topology,
+  mass, centre-of-mass and inertia assertions while TKBO cut construction remains unported.
+- TKTopAlgo now has 72 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`
+  and `BRepOffsetAPI_ThruSections` still have unmapped source cases.
