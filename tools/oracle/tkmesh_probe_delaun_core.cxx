@@ -138,6 +138,11 @@ void mesh_delaun_internal_constraint(std::istream&){
  for(auto&point:points)mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true);mesh->AddLink(BRepMesh_Edge(1,2,BRepMesh_Free));mesh->AddLink(BRepMesh_Edge(2,3,BRepMesh_Free));mesh->AddLink(BRepMesh_Edge(3,4,BRepMesh_Free));mesh->AddLink(BRepMesh_Edge(4,1,BRepMesh_Free));mesh->AddLink(BRepMesh_Edge(1,3,BRepMesh_Fixed));mesh->AddElement(BRepMesh_Triangle({1,2,5},{true,true,false},BRepMesh_Free));
  BRepMesh_Delaun delaun(mesh,-1,-1,false);(delaun.*delaun_member(DelaunInsertInternalEdgesTag{}))();std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
 }
+void mesh_delaun_process_constraints(std::istream&){
+ occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;auto mesh=new BRepMesh_DataStructureOfDelaun(arena,8);gp_XY points[]={gp_XY(0,0),gp_XY(2,0),gp_XY(2,2),gp_XY(0,2)};
+ for(auto&point:points)mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true);for(auto pair:{std::pair<int,int>{1,2},{2,3},{3,4},{4,1}})mesh->AddLink(BRepMesh_Edge(pair.first,pair.second,BRepMesh_Frontier));
+ BRepMesh_Delaun delaun(mesh,-1,-1,false);delaun.ProcessConstraints();std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
+}
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
  occ::handle<BRepMesh_DataStructureOfDelaun>mesh=new BRepMesh_DataStructureOfDelaun(arena,8);
