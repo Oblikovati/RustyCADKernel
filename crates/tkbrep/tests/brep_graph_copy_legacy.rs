@@ -34,6 +34,8 @@ fn copy_graph(source: &BRepGraph, target: &mut BRepGraph, geometry: GeomPolicy) 
 }
 
 include!("brep_graph_copy_legacy/mesh_copy_cases.rs");
+include!("brep_graph_copy_legacy/cache_supplement_cases.rs");
+include!("brep_graph_copy_legacy/primitive_input_cases.rs");
 
 fn surface_area(shape: &rustycad_tkbrep::topods::Shape) -> f64 {
     let mut properties = GProps::default();
