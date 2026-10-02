@@ -91,6 +91,8 @@ def bopds_requests() -> list[str]:
     requests += [
         'bop_common_block 9 20 3 30 5 50 41 42 5 99 60 43 44 70 0.125',
         'bop_common_block 1 11 1 12 0 13 8 8 1 8 -7 8 9 -9 -0.0',
+        'bop_couple_paves 3 8 12 19 -0.0',
+        'bop_couple_paves -4 0 -1 77 1e-7',
     ]
     return requests
 

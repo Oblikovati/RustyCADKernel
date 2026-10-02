@@ -1,6 +1,6 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
-    CommonBlock, IndexRange, Pair, Pave, PaveBlock, Point, pave_block_handle,
+    CommonBlock, CoupleOfPaveBlocks, IndexRange, Pair, Pave, PaveBlock, Point, pave_block_handle,
 };
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Point2, Point3};
@@ -189,6 +189,56 @@ fn common_pave_block(original_edge: i32, edge: i32) -> rustycad_tkbo::bop_ds::Pa
     block.set_original_edge(original_edge);
     block.set_edge(edge);
     pave_block_handle(block)
+}
+
+/// The `BOPDS_CoupleOfPaveBlocks` nullable-handle and scalar oracle request.
+pub fn couple_of_pave_blocks_case(v: &[f64]) {
+    let empty = CoupleOfPaveBlocks::default();
+    integer(empty.index());
+    integer(empty.interference_index());
+    real(empty.tolerance());
+    flag(empty.pave_block1().is_none());
+    flag(empty.pave_block2().is_none());
+    let first = common_pave_block(v[0] as i32, -1);
+    let second = common_pave_block(v[1] as i32, -1);
+    let mut value = CoupleOfPaveBlocks::with_pave_blocks(
+        Some(std::sync::Arc::clone(&first)),
+        Some(std::sync::Arc::clone(&second)),
+    );
+    flag(std::sync::Arc::ptr_eq(value.pave_block1().unwrap(), &first));
+    flag(std::sync::Arc::ptr_eq(
+        value.pave_block2().unwrap(),
+        &second,
+    ));
+    value.set_index(v[2] as i32);
+    value.set_interference_index(v[3] as i32);
+    value.set_tolerance(v[4]);
+    integer(value.index());
+    integer(value.interference_index());
+    real(value.tolerance());
+    let (mut output_first, mut output_second) = (None, None);
+    value.pave_blocks_into(&mut output_first, &mut output_second);
+    flag(std::sync::Arc::ptr_eq(
+        output_first.as_ref().unwrap(),
+        &first,
+    ));
+    flag(std::sync::Arc::ptr_eq(
+        output_second.as_ref().unwrap(),
+        &second,
+    ));
+    value.set_pave_block1(Some(std::sync::Arc::clone(&second)));
+    value.set_pave_block2(None);
+    flag(std::sync::Arc::ptr_eq(
+        value.pave_block1().unwrap(),
+        &second,
+    ));
+    flag(value.pave_block2().is_none());
+    value.set_pave_blocks(Some(std::sync::Arc::clone(&first)), Some(second.clone()));
+    flag(std::sync::Arc::ptr_eq(value.pave_block1().unwrap(), &first));
+    flag(std::sync::Arc::ptr_eq(
+        value.pave_block2().unwrap(),
+        &second,
+    ));
 }
 
 /// Appends the three test paves; `append_extra_paves(&mut block, &request)`.
