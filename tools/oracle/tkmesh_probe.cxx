@@ -115,6 +115,7 @@ int main(){
         else if(operation=="mesh_delaun_null")mesh_delaun_null(input);
         else if(operation=="mesh_delaun_core")mesh_delaun_core(input);
         else if(operation=="mesh_delaun_polygon")mesh_delaun_polygon(input);
+        else if(operation=="mesh_delaun_polygon_mesh")mesh_delaun_polygon_mesh(input);
         else if(operation=="mesh_circle_random")mesh_circle_random(input);
         else if(operation=="mesh_circle_invalid")mesh_circle_invalid(input);
         else if(operation=="mesh_delaun")mesh_delaun(input);

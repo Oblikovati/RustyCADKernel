@@ -15,6 +15,68 @@ pub fn core_case(v: &[i32]) {
     report_unit(core(v));
     println!();
 }
+pub fn polygon_mesh_case(v: &[i32]) {
+    print!("OK ");
+    if let Err(error) = polygon_mesh(v) {
+        print!("{}", error.exception_type());
+    }
+    println!();
+}
+fn polygon_mesh(v: &[i32]) -> Result<(), Failure> {
+    let mesh = fixture::polygon_mesh(v[0], v[2] != 0);
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false)?;
+    let mut links = polygon_links(v[1]);
+    delaun.mesh_polygon_links(&mut links)?;
+    polygon_mesh_snapshot(&delaun)?;
+    Ok(())
+}
+fn polygon_links(reverse: i32) -> Sequence<i32> {
+    let mut links = Sequence::default();
+    for index in 1..=4 {
+        links.append(if reverse == 0 { index } else { -(5 - index) });
+    }
+    links
+}
+fn polygon_mesh_snapshot(delaun: &Delaun) -> Result<(), Failure> {
+    let mesh = delaun.result();
+    let mut links: Vec<i32> = mesh.links_of_domain().iter().copied().collect();
+    links.sort_unstable();
+    let mut triangles: Vec<i32> = mesh.elements_of_domain().iter().copied().collect();
+    triangles.sort_unstable();
+    report_sorted_indices(&links);
+    report_sorted_indices(&triangles);
+    snapshot_polygon_links(delaun, &triangles)?;
+    Ok(())
+}
+fn report_sorted_indices(indices: &[i32]) {
+    int(indices.len() as i32);
+    for index in indices {
+        int(*index);
+    }
+}
+fn snapshot_polygon_links(delaun: &Delaun, triangles: &[i32]) -> Result<(), Failure> {
+    let mut links: Vec<i32> = delaun.result().links_of_domain().iter().copied().collect();
+    links.sort_unstable();
+    for index in links {
+        let edge = delaun.get_edge(index)?;
+        int(index);
+        int(edge.first_node());
+        int(edge.last_node());
+        int(edge.movability() as i32);
+    }
+    for index in triangles {
+        let triangle = delaun.get_triangle(*index)?;
+        int(*index);
+        for edge in triangle.edges {
+            int(edge);
+        }
+        for orientation in triangle.orientations {
+            flag(orientation);
+        }
+        int(triangle.movability() as i32);
+    }
+    Ok(())
+}
 fn core(v: &[i32]) -> Result<(), Failure> {
     let mesh = fixture::mesh(v[0], v[1]);
     let mut delaun = Delaun::from_mesh(&mesh, v[2], v[3], v[4] != 0)?;

@@ -34,7 +34,7 @@ impl BRepMeshDelaun {
             *self.get_vertex(nodes[2])?.coord(),
         ])
     }
-    fn initialize_circle_bounds(
+    pub(super) fn initialize_circle_bounds(
         &mut self,
         bounds: &BoundingBox2,
         u: i32,

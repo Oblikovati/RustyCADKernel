@@ -12,6 +12,10 @@ mod circles;
 mod cleanup;
 mod contains;
 mod polygon;
+mod polygon_decompose;
+mod polygon_mesh;
+mod polygon_state;
+mod triangle_build;
 /// Delaunay machinery over an existing mesh; `BRepMeshDelaun::from_mesh(&mesh,8,8,true)?`.
 pub struct BRepMeshDelaun {
     mesh: Handle<BRepMeshDataStructureOfDelaun>,

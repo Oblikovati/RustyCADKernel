@@ -1,9 +1,7 @@
 use super::BRepMeshDelaun;
+use super::triangle_build::loop_edges;
 use crate::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun;
-use rustycad_tkernel::{
-    ncollection::{BaseAllocator, DataMap, DefaultHashPolicy},
-    standard::Failure,
-};
+use rustycad_tkernel::{ncollection::DataMap, standard::Failure};
 impl BRepMeshDelaun {
     /// Delete triangles attached to auxiliary nodes, then dangling links/nodes; `triangulator.remove_aux_elements()?`.
     pub fn remove_aux_elements(&mut self) -> Result<(), Failure> {
@@ -11,8 +9,7 @@ impl BRepMeshDelaun {
         for index in self.auxiliary.iter() {
             selector.neighbours_of_node(*index)?;
         }
-        let arena = BaseAllocator::incremental(crate::imesh_data::MEMORY_BLOCK_SIZE_HUGE);
-        let mut boundary = DataMap::with_allocator(DefaultHashPolicy, 10, arena);
+        let mut boundary = loop_edges();
         for index in selector.elements().iter() {
             self.delete_triangle(*index, &mut boundary)?;
         }
@@ -22,7 +19,7 @@ impl BRepMeshDelaun {
         }
         Ok(())
     }
-    fn delete_triangle(
+    pub(super) fn delete_triangle(
         &mut self,
         index: i32,
         boundary: &mut DataMap<i32, bool>,
@@ -40,7 +37,10 @@ impl BRepMeshDelaun {
         }
         Ok(())
     }
-    fn remove_auxiliary_boundary(&self, boundary: &DataMap<i32, bool>) -> Result<(), Failure> {
+    pub(super) fn remove_auxiliary_boundary(
+        &self,
+        boundary: &DataMap<i32, bool>,
+    ) -> Result<(), Failure> {
         for (index, _) in boundary.items() {
             if self.mesh_ref()?.elements_connected_to(*index)?.is_empty() {
                 self.mesh_ref()?.remove_link(*index, false)?;

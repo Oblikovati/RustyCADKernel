@@ -92,6 +92,23 @@ fn native_edge_classification_counts_frontiers_and_single_use_edges() {
     assert!(!delaun.use_edge(-1));
 }
 #[test]
+fn frontier_and_free_polygon_loops_recover_the_same_two_triangles() {
+    for kind in 0..=1 {
+        for frontier in [false, true] {
+            let mesh = fixture::polygon_mesh(kind, frontier);
+            let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+            let mut links = Sequence::default();
+            for index in 1..=4 {
+                links.append(index);
+            }
+            delaun.mesh_polygon_links(&mut links).unwrap();
+            assert_eq!(mesh.elements_of_domain().extent(), 2);
+            assert_eq!(mesh.links_of_domain().extent(), 5);
+            assert!(links.is_empty());
+        }
+    }
+}
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();
