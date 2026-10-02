@@ -1,5 +1,6 @@
 // BOPDS_Pair.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 //! Pair equality is unordered, while native operator< compares the stored order.
+use rustycad_tkernel::ncollection::HashKey;
 use rustycad_tkernel::standard::hash_bytes;
 /// `BOPDS_Pair`; `Pair::new(1, 2).is_equal(&Pair::new(2, 1))`.
 #[derive(Clone, Copy, Debug, Eq)]
@@ -50,5 +51,11 @@ impl PartialEq for Pair {
 impl std::hash::Hash for Pair {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         state.write_usize(self.hash_code());
+    }
+}
+
+impl HashKey for Pair {
+    fn occt_hash(&self) -> usize {
+        self.hash_code()
     }
 }

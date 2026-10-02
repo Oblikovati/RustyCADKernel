@@ -25,6 +25,10 @@ storage; assignment preserves the upstream append behavior for the second-edge
 range sequence. `InterfFF` adds nine rows for tangent-face state and its curve
 and point arrays; positive `Init` counts change array increments without erasing
 stored results, matching the pinned native fixture.
+The `BOPDS_DS` interference summary now covers `AddInterf`, both `HasInterf`
+overloads, and `Interferences`. Reciprocal pairs deduplicate while retaining
+the first stored orientation; both shape indices are marked, and iteration
+matches native hash-bucket order.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered

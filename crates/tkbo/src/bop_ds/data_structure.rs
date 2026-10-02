@@ -1,13 +1,12 @@
 //! Shape storage and the ported topology-preparation slice of `BOPDS_DS::Init`.
 use super::{
     CommonBlockHandle, FaceInfo, IndexRange, InterfEE, InterfEF, InterfFF, InterfVE, InterfVF,
-    InterfVV, Pave, PaveBlock, PaveBlockHandle, ShapeInfo, VertexIndexSet, pave_block_handle,
+    InterfVV, Pair, Pave, PaveBlock, PaveBlockHandle, ShapeInfo, VertexIndexSet, pave_block_handle,
 };
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, Vertex};
 use rustycad_tkbrep::toptools::ShapeMapHasher;
-use rustycad_tkernel::ncollection::DataMap;
-use rustycad_tkernel::ncollection::DynamicArray;
+use rustycad_tkernel::ncollection::{DataMap, DynamicArray, Map};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::bnd::BoundingBox3;
@@ -33,6 +32,8 @@ pub struct DataStructure {
     interf_ee: DynamicArray<InterfEE>,
     interf_ef: DynamicArray<InterfEF>,
     interf_ff: DynamicArray<InterfFF>,
+    interference_table: Map<Pair>,
+    interfered_shapes: Map<i32>,
     source_shape_count: i32,
 }
 
@@ -81,6 +82,34 @@ impl DataStructure {
     /// Returns the number of source index ranges; `ds.nb_ranges()`.
     pub fn nb_ranges(&self) -> i32 {
         self.ranges.len() as i32
+    }
+
+    /// Adds an unordered pair to the interference summary, reporting first insertion.
+    /// `ds.add_interference(3, 8)`.
+    pub fn add_interference(&mut self, first: i32, second: i32) -> bool {
+        if !self.interference_table.add(Pair::new(first, second)) {
+            return false;
+        }
+        self.interfered_shapes.add(first);
+        self.interfered_shapes.add(second);
+        true
+    }
+
+    /// Reports whether any stored pair contains `index`; `ds.has_interference_for(3)`.
+    pub fn has_interference_for(&self, index: i32) -> bool {
+        self.interfered_shapes.contains(&index)
+    }
+
+    /// Reports whether the two shapes form a stored unordered pair.
+    /// `ds.has_interference_between(3, 8)`.
+    pub fn has_interference_between(&self, first: i32, second: i32) -> bool {
+        self.interference_table.contains(&Pair::new(first, second))
+    }
+
+    /// Borrows the deduplicated pair table in native hash-map traversal order.
+    /// `ds.interferences().iter()`.
+    pub fn interferences(&self) -> &Map<Pair> {
+        &self.interference_table
     }
 
     /// Borrows a zero-based range, reporting the offending index on failure.

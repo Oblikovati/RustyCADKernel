@@ -346,6 +346,30 @@ pub fn data_structure_case(_: &[f64]) {
     write_cleared_ds_state(&structure, &first);
 }
 
+pub fn data_structure_interferences_case(_: &[f64]) {
+    let mut value = DataStructure::default();
+    integer(value.interferences().len() as i32);
+    flag(value.has_interference_for(4));
+    flag(value.has_interference_between(4, 9));
+    flag(value.add_interference(4, 9));
+    flag(value.add_interference(7, 2));
+    flag(value.add_interference(9, 4));
+    flag(value.add_interference(4, 10));
+    flag(value.add_interference(7, 7));
+    for index in [2, 4, 7, 9, 10, 11] {
+        flag(value.has_interference_for(index));
+    }
+    for (first, second) in [(4, 9), (9, 4), (2, 7), (7, 2), (4, 2), (7, 7), (7, 8)] {
+        flag(value.has_interference_between(first, second));
+    }
+    integer(value.interferences().len() as i32);
+    for pair in value.interferences() {
+        let (first, second) = pair.indices();
+        integer(first);
+        integer(second);
+    }
+}
+
 pub fn data_structure_common_block_case(_: &[f64]) {
     let first = block_with_source_edge(8);
     let real = block_with_source_edge(3);
