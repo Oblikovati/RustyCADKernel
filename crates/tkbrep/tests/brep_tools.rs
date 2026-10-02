@@ -2,12 +2,10 @@
 //! 3d097a0328e71b826377d4814ab05ec3c3d23871. BRepPrimAPI_MakeBox is the box fake of
 //! `support` (TKPrim is not ported).
 //!
-//! The other eight declarations call BRepGProp, BRepMesh, BRepAlgoAPI, BRepCheck,
-//! BRepBndLib, BRepBuilderAPI_NurbsConvert, BRepBuilderAPI_Transform or OSD_Parallel on
-//! BRepGProp results: those toolkits (TKTopAlgo, TKMesh, TKBO) are not ported, and the
-//! native oracle closure cannot build this source (it needs TKBO and TKMesh). The
-//! suite is not mapped in the ledger until every declaration is
-//! (docs/tkbrep-progress.md, "Dependency gap").
+//! Three declarations map directly here: ASCII shape save/restore, all eight empty
+//! topology types, and box subshape tolerances. The other eight source declarations
+//! still need parallel, NURBS, binary persistence, mesh, property, or Boolean behavior;
+//! see docs/tkbrep-progress.md, "Dependency gap". Native CTest builds all eleven.
 #![allow(non_snake_case)]
 mod support;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
