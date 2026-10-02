@@ -1,6 +1,8 @@
-//! Storage primitives of `BOPDS_DS` that do not require geometric initialization.
+//! Shape storage and the currently ported source-vertex portion of `BOPDS_DS::Init`.
 use super::{IndexRange, ShapeInfo};
+use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::Shape;
+use rustycad_tkbrep::topods::{ShapeIterator, Vertex};
 use rustycad_tkbrep::toptools::ShapeMapHasher;
 use rustycad_tkernel::ncollection::DataMap;
 use rustycad_tkernel::standard::Failure;
@@ -17,6 +19,17 @@ pub struct DataStructure {
 }
 
 impl DataStructure {
+    /// Initializes argument topology and source vertex boxes; remaining edge/face/solid
+    /// preparation is not ported yet. `ds.init(1e-5)?`.
+    pub fn init(&mut self, fuzz: f64) -> Result<(), Failure> {
+        if self.arguments.is_empty() {
+            return Ok(());
+        }
+        self.append_unindexed_arguments()?;
+        self.source_shape_count = self.nb_shapes();
+        self.prepare_vertex_bounds(additional_tolerance(fuzz))
+    }
+
     /// Replaces operation arguments with a copy of `shapes`.
     /// `ds.set_arguments(&[shape.clone()]);`.
     pub fn set_arguments(&mut self, shapes: &[Shape]) {
@@ -129,6 +142,78 @@ impl DataStructure {
         self.shape_indices
             .get_or_insert_with(|| DataMap::with_hasher(ShapeMapHasher, 100))
             .bind(shape.clone(), index);
+    }
+
+    fn append_unindexed_arguments(&mut self) -> Result<(), Failure> {
+        let mut first_index = 0;
+        for shape in self.arguments.clone() {
+            if self.index(&shape) >= 0 {
+                continue;
+            }
+            let shape_index = self.append_shape(&shape);
+            self.init_shape(shape_index, &shape)?;
+            let last_index = self.nb_shapes() - 1;
+            self.ranges.push(IndexRange::new(first_index, last_index));
+            first_index = last_index + 1;
+        }
+        Ok(())
+    }
+
+    fn init_shape(&mut self, shape_index: i32, shape: &Shape) -> Result<(), Failure> {
+        let shape_type = shape.shape_type()?;
+        self.change_shape_info(shape_index)?
+            .set_shape_type(shape_type);
+        let mut iterator = ShapeIterator::new(shape, true, true);
+        while iterator.more() {
+            let child = iterator.value()?.clone();
+            let child_index = self.append_or_find(&child)?;
+            self.init_shape(child_index, &child)?;
+            self.append_unique_child(shape_index, child_index)?;
+            iterator.next();
+        }
+        Ok(())
+    }
+
+    fn append_or_find(&mut self, shape: &Shape) -> Result<i32, Failure> {
+        let found = self.index(shape);
+        if found >= 0 {
+            return Ok(found);
+        }
+        Ok(self.append_shape(shape))
+    }
+
+    fn append_unique_child(&mut self, parent: i32, child: i32) -> Result<(), Failure> {
+        let children = self.change_shape_info(parent)?.change_sub_shapes();
+        if !children.contains(&child) {
+            children.push(child);
+        }
+        Ok(())
+    }
+
+    fn prepare_vertex_bounds(&mut self, added_gap: f64) -> Result<(), Failure> {
+        for index in 0..self.source_shape_count {
+            let info = self.shape_info(index)?;
+            if info.shape_type() != rustycad_tkg3d::top_abs::ShapeEnum::Vertex {
+                continue;
+            }
+            let vertex = Vertex::unchecked(self.shape(index)?.clone());
+            let point = BRepTool::pnt(&vertex)?;
+            let gap = BRepTool::vertex_tolerance(&vertex)? + added_gap;
+            let mut bounds = info.box_bounds().clone();
+            bounds.set_gap(gap);
+            bounds.add_point(point);
+            self.change_shape_info(index)?.set_box(&bounds);
+        }
+        Ok(())
+    }
+}
+
+fn additional_tolerance(fuzz: f64) -> f64 {
+    let confusion = rustycad_tkernel::precision::confusion();
+    if fuzz < confusion {
+        confusion * 0.5
+    } else {
+        fuzz * 0.5
     }
 }
 

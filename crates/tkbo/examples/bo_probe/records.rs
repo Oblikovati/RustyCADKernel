@@ -344,6 +344,100 @@ pub fn data_structure_case(_: &[f64]) {
     write_cleared_ds_state(&structure, &first);
 }
 
+/// The recursive `BOPDS_DS::Init` order and vertex-bound preparation slice.
+pub fn data_structure_init_case(v: &[f64]) {
+    use rustycad_tkbo::bop_ds::DataStructure;
+    let (root, first, second, third) = data_structure_init_shapes();
+    let mut structure = DataStructure::default();
+    structure.set_arguments(&[root.clone(), first.clone(), third.clone()]);
+    structure.init(v[0]).expect("valid BRep source arguments");
+    write_initialized_ranges(&structure);
+    write_initialized_indices(&structure, &root, &first, &second, &third);
+    write_initialized_records(&structure);
+}
+
+fn data_structure_init_shapes() -> (
+    rustycad_tkbrep::topods::Shape,
+    rustycad_tkbrep::topods::Shape,
+    rustycad_tkbrep::topods::Shape,
+    rustycad_tkbrep::topods::Shape,
+) {
+    use rustycad_tkbrep::{brep::BRepBuilder, topods::Compound};
+    let builder = BRepBuilder::default();
+    let first = initialized_vertex(&builder, [1.0, 2.0, 3.0], 2e-5);
+    let second = initialized_vertex(&builder, [4.0, 5.0, 6.0], 5e-7);
+    let third = initialized_vertex(&builder, [7.0, 8.0, 9.0], 1e-4);
+    let mut root = Compound::default();
+    builder.make_compound(&mut root);
+    builder.add(&mut root, &first).expect("unlocked compound");
+    builder.add(&mut root, &second).expect("unlocked compound");
+    builder.add(&mut root, &first).expect("unlocked compound");
+    (root.into_shape(), first, second, third)
+}
+
+fn initialized_vertex(
+    builder: &rustycad_tkbrep::brep::BRepBuilder,
+    point: [f64; 3],
+    tolerance: f64,
+) -> rustycad_tkbrep::topods::Shape {
+    use rustycad_tkbrep::topods::Vertex;
+    let mut vertex = Vertex::default();
+    builder
+        .make_vertex_at(
+            &mut vertex,
+            rustycad_tkmath::gp::Point3::new(point[0], point[1], point[2]),
+            tolerance,
+        )
+        .expect("finite point and positive tolerance");
+    vertex.into_shape()
+}
+
+fn write_initialized_ranges(structure: &rustycad_tkbo::bop_ds::DataStructure) {
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    integer(structure.nb_ranges());
+    for index in 0..structure.nb_ranges() {
+        let range = structure.range(index).unwrap();
+        integer(range.first());
+        integer(range.last());
+    }
+}
+
+fn write_initialized_indices(
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    root: &rustycad_tkbrep::topods::Shape,
+    first: &rustycad_tkbrep::topods::Shape,
+    second: &rustycad_tkbrep::topods::Shape,
+    third: &rustycad_tkbrep::topods::Shape,
+) {
+    integer(structure.rank(0));
+    integer(structure.rank(2));
+    integer(structure.rank(3));
+    integer(structure.index(root));
+    integer(structure.index(first));
+    integer(structure.index(second));
+    integer(structure.index(third));
+}
+
+fn write_initialized_records(structure: &rustycad_tkbo::bop_ds::DataStructure) {
+    use rustycad_tkg3d::top_abs::ShapeEnum;
+    for index in 0..structure.nb_shapes() {
+        let info = structure.shape_info(index).unwrap();
+        integer(info.shape_type() as i32);
+        integer(info.sub_shapes().len() as i32);
+        for child in info.sub_shapes() {
+            integer(*child);
+        }
+        flag(info.box_bounds().is_void());
+        if info.shape_type() == ShapeEnum::Vertex {
+            real(info.box_bounds().gap());
+            for bound in info.box_bounds().get().unwrap() {
+                real(bound);
+            }
+        }
+    }
+}
+
 fn data_structure_shapes() -> (
     rustycad_tkbrep::topods::Shape,
     rustycad_tkbrep::topods::Shape,

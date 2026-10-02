@@ -11,6 +11,7 @@
 #include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
 #include <BRepBuilderAPI_MakeVertex.hxx>
+#include <BRep_Builder.hxx>
 #include <Bnd_Box.hxx>
 #include <cstdio>
 #include <unistd.h>
@@ -114,4 +115,12 @@ void bo_data_structure_case(const std::vector<double>&) {
  bo_int(ds.Index(first));bo_int(ds.Index(reversed));bo_int(ds.Index(second));bo_int(ds.Shape(0).IsSame(first));bo_int(ds.ShapeInfo(0).Shape().IsSame(first));
  BOPDS_ShapeInfo info;info.SetShape(second);info.SetFlag(17);bo_int(ds.Append(info));bo_int(ds.ShapeInfo(3).Flag());ds.ChangeShapeInfo(3).SetFlag(21);bo_int(ds.ShapeInfo(3).Flag());
  ds.Clear();bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Arguments().Extent());bo_int(ds.Index(first));
+}
+void bo_data_structure_init_case(const std::vector<double>& v) {
+ BRep_Builder builder;TopoDS_Vertex first,second,third;builder.MakeVertex(first,gp_Pnt(1.,2.,3.),2e-5);builder.MakeVertex(second,gp_Pnt(4.,5.,6.),5e-7);builder.MakeVertex(third,gp_Pnt(7.,8.,9.),1e-4);
+ TopoDS_Compound root;builder.MakeCompound(root);builder.Add(root,first);builder.Add(root,second);builder.Add(root,first);
+ NCollection_List<TopoDS_Shape> arguments;arguments.Append(root);arguments.Append(first);arguments.Append(third);BOPDS_DS ds;ds.SetArguments(arguments);ds.Init(v[0]);
+ bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());for(int i=0;i<ds.NbRanges();++i){bo_int(ds.Range(i).First());bo_int(ds.Range(i).Last());}
+ bo_int(ds.Rank(0));bo_int(ds.Rank(2));bo_int(ds.Rank(3));bo_int(ds.Index(root));bo_int(ds.Index(first));bo_int(ds.Index(second));bo_int(ds.Index(third));
+ for(int i=0;i<ds.NbShapes();++i){const BOPDS_ShapeInfo& info=ds.ShapeInfo(i);bo_int(info.ShapeType());bo_int(info.SubShapes().Extent());for(int child:info.SubShapes())bo_int(child);bo_int(info.Box().IsVoid());if(info.ShapeType()==TopAbs_VERTEX){bo_real(info.Box().GetGap());double x0,y0,z0,x1,y1,z1;info.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);}}
 }
