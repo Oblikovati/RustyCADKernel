@@ -91761,7 +91761,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91793,7 +91793,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -214398,7 +214398,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -320642,6 +320642,105 @@
         "linux-gcc-c-locale"
       ],
       "notes": "Rust mirrors the native assertion path; statuses omitted where the source disables status checks."
+    },
+    {
+      "upstream_id": "BRepGraph_PolygonTest.MultiTriangulation_Roundtrip_PreservesAll",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
+      "source_sha256": "dd5c7d8ddc17053de1f6d0620bb0a111ab4fafc0a2d31c34befe2a0bb41e5bff",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_polygon_legacy",
+      "rust_test": "BRepGraph_PolygonTest__MultiTriangulation_Roundtrip_PreservesAll",
+      "rust_source": "crates/tkbrep/tests/brep_graph_polygon_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_PolygonTest.PolyOnTri_Captured_AfterMesh",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
+      "source_sha256": "dd5c7d8ddc17053de1f6d0620bb0a111ab4fafc0a2d31c34befe2a0bb41e5bff",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_polygon_legacy",
+      "rust_test": "BRepGraph_PolygonTest__PolyOnTri_Captured_AfterMesh",
+      "rust_source": "crates/tkbrep/tests/brep_graph_polygon_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_PolygonTest.PolyOnTri_Roundtrip_PreservedOnReconstruct",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
+      "source_sha256": "dd5c7d8ddc17053de1f6d0620bb0a111ab4fafc0a2d31c34befe2a0bb41e5bff",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_polygon_legacy",
+      "rust_test": "BRepGraph_PolygonTest__PolyOnTri_Roundtrip_PreservedOnReconstruct",
+      "rust_source": "crates/tkbrep/tests/brep_graph_polygon_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_PolygonTest.Polygon3D_Captured_WhenPresent",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
+      "source_sha256": "dd5c7d8ddc17053de1f6d0620bb0a111ab4fafc0a2d31c34befe2a0bb41e5bff",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_polygon_legacy",
+      "rust_test": "BRepGraph_PolygonTest__Polygon3D_Captured_WhenPresent",
+      "rust_source": "crates/tkbrep/tests/brep_graph_polygon_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_PolygonTest.SeamEdge_PolyOnTri_TwoEntries",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
+      "source_sha256": "dd5c7d8ddc17053de1f6d0620bb0a111ab4fafc0a2d31c34befe2a0bb41e5bff",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_polygon_legacy",
+      "rust_test": "BRepGraph_PolygonTest__SeamEdge_PolyOnTri_TwoEntries",
+      "rust_source": "crates/tkbrep/tests/brep_graph_polygon_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "notes": "The native setup runs BRepMesh_IncrementalMesh, but its assertion only counts coedges per face. Rust mirrors that topology assertion without fabricating or inspecting mesh data. Pinned native probe: lateral triangulation has 54 nodes/52 triangles and one seam polygon with node indices 28, 1."
+    },
+    {
+      "upstream_id": "BRepGraph_PolygonTest.UVPoints_Recomputed_OnPCurves",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
+      "source_sha256": "dd5c7d8ddc17053de1f6d0620bb0a111ab4fafc0a2d31c34befe2a0bb41e5bff",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_polygon_legacy",
+      "rust_test": "BRepGraph_PolygonTest__UVPoints_Recomputed_OnPCurves",
+      "rust_source": "crates/tkbrep/tests/brep_graph_polygon_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_PolygonTest.VertexPointRepresentations_StructurallyValid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
+      "source_sha256": "dd5c7d8ddc17053de1f6d0620bb0a111ab4fafc0a2d31c34befe2a0bb41e5bff",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_polygon_legacy",
+      "rust_test": "BRepGraph_PolygonTest__VertexPointRepresentations_StructurallyValid",
+      "rust_source": "crates/tkbrep/tests/brep_graph_polygon_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }
