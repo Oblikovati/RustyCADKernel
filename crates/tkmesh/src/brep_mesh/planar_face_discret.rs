@@ -214,3 +214,50 @@ fn link_order(
         _ => (first, last, super::DegreeOfFreedom::Frontier),
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::{
+        brep_mesh::{BRepMeshEdgeDiscret, BRepMeshModelBuilder},
+        imesh_data::Status,
+        imesh_tools::{ModelAlgo, ModelBuilder},
+    };
+    use rustycad_tkernel::message::ProgressRange;
+    use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
+
+    #[test]
+    fn box_face_statuses_remain_native_no_error() {
+        let shape = box_shape();
+        let parameters = MeshParameters {
+            deflection: 0.5,
+            min_size: 0.05,
+            ..Default::default()
+        };
+        let model = BRepMeshModelBuilder::new().perform(&shape, &parameters);
+        assert!(BRepMeshEdgeDiscret::new().perform(&model, &parameters, &ProgressRange::default()));
+        assert!(
+            BRepMeshPlanarFaceDiscret::new()
+                .perform_internal(&model, &parameters, &ProgressRange::default())
+                .unwrap()
+        );
+        for index in 0..model.faces_nb() {
+            assert!(
+                model
+                    .get_face(index)
+                    .unwrap()
+                    .status()
+                    .is_equal(Status::NoError)
+            );
+        }
+    }
+
+    fn box_shape() -> rustycad_tkbrep::topods::Shape {
+        BRepPrimAPIMakeBox::from_sizes(10.0, 10.0, 10.0)
+            .unwrap()
+            .shape()
+            .unwrap()
+            .clone()
+    }
+}

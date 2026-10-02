@@ -10,10 +10,13 @@
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRepBuilderAPI_MakeWire.hxx>
+#include <BRepPrimAPI_MakeBox.hxx>
 #include <BRep_Tool.hxx>
 #include <Geom_Plane.hxx>
 #include <Poly_Triangulation.hxx>
 #include <TopLoc_Location.hxx>
+#include <TopExp_Explorer.hxx>
+#include <TopoDS.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Vec2d.hxx>
 template<class Tag,typename Tag::type Member>struct DelaunAccess{friend typename Tag::type delaun_member(Tag){return Member;}};
@@ -184,6 +187,11 @@ static void report_incremental_triangulation(const TopoDS_Face&face){
 void mesh_incremental_planar_hole(std::istream&){
  auto outer=BRepBuilderAPI_MakeWire(BRepBuilderAPI_MakeEdge(gp_Pnt(-5.,-5.,0.),gp_Pnt(5.,-5.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(5.,-5.,0.),gp_Pnt(5.,5.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(5.,5.,0.),gp_Pnt(-5.,5.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(-5.,5.,0.),gp_Pnt(-5.,-5.,0.)));
  auto plane=new Geom_Plane(gp_Pln(gp::Origin(),gp::DZ()));BRepBuilderAPI_MakeFace maker(plane,outer.Wire());auto inner=BRepBuilderAPI_MakeWire(BRepBuilderAPI_MakeEdge(gp_Pnt(-1.,-1.,0.),gp_Pnt(1.,-1.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(1.,-1.,0.),gp_Pnt(1.,1.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(1.,1.,0.),gp_Pnt(-1.,1.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(-1.,1.,0.),gp_Pnt(-1.,-1.,0.)));maker.Add(inner.Wire());auto face=maker.Face();BRepMesh_IncrementalMesh mesher(face,0.1);std::cout<<"OK ";ga_flag(mesher.IsDone());ga_int(mesher.GetStatusFlags());report_incremental_triangulation(face);ga_end();
+}
+void mesh_incremental_box(std::istream&){
+ auto box=BRepPrimAPI_MakeBox(10.,10.,10.).Shape();BRepMesh_IncrementalMesh mesher(box,0.5);std::cout<<"OK ";ga_flag(mesher.IsDone());ga_int(mesher.GetStatusFlags());int face_index=0;
+ for(TopExp_Explorer faces(box,TopAbs_FACE);faces.More();faces.Next()){std::cout<<face_index++<<" ";report_incremental_triangulation(TopoDS::Face(faces.Current()));}
+ ga_int(face_index);ga_end();
 }
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
