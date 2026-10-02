@@ -172,3 +172,28 @@ The unchanged native translation unit is included before the observation probe;
 its source hash and compiler command are recorded. The shared wrapper also passes
 all 11,390 existing EdgeEdge comparisons. These dependencies add no public
 BeanFace API or original legacy declaration claim.
+
+## Boolean options and abstract progress infrastructure
+
+`bop_algo::Options` ports allocator identity (including null), shared reports,
+severity queries/dumps/clears, process and instance parallel modes, fuzzy tolerance,
+OBB configuration, and cancellation reporting. It loads the pinned BOPAlgo message
+resource. `bop_algo::Algo` provides the abstract operation callback and native
+validation/progress callbacks; `PISteps` stores the native bounded weights.
+`BOPAlgo_ParallelAlgo` and concrete Boolean builders remain open.
+
+The native oracle and 11 Rust tests cover positive constant slots, callback order,
+negative weights, nonpositive and NaN sums, and the native report merge quirk:
+repeating UserBreak removes the previous failure with the default report limit -1.
+Negative PISteps sizes are rejected by the Rust array boundary; the native build
+segfaulted on -1, so that invalid input is not claimed as a passing oracle case.
+These are supplemental behavior tests, not new legacy GTest declaration mappings.
+
+Run both implementations with:
+
+```sh
+OCCT_BUILD=/path/to/pinned/occt-modeling-full tools/verify_tkbo_base.sh
+```
+
+The manual API ledger remains provisional until the compiler inventories and
+crosswalk establish coverage.
