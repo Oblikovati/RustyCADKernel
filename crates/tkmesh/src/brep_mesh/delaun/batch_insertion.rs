@@ -2,7 +2,10 @@
 use super::triangle_build::{LoopEdges, loop_edges};
 use super::{BRepMeshDelaun, DegreeOfFreedom};
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkmath::gp::Xy;
+use rustycad_tkmath::{
+    bnd::BoundingBox2,
+    gp::{Point2, Xy},
+};
 
 impl BRepMeshDelaun {
     /// Insert a batch by native coordinate order; `delaun.insert_vertices_probe(&mut indices)?`.
@@ -10,6 +13,26 @@ impl BRepMeshDelaun {
     pub fn insert_vertices_probe(&mut self, indices: &mut [i32]) -> Result<(), Failure> {
         self.sort_vertex_indices(indices)?;
         self.create_triangles_on_new_vertices(indices)
+    }
+
+    /// Perform the native supermesh, batch insertion, and auxiliary cleanup sequence.
+    ///
+    /// ```ignore
+    /// delaun.triangulate_vertices_probe(&mut vertex_indices)?;
+    /// ```
+    #[doc(hidden)]
+    pub fn triangulate_vertices_probe(&mut self, indices: &mut [i32]) -> Result<(), Failure> {
+        if indices.len() <= 2 {
+            return Ok(());
+        }
+        let bounds = self.insertion_bounds(indices)?;
+        self.init_circles_tool(-1, -1)?;
+        let (_, super_edges) = self.build_super_mesh(bounds)?;
+        self.sort_vertex_indices(indices)?;
+        let mut boundary = super_triangle_edges(super_edges);
+        self.create_triangles(indices[0], &mut boundary)?;
+        self.create_triangles_on_new_vertices(indices)?;
+        self.remove_aux_elements()
     }
 
     fn create_triangles_on_new_vertices(&mut self, indices: &[i32]) -> Result<(), Failure> {
@@ -118,4 +141,21 @@ impl BRepMeshDelaun {
         }
         Ok(())
     }
+
+    fn insertion_bounds(&self, indices: &[i32]) -> Result<[f64; 4], Failure> {
+        let mut bounds = BoundingBox2::default();
+        for index in indices {
+            bounds.add_point(Point2::from(*self.get_vertex(*index)?.coord()));
+        }
+        bounds.enlarge(rustycad_tkernel::precision::p_confusion());
+        bounds.get()
+    }
+}
+
+fn super_triangle_edges(edges: [i32; 3]) -> LoopEdges {
+    let mut boundary = loop_edges();
+    for edge in edges {
+        boundary.bind(edge.abs(), true);
+    }
+    boundary
 }

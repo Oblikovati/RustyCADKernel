@@ -400,6 +400,35 @@ fn batch_insertion_retriangulates_a_four_point_sequence() {
 }
 
 #[test]
+fn constructor_flow_builds_supermesh_and_removes_auxiliary_domain_elements() {
+    for (points, expected_triangles) in [
+        // Native perform creates no domain triangles for the bare simplex or square.
+        (vec![(0., 0.), (2., 0.), (0., 2.)], 0),
+        (vec![(0., 0.), (2., 0.), (2., 2.), (0., 2.)], 0),
+        (vec![(0., 0.), (2., 0.), (2., 2.), (0., 2.), (1., 1.)], 4),
+    ] {
+        let allocator = Handle::new(Default::default());
+        let mesh = Handle::new(Mesh::new(&allocator, 8));
+        let mut vertices = points
+            .iter()
+            .map(|(x, y)| {
+                mesh.add_node(&Vertex::from_uv(*x, *y, Freedom::Free), true)
+                    .unwrap()
+            })
+            .collect::<Vec<_>>();
+        let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+
+        delaun.triangulate_vertices_probe(&mut vertices).unwrap();
+
+        assert_eq!(
+            delaun.result().elements_of_domain().extent(),
+            expected_triangles
+        );
+        assert_eq!(mesh.nb_nodes(), points.len() as i32 + 3);
+    }
+}
+
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();
