@@ -61,9 +61,13 @@ def cleanup_victim_rows() -> list[str]:
     """Delete a populated polygon cavity containing an interior victim vertex."""
     return ['mesh_delaun_cleanup_victim']
 
+def internal_constraint_rows() -> list[str]:
+    """Recover both missing sides of one fixed boundary edge."""
+    return ['mesh_delaun_internal_constraint']
+
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows()+internal_constraint_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -72,4 +76,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows()+internal_constraint_rows(),frozenset(manifest['input_sha256']))
