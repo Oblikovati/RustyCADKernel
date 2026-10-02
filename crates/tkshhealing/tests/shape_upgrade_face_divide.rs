@@ -10,7 +10,7 @@ use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 fn first_box_face(x: f64) -> topods::Face {
     let mut maker = BRepPrimAPIMakeBox::from_sizes(x, x + 5.0, x + 10.0).unwrap();
     let shape = maker.shape().unwrap();
-    let faces = Explorer::new(&shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
+    let faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
     assert!(faces.more(), "box contains a face");
     topods::face(faces.current()).unwrap()
 }

@@ -4,11 +4,13 @@
 //! detects. docs/shhealing-design.md section 4 fixes how its classes map;
 //! docs/tkshhealing-progress.md lists the ported classes.
 mod edge_connect;
+mod face_connect;
 mod root;
 mod shape;
 mod shape_tolerance;
 
 pub use edge_connect::ShapeFixEdgeConnect;
+pub use face_connect::ShapeFixFaceConnect;
 pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
 pub use shape::ShapeFixShape;
 pub use shape_tolerance::ShapeFixShapeTolerance;

@@ -732,3 +732,16 @@ FaceDivide's unchanged-face path and default context initialization; actual surf
 boundary subdivision remains unported, so the FaceDivide API and TKShHealing toolkit
 are still partial. The toolkit source inventory is now 107/143 mapped. Remaining
 unmapped suites are FaceConnect (16), Face (4), Shape (7), and UnifySameDomain (9).
+
+### FaceConnect selected sewing suite
+
+All 16 declarations in `ShapeFix_FaceConnect_Test.cxx` are mapped as a unit. The
+filtered gate passes 16 unchanged native OCCT tests and all 16 Rust translations.
+The implementation groups only registered faces, delegates shared-boundary sewing to
+the existing `BRepBuilderAPI_Sewing` port, and retains unrelated shell faces. The test
+cases cover null and duplicate registration, clear/reuse, coincident and tolerance-gap
+boundaries, orientation, chains, independent pairs, and stable rebuilds. `Build` remains
+an API-level partial: its fixing-tolerance argument and the later `ShapeFix_Wire` /
+`ShapeFix_Face` repair phase are not yet ported; the pinned rectangular-face suite needs
+no such repair. TKShHealing now maps 123/143 source declarations. Remaining unmapped
+suites are Face (4), Shape (7), and UnifySameDomain (9).
