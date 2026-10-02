@@ -194,10 +194,10 @@ regression suites.
 ### IncrementalMesh free-edge and planar-polygon cases
 
 The full nine-case `BRepMesh_IncrementalMesh_Test.cxx` source remains unmapped while
-its curved-surface and mesh-reuse cases are implemented. Two source cases now have Rust
-mirrors: a bounded eight-edge planar polygon meshes with triangles, and an isolated
-zero-radius circular edge runs through free-edge discretization without face triangles.
-Both native regressions and their Rust cases pass; the empty-compound behavior remains
-green. Six other declarations still need support for trimmed cylinders, torus Boolean
-fusion, seam edge polygons, unbounded-face status, cone angular deflection and quality
-decrease rebuilding.
+its curved-surface and mesh-reuse cases are implemented. Three source cases now have Rust
+mirrors: the bounded eight-edge planar polygon, the trimmed cylindrical face with UV and
+deflection checks, and the isolated zero-radius circular edge. Their pinned native CTests
+and Rust mirrors pass; the empty-compound behavior remains green. Five declarations remain
+for torus Boolean fusion, seam edge polygons, unbounded-face status, cone angular
+deflection and quality decrease rebuilding. The source remains unmapped until all nine
+declarations pass together.

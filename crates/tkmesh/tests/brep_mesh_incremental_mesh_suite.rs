@@ -3,13 +3,36 @@
 use rustycad_tkbrep::{brep::BRepTool, topods::Wire};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkmath::{
-    gp::{Axis2, Circle3, Direction3, Plane3, Point3, StandardDirection3, Vector3},
+    gp::{
+        Axis2, Axis3, Circle3, Cylinder3, Direction3, Plane3, Point2, Point3, StandardDirection3,
+        Vector3,
+    },
     poly::mesh_purpose,
 };
 use rustycad_tkmesh::{brep_mesh::BRepMeshIncrementalMesh, imesh_tools::MeshParameters};
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
 };
+
+#[test]
+fn BRepMesh_IncrementalMeshTest__TrimmedCylinder_RespectsUVRangeAndDeflection() {
+    let cylinder = Cylinder3::new(
+        Axis3::with_standard(Point3::default(), StandardDirection3::Z),
+        5.0,
+    )
+    .unwrap();
+    let maker =
+        BRepBuilderAPIMakeFace::from_cylinder_bounds(cylinder, (0.4, 5.7, -2.0, 7.0)).unwrap();
+    let face = maker.face().unwrap();
+    let shape = face.clone().into_shape();
+    let parameters = MeshParameters {
+        deflection: 0.05,
+        ..Default::default()
+    };
+    BRepMeshIncrementalMesh::with_parameters(&shape, &parameters, &ProgressRange::default())
+        .unwrap();
+    assert_trimmed_cylinder_mesh(&face, parameters.deflection);
+}
 
 #[test]
 fn BRepMesh_IncrementalMeshTest__OCC26407_PlanarPolygonMeshStatus() {
@@ -81,4 +104,84 @@ fn closed_polygon_wire(points: &[Point3; 8]) -> Result<Wire, rustycad_tkernel::s
         maker.add_edge(&edge_maker.edge()?)?;
     }
     maker.wire()
+}
+
+fn assert_trimmed_cylinder_mesh(face: &rustycad_tkbrep::topods::Face, deflection: f64) {
+    let triangulation = BRepTool::triangulation(face, mesh_purpose::NONE).unwrap().0;
+    assert!(!triangulation.is_null());
+    assert!(triangulation.has_uv_nodes());
+    assert!(triangulation.nb_triangles() > 0);
+    let (surface, location) = BRepTool::surface_with_location(face).unwrap();
+    assert_cylinder_nodes(&triangulation, &surface, &location);
+    assert_cylinder_deflection(&triangulation, &surface, &location, deflection);
+}
+
+fn assert_cylinder_nodes(
+    triangulation: &rustycad_tkmath::poly::Triangulation,
+    surface: &rustycad_tkernel::standard::Handle<dyn rustycad_tkg3d::geom::GeomSurface>,
+    location: &rustycad_tkmath::toploc::Location,
+) {
+    for index in 1..=triangulation.nb_nodes() {
+        let uv = triangulation.uv_node(index).unwrap();
+        assert!((0.4 - 1e-9..=5.7 + 1e-9).contains(&uv.x()));
+        assert!((-2.0 - 1e-9..=7.0 + 1e-9).contains(&uv.y()));
+        let expected = surface
+            .value(uv.x(), uv.y())
+            .unwrap()
+            .transformed(location.transformation());
+        assert!(triangulation.node(index).unwrap().distance(&expected) <= 1e-7);
+    }
+}
+
+fn assert_cylinder_deflection(
+    triangulation: &rustycad_tkmath::poly::Triangulation,
+    surface: &rustycad_tkernel::standard::Handle<dyn rustycad_tkg3d::geom::GeomSurface>,
+    location: &rustycad_tkmath::toploc::Location,
+    deflection: f64,
+) {
+    for index in 1..=triangulation.nb_triangles() {
+        let (a, b, c) = triangulation.triangle(index).unwrap().get();
+        let uv = triangle_uv_centroid(triangulation, a, b, c);
+        let expected = surface
+            .value(uv.x(), uv.y())
+            .unwrap()
+            .transformed(location.transformation());
+        let actual = triangle_point_centroid(triangulation, a, b, c);
+        assert!(actual.distance(&expected) <= deflection);
+    }
+}
+
+fn triangle_uv_centroid(
+    triangulation: &rustycad_tkmath::poly::Triangulation,
+    a: i32,
+    b: i32,
+    c: i32,
+) -> Point2 {
+    let points = [
+        triangulation.uv_node(a).unwrap(),
+        triangulation.uv_node(b).unwrap(),
+        triangulation.uv_node(c).unwrap(),
+    ];
+    Point2::new(
+        points.iter().map(|point| point.x()).sum::<f64>() / 3.0,
+        points.iter().map(|point| point.y()).sum::<f64>() / 3.0,
+    )
+}
+
+fn triangle_point_centroid(
+    triangulation: &rustycad_tkmath::poly::Triangulation,
+    a: i32,
+    b: i32,
+    c: i32,
+) -> Point3 {
+    let points = [
+        triangulation.node(a).unwrap(),
+        triangulation.node(b).unwrap(),
+        triangulation.node(c).unwrap(),
+    ];
+    Point3::new(
+        points.iter().map(|point| point.x()).sum::<f64>() / 3.0,
+        points.iter().map(|point| point.y()).sum::<f64>() / 3.0,
+        points.iter().map(|point| point.z()).sum::<f64>() / 3.0,
+    )
 }
