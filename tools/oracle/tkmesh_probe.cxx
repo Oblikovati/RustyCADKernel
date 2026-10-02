@@ -115,6 +115,7 @@ int main(){
         else if(operation=="mesh_delaun_null")mesh_delaun_null(input);
         else if(operation=="mesh_delaun_core")mesh_delaun_core(input);
         else if(operation=="mesh_delaun_use_edge")mesh_delaun_use_edge(input);
+        else if(operation=="mesh_delaun_sort")mesh_delaun_sort(input);
         else if(operation=="mesh_delaun_polygon")mesh_delaun_polygon(input);
         else if(operation=="mesh_delaun_polygon_mesh")mesh_delaun_polygon_mesh(input);
         else if(operation=="mesh_delaun_super_mesh")mesh_delaun_super_mesh(input);

@@ -54,6 +54,13 @@ void mesh_delaun_use_edge(std::istream& input){
  occ::handle<BRepMesh_DataStructureOfDelaun>mesh=new BRepMesh_DataStructureOfDelaun(arena,0);
  BRepMesh_Delaun delaun(mesh,-1,-1,false);ga_flag(delaun.UseEdge(index));ga_end();
 }
+void mesh_delaun_sort(std::istream& input){
+ int count;input>>count;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
+ occ::handle<BRepMesh_DataStructureOfDelaun>mesh=new BRepMesh_DataStructureOfDelaun(arena,count);
+ std::vector<int> indices;for(int i=0;i<count;++i){double x,y;input>>x>>y;indices.push_back(mesh->AddNode(BRepMesh_Vertex(gp_XY(x,y),0,BRepMesh_Free),true));}
+ auto compare=[&](int left,int right){const gp_XY&a=mesh->GetNode(left).Coord();const gp_XY&b=mesh->GetNode(right).Coord();return a.X()+a.Y()<b.X()+b.Y();};
+ std::make_heap(indices.begin(),indices.end(),compare);std::sort_heap(indices.begin(),indices.end(),compare);for(int index:indices)ga_int(index);ga_end();
+}
 static void delaun_polygon_area(const BRepMesh_Delaun&delaun,int reverse){
  IMeshData::SequenceOfInteger polygon;for(int i=1;i<=4;++i)polygon.Append(reverse==0?i:-(5-i));
  for(auto bounds:{std::pair<int,int>{1,4},{1,3},{2,4},{4,1},{5,6},{0,2},{1,5}}){GA_TRY(ga_real((delaun.*delaun_member(DelaunAreaTag{}))(polygon,bounds.first,bounds.second)));}

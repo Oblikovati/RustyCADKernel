@@ -143,6 +143,23 @@ fn use_edge_preserves_native_always_false_behavior_for_signed_indices() {
     }
 }
 #[test]
+fn insertion_order_matches_native_heap_ties_in_projected_coordinates() {
+    let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 4));
+    for point in [
+        Xy::new(3., 0.),
+        Xy::new(0., 3.),
+        Xy::new(2., 1.),
+        Xy::new(1., 2.),
+    ] {
+        mesh.add_node(&Vertex::new(point, 0, Freedom::Free), true)
+            .unwrap();
+    }
+    let delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    let mut indices = vec![1, 2, 3, 4];
+    delaun.sort_vertex_indices(&mut indices).unwrap();
+    assert_eq!(indices, [2, 4, 1, 3]);
+}
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();

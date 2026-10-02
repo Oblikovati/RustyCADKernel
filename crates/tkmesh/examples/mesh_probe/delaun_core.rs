@@ -22,6 +22,29 @@ pub fn use_edge_case(index: i32) {
     flag(delaun.use_edge(index));
     println!();
 }
+pub fn sort_vertices_case(values: &[i32]) {
+    let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), values[0]));
+    let mut indices = Vec::new();
+    for point in values[1..].as_chunks::<2>().0 {
+        indices.push(
+            mesh.add_node(
+                &Vertex::new(
+                    Xy::new(f64::from(point[0]), f64::from(point[1])),
+                    0,
+                    Freedom::Free,
+                ),
+                true,
+            )
+            .unwrap(),
+        );
+    }
+    let delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    delaun.sort_vertex_indices(&mut indices).unwrap();
+    for index in indices {
+        int(index);
+    }
+    println!();
+}
 pub fn polygon_mesh_case(v: &[i32]) {
     print!("OK ");
     if let Err(error) = polygon_mesh(v) {
