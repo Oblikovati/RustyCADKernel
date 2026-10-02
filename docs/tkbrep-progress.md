@@ -28,7 +28,7 @@ The toolkit test inventory maps these suites (1260 declarations; 1271 active nat
 | BRepTools_TrsfModification_Test.cxx | brep_tools_trsf_modification | 4 | pass | pass |
 | BRepTools_GTrsfModification_Test.cxx | brep_tools_gtrsf_modification | 13 | pass | pass |
 | BRepAdaptor_CompCurve_Test.cxx | brep_adaptor_comp_curve | 4 | pass | pass |
-| BRepTools_Test.cxx | brep_tools (3/11 mapped) | 11 | pass (11/11) | pass (3/3 mapped) |
+| BRepTools_Test.cxx | brep_tools + extended stream + TKMesh targets (8/11 mapped) | 11 | pass (11/11) | pass (8/8 mapped) |
 | BRepGraph_RepId_Test.cxx | brep_graph_rep_id | 10 | pass | pass |
 | BRepGraph_ItemId_Test.cxx | brep_graph_item_id | 4 | pass | pass |
 | BRepGraph_NodeId_Test.cxx | brep_graph_node_id | 15 | pass | pass |
@@ -691,15 +691,17 @@ curve with `GeomProjLib::ProjectOnPlane` and `ProjLib_ProjectedCurve` from the
 TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` through
 `brep_tools::update_face`; its former private copy is deleted.
 
-`BRepTools_Test.cxx` has three mapped declarations: ASCII shape save/restore, empty-shape
-save/restore for all eight topology kinds, and box face/edge/vertex tolerances. Its pinned
-OCCT CTest filter passes 11/11; Rust `brep_tools` passes the three mapped tests. The other
-eight declarations remain unmapped: parallel reads need the Rust OSD parallel API; format
-version and binary round trips need the corresponding NURBS conversion, BinTools, mesh,
-validity, bounds and global-property behavior; triangle-option and Clean regressions need
-TKMesh meshing; exact versus triangulated properties needs TKBO Fuse plus mesh and global
-properties; the UV-bounds regression needs TKBO Cut. Passing native CTest results are not
-counted as Rust mappings.
+`BRepTools_Test.cxx` maps eight of eleven declarations: the original three ASCII/empty-shape/
+tolerance cases; both 200-read and repeated 100×5 parallel ASCII-read cases; the five ASCII
+and binary NURBS format round trips; the translated-box binary stream round trip with bounds,
+validity, topology and mass checks; and ASCII/binary triangle-option round trips. The Rust
+mirrors pass in `brep_tools_extended_legacy` and the TKMesh-owned `brep_tools_legacy` target.
+Three declarations remain unmapped: `ModDataBug_27356_CleanRemovesFreeEdgePolygon3d` because
+Rust TKMesh currently does not generate a 3D polygon for a standalone line edge;
+`ModalgBug_29734_ExactAndTriangulatedProperties` because its fused, rotated solids need TKBO
+Fuse; and `ModalgBug_24404_BoxFaceUVBounds` because its repeated circular cuts need TKBO Cut.
+The pinned native CTest filter passes all 11 cases; native passes are not counted as Rust
+mappings.
 
 ## Preserved native behaviour
 
