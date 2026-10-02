@@ -9,9 +9,14 @@ def polygon_rows() -> list[str]:
     """Private winding/area/intersection with explicit closure and both orientations."""
     return ['mesh_delaun_polygon '+' '.join(map(str,v)) for v in product(range(6),range(3),range(7),range(2),range(4))]
 
+def polygon_mesh_rows() -> list[str]:
+    """Insert and decompose convex/concave polygon links in both orientations."""
+    return [f'mesh_delaun_polygon_mesh {kind} {reverse} {frontier}'
+            for kind in range(2) for reverse in range(2) for frontier in range(2)]
+
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -20,4 +25,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows(),frozenset(manifest['input_sha256']))

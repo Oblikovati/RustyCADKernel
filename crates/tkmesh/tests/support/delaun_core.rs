@@ -58,3 +58,23 @@ pub fn mesh(kind: i32, flags: i32) -> Handle<Mesh> {
         .unwrap();
     mesh
 }
+pub fn polygon_mesh(kind: i32, frontier: bool) -> Handle<Mesh> {
+    let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 8));
+    let mut points = coordinates(0);
+    if kind == 1 {
+        points[2] = Xy::new(1., 1.);
+    }
+    for point in points {
+        mesh.add_node(&Vertex::new(point, 0, Freedom::Free), true)
+            .unwrap();
+    }
+    let freedom = if frontier {
+        Freedom::Frontier
+    } else {
+        Freedom::Free
+    };
+    for (first, last) in [(1, 2), (2, 3), (3, 4), (4, 1)] {
+        mesh.add_link(&Edge::new(first, last, freedom)).unwrap();
+    }
+    mesh
+}

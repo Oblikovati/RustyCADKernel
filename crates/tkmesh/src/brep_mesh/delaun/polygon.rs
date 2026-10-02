@@ -85,7 +85,7 @@ impl BRepMeshDelaun {
             first[0], first[1], second[0], second[1], end_touch, on_edge, point,
         ))
     }
-    fn polygon_edge_points(&self, index: i32) -> Result<[Xy; 2], Failure> {
+    pub(super) fn polygon_edge_points(&self, index: i32) -> Result<[Xy; 2], Failure> {
         let edge = self.get_edge(index.wrapping_abs())?;
         let mut nodes = [edge.first_node(), edge.last_node()];
         if index <= 0 {
