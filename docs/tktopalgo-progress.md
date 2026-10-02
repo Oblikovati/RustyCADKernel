@@ -1627,6 +1627,9 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
   fails).
 - The overlap tool owns its element filter (`Box<dyn BRepExtremaElementFilter>`) instead of
   a pointer; `BRepExtrema_SelfIntersection` gives it a filter over its own triangle set.
+- All 20 declarations in `BRepExtrema_ShapeProximity_Test.cxx` are mapped and pass in the
+  pinned native CTest and Rust target. The two source cases that disable status checks
+  retain only their actual distance and distinct-point assertions.
 
 ### BRepBndLib legacy suite
 - All six declarations in `BRepBndLib_Test.cxx` are mapped. The filtered pinned-OCCT
@@ -1636,5 +1639,5 @@ fast in the debug build of the Rust twin (the slowest takes about 1 s there).
 - All 17 declarations in `BRepGProp_Test.cxx` are mapped and pass natively and in Rust.
   The OCC49 cut-result case uses a pinned native BRep fixture with additional topology,
   mass, centre-of-mass and inertia assertions while TKBO cut construction remains unported.
-- TKTopAlgo now has 72 of 95 GoogleTest declarations mapped; `BRepExtrema_ShapeProximity`
-  and `BRepOffsetAPI_ThruSections` still have unmapped source cases.
+- TKTopAlgo now has 92 of 95 GoogleTest declarations mapped; `BRepOffsetAPI_ThruSections`
+  is the remaining unmapped source file.
