@@ -902,10 +902,15 @@ green in Rust.
 
 The same focused suite now mirrors two internal-wire no-op declarations as well:
 `InternalEdgesTermination_Issue925` returns a nonnull shell with at least one face, and
-`ClosedInternalWire` returns a nonnull result. These are checks of the unchanged internal
-wire paths; they do not establish the upstream infinite-loop fix under adversarial
-`IntVEmap` states. The Rust target currently passes 4/9 declaration assertions, while all
-nine native declarations remain green. No parity rows have been added.
+`ClosedInternalWire` returns a nonnull result. The open-path fixture matches the native
+square, two-edge internal wire, shared middle vertex, tolerances, and shell setup, and its
+Rust assertion passes. However, `Build()` currently finds no adjacent face pair in this
+single-face input and returns the unchanged shape; it does not enter OCCT's internal-edge
+face-unification path or maintain the `InternalEdges`/`IntVEmap` state whose cleanup fixed
+the upstream infinite loop. The current case therefore checks fixture construction and a
+no-op result, not the termination fix itself, and remains unmapped. The Rust target covers
+assertions from 4/9 declarations, while all nine native declarations remain green. No
+parity rows have been added.
 
 The focused Rust suite now also exercises missing and stored p-curves on adjacent
 cylindrical panels. Its two cases preserve the two cylinder faces when a source p-curve
