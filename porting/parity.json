@@ -321161,6 +321161,36 @@
       "profiles": [
         "linux-gcc-c-locale"
       ]
+    },
+    {
+      "upstream_id": "BRepMesh_IncrementalMeshTest.ClosedCylinder_SeamPolygonsReferenceValidMeshNodes",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/GTests/BRepMesh_IncrementalMesh_Test.cxx",
+      "source_sha256": "e7ce09c59af7082bb43fc2f99ce72b746f260b15d098d57baeff019885e22986",
+      "rust_package": "rustycad-tkmesh",
+      "rust_target": "brep_mesh_incremental_mesh_suite",
+      "rust_test": "BRepMesh_IncrementalMeshTest__ClosedCylinder_SeamPolygonsReferenceValidMeshNodes",
+      "rust_source": "crates/tkmesh/tests/brep_mesh_incremental_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "notes": "Uses BRepPrimAPIMakeCylinder::new(5.0, 10.0), deflection 0.1. Mirrors native checks over every face and closed edge: forward/reversed seam polygons exist and all node indices fall within that face triangulation."
+    },
+    {
+      "upstream_id": "BRepMesh_IncrementalMeshTest.OCC25445_AngularDeflectionChangesMesh",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/GTests/BRepMesh_IncrementalMesh_Test.cxx",
+      "source_sha256": "e7ce09c59af7082bb43fc2f99ce72b746f260b15d098d57baeff019885e22986",
+      "rust_package": "rustycad-tkmesh",
+      "rust_target": "brep_mesh_incremental_mesh_suite",
+      "rust_test": "BRepMesh_IncrementalMeshTest__OCC25445_AngularDeflectionChangesMesh",
+      "rust_source": "crates/tkmesh/tests/brep_mesh_incremental_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "notes": "Uses two BRepPrimAPIMakeCone::new(100.0, 10.0, 100.0) solids, deflection 0.01, and angular deflections 10/1 degrees. Sums nodes and triangles over all face triangulations and asserts both totals differ, matching source observable; Rust target runtime is about 68 seconds."
     }
   ]
 }

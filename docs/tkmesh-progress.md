@@ -174,11 +174,10 @@ flags and Rust face status masks are both zero. Parameter normalization supplies
 the native minimum size before edge tessellation. Other unsupported surfaces and
 no-face shapes besides empty compounds and zero-length free edges still report the
 unsupported meshing stage; the cylinder path
-is verified in the later Delaun source gate. The focused Rust tests and filtered native OCC31125 regression pass, but the
-original test declaration is not counted as mapped: the source file contains
-nine declarations and the source gate requires mapping the whole file together.
-This keeps the existing partial API accounting unchanged; the source is still pending
-until all nine declarations pass together.
+is verified in the later Delaun source gate. At this stage only the focused Rust tests
+and filtered native OCC31125 regression passed; the nine-declaration source was not yet
+mapped. The later IncrementalMesh progress below records the seven source declarations
+that have since been mirrored exactly, with two cases still open.
 
 ### Internal face vertices
 
@@ -192,18 +191,23 @@ the remaining complete-source candidate is the IncrementalMesh regression suite.
 
 ### IncrementalMesh free-edge and planar-polygon cases
 
-`BRepMesh_IncrementalMesh_Test.cxx` is partially mapped while its curved-surface and
-mesh-reuse cases are implemented. Five declarations have source-faithful Rust mirrors:
+`BRepMesh_IncrementalMesh_Test.cxx` is partially mapped while its torus and sphere
+mesh-reuse cases are implemented. Seven declarations have source-faithful Rust mirrors:
 the bounded eight-edge planar polygon, trimmed cylindrical face UV/deflection checks,
-zero-radius circular edge, empty-compound no-op, and unbounded cylinder status/empty
-triangulation. Those mirrors use the source geometry, meshing parameters, and observable
-checks. The full native CTest passes 9/9; the Rust target passes 8 tests, including these
-five source mirrors and three focused non-equivalent meshing probes. Bounded cylinder,
-cone, and sphere fixtures check seam polygon node validity, angular sensitivity, and
-quality-decrease remeshing, but they do not reproduce the source's full solids. Four
-declarations still need parity: torus Boolean fusion, closed-cylinder solid polygons,
-the complete cone-solid check, and sphere mesh reuse with geometry cleanup. The source
-suite remains incomplete until all nine declarations have faithful passing Rust mirrors.
+zero-radius circular edge, empty-compound no-op, unbounded cylinder status/empty
+triangulation, closed-cylinder solid seam polygons, and full-solid cone angular response.
+All seven mirrors use the source geometry, parameters, and observable checks. The cylinder
+case uses `BRepPrimAPIMakeCylinder::new(5.0, 10.0)` with linear deflection `0.1`; it
+checks that every face has a triangulation and every closed edge has forward/reversed
+polygon indices within that face's mesh-node range. The cone case uses independent
+`BRepPrimAPIMakeCone::new(100.0, 10.0, 100.0)` solids with linear deflection `0.01` and
+angles of 10 and 1 degrees; it sums nodes and triangles across all faces and requires both
+totals to differ, as the source does. The cone regression takes about 68 seconds in the
+Rust target. The full native CTest passes 9/9; the Rust target passes eight tests (seven
+source mirrors and the focused sphere-face quality-decrease probe).
+The remaining two declarations are
+the torus Boolean fusion and sphere solid cleanup/reuse regression. The source suite
+remains incomplete until all nine declarations have faithful passing Rust mirrors.
 
 ### Discret algorithm factory suite
 
@@ -213,5 +217,5 @@ the case-insensitive named factory registry, preferred/default ordering, the
 selector. Factory-created algorithms defer meshing until `perform()` and preserve
 the native `is_done()` transition. The matching pinned native CTest passes 9/9 and
 the Rust target passes all nine source mirrors plus two focused registry checks
-(11/11). TKMesh now maps 20/29 declarations; the complete IncrementalMesh suite
-remains unmapped while its curved-surface and mesh-reuse cases are completed.
+(11/11). TKMesh now maps 27/29 declarations; the IncrementalMesh source has seven of
+nine declarations mapped, with torus Boolean fusion and sphere cleanup/reuse still open.
