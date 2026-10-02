@@ -49,6 +49,11 @@ void mesh_delaun_core(std::istream&input){
  delaun.SetAuxVertices(auxiliary);auxiliary.Clear();DC_TRY(delaun.RemoveAuxElements());delaun_core_snapshot(delaun);
  DC_TRY(delaun.InitCirclesTool(v[2],v[3]));ga_flag(delaun.Circles().IsEmpty()));ga_end();
 }
+void mesh_delaun_use_edge(std::istream& input){
+ int index;input>>index;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
+ occ::handle<BRepMesh_DataStructureOfDelaun>mesh=new BRepMesh_DataStructureOfDelaun(arena,0);
+ BRepMesh_Delaun delaun(mesh,-1,-1,false);ga_flag(delaun.UseEdge(index));ga_end();
+}
 static void delaun_polygon_area(const BRepMesh_Delaun&delaun,int reverse){
  IMeshData::SequenceOfInteger polygon;for(int i=1;i<=4;++i)polygon.Append(reverse==0?i:-(5-i));
  for(auto bounds:{std::pair<int,int>{1,4},{1,3},{2,4},{4,1},{5,6},{0,2},{1,5}}){GA_TRY(ga_real((delaun.*delaun_member(DelaunAreaTag{}))(polygon,bounds.first,bounds.second)));}

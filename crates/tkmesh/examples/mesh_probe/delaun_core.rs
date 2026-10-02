@@ -16,6 +16,12 @@ pub fn core_case(v: &[i32]) {
     report_unit(core(v));
     println!();
 }
+pub fn use_edge_case(index: i32) {
+    let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 0));
+    let delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    flag(delaun.use_edge(index));
+    println!();
+}
 pub fn polygon_mesh_case(v: &[i32]) {
     print!("OK ");
     if let Err(error) = polygon_mesh(v) {
