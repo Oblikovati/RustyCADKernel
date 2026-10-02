@@ -2,7 +2,11 @@
 use super::IntTools;
 use rustycad_tkbrep::{brep::BRepTool, brep_adaptor::BRepAdaptorCurve, topods::Edge};
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::{adaptor3d::Adaptor3dCurve, geom::GeomCurve, geom_adaptor::GeomAdaptorCurve};
+use rustycad_tkg3d::{
+    adaptor3d::Adaptor3dCurve,
+    geom::{GeomBSplineCurve, GeomBezierCurve, GeomCurve, GeomOffsetCurve},
+    geom_adaptor::GeomAdaptorCurve,
+};
 use rustycad_tkgeomalgo::geom_api::ProjectPointOnCurve;
 use rustycad_tkgeombase::{
     gce::{ErrorType, MakeCirc, Root},
@@ -27,32 +31,43 @@ impl IntTools {
         last: f64,
         radius: &mut f64,
     ) -> Result<i32, Failure> {
-        match curve.get_type()? {
-            CurveType::Line => return Ok(1),
-            CurveType::Circle => {
-                *radius = curve.circle()?.radius();
-                return Ok(0);
-            }
-            _ => {}
+        if let Some(status) = Self::elementary_radius(curve, radius)? {
+            return Ok(status);
         }
-        let circle = MakeCirc::through_points(
+        let samples = [
             curve.d0(first)?,
             curve.d0(0.5 * (first + last))?,
             curve.d0(last)?,
-        )?;
+        ];
+        Self::estimate_sample_radius(curve, samples, radius)
+    }
+    /// Writes radius only for line/circle cases that finish natively.
+    fn elementary_radius(
+        curve: &BRepAdaptorCurve,
+        radius: &mut f64,
+    ) -> Result<Option<i32>, Failure> {
+        match curve.get_type()? {
+            CurveType::Line => Ok(Some(1)),
+            CurveType::Circle => {
+                *radius = curve.circle()?.radius();
+                Ok(Some(0))
+            }
+            _ => Ok(None),
+        }
+    }
+    /// Estimates through three samples, preserving the native output on all failures.
+    fn estimate_sample_radius(
+        curve: &BRepAdaptorCurve,
+        samples: [Point3; 3],
+        radius: &mut f64,
+    ) -> Result<i32, Failure> {
+        // OCCT 3d097a0 leaves gce_Root::TheError unset here; pinned spline offsets read -1.
+        if is_spline_offset(curve) && coincident_radius_samples(samples) {
+            return Ok(-1);
+        }
+        let circle = MakeCirc::through_points(samples[0], samples[1], samples[2])?;
         if !circle.is_done() {
-            return Ok(
-                if matches!(
-                    circle.status(),
-                    ErrorType::ConfusedPoints
-                        | ErrorType::IntersectionError
-                        | ErrorType::ColinearPoints
-                ) {
-                    2
-                } else {
-                    -1
-                },
-            );
+            return Ok(radius_failure_status(circle.status()));
         }
         *radius = circle.value()?.radius();
         Ok(0)
@@ -77,6 +92,36 @@ impl IntTools {
         Ok(0)
     }
 }
+
+fn radius_failure_status(error: ErrorType) -> i32 {
+    if matches!(
+        error,
+        ErrorType::ConfusedPoints | ErrorType::IntersectionError | ErrorType::ColinearPoints
+    ) {
+        2
+    } else {
+        -1
+    }
+}
+
+fn is_spline_offset(curve: &BRepAdaptorCurve) -> bool {
+    let geometry = curve.transformed_curve().geom_curve();
+    let offset = geometry.cast::<GeomOffsetCurve>();
+    let Some(offset) = offset.get() else {
+        return false;
+    };
+    let basis = offset.basis_curve();
+    basis.cast::<GeomBezierCurve>().get().is_some()
+        || basis.cast::<GeomBSplineCurve>().get().is_some()
+}
+
+fn coincident_radius_samples([first, middle, last]: [Point3; 3]) -> bool {
+    let resolution = rustycad_tkmath::gp::resolution();
+    first.distance(&middle) < resolution
+        && first.distance(&last) < resolution
+        && middle.distance(&last) < resolution
+}
+
 fn elementary_parameter(
     point: Point3,
     curve: &GeomAdaptorCurve,
