@@ -74,8 +74,8 @@ def create_triangles_rows() -> list[str]:
     return ['mesh_delaun_create_triangles']
 
 def insert_vertex_rows() -> list[str]:
-    """Insert one point and a two-point batch through circle cavity replacement."""
-    return ['mesh_delaun_insert_vertex 1', 'mesh_delaun_insert_vertex 2']
+    """Cover interior batches, constrained-boundary skips, and no-candidate points."""
+    return [f'mesh_delaun_insert_vertex {mode}' for mode in range(1, 6)]
 
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""

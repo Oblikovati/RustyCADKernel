@@ -126,11 +126,14 @@ pub fn create_triangles_case() {
     println!();
 }
 pub fn insert_vertex_case(values: &[i32]) {
-    let mesh = fixture::mesh(0, 0);
-    let points = if values[0] == 2 {
-        vec![Xy::new(1., 0.5), Xy::new(0.5, 1.5)]
-    } else {
-        vec![Xy::new(1., 0.5)]
+    let flags = if values[0] == 3 { 1 } else { 0 };
+    let mesh = fixture::mesh(0, flags);
+    let points = match values[0] {
+        2 => vec![Xy::new(1., 0.5), Xy::new(0.5, 1.5)],
+        3 => vec![Xy::new(1., 0.)],
+        4 => vec![Xy::new(1., 1.)],
+        5 => vec![Xy::new(3., 3.)],
+        _ => vec![Xy::new(1., 0.5)],
     };
     let mut vertices = points
         .iter()

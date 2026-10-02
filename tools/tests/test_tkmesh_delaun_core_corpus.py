@@ -8,7 +8,7 @@ class DelaunCoreCorpusTests(unittest.TestCase):
         """All generated requests survive exactly once in the evidence partition."""
         exact,crashes=partition()
         candidates=core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows()+internal_constraint_rows()+process_constraints_rows()+create_triangles_rows()+insert_vertex_rows()
-        self.assertEqual(len(exact),2283)
+        self.assertEqual(len(exact),2286)
         self.assertEqual(len(crashes),80)
         self.assertEqual(set(candidates),set(exact+crashes))
         self.assertEqual(corpus().splitlines(),candidates)
