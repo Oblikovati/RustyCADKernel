@@ -6,7 +6,7 @@ SurfaceRangeSample, and MarkedRangeSet. The 80 API rows use the header audit
 identities; the remainder of IntTools and the Boolean algorithms remain pending.
 
 `tools/verify_tkbo_foundations.py --source ../OCCT --native-build BUILD` passes
-19,107 exact native comparisons, including signed zero, all root transitions,
+19,109 exact native comparisons, including signed zero, all root transitions,
 range subdivision and hashing, duplicate boundaries, pave-block splitting and
 common-block ordering. Its companion radius-status replay still records 176 undefined-status
 native calls and 32 differences; complete TKBO parity remains false.
@@ -44,8 +44,10 @@ Native differential probes cover depth-first ordering, shared-vertex links and p
 face/edge/vertex flattening in a single-solid box, and the resulting shape bounds.
 Two-sided and one-sided infinite line ranges also match the native synthetic endpoint
 vertices and pave parameters; internal finite-edge paves use the topological endpoint
-orientations. `Init` and `ChangePaveBlocks` remain partial for exact open/inverted shell
-behavior, same-domain mapping, and one-vertex seam edges.
+orientations. Forward and reversed one-vertex pcurve-only seam edges produce the native
+duplicate endpoint index and full-period pave interval. The OCCT circle-edge branch is
+still partial because the Rust edge builder exposes different curve representations;
+open/inverted shells and same-domain mapping also remain incomplete.
 No original GTest declaration is mapped by this storage slice.
 
 IntTools Curve, CommonPrt and point-on-face records add 62 implemented APIs.

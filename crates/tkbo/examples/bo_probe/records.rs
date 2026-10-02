@@ -462,6 +462,110 @@ pub fn data_structure_infinite_case(v: &[f64]) {
     write_infinite_edge_paves(&mut structure, &edge);
 }
 
+/// Writes closed-edge pcurve selection and duplicate endpoint paves.
+pub fn data_structure_seam_case(v: &[f64]) {
+    use rustycad_tkbo::bop_ds::DataStructure;
+    use rustycad_tkbrep::topods::Edge;
+    use std::f64::consts::TAU;
+
+    let edge = make_seam_edge(v[1] as i32, TAU);
+    let edge = if v[1] as i32 >= 2 {
+        edge.reversed()
+    } else {
+        edge
+    };
+    let edge = Edge::unchecked(edge);
+    let edge_shape = edge.clone().into_shape();
+    let mut structure = DataStructure::default();
+    structure.set_arguments(std::slice::from_ref(&edge_shape));
+    structure.init(v[0]).unwrap();
+    write_seam_shape_state(&structure, &edge);
+    structure
+        .change_pave_blocks(structure.index(&edge.clone().into_shape()))
+        .unwrap();
+    write_seam_pave_state(&structure, &edge);
+}
+
+fn make_seam_edge(kind: i32, period: f64) -> rustycad_tkbrep::topods::Shape {
+    use rustycad_tkbrep::brep::BRepBuilder;
+    use rustycad_tkbrep::topods::Vertex;
+    use rustycad_tkernel::standard::Handle;
+    use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+    use rustycad_tkg3d::geom::{GeomCylindricalSurface, GeomSurface};
+    use rustycad_tkmath::gp::{Axis2, Axis2d, Axis3, Circle3, Direction2, Point2, Point3};
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
+    if kind % 2 == 0 {
+        return BRepBuilderAPIMakeEdge::from_circ(Circle3::new(Axis2::default(), 1.0).unwrap())
+            .unwrap()
+            .edge()
+            .unwrap()
+            .into_shape();
+    }
+    let builder = BRepBuilder::default();
+    let mut vertex = Vertex::default();
+    builder
+        .make_vertex_at(&mut vertex, Point3::new(1.0, 0.0, 0.0), 1e-7)
+        .unwrap();
+    let curve: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::new(Axis2d::new(
+        Point2::default(),
+        Direction2::X,
+    )))
+    .cast();
+    let surface: Handle<dyn GeomSurface> =
+        Handle::new(GeomCylindricalSurface::new(Axis3::default(), 1.0).unwrap()).cast();
+    BRepBuilderAPIMakeEdge::from_pcurve_vertices_params(
+        &curve, &surface, &vertex, &vertex, 0.0, period,
+    )
+    .unwrap()
+    .edge()
+    .unwrap()
+    .into_shape()
+}
+
+fn write_seam_shape_state(
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    edge: &rustycad_tkbrep::topods::Edge,
+) {
+    use rustycad_tkbrep::brep::BRepTool;
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    let edge_shape = edge.clone().into_shape();
+    let edge_index = structure.index(&edge_shape);
+    integer(edge_index);
+    let info = structure.shape_info(edge_index).unwrap();
+    integer(info.sub_shapes().len() as i32);
+    for child in info.sub_shapes() {
+        integer(*child);
+        integer(structure.shape(*child).unwrap().orientation() as i32);
+    }
+    let (curve, _, _) = BRepTool::curve(edge).unwrap();
+    flag(curve.is_null());
+    let pcurve = BRepTool::first_curve_on_surface(edge).unwrap().pcurve;
+    flag(pcurve.is_null());
+}
+
+fn write_seam_pave_state(
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    edge: &rustycad_tkbrep::topods::Edge,
+) {
+    integer(structure.pave_blocks_pool().len() as i32);
+    let edge_index = structure.index(&edge.clone().into_shape());
+    integer(structure.shape_info(edge_index).unwrap().reference());
+    let blocks = structure.pave_blocks(edge_index).unwrap();
+    integer(blocks.len() as i32);
+    for handle in blocks {
+        let block = handle.lock().unwrap();
+        integer(block.original_edge());
+        let (first, last) = block.indices();
+        let (first_parameter, last_parameter) = block.range();
+        integer(first);
+        integer(last);
+        real(first_parameter);
+        real(last_parameter);
+        integer(block.ext_paves().len() as i32);
+    }
+}
+
 fn line_edge_bounds(kind: i32, infinity: f64) -> (f64, f64) {
     match kind {
         1 => (-infinity, 2.0),

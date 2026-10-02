@@ -577,20 +577,33 @@ impl DataStructure {
         edge: &Edge,
         block: &mut PaveBlock,
     ) -> Result<(), Failure> {
-        let degenerated = self.shape_info(edge_index)?.has_flag();
         for vertex_index in vertex_indices {
-            let vertex = Vertex::unchecked(self.shape(*vertex_index)?.clone());
-            let parameter = if self.shape_info(*vertex_index)?.has_flag() {
-                compute_endpoint_parameter(&vertex, edge)?
-            } else {
-                BRepTool::parameter(&vertex, edge)?
-            };
-            let pave = Pave::new(*vertex_index, parameter);
-            if degenerated {
-                block.append_ext_pave1(pave);
-            } else {
-                block.append_ext_pave(pave);
-            }
+            self.append_endpoint_pave(edge_index, *vertex_index, edge, block, false)?;
+        }
+        if let [vertex_index] = vertex_indices {
+            self.append_endpoint_pave(edge_index, *vertex_index, edge, block, true)?;
+        }
+        Ok(())
+    }
+
+    fn append_endpoint_pave(
+        &self,
+        edge_index: i32,
+        vertex_index: i32,
+        edge: &Edge,
+        block: &mut PaveBlock,
+        reverse_vertex: bool,
+    ) -> Result<(), Failure> {
+        let mut vertex = Vertex::unchecked(self.shape(vertex_index)?.clone());
+        if reverse_vertex {
+            vertex = Vertex::unchecked(vertex.reversed());
+        }
+        let parameter = endpoint_parameter(self, vertex_index, &vertex, edge)?;
+        let pave = Pave::new(vertex_index, parameter);
+        if self.shape_info(edge_index)?.has_flag() || reverse_vertex {
+            block.append_ext_pave1(pave);
+        } else {
+            block.append_ext_pave(pave);
         }
         Ok(())
     }
@@ -605,11 +618,7 @@ impl DataStructure {
             let vertex_shape = vertices.value()?.clone();
             let vertex_index = self.index(&vertex_shape);
             let vertex = Vertex::unchecked(vertex_shape);
-            let parameter = if self.shape_info(vertex_index)?.has_flag() {
-                compute_endpoint_parameter(&vertex, edge)?
-            } else {
-                BRepTool::parameter(&vertex, edge)?
-            };
+            let parameter = endpoint_parameter(self, vertex_index, &vertex, edge)?;
             block.append_ext_pave1(Pave::new(vertex_index, parameter));
             vertices.next();
         }
@@ -624,6 +633,18 @@ fn additional_tolerance(fuzz: f64) -> f64 {
     } else {
         fuzz * 0.5
     }
+}
+
+fn endpoint_parameter(
+    structure: &DataStructure,
+    vertex_index: i32,
+    vertex: &Vertex,
+    edge: &Edge,
+) -> Result<f64, Failure> {
+    if structure.shape_info(vertex_index)?.has_flag() {
+        return compute_endpoint_parameter(vertex, edge);
+    }
+    BRepTool::parameter(vertex, edge)
 }
 
 fn compute_endpoint_parameter(vertex: &Vertex, edge: &Edge) -> Result<f64, Failure> {

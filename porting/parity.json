@@ -215933,7 +215933,7 @@
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::init",
       "status": "partial",
-      "notes": "Ports argument ordering, recursive shape metadata, ranges, vertex/edge/face/solid bounds and child indices, shared-vertex links, and ordinary/infinite endpoint pave construction. Native probes cover two-sided and one-sided infinite line ranges plus a single-solid box. Exact open/inverted-shell handling, same-domain mapping, and special internal/seam edges remain incomplete."
+      "notes": "Ports argument ordering, recursive shape metadata, ranges, vertex/edge/face/solid bounds and child indices, shared-vertex links, and ordinary/infinite endpoint pave construction. Native probes cover two-sided and one-sided infinite line ranges plus a single-solid box. Exact open/inverted-shell handling and same-domain mapping remain incomplete."
     },
     {
       "upstream_id": "BOPDS_DS::NbShapes() const",
@@ -216069,7 +216069,7 @@
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::change_pave_blocks",
       "status": "partial",
-      "notes": "Creates endpoint paves for ordinary finite and tested infinite line edges. Same-domain vertex mapping, internal edge topology and the one-vertex seam path remain incomplete."
+      "notes": "Creates endpoint paves for ordinary finite and tested infinite line edges, internal line-edge endpoints, and forward/reversed one-vertex pcurve-only seam edges. Same-domain vertex mapping and open/inverted shell paths remain incomplete; 3D periodic-edge builder representations remain mismatched."
     },
     {
       "upstream_id": "BOPDS_DS::UpdatePaveBlocks()",
