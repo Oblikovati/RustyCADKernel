@@ -129,11 +129,11 @@ declarations; overall mapping is 7,215/8,648 GoogleTest declaration candidates.
 ### Populated-mesh Delaun predicates
 
 The existing-mesh Delaun core adds audited API rows, including exact
-`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,151 exact
+`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,159 exact
 populated-mesh cases and reports 80 native-crash/Rust-error divergences separately;
-nine supplemental null-mesh divergences remain outside that corpus. Supermesh bounds
-and first-vertex fan creation are included; sorting, multi-vertex insertion and
-constraint processing remain in progress. This slice maps no original Delaun test
+nine supplemental null-mesh divergences remain outside that corpus. Supermesh bounds, first-vertex fan creation and native insertion ordering are
+included; cavity deletion, multi-vertex insertion and constraint processing remain
+in progress. This slice maps no original Delaun test
 declaration. TKMesh remains at 2/29 mapped original declarations.
 
 ### IncrementalMesh empty-compound construction
