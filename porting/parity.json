@@ -216987,25 +216987,25 @@
       "upstream_id": "BOPDS_DS::AddInterf(int,int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::add_interference",
+      "status": "implemented",
+      "notes": "Adds a symmetric pair once and marks both shape indices; the native probe checks reciprocal duplicates."
     },
     {
       "upstream_id": "BOPDS_DS::HasInterf(int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::has_interference_for",
+      "status": "implemented",
+      "notes": "Queries whether the shape index appears in any retained interference pair."
     },
     {
       "upstream_id": "BOPDS_DS::HasInterf(int,int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::has_interference_between",
+      "status": "implemented",
+      "notes": "Queries pair membership using native unordered BOPDS_Pair equality."
     },
     {
       "upstream_id": "BOPDS_DS::HasInterfShapeSubShapes(int,int,bool) const",
@@ -217027,9 +217027,9 @@
       "upstream_id": "BOPDS_DS::Interferences() const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::interferences",
+      "status": "implemented",
+      "notes": "Borrows the native-hashed pair table in NCollection_Map bucket traversal order."
     },
     {
       "upstream_id": "BOPDS_DS::Dump() const",

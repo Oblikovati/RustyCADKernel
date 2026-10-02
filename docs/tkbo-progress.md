@@ -30,6 +30,10 @@ add twelve audited identities: each Rust record shares the exact base-index
 state, with allocator-only constructors and native destructors explicitly
 excluded. Their defaults, index queries, and sentinel mutations pass the
 19,117-case native comparison.
+The `BOPDS_DS` interference summary now covers `AddInterf`, both `HasInterf`
+overloads, and `Interferences`. Reciprocal pairs deduplicate while retaining
+the first stored orientation; both shape indices are marked, and iteration
+matches native hash-bucket order.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered

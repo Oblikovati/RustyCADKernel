@@ -43,6 +43,18 @@ void bo_bopds_solid_interferences(const std::vector<double>&) {
  BOPDS_InterfFZ fz;bo_bopds_solid_interf(fz);
  BOPDS_InterfZZ zz;bo_bopds_solid_interf(zz);
 }
+void bo_data_structure_interferences_case(const std::vector<double>&) {
+ BOPDS_DS value;bo_int(value.Interferences().Extent());bo_int(value.HasInterf(4));bo_int(value.HasInterf(4,9));
+ bo_int(value.AddInterf(4,9));bo_int(value.AddInterf(7,2));bo_int(value.AddInterf(9,4));
+ bo_int(value.AddInterf(4,10));bo_int(value.AddInterf(7,7));
+ for(int index:{2,4,7,9,10,11})bo_int(value.HasInterf(index));
+ bo_int(value.HasInterf(4,9));bo_int(value.HasInterf(9,4));bo_int(value.HasInterf(2,7));
+ bo_int(value.HasInterf(7,2));bo_int(value.HasInterf(4,2));bo_int(value.HasInterf(7,7));bo_int(value.HasInterf(7,8));
+ const auto& table=value.Interferences();bo_int(table.Extent());
+ for(NCollection_Map<BOPDS_Pair>::Iterator iterator(table);iterator.More();iterator.Next()) {
+   int first=0,second=0;iterator.Key().Indices(first,second);bo_int(first);bo_int(second);
+ }
+}
 void bo_index_state(const BOPDS_IndexRange& value,int query) {
  bo_int(value.First());bo_int(value.Last());int first,last;value.Indices(first,last);bo_int(first);bo_int(last);
  bo_int(value.Contains(query));value.Dump();std::cout<<' ';

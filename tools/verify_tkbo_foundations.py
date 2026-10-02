@@ -99,6 +99,7 @@ def bopds_requests() -> list[str]:
                      range(9), [-1, 4], [-1, 7], [-0.0, 0.25])]
     requests.append('bop_face_info')
     requests.append('bop_data_structure')
+    requests.append('bop_data_structure_interferences')
     requests.append('bop_data_structure_common_block')
     requests.append('bopds_curve')
     requests.append('bopds_interf')
