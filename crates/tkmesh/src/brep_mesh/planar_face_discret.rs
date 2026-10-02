@@ -2,6 +2,7 @@
 use super::{
     BRepMeshDataStructureOfDelaun, BRepMeshDelaun, BRepMeshEdge, BRepMeshVertex, ShapeTool,
 };
+use crate::brep_mesh::{DefaultRangeSplitter, GeomTool};
 use crate::{
     imesh_data::{FaceHandle, MeshModel, MeshWire},
     imesh_tools::{MeshParameters, ModelAlgo},
@@ -31,32 +32,123 @@ impl BRepMeshPlanarFaceDiscret {
         Self::default()
     }
 
-    fn discretize_face(face: &FaceHandle) -> Result<(), Failure> {
-        if face.get_surface().get_type()? != rustycad_tkmath::geom_abs::SurfaceType::Plane {
+    fn discretize_face(face: &FaceHandle, parameters: &MeshParameters) -> Result<(), Failure> {
+        if !matches!(
+            face.get_surface().get_type()?,
+            rustycad_tkmath::geom_abs::SurfaceType::Plane
+                | rustycad_tkmath::geom_abs::SurfaceType::Cylinder
+        ) {
             return Err(Failure::with_message(
                 "Standard_NotImplemented",
-                "BRepMesh planar face strategy requires a plane surface",
+                "BRepMesh boundary face strategy requires a plane or cylinder surface",
             ));
         }
         let allocator = Handle::new(IncrementalAllocatorObject::new(
             crate::imesh_data::MEMORY_BLOCK_SIZE_HUGE,
         ));
         let mesh = Handle::new(BRepMeshDataStructureOfDelaun::new(&allocator, 16));
+        let splitter = Self::range_splitter(face, parameters)?;
+        Self::configure_vertex_tool(&splitter, &mesh)?;
         let mut points = Vec::new();
-        Self::register_boundaries(face, &mesh, &mut points)?;
+        Self::register_boundaries(face, &splitter, &mesh, &mut points)?;
         let mut vertices = (1..=mesh.nb_nodes()).collect::<Vec<_>>();
-        BRepMeshDelaun::from_mesh(&mesh, -1, -1, true)?
+        let (cells_u, cells_v) = GeomTool::cells_count(
+            &face.get_surface().cast(),
+            mesh.nb_nodes(),
+            face.get_deflection(),
+            Some(&splitter),
+        )?;
+        BRepMeshDelaun::from_mesh(&mesh, cells_u, cells_v, true)?
             .triangulate_vertices_probe(&mut vertices)?;
-        Self::publish_mesh(face, &mesh, &points)
+        Self::publish_mesh(face, &splitter, &mesh, &points)
+    }
+
+    fn range_splitter(
+        face: &FaceHandle,
+        parameters: &MeshParameters,
+    ) -> Result<DefaultRangeSplitter, Failure> {
+        let mut splitter = DefaultRangeSplitter::default();
+        splitter.reset(face, parameters);
+        Self::collect_splitter_boundary(face, &mut splitter)?;
+        splitter.adjust_range()?;
+        Self::scale_cylinder_range(face, parameters, &mut splitter)?;
+        Ok(splitter)
+    }
+
+    fn collect_splitter_boundary(
+        face: &FaceHandle,
+        splitter: &mut DefaultRangeSplitter,
+    ) -> Result<(), Failure> {
+        for wire_index in 0..face.wires_nb() {
+            let wire = face.get_wire(wire_index)?;
+            for edge_index in 0..wire.edges_nb() {
+                let edge = wire.get_edge(edge_index)?.upgrade();
+                let orientation = wire.get_edge_orientation(edge_index)?;
+                let pcurve = edge.get_pcurve_for(&face.downgrade(), orientation)?;
+                Self::add_pcurve_bounds(splitter, &pcurve)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn add_pcurve_bounds(
+        splitter: &mut DefaultRangeSplitter,
+        pcurve: &crate::imesh_data::PCurveHandle,
+    ) -> Result<(), Failure> {
+        for sample in 0..pcurve.parameters_nb() {
+            splitter.add_point(pcurve.get_point(sample)?);
+        }
+        Ok(())
+    }
+
+    fn scale_cylinder_range(
+        face: &FaceHandle,
+        parameters: &MeshParameters,
+        splitter: &mut DefaultRangeSplitter,
+    ) -> Result<(), Failure> {
+        if face.get_surface().get_type()? != rustycad_tkmath::geom_abs::SurfaceType::Cylinder {
+            return Ok(());
+        }
+        let radius = face.get_surface().cylinder()?.radius();
+        let step = rustycad_tkgeombase::gcpnts::TangentialDeflection::arc_angular_step(
+            radius,
+            face.get_deflection(),
+            parameters.angle,
+            parameters.min_size,
+        )?;
+        let range_v = splitter.get_range_v();
+        splitter.delta = (step / (range_v.1 - range_v.0), 1.0);
+        Ok(())
+    }
+
+    fn configure_vertex_tool(
+        splitter: &DefaultRangeSplitter,
+        mesh: &Handle<BRepMeshDataStructureOfDelaun>,
+    ) -> Result<(), Failure> {
+        let delta = splitter.get_delta();
+        let tolerance = splitter.get_tolerance_uv();
+        mesh.vertex_tool()
+            .set_tolerances(tolerance.0 / delta.0, tolerance.1 / delta.1);
+        mesh.vertex_tool()
+            .set_cell_sizes(14.0 * tolerance.0 / delta.0, 14.0 * tolerance.1 / delta.1)?;
+        Ok(())
     }
 
     fn register_boundaries(
         face: &FaceHandle,
+        splitter: &DefaultRangeSplitter,
         mesh: &Handle<BRepMeshDataStructureOfDelaun>,
         points: &mut Vec<rustycad_tkmath::gp::Point3>,
     ) -> Result<(), Failure> {
         for wire_index in 0..face.wires_nb() {
-            Self::register_wire(face, &face.get_wire(wire_index)?, wire_index, mesh, points)?;
+            Self::register_wire(
+                face,
+                &face.get_wire(wire_index)?,
+                wire_index,
+                splitter,
+                mesh,
+                points,
+            )?;
         }
         Ok(())
     }
@@ -65,6 +157,7 @@ impl BRepMeshPlanarFaceDiscret {
         face: &FaceHandle,
         wire: &Handle<dyn MeshWire>,
         wire_index: i32,
+        splitter: &DefaultRangeSplitter,
         mesh: &Handle<BRepMeshDataStructureOfDelaun>,
         points: &mut Vec<rustycad_tkmath::gp::Point3>,
     ) -> Result<(), Failure> {
@@ -72,27 +165,117 @@ impl BRepMeshPlanarFaceDiscret {
             let edge = wire.get_edge(edge_index)?.upgrade();
             let orientation = wire.get_edge_orientation(edge_index)?;
             let pcurve = edge.get_pcurve_for(&face.downgrade(), orientation)?;
-            Self::register_pcurve(&edge, &pcurve, wire_index, mesh, points)?;
+            let seam_orientation =
+                Self::fix_seam_edge_orientation(&edge, &pcurve, &face.downgrade())?;
+            Self::register_pcurve(
+                &edge,
+                &pcurve,
+                seam_orientation,
+                wire_index,
+                splitter,
+                mesh,
+                points,
+            )?;
+            Self::register_other_pcurve_nodes(
+                &edge,
+                &pcurve,
+                &face.downgrade(),
+                splitter,
+                mesh,
+                points,
+            )?;
         }
         Ok(())
+    }
+
+    fn fix_seam_edge_orientation(
+        edge: &crate::imesh_data::EdgeHandle,
+        pcurve: &crate::imesh_data::PCurveHandle,
+        face: &crate::imesh_data::FacePtr,
+    ) -> Result<Orientation, Failure> {
+        for index in edge.get_pcurves(face)? {
+            let candidate = edge.get_pcurve(index)?;
+            if candidate.object_address() == pcurve.object_address() {
+                continue;
+            }
+            if Self::pcurves_share_endpoints(pcurve, &candidate)? {
+                return Ok(Orientation::Internal);
+            }
+        }
+        Ok(pcurve.get_orientation())
+    }
+
+    fn pcurves_share_endpoints(
+        first: &crate::imesh_data::PCurveHandle,
+        second: &crate::imesh_data::PCurveHandle,
+    ) -> Result<bool, Failure> {
+        if first.parameters_nb() == 0 || second.parameters_nb() == 0 {
+            return Ok(false);
+        }
+        let first_start = first.get_point(0)?;
+        let first_end = first.get_point(first.parameters_nb() - 1)?;
+        let second_start = second.get_point(0)?;
+        let second_end = second.get_point(second.parameters_nb() - 1)?;
+        Ok(endpoints_share(
+            first_start,
+            first_end,
+            second_start,
+            second_end,
+        ))
     }
 
     fn register_pcurve(
         edge: &crate::imesh_data::EdgeHandle,
         pcurve: &crate::imesh_data::PCurveHandle,
+        orientation: Orientation,
         wire_index: i32,
+        splitter: &DefaultRangeSplitter,
         mesh: &Handle<BRepMeshDataStructureOfDelaun>,
         points: &mut Vec<rustycad_tkmath::gp::Point3>,
     ) -> Result<(), Failure> {
         let curve = edge.get_curve();
         let mut previous = None;
         for sample in 0..pcurve.parameters_nb() {
-            let node = Self::register_sample(&curve, pcurve, sample, mesh, points)?;
+            let node = Self::register_sample(&curve, pcurve, sample, splitter, mesh, points)?;
             pcurve.set_index(sample, node)?;
             if let Some(first) = previous {
-                Self::register_link(mesh, first, node, pcurve.get_orientation(), wire_index)?;
+                Self::register_link(mesh, first, node, orientation, wire_index)?;
             }
             previous = Some(node);
+        }
+        Ok(())
+    }
+
+    fn register_other_pcurve_nodes(
+        edge: &crate::imesh_data::EdgeHandle,
+        selected: &crate::imesh_data::PCurveHandle,
+        face: &crate::imesh_data::FacePtr,
+        splitter: &DefaultRangeSplitter,
+        mesh: &Handle<BRepMeshDataStructureOfDelaun>,
+        points: &mut Vec<rustycad_tkmath::gp::Point3>,
+    ) -> Result<(), Failure> {
+        let curve = edge.get_curve();
+        // OCCT indexes same-face alternatives for polygon output without constraining them.
+        for index in edge.get_pcurves(face)? {
+            let pcurve = edge.get_pcurve(index)?;
+            if pcurve.object_address() == selected.object_address() {
+                continue;
+            }
+            Self::register_pcurve_nodes(&curve, &pcurve, splitter, mesh, points)?;
+        }
+        Ok(())
+    }
+
+    fn register_pcurve_nodes(
+        curve: &crate::imesh_data::CurveHandle,
+        pcurve: &crate::imesh_data::PCurveHandle,
+        splitter: &DefaultRangeSplitter,
+        mesh: &Handle<BRepMeshDataStructureOfDelaun>,
+        points: &mut Vec<rustycad_tkmath::gp::Point3>,
+    ) -> Result<(), Failure> {
+        for sample in 0..pcurve.parameters_nb() {
+            let node = Self::register_sample(curve, pcurve, sample, splitter, mesh, points)?;
+            pcurve.set_index(sample, node)?;
         }
         Ok(())
     }
@@ -101,11 +284,12 @@ impl BRepMeshPlanarFaceDiscret {
         curve: &crate::imesh_data::CurveHandle,
         pcurve: &crate::imesh_data::PCurveHandle,
         sample: i32,
+        splitter: &DefaultRangeSplitter,
         mesh: &Handle<BRepMeshDataStructureOfDelaun>,
         points: &mut Vec<rustycad_tkmath::gp::Point3>,
     ) -> Result<i32, Failure> {
         let point_3d = curve.get_point(sample)?;
-        let point_2d = pcurve.get_point(sample)?;
+        let point_2d = splitter.scale(pcurve.get_point(sample)?, true);
         let location = points.len() as i32 + 1;
         let vertex = BRepMeshVertex::new(
             Xy::new(point_2d.x(), point_2d.y()),
@@ -139,6 +323,7 @@ impl BRepMeshPlanarFaceDiscret {
 
     fn publish_mesh(
         face: &FaceHandle,
+        splitter: &DefaultRangeSplitter,
         mesh: &Handle<BRepMeshDataStructureOfDelaun>,
         points: &[rustycad_tkmath::gp::Point3],
     ) -> Result<(), Failure> {
@@ -153,13 +338,14 @@ impl BRepMeshPlanarFaceDiscret {
             true,
             false,
         )?);
-        Self::copy_nodes(mesh, points, &triangulation)?;
+        Self::copy_nodes(mesh, splitter, points, &triangulation)?;
         Self::copy_triangles(mesh, &elements, &triangulation)?;
         ShapeTool::add_in_face(&face.get_face()?, &triangulation)
     }
 
     fn copy_nodes(
         mesh: &Handle<BRepMeshDataStructureOfDelaun>,
+        splitter: &DefaultRangeSplitter,
         points: &[rustycad_tkmath::gp::Point3],
         output: &Handle<Triangulation>,
     ) -> Result<(), Failure> {
@@ -167,7 +353,7 @@ impl BRepMeshPlanarFaceDiscret {
             let vertex = mesh.get_node(index)?;
             let uv = vertex.coord();
             output.set_node(index, points[vertex.location_3d() as usize - 1])?;
-            output.set_uv_node(index, Point2::new(uv.x(), uv.y()))?;
+            output.set_uv_node(index, splitter.scale(Point2::new(uv.x(), uv.y()), false))?;
         }
         Ok(())
     }
@@ -177,8 +363,10 @@ impl BRepMeshPlanarFaceDiscret {
         elements: &rustycad_tkernel::ncollection::Map<i32>,
         output: &Handle<Triangulation>,
     ) -> Result<(), Failure> {
-        for (offset, element_id) in elements.iter().enumerate() {
-            let element = mesh.get_element(*element_id)?;
+        let mut element_ids: Vec<i32> = elements.iter().copied().collect();
+        element_ids.sort_unstable();
+        for (offset, element_id) in element_ids.into_iter().enumerate() {
+            let element = mesh.get_element(element_id)?;
             let nodes = mesh.element_nodes(&element)?;
             output.set_triangle(
                 offset as i32 + 1,
@@ -197,7 +385,7 @@ impl ModelAlgo for BRepMeshPlanarFaceDiscret {
         _range: &ProgressRange<'_>,
     ) -> Result<bool, Failure> {
         for index in 0..model.faces_nb() {
-            Self::discretize_face(&model.get_face(index)?)?;
+            Self::discretize_face(&model.get_face(index)?, _parameters)?;
         }
         Ok(true)
     }
@@ -213,6 +401,23 @@ fn link_order(
         Orientation::Internal => (first, last, super::DegreeOfFreedom::Fixed),
         _ => (first, last, super::DegreeOfFreedom::Frontier),
     }
+}
+
+fn endpoint_distance(point: &Point2, first: &Point2, second: &Point2) -> f64 {
+    point
+        .square_distance(*first)
+        .min(point.square_distance(*second))
+}
+
+fn endpoints_share(
+    first_start: Point2,
+    first_end: Point2,
+    second_start: Point2,
+    second_end: Point2,
+) -> bool {
+    let tolerance = rustycad_tkernel::precision::square_confusion();
+    endpoint_distance(&first_start, &second_start, &second_end) < tolerance
+        && endpoint_distance(&first_end, &second_start, &second_end) < tolerance
 }
 
 #[cfg(test)]
@@ -251,6 +456,19 @@ mod tests {
                     .is_equal(Status::NoError)
             );
         }
+    }
+
+    #[test]
+    fn seam_endpoints_match_in_either_direction() {
+        let first = Point2::new(0.0, 1.0);
+        let second = Point2::new(4.0, 1.0);
+        assert!(endpoints_share(first, second, second, first));
+        assert!(!endpoints_share(
+            first,
+            second,
+            Point2::new(8.0, 1.0),
+            Point2::new(12.0, 1.0)
+        ));
     }
 
     fn box_shape() -> rustycad_tkbrep::topods::Shape {
