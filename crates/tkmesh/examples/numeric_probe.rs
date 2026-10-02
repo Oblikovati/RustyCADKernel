@@ -137,7 +137,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_delaun_internal_constraint" => mesh_probe::delaun_core::internal_constraint_case(),
         "mesh_delaun_process_constraints" => mesh_probe::delaun_core::process_constraints_case(),
         "mesh_delaun_create_triangles" => mesh_probe::delaun_core::create_triangles_case(),
-        "mesh_delaun_insert_vertex" => mesh_probe::delaun_core::insert_vertex_case(),
+        "mesh_delaun_insert_vertex" => mesh_probe::delaun_core::insert_vertex_case(values),
         "mesh_delaun_use_edge" => mesh_probe::delaun_core::use_edge_case(values[0]),
         "mesh_delaun_sort" => mesh_probe::delaun_core::sort_vertices_case(values),
         "mesh_delaun_polygon" => mesh_probe::delaun_core::polygon_case(values),
