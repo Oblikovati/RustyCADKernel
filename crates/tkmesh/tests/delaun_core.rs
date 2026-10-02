@@ -123,6 +123,18 @@ fn supermesh_adds_the_native_three_vertices_and_oriented_edges() {
     assert_eq!(delaun.get_edge(edges[2]).unwrap().last_node(), nodes[0]);
 }
 #[test]
+fn first_supermesh_vertex_creates_three_native_fan_triangles() {
+    let allocator = Handle::new(Default::default());
+    let mesh = Handle::new(Mesh::new(&allocator, 4));
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    delaun
+        .build_super_fan([0., 0., 2., 2.], Xy::new(1., 1.))
+        .unwrap();
+    assert_eq!(mesh.nb_nodes(), 4);
+    assert_eq!(mesh.nb_links(), 6);
+    assert_eq!(mesh.elements_of_domain().extent(), 3);
+}
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();

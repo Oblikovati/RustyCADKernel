@@ -30,6 +30,20 @@ pub fn super_mesh_case(v: &[i32]) {
     }
     println!();
 }
+pub fn super_fan_case(v: &[i32]) {
+    print!("OK ");
+    if let Err(error) = report_super_fan(v) {
+        print!("{}", error.exception_type());
+    }
+    println!();
+}
+fn report_super_fan(v: &[i32]) -> Result<(), Failure> {
+    let allocator = Handle::new(Default::default());
+    let mesh = Handle::new(Mesh::new(&allocator, 4));
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false)?;
+    delaun.build_super_fan([0., 0., 2., 2.], Xy::new(f64::from(v[0]), f64::from(v[1])))?;
+    polygon_mesh_snapshot(&delaun)
+}
 fn report_super_mesh(v: &[i32]) -> Result<(), Failure> {
     let allocator = Handle::new(Default::default());
     let mesh = Handle::new(Mesh::new(&allocator, 3));
