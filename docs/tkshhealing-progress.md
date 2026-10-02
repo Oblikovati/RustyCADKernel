@@ -147,6 +147,7 @@ public member has an api row:
 | ShapeAnalysis_WireOrder | `ShapeAnalysisWireOrder` | `sh_wireorder` |
 | ShapeAnalysis_FreeBoundData | `ShapeAnalysisFreeBoundData` | `sh_fbdata` |
 | ShapeFix_Root | trait `FixRoot`, `FixRootData`, `ShapeFixRoot`, `need_fix` | `sh_fixroot` |
+| ShapeFix_Shape | `ShapeFixShape` (unchanged-shape path) | `shape_build_reshape` |
 | ShapeFix_ShapeTolerance | `ShapeFixShapeTolerance` | `sh_fixtol` |
 | ShapeFix_EdgeConnect | `ShapeFixEdgeConnect` | `sh_edgeconnect` |
 
@@ -197,18 +198,19 @@ members belong to the classes not ported.
 
 ## GoogleTest suites
 
-The toolkit test inventory now maps two complete suites (23 declarations):
+The toolkit test inventory now maps three complete suites (27 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
 | ShapeAnalysis_Edge_Test.cxx | shape_analysis_edge | 5 |
 | ShapeFix_EdgeConnect_Test.cxx | shape_fix_edge_connect | 18 |
+| ShapeBuild_ReShape_Test.cxx | shape_build_reshape | 4 |
 
-Both translations retain the original builders, geometry, assertions and tolerances.
-The edge-analysis suite uses TKPrim's Rust box maker as a test dependency. Ten of the
-12 upstream suites remain unmapped. ShapeBuild_ReShape_Test.cxx still needs
-ShapeFix_Shape for its repeated-healing regression; its other three cases remain as
-supplemental behavior tests. TKPrim is now available.
+These translations retain the original builders, geometry, assertions and tolerances.
+The box stability regression now exercises ShapeFix_Shape's unchanged-shape path over
+five repeated calls. This is a narrow production slice: the solid, shell, face, wire and
+edge fixing stages still depend on their not-yet-ported child tools. Nine of the 12
+upstream suites remain unmapped.
 
 ## Verification
 

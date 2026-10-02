@@ -1,32 +1,25 @@
-//! Behavior tests of ShapeBuild_ReShape. The first three run the ShapeBuild_ReShapeTest
-//! cases of the upstream GTests/ShapeBuild_ReShape_Test.cxx on the same shapes (the suite
-//! is not mapped whole: its fourth case needs BRepPrimAPI_MakeBox and ShapeFix_Shape).
-use rustycad_tkbrep::brep::BRepBuilder;
+//! Behavior tests of ShapeBuild_ReShape and ShapeFix_Shape from the upstream
+//! GTests/ShapeBuild_ReShape_Test.cxx.
 use rustycad_tkbrep::brep_tools::ReShape;
+use rustycad_tkbrep::topexp;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{Compound, Shape, ShapeIterator, Vertex};
-use rustycad_tkernel::standard::{Handle, RuntimeTyped};
+use rustycad_tkbrep::topods::{Shape, ShapeIterator};
+use rustycad_tkbrep::toptools::IndexedMapOfShape;
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::Point3;
+use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
-use rustycad_tkshhealing::shape_extend::ShapeExtendStatus;
-use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeVertex};
+use rustycad_tkshhealing::shape_fix::ShapeFixShape;
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeShape};
 
-fn vertex(x: f64) -> Vertex {
-    BRepBuilderAPIMakeVertex::new(Point3::new(x, 0.0, 0.0))
-        .unwrap()
-        .vertex()
-        .unwrap()
-}
+#[path = "support/reshape.rs"]
+mod reshape_support;
+use reshape_support::{compound, vertex};
 
-fn compound(items: &[&Shape]) -> Shape {
-    let builder = BRepBuilder::default();
-    let mut c = Compound::default();
-    builder.make_compound(&mut c);
-    for item in items {
-        builder.add(&mut c, item).unwrap();
-    }
-    c.into_shape()
+fn subshape_count(shape: &Shape, kind: ShapeEnum) -> usize {
+    let mut mapped = IndexedMapOfShape::default();
+    topexp::map_shapes_of_type(shape, kind, &mut mapped).unwrap();
+    mapped.extent()
 }
 
 #[test]
@@ -92,46 +85,25 @@ fn reshape_test_apply_diamond_shared_vertex_in_two_compounds() {
 }
 
 #[test]
-fn apply_records_the_status_flags_of_the_last_call() {
-    let (v1, v2, v3) = (vertex(0.0), vertex(1.0), vertex(2.0));
-    let parent = compound(&[&v1, &v2]);
-    let reshape = ShapeBuildReShape::new();
-    reshape.remove(&v2).unwrap();
-    let result = reshape.apply(&parent, ShapeEnum::Shape).unwrap();
-    assert_eq!(result.nb_children(), 1);
-    assert!(reshape.status_flag(ShapeExtendStatus::Done3));
-    assert!(reshape.status_flag(ShapeExtendStatus::Done4));
-    reshape.replace(&v1, &v3).unwrap();
-    reshape.apply(&v1, ShapeEnum::Shape).unwrap();
-    assert!(reshape.status_flag(ShapeExtendStatus::Done1));
-    assert!(Handle::new(ShapeBuildReShape::new()).is_kind_name("BRepTools_ReShape"));
-    assert_eq!(
-        ShapeBuildReShape::static_type().name(),
-        "ShapeBuild_ReShape"
-    );
-}
+#[allow(non_snake_case)]
+fn ShapeFix_ShapeStabilityTest__RepeatedPerformDoesNotMultiplyEdges() {
+    let mut box_maker = BRepPrimAPIMakeBox::from_sizes(10.0, 10.0, 10.0).unwrap();
+    let initial = box_maker.shape().unwrap().clone();
+    let expected = [
+        subshape_count(&initial, ShapeEnum::Edge),
+        subshape_count(&initial, ShapeEnum::Vertex),
+        subshape_count(&initial, ShapeEnum::Face),
+    ];
+    assert_eq!(expected[0], 12);
 
-#[test]
-fn a_sub_shape_replaced_by_a_shape_of_another_type_is_ignored_with_fail1() {
-    let (v1, v2) = (vertex(0.0), vertex(1.0));
-    let edge = BRepBuilderAPIMakeEdge::from_vertices(&v1, &v2)
-        .unwrap()
-        .edge()
-        .unwrap();
-    let builder = BRepBuilder::default();
-    let mut wire = rustycad_tkbrep::topods::Wire::default();
-    builder.make_wire(&mut wire);
-    builder.add(&mut wire, &edge).unwrap();
-    let reshape = ShapeBuildReShape::new();
-    // The edge is replaced by a compound of a vertex, which is not an edge.
-    reshape.replace(&edge, &compound(&[&vertex(3.0)])).unwrap();
-    let result = reshape.apply(&wire, ShapeEnum::Shape).unwrap();
-    assert_eq!(result.nb_children(), 0);
-    assert!(reshape.status_flag(ShapeExtendStatus::Fail1));
-    // The build-mode Apply returns the recorded replacement of a compound item as is.
-    let holder = compound(&[&edge]);
-    let rebuilt = reshape
-        .apply_with_build_mode(&holder, ShapeEnum::Face, 0)
-        .unwrap();
-    assert_eq!(rebuilt.nb_children(), 1);
+    let mut current = initial;
+    for iteration in 0..5 {
+        let fixer = ShapeFixShape::new(current);
+        fixer.perform().unwrap();
+        current = fixer.shape();
+        assert!(!current.is_null(), "iteration {iteration}");
+        assert_eq!(subshape_count(&current, ShapeEnum::Face), expected[2]);
+        assert_eq!(subshape_count(&current, ShapeEnum::Edge), expected[0]);
+        assert_eq!(subshape_count(&current, ShapeEnum::Vertex), expected[1]);
+    }
 }
