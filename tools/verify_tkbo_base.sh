@@ -12,4 +12,11 @@ for suite in options progress; do
     -lTKBO -lTKernel -o "target/tkbo-base-oracle/$suite"
   "target/tkbo-base-oracle/$suite"
 done
-cargo test --locked -p rustycad-tkbo --test bop_algo_options --test bop_algo_progress
+for suite in brep_algo_base brep_algo_builder; do
+  "${CXX:-c++}" -std=c++17 -I"$occt_build/include/opencascade" \
+    "tools/oracle/tkbo_${suite}.cxx" -L"$occt_lib" -Wl,-rpath,"$occt_lib" \
+    -lTKBO -lTKTopAlgo -lTKBRep -lTKernel -o "target/tkbo-base-oracle/$suite"
+  "target/tkbo-base-oracle/$suite"
+done
+cargo test --locked -p rustycad-tkbo --test bop_algo_options --test bop_algo_progress \
+  --test bop_algo_enums --test brep_algo_api_algo --test brep_algo_api_builder_algo
