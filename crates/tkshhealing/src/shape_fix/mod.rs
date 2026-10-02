@@ -5,11 +5,13 @@
 //! docs/tkshhealing-progress.md lists the ported classes.
 mod edge_connect;
 mod root;
+mod shape;
 mod shape_tolerance;
 
 pub use edge_connect::ShapeFixEdgeConnect;
 pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
+pub use shape::ShapeFixShape;
 pub use shape_tolerance::ShapeFixShapeTolerance;
 
 mod wire_segment;
-pub use wire_segment::{ShapeFixWireSegment,WirePatchIndex};
+pub use wire_segment::{ShapeFixWireSegment, WirePatchIndex};
