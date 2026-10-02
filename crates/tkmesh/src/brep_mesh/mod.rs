@@ -2,6 +2,9 @@
 mod shape_tool;
 pub use shape_tool::ShapeTool;
 
+mod incremental_mesh;
+pub use incremental_mesh::BRepMeshIncrementalMesh;
+
 mod model_builder;
 mod shape_visitor;
 pub use model_builder::BRepMeshModelBuilder;
