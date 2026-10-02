@@ -125,6 +125,24 @@ pub fn create_triangles_case() {
     }
     println!();
 }
+pub fn insert_vertex_case() {
+    let mesh = fixture::mesh(0, 0);
+    let vertex = mesh
+        .add_node(&Vertex::from_uv(1., 0.5, Freedom::Free), true)
+        .unwrap();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    print!("OK ");
+    if let Err(error) = delaun
+        .init_circles_tool(8, 8)
+        .and_then(|()| delaun.insert_vertices_probe(&mut [vertex]))
+    {
+        print!("{} ", error.exception_type());
+    }
+    if let Err(error) = polygon_mesh_snapshot(&delaun) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
 fn report_center_left_polygon(values: &[i32]) {
     let mesh = fixture::polygon_mesh_with_center();
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();

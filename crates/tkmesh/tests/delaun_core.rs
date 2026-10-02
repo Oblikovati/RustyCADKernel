@@ -332,6 +332,20 @@ fn create_triangles_fans_an_interior_vertex_across_a_convex_boundary() {
 }
 
 #[test]
+fn batch_insertion_replaces_the_containing_circumcircle_cavity() {
+    let mesh = fixture::mesh(0, 0);
+    let vertex = mesh
+        .add_node(&Vertex::from_uv(1., 0.5, Freedom::Free), true)
+        .unwrap();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    delaun.init_circles_tool(8, 8).unwrap();
+
+    delaun.insert_vertices_probe(&mut [vertex]).unwrap();
+
+    assert_eq!(delaun.result().elements_of_domain().extent(), 4);
+}
+
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();

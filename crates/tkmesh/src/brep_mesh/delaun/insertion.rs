@@ -52,7 +52,7 @@ impl BRepMeshDelaun {
         Ok(())
     }
 
-    fn create_triangles(
+    pub(super) fn create_triangles(
         &mut self,
         vertex: i32,
         polygon: &mut DataMap<i32, bool>,
