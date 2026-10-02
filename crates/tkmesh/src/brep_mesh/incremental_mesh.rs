@@ -1,6 +1,7 @@
 //! Incremental mesh entry point for supported planar boundary meshes.
 use super::{
-    BRepMeshEdgeDiscret, BRepMeshModelBuilder, planar_face_discret::BRepMeshPlanarFaceDiscret,
+    BRepMeshEdgeDiscret, BRepMeshModelBuilder, BRepMeshModelHealer, BRepMeshModelPostProcessor,
+    BRepMeshModelPreProcessor, planar_face_discret::BRepMeshPlanarFaceDiscret,
 };
 use crate::imesh_data::MeshModel;
 use crate::imesh_tools::{MeshParameters, ModelAlgo, ModelBuilder};
@@ -39,8 +40,17 @@ impl BRepMeshIncrementalMesh {
         if !BRepMeshEdgeDiscret::new().perform(&model, parameters, range) {
             return Err(unsupported_shape(shape));
         }
+        if !BRepMeshModelHealer::new().perform(&model, parameters, range) {
+            return Err(unsupported_shape(shape));
+        }
+        if !BRepMeshModelPreProcessor::new().perform(&model, parameters, range) {
+            return Err(unsupported_shape(shape));
+        }
         let mesher = BRepMeshPlanarFaceDiscret::new();
         if !mesher.perform(&model, parameters, range) {
+            return Err(unsupported_shape(shape));
+        }
+        if !BRepMeshModelPostProcessor::new().perform(&model, parameters, range) {
             return Err(unsupported_shape(shape));
         }
         Ok(())
