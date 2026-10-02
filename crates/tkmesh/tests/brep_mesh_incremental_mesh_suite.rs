@@ -3,7 +3,7 @@
 use rustycad_tkbrep::{
     brep::BRepTool,
     topexp::Explorer,
-    topods::{self, Wire},
+    topods::{self, Builder, Compound, Shape, Wire},
 };
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -152,6 +152,7 @@ fn BRepMesh_IncrementalMeshTest__OCC32692_UnboundedCylinderFaceReportsFailure() 
         &MeshParameters {
             deflection: 0.01,
             angle: 0.5,
+            in_parallel: true,
             ..Default::default()
         },
         &ProgressRange::default(),
@@ -213,6 +214,41 @@ fn BRepMesh_IncrementalMeshTest__OCC30234_ZeroLengthFreeEdgeHasNoTriangles() {
             .map(|failure| failure.exception_type().to_string())
             .unwrap_or_default()
     );
+    assert_zero_length_edge_has_no_face_mesh(&shape);
+}
+
+#[test]
+fn BRepMesh_IncrementalMeshTest__OCC31125_EmptyCompoundDoesNotCrash() {
+    let mut empty_compound = Compound::default();
+    Builder.make_compound(&mut empty_compound);
+    let parameters = MeshParameters {
+        deflection: 1.0,
+        ..Default::default()
+    };
+    BRepMeshIncrementalMesh::with_parameters(
+        &empty_compound,
+        &parameters,
+        &ProgressRange::default(),
+    )
+    .expect("empty compound meshing should not throw");
+}
+
+fn assert_zero_length_edge_has_no_face_mesh(shape: &Shape) {
+    let mut faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
+    let mut node_count = 0;
+    let mut triangle_count = 0;
+    while faces.more() {
+        let face = topods::face(faces.current()).unwrap();
+        let triangulation = BRepTool::triangulation(&face, mesh_purpose::NONE)
+            .unwrap()
+            .0;
+        assert!(!triangulation.is_null());
+        node_count += triangulation.nb_nodes();
+        triangle_count += triangulation.nb_triangles();
+        faces.next().unwrap();
+    }
+    assert_eq!(node_count, 0);
+    assert_eq!(triangle_count, 0);
 }
 
 fn planar_regression_points() -> [Point3; 8] {
