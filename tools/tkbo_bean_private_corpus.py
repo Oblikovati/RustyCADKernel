@@ -29,3 +29,26 @@ def line_plane_requests() -> list[str]:
         values = [*origin, *direction, height, reverse, *bounds, *tolerances]
         rows.append("bean_line_plane " + " ".join(map(str, values)))
     return rows
+
+
+def fast_analytic_requests() -> list[str]:
+    """Cover supported analytic type pairs and each strict distance boundary."""
+    rows = []
+    origins = [(0, 0, 0), (0.5, 0, 1), (3, 4, 0)]
+    directions = [((0, 0, 1), (0, 0, 1)), ((0, 0, 1), (0, 0, -1)),
+                  ((0, 0, 1), (1, 0, 0)), ((1, 0, 0), (0, 0, 1))]
+    radii = [(0.25, 0.25), (1.0, 1.0), (2.0, 0.5)]
+    for curve_kind, surface_kind, origin_index, direction_pair, radius_pair, criteria in product(
+        range(8), range(3), range(len(origins)), directions, radii, [0.0, 1e-7],
+    ):
+        curve_origin = origins[origin_index]
+        surface_origin = origins[(origin_index + surface_kind) % len(origins)]
+        curve_direction, surface_direction = direction_pair
+        curve_radius, surface_radius = radius_pair
+        first, last = (-0.75, 1.25) if curve_kind == 0 else (0.0, 1.0)
+        values = [
+            curve_kind, surface_kind, *curve_origin, *curve_direction, curve_radius,
+            *surface_origin, *surface_direction, surface_radius, first, last, criteria,
+        ]
+        rows.append("bean_fast_analytic " + " ".join(map(str, values)))
+    return rows
