@@ -12,12 +12,20 @@ common-block ordering. Its companion radius-status replay still records 176 unde
 native calls and 32 differences; complete TKBO parity remains false.
 
 BOPDS IndexRange, Pave, Pair, Point, PaveBlock, CommonBlock, CoupleOfPaveBlocks,
-ShapeInfo, FaceInfo and DataStructure add 230 API rows.
+ShapeInfo, FaceInfo and DataStructure add 235 API rows. The DS common-block
+association slice now covers `IsCommonBlock`, `CommonBlock`, `SetCommonBlock`,
+`RealPaveBlock` and `IsCommonBlockOnEdge`, with handle-identity and first-block
+selection checked by a pinned native probe.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered
 interval updates and shrunk-data storage. These additions do not map an original TKBO
 test declaration.
+
+No complete TKBO GoogleTest source beyond `IntTools_FaceFace_Test.cxx` is
+currently feasible from these foundations: the DS-adjacent candidates depend
+on Boolean/Section results or C++-specific type traits. The source inventory
+contains 289 declarations across the other 13 TKBO GTest files, still unmapped.
 
 CommonBlock's four Rust regressions cover native first-block ordering, shared-handle
 identity and mutation, duplicate face indices, empty-list exceptions, and exact Dump

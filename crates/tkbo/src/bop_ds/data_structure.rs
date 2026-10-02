@@ -1,7 +1,7 @@
 //! Shape storage and the ported topology-preparation slice of `BOPDS_DS::Init`.
 use super::{
-    FaceInfo, IndexRange, Pave, PaveBlock, PaveBlockHandle, ShapeInfo, VertexIndexSet,
-    pave_block_handle,
+    CommonBlockHandle, FaceInfo, IndexRange, Pave, PaveBlock, PaveBlockHandle, ShapeInfo,
+    VertexIndexSet, pave_block_handle,
 };
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, Vertex};
@@ -12,6 +12,7 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tktopalgo::brep_bnd_lib::BRepBndLib;
 use std::collections::HashMap;
+use std::sync::Arc;
 
 /// The shape and argument storage shared by Boolean operation algorithms.
 /// `let mut ds = DataStructure::default(); ds.append_shape(shape);`.
@@ -23,6 +24,7 @@ pub struct DataStructure {
     shape_indices: Option<DataMap<Shape, i32, ShapeMapHasher>>,
     vertex_edges: DataMap<i32, Vec<i32>>,
     pave_blocks_pool: Vec<Vec<PaveBlockHandle>>,
+    pave_block_common_blocks: Vec<(PaveBlockHandle, CommonBlockHandle)>,
     face_info_pool: Vec<FaceInfo>,
     source_shape_count: i32,
 }
@@ -209,6 +211,55 @@ impl DataStructure {
         Ok(&mut self.pave_blocks_pool[slot])
     }
 
+    /// Tests whether this exact pave-block handle has common-block metadata.
+    /// `ds.is_common_block(&block)`.
+    pub fn is_common_block(&self, block: &PaveBlockHandle) -> bool {
+        self.common_block_entry(block).is_some()
+    }
+
+    /// Clones common-block metadata for this exact pave-block handle, if present.
+    /// `let group = ds.common_block(&block);`.
+    pub fn common_block(&self, block: &PaveBlockHandle) -> Option<CommonBlockHandle> {
+        self.common_block_entry(block)
+            .map(|(_, common)| Arc::clone(common))
+    }
+
+    /// Associates a pave-block handle with common-block metadata; `ds.set_common_block(&pb, cb)`.
+    pub fn set_common_block(&mut self, block: &PaveBlockHandle, common: &CommonBlockHandle) {
+        if let Some((_, existing)) = self.common_block_entry_mut(block) {
+            *existing = Arc::clone(common);
+            return;
+        }
+        self.pave_block_common_blocks
+            .push((Arc::clone(block), Arc::clone(common)));
+    }
+
+    /// Returns the common block's first pave block, or `block` when ungrouped.
+    /// `let real = ds.real_pave_block(&block);`.
+    pub fn real_pave_block(&self, block: &PaveBlockHandle) -> Result<PaveBlockHandle, Failure> {
+        let Some(common) = self.common_block(block) else {
+            return Ok(Arc::clone(block));
+        };
+        let common = common
+            .lock()
+            .expect("common-block lock must not be poisoned");
+        Ok(Arc::clone(common.pave_block1()?))
+    }
+
+    /// Reports whether this block belongs to a common group with multiple blocks.
+    /// `ds.is_common_block_on_edge(&block)`.
+    pub fn is_common_block_on_edge(&self, block: &PaveBlockHandle) -> bool {
+        let Some(common) = self.common_block(block) else {
+            return false;
+        };
+        common
+            .lock()
+            .expect("common-block lock must not be poisoned")
+            .pave_blocks()
+            .len()
+            > 1
+    }
+
     /// Clears arguments and all currently implemented DS storage.
     /// `ds.clear(); assert_eq!(ds.nb_shapes(), 0);`.
     pub fn clear(&mut self) {
@@ -217,6 +268,7 @@ impl DataStructure {
         self.lines.clear();
         self.vertex_edges.clear(false);
         self.pave_blocks_pool.clear();
+        self.pave_block_common_blocks.clear();
         self.face_info_pool.clear();
         self.source_shape_count = 0;
         if let Some(indices) = &mut self.shape_indices {
@@ -228,6 +280,24 @@ impl DataStructure {
         self.shape_indices
             .get_or_insert_with(|| DataMap::with_hasher(ShapeMapHasher, 100))
             .bind(shape.clone(), index);
+    }
+
+    fn common_block_entry(
+        &self,
+        block: &PaveBlockHandle,
+    ) -> Option<&(PaveBlockHandle, CommonBlockHandle)> {
+        self.pave_block_common_blocks
+            .iter()
+            .find(|(candidate, _)| Arc::ptr_eq(candidate, block))
+    }
+
+    fn common_block_entry_mut(
+        &mut self,
+        block: &PaveBlockHandle,
+    ) -> Option<&mut (PaveBlockHandle, CommonBlockHandle)> {
+        self.pave_block_common_blocks
+            .iter_mut()
+            .find(|(candidate, _)| Arc::ptr_eq(candidate, block))
     }
 
     fn append_unindexed_arguments(&mut self) -> Result<(), Failure> {

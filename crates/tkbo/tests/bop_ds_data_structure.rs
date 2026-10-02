@@ -1,5 +1,8 @@
 //! Exact storage and source-vertex initialization behavior of BOPDS_DS.
-use rustycad_tkbo::bop_ds::{DataStructure, IndexRange, ShapeInfo};
+use rustycad_tkbo::bop_ds::{
+    CommonBlock, DataStructure, IndexRange, PaveBlock, ShapeInfo, common_block_handle,
+    pave_block_handle,
+};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::Wire;
 use rustycad_tkbrep::topods::{Compound, Edge, Shape, Vertex};
@@ -213,6 +216,57 @@ fn change_pave_blocks_repeats_single_circle_vertex_at_both_period_bounds() {
     let circle = circle_seam_edge();
     assert_single_vertex_seam_paves(circle.clone());
     assert_single_vertex_seam_paves(circle.reversed());
+}
+
+#[test]
+fn common_block_associations_use_handle_identity_and_native_first_block() {
+    let first = block_for_edge(8);
+    let real = block_for_edge(3);
+    let unrelated = block_for_edge(3);
+    let mut group = CommonBlock::default();
+    group.set_pave_blocks(&[first.clone(), real.clone()]);
+    let group = common_block_handle(group);
+    let mut structure = DataStructure::default();
+
+    assert!(!structure.is_common_block(&first));
+    assert!(structure.common_block(&first).is_none());
+    assert!(std::sync::Arc::ptr_eq(
+        &structure.real_pave_block(&first).unwrap(),
+        &first
+    ));
+    structure.set_common_block(&first, &group);
+    structure.set_common_block(&real, &group);
+
+    assert!(structure.is_common_block(&first));
+    assert!(structure.is_common_block(&real));
+    assert!(!structure.is_common_block(&unrelated));
+    assert!(structure.is_common_block_on_edge(&first));
+    assert!(std::sync::Arc::ptr_eq(
+        &structure.common_block(&first).unwrap(),
+        &group
+    ));
+    assert!(std::sync::Arc::ptr_eq(
+        &structure.real_pave_block(&first).unwrap(),
+        &real
+    ));
+
+    let mut replacement_group = CommonBlock::default();
+    replacement_group.set_pave_blocks(std::slice::from_ref(&first));
+    let replacement = common_block_handle(replacement_group);
+    structure.set_common_block(&first, &replacement);
+    assert!(std::sync::Arc::ptr_eq(
+        &structure.common_block(&first).unwrap(),
+        &replacement
+    ));
+    assert!(!structure.is_common_block_on_edge(&first));
+    structure.clear();
+    assert!(!structure.is_common_block(&first));
+}
+
+fn block_for_edge(edge: i32) -> rustycad_tkbo::bop_ds::PaveBlockHandle {
+    let mut block = PaveBlock::default();
+    block.set_original_edge(edge);
+    pave_block_handle(block)
 }
 
 fn circle_seam_edge() -> Shape {

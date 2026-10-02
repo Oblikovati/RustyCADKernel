@@ -12,6 +12,9 @@ pub struct CommonBlock {
     tolerance: f64,
 }
 
+/// Shared ownership mirrors an OCCT handle to `BOPDS_CommonBlock`.
+pub type CommonBlockHandle = Arc<Mutex<CommonBlock>>;
+
 impl CommonBlock {
     /// Creates an empty group; `CommonBlock::default().tolerance() == 0.0`.
     pub fn new() -> Self {
@@ -183,6 +186,11 @@ impl CommonBlock {
 
 /// Allocates one mutable shared pave-block handle; `pave_block_handle(PaveBlock::default())`.
 pub fn pave_block_handle(block: PaveBlock) -> PaveBlockHandle {
+    Arc::new(Mutex::new(block))
+}
+
+/// Allocates one mutable shared common-block handle.
+pub fn common_block_handle(block: CommonBlock) -> CommonBlockHandle {
     Arc::new(Mutex::new(block))
 }
 

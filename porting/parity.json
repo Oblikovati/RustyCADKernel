@@ -216099,41 +216099,41 @@
       "upstream_id": "BOPDS_DS::IsCommonBlock(const occ::handle<BOPDS_PaveBlock>&) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::is_common_block",
+      "status": "implemented",
+      "notes": "Tests common-block association by shared pave-block handle identity."
     },
     {
       "upstream_id": "BOPDS_DS::CommonBlock(const occ::handle<BOPDS_PaveBlock>&) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::common_block",
+      "status": "implemented",
+      "notes": "Returns the common-block handle associated with the identical pave-block handle, or None."
     },
     {
       "upstream_id": "BOPDS_DS::SetCommonBlock(const occ::handle<BOPDS_PaveBlock>&,const occ::handle<BOPDS_CommonBlock>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::set_common_block",
+      "status": "implemented",
+      "notes": "Binds or replaces common-block metadata by pave-block handle identity."
     },
     {
       "upstream_id": "BOPDS_DS::RealPaveBlock(const occ::handle<BOPDS_PaveBlock>&) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::real_pave_block",
+      "status": "implemented",
+      "notes": "Returns the first block in the associated common block, or the input handle when ungrouped; propagates the empty-list failure from PaveBlock1."
     },
     {
       "upstream_id": "BOPDS_DS::IsCommonBlockOnEdge(const occ::handle<BOPDS_PaveBlock>&) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::is_common_block_on_edge",
+      "status": "implemented",
+      "notes": "Reports whether the associated common block contains multiple pave blocks."
     },
     {
       "upstream_id": "BOPDS_DS::FaceInfoPool() const",
