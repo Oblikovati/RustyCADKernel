@@ -161,6 +161,51 @@ pub fn insert_vertex_case(values: &[i32]) {
     }
     println!();
 }
+pub fn perform_case(values: &[i32]) {
+    let allocator = Handle::new(Default::default());
+    let mesh = Handle::new(Mesh::new(&allocator, 8));
+    let points = perform_points(values[0]);
+    let mut indices = perform_vertices(&mesh, &points);
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    report_perform(&mut delaun, &mut indices);
+}
+fn perform_points(mode: i32) -> Vec<Xy> {
+    match mode {
+        1 => vec![Xy::new(0., 0.), Xy::new(2., 0.), Xy::new(0., 2.)],
+        2 => vec![
+            Xy::new(0., 0.),
+            Xy::new(2., 0.),
+            Xy::new(2., 2.),
+            Xy::new(0., 2.),
+        ],
+        _ => vec![
+            Xy::new(0., 0.),
+            Xy::new(2., 0.),
+            Xy::new(2., 2.),
+            Xy::new(0., 2.),
+            Xy::new(1., 1.),
+        ],
+    }
+}
+fn perform_vertices(mesh: &Handle<Mesh>, points: &[Xy]) -> Vec<i32> {
+    points
+        .iter()
+        .map(|point| {
+            mesh.add_node(&Vertex::new(*point, 0, Freedom::Free), true)
+                .unwrap()
+        })
+        .collect()
+}
+fn report_perform(delaun: &mut Delaun, indices: &mut [i32]) {
+    print!("OK ");
+    if let Err(error) = delaun.triangulate_vertices_probe(indices) {
+        print!("{} ", error.exception_type());
+    }
+    if let Err(error) = polygon_mesh_snapshot(delaun) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
 fn report_center_left_polygon(values: &[i32]) {
     let mesh = fixture::polygon_mesh_with_center();
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();

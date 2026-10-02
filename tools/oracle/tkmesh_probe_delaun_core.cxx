@@ -154,6 +154,13 @@ void mesh_delaun_insert_vertex(std::istream&input){
  IMeshData::VectorOfInteger vertices((int)points.size());for(auto&point:points)vertices.Append(mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true));
  BRepMesh_Delaun delaun(mesh,-1,-1,false);delaun.InitCirclesTool(8,8);delaun.AddVertices(vertices,Message_ProgressRange());std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
 }
+void mesh_delaun_perform(std::istream&input){
+ int mode;input>>mode;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
+ occ::handle<BRepMesh_DataStructureOfDelaun>mesh=new BRepMesh_DataStructureOfDelaun(arena,8);
+ std::vector<gp_XY>points;if(mode==1)points={gp_XY(0,0),gp_XY(2,0),gp_XY(0,2)};else if(mode==2)points={gp_XY(0,0),gp_XY(2,0),gp_XY(2,2),gp_XY(0,2)};else points={gp_XY(0,0),gp_XY(2,0),gp_XY(2,2),gp_XY(0,2),gp_XY(1,1)};
+ IMeshData::VectorOfInteger vertices((int)points.size());for(auto&point:points)vertices.Append(mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true));
+ BRepMesh_Delaun delaun(mesh,vertices);std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
+}
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
  occ::handle<BRepMesh_DataStructureOfDelaun>mesh=new BRepMesh_DataStructureOfDelaun(arena,8);
