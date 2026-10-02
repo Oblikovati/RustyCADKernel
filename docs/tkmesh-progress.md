@@ -129,7 +129,7 @@ declarations; overall mapping is 7,215/8,648 GoogleTest declaration candidates.
 ### Populated-mesh Delaun predicates
 
 The existing-mesh Delaun core adds audited API rows, including exact
-`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,159 exact
+`BRepMesh_Delaun::UseEdge(int)` behavior. Its focused oracle passes 2,189 exact
 populated-mesh cases and reports 80 native-crash/Rust-error divergences separately;
 nine supplemental null-mesh divergences remain outside that corpus. Supermesh bounds, first-vertex fan creation, native insertion ordering and frontier
 reachability (20 exact native queries) are included; cavity deletion, multi-vertex
