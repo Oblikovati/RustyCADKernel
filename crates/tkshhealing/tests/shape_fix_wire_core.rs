@@ -1,7 +1,7 @@
 //! Pinned OCCT ShapeFix_Wire reorder and gap-pass observations.
 use rustycad_tkbrep::{
     topexp::Explorer,
-    topods::{self, ShapeIterator},
+    topods::{self, Builder, ShapeIterator, Wire},
 };
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -15,6 +15,10 @@ use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
 #[test]
 fn empty_check_order_and_fix_reorder_keep_native_empty_state() {
+    let mut empty_wire = Wire::default();
+    Builder.make_wire(&mut empty_wire);
+    assert!(!empty_wire.is_null());
+    assert_eq!(empty_wire.shape_type().unwrap(), ShapeEnum::Wire);
     let (analyzer, mut order) = empty_wire_order();
     assert_empty_order(&analyzer, &mut order);
     assert_empty_fixer(&analyzer, &order);

@@ -814,10 +814,20 @@ edges, replaces the original edges with split wires in the shared context, and r
 reorder. Its focused bowtie test checks the native six-edge sequence, UV endpoints,
 parameter ranges, crossing vertex identity/tolerance, context records, and DONE1/DONE5.
 The native `ShapeFix_ShapeTest.*` oracle suite is green 7/7. The full ShapeFix_Shape
-source still remains unmapped: Rust face construction currently yields reversed outer
-wire edge orientations for this fixture while the pinned native face wire is forward,
-and this narrow method does not yet implement non-line p-curves, competing crossings,
-FixLoopWire face splitting, or the full prism-shell context walk.
+source still remains unmapped. Native and Rust raw face construction both produce a
+forward face, reversed outer wire, and forward raw edges. The remaining classifier
+difference is unstable signed-area rounding at the self-crossing contour. A proposed
+near-zero-area classifier fallback changed MakeFace's wire orientation and broke the
+already green wire-pcurve parity test, so it was removed. FixLoopWire face splitting
+and the full prism-shell context walk remain unimplemented.
+
+`ShapeFix_Shape` now exposes the native precision/minimum/maximum tolerance methods and
+aggregate status query. Focused Rust source tests cover the valid box, valid compound,
+and tolerance declarations; they pass alongside the existing empty-wire and six-box-wire
+parity tests for OCC25014 and OCC24881. The filtered native source gate remains green at
+7/7, and the Rust TKShHealing crate suite passes. These are implementation slices only:
+all seven `ShapeFix_Shape_Test.cxx` declarations remain unmapped until the bowtie cap
+becomes two faces and the reshape is propagated through the prism shell.
 
 `ShapeBuild_Edge::CopyReplaceVertices` and the p-curve update tail are now available as
 `ShapeBuildEdge::copy_replace_vertices_with_pcurve_range`. It copies the original edge,

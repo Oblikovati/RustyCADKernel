@@ -4,6 +4,7 @@
 //! The no-change path of `ShapeFix_Shape` for already valid shapes.
 use super::{FixRoot, FixRootData};
 use crate::shape_build::ShapeBuildReShape;
+use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::impl_transient;
@@ -24,6 +25,7 @@ pub struct ShapeFixShape {
     parent: StandardTransient,
     root: FixRootData,
     result: SharedState<Shape>,
+    status: SharedState<i32>,
 }
 
 impl_transient!(ShapeFixShape, "ShapeFix_Shape", StandardTransient, parent, interfaces: [dyn FixRoot]);
@@ -56,6 +58,7 @@ impl ShapeFixShape {
             }
         });
         *self.result.write() = shape;
+        *self.status.write() = 0;
     }
 
     /// `Perform()`: apply the context and report no internal fix in this supported path;
@@ -68,6 +71,7 @@ impl ShapeFixShape {
     /// assert!(!fixer.perform().unwrap());
     /// ```
     pub fn perform(&self) -> Result<bool, Failure> {
+        *self.status.write() = 0;
         let (input, context) = self
             .root
             .with(|fields| (fields.shape.clone(), fields.context.clone()));
@@ -91,6 +95,48 @@ impl ShapeFixShape {
     /// ```
     pub fn shape(&self) -> Shape {
         self.result.read().clone()
+    }
+
+    /// `Status(status)`: query the aggregate status of the last `Perform()`;
+    /// `!fixer.status(ShapeExtendStatus::Fail)`.
+    pub fn status(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(*self.status.read(), status)
+    }
+
+    /// `SetPrecision(preci)`: delegate the root precision update;
+    /// `fixer.set_precision(0.01)`.
+    pub fn set_precision(&self, precision: f64) {
+        FixRoot::set_precision(self, precision);
+    }
+
+    /// `Precision()`: return the root precision;
+    /// `fixer.precision()`.
+    pub fn precision(&self) -> f64 {
+        FixRoot::precision(self)
+    }
+
+    /// `SetMinTolerance(tol)`: update the minimum root tolerance;
+    /// `fixer.set_min_tolerance(0.001)`.
+    pub fn set_min_tolerance(&self, tolerance: f64) {
+        FixRoot::set_min_tolerance(self, tolerance);
+    }
+
+    /// `MinTolerance()`: return the minimum root tolerance;
+    /// `fixer.min_tolerance()`.
+    pub fn min_tolerance(&self) -> f64 {
+        FixRoot::min_tolerance(self)
+    }
+
+    /// `SetMaxTolerance(tol)`: update the maximum root tolerance;
+    /// `fixer.set_max_tolerance(0.1)`.
+    pub fn set_max_tolerance(&self, tolerance: f64) {
+        FixRoot::set_max_tolerance(self, tolerance);
+    }
+
+    /// `MaxTolerance()`: return the maximum root tolerance;
+    /// `fixer.max_tolerance()`.
+    pub fn max_tolerance(&self) -> f64 {
+        FixRoot::max_tolerance(self)
     }
 }
 
