@@ -8,6 +8,7 @@ from pathlib import Path
 
 from capture_rustdoc_json import (
     LibraryCrate,
+    require_unchanged_inputs,
     validate_capture,
     digest_paths,
     validate_artifact,
@@ -44,12 +45,18 @@ class WorkspaceLibraryTests(unittest.TestCase):
 class RustdocArtifactTests(unittest.TestCase):
     def test_artifact_requires_a_matching_root_and_index(self):
         document = {"root": 0, "index": {"0": {"name": "rustycad_demo"}},
-                    "paths": {}, "format_version": 55}
-        self.assertEqual(validate_rustdoc_json(document, "rustycad_demo"), (55, 1))
+                    "paths": {}, "format_version": 61}
+        self.assertEqual(validate_rustdoc_json(document, "rustycad_demo", 61), (61, 1))
         with self.assertRaisesRegex(ValueError, "lacks fields"):
-            validate_rustdoc_json({"root": "0"}, "rustycad_demo")
+            validate_rustdoc_json({"root": 0}, "rustycad_demo", 61)
         with self.assertRaisesRegex(ValueError, "does not match crate"):
-            validate_rustdoc_json({**document, "index": {"0": {"name": "other"}}}, "rustycad_demo")
+            validate_rustdoc_json({**document, "index": {"0": {"name": "other"}}}, "rustycad_demo", 61)
+
+    def test_artifact_rejects_a_format_version_other_than_the_pin(self):
+        document = {"root": 0, "index": {"0": {"name": "rustycad_demo"}},
+                    "paths": {}, "format_version": 60}
+        with self.assertRaisesRegex(ValueError, "unsupported rustdoc JSON format version 60.*expected 61"):
+            validate_rustdoc_json(document, "rustycad_demo", 61)
 
     def test_artifact_digest_and_schema_are_checked(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -57,32 +64,33 @@ class RustdocArtifactTests(unittest.TestCase):
             artifact = root / "crates/rustycad_demo.json"
             artifact.parent.mkdir()
             artifact.write_text(json.dumps({"root": 0, "index": {"0": {"name": "rustycad_demo"}},
-                                            "paths": {}, "format_version": 55}))
+                                            "paths": {}, "format_version": 61}))
             record = {"artifact": "crates/rustycad_demo.json",
                       "artifact_sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
                       "artifact_bytes": artifact.stat().st_size,
-                      "library_target": "rustycad_demo", "rustdoc_format_version": 55,
+                      "library_target": "rustycad_demo", "rustdoc_format_version": 61,
                       "indexed_items": 1}
-            validate_artifact(root, record)
+            validate_artifact(root, record, 61)
             record["artifact_sha256"] = "stale"
             with self.assertRaisesRegex(ValueError, "missing or changed"):
-                validate_artifact(root, record)
+                validate_artifact(root, record, 61)
 
     def test_capture_rejects_a_missing_workspace_artifact(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             context = {"source": "pinned"}
             manifest = {"raw_capture_complete": True, "normalized_public_inventory": False,
+                        "rustdoc_json_format_version": 61,
                         "inputs": context,
                         "rustdoc_json": [{"library_target": "rustycad_demo",
                                           "artifact": "crates/rustycad_demo.json",
                                           "artifact_sha256": "missing", "artifact_bytes": 10,
-                                          "rustdoc_format_version": 55, "indexed_items": 1}]}
+                                          "rustdoc_format_version": 61, "indexed_items": 1}]}
             (root / "capture-manifest.json").write_text(json.dumps(manifest))
             crate = LibraryCrate("demo-id", "rustycad-demo", root / "Cargo.toml",
                                  "rustycad_demo", root, ())
             with self.assertRaisesRegex(ValueError, "missing or changed"):
-                validate_capture(root, [crate], context)
+                validate_capture(root, [crate], context, 61)
 
     def test_file_fingerprint_changes_when_an_input_changes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -92,6 +100,12 @@ class RustdocArtifactTests(unittest.TestCase):
             original = digest_paths([source], root)
             source.write_text("pub struct OtherShape;\n")
             self.assertNotEqual(original, digest_paths([source], root))
+
+    def test_capture_rejects_inputs_that_change_during_the_run(self):
+        original = {"workspace_inputs_sha256": "before"}
+        changed = {"workspace_inputs_sha256": "after"}
+        with self.assertRaisesRegex(ValueError, "changed during rustdoc capture"):
+            require_unchanged_inputs(original, changed)
 
 
 if __name__ == "__main__":

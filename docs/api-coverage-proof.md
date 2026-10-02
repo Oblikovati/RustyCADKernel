@@ -114,7 +114,8 @@ metadata and captures one JSON artifact for each library target. Cargo's
 records package source and artifact hashes, Cargo metadata/lockfile, Rust
 toolchain versions, active build flags, and configuration file fingerprints.
 It verifies that every workspace package has exactly one library target and
-that every JSON artifact has a valid root and index. In this workspace it
+that every JSON artifact has a valid root, index, and pinned format version 61.
+In this workspace it
 captured all 17 library crates with 96,272 combined indexed items.
 
 Those JSON files are raw compiler outputs, not a normalized public API
