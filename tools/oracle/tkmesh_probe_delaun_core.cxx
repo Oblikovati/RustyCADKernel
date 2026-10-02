@@ -11,7 +11,6 @@ struct DelaunAreaTag{using type=double(BRepMesh_Delaun::*)(const IMeshData::Sequ
 struct DelaunIntersectionTag{using type=BRepMesh_GeomTool::IntFlag(BRepMesh_Delaun::*)(const BRepMesh_Edge&,const BRepMesh_Edge&,bool,bool,gp_Pnt2d&)const;friend type delaun_member(DelaunIntersectionTag);};
 struct DelaunMeshPolygonTag{using type=void(BRepMesh_Delaun::*)(IMeshData::SequenceOfInteger&,IMeshData::SequenceOfBndB2d&,Handle(IMeshData::MapOfInteger));friend type delaun_member(DelaunMeshPolygonTag);};
 struct DelaunSuperMeshTag{using type=void(BRepMesh_Delaun::*)(const Bnd_Box2d&);friend type delaun_member(DelaunSuperMeshTag);};
-struct DelaunCreateTrianglesTag{using type=void(BRepMesh_Delaun::*)(const int,IMeshData::MapOfIntegerInteger&);friend type delaun_member(DelaunCreateTrianglesTag);};
 struct DelaunFrontierReachabilityTag{using type=bool(BRepMesh_Delaun::*)(const int,const int);friend type delaun_member(DelaunFrontierReachabilityTag);};
 struct DelaunCleanupTag{using type=void(BRepMesh_Delaun::*)();friend type delaun_member(DelaunCleanupTag);};
 struct DelaunCheckIntersectionTag{using type=bool(BRepMesh_Delaun::*)(const BRepMesh_Edge&,const IMeshData::SequenceOfInteger&,const IMeshData::SequenceOfBndB2d&,bool,bool,bool,Bnd_B2d&)const;friend type delaun_member(DelaunCheckIntersectionTag);};
@@ -19,12 +18,12 @@ struct DelaunNextPolygonLinkTag{using type=int(BRepMesh_Delaun::*)(const int&,co
 struct DelaunMeshLeftPolygonTag{using type=bool(BRepMesh_Delaun::*)(const int,const bool,Handle(IMeshData::MapOfInteger));friend type delaun_member(DelaunMeshLeftPolygonTag);};
 struct DelaunCleanupPolygonTag{using type=void(BRepMesh_Delaun::*)(const IMeshData::SequenceOfInteger&,const IMeshData::SequenceOfBndB2d&);friend type delaun_member(DelaunCleanupPolygonTag);};
 struct DelaunInsertInternalEdgesTag{using type=void(BRepMesh_Delaun::*)();friend type delaun_member(DelaunInsertInternalEdgesTag);};
+struct DelaunCreateTrianglesTag{using type=void(BRepMesh_Delaun::*)(const int,IMeshData::MapOfIntegerInteger&);friend type delaun_member(DelaunCreateTrianglesTag);};
 template struct DelaunAccess<DelaunWindingTag,&BRepMesh_Delaun::isVertexInsidePolygon>;
 template struct DelaunAccess<DelaunAreaTag,&BRepMesh_Delaun::polyArea>;
 template struct DelaunAccess<DelaunIntersectionTag,&BRepMesh_Delaun::intSegSeg>;
 template struct DelaunAccess<DelaunMeshPolygonTag,&BRepMesh_Delaun::meshPolygon>;
 template struct DelaunAccess<DelaunSuperMeshTag,&BRepMesh_Delaun::superMesh>;
-template struct DelaunAccess<DelaunCreateTrianglesTag,&BRepMesh_Delaun::createTriangles>;
 template struct DelaunAccess<DelaunFrontierReachabilityTag,&BRepMesh_Delaun::isBoundToFrontier>;
 template struct DelaunAccess<DelaunCleanupTag,&BRepMesh_Delaun::cleanupMesh>;
 template struct DelaunAccess<DelaunCheckIntersectionTag,&BRepMesh_Delaun::checkIntersection>;
@@ -32,6 +31,7 @@ template struct DelaunAccess<DelaunNextPolygonLinkTag,&BRepMesh_Delaun::findNext
 template struct DelaunAccess<DelaunMeshLeftPolygonTag,&BRepMesh_Delaun::meshLeftPolygonOf>;
 template struct DelaunAccess<DelaunCleanupPolygonTag,&BRepMesh_Delaun::cleanupPolygon>;
 template struct DelaunAccess<DelaunInsertInternalEdgesTag,&BRepMesh_Delaun::insertInternalEdges>;
+template struct DelaunAccess<DelaunCreateTrianglesTag,&BRepMesh_Delaun::createTriangles>;
 static auto delaun_core_mesh(int kind,int flags){
  occ::handle<NCollection_IncAllocator> arena=new NCollection_IncAllocator;
  occ::handle<BRepMesh_DataStructureOfDelaun> mesh=new BRepMesh_DataStructureOfDelaun(arena,10);
@@ -142,6 +142,11 @@ void mesh_delaun_process_constraints(std::istream&){
  occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;auto mesh=new BRepMesh_DataStructureOfDelaun(arena,8);gp_XY points[]={gp_XY(0,0),gp_XY(2,0),gp_XY(2,2),gp_XY(0,2)};
  for(auto&point:points)mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true);for(auto pair:{std::pair<int,int>{1,2},{2,3},{3,4},{4,1}})mesh->AddLink(BRepMesh_Edge(pair.first,pair.second,BRepMesh_Frontier));
  BRepMesh_Delaun delaun(mesh,-1,-1,false);delaun.ProcessConstraints();std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
+}
+void mesh_delaun_create_triangles(std::istream&){
+ occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;auto mesh=new BRepMesh_DataStructureOfDelaun(arena,8);gp_XY points[]={gp_XY(0,0),gp_XY(2,0),gp_XY(2,2),gp_XY(0,2)};
+ for(auto&point:points)mesh->AddNode(BRepMesh_Vertex(point,0,BRepMesh_Free),true);for(auto pair:{std::pair<int,int>{1,2},{2,3},{3,4},{4,1}})mesh->AddLink(BRepMesh_Edge(pair.first,pair.second,BRepMesh_Free));int center=mesh->AddNode(BRepMesh_Vertex(gp_XY(1,1),0,BRepMesh_Free),true);
+ BRepMesh_Delaun delaun(mesh,-1,-1,false);IMeshData::MapOfIntegerInteger polygon;for(int edge=1;edge<=4;++edge)polygon.Bind(edge,true);(delaun.*delaun_member(DelaunCreateTrianglesTag{}))(center,polygon);std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
 }
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;

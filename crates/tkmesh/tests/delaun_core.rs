@@ -1,6 +1,6 @@
 //! Populated existing-mesh operations that precede Delaunay insertion.
 use rustycad_tkernel::{
-    ncollection::{DynamicArray, Sequence},
+    ncollection::{DataMap, DynamicArray, Sequence},
     standard::Handle,
 };
 use rustycad_tkmath::gp::{Point2, Vector2, Xy};
@@ -311,6 +311,24 @@ fn process_constraints_recovers_an_empty_frontier_square() {
     delaun.process_constraints().unwrap();
 
     assert_eq!(delaun.result().elements_of_domain().extent(), 2);
+}
+
+#[test]
+fn create_triangles_fans_an_interior_vertex_across_a_convex_boundary() {
+    let mesh = fixture::polygon_mesh(0, false);
+    let center = mesh
+        .add_node(&Vertex::from_uv(1., 1., Freedom::Free), true)
+        .unwrap();
+    let mut polygon = DataMap::default();
+    for edge in 1..=4 {
+        polygon.bind(edge, true);
+    }
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+
+    delaun.create_triangles_probe(center, &mut polygon).unwrap();
+
+    assert!(polygon.is_empty());
+    assert_eq!(delaun.result().elements_of_domain().extent(), 4);
 }
 
 #[test]

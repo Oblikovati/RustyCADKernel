@@ -2,7 +2,7 @@
 use super::super::{flag, int, real};
 use super::vertex_inspector::report_unit;
 use rustycad_tkernel::{
-    ncollection::{DynamicArray, Map, Sequence},
+    ncollection::{DataMap, DynamicArray, Map, Sequence},
     standard::{Failure, Handle},
 };
 use rustycad_tkmath::gp::{Point2, Vector2, Xy};
@@ -99,6 +99,25 @@ pub fn process_constraints_case() {
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
     print!("OK ");
     if let Err(error) = delaun.process_constraints() {
+        print!("{} ", error.exception_type());
+    }
+    if let Err(error) = polygon_mesh_snapshot(&delaun) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
+pub fn create_triangles_case() {
+    let mesh = fixture::polygon_mesh(0, false);
+    let center = mesh
+        .add_node(&Vertex::from_uv(1., 1., Freedom::Free), true)
+        .unwrap();
+    let mut polygon = DataMap::default();
+    for edge in 1..=4 {
+        polygon.bind(edge, true);
+    }
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    print!("OK ");
+    if let Err(error) = delaun.create_triangles_probe(center, &mut polygon) {
         print!("{} ", error.exception_type());
     }
     if let Err(error) = polygon_mesh_snapshot(&delaun) {
