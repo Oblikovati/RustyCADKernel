@@ -96,8 +96,11 @@ No original legacy declaration is added by this dependency.
 ### BeanFace private range and box dependencies
 
 Private range flags, stable sample grouping, subdivision limits, cached surface
-boxes, trimmed B-spline knot grids, and analytic line/plane intersections pass
-3,933 exact native comparisons. The grid cases cover knot clipping, degenerate and
+boxes, trimmed B-spline knot grids, analytic line/plane intersections, and the
+FastComputeAnalytic predicate path pass 5,661 exact native comparisons. The 1,728
+new analytic cases cover plane/conic, cylinder/line-or-circle, and sphere/line
+classifications, unsupported Bezier/spline/offset curves, and coincident result
+ranges. The grid cases cover knot clipping, degenerate and
 reversed bounds, derivative-based deflection, and reuse of prior cache values. The
 line/plane cases cover parallel and coincident lines, UV clipping and tolerance
 expansion. Box cases retain preexisting output, negative deflection, reversed frames

@@ -1,5 +1,6 @@
 //! Intermediate grouping and range flags are compared to unchanged OCCT helpers.
 mod boxes;
+mod fast_analytic;
 mod grid;
 mod line_plane;
 use super::bean_ranges;
@@ -87,6 +88,7 @@ pub fn run(operation: &str, values: &[f64]) {
         "bean_box" => boxes::run(values),
         "bean_grid" => grid::run(values),
         "bean_line_plane" => line_plane::run(values),
+        "bean_fast_analytic" => fast_analytic::run(values),
         "bean_empty" => empty(values),
         "bean_group" => grouping(values),
         "bean_sampling" => {
@@ -94,7 +96,7 @@ pub fn run(operation: &str, values: &[f64]) {
             Ok(())
         }
         _ => panic!(
-            "Unknown bean operation {operation}; expected bean_box, bean_empty, bean_grid, bean_group, bean_line_plane or bean_sampling"
+            "Unknown bean operation {operation}; expected bean_box, bean_empty, bean_fast_analytic, bean_grid, bean_group, bean_line_plane or bean_sampling"
         ),
     };
     if let Err(error) = result {
