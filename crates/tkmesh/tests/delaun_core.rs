@@ -346,6 +346,23 @@ fn batch_insertion_replaces_the_containing_circumcircle_cavity() {
 }
 
 #[test]
+fn batch_insertion_orders_and_replaces_two_triangle_cavities() {
+    let mesh = fixture::mesh(0, 0);
+    let mut vertices = [
+        mesh.add_node(&Vertex::from_uv(1., 0.5, Freedom::Free), true)
+            .unwrap(),
+        mesh.add_node(&Vertex::from_uv(0.5, 1.5, Freedom::Free), true)
+            .unwrap(),
+    ];
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    delaun.init_circles_tool(8, 8).unwrap();
+
+    delaun.insert_vertices_probe(&mut vertices).unwrap();
+
+    assert_eq!(delaun.result().elements_of_domain().extent(), 6);
+}
+
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();

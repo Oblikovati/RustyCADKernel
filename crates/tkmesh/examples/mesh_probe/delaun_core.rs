@@ -125,16 +125,25 @@ pub fn create_triangles_case() {
     }
     println!();
 }
-pub fn insert_vertex_case() {
+pub fn insert_vertex_case(values: &[i32]) {
     let mesh = fixture::mesh(0, 0);
-    let vertex = mesh
-        .add_node(&Vertex::from_uv(1., 0.5, Freedom::Free), true)
-        .unwrap();
+    let points = if values[0] == 2 {
+        vec![Xy::new(1., 0.5), Xy::new(0.5, 1.5)]
+    } else {
+        vec![Xy::new(1., 0.5)]
+    };
+    let mut vertices = points
+        .iter()
+        .map(|point| {
+            mesh.add_node(&Vertex::new(*point, 0, Freedom::Free), true)
+                .unwrap()
+        })
+        .collect::<Vec<_>>();
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
     print!("OK ");
     if let Err(error) = delaun
         .init_circles_tool(8, 8)
-        .and_then(|()| delaun.insert_vertices_probe(&mut [vertex]))
+        .and_then(|()| delaun.insert_vertices_probe(&mut vertices))
     {
         print!("{} ", error.exception_type());
     }
