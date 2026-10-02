@@ -9,21 +9,15 @@ from tkbo_algorithms_corpus import algorithm_partition
 from verify_tkmath_numeric import run
 
 REVISION='3d097a0328e71b826377d4814ab05ec3c3d23871'
-RADIUS_SENTINEL='4625478292286210048'
-
-
 def validate_radius_observation(request: str,native: str,rust: str) -> dict[str,str|bool]:
-    """Validate unaffected fields without treating an incidental status match as parity."""
+    """Require the captured pinned result without treating undefined status as portable."""
     expected=native.split();actual=rust.split()
     if len(expected)<9 or len(expected)!=len(actual):
         raise ValueError(f'{request}: native {native!r}, Rust {rust!r}; expected equal complete snapshots')
-    if actual[1:3]!=['0','0'] or expected[1] not in ('0','2','-1'):
-        raise ValueError(f'{request}: native {native!r}, Rust {rust!r}; expected radius statuses 0/2/-1 and Rust zero radius')
-    radius='0' if expected[1]=='0' else RADIUS_SENTINEL
-    if expected[2]!=radius or expected[:1]+expected[3:]!=actual[:1]+actual[3:]:
-        raise ValueError(f'{request}: native {native!r}, Rust {rust!r}; expected only status/radius variation')
-    return dict(request=request,native=native,rust=rust,observed_difference=expected!=actual,
-                classification='native uninitialized gce_MakeCirc status; never an exact parity pass')
+    if expected!=actual:
+        raise ValueError(f'{request}: native {native!r}, Rust {rust!r}; expected pinned result match')
+    return dict(request=request,native=native,rust=rust,observed_difference=False,
+                classification='native uninitialized gce_MakeCirc status; pinned match, not portable parity')
 
 
 def verify_undefined_radius(oracle: NumericOracle,source: Path) -> None:
@@ -47,8 +41,9 @@ def write_radius_report(output: Path,source: Path,records: list[dict[str,str|boo
     """Record undefined inputs and source provenance independently of observed equality."""
     original=source/'src/ModelingData/TKGeomBase/gce/gce_MakeCirc.cxx'
     differences=sum(bool(row['observed_difference']) for row in records)
+    pinned_matches=len(records)-differences
     report=dict(revision=REVISION,source=str(original),source_sha256=hashlib.sha256(original.read_bytes()).hexdigest(),
-                candidates=len(records),exact_passed=0,observed_differences=differences,
+                candidates=len(records),exact_passed=0,pinned_matches=pinned_matches,observed_differences=differences,
                 undefined_status_observations=records,complete_parity=False)
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(f'TKBO radius status: {len(records)} native undefined-status cases, {differences} observed differences; complete parity false')
+    print(f'TKBO radius status: {len(records)} native undefined-status cases, {pinned_matches} pinned matches, {differences} differences; complete parity false')

@@ -6,7 +6,7 @@ use rustycad_tkernel::{
     standard::{Failure, Handle},
 };
 use rustycad_tkg3d::{
-    geom::{GeomCircle, GeomCurve, GeomLine, GeomOffsetCurve},
+    geom::{GeomBSplineCurve, GeomBezierCurve, GeomCircle, GeomCurve, GeomLine, GeomOffsetCurve},
     top_abs::State,
 };
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
@@ -88,6 +88,48 @@ fn line_radius_leaves_the_output_untouched_while_circle_writes_it() -> Result<()
     assert_eq!(radius, 3.);
     Ok(())
 }
+
+#[test]
+fn spline_offset_radius_failure_keeps_the_native_sentinel() -> Result<(), Failure> {
+    assert_spline_offset_radius_failure(spline_basis()?)?;
+    assert_spline_offset_radius_failure(bezier_basis()?)
+}
+
+fn assert_spline_offset_radius_failure(basis: Handle<dyn GeomCurve>) -> Result<(), Failure> {
+    let offset = Handle::new(GeomOffsetCurve::new(&basis, 0.5, Direction3::Z, false)?).into_cast();
+    let adaptor = BRepAdaptorCurve::with_edge(&edge(&offset)?)?;
+    let mut radius = 17.0;
+    assert_eq!(IntTools::get_radius(&adaptor, 0.0, 0.0, &mut radius)?, -1);
+    assert_eq!(radius, 17.0);
+    Ok(())
+}
+
+fn spline_basis() -> Result<Handle<dyn GeomCurve>, Failure> {
+    let poles = [
+        Point3::default(),
+        Point3::new(1.0, 2.0, 0.0),
+        Point3::new(3.0, 0.0, 0.0),
+    ];
+    Ok(Handle::new(GeomBSplineCurve::new(
+        &Array1::from_shared(&poles, 1),
+        &Array1::from_shared(&[0.0, 1.0], 1),
+        &Array1::from_shared(&[3, 3], 1),
+        2,
+        false,
+    )?)
+    .into_cast())
+}
+
+fn bezier_basis() -> Result<Handle<dyn GeomCurve>, Failure> {
+    let poles = [
+        Point3::default(),
+        Point3::new(1.0, 2.0, 0.0),
+        Point3::new(-1.0, 2.0, 0.0),
+        Point3::default(),
+    ];
+    Ok(Handle::new(GeomBezierCurve::new(&Array1::from_shared(&poles, 1))?).into_cast())
+}
+
 #[test]
 fn unsupported_offset_parameter_keeps_the_previous_parameter() -> Result<(), Failure> {
     let curve = line();

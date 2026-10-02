@@ -123,9 +123,11 @@ audit has no missing or stale EdgeEdge rows.
 Seven utility APIs are mapped, with GetRadius explicitly partial. The defined-domain
 corpus adds 2,560 exact requests, bringing the routine gate to 19,017. A mandatory
 companion replay retains 176 coincident-sample calls that read an uninitialized
-native gce_MakeCirc status. Thirty-two differ in the current run; none of the 176
-counts as exact parity, including incidental matches. Rust retains the existing
-zero-radius GCE behavior. Seven direct Rust regressions cover each callable utility.
+native gce_MakeCirc status. The pinned native build and Rust now match all 176 captured
+outputs, including 32 `-1` statuses with the caller's radius value retained. None count
+as defined-domain parity because OCCT leaves this status uninitialized. Rust retains the
+existing zero-radius GCE constructor behavior. Eight direct Rust regressions cover each
+callable utility.
 No original legacy declaration is added by this dependency.
 
 ### BeanFace private range and box dependencies
