@@ -43,6 +43,24 @@ pub fn next_link_case(values: &[i32]) {
     }
     println!();
 }
+pub fn left_polygon_case(values: &[i32]) {
+    let (mesh_kind, frontier) = match values[0] {
+        1 => (0, true),
+        2 => (1, false),
+        _ => (0, false),
+    };
+    let mesh = fixture::polygon_mesh(mesh_kind, frontier);
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    print!("OK ");
+    match delaun.mesh_left_polygon(values[1], values[2] != 0, None) {
+        Ok(result) => {
+            flag(result);
+            let _ = polygon_mesh_snapshot(&delaun);
+        }
+        Err(error) => print!("{} ", error.exception_type()),
+    }
+    println!();
+}
 fn report_next_links(values: &[i32]) -> Result<(), Failure> {
     let mesh = fixture::mesh(values[0], values[1]);
     let delaun = Delaun::from_mesh(&mesh, -1, -1, false)?;

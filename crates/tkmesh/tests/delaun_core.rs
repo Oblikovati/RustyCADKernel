@@ -262,6 +262,16 @@ fn next_polygon_link_selects_visible_neighbor_and_preserves_empty_outputs() {
     assert_eq!(unchanged_direction, Vector2::new(81., 82.));
     assert!(unchanged_bounds.is_void());
 }
+
+#[test]
+fn polygon_loop_recovery_cleans_and_retriangulates_the_frontier_square() {
+    let mesh = fixture::polygon_mesh(0, true);
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+
+    assert!(delaun.mesh_left_polygon(1, true, None).unwrap());
+    assert_eq!(mesh.elements_of_domain().extent(), 2);
+}
+
 #[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
