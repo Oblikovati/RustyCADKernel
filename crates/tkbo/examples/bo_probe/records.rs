@@ -436,6 +436,90 @@ pub fn data_structure_box_case(v: &[f64]) {
     }
 }
 
+/// Writes finite and infinite line-edge endpoint preparation and pave construction.
+pub fn data_structure_infinite_case(v: &[f64]) {
+    use rustycad_tkbo::bop_ds::DataStructure;
+    use rustycad_tkbrep::topods::{Edge, Shape};
+    use rustycad_tkg3d::top_abs::Orientation;
+    use rustycad_tkmath::gp::Line3;
+    use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
+    let infinity = rustycad_tkernel::precision::infinite();
+    let (first, last) = line_edge_bounds(v[1] as i32, infinity);
+    let edge: Shape = BRepBuilderAPIMakeEdge::from_lin_params(Line3::default(), first, last)
+        .unwrap()
+        .edge()
+        .unwrap()
+        .into_shape();
+    let edge = if v[1] as i32 == 4 {
+        Edge::unchecked(edge.oriented(Orientation::Internal)).into_shape()
+    } else {
+        edge
+    };
+    let mut structure = DataStructure::default();
+    structure.set_arguments(std::slice::from_ref(&edge));
+    structure.init(v[0]).unwrap();
+    write_infinite_edge_shapes(&structure, &edge);
+    write_infinite_edge_paves(&mut structure, &edge);
+}
+
+fn line_edge_bounds(kind: i32, infinity: f64) -> (f64, f64) {
+    match kind {
+        1 => (-infinity, 2.0),
+        2 => (-2.0, infinity),
+        3 | 4 => (-2.0, 3.0),
+        _ => (-infinity, infinity),
+    }
+}
+
+fn write_infinite_edge_shapes(
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    edge: &rustycad_tkbrep::topods::Shape,
+) {
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    integer(structure.nb_ranges());
+    integer(structure.index(edge));
+    for index in 0..structure.nb_shapes() {
+        let info = structure.shape_info(index).unwrap();
+        integer(info.shape_type() as i32);
+        flag(info.has_flag());
+        integer(info.flag());
+        integer(info.sub_shapes().len() as i32);
+        for child in info.sub_shapes() {
+            integer(*child);
+        }
+        flag(info.box_bounds().is_void());
+        if !info.box_bounds().is_void() {
+            real(info.box_bounds().gap());
+            for coordinate in info.box_bounds().get().unwrap() {
+                real(coordinate);
+            }
+        }
+    }
+}
+
+fn write_infinite_edge_paves(
+    structure: &mut rustycad_tkbo::bop_ds::DataStructure,
+    edge: &rustycad_tkbrep::topods::Shape,
+) {
+    let index = structure.index(edge);
+    structure.change_pave_blocks(index).unwrap();
+    integer(structure.pave_blocks_pool().len() as i32);
+    integer(structure.shape_info(index).unwrap().reference());
+    let blocks = structure.pave_blocks(index).unwrap();
+    integer(blocks.len() as i32);
+    for block in blocks {
+        let block = block.lock().unwrap();
+        integer(block.original_edge());
+        let (first, last) = block.indices();
+        let (first_parameter, last_parameter) = block.range();
+        integer(first);
+        integer(last);
+        real(first_parameter);
+        real(last_parameter);
+    }
+}
+
 fn write_edge_source_state(
     structure: &rustycad_tkbo::bop_ds::DataStructure,
     first: &rustycad_tkbrep::topods::Shape,

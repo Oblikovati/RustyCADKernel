@@ -6,7 +6,7 @@ SurfaceRangeSample, and MarkedRangeSet. The 80 API rows use the header audit
 identities; the remainder of IntTools and the Boolean algorithms remain pending.
 
 `tools/verify_tkbo_foundations.py --source ../OCCT --native-build BUILD` passes
-19,102 exact native comparisons, including signed zero, all root transitions,
+19,107 exact native comparisons, including signed zero, all root transitions,
 range subdivision and hashing, duplicate boundaries, pave-block splitting and
 common-block ordering. Its companion radius-status replay still records 176 undefined-status
 native calls and 32 differences; complete TKBO parity remains false.
@@ -42,9 +42,11 @@ prepares vertex, edge and face bounds, flattens face and single-solid child indi
 builds shared-vertex edge links, and initializes endpoint pave blocks on demand.
 Native differential probes cover depth-first ordering, shared-vertex links and paves,
 face/edge/vertex flattening in a single-solid box, and the resulting shape bounds.
-`Init` and `ChangePaveBlocks` remain partial: infinite-edge synthetic vertices,
-exact open/inverted shell behavior, same-domain mapping, and internal/seam-edge paves
-are pending. No original GTest declaration is mapped by this storage slice.
+Two-sided and one-sided infinite line ranges also match the native synthetic endpoint
+vertices and pave parameters; internal finite-edge paves use the topological endpoint
+orientations. `Init` and `ChangePaveBlocks` remain partial for exact open/inverted shell
+behavior, same-domain mapping, and one-vertex seam edges.
+No original GTest declaration is mapped by this storage slice.
 
 IntTools Curve, CommonPrt and point-on-face records add 62 implemented APIs.
 The cumulative oracle passes 3,027 cases. `IntTools_PntOnFace::IsValid()` is
