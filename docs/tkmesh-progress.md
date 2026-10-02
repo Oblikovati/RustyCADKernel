@@ -155,9 +155,10 @@ IncrementalMesh integration remain incomplete.
 The three standalone angle and signed-winding declarations in the legacy source now have
 focused Rust tests and native numeric comparisons; the source file remains unmapped until
 its hole, box, and cylinder meshing cases pass too.
-The six declarations in
-`BRepMesh_Delaun_Test.cxx` remain unmapped as a source file; TKMesh remains at 2/29
-mapped original declarations.
+The six declarations in `BRepMesh_Delaun_Test.cxx` now pass the complete native and
+Rust source gates and are mapped atomically. Native/Rust cylinder node hashes match
+on all three faces; triangle enumeration now follows ascending packed-map element IDs.
+TKMesh is at 8/29 mapped original declarations.
 
 ### IncrementalMesh empty-compound construction
 
@@ -170,10 +171,21 @@ square-with-square-hole case matches all eight nodes, UV nodes, and both triangl
 indices exactly. `MeshBoxAllFaces` now matches all six native face triangulations
 exactly, including local XYZ/UV node order and triangle indices; native status
 flags and Rust face status masks are both zero. Parameter normalization supplies
-the native minimum size before edge tessellation. Nonplane faces and shapes with
-no faces still report the unsupported meshing stage; cylinder results remain
-unverified. The focused Rust tests and filtered native OCC31125 regression pass, but the
+the native minimum size before edge tessellation. Other unsupported surfaces and
+shapes with no faces still report the unsupported meshing stage; the cylinder path
+is verified in the later Delaun source gate. The focused Rust tests and filtered native OCC31125 regression pass, but the
 original test declaration is not counted as mapped: the source file contains
 nine declarations and the source gate requires mapping the whole file together.
-This keeps the existing partial API accounting unchanged; TKMesh remains at
-2/29 mapped declarations, and the six Delaun source declarations remain unmapped.
+This keeps the existing partial API accounting unchanged; the source is still pending
+until all nine declarations pass together.
+
+### Internal face vertices
+
+The planar face strategy now registers direct INTERNAL face vertices before boundary
+samples when `InternalVerticesMode` is enabled. It obtains each vertex's stored face
+parameters and 3D point, rejects points outside the face classifier, and inserts the
+node as fixed before Delaunay triangulation. The three `BRepMesh_BaseMeshAlgo_Test.cxx`
+declarations pass in native OCCT and Rust, including three individual points, a 4-by-4
+grid, and disabled internal-vertex mode. TKMesh is now 11/29 mapped declarations;
+the remaining complete-source candidates are the algorithm factory and IncrementalMesh
+regression suites.
