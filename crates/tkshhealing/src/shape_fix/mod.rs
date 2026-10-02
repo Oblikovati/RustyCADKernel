@@ -11,6 +11,7 @@ mod intersection;
 mod root;
 mod shape;
 mod shape_tolerance;
+mod shell_orientation;
 mod wire;
 
 pub use edge_connect::ShapeFixEdgeConnect;

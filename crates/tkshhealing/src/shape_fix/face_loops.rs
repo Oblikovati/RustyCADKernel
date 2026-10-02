@@ -2,7 +2,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Extracts two closed loops after the narrow bowtie wire split.
-use super::ShapeFixWire;
+use super::{FixRoot, ShapeFixWire};
 use crate::shape_analysis::ShapeAnalysisWire;
 use crate::shape_extend::ShapeExtendWireData;
 use rustycad_tkbrep::brep::BRepTool;
@@ -13,13 +13,18 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
 /// Splits one line-pcurve bowtie face into the two triangular faces returned by OCCT.
-pub(super) fn split_bowtie_face(face: &Face, tolerance: f64) -> Result<Option<Shape>, Failure> {
+pub(super) fn split_bowtie_face(
+    face: &Face,
+    tolerance: f64,
+    context: &Handle<crate::shape_build::ShapeBuildReShape>,
+) -> Result<Option<Shape>, Failure> {
     let Some(wire) = single_face_wire(face)? else {
         return Ok(None);
     };
     let analyzer = Handle::new(ShapeAnalysisWire::from_wire(&wire, face, tolerance)?);
     let fixer = ShapeFixWire::new();
     fixer.init(&analyzer);
+    fixer.set_context(context);
     if !fixer.fix_line_self_intersections()? {
         return Ok(None);
     }
