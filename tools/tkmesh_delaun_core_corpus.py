@@ -29,9 +29,17 @@ def use_edge_rows() -> list[str]:
     return [f'mesh_delaun_use_edge {index}' for index in
             (-2147483648,-100,-1,0,1,100,2147483647)]
 
+def sort_rows() -> list[str]:
+    """Sort insertion vertices including equal projections and duplicate points."""
+    points = [(), ((0,0),), ((2,0),(0,1)), ((0,2),(1,1),(2,0)),
+              ((3,0),(0,3),(2,1),(1,2)), ((0,0),(0,0),(1,0),(0,1)),
+              ((-2,4),(4,-2),(0,0),(1,1),(2,0)), ((5,1),(-3,4),(2,-2),(0,0),(4,-4),(1,1))]
+    return ['mesh_delaun_sort '+str(len(row))+(' '+' '.join(f'{x} {y}' for x,y in row) if row else '')
+            for row in points]
+
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -40,4 +48,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows(),frozenset(manifest['input_sha256']))

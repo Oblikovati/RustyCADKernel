@@ -12,6 +12,7 @@ mod circles;
 mod cleanup;
 mod contains;
 mod insertion;
+mod insertion_order;
 mod polygon;
 mod polygon_decompose;
 mod polygon_mesh;
