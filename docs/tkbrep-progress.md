@@ -71,7 +71,7 @@ The toolkit test inventory maps these suites (1260 declarations; 1271 active nat
 | BRepGraph_Reverse_Test.cxx | brep_graph_reverse | 16 | pass | pass |
 | BRepGraph_Sharing_Test.cxx | brep_graph_sharing | 17 | pass | pass |
 | BRepGraph_Compact_Test.cxx | brep_graph_compact_legacy (15/26) | 26 | 15 Rust mirrors pass; native 26/26 | remaining declarations are listed below; source suite not complete |
-| BRepGraph_Copy_Test.cxx | brep_graph_copy_legacy (11/23) | 23 | 11 Rust mirrors pass; native 23/23 | 12 declarations remain: cache services and mesh representations, supplement attachment remapping, cylinder and compound-only-face inputs, and fused-box regularity |
+| BRepGraph_Copy_Test.cxx | brep_graph_copy_legacy (18/23) | 23 | 18 Rust mirrors pass; native 23/23 | Five declarations remain: custom cache service exclusion, supplement attachment remapping, cylinder/compound-only-face inputs, and fused-box regularity |
 
 The 15 direct `BRepGraph_Compact_Test.cxx` mirrors use the source's 10×20×30 box,
 two deep-copied box faces, or a box compound with a loose edge, and compare each
