@@ -35,6 +35,33 @@ fn BRepMesh_IncrementalMeshTest__TrimmedCylinder_RespectsUVRangeAndDeflection() 
 }
 
 #[test]
+fn BRepMesh_IncrementalMeshTest__OCC32692_UnboundedCylinderFaceReportsFailure() {
+    let cylinder = Cylinder3::new(
+        Axis3::with_standard(Point3::default(), StandardDirection3::Z),
+        10.0,
+    )
+    .unwrap();
+    let maker = BRepBuilderAPIMakeFace::from_cylinder(cylinder).unwrap();
+    let face = maker.face().unwrap();
+    let result = BRepMeshIncrementalMesh::with_parameters(
+        &face.clone().into_shape(),
+        &MeshParameters {
+            deflection: 0.01,
+            angle: 0.5,
+            ..Default::default()
+        },
+        &ProgressRange::default(),
+    );
+    let mesher = result.expect("native IsDone remains true for failed face triangulation");
+    assert_eq!(mesher.get_status_flags(), 69);
+    let triangulation = BRepTool::triangulation(&face, mesh_purpose::NONE)
+        .unwrap()
+        .0;
+    assert!(triangulation.is_null() || triangulation.nb_nodes() == 0);
+    assert!(triangulation.is_null() || triangulation.nb_triangles() == 0);
+}
+
+#[test]
 fn BRepMesh_IncrementalMeshTest__OCC26407_PlanarPolygonMeshStatus() {
     let points = planar_regression_points();
     let wire = closed_polygon_wire(&points).unwrap();
@@ -53,7 +80,8 @@ fn BRepMesh_IncrementalMeshTest__OCC26407_PlanarPolygonMeshStatus() {
         },
         &ProgressRange::default(),
     );
-    assert!(result.is_ok(), "planar polygon meshing should complete");
+    let mesher = result.expect("planar polygon meshing should complete");
+    assert_eq!(mesher.get_status_flags(), 0);
     let triangulation = BRepTool::triangulation(&face, mesh_purpose::NONE)
         .unwrap()
         .0;

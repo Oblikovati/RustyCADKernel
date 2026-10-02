@@ -3,14 +3,16 @@ use super::{
     BRepMeshEdgeDiscret, BRepMeshModelBuilder, BRepMeshModelHealer, BRepMeshModelPostProcessor,
     BRepMeshModelPreProcessor, planar_face_discret::BRepMeshPlanarFaceDiscret,
 };
-use crate::imesh_data::MeshModel;
+use crate::imesh_data::{MeshModel, Status};
 use crate::imesh_tools::{MeshParameters, ModelAlgo, ModelBuilder};
 use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 use rustycad_tkernel::{message::ProgressRange, standard::Failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
 /// Incremental mesh facade for planar faces; `BRepMeshIncrementalMesh::with_parameters(&shape, &parameters, &ProgressRange::default())?`.
-pub struct BRepMeshIncrementalMesh;
+pub struct BRepMeshIncrementalMesh {
+    status_flags: i32,
+}
 
 impl BRepMeshIncrementalMesh {
     /// Reproduces OCCT's empty-compound no-op; `BRepMeshIncrementalMesh::with_parameters(&shape, &parameters, &ProgressRange::default())?`.
@@ -21,17 +23,23 @@ impl BRepMeshIncrementalMesh {
     ) -> Result<Self, Failure> {
         validate_parameters(parameters)?;
         if is_empty_compound(shape)? {
-            return Ok(Self);
+            return Ok(Self { status_flags: 0 });
         }
-        Self::mesh_planar_shape(shape, &normalized_parameters(parameters), range)?;
-        Ok(Self)
+        let status_flags =
+            Self::mesh_planar_shape(shape, &normalized_parameters(parameters), range)?;
+        Ok(Self { status_flags })
+    }
+
+    /// Accumulated face and wire status mask; `mesher.get_status_flags()`.
+    pub fn get_status_flags(&self) -> i32 {
+        self.status_flags
     }
 
     fn mesh_planar_shape(
         shape: &Shape,
         parameters: &MeshParameters,
         range: &ProgressRange<'_>,
-    ) -> Result<(), Failure> {
+    ) -> Result<i32, Failure> {
         let builder = BRepMeshModelBuilder::new();
         let model = builder.perform(shape, parameters);
         if model.is_null() {
@@ -51,12 +59,13 @@ impl BRepMeshIncrementalMesh {
         }
         let mesher = BRepMeshPlanarFaceDiscret::new();
         if !mesher.perform(&model, parameters, range) {
-            return Err(unsupported_shape(shape));
+            mark_failed_faces(&model)?;
+            return model_status_flags(&model);
         }
         if !BRepMeshModelPostProcessor::new().perform(&model, parameters, range) {
             return Err(unsupported_shape(shape));
         }
-        Ok(())
+        model_status_flags(&model)
     }
 }
 
@@ -69,14 +78,37 @@ fn mesh_free_edges(
     model: &rustycad_tkernel::standard::Handle<dyn MeshModel>,
     parameters: &MeshParameters,
     range: &ProgressRange<'_>,
-) -> Result<(), Failure> {
+) -> Result<i32, Failure> {
     if model.edges_nb() == 0 {
         return Err(unsupported_shape(shape));
     }
     if !BRepMeshEdgeDiscret::new().perform(model, parameters, range) {
         return Err(unsupported_shape(shape));
     }
+    model_status_flags(model)
+}
+
+fn mark_failed_faces(
+    model: &rustycad_tkernel::standard::Handle<dyn MeshModel>,
+) -> Result<(), Failure> {
+    for index in 0..model.faces_nb() {
+        model.get_face(index)?.status().set_status(Status::Failure);
+    }
     Ok(())
+}
+
+fn model_status_flags(
+    model: &rustycad_tkernel::standard::Handle<dyn MeshModel>,
+) -> Result<i32, Failure> {
+    let mut flags = 0;
+    for face_index in 0..model.faces_nb() {
+        let face = model.get_face(face_index)?;
+        flags |= face.status().get_status_mask();
+        for wire_index in 0..face.wires_nb() {
+            flags |= face.get_wire(wire_index)?.status().get_status_mask();
+        }
+    }
+    Ok(flags)
 }
 
 fn unsupported_shape(shape: &Shape) -> Failure {

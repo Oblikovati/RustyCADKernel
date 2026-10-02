@@ -214965,7 +214965,16 @@
       "source_sha256": "27d880c846f81f6a28061956045438e65dce7dcbb1b93c5aaacd9f5310e55f78",
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh::with_parameters",
       "status": "partial",
-      "notes": "Exact empty-compound no-op constructor behavior only. Nonempty shapes return Standard_NotImplemented pending BRepMesh edge and face discretization; constructor parameter validation is ported."
+      "notes": "The constructor validates and normalizes parameters, handles empty compounds and zero-length free edges, and meshes the pinned planar polygon and trimmed-cylinder face cases. Failed face triangulation preserves native completion and accumulated face/wire status flags. The full IncrementalMesh GTest source remains unmapped while torus Boolean fusion, seam polygons, cone angular deflection, and mesh reuse remain incomplete."
+    },
+    {
+      "upstream_id": "BRepMesh_IncrementalMesh::GetStatusFlags() const",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_IncrementalMesh.hxx",
+      "source_sha256": "27d880c846f81f6a28061956045438e65dce7dcbb1b93c5aaacd9f5310e55f78",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh::get_status_flags",
+      "status": "implemented",
+      "notes": "Returns the accumulated face and wire status mask; exact pinned checks cover success mask 0 for OCC26407 and OpenWire|Failure|Outdated mask 69 for OCC32692."
     },
     {
       "upstream_id": "ShapeFix_FaceConnect::ShapeFix_FaceConnect()",
