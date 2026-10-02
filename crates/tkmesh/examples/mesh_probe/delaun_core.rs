@@ -94,6 +94,18 @@ pub fn internal_constraint_case() {
     }
     println!();
 }
+pub fn process_constraints_case() {
+    let mesh = fixture::polygon_mesh(0, true);
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    print!("OK ");
+    if let Err(error) = delaun.process_constraints() {
+        print!("{} ", error.exception_type());
+    }
+    if let Err(error) = polygon_mesh_snapshot(&delaun) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
 fn report_center_left_polygon(values: &[i32]) {
     let mesh = fixture::polygon_mesh_with_center();
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
