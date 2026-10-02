@@ -135,6 +135,14 @@ fn first_supermesh_vertex_creates_three_native_fan_triangles() {
     assert_eq!(mesh.elements_of_domain().extent(), 3);
 }
 #[test]
+fn use_edge_preserves_native_always_false_behavior_for_signed_indices() {
+    let mesh = fixture::mesh(0, 0);
+    let delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    for index in [i32::MIN, -1, 0, 1, i32::MAX] {
+        assert!(!delaun.use_edge(index));
+    }
+}
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();

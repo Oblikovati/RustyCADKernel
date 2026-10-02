@@ -202226,6 +202226,15 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCanonicalRecognition::is_ellipse",
       "status": "implemented",
       "notes": "Native status, gap, analytic in/out arguments and least-squares fitting. Original 21 legacy declarations plus sh_canonical state/geometry oracle cases; native shell self-comparison quirk retained."
+    },
+    {
+      "upstream_id": "BRepMesh_Delaun::UseEdge(int)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Delaun.hxx",
+      "source_sha256": "6fc230ed91d99974caf7182b8341bc9a40e6478cc949ea07e7328a5c303304c3",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDelaun::use_edge",
+      "status": "implemented",
+      "notes": "Native method always returns false; exact i32 edge-index behavior is compared directly through mesh_delaun_use_edge against the pinned OCCT implementation across signed boundary values."
     }
   ],
   "tests": [
