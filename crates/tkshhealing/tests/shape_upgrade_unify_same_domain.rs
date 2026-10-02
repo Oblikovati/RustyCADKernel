@@ -47,7 +47,7 @@ fn internal_open_path_terminates_and_keeps_its_face() {
         ],
         false,
     );
-    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, true);
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, true, false);
     unifier.set_angular_tolerance(1e-6);
     unifier.set_linear_tolerance(1e-5);
     unifier.allow_internal_edges(true);

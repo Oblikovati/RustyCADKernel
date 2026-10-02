@@ -935,21 +935,25 @@ transformation branch itself.
 
 ### Individual `ShapeUpgrade_UnifySameDomain` declaration mappings
 
-Three declarations are now mapped individually: `BasicBoxUnification`,
-`MultipleCoplanarFacesWithInternalWires`, and `ClosedInternalWire`. The Rust box uses the
-same two-corner constructor and default unification flags as the source. The two internal
-wire cases use the source coordinates, tolerances, `AllowInternalEdges(true)`, and matching
-result assertions; the multi-face case exercises the implemented planar merge and checks
-the single result face. The focused Rust target passes 5/5, and the pinned native target
-passes 9/9 (the three selected native cases also pass independently). TKShHealing now maps
-137/143 declarations.
+Six declarations are now mapped individually: `BasicBoxUnification`,
+`MultipleCoplanarFacesWithInternalWires`, `ClosedInternalWire`,
+`InternalEdgesTermination_Issue925`, `MissingPCurveDoesNotAbortShellProcessing`, and
+`MissingSourcePCurveDuringTransformation`. The Rust box uses the source's two-corner
+constructor and default flags. The internal-wire fixtures use the source coordinates,
+tolerances, `AllowInternalEdges(true)`, and result assertions. Issue925's row records only
+its actual completion, non-null, and face-count assertions; its one-face case remains a
+no-candidate path and does not validate the multi-face `InternalEdges`/`IntVEmap` traversal
+fix.
 
-`InternalEdgesTermination_Issue925` remains unmapped: its one-face input takes the native
-no-candidate path and the Rust no-op path, so this declaration has not validated the
-multi-face `InternalEdges`/`IntVEmap` traversal fix. The two p-curve declarations remain
-unmapped because Rust currently leaves cylindrical face pairs unchanged; matching their
-result counts does not establish that missing source p-curves are skipped during the
-native transformation. `OCC29382_CommonShapeHasStableTopology`,
-`OCC30927_FusedSolidKeepsClosedWires`, and `OCC29544_NearbyLinearSplitIsUnified` remain
-blocked by the unported TKBO `Common`, `Fuse`, and `BOPAlgo_Splitter` paths. The complete
-source suite therefore remains partial at 3/9 mapped.
+For the two p-curve cases, Build now identifies adjacent faces on the same cylindrical
+support, checks their source edge p-curves, and skips a pair when either face has an edge
+without a stored p-curve. The shell-processing case still continues to merge the
+independent planar pair. Its fixture now creates those planar faces independently, as the
+source does; matching linear endpoints identify their common boundary even though the
+edges are separate TShapes. The focused Rust targets pass 7/7; the selected pinned native
+cases pass 3/3, and the complete native suite passes 9/9. TKShHealing now maps 140/143
+declarations.
+
+`OCC29382_CommonShapeHasStableTopology`, `OCC30927_FusedSolidKeepsClosedWires`, and
+`OCC29544_NearbyLinearSplitIsUnified` remain open pending TKBO `Common`, `Fuse`, and
+`BOPAlgo_Splitter` behavior. The complete source suite remains partial at 6/9 mapped.

@@ -3,18 +3,14 @@ mod common;
 use common::{face_count, rectangle_wire};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Shape, Shell, Wire};
-use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{GeomCylindricalSurface, GeomSurface};
-use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Axis3, Direction2, Plane3, Point2, Vector2};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain;
-use rustycad_tktopalgo::brep_builder_api::{
-    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPISewing,
-};
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
 
 #[test]
 fn missing_source_pcurve_does_not_abort_transformation() {
@@ -330,13 +326,10 @@ fn cylinder_shell(builder: &BRepBuilder, faces: &[&rustycad_tkbrep::topods::Face
 }
 
 fn add_planar_pair_to_shell(shell: &Shape) -> Result<(), rustycad_tkernel::standard::Failure> {
-    let planar_pair = sewn_planar_pair();
     let mut result = shell.clone();
-    for face in
-        rustycad_tkbrep::topexp::Explorer::new(&planar_pair, ShapeEnum::Face, ShapeEnum::Shape)?
-    {
-        BRepBuilder::default().add(&mut result, &face)?;
-    }
+    let builder = BRepBuilder::default();
+    builder.add(&mut result, &planar_face(3.0, 4.0))?;
+    builder.add(&mut result, &planar_face(4.0, 5.0))?;
     let unifier = ShapeUpgradeUnifySameDomain::new(&result, false, true, false);
     unifier.allow_internal_edges(true);
     unifier.build()?;
@@ -349,16 +342,6 @@ fn pcurve_line(first: Point2, last: Point2) -> Geom2dLine {
         first,
         Direction2::from_vector(Vector2::between(first, last)).unwrap(),
     )
-}
-
-fn sewn_planar_pair() -> Shape {
-    let first = planar_face(3.0, 4.0);
-    let second = planar_face(4.0, 5.0);
-    let mut sewing = BRepBuilderAPISewing::default();
-    sewing.add(&first).unwrap();
-    sewing.add(&second).unwrap();
-    sewing.perform(&ProgressRange::default()).unwrap();
-    sewing.sewed_shape().clone()
 }
 
 fn planar_face(x_min: f64, x_max: f64) -> Shape {
