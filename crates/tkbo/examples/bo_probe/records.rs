@@ -1,7 +1,8 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
-    BopdsCurve, CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, InterfVE, InterfVF,
-    InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo, common_block_handle, pave_block_handle,
+    BopdsCurve, CommonBlock, CoupleOfPaveBlocks, FaceInfo, IndexRange, InterfEE, InterfEF,
+    InterfVE, InterfVF, InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo, common_block_handle,
+    pave_block_handle,
 };
 use rustycad_tkbo::int_tools::Curve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -496,6 +497,74 @@ pub fn bopds_interf_case(_: &[f64]) {
     real(v);
     vf.set_indices(11, 13);
     flag(vf.contains(13));
+}
+
+pub fn bopds_interf_common_case(_: &[f64]) {
+    let first = common_part(ShapeEnum::Edge, (1.0, 2.0), &[(3.0, 4.0)], true, 1.0);
+    let mut edge_edge = InterfEE::default();
+    integer(edge_edge.index1());
+    integer(edge_edge.index2());
+    write_common_part(edge_edge.common_part());
+    edge_edge.set_indices(7, 9);
+    edge_edge.set_common_part(&first);
+    integer(edge_edge.index1());
+    integer(edge_edge.index2());
+    write_common_part(edge_edge.common_part());
+
+    let second = common_part(ShapeEnum::Vertex, (-1.0, -2.0), &[(7.0, 8.0)], false, -1.0);
+    edge_edge.set_common_part(&second);
+    write_common_part(edge_edge.common_part());
+
+    let mut edge_face = InterfEF::default();
+    edge_face.set_indices(11, 19);
+    edge_face.set_common_part(&first);
+    integer(edge_face.index1());
+    integer(edge_face.index2());
+    write_common_part(edge_face.common_part());
+}
+
+fn common_part(
+    kind: ShapeEnum,
+    bounds: (f64, f64),
+    other_bounds: &[(f64, f64)],
+    all_null: bool,
+    point_offset: f64,
+) -> rustycad_tkbo::int_tools::CommonPrt {
+    use rustycad_tkmath::gp::Point3;
+    let mut part = rustycad_tkbo::int_tools::CommonPrt::default();
+    part.set_type(kind);
+    part.set_range1_bounds(bounds.0, bounds.1);
+    part.set_vertex_parameter1(1.25);
+    part.set_vertex_parameter2(-2.5);
+    part.set_all_null_flag(all_null);
+    for (first, last) in other_bounds {
+        part.append_range2_bounds(*first, *last);
+    }
+    part.set_bounding_points(
+        Point3::new(point_offset, 2.0 * point_offset, 3.0 * point_offset),
+        Point3::new(4.0 * point_offset, 5.0 * point_offset, 6.0 * point_offset),
+    );
+    part
+}
+
+fn write_common_part(part: &rustycad_tkbo::int_tools::CommonPrt) {
+    integer(part.shape_type() as i32);
+    let (first, last) = part.range1_bounds();
+    real(first);
+    real(last);
+    real(part.vertex_parameter1());
+    real(part.vertex_parameter2());
+    flag(part.all_null_flag());
+    let (first, second) = part.bounding_points();
+    for coordinate in first.coordinates().iter().chain(second.coordinates()) {
+        real(*coordinate);
+    }
+    integer(part.ranges2().len() as i32);
+    for range in part.ranges2() {
+        let (first, last) = range.range();
+        real(first);
+        real(last);
+    }
 }
 
 fn optional_index(index: Option<i32>) {

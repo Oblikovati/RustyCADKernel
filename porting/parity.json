@@ -216224,6 +216224,86 @@
       "notes": "Returns the stored parameters in U/V order."
     },
     {
+      "upstream_id": "BOPDS_InterfEE()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfEE::default",
+      "status": "implemented",
+      "notes": "Creates an empty record with native default indices and common-part state."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEE(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native memory arenas; Rust collections own record storage."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEE::~BOPDS_InterfEE()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the subtype fields without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEE::SetCommonPart(const IntTools_CommonPrt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfEE::set_common_part",
+      "status": "implemented",
+      "notes": "Assigns common-part state with IntTools_CommonPrt operator= semantics."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEE::CommonPart() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfEE::common_part",
+      "status": "implemented",
+      "notes": "Borrows the stored common edge or vertex portion."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfEF::default",
+      "status": "implemented",
+      "notes": "Creates an empty record with native default indices and common-part state."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEF(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust owned storage",
+      "status": "excluded",
+      "notes": "The allocator selects native memory arenas; Rust collections own record storage."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEF::~BOPDS_InterfEF()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust ownership drops the subtype fields without a callable destructor."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEF::SetCommonPart(const IntTools_CommonPrt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfEF::set_common_part",
+      "status": "implemented",
+      "notes": "Assigns common-part state with IntTools_CommonPrt operator= semantics."
+    },
+    {
+      "upstream_id": "BOPDS_InterfEF::CommonPart() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::InterfEF::common_part",
+      "status": "implemented",
+      "notes": "Borrows the stored common edge or vertex portion."
+    },
+    {
       "upstream_id": "BOPDS_DS",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
