@@ -2,11 +2,18 @@
 use super::polygon_state::PolygonLoop;
 use super::triangle_build::{LoopEdges, loop_edges};
 use super::{BRepMeshDelaun, DegreeOfFreedom};
-use rustycad_tkernel::ncollection::{DynamicArray, Map};
+use rustycad_tkernel::ncollection::{DynamicArray, Map, Sequence};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bnd::CompactBox2;
 
 impl BRepMeshDelaun {
+    /// Probe exact cavity cleanup for a signed polygon boundary.
+    #[doc(hidden)]
+    pub fn cleanup_polygon_probe(&mut self, links: &Sequence<i32>) -> Result<(), Failure> {
+        let polygon = self.boxed_polygon(links)?;
+        self.cleanup_polygon(&polygon)
+    }
+
     pub(super) fn cleanup_polygon(&mut self, polygon: &PolygonLoop) -> Result<(), Failure> {
         if polygon.len() < 3 {
             return Ok(());

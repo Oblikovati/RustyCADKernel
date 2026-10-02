@@ -273,6 +273,27 @@ fn polygon_loop_recovery_cleans_and_retriangulates_the_frontier_square() {
 }
 
 #[test]
+fn polygon_loop_recovery_removes_interior_victim_triangles() {
+    let mesh = fixture::polygon_mesh_with_center();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+
+    assert!(delaun.mesh_left_polygon(1, true, None).unwrap());
+    assert_eq!(delaun.result().elements_of_domain().extent(), 4);
+}
+
+#[test]
+fn cleanup_polygon_removes_interior_victim_spokes_and_triangles() {
+    let mesh = fixture::polygon_mesh_with_center();
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    let polygon = Sequence::from_iter([1, 2, 3, 4]);
+
+    delaun.cleanup_polygon_probe(&polygon).unwrap();
+
+    assert!(delaun.result().elements_of_domain().is_empty());
+    assert_eq!(delaun.result().links_of_domain().extent(), 4);
+}
+
+#[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {
     let mut edge = 99;
     let delaun = Delaun::from_mesh(&fixture::mesh(2, 0), 1, 1, false).unwrap();

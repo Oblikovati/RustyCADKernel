@@ -53,13 +53,17 @@ def next_link_rows() -> list[str]:
             for flags in (0,1,7)]
 
 def left_polygon_rows() -> list[str]:
-    """Recover closed loops for free, frontier, and concave square boundaries."""
+    """Recover loops on empty, populated, and interior-victim meshes."""
     return [f'mesh_delaun_left_polygon {kind} {start} {forward}'
-            for kind in range(3) for start in range(1,5) for forward in (0,1)]
+            for kind in range(5) for start in range(1,5) for forward in (0,1)]
+
+def cleanup_victim_rows() -> list[str]:
+    """Delete a populated polygon cavity containing an interior victim vertex."""
+    return ['mesh_delaun_cleanup_victim']
 
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -68,4 +72,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows()+left_polygon_rows()+cleanup_victim_rows(),frozenset(manifest['input_sha256']))
