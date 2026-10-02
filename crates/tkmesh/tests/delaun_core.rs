@@ -150,6 +150,24 @@ fn frontier_reachability_stops_at_constraints_and_open_boundaries() {
     assert!(constrained.is_bound_to_frontier(1, 2).unwrap());
 }
 #[test]
+fn cleanup_mesh_removes_unbounded_free_triangles_but_keeps_constrained_region() {
+    let free_mesh = fixture::mesh(0, 0);
+    Delaun::from_mesh(&free_mesh, -1, -1, false)
+        .unwrap()
+        .cleanup_mesh()
+        .unwrap();
+    assert_eq!(free_mesh.elements_of_domain().extent(), 0);
+    assert_eq!(free_mesh.links_of_domain().extent(), 0);
+
+    let constrained_mesh = fixture::mesh(0, 31);
+    Delaun::from_mesh(&constrained_mesh, -1, -1, false)
+        .unwrap()
+        .cleanup_mesh()
+        .unwrap();
+    assert_eq!(constrained_mesh.elements_of_domain().extent(), 2);
+    assert_eq!(constrained_mesh.links_of_domain().extent(), 5);
+}
+#[test]
 fn insertion_order_matches_native_heap_ties_in_projected_coordinates() {
     let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 4));
     for point in [

@@ -11,6 +11,7 @@ struct DelaunMeshPolygonTag{using type=void(BRepMesh_Delaun::*)(IMeshData::Seque
 struct DelaunSuperMeshTag{using type=void(BRepMesh_Delaun::*)(const Bnd_Box2d&);friend type delaun_member(DelaunSuperMeshTag);};
 struct DelaunCreateTrianglesTag{using type=void(BRepMesh_Delaun::*)(const int,IMeshData::MapOfIntegerInteger&);friend type delaun_member(DelaunCreateTrianglesTag);};
 struct DelaunFrontierReachabilityTag{using type=bool(BRepMesh_Delaun::*)(const int,const int);friend type delaun_member(DelaunFrontierReachabilityTag);};
+struct DelaunCleanupTag{using type=void(BRepMesh_Delaun::*)();friend type delaun_member(DelaunCleanupTag);};
 template struct DelaunAccess<DelaunWindingTag,&BRepMesh_Delaun::isVertexInsidePolygon>;
 template struct DelaunAccess<DelaunAreaTag,&BRepMesh_Delaun::polyArea>;
 template struct DelaunAccess<DelaunIntersectionTag,&BRepMesh_Delaun::intSegSeg>;
@@ -18,6 +19,7 @@ template struct DelaunAccess<DelaunMeshPolygonTag,&BRepMesh_Delaun::meshPolygon>
 template struct DelaunAccess<DelaunSuperMeshTag,&BRepMesh_Delaun::superMesh>;
 template struct DelaunAccess<DelaunCreateTrianglesTag,&BRepMesh_Delaun::createTriangles>;
 template struct DelaunAccess<DelaunFrontierReachabilityTag,&BRepMesh_Delaun::isBoundToFrontier>;
+template struct DelaunAccess<DelaunCleanupTag,&BRepMesh_Delaun::cleanupMesh>;
 static auto delaun_core_mesh(int kind,int flags){
  occ::handle<NCollection_IncAllocator> arena=new NCollection_IncAllocator;
  occ::handle<BRepMesh_DataStructureOfDelaun> mesh=new BRepMesh_DataStructureOfDelaun(arena,10);
@@ -82,6 +84,10 @@ static void delaun_polygon_mesh_snapshot(const BRepMesh_Delaun&delaun){
  ga_int((int)links.size());for(auto index:links)ga_int(index);ga_int((int)triangles.size());for(auto index:triangles)ga_int(index);
  for(auto index:links){auto&e=delaun.GetEdge(index);ga_int(index);ga_int(e.FirstNode());ga_int(e.LastNode());ga_int(e.Movability());}
  for(auto index:triangles){auto&t=delaun.GetTriangle(index);ga_int(index);for(auto e:t.myEdges)ga_int(e);for(auto o:t.myOrientations)ga_flag(o);ga_int(t.Movability());}
+}
+void mesh_delaun_cleanup(std::istream&input){
+ int kind,flags;input>>kind>>flags;auto mesh=delaun_core_mesh(kind,flags);BRepMesh_Delaun delaun(mesh,-1,-1,false);
+ (delaun.*delaun_member(DelaunCleanupTag{}))();std::cout<<"OK ";delaun_polygon_mesh_snapshot(delaun);ga_end();
 }
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;

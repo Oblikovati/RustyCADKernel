@@ -16,6 +16,19 @@ pub fn core_case(v: &[i32]) {
     report_unit(core(v));
     println!();
 }
+pub fn cleanup_case(values: &[i32]) {
+    let mut delaun =
+        Delaun::from_mesh(&fixture::mesh(values[0], values[1]), -1, -1, false).unwrap();
+    print!("OK ");
+    if let Err(error) = cleanup_snapshot(&mut delaun) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
+fn cleanup_snapshot(delaun: &mut Delaun) -> Result<(), Failure> {
+    delaun.cleanup_mesh()?;
+    polygon_mesh_snapshot(delaun)
+}
 pub fn use_edge_case(index: i32) {
     let mesh = Handle::new(Mesh::new(&Handle::new(Default::default()), 0));
     let delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
