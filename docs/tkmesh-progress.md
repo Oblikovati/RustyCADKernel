@@ -188,8 +188,7 @@ parameters and 3D point, rejects points outside the face classifier, and inserts
 node as fixed before Delaunay triangulation. The three `BRepMesh_BaseMeshAlgo_Test.cxx`
 declarations pass in native OCCT and Rust, including three individual points, a 4-by-4
 grid, and disabled internal-vertex mode. TKMesh is now 11/29 mapped declarations;
-the remaining complete-source candidates are the algorithm factory and IncrementalMesh
-regression suites.
+the remaining complete-source candidate is the IncrementalMesh regression suite.
 
 ### IncrementalMesh free-edge and planar-polygon cases
 
@@ -204,12 +203,13 @@ face; cone and sphere fixtures have much coarser triangulations than the source'
 solids. Four declarations still need full source parity: torus Boolean fusion,
 closed-cylinder solid polygons, the complete cone-solid check and sphere mesh reuse. The source remains unmapped until all nine declarations pass together.
 
-### Discret algorithm factory suite blocker
+### Discret algorithm factory suite
 
-All nine declarations in `BRepMesh_DiscretAlgoFactory_Test.cxx` remain unmapped.
-The pinned native suite passes 9/9, but Rust has no equivalent discret-algorithm
-factory registry, default-factory selection, or `BRepMesh_DiscretFactory` adapter.
-The existing `IMeshTools_MeshAlgoFactory` selects per-face strategies and does not
-represent these registry semantics. The two `CreateAlgorithm` cases also require
-the missing factory API. No registry behavior was inferred or stubbed; port these
-APIs before mapping this source suite.
+`BRepMesh_DiscretAlgoFactory_Test.cxx` now maps all nine declarations. Rust ports
+the case-insensitive named factory registry, preferred/default ordering, the
+`FastDiscret` incremental-mesh adapter, and the `DiscretFactory` default-name
+selector. Factory-created algorithms defer meshing until `perform()` and preserve
+the native `is_done()` transition. The matching pinned native CTest passes 9/9 and
+the Rust target passes all nine source mirrors plus two focused registry checks
+(11/11). TKMesh now maps 20/29 declarations; the complete IncrementalMesh suite
+remains unmapped while its curved-surface and mesh-reuse cases are completed.
