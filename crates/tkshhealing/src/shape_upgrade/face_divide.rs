@@ -99,7 +99,7 @@ mod tests {
         let mut box_maker = BRepPrimAPIMakeBox::from_sizes(2.0, 3.0, 4.0).unwrap();
         let shape = box_maker.shape().unwrap();
         let faces = rustycad_tkbrep::topexp::Explorer::new(
-            &shape,
+            shape,
             rustycad_tkg3d::top_abs::ShapeEnum::Face,
             rustycad_tkg3d::top_abs::ShapeEnum::Shape,
         )

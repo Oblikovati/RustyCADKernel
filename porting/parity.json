@@ -214966,6 +214966,38 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh::with_parameters",
       "status": "partial",
       "notes": "Exact empty-compound no-op constructor behavior only. Nonempty shapes return Standard_NotImplemented pending BRepMesh edge and face discretization; constructor parameter validation is ported."
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnect::ShapeFix_FaceConnect()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::new",
+      "status": "implemented",
+      "notes": "The constructor initializes an empty connection set."
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnect::Add(const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::add",
+      "status": "implemented",
+      "notes": "Null faces are rejected; duplicate and self connections are accepted, with duplicate registration suppressed."
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnect::Build(const TopoDS_Shell&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::build",
+      "status": "partial",
+      "notes": "Ports registered-face grouping and sews each selected group with BRepBuilderAPI_Sewing. The third argument is not yet used for post-sewing ShapeFix_Wire/ShapeFix_Face repair; all 16 pinned FaceConnect test declarations pass, whose planar rectangle cases need no such repair."
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnect::Clear()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::clear",
+      "status": "implemented",
+      "notes": "Clears all registered face connections; per-build sewing data is local and therefore also discarded."
     }
   ],
   "tests": [
@@ -317426,6 +317458,230 @@
       "rust_target": "shape_upgrade_face_divide",
       "rust_test": "perform_parallel_does_not_crash",
       "rust_source": "crates/tkshhealing/tests/shape_upgrade_face_divide.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.RejectsNullFaces",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "rejects_null_faces",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.AcceptsSelfAndDuplicateConnections",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "accepts_self_and_duplicate_connections",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.NoConnectionsReturnOriginalShell",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "no_connections_return_original_shell",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.ConnectsCoincidentBoundaries",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "connects_coincident_boundaries",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.ConnectsBoundariesWithinSewingTolerance",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "connects_boundaries_within_sewing_tolerance",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.LeavesBoundariesBeyondSewingToleranceSeparate",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "leaves_boundaries_beyond_sewing_tolerance_separate",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.ClearDiscardsConnections",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "clear_discards_connections",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.CanBeReusedAfterClear",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "can_be_reused_after_clear",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.EmptyShellIsReturnedUnchanged",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "empty_shell_is_returned_unchanged",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.SelfConnectionPreservesSingleFaceTopology",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "self_connection_preserves_single_face_topology",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.ConnectsReversedFaces",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "connects_reversed_faces",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.ConnectsThreeFaceChain",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "connects_three_face_chain",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.LeavesUnregisteredThirdFaceSeparate",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "leaves_unregistered_third_face_separate",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.ConnectsTwoIndependentFacePairs",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "connects_two_independent_face_pairs",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.DuplicateConnectionDoesNotChangeResult",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "duplicate_connection_does_not_change_result",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_FaceConnectTest.RebuildingResultIsStable",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeFix_FaceConnect_Test.cxx",
+      "source_sha256": "3d4fccc347b4024fee14c1c581a42c03bd14437672ae7793cd5cffa50eae9d11",
+      "rust_package": "rustycad-tkshhealing",
+      "rust_target": "shape_fix_face_connect",
+      "rust_test": "rebuilding_result_is_stable",
+      "rust_source": "crates/tkshhealing/tests/shape_fix_face_connect.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
