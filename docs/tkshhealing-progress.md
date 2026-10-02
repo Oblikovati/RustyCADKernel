@@ -829,6 +829,14 @@ parity tests for OCC25014 and OCC24881. The filtered native source gate remains 
 all seven `ShapeFix_Shape_Test.cxx` declarations remain unmapped until the bowtie cap
 becomes two faces and the reshape is propagated through the prism shell.
 
+The pinned bowtie face can now pass through the narrow `ShapeFix_Face::FixLoopWire`
+path: the split wire's unique degree-four vertex seeds two center-to-center edge cycles,
+which become two triangular wires/faces on the same support surface. Marking the split
+diagonal halves SameRange/SameParameter is required for `BRepCheck_Analyzer`; the focused
+face test now produces a valid two-face compound with DONE7. `ShapeFix_Shape` still does
+not rebuild the enclosing prism shell/solid around the compound replacement, so its
+seven source rows remain unmapped.
+
 `ShapeBuild_Edge::CopyReplaceVertices` and the p-curve update tail are now available as
 `ShapeBuildEdge::copy_replace_vertices_with_pcurve_range`. It copies the original edge,
 uses supplied endpoint vertices and p-curve, sets the face-specific range, and clears
