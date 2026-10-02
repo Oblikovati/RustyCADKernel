@@ -214957,6 +214957,15 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireSegment::is_vertex",
       "status": "implemented",
       "notes": "Faithful OCCT 3d097a0 wire and patch storage, including clone sharing, clear/load detachment, mutation order, edge orientation, and patch range behavior. 25 callable declarations, 176 exact native differential requests, and two explicit native SIGSEGV versus Rust Standard_NullObject gaps; no direct legacy GTest declarations exist for this helper."
+    },
+    {
+      "upstream_id": "BRepMesh_IncrementalMesh::BRepMesh_IncrementalMesh(const TopoDS_Shape&,const IMeshTools_Parameters&,const Message_ProgressRange&)",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_IncrementalMesh.hxx",
+      "source_sha256": "27d880c846f81f6a28061956045438e65dce7dcbb1b93c5aaacd9f5310e55f78",
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh::with_parameters",
+      "status": "partial",
+      "notes": "Exact empty-compound no-op constructor behavior only. Nonempty shapes return Standard_NotImplemented pending BRepMesh edge and face discretization; constructor parameter validation is ported."
     }
   ],
   "tests": [
