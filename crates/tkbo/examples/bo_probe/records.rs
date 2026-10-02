@@ -1,5 +1,7 @@
 use super::{flag, integer, real};
-use rustycad_tkbo::bop_ds::{IndexRange, Pair, Pave, PaveBlock, Point};
+use rustycad_tkbo::bop_ds::{
+    CommonBlock, IndexRange, Pair, Pave, PaveBlock, Point, pave_block_handle,
+};
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Point2, Point3};
 fn index_state(value: &IndexRange, query: i32) {
@@ -123,6 +125,70 @@ pub fn pave_block_case(v: &[f64]) {
     block.update(&mut splits, v[14] != 0.0);
     write_splits(&splits);
     write_shrunk_data(&mut block, v);
+}
+
+/// The `BOPDS_CommonBlock` native ordering, identity, face-list and dump oracle request.
+pub fn common_block_case(v: &[f64]) {
+    let mut group = CommonBlock::default();
+    real(group.tolerance());
+    flag(group.pave_block1().is_err());
+    flag(group.edge().is_err());
+    integer(group.pave_blocks().len() as i32);
+    integer(group.faces().len() as i32);
+    let blocks = [
+        common_pave_block(v[0] as i32, v[1] as i32),
+        common_pave_block(v[2] as i32, v[3] as i32),
+        common_pave_block(v[4] as i32, v[5] as i32),
+    ];
+    for block in &blocks {
+        group.add_pave_block(std::sync::Arc::clone(block));
+    }
+    integer(group.pave_blocks().len() as i32);
+    for block in group.pave_blocks() {
+        integer(block.lock().unwrap().original_edge());
+    }
+    flag(group.is_pave_block_on_edge(v[8] as i32));
+    flag(group.contains_pave_block(&blocks[2]));
+    flag(group.is_pave_block_on_face(v[9] as i32));
+    group.set_edge(v[10] as i32);
+    for block in group.pave_blocks() {
+        integer(block.lock().unwrap().edge());
+    }
+    integer(group.edge().unwrap());
+    group.set_real_pave_block(&blocks[2]);
+    flag(std::sync::Arc::ptr_eq(
+        group.pave_block1().unwrap(),
+        &blocks[2],
+    ));
+    for block in group.pave_blocks() {
+        integer(block.lock().unwrap().original_edge());
+    }
+    group.set_faces(&[v[6] as i32, v[7] as i32]);
+    let mut appended = vec![v[11] as i32, v[12] as i32];
+    group.append_faces(&mut appended);
+    integer(appended.len() as i32);
+    integer(group.faces().len() as i32);
+    for face in group.faces() {
+        integer(*face);
+    }
+    flag(group.contains_face(v[11] as i32));
+    flag(group.is_pave_block_on_face(v[9] as i32));
+    let selected = group.pave_block_on_edge(v[8] as i32).unwrap();
+    flag(std::sync::Arc::ptr_eq(&selected, &blocks[2]));
+    selected.lock().unwrap().set_edge(v[13] as i32);
+    integer(blocks[2].lock().unwrap().edge());
+    group.set_tolerance(v[14]);
+    real(group.tolerance());
+    let mut dump = String::new();
+    group.dump(&mut dump).unwrap();
+    print!("{}", dump.replace('\n', "\\n"));
+}
+
+fn common_pave_block(original_edge: i32, edge: i32) -> rustycad_tkbo::bop_ds::PaveBlockHandle {
+    let mut block = PaveBlock::default();
+    block.set_original_edge(original_edge);
+    block.set_edge(edge);
+    pave_block_handle(block)
 }
 
 /// Appends the three test paves; `append_extra_paves(&mut block, &request)`.
