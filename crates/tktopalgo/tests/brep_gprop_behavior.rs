@@ -27,13 +27,18 @@ use gprop_builders::{edge_on, plane_rectangle, quarter_disk, segment, wide_splin
 use gprop_records::{BOX_1, BOX_10_20_30, CYLINDER_3_7, CYLINDER_10_20, SPHERE_5};
 use print::Reader;
 use rustycad_tkbrep::brep::BRepBuilder;
+use rustycad_tkbrep::brep_tools;
+use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Edge, Face, Shape};
+use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Handle;
+use rustycad_tkernel::storage::IoStream;
 use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCurve, GeomPlane, GeomSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gcpnts::AbscissaPoint;
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tkmath::gp::{Direction3, Plane3, Point2, Point3};
@@ -306,6 +311,66 @@ fn occ49_cylinder_has_symmetry_axis() {
     let mut props = GProps::new();
     BRepGProp::volume_properties(&shape(&CYLINDER_10_20), &mut props, false, false, false).unwrap();
     assert!(props.principal_properties().unwrap().has_symmetry_axis());
+}
+
+// Native reference of BRepAlgoAPI_Cut(MakeCylinder(10, 20), MakeBox(10, 10, 10)).
+#[test]
+fn occ49_cut_shape_has_no_symmetry_axis_from_native_brep() {
+    let source = include_bytes!("data/brep_gprop/occ49-cylinder-minus-box.brep");
+    let mut stream = IoStream::from_bytes(source.to_vec());
+    let mut cut_result = Shape::default();
+    brep_tools::read(
+        &mut cut_result,
+        &mut stream,
+        &BRepBuilder::default(),
+        &ProgressRange::default(),
+    )
+    .unwrap();
+    assert!(!cut_result.is_null());
+    assert_eq!(cut_result.shape_type().unwrap(), ShapeEnum::Compound);
+    assert_eq!(
+        Explorer::new(&cut_result, ShapeEnum::Vertex, ShapeEnum::Shape)
+            .unwrap()
+            .count(),
+        44
+    );
+    assert_eq!(
+        Explorer::new(&cut_result, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .count(),
+        22
+    );
+    assert_eq!(
+        Explorer::new(&cut_result, ShapeEnum::Face, ShapeEnum::Shape)
+            .unwrap()
+            .count(),
+        6
+    );
+    let mut props = GProps::new();
+    BRepGProp::volume_properties(&cut_result, &mut props, false, false, false).unwrap();
+    assert!(near(props.mass(), 5497.7871437821368, 1.0e-9));
+    let center = props.centre_of_mass();
+    assert!(near(center.x(), -0.60630454511198362, 1.0e-12));
+    assert!(near(center.y(), -0.60630454511198295, 1.0e-12));
+    assert!(near(center.z(), 10.714285714285715, 1.0e-12));
+    let inertia = props.matrix_of_inertia();
+    let expected = [
+        315878.24146288086,
+        14521.015150373298,
+        -19047.619047619028,
+        14521.015150373298,
+        315878.24146287912,
+        -19047.619047619057,
+        -19047.619047619028,
+        -19047.619047619057,
+        270847.32688836136,
+    ];
+    for (index, value) in expected.into_iter().enumerate() {
+        let row = (index / 3 + 1) as i32;
+        let column = (index % 3 + 1) as i32;
+        assert!(near(inertia.value(row, column).unwrap(), value, 1.0e-7));
+    }
+    assert!(!props.principal_properties().unwrap().has_symmetry_axis());
 }
 
 // BRepGPropTest.OCC8797_BSplineLengthConsistencyAbscissaVsLinearProperties
