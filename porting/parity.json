@@ -215382,6 +215382,126 @@
       "rust_item": "Rust static type metadata",
       "status": "excluded",
       "notes": "Standard RTTI metadata is not a callable API; Rust type identity is static."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::default",
+      "status": "implemented",
+      "notes": "Native sentinel indices, null handles and zero tolerance are covered by exact Rust and native cases."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks(const occ::handle<BOPDS_PaveBlock>&,const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::with_pave_blocks",
+      "status": "implemented",
+      "notes": "Copies both nullable shared handles, matching native handle assignment."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::~BOPDS_CoupleOfPaveBlocks()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "Rust Drop glue",
+      "status": "excluded",
+      "notes": "Rust releases the owned shared handles through Drop; there is no callable destructor counterpart."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::SetIndex(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::set_index",
+      "status": "implemented",
+      "notes": "Stores the index without validation."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::Index() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::index",
+      "status": "implemented",
+      "notes": "Reads the stored index."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::SetIndexInterf(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::set_interference_index",
+      "status": "implemented",
+      "notes": "Stores the interference index without validation."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::IndexInterf() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::interference_index",
+      "status": "implemented",
+      "notes": "Reads the stored interference index."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::SetPaveBlocks(const occ::handle<BOPDS_PaveBlock>&,const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::set_pave_blocks",
+      "status": "implemented",
+      "notes": "Replaces both nullable shared handles."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::PaveBlocks(occ::handle<BOPDS_PaveBlock>&,occ::handle<BOPDS_PaveBlock>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::pave_blocks_into",
+      "status": "implemented",
+      "notes": "Preserves the deprecated output-parameter API by cloning both handles into caller outputs."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::SetPaveBlock1(const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::set_pave_block1",
+      "status": "implemented",
+      "notes": "Replaces the first nullable shared handle."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::PaveBlock1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::pave_block1",
+      "status": "implemented",
+      "notes": "Borrows the nullable first handle."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::SetPaveBlock2(const occ::handle<BOPDS_PaveBlock>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::set_pave_block2",
+      "status": "implemented",
+      "notes": "Replaces the second nullable shared handle."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::PaveBlock2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::pave_block2",
+      "status": "implemented",
+      "notes": "Borrows the nullable second handle."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::SetTolerance(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::set_tolerance",
+      "status": "implemented",
+      "notes": "Stores the tolerance without validation, including signed zero and NaN."
+    },
+    {
+      "upstream_id": "BOPDS_CoupleOfPaveBlocks::Tolerance() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::CoupleOfPaveBlocks::tolerance",
+      "status": "implemented",
+      "notes": "Reads the exact stored tolerance."
     }
   ],
   "tests": [

@@ -4,6 +4,7 @@
 #include <BOPDS_Pair.hxx>
 #include <BOPDS_PaveBlock.hxx>
 #include <BOPDS_CommonBlock.hxx>
+#include <BOPDS_CoupleOfPaveBlocks.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <BOPDS_Point.hxx>
 #include <Bnd_Box.hxx>
@@ -73,4 +74,14 @@ void bo_common_block_case(const std::vector<double>& v) {
  bo_int(group.Contains(int(v[11])));bo_int(group.IsPaveBlockOnFace(int(v[9])));
  auto& selected=group.PaveBlockOnEdge(int(v[8]));bo_int(selected==c);selected->SetEdge(int(v[13]));bo_int(c->Edge());
  group.SetTolerance(v[14]);bo_real(group.Tolerance());std::fflush(stdout);FILE* capture=std::tmpfile();int saved=dup(STDOUT_FILENO);dup2(fileno(capture),STDOUT_FILENO);group.Dump();std::fflush(stdout);dup2(saved,STDOUT_FILENO);close(saved);std::rewind(capture);int character;while((character=std::fgetc(capture))!=EOF){if(character=='\n')std::cout<<"\\n";else std::cout<<char(character);}std::fclose(capture);
+}
+void bo_couple_of_pave_blocks_case(const std::vector<double>& v) {
+ BOPDS_CoupleOfPaveBlocks empty;bo_int(empty.Index());bo_int(empty.IndexInterf());bo_real(empty.Tolerance());bo_int(empty.PaveBlock1().IsNull());bo_int(empty.PaveBlock2().IsNull());
+ occ::handle<BOPDS_PaveBlock> a=new BOPDS_PaveBlock(),b=new BOPDS_PaveBlock();a->SetOriginalEdge(int(v[0]));b->SetOriginalEdge(int(v[1]));
+ BOPDS_CoupleOfPaveBlocks value(a,b);bo_int(value.PaveBlock1()==a);bo_int(value.PaveBlock2()==b);
+ value.SetIndex(int(v[2]));value.SetIndexInterf(int(v[3]));value.SetTolerance(v[4]);
+ bo_int(value.Index());bo_int(value.IndexInterf());bo_real(value.Tolerance());
+ occ::handle<BOPDS_PaveBlock> first,second;value.PaveBlocks(first,second);bo_int(first==a);bo_int(second==b);
+ value.SetPaveBlock1(b);value.SetPaveBlock2(occ::handle<BOPDS_PaveBlock>());bo_int(value.PaveBlock1()==b);bo_int(value.PaveBlock2().IsNull());
+ value.SetPaveBlocks(a,b);bo_int(value.PaveBlock1()==a);bo_int(value.PaveBlock2()==b);
 }
