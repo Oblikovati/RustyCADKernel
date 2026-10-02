@@ -48,6 +48,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         sh_probe::wire_divide_state::wire_state_case,
     ),
     ("sh_wire_divide", sh_probe::wire_divide::wire_divide_case),
+    ("sh_wire_segment", sh_probe::wire_segment::wire_segment_case),
     ("sh_edge_divide", sh_probe::edge_divide::edge_divide_case),
     ("sh_free_bounds", sh_probe::free_bounds::free_bounds_case),
     ("sh_shell_sewing", sh_probe::shell_sewing::shell_sewing_case),

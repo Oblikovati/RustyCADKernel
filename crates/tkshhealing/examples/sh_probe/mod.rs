@@ -75,3 +75,5 @@ pub mod transfer_parameters_proj;
 pub mod wire_divide;
 
 pub mod wire_divide_state;
+
+pub mod wire_segment;

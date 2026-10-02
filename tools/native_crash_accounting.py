@@ -11,7 +11,8 @@ from pathlib import Path
 from verify_tkmath_numeric import run_probe, compare, selected_paths
 
 
-def replay_crash(native: Path, rust: Path, request: str) -> dict[str, str | int]:
+def replay_crash(native: Path, rust: Path, request: str,
+                 expected_exception: str = "Standard_ConstructionError") -> dict[str, str | int]:
     """Require native SIGSEGV and the documented Rust failure; replay_crash(native,rust,request)."""
     original = subprocess.run(
         [str(native)], input=request + "\n", text=True, capture_output=True, timeout=30
@@ -19,27 +20,28 @@ def replay_crash(native: Path, rust: Path, request: str) -> dict[str, str | int]
     translated = subprocess.run(
         [str(rust)], input=request + "\n", text=True, capture_output=True, timeout=30
     )
-    validate_crash(original.returncode, translated.returncode, translated.stdout)
+    validate_crash(original.returncode, translated.returncode, translated.stdout, expected_exception)
     return {
         "input": request,
         "input_sha256": hashlib.sha256(request.encode()).hexdigest(),
         "native_returncode": original.returncode,
         "rust_returncode": translated.returncode,
-        "rust_exception": "Standard_ConstructionError",
+        "rust_exception": expected_exception,
         "rust_output": translated.stdout,
         "classification": "native_crash_rust_typed_failure_divergence",
     }
 
 
-def validate_crash(native_code: int, rust_code: int, rust_output: str) -> None:
+def validate_crash(native_code: int, rust_code: int, rust_output: str,
+                   expected_exception: str = "Standard_ConstructionError") -> None:
     """Reject changed native behavior or a Rust crash; validate_crash(-11,0,'Standard_ConstructionError')."""
     if native_code != -11:
         raise ValueError(
             f"Native return code {native_code}; expected -11 SIGSEGV, reclassify the divergence"
         )
-    if rust_code != 0 or "Standard_ConstructionError" not in rust_output.split():
+    if rust_code != 0 or expected_exception not in rust_output.split():
         raise ValueError(
-            f"Rust return code {rust_code}, output {rust_output!r}; expected 0 with Standard_ConstructionError"
+            f"Rust return code {rust_code}, output {rust_output!r}; expected 0 with {expected_exception}"
         )
 
 
@@ -75,6 +77,7 @@ def verify_crash_oracle(
     oracle: NumericOracle,
     partition: Callable[[], tuple[list[str], list[str]]],
     expected_revision: str,
+    expected_exception: str = "Standard_ConstructionError",
 ) -> None:
     """Compare defined paths and replay each crash separately; verify_crash_oracle(oracle,partition,revision)."""
     source, build = selected_paths()
@@ -90,7 +93,7 @@ def verify_crash_oracle(
     exact, crashes = partition()
     verify_defined(native, oracle.rust_probe, exact, output)
     divergent = [
-        replay_crash(native, oracle.rust_probe, request) for request in crashes
+        replay_crash(native, oracle.rust_probe, request, expected_exception) for request in crashes
     ]
     write_crash_report(output, oracle.toolkit, revision, exact, divergent)
 
