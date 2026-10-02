@@ -25,6 +25,11 @@ storage; assignment preserves the upstream append behavior for the second-edge
 range sequence. `InterfFF` adds nine rows for tangent-face state and its curve
 and point arrays; positive `Init` counts change array increments without erasing
 stored results, matching the pinned native fixture.
+The solid-interference shells `InterfVZ`, `InterfEZ`, `InterfFZ`, and `InterfZZ`
+add twelve audited identities: each Rust record shares the exact base-index
+state, with allocator-only constructors and native destructors explicitly
+excluded. Their defaults, index queries, and sentinel mutations pass the
+19,117-case native comparison.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered

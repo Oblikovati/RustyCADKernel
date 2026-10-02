@@ -1,8 +1,8 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
     BopdsCurve, CommonBlock, CoupleOfPaveBlocks, DataStructure, FaceInfo, IndexRange, InterfEE,
-    InterfEF, InterfFF, InterfVE, InterfVF, InterfVV, Pair, Pave, PaveBlock, Point, ShapeInfo,
-    common_block_handle, pave_block_handle,
+    InterfEF, InterfEZ, InterfFF, InterfFZ, InterfVE, InterfVF, InterfVV, InterfVZ, InterfZZ,
+    Interference, Pair, Pave, PaveBlock, Point, ShapeInfo, common_block_handle, pave_block_handle,
 };
 use rustycad_tkbo::int_tools::Curve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -497,6 +497,41 @@ pub fn bopds_interf_case(_: &[f64]) {
     real(v);
     vf.set_indices(11, 13);
     flag(vf.contains(13));
+}
+
+pub fn bopds_solid_interferences_case(_: &[f64]) {
+    let mut vz = InterfVZ::default();
+    solid_interference_state(&mut vz);
+    let mut ez = InterfEZ::default();
+    solid_interference_state(&mut ez);
+    let mut fz = InterfFZ::default();
+    solid_interference_state(&mut fz);
+    let mut zz = InterfZZ::default();
+    solid_interference_state(&mut zz);
+}
+
+fn solid_interference_state(value: &mut Interference) {
+    integer(value.index1());
+    integer(value.index2());
+    integer(value.index_new());
+    value.set_indices(4, 9);
+    value.set_index_new(13);
+    let (first, second) = value.indices();
+    integer(first);
+    integer(second);
+    integer(value.opposite_index(4));
+    integer(value.opposite_index(9));
+    integer(value.opposite_index(27));
+    flag(value.contains(4));
+    flag(value.contains(9));
+    flag(value.contains(27));
+    integer(value.index_new());
+    flag(value.has_index_new());
+    let mut new_index = 77;
+    flag(value.has_index_new_into(&mut new_index));
+    integer(new_index);
+    value.set_index_new(-1);
+    flag(value.has_index_new());
 }
 
 pub fn bopds_interf_common_case(_: &[f64]) {

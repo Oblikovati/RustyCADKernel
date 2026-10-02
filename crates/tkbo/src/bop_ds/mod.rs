@@ -17,7 +17,10 @@ pub use curve::BopdsCurve;
 pub use data_structure::DataStructure;
 pub use face_info::{FaceInfo, PaveBlockIndexMap, VertexIndexSet};
 pub use index_range::IndexRange;
-pub use interference::{InterfEE, InterfEF, InterfFF, InterfVE, InterfVF, InterfVV, Interference};
+pub use interference::{
+    InterfEE, InterfEF, InterfEZ, InterfFF, InterfFZ, InterfVE, InterfVF, InterfVV, InterfVZ,
+    InterfZZ, Interference,
+};
 pub use pair::Pair;
 pub use pave::Pave;
 pub use pave_block::{PaveBlock, PaveBlockHandle};
