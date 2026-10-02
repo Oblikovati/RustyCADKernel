@@ -5,6 +5,16 @@ use rustycad_tkernel::{ncollection::DataMap, standard::Failure};
 use rustycad_tkmath::gp::Xy;
 
 impl BRepMeshDelaun {
+    /// Fan triangles from a node across free polygon edges; `delaun.create_triangles_probe(5,&mut edges)?`.
+    #[doc(hidden)]
+    pub fn create_triangles_probe(
+        &mut self,
+        vertex: i32,
+        polygon: &mut DataMap<i32, bool>,
+    ) -> Result<(), Failure> {
+        self.create_triangles(vertex, polygon)
+    }
+
     /// Build OCCT's enclosing triangle for a finite box; `delaun.build_super_mesh([0.,0.,2.,2.])?`.
     #[doc(hidden)]
     pub fn build_super_mesh(&mut self, bounds: [f64; 4]) -> Result<([i32; 3], [i32; 3]), Failure> {
@@ -38,6 +48,136 @@ impl BRepMeshDelaun {
     ) -> Result<(), Failure> {
         for (edge, forward) in boundary.items() {
             self.add_fan_triangle(vertex, *edge, *forward)?;
+        }
+        Ok(())
+    }
+
+    fn create_triangles(
+        &mut self,
+        vertex: i32,
+        polygon: &mut DataMap<i32, bool>,
+    ) -> Result<(), Failure> {
+        let mut links = Vec::new();
+        let mut external = Vec::new();
+        let entries = polygon
+            .items()
+            .map(|(edge, forward)| (*edge, *forward))
+            .collect::<Vec<_>>();
+        for (edge, forward) in entries {
+            self.create_polygon_fan(vertex, edge, forward, &mut links, &mut external)?;
+        }
+        polygon.clear_with_allocator(None);
+        self.remove_external_triangle_fans(&external, polygon)?;
+        self.remove_unattached_fan_edges(polygon)?;
+        self.recover_fan_holes(&links)
+    }
+
+    fn create_polygon_fan(
+        &mut self,
+        vertex: i32,
+        edge_id: i32,
+        forward: bool,
+        links: &mut Vec<i32>,
+        external: &mut Vec<i32>,
+    ) -> Result<(), Failure> {
+        let (nodes, orientation) = self.oriented_fan_nodes(edge_id, forward)?;
+        let metrics = self.fan_side_metrics(vertex, nodes)?;
+        let tolerance = rustycad_tkernel::precision::p_confusion();
+        if metrics.edge_length < tolerance
+            || metrics.first_side.abs() < tolerance
+            || metrics.last_side.abs() < tolerance
+        {
+            return Ok(());
+        }
+        let fan_edges = self.add_fan_links(vertex, nodes, edge_id, orientation)?;
+        if metrics.first_side > 0. && metrics.last_side > 0. {
+            self.add_signed_triangle(fan_edges, [nodes[0], vertex, nodes[1]])?;
+        } else {
+            links.push(if orientation { edge_id } else { -edge_id });
+            external.push(if metrics.first_link_sq > metrics.last_link_sq {
+                fan_edges[0].abs()
+            } else {
+                fan_edges[2].abs()
+            });
+        }
+        Ok(())
+    }
+
+    fn oriented_fan_nodes(&self, edge_id: i32, forward: bool) -> Result<([i32; 2], bool), Failure> {
+        let edge = self.get_edge(edge_id)?;
+        let nodes = if forward {
+            [edge.first_node(), edge.last_node()]
+        } else {
+            [edge.last_node(), edge.first_node()]
+        };
+        Ok((nodes, forward))
+    }
+
+    fn fan_side_metrics(&self, vertex: i32, nodes: [i32; 2]) -> Result<PolygonFanMetrics, Failure> {
+        let point = self.get_vertex(vertex)?;
+        let first = self.get_vertex(nodes[0])?;
+        let last = self.get_vertex(nodes[1])?;
+        let direction = *last.coord() - *first.coord();
+        let edge_length = direction.modulus();
+        if edge_length < rustycad_tkernel::precision::p_confusion() {
+            return Ok(PolygonFanMetrics::degenerate(edge_length));
+        }
+        let unit = direction / edge_length;
+        let first_link = *first.coord() - *point.coord();
+        let last_link = *point.coord() - *last.coord();
+        Ok(PolygonFanMetrics {
+            edge_length,
+            first_side: first_link.crossed(unit),
+            last_side: unit.crossed(last_link),
+            first_link_sq: first_link.square_modulus(),
+            last_link_sq: last_link.square_modulus(),
+        })
+    }
+
+    fn add_fan_links(
+        &self,
+        vertex: i32,
+        nodes: [i32; 2],
+        edge_id: i32,
+        forward: bool,
+    ) -> Result<[i32; 3], Failure> {
+        Ok([
+            self.add_free_link(vertex, nodes[0])?,
+            if forward { edge_id } else { -edge_id },
+            self.add_free_link(nodes[1], vertex)?,
+        ])
+    }
+
+    fn remove_external_triangle_fans(
+        &mut self,
+        external: &[i32],
+        polygon: &mut DataMap<i32, bool>,
+    ) -> Result<(), Failure> {
+        for edge in external {
+            let adjacent = self.mesh_ref()?.elements_connected_to(*edge)?;
+            if !adjacent.is_empty() {
+                self.delete_triangle(adjacent.first_index(), polygon)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn remove_unattached_fan_edges(&self, polygon: &DataMap<i32, bool>) -> Result<(), Failure> {
+        let edges = polygon.items().map(|(edge, _)| *edge).collect::<Vec<_>>();
+        for edge in edges {
+            if self.mesh_ref()?.elements_connected_to(edge)?.is_empty() {
+                self.mesh_ref()?.remove_link(edge, false)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn recover_fan_holes(&mut self, links: &[i32]) -> Result<(), Failure> {
+        for signed_link in links {
+            let edge_id = signed_link.abs();
+            if self.get_edge(edge_id)?.movability() != DegreeOfFreedom::Deleted {
+                self.mesh_left_polygon(edge_id, *signed_link > 0, None)?;
+            }
         }
         Ok(())
     }
@@ -119,6 +259,26 @@ impl BRepMeshDelaun {
             ))?;
         }
         Ok(self.super_edges)
+    }
+}
+
+struct PolygonFanMetrics {
+    edge_length: f64,
+    first_side: f64,
+    last_side: f64,
+    first_link_sq: f64,
+    last_link_sq: f64,
+}
+
+impl PolygonFanMetrics {
+    fn degenerate(edge_length: f64) -> Self {
+        Self {
+            edge_length,
+            first_side: 0.,
+            last_side: 0.,
+            first_link_sq: 0.,
+            last_link_sq: 0.,
+        }
     }
 }
 
