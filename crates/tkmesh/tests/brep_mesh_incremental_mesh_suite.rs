@@ -1,11 +1,16 @@
 //! Rust mirrors for the full BRepMesh_IncrementalMesh GTest source.
 #![allow(non_snake_case)]
-use rustycad_tkbrep::{brep::BRepTool, topods::Wire};
+use rustycad_tkbrep::{
+    brep::BRepTool,
+    topexp::Explorer,
+    topods::{self, Wire},
+};
 use rustycad_tkernel::message::ProgressRange;
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::{
     gp::{
-        Axis2, Axis3, Circle3, Cylinder3, Direction3, Plane3, Point2, Point3, StandardDirection3,
-        Vector3,
+        Axis2, Axis3, Circle3, Cone3, Cylinder3, Direction3, Plane3, Point2, Point3,
+        StandardDirection3, Vector3,
     },
     poly::mesh_purpose,
 };
@@ -32,6 +37,65 @@ fn BRepMesh_IncrementalMeshTest__TrimmedCylinder_RespectsUVRangeAndDeflection() 
     BRepMeshIncrementalMesh::with_parameters(&shape, &parameters, &ProgressRange::default())
         .unwrap();
     assert_trimmed_cylinder_mesh(&face, parameters.deflection);
+}
+
+#[test]
+fn BRepMesh_IncrementalMeshTest__OCC25445_AngularDeflectionChangesMesh() {
+    let coarse = cone_mesh_counts(10.0_f64.to_radians()).unwrap();
+    let fine = cone_mesh_counts(1.0_f64.to_radians()).unwrap();
+    assert_ne!(coarse.0, fine.0);
+    assert_ne!(coarse.1, fine.1);
+}
+
+fn cone_mesh_counts(angle: f64) -> Result<(i32, i32), rustycad_tkernel::standard::Failure> {
+    let cone = Cone3::new(
+        Axis3::with_standard(Point3::default(), StandardDirection3::Z),
+        0.3,
+        100.0,
+    )?;
+    let maker =
+        BRepBuilderAPIMakeFace::from_cone_bounds(cone, (0.0, std::f64::consts::TAU, 0.0, 100.0))?;
+    let face = maker.face()?;
+    let shape = face.clone().into_shape();
+    let result = BRepMeshIncrementalMesh::with_parameters(
+        &shape,
+        &MeshParameters {
+            deflection: 0.01,
+            angle,
+            ..Default::default()
+        },
+        &ProgressRange::default(),
+    )?;
+    assert_eq!(result.get_status_flags(), 0);
+    let triangulation = BRepTool::triangulation(&face, mesh_purpose::NONE)?.0;
+    Ok((triangulation.nb_nodes(), triangulation.nb_triangles()))
+}
+
+#[test]
+fn BRepMesh_IncrementalMeshTest__ClosedCylinder_SeamPolygonsReferenceValidMeshNodes() {
+    let cylinder = Cylinder3::new(
+        Axis3::with_standard(Point3::default(), StandardDirection3::Z),
+        5.0,
+    )
+    .unwrap();
+    let maker = BRepBuilderAPIMakeFace::from_cylinder_bounds(
+        cylinder,
+        (0.0, std::f64::consts::TAU, 0.0, 10.0),
+    )
+    .unwrap();
+    let face = maker.face().unwrap();
+    let shape = face.clone().into_shape();
+    let mesher = BRepMeshIncrementalMesh::with_parameters(
+        &shape,
+        &MeshParameters {
+            deflection: 0.1,
+            ..Default::default()
+        },
+        &ProgressRange::default(),
+    )
+    .unwrap();
+    assert_eq!(mesher.get_status_flags(), 0);
+    assert_cylinder_seam_polygons(&face);
 }
 
 #[test]
@@ -212,4 +276,39 @@ fn triangle_point_centroid(
         points.iter().map(|point| point.y()).sum::<f64>() / 3.0,
         points.iter().map(|point| point.z()).sum::<f64>() / 3.0,
     )
+}
+
+fn assert_cylinder_seam_polygons(face: &rustycad_tkbrep::topods::Face) {
+    let (triangulation, location) = BRepTool::triangulation(face, mesh_purpose::NONE).unwrap();
+    assert!(!triangulation.is_null());
+    let shape = face.clone().into_shape();
+    let mut explorer = Explorer::new(&shape, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
+    let mut seam_count = 0;
+    while explorer.more() {
+        let edge = topods::edge(explorer.current()).unwrap();
+        explorer.next().unwrap();
+        if !BRepTool::is_closed_on_face(&edge, face).unwrap() {
+            continue;
+        }
+        let forward = BRepTool::polygon_on_triangulation(&edge, &triangulation, &location).unwrap();
+        let reversed = topods::edge(&edge.reversed()).unwrap();
+        let backward =
+            BRepTool::polygon_on_triangulation(&reversed, &triangulation, &location).unwrap();
+        assert!(!forward.is_null());
+        assert!(!backward.is_null());
+        assert_polygon_node_indices(&forward, triangulation.nb_nodes());
+        assert_polygon_node_indices(&backward, triangulation.nb_nodes());
+        seam_count += 1;
+    }
+    assert!(seam_count > 0, "periodic face must expose a seam edge");
+}
+
+fn assert_polygon_node_indices(
+    polygon: &rustycad_tkmath::poly::PolygonOnTriangulation,
+    mesh_nodes: i32,
+) {
+    for index in 1..=polygon.nb_nodes() {
+        let node = polygon.node(index).unwrap();
+        assert!((1..=mesh_nodes).contains(&node));
+    }
 }

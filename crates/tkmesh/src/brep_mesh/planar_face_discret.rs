@@ -17,6 +17,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::top_abs::{ShapeEnum, State};
 use rustycad_tkg3d::{adaptor3d::Adaptor3dSurface, top_abs::Orientation};
 use rustycad_tkmath::{
+    geom_abs::SurfaceType,
     gp::{Point2, Xy},
     poly::{Triangle, Triangulation},
 };
@@ -38,8 +39,7 @@ impl BRepMeshPlanarFaceDiscret {
     fn discretize_face(face: &FaceHandle, parameters: &MeshParameters) -> Result<(), Failure> {
         if !matches!(
             face.get_surface().get_type()?,
-            rustycad_tkmath::geom_abs::SurfaceType::Plane
-                | rustycad_tkmath::geom_abs::SurfaceType::Cylinder
+            SurfaceType::Plane | SurfaceType::Cylinder | SurfaceType::Cone
         ) {
             return Err(Failure::with_message(
                 "Standard_NotImplemented",

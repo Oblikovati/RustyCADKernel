@@ -198,6 +198,8 @@ its curved-surface and mesh-reuse cases are implemented. Four source cases now h
 mirrors: the bounded eight-edge planar polygon, the trimmed cylindrical face with UV and
 deflection checks, the isolated zero-radius circular edge, and an unbounded cylinder face
 that completes with status mask 69 and no triangulation. The trimmed-cylinder and
-unbounded-cylinder cases were rerun against their pinned native CTests. The empty-compound
-case also has an existing Rust mirror. Four declarations remain for torus Boolean fusion,
-seam edge polygons, cone angular deflection and quality decrease rebuilding. The source remains unmapped until all nine declarations pass together.
+unbounded-cylinder cases were rerun against their pinned native CTests. The empty-compound case also has an existing Rust mirror. A bounded cone-face fixture now
+checks that angular deflection changes both node and triangle counts; this does not yet
+reproduce the source's complete MakeCone shape. Four declarations still need full source
+parity: torus Boolean fusion, closed-cylinder seam polygons, cone angular deflection and
+quality-decrease rebuilding. The source remains unmapped until all nine declarations pass together.
