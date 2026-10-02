@@ -10,7 +10,7 @@ mod pcurves;
 use rustycad_tkbrep::brep::access::edge_tshape;
 use rustycad_tkbrep::brep::update_curves::as_gcurve;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepCurveRepresentation, BRepGCurve};
-use rustycad_tkbrep::topods::{self, Edge, ShapeIterator, Vertex};
+use rustycad_tkbrep::topods::{self, Edge, Face, ShapeIterator, Vertex};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dOffsetCurve, Geom2dTrimmedCurve};
@@ -117,6 +117,35 @@ impl ShapeBuildEdge {
         self.copy_ranges(&copy, edge, 0.0, 1.0)?;
         Ok(copy)
     }
+
+    /// Copies an edge with replacement vertices and a p-curve range on its face;
+    /// `ShapeBuildEdge.copy_replace_vertices_with_pcurve_range(&e,&v1,&v2,&pc,&f,(0.2,0.8))?`.
+    pub fn copy_replace_vertices_with_pcurve_range(
+        &self,
+        edge: &Edge,
+        first_vertex: &Vertex,
+        last_vertex: &Vertex,
+        pcurve: &Handle<dyn Geom2dCurve>,
+        face: &Face,
+        range: (f64, f64),
+    ) -> Result<Edge, Failure> {
+        let copy = self.copy_replace_vertices(edge, first_vertex, last_vertex)?;
+        set_face_pcurve_range(&copy, pcurve, face, range)?;
+        Ok(copy)
+    }
+}
+
+/// Replaces the p-curve representation and clears SameRange when its range changes.
+fn set_face_pcurve_range(
+    edge: &Edge,
+    pcurve: &Handle<dyn Geom2dCurve>,
+    face: &Face,
+    (first, last): (f64, f64),
+) -> Result<(), Failure> {
+    let builder = BRepBuilder::default();
+    builder.update_edge_pcurve_on_face(edge, pcurve, face, 0.0)?;
+    builder.range_on_face(edge, face, first, last)?;
+    builder.same_range(edge, false)
 }
 
 /// The vertex loop of `CopyReplaceVertices`: fills the null vertices with the first

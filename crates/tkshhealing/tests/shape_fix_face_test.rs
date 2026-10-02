@@ -78,11 +78,24 @@ fn valid_face_on_periodic_conical_single_wire_with_context() {
     assert!(!wires.more());
     let mut edges = ShapeIterator::new(&face_wire, false, true);
     let mut edge_count = 0;
+    let mut checked_ring = false;
     while edges.more() {
+        let edge = rustycad_tkbrep::topods::edge(edges.value().unwrap()).unwrap();
+        let fixed_face = rustycad_tkbrep::topods::face(&fixed_shape).unwrap();
+        let pcurve = rustycad_tkbrep::brep::BRepTool::curve_on_face(&edge, &fixed_face).unwrap();
+        let start = pcurve.pcurve.value(pcurve.first).unwrap();
+        let end = pcurve.pcurve.value(pcurve.last).unwrap();
+        if (start.y() - 0.5).abs() < 1e-6 && (end.y() - 0.5).abs() < 1e-6 {
+            assert!(start.x().abs() < 1e-9);
+            assert!((end.x() - 2.0 * PI).abs() < 1e-9);
+            assert!((pcurve.last - 1.0497704792601261).abs() < 1e-9);
+            checked_ring = true;
+        }
         edge_count += 1;
         edges.next();
     }
     assert_eq!(edge_count, 4);
+    assert!(checked_ring);
     assert!(analyzer.is_valid().unwrap());
 }
 

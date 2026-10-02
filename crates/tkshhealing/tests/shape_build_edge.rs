@@ -70,6 +70,40 @@ fn copy_replace_vertices_takes_the_given_vertices() {
 }
 
 #[test]
+fn native_fix_gap_edge_copy_replaces_vertices_and_pcurve_range() {
+    let (edge, face) = edge_on_plane();
+    let (first, last) = replacement_vertices();
+    let pcurve = x_line_2d();
+    let fixed = ShapeBuildEdge
+        .copy_replace_vertices_with_pcurve_range(&edge, &first, &last, &pcurve, &face, (0.25, 0.75))
+        .unwrap();
+    assert!(!fixed.is_same(&edge));
+    assert_eq!(
+        BRepTool::range_on_face(&fixed, &face).unwrap(),
+        (0.25, 0.75)
+    );
+    assert!(BRepTool::curve_on_face(&fixed, &face).unwrap().pcurve == pcurve);
+    assert_eq!(BRepTool::range_on_face(&edge, &face).unwrap(), (0.0, 1.0));
+    assert!(!BRepTool::same_range(&fixed).unwrap());
+    let (fixed_first, fixed_last) = rustycad_tkbrep::topexp::vertices(&fixed, false);
+    assert!(fixed_first.is_same(&first));
+    assert!(fixed_last.is_same(&last));
+}
+
+fn replacement_vertices() -> (Vertex, Vertex) {
+    let builder = BRepBuilder::default();
+    let mut first = Vertex::default();
+    let mut last = Vertex::default();
+    builder
+        .make_vertex_at(&mut first, Point3::new(0.25, 0.0, 0.0), 1e-7)
+        .unwrap();
+    builder
+        .make_vertex_at(&mut last, Point3::new(0.75, 0.0, 0.0), 1e-7)
+        .unwrap();
+    (first, last)
+}
+
+#[test]
 fn ranges_and_pcurves_are_set_replaced_and_removed() {
     let (edge, face) = edge_on_plane();
     ShapeBuildEdge.set_range_3d(&edge, 0.25, 0.5).unwrap();
