@@ -8,10 +8,12 @@ struct DelaunWindingTag{using type=bool(BRepMesh_Delaun::*)(const int&,const IMe
 struct DelaunAreaTag{using type=double(BRepMesh_Delaun::*)(const IMeshData::SequenceOfInteger&,int,int)const;friend type delaun_member(DelaunAreaTag);};
 struct DelaunIntersectionTag{using type=BRepMesh_GeomTool::IntFlag(BRepMesh_Delaun::*)(const BRepMesh_Edge&,const BRepMesh_Edge&,bool,bool,gp_Pnt2d&)const;friend type delaun_member(DelaunIntersectionTag);};
 struct DelaunMeshPolygonTag{using type=void(BRepMesh_Delaun::*)(IMeshData::SequenceOfInteger&,IMeshData::SequenceOfBndB2d&,Handle(IMeshData::MapOfInteger));friend type delaun_member(DelaunMeshPolygonTag);};
+struct DelaunSuperMeshTag{using type=void(BRepMesh_Delaun::*)(const Bnd_Box2d&);friend type delaun_member(DelaunSuperMeshTag);};
 template struct DelaunAccess<DelaunWindingTag,&BRepMesh_Delaun::isVertexInsidePolygon>;
 template struct DelaunAccess<DelaunAreaTag,&BRepMesh_Delaun::polyArea>;
 template struct DelaunAccess<DelaunIntersectionTag,&BRepMesh_Delaun::intSegSeg>;
 template struct DelaunAccess<DelaunMeshPolygonTag,&BRepMesh_Delaun::meshPolygon>;
+template struct DelaunAccess<DelaunSuperMeshTag,&BRepMesh_Delaun::superMesh>;
 static auto delaun_core_mesh(int kind,int flags){
  occ::handle<NCollection_IncAllocator> arena=new NCollection_IncAllocator;
  occ::handle<BRepMesh_DataStructureOfDelaun> mesh=new BRepMesh_DataStructureOfDelaun(arena,10);
@@ -73,6 +75,13 @@ void mesh_delaun_polygon_mesh(std::istream&input){
  BRepMesh_Delaun delaun(mesh,-1,-1,false);IMeshData::SequenceOfInteger polygon;IMeshData::SequenceOfBndB2d boxes;
  for(int i=0;i<4;++i){int edge=reverse?-(4-i):i+1;polygon.Append(edge);auto&e=delaun.GetEdge(std::abs(edge));Bnd_B2d box;box.Add(delaun.GetVertex(edge>0?e.FirstNode():e.LastNode()).Coord());box.Add(delaun.GetVertex(edge>0?e.LastNode():e.FirstNode()).Coord());box.Enlarge(Precision::PConfusion());boxes.Append(box);}
  std::cout<<"OK ";(delaun.*delaun_member(DelaunMeshPolygonTag{}))(polygon,boxes,Handle(IMeshData::MapOfInteger)());delaun_polygon_mesh_snapshot(delaun);ga_end();
+}
+void mesh_delaun_super_mesh(std::istream&input){
+ double minX,minY,maxX,maxY;input>>minX>>minY>>maxX>>maxY;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
+ occ::handle<BRepMesh_DataStructureOfDelaun>mesh=new BRepMesh_DataStructureOfDelaun(arena,3);BRepMesh_Delaun delaun(mesh,-1,-1,false);Bnd_Box2d bounds;
+ bounds.Add(gp_Pnt2d(minX,minY));bounds.Add(gp_Pnt2d(maxX,maxY));(delaun.*delaun_member(DelaunSuperMeshTag{}))(bounds);std::cout<<"OK ";
+ for(int i=1;i<=mesh->NbNodes();++i){auto&node=delaun.GetVertex(i);ga_int(i);ga_real(node.Coord().X());ga_real(node.Coord().Y());}
+ for(int i=1;i<=mesh->NbLinks();++i){auto&edge=delaun.GetEdge(i);ga_int(i);ga_int(edge.FirstNode());ga_int(edge.LastNode());ga_int(edge.Movability());}ga_end();
 }
 #undef DC_TRY
 void mesh_delaun_null(std::istream&input){

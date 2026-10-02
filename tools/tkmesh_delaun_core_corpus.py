@@ -14,9 +14,14 @@ def polygon_mesh_rows() -> list[str]:
     return [f'mesh_delaun_polygon_mesh {kind} {reverse} {frontier}'
             for kind in range(2) for reverse in range(2) for frontier in range(2)]
 
+def super_mesh_rows() -> list[str]:
+    """Enclosing triangle coordinates for square, offset, and anisotropic bounds."""
+    return ['mesh_delaun_super_mesh '+' '.join(map(str,bounds)) for bounds in
+            ((0,0,2,2),(-2,1,3,5),(0,0,1,4),(2,-3,7,0))]
+
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -25,4 +30,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows(),frozenset(manifest['input_sha256']))

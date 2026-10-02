@@ -3,11 +3,12 @@ use super::super::{flag, int, real};
 use super::vertex_inspector::report_unit;
 use rustycad_tkernel::{
     ncollection::{DynamicArray, Map, Sequence},
-    standard::Failure,
+    standard::{Failure, Handle},
 };
 use rustycad_tkmath::gp::{Point2, Xy};
 use rustycad_tkmesh::brep_mesh::{
-    BRepMeshDelaun as Delaun, BRepMeshVertex as Vertex, DegreeOfFreedom as Freedom,
+    BRepMeshDataStructureOfDelaun as Mesh, BRepMeshDelaun as Delaun, BRepMeshVertex as Vertex,
+    DegreeOfFreedom as Freedom,
 };
 #[path = "../../tests/support/delaun_core.rs"]
 mod fixture;
@@ -21,6 +22,43 @@ pub fn polygon_mesh_case(v: &[i32]) {
         print!("{}", error.exception_type());
     }
     println!();
+}
+pub fn super_mesh_case(v: &[i32]) {
+    print!("OK ");
+    if let Err(error) = report_super_mesh(v) {
+        print!("{}", error.exception_type());
+    }
+    println!();
+}
+fn report_super_mesh(v: &[i32]) -> Result<(), Failure> {
+    let allocator = Handle::new(Default::default());
+    let mesh = Handle::new(Mesh::new(&allocator, 3));
+    let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false)?;
+    let bounds = [v[0], v[1], v[2], v[3]].map(f64::from);
+    let (nodes, edges) = delaun.build_super_mesh(bounds)?;
+    report_super_nodes(&delaun, nodes)?;
+    report_super_edges(&delaun, edges)?;
+    Ok(())
+}
+fn report_super_nodes(delaun: &Delaun, nodes: [i32; 3]) -> Result<(), Failure> {
+    for index in nodes {
+        let node = delaun.get_vertex(index)?;
+        int(index);
+        real(node.coord().x());
+        real(node.coord().y());
+    }
+    Ok(())
+}
+fn report_super_edges(delaun: &Delaun, edges: [i32; 3]) -> Result<(), Failure> {
+    for signed_index in edges {
+        let index = signed_index.abs();
+        let edge = delaun.get_edge(index)?;
+        int(index);
+        int(edge.first_node());
+        int(edge.last_node());
+        int(edge.movability() as i32);
+    }
+    Ok(())
 }
 fn polygon_mesh(v: &[i32]) -> Result<(), Failure> {
     let mesh = fixture::polygon_mesh(v[0], v[2] != 0);
