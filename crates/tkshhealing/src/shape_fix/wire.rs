@@ -1,13 +1,20 @@
 // Rust translation of ShapeFix/ShapeFix_Wire.cxx reorder and gap entry points at
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! Ordered-wire state, reorder application and unchanged-gap passes.
+//! Ordered-wire state, reorder application and the pinned periodic p-curve repair.
 use super::{FixRoot, FixRootData};
-use crate::shape_analysis::{ShapeAnalysisWire, ShapeAnalysisWireOrder};
+use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
+use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus, ShapeExtendWireData};
-use rustycad_tkbrep::topods::{Edge, Face, Wire};
+use crate::shape_fix::ShapeFixShapeTolerance;
+use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::brep_tools::ReShape;
+use rustycad_tkbrep::topods::{self, Edge, Face, Vertex, Wire};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkg2d::geom2d::Geom2dCurve;
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+use rustycad_tkmath::gp::Point2;
 
 #[derive(Default)]
 struct WireFixState {
@@ -18,7 +25,7 @@ struct WireFixState {
     closed_mode: bool,
 }
 
-/// The currently implemented `ShapeFix_Wire` reorder and no-gap pass.
+/// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
 pub struct ShapeFixWire {
     parent: StandardTransient,
     root: FixRootData,
@@ -103,7 +110,7 @@ impl ShapeFixWire {
         self.fix_gap_pass(true)
     }
 
-    /// `FixGaps2d()`: run the native adjacent-pcurve analysis when no gap needs repair.
+    /// `FixGaps2d()`: analyze adjacent p-curves and repair the pinned closed periodic gap.
     pub fn fix_gaps_2d(&self) -> Result<bool, Failure> {
         self.set_gap_status(false, ShapeExtendStatus::Ok);
         self.fix_gap_pass(false)
@@ -235,10 +242,93 @@ impl ShapeFixWire {
             self.set_gap_status(is_3d, ShapeExtendStatus::Fail1);
             return Ok(());
         }
+        if changed && !is_3d && self.fix_closed_periodic_pcurve_gap(analyzer, index)? {
+            return Ok(());
+        }
         if changed {
             return Err(unsupported_gap(index, is_3d, analyzer));
         }
         Ok(())
+    }
+
+    /// Repairs the same-edge periodic p-curve gap used by the pinned conical loop.
+    fn fix_closed_periodic_pcurve_gap(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        index: i32,
+    ) -> Result<bool, Failure> {
+        if analyzer.nb_edges() != 1 || index != 1 {
+            return Ok(false);
+        }
+        let edge = analyzer.wire_data().edge(1)?;
+        let face = analyzer.face();
+        let (curve, first, last) = ShapeAnalysisEdge::new().pcurve_on_face(&edge, &face, false)?;
+        let Some(midpoint) = periodic_gap_midpoint(&curve, first, last, &face)? else {
+            return Ok(false);
+        };
+        let replacement =
+            ShapeBuildEdge.copy_bspline_pcurve_with_endpoints(&curve, midpoint, midpoint)?;
+        if !self.replace_closed_edge(&edge, &face, &replacement, (first, last), index)? {
+            return Ok(false);
+        }
+        self.set_gap_status(false, ShapeExtendStatus::Done1);
+        Ok(true)
+    }
+
+    /// Records the copied closed edge and vertex in the shared reshape context.
+    fn replace_closed_edge(
+        &self,
+        edge: &Edge,
+        face: &Face,
+        pcurve: &Handle<dyn Geom2dCurve>,
+        range: (f64, f64),
+        index: i32,
+    ) -> Result<bool, Failure> {
+        let analysis = ShapeAnalysisEdge::new();
+        let first = analysis.first_vertex(edge);
+        let last = analysis.last_vertex(edge);
+        if !first.is_same(&last) {
+            return Ok(false);
+        }
+        let (new_first, new_last) = replacement_vertices(&last)?;
+        let fixed = ShapeBuildEdge.copy_replace_vertices_with_pcurve_range(
+            edge, &new_first, &new_last, pcurve, face, range,
+        )?;
+        reset_replacement_tolerances(&new_last, &fixed)?;
+        self.record_replacement(edge, &last, &new_last, &fixed)?;
+        self.wire_data()?.set(&fixed, index)?;
+        Ok(true)
+    }
+
+    /// Makes a context when needed and records the native vertex and edge replacements.
+    fn record_replacement(
+        &self,
+        edge: &Edge,
+        old_vertex: &Vertex,
+        new_vertex: &Vertex,
+        replacement: &Edge,
+    ) -> Result<(), Failure> {
+        let mut context = self.context();
+        if context.is_null() {
+            context = Handle::new(ShapeBuildReShape::new());
+            self.set_context(&context);
+        }
+        let context = context.get().ok_or_else(|| {
+            Failure::with_message(
+                "Standard_NullObject",
+                "ShapeFix_Wire context became null; expected an initialized reshape context",
+            )
+        })?;
+        ReShape::replace(
+            context,
+            &old_vertex.clone().into_shape(),
+            &new_vertex.clone().into_shape(),
+        )?;
+        ReShape::replace(
+            context,
+            &edge.clone().into_shape(),
+            &replacement.clone().into_shape(),
+        )
     }
 
     fn clear_statuses(&self) {
@@ -275,6 +365,56 @@ impl ShapeFixWire {
         };
         ShapeExtend::decode_status(flags, status)
     }
+}
+
+/// Finds the midpoint after moving periodic U values to their nearest representation.
+fn periodic_gap_midpoint(
+    curve: &Handle<dyn Geom2dCurve>,
+    first: f64,
+    last: f64,
+    face: &Face,
+) -> Result<Option<Point2>, Failure> {
+    let (surface, _) = BRepTool::surface_with_location(face)?;
+    let Some(surface) = surface.get() else {
+        return Ok(None);
+    };
+    if !surface.is_u_periodic() {
+        return Ok(None);
+    }
+    let start = curve.value(first)?;
+    let end = curve.value(last)?;
+    let end_u = nearest_periodic_value(end.x(), start.x(), surface.u_period()?);
+    Ok(Some(Point2::new(
+        (start.x() + end_u) * 0.5,
+        (start.y() + end.y()) * 0.5,
+    )))
+}
+
+/// Shifts a periodic value by the nearest integer period to its target.
+fn nearest_periodic_value(value: f64, target: f64, period: f64) -> f64 {
+    value + ((target - value) / period).round() * period
+}
+
+/// Copies the closed endpoint vertex and gives its two edge occurrences opposite senses.
+fn replacement_vertices(vertex: &Vertex) -> Result<(Vertex, Vertex), Failure> {
+    let copy = topods::vertex(&vertex.empty_copied()?)?;
+    let reversed = topods::vertex(&copy.clone().into_shape().oriented(Orientation::Reversed))?;
+    Ok((reversed, copy))
+}
+
+/// Sets the replacement vertex and edge tolerances to OCCT's confusion value.
+fn reset_replacement_tolerances(vertex: &Vertex, edge: &Edge) -> Result<(), Failure> {
+    let tolerance = ShapeFixShapeTolerance::new();
+    tolerance.set_tolerance(
+        &vertex.clone().into_shape(),
+        rustycad_tkernel::precision::confusion(),
+        ShapeEnum::Vertex,
+    )?;
+    tolerance.set_tolerance(
+        &edge.clone().into_shape(),
+        rustycad_tkernel::precision::confusion(),
+        ShapeEnum::Edge,
+    )
 }
 
 impl FixRoot for ShapeFixWire {
