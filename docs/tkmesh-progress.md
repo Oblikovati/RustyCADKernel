@@ -192,16 +192,18 @@ the remaining complete-source candidate is the IncrementalMesh regression suite.
 
 ### IncrementalMesh free-edge and planar-polygon cases
 
-The full nine-case `BRepMesh_IncrementalMesh_Test.cxx` source remains unmapped while
-its curved-surface and mesh-reuse cases are implemented. Four source cases now have Rust
-mirrors: the bounded eight-edge planar polygon, the trimmed cylindrical face with UV and
-deflection checks, the isolated zero-radius circular edge, and an unbounded cylinder face
-that completes with status mask 69 and no triangulation. The trimmed-cylinder and
-unbounded-cylinder cases were rerun against their pinned native CTests. The empty-compound case also has an existing Rust mirror. Bounded cylinder, cone, and sphere fixtures now check seam polygon node validity, angular
-sensitivity, and quality-decrease remeshing. The cylinder seam fixture checks one lateral
-face; cone and sphere fixtures have much coarser triangulations than the source's primitive
-solids. Four declarations still need full source parity: torus Boolean fusion,
-closed-cylinder solid polygons, the complete cone-solid check and sphere mesh reuse. The source remains unmapped until all nine declarations pass together.
+`BRepMesh_IncrementalMesh_Test.cxx` is partially mapped while its curved-surface and
+mesh-reuse cases are implemented. Five declarations have source-faithful Rust mirrors:
+the bounded eight-edge planar polygon, trimmed cylindrical face UV/deflection checks,
+zero-radius circular edge, empty-compound no-op, and unbounded cylinder status/empty
+triangulation. Those mirrors use the source geometry, meshing parameters, and observable
+checks. The full native CTest passes 9/9; the Rust target passes 8 tests, including these
+five source mirrors and three focused non-equivalent meshing probes. Bounded cylinder,
+cone, and sphere fixtures check seam polygon node validity, angular sensitivity, and
+quality-decrease remeshing, but they do not reproduce the source's full solids. Four
+declarations still need parity: torus Boolean fusion, closed-cylinder solid polygons,
+the complete cone-solid check, and sphere mesh reuse with geometry cleanup. The source
+suite remains incomplete until all nine declarations have faithful passing Rust mirrors.
 
 ### Discret algorithm factory suite
 
