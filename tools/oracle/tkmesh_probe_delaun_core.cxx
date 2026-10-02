@@ -6,6 +6,15 @@
 #include <tuple>
 #include <vector>
 #include <BRepMesh_Delaun.hxx>
+#include <BRepMesh_IncrementalMesh.hxx>
+#include <BRepBuilderAPI_MakeEdge.hxx>
+#include <BRepBuilderAPI_MakeFace.hxx>
+#include <BRepBuilderAPI_MakeWire.hxx>
+#include <BRep_Tool.hxx>
+#include <Geom_Plane.hxx>
+#include <Poly_Triangulation.hxx>
+#include <TopLoc_Location.hxx>
+#include <gp_Pln.hxx>
 #include <gp_Vec2d.hxx>
 template<class Tag,typename Tag::type Member>struct DelaunAccess{friend typename Tag::type delaun_member(Tag){return Member;}};
 struct DelaunWindingTag{using type=bool(BRepMesh_Delaun::*)(const int&,const IMeshData::VectorOfInteger&)const;friend type delaun_member(DelaunWindingTag);};
@@ -166,6 +175,15 @@ void mesh_delaun_perform(std::istream&input){
 void mesh_delaun_legacy_angle(std::istream&input){
  int mode;input>>mode;gp_Vec2d right(1.,0.),up(0.,1.);if(mode==0){ga_real(up.Angle(right));ga_real(right.Angle(up));}
  else{gp_XY points[5]={gp_XY(1.,0.),gp_XY(0.,mode==1?1.:-1.),gp_XY(-1.,0.),gp_XY(0.,mode==1?-1.:1.),gp_XY(1.,0.)};gp_Vec2d previous(points[0].X(),points[0].Y());double total=0.;for(int i=1;i<5;++i){gp_Vec2d current(points[i].X(),points[i].Y());total+=current.Angle(previous);previous=current;}ga_real(total);ga_flag(std::abs(2.*M_PI-total)<=Precision::Angular());ga_flag(std::abs(std::abs(total)-2.*M_PI)<=Precision::Angular());}ga_end();
+}
+static void report_incremental_triangulation(const TopoDS_Face&face){
+ TopLoc_Location location;auto triangulation=BRep_Tool::Triangulation(face,location);ga_flag(!triangulation.IsNull());if(triangulation.IsNull())return;ga_int(triangulation->NbNodes());ga_int(triangulation->NbTriangles());
+ for(int i=1;i<=triangulation->NbNodes();++i){auto point=triangulation->Node(i);ga_real(point.X());ga_real(point.Y());ga_real(point.Z());auto uv=triangulation->UVNode(i);ga_real(uv.X());ga_real(uv.Y());}
+ for(int i=1;i<=triangulation->NbTriangles();++i){int a,b,c;triangulation->Triangle(i).Get(a,b,c);ga_int(a);ga_int(b);ga_int(c);}
+}
+void mesh_incremental_planar_hole(std::istream&){
+ auto outer=BRepBuilderAPI_MakeWire(BRepBuilderAPI_MakeEdge(gp_Pnt(-5.,-5.,0.),gp_Pnt(5.,-5.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(5.,-5.,0.),gp_Pnt(5.,5.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(5.,5.,0.),gp_Pnt(-5.,5.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(-5.,5.,0.),gp_Pnt(-5.,-5.,0.)));
+ auto plane=new Geom_Plane(gp_Pln(gp::Origin(),gp::DZ()));BRepBuilderAPI_MakeFace maker(plane,outer.Wire());auto inner=BRepBuilderAPI_MakeWire(BRepBuilderAPI_MakeEdge(gp_Pnt(-1.,-1.,0.),gp_Pnt(1.,-1.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(1.,-1.,0.),gp_Pnt(1.,1.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(1.,1.,0.),gp_Pnt(-1.,1.,0.)),BRepBuilderAPI_MakeEdge(gp_Pnt(-1.,1.,0.),gp_Pnt(-1.,-1.,0.)));maker.Add(inner.Wire());auto face=maker.Face();BRepMesh_IncrementalMesh mesher(face,0.1);std::cout<<"OK ";ga_flag(mesher.IsDone());ga_int(mesher.GetStatusFlags());report_incremental_triangulation(face);ga_end();
 }
 void mesh_delaun_polygon_mesh(std::istream&input){
  int kind,reverse,frontier;input>>kind>>reverse>>frontier;occ::handle<NCollection_IncAllocator>arena=new NCollection_IncAllocator;
