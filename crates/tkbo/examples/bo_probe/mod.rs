@@ -58,6 +58,7 @@ fn dispatch_case(operation: &str, v: &[f64]) {
         "bop_couple_paves" => records::couple_of_pave_blocks_case(v),
         "bop_shape_info" => records::shape_info_case(v),
         "bop_face_info" => records::face_info_case(v),
+        "bop_data_structure" => records::data_structure_case(v),
         "points" => intersections::points_case(v),
         "common" => intersections::common_case(v),
         "intersection_curve" => curves::case(v),

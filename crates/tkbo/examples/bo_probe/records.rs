@@ -331,6 +331,95 @@ pub fn face_info_case(_: &[f64]) {
     flag(info.vertices_section().contains(7));
 }
 
+/// The pre-Init shape and argument storage of `BOPDS_DS`.
+pub fn data_structure_case(_: &[f64]) {
+    use rustycad_tkbo::bop_ds::DataStructure;
+    let (first, second) = data_structure_shapes();
+    let mut structure = DataStructure::default();
+    structure.set_arguments(&[first.clone(), second.clone()]);
+    write_initial_ds_state(&structure);
+    write_appended_ds_state(&mut structure, &first, &second);
+    write_appended_metadata(&mut structure, &second);
+    structure.clear();
+    write_cleared_ds_state(&structure, &first);
+}
+
+fn data_structure_shapes() -> (
+    rustycad_tkbrep::topods::Shape,
+    rustycad_tkbrep::topods::Shape,
+) {
+    use rustycad_tkbrep::brep::BRepBuilder;
+    let builder = BRepBuilder::default();
+    (make_vertex(&builder, 1.0), make_vertex(&builder, 2.0))
+}
+
+fn make_vertex(
+    builder: &rustycad_tkbrep::brep::BRepBuilder,
+    x: f64,
+) -> rustycad_tkbrep::topods::Shape {
+    use rustycad_tkbrep::topods::Vertex;
+    use rustycad_tkmath::gp::Point3;
+    let mut vertex = Vertex::default();
+    builder
+        .make_vertex_at(&mut vertex, Point3::new(x, 0.0, 0.0), 1e-7)
+        .expect("valid finite vertex point");
+    vertex.into_shape()
+}
+
+fn write_initial_ds_state(structure: &rustycad_tkbo::bop_ds::DataStructure) {
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    integer(structure.nb_ranges());
+    integer(structure.arguments().len() as i32);
+}
+
+fn write_appended_ds_state(
+    structure: &mut rustycad_tkbo::bop_ds::DataStructure,
+    first: &rustycad_tkbrep::topods::Shape,
+    second: &rustycad_tkbrep::topods::Shape,
+) {
+    integer(structure.append_shape(first));
+    integer(structure.append_shape(second));
+    let reversed = first.reversed();
+    integer(structure.append_shape(&reversed));
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    integer(structure.nb_ranges());
+    integer(structure.rank(0));
+    integer(structure.rank(1));
+    flag(structure.is_new_shape(0));
+    flag(structure.is_new_shape(-1));
+    integer(structure.index(first));
+    integer(structure.index(&reversed));
+    integer(structure.index(second));
+    flag(structure.shape(0).unwrap().is_same(first));
+    flag(structure.shape_info(0).unwrap().shape().is_same(first));
+}
+
+fn write_appended_metadata(
+    structure: &mut rustycad_tkbo::bop_ds::DataStructure,
+    shape: &rustycad_tkbrep::topods::Shape,
+) {
+    let mut info = ShapeInfo::default();
+    info.set_shape(shape);
+    info.set_flag(17);
+    integer(structure.append_shape_info(&info));
+    integer(structure.shape_info(3).unwrap().flag());
+    structure.change_shape_info(3).unwrap().set_flag(21);
+    integer(structure.shape_info(3).unwrap().flag());
+}
+
+fn write_cleared_ds_state(
+    structure: &rustycad_tkbo::bop_ds::DataStructure,
+    shape: &rustycad_tkbrep::topods::Shape,
+) {
+    integer(structure.nb_shapes());
+    integer(structure.nb_source_shapes());
+    integer(structure.nb_ranges());
+    integer(structure.arguments().len() as i32);
+    integer(structure.index(shape));
+}
+
 /// Writes FaceInfo collections in native In, On and section order.
 fn write_face_info_counts(info: &FaceInfo) {
     integer(info.index());
