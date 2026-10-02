@@ -348,10 +348,10 @@ fn occ49_cut_shape_has_no_symmetry_axis_from_native_brep() {
     );
     let mut props = GProps::new();
     BRepGProp::volume_properties(&cut_result, &mut props, false, false, false).unwrap();
-    assert!(near(props.mass(), 5497.7871437821368, 1.0e-9));
+    assert!(near(props.mass(), 5_497.787_143_782_137, 1.0e-9));
     let center = props.centre_of_mass();
-    assert!(near(center.x(), -0.60630454511198362, 1.0e-12));
-    assert!(near(center.y(), -0.60630454511198295, 1.0e-12));
+    assert!(near(center.x(), -0.606_304_545_111_983_6, 1.0e-12));
+    assert!(near(center.y(), -0.606_304_545_111_983, 1.0e-12));
     assert!(near(center.z(), 10.714285714285715, 1.0e-12));
     let inertia = props.matrix_of_inertia();
     let expected = [
@@ -359,7 +359,7 @@ fn occ49_cut_shape_has_no_symmetry_axis_from_native_brep() {
         14521.015150373298,
         -19047.619047619028,
         14521.015150373298,
-        315878.24146287912,
+        315_878.241_462_879_1,
         -19047.619047619057,
         -19047.619047619028,
         -19047.619047619057,
