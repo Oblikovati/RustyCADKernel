@@ -10,6 +10,7 @@ use rustycad_tkernel::{
 };
 mod circles;
 mod cleanup;
+mod cleanup_mesh;
 mod contains;
 mod frontier_reachability;
 mod insertion;
