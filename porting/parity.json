@@ -214966,6 +214966,246 @@
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh::with_parameters",
       "status": "partial",
       "notes": "Exact empty-compound no-op constructor behavior only. Nonempty shapes return Standard_NotImplemented pending BRepMesh edge and face discretization; constructor parameter validation is ported."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::default",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "Rust allocation policy",
+      "status": "excluded",
+      "notes": "The allocator selects native storage arenas; Rust uses its owned allocator and does not expose this memory policy."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::SetPave1(const BOPDS_Pave&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::set_pave1",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::Pave1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::pave1",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::SetPave2(const BOPDS_Pave&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::set_pave2",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::Pave2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::pave2",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::SetEdge(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::set_edge",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::Edge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::edge",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::HasEdge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::has_edge",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::HasEdge(int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::has_edge_into",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::SetOriginalEdge(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::set_original_edge",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::OriginalEdge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::original_edge",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::IsSplitEdge() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::is_split_edge",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::Range(double&,double&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::range",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::HasSameBounds(const occ::handle<BOPDS_PaveBlock>&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::has_same_bounds",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::Indices(int&,int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::indices",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::IsToUpdate() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::is_to_update",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::AppendExtPave(const BOPDS_Pave&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::append_ext_pave",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::AppendExtPave1(const BOPDS_Pave&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::append_ext_pave1",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::RemoveExtPave(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::remove_ext_pave",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::ExtPaves() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::ext_paves",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::ChangeExtPaves()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::change_ext_paves",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::Update(NCollection_List<occ::handle<BOPDS_PaveBlock>>&,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::update",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::ContainsParameter(double,double,int&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::contains_parameter",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::SetShrunkData(double,double,const Bnd_Box&,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::set_shrunk_data",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::ShrunkData(double&,double&,Bnd_Box&,bool&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::shrunk_data",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::HasShrunkData() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::has_shrunk_data",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::Dump() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::dump",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::IsSplittable() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "rustycad_tkbo::bop_ds::PaveBlock::is_splittable",
+      "status": "implemented",
+      "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
+    },
+    {
+      "upstream_id": "BOPDS_PaveBlock::DEFINE_STANDARD_RTTIEXT(BOPDS_PaveBlock,Standard_Transient)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
+      "rust_item": "Rust static type metadata",
+      "status": "excluded",
+      "notes": "Standard RTTI metadata is not a Rust callable API; Rust type identity is static."
     }
   ],
   "tests": [
