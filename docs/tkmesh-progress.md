@@ -134,3 +134,13 @@ replays 89 native crash differences for null-mesh queries and collinear circle
 cleanup. Supermesh bounds are included; free-vertex insertion and constraint
 processing remain in progress. This slice maps no original Delaun test declaration.
 TKMesh remains at 2/29 mapped original declarations.
+
+### IncrementalMesh empty-compound construction
+
+The parameter-based `BRepMesh_IncrementalMesh` constructor now preserves the
+native no-op behavior for an empty compound and validates linear deflection
+parameters. Nonempty shapes still report the unported discretization stage. Its
+focused Rust tests and the filtered native OCC31125 regression pass, but the
+original test declaration is not counted as mapped: the source file contains
+nine declarations and the source gate requires mapping the whole file together.
+This adds one partial API row; TKMesh remains at 2/29 mapped declarations.
