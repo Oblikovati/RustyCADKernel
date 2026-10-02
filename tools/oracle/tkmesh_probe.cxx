@@ -122,6 +122,7 @@ int main(){
         else if(operation=="mesh_delaun_internal_constraint")mesh_delaun_internal_constraint(input);
         else if(operation=="mesh_delaun_process_constraints")mesh_delaun_process_constraints(input);
         else if(operation=="mesh_delaun_create_triangles")mesh_delaun_create_triangles(input);
+        else if(operation=="mesh_delaun_insert_vertex")mesh_delaun_insert_vertex(input);
         else if(operation=="mesh_delaun_use_edge")mesh_delaun_use_edge(input);
         else if(operation=="mesh_delaun_sort")mesh_delaun_sort(input);
         else if(operation=="mesh_delaun_polygon")mesh_delaun_polygon(input);
