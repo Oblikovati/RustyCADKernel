@@ -178,6 +178,54 @@ fn change_pave_blocks_reads_internal_edge_topological_vertices() {
     assert_eq!(block.range(), (-2.0, 3.0));
 }
 
+#[test]
+fn change_pave_blocks_repeats_single_seam_vertex_at_both_pcurve_bounds() {
+    let seam = pcurve_seam_edge();
+    assert_single_vertex_seam_paves(seam.clone());
+    assert_single_vertex_seam_paves(seam.reversed());
+}
+
+fn pcurve_seam_edge() -> Shape {
+    use rustycad_tkernel::standard::Handle;
+    use rustycad_tkg2d::geom2d::Geom2dLine;
+    use rustycad_tkg3d::geom::GeomCylindricalSurface;
+    use rustycad_tkmath::gp::{Axis2d, Axis3, Direction2, Point2};
+    use std::f64::consts::TAU;
+    let builder = BRepBuilder::default();
+    let vertex = Vertex::unchecked(vertex_with_tolerance(&builder, [1.0, 0.0, 0.0], 1e-7));
+    let pcurve = Handle::new(Geom2dLine::new(Axis2d::new(
+        Point2::default(),
+        Direction2::X,
+    )))
+    .cast();
+    let surface = Handle::new(GeomCylindricalSurface::new(Axis3::default(), 1.0).unwrap()).cast();
+    rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_pcurve_vertices_params(
+        &pcurve, &surface, &vertex, &vertex, 0.0, TAU,
+    )
+    .unwrap()
+    .edge()
+    .unwrap()
+    .into_shape()
+}
+
+fn assert_single_vertex_seam_paves(seam: Shape) {
+    use std::f64::consts::TAU;
+    let mut structure = DataStructure::default();
+    structure.set_arguments(std::slice::from_ref(&seam));
+    structure.init(1e-4).unwrap();
+    let edge_index = structure.index(&seam);
+    assert_eq!(
+        structure.shape_info(edge_index).unwrap().sub_shapes().len(),
+        1
+    );
+    structure.change_pave_blocks(edge_index).unwrap();
+    let blocks = structure.pave_blocks(edge_index).unwrap();
+    assert_eq!(blocks.len(), 1);
+    let block = blocks[0].lock().unwrap();
+    assert_eq!(block.indices(), (1, 1));
+    assert_eq!(block.range(), (0.0, TAU));
+}
+
 fn topology_arguments(builder: &BRepBuilder) -> (Shape, Shape, Shape, Shape) {
     let first = vertex_with_tolerance(builder, [1.0, 2.0, 3.0], 2e-5);
     let second = vertex_with_tolerance(builder, [4.0, 5.0, 6.0], 5e-7);

@@ -15,6 +15,13 @@
 #include <BRepPrimAPI_MakeBox.hxx>
 #include <Precision.hxx>
 #include <gp_Lin.hxx>
+#include <Geom2d_Line.hxx>
+#include <Geom_CylindricalSurface.hxx>
+#include <gp_Circ.hxx>
+#include <gp_Ax2d.hxx>
+#include <gp_Ax3.hxx>
+#include <gp_Dir2d.hxx>
+#include <gp_Pnt2d.hxx>
 #include <BRep_Builder.hxx>
 #include <Bnd_Box.hxx>
 #include <cstdio>
@@ -148,4 +155,10 @@ void bo_data_structure_infinite_case(const std::vector<double>& v) {
  bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(ds.NbRanges());bo_int(ds.Index(edge));
  for(int i=0;i<ds.NbShapes();++i){const BOPDS_ShapeInfo& info=ds.ShapeInfo(i);bo_int(info.ShapeType());bo_int(info.HasFlag());bo_int(info.Flag());bo_int(info.SubShapes().Extent());for(int child:info.SubShapes())bo_int(child);bo_int(info.Box().IsVoid());if(!info.Box().IsVoid()){bo_real(info.Box().GetGap());double x0,y0,z0,x1,y1,z1;info.Box().Get(x0,y0,z0,x1,y1,z1);for(double x:{x0,y0,z0,x1,y1,z1})bo_real(x);}}
  const int edgeIndex=ds.Index(edge);auto& blocks=ds.ChangePaveBlocks(edgeIndex);bo_int(ds.PaveBlocksPool().Length());bo_int(ds.ShapeInfo(edgeIndex).Reference());bo_int(blocks.Extent());for(const auto& block:blocks){int i1,i2;double p1,p2;block->Indices(i1,i2);block->Range(p1,p2);bo_int(block->OriginalEdge());bo_int(i1);bo_int(i2);bo_real(p1);bo_real(p2);}
+}
+void bo_data_structure_seam_case(const std::vector<double>& v) {
+ TopoDS_Edge edge;if(int(v[1])%2==0){edge=BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(),1.));}else{Handle(Geom_CylindricalSurface) surface=new Geom_CylindricalSurface(gp_Ax3(),1.);Handle(Geom2d_Line) pcurve=new Geom2d_Line(gp_Ax2d(gp_Pnt2d(0.,0.),gp_Dir2d(1.,0.)));TopoDS_Vertex vertex=BRepBuilderAPI_MakeVertex(gp_Pnt(1.,0.,0.));edge=BRepBuilderAPI_MakeEdge(pcurve,surface,vertex,vertex,0.,2.*M_PI);}
+ if(int(v[1])>=2)edge.Reverse();NCollection_List<TopoDS_Shape> arguments;arguments.Append(edge);BOPDS_DS ds;ds.SetArguments(arguments);ds.Init(v[0]);const int edgeIndex=ds.Index(edge);bo_int(ds.NbShapes());bo_int(ds.NbSourceShapes());bo_int(edgeIndex);const BOPDS_ShapeInfo& info=ds.ShapeInfo(edgeIndex);bo_int(info.SubShapes().Extent());for(int child:info.SubShapes()){bo_int(child);bo_int(int(ds.Shape(child).Orientation()));}
+ double first,last;TopLoc_Location location;bo_int(BRep_Tool::Curve(edge,location,first,last).IsNull());TopLoc_Location surfaceLocation;Handle(Geom2d_Curve) pcurve;Handle(Geom_Surface) curveSurface;BRep_Tool::CurveOnSurface(edge,pcurve,curveSurface,surfaceLocation,first,last);bo_int(pcurve.IsNull());
+ auto& blocks=ds.ChangePaveBlocks(edgeIndex);bo_int(ds.PaveBlocksPool().Length());bo_int(ds.ShapeInfo(edgeIndex).Reference());bo_int(blocks.Extent());for(const auto& block:blocks){int i1,i2;double p1,p2;block->Indices(i1,i2);block->Range(p1,p2);bo_int(block->OriginalEdge());bo_int(i1);bo_int(i2);bo_real(p1);bo_real(p2);bo_int(block->ExtPaves().Extent());}
 }
