@@ -721,3 +721,14 @@ because the pinned source and library have no definition. Its focused oracle pas
 returns `Standard_NullObject`. No original WireSegment or ComposeShell declaration
 exists, so the TKShHealing legacy count remains 101/143. The full source gate passes
 all 101 mapped declarations in native and Rust executions.
+
+### FaceDivide null-context safety suite
+
+All 2 declarations from `ShapeUpgrade_FaceDivide_Test.cxx` are mapped together. The
+filtered native/Rust source gate passes both OCCT declarations and both Rust runtime
+cases, including 100 independent concurrent `Perform()` calls. The focused crate tests
+also pass 3/3, and `cargo fmt --all --check` is clean. The port currently implements
+FaceDivide's unchanged-face path and default context initialization; actual surface and
+boundary subdivision remains unported, so the FaceDivide API and TKShHealing toolkit
+are still partial. The toolkit source inventory is now 107/143 mapped. Remaining
+unmapped suites are FaceConnect (16), Face (4), Shape (7), and UnifySameDomain (9).

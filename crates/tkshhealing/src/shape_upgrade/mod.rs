@@ -47,3 +47,6 @@ pub use fix_small_curves::{
 
 mod wire_divide;
 pub use wire_divide::{ShapeUpgradeWireDivide, WireDivideData, WireDivideFields, WireDivider};
+
+mod face_divide;
+pub use face_divide::ShapeUpgradeFaceDivide;
