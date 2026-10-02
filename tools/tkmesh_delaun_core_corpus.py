@@ -75,7 +75,7 @@ def create_triangles_rows() -> list[str]:
 
 def insert_vertex_rows() -> list[str]:
     """Cover interior batches, constrained-boundary skips, and no-candidate points."""
-    return [f'mesh_delaun_insert_vertex {mode}' for mode in range(1, 6)]
+    return [f'mesh_delaun_insert_vertex {mode}' for mode in range(1, 7)]
 
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
