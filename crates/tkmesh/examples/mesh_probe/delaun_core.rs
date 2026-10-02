@@ -5,7 +5,7 @@ use rustycad_tkernel::{
     ncollection::{DynamicArray, Map, Sequence},
     standard::{Failure, Handle},
 };
-use rustycad_tkmath::gp::{Point2, Xy};
+use rustycad_tkmath::gp::{Point2, Vector2, Xy};
 use rustycad_tkmesh::brep_mesh::{
     BRepMeshDataStructureOfDelaun as Mesh, BRepMeshDelaun as Delaun, BRepMeshVertex as Vertex,
     DegreeOfFreedom as Freedom,
@@ -35,6 +35,117 @@ pub fn intersection_case(values: &[i32]) {
         print!("{} ", error.exception_type());
     }
     println!();
+}
+pub fn next_link_case(values: &[i32]) {
+    print!("OK ");
+    if let Err(error) = report_next_links(values) {
+        print!("{} ", error.exception_type());
+    }
+    println!();
+}
+fn report_next_links(values: &[i32]) -> Result<(), Failure> {
+    let mesh = fixture::mesh(values[0], values[1]);
+    let delaun = Delaun::from_mesh(&mesh, -1, -1, false)?;
+    let polygon = (1..=5).collect::<Vec<_>>();
+    let polygon = Sequence::from_iter(polygon);
+    let boxes = intersection_boxes(&delaun)?;
+    for pivot in 1..=4 {
+        for first in 1..=4 {
+            for direction in [
+                Vector2::new(1., 0.),
+                Vector2::new(0., 1.),
+                Vector2::new(-1., 0.),
+            ] {
+                for skip_leprous in [false, true] {
+                    for seed in [
+                        (0, 0, 0),
+                        (1, 0, 0),
+                        (0, 1, 0),
+                        (0, 0, 1),
+                        (3, 5, 2),
+                        (31, 31, 31),
+                    ] {
+                        report_next_link_case(
+                            &delaun,
+                            &polygon,
+                            &boxes,
+                            pivot,
+                            first,
+                            direction,
+                            skip_leprous,
+                            seed,
+                        )?;
+                    }
+                }
+            }
+        }
+    }
+    Ok(())
+}
+#[allow(clippy::too_many_arguments)] // Keeps one exact oracle iteration legible.
+fn report_next_link_case(
+    delaun: &Delaun,
+    polygon: &Sequence<i32>,
+    boxes: &Sequence<rustycad_tkmath::bnd::CompactBox2>,
+    pivot: i32,
+    first: i32,
+    direction: Vector2,
+    skip_leprous: bool,
+    seeds: (i32, i32, i32),
+) -> Result<(), Failure> {
+    let skipped = seeded_map(seeds.0);
+    let mut leprous = seeded_map(seeds.1);
+    let mut dead = seeded_map(seeds.2);
+    let pivot_vertex = delaun.get_vertex(pivot)?;
+    let mut next_pivot = -77;
+    let mut next_direction = Vector2::new(81., 82.);
+    let mut bounds = rustycad_tkmath::bnd::CompactBox2::default();
+    let next = delaun.find_next_polygon_link(
+        first,
+        pivot,
+        &pivot_vertex,
+        direction,
+        boxes,
+        polygon,
+        Some(&skipped),
+        skip_leprous,
+        &mut leprous,
+        &mut dead,
+        &mut next_pivot,
+        &mut next_direction,
+        &mut bounds,
+    )?;
+    int(next);
+    int(next_pivot);
+    real(next_direction.x());
+    real(next_direction.y());
+    let minimum = bounds.corner_min();
+    let maximum = bounds.corner_max();
+    real(minimum.x());
+    real(minimum.y());
+    real(maximum.x());
+    real(maximum.y());
+    report_sorted_map(&skipped);
+    report_sorted_map(&leprous);
+    report_sorted_map(&dead);
+    Ok(())
+}
+fn seeded_map(mask: i32) -> Map<i32> {
+    let mut map = Map::default();
+    for index in 1..=5 {
+        if mask & (1 << (index - 1)) != 0 {
+            map.add(index);
+        }
+    }
+    map
+}
+fn report_sorted_map(map: &Map<i32>) {
+    let mut indices = map.iter().copied().collect::<Vec<_>>();
+    indices.sort_unstable();
+    int(indices.len() as i32);
+    for index in indices {
+        int(index);
+    }
 }
 fn report_intersections(values: &[i32]) -> Result<(), Failure> {
     let mesh = fixture::mesh(values[0], values[1]);

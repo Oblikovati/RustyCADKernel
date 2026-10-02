@@ -116,6 +116,7 @@ int main(){
         else if(operation=="mesh_delaun_core")mesh_delaun_core(input);
         else if(operation=="mesh_delaun_cleanup")mesh_delaun_cleanup(input);
         else if(operation=="mesh_delaun_intersections")mesh_delaun_intersections(input);
+        else if(operation=="mesh_delaun_next_link")mesh_delaun_next_link(input);
         else if(operation=="mesh_delaun_use_edge")mesh_delaun_use_edge(input);
         else if(operation=="mesh_delaun_sort")mesh_delaun_sort(input);
         else if(operation=="mesh_delaun_polygon")mesh_delaun_polygon(input);

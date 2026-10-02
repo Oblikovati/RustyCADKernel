@@ -131,6 +131,7 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_delaun_core" => mesh_probe::delaun_core::core_case(values),
         "mesh_delaun_cleanup" => mesh_probe::delaun_core::cleanup_case(values),
         "mesh_delaun_intersections" => mesh_probe::delaun_core::intersection_case(values),
+        "mesh_delaun_next_link" => mesh_probe::delaun_core::next_link_case(values),
         "mesh_delaun_use_edge" => mesh_probe::delaun_core::use_edge_case(values[0]),
         "mesh_delaun_sort" => mesh_probe::delaun_core::sort_vertices_case(values),
         "mesh_delaun_polygon" => mesh_probe::delaun_core::polygon_case(values),
