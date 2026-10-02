@@ -1,5 +1,11 @@
 //! Direct Rust mirrors of supported BRepGraph_Compact legacy declarations.
 #![allow(non_snake_case)]
+#[path = "brep_graph_compact_legacy/cache.rs"]
+mod cache;
+#[path = "brep_graph_compact_legacy/identity.rs"]
+mod identity;
+#[path = "brep_graph_compact_legacy/rebuild.rs"]
+mod rebuild;
 mod support;
 
 use rustycad_tkbrep::brep::BRepBuilder;

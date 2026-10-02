@@ -1184,3 +1184,13 @@ deterministic face-local fixtures captured from pinned OCCT: at deflections 0.5 
 0.2, each planar box face has four corner nodes and two triangles. The Rust fixtures
 preserve the native node ordering, triangle diagonals, and edge-to-face polygon
 associations, while avoiding a dependency on the not-yet-ported `BRepMesh_IncrementalMesh`.
+
+## Compaction identity, cache and rebuild legacy mirrors
+
+`BRepGraph_Compact_Test.cxx` now has 25/26 declaration mappings. The ten added
+mirrors cover coedge/reference UID resolution, six topology mutation generations,
+cache service/driver survival and fresh mesh transfer, bounds after removal,
+closed reconstructed topology, three copied boxes after deduplication, and
+history records after remapping. All 25 Rust tests and all 26 pinned native tests
+pass. The one remaining declaration constructs a cylindrical hole with
+`BRepAlgoAPI_Cut`; the Boolean algorithm dependency remains open.
