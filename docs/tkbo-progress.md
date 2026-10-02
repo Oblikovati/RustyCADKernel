@@ -12,7 +12,7 @@ common-block ordering. Its companion radius-status replay still records 176 unde
 native calls and 32 differences; complete TKBO parity remains false.
 
 BOPDS IndexRange, Pave, Pair, Point, PaveBlock, CommonBlock, CoupleOfPaveBlocks,
-ShapeInfo and FaceInfo add 150 API rows.
+ShapeInfo, FaceInfo and DataStructure add 230 API rows.
 Their comparison, hash, mutation, splitting, shared-handle and Dump behavior are checked against native
 calls, including signed zero. PaveBlock's six focused Rust regressions cover default
 sentinels, endpoint matching, deduplicated extras, strict parameter tolerance, ordered
@@ -36,6 +36,13 @@ cover the BRep participation rules, signed flags, bound gaps and exact Dump text
 FaceInfo adds sixteen callable rows for its In, On and section maps. Its two Rust
 regressions and native differential probe cover identity-keyed handle maps, unique
 vertex sets, and `Clear()` retaining section state while clearing In and On.
+
+DataStructure adds the complete `BOPDS_DS` header inventory. Its pre-Init storage
+slice and recursive source-shape initialization pass native differential probes for
+depth-first child ordering, duplicate-shape index rebinding, inclusive argument
+ranges, source counts and vertex tolerance boxes. `Init` remains partial: edge, face,
+solid preparation, vertex-edge links and operation pools are pending; no original
+GTest declaration is mapped by this storage slice.
 
 IntTools Curve, CommonPrt and point-on-face records add 62 implemented APIs.
 The cumulative oracle passes 3,027 cases. `IntTools_PntOnFace::IsValid()` is
