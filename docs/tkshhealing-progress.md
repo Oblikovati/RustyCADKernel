@@ -806,12 +806,18 @@ declarations.
 The reusable intersection slice detects strict interior crossings between line-backed
 p-curves and returns both curve parameters plus the crossing point. It is tested against
 the pinned bowtie's diagonal pair at UV `(0, 0)`, along with endpoint, parallel and
-out-of-range rejection. `ShapeBuildEdge::split_at_parameter` now copies a forward edge
-into two ranges sharing a supplied crossing vertex and preserves its curve/p-curve
-representations; a focused plane-edge test checks both ranges and vertex identity. The
-wire path still lacks surface-to-3D crossing vertex construction, context replacement,
-edge insertion/order, and native DONE status propagation, so the detector and split
-helper do not enable the ShapeFix_Shape bowtie declaration.
+out-of-range rejection. `ShapeBuildEdge::split_at_parameter` copies an edge into two
+ranges sharing a supplied crossing vertex and preserves its curve/p-curve
+representations. `ShapeFixWire::fix_line_self_intersections` now scans nonadjacent line
+p-curves, creates one vertex at the support-surface crossing, splits and inserts both
+edges, replaces the original edges with split wires in the shared context, and runs
+reorder. Its focused bowtie test checks the native six-edge sequence, UV endpoints,
+parameter ranges, crossing vertex identity/tolerance, context records, and DONE1/DONE5.
+The native `ShapeFix_ShapeTest.*` oracle suite is green 7/7. The full ShapeFix_Shape
+source still remains unmapped: Rust face construction currently yields reversed outer
+wire edge orientations for this fixture while the pinned native face wire is forward,
+and this narrow method does not yet implement non-line p-curves, competing crossings,
+FixLoopWire face splitting, or the full prism-shell context walk.
 
 `ShapeBuild_Edge::CopyReplaceVertices` and the p-curve update tail are now available as
 `ShapeBuildEdge::copy_replace_vertices_with_pcurve_range`. It copies the original edge,

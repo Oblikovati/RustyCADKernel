@@ -15,6 +15,7 @@ use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient
 use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::Point2;
+use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeWire;
 
 #[derive(Default)]
 struct WireFixState {
@@ -22,6 +23,7 @@ struct WireFixState {
     reorder_status: i32,
     gaps_3d_status: i32,
     gaps_2d_status: i32,
+    intersections_status: i32,
     closed_mode: bool,
 }
 
@@ -44,6 +46,7 @@ impl Default for ShapeFixWire {
                 reorder_status: 0,
                 gaps_3d_status: 0,
                 gaps_2d_status: 0,
+                intersections_status: 0,
                 closed_mode: true,
             }),
         }
@@ -114,6 +117,30 @@ impl ShapeFixWire {
     pub fn fix_gaps_2d(&self) -> Result<bool, Failure> {
         self.set_gap_status(false, ShapeExtendStatus::Ok);
         self.fix_gap_pass(false)
+    }
+
+    /// Splits one strict interior crossing between nonadjacent line p-curves.
+    pub fn fix_line_self_intersections(&self) -> Result<bool, Failure> {
+        self.state.write().intersections_status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
+        let analyzer = self.analyzer()?;
+        let face = analyzer.face();
+        if face.is_null() {
+            return Ok(false);
+        }
+        let Some((first_index, second_index, hit)) = self.first_line_crossing(&analyzer)? else {
+            return Ok(false);
+        };
+        self.split_crossing_pair(&analyzer, &face, first_index, second_index, hit)?;
+        self.state.write().intersections_status =
+            ShapeExtend::encode_status(ShapeExtendStatus::Done1)
+                | ShapeExtend::encode_status(ShapeExtendStatus::Done5);
+        let _ = self.fix_reorder()?;
+        Ok(true)
+    }
+
+    /// `StatusSelfIntersection(status)`: query the implemented wire-intersection flags.
+    pub fn status_self_intersection(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.state.read().intersections_status, status)
     }
 
     /// `StatusReorder(status)`: query reorder flags.
@@ -225,6 +252,85 @@ impl ShapeFixWire {
             self.fix_gap_pair(&analyzer, is_3d, index)?;
         }
         Ok(self.gap_status(is_3d, ShapeExtendStatus::Done))
+    }
+
+    fn first_line_crossing(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+    ) -> Result<Option<(i32, i32, super::PcurveCrossing)>, Failure> {
+        let data = analyzer.wire_data();
+        for first_index in 1..=(data.nb_edges() - 2).max(0) {
+            for second_index in (first_index + 2)..=data.nb_edges() {
+                if first_index == 1 && second_index == data.nb_edges() {
+                    continue;
+                }
+                let first_edge = data.edge(first_index)?;
+                let second_edge = data.edge(second_index)?;
+                let first_pc = ShapeAnalysisEdge::new().pcurve_on_face(
+                    &first_edge,
+                    &analyzer.face(),
+                    false,
+                )?;
+                let second_pc = ShapeAnalysisEdge::new().pcurve_on_face(
+                    &second_edge,
+                    &analyzer.face(),
+                    false,
+                )?;
+                let Some(hit) = super::line_pcurve_crossing(
+                    &first_pc.0,
+                    (first_pc.1, first_pc.2),
+                    &second_pc.0,
+                    (second_pc.1, second_pc.2),
+                    rustycad_tkernel::precision::p_confusion(),
+                ) else {
+                    continue;
+                };
+                return Ok(Some((first_index, second_index, hit)));
+            }
+        }
+        Ok(None)
+    }
+
+    fn split_crossing_pair(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        face: &Face,
+        first_index: i32,
+        second_index: i32,
+        hit: super::PcurveCrossing,
+    ) -> Result<(), Failure> {
+        let data = analyzer.wire_data();
+        let vertex = crossing_vertex(face, hit.point)?;
+        self.split_wire_edge(&data, face, second_index, hit.second_parameter, &vertex)?;
+        self.split_wire_edge(&data, face, first_index, hit.first_parameter, &vertex)
+    }
+
+    fn split_wire_edge(
+        &self,
+        data: &ShapeExtendWireData,
+        face: &Face,
+        index: i32,
+        parameter: f64,
+        vertex: &Vertex,
+    ) -> Result<(), Failure> {
+        let edge = data.edge(index)?;
+        let (first, second) = ShapeBuildEdge.split_at_parameter(&edge, face, parameter, vertex)?;
+        let replacement = BRepBuilderAPIMakeWire::from_two_edges(&first, &second)?.wire()?;
+        let mut context = self.context();
+        if context.is_null() {
+            context = Handle::new(ShapeBuildReShape::new());
+            self.set_context(&context);
+        }
+        let context = context
+            .get()
+            .ok_or_else(|| Failure::new("ShapeFix_Wire context is null"))?;
+        ReShape::replace(
+            context,
+            &edge.clone().into_shape(),
+            &replacement.into_shape(),
+        )?;
+        data.set(&first, index)?;
+        data.add_edge(&second, index + 1)
     }
 
     fn fix_gap_pair(
@@ -393,6 +499,23 @@ fn periodic_gap_midpoint(
 /// Shifts a periodic value by the nearest integer period to its target.
 fn nearest_periodic_value(value: f64, target: f64, period: f64) -> f64 {
     value + ((target - value) / period).round() * period
+}
+
+fn crossing_vertex(face: &Face, point: Point2) -> Result<Vertex, Failure> {
+    let (surface, location) = BRepTool::surface_with_location(face)?;
+    let surface = surface
+        .get()
+        .ok_or_else(|| Failure::new("ShapeFix_Wire face has no surface"))?;
+    let position = surface
+        .value(point.x(), point.y())?
+        .transformed(location.transformation());
+    let mut vertex = Vertex::default();
+    rustycad_tkbrep::brep::BRepBuilder::default().make_vertex_at(
+        &mut vertex,
+        position,
+        rustycad_tkernel::precision::confusion(),
+    )?;
+    Ok(vertex)
 }
 
 /// Copies the closed endpoint vertex and gives its two edge occurrences opposite senses.

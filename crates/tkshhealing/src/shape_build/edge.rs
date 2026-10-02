@@ -145,16 +145,26 @@ impl ShapeBuildEdge {
         parameter: f64,
         vertex: &Vertex,
     ) -> Result<(Edge, Edge), Failure> {
-        let (first_vertex, last_vertex) = rustycad_tkbrep::topexp::vertices(edge, false);
-        let (first, last) = rustycad_tkbrep::brep::BRepTool::range_on_face(edge, face)?;
+        let orientation = edge.orientation();
+        let mut forward = edge.clone();
+        forward.set_orientation(Orientation::Forward);
+        let (first_vertex, last_vertex) = rustycad_tkbrep::topexp::vertices(&forward, false);
+        let (first, last) = rustycad_tkbrep::brep::BRepTool::range_on_face(&forward, face)?;
         let fraction = (parameter - first) / (last - first);
-        if edge.orientation() != Orientation::Forward || !(0.0 < fraction && fraction < 1.0) {
+        if !matches!(orientation, Orientation::Forward | Orientation::Reversed)
+            || !(0.0 < fraction && fraction < 1.0)
+        {
             return Err(invalid_split_parameter(edge, parameter, (first, last)));
         }
-        let first_half = self.copy_replace_vertices(edge, &first_vertex, vertex)?;
-        let second_half = self.copy_replace_vertices(edge, vertex, &last_vertex)?;
-        self.copy_ranges(&first_half, edge, 0.0, fraction)?;
-        self.copy_ranges(&second_half, edge, fraction, 1.0)?;
+        let mut first_half = self.copy_replace_vertices(&forward, &first_vertex, vertex)?;
+        let mut second_half = self.copy_replace_vertices(&forward, vertex, &last_vertex)?;
+        self.copy_ranges(&first_half, &forward, 0.0, fraction)?;
+        self.copy_ranges(&second_half, &forward, fraction, 1.0)?;
+        if orientation == Orientation::Reversed {
+            first_half.set_orientation(Orientation::Reversed);
+            second_half.set_orientation(Orientation::Reversed);
+            std::mem::swap(&mut first_half, &mut second_half);
+        }
         BRepBuilder::default().same_range(&first_half, false)?;
         BRepBuilder::default().same_parameter(&first_half, false)?;
         BRepBuilder::default().same_range(&second_half, false)?;
@@ -209,7 +219,7 @@ fn invalid_split_parameter(edge: &Edge, parameter: f64, range: (f64, f64)) -> Fa
     Failure::with_message(
         "Standard_DomainError",
         &format!(
-            "ShapeBuild_Edge::SplitAtParameter: edge orientation {:?}, parameter {parameter}; expected a forward edge parameter inside {:?}",
+            "ShapeBuild_Edge::SplitAtParameter: edge orientation {:?}, parameter {parameter}; expected a forward or reversed edge parameter inside {:?}",
             edge.orientation(),
             range
         ),
