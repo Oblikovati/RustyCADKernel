@@ -3,7 +3,7 @@ use rustycad_tkernel::{
     ncollection::{DynamicArray, Sequence},
     standard::Handle,
 };
-use rustycad_tkmath::gp::{Point2, Xy};
+use rustycad_tkmath::gp::{Point2, Vector2, Xy};
 use rustycad_tkmesh::brep_mesh::{
     BRepMeshDataStructureOfDelaun as Mesh, BRepMeshDelaun as Delaun, BRepMeshVertex as Vertex,
     DegreeOfFreedom as Freedom,
@@ -183,6 +183,84 @@ fn insertion_order_matches_native_heap_ties_in_projected_coordinates() {
     let mut indices = vec![1, 2, 3, 4];
     delaun.sort_vertex_indices(&mut indices).unwrap();
     assert_eq!(indices, [2, 4, 1, 3]);
+}
+
+#[test]
+fn next_polygon_link_selects_visible_neighbor_and_preserves_empty_outputs() {
+    let mesh = fixture::mesh(0, 0);
+    let delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
+    let polygon = Sequence::default();
+    let boxes = Sequence::default();
+    let pivot = delaun.get_vertex(1).unwrap();
+    let mut leprous = rustycad_tkernel::ncollection::Map::default();
+    let mut dead = rustycad_tkernel::ncollection::Map::default();
+    let mut next_pivot = -77;
+    let mut next_direction = Vector2::new(81., 82.);
+    let mut bounds = rustycad_tkmath::bnd::CompactBox2::default();
+
+    let next = delaun
+        .find_next_polygon_link(
+            4,
+            1,
+            &pivot,
+            Vector2::new(1., 0.),
+            &boxes,
+            &polygon,
+            None,
+            false,
+            &mut leprous,
+            &mut dead,
+            &mut next_pivot,
+            &mut next_direction,
+            &mut bounds,
+        )
+        .unwrap();
+
+    assert_eq!(next, -4);
+    assert_eq!(next_pivot, 4);
+    assert_eq!(next_direction, Vector2::new(0., 2.));
+    assert!(leprous.contains(&1));
+    assert!(leprous.contains(&4));
+    assert!(leprous.contains(&5));
+    assert_eq!(
+        bounds.corner_min().x(),
+        -rustycad_tkernel::precision::p_confusion()
+    );
+    assert_eq!(
+        bounds.corner_max().x(),
+        rustycad_tkernel::precision::p_confusion()
+    );
+
+    let mut blocked = rustycad_tkernel::ncollection::Map::default();
+    for link in [1, 4, 5] {
+        blocked.add(link);
+    }
+    let mut unchanged_pivot = -77;
+    let mut unchanged_direction = Vector2::new(81., 82.);
+    let mut unchanged_bounds = rustycad_tkmath::bnd::CompactBox2::default();
+    assert_eq!(
+        delaun
+            .find_next_polygon_link(
+                4,
+                1,
+                &pivot,
+                Vector2::new(1., 0.),
+                &boxes,
+                &polygon,
+                None,
+                false,
+                &mut leprous,
+                &mut blocked,
+                &mut unchanged_pivot,
+                &mut unchanged_direction,
+                &mut unchanged_bounds,
+            )
+            .unwrap(),
+        0
+    );
+    assert_eq!(unchanged_pivot, -77);
+    assert_eq!(unchanged_direction, Vector2::new(81., 82.));
+    assert!(unchanged_bounds.is_void());
 }
 #[test]
 fn degenerate_triangles_and_null_mesh_are_explicit() {

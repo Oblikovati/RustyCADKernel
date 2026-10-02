@@ -16,6 +16,7 @@ mod contains;
 mod frontier_reachability;
 mod insertion;
 mod insertion_order;
+mod next_polygon_link;
 mod polygon;
 mod polygon_decompose;
 mod polygon_mesh;

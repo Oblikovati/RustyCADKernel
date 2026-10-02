@@ -47,9 +47,14 @@ def intersection_rows() -> list[str]:
     return [f'mesh_delaun_intersections {kind} {flags}' for kind in range(6)
             for flags in (0,1,2,7,31)]
 
+def next_link_rows() -> list[str]:
+    """Choose boundary-walk neighbors while mutating skipped, leprous, and dead maps."""
+    return [f'mesh_delaun_next_link {kind} {flags}' for kind in range(6)
+            for flags in (0,1,7)]
+
 def corpus() -> str:
     """Compare every supported nonempty core path with the immutable native library."""
-    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows())+'\n'
+    return '\n'.join(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows())+'\n'
 
 
 def partition() -> tuple[list[str],list[str]]:
@@ -58,4 +63,4 @@ def partition() -> tuple[list[str],list[str]]:
     from porting import ROOT
     from native_crash_accounting import partition_crash_requests
     manifest=json.loads((ROOT/'tools/oracle/tkmesh_delaun_core_crashes.json').read_text())
-    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows(),frozenset(manifest['input_sha256']))
+    return partition_crash_requests(core_rows()+polygon_rows()+polygon_mesh_rows()+super_mesh_rows()+super_fan_rows()+use_edge_rows()+sort_rows()+cleanup_rows()+intersection_rows()+next_link_rows(),frozenset(manifest['input_sha256']))
