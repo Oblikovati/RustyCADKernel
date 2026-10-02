@@ -94,6 +94,9 @@ def bopds_requests() -> list[str]:
         'bop_couple_paves 3 8 12 19 -0.0',
         'bop_couple_paves -4 0 -1 77 1e-7',
     ]
+    requests += [f'bop_shape_info {shape} {reference} {flag} -1 -2 -3 4 5 6 3 1 3 {gap}'
+                 for shape, reference, flag, gap in product(
+                     range(9), [-1, 4], [-1, 7], [-0.0, 0.25])]
     return requests
 
 

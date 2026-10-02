@@ -1,7 +1,9 @@
 use super::{flag, integer, real};
 use rustycad_tkbo::bop_ds::{
-    CommonBlock, CoupleOfPaveBlocks, IndexRange, Pair, Pave, PaveBlock, Point, pave_block_handle,
+    CommonBlock, CoupleOfPaveBlocks, IndexRange, Pair, Pave, PaveBlock, Point, ShapeInfo,
+    pave_block_handle,
 };
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Point2, Point3};
 fn index_state(value: &IndexRange, query: i32) {
@@ -239,6 +241,56 @@ pub fn couple_of_pave_blocks_case(v: &[f64]) {
         value.pave_block2().unwrap(),
         &second,
     ));
+}
+
+/// The `BOPDS_ShapeInfo` metadata and Dump oracle request.
+pub fn shape_info_case(v: &[f64]) {
+    let mut info = ShapeInfo::default();
+    let mut flag_value = 99;
+    integer(info.shape_type() as i32);
+    flag(info.shape().is_null());
+    flag(info.box_bounds().is_void());
+    integer(info.sub_shapes().len() as i32);
+    integer(info.reference());
+    flag(info.has_reference());
+    flag(info.has_brep());
+    flag(info.is_interfering());
+    flag(info.has_flag());
+    flag(info.has_flag_into(&mut flag_value));
+    integer(flag_value);
+    info.set_shape(&rustycad_tkbrep::topods::Shape::default());
+    info.set_shape_type(ShapeEnum::ALL[v[0] as usize]);
+    info.set_box(&BoundingBox3::new(
+        Point3::new(v[3], v[4], v[5]),
+        Point3::new(v[6], v[7], v[8]),
+    ));
+    info.set_reference(v[1] as i32);
+    info.set_flag(v[2] as i32);
+    info.change_sub_shapes()
+        .extend([v[9] as i32, v[10] as i32, v[11] as i32]);
+    info.change_box().set_gap(v[12]);
+    integer(info.shape_type() as i32);
+    flag(info.shape().is_null());
+    flag(info.box_bounds().is_void());
+    integer(info.sub_shapes().len() as i32);
+    for index in info.sub_shapes() {
+        integer(*index);
+    }
+    flag(info.has_sub_shape(v[9] as i32));
+    flag(info.has_sub_shape(-999));
+    integer(info.reference());
+    flag(info.has_reference());
+    flag(info.has_brep());
+    flag(info.is_interfering());
+    flag(info.has_flag());
+    flag(info.has_flag_into(&mut flag_value));
+    integer(flag_value);
+    for bound in info.box_bounds().get().unwrap() {
+        real(bound);
+    }
+    let mut dump = String::new();
+    info.dump(&mut dump).unwrap();
+    print!("{dump}");
 }
 
 /// Appends the three test paves; `append_extra_paves(&mut block, &request)`.
