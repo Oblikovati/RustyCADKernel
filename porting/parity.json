@@ -220135,6 +220135,158 @@
       "rust_item": "rustycad_tkoffset::brep_offset::BRepOffsetSimpleStatus::ErrorNonClosedShell",
       "status": "implemented",
       "notes": "Native simple-offset status values; state and wall construction oracle regressions retain native failures."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::ShapeFix_Edge()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixVertexTolerance(const TopoDS_Edge &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_vertex_tolerance",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixSameParameter(const TopoDS_Edge &,const TopoDS_Face &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_same_parameter_on_face",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixRemoveCurve3d(const TopoDS_Edge &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_remove_curve_3d",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixRemovePCurve(const TopoDS_Edge &,const occ::handle<Geom_Surface> &,const TopLoc_Location &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_remove_pcurve_on_surface",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixRemovePCurve(const TopoDS_Edge &,const TopoDS_Face &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_remove_pcurve",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::Status(const ShapeExtend_Status)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::status_flag",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixSameParameter(const TopoDS_Edge &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_same_parameter",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixReversed2d(const TopoDS_Edge &,const occ::handle<Geom_Surface> &,const TopLoc_Location &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_reversed_2d_on_surface",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixAddPCurve(const TopoDS_Edge &,const occ::handle<Geom_Surface> &,const TopLoc_Location &,const bool,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_add_pcurve_on_surface",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixAddPCurve(const TopoDS_Edge &,const TopoDS_Face &,const bool,const occ::handle<ShapeAnalysis_Surface> &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_add_pcurve_on_face_with_analysis",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixReversed2d(const TopoDS_Edge &,const TopoDS_Face &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_reversed_2d",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::SetContext(const occ::handle<ShapeBuild_ReShape> &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::set_context",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixAddCurve3d(const TopoDS_Edge &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_add_curve_3d",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixVertexTolerance(const TopoDS_Edge &,const TopoDS_Face &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_vertex_tolerance_on_face",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixAddPCurve(const TopoDS_Edge &,const TopoDS_Face &,const bool,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_add_pcurve",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::Projector()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::projector",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::FixAddPCurve(const TopoDS_Edge &,const occ::handle<Geom_Surface> &,const TopLoc_Location &,const bool,const occ::handle<ShapeAnalysis_Surface> &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::fix_add_pcurve_with_analysis",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_Edge::Context()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Edge.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::context",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
     }
   ],
   "tests": [
