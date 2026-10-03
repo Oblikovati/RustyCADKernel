@@ -38,6 +38,18 @@ class TkMathLegacyRuntimeTest(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "skips require explicit review"):
                 native_statuses(xml_path, {"Suite.Case"})
 
+    def test_native_status_accepts_exact_passing_identity(self) -> None:
+        """A complete passing XML case produces one status; e.g. Suite.Case."""
+        with tempfile.TemporaryDirectory() as temporary:
+            xml_path = pathlib.Path(temporary) / "cases.xml"
+            xml_path.write_text(
+                '<testsuites><testsuite><testcase classname="Suite" name="Case" '
+                'status="run"/></testsuite></testsuites>'
+            )
+            self.assertEqual(
+                native_statuses(xml_path, {"Suite.Case"}), {"Suite.Case": "passed"}
+            )
+
     def test_native_status_rejects_missing_identity(self) -> None:
         """A successful XML subset cannot prove the mapping set; e.g. absent case."""
         with tempfile.TemporaryDirectory() as temporary:
