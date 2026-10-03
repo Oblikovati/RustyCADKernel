@@ -58,3 +58,4 @@ pub use split_curve3d_continuity::ShapeUpgradeSplitCurve3dContinuity;
 
 mod split_curve2d_continuity;
 pub use split_curve2d_continuity::ShapeUpgradeSplitCurve2dContinuity;
+mod curve_continuity;

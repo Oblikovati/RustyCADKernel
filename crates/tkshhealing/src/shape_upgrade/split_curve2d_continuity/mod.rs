@@ -1,6 +1,8 @@
 //! OCCT ShapeUpgrade_SplitCurve2dContinuity at 3d097a0328e71b8.
-use super::{ShapeUpgradeSplitCurve2d, SplitCurve, SplitCurveData, SplitCurves2d};
-use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
+use super::{
+    ShapeUpgradeSplitCurve2d, SplitCurve, SplitCurveData, SplitCurves2d,
+    curve_continuity::ContinuitySettings,
+};
 use rustycad_tkernel::{
     impl_transient, precision,
     standard::{Failure, Handle, SharedState},
@@ -10,23 +12,6 @@ use rustycad_tkmath::geom_abs::Shape;
 
 mod compute;
 
-#[derive(Clone, Copy)]
-struct ContinuitySettings {
-    criterion: Shape,
-    tolerance: f64,
-    order: i32,
-}
-
-impl Default for ContinuitySettings {
-    fn default() -> Self {
-        Self {
-            criterion: Shape::C1,
-            tolerance: precision::p_confusion(),
-            order: 1,
-        }
-    }
-}
-
 /// Correct or split a private 2D curve copy at insufficiently continuous knots.
 ///
 /// ```
@@ -35,10 +20,19 @@ impl Default for ContinuitySettings {
 /// splitter.set_criterion(rustycad_tkmath::geom_abs::Shape::C2);
 /// splitter.set_tolerance(1e-7);
 /// ```
-#[derive(Default)]
 pub struct ShapeUpgradeSplitCurve2dContinuity {
     parent: ShapeUpgradeSplitCurve2d,
     settings: SharedState<ContinuitySettings>,
+}
+impl Default for ShapeUpgradeSplitCurve2dContinuity {
+    fn default() -> Self {
+        Self {
+            parent: ShapeUpgradeSplitCurve2d::default(),
+            settings: SharedState::new(
+                ContinuitySettings::with_tolerance(precision::p_confusion()),
+            ),
+        }
+    }
 }
 impl_transient!(ShapeUpgradeSplitCurve2dContinuity, "ShapeUpgrade_SplitCurve2dContinuity",
     ShapeUpgradeSplitCurve2d, parent, interfaces: [dyn SplitCurve]);
@@ -53,9 +47,7 @@ impl ShapeUpgradeSplitCurve2dContinuity {
     /// Set the requested continuity; unsupported geometric criteria use native order one;
     /// `splitter.set_criterion(Shape::C2)`.
     pub fn set_criterion(&self, criterion: Shape) {
-        let mut settings = self.settings.write();
-        settings.criterion = criterion;
-        settings.order = continuity_order(criterion);
+        self.settings.write().set_criterion(criterion);
     }
 
     /// Set the tolerance passed to `Geom2d_BSplineCurve::RemoveKnot` without clamping;
@@ -88,16 +80,6 @@ impl ShapeUpgradeSplitCurve2dContinuity {
     pub fn curves(&self) -> SplitCurves2d {
         self.parent.curves()
     }
-
-    fn replace_status(&self, status: ShapeExtendStatus) {
-        self.split_curve_data()
-            .with_mut(|fields| fields.status = ShapeExtend::encode_status(status));
-    }
-
-    fn add_status(&self, status: ShapeExtendStatus) {
-        self.split_curve_data()
-            .with_mut(|fields| fields.status |= ShapeExtend::encode_status(status));
-    }
 }
 
 impl SplitCurve for ShapeUpgradeSplitCurve2dContinuity {
@@ -111,16 +93,6 @@ impl SplitCurve for ShapeUpgradeSplitCurve2dContinuity {
 
     fn compute(&self) -> Result<(), Failure> {
         self.compute_continuity()
-    }
-}
-
-fn continuity_order(criterion: Shape) -> i32 {
-    match criterion {
-        Shape::C0 => 0,
-        Shape::C2 => 2,
-        Shape::C3 => 3,
-        Shape::CN => 4,
-        _ => 1,
     }
 }
 

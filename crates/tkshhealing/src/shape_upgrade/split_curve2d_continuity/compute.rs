@@ -1,7 +1,11 @@
 //! Preserve 2D source status order, interval knot cursor, and removal-index quirk.
 use super::*;
+use crate::shape_extend::ShapeExtendStatus;
+use crate::shape_upgrade::curve_continuity::{
+    KnotRemoval, add_status, continuity_order, copy_nested_results, offset_criterion,
+    remove_knot_and_recheck, replace_status,
+};
 use rustycad_tkg2d::geom2d::Geom2dBSplineCurve;
-use rustycad_tkmath::geom_abs::Shape as Continuity;
 
 struct KnotScan {
     first: f64,
@@ -29,10 +33,10 @@ impl ShapeUpgradeSplitCurve2dContinuity {
         let curve = self.curve();
         let settings = *self.settings.read();
         if curve.continuity() < settings.criterion {
-            self.replace_status(ShapeExtendStatus::Done2);
+            replace_status(self.split_curve_data(), ShapeExtendStatus::Done2);
         }
         if values.sequence(|s| s.len()) > 2 {
-            self.replace_status(ShapeExtendStatus::Done1);
+            replace_status(self.split_curve_data(), ShapeExtendStatus::Done1);
         }
         let (first, last) =
             values.sequence(|s| Ok::<_, Failure>((*s.value(1)?, *s.value(s.len())?)))?;
@@ -69,7 +73,12 @@ impl ShapeUpgradeSplitCurve2dContinuity {
         nested.set_tolerance(settings.tolerance);
         nested.set_criterion(settings.criterion);
         nested.compute()?;
-        copy_nested_results(self, &nested)
+        copy_nested_results(
+            nested.split_curve_data(),
+            &nested.split_values(),
+            self.split_curve_data(),
+            &self.split_values(),
+        )
     }
 
     fn compute_spline(
@@ -137,7 +146,7 @@ impl ShapeUpgradeSplitCurve2dContinuity {
         }
         let multiplicity = (spline.degree() - settings.order).max(0);
         if remove_for_continuity(spline, scan.index, multiplicity, settings)? {
-            self.add_status(ShapeExtendStatus::Done3);
+            add_status(self.split_curve_data(), ShapeExtendStatus::Done3);
             return Ok(());
         }
         self.split_at_knot(spline.knot(scan.index)?, scan.interval)?;
@@ -154,25 +163,10 @@ impl ShapeUpgradeSplitCurve2dContinuity {
 
     fn finish_status(&self) -> Result<(), Failure> {
         if self.split_values().sequence(|values| values.len()) > 2 {
-            self.replace_status(ShapeExtendStatus::Done1);
+            replace_status(self.split_curve_data(), ShapeExtendStatus::Done1);
         }
         Ok(())
     }
-}
-
-fn copy_nested_results(
-    parent: &ShapeUpgradeSplitCurve2dContinuity,
-    nested: &ShapeUpgradeSplitCurve2dContinuity,
-) -> Result<(), Failure> {
-    let sequence = nested.split_values().sequence(Clone::clone);
-    parent
-        .split_values()
-        .change_sequence(|values| *values = sequence);
-    let status = nested.split_curve_data().with(|fields| fields.status);
-    parent
-        .split_curve_data()
-        .with_mut(|fields| fields.status |= status);
-    Ok(())
 }
 
 fn remove_for_continuity(
@@ -181,21 +175,17 @@ fn remove_for_continuity(
     multiplicity: i32,
     settings: ContinuitySettings,
 ) -> Result<bool, Failure> {
-    let corrected = spline
-        .remove_knot(knot, multiplicity, settings.tolerance)
-        .unwrap_or(false);
-    if corrected && multiplicity > 0 {
-        return Ok(spline.degree() - spline.multiplicity(knot)? >= settings.order);
-    }
-    Ok(corrected)
-}
-
-fn offset_criterion(criterion: Continuity) -> Continuity {
-    match criterion {
-        Continuity::C2 => Continuity::C3,
-        Continuity::C3 | Continuity::CN => Continuity::CN,
-        _ => Continuity::C2,
-    }
+    remove_knot_and_recheck(
+        KnotRemoval {
+            degree: spline.degree(),
+            knot,
+            multiplicity,
+            tolerance: settings.tolerance,
+            order: settings.order,
+        },
+        |index, mult, tolerance| spline.remove_knot(index, mult, tolerance),
+        |index| spline.multiplicity(index),
+    )
 }
 
 fn wrapped_basis(
@@ -208,10 +198,8 @@ fn wrapped_basis(
     let offset = curve.cast::<Geom2dOffsetCurve>();
     let basis = offset.get()?.basis_curve();
     let criterion = offset_criterion(settings.criterion);
-    let adjusted = ContinuitySettings {
-        criterion,
-        order: continuity_order(criterion),
-        ..settings
-    };
+    let mut adjusted = settings;
+    adjusted.criterion = criterion;
+    adjusted.order = continuity_order(criterion);
     Some((basis, adjusted))
 }
