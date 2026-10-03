@@ -33,3 +33,26 @@ Next investigation: compare native evaluator and ElCLib arithmetic, compiler
 optimization flags and library/test compilation contexts. Do not weaken the test,
 modify pinned OCCT, or silently count the failure as parity. Full toolkit acceptance
 remains false even if this numerical issue is resolved.
+
+## Optimization isolation
+
+The same unmodified upstream test translation unit was compiled separately with
+GCC 13.3.0, linking the same pinned OCCT and GoogleTest shared libraries:
+
+| Test compilation flags | Isolated legacy test result |
+| --- | --- |
+| `-O2 -g -DNDEBUG` (native suite configuration) | Fails, distance `1.1102230246251565e-16` |
+| `-O0 -g -DNDEBUG` | Passes |
+| `-O2 -g -DNDEBUG -fno-builtin-sinh -fno-builtin-cosh` | Passes |
+
+`ExtremaPC2d_Hyperbola.hxx:83` evaluates cosh/sinh in a header; `ElCLib.cxx:559`
+evaluates them in the shared library. Disabling the compiler's sinh/cosh built-ins
+removes the failure in this experiment. This supports an optimization/libm rounding
+explanation; it does not establish every exact compiler transformation or excuse the
+optimized suite failure. A simple reduced value-only probe did not reproduce the
+failure, so the full test's compilation context matters.
+
+Only the test object compilation changed. Pinned source, expected assertions, and
+OCCT shared libraries were not modified. These three isolated experiments are not
+a replacement for the complete paired toolkit run. Logs and binaries remain in the
+integration worktree's `target/api-proof/hyperbola-legacy-O{0,2}*` paths.

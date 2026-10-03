@@ -111,7 +111,7 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkernel/report.json 
   --occt-source /path/to/OCCT --output target/api-proof/tkernel-joined-runtime.json
 ```
 
-The published API crosswalk at Rust revision `82d8fb9e` resolves 19,925 implemented declaration claims; 7,185
+The published API crosswalk at Rust revision `cf359bf0` resolves 20,013 implemented declaration claims; 7,185
 ledger rows remain unresolved. It is not a behavioral coverage percentage.
 
 ### TKMath paired run
@@ -165,3 +165,12 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkg3d-legacy/report.
 
 The source revision and all hashed runtime inputs are retained in each receipt.
 These historical receipts do not jointly establish a current whole-kernel pass.
+
+### TKGeomBase native failure
+
+The paired verifier now supports all 839 mapped TKGeomBase declarations. Its first
+strict run at `65fed4cd` returned 838 native passes and one exact-zero assertion
+failure in `ExtremaPC2d_HyperbolaTest.SingletonInvalidAndValueAccessor`. No successful
+paired receipt was generated. The unchanged single test passes at `-O0` and at
+`-O2 -fno-builtin-sinh -fno-builtin-cosh`, but fails at the native build's `-O2`.
+See [reproduction and limitations](../../docs/tkgeombase-native-runtime-blocker.md).
