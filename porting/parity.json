@@ -82207,9 +82207,9 @@
       "upstream_id": "Standard_GUID::ToCString(Standard_PCharacter) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::to_c_string / Display",
+      "rust_item": "rustycad_tkernel::standard::Guid::write_c_string",
       "status": "implemented",
-      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Returns the 37-byte buffer (text and NUL) instead of filling a caller buffer."
+      "notes": "Standard_GUID caller-buffer formatting writes all 37 bytes including NUL via Guid::write_c_string. The standard_values API probe uses this method; 99 native GUID differential cases pass. The return-buffer convenience method to_c_string delegates to this entry point."
     },
     {
       "upstream_id": "Standard_GUID::ToExtString(Standard_PExtCharacter) const",
