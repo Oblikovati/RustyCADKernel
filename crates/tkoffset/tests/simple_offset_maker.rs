@@ -21,6 +21,16 @@ fn default_and_null_perform_match_native_state() {
 }
 
 #[test]
+fn generated_before_perform_uses_native_unrecorded_shape_error()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let source = plane_face()?;
+    let maker = BRepOffsetMakeSimpleOffset::new();
+    let failure = maker.generated(&source).unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_NoSuchObject");
+    Ok(())
+}
+
+#[test]
 fn shell_perform_and_reinitialize_preserve_native_result_state()
 -> Result<(), rustycad_tkernel::standard::Failure> {
     let source = plane_face()?;
@@ -43,9 +53,11 @@ fn shell_perform_and_reinitialize_preserve_native_result_state()
     assert_eq!(maker.tolerance(), 2.0e-6);
     assert!(maker.build_solid_flag());
     assert!(!maker.is_done() && maker.result_shape().is_same(&generated));
+    assert!(maker.generated(&source)?.is_same(&generated));
     maker.perform()?;
     assert_eq!(maker.error(), BRepOffsetSimpleStatus::NullInputShape);
     assert!(!maker.is_done() && maker.result_shape().is_same(&generated));
+    assert!(maker.generated(&source)?.is_same(&generated));
     Ok(())
 }
 

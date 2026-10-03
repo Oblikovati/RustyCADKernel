@@ -42,7 +42,7 @@ pub struct BRepOffsetMakeSimpleOffset {
     max_angle: f64,
     error: BRepOffsetSimpleStatus,
     done: bool,
-    modifier: Option<Modifier>,
+    modifier: Modifier,
     reshape: ShapeBuildReShape,
     result_shape: Shape,
 }
@@ -57,7 +57,7 @@ impl Default for BRepOffsetMakeSimpleOffset {
             max_angle: 0.0,
             error: BRepOffsetSimpleStatus::Ok,
             done: false,
-            modifier: None,
+            modifier: Modifier::default(),
             reshape: ShapeBuildReShape::new(),
             result_shape: Shape::default(),
         }
@@ -121,7 +121,7 @@ impl BRepOffsetMakeSimpleOffset {
 
     fn prepare_shell_modifier(&mut self) -> Result<(), Failure> {
         self.ensure_max_angle()?;
-        self.modifier = Some(Modifier::with_shape(&self.input_shape)?);
+        self.modifier.init(&self.input_shape)?;
         self.run_shell_mapping()?;
         self.capture_result_shape()
     }
@@ -137,16 +137,8 @@ impl BRepOffsetMakeSimpleOffset {
         let mapping =
             BRepOffsetSimpleOffset::new(&self.input_shape, self.offset_value, self.tolerance)?;
         let mapping: Handle<dyn BRepToolsModification> = Handle::new(mapping).cast();
-        self.modifier
-            .as_mut()
-            .expect("modifier was assigned above")
-            .perform(&mapping, &ProgressRange::default())?;
-        if !self
-            .modifier
-            .as_ref()
-            .expect("modifier was assigned above")
-            .is_done()
-        {
+        self.modifier.perform(&mapping, &ProgressRange::default())?;
+        if !self.modifier.is_done() {
             self.error = BRepOffsetSimpleStatus::ErrorOffsetComputation;
         }
         Ok(())
@@ -156,23 +148,16 @@ impl BRepOffsetMakeSimpleOffset {
         if self.error != BRepOffsetSimpleStatus::Ok {
             return Ok(());
         }
-        self.result_shape = self
-            .modifier
-            .as_ref()
-            .expect("modifier was assigned above")
-            .modified_shape(&self.input_shape)?;
+        self.result_shape = self.modifier.modified_shape(&self.input_shape)?;
         Ok(())
     }
 
     fn restore_degenerated_edges(&self) -> Result<(), Failure> {
-        let Some(modifier) = &self.modifier else {
-            return Ok(());
-        };
         let mut explorer = Explorer::new(&self.input_shape, ShapeEnum::Edge, ShapeEnum::Shape)?;
         let builder = BRepBuilder::default();
         while explorer.more() {
             mark_degenerated_image(
-                modifier,
+                &self.modifier,
                 &builder,
                 Edge::unchecked(explorer.current().clone()),
             )?;
@@ -216,10 +201,7 @@ impl BRepOffsetMakeSimpleOffset {
 
     /// `Generated(shape)`: return the offset image after reshape history.
     pub fn generated(&self, shape: &Shape) -> Result<Shape, Failure> {
-        let Some(modifier) = &self.modifier else {
-            return Ok(Shape::default());
-        };
-        let generated = modifier.modified_shape(shape)?;
+        let generated = self.modifier.modified_shape(shape)?;
         if generated.is_null() {
             return Ok(generated);
         }
