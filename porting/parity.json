@@ -224978,7 +224978,7 @@
       "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::fix_split_face",
       "status": "partial",
-      "notes": "Partial: empty-container behavior is pinned. Nonempty faces reach native CheckSplittingVertices, which reads uninitialized myPrecision; this Rust port returns an explicit Standard_ConstructionError, and does not claim parity for that domain."
+      "notes": "Partial: deterministic initialized-analyzer fixtures pin two-face topology, aggregate replacement, and DONE3. The native public entrypoint reads uninitialized private myPrecision; Rust reports that indeterminate ordinary-constructor path explicitly."
     },
     {
       "upstream_id": "ShapeFix_FixSmallFace::SplitOneFace(TopoDS_Face&,TopoDS_Compound&)",
@@ -224987,7 +224987,7 @@
       "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::split_one_face",
       "status": "partial",
-      "notes": "Partial: empty-face false result is pinned. Recursive splitting is unported; native detection reads uninitialized myPrecision and cannot be assigned a defined cross-run result."
+      "notes": "Partial: recursive construction matches the two-face fixture when a test-only native harness sets private myPrecision. The public native API leaves this field uninitialized, so ordinary calls do not have a defined cross-run output."
     },
     {
       "upstream_id": "ShapeFix_Wire::SetMaxTailAngle(double)",
