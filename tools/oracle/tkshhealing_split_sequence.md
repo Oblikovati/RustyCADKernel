@@ -15,9 +15,10 @@ EXTERNAL seam segments, and applies reshape replacements. Private tests also
 exercise equal and NaN ordering, identity-based tangency merging, and retained
 half-parity state. These are additional tests, not mapped legacy declarations.
 
-A context replacement that removes an edge remains an explicit parity limitation:
-the native loop increments by ApplyContext's zero return and cannot advance.
-Rust reports Standard_NotImplemented. This is not an approved behavioral exception
+An empty compound replacement remains an explicit parity limitation: native
+ApplyContext returns zero and the enclosing sequence loop cannot advance. Rust
+reports Standard_NotImplemented. A removed edge produces a null replacement;
+native dereferences it in ShapeType, whereas Rust reports Standard_NullObject. This is not an approved behavioral exception
 or evidence of complete API parity. The seven native fixtures do not exercise it.
 
 ```sh
