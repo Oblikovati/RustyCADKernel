@@ -120,6 +120,11 @@ static void runComputeCode()
   gp_Lin2d line(gp_Pnt2d(1, 0), gp_Dir2d(0, 1));
   std::cout << "compute_code "
             << tool.ComputeCode(segments(1).WireData(), line, 1, 1, 0.25, 0.75) << '\n';
+  std::cout << "compute_code_right "
+            << tool.ComputeCode(segments(1).WireData(), line, 1, 1, 1.25, 1.75) << '\n';
+  gp_Lin2d tangent(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
+  std::cout << "compute_code_tangent "
+            << tool.ComputeCode(segments(1).WireData(), tangent, 1, 1, 0.25, 0.75) << '\n';
 }
 
 static void runPatchLimits()
