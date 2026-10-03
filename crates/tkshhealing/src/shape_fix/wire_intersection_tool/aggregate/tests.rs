@@ -10,6 +10,7 @@ mod tests {
     use rustycad_tkernel::standard::Handle;
     use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
     use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane};
+    use rustycad_tkg3d::top_abs::Orientation;
     use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
     use rustycad_tkmath::toploc::Location;
 
@@ -133,6 +134,42 @@ mod tests {
     }
 
     #[test]
+    fn reversed_nonadjacent_edge_crossing_preserves_native_ranges() {
+        let mut face = plane();
+        let wire = Handle::new(ShapeExtendWireData::new());
+        let mut edges = crossing_edges(&face);
+        edges[2].set_orientation(Orientation::Reversed);
+        for edge in edges {
+            wire.add_edge(&edge, 0).unwrap();
+        }
+        BRepBuilder::default()
+            .add(&mut face, &wire.wire().unwrap().into_shape())
+            .unwrap();
+        let context = Handle::new(ShapeBuildReShape::new());
+        let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+        let (mut split, mut cut, mut removed) = (91, 92, 93);
+        let done = tool
+            .fix_self_intersect_wire(&wire, &face, &mut split, &mut cut, &mut removed)
+            .unwrap();
+        let mut observed = vec![
+            f64::from(done),
+            f64::from(split),
+            f64::from(cut),
+            f64::from(removed),
+            f64::from(wire.nb_edges()),
+        ];
+        append_ranges(&wire, &face, &mut observed);
+        let expected = EXPECTED
+            .lines()
+            .nth(3)
+            .unwrap()
+            .split_whitespace()
+            .map(|value| value.parse().unwrap())
+            .collect::<Vec<f64>>();
+        assert_eq!(observed, expected);
+    }
+
+    #[test]
     fn long_overlap_triple_split_removes_overlapped_pieces() {
         let mut face = plane();
         let wire = Handle::new(ShapeExtendWireData::new());
@@ -159,7 +196,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(3)
+            .nth(4)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -193,7 +230,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(4)
+            .nth(5)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
