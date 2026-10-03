@@ -221723,6 +221723,24 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_degenerated",
       "status": "implemented",
       "notes": "Source translation of singular-edge checks and native accumulated status semantics. Native fixtures tkshhealing_wire_degenerated and tkshhealing_wire_singular_checks cover invalid flags, cone apex, midpoint veto, disconnected vertices, aggregate retention and ClearStatuses. UV output references adapted to a returned tuple. Branch validation is not exhaustive API or whole-toolkit behavior proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckClosed(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_closed",
+      "status": "implemented",
+      "notes": "Native closure check composes CheckConnected(1,prec) and CheckDegenerated(1), resets aggregate closure status, preserves last advanced-check status, and returns only accumulated DONE. Native singular-check fixtures verify DONE1/DONE2, FAIL1, and mixed DONE1/FAIL2. Default prec=0 represented by explicit Rust argument. No full toolkit claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusClosed(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_closed",
+      "status": "implemented",
+      "notes": "Native closure check composes CheckConnected(1,prec) and CheckDegenerated(1), resets aggregate closure status, preserves last advanced-check status, and returns only accumulated DONE. Native singular-check fixtures verify DONE1/DONE2, FAIL1, and mixed DONE1/FAIL2. Default prec=0 represented by explicit Rust argument. No full toolkit claim."
     }
   ],
   "tests": [

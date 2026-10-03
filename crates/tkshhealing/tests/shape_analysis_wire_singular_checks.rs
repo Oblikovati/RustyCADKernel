@@ -91,6 +91,7 @@ fn inspect(name: &str, wire: &Handle<ShapeExtendWireData>) {
             .find(|line| line.starts_with(&format!("{name} "))),
         Some(row.as_str())
     );
+    check_closure(name, &analyzer);
     check_aggregate(name, &analyzer, wire);
 }
 
@@ -145,4 +146,47 @@ fn check_aggregate(name: &str, analyzer: &ShapeAnalysisWire, wire: &Handle<Shape
             .find(|line| line.starts_with(&format!("{name}_aggregate "))),
         Some(row.as_str())
     );
+}
+
+fn check_closure(name: &str, analyzer: &ShapeAnalysisWire) {
+    let closed = analyzer.check_closed(0.0).unwrap();
+    let statuses = [
+        ShapeExtendStatus::Done1,
+        ShapeExtendStatus::Done2,
+        ShapeExtendStatus::Fail1,
+        ShapeExtendStatus::Fail2,
+    ];
+    let flags = statuses.map(|status| u8::from(analyzer.status_closed(status)));
+    let row = format!(
+        "{name}_closed {} {} {} {} {}",
+        u8::from(closed),
+        flags[0],
+        flags[1],
+        flags[2],
+        flags[3]
+    );
+    assert_eq!(
+        EXPECTED
+            .lines()
+            .find(|line| line.starts_with(&format!("{name}_closed "))),
+        Some(row.as_str())
+    );
+    analyzer.clear_statuses();
+    assert!(analyzer.status_closed(ShapeExtendStatus::Ok));
+}
+
+#[test]
+fn closure_on_an_uninitialized_wire_is_false_and_clear() {
+    let analyzer = ShapeAnalysisWire::new();
+    assert!(!analyzer.check_closed(0.0).unwrap());
+    assert!(analyzer.status_closed(ShapeExtendStatus::Ok));
+}
+
+#[test]
+fn closure_accumulates_connection_done_and_degenerate_failure() {
+    let edge = edge_at(Point3::new(1., 0., 0.), Point3::new(1., 0., 0.));
+    BRepBuilder::default().degenerated(&edge, true).unwrap();
+    let wire = Handle::new(ShapeExtendWireData::new());
+    wire.add_edge(&edge, 0).unwrap();
+    inspect("invalid_degenerate_flag", &wire);
 }

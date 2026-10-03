@@ -46,6 +46,12 @@ static void inspect(const char* name, const Handle(ShapeExtend_WireData)& wire)
             << analyzer.LastCheckStatus(ShapeExtend_DONE2) << " "
             << analyzer.LastCheckStatus(ShapeExtend_FAIL1) << " "
             << analyzer.LastCheckStatus(ShapeExtend_FAIL2) << '\n';
+  const bool closed = analyzer.CheckClosed();
+  std::cout << name << "_closed " << closed << " "
+            << analyzer.StatusClosed(ShapeExtend_DONE1) << " "
+            << analyzer.StatusClosed(ShapeExtend_DONE2) << " "
+            << analyzer.StatusClosed(ShapeExtend_FAIL1) << " "
+            << analyzer.StatusClosed(ShapeExtend_FAIL2) << '\n';
   const bool aggregate = analyzer.CheckDegenerated();
   const bool wrapped = analyzer.CheckDegenerated(wire->NbEdges());
   wire->Clear();
@@ -70,4 +76,9 @@ int main()
   disconnected->Add(edgeAt(gp_Pnt(2.,0.,0.), gp_Pnt(1.,0.,0.)));
   disconnected->Add(edgeAt(gp_Pnt(), gp_Pnt(1.,0.,0.)));
   inspect("disconnected_singular_vertex", disconnected);
+  Handle(ShapeExtend_WireData) flagged = new ShapeExtend_WireData;
+  TopoDS_Edge invalid = edgeAt(gp_Pnt(1.,0.,0.), gp_Pnt(1.,0.,0.));
+  builder.Degenerated(invalid, true);
+  flagged->Add(invalid);
+  inspect("invalid_degenerate_flag", flagged);
 }
