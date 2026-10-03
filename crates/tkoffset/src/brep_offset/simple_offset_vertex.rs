@@ -26,8 +26,8 @@ pub struct OffsetVertexGeometry {
 }
 
 /// Computes the private `FillVertexData` result from incident edge-map entries.
-/// Returns `None` when none contributes a non-null 3D offset curve; upstream's empty
-/// sample case divides by zero and remains unsupported.
+/// Returns `None` when none contributes a non-null 3D offset curve. Native empty-sample
+/// behavior is unprobed and remains unsupported by this helper.
 ///
 /// ```
 /// use rustycad_tkbrep::topods::Vertex;

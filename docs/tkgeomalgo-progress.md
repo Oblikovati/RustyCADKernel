@@ -97,8 +97,8 @@ probe invokes pinned `BRepOffset_SimpleOffset::NewCurve` and `NewPoint` on bound
 located, reversed and adjacent-face plane inputs. Focused Rust tests check edge locations,
 endpoints, vertex centroids, and tolerances (`1e-7` for the simple edge, `1.001e-7` for
 simple vertices, `20.0002` for the opposed adjacent edge, and `20.0202` for its vertices).
-The upstream empty-vertex sample case remains unsupported because `FillVertexData` divides
-by an empty sample count. Build the probe with `g++ -std=c++17`, the OCCT build's
+The helper returns no vertex result when its input edges yield no offset samples; native
+empty-sample behavior is unprobed and remains unsupported. Build the probe with `g++ -std=c++17`, the OCCT build's
 `include/opencascade` and `lin64/gcc/libi` paths, and link `TKOffset`, `TKShHealing`,
 `TKPrim`, `TKBO`, `TKTopAlgo`, `TKBRep`, `TKGeomAlgo`, `TKGeomBase`, `TKG3d`, `TKG2d`,
 `TKMath` and `TKernel`.
