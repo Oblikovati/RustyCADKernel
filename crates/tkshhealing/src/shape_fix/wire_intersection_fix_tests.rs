@@ -5,8 +5,8 @@ use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::geom::{GeomCurve, GeomLine};
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve};
+use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomTrimmedCurve};
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point3};
@@ -106,6 +106,103 @@ fn adjacent_crossing_context_replaces_edges_before_raising_local_tolerance() {
     assert_context_statuses(&fixer);
     assert_original_shared_vertices(&fixture);
     assert_replaced_edge_tolerances(&reshape, &fixture);
+}
+
+#[test]
+fn split_tool_preserves_native_face_range_on_tiny_trimmed_line_cut() {
+    let face = planar_face();
+    let edge = tiny_trimmed_line_edge(&face);
+    let cut = 1.0e9 - 1.0e-4;
+    let mut cut_line = true;
+
+    let changed =
+        super::super::wire_split_tool::cut_edge(&edge, 0.0, cut, &face, &mut cut_line).unwrap();
+
+    assert_eq!(changed, expected_cut_flag("changed"));
+    assert_eq!(cut_line, expected_cut_flag("cut_line"));
+    assert_close(
+        BRepTool::range_on_face(&edge, &face).unwrap().1,
+        expected_cut_range("face_last"),
+    );
+    let edge_range = BRepTool::range(&edge).unwrap();
+    assert_close(edge_range.0, expected_cut_range("edge_first"));
+    assert_close(edge_range.1, expected_cut_range("edge_last"));
+}
+
+#[test]
+fn split_tool_validates_same_parameter_cut_against_bounded_curve_domain() {
+    let face = planar_face();
+    let edge = bounded_curve_cut_edge(&face);
+    let mut cut_line = false;
+
+    let changed =
+        super::super::wire_split_tool::cut_edge(&edge, 0.0, 1.5, &face, &mut cut_line).unwrap();
+
+    assert!(changed);
+    assert!(!cut_line);
+    assert_eq!(
+        BRepTool::range_on_face(&edge, &face).unwrap(),
+        (0.0, expected_validated_range("face_last"))
+    );
+    assert_eq!(
+        BRepTool::range(&edge).unwrap(),
+        (0.0, expected_validated_range("edge_last"))
+    );
+    assert!(BRepTool::same_range(&edge).unwrap());
+    assert!(BRepTool::same_parameter(&edge).unwrap());
+}
+
+fn bounded_curve_cut_edge(face: &Face) -> Edge {
+    let edge = edge_with_pcurve(
+        face,
+        Point3::new(0.0, 0.0, 0.0),
+        Point3::new(2.0, 0.0, 0.0),
+        Direction2::new(1.0, 0.0).unwrap(),
+        2.0,
+    );
+    install_bounded_curve_representations(&edge, face);
+    edge
+}
+
+fn install_bounded_curve_representations(edge: &Edge, face: &Face) {
+    let axis = Axis1::new(Point3::default(), Direction3::X);
+    let line = Handle::new(GeomLine::new(axis)).cast();
+    let curve = Handle::new(GeomTrimmedCurve::new(&line, 0.0, 1.0, true, true).unwrap())
+        .cast::<dyn GeomCurve>();
+    let builder = BRepBuilder::default();
+    builder.update_edge_curve(edge, &curve, 1e-7).unwrap();
+    builder.range(edge, 0.0, 2.0, true).unwrap();
+    builder.range_on_face(edge, face, 0.0, 2.0).unwrap();
+    builder.same_range(edge, true).unwrap();
+    builder.same_parameter(edge, true).unwrap();
+}
+
+fn tiny_trimmed_line_edge(face: &Face) -> Edge {
+    let edge = edge_with_pcurve(
+        face,
+        Point3::new(0.0, 0.0, 0.0),
+        Point3::new(1.0e9, 0.0, 0.0),
+        Direction2::new(1.0, 0.0).unwrap(),
+        1.0e9,
+    );
+    install_tiny_trimmed_line_representations(&edge, face);
+    edge
+}
+
+fn install_tiny_trimmed_line_representations(edge: &Edge, face: &Face) {
+    let base = Handle::new(Geom2dLine::new(Axis2d::default())).cast();
+    let trimmed = Handle::new(Geom2dTrimmedCurve::new(&base, 0.0, 1.0e9, true, true).unwrap())
+        .cast::<dyn Geom2dCurve>();
+    let curve_3d = Handle::new(GeomLine::new(Axis1::new(Point3::default(), Direction3::X)))
+        .cast::<dyn GeomCurve>();
+    let builder = BRepBuilder::default();
+    builder
+        .update_edge_pcurve_on_face(edge, &trimmed, face, 1e-7)
+        .unwrap();
+    builder.update_edge_curve(edge, &curve_3d, 1e-7).unwrap();
+    builder.range_on_face(edge, face, 0.0, 1.0e9).unwrap();
+    builder.range(edge, 0.0, 1.0, true).unwrap();
+    builder.same_parameter(edge, false).unwrap();
 }
 
 fn context_edge_tolerance_fixture() -> ContextToleranceFixture {
@@ -394,6 +491,34 @@ fn expected_context_flag(label: &str) -> bool {
     let mut fields = row.split_whitespace();
     while fields.next() != Some(label) {}
     fields.next().unwrap() == "1"
+}
+
+fn expected_cut_flag(label: &str) -> bool {
+    let row =
+        include_str!("../../../../tools/oracle/tkshhealing_wire_split_tool_early_range.expected")
+            .trim();
+    let mut fields = row.split_whitespace();
+    while fields.next() != Some(label) {}
+    fields.next().unwrap() == "1"
+}
+
+fn expected_cut_range(label: &str) -> f64 {
+    let row =
+        include_str!("../../../../tools/oracle/tkshhealing_wire_split_tool_early_range.expected")
+            .trim();
+    let mut fields = row.split_whitespace();
+    while fields.next() != Some(label) {}
+    fields.next().unwrap().parse().unwrap()
+}
+
+fn expected_validated_range(label: &str) -> f64 {
+    let row = include_str!(
+        "../../../../tools/oracle/tkshhealing_wire_split_tool_validated_range.expected"
+    )
+    .trim();
+    let mut fields = row.split_whitespace();
+    while fields.next() != Some(label) {}
+    fields.next().unwrap().parse().unwrap()
 }
 
 fn assert_close(actual: f64, expected: f64) {
