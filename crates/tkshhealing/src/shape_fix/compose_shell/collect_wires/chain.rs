@@ -148,7 +148,17 @@ fn mark_segment_consumed(
 fn initialize_chain_start(state: &mut ChainState, face: &Face) -> Result<(), Failure> {
     state.first_edge = state.wire_data.get().ok_or_else(null_wire)?.edge(1)?;
     state.first_vertex = ShapeAnalysisEdge::new().first_vertex(&state.first_edge);
-    let (_, outputs) = tangent_on_edge(&state.first_edge, face, false, 1.0e-3)?;
+    let mut outputs = EdgeTangent2d {
+        point: state.first_point,
+        tangent: state.first_tangent,
+    };
+    ShapeAnalysisEdge::new().get_end_tangent_2d_on_face_into(
+        &state.first_edge,
+        face,
+        false,
+        1.0e-3,
+        &mut outputs,
+    )?;
     state.first_point = outputs.point;
     state.first_tangent = outputs.tangent;
     Ok(())
@@ -244,29 +254,32 @@ fn close_current_loop(
     let loop_segment = ShapeFixWireSegment::from_wire_data(&state.wire_data, Orientation::Forward)?;
     loop_segment.set_patch_index(1, state.patch)?;
     loops.append(loop_segment);
-    *state = ChainState::default();
+    state.reset_for_next_loop();
     let _ = face;
     Ok(())
 }
 
-fn tangent_on_edge(
-    edge: &Edge,
-    face: &Face,
-    at_end: bool,
-    dparam: f64,
-) -> Result<(bool, EdgeTangent2d), Failure> {
-    let mut output = EdgeTangent2d::default();
-    let found = ShapeAnalysisEdge::new().get_end_tangent_2d_on_face_into(
-        edge,
-        face,
-        at_end,
-        dparam,
-        &mut output,
-    )?;
-    Ok((found, output))
+impl ChainState {
+    fn reset_for_next_loop(&mut self) {
+        let (first_point, end_point, first_tangent, end_tangent, last_edge, tolerance) = (
+            self.first_point,
+            self.end_point,
+            self.first_tangent,
+            self.end_tangent,
+            self.last_edge.clone(),
+            self.tolerance,
+        );
+        *self = Self::default();
+        self.first_point = first_point;
+        self.end_point = end_point;
+        self.first_tangent = first_tangent;
+        self.end_tangent = end_tangent;
+        self.last_edge = last_edge;
+        self.tolerance = tolerance;
+    }
 }
 
-fn set_status(composer: &ShapeFixComposeShell, status: ShapeExtendStatus) {
+pub(super) fn set_status(composer: &ShapeFixComposeShell, status: ShapeExtendStatus) {
     composer.fields.write().status |= ShapeExtend::encode_status(status);
 }
 

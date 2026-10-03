@@ -1,5 +1,6 @@
 use super::super::coincident;
-use super::{ChainState, ShapeFixComposeShell, patch, tangent_on_edge};
+use super::{ChainState, ShapeFixComposeShell, patch, set_status};
+use crate::shape_analysis::{EdgeTangent2d, ShapeAnalysisEdge};
 use crate::shape_extend::ShapeExtendCompositeSurface;
 use crate::shape_fix::ShapeFixWireSegment;
 use rustycad_tkbrep::brep::BRepTool;
@@ -138,7 +139,14 @@ fn score_endpoint(
     let reversed = endpoint != 0;
     let misoriented = segment.orientation() == endpoint_orientation(reversed);
     if state.last_edge.is_same(&last_edge) {
-        select_return_edge(index, reversed, same_patch, misoriented, best);
+        select_return_edge(
+            index,
+            reversed,
+            same_patch,
+            misoriented,
+            state.can_be_closed,
+            best,
+        );
         return Ok(());
     }
     evaluate_candidate(
@@ -180,18 +188,22 @@ fn select_return_edge(
     reverse: bool,
     same_patch: bool,
     misoriented: bool,
+    can_be_closed: bool,
     best: &mut Candidate,
 ) {
-    if best.index != 0 {
+    if best.index != 0 || can_be_closed {
         return;
     }
+    let weight = i32::from(same_patch) * 16 + 8 + i32::from(!misoriented) * 4;
     *best = Candidate {
         index,
         reverse,
         connected: true,
         misoriented,
         same_patch,
-        weight: i32::from(same_patch) * 16 + 8 + i32::from(!misoriented) * 4,
+        weight,
+        angle: best.angle,
+        distance: best.distance,
         ..Candidate::default()
     };
 }
@@ -210,7 +222,8 @@ fn evaluate_candidate(
     misoriented: bool,
     best: &mut Candidate,
 ) -> Result<(), Failure> {
-    let (point, tangent, edge_tolerance) = candidate_start_tangent(segment, face, reverse)?;
+    let (point, tangent, edge_tolerance) =
+        candidate_start_tangent(composer, segment, face, reverse)?;
     let (point, shift_u, shift_v) = align_closed_mode(composer, point, state.end_point, grid)?;
     let short = shortness.get(index - 1).copied().unwrap_or(0) > 0;
     let angle = candidate_angle(composer.closed_mode(), short, state.end_tangent, tangent)?;
@@ -238,11 +251,14 @@ fn evaluate_candidate(
 }
 
 fn candidate_start_tangent(
+    composer: &ShapeFixComposeShell,
     segment: &ShapeFixWireSegment,
     face: &Face,
     reverse: bool,
 ) -> Result<(Point2, Vector2, f64), Failure> {
     let count = segment.nb_edges();
+    let mut outputs = EdgeTangent2d::default();
+    let mut edge_tolerance = 0.0;
     for position in 1..=count {
         let edge_index = if reverse {
             count + 1 - position
@@ -254,22 +270,20 @@ fn candidate_start_tangent(
         } else {
             segment.edge(edge_index)?
         };
-        let (found, outputs) = tangent_on_edge(&edge, face, false, 1.0e-3)?;
+        edge_tolerance = BRepTool::edge_tolerance(&edge)?;
+        let found = ShapeAnalysisEdge::new().get_end_tangent_2d_on_face_into(
+            &edge,
+            face,
+            false,
+            1.0e-3,
+            &mut outputs,
+        )?;
         if found {
-            return Ok((
-                outputs.point,
-                outputs.tangent,
-                BRepTool::edge_tolerance(&edge)?,
-            ));
+            return Ok((outputs.point, outputs.tangent, edge_tolerance));
         }
     }
-    let edge = segment.edge(if reverse { -count } else { 1 })?;
-    let (_, outputs) = tangent_on_edge(&edge, face, false, 1.0e-3)?;
-    Ok((
-        outputs.point,
-        outputs.tangent,
-        BRepTool::edge_tolerance(&edge)?,
-    ))
+    set_status(composer, crate::shape_extend::ShapeExtendStatus::Fail2);
+    Ok((outputs.point, outputs.tangent, edge_tolerance))
 }
 
 fn align_closed_mode(
@@ -308,7 +322,7 @@ fn candidate_angle(
     if short {
         return Ok(std::f64::consts::PI);
     }
-    let angle = end_tangent.angle(candidate_tangent)?.abs();
+    let angle = end_tangent.angle(candidate_tangent)?;
     Ok(
         if closed_mode && std::f64::consts::PI - angle < rustycad_tkernel::precision::angular() {
             0.0
@@ -335,4 +349,42 @@ fn candidate_weight(
 
 fn candidate_tail(best: &Candidate, angle: f64, distance: f64) -> i32 {
     i32::from(!best.connected && distance > best.distance) * 2 + i32::from(angle < best.angle)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{Candidate, candidate_angle, select_return_edge};
+    use rustycad_tkmath::gp::Vector2;
+
+    #[test]
+    fn angle_keeps_occt_signed_direction() {
+        let angle = candidate_angle(
+            false,
+            false,
+            Vector2::new(1.0, 0.0),
+            Vector2::new(0.0, -1.0),
+        )
+        .unwrap();
+        assert_eq!(angle, -std::f64::consts::FRAC_PI_2);
+    }
+
+    #[test]
+    fn closed_chain_does_not_select_same_edge_return() {
+        let mut best = Candidate::default();
+        select_return_edge(2, false, true, false, true, &mut best);
+        assert_eq!(best.index, 0);
+    }
+
+    #[test]
+    fn return_edge_retains_default_angle_and_distance_tiebreakers() {
+        let mut best = Candidate {
+            angle: -std::f64::consts::PI,
+            distance: f64::MAX,
+            ..Candidate::default()
+        };
+        select_return_edge(2, true, false, true, false, &mut best);
+        assert_eq!(best.index, 2);
+        assert_eq!(best.angle, -std::f64::consts::PI);
+        assert_eq!(best.distance, f64::MAX);
+    }
 }

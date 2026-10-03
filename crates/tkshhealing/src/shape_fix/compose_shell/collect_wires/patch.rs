@@ -11,7 +11,7 @@ pub(super) fn extend_same_patch(
         return false;
     };
     let (du, dv) = period_shifts(candidate, *patch, nu, nv);
-    let candidate = shift_patch(candidate, du, dv);
+    let candidate = shift_patch(candidate, du * nu, dv * nv);
     let joined = joined_patch(candidate, *patch);
     if !adjacent_or_equal(joined) {
         return false;
@@ -65,4 +65,28 @@ fn adjacent_or_equal(patch: WirePatchIndex) -> bool {
     let du = patch.u_max - patch.u_min;
     let dv = patch.v_max - patch.v_min;
     matches!(du, 0 | 1) && matches!(dv, 0 | 1)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{period_shifts, shift_patch};
+    use crate::shape_fix::WirePatchIndex;
+
+    #[test]
+    fn periodic_translation_scales_patch_index_shift_by_grid_size() {
+        let candidate = WirePatchIndex {
+            u_min: 5,
+            u_max: 6,
+            v_min: 1,
+            v_max: 1,
+        };
+        let current = WirePatchIndex {
+            u_min: 1,
+            u_max: 2,
+            v_min: 1,
+            v_max: 1,
+        };
+        let (du, dv) = period_shifts(candidate, current, 2, 3);
+        assert_eq!(shift_patch(candidate, du * 2, dv * 3).u_min, 1);
+    }
 }
