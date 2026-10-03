@@ -22,6 +22,7 @@ mod order;
 mod seam;
 mod shape_connect;
 mod small;
+mod small_area;
 mod state;
 struct WireAnalysisFields {
     wire: Handle<ShapeExtendWireData>,

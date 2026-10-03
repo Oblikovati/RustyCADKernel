@@ -221903,6 +221903,15 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::min_distance_2d",
       "status": "implemented",
       "notes": "Native ordered composition of edge endpoint checks, seam, 3D/2D gaps, and same-parameter check. Four native fixture rows compare seven DONE/FAIL pairs, retained last-check status, 3D/2D distances and status clearing. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckSmallArea(const TopoDS_Wire&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_small_area",
+      "status": "implemented",
+      "notes": "Native 23-sample center and cross-sum screening followed by BRepGProp surface/linear properties of the supplied wire. Nine pinned native cases compare threshold, reversal, differing argument wire, and missing geometry/face/empty input. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [
