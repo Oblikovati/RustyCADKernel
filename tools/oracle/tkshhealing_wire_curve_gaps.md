@@ -24,3 +24,11 @@ cargo test -p rustycad-tkshhealing --test shape_analysis_wire_curve_gaps
 ```
 
 These checks establish these branch observations, not full toolkit parity.
+
+## Combined edge consistency
+
+The four `consistency_*` rows run `CheckEdgeCurves` on a single edge with
+coincident representations, offset 3D geometry, unequal ranges, or no 3D curve.
+Endpoint vertices are explicitly constructed. Rows encode `found DONE1..DONE7
+FAIL1..FAIL7 last_DONE1 last_FAIL1 minimum3d minimum2d cleared_OK`.
+These validate the seven check categories and native last-check state retention.

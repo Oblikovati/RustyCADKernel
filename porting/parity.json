@@ -221876,6 +221876,33 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_seam_into",
       "status": "implemented",
       "notes": "Native seam selection and ordered output-reference updates, forcing forward face plus forward/reversed edge occurrences. Seven pinned native rows compare seam ordering, reversed face/edge, unready/ordinary-edge sentinel preservation. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckEdgeCurves()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_edge_curves",
+      "status": "implemented",
+      "notes": "Native ordered composition of edge endpoint checks, seam, 3D/2D gaps, and same-parameter check. Four native fixture rows compare seven DONE/FAIL pairs, retained last-check status, 3D/2D distances and status clearing. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusEdgeCurves(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_edge_curves",
+      "status": "implemented",
+      "notes": "Native ordered composition of edge endpoint checks, seam, 3D/2D gaps, and same-parameter check. Four native fixture rows compare seven DONE/FAIL pairs, retained last-check status, 3D/2D distances and status clearing. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::MinDistance2d() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::min_distance_2d",
+      "status": "implemented",
+      "notes": "Native ordered composition of edge endpoint checks, seam, 3D/2D gaps, and same-parameter check. Four native fixture rows compare seven DONE/FAIL pairs, retained last-check status, 3D/2D distances and status clearing. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [

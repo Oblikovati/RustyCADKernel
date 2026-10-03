@@ -6,6 +6,7 @@
 #include <ShapeAnalysis_Wire.hxx>
 #include <ShapeExtend_WireData.hxx>
 #include <TopoDS_Edge.hxx>
+#include <TopoDS_Vertex.hxx>
 #include <gp_Ax3.hxx>
 #include <gp_Ax1.hxx>
 #include <gp_Ax2d.hxx>
@@ -17,6 +18,11 @@ static TopoDS_Edge edgeOn(const TopoDS_Face& face, double offset, double span)
   BRep_Builder builder;
   TopoDS_Edge edge;
   builder.MakeEdge(edge);
+  TopoDS_Vertex first, last;
+  builder.MakeVertex(first, gp_Pnt(), 1.e-7);
+  builder.MakeVertex(last, gp_Pnt(1.,0.,0.), 1.e-7);
+  builder.Add(edge, first.Oriented(TopAbs_FORWARD));
+  builder.Add(edge, last.Oriented(TopAbs_REVERSED));
   builder.UpdateEdge(edge, new Geom_Line(gp_Ax1(gp_Pnt(0.,0.,offset), gp_Dir(1.,0.,0.))), 1.e-7);
   builder.Range(edge, 0., 1., true);
   builder.UpdateEdge(edge, new Geom2d_Line(gp_Ax2d(gp_Pnt2d(), gp_Dir2d(1.,0.))), face, 1.e-7);
@@ -43,6 +49,27 @@ static void inspect(const char* name, double offset, double span, bool reverse)
   analysis.ClearStatuses();
   std::cout << " " << analysis.StatusCurveGaps(ShapeExtend_OK) << " " << analysis.MaxDistance3d() << '\n';
 }
+static void consistency(const char* name, double offset, double span, bool missing)
+{
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
+  Handle(ShapeExtend_WireData) wire = new ShapeExtend_WireData;
+  TopoDS_Edge edge = edgeOn(face, offset, span);
+  if (missing) builder.UpdateEdge(edge, Handle(Geom_Curve)(), 1.e-7);
+  wire->Add(edge);
+  ShapeAnalysis_Wire analysis(wire, face, 1.e-7);
+  std::cout << name << " " << analysis.CheckEdgeCurves();
+  for (int flag = ShapeExtend_DONE1; flag <= ShapeExtend_DONE7; ++flag)
+    std::cout << " " << analysis.StatusEdgeCurves(static_cast<ShapeExtend_Status>(flag));
+  for (int flag = ShapeExtend_FAIL1; flag <= ShapeExtend_FAIL7; ++flag)
+    std::cout << " " << analysis.StatusEdgeCurves(static_cast<ShapeExtend_Status>(flag));
+  std::cout << " " << analysis.LastCheckStatus(ShapeExtend_DONE1)
+            << " " << analysis.LastCheckStatus(ShapeExtend_FAIL1)
+            << " " << analysis.MinDistance3d() << " " << analysis.MinDistance2d();
+  analysis.ClearStatuses();
+  std::cout << " " << analysis.StatusEdgeCurves(ShapeExtend_OK) << '\n';
+}
 int main()
 {
   std::cout << std::setprecision(17);
@@ -51,4 +78,8 @@ int main()
   inspect("different_ranges", 0., 2., false);
   inspect("reversed", 3., 2., true);
   inspect("below_precision", 1.e-8, 1., false);
+  consistency("consistency_coincident", 0., 1., false);
+  consistency("consistency_offset", 3., 1., false);
+  consistency("consistency_ranges", 0., 2., false);
+  consistency("consistency_missing", 0., 1., true);
 }

@@ -132,6 +132,11 @@ impl ShapeAnalysisWire {
         self.fields.read().max_3d
     }
 
+    /// The last minimum 2D measurement; `analyzer.min_distance_2d()`.
+    pub fn min_distance_2d(&self) -> f64 {
+        self.fields.read().min_2d
+    }
+
     /// The largest measured 2D boundary gap.
     pub fn max_distance_2d(&self) -> f64 {
         self.fields.read().max_2d

@@ -15,6 +15,7 @@ mod closed;
 mod connected;
 mod curve_gaps;
 mod degenerated;
+mod edge_curves;
 mod gaps;
 mod lacking;
 mod order;
@@ -37,6 +38,7 @@ struct WireAnalysisFields {
     status_closed: i32,
     status_lacking: i32,
     status_small: i32,
+    status_edge_curves: i32,
     min_3d: f64,
     max_3d: f64,
     min_2d: f64,
@@ -73,6 +75,7 @@ impl Default for ShapeAnalysisWire {
                 status_closed: 0,
                 status_lacking: 0,
                 status_small: 0,
+                status_edge_curves: 0,
                 min_3d: 0.,
                 max_3d: 0.,
                 min_2d: 0.,

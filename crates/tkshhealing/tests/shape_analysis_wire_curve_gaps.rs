@@ -1,4 +1,5 @@
 //! Native sampled curve-gap distances, retained failure metrics and aggregate status.
+mod support;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
     topods::{Edge, Face},
@@ -85,9 +86,8 @@ fn planar_face() -> Face {
 }
 
 fn edge_on(face: &Face, offset: f64, span: f64) -> Edge {
-    let mut edge = Edge::default();
+    let edge = support::edge_at_points(Point3::default(), Point3::new(1., 0., 0.));
     let builder = BRepBuilder::default();
-    builder.make_edge(&mut edge).unwrap();
     let axis = Axis1::new(
         Point3::new(0., 0., offset),
         Direction3::new(1., 0., 0.).unwrap(),
@@ -110,4 +110,58 @@ fn unloaded_curve_checks_return_false_and_reset_status() {
     assert!(analyzer.last_check_status(ShapeExtendStatus::Ok));
     assert!(!analyzer.check_curve_gaps().unwrap());
     assert!(analyzer.status_curve_gaps(ShapeExtendStatus::Ok));
+    assert!(!analyzer.check_edge_curves().unwrap());
+    assert!(analyzer.status_edge_curves(ShapeExtendStatus::Ok));
+}
+
+#[test]
+fn edge_curve_consistency_statuses_match_native() {
+    inspect_consistency("consistency_coincident", 0., 1., false);
+    inspect_consistency("consistency_offset", 3., 1., false);
+    inspect_consistency("consistency_ranges", 0., 2., false);
+    inspect_consistency("consistency_missing", 0., 1., true);
+}
+
+fn inspect_consistency(name: &str, offset: f64, span: f64, missing: bool) {
+    let face = planar_face();
+    let edge = edge_on(&face, offset, span);
+    if missing {
+        BRepBuilder::default()
+            .update_edge_curve(&edge, &Handle::default(), 1e-7)
+            .unwrap();
+    }
+    let wire = Handle::new(ShapeExtendWireData::new());
+    wire.add_edge(&edge, 0).unwrap();
+    let analyzer = ShapeAnalysisWire::from_wire_data(&wire, &face, 1e-7).unwrap();
+    let observed = consistency_observation(&analyzer);
+    let row = EXPECTED
+        .lines()
+        .find(|row| row.starts_with(&format!("{name} ")))
+        .unwrap();
+    let expected: Vec<f64> = row
+        .split_whitespace()
+        .skip(1)
+        .map(|value| value.parse().unwrap())
+        .collect();
+    assert_eq!(observed, expected, "native consistency case {name}");
+}
+
+fn consistency_observation(analyzer: &ShapeAnalysisWire) -> Vec<f64> {
+    use ShapeExtendStatus::*;
+    let mut observed = vec![f64::from(analyzer.check_edge_curves().unwrap())];
+    for status in [
+        Done1, Done2, Done3, Done4, Done5, Done6, Done7, Fail1, Fail2, Fail3, Fail4, Fail5, Fail6,
+        Fail7,
+    ] {
+        observed.push(f64::from(analyzer.status_edge_curves(status)));
+    }
+    observed.extend([
+        f64::from(analyzer.last_check_status(Done1)),
+        f64::from(analyzer.last_check_status(Fail1)),
+        analyzer.min_distance_3d(),
+        analyzer.min_distance_2d(),
+    ]);
+    analyzer.clear_statuses();
+    observed.push(f64::from(analyzer.status_edge_curves(Ok)));
+    observed
 }
