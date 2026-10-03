@@ -13,20 +13,27 @@ const RIGHT: i32 = 2;
 const BOTH: i32 = LEFT | RIGHT;
 const SAMPLE_COUNT: i32 = 5;
 
+pub(super) struct ComputeCodeInput<'a> {
+    pub(super) wire: &'a ShapeExtendWireData,
+    pub(super) line: Line2,
+    pub(super) begin_edge: i32,
+    pub(super) end_edge: i32,
+    pub(super) begin_parameter: f64,
+    pub(super) end_parameter: f64,
+    pub(super) internal: bool,
+}
+
 pub(super) fn compute_code(
     composer: &ShapeFixComposeShell,
-    wire: &ShapeExtendWireData,
-    line: Line2,
-    begin_edge: i32,
-    end_edge: i32,
-    begin_parameter: f64,
-    end_parameter: f64,
-    internal: bool,
+    input: ComputeCodeInput<'_>,
 ) -> Result<i32, Failure> {
     let fields = composer.fields.read().clone();
-    let bounds = segment_bounds((begin_edge, end_edge), (begin_parameter, end_parameter));
-    let special = special_segment(wire, bounds, &fields, internal)?;
-    sample_and_finish(composer, &fields, wire, line, bounds, special)
+    let bounds = segment_bounds(
+        (input.begin_edge, input.end_edge),
+        (input.begin_parameter, input.end_parameter),
+    );
+    let special = special_segment(input.wire, bounds, &fields, input.internal)?;
+    sample_and_finish(composer, &fields, input.wire, input.line, bounds, special)
 }
 
 fn segment_bounds(edges: (i32, i32), params: (f64, f64)) -> SegmentBounds {
@@ -82,16 +89,16 @@ fn sample_segment(
     let mut result = SampleResult::default();
     let mut edge_index = bounds.begin_edge;
     loop {
-        sample_edge(
+        sample_edge(EdgeSampleInput {
             composer,
             fields,
             wire,
             line,
-            &mut result,
+            result: &mut result,
             edge_index,
             bounds,
             special,
-        )?;
+        })?;
         if !continue_sampling(&result, edge_index, bounds.end_edge, &mut special) {
             break;
         }
@@ -115,32 +122,36 @@ fn continue_sampling(
     true
 }
 
-fn sample_edge(
-    composer: &ShapeFixComposeShell,
-    fields: &super::ComposeShellFields,
-    wire: &ShapeExtendWireData,
+struct EdgeSampleInput<'a> {
+    composer: &'a ShapeFixComposeShell,
+    fields: &'a super::ComposeShellFields,
+    wire: &'a ShapeExtendWireData,
     line: Line2,
-    result: &mut SampleResult,
+    result: &'a mut SampleResult,
     edge_index: i32,
     bounds: SegmentBounds,
     special: i32,
-) -> Result<(), Failure> {
-    let edge = wire.edge(edge_index)?;
+}
+
+fn sample_edge(input: EdgeSampleInput<'_>) -> Result<(), Failure> {
+    let edge = input.wire.edge(input.edge_index)?;
     let (curve, first, last) =
-        ShapeAnalysisEdge::new().pcurve_on_face(&edge, &fields.face, false)?;
+        ShapeAnalysisEdge::new().pcurve_on_face(&edge, &input.fields.face, false)?;
     let Some(curve) = curve.get() else {
-        mark_failure(composer, ShapeExtendStatus::Fail3);
+        mark_failure(input.composer, ShapeExtendStatus::Fail3);
         return Ok(());
     };
-    result.tolerance = composer.limit_tolerance(BRepTool::edge_tolerance(&edge)?);
+    input.result.tolerance = input
+        .composer
+        .limit_tolerance(BRepTool::edge_tolerance(&edge)?);
     let (start, end) = sample_parameters(
-        edge_index,
-        bounds,
-        special,
+        input.edge_index,
+        input.bounds,
+        input.special,
         edge.orientation(),
         (first, last),
     );
-    sample_parameters_on_edge(fields, line, result, curve, start, end)?;
+    sample_parameters_on_edge(input.fields, input.line, input.result, curve, start, end)?;
     Ok(())
 }
 

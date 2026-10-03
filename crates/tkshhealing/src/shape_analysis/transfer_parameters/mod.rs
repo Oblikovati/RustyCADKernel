@@ -54,6 +54,11 @@ impl TransferParameterData {
 pub trait TransferParameters: Transient {
     /// Shared protected storage; `tool.transfer_parameter_data()`.
     fn transfer_parameter_data(&self) -> &TransferParameterData;
+    /// Stores the upper bound used by projection-based implementations; `tool.set_max_tolerance(1e-6)`.
+    fn set_max_tolerance(&self, tolerance: f64) {
+        self.transfer_parameter_data()
+            .with_mut(|fields| fields.max_tolerance = tolerance);
+    }
     /// Discover unoriented curve ranges; `tool.init(&edge,&face)?`.
     fn init(&self, edge: &Edge, face: &Face) -> Result<(), Failure> {
         operations::initialize(self.transfer_parameter_data(), edge, face)

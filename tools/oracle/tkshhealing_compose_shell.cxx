@@ -30,6 +30,7 @@ public:
   using ShapeFix_ComposeShell::LoadWires;
   using ShapeFix_ComposeShell::ComputeCode;
   using ShapeFix_ComposeShell::BreakWires;
+  using ShapeFix_ComposeShell::SplitWire;
 };
 
 static void runInit()
@@ -244,6 +245,52 @@ static void runComputeCode()
             << tool.ComputeCode(segments(1).WireData(), line, 1, 1, 0., 2.) << '\n';
 }
 
+static void runSplitWire()
+{
+  BRepBuilderAPI_MakeWire wire;
+  gp_Pnt points[] = {gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)};
+  for (int i = 0; i < 4; ++i)
+    wire.Add(BRepBuilderAPI_MakeEdge(points[i], points[(i + 1) % 4]).Edge());
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), wire.Wire(), true).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 2, 1, 1);
+  patches->SetValue(1, 1, new Geom_Plane(gp_Pln()));
+  patches->SetValue(2, 1, new Geom_Plane(gp_Pln()));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  NCollection_Array1<double> uJoints(1, 3);
+  uJoints.SetValue(1, 0.0);
+  uJoints.SetValue(2, 1.0);
+  uJoints.SetValue(3, 2.0);
+  grid->SetUJointValues(uJoints);
+  ComposeProbe tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  NCollection_Sequence<ShapeFix_WireSegment> segments;
+  tool.LoadWires(segments);
+  NCollection_Sequence<int> indexes;
+  indexes.Append(1);
+  indexes.Append(3);
+  NCollection_Sequence<double> values;
+  values.Append(1.0);
+  values.Append(1.0);
+  NCollection_Sequence<int> codes;
+  codes.Append(2);
+  codes.Append(1);
+  NCollection_Sequence<TopoDS_Shape> vertices;
+  ShapeFix_WireSegment split = tool.SplitWire(segments(1), indexes, values, vertices, codes, true, 1);
+  std::cout << "split_wire " << split.NbEdges() << ' ' << vertices.Length();
+  for (int edge = 1; edge <= split.NbEdges(); ++edge)
+  {
+    int umin, umax, vmin, vmax;
+    split.GetPatchIndex(edge, umin, umax, vmin, vmax);
+    std::cout << ' ' << umin << ':' << umax << ':' << vmin << ':' << vmax;
+    double first, last;
+    BRep_Tool::Range(split.Edge(edge), first, last);
+    std::cout << '@' << first << ':' << last;
+  }
+  std::cout << '\n';
+}
+
 static void runPatchLimits()
 {
   TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)).Edge();
@@ -271,6 +318,7 @@ int main()
   runLoadWires();
   runMixedLoadWires();
   runComputeCode();
+  runSplitWire();
   runBreakWires();
   runInternalExternalBreakWires();
   runPatchLimits();
