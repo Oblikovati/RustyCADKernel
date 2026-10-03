@@ -99,3 +99,5 @@ mod shape_divide_closed;
 pub use shape_divide_closed::ShapeUpgradeShapeDivideClosed;
 mod shape_divide_area;
 pub use shape_divide_area::ShapeUpgradeShapeDivideArea;
+mod shape_convert_to_bezier;
+pub use shape_convert_to_bezier::ShapeUpgradeShapeConvertToBezier;
