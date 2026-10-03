@@ -278,13 +278,3 @@ fn native_rtti_parent_and_virtual_compute_build_share_result_state() {
     );
     assert!(tool.status_flag(ShapeExtendStatus::Done1));
 }
-
-#[test]
-fn protected_segment_sequences_keep_shared_handle_identity() {
-    let spatial = ShapeUpgradeConvertCurve3dToBezier::new();
-    let planar = ShapeUpgradeConvertCurve2dToBezier::new();
-    assert!(spatial.segments() == spatial.segments());
-    assert!(planar.segments() == planar.segments());
-    assert_eq!(spatial.segments().sequence(|seq| seq.len()), 0);
-    assert_eq!(planar.segments().sequence(|seq| seq.len()), 0);
-}
