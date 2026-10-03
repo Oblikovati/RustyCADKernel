@@ -103,6 +103,9 @@ impl ShapeFixWire {
             self.set_last_fix_status(ShapeExtendStatus::Ok);
             let status = self.state.read().last_fix_status;
             self.state.write().notches_status = status;
+            if state.fixed {
+                let _ = self.fix_shifted()?;
+            }
         }
         Ok(())
     }
