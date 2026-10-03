@@ -133,3 +133,16 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkmath-legacy/report
 
 Both retained receipts now record execution-time Git provenance. They remain
 historical receipts after later source changes; rerun the verifier to assess those changes.
+
+### TKG2d paired run
+
+`tkg2d-runtime-report.json.gz` and `tkg2d-runtime-declarations.json.gz` retain
+523 passing native/Rust pairs from clean execution revision `5644d059`. No
+cases were skipped and the declaration join has no mapping anomalies. This
+receipt covers every CMake-listed TKG2d GoogleTest declaration at the pinned
+source revision; it does not prove API, DRAW, toolkit or global completion.
+
+```sh
+python3 tools/verify_tkmath_legacy.py --toolkit TKG2d --source /path/to/OCCT \
+  --build-dir /path/to/occt-modeling-full --jobs 2
+```

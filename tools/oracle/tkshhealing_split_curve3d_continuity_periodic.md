@@ -5,19 +5,17 @@ Oracle revision: OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 The safe fixture probe covers a degree-two periodic five-pole curve, a valid one-knot
 removal that leaves a constructor-valid periodic curve, separate direct knot removals,
 sequential removal through three knots, and a zigzag with multiple failed removals.
-The Rust test compares those observations with `shape_upgrade_split_curve3d_continuity_periodic.expected`.
+The Rust test compares those observations with `tkshhealing_split_curve3d_continuity_periodic.expected`.
 
 Build against the pinned OCCT installation:
 
 ```sh
+build=/path/to/occt-modeling-full
+lib="$build/lin64/gcc/libi"
 g++ -std=c++17 tools/oracle/tkshhealing_split_curve3d_continuity_periodic.cxx \
-  -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade \
-  -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib \
-  -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib \
-  -lTKShHealing -lTKGeomAlgo -lTKGeomBase -lTKG3d -lTKG2d -lTKMath -lTKernel \
-  -o /tmp/tksh-continuity-periodic-probe
-LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/occt-install/lib:/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib \
-  /tmp/tksh-continuity-periodic-probe
+  -I"$build/include/opencascade" -L"$lib" -Wl,-rpath,"$lib" \
+  -lTKShHealing -lTKG3d -lTKMath -lTKernel -o /tmp/tksh-continuity-periodic-probe
+/tmp/tksh-continuity-periodic-probe
 ```
 
 The separate `*_periodic_undefined.cxx` probe records OCCT's result when repeated
@@ -35,11 +33,9 @@ Build and run that native-only observation separately:
 
 ```sh
 g++ -std=c++17 tools/oracle/tkshhealing_split_curve3d_continuity_periodic_undefined.cxx \
-  -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade \
-  -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib \
-  -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib \
-  -lTKShHealing -lTKGeomAlgo -lTKGeomBase -lTKG3d -lTKG2d -lTKMath -lTKernel \
-  -o /tmp/tksh-continuity-periodic-undefined-probe
-LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/occt-install/lib:/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib \
-  /tmp/tksh-continuity-periodic-undefined-probe
+  -I"$build/include/opencascade" -L"$lib" -Wl,-rpath,"$lib" \
+  -lTKShHealing -lTKG3d -lTKMath -lTKernel -o /tmp/tksh-continuity-periodic-undefined-probe
+/tmp/tksh-continuity-periodic-undefined-probe
 ```
+
+The safe probe was also rebuilt and its output matched using the pinned full-modeling build.
