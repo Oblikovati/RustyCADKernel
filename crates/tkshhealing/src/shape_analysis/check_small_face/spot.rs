@@ -1,3 +1,4 @@
+use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Face, ShapeIterator, edge, vertex};
@@ -7,12 +8,54 @@ use rustycad_tkmath::gp::Point3;
 
 /// Spot-face analysis from `ShapeAnalysis_CheckSmallFace`.
 #[derive(Default)]
-pub struct ShapeAnalysisCheckSmallFace;
+pub struct ShapeAnalysisCheckSmallFace {
+    overall_status: Option<i32>,
+    spot_status: i32,
+    tolerance: Option<f64>,
+}
 
 impl ShapeAnalysisCheckSmallFace {
     /// Constructs the analyzer; `let analyzer = ShapeAnalysisCheckSmallFace::new();`.
     pub fn new() -> Self {
-        Self
+        Self::default()
+    }
+
+    /// Calls native `CheckSpotFace` and records DONE1 or DONE2 without clearing earlier status.
+    /// `analyzer.check_spot_face(&face, -1.0)?`.
+    pub fn check_spot_face(&mut self, face: &Face, tolerance: f64) -> Result<bool, Failure> {
+        let mut spot = Point3::default();
+        let mut spot_tolerance = 0.0;
+        let result =
+            self.is_spot_face_with_tolerance(face, &mut spot, &mut spot_tolerance, tolerance)?;
+        let status = spot_status(result);
+        if let Some(status) = status {
+            self.spot_status = ShapeExtend::encode_status(status);
+            return Ok(true);
+        }
+        Ok(false)
+    }
+
+    /// Decodes the native overall status field when known; OCCT leaves that field
+    /// uninitialized in its constructor, so a fresh analyzer returns `None`.
+    pub fn status(&self, status: ShapeExtendStatus) -> Option<bool> {
+        self.overall_status
+            .map(|value| ShapeExtend::decode_status(value, status))
+    }
+
+    /// Decodes the last `CheckSpotFace` result; `analyzer.status_spot(ShapeExtendStatus::Done1)`.
+    pub fn status_spot(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.spot_status, status)
+    }
+
+    /// Sets the separate checker precision field; `analyzer.set_tolerance(0.01)`.
+    pub fn set_tolerance(&mut self, tolerance: f64) {
+        self.tolerance = Some(tolerance);
+    }
+
+    /// Reads the checker precision after `SetTolerance`; `analyzer.tolerance() == Some(0.01)`.
+    /// OCCT leaves this field uninitialized until its setter has been called.
+    pub fn tolerance(&self) -> Option<f64> {
+        self.tolerance
     }
 
     /// Uses the native default local-tolerance check; outputs change only on a spot.
@@ -44,6 +87,14 @@ impl ShapeAnalysisCheckSmallFace {
         }
         assign_spot_outputs(&bounds, spot, spot_tolerance);
         Ok(if bounds.same_vertex { 2 } else { 1 })
+    }
+}
+
+fn spot_status(result: i32) -> Option<ShapeExtendStatus> {
+    match result {
+        1 => Some(ShapeExtendStatus::Done1),
+        2 => Some(ShapeExtendStatus::Done2),
+        _ => None,
     }
 }
 

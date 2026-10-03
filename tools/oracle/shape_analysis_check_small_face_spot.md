@@ -8,6 +8,12 @@ values on `no_wire` and rejected faces verify that OCCT leaves both output argum
 untouched on those paths. `empty_wire` records the native `Precision::Infinite`
 arithmetic, while `local_tolerance` exercises the negative-tolerance vertex branch.
 
-The Rust slice implements only `IsSpotFace`; other public methods and status accessors
-on `ShapeAnalysis_CheckSmallFace` remain unported. The empty-wire behavior is retained
-as a defined native result, including its large finite sentinel coordinates.
+The Rust slice currently implements `IsSpotFace`, `CheckSpotFace`, its status query,
+and the tolerance setter/query. The other analysis methods and status families on
+`ShapeAnalysis_CheckSmallFace` remain unported. The empty-wire behavior is retained as
+a defined native result, including its large finite sentinel coordinates.
+
+The final `check_spot` row exercises `CheckSpotFace` status persistence and `SetTolerance`/
+`Tolerance`. OCCT's overall `Status` and initial `Tolerance` fields are uninitialized by
+its constructor, so Rust exposes those values as `None` until a defined setter or check
+assigns them; it does not synthesize a value for native indeterminate state.

@@ -9,6 +9,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace;
+use rustycad_tkshhealing::shape_extend::ShapeExtendStatus;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
 fn expected(name: &str) -> (i32, Point3, f64) {
@@ -26,6 +27,20 @@ fn expected(name: &str) -> (i32, Point3, f64) {
     (status, point, fields.next().unwrap().parse().unwrap())
 }
 
+fn expected_checker_state() -> ([i32; 7], f64) {
+    let row = include_str!("../../../tools/oracle/shape_analysis_check_small_face_spot.expected")
+        .lines()
+        .find(|row| row.starts_with("check_spot "))
+        .unwrap();
+    let values = row
+        .split_whitespace()
+        .skip(1)
+        .map(|value| value.parse::<f64>().unwrap())
+        .collect::<Vec<_>>();
+    let states = std::array::from_fn(|index| values[index] as i32);
+    (states, values[7])
+}
+
 #[test]
 fn spot_face_results_match_pinned_oracle() {
     assert_probe("no_wire", no_wire_face(), Some(0.001));
@@ -35,6 +50,40 @@ fn spot_face_results_match_pinned_oracle() {
     assert_probe("wide_loop", circle_face(0.01), Some(0.001));
     assert_probe("tiny_box", box_face(0.0001), Some(0.001));
     assert_probe("regular_box", box_face(1.0), Some(0.001));
+}
+
+#[test]
+fn check_spot_face_updates_only_its_status_and_preserves_unknown_native_fields() {
+    let mut analyzer = ShapeAnalysisCheckSmallFace::new();
+    assert_eq!(analyzer.status(ShapeExtendStatus::Ok), None);
+    assert!(analyzer.status_spot(ShapeExtendStatus::Ok));
+    assert_eq!(analyzer.tolerance(), None);
+    analyzer.set_tolerance(-0.25);
+    let states = run_checker_state_cases(&mut analyzer);
+    assert_eq!(states, expected_checker_state().0);
+    assert_eq!(analyzer.tolerance(), Some(expected_checker_state().1));
+    assert_eq!(analyzer.status(ShapeExtendStatus::Ok), None);
+}
+
+fn run_checker_state_cases(analyzer: &mut ShapeAnalysisCheckSmallFace) -> [i32; 7] {
+    let check_tiny = analyzer.check_spot_face(&box_face(0.0001), 0.001).unwrap();
+    let tiny_done = analyzer.status_spot(ShapeExtendStatus::Done1);
+    let check_regular = analyzer.check_spot_face(&box_face(1.0), 0.001).unwrap();
+    let still_done = analyzer.status_spot(ShapeExtendStatus::Done1);
+    let check_shared = analyzer
+        .check_spot_face(&shared_vertex_face(), 0.001)
+        .unwrap();
+    let shared_done = analyzer.status_spot(ShapeExtendStatus::Done2);
+    let fail1 = analyzer.status_spot(ShapeExtendStatus::Fail1);
+    [
+        check_tiny as i32,
+        tiny_done as i32,
+        check_regular as i32,
+        still_done as i32,
+        check_shared as i32,
+        shared_done as i32,
+        fail1 as i32,
+    ]
 }
 
 fn assert_probe(name: &str, face: Face, tolerance: Option<f64>) {
