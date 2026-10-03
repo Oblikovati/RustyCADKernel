@@ -92,6 +92,11 @@ impl ShapeUpgradeConvertCurve3dToBezier {
     pub fn split_params(&self) -> Handle<HSequence<f64>> {
         self.state.read().split_params.clone()
     }
+    /// Lend the native protected segment sequence to specialized converters.
+    /// Example: `let segments = converter.segments();`.
+    pub fn segments(&self) -> Handle<HSequence<Handle<dyn GeomCurve>>> {
+        self.state.read().segments.clone()
+    }
     /// Shared Bezier result geometry inherited from `ShapeUpgradeSplitCurve3d`.
     /// `let curves: SplitCurves3d = converter.curves()`.
     pub fn curves(&self) -> SplitCurves3d {

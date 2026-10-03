@@ -221375,6 +221375,230 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisShapeContents::modify_offest_surface_mode",
       "status": "implemented",
       "notes": "Native tools/oracle/tkshhealing_shape_contents.cxx: sixteen generated rows and six Rust regressions cover occurrence versus location-stripped shared counts, seams, surface/curve types, 8192-pole threshold, recording flags and shared sequence clear on copy. Native constructor leaves counters uninitialized; Rust zero-initialization in that undefined domain is not parity evidence. Statistics are compared only after Clear/Perform. Legacy obligations remain separate."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve2dToBezier::ShapeUpgrade_ConvertCurve2dToBezier()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve2dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve2dToBezier::new",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve2dToBezier::Compute()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve2dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve2dToBezier::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::compute",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve2dToBezier::Build(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve2dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve2dToBezier::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::build",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve2dToBezier::Segments() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve2dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve2dToBezier::segments",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve2dToBezier::SplitParams() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve2dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve2dToBezier::split_params",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::ShapeUpgrade_ConvertCurve3dToBezier()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::new",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::Compute()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::compute",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::Build(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::build",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::Segments() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::segments",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::SplitParams() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::split_params",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::SetLineMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::set_line_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::GetLineMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::line_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::SetCircleMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::set_circle_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::GetCircleMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::circle_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::SetConicMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::set_conic_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertCurve3dToBezier::GetConicMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertCurve3dToBezier.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertCurve3dToBezier::conic_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::ShapeUpgrade_ConvertSurfaceToBezierBasis()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::new",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::<rustycad_tkshhealing::shape_upgrade::SplitSurface>::compute",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::Build(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::<rustycad_tkshhealing::shape_upgrade::SplitSurface>::build",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::Segments() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::segments",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::SetPlaneMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::set_plane_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::GetPlaneMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::plane_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::SetRevolutionMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::set_revolution_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::GetRevolutionMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::revolution_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::SetExtrusionMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::set_extrusion_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::GetExtrusionMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::extrusion_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::SetBSplineMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::set_bspline_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ConvertSurfaceToBezierBasis::GetBSplineMode() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ConvertSurfaceToBezierBasis.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeConvertSurfaceToBezierBasis::bspline_mode",
+      "status": "implemented",
+      "notes": "Pinned native Bezier conversion fixtures and focused Rust regressions cover geometry, mode flags, split parameters, result types, concrete parent/shared state and virtual dispatch. Protected Segments exposed for specialization. Generated fixtures supplement legacy declarations; exhaustive parity remains pending."
     }
   ],
   "tests": [

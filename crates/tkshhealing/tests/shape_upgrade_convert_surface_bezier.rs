@@ -259,3 +259,19 @@ fn extrusion_line_converts_to_a_bezier_surface_patch() {
             .is_null()
     );
 }
+
+#[test]
+fn surface_converter_parent_cast_shares_state_and_preserves_virtual_dispatch() {
+    use rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface;
+    let converter = Handle::new(ShapeUpgradeConvertSurfaceToBezierBasis::new());
+    let parent = converter.cast::<ShapeUpgradeSplitSurface>();
+    assert!(!parent.is_null());
+    parent
+        .init_surface_bounds(&plane(), (0., 1., 0., 1.), 0.)
+        .unwrap();
+    assert!(parent.u_split_values() == converter.u_split_values());
+    let virtual_tool = converter.cast::<dyn SplitSurface>();
+    virtual_tool.compute(true).unwrap();
+    assert!(!converter.segments().is_null());
+    assert!(parent.status_flag(ShapeExtendStatus::Done1));
+}

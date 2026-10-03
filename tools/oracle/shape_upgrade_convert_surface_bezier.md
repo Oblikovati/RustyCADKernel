@@ -5,13 +5,13 @@ the local OCCT install from the repository root:
 
 ```sh
 g++ -std=c++17 \
-  -I/home/vmiguel/git/oblikovati-workspace/occt-install/include/opencascade \
+  -I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade \
   tools/oracle/shape_upgrade_convert_surface_bezier.cxx \
-  -L/home/vmiguel/git/oblikovati-workspace/occt-install/lib \
-  -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/occt-install/lib \
+  -L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi \
+  -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi \
   -lTKShHealing -lTKGeomBase -lTKG3d -lTKMath -lTKernel \
   -o /tmp/rustycad-surface-bezier-oracle
-LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/occt-install/lib:/home/vmiguel/git/oblikovati-workspace/occt-build/lin64/gcc/lib \
+LD_LIBRARY_PATH=/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi \
   /tmp/rustycad-surface-bezier-oracle
 ```
 
@@ -30,3 +30,5 @@ extrusion status=1,0 segments=1x1 patch=Geom_BezierSurface patch_bounds=0,1,0,1 
 The Rust regressions compare status, patch type/count, full-range handle retention,
 offset wrapping, and split-cell insertion for these cases. Revolution and extrusion use the
 sibling `ShapeUpgrade_ConvertCurve3dToBezier` port to preserve the native curve breakpoints.
+
+Rebuilt and checked against OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871` in the pinned modeling build. The surface converter also preserves concrete parent downcasts, shared split state, and virtual Compute dispatch.

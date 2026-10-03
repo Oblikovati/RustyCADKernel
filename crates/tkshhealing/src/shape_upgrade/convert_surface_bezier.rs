@@ -5,10 +5,10 @@ mod swept;
 type ParameterBounds = (f64, f64, f64, f64);
 
 use crate::shape_extend::{ShapeExtend, ShapeExtendCompositeSurface};
-use crate::shape_upgrade::{SplitSurface, SplitSurfaceData};
+use crate::shape_upgrade::{ShapeUpgradeSplitSurface, SplitSurface, SplitSurfaceData};
 use rustycad_tkernel::{
     impl_transient,
-    standard::{Failure, Handle, SharedState, StandardTransient},
+    standard::{Failure, Handle, SharedState},
 };
 use rustycad_tkg3d::geom::GeomSurface;
 
@@ -33,17 +33,15 @@ impl Default for ConversionModes {
 /// Converts supported surfaces into a patch grid whose analytic spline patches use Bezier bases.
 /// Example: `converter.init_surface(&surface)?; converter.perform(true)?;`.
 pub struct ShapeUpgradeConvertSurfaceToBezierBasis {
-    parent: StandardTransient,
-    state: SplitSurfaceData,
+    parent: ShapeUpgradeSplitSurface,
     modes: SharedState<ConversionModes>,
     segments: SharedState<Handle<ShapeExtendCompositeSurface>>,
 }
-impl_transient!(ShapeUpgradeConvertSurfaceToBezierBasis, "ShapeUpgrade_ConvertSurfaceToBezierBasis", StandardTransient, parent, interfaces:[dyn SplitSurface]);
+impl_transient!(ShapeUpgradeConvertSurfaceToBezierBasis, "ShapeUpgrade_ConvertSurfaceToBezierBasis", ShapeUpgradeSplitSurface, parent, interfaces:[dyn SplitSurface]);
 impl Default for ShapeUpgradeConvertSurfaceToBezierBasis {
     fn default() -> Self {
         Self {
-            parent: StandardTransient::default(),
-            state: SplitSurfaceData::default(),
+            parent: ShapeUpgradeSplitSurface::default(),
             modes: SharedState::new(ConversionModes::default()),
             segments: SharedState::new(Handle::default()),
         }
@@ -109,12 +107,12 @@ impl ShapeUpgradeConvertSurfaceToBezierBasis {
         *self.segments.write() = Handle::new(segments);
     }
     fn state(&self) -> &SplitSurfaceData {
-        &self.state
+        self.parent.split_surface_data()
     }
 }
 impl SplitSurface for ShapeUpgradeConvertSurfaceToBezierBasis {
     fn split_surface_data(&self) -> &SplitSurfaceData {
-        &self.state
+        self.parent.split_surface_data()
     }
     fn compute(&self, segment: bool) -> Result<(), Failure> {
         self.compute_conversion(segment)
