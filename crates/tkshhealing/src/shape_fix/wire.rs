@@ -38,6 +38,7 @@ mod wire_split_tool;
 mod wire_state;
 
 pub use wire_intersection_tool::ShapeFixIntersectionTool;
+pub use wire_split_tool::ShapeFixSplitTool;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};

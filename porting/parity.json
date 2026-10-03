@@ -223775,7 +223775,124 @@
       "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::fix_self_intersect_wire",
       "status": "partial",
-      "notes": "Four native fixture cases cover crossing, long/short overlaps and endpoint reuse at a mixed transition. Multiple-hit, endpoint union, reversed/asymmetric and broader overlap replacement branches require additional evidence. No whole-class parity claim or new legacy mappings."
+      "notes": "Ten native fixtures cover interior/multiple/reversed crossings, endpoint reuse/union, near-endpoint cuts and long/short/endpoint-aligned overlaps. They exposed and corrected overlap removal order. Broader curved and replacement domains remain to be validated; no complete class parity claim or new legacy declarations."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::IsStripSupport(const TopoDS_Face &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::is_strip_support_with_tolerance",
+      "status": "implemented",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitTool::ShapeFix_SplitTool()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
+      "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::new",
+      "status": "implemented",
+      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::ShapeAnalysis_CheckSmallFace()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::new",
+      "status": "implemented",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitTool::CutEdge(const TopoDS_Edge &,const double,const double,const TopoDS_Face &,bool &) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
+      "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::cut_edge",
+      "status": "partial",
+      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitTool::SplitEdge(const TopoDS_Edge &,const double,const double,const TopoDS_Vertex &,const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
+      "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::split_edge_cut",
+      "status": "partial",
+      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckSpotFace(const TopoDS_Face &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_spot_face",
+      "status": "implemented",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::Status(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status",
+      "status": "partial",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitTool::SplitEdge(const TopoDS_Edge &,const double,const TopoDS_Vertex &,const double,const TopoDS_Vertex &,const TopoDS_Face &,NCollection_Sequence<TopoDS_Shape> &,int &,const occ::handle<ShapeBuild_ReShape> &,const double,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
+      "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::split_edge_sequence",
+      "status": "partial",
+      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusSpot(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_spot",
+      "status": "implemented",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::Tolerance() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::tolerance",
+      "status": "partial",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::IsSpotFace(const TopoDS_Face &,gp_Pnt &,double &,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::is_spot_face_with_tolerance",
+      "status": "implemented",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::SetTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::set_tolerance",
+      "status": "implemented",
+      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_SplitTool::SplitEdge(const TopoDS_Edge &,const double,const TopoDS_Vertex &,const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
+      "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::split_edge",
+      "status": "partial",
+      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
     }
   ],
   "tests": [

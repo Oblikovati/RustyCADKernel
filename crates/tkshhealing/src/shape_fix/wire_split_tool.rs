@@ -86,7 +86,7 @@ fn cut_without_same_parameter(
     if trimmed.basis_curve().cast::<Geom2dLine>().is_null() {
         return Ok(true);
     }
-    BRepBuilder::default().range_on_face(edge, face, endpoint.min(cut), endpoint.max(cut))?;
+    BRepBuilder::default().range(edge, endpoint.min(cut), endpoint.max(cut), false)?;
     cut_trimmed_line(edge, endpoint, cut, first, last, edge_range, cut_line)
 }
 
@@ -99,52 +99,34 @@ fn cut_trimmed_line(
     edge_range: (f64, f64),
     cut_line: &mut bool,
 ) -> Result<bool, Failure> {
-    let Some((new_first, new_last)) = trimmed_line_range(endpoint, cut, first, last, edge_range)?
+    let Some(((new_first, new_last), shift)) =
+        trimmed_line_range(endpoint, cut, first, last, edge_range)
     else {
         return Ok(true);
     };
-    if is_empty_trimmed_range((new_first, new_last), edge_range) {
+    if shift <= precision::p_confusion() {
         return Ok(false);
     }
     BRepBuilder::default().range(edge, new_first, new_last, true)?;
     *cut_line = true;
     Ok(true)
 }
-
 fn trimmed_line_range(
     endpoint: f64,
     cut: f64,
     first: f64,
     last: f64,
     edge_range: (f64, f64),
-) -> Result<Option<(f64, f64)>, Failure> {
-    let confusion = precision::p_confusion();
-    if (endpoint - last).abs() < confusion {
-        let shift = line_cut_distance(cut - first, first, last, edge_range)?;
-        return Ok(Some((edge_range.0 + shift, edge_range.1)));
+) -> Option<((f64, f64), f64)> {
+    if (endpoint - last).abs() < precision::p_confusion() {
+        let shift = (cut - first) * (edge_range.1 - edge_range.0) / (last - first);
+        return Some(((edge_range.0 + shift, edge_range.1), shift));
     }
-    if (endpoint - first).abs() < confusion {
-        let shift = line_cut_distance(last - cut, first, last, edge_range)?;
-        return Ok(Some((edge_range.0, edge_range.1 - shift)));
+    if (endpoint - first).abs() < precision::p_confusion() {
+        let shift = (last - cut) * (edge_range.1 - edge_range.0) / (last - first);
+        return Some(((edge_range.0, edge_range.1 - shift), shift));
     }
-    Ok(None)
-}
-
-fn is_empty_trimmed_range(range: (f64, f64), original: (f64, f64)) -> bool {
-    let confusion = precision::p_confusion();
-    (range.0 - original.0).abs() <= confusion || (original.1 - range.1).abs() <= confusion
-}
-
-fn line_cut_distance(
-    cut_length: f64,
-    first: f64,
-    last: f64,
-    edge_range: (f64, f64),
-) -> Result<f64, Failure> {
-    if (last - first).abs() <= precision::p_confusion() {
-        return Ok(0.0);
-    }
-    Ok(cut_length * (edge_range.1 - edge_range.0) / (last - first))
+    None
 }
 
 fn cut_same_parameter(
@@ -202,7 +184,34 @@ fn update_validated_range(edge: &Edge, face: &Face, range: (f64, f64)) -> Result
     let (pcurve, _, _) = ShapeAnalysisEdge::new().pcurve_on_face(edge, face, false)?;
     if !pcurve.is_null() {
         builder.same_range(edge, false)?;
-        ShapeFixEdge::new().fix_same_parameter_default(edge)?;
     }
+    ShapeFixEdge::new().fix_same_parameter_default(edge)?;
     Ok(())
 }
+
+/// OCCT edge splitting and trimming utility; `ShapeFixSplitTool::new()`.
+#[derive(Default)]
+pub struct ShapeFixSplitTool;
+impl ShapeFixSplitTool {
+    /// Construct the stateless tool; `ShapeFixSplitTool::new()`.
+    pub fn new() -> Self {
+        Self
+    }
+    /// Trim the native edge ranges; `tool.cut_edge(&edge, 0., 0.5, &face, &mut cut_line)?`.
+    pub fn cut_edge(
+        &self,
+        edge: &Edge,
+        endpoint: f64,
+        cut: f64,
+        face: &Face,
+        cut_line: &mut bool,
+    ) -> Result<bool, Failure> {
+        cut_edge(edge, endpoint, cut, face, cut_line)
+    }
+}
+
+#[path = "wire_split_tool/split.rs"]
+mod split;
+
+#[path = "wire_split_tool/sequence.rs"]
+mod sequence;

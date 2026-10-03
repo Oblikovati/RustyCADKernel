@@ -13,6 +13,25 @@ ShapeExtend status codes 475, messages 85, WireData 92, Explorer 849, registrato
 ComplexCurve 24 and CompositeSurface 126; ShapeBuild vertices 48, edges 457 and re-shapers
 11.
 
+## October 2026 integration update
+
+Recent slices add bounding-tree selection, free-boundary contour/notch properties,
+package SameParameter and vertex positioning, small-solid removal/merging, the
+public SplitTool overloads, and nonadjacent wire-intersection repair. ShapeUpgrade
+now includes the continuity and Bezier shape wrappers, with native-backed mixed
+seam postprocessing and connected line-wire unification. Small-face analysis has
+spot/status/tolerance and strip-support checks; remaining checker methods are in
+progress.
+
+Native fixtures and limitations are retained under `tools/oracle/`, including
+`tkshhealing_vertex_position.md`, `tkshhealing_split_tool.md`,
+`tkshhealing_intersection_tool_aggregate.md`, and `shape_fix_small_solid.md`.
+These additional differential tests do not increase legacy declaration mappings.
+Constructor-indeterminate state, native crash domains, child algorithm limits and
+unvalidated geometry cases remain explicit gaps. The current compiler-bound
+accounting is in [the inventory summary](../porting/api-inventory/completeness.json);
+older per-package manual audits below are historical records, not global API proof.
+
 ## SHMessage: the message resources
 
 SHMessage holds no code. `SHMessage_SHAPE_us.pxx` and `SHMessage_SHAPE_fr.pxx` each define

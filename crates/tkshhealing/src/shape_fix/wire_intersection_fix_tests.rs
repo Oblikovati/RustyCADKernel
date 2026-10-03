@@ -316,13 +316,12 @@ fn install_bounded_curve_representations(edge: &Edge, face: &Face) {
 }
 
 fn tiny_trimmed_line_edge(face: &Face) -> Edge {
-    let edge = edge_with_pcurve(
-        face,
-        Point3::new(0.0, 0.0, 0.0),
-        Point3::new(1.0e9, 0.0, 0.0),
-        Direction2::new(1.0, 0.0).unwrap(),
-        1.0e9,
-    );
+    // Native probe inserts the 3D representation first: BRep_Tool::Range uses list order.
+    let mut edge = Edge::default();
+    let curve = Handle::new(GeomLine::new(Axis1::new(Point3::default(), Direction3::X))).cast();
+    BRepBuilder::default()
+        .make_edge_with_curve(&mut edge, &curve, 1e-7)
+        .unwrap();
     install_tiny_trimmed_line_representations(&edge, face);
     edge
 }
