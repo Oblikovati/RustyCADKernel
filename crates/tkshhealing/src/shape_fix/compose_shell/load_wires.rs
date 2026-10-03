@@ -232,7 +232,7 @@ mod tests {
     }
 
     #[test]
-    fn edge_segment_side_code_matches_native_protected_helper() {
+    fn edge_segment_side_codes_match_native_protected_helper() {
         let expected =
             include_str!("../../../../../tools/oracle/tkshhealing_compose_shell.expected");
         let composer = ShapeFixComposeShell::new();
@@ -252,13 +252,45 @@ mod tests {
             rustycad_tkmath::gp::Point2::new(1.0, 0.0),
             rustycad_tkmath::gp::Direction2::new(0.0, 1.0).unwrap(),
         );
-        let code = composer
-            .compute_code(wire, line, 1, 1, 0.25, 0.75, false)
-            .unwrap();
-        assert_eq!(
-            format!("compute_code {code}"),
-            expected.lines().nth(5).unwrap()
+        assert_native_code(
+            &composer,
+            wire,
+            line,
+            (0.25, 0.75),
+            expected.lines().nth(5).unwrap(),
         );
+        assert_native_code(
+            &composer,
+            wire,
+            line,
+            (1.25, 1.75),
+            expected.lines().nth(6).unwrap(),
+        );
+        let tangent = rustycad_tkmath::gp::Line2::new(
+            rustycad_tkmath::gp::Point2::new(0.0, 0.0),
+            rustycad_tkmath::gp::Direction2::new(1.0, 0.0).unwrap(),
+        );
+        assert_native_code(
+            &composer,
+            wire,
+            tangent,
+            (0.25, 0.75),
+            expected.lines().nth(7).unwrap(),
+        );
+    }
+
+    fn assert_native_code(
+        composer: &ShapeFixComposeShell,
+        wire: &ShapeExtendWireData,
+        line: rustycad_tkmath::gp::Line2,
+        range: (f64, f64),
+        expected: &str,
+    ) {
+        let code = composer
+            .compute_code(wire, line, 1, 1, range.0, range.1, false)
+            .unwrap();
+        let label = expected.split_whitespace().next().unwrap();
+        assert_eq!(format!("{label} {code}"), expected);
     }
 
     fn native_segment_summary(segments: &Sequence<ShapeFixWireSegment>) -> String {
