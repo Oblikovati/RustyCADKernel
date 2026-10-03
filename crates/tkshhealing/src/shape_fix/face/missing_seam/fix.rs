@@ -29,11 +29,21 @@ pub(in crate::shape_fix::face) fn fix(fixer: &ShapeFixFace) -> Result<bool, Fail
     let Some(prepared) = prepare(&mut plan, fixer.precision())? else {
         return Ok(false);
     };
-    compose_missing_seam(fixer, prepared.face, &prepared.grid, &context)?;
-    let context = fixer.context();
-    cleanup_composed_result(fixer, &context)?;
-    send_missing_seam_warning(fixer);
+    compose_and_cleanup(fixer, prepared.face, &prepared.grid, &context)?;
+    let message = Msg::from_key(&AsciiString::from("FixAdvFace.FixMissingSeam.MSG0"));
+    fixer.send_warning_on_shape(&message);
     Ok(true)
+}
+
+fn compose_and_cleanup(
+    fixer: &ShapeFixFace,
+    face: Face,
+    grid: &Handle<crate::shape_extend::ShapeExtendCompositeSurface>,
+    context: &Handle<ShapeBuildReShape>,
+) -> Result<(), Failure> {
+    compose_missing_seam(fixer, face, grid, context)?;
+    let live_context = fixer.context();
+    cleanup_composed_result(fixer, &live_context)
 }
 
 fn surface_is_closed(surface: &ShapeAnalysisSurface) -> Result<bool, Failure> {
@@ -265,11 +275,6 @@ fn remove_from_context(context: &Handle<ShapeBuildReShape>, shape: &Shape) -> Re
         context.remove(shape)?;
     }
     Ok(())
-}
-
-fn send_missing_seam_warning(fixer: &ShapeFixFace) {
-    let message = Msg::from_key(&AsciiString::from("FixAdvFace.FixMissingSeam.MSG0"));
-    fixer.send_warning_on_shape(&message);
 }
 
 fn null_surface() -> Failure {
