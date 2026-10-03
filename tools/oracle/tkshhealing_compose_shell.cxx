@@ -122,6 +122,19 @@ static void runComputeCode()
             << tool.ComputeCode(segments(1).WireData(), line, 1, 1, 0.25, 0.75) << '\n';
 }
 
+static void runPatchLimits()
+{
+  TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)).Edge();
+  ShapeFix_WireSegment segment;
+  segment.AddEdge(0, edge);
+  segment.DefineIUMin(1, 2);
+  segment.DefineIUMax(1, 2);
+  segment.DefineIVMin(1, 3);
+  int umin, umax, vmin, vmax;
+  segment.GetPatchIndex(1, umin, umax, vmin, vmax);
+  std::cout << "patch_limits " << umin << ' ' << umax << ' ' << vmin << ' ' << vmax << '\n';
+}
+
 int main()
 {
   ShapeFix_ComposeShell tool;
@@ -135,5 +148,6 @@ int main()
   runInit();
   runLoadWires();
   runComputeCode();
+  runPatchLimits();
   runSplitEdges();
 }
