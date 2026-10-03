@@ -71,10 +71,34 @@ GeomFill_BSplineCurves_Test.cxx is partially mapped. The first OCC28131 declarat
 now builds the source fixture's Bezier and interpolated boundaries, Coons surface,
 face, and BRepCheck validity result in `tktopalgo`'s integration target. It uses the
 existing TKGeomAlgo operations without a production dependency cycle. Two remaining
-OCC28131 offset declarations depend on TKOffset and ShapeFix_Shape; they are still
-unmapped. The two independent GeomFill cases (OCC13904 and OCC27704) run as behavior
+OCC28131 offset declarations remain unmapped. The pinned native gates
+`OCC28131_SimpleOffsetOfFilledFace` and `OCC28131_StandardOffsetOfFilledFace` both pass.
+The simple operation is not only construction of `Geom_OffsetSurface`: it applies a
+`BRepOffset_SimpleOffset` modification through `BRepTools_Modifier`, which constructs
+offset face surfaces, edge curves, vertex positions and the associated tolerances before
+`BRepOffset_MakeSimpleOffset` restores the result topology. Those first two offset classes
+are not in Rust yet (their pinned implementations are 427 and 703 lines). The standard
+operation additionally needs `BRepOffset_MakeOffset` (5,659 lines), its shared
+`BRepOffset_Tool` (4,659 lines), and the behavior of `ShapeFix_Shape` on the result.
+Existing `GeomOffsetSurface`, `BRepTools_Modifier`, `BRepLib::BuildCurves3d` and edge
+validation primitives cover dependencies, but not this orchestration or its shape-level
+semantics. Both exact native tests therefore stay pending; no fixture-only offset result
+is substituted. The new TKOffset crate has started with the reusable internal
+`BRepOffset_SimpleOffset::FillEdgeData` step: it builds a p-curve's 3D offset edge and
+measures its deviation on adjacent offset faces. That helper alone does not implement or
+claim the private full `BRepOffset_SimpleOffset` class. The two independent GeomFill cases
+(OCC13904 and OCC27704) run as behavior
 tests (`geom_fill_skin_behavior` and `geom_fill_filling_behavior`) and in the numeric
 corpus.
+
+`tools/oracle/tkoffset_simple_offset_edge_probe.cxx` is a direct oracle for that internal
+step: it invokes the pinned `BRepOffset_SimpleOffset::NewCurve` on bounded, located,
+reversed and adjacent-face plane inputs. Against it, the focused Rust test checks the
+returned identity location, edge endpoints and tolerances (`1e-7`, `20.0002` for the
+opposed adjacent offsets). Build the probe with `g++ -std=c++17`, the OCCT build's
+`include/opencascade` and `lin64/gcc/libi` paths, and link `TKOffset`, `TKShHealing`,
+`TKPrim`, `TKBO`, `TKTopAlgo`, `TKBRep`, `TKGeomAlgo`, `TKGeomBase`, `TKG3d`, `TKG2d`,
+`TKMath` and `TKernel`.
 
 GeomFill_CorrectedFrenet_Test.cxx now maps all four declarations in
 `geom_fill_corrected_frenet`. The original reproducer constructs its three segments with
