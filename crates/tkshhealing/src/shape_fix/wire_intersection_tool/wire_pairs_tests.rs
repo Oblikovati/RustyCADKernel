@@ -177,6 +177,15 @@ fn short_cross_wire_overlap_splits_both_overlapping_edges() {
 
 #[test]
 fn long_overlap_reuses_one_wire_segment_for_the_full_overlap() {
+    assert_full_long_overlap_replacement(2.0, 1.0);
+}
+
+#[test]
+fn reversed_long_overlap_reuses_one_wire_segment_for_the_full_overlap() {
+    assert_full_long_overlap_replacement(8.0, -1.0);
+}
+
+fn assert_full_long_overlap_replacement(second_start: f64, second_direction: f64) {
     let mut face = planar_face();
     let first_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 10.0);
     let first_vertex = ShapeAnalysisEdge::new().first_vertex(&first_edge);
@@ -190,7 +199,10 @@ fn long_overlap_reuses_one_wire_segment_for_the_full_overlap() {
         .unwrap();
     let second = Handle::new(ShapeExtendWireData::new());
     second
-        .add_edge(&line_edge_range(&face, 2.0, 0.0, 0.0, 1.0, 0.0, 6.0), 0)
+        .add_edge(
+            &line_edge_range(&face, second_start, 0.0, 0.0, second_direction, 0.0, 6.0),
+            0,
+        )
         .unwrap();
     second
         .add_edge(&line_edge(&face, -30.0, -30.0, 0.0, 1.0), 0)
