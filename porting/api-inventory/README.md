@@ -21,8 +21,10 @@ owning toolkit. Original failures are preserved even when a context retry works.
 The observed surface contains 110,035 public/protected declaration candidates
 and 6,526 macro candidates. Macro bodies, inactive platform/configuration
 branches, unknown configurations, and unresolved identities require additional
-work. These are observed counts, not a full-port percentage. Shared package
-ownership makes per-toolkit totals overlap.
+work. The declaration count is a preliminary candidate count: the current
+visibility filter still includes internal helpers, so it is neither a validated
+lower bound nor a denominator for API coverage. Shared package ownership makes
+per-toolkit totals overlap.
 
 ## Reproduce
 

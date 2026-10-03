@@ -151,10 +151,11 @@ parity evidence.
 
 ## Auditing capture gaps
 
-`retry_occt_header_context.py` retries parse failures inside real CMake source
-translation units. It follows source-header includes up to three levels and
-accepts a header only when the extractor reports that target header as seen.
-The retry table preserves compiler flags, source hashes, and probe artifacts:
+`retry_occt_header_context.py` retries headers included directly by real CMake
+translation units, plus short chains of generated or external wrapper headers.
+It stops at the first OCCT source header; it does not discover arbitrary
+OCCT-header-to-header inclusion chains. The retry table preserves compiler
+flags, source hashes, and probe artifacts:
 
 ```sh
 python3 tools/retry_occt_header_context.py \
@@ -164,6 +165,48 @@ python3 tools/retry_occt_header_context.py \
   --capture target/api-proof/occt-inventory/capture-manifest.json \
   --output target/api-proof/occt-context-retries
 ```
+
+The checked-in
+`porting/api-inventory/occt-transitive-context-plan.json` records 21 contexts
+found by following actual OCCT header include chains: sixteen prior successful
+probes and five prior BVH failures whose artifacts did see the target header.
+The Windows-only `WNT_Dword.hxx` attempt is omitted because the old artifact did
+not see that guarded header. The plan contains relative header/TU paths and
+input hashes, not machine-specific absolute paths. Create or validate a plan
+from the original context evidence:
+
+```sh
+python3 tools/replay_occt_header_context.py plan \
+  --retries /path/to/context-retry-manifest.json \
+  --capture target/api-proof/occt-inventory/capture-manifest.json \
+  --source /path/to/OCCT \
+  --database /path/to/configured/compile_commands.json \
+  --extractor target/api_inventory/occt-api-extract \
+  --output porting/api-inventory/occt-transitive-context-plan.json
+```
+
+Replay planned contexts against a capture and extractor whose hashes match.
+Headers already parsed in that standalone capture are verified by artifact
+hash and target-header observation, then recorded separately as
+`already_parsed`; the remaining contexts are rerun into a fresh output
+directory. Old failure status stays as provenance; only a new run's success
+and target-header observation can mark a retry passed. Existing evidence is
+never overwritten:
+
+```sh
+python3 tools/replay_occt_header_context.py run \
+  --plan porting/api-inventory/occt-transitive-context-plan.json \
+  --capture target/api-proof/new-occt-inventory/capture-manifest.json \
+  --source /path/to/OCCT \
+  --database /path/to/configured/compile_commands.json \
+  --extractor target/api_inventory/occt-api-extract \
+  --output target/api-proof/context-replay
+```
+
+The v2 capture parsed five of the planned BVH headers standalone; the other 16
+contexts reran successfully with the v2 extractor. The replay manifest records
+the five standalone results separately, so they are not submitted as retries
+against already parsed capture rows.
 
 `gap_audit.py` records unresolved platform/configuration gaps and validates the
 retry artifacts without changing original capture evidence. Its report keeps
