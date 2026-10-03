@@ -11,6 +11,7 @@ use rustycad_tkmath::gp::Point3;
 pub struct ShapeAnalysisCheckSmallFace {
     overall_status: Option<i32>,
     spot_status: i32,
+    pub(super) strip_status: i32,
     tolerance: Option<f64>,
 }
 
@@ -196,7 +197,12 @@ fn include_vertex(
     Ok(())
 }
 
-fn update_bounds(minimum: &mut Point3, maximum: &mut Point3, point: Point3, has_points: bool) {
+pub(super) fn update_bounds(
+    minimum: &mut Point3,
+    maximum: &mut Point3,
+    point: Point3,
+    has_points: bool,
+) {
     let (min_x, max_x) = next_bounds(minimum.x(), maximum.x(), point.x(), has_points);
     let (min_y, max_y) = next_bounds(minimum.y(), maximum.y(), point.y(), has_points);
     let (min_z, max_z) = next_bounds(minimum.z(), maximum.z(), point.z(), has_points);
@@ -213,7 +219,7 @@ fn next_bounds(minimum: f64, maximum: f64, point: f64, has_points: bool) -> (f64
     (next_min, next_max)
 }
 
-fn axis_is_small(extent: f64, tolerance: f64) -> bool {
+pub(super) fn axis_is_small(extent: f64, tolerance: f64) -> bool {
     extent <= tolerance || precision::is_infinite(extent)
 }
 

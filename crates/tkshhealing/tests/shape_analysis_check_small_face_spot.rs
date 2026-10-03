@@ -2,9 +2,12 @@
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Builder, Edge, Face, Shape, Vertex, Wire};
+use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg3d::geom::{GeomCircle, GeomCurve};
+use rustycad_tkg3d::geom::{
+    GeomBSplineSurface, GeomBezierSurface, GeomCircle, GeomCurve, GeomSurface,
+};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
@@ -63,6 +66,27 @@ fn check_spot_face_updates_only_its_status_and_preserves_unknown_native_fields()
     assert_eq!(states, expected_checker_state().0);
     assert_eq!(analyzer.tolerance(), Some(expected_checker_state().1));
     assert_eq!(analyzer.status(ShapeExtendStatus::Ok), None);
+}
+
+#[test]
+fn strip_support_matches_native_pole_scans_and_status_persistence() {
+    assert_strip_case("strip_v", bezier_surface(true, 1e-8), None);
+    assert_strip_case("strip_u", bezier_surface(false, 1e-8), None);
+    assert_strip_case("strip_none", bezier_surface(false, 1.0), None);
+    assert_strip_case("strip_tolerance", bezier_surface(true, 0.001), Some(0.002));
+    assert_strip_case("strip_bspline", bspline_strip_surface(), None);
+    let mut analyzer = ShapeAnalysisCheckSmallFace::new();
+    assert!(
+        analyzer
+            .is_strip_support(&surface_face(bezier_surface(true, 1e-8)))
+            .unwrap()
+    );
+    assert!(
+        !analyzer
+            .is_strip_support(&surface_face(bezier_surface(false, 1.0)))
+            .unwrap()
+    );
+    assert!(analyzer.status_strip(ShapeExtendStatus::Done2));
 }
 
 fn run_checker_state_cases(analyzer: &mut ShapeAnalysisCheckSmallFace) -> [i32; 7] {
@@ -181,4 +205,97 @@ fn box_face(size: f64) -> Face {
         .clone();
     let faces = Explorer::new(&shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
     topods::face(faces.current()).unwrap()
+}
+
+fn assert_strip_oracle(name: &str, result: bool, analyzer: &ShapeAnalysisCheckSmallFace) {
+    let row = include_str!("../../../tools/oracle/shape_analysis_check_small_face_spot.expected")
+        .lines()
+        .find(|row| row.starts_with(name))
+        .unwrap();
+    let expected = row
+        .split_whitespace()
+        .skip(1)
+        .map(|value| value.parse::<i32>().unwrap())
+        .collect::<Vec<_>>();
+    assert_eq!(result as i32, expected[0], "{name}");
+    assert_eq!(
+        analyzer.status_strip(ShapeExtendStatus::Done1) as i32,
+        expected[1],
+        "{name} DONE1"
+    );
+    assert_eq!(
+        analyzer.status_strip(ShapeExtendStatus::Done2) as i32,
+        expected[2],
+        "{name} DONE2"
+    );
+}
+
+fn assert_strip_case(name: &str, surface: Handle<dyn GeomSurface>, tolerance: Option<f64>) {
+    let mut analyzer = ShapeAnalysisCheckSmallFace::new();
+    let face = surface_face(surface);
+    let result = match tolerance {
+        Some(tolerance) => analyzer.is_strip_support_with_tolerance(&face, tolerance),
+        None => analyzer.is_strip_support(&face),
+    }
+    .unwrap();
+    assert_strip_oracle(name, result, &analyzer);
+}
+
+fn surface_face(surface: Handle<dyn GeomSurface>) -> Face {
+    let mut face = Face::default();
+    BRepBuilder::default()
+        .make_face_on_surface(&mut face, &surface, 1e-7)
+        .unwrap();
+    face
+}
+
+fn bezier_surface(strip_in_v: bool, width: f64) -> Handle<dyn GeomSurface> {
+    let mut poles = Array2::<Point3>::with_bounds(1, 2, 1, 2).unwrap();
+    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
+    poles[(1, 2)] = if strip_in_v {
+        Point3::new(0.0, width, 0.0)
+    } else {
+        Point3::new(0.0, 1.0, 0.0)
+    };
+    poles[(2, 1)] = if strip_in_v {
+        Point3::new(1.0, 0.0, 0.0)
+    } else {
+        Point3::new(width, 0.0, 0.0)
+    };
+    poles[(2, 2)] = if strip_in_v {
+        Point3::new(1.0, width, 0.0)
+    } else {
+        Point3::new(width, 1.0, 0.0)
+    };
+    Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
+}
+
+fn bspline_strip_surface() -> Handle<dyn GeomSurface> {
+    let mut poles = Array2::<Point3>::with_bounds(1, 2, 1, 2).unwrap();
+    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
+    poles[(1, 2)] = Point3::new(0.0, 1e-8, 0.0);
+    poles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
+    poles[(2, 2)] = Point3::new(1.0, 1e-8, 0.0);
+    let (knots, mults) = clamped_linear_knots();
+    Handle::new(
+        GeomBSplineSurface::new(
+            &poles,
+            (&knots, &mults),
+            (&knots, &mults),
+            (1, 1),
+            (false, false),
+        )
+        .unwrap(),
+    )
+    .cast()
+}
+
+fn clamped_linear_knots() -> (Array1<'static, f64>, Array1<'static, i32>) {
+    let mut knots = Array1::with_bounds(1, 2).unwrap();
+    let mut multiplicities = Array1::with_bounds(1, 2).unwrap();
+    knots[1] = 0.0;
+    knots[2] = 1.0;
+    multiplicities[1] = 2;
+    multiplicities[2] = 2;
+    (knots, multiplicities)
 }
