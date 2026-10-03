@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify mapped OCCT runtime cases for TKMath, TKG2d, or TKG3d."""
+"""Verify mapped OCCT runtime cases for TKMath, TKG2d, TKG3d, or TKGeomBase."""
 
 from __future__ import annotations
 

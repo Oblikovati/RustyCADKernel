@@ -47,6 +47,25 @@ class PackageScopedRustRuns:
 
 
 class TkMathLegacyRuntimeTest(unittest.TestCase):
+    def test_geom_base_native_closure_is_required(self) -> None:
+        """A geometry-base receipt must bind its own and lower-level libraries."""
+        wanted = (
+            "libTKernel.so",
+            "libTKMath.so",
+            "libTKG2d.so",
+            "libTKG3d.so",
+            "libTKGeomBase.so",
+        )
+        self.assertEqual(required_toolkit_libraries("TKGeomBase"), wanted)
+        libraries = {
+            name: "/build/" + name
+            for name in (*wanted, "libgtest.so", "libgtest_main.so")
+        }
+        require_native_library_set(libraries, "TKGeomBase")
+        del libraries["libTKGeomBase.so"]
+        with self.assertRaisesRegex(RuntimeError, "libTKGeomBase.so"):
+            require_native_library_set(libraries, "TKGeomBase")
+
     def test_cli_keeps_tkmath_default_and_selects_tkg2d_output(self) -> None:
         """The old default remains stable and explicit toolkit runs isolate outputs."""
         with patch("sys.argv", ["verify_tkmath_legacy.py"]):

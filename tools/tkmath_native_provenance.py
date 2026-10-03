@@ -13,6 +13,13 @@ from api_inventory.inputs import JSONObject
 NATIVE_BUILD = Path("target/occt-modeling-full")
 NATIVE_EXECUTABLE = Path("lin64/gcc/bini/OpenCascadeGTest")
 TOOLKIT_LIBRARY_PREFIXES = {
+    "TKGeomBase": (
+        "libTKernel.so",
+        "libTKMath.so",
+        "libTKG2d.so",
+        "libTKG3d.so",
+        "libTKGeomBase.so",
+    ),
     "TKMath": ("libTKernel.so", "libTKMath.so"),
     "TKG2d": ("libTKernel.so", "libTKMath.so", "libTKG2d.so"),
     "TKG3d": ("libTKernel.so", "libTKMath.so", "libTKG2d.so", "libTKG3d.so"),

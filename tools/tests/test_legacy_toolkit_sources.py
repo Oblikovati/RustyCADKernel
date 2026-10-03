@@ -31,6 +31,16 @@ class LegacyToolkitSourcesTest(unittest.TestCase):
                 {"src/ModelingData/TKG2d/GTests/Geom2d_Line_Test.cxx"},
             )
 
+    def test_geom_base_manifest_and_every_declaration_are_mapped(self) -> None:
+        """Geometry base proofs require their complete declared GTest source set."""
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary)
+            rows = source_rows(source, ["GeomConvert_Test.cxx"], "TKGeomBase")
+            self.assertEqual(
+                verify_source_rows(source, rows),
+                {"src/ModelingData/TKGeomBase/GTests/GeomConvert_Test.cxx"},
+            )
+
     def test_cmake_manifest_rejects_an_unmapped_test_file(self) -> None:
         """An unrepresented FILES.cmake entry blocks toolkit runtime proof."""
         with tempfile.TemporaryDirectory() as temporary:
@@ -108,9 +118,11 @@ class LegacyToolkitSourcesTest(unittest.TestCase):
             )
 
 
-def source_rows(source: Path, filenames: list[str]) -> list[JSONObject]:
+def source_rows(
+    source: Path, filenames: list[str], toolkit: str = "TKG2d"
+) -> list[JSONObject]:
     """Create a small manifest fixture; e.g. `source_rows(tmp, ['One_Test.cxx'])`."""
-    relative = Path(GTEST_MANIFESTS["TKG2d"])
+    relative = Path(GTEST_MANIFESTS[toolkit])
     manifest = source / relative
     manifest.parent.mkdir(parents=True, exist_ok=True)
     manifest.write_text(
@@ -122,7 +134,7 @@ def source_rows(source: Path, filenames: list[str]) -> list[JSONObject]:
         (manifest.parent / filename).write_bytes(contents)
         rows.append(
             {
-                "toolkit": "TKG2d",
+                "toolkit": toolkit,
                 "source": (relative.parent / filename).as_posix(),
                 "upstream_id": "Geom2d_Line.Eval",
                 "source_sha256": hashlib.sha256(contents).hexdigest(),

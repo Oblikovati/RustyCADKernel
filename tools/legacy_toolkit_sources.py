@@ -9,8 +9,9 @@ import re
 
 from api_inventory.inputs import JSONObject
 
-SUPPORTED_RUNTIME_TOOLKITS = ("TKMath", "TKG2d", "TKG3d")
+SUPPORTED_RUNTIME_TOOLKITS = ("TKMath", "TKG2d", "TKG3d", "TKGeomBase")
 GTEST_MANIFESTS = {
+    "TKGeomBase": "src/ModelingData/TKGeomBase/GTests/FILES.cmake",
     "TKMath": "src/FoundationClasses/TKMath/GTests/FILES.cmake",
     "TKG2d": "src/ModelingData/TKG2d/GTests/FILES.cmake",
     "TKG3d": "src/ModelingData/TKG3d/GTests/FILES.cmake",
