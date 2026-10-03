@@ -223182,6 +223182,123 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::split_face_tool",
       "status": "implemented",
       "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::ShapeAnalysis_BoxBndTreeSelector(occ::handle<NCollection_HArray1<TopoDS_Shape>>,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::new",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::DefineBoxes(const Bnd_Box&,const Bnd_Box&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::define_boxes",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::DefineVertexes(TopoDS_Vertex,TopoDS_Vertex)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::define_vertexes",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::DefinePnt(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::define_pnt",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::GetNb()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::nb",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::SetNb(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::set_nb",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::LoadList(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::load_list",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::SetStop()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::set_stop",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::SetTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::set_tolerance",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::ContWire(int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::cont_wire",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::LastCheckStatus(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::last_check_status",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::Reject(const Bnd_Box&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::reject",
+      "status": "implemented",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_BoxBndTreeSelector::Accept(const int&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
+      "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::accept",
+      "status": "partial",
+      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
     }
   ],
   "tests": [
