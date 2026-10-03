@@ -224714,6 +224714,15 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_pin_edges",
       "status": "partial",
       "notes": "Native constructor leaves this status indeterminate; Rust Option<bool> explicitly models unknown until written. This is an unresolved behavior domain, not an approved exception."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixLoopWire(NCollection_Sequence<TopoDS_Shape> &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_loop_wire",
+      "status": "partial",
+      "notes": "Eight native rows compare branching graph reconstruction, output append/early return, ordered oriented endpoint coordinates, DONE7, closure flags and nonplanar missing-pcurve false return with retained outputs. Seam/small-edge and broader curved/located failure cases need oracle coverage; no legacy mapping increase."
     }
   ],
   "tests": [

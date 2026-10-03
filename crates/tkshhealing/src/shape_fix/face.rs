@@ -5,6 +5,7 @@
 mod coincident_wires;
 mod configuration;
 use configuration::FaceFixModes;
+mod loop_wire;
 pub(crate) mod make_faces_on_patch;
 mod missing_seam;
 mod natural_bound;
