@@ -4,6 +4,8 @@
 //! Ordered-wire state, reorder application and the pinned periodic p-curve repair.
 #[path = "wire_degenerated.rs"]
 mod wire_degenerated;
+#[path = "wire_lacking.rs"]
+mod wire_lacking;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
 
@@ -32,7 +34,10 @@ struct WireFixState {
     degenerated_status: i32,
     last_fix_status: i32,
     intersections_status: i32,
+    lacking_status: i32,
     closed_mode: bool,
+    topology_mode: bool,
+    geometry_mode: bool,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
@@ -55,7 +60,10 @@ impl Default for ShapeFixWire {
                 degenerated_status: 0,
                 last_fix_status: 0,
                 intersections_status: 0,
+                lacking_status: 0,
                 closed_mode: true,
+                topology_mode: false,
+                geometry_mode: true,
             }),
         }
     }
@@ -136,6 +144,21 @@ impl ShapeFixWire {
     /// `SetFace(face)`: update the shared analyzer support face.
     pub fn set_face(&self, face: &Face) -> Result<(), Failure> {
         self.ensure_analyzer().set_face(face)
+    }
+
+    /// Set whether `FixLacking` may add edges; `fixer.set_topology_mode(true)`.
+    pub fn set_topology_mode(&self, enabled: bool) {
+        self.state.write().topology_mode = enabled;
+    }
+
+    /// Set whether `FixLacking` may bend existing p-curves; `fixer.set_geometry_mode(false)`.
+    pub fn set_geometry_mode(&self, enabled: bool) {
+        self.state.write().geometry_mode = enabled;
+    }
+
+    /// Query the aggregate flags from the last `FixLacking()` call.
+    pub fn status_lacking(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.state.read().lacking_status, status)
     }
 
     /// `FixReorder()`: analyze the loaded 3D endpoints, then apply the proposed order.
@@ -286,6 +309,14 @@ impl ShapeFixWire {
 
     fn closed_mode(&self) -> bool {
         self.state.read().closed_mode
+    }
+
+    fn topology_mode(&self) -> bool {
+        self.state.read().topology_mode
+    }
+
+    fn geometry_mode(&self) -> bool {
+        self.state.read().geometry_mode
     }
 
     fn apply_order(
