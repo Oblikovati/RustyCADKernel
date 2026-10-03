@@ -97,17 +97,29 @@ fn merge_planar_face_edges(
     if wires.len() != 1 {
         return Ok(shape.clone());
     }
-    let before = wire_edges(&wires[0].clone().into_shape())?.len();
-    let merged = merge_wire_chains(
-        &wires[0].clone().into_shape(),
+    merge_planar_wire_chain(
+        shape,
+        &face,
+        &wires[0],
         angular_tolerance,
-        false,
         concat_bspline_edges,
-    )?;
+    )
+}
+
+fn merge_planar_wire_chain(
+    original: &Shape,
+    face: &Face,
+    wire: &Wire,
+    angular_tolerance: f64,
+    concat_bspline_edges: bool,
+) -> Result<Shape, Failure> {
+    let source = wire.clone().into_shape();
+    let before = wire_edges(&source)?.len();
+    let merged = merge_wire_chains(&source, angular_tolerance, false, concat_bspline_edges)?;
     if wire_edges(&merged)?.len() == before {
-        return Ok(shape.clone());
+        return Ok(original.clone());
     }
-    let rebuilt = rebuild_planar_face(&face, &rustycad_tkbrep::topods::wire(&merged)?)?;
+    let rebuilt = rebuild_planar_face(face, &rustycad_tkbrep::topods::wire(&merged)?)?;
     rebuild_planar_face_pcurves(&rebuilt)
 }
 
