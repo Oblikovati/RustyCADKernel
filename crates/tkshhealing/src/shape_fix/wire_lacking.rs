@@ -25,6 +25,7 @@ use types::{
 impl ShapeFixWire {
     /// `FixLacking(num, force)`: repair one analyzed p-curve gap.
     /// Example: `let repaired = fixer.fix_lacking_at(2, false)?;`.
+    /// The bend branch still lacks OCCT's self/intersection follow-up repairs.
     pub fn fix_lacking_at(&self, index: i32, force: bool) -> Result<bool, Failure> {
         self.set_last_fix_status(ShapeExtendStatus::Ok);
         let analyzer = self.analyzer()?;
@@ -42,6 +43,7 @@ impl ShapeFixWire {
 
     /// `FixLacking(force)`: process all eligible adjacent edge pairs.
     /// Example: `let changed = fixer.fix_lacking(false)?;`.
+    /// The bend branch still lacks OCCT's self/intersection follow-up repairs.
     pub fn fix_lacking(&self, force: bool) -> Result<bool, Failure> {
         self.state.write().lacking_status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
         let analyzer = self.analyzer()?;
