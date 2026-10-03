@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "source_capture_revision": "273997094c47aa77cd5a4531d431e00b504503a5",
+  "scope": "Twenty existing implemented claims: exact unique C++ declaration and unique Default/Clone Rust trait member. Source hashes checked against current files. Selector corrections only; status flags unchanged, not behavioral proof.",
+  "corrections": [
+    {
+      "upstream_id": "Quantity_Date::Quantity_Date()",
+      "before": "rustycad_tkernel::quantity::Date::Default",
+      "after": "rustycad_tkernel::quantity::Date::<core::default::Default>::default",
+      "rust_source": "crates/tkernel/src/quantity/date.rs",
+      "rust_source_sha256": "bf8f2763fd4dfad055408666fce36da94ef60d757ad97cdd694c0f26fa64d208",
+      "cpp_source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
+      "cpp_id": "52f086097d1bc36c766f0b254062e067e78a0bb56062ef053043dddde9af85a5"
+    },
+    {
+      "upstream_id": "Bnd_Range::Bnd_Range()",
+      "before": "rustycad_tkmath::bnd::Range1::default",
+      "after": "rustycad_tkmath::bnd::Range1::<core::default::Default>::default",
+      "rust_source": "crates/tkmath/src/bnd/range.rs",
+      "rust_source_sha256": "0493746dbf4c716bc4d87a7d804baa6e10d4f2251bff0163fe66355f7a6cb709",
+      "cpp_source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "cpp_id": "4f3c9f4f21edd4fb6323881b80b58b4e5bb738feb15149d6d9a27ff117eba67c"
+    },
+    {
+      "upstream_id": "Bnd_Sphere::Bnd_Sphere()",
+      "before": "rustycad_tkmath::bnd::BoundingSphere::default",
+      "after": "rustycad_tkmath::bnd::BoundingSphere::<core::default::Default>::default",
+      "rust_source": "crates/tkmath/src/bnd/sphere.rs",
+      "rust_source_sha256": "8801b716aa9d5313c6426d483ac776ab40e25e9810facbb2a23c120bf7f5bd0c",
+      "cpp_source": "src/FoundationClasses/TKMath/Bnd/Bnd_Sphere.hxx",
+      "cpp_id": "a01a764de7605763b17e2722e6c6b6f6aa93db7911406e5f3db5cec6a0a026bb"
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d()",
+      "before": "rustycad_tkmath::cslib::Class2d::default",
+      "after": "rustycad_tkmath::cslib::Class2d::<core::default::Default>::default",
+      "rust_source": "crates/tkmath/src/cslib/class2d.rs",
+      "rust_source_sha256": "98a7541b0395c821c1d6020050d6eae7c25dcdcec6414aebf85a37aacd641acb",
+      "cpp_source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "cpp_id": "7ac32a25dd84941fc851b2cdf3cd302c5c1a44c242b01389c5f9225045948f03"
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const CSLib_Class2d&)",
+      "before": "rustycad_tkmath::cslib::Class2d::clone",
+      "after": "rustycad_tkmath::cslib::Class2d::<core::clone::Clone>::clone",
+      "rust_source": "crates/tkmath/src/cslib/class2d.rs",
+      "rust_source_sha256": "98a7541b0395c821c1d6020050d6eae7c25dcdcec6414aebf85a37aacd641acb",
+      "cpp_source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "cpp_id": "08f5f77d79f92995ad710c80046315aad31684ea907acbce25d6d3f33de06aaa"
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_ChildNodes::BVH_ChildNodes()",
+      "before": "rustycad_tkmath::bvh::BvhChildNodes::default",
+      "after": "rustycad_tkmath::bvh::BvhChildNodes::<core::default::Default>::default",
+      "rust_source": "crates/tkmath/src/bvh/queue_builder.rs",
+      "rust_source_sha256": "546cb28bacbc6d2b343d0314c28053b10a067c8878b5b6c56cd4376a86a47fb9",
+      "cpp_source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "cpp_id": "91ff7a60b9d0f35593e060315f939b4ac9aed3baf193157d2afadb57080c02a8"
+    },
+    {
+      "upstream_id": "Bnd_OBB::Bnd_OBB()",
+      "before": "rustycad_tkmath::bnd::OrientedBoundingBox::default",
+      "after": "rustycad_tkmath::bnd::OrientedBoundingBox::<core::default::Default>::default",
+      "rust_source": "crates/tkmath/src/bnd/obb/mod.rs",
+      "rust_source_sha256": "b90864a01041799707a2518bc219761a260f0d6ff890ca505b5dbf195d4bd7fe",
+      "cpp_source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "cpp_id": "01dc342c5d0a8f93aaa0ba924c5ad3b3a86d285693f4ab605bab097e0d69d78b"
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Bnd_BoundSortBox()",
+      "before": "rustycad_tkmath::bnd::BoundSortBox::default",
+      "after": "rustycad_tkmath::bnd::BoundSortBox::<core::default::Default>::default",
+      "rust_source": "crates/tkmath/src/bnd/sort_box/mod.rs",
+      "rust_source_sha256": "518371572f2d44627178d0b5a5e8358f4cdaefb39c3136e92b5eac71751d69b3",
+      "cpp_source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "cpp_id": "6abdb1230148dbb04b697e0f9245c9a903f3484e3c5025b743f80853fb6eaa3d"
+    },
+    {
+      "upstream_id": "Bnd_Box::Bnd_Box()",
+      "before": "rustycad_tkmath::bnd::BoundingBox3::default",
+      "after": "rustycad_tkmath::bnd::BoundingBox3::<core::default::Default>::default",
+      "rust_source": "crates/tkmath/src/bnd/mod.rs",
+      "rust_source_sha256": "41b88a00798abb3952882e0fdd3eb76cd733d05e61c3293290df150ff0225dbf",
+      "cpp_source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "cpp_id": "cdcbfc3ab01d362a5965096eca0d811095fea7ee79da910c841234a1cd025e7b"
+    },
+    {
+      "upstream_id": "Geom_Transformation::Geom_Transformation()",
+      "before": "rustycad_tkg3d::geom::GeomTransformation::default",
+      "after": "rustycad_tkg3d::geom::GeomTransformation::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/geom/transformation.rs",
+      "rust_source_sha256": "31c6f3c666212619fec47e0124e60b9f5113c21ed298f98592e811ffd8da84f7",
+      "cpp_source": "src/ModelingData/TKG3d/Geom/Geom_Transformation.hxx",
+      "cpp_id": "cd78f0286fb4459e8b976de3486f235d4d7879b3925e61840e5c80d711cdc517"
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Adaptor3d_CurveOnSurface()",
+      "before": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::default",
+      "after": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/adaptor3d/curve_on_surface/mod.rs",
+      "rust_source_sha256": "931f5546fc4a3192ee83637ce79a1fc2e8aae2bbbc7e1ee13c3f695cdb3d2afc",
+      "cpp_source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "cpp_id": "0e12463a06b0e68ebdcdbdc314696aa05a4d7c013e0fe9ffe3747a326bc8b2a3"
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Adaptor3d_IsoCurve()",
+      "before": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::default",
+      "after": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/adaptor3d/iso_curve/mod.rs",
+      "rust_source_sha256": "cf132740daccc0b4fa9751bb6aab8c52ffcd7ca539956be8ee50d247231c8291",
+      "cpp_source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "cpp_id": "b10d3dac8dbcdbcb90a675175d15504467408fe6e771442e408425e65d1a3de2"
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::GeomAdaptor_Curve()",
+      "before": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::default",
+      "after": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/geom_adaptor/curve.rs",
+      "rust_source_sha256": "7c7ef225acb33a32ee70903e1dba79c53bd43495d90ab0734fb1ab4dbf3c56ce",
+      "cpp_source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "cpp_id": "a90fa22fa808b5f75dd48a01fc50813320016fcef00d1570ea584bf03cc84d6f"
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::GeomAdaptor_Surface()",
+      "before": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::default",
+      "after": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/geom_adaptor/surface.rs",
+      "rust_source_sha256": "fd11d735111f987282b05f9d9bb6fef42acd53a443fe7a6f5f7d7120d4773a1b",
+      "cpp_source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "cpp_id": "884b52569e9178d563596bacfb4493c85f094b5dc72070ac33167ed972f17e6e"
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::GeomAdaptor_SurfaceOfLinearExtrusion()",
+      "before": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::default",
+      "after": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/geom_adaptor/surface_of_linear_extrusion.rs",
+      "rust_source_sha256": "45d66f68a4af8d5720209a7dbbb6e1fe4b66897f87aab37c7e1fe7a026f2b4d5",
+      "cpp_source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "cpp_id": "2c0bf9759c3fa82099876e9f08c0c08ab9235f9fa2c8d11e05e16ca6818775e5"
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::GeomAdaptor_SurfaceOfRevolution()",
+      "before": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::default",
+      "after": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/geom_adaptor/surface_of_revolution.rs",
+      "rust_source_sha256": "511ce842864c0b1ae633fe94688582ed4a0d90bef78da963454ce276cd8bf703",
+      "cpp_source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "cpp_id": "92de424f33f9779b9d953d7d029bb605a8ed85d6abb5716146828d0f397bc058"
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::GeomAdaptor_TransformedSurface()",
+      "before": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::default",
+      "after": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/geom_adaptor/transformed_surface.rs",
+      "rust_source_sha256": "61be45ab43210fb2c8cc61bbd638e970cb9479f679afbd9bd9e80ed9d85b50f2",
+      "cpp_source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "cpp_id": "f6344af90394b098bc2296c889c4055336bec15821bf5ae38f8b7db8c285925b"
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex::Adaptor3d_HVertex()",
+      "before": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertexBase::default",
+      "after": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertexBase::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/adaptor3d/h_vertex.rs",
+      "rust_source_sha256": "09b5d5a8c49b304169a9985267eb9368f96a01aad055b4bace6412e97dc29427",
+      "cpp_source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "cpp_id": "df45362e67421f3b95ec07bb0dec5c9dbcd8b0c060a52f74017766b73a195701"
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Adaptor3d_TopolTool()",
+      "before": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::default",
+      "after": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/adaptor3d/topol_tool/mod.rs",
+      "rust_source_sha256": "dbfc34b27c5a5026ba99b341c15c490875235478910411580c27a2cfdd69eeb8",
+      "cpp_source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "cpp_id": "225e00cbd89f98206cb616d2cf1aab4035b2fe5260d1707dff566a20ed5ecb60"
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::GeomAdaptor_TransformedCurve()",
+      "before": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::default",
+      "after": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::<core::default::Default>::default",
+      "rust_source": "crates/tkg3d/src/geom_adaptor/transformed_curve.rs",
+      "rust_source_sha256": "f362b45445e30f4016d83d183256ba570cda80c2ebe53a7ac7ea5920136d1cbd",
+      "cpp_source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "cpp_id": "518d5e17fd4c077bab9029fb899dfdcb94a29c77b54958dfbefa857a8f5e84d5"
+    }
+  ]
+}
