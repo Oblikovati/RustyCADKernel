@@ -20,7 +20,41 @@ static TopoDS_Wire makeWire(const gp_Pnt& middle) {
   return wireBuilder.Wire();
 }
 
+static TopoDS_Wire makeThreeLineWire() {
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(1, 0, 0), gp_Pnt(2, 0, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(3, 0, 0)));
+  return wireBuilder.Wire();
+}
+
+static TopoDS_Wire makeReverseOrderWire() {
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(3, 0, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(1, 0, 0), gp_Pnt(2, 0, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)));
+  return wireBuilder.Wire();
+}
+
+static TopoDS_Wire makeReversedOccurrencesWire() {
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)));
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(1, 0, 0));
+  second.Reverse();
+  wireBuilder.Add(second);
+  TopoDS_Edge third = BRepBuilderAPI_MakeEdge(gp_Pnt(3, 0, 0), gp_Pnt(2, 0, 0));
+  third.Reverse();
+  wireBuilder.Add(third);
+  return wireBuilder.Wire();
+}
+
 static void runCase(const char* name, const TopoDS_Wire& wire, bool unifyEdges) {
+  for (TopExp_Explorer inputEdge(wire, TopAbs_EDGE); inputEdge.More(); inputEdge.Next()) {
+    TopoDS_Vertex inputFirst, inputLast;
+    TopExp::Vertices(TopoDS::Edge(inputEdge.Current()), inputFirst, inputLast, true);
+    std::cerr << name << " input " << BRep_Tool::Pnt(inputFirst).X() << " -> "
+              << BRep_Tool::Pnt(inputLast).X() << '\n';
+  }
   ShapeUpgrade_UnifySameDomain unifier(wire, unifyEdges, false, false);
   unifier.Build();
 
@@ -44,6 +78,9 @@ static void runCase(const char* name, const TopoDS_Wire& wire, bool unifyEdges) 
 
 int main() {
   runCase("linear", makeWire(gp_Pnt(2, 0, 0)), true);
+  runCase("linear_three", makeThreeLineWire(), true);
+  runCase("reverse_order", makeReverseOrderWire(), true);
+  runCase("reversed_occurrences", makeReversedOccurrencesWire(), true);
   runCase("disabled", makeWire(gp_Pnt(2, 0, 0)), false);
   runCase("perpendicular", makeWire(gp_Pnt(1, 1, 0)), true);
 }

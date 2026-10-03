@@ -15,7 +15,7 @@ use rustycad_tkmath::gp::{Axis1, Direction3};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 
 /// Merges the native two-line chain without needing face p-curve rewrites.
-pub(super) fn merge_two_line_wire_edges(
+pub(super) fn merge_line_wire_chain(
     tool: &ShapeUpgradeUnifySameDomain,
     shape: &Shape,
 ) -> Result<Shape, Failure> {
@@ -23,10 +23,10 @@ pub(super) fn merge_two_line_wire_edges(
         return Ok(shape.clone());
     }
     let edges = wire_edges(shape)?;
-    if edges.len() != 2 {
+    if edges.len() < 2 {
         return Ok(shape.clone());
     }
-    merge_edge_pair(tool, shape, &edges[0], &edges[1])
+    merge_edge_chain(tool, shape, &edges)
 }
 
 fn wire_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {
@@ -35,23 +35,31 @@ fn wire_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {
         .collect()
 }
 
-fn merge_edge_pair(
+fn merge_edge_chain(
     tool: &ShapeUpgradeUnifySameDomain,
     shape: &Shape,
-    first: &Edge,
-    second: &Edge,
+    edges: &[Edge],
 ) -> Result<Shape, Failure> {
     let fields = tool.fields.read().clone();
-    if !fields.unify_edges || !both_linear(first, second, fields.angular_tolerance)? {
+    if !fields.unify_edges || !all_linear(edges, fields.angular_tolerance)? {
         return Ok(shape.clone());
     }
-    let Some((start, end)) = ordered_endpoints(first, second)? else {
+    let Some((ordered, start, end)) = order_chain(edges) else {
         return Ok(shape.clone());
     };
-    rebuild_merged_wire(shape, first, second, start, end)
+    rebuild_merged_wire(shape, &ordered, start, end)
 }
 
-fn both_linear(first: &Edge, second: &Edge, tolerance: f64) -> Result<bool, Failure> {
+fn all_linear(edges: &[Edge], tolerance: f64) -> Result<bool, Failure> {
+    for pair in edges.windows(2) {
+        if !pair_is_linear(&pair[0], &pair[1], tolerance)? {
+            return Ok(false);
+        }
+    }
+    Ok(true)
+}
+
+fn pair_is_linear(first: &Edge, second: &Edge, tolerance: f64) -> Result<bool, Failure> {
     let first_curve = BRepAdaptorCurve::with_edge(first)?;
     let second_curve = BRepAdaptorCurve::with_edge(second)?;
     if first_curve.get_type()? != CurveType::Line || second_curve.get_type()? != CurveType::Line {
@@ -62,27 +70,57 @@ fn both_linear(first: &Edge, second: &Edge, tolerance: f64) -> Result<bool, Fail
     Ok(first_direction.is_parallel(second_direction, tolerance))
 }
 
-fn ordered_endpoints(first: &Edge, second: &Edge) -> Result<Option<(Vertex, Vertex)>, Failure> {
+fn order_chain(edges: &[Edge]) -> Option<(Vec<Edge>, Vertex, Vertex)> {
     let analysis = ShapeAnalysisEdge::new();
-    let (first_start, first_end) = edge_vertices(&analysis, first);
-    let (second_start, second_end) = edge_vertices(&analysis, second);
-    if first_end.is_same(&second_start) {
-        return Ok(Some((first_start, second_end)));
+    let first = edges.first()?.clone();
+    let mut ordered = vec![first.clone()];
+    let mut start = analysis.first_vertex(&first);
+    let mut end = analysis.last_vertex(&first);
+    extend_chain_front(edges, &analysis, &mut ordered, &mut start);
+    extend_chain_back(edges, &analysis, &mut ordered, &mut end);
+    if ordered.len() != edges.len() || start.is_same(&end) {
+        return None;
     }
-    if second_end.is_same(&first_start) {
-        return Ok(Some((second_start, first_end)));
-    }
-    Ok(None)
+    Some((ordered, start, end))
 }
 
-fn edge_vertices(analysis: &ShapeAnalysisEdge, edge: &Edge) -> (Vertex, Vertex) {
-    (analysis.first_vertex(edge), analysis.last_vertex(edge))
+fn extend_chain_front(
+    edges: &[Edge],
+    analysis: &ShapeAnalysisEdge,
+    ordered: &mut Vec<Edge>,
+    start: &mut Vertex,
+) {
+    while let Some(edge) = edges
+        .iter()
+        .find(|edge| !contains_edge(ordered, edge) && analysis.last_vertex(edge).is_same(start))
+    {
+        ordered.insert(0, edge.clone());
+        *start = analysis.first_vertex(edge);
+    }
+}
+
+fn extend_chain_back(
+    edges: &[Edge],
+    analysis: &ShapeAnalysisEdge,
+    ordered: &mut Vec<Edge>,
+    end: &mut Vertex,
+) {
+    while let Some(edge) = edges
+        .iter()
+        .find(|edge| !contains_edge(ordered, edge) && analysis.first_vertex(edge).is_same(end))
+    {
+        ordered.push(edge.clone());
+        *end = analysis.last_vertex(edge);
+    }
+}
+
+fn contains_edge(edges: &[Edge], candidate: &Edge) -> bool {
+    edges.iter().any(|edge| edge.is_same(candidate))
 }
 
 fn rebuild_merged_wire(
     shape: &Shape,
-    first: &Edge,
-    second: &Edge,
+    edges: &[Edge],
     start: Vertex,
     end: Vertex,
 ) -> Result<Shape, Failure> {
@@ -101,19 +139,16 @@ fn rebuild_merged_wire(
     let edge =
         BRepBuilderAPIMakeEdge::from_curve_vertices_params(&trimmed, &start, &end, 0., distance)?
             .edge()?;
-    apply_edge_merge(shape, first, second, &edge.into_shape())
+    apply_edge_merge(shape, edges, &edge.into_shape())
 }
 
-fn apply_edge_merge(
-    shape: &Shape,
-    first: &Edge,
-    second: &Edge,
-    merged: &Shape,
-) -> Result<Shape, Failure> {
+fn apply_edge_merge(shape: &Shape, edges: &[Edge], merged: &Shape) -> Result<Shape, Failure> {
     let context = Handle::new(ShapeBuildReShape::new());
-    context.merge(
-        &[first.clone().into_shape(), second.clone().into_shape()],
-        merged,
-    )?;
+    let parts = edges
+        .iter()
+        .cloned()
+        .map(Edge::into_shape)
+        .collect::<Vec<_>>();
+    context.merge(&parts, merged)?;
     context.apply(shape, ShapeEnum::Shape)
 }
