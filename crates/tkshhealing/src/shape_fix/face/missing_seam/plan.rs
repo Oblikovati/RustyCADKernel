@@ -65,6 +65,15 @@ pub(super) fn analyze_with_closure(
         return Ok(None);
     }
     let bounds = finite_bounds(surface.bounds(), face)?;
+    analyze_wire_pair(face, surface, bounds, (u_closed, v_closed))
+}
+
+fn analyze_wire_pair(
+    face: &Face,
+    surface: &Handle<dyn GeomSurface>,
+    bounds: SurfaceBounds,
+    closure: (bool, bool),
+) -> Result<Option<MissingSeamPlan>, Failure> {
     let u_period = bounded_period(bounds.0, bounds.1);
     let v_period = bounded_period(bounds.2, bounds.3);
     let mut buckets = face_wires(face)?;
@@ -73,7 +82,7 @@ pub(super) fn analyze_with_closure(
         face,
         surface,
         bounds,
-        (u_closed, v_closed),
+        closure,
         (u_period, v_period),
         buckets,
         pair,
