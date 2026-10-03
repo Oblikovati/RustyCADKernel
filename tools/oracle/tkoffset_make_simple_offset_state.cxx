@@ -1,6 +1,8 @@
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRepOffset_MakeSimpleOffset.hxx>
 #include <BRep_Tool.hxx>
+#include <Standard_Failure.hxx>
+#include <Standard_NoSuchObject.hxx>
 #include <gp.hxx>
 #include <gp_Ax3.hxx>
 #include <gp_Pln.hxx>
@@ -31,6 +33,20 @@ int main()
   std::cout << std::setprecision(17);
   BRepOffset_MakeSimpleOffset maker;
   writeState("default", maker);
+  try
+  {
+    maker.Generated(TopoDS_Shape());
+  }
+  catch (Standard_NoSuchObject const& failure)
+  {
+    std::cout << "case=generated_before_perform error=Standard_NoSuchObject message="
+              << failure.GetMessageString() << '\n';
+  }
+  catch (Standard_Failure const& failure)
+  {
+    std::cout << "case=generated_before_perform error=Standard_Failure message="
+              << failure.GetMessageString() << '\n';
+  }
   maker.Perform();
   writeState("null_perform", maker);
 
@@ -49,6 +65,8 @@ int main()
 
   maker.Initialize(TopoDS_Shape(), 3.0);
   writeState("reinitialized_null", maker);
+  std::cout << "case=history_after_initialize generated_same_as_previous="
+            << maker.Generated(source).IsSame(generated) << '\n';
   maker.Perform();
   writeState("reinitialized_null_perform", maker);
 }
