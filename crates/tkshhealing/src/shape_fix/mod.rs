@@ -23,7 +23,7 @@ pub use compose_shell::ShapeFixComposeShell;
 pub use edge::ShapeFixEdge;
 pub use edge_connect::ShapeFixEdgeConnect;
 pub use edge_proj_aux::ShapeFixEdgeProjAux;
-pub use face::ShapeFixFace;
+pub use face::{ShapeFixFace, ShapeFixFaceWireMap};
 pub use face_connect::ShapeFixFaceConnect;
 pub use intersection::{PcurveCrossing, line_pcurve_crossing};
 pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
