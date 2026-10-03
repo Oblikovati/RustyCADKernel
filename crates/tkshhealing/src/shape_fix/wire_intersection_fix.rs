@@ -5,6 +5,8 @@ use super::{
     wire_split_tool::{cut_adjacent_pair, same_vertex},
 };
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire};
+use crate::shape_build::ShapeBuildEdge;
+use crate::shape_build::ShapeBuildReShape;
 use crate::shape_extend::ShapeExtendStatus;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::ReShape;
@@ -22,6 +24,8 @@ pub(super) struct CrossingState {
     pub(super) previous_ranges: [f64; 2],
     pub(super) point: Point3,
     pub(super) tolerance: f64,
+    wire_indices: [i32; 2],
+    changed_edges: bool,
 }
 
 type AdjacentIntersectionRecords = (Sequence<IntersectionPoint>, Sequence<Point3>, Sequence<f64>);
@@ -80,9 +84,10 @@ impl ShapeFixWire {
         let Some(mut action) = crossing_action(state, index, uv, xyz, errors, item)? else {
             return Ok(());
         };
-        let improved = self.try_improve_edge_tolerance(state, &action)?;
-        action.tolerance = improved.unwrap_or(action.tolerance);
-        action.improved = improved.is_some();
+        if let Some((tolerance, changed)) = self.try_improve_edge_tolerance(state, &action)? {
+            action.tolerance = tolerance;
+            action.improved = changed;
+        }
         self.apply_intersection_action(state, &action)
     }
 
@@ -90,7 +95,7 @@ impl ShapeFixWire {
         &self,
         state: &mut CrossingState,
         action: &CrossingAction,
-    ) -> Result<Option<f64>, Failure> {
+    ) -> Result<Option<(f64, bool)>, Failure> {
         if action.tolerance <= state.tolerance {
             return Ok(None);
         }
@@ -99,9 +104,21 @@ impl ShapeFixWire {
         if maximum >= self.max_tolerance() || maximum >= action.tolerance {
             return Ok(None);
         }
-        self.raise_adjacent_edge_tolerances(state, tolerances)?;
-        self.or_last_fix_status(ShapeExtendStatus::Done6);
-        Ok(Some(1.000001 * maximum))
+        let changed = self.adjacent_edge_tolerances_need_update(state, tolerances)?;
+        if changed {
+            self.raise_adjacent_edge_tolerances(state, tolerances)?;
+            self.or_last_fix_status(ShapeExtendStatus::Done6);
+        }
+        Ok(Some((1.000001 * maximum, changed)))
+    }
+
+    fn adjacent_edge_tolerances_need_update(
+        &self,
+        state: &CrossingState,
+        tolerances: (f64, f64),
+    ) -> Result<bool, Failure> {
+        Ok(BRepTool::edge_tolerance(&state.edges[0])? < tolerances.0
+            || BRepTool::edge_tolerance(&state.edges[1])? < tolerances.1)
     }
 
     fn local_edge_tolerances(
@@ -118,11 +135,80 @@ impl ShapeFixWire {
 
     fn raise_adjacent_edge_tolerances(
         &self,
-        state: &CrossingState,
+        state: &mut CrossingState,
         tolerances: (f64, f64),
     ) -> Result<(), Failure> {
+        if !self.context().is_null() {
+            self.copy_adjacent_edges(state)?;
+        }
         self.raise_edge_tolerance(&state.edges[0], tolerances.0)?;
         self.raise_edge_tolerance(&state.edges[1], tolerances.1)
+    }
+
+    fn copy_adjacent_edges(&self, state: &mut CrossingState) -> Result<(), Failure> {
+        let context = self.context();
+        let reshape = context
+            .get()
+            .ok_or_else(|| Failure::new("ShapeFix_Wire context is null"))?;
+        let (first_copy, shared, last_copy) = self.copy_adjacent_vertices(state, reshape)?;
+        self.replace_adjacent_edges(state, reshape, &first_copy, &shared, &last_copy)?;
+        self.update_wire()?;
+        self.reload_adjacent_edges(state)?;
+        state.changed_edges = true;
+        Ok(())
+    }
+
+    fn copy_adjacent_vertices(
+        &self,
+        state: &CrossingState,
+        reshape: &ShapeBuildReShape,
+    ) -> Result<(Vertex, Vertex, Vertex), Failure> {
+        let analysis = ShapeAnalysisEdge::new();
+        let previous = analysis.first_vertex(&state.edges[0]);
+        let shared = reshape.copy_vertex(&state.shared[0], -1.0)?;
+        let last = analysis.last_vertex(&state.edges[1]);
+        let (first_copy, last_copy) = if previous.is_same(&last) {
+            let copy = reshape.copy_vertex(&previous, -1.0)?;
+            (copy.clone(), copy)
+        } else {
+            (
+                reshape.copy_vertex(&previous, -1.0)?,
+                reshape.copy_vertex(&last, -1.0)?,
+            )
+        };
+        Ok((first_copy, shared, last_copy))
+    }
+
+    fn replace_adjacent_edges(
+        &self,
+        state: &CrossingState,
+        reshape: &ShapeBuildReShape,
+        first_vertex: &Vertex,
+        shared_vertex: &Vertex,
+        last_vertex: &Vertex,
+    ) -> Result<(), Failure> {
+        let first =
+            ShapeBuildEdge.copy_replace_vertices(&state.edges[0], first_vertex, shared_vertex)?;
+        let second =
+            ShapeBuildEdge.copy_replace_vertices(&state.edges[1], shared_vertex, last_vertex)?;
+        replace_context_edge(reshape, &state.edges[0], &first)?;
+        replace_context_edge(reshape, &state.edges[1], &second)
+    }
+
+    fn reload_adjacent_edges(&self, state: &mut CrossingState) -> Result<(), Failure> {
+        let wire = self.wire_data()?;
+        state.edges = [
+            wire.edge(state.wire_indices[0])?,
+            wire.edge(state.wire_indices[1])?,
+        ];
+        let analysis = ShapeAnalysisEdge::new();
+        state.shared = [
+            analysis.last_vertex(&state.edges[0]),
+            analysis.first_vertex(&state.edges[1]),
+        ];
+        state.point = BRepTool::pnt(&state.shared[0])?;
+        state.tolerance = BRepTool::vertex_tolerance(&state.shared[0])?;
+        Ok(())
     }
 
     fn raise_edge_tolerance(&self, edge: &Edge, tolerance: f64) -> Result<(), Failure> {
@@ -237,7 +323,9 @@ impl ShapeFixWire {
             return Ok(());
         }
         let context = self.context();
-        if let Some(reshape) = context.get() {
+        if let Some(reshape) = context.get()
+            && !state.changed_edges
+        {
             for vertex in distinct_shared_vertices(&state.shared) {
                 reshape.copy_vertex_at(vertex, state.point, state.tolerance)?;
             }
@@ -276,6 +364,8 @@ impl CrossingState {
             edges,
             shared,
             previous_ranges: [f64::MAX; 2],
+            wire_indices: [first_index, second_index],
+            changed_edges: false,
         })
     }
 
@@ -301,6 +391,18 @@ impl CrossingState {
         self.previous_ranges = ranges;
         true
     }
+}
+
+fn replace_context_edge(
+    context: &ShapeBuildReShape,
+    original: &Edge,
+    replacement: &Edge,
+) -> Result<(), Failure> {
+    ReShape::replace(
+        context,
+        &original.clone().into_shape(),
+        &replacement.clone().into_shape(),
+    )
 }
 
 fn apply_context_edge(
