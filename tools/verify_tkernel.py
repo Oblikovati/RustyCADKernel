@@ -212,6 +212,13 @@ def main():
         run([sys.executable, ROOT/"tools/verify_geometry.py", "--source", source], output/"geometry-verification.log", env=env)
         geometry_report = json.loads((output/"geometry/report.json").read_text())
     files = sorted(set([p for p in (ROOT/"crates").rglob("*") if p.is_file()] + list((ROOT/"tools/oracle").glob("*.cxx")) + [ROOT/"Cargo.toml", ROOT/"tools/verify_geometry.py", ROOT/"tools/verify_units.py", ROOT/"tools/generate_units_data.py", ROOT/"tools/generate_quantity_color_table.py", ROOT/"tools/generate_resource_tables.py", ROOT/"porting/units-data.json", ROOT/"tools/verify_kdtree.py", ROOT/"crates/tkernel/Cargo.toml", ROOT/"porting/parity.json", Path(__file__).resolve(), ROOT/"tools/oracle/tkernel_probe.cxx", ROOT/"tools/oracle/strtod_probe.cxx", ROOT/"tools/verify_strtod.py", ROOT/"tools/tkernel_mapping.py", ROOT/"tools/verify_ascii_string.py", ROOT/"tools/oracle/ascii_string_probe.cxx", ROOT/"tools/verify_extended_string.py", ROOT/"tools/oracle/extended_string_probe.cxx", ROOT/"tools/verify_tkernel_api.py", *(ROOT/"tools").glob("tkernel_*_corpus.py"), *(ROOT/"tools/oracle").glob("*.hxx"), ROOT/"Cargo.lock", ROOT/"rust-toolchain.toml"]))
+    files.extend((ROOT/"tools/api_inventory").glob("*.py"))
+    files.extend(ROOT / path for path in (
+        "porting/baseline.json", "tools/api_inventory_status.py", "tools/api_tool_hashes.py",
+        "tools/capture_rustdoc_json.py", "tools/native_build.py", "tools/porting.py",
+        "tools/tkernel_native_baseline.py",
+    ))
+    files = sorted(set(files))
     report = {"schema_version":1,"profile":"linux-gcc-c-locale","revision":inventory['revision'],
               "platform":platform.platform(),"python":platform.python_version(),
               "cmake_definitions":flags,
