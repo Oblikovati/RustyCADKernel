@@ -2,6 +2,8 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Ordered-wire state, reorder application and the pinned periodic p-curve repair.
+#[path = "wire_connected.rs"]
+mod wire_connected;
 #[path = "wire_degenerated.rs"]
 mod wire_degenerated;
 #[path = "wire_shifted.rs"]
