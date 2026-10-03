@@ -120,3 +120,34 @@ fn waiters_wake_when_another_thread_sets() {
     });
     assert!(condition.check());
 }
+
+#[test]
+fn sentry_unlocks_when_its_error_handler_runs_the_registered_callback() {
+    use rustycad_tkernel::standard::ErrorHandler;
+
+    let mutex = StandardMutex::new();
+    let handler = ErrorHandler::new();
+    let sentry = Sentry::new(&mutex);
+    assert!(!other_thread_try_lock(&mutex));
+    assert!(ErrorHandler::is_in_try_block());
+    handler.destroy();
+    assert!(!ErrorHandler::is_in_try_block());
+    assert!(other_thread_try_lock(&mutex));
+    drop(sentry);
+    assert!(other_thread_try_lock(&mutex));
+}
+
+#[test]
+fn nested_sentries_release_each_recursive_lock_from_handler_callbacks() {
+    use rustycad_tkernel::standard::ErrorHandler;
+
+    let mutex = StandardMutex::new();
+    let handler = ErrorHandler::new();
+    let outer = Sentry::new(&mutex);
+    let inner = Sentry::new(&mutex);
+    assert!(!other_thread_try_lock(&mutex));
+    handler.destroy();
+    assert!(other_thread_try_lock(&mutex));
+    drop(inner);
+    drop(outer);
+}
