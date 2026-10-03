@@ -12,6 +12,8 @@ mod wire_degenerated;
 mod wire_dummy_seam;
 #[path = "wire_edge_curves.rs"]
 mod wire_edge_curves;
+#[path = "wire_gap_3d/mod.rs"]
+mod wire_gap_3d;
 #[path = "wire_intersection_fix.rs"]
 mod wire_intersection_fix;
 #[path = "wire_intersection_geometry.rs"]
@@ -311,10 +313,16 @@ impl ShapeFixWire {
         Ok(true)
     }
 
-    /// `FixGaps3d()`: run the native adjacent-curve analysis when no gap needs repair.
+    /// Repair 3D junctions by native spline conversion; `tool.fix_gaps_3d()?`.
     pub fn fix_gaps_3d(&self) -> Result<bool, Failure> {
-        self.set_gap_status(true, ShapeExtendStatus::Ok);
-        self.fix_gap_pass(true)
+        self.state.write().gaps_3d_status = 0;
+        let start = if self.closed_mode() { 1 } else { 2 };
+        for index in start..=self.nb_edges() {
+            self.fix_gap_3d(index, true)?;
+            let last = self.state.read().last_fix_status;
+            self.state.write().gaps_3d_status |= last;
+        }
+        Ok(self.status_gaps_3d(ShapeExtendStatus::Done))
     }
 
     /// `FixGaps2d()`: analyze adjacent p-curves and repair the pinned closed periodic gap.

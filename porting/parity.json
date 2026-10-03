@@ -225025,7 +225025,6 @@
       "status": "partial",
       "notes": "Native differential covers a planar three-edge overlap that splits the long edge and removes the short edge, plus status and mode-accessor rows. Curved/seam p-curves, context failures and full Perform dispatch remain open."
     },
-
     {
       "upstream_id": "ShapeFix_Wire::FixSelfIntersection()",
       "toolkit": "TKShHealing",
@@ -225052,6 +225051,33 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::status_removed_segment",
       "status": "partial",
       "notes": "Native mode/default and simple-run fixtures confirm false; nonadjacent removed-segment output has not yet been differentially exercised."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::FixWireGaps()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::fix_wire_gaps",
+      "status": "partial",
+      "notes": "Native face/free-wire/compound orchestration and status/context mutation; twelve geometry rows plus repeated wire pass. Gap conversion line/single-edge cases compare ranges, endpoints, midpoint and spline degree. Full 2D repair and curved/located/error domains remain incomplete. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixGaps3d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_3d",
+      "status": "partial",
+      "notes": "Default conversion pass now repairs actual gaps and resets prior DONE flags; native differential fixtures. Optional ranges mode is not yet exposed; conic/offset/spline domains need more coverage. No legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixGap3d(const int, const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gap_3d",
+      "status": "partial",
+      "notes": "Native conversion branch and vertex/edge context mutations. Nonzero range-only repair remains explicitly unported; curved/located/nonmanifold conversions require broader oracle coverage. No legacy mapping increase."
     }
   ],
   "tests": [

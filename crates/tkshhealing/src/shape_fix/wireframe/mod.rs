@@ -1,4 +1,5 @@
 //! ShapeFix_Wireframe state and topology analysis from OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
+mod gaps;
 mod small_edges;
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
