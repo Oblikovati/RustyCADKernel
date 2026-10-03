@@ -1,6 +1,7 @@
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
 #include <BRep_Builder.hxx>
+#include <BRep_Tool.hxx>
 #include <TopoDS_Compound.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Shape.hxx>
@@ -11,7 +12,10 @@
 #include <gp_Pnt.hxx>
 #include <ShapeFix_FixSmallFace.hxx>
 #include <TopExp_Explorer.hxx>
+#include <TopoDS_Vertex.hxx>
+#include <TopoDS.hxx>
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 
@@ -21,14 +25,46 @@ static int count(const TopoDS_Shape& shape, const TopAbs_ShapeEnum type) {
   return total;
 }
 
+static void vertex_bounds(const TopoDS_Shape& shape, double bounds[6]) {
+  bounds[0] = bounds[2] = bounds[4] = 1.0e100;
+  bounds[1] = bounds[3] = bounds[5] = -1.0e100;
+  for (TopExp_Explorer iterator(shape, TopAbs_VERTEX); iterator.More(); iterator.Next()) {
+    const gp_Pnt point = BRep_Tool::Pnt(TopoDS::Vertex(iterator.Current()));
+    bounds[0] = std::min(bounds[0], point.X());
+    bounds[1] = std::max(bounds[1], point.X());
+    bounds[2] = std::min(bounds[2], point.Y());
+    bounds[3] = std::max(bounds[3], point.Y());
+    bounds[4] = std::min(bounds[4], point.Z());
+    bounds[5] = std::max(bounds[5], point.Z());
+  }
+}
+
 static void probe(const char* name, const TopoDS_Shape& input) {
   ShapeFix_FixSmallFace fixer;
   fixer.Init(input);
   const TopoDS_Shape result = fixer.FixSpotFace();
   const TopoDS_Shape output = fixer.Shape();
+  double bounds[6];
+  vertex_bounds(output, bounds);
   std::cout << name << ' ' << result.IsSame(input) << ' ' << output.IsSame(input) << ' '
             << output.ShapeType() << ' ' << count(output, TopAbs_FACE) << ' '
-            << count(output, TopAbs_EDGE) << ' ' << count(output, TopAbs_VERTEX) << '\n';
+            << count(output, TopAbs_EDGE) << ' ' << count(output, TopAbs_VERTEX);
+  for (double value : bounds) std::cout << ' ' << value;
+  std::cout << '\n';
+}
+
+static void probe_strip(const char* name, const TopoDS_Shape& input) {
+  ShapeFix_FixSmallFace fixer;
+  fixer.Init(input);
+  fixer.SetPrecision(0.001);
+  const TopoDS_Shape result = fixer.FixStripFace();
+  double bounds[6];
+  vertex_bounds(result, bounds);
+  std::cout << name << ' ' << result.IsSame(input) << ' ' << fixer.Shape().IsSame(input) << ' '
+            << result.ShapeType() << ' ' << count(result, TopAbs_FACE) << ' '
+            << count(result, TopAbs_EDGE) << ' ' << count(result, TopAbs_VERTEX);
+  for (double value : bounds) std::cout << ' ' << value;
+  std::cout << '\n';
 }
 
 int main() {
@@ -48,4 +84,5 @@ int main() {
   builder.Add(compound, tiny_face);
   builder.Add(compound, regular);
   probe("tiny_and_regular", compound);
+  probe_strip("thin_solid", BRepPrimAPI_MakeBox(1.0, 1.0e-4, 1.0e-4).Shape());
 }

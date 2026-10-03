@@ -1,5 +1,6 @@
 //! Spot-face healing from `ShapeFix_FixSmallFace`.
 mod spot;
+mod strip;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::ShapeAnalysisCheckSmallFace;
@@ -99,6 +100,41 @@ impl ShapeFixFixSmallFace {
     /// Native `FixPinFace` is currently a no-op returning true; `assert!(fixer.fix_pin_face(&mut face))`.
     pub fn fix_pin_face(&self, _face: &mut Face) -> bool {
         true
+    }
+
+    /// Replaces recognized strip faces and applies the shared reshape context; `fixer.fix_strip_face(false)?`.
+    pub fn fix_strip_face(&self, was_done: bool) -> Result<Shape, Failure> {
+        strip::fix_strip_face(self, was_done)
+    }
+
+    /// Joins the two long strip edges through their adjacent support; `fixer.replace_in_case_of_strip(&mut face, &mut first, &mut second, 1e-7)?`.
+    pub fn replace_in_case_of_strip(
+        &self,
+        face: &mut Face,
+        first: &mut rustycad_tkbrep::topods::Edge,
+        second: &mut rustycad_tkbrep::topods::Edge,
+        tolerance: f64,
+    ) -> Result<bool, Failure> {
+        strip::replace_in_case_of_strip(self, face, first, second, tolerance)
+    }
+
+    /// Removes a strip face from the reshape context and records its warning.
+    /// Example: `fixer.remove_faces_in_case_of_strip(&face)?`.
+    pub fn remove_faces_in_case_of_strip(&self, face: &Face) -> Result<bool, Failure> {
+        strip::remove_faces_in_case_of_strip(self, face)
+    }
+
+    /// Builds the shared strip edge from matched endpoints and the support-face p-curve.
+    /// Example: `let edge = fixer.compute_shared_edge_for_strip_face(&face, &a, &b, &neighbor, 1e-7)?`.
+    pub fn compute_shared_edge_for_strip_face(
+        &self,
+        _face: &Face,
+        first: &rustycad_tkbrep::topods::Edge,
+        second: &rustycad_tkbrep::topods::Edge,
+        support: &Face,
+        tolerance: f64,
+    ) -> Result<rustycad_tkbrep::topods::Edge, Failure> {
+        strip::compute_shared_edge_for_strip_face(self, first, second, support, tolerance)
     }
 
     fn ensure_context(&self) {
