@@ -14,3 +14,5 @@ mod printers;
 mod report;
 #[path = "message_api_behavior/status.rs"]
 mod status;
+#[path = "message_api_behavior/status_values.rs"]
+mod status_values;
