@@ -58,7 +58,7 @@ fn assert_row(label: &str, fixer: &ShapeFixFreeBounds) {
         count(fixer.closed_wires(), ShapeEnum::Wire),
         count(fixer.open_wires(), ShapeEnum::Wire),
         count(fixer.open_wires(), ShapeEnum::Edge),
-        vertices.extent() as usize,
+        vertices.extent(),
     ];
     let expected: Vec<usize> = ORACLE
         .lines()

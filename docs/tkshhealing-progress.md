@@ -968,3 +968,30 @@ matching endpoints is therefore insufficient to justify merging them. The propos
 endpoint matching and cylindrical skip/error changes were not integrated. Existing
 supplemental p-curve fixtures remain regression tests, with no declaration parity
 claim until the cylindrical p-curve transformation path is implemented.
+
+## October 2026 native behavior additions
+
+The compiler crosswalk under `porting/api-inventory` is the authoritative declaration
+accounting. Earlier manual API audits in this document do not establish toolkit or
+lower-toolkit acceptance; unresolved mappings, protected surfaces and runtime evidence
+remain separate obligations.
+
+- `ShapeFixEdge` now implements missing/removable 3D and 2D curves, seam projection,
+  p-curve reversal, same-range/parameter repair, vertex tolerances and replacement
+  context. Shared handles can mutate the same repair tool. Native fixtures cover the
+  counterintuitive status resets, periodic/Bezier ranges, located cylinders and torus
+  seams. The 19 method declarations are mapped; this is not exhaustive behavioral proof.
+- `ShapeAnalysisWireVertex` adds all 25 declared methods. Its native oracle covers
+  geometric junction states, projection, shared record arrays on copy, ignored Init
+  precision, SetStart writing the following parameter slot, empty initialization,
+  missing-curve state retention and exact iteration criteria.
+- `ShapeFixFreeBounds` adds both analyzed-shape constructors and all three output
+  accessors. Tests preserve native null compounds and the `TopoDS_FrozenShape` exception
+  in the forecast connection fixture. Six method declarations are mapped.
+- `ShapeBuildEdge::reassign_pcurve` has new native comparisons for ordinary, synthesized
+  planar, missing and forward/reversed seam p-curves. The audit found no production
+  change was needed for these cases.
+
+Reproduce the new fixtures with the `tools/oracle/tkshhealing_*.md` instructions and
+run the Rust suite with `cargo test -p rustycad-tkshhealing`. Generated native fixtures
+supplement the legacy declaration inventory; they do not replace unmapped legacy tests.
