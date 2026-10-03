@@ -111,11 +111,14 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkernel/report.json 
   --occt-source /path/to/OCCT --output target/api-proof/tkernel-joined-runtime.json
 ```
 
-The published API crosswalk at Rust revision `d61f7ade` resolves 20,301 implemented declaration claims; 6,902
-ledger rows remain unresolved. It is not a behavioral coverage percentage.
-This refresh includes 283 corrected TKernel `noexcept` selectors for existing
-claims, one protected removal-status mapping, and four wire singularity-check
-mappings. The selector corrections are audited in
+The published API crosswalk at Rust revision `3c4e8a77` resolves 20,316 implemented
+declaration claims out of 110,134 observed candidates; 6,902 ledger rows remain
+unresolved and 86,167 candidates have no claim. These are declaration accounting
+counts, not behavioral coverage percentages or a validated complete API denominator.
+This refresh adds 15 wire analyzer mappings since the previous snapshot: closure,
+missing connections, outer bounds, shape connection selection, curve gaps and small
+edges. Face orientation and shell splitting work has no new complete API claims.
+Earlier TKernel `noexcept` selector corrections remain audited in
 [`tkernel-noexcept-selector-audit.json`](../tkernel-noexcept-selector-audit.json).
 
 ### TKMath paired run
