@@ -124,7 +124,7 @@ fn face_wires(face: &Face) -> Result<WireBuckets, Failure> {
         wires: Vec::new(),
         nonmanifold: Vec::new(),
     };
-    for child in ShapeIterator::new(&face.clone().into_shape(), false, false) {
+    for child in ShapeIterator::new(&face.clone().into_shape(), false, true) {
         classify_face_child(child, &mut buckets)?;
     }
     Ok(buckets)

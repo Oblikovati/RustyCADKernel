@@ -35,7 +35,7 @@ fn accumulate_pcurve_displacement(
 ) -> Result<Option<(Vector2, bool)>, Failure> {
     let mut displacement = Vector2::new(0.0, 0.0);
     let mut all_degenerated = true;
-    for child in ShapeIterator::new(&wire.clone().into_shape(), false, false) {
+    for child in ShapeIterator::new(&wire.clone().into_shape(), true, true) {
         if !accumulate_edge_displacement(&mut displacement, &mut all_degenerated, &child, face)? {
             return Ok(None);
         }

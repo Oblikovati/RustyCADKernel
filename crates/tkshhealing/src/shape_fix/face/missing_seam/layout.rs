@@ -200,7 +200,7 @@ fn expand_bounds_for_shift(ordered: &mut OrderedWires, coord: usize, shift: f64)
 
 fn direct_wires(face: &Face) -> Result<Vec<Wire>, Failure> {
     let mut wires = Vec::new();
-    for child in ShapeIterator::new(&face.clone().into_shape(), false, false) {
+    for child in ShapeIterator::new(&face.clone().into_shape(), false, true) {
         if child.shape_type()? == rustycad_tkg3d::top_abs::ShapeEnum::Wire {
             wires.push(topods::wire(&child)?);
         }
@@ -236,7 +236,7 @@ fn translate_wire_pcurves(
     } else {
         Vector2::new(0.0, shift)
     };
-    for child in ShapeIterator::new(&wire.clone().into_shape(), false, false) {
+    for child in ShapeIterator::new(&wire.clone().into_shape(), true, true) {
         translate_edge_pcurve(face, &topods::edge(&child)?, vector)?;
     }
     Ok(())

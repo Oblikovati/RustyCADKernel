@@ -73,12 +73,14 @@ fn invalid_grid(_: rustycad_tkernel::ncollection::ArrayError) -> Failure {
 #[cfg(test)]
 mod tests {
     use super::prepare;
+    use crate::shape_fix::face::missing_seam::check_wire::check_wire;
     use crate::shape_fix::face::missing_seam::plan::analyze;
     use crate::shape_fix::{FixRoot, ShapeFixFace};
     use rustycad_tkbrep::brep::BRepBuilder;
     use rustycad_tkbrep::brep_tools::ReShape;
     use rustycad_tkbrep::topexp::Explorer;
     use rustycad_tkbrep::topods::Face;
+    use rustycad_tkbrep::topods::{self, ShapeIterator};
     use rustycad_tkernel::precision;
     use rustycad_tkernel::standard::Handle;
     use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
@@ -156,6 +158,26 @@ mod tests {
     }
 
     #[test]
+    fn reversed_wire_orientation_matches_native_iterator_composition() {
+        let face = cylinder_with_reversed_second_wire().unwrap();
+        let fixer = ShapeFixFace::new(face.into_shape());
+        assert!(fixer.fix_missing_seam().unwrap());
+        assert_native_row(reversed_wire_cylinder_row(&fixer.result()), 4);
+    }
+
+    #[test]
+    fn check_wire_composes_reversed_parent_orientation_into_edge_iteration() {
+        let face = cylinder_with_reversed_second_wire().unwrap();
+        let mut children = ShapeIterator::new(&face.clone().into_shape(), false, true);
+        children.next();
+        let reversed_wire = topods::wire(children.value().unwrap()).unwrap();
+        let direction = check_wire(&reversed_wire, &face, TAU, precision::infinite())
+            .unwrap()
+            .unwrap();
+        assert_eq!(direction.u, -1);
+    }
+
+    #[test]
     fn spindle_torus_single_open_wire_matches_native_result() {
         let face = spindle_torus_with_open_u_wire().unwrap();
         let input = face.into_shape();
@@ -163,7 +185,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(torus_row(&result), 4);
+        assert_native_row(torus_row(&result), 5);
     }
 
     #[test]
@@ -174,7 +196,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(bspline_sphere_row(&result), 5);
+        assert_native_row(bspline_sphere_row(&result), 6);
     }
 
     fn sphere_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
@@ -197,6 +219,15 @@ mod tests {
     fn same_direction_cylinder_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
         format!(
             "cylinder_same_direction_open_u changed=1 faces={} edges={} seam_edges={}",
+            count_faces(shape),
+            count_edges(shape),
+            count_seam_edges(shape)
+        )
+    }
+
+    fn reversed_wire_cylinder_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
+        format!(
+            "cylinder_reversed_wire_open_u changed=1 faces={} edges={} seam_edges={}",
             count_faces(shape),
             count_edges(shape),
             count_seam_edges(shape)
@@ -284,8 +315,19 @@ mod tests {
         let mut face = Face::default();
         let builder = BRepBuilder::default();
         builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
-        add_cylinder_wire(&builder, &mut face, -1.0, false)?;
-        add_cylinder_wire(&builder, &mut face, 1.0, reverse_second)?;
+        add_cylinder_wire(&builder, &mut face, -1.0, false, false)?;
+        add_cylinder_wire(&builder, &mut face, 1.0, reverse_second, false)?;
+        Ok(face)
+    }
+
+    fn cylinder_with_reversed_second_wire() -> Result<Face, rustycad_tkernel::standard::Failure> {
+        let surface: Handle<dyn GeomSurface> =
+            Handle::new(GeomCylindricalSurface::new(Axis3::default(), 1.0)?).cast();
+        let mut face = Face::default();
+        let builder = BRepBuilder::default();
+        builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
+        add_cylinder_wire(&builder, &mut face, -1.0, false, false)?;
+        add_cylinder_wire(&builder, &mut face, 1.0, false, true)?;
         Ok(face)
     }
 
@@ -301,7 +343,7 @@ mod tests {
             StandardDirection3::X,
         );
         let edge = circle_edge(circle_axis, 3.0)?;
-        add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X)?;
+        add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X, false)?;
         Ok(face)
     }
 
@@ -314,7 +356,7 @@ mod tests {
         let builder = BRepBuilder::default();
         builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
         let edge = circle_edge(Axis2::default(), 1.0)?;
-        add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X)?;
+        add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X, false)?;
         Ok(face)
     }
 
@@ -323,6 +365,7 @@ mod tests {
         face: &mut Face,
         z: f64,
         reverse: bool,
+        reverse_wire: bool,
     ) -> Result<(), rustycad_tkernel::standard::Failure> {
         let axis = Axis2::with_standard_frame(
             Point3::new(0.0, 0.0, z),
@@ -335,7 +378,7 @@ mod tests {
         } else {
             Direction2::X
         };
-        add_periodic_boundary(builder, face, &edge, z, direction)
+        add_periodic_boundary(builder, face, &edge, z, direction, reverse_wire)
     }
 
     fn circle_edge(
@@ -353,6 +396,7 @@ mod tests {
         edge: &rustycad_tkbrep::topods::Edge,
         v: f64,
         direction: Direction2,
+        reverse_wire: bool,
     ) -> Result<(), rustycad_tkernel::standard::Failure> {
         builder.range(edge, 0.0, TAU, true)?;
         let pcurve: Handle<dyn Geom2dCurve> =
@@ -363,6 +407,9 @@ mod tests {
         let mut wire = rustycad_tkbrep::topods::Wire::default();
         rustycad_tkbrep::topods::Builder.make_wire(&mut wire);
         rustycad_tkbrep::topods::Builder.add(&mut wire, &edge.clone().into_shape())?;
+        if reverse_wire {
+            wire.reverse();
+        }
         rustycad_tkbrep::topods::Builder.add(face, &wire.into_shape())?;
         Ok(())
     }
@@ -375,7 +422,7 @@ mod tests {
         let builder = BRepBuilder::default();
         builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
         let edge = circle_edge(Axis2::default(), 1.0)?;
-        add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X)?;
+        add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X, false)?;
         Ok((face, surface))
     }
 }

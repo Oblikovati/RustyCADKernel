@@ -23,7 +23,7 @@
 #include <iostream>
 
 static void addCylinderBoundary(BRep_Builder& builder, TopoDS_Face& face, double z,
-                                bool reverse);
+                                bool reverse, bool reverseWire = false);
 static void addTorusOuterBoundary(BRep_Builder& builder, TopoDS_Face& face);
 static void addSphereBoundary(BRep_Builder& builder, TopoDS_Face& face);
 
@@ -111,6 +111,29 @@ int main() {
             << " faces=" << sameDirectionFaces << " edges=" << sameDirectionEdges
             << " seam_edges=" << sameDirectionSeams << '\n';
 
+  TopoDS_Face reversedWireFace;
+  builder.MakeFace(reversedWireFace, cylinder, 1.e-7);
+  addCylinderBoundary(builder, reversedWireFace, -1.0, false);
+  addCylinderBoundary(builder, reversedWireFace, 1.0, false, true);
+  ShapeFix_Face reversedWireFixer(reversedWireFace);
+  const bool reversedWireChanged = reversedWireFixer.FixMissingSeam();
+  const TopoDS_Shape reversedWireResult = reversedWireFixer.Result();
+  int reversedWireFaces = 0;
+  int reversedWireEdges = 0;
+  int reversedWireSeams = 0;
+  for (TopExp_Explorer faceIt(reversedWireResult, TopAbs_FACE); faceIt.More(); faceIt.Next()) {
+    ++reversedWireFaces;
+    for (TopExp_Explorer edgeIt(faceIt.Current(), TopAbs_EDGE); edgeIt.More(); edgeIt.Next()) {
+      ++reversedWireEdges;
+      if (BRep_Tool::IsClosed(TopoDS::Edge(edgeIt.Current()), TopoDS::Face(faceIt.Current()))) {
+        ++reversedWireSeams;
+      }
+    }
+  }
+  std::cout << "cylinder_reversed_wire_open_u changed=" << reversedWireChanged
+            << " faces=" << reversedWireFaces << " edges=" << reversedWireEdges
+            << " seam_edges=" << reversedWireSeams << '\n';
+
   const Handle(Geom_ToroidalSurface) spindle =
       new Geom_ToroidalSurface(gp_Ax3(), 1.0, 2.0);
   TopoDS_Face spindleFace;
@@ -157,7 +180,7 @@ int main() {
 }
 
 static void addCylinderBoundary(BRep_Builder& builder, TopoDS_Face& face, double z,
-                                bool reverse) {
+                                bool reverse, bool reverseWire) {
   const Handle(Geom_Circle) circle =
       new Geom_Circle(gp_Ax2(gp_Pnt(0.0, 0.0, z), gp_Dir(0.0, 0.0, 1.0)), 1.0);
   TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(circle);
@@ -170,6 +193,7 @@ static void addCylinderBoundary(BRep_Builder& builder, TopoDS_Face& face, double
   TopoDS_Wire wire;
   builder.MakeWire(wire);
   builder.Add(wire, edge);
+  if (reverseWire) wire.Reverse();
   builder.Add(face, wire);
 }
 
