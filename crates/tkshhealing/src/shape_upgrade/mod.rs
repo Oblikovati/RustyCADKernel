@@ -58,3 +58,6 @@ pub use split_curve3d_continuity::ShapeUpgradeSplitCurve3dContinuity;
 
 mod closed_edge_divide;
 pub use closed_edge_divide::ShapeUpgradeClosedEdgeDivide;
+
+mod split_surface_angle;
+pub use split_surface_angle::ShapeUpgradeSplitSurfaceAngle;

@@ -220791,6 +220791,38 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeClosedEdgeDivide::<rustycad_tkshhealing::shape_upgrade::EdgeDivider>::compute",
       "status": "implemented",
       "notes": "Native tools/oracle/tkshhealing_closed_edge_divide.cxx; seven generated oracle cases with bit-exact split parameters plus shared state/runtime dispatch tests. Legacy test obligations remain separate; no exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceAngle::SetMaxAngle(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceAngle.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceAngle::set_max_angle",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_surface_angle.cxx: 15 bit-exact generated cases cover rotational classes, one-level wrapper recognition, status retention and parameter identity. Undefined native float-to-int conversions become explicit Rust failure; these cases are not parity evidence. Legacy tests remain separate."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceAngle::ShapeUpgrade_SplitSurfaceAngle(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceAngle.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceAngle::new",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_surface_angle.cxx: 15 bit-exact generated cases cover rotational classes, one-level wrapper recognition, status retention and parameter identity. Undefined native float-to-int conversions become explicit Rust failure; these cases are not parity evidence. Legacy tests remain separate."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceAngle::MaxAngle()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceAngle.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceAngle::max_angle",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_surface_angle.cxx: 15 bit-exact generated cases cover rotational classes, one-level wrapper recognition, status retention and parameter identity. Undefined native float-to-int conversions become explicit Rust failure; these cases are not parity evidence. Legacy tests remain separate."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceAngle::Compute(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceAngle.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceAngle::<rustycad_tkshhealing::shape_upgrade::SplitSurface>::compute",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_split_surface_angle.cxx: 15 bit-exact generated cases cover rotational classes, one-level wrapper recognition, status retention and parameter identity. Undefined native float-to-int conversions become explicit Rust failure; these cases are not parity evidence. Legacy tests remain separate."
     }
   ],
   "tests": [
