@@ -12,6 +12,9 @@
 #include <ShapeBuild_Edge.hxx>
 #include <ShapeBuild_ReShape.hxx>
 #include <ShapeFix_Wire.hxx>
+#include <ShapeFix_Edge.hxx>
+#include <Geom_Curve.hxx>
+#include <gp_Pln.hxx>
 #include <ShapeExtend.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Face.hxx>
@@ -61,6 +64,12 @@ void default_modes_case()
 {
   Fixture fixture = cylinder_edge_without_pcurve();
   ShapeFix_Wire fixer(fixture.wire, fixture.face, 1e-7);
+  std::cout << "default-mode-values " << fixer.FixEdgeCurvesMode();
+  std::cout << ' ' << fixer.FixReversed2dMode() << ' ' << fixer.FixRemovePCurveMode()
+            << ' ' << fixer.FixAddPCurveMode() << ' ' << fixer.FixRemoveCurve3dMode()
+            << ' ' << fixer.FixAddCurve3dMode() << ' ' << fixer.FixSeamMode()
+            << ' ' << fixer.FixShiftedMode() << ' ' << fixer.FixSameParameterMode()
+            << ' ' << fixer.FixVertexToleranceMode() << '\n';
   bool fixed = fixer.FixEdgeCurves();
   std::cout << "default-modes " << fixed;
   for (int index = 1; index <= 8; ++index)
@@ -72,6 +81,72 @@ void default_modes_case()
     std::cout << ' ' << fixer.StatusEdgeCurves(static_cast<ShapeExtend_Status>(index));
   }
   std::cout << ' ' << ShapeAnalysis_Edge().HasPCurve(fixture.edge, fixture.face) << '\n';
+}
+
+void remove_pcurve_case()
+{
+  Fixture fixture = cylinder_edge_without_pcurve();
+  ShapeFix_Edge edgeFix;
+  edgeFix.FixAddPCurve(fixture.edge, fixture.face, false, 1e-7);
+  ShapeFix_Wire fixer(fixture.wire, fixture.face, 1e-7);
+  fixer.FixReversed2dMode() = 0;
+  fixer.FixRemovePCurveMode() = 1;
+  fixer.FixAddPCurveMode() = 0;
+  fixer.FixRemoveCurve3dMode() = 0;
+  fixer.FixAddCurve3dMode() = 0;
+  fixer.FixSeamMode() = 0;
+  fixer.FixShiftedMode() = 0;
+  fixer.FixSameParameterMode() = 0;
+  fixer.FixVertexToleranceMode() = 0;
+  bool fixed = fixer.FixEdgeCurves();
+  std::cout << "remove-pcurve " << fixed << ' '
+            << fixer.StatusEdgeCurves(ShapeExtend_DONE2) << ' '
+            << fixer.StatusEdgeCurves(ShapeExtend_FAIL2) << ' '
+            << ShapeAnalysis_Edge().HasPCurve(fixture.edge, fixture.face) << '\n';
+}
+
+void remove_curve3d_case()
+{
+  Fixture fixture = cylinder_edge_without_pcurve();
+  ShapeFix_Wire fixer(fixture.wire, fixture.face, 1e-7);
+  fixer.FixReversed2dMode() = 0;
+  fixer.FixRemovePCurveMode() = 0;
+  fixer.FixAddPCurveMode() = 0;
+  fixer.FixRemoveCurve3dMode() = 1;
+  fixer.FixAddCurve3dMode() = 0;
+  fixer.FixSeamMode() = 0;
+  fixer.FixShiftedMode() = 0;
+  fixer.FixSameParameterMode() = 0;
+  fixer.FixVertexToleranceMode() = 0;
+  bool fixed = fixer.FixEdgeCurves();
+  double first = 0.0, last = 0.0;
+  occ::handle<Geom_Curve> curve = BRep_Tool::Curve(fixture.edge, first, last);
+  std::cout << "remove-curve3d " << fixed << ' '
+            << fixer.StatusEdgeCurves(ShapeExtend_DONE4) << ' '
+            << fixer.StatusEdgeCurves(ShapeExtend_FAIL4) << ' '
+            << curve.IsNull() << '\n';
+}
+
+void plane_add_pcurve_noop_case()
+{
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(), -1.0, 1.0, -1.0, 1.0).Face();
+  TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)).Edge();
+  TopoDS_Wire wire = BRepBuilderAPI_MakeWire(edge).Wire();
+  ShapeFix_Wire fixer(wire, face, 1e-7);
+  fixer.FixReversed2dMode() = 0;
+  fixer.FixRemovePCurveMode() = 0;
+  fixer.FixAddPCurveMode() = 1;
+  fixer.FixRemoveCurve3dMode() = 0;
+  fixer.FixAddCurve3dMode() = 0;
+  fixer.FixSeamMode() = 0;
+  fixer.FixShiftedMode() = 0;
+  fixer.FixSameParameterMode() = 0;
+  fixer.FixVertexToleranceMode() = 0;
+  bool fixed = fixer.FixEdgeCurves();
+  std::cout << "plane-add-pcurve " << fixed << ' '
+            << fixer.StatusEdgeCurves(ShapeExtend_DONE3) << ' '
+            << fixer.StatusEdgeCurves(ShapeExtend_FAIL3) << ' '
+            << ShapeAnalysis_Edge().HasPCurve(edge, face) << '\n';
 }
 
 void spherical_pole_split_case()
@@ -134,5 +209,8 @@ int main()
   explicit_add_pcurve_case();
   default_modes_case();
   incomplete_edge_case();
+  remove_pcurve_case();
+  remove_curve3d_case();
+  plane_add_pcurve_noop_case();
   spherical_pole_split_case();
 }

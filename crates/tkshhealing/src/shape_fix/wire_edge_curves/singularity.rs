@@ -297,7 +297,7 @@ fn add_edge_segment(
 ) -> Result<(), Failure> {
     let piece = ShapeBuildEdge.copy_replace_vertices(edge, first_vertex, last_vertex)?;
     if BRepTool::same_parameter(edge)? {
-        BRepBuilder::default().range(&piece, range.0, end, true)?;
+        BRepBuilder::default().range(&piece, range.0, end, false)?;
     } else {
         transfer_split_range(edge, face, &piece, range.0, end)?;
     }

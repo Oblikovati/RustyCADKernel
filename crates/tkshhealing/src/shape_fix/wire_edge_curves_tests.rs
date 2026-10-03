@@ -3,6 +3,8 @@ use crate::shape_analysis::ShapeAnalysisEdge;
 use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
 use crate::shape_extend::ShapeExtendStatus;
 use crate::shape_fix::FixRoot;
+use crate::shape_fix::ShapeFixEdge;
+use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::{Edge, Face, Wire};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::gp::{Axis2, Axis3, Circle3, Cylinder3, Point3, Sphere3, StandardDirection3};
@@ -91,8 +93,33 @@ fn assert_spherical_split_ranges(fixer: &ShapeFixWire, face: &Face) {
     assert_edge_range(&first_edge, 5.783_185_307_179_586, std::f64::consts::TAU);
     assert_edge_range(&second_edge, std::f64::consts::TAU, 6.783_185_307_179_586);
     let analysis = ShapeAnalysisEdge::new();
-    assert!(analysis.has_pcurve_on_face(&first_edge, face).unwrap());
-    assert!(analysis.has_pcurve_on_face(&second_edge, face).unwrap());
+    assert_pcurve_range(
+        &analysis,
+        &first_edge,
+        face,
+        5.783_185_307_179_586,
+        std::f64::consts::TAU,
+    );
+    assert_pcurve_range(
+        &analysis,
+        &second_edge,
+        face,
+        std::f64::consts::TAU,
+        6.783_185_307_179_586,
+    );
+}
+
+fn assert_pcurve_range(
+    analysis: &ShapeAnalysisEdge,
+    edge: &Edge,
+    face: &Face,
+    expected_first: f64,
+    expected_last: f64,
+) {
+    let (curve, first, last) = analysis.pcurve_on_face(edge, face, true).unwrap();
+    assert!(!curve.is_null());
+    assert!((first - expected_first).abs() < 1e-12);
+    assert!((last - expected_last).abs() < 1e-12);
 }
 
 fn assert_edge_range(edge: &Edge, expected_first: f64, expected_last: f64) {
@@ -169,6 +196,90 @@ fn all_curve_modes_use_native_minus_one_defaults_and_setters() {
     assert_all_defaults_are_minus_one(&fixer);
     set_all_modes(&fixer, 0);
     assert_all_modes_are_zero(&fixer);
+}
+
+#[test]
+fn plane_projection_and_valid_geometry_removals_match_native_noops() {
+    assert_plane_add_pcurve_is_noop();
+    assert_valid_pcurve_removal_is_noop();
+    assert_valid_curve_removal_is_noop();
+}
+
+fn assert_plane_add_pcurve_is_noop() {
+    let face = BRepBuilderAPIMakeFace::from_plane_bounds(
+        rustycad_tkmath::gp::Plane3::default(),
+        (-1.0, 1.0, -1.0, 1.0),
+    )
+    .unwrap()
+    .face()
+    .unwrap();
+    let edge = BRepLibMakeEdge::from_points(Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0))
+        .unwrap()
+        .edge()
+        .unwrap();
+    let wire = BRepBuilderAPIMakeWire::from_edge(&edge)
+        .unwrap()
+        .wire()
+        .unwrap();
+    let fixer = ShapeFixWire::from_wire_face(&wire, &face, 1e-7).unwrap();
+    disable_other_curve_passes(&fixer);
+    fixer.set_fix_add_pcurve_mode(1);
+    assert!(!fixer.fix_edge_curves().unwrap());
+    assert_status_pair(
+        &fixer,
+        ShapeExtendStatus::Done3,
+        ShapeExtendStatus::Fail3,
+        false,
+    );
+}
+
+fn assert_valid_pcurve_removal_is_noop() {
+    let (wire, face, edge) = cylinder_wire();
+    ShapeFixEdge::new()
+        .fix_add_pcurve(&edge, &face, false, 1e-7)
+        .unwrap();
+    let fixer = ShapeFixWire::from_wire_face(&wire, &face, 1e-7).unwrap();
+    disable_other_curve_passes(&fixer);
+    fixer.set_fix_add_pcurve_mode(0);
+    fixer.set_fix_remove_pcurve_mode(1);
+    assert!(!fixer.fix_edge_curves().unwrap());
+    assert_status_pair(
+        &fixer,
+        ShapeExtendStatus::Done2,
+        ShapeExtendStatus::Fail2,
+        false,
+    );
+    assert!(
+        ShapeAnalysisEdge::new()
+            .has_pcurve_on_face(&edge, &face)
+            .unwrap()
+    );
+}
+
+fn assert_valid_curve_removal_is_noop() {
+    let (wire, face, edge) = cylinder_wire();
+    let fixer = ShapeFixWire::from_wire_face(&wire, &face, 1e-7).unwrap();
+    disable_other_curve_passes(&fixer);
+    fixer.set_fix_add_pcurve_mode(0);
+    fixer.set_fix_remove_curve_3d_mode(1);
+    assert!(!fixer.fix_edge_curves().unwrap());
+    assert_status_pair(
+        &fixer,
+        ShapeExtendStatus::Done4,
+        ShapeExtendStatus::Fail4,
+        false,
+    );
+    assert!(!BRepTool::curve(&edge).unwrap().0.is_null());
+}
+
+fn assert_status_pair(
+    fixer: &ShapeFixWire,
+    done: ShapeExtendStatus,
+    failed: ShapeExtendStatus,
+    expected: bool,
+) {
+    assert_eq!(fixer.status_edge_curves(done), expected);
+    assert_eq!(fixer.status_edge_curves(failed), expected);
 }
 
 fn assert_all_defaults_are_minus_one(fixer: &ShapeFixWire) {
