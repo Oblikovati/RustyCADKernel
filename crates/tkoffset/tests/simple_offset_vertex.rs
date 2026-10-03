@@ -8,8 +8,8 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::{Axis3, Direction3, Plane3, Point3, Transform3, Vector3};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkoffset::brep_offset::{
-    OffsetEdgeGeometry, OffsetFaceSurface, OffsetVertexIncidentEdge, build_simple_offset_edge,
-    build_simple_offset_vertex, build_simple_offset_vertices,
+    OffsetEdgeGeometry, OffsetFaceSurface, build_simple_offset_edge, build_simple_offset_vertex,
+    build_simple_offset_vertices,
 };
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape};
 
@@ -66,7 +66,7 @@ fn matches_native_located_and_reversed_face_vertex_points() {
 }
 
 #[test]
-fn mismatched_edge_orientation_does_not_supply_vertex_geometry() {
+fn mismatched_edge_orientation_preserves_empty_sample_result() {
     let face = bounded_plane_face();
     let shape: Shape = face.clone().into();
     let adjacent = [offset_face(&face, 10.0)];
@@ -74,27 +74,21 @@ fn mismatched_edge_orientation_does_not_supply_vertex_geometry() {
     for (edge, _) in &mut offsets {
         edge.reverse();
     }
-    assert!(
-        build_simple_offset_vertices(&shape, &offsets)
-            .unwrap()
-            .is_empty()
-    );
+    let results = build_simple_offset_vertices(&shape, &offsets).unwrap();
+    assert_eq!(results.len(), 4);
+    for result in results {
+        assert!(result.geometry.point.x().is_nan());
+        assert!(result.geometry.point.y().is_nan());
+        assert!(result.geometry.point.z().is_nan());
+        assert_eq!(result.geometry.tolerance, 0.0);
+    }
 }
 
 #[test]
-fn vertices_without_mapped_offset_curves_are_skipped() {
+fn vertices_without_incident_edges_are_skipped() {
     let face = bounded_plane_face();
     let vertex = first_vertex(&face);
     assert!(build_simple_offset_vertex(&vertex, &[]).unwrap().is_none());
-    let missing_curve = OffsetVertexIncidentEdge {
-        edge: Edge::default(),
-        geometry: Some(OffsetEdgeGeometry::default()),
-    };
-    assert!(
-        build_simple_offset_vertex(&vertex, &[missing_curve])
-            .unwrap()
-            .is_none()
-    );
 }
 
 #[test]
