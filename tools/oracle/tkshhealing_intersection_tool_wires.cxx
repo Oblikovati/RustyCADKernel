@@ -209,12 +209,17 @@ static void runContainedFirstLongOverlapCase() {
   std::cout << '\n';
 }
 
-static void runPartialLongOverlapCase(double secondStart, double secondDirection = 1.) {
+static void runPartialLongOverlapCase(double firstStart,
+                                      double firstDirection,
+                                      double secondStart,
+                                      double secondDirection = 1.) {
   BRep_Builder builder;
   TopoDS_Face face;
   builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
-  TopoDS_Edge firstOverlap = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
-                                         gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 10.);
+  TopoDS_Edge firstOverlap = edgeOnPlane(face, gp_Pnt(firstStart, 0., 0.),
+                                         gp_Dir(firstDirection, 0., 0.),
+                                         gp_Pnt2d(firstStart, 0.),
+                                         gp_Dir2d(firstDirection, 0.), 10.);
   ShapeAnalysis_Edge analysis;
   builder.UpdateVertex(analysis.FirstVertex(firstOverlap), 1.e-5);
   TopoDS_Edge secondOverlap = edgeOnPlane(face, gp_Pnt(secondStart, 0., 0.),
@@ -418,9 +423,10 @@ int main() {
   runShortOverlapCase();
   runLongOverlapCase();
   runContainedFirstLongOverlapCase();
-  runPartialLongOverlapCase(2.);
-  runPartialLongOverlapCase(-2.);
-  runPartialLongOverlapCase(8., -1.);
+  runPartialLongOverlapCase(0., 1., 2.);
+  runPartialLongOverlapCase(0., 1., -2.);
+  runPartialLongOverlapCase(0., 1., 8., -1.);
+  runPartialLongOverlapCase(8., -1., 2.);
   runReversedLongOverlapCase();
   runTwoSidedEndpointCutCase();
   runFarEndpointCutCase();
