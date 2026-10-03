@@ -178,6 +178,11 @@ def retry_key(
     return hashlib.sha256(json.dumps(fields, sort_keys=True).encode()).hexdigest()
 
 
+def artifact_reference(output: pathlib.Path, manifest_directory: pathlib.Path) -> str:
+    """Store retry artifacts relative to their manifest; e.g. `artifacts/abc.jsonl`."""
+    return output.resolve().relative_to(manifest_directory.resolve()).as_posix()
+
+
 def run_probe(
     header: pathlib.Path, context: CompileContext, include_name: str, source_root: pathlib.Path,
     extractor: pathlib.Path, output: pathlib.Path, timeout: int,
@@ -196,7 +201,8 @@ def run_probe(
         "compile_flags_sha256": hashlib.sha256(json.dumps(context.flags).encode()).hexdigest(),
         "include_name": include_name, "target_header_seen": target_seen,
         "target_declarations": target_declarations,
-        "artifact": str(output), "output_sha256": digest(output),
+        "artifact": artifact_reference(output, output.parent.parent),
+        "output_sha256": digest(output),
     }
 
 
@@ -256,7 +262,8 @@ def run_capture(args: argparse.Namespace) -> None:
 def retry_manifest(
     args: argparse.Namespace, original: dict[str, Any], results: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    record = {"schema": "occt-context-retry-v1", "original_capture": str(args.capture.resolve()),
+    record = {"schema": "occt-context-retry-v1", "artifact_path_base": "manifest_directory",
+              "original_capture": str(args.capture.resolve()),
               "original_capture_sha256": digest(args.capture), "original_fingerprint": original["fingerprint"],
               "database_sha256": digest(args.database), "extractor_sha256": digest(args.extractor),
               "retry_results": results, "retry_count": len(results),

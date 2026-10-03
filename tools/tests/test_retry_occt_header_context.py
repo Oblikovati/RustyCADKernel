@@ -7,6 +7,7 @@ import unittest
 
 from retry_occt_header_context import (
     CompileContext,
+    artifact_reference,
     include_directives,
     include_roots,
     index_source_includes,
@@ -16,6 +17,14 @@ from retry_occt_header_context import (
 
 
 class RetryHeaderContextTest(unittest.TestCase):
+    def test_artifact_reference_is_relative_to_retry_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory)
+            output = root / "artifacts" / "probe.jsonl"
+            output.parent.mkdir()
+            output.write_text("{}\n")
+            self.assertEqual(artifact_reference(output, root), "artifacts/probe.jsonl")
+
     def test_include_roots_separate_quote_and_system_search_paths(self) -> None:
         roots = include_roots(("-iquote", "/project/quote", "-I/project/include",
                                "-isystem", "/usr/include"))
