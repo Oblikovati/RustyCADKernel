@@ -223047,6 +223047,141 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::set_splitting_by_number",
       "status": "implemented",
       "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix::LeastEdgeSize(TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix.hxx",
+      "source_sha256": "2c10826e07b42961808f70aef86dfb88ff88b37c4bf4e072cf561b682041ad11",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFix::least_edge_size",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix::EncodeRegularity(const TopoDS_Shape&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix.hxx",
+      "source_sha256": "2c10826e07b42961808f70aef86dfb88ff88b37c4bf4e072cf561b682041ad11",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFix::encode_regularity",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix::SameParameter(const TopoDS_Shape&,bool,double,const Message_ProgressRange&,const occ::handle<ShapeExtend_BasicMsgRegistrator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix.hxx",
+      "source_sha256": "2c10826e07b42961808f70aef86dfb88ff88b37c4bf4e072cf561b682041ad11",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFix::same_parameter",
+      "status": "partial",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_IntersectionTool::ShapeFix_IntersectionTool(const occ::handle<ShapeBuild_ReShape>&,double,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
+      "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::with_max_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_IntersectionTool::Context() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
+      "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::context",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_IntersectionTool::SplitEdge(const TopoDS_Edge&,double,const TopoDS_Vertex&,const TopoDS_Face&,TopoDS_Edge&,TopoDS_Edge&,double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
+      "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::split_edge",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_IntersectionTool::CutEdge(const TopoDS_Edge&,double,double,const TopoDS_Face&,bool&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
+      "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::cut_edge",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::ShapeUpgrade_ShapeDivideContinuity()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::empty",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::ShapeUpgrade_ShapeDivideContinuity(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::new",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::SetTolerance(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::set_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::SetTolerance2d(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::set_tolerance_2d",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::SetBoundaryCriterion(GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::set_boundary_criterion",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::SetPCurveCriterion(GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::set_pcurve_criterion",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::SetSurfaceCriterion(GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::set_surface_criterion",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_ShapeDivideContinuity::GetSplitFaceTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideContinuity.hxx",
+      "source_sha256": "17c8a17305ea4c0ed3b0d36fb3a5bbee3b196a9a9e86bb1cf0703198ae9ef7c7",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideContinuity::split_face_tool",
+      "status": "implemented",
+      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
     }
   ],
   "tests": [
