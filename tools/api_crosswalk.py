@@ -257,7 +257,7 @@ def paired_rust_targets(row: dict[str, JSONValue]) -> list[str] | None:
     if len(set(targets)) != len(targets):
         return None
     primary = row.get("rust_item")
-    if primary is not None and primary != targets[0]:
+    if "rust_item" in row and primary != targets[0]:
         return None
     return targets
 

@@ -67,9 +67,11 @@ class PairedRustTargetsTests(unittest.TestCase):
                 self.assertEqual(row_rust_candidates(row, {})[0], "invalid_rust_targets")
 
     def test_conflicting_primary_is_rejected(self) -> None:
-        row = fixture_row()
-        row["rust_item"] = SETTER
-        self.assertIsNone(paired_rust_targets(row))
+        for primary in [SETTER, None, 0, ""]:
+            with self.subTest(primary=primary):
+                row = fixture_row()
+                row["rust_item"] = primary
+                self.assertIsNone(paired_rust_targets(row))
 
     def test_list_only_and_single_target_rows_remain_supported(self) -> None:
         row = fixture_row()
