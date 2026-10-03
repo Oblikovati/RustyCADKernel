@@ -1115,3 +1115,22 @@ the native child policies. Eight oracle rows verify angular face counts, criteri
 identity and fallback, and the intentionally ignored closed-edge split count.
 Angle resets discard wire division but retain the face tool. Inherited whole-shape
 Perform remains partial, as do angle setters for the null face-tool exceptional case.
+
+## 2026-10-04 shell and solid repair
+
+`ShapeFixShell` now ports native face grouping, orientation, multiple-edge
+handling, closed-candidate gluing, nonmanifold merging and Perform orchestration.
+Eighteen pinned oracle rows compare ordering, flags, statuses, cancellation and
+retained state. `ShapeFixSolid` adds solid construction, shell containment,
+hole orientation, shared-face compsolid assembly and Perform. Twenty-two native
+rows compare state, topology and signed volume, including nested shells and open
+shell policy. These added fixtures do not increase legacy declaration mappings.
+
+The combined TKShHealing run after these changes passed 869 tests with zero
+failures and one existing ignored doctest; strict all-target Clippy passed.
+The new algorithm mappings remain partial pending broader geometric and failure
+domain evidence. Additional CheckSmallFace strip/pin methods and direct-wire
+intersection work are integrated; the latter still has overlap branches under
+active development. UnifySameDomain now handles additional native-backed circle
+and smooth Bezier chain cases, while spline face p-curves remain in progress.
+The published completeness snapshot is authoritative for API resolution counts.

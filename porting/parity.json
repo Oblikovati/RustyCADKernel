@@ -224027,6 +224027,207 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_face_orientation",
       "status": "partial",
       "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::ShapeFix_Solid()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::new",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::ShapeFix_Solid(const TopoDS_Solid &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::from_solid",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::Init(const TopoDS_Solid &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::init",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::Perform(const Message_ProgressRange &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::perform_with_progress",
+      "status": "partial",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::SolidFromShell(const TopoDS_Shell &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::solid_from_shell",
+      "status": "partial",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::Status(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::status_flag",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::Solid() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::solid",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::Shape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::shape",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::FixShellTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::fix_shell_tool",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::FixShellMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::fix_shell_mode",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixSolid::fix_shell_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixSolid::set_fix_shell_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::FixShellOrientationMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::fix_shell_orientation_mode",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixSolid::fix_shell_orientation_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixSolid::set_fix_shell_orientation_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Solid::CreateOpenSolidMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
+      "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::create_open_solid_mode",
+      "status": "implemented",
+      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixSolid::create_open_solid_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixSolid::set_create_open_solid_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusStrip(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_strip",
+      "status": "implemented",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusPin(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_pin",
+      "status": "implemented",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckStripEdges(const TopoDS_Edge &,const TopoDS_Edge &,const double,double &) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_strip_edges",
+      "status": "partial",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::FindStripEdges(const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double,double &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::find_strip_edges",
+      "status": "partial",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckSingleStrip(const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_single_strip",
+      "status": "partial",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckStripFace(const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_strip_face",
+      "status": "partial",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckPinEdges(const TopoDS_Edge &,const TopoDS_Edge &,const double,const double,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_pin_edges",
+      "status": "partial",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckPin(const TopoDS_Face &,int &,int &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_pin",
+      "status": "partial",
+      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+    },
+    {
+      "upstream_id": "ShapeFix_IntersectionTool::FixIntersectingWires(TopoDS_Face &) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
+      "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::fix_intersecting_wires",
+      "status": "partial",
+      "notes": "Direct-wire traversal, point intersections, endpoint reuse/union and short overlap splits are compared with native output including split ranges. Long-overlap and remaining endpoint-cut branches are still being ported. This row records an incomplete implementation, not class or legacy-test parity."
     }
   ],
   "tests": [

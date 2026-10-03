@@ -46,3 +46,6 @@ pub use package::ShapeFix;
 
 mod shell;
 pub use shell::ShapeFixShell;
+
+mod solid;
+pub use solid::ShapeFixSolid;
