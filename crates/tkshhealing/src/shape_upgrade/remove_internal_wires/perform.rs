@@ -115,7 +115,10 @@ fn initialize_wire_faces(
     input: &Shape,
     wire_faces: &mut Option<IndexedDataMapOfShapeListOfShape>,
 ) -> Result<(), Failure> {
-    if wire_faces.is_some() {
+    if wire_faces
+        .as_ref()
+        .is_some_and(|existing| existing.extent() > 0)
+    {
         return Ok(());
     }
     let mut map = IndexedDataMapOfShapeListOfShape::default();
@@ -240,8 +243,16 @@ fn collect_edge_candidates(
         .remove_edges
         .seek(edge)
         .ok_or_else(|| missing_edge_faces(edge))?;
+    let mut removed_cursor = 0;
     for face in faces.iter() {
-        collect_candidate(context, face, removed, edge, candidates)?;
+        collect_candidate(
+            context,
+            face,
+            removed,
+            &mut removed_cursor,
+            edge,
+            candidates,
+        )?;
     }
     Ok(())
 }
@@ -250,11 +261,12 @@ fn collect_candidate(
     context: &ShapeBuildReShape,
     face: &Shape,
     removed: &List<Shape>,
+    removed_cursor: &mut usize,
     edge: &Shape,
     candidates: &mut Vec<Shape>,
 ) -> Result<(), Failure> {
     let applied = context.apply(face, ShapeEnum::Shape)?;
-    if applied.is_null() || matches_removed_face(context, &applied, removed)? {
+    if applied.is_null() || matches_removed_face(context, &applied, removed, removed_cursor)? {
         return Ok(());
     }
     if !outer_contains_edge(&applied, edge)? || candidates.iter().any(|old| old.is_same(&applied)) {
@@ -268,12 +280,15 @@ fn matches_removed_face(
     context: &ShapeBuildReShape,
     candidate: &Shape,
     removed: &List<Shape>,
+    cursor: &mut usize,
 ) -> Result<bool, Failure> {
-    for old in removed.iter() {
+    for (index, old) in removed.iter().enumerate().skip(*cursor) {
         let applied = context.apply(old, ShapeEnum::Shape)?;
         if candidate.is_same(&applied) {
+            *cursor = index;
             return Ok(true);
         }
+        *cursor = index + 1;
     }
     Ok(false)
 }
@@ -291,8 +306,7 @@ fn remove_empty_candidates(
     candidates: &[Shape],
 ) -> Result<(), Failure> {
     for face in candidates {
-        let current = context.apply(face, ShapeEnum::Shape)?;
-        if current.is_null() || has_nonremoved_neighbor(fields, context, &current, candidates)? {
+        if has_nonremoved_neighbor(fields, context, face, candidates)? {
             continue;
         }
         context.remove(face)?;
@@ -312,45 +326,45 @@ fn has_nonremoved_neighbor(
     let wire_data = Handle::new(crate::shape_extend::ShapeExtendWireData::from_wire(
         &outer, true, true,
     )?);
+    let mut count = 0;
     for index in 1..=wire_data.nb_edges() {
-        if edge_has_unremoved_neighbor(fields, context, &face, candidates, &wire_data, index)? {
-            return Ok(true);
-        }
+        count += edge_neighbor_count(fields, context, &face, candidates, &wire_data, index)?;
     }
-    Ok(false)
+    Ok(count > 0)
 }
 
-fn edge_has_unremoved_neighbor(
+fn edge_neighbor_count(
     fields: &mut RemoveInternalWiresFields,
     context: &ShapeBuildReShape,
     face: &Shape,
     candidates: &[Shape],
     wire_data: &crate::shape_extend::ShapeExtendWireData,
     index: i32,
-) -> Result<bool, Failure> {
+) -> Result<usize, Failure> {
     if wire_data.is_seam(index) {
-        return Ok(false);
+        return Ok(0);
     }
     let edge = wire_data.edge(index)?.into_shape();
     if fields.remove_edges.contains(&edge) {
-        return Ok(false);
+        return Ok(0);
     }
-    has_external_adjacent_face(fields, context, face, candidates, &edge)
+    count_external_adjacent_faces(fields, context, face, candidates, &edge)
 }
 
-fn has_external_adjacent_face(
+fn count_external_adjacent_faces(
     fields: &RemoveInternalWiresFields,
     context: &ShapeBuildReShape,
     face: &Shape,
     candidates: &[Shape],
     edge: &Shape,
-) -> Result<bool, Failure> {
+) -> Result<usize, Failure> {
+    let mut count = 0;
     for adjacent in fields.edge_faces.find_from_key(edge)?.iter() {
         if face_is_external(context, face, adjacent, candidates)? {
-            return Ok(true);
+            count += 1;
         }
     }
-    Ok(false)
+    Ok(count)
 }
 
 fn face_is_external(

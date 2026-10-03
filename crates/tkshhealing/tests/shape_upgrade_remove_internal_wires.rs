@@ -37,12 +37,22 @@ fn selected_wire_scan_matches_native() {
 
 #[test]
 fn removes_adjacent_face_whose_outer_edges_all_belong_to_the_small_wire() {
-    let shape = partition_fixture();
+    let shape = partition_fixture(1);
     let remover = ShapeUpgradeRemoveInternalWires::with_shape(&shape).unwrap();
     remover.set_min_area(2.0);
 
     assert!(remover.perform().unwrap());
     assert_native_row("remove_small_face", &remover, true);
+}
+
+#[test]
+fn processes_multiple_adjacent_candidates_in_native_order() {
+    let shape = partition_fixture(2);
+    let remover = ShapeUpgradeRemoveInternalWires::with_shape(&shape).unwrap();
+    remover.set_min_area(2.0);
+
+    assert!(remover.perform().unwrap());
+    assert_native_row("multiple_adjacent_faces", &remover, true);
 }
 
 #[test]
@@ -152,15 +162,17 @@ fn fixture() -> (Shape, Wire) {
     (face.into_shape(), hole)
 }
 
-fn partition_fixture() -> Shape {
+fn partition_fixture(adjacent_faces: usize) -> Shape {
     let (shape, hole) = fixture();
-    let filler = filler_face(&hole);
     let mut compound = Compound::default();
     BRepBuilder::default().make_compound(&mut compound);
     BRepBuilder::default().add(&mut compound, &shape).unwrap();
-    BRepBuilder::default()
-        .add(&mut compound, &filler.into_shape())
-        .unwrap();
+    for _ in 0..adjacent_faces {
+        let filler = filler_face(&hole);
+        BRepBuilder::default()
+            .add(&mut compound, &filler.into_shape())
+            .unwrap();
+    }
     compound.into_shape()
 }
 
