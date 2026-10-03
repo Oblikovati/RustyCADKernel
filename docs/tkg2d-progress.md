@@ -286,3 +286,23 @@ bounds, sampling, exception assertions and approximation tolerances. TKGeomBase 
 TKGeomAlgo are test-only dependencies. This completes the inventoried GoogleTest
 mapping for TKG2d; full API and other legacy-test acceptance still follows the project
 coverage inventory, rather than this count alone.
+
+## Compiler inventory constructor audit (2026-10-03)
+
+Corrected 36 existing Geom2d constructor ledger IDs to the compiler-qualified
+`Class::Class(parameters)` spelling. An unqualified class name identifies the
+record declaration and cannot prove a constructor overload. The identity
+constructor of `Geom2d_Transformation` now names the externally reachable
+`<core::default::Default>::default` implementation explicitly. No geometry
+implementation or legacy declaration count changed in this audit.
+
+Validation against pinned OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871`:
+
+- `cargo test --locked -p rustycad-tkg2d`: 602 tests passed across 41 targets.
+- `python3 tools/verify_tkg2d_numeric.py --source OCCT --native-build BUILD`:
+  1,787 numeric comparisons passed (exact finite bits, NaN classification).
+- The compiler crosswalk resolves each corrected constructor overload separately.
+
+These checks support the audited slice. They do not prove full API equivalence or
+join every GoogleTest runtime instance to a Rust execution; those obligations
+remain visible in the global inventories.
