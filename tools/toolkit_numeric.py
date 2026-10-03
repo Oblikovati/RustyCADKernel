@@ -12,6 +12,7 @@ Usage from a verifier:
                                  ['TKG3d', 'TKG2d', 'TKMath', 'TKernel'],
                                  'rustycad-tkg3d', corpus))
 """
+
 from __future__ import annotations
 import hashlib
 import json
@@ -20,8 +21,15 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
+from cargo_probe_artifact import cargo_probe_executable
 from porting import ROOT, snapshot
-from verify_tkmath_numeric import compare, reject_unknown_operation, run, run_probe, selected_paths
+from verify_tkmath_numeric import (
+    compare,
+    reject_unknown_operation,
+    run,
+    run_probe,
+    selected_paths,
+)
 
 
 @dataclass(frozen=True)
@@ -40,44 +48,69 @@ class NumericOracle:
     @property
     def evidence(self) -> Path:
         """Directory of the evidence files; `target/oracle-tkg3d/numeric`."""
-        return ROOT/'target'/f'oracle-{self.toolkit.lower()}'/'numeric'
+        return ROOT / "target" / f"oracle-{self.toolkit.lower()}" / "numeric"
 
     @property
     def rust_example(self) -> str:
         """Unique Cargo target name; shared example names can reuse stale artifacts."""
-        return self.rust_package+'-numeric-probe'
+        return self.rust_package + "-numeric-probe"
 
     @property
     def rust_probe(self) -> Path:
         """Toolkit-owned snapshot, avoiding Cargo examples with colliding names."""
-        return self.evidence/'rust-probe'
+        return self.evidence / "rust-probe"
 
 
 def build_probes(oracle: NumericOracle, build: Path, output: Path) -> Path:
     """Compile the native oracle and the Rust twin; build_probes(oracle, build, out) -> native path."""
-    libraries = [next(build.rglob('lib'+name+'.so')) for name in oracle.libraries]
-    executable = output/'native-probe'
-    run(['c++', '-std=c++17', '-O2', '-I'+str(build/'include/opencascade'),
-         str(ROOT/oracle.probe_source), *map(str, libraries), '-Wl,-rpath,'+str(libraries[0].parent),
-         '-o', str(executable)], output/'compile.log')
+    libraries = [next(build.rglob("lib" + name + ".so")) for name in oracle.libraries]
+    executable = output / "native-probe"
+    run(
+        [
+            "c++",
+            "-std=c++17",
+            "-O2",
+            "-I" + str(build / "include/opencascade"),
+            str(ROOT / oracle.probe_source),
+            *map(str, libraries),
+            "-Wl,-rpath," + str(libraries[0].parent),
+            "-o",
+            str(executable),
+        ],
+        output / "compile.log",
+    )
     build_rust_probe(oracle, output)
     return executable
 
 
 def build_rust_probe(oracle: NumericOracle, output: Path) -> None:
     """Build a uniquely named Cargo example and retain this toolkit's executable."""
-    selected = ROOT/'target/debug/examples'/oracle.rust_example
     oracle.rust_probe.unlink(missing_ok=True)
-    run(['cargo', 'build', '--locked', '-p', oracle.rust_package, '--example', oracle.rust_example],
-        output/'rust-build.log')
+    messages = run(
+        [
+            "cargo",
+            "build",
+            "--locked",
+            "-p",
+            oracle.rust_package,
+            "--example",
+            oracle.rust_example,
+            "--message-format=json",
+        ],
+        output / "rust-build.log",
+    )
+    selected = cargo_probe_executable(messages, oracle.rust_example)
     shutil.copy2(selected, oracle.rust_probe)
 
 
 def check_generators(oracle: NumericOracle, source: Path, output: Path) -> None:
     """Fail when a generated table differs from the OCCT sources; check_generators(oracle, source, out)."""
     for generator in oracle.generators:
-        log = output/(Path(generator).stem+'-check.log')
-        run([sys.executable, str(ROOT/generator), '--check', '--source', str(source)], log)
+        log = output / (Path(generator).stem + "-check.log")
+        run(
+            [sys.executable, str(ROOT / generator), "--check", "--source", str(source)],
+            log,
+        )
 
 
 def verify_numeric(oracle: NumericOracle) -> None:
@@ -86,21 +119,28 @@ def verify_numeric(oracle: NumericOracle) -> None:
     inventory = snapshot(source)
     output = oracle.evidence
     output.mkdir(parents=True, exist_ok=True)
-    (output/'report.json').unlink(missing_ok=True)
+    (output / "report.json").unlink(missing_ok=True)
     check_generators(oracle, source, output)
     executable = build_probes(oracle, build, output)
     reject_unknown_operation(executable)
     reject_unknown_operation(oracle.rust_probe)
     requests = oracle.corpus()
-    (output/'inputs.txt').write_text(requests)
-    native = run_probe([str(executable)], output/'native.txt', requests)
-    rust = run_probe([str(oracle.rust_probe)], output/'rust.txt', requests)
+    (output / "inputs.txt").write_text(requests)
+    native = run_probe([str(executable)], output / "native.txt", requests)
+    rust = run_probe([str(oracle.rust_probe)], output / "rust.txt", requests)
     compare(native, rust, requests)
-    report = {'revision': inventory['revision'], 'toolkit': oracle.toolkit,
-              'cases_passed': len(requests.splitlines()),
-              'input_sha256': hashlib.sha256(requests.encode()).hexdigest(),
-              'output_sha256': hashlib.sha256(native.encode()).hexdigest(),
-              'comparator': 'finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text',
-              'nan_representation_difference_cases': sum(a != b for a, b in zip(native.splitlines(), rust.splitlines()))}
-    (output/'report.json').write_text(json.dumps(report, indent=2)+'\n')
-    print(f"{oracle.toolkit}: {report['cases_passed']} numeric comparisons (exact finite bits, NaN classification) passed")
+    report = {
+        "revision": inventory["revision"],
+        "toolkit": oracle.toolkit,
+        "cases_passed": len(requests.splitlines()),
+        "input_sha256": hashlib.sha256(requests.encode()).hexdigest(),
+        "output_sha256": hashlib.sha256(native.encode()).hexdigest(),
+        "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+        "nan_representation_difference_cases": sum(
+            a != b for a, b in zip(native.splitlines(), rust.splitlines())
+        ),
+    }
+    (output / "report.json").write_text(json.dumps(report, indent=2) + "\n")
+    print(
+        f"{oracle.toolkit}: {report['cases_passed']} numeric comparisons (exact finite bits, NaN classification) passed"
+    )
