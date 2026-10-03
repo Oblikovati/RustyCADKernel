@@ -85,6 +85,26 @@ int main() {
   }
   std::cout << '\n';
 
+  TopoDS_Face sharedVertexFace;
+  builder.MakeFace(sharedVertexFace, new Geom_Plane(gp_Ax3()), 1.e-7);
+  Handle(ShapeExtend_WireData) sharedVertexWire = new ShapeExtend_WireData;
+  sharedVertexWire->Add(edgeOnPlane(sharedVertexFace, gp_Pnt(-1., 0., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(-1., 0.), gp_Dir2d(1., 0.), 1.));
+  sharedVertexWire->Add(edgeOnPlane(sharedVertexFace, gp_Pnt(3., 3., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(3., 3.), gp_Dir2d(1., 0.)));
+  sharedVertexWire->Add(edgeOnPlane(sharedVertexFace, gp_Pnt(0., 0., 0.), gp_Dir(0., 1., 0.), gp_Pnt2d(0., 0.), gp_Dir2d(0., 1.), 1.));
+  sharedVertexWire->Add(edgeOnPlane(sharedVertexFace, gp_Pnt(-4., -4., 0.), gp_Dir(0., 1., 0.), gp_Pnt2d(-4., -4.), gp_Dir2d(0., 1.)));
+  builder.Add(sharedVertexFace, sharedVertexWire->Wire());
+  Handle(ShapeBuild_ReShape) sharedVertexContext = new ShapeBuild_ReShape;
+  ShapeFix_IntersectionTool sharedVertexTool(sharedVertexContext, 1.e-7);
+  split = 91; cut = 92; removed = 93;
+  done = sharedVertexTool.FixSelfIntersectWire(sharedVertexWire, sharedVertexFace, split, cut, removed);
+  std::cout << done << " " << split << " " << cut << " " << removed << " " << sharedVertexWire->NbEdges();
+  for (int i = 1; i <= sharedVertexWire->NbEdges(); ++i) {
+    double first, last;
+    BRep_Tool::Range(sharedVertexWire->Edge(i), sharedVertexFace, first, last);
+    std::cout << " " << first << " " << last;
+  }
+  std::cout << '\n';
+
   Handle(ShapeExtend_WireData) overlap = new ShapeExtend_WireData;
   overlap->Add(edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 2., .1));
   overlap->Add(edgeOnPlane(face, gp_Pnt(3., 3., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(3., 3.), gp_Dir2d(1., 0.)));
