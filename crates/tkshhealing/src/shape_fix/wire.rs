@@ -8,6 +8,8 @@ mod wire_closed;
 mod wire_connected;
 #[path = "wire_degenerated.rs"]
 mod wire_degenerated;
+#[path = "wire_edge_curves.rs"]
+mod wire_edge_curves;
 #[path = "wire_intersection_fix.rs"]
 mod wire_intersection_fix;
 #[path = "wire_intersection_geometry.rs"]
@@ -35,6 +37,7 @@ use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
 use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus, ShapeExtendWireData};
+use crate::shape_fix::ShapeFixEdge;
 use crate::shape_fix::ShapeFixShapeTolerance;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_tools::ReShape;
@@ -64,12 +67,24 @@ struct WireFixState {
     topology_mode: bool,
     geometry_mode: bool,
     remove_loop_mode: i32,
+    edge_curves_mode: i32,
+    reversed_2d_mode: i32,
+    remove_pcurve_mode: i32,
+    add_pcurve_mode: i32,
+    remove_curve_3d_mode: i32,
+    add_curve_3d_mode: i32,
+    seam_mode: i32,
+    shifted_mode: i32,
+    same_parameter_mode: i32,
+    vertex_tolerance_mode: i32,
+    edge_curves_status: i32,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
 pub struct ShapeFixWire {
     parent: ShapeFixRoot,
     state: SharedState<WireFixState>,
+    edge_fixer: Handle<ShapeFixEdge>,
 }
 
 impl_transient!(ShapeFixWire, "ShapeFix_Wire", ShapeFixRoot, parent, interfaces: [dyn FixRoot]);
@@ -94,7 +109,19 @@ impl Default for ShapeFixWire {
                 topology_mode: false,
                 geometry_mode: true,
                 remove_loop_mode: -1,
+                edge_curves_mode: -1,
+                reversed_2d_mode: -1,
+                remove_pcurve_mode: -1,
+                add_pcurve_mode: -1,
+                remove_curve_3d_mode: -1,
+                add_curve_3d_mode: -1,
+                seam_mode: -1,
+                shifted_mode: -1,
+                same_parameter_mode: -1,
+                vertex_tolerance_mode: -1,
+                edge_curves_status: 0,
             }),
+            edge_fixer: Handle::new(ShapeFixEdge::new()),
         }
     }
 }
@@ -631,6 +658,7 @@ impl ShapeFixWire {
         state.degenerated_status = 0;
         state.intersections_status = 0;
         state.lacking_status = 0;
+        state.edge_curves_status = 0;
         state.last_fix_status = 0;
         state.small_status = 0;
         state.connected_status = 0;
