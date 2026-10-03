@@ -8,6 +8,7 @@ import json
 import pathlib
 from collections import Counter
 from dataclasses import dataclass, field
+from functools import lru_cache
 from typing import Iterator
 
 from .inputs import JSONObject, JSONValue, digest, object_rows, text_field
@@ -37,6 +38,7 @@ def json_lines(path: pathlib.Path) -> Iterator[JSONObject]:
             yield value
 
 
+@lru_cache(maxsize=65536)
 def source_identity(filename: str, source: pathlib.Path) -> str:
     """Keep source-relative identities and explicit external locations."""
     path = pathlib.Path(filename).resolve()

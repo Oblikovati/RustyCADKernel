@@ -52,7 +52,9 @@ def arguments() -> argparse.Namespace:
 
 
 def read_json(path: Path) -> dict[str, JSONValue]:
-    value = json.loads(path.read_text(encoding="utf-8"))
+    opener = gzip.open if path.suffix == ".gz" else open
+    with opener(path, "rt", encoding="utf-8") as stream:
+        value = json.load(stream)
     if not isinstance(value, dict):
         raise ValueError(f"{path} must contain a JSON object")
     return value
