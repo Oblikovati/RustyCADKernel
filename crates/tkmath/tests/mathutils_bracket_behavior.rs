@@ -2,6 +2,58 @@
 use rustycad_tkmath::math_utils::*;
 
 #[test]
+fn bracket_result_public_fields_have_native_defaults() {
+    let result: BracketResult = BracketResult::default();
+    assert_eq!(
+        (
+            result.status,
+            result.is_valid,
+            result.iterations,
+            result.a,
+            result.b
+        ),
+        (Status::NotConverged, false, 0, 0.0, 0.0)
+    );
+    assert!(result.fa.is_nan() && result.fb.is_nan());
+    assert!(!result.has_fa && !result.has_fb);
+}
+
+#[test]
+fn minimum_result_public_fields_have_native_defaults() {
+    let result: MinBracketResult = MinBracketResult::default();
+    assert_eq!(
+        (
+            result.status,
+            result.is_valid,
+            result.iterations,
+            result.a,
+            result.b,
+            result.c
+        ),
+        (Status::NotConverged, false, 0, 0.0, 0.0, 0.0)
+    );
+    assert!(result.fa.is_nan() && result.fb.is_nan() && result.fc.is_nan());
+}
+
+#[test]
+fn minimum_options_public_fields_have_native_defaults() {
+    let options: MinBracketOptions = MinBracketOptions::default();
+    assert_eq!(
+        (
+            options.max_iterations,
+            options.use_limits,
+            options.left_limit,
+            options.right_limit,
+            options.has_fa,
+            options.has_fb,
+            options.fa,
+            options.fb,
+        ),
+        (50, false, 0.0, 0.0, false, false, 0.0, 0.0)
+    );
+}
+
+#[test]
 fn root_expansion_and_reversed_endpoints() {
     let mut linear = |x: f64, out: &mut f64| {
         *out = x - 10.0;
