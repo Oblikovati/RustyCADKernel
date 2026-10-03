@@ -73,17 +73,22 @@ fn invalid_grid(_: rustycad_tkernel::ncollection::ArrayError) -> Failure {
 #[cfg(test)]
 mod tests {
     use super::prepare;
-    use crate::shape_fix::ShapeFixFace;
     use crate::shape_fix::face::missing_seam::plan::analyze;
+    use crate::shape_fix::{FixRoot, ShapeFixFace};
     use rustycad_tkbrep::brep::BRepBuilder;
+    use rustycad_tkbrep::brep_tools::ReShape;
     use rustycad_tkbrep::topexp::Explorer;
     use rustycad_tkbrep::topods::Face;
     use rustycad_tkernel::precision;
     use rustycad_tkernel::standard::Handle;
     use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-    use rustycad_tkg3d::geom::{GeomCircle, GeomSphericalSurface, GeomSurface};
+    use rustycad_tkg3d::geom::{
+        GeomCircle, GeomCylindricalSurface, GeomSphericalSurface, GeomSurface,
+    };
     use rustycad_tkg3d::top_abs::ShapeEnum;
-    use rustycad_tkmath::gp::{Axis2, Axis3, Direction2, Point2};
+    use rustycad_tkmath::gp::{
+        Axis2, Axis3, Direction2, Point2, Point3, StandardDirection2, StandardDirection3,
+    };
     use std::f64::consts::TAU;
 
     #[test]
@@ -106,9 +111,11 @@ mod tests {
     #[test]
     fn sphere_missing_seam_matches_native_face_edge_result() {
         let (face, _) = sphere_with_open_u_wire().unwrap();
-        let fixer = ShapeFixFace::new(face.into_shape());
+        let input = face.into_shape();
+        let fixer = ShapeFixFace::new(input.clone());
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
+        assert_context_maps_input(&fixer, &input, &result);
         let faces = Explorer::new(&result, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
         let face_count = faces.count();
         let edges = Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
@@ -124,8 +131,101 @@ mod tests {
         assert_eq!(
             actual,
             include_str!("../../../../../../tools/oracle/shape_fix_face_missing_seam.expected")
-                .trim()
+                .lines()
+                .next()
+                .unwrap()
         );
+    }
+
+    #[test]
+    fn cylinder_two_open_wires_matches_native_seam_result() {
+        let face = cylinder_with_two_open_u_wires().unwrap();
+        let input = face.into_shape();
+        let fixer = ShapeFixFace::new(input.clone());
+        assert!(fixer.fix_missing_seam().unwrap());
+        let result = fixer.result();
+        assert_context_maps_input(&fixer, &input, &result);
+        let faces = Explorer::new(&result, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
+        let face_count = faces.clone().count();
+        let face = rustycad_tkbrep::topods::face(faces.current()).unwrap();
+        let edges = Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
+        let edge_count = edges.clone().count();
+        let seam_count = edges
+            .filter(|edge| {
+                let edge = rustycad_tkbrep::topods::edge(edge).unwrap();
+                rustycad_tkbrep::brep::BRepTool::is_closed_on_face(&edge, &face).unwrap()
+            })
+            .count();
+        let actual = format!(
+            "cylinder_two_open_u changed=1 faces={face_count} edges={edge_count} seam_edges={seam_count}"
+        );
+        assert_eq!(
+            actual,
+            include_str!("../../../../../../tools/oracle/shape_fix_face_missing_seam.expected")
+                .lines()
+                .nth(1)
+                .unwrap()
+        );
+    }
+
+    fn assert_context_maps_input(
+        fixer: &ShapeFixFace,
+        input: &rustycad_tkbrep::topods::Shape,
+        result: &rustycad_tkbrep::topods::Shape,
+    ) {
+        let context = fixer.context();
+        assert!(!context.is_null());
+        assert!(
+            context
+                .apply(input, ShapeEnum::Shape)
+                .unwrap()
+                .is_same(result)
+        );
+    }
+
+    fn cylinder_with_two_open_u_wires() -> Result<Face, rustycad_tkernel::standard::Failure> {
+        let surface: Handle<dyn GeomSurface> =
+            Handle::new(GeomCylindricalSurface::new(Axis3::default(), 1.0)?).cast();
+        let mut face = Face::default();
+        let builder = BRepBuilder::default();
+        builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
+        add_cylinder_wire(&builder, &mut face, -1.0, false)?;
+        add_cylinder_wire(&builder, &mut face, 1.0, true)?;
+        Ok(face)
+    }
+
+    fn add_cylinder_wire(
+        builder: &BRepBuilder,
+        face: &mut Face,
+        z: f64,
+        reverse: bool,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        let axis = Axis2::with_standard_frame(
+            Point3::new(0.0, 0.0, z),
+            StandardDirection3::Z,
+            StandardDirection3::X,
+        );
+        let circle: Handle<dyn rustycad_tkg3d::geom::GeomCurve> =
+            Handle::new(GeomCircle::new(axis, 1.0)?).cast();
+        let edge =
+            rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve(&circle)?
+                .edge()?;
+        builder.range(&edge, 0.0, TAU, true)?;
+        let direction = if reverse {
+            Direction2::from_standard(StandardDirection2::NegX)
+        } else {
+            Direction2::X
+        };
+        let pcurve: Handle<dyn Geom2dCurve> =
+            Handle::new(Geom2dLine::from_point(Point2::new(0.0, z), direction)).cast();
+        builder.update_edge_pcurve_on_face(&edge, &pcurve, face, precision::confusion())?;
+        let (support, location) = rustycad_tkbrep::brep::BRepTool::surface_with_location(face)?;
+        builder.range_on_surface(&edge, &support, &location, 0.0, TAU)?;
+        let mut wire = rustycad_tkbrep::topods::Wire::default();
+        rustycad_tkbrep::topods::Builder.make_wire(&mut wire);
+        rustycad_tkbrep::topods::Builder.add(&mut wire, &edge.into_shape())?;
+        rustycad_tkbrep::topods::Builder.add(face, &wire.into_shape())?;
+        Ok(())
     }
 
     fn sphere_with_open_u_wire()

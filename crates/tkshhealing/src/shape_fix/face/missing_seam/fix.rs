@@ -30,6 +30,7 @@ pub(in crate::shape_fix::face) fn fix(fixer: &ShapeFixFace) -> Result<bool, Fail
         return Ok(false);
     };
     compose_missing_seam(fixer, prepared.face, &prepared.grid, &context)?;
+    let context = fixer.context();
     cleanup_composed_result(fixer, &context)?;
     send_missing_seam_warning(fixer);
     Ok(true)
@@ -64,8 +65,8 @@ fn compose_missing_seam(
     composer.set_context(&context);
     composer.set_max_tolerance(fixer.max_tolerance());
     composer.perform()?;
-    store_composed_result(fixer, &composer.result(), &context)?;
     reset_analysis_surface(fixer, grid)?;
+    store_composed_result(fixer, &composer.result(), &context)?;
     Ok(())
 }
 
@@ -216,10 +217,10 @@ fn cleanup_small_face(
     face_count: i32,
 ) -> Result<(), Failure> {
     let face = topods::face(&apply_reshape(context, candidate)?)?;
+    *fixer.face_state.write() = face.clone().into_shape();
     if face.is_null() {
         return Ok(());
     }
-    *fixer.face_state.write() = face.into_shape();
     remove_small_wires_for_multiple_faces(fixer, face_count)?;
     update_current_face(fixer, context)
 }
