@@ -6,6 +6,8 @@
 mod wire_degenerated;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
+#[path = "wire_small.rs"]
+mod wire_small;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
@@ -31,8 +33,10 @@ struct WireFixState {
     gaps_2d_status: i32,
     degenerated_status: i32,
     last_fix_status: i32,
+    small_status: i32,
     intersections_status: i32,
     closed_mode: bool,
+    topology_mode: bool,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
@@ -54,8 +58,10 @@ impl Default for ShapeFixWire {
                 gaps_2d_status: 0,
                 degenerated_status: 0,
                 last_fix_status: 0,
+                small_status: 0,
                 intersections_status: 0,
                 closed_mode: true,
+                topology_mode: false,
             }),
         }
     }
@@ -136,6 +142,21 @@ impl ShapeFixWire {
     /// `SetFace(face)`: update the shared analyzer support face.
     pub fn set_face(&self, face: &Face) -> Result<(), Failure> {
         self.ensure_analyzer().set_face(face)
+    }
+
+    /// Reads native `TopoMode`; `assert!(!fixer.topology_mode())`.
+    pub fn topology_mode(&self) -> bool {
+        self.state.read().topology_mode
+    }
+
+    /// Controls whether topology may be edited in place; `fixer.set_topology_mode(true)`.
+    pub fn set_topology_mode(&self, enabled: bool) {
+        self.state.write().topology_mode = enabled;
+    }
+
+    /// Queries accumulated small-edge repair status; `assert!(fixer.status_small(ShapeExtendStatus::Done))`.
+    pub fn status_small(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.state.read().small_status, status)
     }
 
     /// `FixReorder()`: analyze the loaded 3D endpoints, then apply the proposed order.
@@ -548,6 +569,7 @@ impl ShapeFixWire {
         state.gaps_2d_status = 0;
         state.degenerated_status = 0;
         state.last_fix_status = 0;
+        state.small_status = 0;
     }
 
     fn set_reorder_status(&self, status: ShapeExtendStatus) {

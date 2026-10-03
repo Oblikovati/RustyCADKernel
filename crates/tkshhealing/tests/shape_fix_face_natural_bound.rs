@@ -10,7 +10,7 @@ use rustycad_tkg3d::geom::{
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
 use rustycad_tkshhealing::shape_analysis::ShapeAnalysis;
-use rustycad_tkshhealing::shape_fix::ShapeFixFace;
+use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixFace};
 use support::*;
 
 #[test]
