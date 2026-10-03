@@ -1037,3 +1037,13 @@ need broader differential coverage; the toolkit acceptance gate remains false.
 existing outer-wire, 2D area and period-shift functions. Eighteen generated native
 rows and four Rust regressions cover bounds, classification, contour closure and
 oriented endpoints. This API implementation claim is not exhaustive behavioral proof.
+
+`ShapeUpgradeSplitSurfaceArea` now preserves area/aspect count selection, fixed U/V
+counts, automatically retained square counts, and shared insertion sequences. Thirteen
+native rows include negative protected measures; explicit Rust errors for native
+integer-overflow/nonfinite conversions remain outside parity evidence.
+`ShapeUpgradeSplitSurfaceContinuity` adds all four explicit methods. Fourteen native
+cases cover default-versus-explicit C1, U/V knot removal and splitting, supplied bounds,
+trimmed/offset recursion, and swept surfaces. Follow-up regressions preserve native
+copy order, min/max NaN and signed-zero behavior, and shared-sequence errors. Neither
+class asserts exhaustive behavioral coverage or toolkit completion.

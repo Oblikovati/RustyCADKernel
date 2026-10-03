@@ -220903,6 +220903,78 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysis::is_outer_bound",
       "status": "implemented",
       "notes": "Pinned tools/oracle/tkshhealing_shape_analysis_package.cxx: eighteen generated rows cover natural/trimmed pcurve bounds, missing-pcurve failure, reversed/single/multiple wires, sampled contour closure, and oriented endpoint discovery. Four Rust regressions pass; generated fixtures do not replace legacy test obligations or constitute exhaustive behavior proof."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceArea::ShapeUpgrade_SplitSurfaceArea()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceArea.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::new",
+      "status": "implemented",
+      "notes": "Thirteen native oracle rows preserve equal-aspect direction, repeated auto-square state and negative protected measures. Native reference NbParts is represented by nb_parts/set_nb_parts. Undefined native product overflow/nonfinite count conversion remains an explicit Rust failure, not parity. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceArea::NbParts()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceArea.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::nb_parts",
+      "status": "implemented",
+      "notes": "Thirteen native oracle rows preserve equal-aspect direction, repeated auto-square state and negative protected measures. Native reference NbParts is represented by nb_parts/set_nb_parts. Undefined native product overflow/nonfinite count conversion remains an explicit Rust failure, not parity. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceArea::SetSplittingIntoSquares(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceArea.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::set_splitting_into_squares",
+      "status": "implemented",
+      "notes": "Thirteen native oracle rows preserve equal-aspect direction, repeated auto-square state and negative protected measures. Native reference NbParts is represented by nb_parts/set_nb_parts. Undefined native product overflow/nonfinite count conversion remains an explicit Rust failure, not parity. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceArea::SetNumbersUVSplits(const int, const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceArea.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::set_numbers_uv_splits",
+      "status": "implemented",
+      "notes": "Thirteen native oracle rows preserve equal-aspect direction, repeated auto-square state and negative protected measures. Native reference NbParts is represented by nb_parts/set_nb_parts. Undefined native product overflow/nonfinite count conversion remains an explicit Rust failure, not parity. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceArea::Compute(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceArea.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::<rustycad_tkshhealing::shape_upgrade::SplitSurface>::compute",
+      "status": "implemented",
+      "notes": "Thirteen native oracle rows preserve equal-aspect direction, repeated auto-square state and negative protected measures. Native reference NbParts is represented by nb_parts/set_nb_parts. Undefined native product overflow/nonfinite count conversion remains an explicit Rust failure, not parity. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceContinuity::ShapeUpgrade_SplitSurfaceContinuity()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceContinuity::new",
+      "status": "implemented",
+      "notes": "Fourteen generated native cases plus Rust regressions preserve default myCont=0, U/V removal indices, wrapper status/copy order, extrusion-only basis replacement, shared endpoints, and failure propagation. Native-style min/max operand order includes NaN/signed-zero unit evidence. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceContinuity::SetCriterion(const GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceContinuity::set_criterion",
+      "status": "implemented",
+      "notes": "Fourteen generated native cases plus Rust regressions preserve default myCont=0, U/V removal indices, wrapper status/copy order, extrusion-only basis replacement, shared endpoints, and failure propagation. Native-style min/max operand order includes NaN/signed-zero unit evidence. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceContinuity::SetTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceContinuity::set_tolerance",
+      "status": "implemented",
+      "notes": "Fourteen generated native cases plus Rust regressions preserve default myCont=0, U/V removal indices, wrapper status/copy order, extrusion-only basis replacement, shared endpoints, and failure propagation. Native-style min/max operand order includes NaN/signed-zero unit evidence. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitSurfaceContinuity::Compute(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceContinuity::<rustycad_tkshhealing::shape_upgrade::SplitSurface>::compute",
+      "status": "implemented",
+      "notes": "Fourteen generated native cases plus Rust regressions preserve default myCont=0, U/V removal indices, wrapper status/copy order, extrusion-only basis replacement, shared endpoints, and failure propagation. Native-style min/max operand order includes NaN/signed-zero unit evidence. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
     }
   ],
   "tests": [
