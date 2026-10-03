@@ -1,17 +1,22 @@
 # BRepOffset_MakeSimpleOffset state oracle
 
 The native probe exercises default construction, `Perform()` on a null input,
-successful shell generation from a bounded plane, `Generated`/`Modified`, and
-reinitialization after success. The checked-in output is
+successful shell generation from a bounded plane, `Generated`/`Modified`,
+reinitialization after success, a bounded plane offset into a solid, and a closed-box
+offset that reports multiple shells. The checked-in output is
 `crates/tkoffset/tests/fixtures/make_simple_offset_state.txt`; it was generated
 with OCCT revision `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 
-`Clear()` resets `IsDone`, error status, cached max angle, and reshape history. It
-preserves the result shape, input settings, build-solid flag, modifier, and tolerance.
-The Rust class follows those state transitions. Its build-solid path returns
-`Standard_NotImplemented` after the offset shell is computed because wall
-reconstruction is still unported; it leaves native error status `OK` and does not
-mark the algorithm done.
+`Clear()` resets `IsDone`, error status, cached max angle, wall-edge sharing, and reshape
+history. It preserves the result shape, input settings, build-solid flag, modifier, and
+tolerance. The Rust class follows those state transitions. The plane case produces a
+valid solid with signed volume `-3`; the closed-box case retains the offset result and
+reports `ErrorInvalidNbShells`, matching the native probe.
+
+`BRepOffset_MakeSimpleOffset` calls the one-argument
+`ShapeAnalysis_FreeBounds(shape)` overload. In the pinned header, that resolves to the
+three-argument actual-boundary overload with defaults `(splitclosed=false,
+splitopen=true, checkinternaledges=false)`, which the Rust code calls explicitly.
 
 Build and run against the OCCT build used by the port:
 

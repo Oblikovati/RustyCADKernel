@@ -1,12 +1,14 @@
+mod walls;
+
 // Translation of BRepOffset_MakeSimpleOffset at OCCT
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
-use super::{BRepOffsetSimpleOffset, compute_simple_offset_max_angle};
+use super::{BRepOffsetSimpleOffset, build_simple_offset_wall, compute_simple_offset_max_angle};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::{BRepToolsModification, Modifier, ReShape};
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{Edge, Shape};
+use rustycad_tkbrep::topods::{Edge, Shape, Solid, Vertex};
 use rustycad_tkernel::message::ProgressRange;
-use rustycad_tkernel::standard::exceptions::not_implemented;
+use rustycad_tkernel::ncollection::DataMap;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
@@ -32,8 +34,8 @@ pub enum BRepOffsetSimpleStatus {
 
 /// Stateful shell-producing `BRepOffset_MakeSimpleOffset` orchestration.
 ///
-/// The default result is a shell. Solid construction is currently unsupported because
-/// OCCT's wall reconstruction path has not been ported.
+/// Shell results preserve the native modifier history. Solid mode rebuilds walls for the
+/// currently ported boundary cases.
 pub struct BRepOffsetMakeSimpleOffset {
     input_shape: Shape,
     offset_value: f64,
@@ -43,8 +45,9 @@ pub struct BRepOffsetMakeSimpleOffset {
     error: BRepOffsetSimpleStatus,
     done: bool,
     modifier: Modifier,
-    reshape: ShapeBuildReShape,
+    reshape: Handle<ShapeBuildReShape>,
     result_shape: Shape,
+    wall_edges: DataMap<Vertex, Edge>,
 }
 
 impl Default for BRepOffsetMakeSimpleOffset {
@@ -58,8 +61,9 @@ impl Default for BRepOffsetMakeSimpleOffset {
             error: BRepOffsetSimpleStatus::Ok,
             done: false,
             modifier: Modifier::default(),
-            reshape: ShapeBuildReShape::new(),
+            reshape: Handle::new(ShapeBuildReShape::new()),
             result_shape: Shape::default(),
+            wall_edges: DataMap::default(),
         }
     }
 }
@@ -111,9 +115,10 @@ impl BRepOffsetMakeSimpleOffset {
         }
         self.restore_degenerated_edges()?;
         if self.build_solid {
-            return Err(not_implemented(
-                "BRepOffset_MakeSimpleOffset::Perform: solid wall construction is not ported",
-            ));
+            self.build_solid_result()?;
+            if self.error != BRepOffsetSimpleStatus::Ok {
+                return Ok(());
+            }
         }
         self.done = true;
         Ok(())
@@ -171,7 +176,29 @@ impl BRepOffsetMakeSimpleOffset {
         self.done = false;
         self.error = BRepOffsetSimpleStatus::Ok;
         self.max_angle = 0.0;
-        self.reshape.clear();
+        self.reshape
+            .get()
+            .expect("reshape handle is initialized")
+            .clear();
+        self.wall_edges.clear(true);
+    }
+
+    fn build_solid_result(&mut self) -> Result<(), Failure> {
+        let shell = match walls::make_solid(
+            &self.input_shape,
+            &self.result_shape,
+            &self.modifier,
+            &self.reshape,
+            &mut self.wall_edges,
+        )? {
+            Ok(shell) => shell,
+            Err(status) => {
+                self.error = status;
+                return Ok(());
+            }
+        };
+        self.result_shape = make_solid(&shell)?;
+        Ok(())
     }
 
     /// `GetErrorMessage()`: the native text for the current status.
@@ -205,12 +232,19 @@ impl BRepOffsetMakeSimpleOffset {
         if generated.is_null() {
             return Ok(generated);
         }
-        self.reshape.apply(&generated, ShapeEnum::Shape)
+        self.reshape
+            .get()
+            .expect("reshape handle is initialized")
+            .apply(&generated, ShapeEnum::Shape)
     }
 
     /// `Modified(shape)`: return a reshape replacement or a null shape.
     pub fn modified(&self, shape: &Shape) -> Result<Shape, Failure> {
-        let (status, result) = self.reshape.status(shape, false)?;
+        let (status, result) = self
+            .reshape
+            .get()
+            .expect("reshape handle is initialized")
+            .status(shape, false)?;
         Ok(if status == 0 {
             Shape::default()
         } else {
@@ -262,6 +296,14 @@ impl BRepOffsetMakeSimpleOffset {
     pub fn set_tolerance(&mut self, tolerance: f64) {
         self.tolerance = tolerance;
     }
+}
+
+fn make_solid(shell: &rustycad_tkbrep::topods::Shell) -> Result<Shape, Failure> {
+    let builder = BRepBuilder::default();
+    let mut solid = Solid::default();
+    builder.make_solid(&mut solid);
+    builder.add(&mut solid, shell)?;
+    Ok(solid.into_shape())
 }
 
 fn mark_degenerated_image(
