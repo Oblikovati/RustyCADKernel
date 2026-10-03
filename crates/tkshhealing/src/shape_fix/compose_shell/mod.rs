@@ -2,6 +2,7 @@
 mod break_wires;
 mod collect_wires;
 mod compute_code;
+mod dispatch_wires;
 mod geometry;
 mod grid;
 mod init;

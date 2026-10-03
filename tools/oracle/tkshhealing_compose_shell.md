@@ -30,6 +30,8 @@ periodic grid pass over a cylinder boundary; OCCT leaves all four original edge 
 unchanged for this fixture.
 The two `CollectWires` rows check extraction of one closed boundary loop and greedy joining
 of two manually split segments, including the consumed source orientations.
+The `Perform` row records the complete one-patch planar path, result face orientation,
+single boundary-wire child and `DONE1` status.
 The periodic-cylinder `SplitByLine` rows cut the seam at both U=0 and U=2π; the
 second row checks that shifting the cutter across the period preserves the native
 intersection order and vertex coordinates.

@@ -24,15 +24,27 @@ pub(super) struct Candidate {
     pub(super) shift_v: f64,
 }
 
+pub(super) struct CandidateSearch<'a> {
+    pub(super) composer: &'a ShapeFixComposeShell,
+    pub(super) grid: &'a Handle<ShapeExtendCompositeSurface>,
+    pub(super) face: &'a Face,
+    pub(super) shortness: &'a [i32],
+    pub(super) nu: i32,
+    pub(super) nv: i32,
+}
+
+#[derive(Clone, Copy)]
+struct CandidateChoice {
+    index: usize,
+    reverse: bool,
+    same_patch: bool,
+    misoriented: bool,
+}
+
 pub(super) fn choose_segment(
-    composer: &ShapeFixComposeShell,
+    search: &CandidateSearch<'_>,
     segments: &Sequence<ShapeFixWireSegment>,
-    grid: &Handle<ShapeExtendCompositeSurface>,
-    face: &Face,
-    shortness: &[i32],
     state: &ChainState,
-    nu: i32,
-    nv: i32,
 ) -> Result<Option<Candidate>, Failure> {
     let mut best = Candidate {
         angle: -std::f64::consts::PI,
@@ -40,9 +52,7 @@ pub(super) fn choose_segment(
         ..Candidate::default()
     };
     for index in 1..=segments.length() as usize {
-        score_segment(
-            composer, segments, grid, face, shortness, state, nu, nv, index, &mut best,
-        )?;
+        score_segment(search, segments, state, index, &mut best)?;
         if state.wire_data.is_null() && best.index != 0 {
             break;
         }
@@ -51,14 +61,9 @@ pub(super) fn choose_segment(
 }
 
 fn score_segment(
-    composer: &ShapeFixComposeShell,
+    search: &CandidateSearch<'_>,
     segments: &Sequence<ShapeFixWireSegment>,
-    grid: &Handle<ShapeExtendCompositeSurface>,
-    face: &Face,
-    shortness: &[i32],
     state: &ChainState,
-    nu: i32,
-    nv: i32,
     index: usize,
     best: &mut Candidate,
 ) -> Result<(), Failure> {
@@ -67,11 +72,9 @@ fn score_segment(
         return Ok(());
     }
     if state.wire_data.is_null() {
-        return select_initial(segment, index, shortness, best);
+        return select_initial(segment, index, search.shortness, best);
     }
-    score_attached_segment(
-        composer, segment, index, grid, face, shortness, state, nu, nv, best,
-    )
+    score_attached_segment(search, segment, index, state, best)
 }
 
 fn select_initial(
@@ -97,37 +100,33 @@ fn select_initial(
 }
 
 fn score_attached_segment(
-    composer: &ShapeFixComposeShell,
+    search: &CandidateSearch<'_>,
     segment: &ShapeFixWireSegment,
     index: usize,
-    grid: &Handle<ShapeExtendCompositeSurface>,
-    face: &Face,
-    shortness: &[i32],
     state: &ChainState,
-    nu: i32,
-    nv: i32,
     best: &mut Candidate,
 ) -> Result<(), Failure> {
-    let same_patch = patch::extend_same_patch(segment, &mut state.patch.clone(), nu, nv, false);
+    let same_patch = patch::extend_same_patch(
+        segment,
+        &mut state.patch.clone(),
+        search.nu,
+        search.nv,
+        false,
+    );
     if !same_patch && (state.can_be_closed || (best.index != 0 && best.same_patch)) {
         return Ok(());
     }
     for endpoint in 0..=1 {
-        score_endpoint(
-            composer, segment, index, endpoint, grid, face, shortness, state, same_patch, best,
-        )?;
+        score_endpoint(search, segment, index, endpoint, state, same_patch, best)?;
     }
     Ok(())
 }
 
 fn score_endpoint(
-    composer: &ShapeFixComposeShell,
+    search: &CandidateSearch<'_>,
     segment: &ShapeFixWireSegment,
     index: usize,
     endpoint: usize,
-    grid: &Handle<ShapeExtendCompositeSurface>,
-    face: &Face,
-    shortness: &[i32],
     state: &ChainState,
     same_patch: bool,
     best: &mut Candidate,
@@ -150,16 +149,15 @@ fn score_endpoint(
         return Ok(());
     }
     evaluate_candidate(
-        composer,
+        search,
         segment,
-        index,
-        reversed,
-        grid,
-        face,
-        shortness,
         state,
-        same_patch,
-        misoriented,
+        CandidateChoice {
+            index,
+            reverse: reversed,
+            same_patch,
+            misoriented,
+        },
         best,
     )
 }
@@ -208,39 +206,49 @@ fn select_return_edge(
     };
 }
 
-#[allow(clippy::too_many_arguments)]
 fn evaluate_candidate(
-    composer: &ShapeFixComposeShell,
+    search: &CandidateSearch<'_>,
     segment: &ShapeFixWireSegment,
-    index: usize,
-    reverse: bool,
-    grid: &Handle<ShapeExtendCompositeSurface>,
-    face: &Face,
-    shortness: &[i32],
     state: &ChainState,
-    same_patch: bool,
-    misoriented: bool,
+    choice: CandidateChoice,
     best: &mut Candidate,
 ) -> Result<(), Failure> {
     let (point, tangent, edge_tolerance) =
-        candidate_start_tangent(composer, segment, face, reverse)?;
-    let (point, shift_u, shift_v) = align_closed_mode(composer, point, state.end_point, grid)?;
-    let short = shortness.get(index - 1).copied().unwrap_or(0) > 0;
-    let angle = candidate_angle(composer.closed_mode(), short, state.end_tangent, tangent)?;
+        candidate_start_tangent(search.composer, segment, search.face, choice.reverse)?;
+    let (point, shift_u, shift_v) =
+        align_closed_mode(search.composer, point, state.end_point, search.grid)?;
+    let short = search.shortness.get(choice.index - 1).copied().unwrap_or(0) > 0;
+    let angle = candidate_angle(
+        search.composer.closed_mode(),
+        short,
+        state.end_tangent,
+        tangent,
+    )?;
     let tolerance = edge_tolerance.max(BRepTool::vertex_tolerance(&state.end_vertex)?);
-    let connected = coincident(state.end_point, point, composer.resolutions(), tolerance);
+    let connected = coincident(
+        state.end_point,
+        point,
+        search.composer.resolutions(),
+        tolerance,
+    );
     let distance = state.end_point.square_distance(point);
-    let (weight, tail) =
-        candidate_weight(same_patch, connected, misoriented, angle, distance, best);
+    let (weight, tail) = candidate_weight(
+        choice.same_patch,
+        connected,
+        choice.misoriented,
+        angle,
+        distance,
+        best,
+    );
     if weight + tail <= best.weight + candidate_tail(best, angle, distance) {
         return Ok(());
     }
     *best = Candidate {
-        index,
-        reverse,
+        index: choice.index,
+        reverse: choice.reverse,
         connected,
-        misoriented,
-        same_patch,
+        misoriented: choice.misoriented,
+        same_patch: choice.same_patch,
         angle,
         distance,
         weight,
