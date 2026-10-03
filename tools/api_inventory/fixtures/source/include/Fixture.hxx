@@ -44,6 +44,20 @@ template <typename T, unsigned N = 2> struct Box {
 
 template <typename T> T identity(T value);
 
+struct ProviderValue { static constexpr int inherited_value = 1; };
+template <typename T> struct DependentValueBase : T {
+  using T::inherited_value;
+};
+
+struct SFINAEOverloads {
+  template <typename Provider>
+  auto IsValidIn(const Provider& provider) const
+      -> decltype(provider.Nb(), bool()) { return true; }
+  template <typename Provider>
+  auto IsValidIn(const Provider& provider) const
+      -> decltype(provider.Size(), bool()) { return true; }
+};
+
 inline void function_with_locals() {
   using LocalAlias = int;
   struct LocalRecord {};

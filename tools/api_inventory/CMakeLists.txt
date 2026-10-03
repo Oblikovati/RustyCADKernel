@@ -23,4 +23,6 @@ if(BUILD_TESTING)
   add_test(NAME api_inventory_fixture
     COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_fixture.py
       $<TARGET_FILE:occt-api-extract> ${CMAKE_CURRENT_SOURCE_DIR}/fixtures)
+  add_test(NAME api_inventory_signature_identity
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_merge_identity.py)
 endif()
