@@ -112,11 +112,23 @@ static void print_connected_case(bool topologyMode) {
             << " shared=" << firstEnd.IsSame(secondStart) << '\n';
 }
 
+static void print_connected_all_case() {
+  ShapeFix_Wire fixer;
+  fixer.Load(disconnected_wire());
+  const bool changed = fixer.FixConnected(1.e-3);
+  const TopoDS_Edge first = TopoDS::Edge(fixer.WireData()->Edge(1));
+  const TopoDS_Edge second = TopoDS::Edge(fixer.WireData()->Edge(2));
+  std::cout << "connected_all changed=" << changed
+            << " status_done=" << fixer.StatusConnected(ShapeExtend_DONE)
+            << " shared=" << TopExp::LastVertex(first, false).IsSame(TopExp::FirstVertex(second, false)) << '\n';
+}
+
 int main() {
   print_case(false);
   print_case(true);
   print_connected_case(false);
   print_connected_case(true);
+  print_connected_all_case();
   print_degenerated_small_case();
   print_single_edge_connected_case(false);
   print_single_edge_connected_case(true);

@@ -27,6 +27,7 @@ small_edge topo=0 changed=0 edges=3 done2=0 fail2=1 fail3=0
 small_edge topo=1 changed=1 edges=2 done2=1 fail2=0 fail3=0
 connected topo=0 changed=1 edges=2 done1=0 done2=0 done3=1 shared=1
 connected topo=1 changed=1 edges=2 done1=0 done2=0 done3=1 shared=1
+connected_all changed=1 status_done=1 shared=1
 degenerated_small changed=1 edges=1 done1=1 fail1=1
 connected_single topo=0 changed=1 done3=1 shared=1
 connected_single topo=1 changed=1 done3=1 shared=1
@@ -36,4 +37,6 @@ The short-edge fixture avoids a `1e-8` edge: OCCT's edge builder merges its
 endpoints at construction, so that edge does not exercise `DONE2`. The two-edge
 connection case uses a `1e-4` gap and a `1e-3` check tolerance, so native chooses
 `DONE3`; both modes replace both working edge endpoints with one shared vertex.
+The aggregate `FixConnected(precision)` regression also confirms its native
+boolean result, accumulated `StatusConnected(DONE)`, and updated shared endpoint.
 Rust regressions are in `tests/shape_fix_wire_small.rs`.

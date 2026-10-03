@@ -19,6 +19,15 @@ fn small_distinct_vertex_edge_requires_topology_mode() {
 }
 
 #[test]
+fn aggregate_fix_small_returns_native_integer_change_flag() {
+    let fixer = ShapeFixWire::new();
+    fixer.load(&short_edge_wire()).unwrap();
+    fixer.set_topology_mode(true);
+
+    assert_eq!(fixer.fix_small_all(false, 2e-5).unwrap(), 1);
+}
+
+#[test]
 fn topology_mode_removes_small_edge_and_reconnects_neighbors() {
     let wire = short_edge_wire();
     let fixer = ShapeFixWire::new();
@@ -39,6 +48,24 @@ fn connected_two_edge_gap_rebuilds_both_edges_with_a_shared_vertex() {
 
     assert!(fixer.fix_connected_at(2, 1e-3, true).unwrap());
     assert!(fixer.last_fix_status(ShapeExtendStatus::Done3));
+    let wire_data = fixer.wire_data().unwrap();
+    let first = wire_data.edge(1).unwrap();
+    let second = wire_data.edge(2).unwrap();
+    let analysis = ShapeAnalysisEdge::new();
+    assert!(
+        analysis
+            .last_vertex(&first)
+            .is_same(&analysis.first_vertex(&second))
+    );
+}
+
+#[test]
+fn aggregate_fix_connected_accumulates_status_and_rebuilds_working_wire() {
+    let fixer = ShapeFixWire::new();
+    fixer.load(&disconnected_wire()).unwrap();
+
+    assert!(fixer.fix_connected_all(1e-3).unwrap());
+    assert!(fixer.status_connected(ShapeExtendStatus::Done));
     let wire_data = fixer.wire_data().unwrap();
     let first = wire_data.edge(1).unwrap();
     let second = wire_data.edge(2).unwrap();
