@@ -1,4 +1,6 @@
-//! Native package operations supporting outer-wire selection.
+//! Native package operations supporting topology and contour analysis.
+mod bounds;
+mod contour;
 use super::ShapeAnalysisCurve;
 use crate::shape_extend::ShapeExtendWireData;
 use rustycad_tkbrep::{
@@ -13,7 +15,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::Point2;
 /// Native `ShapeAnalysis` package operations; `ShapeAnalysis::outer_wire(&face)?`.
-/// Other package operations are not yet implemented.
+/// Period adjustment helpers are exported from the enclosing package.
 pub struct ShapeAnalysis;
 impl ShapeAnalysis {
     /// First positive-area wire, or the last wire without analyzing it.
