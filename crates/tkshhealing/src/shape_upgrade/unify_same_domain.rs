@@ -107,8 +107,13 @@ impl ShapeUpgradeUnifySameDomain {
             result = edges::merge_wire_edge_chains(self, &result)?;
         }
         let face_candidate = fields.unify_faces && first_coplanar_pair(&result, &fields)?.is_some();
-        let edge_candidate =
-            fields.unify_edges && has_collinear_edge_pair(&result, fields.angular_tolerance)?;
+        let edge_candidate = fields.unify_edges
+            && (has_collinear_edge_pair(&result, fields.angular_tolerance)?
+                || edges::has_unported_spline_candidate(
+                    &result,
+                    fields.angular_tolerance,
+                    fields._concat_bspline_edges,
+                )?);
         let face_merge_completed = count_shapes(&result, ShapeEnum::Face)? < input_face_count;
         let has_candidate = face_candidate || edge_candidate && !face_merge_completed;
         if has_candidate {

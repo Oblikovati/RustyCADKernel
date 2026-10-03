@@ -37,6 +37,17 @@ pub(super) fn merge_wire_edge_chains(
     }
 }
 
+pub(super) fn has_unported_spline_candidate(
+    shape: &Shape,
+    angular_tolerance: f64,
+    concat_bspline_edges: bool,
+) -> Result<bool, Failure> {
+    if !concat_bspline_edges {
+        return Ok(false);
+    }
+    bspline::has_candidate(shape, angular_tolerance)
+}
+
 fn merge_wire_chains(
     shape: &Shape,
     angular_tolerance: f64,

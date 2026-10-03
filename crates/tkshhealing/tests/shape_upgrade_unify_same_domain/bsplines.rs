@@ -60,6 +60,16 @@ fn bezier_chain_stays_split_when_concatenation_is_disabled() {
     assert!((middle.y() - 0.25).abs() < 1e-12);
 }
 
+#[test]
+fn spline_boundary_candidate_on_a_face_is_reported_unimplemented() {
+    let input = bezier_face();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, true);
+    assert_eq!(
+        unifier.build().unwrap_err().exception_type(),
+        "Standard_NotImplemented"
+    );
+}
+
 fn assert_native_merge(input: &Shape, case: &str, last: f64, middle: Point3) {
     let unifier = ShapeUpgradeUnifySameDomain::new(input, true, false, true);
     unifier.build().unwrap();
@@ -120,6 +130,30 @@ fn bezier_wire(segments: &[[Point3; 3]], reverse: bool, reverse_order: bool) -> 
     let mut wire = BRepBuilderAPIMakeWire::new();
     edges.iter().for_each(|edge| wire.add_edge(edge).unwrap());
     wire.wire().unwrap().into_shape()
+}
+
+fn bezier_face() -> Shape {
+    let curved = bezier_chain_wire();
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    for edge in edge_shapes(&curved) {
+        wire.add_edge(&edge).unwrap();
+    }
+    for (first, last) in [
+        (Point3::new(2., 4., 0.), Point3::new(0., 4., 0.)),
+        (Point3::new(0., 4., 0.), Point3::new(0., 0., 0.)),
+    ] {
+        let edge = BRepBuilderAPIMakeEdge::from_points(first, last)
+            .unwrap()
+            .edge()
+            .unwrap();
+        wire.add_edge(&edge).unwrap();
+    }
+    let wire = wire.wire().unwrap();
+    BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &wire, true)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape()
 }
 
 fn bezier_edge(points: [Point3; 3]) -> rustycad_tkbrep::topods::Edge {
