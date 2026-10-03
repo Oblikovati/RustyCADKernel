@@ -68,3 +68,6 @@ mod curve_continuity;
 
 mod fix_small_bezier_curves;
 pub use fix_small_bezier_curves::ShapeUpgradeFixSmallBezierCurves;
+
+mod remove_internal_wires;
+pub use remove_internal_wires::ShapeUpgradeRemoveInternalWires;
