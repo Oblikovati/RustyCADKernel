@@ -114,6 +114,29 @@ def require_unchanged_runtime_inputs(
         )
 
 
+def runtime_git_state(root: pathlib.Path) -> JSONObject:
+    """Capture the executing Rust commit and cleanliness; e.g. `runtime_git_state(root)`."""
+    return {
+        "commit": git_output(root, "rev-parse", "HEAD"),
+        "clean": not bool(
+            git_output(root, "status", "--porcelain", "--untracked-files=normal")
+        ),
+    }
+
+
+def require_clean_runtime_git_state(state: JSONObject) -> None:
+    """Require a clean execution tree; e.g. `require_clean_runtime_git_state(state)`."""
+    if state.get("clean") is not True:
+        raise ValueError("Rust source tree must be clean before runtime verification")
+
+
+def require_unchanged_runtime_git_state(before: JSONObject, after: JSONObject) -> None:
+    """Reject revision or cleanliness drift; e.g. `require_unchanged_runtime_git_state(a, b)`."""
+    if before != after:
+        raise ValueError("Rust git state changed during runtime verification")
+    require_clean_runtime_git_state(after)
+
+
 def git_output(source: pathlib.Path, *arguments: str) -> str:
     """Read one git value; e.g. `git_output(source, 'rev-parse', 'HEAD')`."""
     command = ["git", "-C", str(source), *arguments]

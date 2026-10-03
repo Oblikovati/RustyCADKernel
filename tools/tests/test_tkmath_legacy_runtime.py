@@ -6,11 +6,16 @@ import hashlib
 import pathlib
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from api_inventory.inputs import JSONObject
 from verify_tkmath_legacy import (
+    hash_linked_native_libraries,
+    linked_native_library_paths,
     native_filter,
+    native_env,
     native_statuses,
+    cargo_env,
     verify_source_group,
 )
 
@@ -69,6 +74,40 @@ class TkMathLegacyRuntimeTest(unittest.TestCase):
             verify_source_group(source, "Suite_Test.cxx", [mapping(digest)])
             with self.assertRaisesRegex(RuntimeError, "Stale or incomplete"):
                 verify_source_group(source, "Suite_Test.cxx", [])
+
+    def test_native_library_hash_requires_core_libraries_inside_build(self) -> None:
+        """Oracle provenance binds shared dependencies; e.g. four core libraries."""
+        with tempfile.TemporaryDirectory() as temporary:
+            build = pathlib.Path(temporary)
+            names = ["libTKernel.so", "libTKMath.so", "libgtest.so", "libgtest_main.so"]
+            lines = []
+            for name in names:
+                path = build / name
+                path.write_text(name)
+                lines.append(f"{name} => {path} (0x0)")
+            hashes = hash_linked_native_libraries("\n".join(lines), build)
+        self.assertEqual(len(hashes), 4)
+
+    def test_native_library_provenance_rejects_unresolved_dependency(self) -> None:
+        """An unresolved linked OCCT library blocks evidence; e.g. ldd says not found."""
+        with self.assertRaisesRegex(RuntimeError, "unresolved"):
+            linked_native_library_paths("libTKOffset.so => not found")
+
+    def test_native_environment_removes_library_overrides(self) -> None:
+        """Dynamic loader overrides cannot replace the pinned build libraries."""
+        with patch.dict(
+            "os.environ", {"LD_LIBRARY_PATH": "/tmp", "LD_PRELOAD": "/tmp/x.so"}
+        ):
+            env = native_env()
+        self.assertNotIn("LD_LIBRARY_PATH", env)
+        self.assertNotIn("LD_PRELOAD", env)
+
+    def test_cargo_environment_pins_private_target_directory(self) -> None:
+        """Cargo artifact paths are checkout-scoped; e.g. caller override is replaced."""
+        target = pathlib.Path("/tmp/rustycad-tkmath-private-target")
+        with patch.dict("os.environ", {"CARGO_TARGET_DIR": "/tmp/other-worktree"}):
+            env = cargo_env(target)
+        self.assertEqual(env["CARGO_TARGET_DIR"], str(target.resolve()))
 
 
 def mapping(digest: str) -> JSONObject:

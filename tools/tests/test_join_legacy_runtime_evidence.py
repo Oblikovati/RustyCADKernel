@@ -110,12 +110,46 @@ class LegacyRuntimeJoinTest(unittest.TestCase):
         self.assertNotEqual(
             first["runtime_report_sha256"], changed["runtime_report_sha256"]
         )
-        self.assertEqual(first["rust_worktree_clean"], True)
+        self.assertEqual(first["rust_source_clean"], True)
+        self.assertEqual(first["rust_revision"], "a" * 40)
+        self.assertIn("joined_on_rust_revision", first)
 
     def test_join_provenance_rejects_missing_manifest(self) -> None:
         """A report without input hashes cannot produce a self-contained join."""
         with self.assertRaisesRegex(ValueError, "source_hashes"):
-            runtime_provenance({"revision": "x"}, pathlib.Path("."), "b" * 64)
+            runtime_provenance(
+                {
+                    "revision": "x",
+                    "rust_git_commit": "a" * 40,
+                    "rust_source_clean": True,
+                },
+                pathlib.Path("."),
+                "b" * 64,
+            )
+
+    def test_join_rejects_reports_without_execution_revision(self) -> None:
+        """Join-time commits cannot stand in for run provenance; e.g. old reports fail."""
+        with tempfile.TemporaryDirectory() as temporary:
+            initialize_git(pathlib.Path(temporary))
+            report: JSONObject = {
+                "revision": "occt-revision",
+                "source_hashes": {"Cargo.lock": "a" * 64},
+            }
+            with self.assertRaisesRegex(ValueError, "rust_git_commit"):
+                runtime_provenance(report, pathlib.Path(temporary), "b" * 64)
+
+    def test_join_rejects_dirty_execution_source(self) -> None:
+        """Run-time dirty trees cannot be reassigned a later clean commit."""
+        with tempfile.TemporaryDirectory() as temporary:
+            initialize_git(pathlib.Path(temporary))
+            report: JSONObject = {
+                "revision": "occt-revision",
+                "source_hashes": {"Cargo.lock": "a" * 64},
+                "rust_git_commit": "a" * 40,
+                "rust_source_clean": False,
+            }
+            with self.assertRaisesRegex(ValueError, "rust_source_clean"):
+                runtime_provenance(report, pathlib.Path(temporary), "b" * 64)
 
     def test_source_mapping_errors_accept_tkmath_scope(self) -> None:
         """Source freshness checks target the report toolkit; e.g. TKMath rows."""
@@ -206,8 +240,10 @@ def provenance_fixture() -> JSONObject:
     return {
         "runtime_report_sha256": "b" * 64,
         "runtime_report_revision": "pinned",
-        "rust_revision": "rust-revision",
-        "rust_worktree_clean": True,
+        "rust_revision": "a" * 40,
+        "rust_source_clean": True,
+        "joined_on_rust_revision": "rust-revision",
+        "joined_on_rust_worktree_clean": True,
         "runtime_input_manifest_sha256": "c" * 64,
         "runtime_input_manifest": {"Cargo.lock": "a" * 64},
         "join_tool_sha256": "d" * 64,
@@ -243,6 +279,8 @@ def changed_provenance_pair(root: pathlib.Path) -> tuple[JSONObject, JSONObject]
     report: JSONObject = {
         "revision": "occt-revision",
         "source_hashes": {"Cargo.lock": "a" * 64},
+        "rust_git_commit": "a" * 40,
+        "rust_source_clean": True,
     }
     first = runtime_provenance(report, root, "b" * 64)
     changed_report = {**report, "source_hashes": {"Cargo.lock": "c" * 64}}
