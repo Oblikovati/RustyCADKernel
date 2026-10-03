@@ -54,6 +54,15 @@ class LegacyToolkitSourcesTest(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "Stale or incomplete TKG2d"):
                 verify_source_rows(source, rows)
 
+    def test_duplicate_declaration_mapping_is_rejected(self) -> None:
+        """One source declaration cannot inflate the runtime row count twice."""
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary)
+            rows = source_rows(source, ["Geom2d_Line_Test.cxx"])
+            rows.append(dict(rows[0]))
+            with self.assertRaisesRegex(RuntimeError, "Duplicate TKG2d mapping"):
+                verify_source_rows(source, rows)
+
     def test_mixed_toolkit_rows_are_rejected(self) -> None:
         """Rows from different toolkits cannot be joined into one runtime report."""
         with self.assertRaisesRegex(ValueError, "without mixed toolkits"):

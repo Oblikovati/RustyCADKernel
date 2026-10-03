@@ -99,9 +99,11 @@ def verify_source_group(
     declarations = {
         f"{suite}.{case}" for suite, case in DECLARATION.findall(contents.decode())
     }
-    mapped = {str(row["upstream_id"]) for row in mappings}
+    mapped = [str(row["upstream_id"]) for row in mappings]
     toolkit = str(mappings[0].get("toolkit", "TKMath"))
-    if declarations != mapped or any(
+    if len(mapped) != len(set(mapped)):
+        raise RuntimeError(f"Duplicate {toolkit} mapping declaration: {relative}")
+    if set(declarations) != set(mapped) or any(
         row["source_sha256"] != digest for row in mappings
     ):
         raise RuntimeError(f"Stale or incomplete {toolkit} source mapping: {relative}")
