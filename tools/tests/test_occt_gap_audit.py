@@ -10,6 +10,7 @@ import tempfile
 import unittest
 
 from tools.api_inventory.gap_audit import (
+    _capture_gaps,
     build_report,
     classify_failed,
     classify_unconfigured,
@@ -22,6 +23,21 @@ from tools.api_inventory.gap_audit import (
 
 
 class GapAuditTests(unittest.TestCase):
+    def test_retry_without_toolkit_uses_all_manifest_owners(self) -> None:
+        owners = [{"toolkit": "TKOpenGl"}, {"toolkit": "TKOpenGles"}]
+        candidate = {"path": "src/Header.hxx", "status": "pending", "owners": owners}
+        retry = {"path": candidate["path"], "status": "parse_failed"}
+        gaps = _capture_gaps(
+            {"header_candidates": [candidate]}, {"retry_results": [retry]}
+        )
+        self.assertEqual(gaps[0]["toolkit"], "TKOpenGl")
+        self.assertEqual(gaps[0]["owners"], owners)
+        candidate["owners"] = []
+        with self.assertRaisesRegex(ValueError, "src/Header.hxx.*manifest owner"):
+            _capture_gaps(
+                {"header_candidates": [candidate]}, {"retry_results": [retry]}
+            )
+
     def init_source(self, path: pathlib.Path) -> None:
         subprocess.run(["git", "init", "-q", str(path)], check=True)
         subprocess.run(

@@ -13,13 +13,13 @@ inside `rust-api.json.gz`. Full API and test parity are **not complete**.
   skipped preprocessor ranges, contributing files, and source-context retries.
 
 The initial scan attempted all 5,905 standalone headers available in the Linux
-configuration. It parsed 5,633; authentic OCCT translation-unit retries recovered
-260 more. All 384 inline fragments were observed. Twelve header probes
+configuration. It parsed 5,639; authentic OCCT translation-unit retries recovered
+260 more. All 384 inline fragments were observed. Six header probes
 remain unresolved and another 28 distinct source headers lack a configured
 owning toolkit. Original failures are preserved even when a context retry works.
 
-The observed surface contains 110,035 public/protected declaration candidates
-and 6,526 macro candidates. Macro bodies, inactive platform/configuration
+The observed surface contains 110,134 public/protected declaration candidates
+and 6,465 macro candidates. Macro bodies, inactive platform/configuration
 branches, unknown configurations, and unresolved identities require additional
 work. The declaration count is a preliminary candidate count: the current
 visibility filter still includes internal helpers, so it is neither a validated

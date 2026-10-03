@@ -103,7 +103,7 @@ def _capture_gaps(capture: JSONObject, retries: JSONObject) -> list[JSONObject]:
             path in failed
             and text_field(failed[path], "status") != "parsed_with_context"
         ):
-            gaps.append(_retry_gap(path, failed[path]))
+            gaps.append(_retry_gap(path, failed[path], candidate))
     return sorted(gaps, key=lambda item: text_field(item, "path"))
 
 
@@ -121,7 +121,10 @@ def _unconfigured_gap(candidate: JSONObject) -> JSONObject:
     }
 
 
-def _retry_gap(path: str, row: JSONObject) -> JSONObject:
+def _retry_gap(path: str, row: JSONObject, candidate: JSONObject) -> JSONObject:
+    owners = object_rows(candidate.get("owners"), "header owners")
+    if not owners:
+        raise ValueError(f"header {path!r}: expected at least one manifest owner")
     status = text_field(row, "status")
     if status == "no_source_include_context":
         category, remedy = context_gap(path)
@@ -132,7 +135,8 @@ def _retry_gap(path: str, row: JSONObject) -> JSONObject:
         category, remedy = classify_failed(path)
     return {
         "path": path,
-        "toolkit": text_field(row, "toolkit"),
+        "toolkit": text_field(owners[0], "toolkit"),
+        "owners": owners,
         "category": category,
         "evidence": row.get("context_evidence", row.get("stderr", "")),
         "retry_status": status,

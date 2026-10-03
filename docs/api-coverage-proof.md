@@ -1,29 +1,29 @@
 # OCCT API coverage proof
 
-`porting/parity.json` is a manually curated mapping ledger. Its 27,139 API rows are
+`porting/parity.json` is a manually curated mapping ledger. Its 27,143 API rows are
 useful work records, but they are not an authoritative upstream symbol inventory.
 `api_inventory_complete` must remain `false` until an independent inventory is
 generated from both projects and the comparison gate passes.
 
 ## Current compiler inventory
 
-The configured scan observes **110,035 public/protected C++ declaration
-candidates**, plus 6,526 macro candidates tracked separately. It accounts for
+The configured scan observes **110,134 public/protected C++ declaration
+candidates**, plus 6,465 macro candidates tracked separately. It accounts for
 all 6,316 source-header paths and the generated version header:
 
 | Header disposition | Count |
 | --- | ---: |
-| Standalone parse succeeded | 5,633 |
+| Standalone parse succeeded | 5,639 |
 | Parsed in a real OCCT translation-unit context | 260 |
 | Included fragments observed | 384 |
-| Parsing/context gaps | 12 |
+| Parsing/context gaps | 6 |
 | No configured owning toolkit | 28 |
 
 All 384 `.lxx` fragments are observed. Context successes retain their original
 standalone failure, source translation unit, flags, and hashes. Six toolkit
 configurations remain absent; OpenGL/GLES share physical headers, so per-toolkit
 ownership totals overlap and do not prove the absent GLES configuration.
-There are 2,651 conflicting-declaration observations and 1,094 skipped preprocessor
+There are 5,224 conflicting-declaration observations and 1,094 skipped preprocessor
 ranges retained for review. The declaration count is a preliminary candidate
 count: the current visibility filter still includes internal helpers, so it is
 neither a validated lower bound nor a denominator for API coverage.
@@ -123,10 +123,10 @@ archive is 1,183,587,483 bytes compressed; the extracted LLVM tree occupies
 about 12.4 GB in this environment. The pinned nightly installation occupies
 about 601 MB.
 CMake configuration may also require platform development headers for optional
-OCCT features. This environment currently configures 5,692 translation units
-covering 67 of 75 manifest toolkits. CMake omits `TKIVtk` and `TKIVtkDraw`
-because VTK is unavailable, and `TKDEGLTF` and `TKXSDRAWGLTF` because RapidJSON
-is unavailable. `TKD3DHost`, `TKD3DHostTest`, `TKOpenGles`, and
+OCCT features. The current capture configuration contains 5,701 translation units
+covering 69 of 75 manifest toolkits. RapidJSON headers enable `TKDEGLTF` and
+`TKXSDRAWGLTF`; one parser header still fails with RapidJSON 1.1.0. CMake omits
+`TKIVtk` and `TKIVtkDraw` because VTK is unavailable. `TKD3DHost`, `TKD3DHostTest`, `TKOpenGles`, and
 `TKOpenGlesTest` are absent from the Linux configuration due to platform-specific
 toolkit availability. `verify` fails while any manifest toolkit lacks compile
 commands. These absences are inventory failures, not API exclusions.

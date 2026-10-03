@@ -3,14 +3,14 @@
   "inputs": {
     "manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
     "database_sha256": "6429a7389b6747066c80eaabcb2c6cfe340dc8dfcb958218c0545df5a9e0a9a8",
-    "extractor_sha256": "fe344f205fb6a0f634fe5fc60247907475726fc0bdd22c219175004b71d4de8d",
+    "extractor_sha256": "38459c021180ab0644d396ad6f195ea987d2fc718d3b07931c43c4f2d4b71f44",
     "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
     "cmake_cache_sha256": "df4501d40b90bbc2cb8543658820157dddfe1e5a9f9fc1efc55a03d21325979b",
     "generated_version_sha256": "49100a529ae6ba88686552213d31e86beea5dec7e00b96dcda2b571292bf4f86",
     "file_inputs": {
       "manifest": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace-RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/porting/api-header-manifest.json",
       "database": "/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/compile_commands.json",
-      "extractor": "/tmp/rustycad-api-clang-extractor/target/api_inventory/occt-api-extract",
+      "extractor": "/tmp/rustycad-api-clang-identity-followup-build/occt-api-extract",
       "toolchain_config": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace-RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/porting/api-proof-toolchain.json",
       "cmake_cache": "/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/CMakeCache.txt",
       "generated_version": "/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/include/opencascade/Standard_Version.hxx"
@@ -47,49 +47,50 @@
         "sha256": "474d444e61549f1cbec51ced309d260caf9e75ba51b0a490cb75131bb42e7655"
       }
     ],
-    "collector_sha256": "4eccf6f56194eeaac436e4dc77b96d8ed2dabfaf3db9e902daf17c9d0c3a4b0c"
+    "collector_sha256": "f25fd5bbf892c720160d25de61aae56612500239f9aa3a9289dd0390b2046d1f"
   },
-  "capture_fingerprint": "89cd16fc749b1d37d680bbe65e6effef791e5c8f31d1b5216ff95464ccd90c28",
-  "context_retry_sha256": "beb67de2a6f4a5f3b67e11140f2f80b4651f9f7ae48bd836a0a21b1f3bcc8701",
+  "capture_fingerprint": "c99da7e55613ccb63f5cb790b76f330937c7227d1071d9da18db0056ccd23787",
+  "context_retry_sha256": "e06f2f14b1e4a6c5a6cafea1dc0b7fae749acbd3fa4d4f83ad9df983a0d8e689",
   "expected_headers": 6317,
   "headers_by_status": {
-    "parsed": 5633,
+    "parsed": 5639,
     "included_fragment": 384,
     "parsed_with_context": 260,
-    "parse_failed": 12,
+    "parse_failed": 6,
     "missing_compile_configuration": 28
   },
-  "declarations": 271488,
-  "api_declarations": 110270,
-  "macro_definitions": 12379,
-  "macro_candidates": 6526,
+  "declarations": 271643,
+  "api_declarations": 110134,
+  "macro_definitions": 12385,
+  "macro_candidates": 6465,
   "declarations_by_kind": {
     "Namespace": 53,
-    "Function": 1024,
+    "Function": 900,
     "FunctionTemplate": 593,
-    "TemplateTypeParm": 1509,
-    "CXXRecord": 5762,
-    "CXXMethod": 73620,
+    "TemplateTypeParm": 1502,
+    "CXXRecord": 5754,
+    "CXXMethod": 73643,
     "ClassTemplateSpecialization": 128,
-    "NonTypeTemplateParm": 269,
-    "CXXConstructor": 7990,
-    "Typedef": 5907,
+    "NonTypeTemplateParm": 274,
+    "CXXConstructor": 7995,
+    "Typedef": 5903,
     "Enum": 630,
     "EnumConstant": 4662,
-    "Field": 5541,
+    "Field": 5552,
     "CXXConversion": 173,
-    "CXXDestructor": 500,
-    "ClassTemplate": 226,
-    "Var": 233,
+    "CXXDestructor": 503,
+    "ClassTemplate": 228,
+    "Var": 185,
     "TypeAlias": 573,
     "ClassTemplatePartialSpecialization": 39,
     "TemplateTemplateParm": 1,
+    "UnresolvedUsingValue": 6,
     "UsingDirective": 29,
     "Using": 806,
     "TypeAliasTemplate": 2
   },
-  "unsupported_records": 2651,
-  "diagnostics": 7813,
+  "unsupported_records": 5224,
+  "diagnostics": 7807,
   "skipped_ranges": 1094,
   "configuration_matrix_complete": false,
   "declaration_inventory_complete": false,
@@ -97,28 +98,28 @@
   "artifacts": {
     "declarations": {
       "path": "occt-declarations.jsonl.gz",
-      "sha256": "4a2de56e7fa0dc2abf580b1fc820aac578c92417c1177e1968645e47a7c27b8e",
-      "rows": 271488
+      "sha256": "cf6938854274e724f2c654713c633827ed19f6930cb0f8c21ce0bd10aaa912c3",
+      "rows": 271643
     },
     "macros": {
       "path": "occt-macros.jsonl.gz",
-      "sha256": "90830de296ca4481be21b2afb785339cd2e891bbc71496a030d633b18d59371b",
-      "rows": 12379
+      "sha256": "6237425735b1a66d28ab3610a82ab44f1e4504fd8b8d03750e11646dffc2b9e0",
+      "rows": 12385
     },
     "headers": {
       "path": "occt-headers.jsonl.gz",
-      "sha256": "26629958573461b4ff1640f6e4e18a1f115edc5f32d83ef5e74a1816e8850236",
+      "sha256": "f6360706da3e81219c3cec0a4ba8a618a8d14cf0f4bb2ad1a8dd56fda4407077",
       "rows": 6317
     },
     "diagnostics": {
       "path": "occt-diagnostics.jsonl.gz",
-      "sha256": "f6681b36c0feaefd436ce9fa9d2ce33a953c8745eb2875631bf1acd6e8302ce0",
-      "rows": 7813
+      "sha256": "c3673215274338e5e750b06292924bdbc8961c7bf4892f0d4530009097270856",
+      "rows": 7807
     },
     "unsupported": {
       "path": "occt-unsupported.jsonl.gz",
-      "sha256": "b48b5fd40b776a4f84ebb68212a3fb870172534e1efb63bfb93af7c39bae8323",
-      "rows": 2651
+      "sha256": "138c795fcb72b5374e12a79e6d9e58f77d8090419e836b1f842a4e17d5e3506a",
+      "rows": 5224
     },
     "skipped-ranges": {
       "path": "occt-skipped-ranges.jsonl.gz",
@@ -127,18 +128,18 @@
     },
     "compiler-summaries": {
       "path": "occt-compiler-summaries.jsonl.gz",
-      "sha256": "e51dbd0214c629ab49c5faf456fcdc5f62b0313810f5e99e1934be60e3161d8b",
-      "rows": 5893
+      "sha256": "70219bbb6d5e7a5378766fd95defe738224e13dbcafda281434ee6a0e6ad90a9",
+      "rows": 5899
     },
     "context-retries": {
       "path": "occt-context-retries.jsonl.gz",
-      "sha256": "4f501a95730991e5fe73f4b0a9d1c25a60d636147e38fcae39119cd54e163808",
-      "rows": 272
+      "sha256": "f8a8bac7c1603b8f304e0ee7d72ac1173b31af8ea61c13d6a5d8253d6b1bd135",
+      "rows": 266
     },
     "included-files": {
       "path": "occt-included-files.jsonl.gz",
-      "sha256": "78e3f2d5009f4a981c618e60da614bc2acd50b8ab0d3d8dcd4283e0f47fbd9cc",
-      "rows": 10617
+      "sha256": "cf5715b7e02b5b180b4140c3d0716713275a0a89a930beade59829b6edfc9dc4",
+      "rows": 10618
     }
   }
 }

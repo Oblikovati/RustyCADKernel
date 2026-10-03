@@ -3,45 +3,51 @@
   "coverage_proof": false,
   "declaration_inventory_complete": false,
   "inputs": {
-    "capture_fingerprint": "89cd16fc749b1d37d680bbe65e6effef791e5c8f31d1b5216ff95464ccd90c28",
-    "capture_sha256": "95cc45c855372db9d837079899541e6e89dde4730a2efedd8195f2289a7fa443",
+    "capture_fingerprint": "c99da7e55613ccb63f5cb790b76f330937c7227d1071d9da18db0056ccd23787",
+    "capture_sha256": "50aae71c6c75a2ba67c775f5eb55e8d618e9b7c5a8dca18fc421fa61e80340af",
     "cmake_cache_sha256": "df4501d40b90bbc2cb8543658820157dddfe1e5a9f9fc1efc55a03d21325979b",
     "retry_database_sha256": "6429a7389b6747066c80eaabcb2c6cfe340dc8dfcb958218c0545df5a9e0a9a8",
-    "retry_extractor_sha256": "fe344f205fb6a0f634fe5fc60247907475726fc0bdd22c219175004b71d4de8d",
-    "retry_sha256": "beb67de2a6f4a5f3b67e11140f2f80b4651f9f7ae48bd836a0a21b1f3bcc8701"
+    "retry_extractor_sha256": "38459c021180ab0644d396ad6f195ea987d2fc718d3b07931c43c4f2d4b71f44",
+    "retry_sha256": "e06f2f14b1e4a6c5a6cafea1dc0b7fae749acbd3fa4d4f83ad9df983a0d8e689"
   },
   "merged_capture": {
-    "context_retry_sha256": "beb67de2a6f4a5f3b67e11140f2f80b4651f9f7ae48bd836a0a21b1f3bcc8701",
+    "context_retry_sha256": "e06f2f14b1e4a6c5a6cafea1dc0b7fae749acbd3fa4d4f83ad9df983a0d8e689",
     "coverage_proof": false,
     "headers_by_status": {
       "included_fragment": 384,
       "missing_compile_configuration": 28,
-      "parse_failed": 12,
-      "parsed": 5633,
+      "parse_failed": 6,
+      "parsed": 5639,
       "parsed_with_context": 260
     },
-    "manifest_sha256": "ec0907f4807e54969cfc6b5e116bd170d10afd6b009e80339e14cf594ad928f9"
+    "manifest_sha256": "e932ffe239a7f5deed5f08f217f81cb08315c4d1c2fa527d5bae5fc2d1bd0859"
   },
   "note": "Supplemental retries are reported separately and do not rewrite capture evidence.",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "schema": "occt-capture-gap-audit-v1",
   "unresolved_by_category": {
     "external_dependency_parse_error": 1,
-    "extractor_unhandled_decl_kind": 6,
     "language_mode_unavailable": 1,
-    "no_source_include_consumer": 1,
+    "no_source_include_consumer": 2,
     "optional_dependency_unconfigured": 23,
     "optional_platform_feature_unconfigured": 1,
-    "platform_condition_excludes_header": 2,
+    "platform_condition_excludes_header": 1,
     "platform_unconfigured": 5
   },
-  "unresolved_gap_count": 40,
+  "unresolved_gap_count": 34,
   "unresolved_gaps": [
     {
-      "artifact_sha256": "e06a3a248c3275880c56d60aa98991c95a7dc8cbb10620acc5a9e8f85b658c05",
+      "artifact_sha256": "ebe5e701c4d054875ffe07dfa817f97493f20ae2209b46ff2434210c4ba2cf6c",
       "capture_status": "unresolved",
       "category": "external_dependency_parse_error",
       "evidence": "compile_commands source include resolves through configured headers to this OCCT file",
+      "owners": [
+        {
+          "module": "DataExchange",
+          "package": "RWGltf",
+          "toolkit": "TKDEGLTF"
+        }
+      ],
       "path": "src/DataExchange/TKDEGLTF/RWGltf/RWGltf_GltfJsonParser.hxx",
       "recommended_recovery": "Resolve the RapidJSON 1.1.0 Clang incompatibility and recapture.",
       "retry_status": "parse_failed",
@@ -80,70 +86,17 @@
       "toolkit": "TKIVtkDraw"
     },
     {
-      "artifact_sha256": "0a68c5240e92c4f481b8669a8503e0a0992301a74dc80f5f9eac54e68658fc16",
-      "capture_status": "unresolved",
-      "category": "extractor_unhandled_decl_kind",
-      "evidence": "compile_commands source include resolves through configured headers to this OCCT file",
-      "path": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "recommended_recovery": "Support UnresolvedUsingValue, rebuild, and recapture.",
-      "retry_status": "parse_failed",
-      "toolkit": "TKMath"
-    },
-    {
-      "artifact_sha256": "299d9a4334bf86c32649e96410629d1515ae4d7e50c159c942c79906c44db349",
-      "capture_status": "unresolved",
-      "category": "extractor_unhandled_decl_kind",
-      "evidence": "transitive source include graph candidate; artifact header_seen validates active include",
-      "path": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
-      "recommended_recovery": "Support UnresolvedUsingValue, rebuild, and recapture.",
-      "retry_status": "parse_failed",
-      "toolkit": "TKMath"
-    },
-    {
-      "artifact_sha256": "6e121517b0e15530520e53881fa6ad407379f46f108dc617069fdad10769df07",
-      "capture_status": "unresolved",
-      "category": "extractor_unhandled_decl_kind",
-      "evidence": "transitive source include graph candidate; artifact header_seen validates active include",
-      "path": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
-      "recommended_recovery": "Support UnresolvedUsingValue, rebuild, and recapture.",
-      "retry_status": "parse_failed",
-      "toolkit": "TKMath"
-    },
-    {
-      "artifact_sha256": "8516e8c8d801a3d3ecbcabd50709db029272c6e3a56e8fc16304c21d70f3b9a5",
-      "capture_status": "unresolved",
-      "category": "extractor_unhandled_decl_kind",
-      "evidence": "transitive source include graph candidate; artifact header_seen validates active include",
-      "path": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "recommended_recovery": "Support UnresolvedUsingValue, rebuild, and recapture.",
-      "retry_status": "parse_failed",
-      "toolkit": "TKMath"
-    },
-    {
-      "artifact_sha256": "a1a9c8bb1f86b5b01c028ff411e8dc995ef96bd3b58df9bbc1955e8c84cdc43b",
-      "capture_status": "unresolved",
-      "category": "extractor_unhandled_decl_kind",
-      "evidence": "transitive source include graph candidate; artifact header_seen validates active include",
-      "path": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
-      "recommended_recovery": "Support UnresolvedUsingValue, rebuild, and recapture.",
-      "retry_status": "parse_failed",
-      "toolkit": "TKMath"
-    },
-    {
-      "artifact_sha256": "5e25d6e32cbd86e59d082fa254558440bbdd7e96bc59e381f51fb5da4b5abedf",
-      "capture_status": "unresolved",
-      "category": "extractor_unhandled_decl_kind",
-      "evidence": "transitive source include graph candidate; artifact header_seen validates active include",
-      "path": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "recommended_recovery": "Support UnresolvedUsingValue, rebuild, and recapture.",
-      "retry_status": "parse_failed",
-      "toolkit": "TKMath"
-    },
-    {
       "artifact_sha256": null,
       "capture_status": "unresolved",
       "category": "language_mode_unavailable",
       "evidence": "",
+      "owners": [
+        {
+          "module": "FoundationClasses",
+          "package": "NCollection",
+          "toolkit": "TKernel"
+        }
+      ],
       "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Haft.h",
       "recommended_recovery": "Capture with the actual MSVC C++/CLI configuration if in scope.",
       "retry_status": "no_source_include_context",
@@ -154,6 +107,13 @@
       "capture_status": "unresolved",
       "category": "platform_condition_excludes_header",
       "evidence": "compile_commands source include resolves through configured headers to this OCCT file",
+      "owners": [
+        {
+          "module": "FoundationClasses",
+          "package": "OSD",
+          "toolkit": "TKernel"
+        }
+      ],
       "path": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "recommended_recovery": "Capture with the platform configuration that activates the guarded include.",
       "retry_status": "parse_failed",
@@ -356,19 +316,38 @@
       "capture_status": "unresolved",
       "category": "optional_platform_feature_unconfigured",
       "evidence": "",
+      "owners": [
+        {
+          "module": "Visualization",
+          "package": "OpenGl",
+          "toolkit": "TKOpenGl"
+        },
+        {
+          "module": "Visualization",
+          "package": "OpenGl",
+          "toolkit": "TKOpenGles"
+        }
+      ],
       "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_GLESExtensions.hxx",
       "recommended_recovery": "Enable GLES and verify an active source include.",
       "retry_status": "no_source_include_context",
       "toolkit": "TKOpenGl"
     },
     {
-      "artifact_sha256": "25cb0abaa1fd61d0035436bad2400573b59f4234f5d234287169be45fe898509",
+      "artifact_sha256": null,
       "capture_status": "unresolved",
-      "category": "platform_condition_excludes_header",
-      "evidence": "transitive source include graph candidate; artifact header_seen validates active include",
+      "category": "no_source_include_consumer",
+      "evidence": "",
+      "owners": [
+        {
+          "module": "Visualization",
+          "package": "WNT",
+          "toolkit": "TKService"
+        }
+      ],
       "path": "src/Visualization/TKService/WNT/WNT_Dword.hxx",
-      "recommended_recovery": "Capture with the platform configuration that activates the guarded include.",
-      "retry_status": "parse_failed",
+      "recommended_recovery": "Keep unresolved until a real consuming translation unit is identified.",
+      "retry_status": "no_source_include_context",
       "toolkit": "TKService"
     },
     {
@@ -376,6 +355,13 @@
       "capture_status": "unresolved",
       "category": "no_source_include_consumer",
       "evidence": "",
+      "owners": [
+        {
+          "module": "Visualization",
+          "package": "StdPrs",
+          "toolkit": "TKV3d"
+        }
+      ],
       "path": "src/Visualization/TKV3d/StdPrs/StdPrs_Vertex.hxx",
       "recommended_recovery": "Keep unresolved until a real consuming translation unit is identified.",
       "retry_status": "no_source_include_context",
