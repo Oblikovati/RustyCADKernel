@@ -220287,6 +220287,206 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdge::context",
       "status": "implemented",
       "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; native oracle fixtures tkshhealing_fix_edge_parameters, tkshhealing_fix_edge_curves, tkshhealing_fix_edge_api_context, tkshhealing_temp_same_range_probe and tkshhealing_fix_add_pcurve. Declaration mapping is not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Init(const occ::handle<ShapeExtend_WireData> &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::init_wire_data",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::NextCriter(const int,const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::next_criter",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetDisjoined(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_disjoined",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Load(const TopoDS_Wire &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::load",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetPrecision(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_precision",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetEnd(const int,const gp_XYZ &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_end",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetInters(const int,const gp_XYZ &,const double,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_inters",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Data(const int,gp_XYZ &,double &,double &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::data",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::ShapeAnalysis_WireVertex()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Status(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::status",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::IsDone()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::is_done",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Load(const occ::handle<ShapeExtend_WireData> &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::load_wire_data",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Precision()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::precision",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::UFollowing(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::u_following",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::WireData()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::wire_data",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetStart(const int,const gp_XYZ &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_start",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetClose(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_close",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Init(const TopoDS_Wire &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::init",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::UPrevious(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::u_previous",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::NextStatus(const int,const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::next_status",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::NbEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::nb_edges",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetSameVertex(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_same_vertex",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::SetSameCoords(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::set_same_coords",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Analyze()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::analyze",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_WireVertex::Position(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::position",
+      "status": "implemented",
+      "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
     }
   ],
   "tests": [
