@@ -306,3 +306,9 @@ Validation against pinned OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871`:
 These checks support the audited slice. They do not prove full API equivalence or
 join every GoogleTest runtime instance to a Rust execution; those obligations
 remain visible in the global inventories.
+
+A follow-up audit names 173 existing Geom2d trait implementations explicitly in
+the ledger. The normalizer first resolves each trait's public export rather than
+using its inaccessible defining module in an implementation selector. Each row
+retains its exact implementing type and method; this is a mapping correction,
+not an additional geometry implementation or legacy test declaration.
