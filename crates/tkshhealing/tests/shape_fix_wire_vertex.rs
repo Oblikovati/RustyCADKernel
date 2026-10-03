@@ -24,7 +24,7 @@ fn fix_reconnects_projected_junctions_and_preserves_start_slot_quirk()
         assert_eq!(analysis.status(1)?, 0);
         assert_shared_endpoints(&data, x)?;
     }
-    mixed_positive_and_nonpositive_statuses_keep_native_null_endpoint();
+    mixed_positive_and_nonpositive_statuses_keep_native_vertex_orientations();
     Ok(())
 }
 
@@ -58,6 +58,31 @@ fn fix_same_compares_vertex_orientation_as_native_shape_equality_does() {
     assert_eq!(analysis.status(1).unwrap(), 0);
 }
 
+#[test]
+fn close_fix_same_uses_oriented_curve_ranges_on_reversed_edges() {
+    for (reverse_first, reverse_second, x1, x2, u1, u2) in [
+        (true, false, 0.0, 1.0001, 0.0, 0.0),
+        (false, true, 1.0, 2.0, 1.0, 0.9999),
+    ] {
+        let (mut analysis, data) = reversed_analyzed_pair(reverse_first, reverse_second).unwrap();
+        analysis.set_close(1).unwrap();
+        let mut fixer = ShapeFixWireVertex::new();
+        fixer.init_from_analyzer(&analysis);
+        assert_eq!(fixer.fix_same().unwrap(), 1);
+        assert_reversed_join(&data, (x1, x2), (u1, u2), 1e-3);
+    }
+}
+
+#[test]
+fn fix_uses_oriented_curve_ranges_on_reversed_edges() {
+    let (mut analysis, data) = reversed_analyzed_pair(true, true).unwrap();
+    analysis.set_end(1, Xyz::new(1.1, 0.0, 0.0), 0.25).unwrap();
+    let mut fixer = ShapeFixWireVertex::new();
+    fixer.init_from_analyzer(&analysis);
+    assert_eq!(fixer.fix().unwrap(), 2);
+    assert_shared_join(&data, 1.1, (0.0, 0.9999));
+}
+
 fn set_same_status(analysis: &mut ShapeAnalysisWireVertex, close: bool) {
     if close {
         analysis.set_close(1).unwrap();
@@ -66,7 +91,7 @@ fn set_same_status(analysis: &mut ShapeAnalysisWireVertex, close: bool) {
     }
 }
 
-fn mixed_positive_and_nonpositive_statuses_keep_native_null_endpoint() {
+fn mixed_positive_and_nonpositive_statuses_keep_native_vertex_orientations() {
     let (mut analysis, data) = analyzed_pair().unwrap();
     analysis.set_end(1, Xyz::new(1.1, 0.0, 0.0), 0.25).unwrap();
     analysis.set_same_vertex(2).unwrap();
@@ -76,7 +101,10 @@ fn mixed_positive_and_nonpositive_statuses_keep_native_null_endpoint() {
     assert_eq!(analysis.status(1).unwrap(), 0);
     assert_eq!(analysis.status(2).unwrap(), 0);
     let edges = ShapeAnalysisEdge::new();
-    assert!(edges.last_vertex(&data.edge(2).unwrap()).is_null());
+    assert_eq!(
+        edges.last_vertex(&data.edge(2).unwrap()).orientation(),
+        rustycad_tkg3d::top_abs::Orientation::Reversed
+    );
     assert_eq!(
         edges.first_vertex(&data.edge(1).unwrap()).orientation(),
         rustycad_tkg3d::top_abs::Orientation::External
@@ -87,6 +115,7 @@ fn mixed_positive_and_nonpositive_statuses_keep_native_null_endpoint() {
 #[test]
 fn disjoined_fixer_run_leaves_the_wire_unchanged() {
     disjoined_junction_is_reset_when_another_record_triggers_fix();
+    disjoined_no_curve_wire_returns_before_edge_capture();
     let (mut analysis, data) = analyzed_pair().unwrap();
     analysis.set_disjoined(1).unwrap();
     analysis.set_disjoined(2).unwrap();
@@ -96,6 +125,19 @@ fn disjoined_fixer_run_leaves_the_wire_unchanged() {
     assert_eq!(analysis.status(1).unwrap(), -1);
     assert_eq!(analysis.status(2).unwrap(), -1);
     assert_not_reconnected(&data, false);
+}
+
+fn disjoined_no_curve_wire_returns_before_edge_capture() {
+    let (mut analysis, data) = analyzed_pair().unwrap();
+    analysis.set_disjoined(1).unwrap();
+    analysis.set_disjoined(2).unwrap();
+    rustycad_tkbrep::brep::BRepBuilder::default()
+        .update_edge_curve(&data.edge(1).unwrap(), &Handle::default(), 0.0)
+        .unwrap();
+    let mut fixer = ShapeFixWireVertex::new();
+    fixer.init_from_analyzer(&analysis);
+    assert_eq!(fixer.fix().unwrap(), 0);
+    assert_eq!(analysis.status(1).unwrap(), -1);
 }
 
 fn disjoined_junction_is_reset_when_another_record_triggers_fix() {
@@ -138,6 +180,31 @@ fn shared_endpoint_pair() -> Result<Handle<ShapeExtendWireData>, rustycad_tkerne
     Ok(data)
 }
 
+fn reversed_analyzed_pair(
+    reverse_first: bool,
+    reverse_second: bool,
+) -> Result<
+    (ShapeAnalysisWireVertex, Handle<ShapeExtendWireData>),
+    rustycad_tkernel::standard::Failure,
+> {
+    let mut first = line(0.0, 1.0)?;
+    let mut second = line(1.0001, 2.0)?;
+    if reverse_first {
+        first.reverse();
+    }
+    if reverse_second {
+        second.reverse();
+    }
+    let data = Handle::new(ShapeExtendWireData::new());
+    data.add_edge(&first, 0)?;
+    data.add_edge(&second, 0)?;
+    let mut analysis = ShapeAnalysisWireVertex::new();
+    analysis.init_wire_data(&data, 0.75);
+    analysis.set_precision(1e-3);
+    analysis.analyze()?;
+    Ok((analysis, data))
+}
+
 fn line(start: f64, end: f64) -> Result<Edge, rustycad_tkernel::standard::Failure> {
     BRepBuilderAPIMakeEdge::from_points(Point3::new(start, 0.0, 0.0), Point3::new(end, 0.0, 0.0))?
         .edge()
@@ -167,6 +234,46 @@ fn assert_shared_endpoints(
     assert_eq!(BRepTool::parameter(&previous, &previous_edge)?, 1.0);
     assert_eq!(BRepTool::parameter(&following, &following_edge)?, 0.0);
     Ok(())
+}
+
+fn assert_reversed_join(
+    data: &Handle<ShapeExtendWireData>,
+    points: (f64, f64),
+    parameters: (f64, f64),
+    previous_tolerance: f64,
+) {
+    let (previous, following) = endpoints(data).unwrap();
+    let previous_edge = data.edge(1).unwrap();
+    let following_edge = data.edge(2).unwrap();
+    assert!(!previous.is_same(&following));
+    assert_eq!(BRepTool::pnt(&previous).unwrap().x(), points.0);
+    assert_eq!(BRepTool::pnt(&following).unwrap().x(), points.1);
+    assert_eq!(
+        BRepTool::vertex_tolerance(&previous).unwrap(),
+        previous_tolerance
+    );
+    assert_eq!(
+        BRepTool::parameter(&previous, &previous_edge).unwrap(),
+        parameters.0
+    );
+    assert_eq!(
+        BRepTool::parameter(&following, &following_edge).unwrap(),
+        parameters.1
+    );
+}
+
+fn assert_shared_join(data: &Handle<ShapeExtendWireData>, x: f64, parameters: (f64, f64)) {
+    let (previous, following) = endpoints(data).unwrap();
+    assert!(previous.is_same(&following));
+    assert_eq!(BRepTool::pnt(&previous).unwrap().x(), x);
+    assert_eq!(
+        BRepTool::parameter(&previous, &data.edge(1).unwrap()).unwrap(),
+        parameters.0
+    );
+    assert_eq!(
+        BRepTool::parameter(&following, &data.edge(2).unwrap()).unwrap(),
+        parameters.1
+    );
 }
 
 fn assert_not_reconnected(data: &Handle<ShapeExtendWireData>, close: bool) {

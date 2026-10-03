@@ -19,4 +19,6 @@ g++ -std=c++17 -I"$build/include/opencascade" \
 `*.expected` records counts and endpoint identity/point/tolerance/parameter observations.
 `FixSame` adds the selected shared vertex but retains old endpoint vertices; `Fix` first
 removes endpoints and then reconnects them. The tested status-4 record also preserves the
-upstream `ShapeAnalysis_WireVertex::SetStart` following-slot behavior.
+upstream `ShapeAnalysis_WireVertex::SetStart` following-slot behavior. Reversed-edge cases
+verify that the fixer requests oriented 3D curve ranges; the no-curve row verifies `Fix`
+returns before reading edge records when all statuses are nonpositive.

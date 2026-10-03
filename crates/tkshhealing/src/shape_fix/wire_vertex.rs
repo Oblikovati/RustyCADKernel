@@ -16,7 +16,7 @@ use rustycad_tkmath::gp::{Point3, Xyz};
 /// ```
 /// use rustycad_tkshhealing::shape_fix::ShapeFixWireVertex;
 /// let fixer = ShapeFixWireVertex::new();
-/// assert_eq!(fixer.analyzer().nb_edges(), 0);
+/// assert!(!fixer.analyzer().is_done());
 /// ```
 #[derive(Clone, Default)]
 pub struct ShapeFixWireVertex {
@@ -89,10 +89,12 @@ impl ShapeFixWireVertex {
         if !self.analyzer.is_done() {
             return Ok(0);
         }
-        let snapshot = FixSnapshot::capture(&self.analyzer)?;
-        if snapshot.positive_count == 0 {
+        let positive_count =
+            count_positive_statuses(&self.analyzer, self.analyzer.nb_edges() as usize)?;
+        if positive_count == 0 {
             return Ok(0);
         }
+        let snapshot = FixSnapshot::capture(&self.analyzer, positive_count)?;
         self.apply_fix_snapshot(snapshot)
     }
 
@@ -128,8 +130,8 @@ impl ShapeFixWireVertex {
         shared_vertex: &Vertex,
     ) -> Result<(), Failure> {
         let analyzer = ShapeAnalysisEdge::new();
-        let (_, _, previous_parameter) = analyzer.curve_3d(&pair.0, false)?;
-        let (_, following_parameter, _) = analyzer.curve_3d(&pair.1, false)?;
+        let (_, _, previous_parameter) = analyzer.curve_3d(&pair.0, true)?;
+        let (_, following_parameter, _) = analyzer.curve_3d(&pair.1, true)?;
         let builder = BRepBuilder::default();
         let precision = self.analyzer.precision();
         builder.update_vertex_on_edge(shared_vertex, previous_parameter, &pair.0, precision)?;
@@ -212,21 +214,20 @@ struct JunctionSnapshot {
 }
 
 impl FixSnapshot {
-    fn capture(analyzer: &ShapeAnalysisWireVertex) -> Result<Self, Failure> {
+    fn capture(analyzer: &ShapeAnalysisWireVertex, positive_count: i32) -> Result<Self, Failure> {
         let count = analyzer.nb_edges();
         let data = analyzer.wire_data();
         let edges = (1..=count)
             .map(|index| data.edge(index))
             .collect::<Result<Vec<_>, _>>()?;
-        Self::capture_vertices(analyzer, edges)
+        Self::capture_vertices(analyzer, edges, positive_count)
     }
 
     fn capture_vertices(
         analyzer: &ShapeAnalysisWireVertex,
         edges: Vec<Edge>,
+        positive_count: i32,
     ) -> Result<Self, Failure> {
-        let count = edges.len();
-        let positive_count = count_positive_statuses(analyzer, count)?;
         let junctions = capture_junction_records(analyzer, &edges)?;
         Ok(Self {
             edges,
@@ -282,10 +283,10 @@ fn junction_parameters(
     let mut previous_parameter = analyzer.u_previous(index as i32 + 1)?;
     let mut following_parameter = analyzer.u_following(next as i32 + 1)?;
     if status < 4 {
-        previous_parameter = edge_analysis.curve_3d(&edges[index], false)?.2;
+        previous_parameter = edge_analysis.curve_3d(&edges[index], true)?.2;
     }
     if status < 3 || status == 4 {
-        following_parameter = edge_analysis.curve_3d(&edges[next], false)?.1;
+        following_parameter = edge_analysis.curve_3d(&edges[next], true)?.1;
     }
     Ok((previous_parameter, following_parameter))
 }
@@ -303,7 +304,7 @@ fn attach_shared_vertex(pair: (Edge, Edge), mut vertex: Vertex) -> Result<(), Fa
     vertex.set_orientation(pair.1.orientation());
     builder.add(&mut pair.1.clone(), &vertex)?;
     vertex.set_orientation(pair.0.orientation());
-    vertex.set_orientation(Orientation::Reversed);
+    vertex.reverse();
     builder.add(&mut pair.0.clone(), &vertex)
 }
 
@@ -362,6 +363,6 @@ fn reconnect_junction(
     builder.add(&mut next, &vertex)?;
     let mut previous = previous.clone();
     previous.set_free(true)?;
-    vertex.reverse();
+    vertex.set_orientation(Orientation::Reversed);
     builder.add(&mut previous, &vertex)
 }

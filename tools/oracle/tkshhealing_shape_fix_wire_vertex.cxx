@@ -1,5 +1,6 @@
 // Oracle for ShapeFix_WireVertex at OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #include <BRepBuilderAPI_MakeEdge.hxx>
+#include <BRep_Builder.hxx>
 #include <BRepBuilderAPI_MakeVertex.hxx>
 #include <BRep_Tool.hxx>
 #include <ShapeAnalysis_WireVertex.hxx>
@@ -7,6 +8,7 @@
 #include <ShapeFix_WireVertex.hxx>
 #include <ShapeAnalysis_Edge.hxx>
 #include <TopoDS_Edge.hxx>
+#include <TopoDS_Iterator.hxx>
 #include <TopoDS_Vertex.hxx>
 #include <gp_Pnt.hxx>
 #include <iomanip>
@@ -16,6 +18,15 @@ static occ::handle<ShapeExtend_WireData> pair() {
   occ::handle<ShapeExtend_WireData> data = new ShapeExtend_WireData;
   data->Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0,0,0), gp_Pnt(1,0,0)).Edge());
   data->Add(BRepBuilderAPI_MakeEdge(gp_Pnt(1.0001,0,0), gp_Pnt(2,0,0)).Edge());
+  return data;
+}
+static occ::handle<ShapeExtend_WireData> reversed_pair(bool reverse_first, bool reverse_second) {
+  TopoDS_Edge first = BRepBuilderAPI_MakeEdge(gp_Pnt(0,0,0), gp_Pnt(1,0,0)).Edge();
+  TopoDS_Edge second = BRepBuilderAPI_MakeEdge(gp_Pnt(1.0001,0,0), gp_Pnt(2,0,0)).Edge();
+  if (reverse_first) first.Reverse();
+  if (reverse_second) second.Reverse();
+  occ::handle<ShapeExtend_WireData> data = new ShapeExtend_WireData;
+  data->Add(first); data->Add(second);
   return data;
 }
 static occ::handle<ShapeExtend_WireData> shared_pair() {
@@ -33,8 +44,11 @@ static void state(const char* label, int count, ShapeFix_WireVertex& fixer, int 
   ShapeAnalysis_Edge analysis;
   TopoDS_Vertex va = analysis.LastVertex(a), vb = analysis.FirstVertex(b);
   std::cout << label << ' ' << count << ' ' << fixer.Analyzer().Status(1) << ' '
-            << data->NbEdges() << ' ' << va.IsNull() << ' ' << vb.IsNull() << ' '
-            << (va.IsSame(vb) ? 1 : 0);
+            << data->NbEdges() << ' ' << static_cast<int>(a.Orientation()) << ' '
+            << static_cast<int>(b.Orientation()) << ' ' << va.IsNull() << ' ' << vb.IsNull() << ' '
+            << (va.IsSame(vb) ? 1 : 0) << ' '
+            << static_cast<int>(va.Orientation()) << ' '
+            << static_cast<int>(vb.Orientation());
   if (!va.IsNull() && !vb.IsNull()) {
     gp_Pnt pa = BRep_Tool::Pnt(va), pb = BRep_Tool::Pnt(vb);
     std::cout << ' ' << pa.X() << ' ' << pb.X() << ' '
@@ -69,10 +83,23 @@ static void fix_status(const char* label, int status) {
   fixer.Init(analysis);
   state(label, fixer.Fix(), fixer, status);
 }
+static void fix_reversed(const char* label, bool reverse_first, bool reverse_second, int status) {
+  auto data = reversed_pair(reverse_first, reverse_second);
+  auto analysis = initialized(data);
+  if (status == 2) analysis.SetClose(1);
+  else analysis.SetEnd(1, gp_XYZ(1.1,0,0), 0.25);
+  ShapeFix_WireVertex fixer; fixer.Init(analysis);
+  int count = status == 2 ? fixer.FixSame() : fixer.Fix();
+  state(label, count, fixer, status);
+}
 int main() {
   std::cout << std::setprecision(17);
   fix_same("same-coords", 1);
   fix_same("close", 2);
+  fix_reversed("close-reversed-previous", true, false, 2);
+  fix_reversed("close-reversed-following", false, true, 2);
+  fix_reversed("fix-reversed-previous", true, false, 3);
+  fix_reversed("fix-reversed-both", true, true, 3);
   auto shared = shared_pair(); auto shared_analysis = initialized(shared);
   shared_analysis.SetSameCoords(1);
   ShapeFix_WireVertex shared_fixer; shared_fixer.Init(shared_analysis);
@@ -87,6 +114,13 @@ int main() {
   ShapeFix_WireVertex all_fixer; all_fixer.Init(all_analysis);
   std::cout << "all-disjoined " << all_fixer.Fix() << ' '
             << all_fixer.Analyzer().Status(1) << ' ' << all_fixer.Analyzer().Status(2) << '\n';
+  auto missing_data = pair(); auto missing_analysis = initialized(missing_data);
+  missing_analysis.SetDisjoined(1); missing_analysis.SetDisjoined(2);
+  BRep_Builder().UpdateEdge(missing_data->Edge(1), occ::handle<Geom_Curve>(), 0.0);
+  ShapeFix_WireVertex missing_fixer; missing_fixer.Init(missing_analysis);
+  std::cout << "all-disjoined-no-curve " << missing_fixer.Fix() << ' '
+            << missing_fixer.Analyzer().Status(1) << ' '
+            << missing_fixer.Analyzer().Status(2) << '\n';
   auto mixed_data = pair(); auto mixed_analysis = initialized(mixed_data);
   mixed_analysis.SetEnd(1, gp_XYZ(1.1,0,0), 0.25); mixed_analysis.SetSameVertex(2);
   ShapeFix_WireVertex mixed_fixer; mixed_fixer.Init(mixed_analysis);
@@ -94,6 +128,11 @@ int main() {
   ShapeAnalysis_Edge mixed_edges;
   TopoDS_Vertex mixed_last = mixed_edges.LastVertex(mixed_data->Edge(2));
   TopoDS_Vertex mixed_first = mixed_edges.FirstVertex(mixed_data->Edge(1));
+  std::cout << "mixed-children";
+  for (TopoDS_Iterator it(mixed_data->Edge(2), false, false); it.More(); it.Next())
+    std::cout << ' ' << static_cast<int>(it.Value().ShapeType()) << ':'
+              << static_cast<int>(it.Value().Orientation());
+  std::cout << '\n';
   std::cout << "mixed-positive " << mixed_count << ' '
             << mixed_fixer.Analyzer().Status(1) << ' ' << mixed_fixer.Analyzer().Status(2) << ' '
             << mixed_last.IsNull() << ' ' << mixed_first.IsNull() << ' '
