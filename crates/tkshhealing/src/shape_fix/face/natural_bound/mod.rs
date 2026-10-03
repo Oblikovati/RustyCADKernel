@@ -41,13 +41,10 @@ fn current_face(
 > {
     let (shape, context) = fixer
         .fix_root_data()
-        .with(|fields| (fields.shape.clone(), fields.context.clone()));
+        .with(|fields| (fixer.face_state.read().clone(), fields.context.clone()));
     let applied = apply_context(&shape, &context)?;
     let face = topods::face(&applied)?;
-    fixer
-        .fix_root_data()
-        .with_mut(|fields| fields.shape = applied.clone());
-    *fixer.result.write() = applied.clone();
+    *fixer.face_state.write() = applied.clone();
     Ok((face, context))
 }
 
@@ -102,9 +99,7 @@ fn create_natural_face(
     new_face.set_orientation(old_face.orientation());
     let new_shape = new_face.clone().into_shape();
     replace_context(context, old_face, &new_shape)?;
-    fixer
-        .fix_root_data()
-        .with_mut(|fields| fields.shape = new_shape.clone());
+    *fixer.face_state.write() = new_shape.clone();
     fix_natural_face_edge_tolerances(fixer, &new_face)?;
     send_natural_boundary_warning(fixer, &new_face);
     rustycad_tkbrep::brep_tools::update_face(&new_face)?;
@@ -115,11 +110,15 @@ fn create_natural_face(
 fn fix_natural_face_edge_tolerances(fixer: &ShapeFixFace, face: &Face) -> Result<(), Failure> {
     let edge_fixer = ShapeFixEdge::default();
     edge_fixer.set_context(&fixer.context());
-    for child in ShapeIterator::new(&face.clone().into_shape(), true, true) {
-        if child.shape_type()? != ShapeEnum::Edge {
-            continue;
+    let mut pending = vec![face.clone().into_shape()];
+    while let Some(parent) = pending.pop() {
+        for child in ShapeIterator::new(&parent, true, true) {
+            if child.shape_type()? == ShapeEnum::Edge {
+                edge_fixer.fix_vertex_tolerance_on_face(&topods::edge(&child)?, face)?;
+            } else {
+                pending.push(child);
+            }
         }
-        edge_fixer.fix_vertex_tolerance_on_face(&topods::edge(&child)?, face)?;
     }
     Ok(())
 }
@@ -137,11 +136,8 @@ fn publish_rebuilt_face(
 ) -> Result<(), Failure> {
     let shape = result.clone().into_shape();
     replace_context(context, old_face, &shape)?;
-    fixer
-        .fix_root_data()
-        .with_mut(|fields| fields.shape = shape.clone());
+    *fixer.face_state.write() = shape;
     rustycad_tkbrep::brep_tools::update_face(result)?;
     send_natural_boundary_warning(fixer, result);
-    *fixer.result.write() = shape;
     Ok(())
 }

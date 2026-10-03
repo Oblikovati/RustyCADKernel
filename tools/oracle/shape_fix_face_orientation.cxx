@@ -201,7 +201,8 @@ static void print_empty_sphere_natural_bound_case() {
   int wires = 0;
   for (TopExp_Explorer it(fixer.Face(), TopAbs_WIRE); it.More(); it.Next()) ++wires;
   std::cout << "empty_sphere_natural_bound changed=" << changed << " wires=" << wires
-            << " orientation=" << fixer.Face().Orientation() << '\n';
+            << " orientation=" << fixer.Face().Orientation()
+            << " result_matches_face=" << fixer.Result().IsSame(fixer.Face()) << '\n';
 }
 
 static void print_empty_cylinder_natural_bound_case() {
@@ -254,6 +255,14 @@ static void print_torus_reversed_wire_natural_bound_case() {
               << pcurve->Value((first + last) * 0.5).Y();
   }
   std::cout << "\ntorus_reversed_wire_natural_bound changed=" << changed << " wires=" << wires << '\n';
+}
+
+static void print_direct_result_state(const gp_Pln& plane) {
+  ShapeFix_Face fixer(face_with_wire(plane, square(0, 0, 4, 4, true)));
+  const bool changed = fixer.FixOrientation();
+  std::cout << "direct_orientation_result changed=" << changed
+            << " face_forward=" << (fixer.Face().Orientation() == TopAbs_FORWARD)
+            << " result_null=" << fixer.Result().IsNull() << '\n';
 }
 
 static void print_context_case(const gp_Pln& plane) {
@@ -333,6 +342,7 @@ int main() {
   print_uninitialized_natural_bound_case();
   print_sphere_wire_natural_bound_case();
   print_torus_reversed_wire_natural_bound_case();
+  print_direct_result_state(plane);
   print_context_case(plane);
   print_sphere_natural_bound_case();
   return 0;

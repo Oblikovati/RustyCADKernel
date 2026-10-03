@@ -29,6 +29,7 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 /// ```
 pub struct ShapeFixFace {
     parent: ShapeFixRoot,
+    face_state: SharedState<Shape>,
     result: SharedState<Shape>,
     status: SharedState<i32>,
     modes: SharedState<FaceFixModes>,
@@ -42,6 +43,7 @@ impl Default for ShapeFixFace {
     fn default() -> Self {
         Self {
             parent: ShapeFixRoot::new(),
+            face_state: SharedState::new(Shape::default()),
             result: SharedState::new(Shape::default()),
             status: SharedState::new(0),
             modes: SharedState::new(FaceFixModes::default()),
@@ -71,7 +73,7 @@ impl Default for FaceFixModes {
 }
 
 impl ShapeFixFace {
-    /// `ShapeFix_Face(face)`: the input also initializes the result;
+    /// `ShapeFix_Face(face)`: initialize the root shape and working face;
     /// `ShapeFixFace::new(face.into_shape())`.
     pub fn new(face: Shape) -> Self {
         let fixer = Self::default();
@@ -79,16 +81,15 @@ impl ShapeFixFace {
         fixer
     }
 
-    /// `Init(face)`: replace the input and current result with `face`.
+    /// `Init(face)`: replace the root shape and working face with `face`.
     pub fn init(&self, face: Shape) {
         self.parent
             .fix_root_data()
             .with_mut(|fields| fields.shape = face.clone());
-        *self.result.write() = face;
+        *self.face_state.write() = face.clone();
         *self.status.write() = 0;
-        let input = self.result.read().clone();
-        *self.analysis_surface.write() = initialize_face_surface(&input);
-        *self.forward.write() = input.orientation() != Orientation::Reversed;
+        *self.analysis_surface.write() = initialize_face_surface(&face);
+        *self.forward.write() = face.orientation() != Orientation::Reversed;
     }
 
     /// Sets the wire-orientation mode; negative selects OCCT's default-on behavior.
@@ -153,10 +154,7 @@ impl ShapeFixFace {
         if !*self.forward.read() {
             stored.set_orientation(Orientation::Reversed);
         }
-        self.parent
-            .fix_root_data()
-            .with_mut(|fields| fields.shape = stored.clone());
-        *self.result.write() = stored;
+        *self.face_state.write() = stored;
         Ok(())
     }
 
@@ -181,13 +179,11 @@ impl ShapeFixFace {
     /// `Perform()`: preserve context replacements and repair a single periodic cone loop.
     pub fn perform(&self) -> Result<bool, Failure> {
         *self.status.write() = 0;
-        let (input, context, tolerance) = self.parent.fix_root_data().with(|fields| {
-            (
-                fields.shape.clone(),
-                fields.context.clone(),
-                fields.precision,
-            )
-        });
+        let (context, tolerance) = self
+            .parent
+            .fix_root_data()
+            .with(|fields| (fields.context.clone(), fields.precision));
+        let input = self.face_state.read().clone();
         let applied = apply_context(&input, &context)?;
         if !is_face(&applied)? {
             *self.result.write() = applied;
@@ -202,6 +198,7 @@ impl ShapeFixFace {
         }
         let fixed = periodic_cone::repair_periodic_cone(&face, tolerance)?;
         let result = fixed.clone().unwrap_or(applied);
+        *self.face_state.write() = result.clone();
         *self.result.write() = result.clone();
         replace_context(&context, &face, &result)?;
         Ok(false)
@@ -214,7 +211,7 @@ impl ShapeFixFace {
 
     /// `Face()`: return the last result as a face when it has face topology.
     pub fn face(&self) -> Result<Face, Failure> {
-        topods::face(&self.result.read())
+        topods::face(&self.face_state.read())
     }
 
     /// `Status(status)`: decode a flag from the last `Perform()`.
@@ -263,14 +260,15 @@ fn initialize_surface_state(
         &surface.surface(),
         precision::confusion(),
     )?;
+    let base_shape = face.clone().into_shape();
     if !forward {
         face.set_orientation(Orientation::Reversed);
     }
-    let shape = face.into_shape();
+    let face_shape = face.into_shape();
     fixer
         .fix_root_data()
-        .with_mut(|fields| fields.shape = shape.clone());
-    *fixer.result.write() = shape;
+        .with_mut(|fields| fields.shape = base_shape);
+    *fixer.face_state.write() = face_shape;
     *fixer.analysis_surface.write() = surface;
     *fixer.forward.write() = forward;
     fixer.set_precision(tolerance);
