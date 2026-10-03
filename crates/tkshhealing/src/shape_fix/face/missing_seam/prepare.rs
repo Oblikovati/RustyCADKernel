@@ -135,13 +135,24 @@ mod tests {
 
     #[test]
     fn cylinder_two_open_wires_matches_native_seam_result() {
-        let face = cylinder_with_two_open_u_wires().unwrap();
+        let face = cylinder_with_two_open_u_wires(true).unwrap();
         let input = face.into_shape();
         let fixer = ShapeFixFace::new(input.clone());
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
         assert_native_row(cylinder_row(&result), 2);
+    }
+
+    #[test]
+    fn same_direction_cylinder_wires_match_native_reversal() {
+        let face = cylinder_with_two_open_u_wires(false).unwrap();
+        let input = face.into_shape();
+        let fixer = ShapeFixFace::new(input.clone());
+        assert!(fixer.fix_missing_seam().unwrap());
+        let result = fixer.result();
+        assert_context_maps_input(&fixer, &input, &result);
+        assert_native_row(same_direction_cylinder_row(&result), 3);
     }
 
     #[test]
@@ -152,7 +163,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(torus_row(&result), 3);
+        assert_native_row(torus_row(&result), 4);
     }
 
     #[test]
@@ -163,7 +174,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        assert_native_row(bspline_sphere_row(&result), 4);
+        assert_native_row(bspline_sphere_row(&result), 5);
     }
 
     fn sphere_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
@@ -177,6 +188,15 @@ mod tests {
     fn cylinder_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
         format!(
             "cylinder_two_open_u changed=1 faces={} edges={} seam_edges={}",
+            count_faces(shape),
+            count_edges(shape),
+            count_seam_edges(shape)
+        )
+    }
+
+    fn same_direction_cylinder_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
+        format!(
+            "cylinder_same_direction_open_u changed=1 faces={} edges={} seam_edges={}",
             count_faces(shape),
             count_edges(shape),
             count_seam_edges(shape)
@@ -256,14 +276,16 @@ mod tests {
         );
     }
 
-    fn cylinder_with_two_open_u_wires() -> Result<Face, rustycad_tkernel::standard::Failure> {
+    fn cylinder_with_two_open_u_wires(
+        reverse_second: bool,
+    ) -> Result<Face, rustycad_tkernel::standard::Failure> {
         let surface: Handle<dyn GeomSurface> =
             Handle::new(GeomCylindricalSurface::new(Axis3::default(), 1.0)?).cast();
         let mut face = Face::default();
         let builder = BRepBuilder::default();
         builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
         add_cylinder_wire(&builder, &mut face, -1.0, false)?;
-        add_cylinder_wire(&builder, &mut face, 1.0, true)?;
+        add_cylinder_wire(&builder, &mut face, 1.0, reverse_second)?;
         Ok(face)
     }
 

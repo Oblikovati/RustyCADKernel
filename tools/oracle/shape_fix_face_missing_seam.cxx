@@ -88,6 +88,29 @@ int main() {
   std::cout << "cylinder_two_open_u changed=" << cylinderChanged << " faces=" << cylinderFaces
             << " edges=" << cylinderEdges << " seam_edges=" << cylinderSeamEdges << '\n';
 
+  TopoDS_Face sameDirectionFace;
+  builder.MakeFace(sameDirectionFace, cylinder, 1.e-7);
+  addCylinderBoundary(builder, sameDirectionFace, -1.0, false);
+  addCylinderBoundary(builder, sameDirectionFace, 1.0, false);
+  ShapeFix_Face sameDirectionFixer(sameDirectionFace);
+  const bool sameDirectionChanged = sameDirectionFixer.FixMissingSeam();
+  const TopoDS_Shape sameDirectionResult = sameDirectionFixer.Result();
+  int sameDirectionFaces = 0;
+  int sameDirectionEdges = 0;
+  int sameDirectionSeams = 0;
+  for (TopExp_Explorer faceIt(sameDirectionResult, TopAbs_FACE); faceIt.More(); faceIt.Next()) {
+    ++sameDirectionFaces;
+    for (TopExp_Explorer edgeIt(faceIt.Current(), TopAbs_EDGE); edgeIt.More(); edgeIt.Next()) {
+      ++sameDirectionEdges;
+      if (BRep_Tool::IsClosed(TopoDS::Edge(edgeIt.Current()), TopoDS::Face(faceIt.Current()))) {
+        ++sameDirectionSeams;
+      }
+    }
+  }
+  std::cout << "cylinder_same_direction_open_u changed=" << sameDirectionChanged
+            << " faces=" << sameDirectionFaces << " edges=" << sameDirectionEdges
+            << " seam_edges=" << sameDirectionSeams << '\n';
+
   const Handle(Geom_ToroidalSurface) spindle =
       new Geom_ToroidalSurface(gp_Ax3(), 1.0, 2.0);
   TopoDS_Face spindleFace;

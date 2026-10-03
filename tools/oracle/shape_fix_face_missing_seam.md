@@ -1,7 +1,8 @@
 # ShapeFix_Face::FixMissingSeam
 
 This probe covers the no-op on an open plane, an open sphere boundary, opposing open cylinder boundaries, a
-single open boundary on a spindle torus, and an open boundary on a periodic
+same-direction cylinder pair (which requires native wire reversal), a single
+open boundary on a spindle torus, and an open boundary on a periodic
 B-spline sphere. It compares the returned `changed` flag and resulting face,
 edge, seam, and degenerated-edge counts.
 
