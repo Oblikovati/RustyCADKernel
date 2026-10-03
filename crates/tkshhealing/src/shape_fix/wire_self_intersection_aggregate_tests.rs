@@ -6,12 +6,13 @@ use crate::shape_extend::{ShapeExtendStatus, ShapeExtendWireData};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{Edge, Face};
+use rustycad_tkbrep::topods::{Builder, Edge, Face, Vertex};
+use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane};
-use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+use rustycad_tkmath::gp::{Axis1, Axis2, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
 use rustycad_tkmath::toploc::Location;
 
 const NATIVE: &str =
@@ -41,6 +42,17 @@ fn default_aggregate_matches_native_pass_order_and_statuses() {
     assert_eq!(observed, expected);
 }
 
+#[test]
+fn remove_loop_mode_one_rechecks_after_removal_and_runs_closed_pass() {
+    let face = plane();
+    let data = removable_loop_wire_data(&face);
+    let original = data.wire().unwrap();
+    let fixer = remove_loop_mode_one_fixer(&data, &face);
+    let changed = fixer.fix_self_intersection().unwrap();
+    let observed = aggregate_observation(&fixer, &original, changed).unwrap();
+    assert_eq!(observed, expected_row(2));
+}
+
 fn expected_row(index: usize) -> Vec<f64> {
     NATIVE
         .lines()
@@ -66,6 +78,78 @@ fn aggregate_fixer(
         fixer.set_fix_nonadjacent_intersecting_edges_mode(1);
     }
     fixer
+}
+
+fn remove_loop_mode_one_fixer(data: &Handle<ShapeExtendWireData>, face: &Face) -> ShapeFixWire {
+    let fixer = aggregate_fixer(data, face, true);
+    fixer.set_fix_self_intersecting_edge_mode(1);
+    fixer.set_remove_loop_mode(1);
+    fixer
+}
+
+fn removable_loop_wire_data(face: &Face) -> Handle<ShapeExtendWireData> {
+    let data = Handle::new(ShapeExtendWireData::new());
+    data.add_edge(&removable_loop_edge(face), 0).unwrap();
+    data
+}
+
+fn removable_loop_edge(face: &Face) -> Edge {
+    let curve_2d = loop_pcurve();
+    let curve_3d: Handle<dyn GeomCurve> =
+        rustycad_tkgeombase::geom_lib::to_3d(Axis2::default(), &curve_2d).unwrap();
+    let mut edge = make_loop_edge_with_vertices(&curve_3d);
+    finish_loop_edge(face, &mut edge, &curve_2d);
+    edge
+}
+
+fn loop_pcurve() -> Handle<dyn Geom2dCurve> {
+    let poles = [
+        Point2::new(0.0, 0.0),
+        Point2::new(3.0, 3.0),
+        Point2::new(-3.0, 3.0),
+        Point2::new(1.0, 0.0),
+    ];
+    Handle::new(Geom2dBezierCurve::new(&Array1::from_shared(&poles, 1)).unwrap()).cast()
+}
+
+fn make_loop_edge_with_vertices(curve: &Handle<dyn GeomCurve>) -> Edge {
+    let builder = BRepBuilder::default();
+    let mut edge = Edge::default();
+    builder
+        .make_edge_with_curve(&mut edge, curve, 1.0e-7)
+        .unwrap();
+    let (first, last) = loop_vertices();
+    Builder
+        .add(&mut edge, &first.oriented(Orientation::Forward))
+        .unwrap();
+    Builder
+        .add(&mut edge, &last.oriented(Orientation::Reversed))
+        .unwrap();
+    edge
+}
+
+fn finish_loop_edge(face: &Face, edge: &mut Edge, pcurve: &Handle<dyn Geom2dCurve>) {
+    let builder = BRepBuilder::default();
+    builder
+        .update_edge_pcurve_on_face(edge, pcurve, face, 1.0e-7)
+        .unwrap();
+    builder.range_on_face(edge, face, 0.0, 1.0).unwrap();
+    builder.range(edge, 0.0, 1.0, true).unwrap();
+    builder.same_range(edge, false).unwrap();
+    builder.same_parameter(edge, false).unwrap();
+}
+
+fn loop_vertices() -> (Vertex, Vertex) {
+    let builder = BRepBuilder::default();
+    let mut first = Vertex::default();
+    let mut last = Vertex::default();
+    builder
+        .make_vertex_at(&mut first, Point3::default(), 1.0e-7)
+        .unwrap();
+    builder
+        .make_vertex_at(&mut last, Point3::new(1.0, 0.0, 0.0), 1.0e-7)
+        .unwrap();
+    (first, last)
 }
 
 fn aggregate_observation(
@@ -118,7 +202,20 @@ fn applied_edge_count(
 
 fn crossing_wire_data(face: &Face) -> Handle<ShapeExtendWireData> {
     let data = Handle::new(ShapeExtendWireData::new());
-    for (start, direction) in [
+    for (start, direction) in horizontal_crossing_lines()
+        .into_iter()
+        .chain(vertical_crossing_lines())
+    {
+        let uv = Point2::new(start.x(), start.y());
+        let uv_direction = Direction2::new(direction.x(), direction.y()).unwrap();
+        data.add_edge(&line_edge(face, start, direction, uv, uv_direction), 0)
+            .unwrap();
+    }
+    data
+}
+
+fn horizontal_crossing_lines() -> [(Point3, Direction3); 2] {
+    [
         (
             Point3::new(-1.0, 0.0, 0.0),
             Direction3::new(1.0, 0.0, 0.0).unwrap(),
@@ -127,6 +224,11 @@ fn crossing_wire_data(face: &Face) -> Handle<ShapeExtendWireData> {
             Point3::new(3.0, 3.0, 0.0),
             Direction3::new(1.0, 0.0, 0.0).unwrap(),
         ),
+    ]
+}
+
+fn vertical_crossing_lines() -> [(Point3, Direction3); 2] {
+    [
         (
             Point3::new(0.0, -1.0, 0.0),
             Direction3::new(0.0, 1.0, 0.0).unwrap(),
@@ -135,13 +237,7 @@ fn crossing_wire_data(face: &Face) -> Handle<ShapeExtendWireData> {
             Point3::new(-4.0, -4.0, 0.0),
             Direction3::new(0.0, 1.0, 0.0).unwrap(),
         ),
-    ] {
-        let uv = Point2::new(start.x(), start.y());
-        let uv_direction = Direction2::new(direction.x(), direction.y()).unwrap();
-        data.add_edge(&line_edge(face, start, direction, uv, uv_direction), 0)
-            .unwrap();
-    }
-    data
+    ]
 }
 
 fn line_edge(
