@@ -222020,6 +222020,15 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_notched_edges",
       "status": "implemented",
       "notes": "Native adjacent p-curve tangents, plane-adaptor projection with range clamping, tie selection and 22-step sampling. Thirteen pinned native rows compare exact index/parameter outputs including partial mutation before curved rejection and OK status on success. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckTail(const TopoDS_Edge&,const TopoDS_Edge&,double,double,double,TopoDS_Edge&,TopoDS_Edge&,TopoDS_Edge&,TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_tail",
+      "status": "implemented",
+      "notes": "Native tail endpoint/angle screening, length sampling, range-clamped projection, bisection, 22-point validation and edge split/parameter-transfer/linear-mass decisions. Four mutable native edge outputs represented by an ordered [Edge;4]. Thirteen pinned native cases compare exact coordinates, ranges, tolerances, identities, flags and untouched outputs. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [

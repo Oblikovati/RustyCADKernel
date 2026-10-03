@@ -27,6 +27,7 @@ mod shape_connect;
 mod small;
 mod small_area;
 mod state;
+mod tail;
 struct WireAnalysisFields {
     wire: Handle<ShapeExtendWireData>,
     face: Face,
