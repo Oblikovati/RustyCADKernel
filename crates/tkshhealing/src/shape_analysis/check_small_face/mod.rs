@@ -2,6 +2,7 @@
 mod check_single_strip;
 mod check_strip_face;
 mod find_strip_edges;
+mod pin_edges;
 mod spot;
 mod strip;
 mod strip_edges;
