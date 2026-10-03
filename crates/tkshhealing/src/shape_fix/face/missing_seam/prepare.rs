@@ -116,25 +116,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        let faces = Explorer::new(&result, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
-        let face_count = faces.count();
-        let edges = Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
-        let degenerated_count = edges
-            .filter(|edge| {
-                let edge = rustycad_tkbrep::topods::edge(edge).unwrap();
-                rustycad_tkbrep::brep::BRepTool::degenerated(&edge).unwrap()
-            })
-            .count();
-        let actual = format!(
-            "sphere_open_u changed=1 faces={face_count} degenerated_edges={degenerated_count}"
-        );
-        assert_eq!(
-            actual,
-            include_str!("../../../../../../tools/oracle/shape_fix_face_missing_seam.expected")
-                .lines()
-                .next()
-                .unwrap()
-        );
+        assert_native_row(sphere_row(&result), 0);
     }
 
     #[test]
@@ -145,27 +127,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        let faces = Explorer::new(&result, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
-        let face_count = faces.clone().count();
-        let face = rustycad_tkbrep::topods::face(faces.current()).unwrap();
-        let edges = Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
-        let edge_count = edges.clone().count();
-        let seam_count = edges
-            .filter(|edge| {
-                let edge = rustycad_tkbrep::topods::edge(edge).unwrap();
-                rustycad_tkbrep::brep::BRepTool::is_closed_on_face(&edge, &face).unwrap()
-            })
-            .count();
-        let actual = format!(
-            "cylinder_two_open_u changed=1 faces={face_count} edges={edge_count} seam_edges={seam_count}"
-        );
-        assert_eq!(
-            actual,
-            include_str!("../../../../../../tools/oracle/shape_fix_face_missing_seam.expected")
-                .lines()
-                .nth(1)
-                .unwrap()
-        );
+        assert_native_row(cylinder_row(&result), 1);
     }
 
     #[test]
@@ -176,26 +138,7 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        let faces = Explorer::new(&result, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
-        let face_count = faces.count();
-        let edges = Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
-        let edge_count = edges.clone().count();
-        let degenerated_count = edges
-            .filter(|edge| {
-                let edge = rustycad_tkbrep::topods::edge(edge).unwrap();
-                rustycad_tkbrep::brep::BRepTool::degenerated(&edge).unwrap()
-            })
-            .count();
-        let actual = format!(
-            "spindle_torus_open_u changed=1 faces={face_count} edges={edge_count} degenerated_edges={degenerated_count}"
-        );
-        assert_eq!(
-            actual,
-            include_str!("../../../../../../tools/oracle/shape_fix_face_missing_seam.expected")
-                .lines()
-                .nth(2)
-                .unwrap()
-        );
+        assert_native_row(torus_row(&result), 2);
     }
 
     #[test]
@@ -206,27 +149,82 @@ mod tests {
         assert!(fixer.fix_missing_seam().unwrap());
         let result = fixer.result();
         assert_context_maps_input(&fixer, &input, &result);
-        let face_count = Explorer::new(&result, ShapeEnum::Face, ShapeEnum::Shape)
+        assert_native_row(bspline_sphere_row(&result), 3);
+    }
+
+    fn sphere_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
+        format!(
+            "sphere_open_u changed=1 faces={} degenerated_edges={}",
+            count_faces(shape),
+            count_degenerated_edges(shape)
+        )
+    }
+
+    fn cylinder_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
+        format!(
+            "cylinder_two_open_u changed=1 faces={} edges={} seam_edges={}",
+            count_faces(shape),
+            count_edges(shape),
+            count_seam_edges(shape)
+        )
+    }
+
+    fn torus_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
+        format!(
+            "spindle_torus_open_u changed=1 faces={} edges={} degenerated_edges={}",
+            count_faces(shape),
+            count_edges(shape),
+            count_degenerated_edges(shape)
+        )
+    }
+
+    fn bspline_sphere_row(shape: &rustycad_tkbrep::topods::Shape) -> String {
+        format!(
+            "periodic_bspline_sphere_open_u changed=1 faces={} edges={} degenerated_edges={}",
+            count_faces(shape),
+            count_edges(shape),
+            count_degenerated_edges(shape)
+        )
+    }
+
+    fn count_faces(shape: &rustycad_tkbrep::topods::Shape) -> usize {
+        Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)
             .unwrap()
-            .count();
-        let edges = Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
-        let edge_count = edges.clone().count();
-        let degenerated_count = edges
-            .filter(|edge| {
-                let edge = rustycad_tkbrep::topods::edge(edge).unwrap();
+            .count()
+    }
+
+    fn count_edges(shape: &rustycad_tkbrep::topods::Shape) -> usize {
+        Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .count()
+    }
+
+    fn count_degenerated_edges(shape: &rustycad_tkbrep::topods::Shape) -> usize {
+        Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .filter(|candidate| {
+                let edge = rustycad_tkbrep::topods::edge(candidate).unwrap();
                 rustycad_tkbrep::brep::BRepTool::degenerated(&edge).unwrap()
             })
-            .count();
-        let actual = format!(
-            "periodic_bspline_sphere_open_u changed=1 faces={face_count} edges={edge_count} degenerated_edges={degenerated_count}"
-        );
-        assert_eq!(
-            actual,
-            include_str!("../../../../../../tools/oracle/shape_fix_face_missing_seam.expected")
-                .lines()
-                .nth(3)
-                .unwrap()
-        );
+            .count()
+    }
+
+    fn count_seam_edges(shape: &rustycad_tkbrep::topods::Shape) -> usize {
+        let faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
+        let face = rustycad_tkbrep::topods::face(faces.current()).unwrap();
+        Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .filter(|candidate| {
+                let edge = rustycad_tkbrep::topods::edge(candidate).unwrap();
+                rustycad_tkbrep::brep::BRepTool::is_closed_on_face(&edge, &face).unwrap()
+            })
+            .count()
+    }
+
+    fn assert_native_row(actual: String, line: usize) {
+        let expected =
+            include_str!("../../../../../../tools/oracle/shape_fix_face_missing_seam.expected");
+        assert_eq!(actual, expected.lines().nth(line).unwrap());
     }
 
     fn assert_context_maps_input(
@@ -266,11 +264,7 @@ mod tests {
             StandardDirection3::Z,
             StandardDirection3::X,
         );
-        let circle: Handle<dyn rustycad_tkg3d::geom::GeomCurve> =
-            Handle::new(GeomCircle::new(circle_axis, 3.0)?).cast();
-        let edge =
-            rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve(&circle)?
-                .edge()?;
+        let edge = circle_edge(circle_axis, 3.0)?;
         add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X)?;
         Ok(face)
     }
@@ -283,11 +277,7 @@ mod tests {
         let mut face = Face::default();
         let builder = BRepBuilder::default();
         builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
-        let circle: Handle<dyn rustycad_tkg3d::geom::GeomCurve> =
-            Handle::new(GeomCircle::new(Axis2::default(), 1.0)?).cast();
-        let edge =
-            rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve(&circle)?
-                .edge()?;
+        let edge = circle_edge(Axis2::default(), 1.0)?;
         add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X)?;
         Ok(face)
     }
@@ -303,17 +293,22 @@ mod tests {
             StandardDirection3::Z,
             StandardDirection3::X,
         );
-        let circle: Handle<dyn rustycad_tkg3d::geom::GeomCurve> =
-            Handle::new(GeomCircle::new(axis, 1.0)?).cast();
-        let edge =
-            rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve(&circle)?
-                .edge()?;
+        let edge = circle_edge(axis, 1.0)?;
         let direction = if reverse {
             Direction2::from_standard(StandardDirection2::NegX)
         } else {
             Direction2::X
         };
         add_periodic_boundary(builder, face, &edge, z, direction)
+    }
+
+    fn circle_edge(
+        axis: Axis2,
+        radius: f64,
+    ) -> Result<rustycad_tkbrep::topods::Edge, rustycad_tkernel::standard::Failure> {
+        let circle: Handle<dyn rustycad_tkg3d::geom::GeomCurve> =
+            Handle::new(GeomCircle::new(axis, radius)?).cast();
+        rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve(&circle)?.edge()
     }
 
     fn add_periodic_boundary(
@@ -338,26 +333,13 @@ mod tests {
 
     fn sphere_with_open_u_wire()
     -> Result<(Face, Handle<dyn GeomSurface>), rustycad_tkernel::standard::Failure> {
-        let sphere = GeomSphericalSurface::new(Axis3::default(), 1.0)?;
-        let surface: Handle<dyn GeomSurface> = Handle::new(sphere).cast();
+        let surface: Handle<dyn GeomSurface> =
+            Handle::new(GeomSphericalSurface::new(Axis3::default(), 1.0)?).cast();
         let mut face = Face::default();
         let builder = BRepBuilder::default();
         builder.make_face_on_surface(&mut face, &surface, precision::confusion())?;
-        let circle: Handle<dyn rustycad_tkg3d::geom::GeomCurve> =
-            Handle::new(GeomCircle::new(Axis2::default(), 1.0)?).cast();
-        let edge =
-            rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve(&circle)?
-                .edge()?;
-        builder.range(&edge, 0.0, TAU, true)?;
-        let pcurve: Handle<dyn Geom2dCurve> =
-            Handle::new(Geom2dLine::from_point(Point2::default(), Direction2::X)).cast();
-        builder.update_edge_pcurve_on_face(&edge, &pcurve, &face, precision::confusion())?;
-        let (support, location) = rustycad_tkbrep::brep::BRepTool::surface_with_location(&face)?;
-        builder.range_on_surface(&edge, &support, &location, 0.0, TAU)?;
-        let mut wire = rustycad_tkbrep::topods::Wire::default();
-        rustycad_tkbrep::topods::Builder.make_wire(&mut wire);
-        rustycad_tkbrep::topods::Builder.add(&mut wire, &edge.into_shape())?;
-        rustycad_tkbrep::topods::Builder.add(&mut face, &wire.into_shape())?;
+        let edge = circle_edge(Axis2::default(), 1.0)?;
+        add_periodic_boundary(&builder, &mut face, &edge, 0.0, Direction2::X)?;
         Ok((face, surface))
     }
 }
