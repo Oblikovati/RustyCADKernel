@@ -221786,6 +221786,24 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_outer_bound",
       "status": "implemented",
       "notes": "Native implementation delegates to ShapeAnalysis::IsOuterBound on a face copy holding the current wire. Both Wire and WireAPIMake modes compared for forward/reversed wires on all six box faces (24 native observations); unready status regression. No full toolkit proof."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckShapeConnect(const TopoDS_Shape&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_shape_connect",
+      "status": "implemented",
+      "notes": "Native endpoint pairing and exact tie/status ordering. Four output references represented by caller-owned [f64;4] in tailhead,tailtail,headtail,headhead order, preserved on early failure and endpoint exception. Eleven native rows cover four pairings, ties, tolerance, null/unsupported shapes, wire orientation and disconnected-wire NullObject exception with DONE1 already set. No whole-toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckShapeConnect(double&,double&,double&,double&,const TopoDS_Shape&,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_shape_connect_into",
+      "status": "implemented",
+      "notes": "Native endpoint pairing and exact tie/status ordering. Four output references represented by caller-owned [f64;4] in tailhead,tailtail,headtail,headhead order, preserved on early failure and endpoint exception. Eleven native rows cover four pairings, ties, tolerance, null/unsupported shapes, wire orientation and disconnected-wire NullObject exception with DONE1 already set. No whole-toolkit parity claim."
     }
   ],
   "tests": [

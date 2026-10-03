@@ -17,6 +17,7 @@ mod degenerated;
 mod gaps;
 mod lacking;
 mod order;
+mod shape_connect;
 mod state;
 struct WireAnalysisFields {
     wire: Handle<ShapeExtendWireData>,
