@@ -6,10 +6,12 @@ use crate::shape_extend::ShapeExtendWireData;
 use crate::shape_fix::{FixRoot, ShapeFixWireSegment};
 mod closed_mode;
 mod helpers;
+mod pcurve_scan;
 use helpers::{
-    ITP_TANG, JunctionState, SplitArguments, edge_end_parameter, edge_start_parameter,
-    null_context, null_pcurve, null_wire,
+    ITP_TANG, JunctionState, SplitArguments, TOLINT, edge_end_parameter, edge_start_parameter,
+    null_context, null_wire,
 };
+use pcurve_scan::EdgePcurveScan;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::{Edge, Shape};
@@ -44,6 +46,7 @@ pub(super) struct SplitIntersection {
     pub(super) edge_index: i32,
     pub(super) edge_parameter: f64,
     pub(super) line_parameter: f64,
+    order: u8,
 }
 
 pub(super) fn split_by_line(
@@ -78,13 +81,8 @@ impl<'a> SplitByLineState<'a> {
         if self.input.wire.is_vertex() {
             return self.split_vertex();
         }
-        if closed_mode::periodic_cut_direction(self.composer, self.input.line) {
-            return Err(Failure::with_message(
-                "Standard_NotImplemented",
-                "ShapeFix_ComposeShell::SplitByLine: periodic line wrapping is not implemented",
-            ));
-        }
-        self.collect_intersections()?;
+        let periodic_axis = closed_mode::periodic_cut_direction(self.composer, self.input.line);
+        self.collect_intersections(periodic_axis)?;
         if self.intersections.is_empty() {
             return Ok(false);
         }
@@ -147,75 +145,95 @@ impl<'a> SplitByLineState<'a> {
         Ok(())
     }
 
-    fn collect_intersections(&mut self) -> Result<(), Failure> {
+    fn collect_intersections(
+        &mut self,
+        periodic_axis: Option<closed_mode::PeriodicAxis>,
+    ) -> Result<(), Failure> {
         let mut junction = JunctionState::default();
         for edge_index in 1..=self.input.wire.nb_edges() {
             let edge = self.input.wire.edge(edge_index)?;
-            let transition = self.collect_edge_junction(&edge, edge_index, &mut junction)?;
-            self.collect_curve_intersections(&edge, edge_index, transition.0, transition.1)?;
+            let face = self.composer.fields.read().face.clone();
+            let (curve, first, last) =
+                ShapeAnalysisEdge::new().pcurve_on_face(&edge, &face, false)?;
+            let mut scan = EdgePcurveScan::new(&curve, first, last, periodic_axis)?;
+            let transition =
+                self.collect_edge_junction(&edge, edge_index, &scan, periodic_axis, &mut junction)?;
+            self.collect_curve_intersections(edge_index, transition, &mut scan)?;
         }
-        self.collect_closing_junction(junction)
+        self.collect_closing_junction(junction, periodic_axis)
     }
 
     fn collect_edge_junction(
         &mut self,
         edge: &Edge,
         index: i32,
+        scan: &EdgePcurveScan,
+        periodic_axis: Option<closed_mode::PeriodicAxis>,
         junction: &mut JunctionState,
     ) -> Result<(i32, i32), Failure> {
-        let face = self.composer.fields.read().face.clone();
-        let (curve, first, last) = ShapeAnalysisEdge::new().pcurve_on_face(edge, &face, false)?;
-        let start_parameter = edge_start_parameter(edge, first, last);
-        let end_parameter = edge_end_parameter(edge, first, last);
-        let live_curve = curve.get().ok_or_else(null_pcurve)?;
-        let start = live_curve.value(start_parameter)?;
-        let end = live_curve.value(end_parameter)?;
-        let (code, _) = geometry::point_line_position(start, self.input.line);
-        let (end_code, _) = geometry::point_line_position(end, self.input.line);
+        let start_parameter = edge_start_parameter(edge, scan.first, scan.last);
+        let end_parameter = edge_end_parameter(edge, scan.first, scan.last);
+        let (start, end) = oriented_scan_endpoints(edge, scan);
+        let (code, deviation) = geometry::point_line_position(start, self.input.line);
+        let (end_code, end_deviation) = geometry::point_line_position(end, self.input.line);
         let previous_code = junction.previous_code;
         if index == 1 {
             junction.start_code = code;
             junction.start_point = Some(start);
+            junction.start_deviation = deviation;
         } else if code == 0 || code != junction.previous_code {
-            self.intersections.push(SplitIntersection {
-                edge_index: index,
-                edge_parameter: start_parameter,
-                line_parameter: geometry::parameter_between_points(
-                    start,
-                    junction.previous_point,
-                    self.input.line,
-                ),
-            });
+            if junction_within_half_period(deviation, junction.previous_deviation, periodic_axis) {
+                self.intersections.push(SplitIntersection {
+                    edge_index: index,
+                    edge_parameter: start_parameter,
+                    line_parameter: geometry::parameter_between_points(
+                        start,
+                        junction.previous_point,
+                        self.input.line,
+                    ),
+                    order: 0,
+                });
+            }
         }
         junction.previous_point = end;
         junction.previous_code = end_code;
+        junction.previous_deviation = end_deviation;
         junction.last_parameter = end_parameter;
         Ok((code, previous_code))
     }
 
     fn collect_curve_intersections(
         &mut self,
-        edge: &Edge,
         index: i32,
-        code: i32,
-        previous_code: i32,
+        transition: (i32, i32),
+        scan: &mut EdgePcurveScan,
     ) -> Result<(), Failure> {
-        let (curve, first, last) = ShapeAnalysisEdge::new().pcurve_on_face(
-            edge,
-            &self.composer.fields.read().face,
-            false,
-        )?;
-        let adaptor = Geom2dAdaptorCurve::with_range(&curve, first, last)?;
-        let intersection = GInter::between(
-            &self.line_adaptor,
-            &adaptor,
-            precision::confusion(),
-            precision::confusion(),
-        )?;
-        if !intersection.is_done() {
-            return Ok(());
+        for iteration in 0..scan.iterations {
+            self.collect_curve_intersection(index, transition, scan)?;
+            if iteration + 1 < scan.iterations {
+                scan.advance_period()?;
+            }
         }
-        self.append_curve_intersections(&intersection, index, code != 0 && previous_code != 0)
+        Ok(())
+    }
+
+    fn collect_curve_intersection(
+        &mut self,
+        edge_index: i32,
+        transition: (i32, i32),
+        scan: &EdgePcurveScan,
+    ) -> Result<(), Failure> {
+        let adaptor = Geom2dAdaptorCurve::with_range(&scan.curve, scan.first, scan.last)?;
+        let intersection = GInter::between(&self.line_adaptor, &adaptor, TOLINT, TOLINT)?;
+        if intersection.is_done() {
+            self.append_curve_intersections(
+                &intersection,
+                edge_index,
+                transition.0 != 0 && transition.1 != 0,
+                (scan.first, scan.last),
+            )?;
+        }
+        Ok(())
     }
 
     fn append_curve_intersections(
@@ -223,6 +241,7 @@ impl<'a> SplitByLineState<'a> {
         intersection: &GInter,
         edge_index: i32,
         retain_endpoint: bool,
+        range: (f64, f64),
     ) -> Result<(), Failure> {
         for rank in 1..=intersection.nb_points()? {
             let point = intersection.point(rank)?;
@@ -231,15 +250,11 @@ impl<'a> SplitByLineState<'a> {
             {
                 continue;
             }
-            self.intersections.push(SplitIntersection {
-                edge_index,
-                edge_parameter: point.param_on_second(),
-                line_parameter: point.param_on_first(),
-            });
+            self.append_clamped_intersection(edge_index, point, range);
         }
         for rank in 1..=intersection.nb_segments()? {
             let segment = intersection.segment(rank)?;
-            self.append_segment_endpoints(edge_index, segment)?;
+            self.append_segment_endpoints(edge_index, segment, range)?;
         }
         Ok(())
     }
@@ -248,25 +263,29 @@ impl<'a> SplitByLineState<'a> {
         &mut self,
         edge_index: i32,
         segment: rustycad_tkgeomalgo::int_res2d::IntersectionSegment,
+        range: (f64, f64),
     ) -> Result<(), Failure> {
         if segment.has_first_point() {
-            self.append_intersection(edge_index, segment.first_point()?);
+            self.append_clamped_intersection(edge_index, segment.first_point()?, range);
         }
         if segment.has_last_point() {
-            self.append_intersection(edge_index, segment.last_point()?);
+            self.append_clamped_intersection(edge_index, segment.last_point()?, range);
         }
         Ok(())
     }
 
-    fn append_intersection(
+    fn append_clamped_intersection(
         &mut self,
         edge_index: i32,
         point: rustycad_tkgeomalgo::int_res2d::IntersectionPoint,
+        range: (f64, f64),
     ) {
+        let parameter = point.param_on_second().clamp(range.0, range.1);
         self.intersections.push(SplitIntersection {
             edge_index,
-            edge_parameter: point.param_on_second(),
+            edge_parameter: parameter,
             line_parameter: point.param_on_first(),
+            order: 1,
         });
     }
 
@@ -282,8 +301,10 @@ impl<'a> SplitByLineState<'a> {
             .collect();
         self.intersections.sort_by(|left, right| {
             left.edge_index.cmp(&right.edge_index).then_with(|| {
-                let direction = directions[(left.edge_index - 1) as usize];
-                (direction * left.edge_parameter).total_cmp(&(direction * right.edge_parameter))
+                left.order.cmp(&right.order).then_with(|| {
+                    let direction = directions[(left.edge_index - 1) as usize];
+                    (direction * left.edge_parameter).total_cmp(&(direction * right.edge_parameter))
+                })
             })
         });
     }
@@ -404,14 +425,23 @@ impl<'a> SplitByLineState<'a> {
         Ok(())
     }
 
-    fn collect_closing_junction(&mut self, junction: JunctionState) -> Result<(), Failure> {
+    fn collect_closing_junction(
+        &mut self,
+        junction: JunctionState,
+        periodic_axis: Option<closed_mode::PeriodicAxis>,
+    ) -> Result<(), Failure> {
         let orientation = self.input.wire.orientation();
         let first = junction.start_point.ok_or_else(null_wire)?;
         if matches!(
             orientation,
             rustycad_tkg3d::top_abs::Orientation::External
                 | rustycad_tkg3d::top_abs::Orientation::Internal
-        ) || junction.previous_code == junction.start_code
+        ) || (junction.previous_code != 0 && junction.previous_code == junction.start_code)
+            || !junction_within_half_period(
+                junction.start_deviation,
+                junction.previous_deviation,
+                periodic_axis,
+            )
         {
             return Ok(());
         }
@@ -423,7 +453,34 @@ impl<'a> SplitByLineState<'a> {
                 first,
                 self.input.line,
             ),
+            order: 2,
         });
         Ok(())
     }
+}
+
+fn oriented_scan_endpoints(
+    edge: &Edge,
+    scan: &EdgePcurveScan,
+) -> (rustycad_tkmath::gp::Point2, rustycad_tkmath::gp::Point2) {
+    if edge.orientation() == Orientation::Reversed {
+        (scan.end, scan.start)
+    } else {
+        (scan.start, scan.end)
+    }
+}
+
+fn junction_within_half_period(
+    deviation: f64,
+    previous_deviation: f64,
+    axis: Option<closed_mode::PeriodicAxis>,
+) -> bool {
+    let Some(axis) = axis else {
+        return true;
+    };
+    let period = match axis {
+        closed_mode::PeriodicAxis::U { period, .. }
+        | closed_mode::PeriodicAxis::V { period, .. } => period,
+    };
+    (deviation - previous_deviation).abs() < period * 0.5
 }

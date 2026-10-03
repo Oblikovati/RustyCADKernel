@@ -10,14 +10,35 @@ use rustycad_tkernel::{precision, standard::Failure};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::Line2;
 
-pub(super) fn periodic_cut_direction(composer: &ShapeFixComposeShell, line: Line2) -> bool {
+#[derive(Clone, Copy)]
+pub(super) enum PeriodicAxis {
+    U { line_coordinate: f64, period: f64 },
+    V { line_coordinate: f64, period: f64 },
+}
+
+pub(super) fn periodic_cut_direction(
+    composer: &ShapeFixComposeShell,
+    line: Line2,
+) -> Option<PeriodicAxis> {
     if !composer.closed_mode() {
-        return false;
+        return None;
     }
     let fields = composer.fields.read();
     let direction = line.direction();
-    (fields.u_closed && direction.x().abs() < precision::p_confusion())
-        || (fields.v_closed && direction.y().abs() < precision::p_confusion())
+    let location = line.location();
+    if fields.u_closed && direction.x().abs() < precision::p_confusion() {
+        return Some(PeriodicAxis::U {
+            line_coordinate: location.x(),
+            period: fields.u_period,
+        });
+    }
+    if fields.v_closed && direction.y().abs() < precision::p_confusion() {
+        return Some(PeriodicAxis::V {
+            line_coordinate: location.y(),
+            period: fields.v_period,
+        });
+    }
+    None
 }
 
 pub(super) fn remove_duplicates(
@@ -29,25 +50,33 @@ pub(super) fn remove_duplicates(
         return Ok(());
     }
     let mut index = 0;
-    while index + 1 < intersections.len() {
-        if duplicate_at_tail(composer, wire, intersections, index)? {
+    let mut previous = intersections.len() - 1;
+    while index < intersections.len() {
+        if index == previous {
+            break;
+        }
+        if duplicate_at_pair(composer, wire, intersections, index, previous)? {
             intersections.remove(index);
+            if previous > index {
+                previous -= 1;
+            }
         } else {
+            previous = index;
             index += 1;
         }
     }
     Ok(())
 }
 
-fn duplicate_at_tail(
+fn duplicate_at_pair(
     composer: &ShapeFixComposeShell,
     wire: &ShapeFixWireSegment,
     intersections: &[SplitIntersection],
     index: usize,
+    previous: usize,
 ) -> Result<bool, Failure> {
-    let tail_index = intersections.len() - 1;
     let first = intersections[index];
-    let tail = intersections[tail_index];
+    let tail = intersections[previous];
     if first.edge_index == tail.edge_index {
         return Ok((first.edge_parameter - tail.edge_parameter).abs() < precision::p_confusion());
     }
