@@ -1,10 +1,12 @@
 // Translation of ShapeFix_Edge parameter and vertex repair at
 // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
+mod curves;
 mod parameter;
 mod range;
 mod vertex;
 
 use crate::shape_build::ShapeBuildReShape;
+use crate::shape_construct::ShapeConstructProjectCurveOnSurface;
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::{Handle, StandardTransient};
@@ -17,15 +19,31 @@ use rustycad_tkernel::standard::{Handle, StandardTransient};
 /// use rustycad_tkshhealing::shape_extend::ShapeExtendStatus;
 /// assert!(ShapeFixEdge::new().status_flag(ShapeExtendStatus::Ok));
 /// ```
-#[derive(Default)]
 pub struct ShapeFixEdge {
     parent: StandardTransient,
     status: i32,
     context: Handle<ShapeBuildReShape>,
+    projector: Handle<ShapeConstructProjectCurveOnSurface>,
 }
 impl_transient!(ShapeFixEdge, "ShapeFix_Edge", StandardTransient, parent);
 
+impl Default for ShapeFixEdge {
+    fn default() -> Self {
+        Self {
+            parent: StandardTransient::default(),
+            status: 0,
+            context: Handle::default(),
+            projector: Handle::new(ShapeConstructProjectCurveOnSurface::new()),
+        }
+    }
+}
+
 impl ShapeFixEdge {
+    /// Share the projector so callers can configure projection; `tool.projector()`.
+    pub fn projector(&self) -> Handle<ShapeConstructProjectCurveOnSurface> {
+        self.projector.clone()
+    }
+
     /// Construct a repair tool with no replacement context; `ShapeFixEdge::new()`.
     pub fn new() -> Self {
         Self::default()
