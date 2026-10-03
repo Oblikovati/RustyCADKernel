@@ -38,6 +38,15 @@ def check_declarations(events):
     one(events, "declaration", qualified_name="fixture::Box", kind="ClassTemplate")
     assert one(events, "declaration", qualified_name="fixture::Box", kind="CXXRecord")["exclusion_reason"] == "template_owned_declaration"
     assert one(events, "declaration", qualified_name="fixture::scaled")["api_visible"]
+    template_function = one(events, "declaration", qualified_name="fixture::identity", kind="FunctionTemplate")
+    assert template_function["parameter_types"] == ["type-parameter-0-0"]
+    assert template_function["written_parameter_types"] == ["T"]
+    assert "(" in template_function["signature"]
+    assert one(events, "declaration", qualified_name="LocalAlias")["exclusion_reason"] == "local_scope"
+    assert one(events, "declaration", qualified_name="LocalRecord")["exclusion_reason"] == "local_scope"
+    assert one(events, "declaration", qualified_name="local_value")["exclusion_reason"] == "local_variable"
+    template_parameters = [event for event in declarations if event.get("parent_usr") == template_function["usr"] and event.get("kind") == "TemplateTypeParm"]
+    assert len(template_parameters) == 1 and template_parameters[0]["api_visible"]
     assert one(events, "declaration", kind="StaticAssert")["exclusion_reason"] == "static_assert"
     overloads = [event for event in declarations if event.get("qualified_name") == "fixture::PublicType::overload"]
     assert len(overloads) == 2 and overloads[0]["usr"] != overloads[1]["usr"]
@@ -50,6 +59,8 @@ def check_preprocessor(events, root: pathlib.Path):
     guard = one(events, "macro", name="_Fixture_HeaderFile")
     assert guard["macro_category"] == "include_guard" and not guard["api_candidate"]
     assert one(events, "macro", name="FIXTURE_SCALE")["api_candidate"]
+    fallback = one(events, "macro", name="M_PI")
+    assert fallback["macro_category"] == "source_macro" and fallback["api_candidate"]
     skipped = one(events, "skipped_range")
     assert skipped["start"]["line"] < skipped["end"]["line"]
     for fragment in ("Fixture.lxx", "Fixture.pxx", "Fixture.gxx"):

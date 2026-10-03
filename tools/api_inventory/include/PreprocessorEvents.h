@@ -2,9 +2,14 @@
 
 #include "Schema.h"
 #include "clang/Lex/PPCallbacks.h"
-#include <map>
 #include <set>
 #include <string>
+#include <utility>
+#include <vector>
+
+namespace clang {
+class MacroInfo;
+}
 
 namespace api_inventory {
 class PreprocessorEvents final : public clang::PPCallbacks {
@@ -13,8 +18,6 @@ public:
                      const clang::LangOptions &language);
   void MacroDefined(const clang::Token &name,
                     const clang::MacroDirective *directive) override;
-  void Ifndef(clang::SourceLocation location, const clang::Token &name,
-              const clang::MacroDefinition &definition) override;
   void SourceRangeSkipped(clang::SourceRange range,
                          clang::SourceLocation endifLocation) override;
   void InclusionDirective(clang::SourceLocation hashLocation,
@@ -35,6 +38,6 @@ private:
   clang::SourceManager &sources_;
   const clang::LangOptions &language_;
   std::set<std::filesystem::path> seenHeaders_;
-  std::map<std::filesystem::path, std::set<std::string>> includeGuardNames_;
+  std::vector<std::pair<std::string, const clang::MacroInfo *>> macros_;
 };
 } // namespace api_inventory

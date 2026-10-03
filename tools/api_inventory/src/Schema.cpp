@@ -77,12 +77,29 @@ bool isCandidateKind(const clang::Decl &declaration) {
                    clang::TemplateTemplateParmDecl, clang::ConceptDecl>(&declaration);
 }
 
+bool hasLocalAncestor(const clang::Decl &declaration) {
+  if (llvm::isa<clang::TemplateTypeParmDecl,
+                clang::NonTypeTemplateParmDecl,
+                clang::TemplateTemplateParmDecl>(&declaration))
+    return false;
+  const clang::DeclContext *context = declaration.getDeclContext();
+  while (context && !context->isTranslationUnit()) {
+    const auto *owner = clang::Decl::castFromDeclContext(context);
+    if (llvm::isa<clang::FunctionDecl, clang::BlockDecl,
+                  clang::CapturedDecl>(owner))
+      return true;
+    context = context->getParent();
+  }
+  return false;
+}
+
 std::string exclusionFor(const clang::Decl &declaration) {
   if (declaration.isImplicit()) return "implicit_declaration";
   if (llvm::isa<clang::ParmVarDecl>(&declaration)) return "function_parameter";
   if (const auto *variable = llvm::dyn_cast<clang::VarDecl>(&declaration))
     if (!variable->isFileVarDecl() && !variable->isStaticDataMember())
       return "local_variable";
+  if (hasLocalAncestor(declaration)) return "local_scope";
   if (llvm::isa<clang::AccessSpecDecl>(&declaration)) return "access_marker";
   if (llvm::isa<clang::UsingShadowDecl>(&declaration)) return "using_shadow";
   if (llvm::isa<clang::FriendDecl>(&declaration)) return "friend_wrapper";
@@ -125,6 +142,14 @@ llvm::json::Array parameterTypes(const clang::FunctionDecl &function,
   return types;
 }
 
+const clang::FunctionDecl *functionForApi(const clang::Decl &declaration) {
+  if (const auto *function = llvm::dyn_cast<clang::FunctionDecl>(&declaration))
+    return function;
+  if (const auto *templ = llvm::dyn_cast<clang::FunctionTemplateDecl>(&declaration))
+    return templ->getTemplatedDecl();
+  return nullptr;
+}
+
 llvm::json::Array ancestorAccess(const clang::Decl &declaration) {
   llvm::json::Array ancestors;
   const clang::DeclContext *context = declaration.getDeclContext();
@@ -145,7 +170,7 @@ llvm::json::Array ancestorAccess(const clang::Decl &declaration) {
 
 std::string canonicalSignature(const clang::Decl &declaration,
                               const clang::ASTContext &context) {
-  if (const auto *function = llvm::dyn_cast<clang::FunctionDecl>(&declaration))
+  if (const auto *function = functionForApi(declaration))
     return typeText(function->getType(), context, true);
   return declarationType(declaration, context);
 }
@@ -198,7 +223,7 @@ llvm::json::Object declarationEvent(const clang::Decl &declaration,
   std::string reason = exclusionFor(declaration);
   if (isTemplatePattern(declaration)) reason = "template_owned_declaration";
   const auto *named = llvm::dyn_cast<clang::NamedDecl>(&declaration);
-  const auto *function = llvm::dyn_cast<clang::FunctionDecl>(&declaration);
+  const auto *function = functionForApi(declaration);
   const std::string source = expansionFile ? expansionFile->str() : "";
   llvm::json::Object event{
       {"event", "declaration"},

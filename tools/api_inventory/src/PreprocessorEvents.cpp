@@ -28,7 +28,7 @@ std::string macroName(const clang::Token &token,
   return clang::Lexer::getSpelling(token, sources, language);
 }
 
-llvm::json::Object macroEvent(const clang::Token &name,
+llvm::json::Object macroEvent(llvm::StringRef name,
                               const clang::MacroInfo &macro,
                               const clang::SourceManager &sources,
                               const clang::LangOptions &language,
@@ -42,7 +42,7 @@ llvm::json::Object macroEvent(const clang::Token &name,
       {"event", "macro"},
       {"source", fileAt(macro.getDefinitionLoc(), sources).string()},
       {"main_header", config.mainHeader.string()},
-      {"name", macroName(name, sources, language)},
+      {"name", name.str()},
       {"function_like", macro.isFunctionLike()},
       {"variadic", macro.isVariadic()},
       {"parameters", std::move(parameters)},
@@ -61,23 +61,13 @@ PreprocessorEvents::PreprocessorEvents(const Config &config,
   seenHeaders_.insert(config_.mainHeader);
 }
 
-void PreprocessorEvents::Ifndef(clang::SourceLocation location,
-                                const clang::Token &name,
-                                const clang::MacroDefinition &) {
-  includeGuardNames_[fileAt(location, sources_)].insert(
-      macroName(name, sources_, language_));
-}
-
 void PreprocessorEvents::MacroDefined(const clang::Token &name,
                                       const clang::MacroDirective *directive) {
   if (!directive || !directive->getMacroInfo()) return;
   const clang::MacroInfo &macro = *directive->getMacroInfo();
   const auto path = fileAt(macro.getDefinitionLoc(), sources_);
-  const std::string spelling = macroName(name, sources_, language_);
   if (!shouldEmit(path, config_)) return;
-  const bool includeGuard = includeGuardNames_[path].find(spelling) !=
-                            includeGuardNames_[path].end();
-  writeEvent(macroEvent(name, macro, sources_, language_, config_, includeGuard));
+  macros_.emplace_back(macroName(name, sources_, language_), &macro);
 }
 
 void PreprocessorEvents::SourceRangeSkipped(clang::SourceRange range,
@@ -103,6 +93,9 @@ void PreprocessorEvents::InclusionDirective(
 }
 
 void PreprocessorEvents::emitHeaders() const {
+  for (const auto &[name, macro] : macros_)
+    writeEvent(macroEvent(name, *macro, sources_, language_, config_,
+                          macro->isUsedForHeaderGuard()));
   for (const auto &path : seenHeaders_) writeEvent(headerSeenEvent(path, config_));
 }
 } // namespace api_inventory

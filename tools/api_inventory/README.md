@@ -52,9 +52,10 @@ Each output line is a JSON object with an `event` discriminator and the
   markers, static assertions, and other non-API AST nodes are also reported as
   exclusions. Namespace/file variables and static data members are candidates.
 * `macro`: definition, replacement tokens, parameters, and location. Include
-  guards are separate rows marked `macro_category=include_guard` and excluded
-  from API candidates. Other source macros remain candidates for a later
-  mapping decision.
+  guards are identified by Clang's completed multiple-include/header-guard
+  analysis, emitted as `macro_category=include_guard`, and excluded from API
+  candidates. A macro merely defined below `#ifndef` (such as a fallback
+  constant macro) remains a source macro candidate.
 * `header_seen`: canonical included path plus whether declarations from that
   path were emitted for this run.
 * `skipped_range`: an inactive preprocessor range with start/end locations.
