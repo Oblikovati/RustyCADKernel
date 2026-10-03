@@ -4,6 +4,8 @@
 #include <BRep_Tool.hxx>
 #include <BRepCheck_Analyzer.hxx>
 #include <BRepAdaptor_Curve.hxx>
+#include <Geom_BezierCurve.hxx>
+#include <NCollection_Array1.hxx>
 #include <ShapeUpgrade_UnifySameDomain.hxx>
 #include <TopExp.hxx>
 #include <TopExp_Explorer.hxx>
@@ -79,6 +81,20 @@ static TopoDS_Wire makeClosedCircleWire() {
   return wireBuilder.Wire();
 }
 
+static TopoDS_Wire makeBezierChainWire() {
+  NCollection_Array1<gp_Pnt> firstPoles(1, 3), secondPoles(1, 3);
+  firstPoles.SetValue(1, gp_Pnt(0, 0, 0));
+  firstPoles.SetValue(2, gp_Pnt(0.5, 0, 0));
+  firstPoles.SetValue(3, gp_Pnt(1, 1, 0));
+  secondPoles.SetValue(1, gp_Pnt(1, 1, 0));
+  secondPoles.SetValue(2, gp_Pnt(1.5, 2, 0));
+  secondPoles.SetValue(3, gp_Pnt(2, 4, 0));
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(new Geom_BezierCurve(firstPoles)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(new Geom_BezierCurve(secondPoles)));
+  return wireBuilder.Wire();
+}
+
 static TopoDS_Wire makeReverseOrderWire() {
   BRepBuilderAPI_MakeWire wireBuilder;
   wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(3, 0, 0)));
@@ -99,14 +115,15 @@ static TopoDS_Wire makeReversedOccurrencesWire() {
   return wireBuilder.Wire();
 }
 
-static void runCase(const char* name, const TopoDS_Wire& wire, bool unifyEdges) {
+static void runCase(const char* name, const TopoDS_Wire& wire, bool unifyEdges,
+                    bool concatBSplines = false) {
   for (TopExp_Explorer inputEdge(wire, TopAbs_EDGE); inputEdge.More(); inputEdge.Next()) {
     TopoDS_Vertex inputFirst, inputLast;
     TopExp::Vertices(TopoDS::Edge(inputEdge.Current()), inputFirst, inputLast, true);
     std::cerr << name << " input " << BRep_Tool::Pnt(inputFirst).X() << " -> "
               << BRep_Tool::Pnt(inputLast).X() << '\n';
   }
-  ShapeUpgrade_UnifySameDomain unifier(wire, unifyEdges, false, false);
+  ShapeUpgrade_UnifySameDomain unifier(wire, unifyEdges, false, concatBSplines);
   unifier.Build();
 
   const TopoDS_Shape result = unifier.Shape();
@@ -124,7 +141,7 @@ static void runCase(const char* name, const TopoDS_Wire& wire, bool unifyEdges) 
     std::cout << std::setprecision(17) << name << " endpoints " << firstPoint.X() << ' '
               << firstPoint.Y() << ' ' << firstPoint.Z() << ' ' << lastPoint.X() << ' '
               << lastPoint.Y() << ' ' << lastPoint.Z() << '\n';
-    if (name[0] == 'c') {
+    if (name[0] == 'c' || name[0] == 'b') {
       const BRepAdaptor_Curve curve(TopoDS::Edge(explorer.Current()));
       const double first = curve.FirstParameter(), last = curve.LastParameter();
       const gp_Pnt middle = curve.Value((first + last) * 0.5);
@@ -164,5 +181,7 @@ int main() {
   runCase("circle_reverse_order", makeReverseCircleWire(), true);
   runCase("circle_reversed_occurrences", makeReversedCircleOccurrencesWire(), true);
   runCase("circle_closed", makeClosedCircleWire(), true);
+  runCase("bezier_disabled", makeBezierChainWire(), true);
+  runCase("bezier_chain", makeBezierChainWire(), true, true);
   runPlanarFaceCase();
 }
