@@ -95,7 +95,7 @@ verifier's local helper modules.
 ## Paired runtime evidence
 
 `tkernel-runtime-report.json.gz` retains the complete verifier report and its input
-hashes at Rust revision `219c48d7`. `tkernel-runtime-declarations.json.gz` records
+hashes at Rust revision `432e74bc`. `tkernel-runtime-declarations.json.gz` records
 the exact declaration/instance join: 1,315 declarations passed, one declaration
 was an approved upstream skip, and 7,332 were unverified by this TKernel run.
 There were zero unmapped runtime cases or mapping anomalies. The run executed
