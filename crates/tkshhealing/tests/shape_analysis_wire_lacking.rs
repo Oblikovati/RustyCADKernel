@@ -1,14 +1,12 @@
 //! Native missing-connection statuses, tolerances, orientation and metric state.
+mod support;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
-    topods::{Builder, Edge, Face, Vertex},
+    topods::{Edge, Face},
 };
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::{
-    geom::{GeomPlane, GeomSurface},
-    top_abs::Orientation,
-};
+use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
 use rustycad_tkmath::gp::{Axis2d, Axis3, Direction2, Point2, Point3};
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisWire,
@@ -102,11 +100,16 @@ fn planar_face() -> Face {
 }
 
 fn fixture_edge(face: &Face, vertices: u8, span: f64, reverse: bool) -> Edge {
-    let mut edge = Edge::default();
-    BRepBuilder::default().make_edge(&mut edge).unwrap();
-    if vertices > 0 {
-        attach_vertices(&edge, vertices == 2);
-    }
+    let mut edge = if vertices > 0 {
+        support::edge_at_points(
+            Point3::default(),
+            Point3::new(f64::from(vertices == 2), 0., 0.),
+        )
+    } else {
+        let mut edge = Edge::default();
+        BRepBuilder::default().make_edge(&mut edge).unwrap();
+        edge
+    };
     if span >= 0. {
         attach_pcurve(&edge, face, span);
     }
@@ -114,22 +117,6 @@ fn fixture_edge(face: &Face, vertices: u8, span: f64, reverse: bool) -> Edge {
         edge.reverse();
     }
     edge
-}
-
-fn attach_vertices(edge: &Edge, disconnected: bool) {
-    let mut shape = edge.clone().into_shape();
-    for (x, orientation) in [
-        (0., Orientation::Forward),
-        (f64::from(disconnected), Orientation::Reversed),
-    ] {
-        let mut vertex = Vertex::default();
-        BRepBuilder::default()
-            .make_vertex_at(&mut vertex, Point3::new(x, 0., 0.), 1e-7)
-            .unwrap();
-        Builder
-            .add(&mut shape, &vertex.oriented(orientation))
-            .unwrap();
-    }
 }
 
 fn attach_pcurve(edge: &Edge, face: &Face, span: f64) {

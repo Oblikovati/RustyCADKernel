@@ -1,19 +1,15 @@
 //! Branch regressions compared with the pinned OCCT CheckDegenerated implementation.
-use rustycad_tkbrep::{
-    brep::BRepBuilder,
-    topods::{Builder, Edge, Face, Vertex},
-};
+mod support;
+use rustycad_tkbrep::{brep::BRepBuilder, topods::Face};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::{
-    geom::{GeomCircle, GeomConicalSurface, GeomCurve, GeomSurface},
-    top_abs::Orientation,
-};
+use rustycad_tkg3d::geom::{GeomCircle, GeomConicalSurface, GeomCurve, GeomSurface};
 use rustycad_tkmath::gp::{Axis2, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisWire,
     shape_extend::{ShapeExtendStatus, ShapeExtendWireData},
 };
+use support::edge_at_points as edge_at;
 
 const EXPECTED: &str =
     include_str!("../../../tools/oracle/tkshhealing_wire_singular_checks.expected");
@@ -93,21 +89,6 @@ fn inspect(name: &str, wire: &Handle<ShapeExtendWireData>) {
     );
     check_closure(name, &analyzer);
     check_aggregate(name, &analyzer, wire);
-}
-
-fn edge_at(first: Point3, last: Point3) -> Edge {
-    let builder = BRepBuilder::default();
-    let mut edge = Edge::default();
-    builder.make_edge(&mut edge).unwrap();
-    let mut shape = edge.clone().into_shape();
-    for (point, orientation) in [(first, Orientation::Forward), (last, Orientation::Reversed)] {
-        let mut vertex = Vertex::default();
-        builder.make_vertex_at(&mut vertex, point, 1e-7).unwrap();
-        Builder
-            .add(&mut shape, &vertex.oriented(orientation))
-            .unwrap();
-    }
-    edge
 }
 
 fn attach_apex_pcurves(wire: &Handle<ShapeExtendWireData>, face: &Face) {

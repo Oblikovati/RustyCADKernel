@@ -8,11 +8,7 @@ use rustycad_tkmath::gp::Point3;
 
 /// A vertex at `(x, y, 0)`.
 pub fn vertex(x: f64, y: f64) -> Vertex {
-    let mut v = Vertex::default();
-    BRepBuilder::default()
-        .make_vertex_at(&mut v, Point3::new(x, y, 0.0), 1e-7)
-        .unwrap();
-    v
+    vertex_at(Point3::new(x, y, 0.0))
 }
 
 /// An edge without geometry from `first` (FORWARD) to `last` (REVERSED).
@@ -52,4 +48,19 @@ pub fn wire(shapes: &[Shape]) -> Wire {
 /// The edges as shapes.
 pub fn shapes(edges: &[Edge]) -> Vec<Shape> {
     edges.iter().map(|e| e.clone().into_shape()).collect()
+}
+
+/// A vertex at any spatial point; `vertex_at(Point3::new(1., 2., 3.))`.
+pub fn vertex_at(point: Point3) -> Vertex {
+    let mut vertex = Vertex::default();
+    BRepBuilder::default()
+        .make_vertex_at(&mut vertex, point, 1e-7)
+        .unwrap();
+    vertex
+}
+
+/// An edge with distinct endpoint identities, even at coincident points.
+/// Example: `edge_at_points(Point3::default(), Point3::new(1., 0., 0.))`.
+pub fn edge_at_points(first: Point3, last: Point3) -> Edge {
+    edge(&vertex_at(first), &vertex_at(last))
 }

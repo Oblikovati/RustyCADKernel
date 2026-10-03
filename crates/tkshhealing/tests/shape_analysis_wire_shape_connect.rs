@@ -1,10 +1,7 @@
 //! Exact native endpoint-pairing flags and output-reference preservation.
-use rustycad_tkbrep::{
-    brep::BRepBuilder,
-    topods::{Builder, Compound, Edge, Shape, Vertex, Wire},
-};
+mod support;
+use rustycad_tkbrep::topods::{Builder, Compound, Edge, Shape, Wire};
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisWire,
@@ -94,20 +91,7 @@ fn connection_flags(analyzer: &ShapeAnalysisWire, found: bool) -> Vec<f64> {
 }
 
 fn edge_at(first: f64, last: f64) -> Edge {
-    let builder = BRepBuilder::default();
-    let mut edge = Edge::default();
-    builder.make_edge(&mut edge).unwrap();
-    let mut shape = edge.clone().into_shape();
-    for (x, orientation) in [(first, Orientation::Forward), (last, Orientation::Reversed)] {
-        let mut vertex = Vertex::default();
-        builder
-            .make_vertex_at(&mut vertex, Point3::new(x, 0., 0.), 1e-7)
-            .unwrap();
-        Builder
-            .add(&mut shape, &vertex.oriented(orientation))
-            .unwrap();
-    }
-    edge
+    support::edge_at_points(Point3::new(first, 0., 0.), Point3::new(last, 0., 0.))
 }
 
 #[test]
