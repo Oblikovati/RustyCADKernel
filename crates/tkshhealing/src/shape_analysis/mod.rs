@@ -12,7 +12,7 @@ mod shell;
 mod wire_order;
 
 pub use check_small_face::{
-    ShapeAnalysisCheckSmallFace, SplittingVertexEdges, SplittingVertexParameters,
+    PinFaceEdgeMap, ShapeAnalysisCheckSmallFace, SplittingVertexEdges, SplittingVertexParameters,
 };
 pub use free_bound_data::ShapeAnalysisFreeBoundData;
 pub use geom::ShapeAnalysisGeom;
