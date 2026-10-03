@@ -60,6 +60,36 @@ impl ShapeFixWire {
         self.state.write().fix_lacking_mode = mode;
     }
 
+    /// Reads the native aggregate small-edge mode; `fixer.fix_small_mode()`.
+    pub fn fix_small_mode(&self) -> i32 {
+        self.state.read().fix_small_mode
+    }
+
+    /// Reads the native aggregate vertex-connection mode; `fixer.fix_connected_mode()`.
+    pub fn fix_connected_mode(&self) -> i32 {
+        self.state.read().fix_connected_mode
+    }
+
+    /// Reads the native aggregate degenerated-edge mode; `fixer.fix_degenerated_mode()`.
+    pub fn fix_degenerated_mode(&self) -> i32 {
+        self.state.read().fix_degenerated_mode
+    }
+
+    /// Reads the native aggregate self-intersection mode; `fixer.fix_self_intersection_mode()`.
+    pub fn fix_self_intersection_mode(&self) -> i32 {
+        self.state.read().fix_self_intersection_mode
+    }
+
+    /// Reads the native aggregate missing-edge mode; `fixer.fix_lacking_mode()`.
+    pub fn fix_lacking_mode(&self) -> i32 {
+        self.state.read().fix_lacking_mode
+    }
+
+    /// Returns whether self-intersection repair removed a segment; `fixer.status_removed_segment()`.
+    pub fn status_removed_segment(&self) -> bool {
+        self.state.read().removed_segment
+    }
+
     /// Reads aggregate notched-edge status; `fixer.status_notches(ShapeExtendStatus::Done)`.
     pub fn status_notches(&self, status: ShapeExtendStatus) -> bool {
         ShapeExtend::decode_status(self.state.read().notches_status, status)

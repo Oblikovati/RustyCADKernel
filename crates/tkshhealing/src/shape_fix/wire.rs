@@ -22,6 +22,8 @@ mod wire_intersection_tool;
 mod wire_lacking;
 #[path = "wire_nonadjacent_intersection_fix.rs"]
 mod wire_nonadjacent_intersection_fix;
+#[path = "wire_notched.rs"]
+mod wire_notched;
 #[path = "wire_perform.rs"]
 mod wire_perform;
 #[path = "wire_seam.rs"]
@@ -103,6 +105,7 @@ struct WireFixState {
     tails_status: i32,
     max_tail_angle_sine: f64,
     max_tail_width: f64,
+    removed_segment: bool,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
@@ -157,6 +160,7 @@ impl Default for ShapeFixWire {
                 tails_status: 0,
                 max_tail_angle_sine: 0.0,
                 max_tail_width: -1.0,
+                removed_segment: false,
             }),
             edge_fixer: Handle::new(ShapeFixEdge::new()),
         }
