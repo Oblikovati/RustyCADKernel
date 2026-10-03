@@ -24,8 +24,9 @@ standalone failure, source translation unit, flags, and hashes. Six toolkit
 configurations remain absent; OpenGL/GLES share physical headers, so per-toolkit
 ownership totals overlap and do not prove the absent GLES configuration.
 There are 2,651 conflicting-declaration observations and 1,094 skipped preprocessor
-ranges retained for review. The observed declaration count is a lower bound on
-the cross-platform surface, not a denominator for a full-port percentage.
+ranges retained for review. The declaration count is a preliminary candidate
+count: the current visibility filter still includes internal helpers, so it is
+neither a validated lower bound nor a denominator for API coverage.
 
 The legacy-test snapshot separately accounts for 8,648 GoogleTest declarations:
 7,393 exact Rust mappings and 1,255 unmapped, with zero unknown or duplicate
