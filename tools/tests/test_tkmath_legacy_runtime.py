@@ -19,6 +19,7 @@ from verify_tkmath_legacy import (
     main,
     report_header_fields,
     cargo_env,
+    rust_statuses,
     verify_source_group,
 )
 from tkmath_native_provenance import (
@@ -32,6 +33,17 @@ class FailedToolkitRun:
 
     def __call__(self, _args: object) -> None:
         raise RuntimeError("simulated native execution failure")
+
+
+class PackageScopedRustRuns:
+    """Record package/target requests and return each exact mapped identity."""
+
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, str]] = []
+
+    def __call__(self, package, target, expected, _env, _output):
+        self.calls.append((package, target))
+        return {case for case in expected if case[:2] == (package, target)}
 
 
 class TkMathLegacyRuntimeTest(unittest.TestCase):
@@ -207,6 +219,21 @@ class TkMathLegacyRuntimeTest(unittest.TestCase):
         with patch.dict("os.environ", {"CARGO_TARGET_DIR": "/tmp/other-worktree"}):
             env = cargo_env(target)
         self.assertEqual(env["CARGO_TARGET_DIR"], str(target.resolve()))
+
+    def test_rust_runs_are_grouped_by_package_and_target(self) -> None:
+        """Every crate gets a separate exact Cargo invocation; e.g. TKG3d dependencies."""
+        expected = {
+            ("rustycad-tkg3d", "mesh_test", "case"),
+            ("rustycad-tkgeomalgo", "mesh_test", "case"),
+        }
+        runner = PackageScopedRustRuns()
+        with patch("verify_tkmath_legacy.run_rust_target", side_effect=runner):
+            passed = rust_statuses(expected, {}, pathlib.Path("out"))
+        self.assertEqual(
+            set(runner.calls),
+            {("rustycad-tkg3d", "mesh_test"), ("rustycad-tkgeomalgo", "mesh_test")},
+        )
+        self.assertEqual(passed, expected)
 
 
 def mapping(digest: str) -> JSONObject:

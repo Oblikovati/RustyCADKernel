@@ -87,6 +87,26 @@ class LegacyRuntimeJoinTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicate runtime case identity"):
             join_declarations([mapped_declaration()], [case, dict(case)])
 
+    def test_package_is_part_of_exact_runtime_identity(self) -> None:
+        """Equal target/test strings remain distinct across crates; e.g. TKG3d packages."""
+        first = mapped_declaration()
+        second = mapped_declaration()
+        second["name"] = "Other.Case"
+        second["mapped_rust_test"]["upstream_id"] = "Other.Case"
+        second["mapped_rust_test"]["rust_package"] = "rustycad-tkgeomalgo"
+        first["mapped_rust_test"]["rust_package"] = "rustycad-tkg3d"
+        first_case = case_result(package="rustycad-tkg3d")
+        second_case = case_result(package="rustycad-tkgeomalgo")
+        second_case["upstream_id"] = "Other.Case"
+        second_case["native_case"] = "Other.Case"
+        joined, unclaimed = join_declarations(
+            [first, second], [first_case, second_case]
+        )
+        self.assertEqual(
+            [row["runtime_status"] for row in joined], ["passed", "passed"]
+        )
+        self.assertEqual(unclaimed, [])
+
     def test_incremental_green_rows_do_not_set_global_proof(self) -> None:
         """A passing subset is not full acceptance; e.g. one TKA declaration."""
         report: JSONObject = {"revision": "pinned"}
@@ -200,6 +220,7 @@ def fixture_mapping(status: str, runtime_cases: list[JSONObject] | None) -> JSON
         "toolkit": "TKA",
         "source": "src/A_Test.cxx",
         "upstream_id": "Suite.Case",
+        "rust_package": "rustycad-tkg3d",
         "rust_target": "suite_test",
         "rust_test": "case_test",
         "status": status,
@@ -302,6 +323,7 @@ def case_result(
     native_case: str = "Suite.Case",
     rust_test: str = "case_test",
     native_status: str = "passed",
+    package: str = "rustycad-tkg3d",
 ) -> JSONObject:
     return {
         "toolkit": "TKA",
@@ -310,6 +332,7 @@ def case_result(
         "native_case": native_case,
         "native_status": native_status,
         "source_sha256": "0" * 64,
+        "rust_package": package,
         "rust_target": "suite_test",
         "rust_test": rust_test,
         "rust_status": "passed",

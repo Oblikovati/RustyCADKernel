@@ -122,11 +122,13 @@ def require_native_passes(cases: list[ET.Element], toolkit: str = "TKMath") -> N
 
 
 def rust_statuses(
-    package: str, expected: set[tuple[str, str]], env: dict[str, str], output: Path
-) -> set[tuple[str, str]]:
-    """Run exact mapped Cargo targets; e.g. `rust_statuses('rustycad-tkmath', expected, env, out)`."""
-    passed: set[tuple[str, str]] = set()
-    for target in sorted({target for target, _ in expected}):
+    expected: set[tuple[str, str, str]], env: dict[str, str], output: Path
+) -> set[tuple[str, str, str]]:
+    """Run each package/target pair exactly; e.g. `rust_statuses(expected, env, out)`."""
+    passed: set[tuple[str, str, str]] = set()
+    for package, target in sorted(
+        {(package, target) for package, target, _ in expected}
+    ):
         passed.update(run_rust_target(package, target, expected, env, output))
     return passed
 
@@ -134,14 +136,14 @@ def rust_statuses(
 def run_rust_target(
     package: str,
     target: str,
-    expected: set[tuple[str, str]],
+    expected: set[tuple[str, str, str]],
     env: dict[str, str],
     output: Path,
-) -> set[tuple[str, str]]:
+) -> set[tuple[str, str, str]]:
     """Collect one test binary's passing identities; e.g. `run_rust_target(package, target, pairs, env, out)`."""
     result = rust_target_output(package, target, env, output)
     names = set(re.findall(r"^test (\S+) \.\.\. ok$", result, re.M))
-    return validate_rust_target(target, names, expected)
+    return validate_rust_target(package, target, names, expected)
 
 
 def rust_target_output(
@@ -160,33 +162,28 @@ def rust_target_output(
             "--",
             "--test-threads=1",
         ],
-        output / f"rust-{target}.log",
+        output / f"rust-{package}-{target}.log",
         env=env,
         timeout=1800,
     )
 
 
 def validate_rust_target(
-    target: str, names: set[str], expected: set[tuple[str, str]]
-) -> set[tuple[str, str]]:
-    """Require exact mapped Rust test events; e.g. `validate_rust_target(target, names, pairs)`."""
-    target_passed = {(target, name) for name in names}
+    package: str,
+    target: str,
+    names: set[str],
+    expected: set[tuple[str, str, str]],
+) -> set[tuple[str, str, str]]:
+    """Require exact package-scoped tests; e.g. `validate_rust_target(package, target, names, expected)`."""
+    target_passed = {(package, target, name) for name in names}
     wanted = {
-        (name_target, name) for name_target, name in expected if name_target == target
+        (name_package, name_target, name)
+        for name_package, name_target, name in expected
+        if name_package == package and name_target == target
     }
     if target_passed != wanted:
         raise RuntimeError(f"Rust target {target} passed set differs from mappings")
     return target_passed
-
-
-def package_name(rows: list[dict[str, object]], toolkit: str = "TKMath") -> str:
-    """Require one Rust package; e.g. `package_name(tkg2d_rows, 'TKG2d')`."""
-    packages = {str(row["rust_package"]) for row in rows}
-    if len(packages) != 1:
-        raise RuntimeError(
-            f"{toolkit} mappings use unexpected Rust packages: {sorted(packages)}"
-        )
-    return packages.pop()
 
 
 def run_verification(args: argparse.Namespace) -> JSONObject:
@@ -237,7 +234,7 @@ def execute_verified_run(
 def finish_verified_run(
     run: VerifiedRun,
     native: dict[str, str],
-    rust_passed: set[tuple[str, str]],
+    rust_passed: set[tuple[str, str, str]],
     native_provenance: JSONObject,
 ) -> JSONObject:
     """Validate run stability and serialize results; e.g. `finish_verified_run(run, native, rust, provenance)`."""
@@ -263,14 +260,12 @@ def run_mapped_rust_cases(
     native: dict[str, str],
     output: Path,
     cargo_target_dir: Path,
-) -> set[tuple[str, str]]:
+) -> set[tuple[str, str, str]]:
     """Run exact Rust peers of native cases; e.g. `run_mapped_rust_cases(rows, native, output)`."""
     expected, rust_expected = mapped_runtime_sets(rows)
     toolkit = str(rows[0]["toolkit"])
     validate_native_identity_set(native, expected, toolkit)
-    return rust_statuses(
-        package_name(rows, toolkit), rust_expected, cargo_env(cargo_target_dir), output
-    )
+    return rust_statuses(rust_expected, cargo_env(cargo_target_dir), output)
 
 
 def validate_native_identity_set(
@@ -381,7 +376,7 @@ def report(
     inventory: JSONObject,
     sources: set[str],
     native: dict[str, str],
-    rust_passed: set[tuple[str, str]],
+    rust_passed: set[tuple[str, str, str]],
     input_hashes: dict[str, str],
     native_provenance: JSONObject,
     rust_state: JSONObject,
@@ -436,7 +431,7 @@ def rust_report_fields(rust_state: JSONObject, cargo_target_dir: Path) -> JSONOb
 def runtime_counts_fields(
     rows: list[JSONObject],
     native: dict[str, str],
-    rust_passed: set[tuple[str, str]],
+    rust_passed: set[tuple[str, str, str]],
 ) -> JSONObject:
     """Record aggregate counts beside per-case rows; e.g. `runtime_counts_fields(rows, native, rust)`."""
     return {
@@ -451,7 +446,7 @@ def runtime_counts_fields(
 def runtime_case_fields(
     rows: list[JSONObject],
     native: dict[str, str],
-    rust_passed: set[tuple[str, str]],
+    rust_passed: set[tuple[str, str, str]],
     sources: set[str],
     native_provenance: JSONObject,
 ) -> JSONObject:
