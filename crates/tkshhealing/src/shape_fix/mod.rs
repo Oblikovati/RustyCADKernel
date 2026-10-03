@@ -14,6 +14,7 @@ mod shape;
 mod shape_tolerance;
 mod shell_orientation;
 mod wire;
+mod wire_vertex;
 
 pub use edge::ShapeFixEdge;
 pub use edge_connect::ShapeFixEdgeConnect;
@@ -24,6 +25,7 @@ pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
 pub use shape::ShapeFixShape;
 pub use shape_tolerance::ShapeFixShapeTolerance;
 pub use wire::ShapeFixWire;
+pub use wire_vertex::ShapeFixWireVertex;
 
 mod wire_segment;
 pub use wire_segment::{ShapeFixWireSegment, WirePatchIndex};
