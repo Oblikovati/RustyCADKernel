@@ -8,13 +8,16 @@ pub(super) const ITP_BEGSEG: i32 = 16;
 pub(super) const ITP_ENDSEG: i32 = 32;
 pub(super) const ITP_TANG: i32 = 64;
 pub(super) const IOR_POS: i32 = 4;
+pub(super) const TOLINT: f64 = 1.0e-10;
 
 #[derive(Default)]
 pub(super) struct JunctionState {
     pub(super) start_code: i32,
     pub(super) previous_code: i32,
     pub(super) start_point: Option<rustycad_tkmath::gp::Point2>,
+    pub(super) start_deviation: f64,
     pub(super) previous_point: rustycad_tkmath::gp::Point2,
+    pub(super) previous_deviation: f64,
     pub(super) last_parameter: f64,
 }
 

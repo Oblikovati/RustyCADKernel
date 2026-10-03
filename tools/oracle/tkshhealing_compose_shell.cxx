@@ -3,6 +3,7 @@
 #include <BRepBuilderAPI_MakeWire.hxx>
 #include <BRep_Builder.hxx>
 #include <Geom_Plane.hxx>
+#include <Geom_CylindricalSurface.hxx>
 #include <Geom_RectangularTrimmedSurface.hxx>
 #include <NCollection_HArray2.hxx>
 #include <ShapeExtend_Status.hxx>
@@ -21,6 +22,8 @@
 #include <gp_Pnt2d.hxx>
 #include <gp_Dir2d.hxx>
 #include <gp_Lin2d.hxx>
+#include <gp_Cylinder.hxx>
+#include <gp_Ax3.hxx>
 #include <TopLoc_Location.hxx>
 #include <iostream>
 
@@ -352,6 +355,39 @@ static void runSplitByLineLooseVertex()
             << '\n';
 }
 
+static void runSplitByLinePeriodicCylinder(double lineU = 0.0)
+{
+  gp_Ax3 frame;
+  gp_Cylinder cylinder(frame, 2.0);
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(cylinder, 0., 2. * M_PI, 0., 2.).Face();
+  Handle(NCollection_HArray2<Handle(Geom_Surface)>) patches =
+    new NCollection_HArray2<Handle(Geom_Surface)>(1, 1, 1, 1);
+  patches->SetValue(1, 1, new Geom_CylindricalSurface(frame, 2.0));
+  Handle(ShapeExtend_CompositeSurface) grid = new ShapeExtend_CompositeSurface(patches);
+  ComposeProbe tool;
+  tool.SetContext(new ShapeBuild_ReShape);
+  tool.Init(grid, TopLoc_Location(), face, 1.0e-7);
+  tool.ClosedMode() = true;
+  NCollection_Sequence<ShapeFix_WireSegment> segments;
+  tool.LoadWires(segments);
+  ShapeFix_WireSegment segment = segments(1);
+  gp_Lin2d line(gp_Pnt2d(lineU, 0.), gp_Dir2d(0., 1.));
+  NCollection_Sequence<double> parameters;
+  NCollection_Sequence<int> codes;
+  NCollection_Sequence<TopoDS_Shape> vertices;
+  const bool done = tool.SplitByLine(segment, line, true, 1, parameters, codes, vertices);
+  std::cout << (lineU == 0.0 ? "split_by_line_periodic " : "split_by_line_periodic_shifted ")
+            << done << ' ' << segment.NbEdges() << ' '
+            << parameters.Length() << ' ' << codes.Length() << ' ' << vertices.Length();
+  for (int i = 1; i <= parameters.Length(); ++i)
+  {
+    gp_Pnt point = BRep_Tool::Pnt(TopoDS::Vertex(vertices(i)));
+    std::cout << ' ' << parameters(i) << ':' << codes(i) << ':' << point.X() << ':' << point.Y()
+              << ':' << point.Z();
+  }
+  std::cout << '\n';
+}
+
 static void runSplitWireInternalVertex()
 {
   TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(2, 0, 0)).Edge();
@@ -420,6 +456,8 @@ int main()
   runSplitByLine();
   runSplitByLine(true);
   runSplitByLineLooseVertex();
+  runSplitByLinePeriodicCylinder();
+  runSplitByLinePeriodicCylinder(2. * M_PI);
   runBreakWires();
   runInternalExternalBreakWires();
   runPatchLimits();
