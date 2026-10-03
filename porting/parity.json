@@ -222110,6 +222110,60 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_seam",
       "status": "implemented",
       "notes": "Native seam analyzer followed by p-curve exchange, retained range and zero requested builder tolerance. Seven pinned native cases compare curve ordering, tolerance, last-fix flags and idempotent second call for normal/reversed occurrences and unready/nonseam edges. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixSmall(bool,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_small_all",
+      "status": "implemented",
+      "notes": "Native small-edge removal and connection repair with aggregate reverse traversal, context refresh and status accumulation. shape_fix_wire_small.cxx and seven Rust regressions cover topology modes, shared endpoints, degenerate-edge FAIL1 retention, one-edge replacement, aggregate boolean/integer results. Additional oracle tests; no new legacy-test declaration mapping or toolkit completeness claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixSmall(int,bool,double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_small_at",
+      "status": "implemented",
+      "notes": "Native small-edge removal and connection repair with aggregate reverse traversal, context refresh and status accumulation. shape_fix_wire_small.cxx and seven Rust regressions cover topology modes, shared endpoints, degenerate-edge FAIL1 retention, one-edge replacement, aggregate boolean/integer results. Additional oracle tests; no new legacy-test declaration mapping or toolkit completeness claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixConnected(double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_connected_all",
+      "status": "implemented",
+      "notes": "Native small-edge removal and connection repair with aggregate reverse traversal, context refresh and status accumulation. shape_fix_wire_small.cxx and seven Rust regressions cover topology modes, shared endpoints, degenerate-edge FAIL1 retention, one-edge replacement, aggregate boolean/integer results. Additional oracle tests; no new legacy-test declaration mapping or toolkit completeness claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixConnected(int,double,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_connected_at",
+      "status": "implemented",
+      "notes": "Native small-edge removal and connection repair with aggregate reverse traversal, context refresh and status accumulation. shape_fix_wire_small.cxx and seven Rust regressions cover topology modes, shared endpoints, degenerate-edge FAIL1 retention, one-edge replacement, aggregate boolean/integer results. Additional oracle tests; no new legacy-test declaration mapping or toolkit completeness claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::StatusSmall(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::status_small",
+      "status": "implemented",
+      "notes": "Native small-edge removal and connection repair with aggregate reverse traversal, context refresh and status accumulation. shape_fix_wire_small.cxx and seven Rust regressions cover topology modes, shared endpoints, degenerate-edge FAIL1 retention, one-edge replacement, aggregate boolean/integer results. Additional oracle tests; no new legacy-test declaration mapping or toolkit completeness claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::StatusConnected(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::status_connected",
+      "status": "implemented",
+      "notes": "Native small-edge removal and connection repair with aggregate reverse traversal, context refresh and status accumulation. shape_fix_wire_small.cxx and seven Rust regressions cover topology modes, shared endpoints, degenerate-edge FAIL1 retention, one-edge replacement, aggregate boolean/integer results. Additional oracle tests; no new legacy-test declaration mapping or toolkit completeness claim."
     }
   ],
   "tests": [
