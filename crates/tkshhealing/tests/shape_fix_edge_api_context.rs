@@ -17,9 +17,9 @@ use rustycad_tktopalgo::brep_lib::BRepLibMakeEdge;
 #[test]
 fn missing_3d_curve_failure_matches_native() -> Result<(), rustycad_tkernel::standard::Failure> {
     let edge = edge_without_3d_curve()?;
-    let mut fixer = ShapeFixEdge::new();
-    assert_no3d_vertex_result(&mut fixer, &edge)?;
-    assert_no3d_parameter_result(&mut fixer, &edge)?;
+    let fixer = ShapeFixEdge::new();
+    assert_no3d_vertex_result(&fixer, &edge)?;
+    assert_no3d_parameter_result(&fixer, &edge)?;
     Ok(())
 }
 
@@ -28,7 +28,7 @@ fn face_overload_filters_other_surface_pcurves() -> Result<(), rustycad_tkernel:
 {
     let (edge, _) = edge_with_pcurve(0.2)?;
     let face = plane_face(0.0)?;
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer.fix_vertex_tolerance_on_face(&edge, &face)?;
     assert_vertex_row("face_unrelated", changed, &fixer, &edge)?;
     let changed = fixer.fix_vertex_tolerance(&edge)?;
@@ -40,9 +40,9 @@ fn face_overload_filters_other_surface_pcurves() -> Result<(), rustycad_tkernel:
 #[test]
 fn default_tolerance_is_zero_for_both_same_parameter_overloads()
 -> Result<(), rustycad_tkernel::standard::Failure> {
-    assert_default_same_parameter(&mut ShapeFixEdge::new(), &edge_with_pcurve(0.2)?.0)?;
+    assert_default_same_parameter(&ShapeFixEdge::new(), &edge_with_pcurve(0.2)?.0)?;
     let (edge, surface) = edge_with_pcurve(0.2)?;
-    assert_default_face_same_parameter(&mut ShapeFixEdge::new(), &edge, &surface)?;
+    assert_default_face_same_parameter(&ShapeFixEdge::new(), &edge, &surface)?;
     Ok(())
 }
 
@@ -51,9 +51,22 @@ fn context_copies_repaired_vertices_without_mutating_source()
 -> Result<(), rustycad_tkernel::standard::Failure> {
     let (edge, _) = edge_with_pcurve(0.2)?;
     let context = Handle::new(ShapeBuildReShape::new());
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     fixer.set_context(&context);
-    assert_context_copy(&mut fixer, &context, &edge)
+    assert_context_copy(&fixer, &context, &edge)
+}
+
+#[test]
+fn cloned_handle_observes_shared_replacement_context() {
+    let fixer = Handle::new(ShapeFixEdge::new());
+    let alias = fixer.clone();
+    let context = Handle::new(ShapeBuildReShape::new());
+
+    fixer.get().unwrap().set_context(&context);
+    assert_eq!(
+        alias.get().unwrap().context().object_address(),
+        context.object_address()
+    );
 }
 
 #[test]
@@ -63,7 +76,7 @@ fn context_rejects_a_replacement_of_the_wrong_shape_type()
     let vertex = ShapeAnalysisEdge::new().first_vertex(&edge);
     let context = Handle::new(ShapeBuildReShape::new());
     context.replace(&edge, &Shape::from(vertex))?;
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     fixer.set_context(&context);
     let changed = fixer.fix_vertex_tolerance(&edge)?;
     assert_native_row(
@@ -78,7 +91,7 @@ fn context_rejects_a_replacement_of_the_wrong_shape_type()
 }
 
 fn assert_no3d_vertex_result(
-    fixer: &mut ShapeFixEdge,
+    fixer: &ShapeFixEdge,
     edge: &Edge,
 ) -> Result<(), rustycad_tkernel::standard::Failure> {
     let changed = fixer.fix_vertex_tolerance(edge)?;
@@ -88,7 +101,7 @@ fn assert_no3d_vertex_result(
 }
 
 fn assert_no3d_parameter_result(
-    fixer: &mut ShapeFixEdge,
+    fixer: &ShapeFixEdge,
     edge: &Edge,
 ) -> Result<(), rustycad_tkernel::standard::Failure> {
     let changed = fixer.fix_same_parameter_default(edge)?;
@@ -129,7 +142,7 @@ fn vertex_row(
 }
 
 fn assert_default_same_parameter(
-    fixer: &mut ShapeFixEdge,
+    fixer: &ShapeFixEdge,
     edge: &Edge,
 ) -> Result<(), rustycad_tkernel::standard::Failure> {
     let changed = fixer.fix_same_parameter_default(edge)?;
@@ -137,7 +150,7 @@ fn assert_default_same_parameter(
 }
 
 fn assert_default_face_same_parameter(
-    fixer: &mut ShapeFixEdge,
+    fixer: &ShapeFixEdge,
     edge: &Edge,
     surface: &Handle<dyn GeomSurface>,
 ) -> Result<(), rustycad_tkernel::standard::Failure> {
@@ -164,7 +177,7 @@ fn assert_same_parameter_row(
 }
 
 fn assert_context_copy(
-    fixer: &mut ShapeFixEdge,
+    fixer: &ShapeFixEdge,
     context: &Handle<ShapeBuildReShape>,
     edge: &Edge,
 ) -> Result<(), rustycad_tkernel::standard::Failure> {

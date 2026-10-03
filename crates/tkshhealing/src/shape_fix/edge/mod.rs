@@ -11,7 +11,7 @@ use crate::shape_build::ShapeBuildReShape;
 use crate::shape_construct::ShapeConstructProjectCurveOnSurface;
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Handle, StandardTransient};
+use rustycad_tkernel::standard::{Handle, SharedState, StandardTransient};
 
 /// Repair missing or inconsistent edge curves, parameterization and vertex tolerances.
 ///
@@ -22,8 +22,8 @@ use rustycad_tkernel::standard::{Handle, StandardTransient};
 /// ```
 pub struct ShapeFixEdge {
     parent: StandardTransient,
-    status: i32,
-    context: Handle<ShapeBuildReShape>,
+    status: SharedState<i32>,
+    context: SharedState<Handle<ShapeBuildReShape>>,
     projector: Handle<ShapeConstructProjectCurveOnSurface>,
 }
 impl_transient!(ShapeFixEdge, "ShapeFix_Edge", StandardTransient, parent);
@@ -32,8 +32,8 @@ impl Default for ShapeFixEdge {
     fn default() -> Self {
         Self {
             parent: StandardTransient::default(),
-            status: 0,
-            context: Handle::default(),
+            status: SharedState::new(0),
+            context: SharedState::new(Handle::default()),
             projector: Handle::new(ShapeConstructProjectCurveOnSurface::new()),
         }
     }
@@ -52,20 +52,28 @@ impl ShapeFixEdge {
 
     /// Query flags from the latest repair; `tool.status_flag(ShapeExtendStatus::Done)`.
     pub fn status_flag(&self, flag: ShapeExtendStatus) -> bool {
-        ShapeExtend::decode_status(self.status, flag)
+        ShapeExtend::decode_status(*self.status.read(), flag)
     }
 
     /// Share the vertex-replacement context; `tool.set_context(&context)`.
-    pub fn set_context(&mut self, context: &Handle<ShapeBuildReShape>) {
-        self.context = context.clone();
+    pub fn set_context(&self, context: &Handle<ShapeBuildReShape>) {
+        *self.context.write() = context.clone();
     }
 
     /// Return the current replacement context; `let context = tool.context()`.
     pub fn context(&self) -> Handle<ShapeBuildReShape> {
-        self.context.clone()
+        self.context.read().clone()
     }
 
-    fn add_status(&mut self, flag: ShapeExtendStatus) {
-        self.status |= ShapeExtend::encode_status(flag);
+    fn add_status(&self, flag: ShapeExtendStatus) {
+        *self.status.write() |= ShapeExtend::encode_status(flag);
+    }
+
+    fn reset_status(&self) {
+        *self.status.write() = 0;
+    }
+
+    fn set_status(&self, status: i32) {
+        *self.status.write() = status;
     }
 }

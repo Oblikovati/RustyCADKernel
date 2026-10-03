@@ -12,7 +12,7 @@ use rustycad_tkmath::toploc::Location;
 impl ShapeFixEdge {
     /// Remove a face p-curve whose endpoints miss the vertices;
     /// `tool.fix_remove_pcurve(&edge, &face)?`.
-    pub fn fix_remove_pcurve(&mut self, edge: &Edge, face: &Face) -> Result<bool, Failure> {
+    pub fn fix_remove_pcurve(&self, edge: &Edge, face: &Face) -> Result<bool, Failure> {
         let (surface, location) = BRepTool::surface_with_location(face)?;
         self.fix_remove_pcurve_on_surface(edge, &surface, &location)
     }
@@ -20,12 +20,12 @@ impl ShapeFixEdge {
     /// Remove inconsistent stored p-curves on a located surface;
     /// `tool.fix_remove_pcurve_on_surface(&edge, &surface, &location)?`.
     pub fn fix_remove_pcurve_on_surface(
-        &mut self,
+        &self,
         edge: &Edge,
         surface: &Handle<dyn GeomSurface>,
         location: &Location,
     ) -> Result<bool, Failure> {
-        self.status = 0;
+        self.reset_status();
         let result = ShapeAnalysisEdge::new()
             .check_vertices_with_pcurve_on_surface(edge, surface, location, -1.0, 0)?;
         if result {
@@ -37,8 +37,8 @@ impl ShapeFixEdge {
 
     /// Remove a 3D curve whose endpoints miss the vertices;
     /// `tool.fix_remove_curve_3d(&edge)?`.
-    pub fn fix_remove_curve_3d(&mut self, edge: &Edge) -> Result<bool, Failure> {
-        self.status = 0;
+    pub fn fix_remove_curve_3d(&self, edge: &Edge) -> Result<bool, Failure> {
+        self.reset_status();
         let result = ShapeAnalysisEdge::new().check_vertices_with_curve_3d(edge, -1.0, 0)?;
         if result {
             ShapeBuildEdge.remove_curve_3d(edge)?;
@@ -47,8 +47,8 @@ impl ShapeFixEdge {
     }
 
     /// Build missing 3D geometry from p-curves; `tool.fix_add_curve_3d(&edge)?`.
-    pub fn fix_add_curve_3d(&mut self, edge: &Edge) -> Result<bool, Failure> {
-        self.status = 0;
+    pub fn fix_add_curve_3d(&self, edge: &Edge) -> Result<bool, Failure> {
+        self.reset_status();
         if BRepTool::degenerated(edge)? || ShapeAnalysisEdge::new().has_curve_3d(edge)? {
             return Ok(false);
         }
@@ -64,7 +64,7 @@ impl ShapeFixEdge {
     }
 
     /// Reverse a p-curve when the 3D curve requires it; `tool.fix_reversed_2d(&edge, &face)?`.
-    pub fn fix_reversed_2d(&mut self, edge: &Edge, face: &Face) -> Result<bool, Failure> {
+    pub fn fix_reversed_2d(&self, edge: &Edge, face: &Face) -> Result<bool, Failure> {
         let (surface, location) = BRepTool::surface_with_location(face)?;
         self.fix_reversed_2d_on_surface(edge, &surface, &location)
     }
@@ -72,12 +72,12 @@ impl ShapeFixEdge {
     /// Reverse the existing p-curve in place, preserving seam representations;
     /// `tool.fix_reversed_2d_on_surface(&edge, &surface, &location)?`.
     pub fn fix_reversed_2d_on_surface(
-        &mut self,
+        &self,
         edge: &Edge,
         surface: &Handle<dyn GeomSurface>,
         location: &Location,
     ) -> Result<bool, Failure> {
-        self.status = 0;
+        self.reset_status();
         let mut analyzer = ShapeAnalysisEdge::new();
         analyzer.check_curve_3d_with_pcurve_on_surface(edge, surface, location)?;
         for flag in [ShapeExtendStatus::Fail1, ShapeExtendStatus::Fail2] {
