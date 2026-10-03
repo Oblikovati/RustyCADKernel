@@ -220918,7 +220918,11 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurfaceArea.hxx",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::nb_parts",
       "status": "implemented",
-      "notes": "Thirteen native oracle rows preserve equal-aspect direction, repeated auto-square state and negative protected measures. Native reference NbParts is represented by nb_parts/set_nb_parts. Undefined native product overflow/nonfinite count conversion remains an explicit Rust failure, not parity. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending."
+      "notes": "Thirteen native oracle rows preserve equal-aspect direction, repeated auto-square state and negative protected measures. Native reference NbParts is represented by nb_parts/set_nb_parts. Undefined native product overflow/nonfinite count conversion remains an explicit Rust failure, not parity. Generated fixtures supplement legacy declarations; toolkit acceptance remains pending.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::nb_parts",
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurfaceArea::set_nb_parts"
+      ]
     },
     {
       "upstream_id": "ShapeUpgrade_SplitSurfaceArea::SetSplittingIntoSquares(const bool)",
@@ -222235,7 +222239,11 @@
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_closed_mode",
       "status": "implemented",
-      "notes": "Working-analyzer delegation backed by eleven native state rows in tkshhealing_wire_state.cxx and shape_fix_wire_state.rs. SetPrecision is a ShapeFixWire override of FixRoot and updates root plus analyzer; Init(analyzer) preserves root precision. ClosedWireMode uses closed_mode getter and set_closed_mode setter. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+      "notes": "Working-analyzer delegation backed by eleven native state rows in tkshhealing_wire_state.cxx and shape_fix_wire_state.rs. SetPrecision is a ShapeFixWire override of FixRoot and updates root plus analyzer; Init(analyzer) preserves root precision. ClosedWireMode uses closed_mode getter and set_closed_mode setter. Additional oracle tests, no legacy declaration mapping or whole-class parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_closed_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_closed_mode"
+      ]
     },
     {
       "upstream_id": "ShapeFix_Wire::SetFace(const TopoDS_Face&,const occ::handle<ShapeAnalysis_Surface>&)",
@@ -222478,7 +222486,11 @@
       "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::max_area",
       "status": "implemented",
-      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::max_area",
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::set_max_area"
+      ]
     },
     {
       "upstream_id": "ShapeUpgrade_FaceDivideArea::NbParts()",
@@ -222487,7 +222499,11 @@
       "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::nb_parts",
       "status": "implemented",
-      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::nb_parts",
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::set_nb_parts"
+      ]
     },
     {
       "upstream_id": "ShapeUpgrade_FaceDivideArea::SetNumbersUVSplits(int,int)",
@@ -222758,6 +222774,154 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideClosedEdges::set_nb_split_points",
       "status": "implemented",
       "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixEdgeCurvesMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_edge_curves_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_edge_curves_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_edge_curves_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixReversed2dMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_reversed_2d_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_reversed_2d_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_reversed_2d_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixRemovePCurveMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_remove_pcurve_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_remove_pcurve_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_remove_pcurve_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixAddPCurveMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_add_pcurve_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_add_pcurve_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_add_pcurve_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixRemoveCurve3dMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_remove_curve_3d_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_remove_curve_3d_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_remove_curve_3d_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixAddCurve3dMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_add_curve_3d_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_add_curve_3d_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_add_curve_3d_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixSeamMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_seam_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_seam_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_seam_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixShiftedMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_shifted_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_shifted_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_shifted_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixSameParameterMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_same_parameter_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_same_parameter_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_same_parameter_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixVertexToleranceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_vertex_tolerance_mode",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_vertex_tolerance_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_fix_vertex_tolerance_mode"
+      ],
+      "status": "implemented",
+      "notes": "Mutable reference accessor represented by required Rust getter/setter pair; native default -1 and mutation covered by wire edge-curve oracle and unit tests. No whole-class or alias-lifetime parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixEdgeCurves()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_edge_curves",
+      "status": "partial",
+      "notes": "Native edge-curve repair pass order, configuration and status oracle. FixEdgeCurves inherits remaining primitive and geometry-domain limitations; no whole-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::StatusEdgeCurves(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::status_edge_curves",
+      "status": "implemented",
+      "notes": "Native edge-curve repair pass order, configuration and status oracle. FixEdgeCurves inherits remaining primitive and geometry-domain limitations; no whole-class parity claim."
     }
   ],
   "tests": [

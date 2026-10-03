@@ -233,3 +233,15 @@ path so alias corrections can be reviewed. Macro candidates are not C++ API
 declarations and are not counted as matches. If an excluded parity row has no
 declaration candidate, it stays unresolved until the source can be identified
 without treating a macro definition elsewhere as evidence for that invocation.
+
+## Multiple Rust targets for one declaration
+
+A ledger row may declare `rust_items`, a nonempty list of distinct Rust paths,
+when one C++ API needs multiple Rust functions. For example, a mutable-reference
+mode accessor requires both its Rust getter and setter. If `rust_item` is also
+present, it must equal the first entry. Every target must resolve uniquely to a
+source-hashed Rust item before the row can resolve as implemented. Missing,
+ambiguous, unpinned, or malformed companion targets prevent that result. The
+row still claims one C++ declaration; multiple Rust targets do not multiply
+upstream coverage. This correspondence check does not prove reference aliasing
+or runtime behavior.

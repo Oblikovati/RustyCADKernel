@@ -232,6 +232,36 @@ def rust_candidates(
     return status, candidates
 
 
+def row_rust_candidates(
+    row: dict[str, JSONValue],
+    crates: dict[str, dict[str, list[dict[str, JSONValue]]]],
+) -> tuple[str, list[dict[str, JSONValue]]]:
+    """Require all accessor targets; e.g. `row_rust_candidates(row, crates)`."""
+    if "rust_items" not in row:
+        return rust_candidates(row.get("rust_item"), crates)
+    targets = paired_rust_targets(row)
+    if targets is None:
+        return "invalid_rust_targets", []
+    matches = [rust_candidates(target, crates) for target in targets]
+    status = next((status for status, _ in matches if status != "unique"), "unique")
+    return status, [item for _, candidates in matches for item in candidates]
+
+
+def paired_rust_targets(row: dict[str, JSONValue]) -> list[str] | None:
+    """Validate an ordered target set; e.g. `paired_rust_targets(row)`."""
+    targets = row.get("rust_items")
+    if not isinstance(targets, list) or not targets:
+        return None
+    if any(not isinstance(target, str) or not target for target in targets):
+        return None
+    if len(set(targets)) != len(targets):
+        return None
+    primary = row.get("rust_item")
+    if primary is not None and primary != targets[0]:
+        return None
+    return targets
+
+
 def rust_source_is_pinned(item: dict[str, JSONValue]) -> bool:
     source_file = item.get("source_file")
     source_hash = item.get("source_sha256")
@@ -253,7 +283,7 @@ def match_api_row(
     cpp_status, cpp = cpp_candidates(
         row.get("upstream_id", ""), row.get("toolkit", ""), by_name
     )
-    rust_status, rust_rows = rust_candidates(row.get("rust_item"), rust)
+    rust_status, rust_rows = row_rust_candidates(row, rust)
     source_status = row.get("status", "missing_status")
     source = row.get("source")
     source_known = isinstance(source, str) and source in known_sources
@@ -267,6 +297,7 @@ def match_api_row(
         "cpp_ids": [item.get("id") for item in cpp],
         "cpp_matches": [declaration_summary(item) for item in cpp],
         "rust_status": rust_status,
+        "declared_rust_paths": row.get("rust_items", [row.get("rust_item")]),
         "rust_paths": [item.get("path") for item in rust_rows],
         "rust_matches": [rust_summary(item) for item in rust_rows],
         "source": row.get("source"),
@@ -292,6 +323,8 @@ def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) 
         return "partial"
     if parity == "excluded" and rust == "no_rust_target_declared":
         return "excluded"
+    if rust == "invalid_rust_targets":
+        return "invalid_rust_targets"
     if rust == "ambiguous":
         return "ambiguous_rust"
     if rust == "unverifiable_source":
