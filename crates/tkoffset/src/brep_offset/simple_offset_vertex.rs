@@ -74,15 +74,15 @@ fn collect_incident_samples(
     let Some(geometry) = incident.geometry.as_ref() else {
         return Ok(());
     };
-    let Some(offset_curve) = geometry.curve.get() else {
-        // OCCT 3d097a0328e7 dereferences a bound null curve; its result is undefined.
-        return Err(Failure::new(
-            "mapped edge has a null offset curve; expected a non-null 3D curve",
-        ));
-    };
     let (source_curve, first, last) = BRepTool::curve(&incident.edge)?;
     let Some(source_curve) = source_curve.get() else {
         return Ok(());
+    };
+    let Some(offset_curve) = geometry.curve.get() else {
+        // OCCT 3d097a0328e7 dereferences a bound null curve after this source-curve guard.
+        return Err(Failure::new(
+            "mapped edge has a null offset curve; expected a non-null 3D curve",
+        ));
     };
     append_closest_offset_ends(
         &incident.edge,
