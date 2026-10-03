@@ -34,6 +34,7 @@ from api_inventory.merge import (
     inventory_summary,
     write_jsonl_gzip,
 )
+from api_inventory.template_identity import normalize_template_signature
 
 
 class FakeCompiler:
@@ -140,6 +141,39 @@ class CaptureTests(InventoryFixture):
 
 
 class MergeTests(InventoryFixture):
+    def test_template_literal_and_relational_defaults_normalize_safely(self) -> None:
+        spellings = (
+            "template <char A = '>', char B = ',', bool C = (1 < 2 && 3 > 2)>",
+            "template <char A, char B, bool C>",
+        )
+        normalized = [normalize_template_signature(item) for item in spellings]
+        self.assertTrue(all(item.supported for item in normalized))
+        self.assertEqual(normalized[0].normalized, normalized[1].normalized)
+
+    def test_nested_template_default_and_identifier_substring(self) -> None:
+        nested = normalize_template_signature(
+            "template <typename __template_param_0 = std::pair<int, long>>"
+        )
+        plain = normalize_template_signature(
+            "template <typename __template_param_0>"
+        )
+        self.assertTrue(nested.supported)
+        self.assertEqual(nested.normalized, plain.normalized)
+
+    def test_ambiguous_shift_default_is_marked_unstable(self) -> None:
+        records = InventoryRecords()
+        row = self.declaration("c:@FT@shift#")
+        row["kind"] = "FunctionTemplate"
+        row["template_signature"] = "template <int N = 8 >> 1>"
+        consume_event(records, row, "a.hxx", self.root)
+        merged = next(iter(records.declarations.values()))
+        self.assertTrue(merged["unstable_identity"])
+        self.assertEqual(
+            merged["api_resolution"],
+            "unsupported_template_signature_normalization",
+        )
+        self.assertEqual(len(records.unsupported), 1)
+
     def test_noncallable_signature_variance_conflicts_under_one_usr(self) -> None:
         records = InventoryRecords()
         first = self.declaration("c:@T@math_Vector")

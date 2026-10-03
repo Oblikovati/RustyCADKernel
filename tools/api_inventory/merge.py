@@ -12,6 +12,7 @@ from functools import lru_cache
 from typing import Iterator, cast
 
 from .inputs import JSONObject, JSONValue, digest, object_rows, text_field
+from .template_identity import normalize_template_signature
 
 CALLABLE_DECLARATION_KINDS = frozenset(
     {
@@ -66,7 +67,13 @@ def declaration_identity(row: JSONObject) -> str:
     signature = row.get("identity_signature", row.get("signature"))
     components: list[JSONValue] = [usr, row.get("kind")]
     if row.get("kind") in CALLABLE_DECLARATION_KINDS:
-        components.extend([signature, normalized_template_signature(row)])
+        template = row.get("template_signature")
+        normalized = (
+            normalize_template_signature(template).normalized
+            if isinstance(template, str)
+            else template
+        )
+        components.extend([signature, normalized])
     if not usr:
         components = [
             row.get("source"),
@@ -78,88 +85,6 @@ def declaration_identity(row: JSONObject) -> str:
             row.get("kind"),
         ]
     return hashlib.sha256(json.dumps(components, sort_keys=True).encode()).hexdigest()
-
-
-def normalized_template_signature(row: JSONObject) -> JSONValue:
-    """Remove top-level template defaults while preserving the recorded spelling."""
-    signature = row.get("template_signature")
-    if not isinstance(signature, str):
-        return signature
-    bounds = template_parameter_bounds(signature)
-    if bounds is None:
-        return signature
-    start, end = bounds
-    chunks = split_template_parameters(signature[start + 1 : end])
-    if chunks is None:
-        return signature
-    normalized = [without_template_default(chunk) for chunk in chunks]
-    return signature[: start + 1] + ", ".join(normalized) + signature[end:]
-
-
-def normalize_nested_template_defaults(parameter: str) -> str:
-    """Normalize defaults in nested template-template parameter lists."""
-    bounds = template_parameter_bounds(parameter)
-    if bounds is None:
-        return parameter
-    start, end = bounds
-    chunks = split_template_parameters(parameter[start + 1 : end])
-    if chunks is None:
-        return parameter
-    normalized = [without_template_default(chunk) for chunk in chunks]
-    return parameter[: start + 1] + ", ".join(normalized) + parameter[end:]
-
-
-def template_parameter_bounds(signature: str) -> tuple[int, int] | None:
-    """Find one balanced template parameter list, returning delimiters."""
-    start = signature.find("<", signature.find("template"))
-    if start < 0:
-        return None
-    depth = 0
-    for index in range(start, len(signature)):
-        depth += (signature[index] == "<") - (signature[index] == ">")
-        if depth == 0:
-            return start, index
-    return None
-
-
-def split_template_parameters(signature: str) -> list[str] | None:
-    """Split balanced top-level parameters; return None for malformed syntax."""
-    chunks: list[str] = []
-    depths = {"<": 0, "(": 0, "[": 0, "{": 0}
-    closing = {">": "<", ")": "(", "]": "[", "}": "{"}
-    start = 0
-    for index, character in enumerate(signature):
-        if character == "," and not any(depths.values()):
-            chunks.append(signature[start:index].strip())
-            start = index + 1
-        if character in depths:
-            depths[character] += 1
-        elif character in closing:
-            depths[closing[character]] -= 1
-            if min(depths.values()) < 0:
-                return None
-    if any(depths.values()):
-        return None
-    chunks.append(signature[start:].strip())
-    return chunks
-
-
-def without_template_default(parameter: str) -> str:
-    """Drop a top-level template default expression; e.g. `typename T = int`."""
-    parameter = normalize_nested_template_defaults(parameter)
-    depths = {"<": 0, "(": 0, "[": 0, "{": 0}
-    closing = {">": "<", ")": "(", "]": "[", "}": "{"}
-    for index, character in enumerate(parameter):
-        if character == "=" and not any(depths.values()):
-            before = parameter[index - 1] if index else ""
-            after = parameter[index + 1] if index + 1 < len(parameter) else ""
-            if before not in "=!<>" and after != "=":
-                return parameter[:index].rstrip()
-        if character in depths:
-            depths[character] += 1
-        elif character in closing:
-            depths[closing[character]] -= 1
-    return parameter
 
 
 def declaration_site(row: JSONObject, header: str) -> JSONObject:
@@ -187,7 +112,13 @@ def compare_declarations(
         if callable_kind and "identity_signature" in first
         else ["signature", "identity_signature"]
     )
-    for key in (*signature_keys, "api_visible", "exclusion_reason"):
+    for key in (
+        *signature_keys,
+        "api_visible",
+        "exclusion_reason",
+        "api_resolution",
+        "unstable_identity",
+    ):
         if first.get(key) != other.get(key):
             first["inventory_conflict"] = True
             conflict = {
@@ -214,6 +145,7 @@ def merge_default_arguments(existing: JSONObject, row: JSONObject) -> None:
 
 def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -> None:
     """Merge redeclarations without losing conflicting signatures or visibility."""
+    mark_unsupported_template_identity(records, row, header)
     identifier = declaration_identity(row)
     site = declaration_site(row, header)
     site_key = json.dumps(site, sort_keys=True)
@@ -232,7 +164,8 @@ def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -
                     if isinstance(row.get("default_arguments"), list)
                     else []
                 ),
-                "stable_identity": bool(row.get("usr")),
+                "stable_identity": bool(row.get("usr"))
+                and not bool(row.get("unstable_identity")),
             }
         )
         records.declarations[identifier] = row
@@ -252,6 +185,28 @@ def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -
         template_signatures.append(row.get("template_signature"))
     merge_default_arguments(existing, row)
     compare_declarations(records, existing, row, header)
+
+
+def mark_unsupported_template_identity(
+    records: InventoryRecords, row: JSONObject, header: str
+) -> None:
+    """Withhold declarations whose template signature cannot be safely normalized."""
+    signature = row.get("template_signature")
+    if not isinstance(signature, str):
+        return
+    result = normalize_template_signature(signature)
+    if result.supported:
+        return
+    row["api_resolution"] = "unsupported_template_signature_normalization"
+    row["unstable_identity"] = True
+    records.unsupported.append(
+        {
+            "reason": result.reason,
+            "id": row.get("usr"),
+            "template_signature": signature,
+            "header": header,
+        }
+    )
 
 
 def default_argument_capture_status(row: JSONObject) -> str:

@@ -173,9 +173,16 @@ def cpp_candidates(
     unresolved = [
         row
         for row in candidates
-        if row.get("api_resolution") == "unresolved_using_value_target"
+        if row.get("api_resolution")
+        in {
+            "unresolved_using_value_target",
+            "unsupported_template_signature_normalization",
+        }
     ]
     if unresolved:
+        resolution = unresolved[0].get("api_resolution")
+        if resolution == "unsupported_template_signature_normalization":
+            return "unstable_cpp_identity", unresolved
         return "unresolved_member_target", unresolved
     if params is not None:
         candidates = [row for row in candidates if parameter_match(params, row)]
@@ -273,6 +280,8 @@ def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) 
         return "conflicting_cpp_inventory"
     if cpp == "unresolved_member_target":
         return "unresolved_cpp_member_target"
+    if cpp == "unstable_cpp_identity":
+        return "unstable_cpp_identity"
     if cpp == "ambiguous":
         return "ambiguous_cpp"
     if cpp != "unique":
