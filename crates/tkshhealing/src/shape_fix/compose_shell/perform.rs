@@ -176,9 +176,14 @@ mod tests {
 
     #[test]
     fn perform_periodic_cylinder_with_trimmed_patches_matches_native_pcurves() {
-        let composer = initialized_trimmed_cylinder_composer();
+        assert_trimmed_cylinder_result(false, "perform_periodic_cylinder_patches_open");
+        assert_trimmed_cylinder_result(true, "perform_periodic_cylinder_patches_closed");
+    }
+
+    fn assert_trimmed_cylinder_result(closed: bool, label: &str) {
+        let composer = initialized_trimmed_cylinder_composer(closed);
         let done = composer.perform().unwrap();
-        assert_native_result(&composer, done, "perform_periodic_cylinder_patches");
+        assert_native_result(&composer, done, label);
     }
 
     fn assert_periodic_cylinder_result(closed: bool, label: &str) {
@@ -214,7 +219,7 @@ mod tests {
         composer
     }
 
-    fn initialized_trimmed_cylinder_composer() -> ShapeFixComposeShell {
+    fn initialized_trimmed_cylinder_composer(closed: bool) -> ShapeFixComposeShell {
         let cylinder = Cylinder3::new(Axis3::default(), 2.0).unwrap();
         let face = BRepBuilderAPIMakeFace::from_cylinder_bounds(
             cylinder,
@@ -239,7 +244,7 @@ mod tests {
                 1.0e-7,
             )
             .unwrap();
-        composer.set_closed_mode(true);
+        composer.set_closed_mode(closed);
         composer
     }
 
@@ -302,7 +307,10 @@ mod tests {
             let seam = periodic_seam_values(&result).unwrap();
             row.push_str(&format!(" {} {} {} {}", seam.0, seam.1, seam.2, seam.3));
         }
-        if label == "perform_two_patches" || label == "perform_periodic_cylinder_patches" {
+        if label == "perform_two_patches"
+            || label == "perform_periodic_cylinder_patches_open"
+            || label == "perform_periodic_cylinder_patches_closed"
+        {
             let bounds = pcurve_bounds(&result).unwrap();
             row.push_str(&format!(
                 " {} {} {} {}",
