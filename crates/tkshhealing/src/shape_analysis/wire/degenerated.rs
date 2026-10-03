@@ -2,7 +2,7 @@
 
 //! Detect a missing or incorrectly marked singular edge between consecutive wire edges.
 use super::*;
-use crate::shape_analysis::ShapeAnalysisEdge;
+use crate::shape_analysis::{ShapeAnalysisEdge, SurfaceSingularity};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::Edge;
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
@@ -13,6 +13,7 @@ struct CandidateEdges<'a> {
     current: &'a Edge,
     next: &'a Edge,
     indices: (i32, i32),
+    tolerance: f64,
 }
 
 impl ShapeAnalysisWire {
@@ -60,7 +61,7 @@ impl ShapeAnalysisWire {
         previous: &Edge,
         analysis: &ShapeAnalysisEdge,
     ) -> Result<bool, Failure> {
-        if current.is_same(previous) || !BRepTool::degenerated(previous)? {
+        if self.nb_edges() == 1 || !BRepTool::degenerated(previous)? {
             return Ok(false);
         }
         if analysis.has_pcurve_on_face(previous, &self.face())? {
@@ -150,28 +151,32 @@ impl ShapeAnalysisWire {
         ),
     ) -> Result<(bool, Point2, Point2), Failure> {
         let (previous_start, previous_end, current_start, current_end) = vertices;
+        let tolerance = vertex_threshold(self.precision(), current_start)?;
         let edges = CandidateEdges {
             previous,
             current,
             next,
             indices,
+            tolerance: tolerance.2,
         };
-        let tolerance = vertex_threshold(self.precision(), current_start)?;
         let point = BRepTool::pnt(current_start)?;
-        let already_degenerated =
-            self.detect_existing(current, current_start, current_end, point, tolerance)?;
-        if already_degenerated {
-            return self.finish_candidate(&edges, tolerance, true);
+        if let Some(entry) =
+            self.detect_existing(current, current_start, current_end, point, tolerance)?
+        {
+            return self.finish_candidate_points(&edges, entry.first_uv, entry.last_uv, true);
         }
         let previous_point = BRepTool::pnt(previous_start)?;
         if previous_index_is_distinct(indices.0, indices.1)
-            && BRepTool::pnt(previous_end)?.distance(&point) <= tolerance.0
+            && previous_point.distance(&point) <= tolerance.0
             && self.surface().is_degenerated(previous_point, tolerance.0)?
             && !BRepTool::degenerated(previous)?
         {
             return Ok((false, Point2::default(), Point2::default()));
         }
-        self.find_missing_candidate(&edges, point, tolerance.1)
+        if BRepTool::pnt(previous_end)?.distance(&point) > tolerance.1 {
+            return self.no_candidate_status(current);
+        }
+        self.find_missing_candidate(&edges, point, tolerance.2)
     }
 
     fn detect_existing(
@@ -180,23 +185,19 @@ impl ShapeAnalysisWire {
         first: &rustycad_tkbrep::topods::Vertex,
         last: &rustycad_tkbrep::topods::Vertex,
         point: rustycad_tkmath::gp::Point3,
-        tolerance: (f64, f64),
-    ) -> Result<bool, Failure> {
+        tolerance: (f64, f64, f64),
+    ) -> Result<Option<SurfaceSingularity>, Failure> {
         if BRepTool::pnt(first)?.distance(&BRepTool::pnt(last)?) > tolerance.0 {
-            return Ok(false);
+            return Ok(None);
         }
-        let surface = self.surface();
-        let Some(singularity) = surface.degenerated_values(point, tolerance.1, true)? else {
-            return Ok(false);
-        };
-        let (curve, first_parameter, last_parameter) =
-            ShapeAnalysisEdge::new().curve_3d(current, true)?;
-        let Some(curve) = curve.get() else {
-            return Ok(true);
-        };
-        let midpoint = curve.value(0.5 * (first_parameter + last_parameter))?;
-        Ok(midpoint.distance(&point) <= tolerance.1
-            || singularity.point.distance(&point) <= tolerance.1)
+        let forward = current.orientation() == rustycad_tkg3d::top_abs::Orientation::Forward;
+        let entry = self
+            .surface()
+            .degenerated_values(point, tolerance.2, forward)?;
+        if entry.is_some() && midpoint_leaves_singularity(current, point, tolerance.2)? {
+            return Ok(None);
+        }
+        Ok(entry)
     }
 
     fn find_missing_candidate(
@@ -233,24 +234,6 @@ impl ShapeAnalysisWire {
         Ok((false, Point2::default(), Point2::default()))
     }
 
-    fn finish_candidate(
-        &self,
-        edges: &CandidateEdges<'_>,
-        tolerance: (f64, f64),
-        existing: bool,
-    ) -> Result<(bool, Point2, Point2), Failure> {
-        let surface = self.surface();
-        let Some(entry) = surface.degenerated_values(
-            BRepTool::pnt(&ShapeAnalysisEdge::new().first_vertex(edges.current))?,
-            tolerance.1,
-            true,
-        )?
-        else {
-            return self.no_candidate_status(edges.current);
-        };
-        self.finish_candidate_points(edges, entry.first_uv, entry.last_uv, existing)
-    }
-
     fn finish_candidate_points(
         &self,
         edges: &CandidateEdges<'_>,
@@ -267,11 +250,11 @@ impl ShapeAnalysisWire {
                 last,
             )?;
         }
-        if self.missing_pcurve_status(edges.previous, edges.current, edges.next, existing)? {
+        if !surface.is_degenerated_segment(first, last, edges.tolerance, 10.)? {
+            if BRepTool::degenerated(edges.current)? {
+                self.fields.write().status |= ShapeExtend::encode_status(ShapeExtendStatus::Fail2);
+            }
             return Ok((false, first, last));
-        }
-        if !surface.is_degenerated_segment(first, last, self.precision(), 10.)? {
-            return self.no_candidate_status(edges.current);
         }
         if first.distance(last) <= self.parameter_resolution()? {
             return Ok((false, first, last));
@@ -300,23 +283,6 @@ impl ShapeAnalysisWire {
         pcurve.value(if at_end { last } else { first })
     }
 
-    fn missing_pcurve_status(
-        &self,
-        previous: &Edge,
-        current: &Edge,
-        next: &Edge,
-        existing: bool,
-    ) -> Result<bool, Failure> {
-        let analysis = ShapeAnalysisEdge::new();
-        let first_missing = !analysis.has_pcurve_on_face(previous, &self.face())?;
-        let last_edge = if existing { next } else { current };
-        let last_missing = !analysis.has_pcurve_on_face(last_edge, &self.face())?;
-        if first_missing || last_missing {
-            self.set_last_status(ShapeExtendStatus::Fail1);
-        }
-        Ok(first_missing || last_missing)
-    }
-
     fn parameter_resolution(&self) -> Result<f64, Failure> {
         let adaptor = self.surface().adaptor3d();
         let surface = adaptor
@@ -332,12 +298,13 @@ impl ShapeAnalysisWire {
 fn vertex_threshold(
     precision: f64,
     vertex: &rustycad_tkbrep::topods::Vertex,
-) -> Result<(f64, f64), Failure> {
+) -> Result<(f64, f64, f64), Failure> {
     let vertex_tolerance = BRepTool::vertex_tolerance(vertex)?;
     let lower = precision.min(vertex_tolerance);
     let upper = precision.max(vertex_tolerance);
     Ok((
         lower,
+        upper,
         if precision < vertex_tolerance {
             2. * upper
         } else {
@@ -396,4 +363,18 @@ fn pcurve_uv(
         .get()
         .ok_or_else(|| Failure::new("ShapeAnalysis_Wire requires neighboring p-curves"))?;
     curve.value(if at_end { last } else { first })
+}
+
+// OCCT CheckDegenerated's closed-curve veto prevents collapsing loops at singular vertices.
+fn midpoint_leaves_singularity(
+    edge: &Edge,
+    point: rustycad_tkmath::gp::Point3,
+    tolerance: f64,
+) -> Result<bool, Failure> {
+    let (curve, first, last) = BRepTool::curve(edge)?;
+    let Some(curve) = curve.get() else {
+        return Ok(false);
+    };
+    let midpoint = curve.value(0.5 * (first + last))?;
+    Ok(midpoint.square_distance(&point) > tolerance * tolerance)
 }
