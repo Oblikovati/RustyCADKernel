@@ -9,7 +9,6 @@ mod edge_connect;
 mod edge_proj_aux;
 mod face;
 mod face_connect;
-mod face_loops;
 mod fix_small_face;
 mod fix_small_solid;
 mod intersection;

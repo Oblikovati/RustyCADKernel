@@ -40,7 +40,7 @@ impl ShapeFixFace {
         *self.result.write() = applied;
         Ok(true)
     }
-    fn perform_periodic_stages(&self) -> Result<(), Failure> {
+    pub(super) fn perform_periodic_stages(&self) -> Result<(), Failure> {
         let modes = *self.modes.read();
         if need_fix(modes.periodic_degenerated, true) {
             self.fix_periodic_degenerated()?;
@@ -50,7 +50,7 @@ impl ShapeFixFace {
         }
         Ok(())
     }
-    fn perform_face_stages(&self) -> Result<(), Failure> {
+    pub(super) fn perform_face_stages(&self) -> Result<(), Failure> {
         let modes = *self.modes.read();
         if self.fix_wires_two_coinc_edges()? {
             self.record_face_stage(ShapeExtendStatus::Done7);
@@ -80,7 +80,7 @@ impl ShapeFixFace {
         }
         Ok(())
     }
-    fn perform_small_area_stages(&self) -> Result<(), Failure> {
+    pub(super) fn perform_small_area_stages(&self) -> Result<(), Failure> {
         let modes = *self.modes.read();
         let result = self.result();
         for shape in Explorer::new(&result, ShapeEnum::Face, ShapeEnum::Shape)? {
@@ -102,7 +102,7 @@ impl ShapeFixFace {
         }
         Ok(done)
     }
-    fn record_face_stage(&self, status: ShapeExtendStatus) {
+    pub(super) fn record_face_stage(&self, status: ShapeExtendStatus) {
         *self.status.write() |= ShapeExtend::encode_status(status);
     }
 }
