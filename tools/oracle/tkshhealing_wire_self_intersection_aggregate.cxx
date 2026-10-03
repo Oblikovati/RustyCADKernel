@@ -78,13 +78,17 @@ static int appliedEdgeCount(const Handle(ShapeBuild_ReShape)& context, const Top
   return count;
 }
 
-static void runOracle(const TopoDS_Wire& wire, const TopoDS_Face& face) {
-  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
-  ShapeFix_Wire fixer(wire, face, 1.e-7);
-  fixer.SetContext(context);
+static void configureNonAdjacentOnly(ShapeFix_Wire& fixer) {
   fixer.FixSelfIntersectingEdgeMode() = 0;
   fixer.FixIntersectingEdgesMode() = 0;
   fixer.FixNonAdjacentIntersectingEdgesMode() = 1;
+}
+
+static void runOracle(const TopoDS_Wire& wire, const TopoDS_Face& face, bool isolateNonAdjacent) {
+  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
+  ShapeFix_Wire fixer(wire, face, 1.e-7);
+  fixer.SetContext(context);
+  if (isolateNonAdjacent) configureNonAdjacentOnly(fixer);
   bool changed = fixer.FixSelfIntersection();
   std::cout << std::setprecision(17) << changed << " " << fixer.WireData()->NbEdges()
             << " " << fixer.StatusRemovedSegment();
@@ -97,5 +101,6 @@ int main() {
   BRep_Builder builder;
   TopoDS_Face face;
   builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
-  runOracle(crossingWire(face), face);
+  runOracle(crossingWire(face), face, true);
+  runOracle(crossingWire(face), face, false);
 }

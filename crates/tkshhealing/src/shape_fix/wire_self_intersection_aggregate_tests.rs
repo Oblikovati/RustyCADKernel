@@ -22,21 +22,50 @@ fn nonadjacent_aggregate_matches_native_status_ranges_and_explicit_context() {
     let face = plane();
     let data = crossing_wire_data(&face);
     let original = data.wire().unwrap();
-    let analyzer = Handle::new(ShapeAnalysisWire::from_wire_data(&data, &face, 1.0e-7).unwrap());
+    let fixer = aggregate_fixer(&data, &face, true);
+    let changed = fixer.fix_self_intersection().unwrap();
+    let observed = aggregate_observation(&fixer, &original, changed).unwrap();
+    let expected = expected_row(0);
+    assert_eq!(observed, expected);
+}
+
+#[test]
+fn default_aggregate_matches_native_pass_order_and_statuses() {
+    let face = plane();
+    let data = crossing_wire_data(&face);
+    let original = data.wire().unwrap();
+    let fixer = aggregate_fixer(&data, &face, false);
+    let changed = fixer.fix_self_intersection().unwrap();
+    let observed = aggregate_observation(&fixer, &original, changed).unwrap();
+    let expected = expected_row(1);
+    assert_eq!(observed, expected);
+}
+
+fn expected_row(index: usize) -> Vec<f64> {
+    NATIVE
+        .lines()
+        .nth(index)
+        .unwrap()
+        .split_whitespace()
+        .map(parse_number)
+        .collect()
+}
+
+fn aggregate_fixer(
+    data: &Handle<ShapeExtendWireData>,
+    face: &Face,
+    isolate_nonadjacent: bool,
+) -> ShapeFixWire {
+    let analyzer = Handle::new(ShapeAnalysisWire::from_wire_data(data, face, 1.0e-7).unwrap());
     let fixer = ShapeFixWire::new();
     fixer.init(&analyzer);
     fixer.set_context(&Handle::new(ShapeBuildReShape::new()));
-    fixer.set_fix_self_intersecting_edge_mode(0);
-    fixer.set_fix_intersecting_edges_mode(0);
-    fixer.set_fix_nonadjacent_intersecting_edges_mode(1);
-
-    let changed = fixer.fix_self_intersection().unwrap();
-    let observed = aggregate_observation(&fixer, &original, changed).unwrap();
-    let expected = NATIVE
-        .split_whitespace()
-        .map(parse_number)
-        .collect::<Vec<_>>();
-    assert_eq!(observed, expected);
+    if isolate_nonadjacent {
+        fixer.set_fix_self_intersecting_edge_mode(0);
+        fixer.set_fix_intersecting_edges_mode(0);
+        fixer.set_fix_nonadjacent_intersecting_edges_mode(1);
+    }
+    fixer
 }
 
 fn aggregate_observation(
