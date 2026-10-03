@@ -15,8 +15,9 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 use rustycad_tkmath::gp::{Axis1, Axis2, Circle3, Direction3, Point3, Vector3};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
+use rustycad_tktopalgo::brep_lib::build_pcurve_for_edges_on_plane;
 
-/// Merges line and circle chains whose p-curves need no support transformation.
+/// Merges supported wire and planar-face chains, restoring missing planar p-curves.
 pub(super) fn merge_wire_edge_chains(
     tool: &ShapeUpgradeUnifySameDomain,
     shape: &Shape,
@@ -32,7 +33,11 @@ pub(super) fn merge_wire_edge_chains(
             true,
             fields._concat_bspline_edges,
         ),
-        ShapeEnum::Face => merge_planar_face_lines(shape, fields.angular_tolerance),
+        ShapeEnum::Face => merge_planar_face_edges(
+            shape,
+            fields.angular_tolerance,
+            fields._concat_bspline_edges,
+        ),
         _ => Ok(shape.clone()),
     }
 }
@@ -79,7 +84,11 @@ fn merge_wire_chains(
     Ok(result)
 }
 
-fn merge_planar_face_lines(shape: &Shape, angular_tolerance: f64) -> Result<Shape, Failure> {
+fn merge_planar_face_edges(
+    shape: &Shape,
+    angular_tolerance: f64,
+    concat_bspline_edges: bool,
+) -> Result<Shape, Failure> {
     let face = rustycad_tkbrep::topods::face(shape)?;
     if BRepAdaptorSurface::with_face(&face, false)?.get_type()? != SurfaceType::Plane {
         return Ok(shape.clone());
@@ -93,12 +102,25 @@ fn merge_planar_face_lines(shape: &Shape, angular_tolerance: f64) -> Result<Shap
         &wires[0].clone().into_shape(),
         angular_tolerance,
         false,
-        false,
+        concat_bspline_edges,
     )?;
     if wire_edges(&merged)?.len() == before {
         return Ok(shape.clone());
     }
-    rebuild_planar_face(&face, &rustycad_tkbrep::topods::wire(&merged)?)
+    let rebuilt = rebuild_planar_face(&face, &rustycad_tkbrep::topods::wire(&merged)?)?;
+    rebuild_planar_face_pcurves(&rebuilt)
+}
+
+fn rebuild_planar_face_pcurves(shape: &Shape) -> Result<Shape, Failure> {
+    let face = rustycad_tkbrep::topods::face(shape)?;
+    let edges = wire_edges(shape)?;
+    let edge_shapes = edges
+        .iter()
+        .map(|edge| edge.clone().into_shape())
+        .collect::<Vec<_>>();
+    // The replacement edge has no stored p-curve; planar projection restores its UV curve.
+    build_pcurve_for_edges_on_plane(edge_shapes.iter(), &face)?;
+    Ok(shape.clone())
 }
 
 fn first_linear_pair(

@@ -4,6 +4,7 @@
 #include <BRep_Tool.hxx>
 #include <BRepCheck_Analyzer.hxx>
 #include <BRepAdaptor_Curve.hxx>
+#include <BRepAdaptor_Curve2d.hxx>
 #include <Geom_BezierCurve.hxx>
 #include <NCollection_Array1.hxx>
 #include <ShapeUpgrade_UnifySameDomain.hxx>
@@ -15,6 +16,8 @@
 #include <gp_Pnt.hxx>
 #include <gp_Ax2.hxx>
 #include <gp_Circ.hxx>
+#include <gp_Ax3.hxx>
+#include <gp_Pln.hxx>
 
 #include <iomanip>
 #include <iostream>
@@ -192,6 +195,33 @@ static void runPlanarFaceCase() {
             << BRepCheck_Analyzer(result, true).IsValid() << '\n';
 }
 
+static void runBezierFaceCase() {
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(makeBezierSegment(gp_Pnt(0, 0, 0), gp_Pnt(0.5, 0, 0), gp_Pnt(1, 1, 0)));
+  wireBuilder.Add(makeBezierSegment(gp_Pnt(1, 1, 0), gp_Pnt(1.5, 2, 0), gp_Pnt(2, 4, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 4, 0), gp_Pnt(0, 4, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 4, 0), gp_Pnt(0, 0, 0)));
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(gp_Ax3()), wireBuilder.Wire(), true);
+  ShapeUpgrade_UnifySameDomain unifier(face, true, false, true);
+  unifier.Build();
+  const TopoDS_Shape result = unifier.Shape();
+  int edgeCount = 0;
+  for (TopExp_Explorer edge(result, TopAbs_EDGE); edge.More(); edge.Next()) ++edgeCount;
+  std::cout << "bezier_face edges " << edgeCount << " valid "
+            << BRepCheck_Analyzer(result, true).IsValid() << '\n';
+  for (TopExp_Explorer edge(result, TopAbs_EDGE); edge.More(); edge.Next()) {
+    const TopoDS_Edge current = TopoDS::Edge(edge.Current());
+    const BRepAdaptor_Curve curve(current);
+    if (curve.GetType() != GeomAbs_BSplineCurve) continue;
+    double first = 0., last = 0.;
+    const Handle(Geom2d_Curve) pcurve = BRep_Tool::CurveOnSurface(current, face, first, last);
+    const BRepAdaptor_Curve2d adaptor(current, face);
+    const gp_Pnt2d midpoint = adaptor.Value((first + last) / 2.);
+    std::cout << std::setprecision(17) << "bezier_face pcurve " << adaptor.GetType() << ' '
+              << first << ' ' << last << ' ' << midpoint.X() << ' ' << midpoint.Y() << '\n';
+  }
+}
+
 int main() {
   runCase("linear", makeWire(gp_Pnt(2, 0, 0)), true);
   runCase("linear_three", makeThreeLineWire(), true);
@@ -210,4 +240,5 @@ int main() {
   runCase("bezier_reverse_order", makeReverseBezierWire(false), true, true);
   runCase("bezier_reversed_occurrences", makeReverseBezierWire(true), true, true);
   runPlanarFaceCase();
+  runBezierFaceCase();
 }
