@@ -44,9 +44,15 @@ pub(super) fn orient_multiple_wires(
     };
     let periods = periodic_ranges(surface)?;
     let boxes = aligned_wire_boxes(face, &wires.oriented, periods)?;
-    let relations = classify_all_wires(face, wires, surface, periods, &boxes)?;
-
-    orient_classified_wires(fixer, face, wires, relations, output_map)
+    let context = WireClassifier {
+        face,
+        wires: &wires.oriented,
+        boxes: &boxes,
+        periods,
+    };
+    orient_classified_wires(fixer, face, wires, output_map, |index, wire| {
+        classify_one_wire(&context, wire, index, surface, &wires.all)
+    })
 }
 
 fn periodic_ranges(surface: &ShapeAnalysisSurface) -> Result<PeriodicRanges, Failure> {
@@ -136,27 +142,6 @@ fn add_curve_bounds(
 fn use_full_bspline_bounds(curve: &Handle<dyn Geom2dCurve>, first: f64, last: f64) -> bool {
     curve.cast::<Geom2dBSplineCurve>().is_some()
         && (first < curve.first_parameter() || last > curve.last_parameter())
-}
-
-fn classify_all_wires(
-    face: &Face,
-    wires: &FaceWireSet,
-    surface: &ShapeAnalysisSurface,
-    periods: PeriodicRanges,
-    boxes: &[BoundingBox2],
-) -> Result<Vec<WireRelation>, Failure> {
-    let context = WireClassifier {
-        face,
-        wires: &wires.oriented,
-        boxes,
-        periods,
-    };
-    wires
-        .oriented
-        .iter()
-        .enumerate()
-        .map(|(index, wire)| classify_one_wire(&context, wire, index, surface, &wires.all))
-        .collect()
 }
 
 fn classify_one_wire(

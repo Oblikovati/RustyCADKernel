@@ -28,7 +28,6 @@ use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 /// ```
 pub struct ShapeFixFace {
     parent: ShapeFixRoot,
-    root: FixRootData,
     result: SharedState<Shape>,
     status: SharedState<i32>,
     modes: SharedState<FaceFixModes>,
@@ -42,7 +41,6 @@ impl Default for ShapeFixFace {
     fn default() -> Self {
         Self {
             parent: ShapeFixRoot::new(),
-            root: FixRootData::default(),
             result: SharedState::new(Shape::default()),
             status: SharedState::new(0),
             modes: SharedState::new(FaceFixModes::default()),
@@ -82,7 +80,9 @@ impl ShapeFixFace {
 
     /// `Init(face)`: replace the input and current result with `face`.
     pub fn init(&self, face: Shape) {
-        self.root.with_mut(|fields| fields.shape = face.clone());
+        self.parent
+            .fix_root_data()
+            .with_mut(|fields| fields.shape = face.clone());
         *self.result.write() = face;
         *self.status.write() = 0;
         let input = self.result.read().clone();
@@ -152,7 +152,9 @@ impl ShapeFixFace {
         if !*self.forward.read() {
             stored.set_orientation(Orientation::Reversed);
         }
-        self.root.with_mut(|fields| fields.shape = stored.clone());
+        self.parent
+            .fix_root_data()
+            .with_mut(|fields| fields.shape = stored.clone());
         *self.result.write() = stored;
         Ok(())
     }
@@ -172,7 +174,7 @@ impl ShapeFixFace {
     /// `Perform()`: preserve context replacements and repair a single periodic cone loop.
     pub fn perform(&self) -> Result<bool, Failure> {
         *self.status.write() = 0;
-        let (input, context, tolerance) = self.root.with(|fields| {
+        let (input, context, tolerance) = self.parent.fix_root_data().with(|fields| {
             (
                 fields.shape.clone(),
                 fields.context.clone(),
@@ -216,7 +218,7 @@ impl ShapeFixFace {
 
 impl FixRoot for ShapeFixFace {
     fn fix_root_data(&self) -> &FixRootData {
-        &self.root
+        self.parent.fix_root_data()
     }
 }
 
@@ -258,7 +260,9 @@ fn initialize_surface_state(
         face.set_orientation(Orientation::Reversed);
     }
     let shape = face.into_shape();
-    fixer.root.with_mut(|fields| fields.shape = shape.clone());
+    fixer
+        .fix_root_data()
+        .with_mut(|fields| fields.shape = shape.clone());
     *fixer.result.write() = shape;
     *fixer.analysis_surface.write() = surface;
     *fixer.forward.write() = forward;
