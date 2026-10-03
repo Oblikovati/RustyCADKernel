@@ -13,7 +13,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 from porting import ROOT, snapshot
-from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, verified_native_skips
+from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, runtime_case_results, verified_native_skips
 from tkernel_native_baseline import compile_sources
 from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
 import tkernel_ncollection_corpus
@@ -158,14 +158,20 @@ def main():
     if {c.attrib['classname']+'.'+c.attrib['name'] for c in cases} != expected:
         raise RuntimeError("Missing, failed or skipped upstream tests")
     native_skips = verified_native_skips(cases, mappings)
+    native_statuses = {case.attrib['classname']+'.'+case.attrib['name']:
+                       'upstream_skipped' if case.find('skipped') is not None else 'passed'
+                       for case in cases}
     native_passed = len(cases) - len(native_skips)
     print(f"OCCT: {native_passed} legacy tests passed; {len(native_skips)} explicit upstream skips; running mapped Rust tests", flush=True)
+    rust_passed = set()
     for target in sorted({m["rust_target"] for m in mappings}):
         result = run(["cargo","test","--locked","-p","rustycad-tkernel","--test",target,"--","--test-threads=1"],output/f"rust-{target}.log",env=env)
         passed = set(re.findall(r"^test (\S+) \.\.\. ok$",result,re.M))
+        rust_passed.update((target, test_name) for test_name in passed)
         wanted = {name for mapped_target, name in rust_expected if mapped_target == target}
         if passed != wanted:
             raise RuntimeError(f"Rust tests missing, skipped or unmapped in {target}")
+    case_results = runtime_case_results(mappings, native_statuses, rust_passed)
     if any(m["rust_target"] == "quantity_color" for m in mappings):
         # The named-color table is generated data; a stale copy would pass the Rust tests alone.
         run([sys.executable, ROOT/"tools/generate_quantity_color_table.py", "--check", "--source", source], output/"quantity-color-table-check.log", env=env)
@@ -229,6 +235,8 @@ def main():
               "legacy_tests_passed":native_passed,"upstream_skips":native_skips,
               "declarations_mapped":len(mappings),"rust_translations_passed":sum(m["status"]=="translated" for m in mappings),
               "current_behavior_regressions_passed":len(native_skips),"rust_runtime_cases_passed":len(rust_expected),
+              "runtime_evidence_schema":1,"runtime_evidence_toolkit":"TKernel",
+              "runtime_case_results":case_results,
               "differential_cases_passed":len(requests.splitlines()) + (numeric_report["cases_passed"] if numeric_report else 0) + (string_report["cases_passed"] if string_report else 0) + (extended_report["cases_passed"] if extended_report else 0) + (kdtree_report["cases_passed"] if kdtree_report else 0) + (units_report["cases_passed"] if units_report else 0) + (geometry_report["cases_passed"] if geometry_report else 0) + api_report["cases_passed"],
               "numeric_prefix_report":numeric_report,
               "ascii_string_report":string_report,

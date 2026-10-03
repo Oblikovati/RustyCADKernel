@@ -1,5 +1,7 @@
 """Expand explicitly paired native/Rust cases without losing declaration identity."""
 
+from api_inventory.inputs import JSONObject
+
 
 def runtime_pairs(row):
     """A regular declaration has one case; typed declarations list every expansion."""
@@ -24,10 +26,47 @@ def mapped_runtime_sets(mappings):
         for native, rust in runtime_pairs(row):
             rust_identity = (row["rust_target"], rust)
             if native in native_cases or rust_identity in rust_cases:
-                raise ValueError(f"Duplicate mapped runtime identity: {native}, {rust_identity}")
+                raise ValueError(
+                    f"Duplicate mapped runtime identity: {native}, {rust_identity}"
+                )
             native_cases.add(native)
             rust_cases.add(rust_identity)
     return native_cases, rust_cases
+
+
+def runtime_case_results(
+    mappings: list[JSONObject],
+    native_statuses: dict[str, str],
+    rust_passed: set[tuple[str, str]],
+) -> list[JSONObject]:
+    """Bind observed statuses to mapped declarations; e.g. `runtime_case_results(rows, native, rust)`."""
+    return [
+        runtime_case_result(row, native, rust, native_statuses, rust_passed)
+        for row in mappings
+        for native, rust in runtime_pairs(row)
+    ]
+
+
+def runtime_case_result(
+    row: JSONObject,
+    native: str,
+    rust: str,
+    native_statuses: dict[str, str],
+    rust_passed: set[tuple[str, str]],
+) -> JSONObject:
+    """Serialize one case pair; e.g. `runtime_case_result(mapping, native, rust, states, passed)`."""
+    status = "passed" if (row["rust_target"], rust) in rust_passed else "missing"
+    return {
+        "toolkit": row["toolkit"],
+        "source": row["source"],
+        "upstream_id": row["upstream_id"],
+        "native_case": native,
+        "source_sha256": row["source_sha256"],
+        "native_status": native_statuses[native],
+        "rust_target": row["rust_target"],
+        "rust_test": rust,
+        "rust_status": status,
+    }
 
 
 def listed_runtime_cases(listing):
