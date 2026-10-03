@@ -4,10 +4,13 @@ use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
 use crate::shape_extend::ShapeExtendStatus;
 use crate::shape_fix::FixRoot;
 use crate::shape_fix::ShapeFixEdge;
-use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{Edge, Face, Wire};
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkmath::gp::{Axis2, Axis3, Circle3, Cylinder3, Point3, Sphere3, StandardDirection3};
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkmath::gp::{
+    Axis2, Axis3, Circle3, Cylinder3, Direction2, Point2, Point3, Sphere3, StandardDirection3,
+};
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakeWire};
 use rustycad_tktopalgo::brep_lib::BRepLibMakeEdge;
 
@@ -85,6 +88,65 @@ fn add_pcurve_splits_edge_at_spherical_pole_like_native() {
     assert_spherical_split_ranges(&fixer, &face);
     assert!(fixer.status_edge_curves(ShapeExtendStatus::Done3));
     assert!(!fixer.status_edge_curves(ShapeExtendStatus::Fail3));
+}
+
+#[test]
+fn missing_context_skips_singularity_split_but_keeps_projected_curve() {
+    let (wire, face) = sphere_pole_wire();
+    let fixer = ShapeFixWire::from_wire_face(&wire, &face, 1e-7).unwrap();
+    assert!(fixer.context().is_null());
+    disable_other_curve_passes(&fixer);
+    fixer.set_fix_add_pcurve_mode(1);
+    assert!(fixer.fix_edge_curves().unwrap());
+    assert_eq!(fixer.nb_edges(), 1);
+    assert!(fixer.status_edge_curves(ShapeExtendStatus::Done3));
+    assert!(!fixer.status_edge_curves(ShapeExtendStatus::Fail3));
+}
+
+#[test]
+fn missing_3d_curve_reports_add_pcurve_failure_without_removing_edge() {
+    let (wire, face, edge) = cylinder_wire();
+    ShapeBuildEdge.remove_curve_3d(&edge).unwrap();
+    let fixer = ShapeFixWire::from_wire_face(&wire, &face, 1e-7).unwrap();
+    disable_other_curve_passes(&fixer);
+    fixer.set_fix_add_pcurve_mode(1);
+    assert!(!fixer.fix_edge_curves().unwrap());
+    assert_eq!(fixer.nb_edges(), 1);
+    assert!(!fixer.status_edge_curves(ShapeExtendStatus::Done3));
+    assert!(fixer.status_edge_curves(ShapeExtendStatus::Fail3));
+}
+
+#[test]
+fn malformed_pcurve_is_removed_without_native_done_or_fail_bits() {
+    let (wire, face, edge) = cylinder_wire();
+    install_wrong_pcurve(&edge, &face);
+    let fixer = ShapeFixWire::from_wire_face(&wire, &face, 1e-7).unwrap();
+    disable_other_curve_passes(&fixer);
+    fixer.set_fix_add_pcurve_mode(0);
+    fixer.set_fix_remove_pcurve_mode(1);
+    assert!(!fixer.fix_edge_curves().unwrap());
+    assert_status_pair(
+        &fixer,
+        ShapeExtendStatus::Done2,
+        ShapeExtendStatus::Fail2,
+        false,
+    );
+    assert!(
+        !ShapeAnalysisEdge::new()
+            .has_pcurve_on_face(&edge, &face)
+            .unwrap()
+    );
+}
+
+fn install_wrong_pcurve(edge: &Edge, face: &Face) {
+    let direction = Direction2::new(0.0, 1.0).unwrap();
+    let line = Geom2dLine::from_point(Point2::new(std::f64::consts::PI, 0.0), direction);
+    let pcurve: Handle<dyn Geom2dCurve> = Handle::new(line).cast();
+    let builder = BRepBuilder::default();
+    builder
+        .update_edge_pcurve_on_face(edge, &pcurve, face, 0.0)
+        .unwrap();
+    builder.range_on_face(edge, face, 0.0, 1.0).unwrap();
 }
 
 fn assert_spherical_split_ranges(fixer: &ShapeFixWire, face: &Face) {
