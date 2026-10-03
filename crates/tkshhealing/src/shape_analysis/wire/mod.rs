@@ -15,6 +15,7 @@ mod closed;
 mod connected;
 mod degenerated;
 mod gaps;
+mod intersections;
 mod lacking;
 mod order;
 mod state;
