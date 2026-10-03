@@ -14,6 +14,8 @@ mod wire_edge_curves;
 mod wire_intersection_fix;
 #[path = "wire_intersection_geometry.rs"]
 mod wire_intersection_geometry;
+#[path = "wire_intersection_tool.rs"]
+mod wire_intersection_tool;
 #[path = "wire_lacking.rs"]
 mod wire_lacking;
 #[path = "wire_nonadjacent_intersection_fix.rs"]
@@ -34,6 +36,8 @@ mod wire_small;
 mod wire_split_tool;
 #[path = "wire_state.rs"]
 mod wire_state;
+
+pub use wire_intersection_tool::ShapeFixIntersectionTool;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
