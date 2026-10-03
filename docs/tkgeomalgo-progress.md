@@ -1,14 +1,16 @@
 # TKGeomAlgo port status
 
-**Every package is ported; one upstream suite still waits for other toolkits.**
+**Every package is ported; two offset regressions still wait for other toolkits.**
 `crates/tkgeomalgo`
 (`rustycad-tkgeomalgo`) is the port of the ModelingAlgorithms toolkit TKGeomAlgo. It
 depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase and TKBRep ports, as the
 native toolkit does (its EXTERNLIB). Each of the 33 OCCT packages is one module of the
 crate, declared up front in `src/lib.rs`; a module whose package is not ported yet
 holds only its documentation. All 33 packages are ported (NLPlate has no sources at the
-pinned commit), and each audits with 0 missing and 0 stale api rows. One suite remains unmapped: GeomFill_BSplineCurves_Test needs the remaining TKOffset
-and ShapeFix_Shape implementations. Its available cases run as behaviour tests.
+pinned commit), and each audits with 0 missing and 0 stale api rows. Two offset
+regressions in GeomFill_BSplineCurves_Test still need the remaining TKOffset and
+ShapeFix_Shape implementations. Its surface-fill case and two independent GeomFill
+cases are now mapped.
 
 Generic C++ code (the `.gxx` and `.pxx` templates that OCCT instantiates per type) is
 ported once as a Rust generic and instantiated where OCCT instantiates it, as
@@ -65,12 +67,14 @@ The toolkit test inventory maps these suites (208 declarations):
 | IntPatch_PolyhedronBVH_Test.cxx | int_patch_polyhedron_bvh | 8 | pass | pass |
 | GeomPlate_BuildPlateSurface_Test.cxx | geom_plate_build_plate_surface | 6 | pass | pass |
 
-GeomFill_BSplineCurves_Test.cxx is not mapped yet: three of its five declarations
-build faces and offsets (BRepBuilderAPI, BRepCheck, BRepGProp, BRepOffset and ShapeFix
-of TKTopAlgo, TKOffset and TKShHealing, and GeomAPI::To3d). TKOffset and ShapeFix_Shape
-remain the Rust dependencies needed to map the complete source suite. Its two GeomFill
-cases (OCC13904 and OCC27704) run as behavior tests (`geom_fill_skin_behavior` and
-`geom_fill_filling_behavior`) and in the numeric corpus.
+GeomFill_BSplineCurves_Test.cxx is partially mapped. The first OCC28131 declaration
+now builds the source fixture's Bezier and interpolated boundaries, Coons surface,
+face, and BRepCheck validity result in `tktopalgo`'s integration target. It uses the
+existing TKGeomAlgo operations without a production dependency cycle. Two remaining
+OCC28131 offset declarations depend on TKOffset and ShapeFix_Shape; they are still
+unmapped. The two independent GeomFill cases (OCC13904 and OCC27704) run as behavior
+tests (`geom_fill_skin_behavior` and `geom_fill_filling_behavior`) and in the numeric
+corpus.
 
 GeomFill_CorrectedFrenet_Test.cxx now maps all four declarations in
 `geom_fill_corrected_frenet`. The original reproducer constructs its three segments with
