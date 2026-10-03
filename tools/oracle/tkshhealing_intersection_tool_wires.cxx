@@ -170,6 +170,84 @@ static void runLongOverlapCase() {
   std::cout << '\n';
 }
 
+static void runContainedFirstLongOverlapCase() {
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
+  TopoDS_Edge firstOverlap = edgeOnPlane(face, gp_Pnt(2., 0., 0.), gp_Dir(1., 0., 0.),
+                                         gp_Pnt2d(2., 0.), gp_Dir2d(1., 0.), 6.);
+  TopoDS_Edge secondOverlap = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
+                                          gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 10.);
+  ShapeAnalysis_Edge analysis;
+  builder.UpdateVertex(analysis.FirstVertex(secondOverlap), 1.e-5);
+  TopoDS_Edge firstFar = edgeOnPlane(face, gp_Pnt(30., 30., 0.), gp_Dir(1., 0., 0.),
+                                     gp_Pnt2d(30., 30.), gp_Dir2d(1., 0.));
+  TopoDS_Edge secondFar = edgeOnPlane(face, gp_Pnt(-30., -30., 0.), gp_Dir(0., 1., 0.),
+                                      gp_Pnt2d(-30., -30.), gp_Dir2d(0., 1.));
+  Handle(ShapeExtend_WireData) first = makeWire(face, firstOverlap, firstFar);
+  Handle(ShapeExtend_WireData) second = makeWire(face, secondOverlap, secondFar);
+  builder.Add(face, first->Wire());
+  builder.Add(face, second->Wire());
+  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
+  ShapeFix_IntersectionTool tool(context, 1.e-7);
+  bool done = tool.FixIntersectingWires(face);
+  Handle(ShapeExtend_WireData) result[2];
+  int wireIndex = 0;
+  for (TopoDS_Iterator wires(face, false, true); wires.More(); wires.Next()) {
+    if (wires.Value().ShapeType() == TopAbs_WIRE) {
+      result[wireIndex++] = new ShapeExtend_WireData(TopoDS::Wire(wires.Value()));
+    }
+  }
+  std::cout << std::setprecision(17) << done << " " << result[0]->NbEdges() << " " << result[1]->NbEdges();
+  for (int wire = 0; wire < 2; ++wire) {
+    for (int index = 1; index <= result[wire]->NbEdges(); ++index) {
+      double firstParameter, lastParameter;
+      BRep_Tool::Range(result[wire]->Edge(index), face, firstParameter, lastParameter);
+      std::cout << " " << firstParameter << " " << lastParameter;
+    }
+  }
+  std::cout << '\n';
+}
+
+static void runPartialLongOverlapCase() {
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.e-7);
+  TopoDS_Edge firstOverlap = edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.),
+                                         gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 10.);
+  ShapeAnalysis_Edge analysis;
+  builder.UpdateVertex(analysis.FirstVertex(firstOverlap), 1.e-5);
+  TopoDS_Edge secondOverlap = edgeOnPlane(face, gp_Pnt(2., 0., 0.), gp_Dir(1., 0., 0.),
+                                          gp_Pnt2d(2., 0.), gp_Dir2d(1., 0.), 10.);
+  TopoDS_Edge firstFar = edgeOnPlane(face, gp_Pnt(30., 30., 0.), gp_Dir(1., 0., 0.),
+                                     gp_Pnt2d(30., 30.), gp_Dir2d(1., 0.));
+  TopoDS_Edge secondFar = edgeOnPlane(face, gp_Pnt(-30., -30., 0.), gp_Dir(0., 1., 0.),
+                                      gp_Pnt2d(-30., -30.), gp_Dir2d(0., 1.));
+  Handle(ShapeExtend_WireData) first = makeWire(face, firstOverlap, firstFar);
+  Handle(ShapeExtend_WireData) second = makeWire(face, secondOverlap, secondFar);
+  builder.Add(face, first->Wire());
+  builder.Add(face, second->Wire());
+  Handle(ShapeBuild_ReShape) context = new ShapeBuild_ReShape;
+  ShapeFix_IntersectionTool tool(context, 1.e-7);
+  bool done = tool.FixIntersectingWires(face);
+  Handle(ShapeExtend_WireData) result[2];
+  int wireIndex = 0;
+  for (TopoDS_Iterator wires(face, false, true); wires.More(); wires.Next()) {
+    if (wires.Value().ShapeType() == TopAbs_WIRE) {
+      result[wireIndex++] = new ShapeExtend_WireData(TopoDS::Wire(wires.Value()));
+    }
+  }
+  std::cout << std::setprecision(17) << done << " " << result[0]->NbEdges() << " " << result[1]->NbEdges();
+  for (int wire = 0; wire < 2; ++wire) {
+    for (int index = 1; index <= result[wire]->NbEdges(); ++index) {
+      double firstParameter, lastParameter;
+      BRep_Tool::Range(result[wire]->Edge(index), face, firstParameter, lastParameter);
+      std::cout << " " << firstParameter << " " << lastParameter;
+    }
+  }
+  std::cout << '\n';
+}
+
 static void runReversedLongOverlapCase() {
   BRep_Builder builder;
   TopoDS_Face face;
@@ -277,6 +355,8 @@ int main() {
   runVertexCase(false);
   runShortOverlapCase();
   runLongOverlapCase();
+  runContainedFirstLongOverlapCase();
+  runPartialLongOverlapCase();
   runReversedLongOverlapCase();
   runEndpointCutCase();
 }
