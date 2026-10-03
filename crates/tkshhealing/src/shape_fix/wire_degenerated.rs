@@ -16,12 +16,15 @@ impl ShapeFixWire {
     pub fn fix_degenerated_at(&self, index: i32) -> Result<bool, Failure> {
         self.set_last_fix_status(ShapeExtendStatus::Ok);
         let analyzer = self.analyzer_for_degenerated()?;
-        let (found, first, last) = analyzer.check_degenerated_at(index)?;
+        if !analyzer.is_ready() {
+            return Ok(false);
+        }
+        let (_, first, last) = analyzer.check_degenerated_at(index)?;
         self.transfer_check_failure(&analyzer);
         if analyzer.last_check_status(ShapeExtendStatus::Fail2) {
             return self.remove_invalid_degenerated(&analyzer, index);
         }
-        if !found {
+        if !analyzer.last_check_status(ShapeExtendStatus::Done) {
             return Ok(false);
         }
         self.apply_degenerated_edge(&analyzer, index, first, last)
@@ -89,7 +92,7 @@ impl ShapeFixWire {
         let data = analyzer.wire_data();
         data.remove(index)?;
         if !previous_coded {
-            index = analyzer.nb_edges() + 1;
+            index = analyzer.nb_edges();
         }
         clear_degenerated_flag(&data.edge(index)?)?;
         Ok((index, last_coded, false))
