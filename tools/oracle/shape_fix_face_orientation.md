@@ -39,12 +39,13 @@ periodic_reverse_states infinite=1 5.8,2.5=1 6.1,1=1 6.4,2.5=1 6.1,4=1
 periodic_messages Unknown message invoked with the keyword FixAdvFace.FixOrientation.MSG11:L=1:R=0 Unknown message invoked with the keyword FixAdvFace.FixOrientation.MSG5:L=0:R=0
 periodic_shift changed=1 pcurve_mid_before=0.1 pcurve_mid_after=6.38319 map=0 forward=2 reversed=0 warning_shapes=2 edge_forward=4 edge_reversed=4
 shared_seam_reversal changed=1 p=6.28319 p=6.28319
-empty_sphere_natural_bound changed=1 wires=1 orientation=0
+empty_sphere_natural_bound changed=1 wires=1 orientation=0 result_matches_face=1
 empty_cylinder_natural_bound changed=0 wires=0
 uninitialized_natural_bound changed=0
 sphere_wire_natural_bound changed=0 wires=1
  torus_p=6.48319,6.88319 torus_p=3.64159,6.78319
 torus_reversed_wire_natural_bound changed=1 wires=2
+direct_orientation_result changed=1 face_forward=1 result_null=1
 context changed=1 result_matches_context=1 result_forward=1
 sphere_natural_bound changed=0 wire_orientation=1
 ```
@@ -80,3 +81,18 @@ outer-bound test keeps `FixAddNaturalBound` unchanged.
 `torus_reversed_wire_natural_bound` uses a reversed wire on a doubly periodic torus.
 The fixture checks the original wire's `+2π` p-curve translation and the new natural
 boundary's selected UV interval shift.
+
+`ShapeFix_Face::FixAddNaturalBound` also contains a sphere-only merge loop for a
+source wire that shares a degenerated edge with the generated natural boundary.
+In this pinned source, that loop follows `isNeedAddNaturalBound(ws)`, whose edge
+scan returns false as soon as any input wire has a degenerated edge. The merge
+loop itself requires such an edge in one of those same source wires, so that
+branch is unreachable through this method's current guard. The Rust port does
+not add the `FixConnected`/`FixDegenerated` merge path on that unreachable route;
+the native dependency remains relevant only if the upstream guard or call path
+changes.
+
+The direct `Face()` and `Result()` accessors are distinct native state. Direct
+`FixOrientation` and the nonempty natural-bound path update `myFace`, while
+`myResult` remains unchanged; only the finite-empty natural-bound path assigns
+`myResult` directly. Rust regressions check this distinction.

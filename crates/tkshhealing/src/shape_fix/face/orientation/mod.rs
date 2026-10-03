@@ -41,10 +41,7 @@ pub(super) fn fix_orientation(
 
 fn store_current_face(fixer: &ShapeFixFace, face: &Face) {
     let shape = face.clone().into_shape();
-    fixer
-        .fix_root_data()
-        .with_mut(|fields| fields.shape = shape.clone());
-    *fixer.result.write() = shape;
+    *fixer.face_state.write() = shape;
 }
 
 fn orientation_decision(
@@ -64,7 +61,7 @@ fn orientation_decision(
 }
 
 fn current_face(fixer: &ShapeFixFace) -> Result<Face, Failure> {
-    let shape = fixer.fix_root_data().with(|fields| fields.shape.clone());
+    let shape = fixer.face_state.read().clone();
     let context = fixer.context();
     let applied = apply_context(&shape, &context)?;
     topods::face(&applied)
@@ -230,10 +227,7 @@ fn orientation_changed(
 
 fn store_oriented_result(fixer: &ShapeFixFace, face: &Face, result: &Shape) -> Result<(), Failure> {
     replace_oriented_face_in_context(fixer, face, result)?;
-    fixer
-        .fix_root_data()
-        .with_mut(|fields| fields.shape = result.clone());
-    *fixer.result.write() = result.clone();
+    fixer.face_state.write().clone_from(result);
     rustycad_tkbrep::brep_tools::update_face(&topods::face(result)?)
 }
 
