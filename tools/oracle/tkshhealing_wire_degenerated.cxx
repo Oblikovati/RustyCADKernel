@@ -1,3 +1,4 @@
+#include <array>
 #include <BRep_Builder.hxx>
 #include <BRep_Tool.hxx>
 #include <Geom_Plane.hxx>
@@ -8,6 +9,9 @@
 #include <ShapeExtend_WireData.hxx>
 #include <ShapeFix_Wire.hxx>
 #include <Geom_CylindricalSurface.hxx>
+#include <Geom_SphericalSurface.hxx>
+#include <Geom_Circle.hxx>
+#include <Geom_SurfaceOfRevolution.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Vertex.hxx>
@@ -27,6 +31,14 @@ static void check_invalid_flag_removal();
 static void check_existing_singular_edge_replacement();
 static void check_periodic_shift();
 static void check_bulk_degenerated();
+static void check_spherical_v_period();
+static void check_spherical_bimeridian();
+static void check_revolution_basis_period();
+static void check_duplicate_degenerated_wrap();
+static void check_fix_unready_preserves_analyzer_status();
+static TopoDS_Edge make_apex_degenerated_edge(BRep_Builder& builder,
+                                              const TopoDS_Face& face,
+                                              const gp_Pnt& apex);
 
 int main()
 {
@@ -34,6 +46,259 @@ int main()
   check_existing_singular_edge_replacement();
   check_periodic_shift();
   check_bulk_degenerated();
+  check_spherical_v_period();
+  check_spherical_bimeridian();
+  check_revolution_basis_period();
+  check_duplicate_degenerated_wrap();
+  check_fix_unready_preserves_analyzer_status();
+}
+
+static void check_fix_unready_preserves_analyzer_status()
+{
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face, new Geom_Plane(gp_Ax3()), 1.0e-7);
+  TopoDS_Vertex vertex;
+  builder.MakeVertex(vertex, gp_Pnt(1.0, 0.0, 0.0), 1.0e-7);
+  TopoDS_Edge edge;
+  builder.MakeEdge(edge);
+  builder.Degenerated(edge, true);
+  TopoDS_Vertex firstVertex = vertex;
+  firstVertex.Orientation(TopAbs_FORWARD);
+  TopoDS_Vertex lastVertex = vertex;
+  lastVertex.Orientation(TopAbs_REVERSED);
+  builder.Add(edge, firstVertex);
+  builder.Add(edge, lastVertex);
+  Handle(ShapeExtend_WireData) data = new ShapeExtend_WireData;
+  data->Add(edge);
+  Handle(ShapeAnalysis_Wire) analyzer = new ShapeAnalysis_Wire;
+  analyzer->Init(data, face, 1.0e-7);
+  gp_Pnt2d first;
+  gp_Pnt2d last;
+  analyzer->CheckDegenerated(1, first, last);
+  const bool priorFail = analyzer->LastCheckStatus(ShapeExtend_FAIL2);
+  analyzer->SetFace(TopoDS_Face());
+  ShapeFix_Wire fixer;
+  fixer.Init(analyzer);
+  const bool changed = fixer.FixDegenerated(1);
+  std::cout << "unready=" << changed << " prior_fail2=" << priorFail
+            << " after_fail2=" << analyzer->LastCheckStatus(ShapeExtend_FAIL2) << '\n';
+}
+
+static TopoDS_Edge make_apex_degenerated_edge(BRep_Builder& builder,
+                                              const TopoDS_Face& face,
+                                              const gp_Pnt& apex)
+{
+  TopoDS_Edge edge;
+  builder.MakeEdge(edge);
+  TopoDS_Vertex vertex;
+  builder.MakeVertex(vertex, apex, 1.0e-7);
+  TopoDS_Vertex first = vertex;
+  first.Orientation(TopAbs_FORWARD);
+  TopoDS_Vertex last = vertex;
+  last.Orientation(TopAbs_REVERSED);
+  builder.Add(edge, first);
+  builder.Add(edge, last);
+  Handle(Geom2d_Line) pcurve = new Geom2d_Line(
+    gp_Ax2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(1.0, 0.0)));
+  builder.UpdateEdge(edge, pcurve, face, 1.0e-7);
+  builder.Range(edge, face, 0.0, 2.0 * M_PI);
+  return edge;
+}
+
+static void check_duplicate_degenerated_wrap()
+{
+  BRep_Builder builder;
+  Handle(Geom_ConicalSurface) cone = new Geom_ConicalSurface(gp_Ax3(), 0.5, 0.0);
+  TopoDS_Face face;
+  builder.MakeFace(face, cone, 1.0e-7);
+  Handle(ShapeExtend_WireData) data = new ShapeExtend_WireData;
+  TopoDS_Edge edge = make_apex_degenerated_edge(builder, face, cone->Apex());
+  data->Add(edge);
+  data->Add(edge);
+  Handle(ShapeAnalysis_Wire) analyzer = new ShapeAnalysis_Wire;
+  analyzer->Init(data, face, 1.0e-7);
+  gp_Pnt2d first;
+  gp_Pnt2d last;
+  const bool found = analyzer->CheckDegenerated(2, first, last);
+  std::cout << "duplicate_check=" << found << " done2="
+            << analyzer->LastCheckStatus(ShapeExtend_DONE2) << " done1="
+            << analyzer->LastCheckStatus(ShapeExtend_DONE1) << '\n';
+  const bool foundFirst = analyzer->CheckDegenerated(1, first, last);
+  std::cout << "duplicate_first_check=" << foundFirst << " done2="
+            << analyzer->LastCheckStatus(ShapeExtend_DONE2) << '\n';
+  ShapeFix_Wire fixer;
+  fixer.Init(analyzer);
+  const bool changed = fixer.FixDegenerated();
+  std::cout << "duplicate=" << changed << " count=" << data->NbEdges()
+            << " degenerated=" << BRep_Tool::Degenerated(data->Edge(1)) << " status2="
+            << fixer.StatusDegenerated(ShapeExtend_DONE2) << "\n";
+}
+
+static void check_spherical_v_period()
+{
+  BRep_Builder builder;
+  Handle(Geom_SphericalSurface) sphere = new Geom_SphericalSurface(gp_Ax3(), 1.0);
+  TopoDS_Face face;
+  builder.MakeFace(face, sphere, 1.0e-7);
+  Handle(ShapeExtend_WireData) data = new ShapeExtend_WireData;
+  for (const auto& bounds : {std::array<double, 4>{0.2, 1.4, 0.4, 1.5},
+                             std::array<double, 4>{0.4, -1.5, 0.6, -1.4}})
+  {
+    TopoDS_Edge edge;
+    builder.MakeEdge(edge);
+    const double du = bounds[2] - bounds[0];
+    const double dv = bounds[3] - bounds[1];
+    Handle(Geom2d_Line) pcurve = new Geom2d_Line(
+      gp_Ax2d(gp_Pnt2d(bounds[0], bounds[1]), gp_Dir2d(du, dv)));
+    const double last = std::sqrt(du * du + dv * dv);
+    builder.UpdateEdge(edge, pcurve, face, 1.0e-7);
+    builder.Range(edge, face, 0.0, last);
+    TopoDS_Vertex first;
+    TopoDS_Vertex second;
+    builder.MakeVertex(first, sphere->Value(bounds[0], bounds[1]), 1.0e-7);
+    builder.MakeVertex(second, sphere->Value(bounds[2], bounds[3]), 1.0e-7);
+    builder.Add(edge, first);
+    second.Reverse();
+    builder.Add(edge, second);
+    data->Add(edge);
+  }
+  Handle(ShapeAnalysis_Wire) analyzer = new ShapeAnalysis_Wire;
+  analyzer->Init(data, face, 1.0e-7);
+  ShapeFix_Wire fixer;
+  fixer.Init(analyzer);
+  const bool changed = fixer.FixShifted();
+  ShapeAnalysis_Edge edgeAnalysis;
+  std::cout << "sphere=" << changed << " done1="
+            << fixer.LastFixStatus(ShapeExtend_DONE1) << " done2="
+            << fixer.LastFixStatus(ShapeExtend_DONE2);
+  for (int index = 1; index <= data->NbEdges(); ++index)
+  {
+    Handle(Geom2d_Curve) curve;
+    double first;
+    double last;
+    edgeAnalysis.PCurve(data->Edge(index), face, curve, first, last, true);
+    const gp_Pnt2d a = curve->Value(first);
+    const gp_Pnt2d b = curve->Value(last);
+    std::cout << " e" << index << "=" << a.X() << ',' << a.Y() << ',' << b.X() << ','
+              << b.Y();
+  }
+  std::cout << '\n';
+}
+
+static TopoDS_Edge make_sphere_edge(BRep_Builder& builder,
+                                    const TopoDS_Face& face,
+                                    const Handle(Geom_SphericalSurface)& sphere,
+                                    const gp_Pnt2d& firstPoint,
+                                    const gp_Pnt2d& lastPoint)
+{
+  TopoDS_Edge edge;
+  builder.MakeEdge(edge);
+  const double du = lastPoint.X() - firstPoint.X();
+  const double dv = lastPoint.Y() - firstPoint.Y();
+  Handle(Geom2d_Line) pcurve = new Geom2d_Line(
+    gp_Ax2d(firstPoint, gp_Dir2d(du, dv)));
+  const double last = std::sqrt(du * du + dv * dv);
+  builder.UpdateEdge(edge, pcurve, face, 1.0e-7);
+  builder.Range(edge, face, 0.0, last);
+  TopoDS_Vertex first;
+  TopoDS_Vertex second;
+  builder.MakeVertex(first, sphere->Value(firstPoint.X(), firstPoint.Y()), 1.0e-7);
+  builder.MakeVertex(second, sphere->Value(lastPoint.X(), lastPoint.Y()), 1.0e-7);
+  first.Orientation(TopAbs_FORWARD);
+  second.Orientation(TopAbs_REVERSED);
+  builder.Add(edge, first);
+  builder.Add(edge, second);
+  return edge;
+}
+
+static void check_spherical_bimeridian()
+{
+  BRep_Builder builder;
+  Handle(Geom_SphericalSurface) sphere = new Geom_SphericalSurface(gp_Ax3(), 1.0);
+  TopoDS_Face face;
+  builder.MakeFace(face, sphere, 1.0e-7);
+  Handle(ShapeExtend_WireData) data = new ShapeExtend_WireData;
+  data->Add(make_sphere_edge(builder, face, sphere, gp_Pnt2d(0.0, 1.3), gp_Pnt2d(1.0, 1.5)));
+  data->Add(make_sphere_edge(builder, face, sphere, gp_Pnt2d(5.0, 1.5), gp_Pnt2d(5.5, 1.3)));
+  data->Add(make_sphere_edge(builder, face, sphere, gp_Pnt2d(4.5, -1.3), gp_Pnt2d(5.0, -1.5)));
+  data->Add(make_sphere_edge(builder, face, sphere, gp_Pnt2d(1.0, -1.5), gp_Pnt2d(1.5, -1.3)));
+  Handle(ShapeAnalysis_Wire) analyzer = new ShapeAnalysis_Wire;
+  analyzer->Init(data, face, 1.0e-7);
+  ShapeFix_Wire fixer;
+  fixer.Init(analyzer);
+  const bool changed = fixer.FixShifted();
+  ShapeAnalysis_Edge edgeAnalysis;
+  std::cout << "bimeridian=" << changed << " done1="
+            << fixer.LastFixStatus(ShapeExtend_DONE1) << " done2="
+            << fixer.LastFixStatus(ShapeExtend_DONE2);
+  for (int index = 1; index <= data->NbEdges(); ++index)
+  {
+    Handle(Geom2d_Curve) curve;
+    double first;
+    double last;
+    edgeAnalysis.PCurve(data->Edge(index), face, curve, first, last, true);
+    const gp_Pnt2d a = curve->Value(first);
+    const gp_Pnt2d b = curve->Value(last);
+    std::cout << " e" << index << "=" << a.X() << ',' << a.Y() << ',' << b.X() << ','
+              << b.Y();
+  }
+  std::cout << '\n';
+}
+
+static void check_revolution_basis_period()
+{
+  BRep_Builder builder;
+  Handle(Geom_Circle) basis = new Geom_Circle(
+    gp_Ax2(gp_Pnt(2.0, 0.0, 0.0), gp_Dir(1.0, 0.0, 0.0)), 1.0);
+  Handle(Geom_SurfaceOfRevolution) revolution = new Geom_SurfaceOfRevolution(
+    basis, gp_Ax1(gp_Pnt(0.0, 0.0, 0.0), gp_Dir(0.0, 0.0, 1.0)));
+  TopoDS_Face face;
+  builder.MakeFace(face, revolution, 1.0e-7);
+  Handle(ShapeExtend_WireData) data = new ShapeExtend_WireData;
+  for (const auto& bounds : {std::array<double, 4>{0.2, 5.8, 0.4, 6.0},
+                             std::array<double, 4>{0.4, -0.2, 0.6, 0.0}})
+  {
+    TopoDS_Edge edge;
+    builder.MakeEdge(edge);
+    const double du = bounds[2] - bounds[0];
+    const double dv = bounds[3] - bounds[1];
+    Handle(Geom2d_Line) pcurve = new Geom2d_Line(
+      gp_Ax2d(gp_Pnt2d(bounds[0], bounds[1]), gp_Dir2d(du, dv)));
+    const double last = std::sqrt(du * du + dv * dv);
+    builder.UpdateEdge(edge, pcurve, face, 1.0e-7);
+    builder.Range(edge, face, 0.0, last);
+    TopoDS_Vertex first;
+    TopoDS_Vertex second;
+    builder.MakeVertex(first, revolution->Value(bounds[0], bounds[1]), 1.0e-7);
+    builder.MakeVertex(second, revolution->Value(bounds[2], bounds[3]), 1.0e-7);
+    first.Orientation(TopAbs_FORWARD);
+    second.Orientation(TopAbs_REVERSED);
+    builder.Add(edge, first);
+    builder.Add(edge, second);
+    data->Add(edge);
+  }
+  Handle(ShapeAnalysis_Wire) analyzer = new ShapeAnalysis_Wire;
+  analyzer->Init(data, face, 1.0e-7);
+  ShapeFix_Wire fixer;
+  fixer.Init(analyzer);
+  const bool changed = fixer.FixShifted();
+  ShapeAnalysis_Edge edgeAnalysis;
+  std::cout << "revolution=" << changed << " done1="
+            << fixer.LastFixStatus(ShapeExtend_DONE1) << " done2="
+            << fixer.LastFixStatus(ShapeExtend_DONE2);
+  for (int index = 1; index <= data->NbEdges(); ++index)
+  {
+    Handle(Geom2d_Curve) curve;
+    double first;
+    double last;
+    edgeAnalysis.PCurve(data->Edge(index), face, curve, first, last, true);
+    const gp_Pnt2d a = curve->Value(first);
+    const gp_Pnt2d b = curve->Value(last);
+    std::cout << " e" << index << "=" << a.X() << ',' << a.Y() << ',' << b.X() << ','
+              << b.Y();
+  }
+  std::cout << '\n';
 }
 
 static TopoDS_Edge make_periodic_edge(BRep_Builder& builder,
