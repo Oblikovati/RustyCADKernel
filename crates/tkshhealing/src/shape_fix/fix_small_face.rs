@@ -67,6 +67,14 @@ impl ShapeFixFixSmallFace {
         ShapeExtend::decode_status(*self.status.read(), status)
     }
 
+    /// Runs the native spot and strip repair phases in order.
+    /// Example: `fixer.perform()?; let repaired = fixer.shape()`.
+    pub fn perform(&self) -> Result<(), Failure> {
+        self.fix_spot_face()?;
+        self.fix_strip_face(false)?;
+        Ok(())
+    }
+
     /// Applies the native spot-face checker to each face and updates the reshape context.
     /// Example: `let result = fixer.fix_spot_face()?`.
     pub fn fix_spot_face(&self) -> Result<Shape, Failure> {

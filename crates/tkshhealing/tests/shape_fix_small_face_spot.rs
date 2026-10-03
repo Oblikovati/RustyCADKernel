@@ -34,6 +34,20 @@ fn regular_box_is_preserved_by_the_spot_phase() {
 }
 
 #[test]
+fn perform_runs_spot_then_strip_on_a_regular_box() {
+    let native = include_str!("../../../tools/oracle/tkshhealing_fix_small_face_spot.expected")
+        .lines()
+        .find(|row| row.starts_with("perform_regular "))
+        .unwrap();
+    assert_eq!(native, "perform_regular 1 2 6 24 48");
+    let mut box_maker = BRepPrimAPIMakeBox::from_sizes(1.0, 1.0, 1.0).unwrap();
+    let input = box_maker.shape().unwrap().clone();
+    let fixer = ShapeFixFixSmallFace::new(input.clone());
+    fixer.perform().unwrap();
+    assert!(fixer.shape().is_same(&input));
+}
+
+#[test]
 fn spot_face_is_removed_from_a_compound_and_regular_faces_survive() {
     let native = include_str!("../../../tools/oracle/tkshhealing_fix_small_face_spot.expected")
         .lines()
