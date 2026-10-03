@@ -30,7 +30,7 @@ pub use root::{FixRoot, FixRootData, FixRootFields, ShapeFixRoot, need_fix};
 pub use shape::ShapeFixShape;
 pub use shape_tolerance::ShapeFixShapeTolerance;
 pub use split_common_vertex::ShapeFixSplitCommonVertex;
-pub use wire::ShapeFixWire;
+pub use wire::{ShapeFixIntersectionTool, ShapeFixWire};
 pub use wire_vertex::ShapeFixWireVertex;
 
 mod wire_segment;

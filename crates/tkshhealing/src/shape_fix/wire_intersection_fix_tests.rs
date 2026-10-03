@@ -13,6 +13,8 @@ use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point3};
 
 const EXPECTED: &str =
     include_str!("../../../../tools/oracle/tkshhealing_wire_fix_intersections.expected");
+const TOOL_EDGES_EXPECTED: &str =
+    include_str!("../../../../tools/oracle/tkshhealing_intersection_tool_edges.expected");
 
 struct ContextToleranceFixture {
     analyzer: Handle<ShapeAnalysisWire>,
@@ -150,6 +152,142 @@ fn split_tool_validates_same_parameter_cut_against_bounded_curve_domain() {
     );
     assert!(BRepTool::same_range(&edge).unwrap());
     assert!(BRepTool::same_parameter(&edge).unwrap());
+}
+
+#[test]
+fn intersection_tool_split_edge_matches_native_ranges_vertices_and_flags() {
+    let face = planar_face();
+    let edge = edge_with_pcurve_and_line(
+        &face,
+        Point3::new(0.0, 0.0, 0.0),
+        Direction2::new(1.0, 0.0).unwrap(),
+        2.0,
+        Point3::new(0.0, 0.0, 0.0),
+        Direction3::X,
+    );
+    let split = vertex_at(Point3::new(1.0, 0.0, 0.0));
+    let tool = super::super::wire_intersection_tool::ShapeFixIntersectionTool::new(
+        &Handle::new(crate::shape_build::ShapeBuildReShape::new()),
+        1.0e-7,
+    );
+    let (mut first, mut second) = (Edge::default(), Edge::default());
+
+    assert!(
+        tool.split_edge(&edge, 1.0, &split, &face, &mut first, &mut second, 1.0e-7)
+            .unwrap()
+    );
+    assert_close(
+        BRepTool::range(&first).unwrap().0,
+        expected_tool_edge("first_first"),
+    );
+    assert_close(
+        BRepTool::range(&first).unwrap().1,
+        expected_tool_edge("first_last"),
+    );
+    assert_close(
+        BRepTool::range(&second).unwrap().0,
+        expected_tool_edge("second_first"),
+    );
+    assert_close(
+        BRepTool::range(&second).unwrap().1,
+        expected_tool_edge("second_last"),
+    );
+    assert!(
+        ShapeAnalysisEdge::new()
+            .last_vertex(&first)
+            .is_same(&ShapeAnalysisEdge::new().first_vertex(&second))
+    );
+    assert!(!BRepTool::same_range(&first).unwrap());
+    assert!(!BRepTool::same_parameter(&first).unwrap());
+}
+
+#[test]
+fn intersection_tool_rejected_split_preserves_output_edges_and_shares_context() {
+    let face = planar_face();
+    let edge = edge_with_pcurve(
+        &face,
+        Point3::default(),
+        Point3::new(2.0, 0.0, 0.0),
+        Direction2::new(1.0, 0.0).unwrap(),
+        2.0,
+    );
+    let endpoint = ShapeAnalysisEdge::new().first_vertex(&edge);
+    let sentinel = edge_with_pcurve(
+        &face,
+        Point3::new(5.0, 0.0, 0.0),
+        Point3::new(6.0, 0.0, 0.0),
+        Direction2::new(1.0, 0.0).unwrap(),
+        1.0,
+    );
+    let context = Handle::new(crate::shape_build::ShapeBuildReShape::new());
+    let tool = super::super::wire_intersection_tool::ShapeFixIntersectionTool::with_max_tolerance(
+        &context, 1.0e-7, 0.25,
+    );
+    let (mut first, mut second) = (sentinel.clone(), sentinel.clone());
+
+    assert_eq!(tool.context().as_ptr(), context.as_ptr());
+    assert!(
+        !tool
+            .split_edge(
+                &edge,
+                1.0,
+                &endpoint,
+                &face,
+                &mut first,
+                &mut second,
+                1.0e-7
+            )
+            .unwrap()
+    );
+    assert!(first.is_same(&sentinel));
+    assert!(second.is_same(&sentinel));
+}
+
+#[test]
+fn intersection_tool_cut_edge_preserves_native_cut_line_output() {
+    let face = planar_face();
+    let edge = edge_with_pcurve_and_line(
+        &face,
+        Point3::default(),
+        Direction2::new(1.0, 0.0).unwrap(),
+        2.0,
+        Point3::default(),
+        Direction3::X,
+    );
+    let tool = super::super::wire_intersection_tool::ShapeFixIntersectionTool::new(
+        &Handle::new(crate::shape_build::ShapeBuildReShape::new()),
+        1.0e-7,
+    );
+    let mut cut_line = true;
+
+    assert!(
+        tool.cut_edge(&edge, 0.0, 0.75, &face, &mut cut_line)
+            .unwrap()
+    );
+    assert!(cut_line);
+    let range = BRepTool::range(&edge).unwrap();
+    assert_close(range.0, expected_tool_edge("cut_first"));
+    assert_close(range.1, expected_tool_edge("cut_last"));
+}
+
+#[test]
+fn intersection_tool_trimmed_line_cut_keeps_native_tiny_spatial_remainder() {
+    let face = planar_face();
+    let edge = tiny_trimmed_line_edge(&face);
+    let tool = super::super::wire_intersection_tool::ShapeFixIntersectionTool::new(
+        &Handle::new(crate::shape_build::ShapeBuildReShape::new()),
+        1.0e-7,
+    );
+    let mut cut_line = false;
+
+    assert!(
+        tool.cut_edge(&edge, 0.0, 1.0e9 - 1.0e-4, &face, &mut cut_line)
+            .unwrap()
+    );
+    assert!(cut_line);
+    let (_, first, last) = BRepTool::curve(&edge).unwrap();
+    assert_close(first, expected_tool_edge("trimmed_first"));
+    assert_close(last, expected_tool_edge("trimmed_last"));
 }
 
 fn bounded_curve_cut_edge(face: &Face) -> Edge {
@@ -519,6 +657,15 @@ fn expected_validated_range(label: &str) -> f64 {
     let mut fields = row.split_whitespace();
     while fields.next() != Some(label) {}
     fields.next().unwrap().parse().unwrap()
+}
+
+fn expected_tool_edge(label: &str) -> f64 {
+    TOOL_EDGES_EXPECTED
+        .lines()
+        .find_map(|line| line.strip_prefix(&format!("{label}=")))
+        .unwrap()
+        .parse()
+        .unwrap()
 }
 
 fn assert_close(actual: f64, expected: f64) {
