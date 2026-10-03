@@ -7,10 +7,11 @@ nonadjacent line edges among two remote edges. They cover an interior point
 crossing, a middle-to-endpoint hit that reuses the endpoint vertex, an
 endpoint-to-endpoint hit that unions a shared endpoint, a long common segment
 that is split and removed, a reversed edge crossing, two point hits between a
-circle and line repaired through the repeated scan, and a short common segment
-split on both edges while endpoint vertices are displaced from their curves.
-Each row records the return value, split/cut/removed counters, resulting edge
-count, and ordered p-curve ranges. They do not establish entire-class parity.
+circle and line repaired through the repeated scan, endpoint reuse while
+removing an overlap segment, and a short common segment split on both edges
+while endpoint vertices are displaced from their curves. Each row records the
+return value, split/cut/removed counters, resulting edge count, and ordered
+p-curve ranges. They do not establish entire-class parity.
 
 Build and run:
 

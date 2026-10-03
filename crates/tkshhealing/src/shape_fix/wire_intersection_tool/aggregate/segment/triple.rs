@@ -183,9 +183,6 @@ fn split_first_overlap(
             boxes,
             counts,
         )?;
-        if inserted > 0 {
-            segment_index = index + 1;
-        }
         return Ok((inserted, segment_index));
     }
     if candidates.first_key > 0 || candidates.last_key > 0 {

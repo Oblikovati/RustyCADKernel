@@ -160,6 +160,26 @@ int main() {
   }
   std::cout << '\n';
 
+  TopoDS_Face endpointOverlapFace;
+  builder.MakeFace(endpointOverlapFace, new Geom_Plane(gp_Ax3()), 1.e-7);
+  Handle(ShapeExtend_WireData) endpointOverlapWire = new ShapeExtend_WireData;
+  endpointOverlapWire->Add(edgeOnPlane(endpointOverlapFace, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 2., .1));
+  endpointOverlapWire->Add(edgeOnPlane(endpointOverlapFace, gp_Pnt(3., 3., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(3., 3.), gp_Dir2d(1., 0.)));
+  endpointOverlapWire->Add(edgeOnPlane(endpointOverlapFace, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 1.5, .1));
+  endpointOverlapWire->Add(edgeOnPlane(endpointOverlapFace, gp_Pnt(-4., -4., 0.), gp_Dir(0., 1., 0.), gp_Pnt2d(-4., -4.), gp_Dir2d(0., 1.)));
+  builder.Add(endpointOverlapFace, endpointOverlapWire->Wire());
+  Handle(ShapeBuild_ReShape) endpointOverlapContext = new ShapeBuild_ReShape;
+  ShapeFix_IntersectionTool endpointOverlapTool(endpointOverlapContext, 1.e-7);
+  split = 91; cut = 92; removed = 0;
+  done = endpointOverlapTool.FixSelfIntersectWire(endpointOverlapWire, endpointOverlapFace, split, cut, removed);
+  std::cout << done << " " << split << " " << cut << " " << removed << " " << endpointOverlapWire->NbEdges();
+  for (int i = 1; i <= endpointOverlapWire->NbEdges(); ++i) {
+    double first, last;
+    BRep_Tool::Range(endpointOverlapWire->Edge(i), endpointOverlapFace, first, last);
+    std::cout << " " << first << " " << last;
+  }
+  std::cout << '\n';
+
   Handle(ShapeExtend_WireData) overlap = new ShapeExtend_WireData;
   overlap->Add(edgeOnPlane(face, gp_Pnt(0., 0., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(0., 0.), gp_Dir2d(1., 0.), 2., .1));
   overlap->Add(edgeOnPlane(face, gp_Pnt(3., 3., 0.), gp_Dir(1., 0., 0.), gp_Pnt2d(3., 3.), gp_Dir2d(1., 0.)));
