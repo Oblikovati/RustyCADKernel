@@ -70,3 +70,5 @@ mod curve_continuity;
 
 mod fix_small_bezier_curves;
 pub use fix_small_bezier_curves::ShapeUpgradeFixSmallBezierCurves;
+mod split_surface_continuity;
+pub use split_surface_continuity::ShapeUpgradeSplitSurfaceContinuity;
