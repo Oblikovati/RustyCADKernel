@@ -10,17 +10,47 @@ from unittest.mock import patch
 
 from api_inventory.inputs import JSONObject
 from verify_tkmath_legacy import (
+    arguments,
     hash_linked_native_libraries,
     linked_native_library_paths,
     native_filter,
     native_env,
     native_statuses,
+    report_header_fields,
     cargo_env,
     verify_source_group,
+)
+from tkmath_native_provenance import (
+    require_native_library_set,
+    required_toolkit_libraries,
 )
 
 
 class TkMathLegacyRuntimeTest(unittest.TestCase):
+    def test_cli_keeps_tkmath_default_and_selects_tkg2d_output(self) -> None:
+        """The old default remains stable and explicit toolkit runs isolate outputs."""
+        with patch("sys.argv", ["verify_tkmath_legacy.py"]):
+            default = arguments()
+        with patch("sys.argv", ["verify_tkmath_legacy.py", "--toolkit", "TKG2d"]):
+            tkg2d = arguments()
+        self.assertEqual(default.toolkit, "TKMath")
+        self.assertEqual(default.output.name, "oracle-tkmath-legacy")
+        self.assertEqual(tkg2d.toolkit, "TKG2d")
+        self.assertEqual(tkg2d.output.name, "oracle-tkg2d-legacy")
+
+    def test_tkg2d_runtime_report_does_not_claim_toolkit_completion(self) -> None:
+        """Mapped runtime evidence stays scoped and non-complete; e.g. TKG2d header."""
+        report = report_header_fields(
+            "TKG2d",
+            {"revision": "occt-revision"},
+            {},
+            {},
+            {"commit": "rust-revision", "clean": True},
+            pathlib.Path("target/private"),
+        )
+        self.assertEqual(report["runtime_evidence_toolkit"], "TKG2d")
+        self.assertFalse(report["toolkit_complete"])
+
     def test_native_filter_is_exact_and_sorted(self) -> None:
         """Filtering keeps only named mapped cases; e.g. stable sorted identities."""
         self.assertEqual(native_filter({"B.Test", "A.Test"}), "A.Test:B.Test")
@@ -40,8 +70,10 @@ class TkMathLegacyRuntimeTest(unittest.TestCase):
                 '<testsuites><testsuite><testcase classname="Suite" name="Case" '
                 'status="run"><skipped message="todo"/></testcase></testsuite></testsuites>'
             )
-            with self.assertRaisesRegex(RuntimeError, "skips require explicit review"):
-                native_statuses(xml_path, {"Suite.Case"})
+            with self.assertRaisesRegex(
+                RuntimeError, "TKG2d native skips require explicit review"
+            ):
+                native_statuses(xml_path, {"Suite.Case"}, "TKG2d")
 
     def test_native_status_accepts_exact_passing_identity(self) -> None:
         """A complete passing XML case produces one status; e.g. Suite.Case."""
@@ -62,6 +94,17 @@ class TkMathLegacyRuntimeTest(unittest.TestCase):
             xml_path.write_text("<testsuites/>")
             with self.assertRaisesRegex(RuntimeError, "exact set"):
                 native_statuses(xml_path, {"Suite.Case"})
+
+    def test_native_status_rejects_duplicate_identity(self) -> None:
+        """Duplicated XML identities cannot satisfy an exact case set."""
+        with tempfile.TemporaryDirectory() as temporary:
+            xml_path = pathlib.Path(temporary) / "cases.xml"
+            testcase = '<testcase classname="Suite" name="Case" status="run"/>'
+            xml_path.write_text(
+                f"<testsuites><testsuite>{testcase}{testcase}</testsuite></testsuites>"
+            )
+            with self.assertRaisesRegex(RuntimeError, "exact set"):
+                native_statuses(xml_path, {"Suite.Case"}, "TKG2d")
 
     def test_source_group_requires_every_declaration_and_digest(self) -> None:
         """Mapped cases bind to exact source bytes; e.g. source file hash and names."""
@@ -92,6 +135,39 @@ class TkMathLegacyRuntimeTest(unittest.TestCase):
         """An unresolved linked OCCT library blocks evidence; e.g. ldd says not found."""
         with self.assertRaisesRegex(RuntimeError, "unresolved"):
             linked_native_library_paths("libTKOffset.so => not found")
+
+    def test_tkg2d_native_library_requirements_include_core_dependencies(self) -> None:
+        """TKG2d proof requires itself and its dependency core; e.g. TKG2d/TKMath/TKernel."""
+        self.assertEqual(
+            required_toolkit_libraries("TKG2d"),
+            ("libTKernel.so", "libTKMath.so", "libTKG2d.so"),
+        )
+        libraries = {
+            name: f"/build/{name}.8.1"
+            for name in (
+                "libTKernel.so.8.1",
+                "libTKMath.so.8.1",
+                "libTKG2d.so.8.1",
+                "libgtest.so.1",
+                "libgtest_main.so.1",
+            )
+        }
+        require_native_library_set(libraries, "TKG2d")
+
+    def test_tkg3d_native_library_requirements_reject_missing_module(self) -> None:
+        """A TKG3d report needs both 3D and 2D linked modules."""
+        libraries = {
+            name: f"/build/{name}.8.1"
+            for name in (
+                "libTKernel.so.8.1",
+                "libTKMath.so.8.1",
+                "libTKG2d.so.8.1",
+                "libgtest.so.1",
+                "libgtest_main.so.1",
+            )
+        }
+        with self.assertRaisesRegex(RuntimeError, "libTKG3d.so"):
+            require_native_library_set(libraries, "TKG3d")
 
     def test_native_environment_removes_library_overrides(self) -> None:
         """Dynamic loader overrides cannot replace the pinned build libraries."""
