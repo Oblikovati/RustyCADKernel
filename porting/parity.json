@@ -225024,6 +225024,34 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_notched_edges",
       "status": "partial",
       "notes": "Native differential covers a planar three-edge overlap that splits the long edge and removes the short edge, plus status and mode-accessor rows. Curved/seam p-curves, context failures and full Perform dispatch remain open."
+    },
+
+    {
+      "upstream_id": "ShapeFix_Wire::FixSelfIntersection()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_self_intersection",
+      "status": "partial",
+      "notes": "Native aggregate pass ordering, component modes, unready status and a simple planar wire are differentially checked. Complex topology cuts, loop removals and removed-segment cases remain unverified."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::perform_with_progress",
+      "status": "partial",
+      "notes": "Free-wire and one face-ready planar p-curve fixture match native stage statuses and edge count. Broader repair branches and interruption timing need more differential cases."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::StatusRemovedSegment() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::status_removed_segment",
+      "status": "partial",
+      "notes": "Native mode/default and simple-run fixtures confirm false; nonadjacent removed-segment output has not yet been differentially exercised."
     }
   ],
   "tests": [
