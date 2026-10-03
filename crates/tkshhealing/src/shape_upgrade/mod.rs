@@ -65,3 +65,6 @@ pub use split_surface_angle::ShapeUpgradeSplitSurfaceAngle;
 mod split_curve2d_continuity;
 pub use split_curve2d_continuity::ShapeUpgradeSplitCurve2dContinuity;
 mod curve_continuity;
+
+mod fix_small_bezier_curves;
+pub use fix_small_bezier_curves::ShapeUpgradeFixSmallBezierCurves;

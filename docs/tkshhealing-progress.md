@@ -1010,7 +1010,9 @@ API obligations, and the done-with-zero-extrema branch lacks a direct native fix
 inherits initialization/build behavior through the existing splitter state. Thirteen
 native oracle cases and three Rust tests cover private geometry, knot mutation,
 status overwrites, copied wrapper recursion, handle identity and virtual dispatch.
-Additional periodic fixtures are in progress. These generated probes do not replace
+Additional periodic fixtures cover ten defined native cases. A separate aggressive
+full-removal case reaches an out-of-bounds native knot cache read and remains an
+explicit non-parity gap (see the periodic oracle notes). These generated probes do not replace
 legacy test declarations, and none of these entries asserts toolkit completion.
 
 `ShapeUpgradeSplitCurve2dContinuity` additionally preserves the native 2D scan's
@@ -1021,3 +1023,11 @@ persistent knot cursor and removal-index behavior; it has ten native oracle rows
 status retention and angular interval arithmetic (fifteen oracle rows). Undefined
 native integer conversions return an explicit Rust failure documented separately.
 All four explicit angle methods and both closed-edge methods have API mappings.
+
+
+`ShapeUpgradeFixSmallBezierCurves` adds its constructor and Approx override. Sixteen
+native cases and four Rust regressions cover 3D/2D status asymmetry, retained partial
+outputs, forward-bound reuse in seam approximation, CN continuity errors, and trim
+versus approximation exception boundaries. The parent and splitting tools retain
+shared handle identity. Approximation-not-done and arbitrary geometry domains still
+need broader differential coverage; the toolkit acceptance gate remains false.

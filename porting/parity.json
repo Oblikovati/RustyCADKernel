@@ -220855,6 +220855,22 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2dContinuity::set_criterion",
       "status": "implemented",
       "notes": "Native tools/oracle/tkshhealing_split_curve2d_continuity.cxx preserves PConfusion default, persistent knot cursor, inclusive last-bound threshold, and unchanged last-index after removal. Generated oracle fixtures remain separate from legacy tests; full module acceptance is pending."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallBezierCurves::ShapeUpgrade_FixSmallBezierCurves()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallBezierCurves.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallBezierCurves::new",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_fix_small_bezier_curves.cxx: sixteen generated cases preserve 3D/2D splitter status asymmetry, forward bounds reused by the seam, CN approximation errors, and exception boundaries. Four Rust regressions also cover actual parent projection and shared state. Generated fixtures do not replace legacy test obligations or establish exhaustive behavior."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_FixSmallBezierCurves::Approx(occ::handle<Geom_Curve> &, occ::handle<Geom2d_Curve> &, occ::handle<Geom2d_Curve> &, double &, double &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FixSmallBezierCurves.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFixSmallBezierCurves::<rustycad_tkshhealing::shape_upgrade::FixSmallCurves>::approx",
+      "status": "implemented",
+      "notes": "Native tools/oracle/tkshhealing_fix_small_bezier_curves.cxx: sixteen generated cases preserve 3D/2D splitter status asymmetry, forward bounds reused by the seam, CN approximation errors, and exception boundaries. Four Rust regressions also cover actual parent projection and shared state. Generated fixtures do not replace legacy test obligations or establish exhaustive behavior."
     }
   ],
   "tests": [
