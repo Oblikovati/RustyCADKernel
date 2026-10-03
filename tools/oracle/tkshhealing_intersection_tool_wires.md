@@ -6,8 +6,9 @@ parameter ranges, and confirms the replacement context maps the new face to
 itself. The next rows exercise middle-to-endpoint vertex reuse and
 endpoint-to-endpoint vertex union. Rust has a separate one-wire guard
 regression. The short-overlap case checks an offset intersection that splits
-each wire once. The long-overlap case splits one edge into three and reuses its
-middle edge in the other wire. The endpoint-cut case confirms that OCCT trims
+each wire once. Two long-overlap cases split one edge into three and reuse its
+middle edge in the other wire, including reversed parameter direction. The
+endpoint-cut case confirms that OCCT trims
 the long edge from parameter 0 to 1 but reports no face replacement and leaves
 the short edge's range intact.
 
