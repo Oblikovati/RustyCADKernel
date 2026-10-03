@@ -1,6 +1,7 @@
 //! Native tolerance and status behavior for `ShapeFix_Wire::FixLacking`.
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
+    brep_tools::ReShape,
     topods::{self, Builder, Edge, Face, Vertex},
 };
 use rustycad_tkernel::standard::Handle;
@@ -9,9 +10,9 @@ use rustycad_tkg3d::{
     geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface},
     top_abs::Orientation,
 };
-use rustycad_tkmath::gp::{Axis2d, Axis3, Direction2, Point2, Point3};
+use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
 use rustycad_tkshhealing::{
-    shape_analysis::ShapeAnalysisWire,
+    shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire},
     shape_extend::{ShapeExtendStatus, ShapeExtendWireData},
     shape_fix::{FixRoot, ShapeFixWire},
 };
@@ -19,6 +20,8 @@ use rustycad_tkshhealing::{
 const EXPECTED: &str = include_str!("../../../tools/oracle/tkshhealing_wire_fix_lacking.expected");
 const EXPECTED_BEND: &str =
     include_str!("../../../tools/oracle/tkshhealing_wire_lacking_bend.expected");
+const EXPECTED_LONG: &str =
+    include_str!("../../../tools/oracle/tkshhealing_wire_lacking_long_edge.expected");
 
 #[test]
 fn tolerance_increase_and_status_match_native() {
@@ -143,6 +146,130 @@ fn successful_curve_bend_runs_both_native_follow_up_repairs() {
         0.00100000999999989
     );
     assert_bent_endpoints_match_native(&wire, &face);
+}
+
+#[test]
+fn topology_mode_adds_long_edge_and_replaces_both_neighbors_in_context() {
+    let (analyzer, wire, first, second) = long_gap_wire();
+    let context = Handle::new(rustycad_tkshhealing::shape_build::ShapeBuildReShape::new());
+    let fixer = ShapeFixWire::new();
+    fixer.init(&analyzer);
+    fixer.set_max_tolerance(0.01);
+    fixer.set_topology_mode(true);
+    fixer.set_geometry_mode(false);
+    fixer.set_context(&context);
+
+    assert!(fixer.fix_lacking_at(2, false).unwrap());
+
+    assert_long_gap_status(&fixer, &wire);
+    assert_long_gap_context(&context, &first, &second);
+    assert_long_gap_connector(&wire);
+}
+
+fn long_gap_wire() -> (
+    Handle<ShapeAnalysisWire>,
+    Handle<ShapeExtendWireData>,
+    Edge,
+    Edge,
+) {
+    let face = plane_face();
+    let left = vertex_at(Point3::new(-1.0, 0.0, 0.0));
+    let shared = vertex_at(Point3::new(0.5, 0.0, 0.0));
+    let right = vertex_at(Point3::new(2.0, 0.0, 0.0));
+    let first = long_gap_edge(&face, &left, &shared, -1.0);
+    let second = long_gap_edge(&face, &shared, &right, 1.0);
+    let wire = Handle::new(ShapeExtendWireData::new());
+    wire.add_edge(&first, 0).unwrap();
+    wire.add_edge(&second, 0).unwrap();
+    let analyzer = ShapeAnalysisWire::from_wire_data(&wire, &face, 1e-7).unwrap();
+    (Handle::new(analyzer), wire, first, second)
+}
+
+fn long_gap_edge(face: &Face, first: &Vertex, last: &Vertex, start_x: f64) -> Edge {
+    let mut edge = Edge::default();
+    let builder = BRepBuilder::default();
+    builder.make_edge(&mut edge).unwrap();
+    add_edge_vertices(&edge, first, last);
+    add_long_gap_curves(&edge, face, start_x);
+    edge
+}
+
+fn add_edge_vertices(edge: &Edge, first: &Vertex, last: &Vertex) {
+    let mut shape = edge.clone().into_shape();
+    Builder
+        .add(&mut shape, &first.oriented(Orientation::Forward))
+        .unwrap();
+    Builder
+        .add(&mut shape, &last.oriented(Orientation::Reversed))
+        .unwrap();
+}
+
+fn add_long_gap_curves(edge: &Edge, face: &Face, start_x: f64) {
+    let builder = BRepBuilder::default();
+    let curve3d: Handle<dyn GeomCurve> = Handle::new(GeomLine::new(Axis1::new(
+        Point3::new(start_x, 0.0, 0.0),
+        Direction3::X,
+    )))
+    .cast();
+    let pcurve: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::new(Axis2d::new(
+        Point2::new(start_x, 0.0),
+        Direction2::new(1.0, 0.0).unwrap(),
+    )))
+    .cast();
+    builder.update_edge_curve(edge, &curve3d, 1e-7).unwrap();
+    builder.range(edge, 0.0, 1.0, true).unwrap();
+    builder
+        .update_edge_pcurve_on_face(edge, &pcurve, face, 1e-7)
+        .unwrap();
+    builder.range_on_face(edge, face, 0.0, 1.0).unwrap();
+}
+
+fn assert_long_gap_status(fixer: &ShapeFixWire, wire: &ShapeExtendWireData) {
+    assert_eq!(wire.nb_edges(), expected_long_number("count") as i32);
+    assert_eq!(
+        fixer.last_fix_status(ShapeExtendStatus::Done2),
+        expected_long_flag("done2")
+    );
+    assert_eq!(
+        fixer.last_fix_status(ShapeExtendStatus::Done1),
+        expected_long_flag("done1")
+    );
+}
+
+fn assert_long_gap_context(
+    context: &Handle<rustycad_tkshhealing::shape_build::ShapeBuildReShape>,
+    first: &Edge,
+    second: &Edge,
+) {
+    assert_eq!(
+        context.is_recorded(&first.clone().into_shape()),
+        expected_long_flag("first_replaced")
+    );
+    assert_eq!(
+        context.is_recorded(&second.clone().into_shape()),
+        expected_long_flag("second_replaced")
+    );
+}
+
+fn assert_long_gap_connector(wire: &ShapeExtendWireData) {
+    let connector = wire.edge(2).unwrap();
+    let analysis = ShapeAnalysisEdge::new();
+    assert_close(
+        BRepTool::pnt(&analysis.first_vertex(&connector))
+            .unwrap()
+            .x(),
+        expected_long_number("connector_first"),
+    );
+    assert_close(
+        BRepTool::pnt(&analysis.last_vertex(&connector))
+            .unwrap()
+            .x(),
+        expected_long_number("connector_last"),
+    );
+    assert_close(
+        BRepTool::edge_tolerance(&connector).unwrap(),
+        expected_long_number("connector_tolerance"),
+    );
 }
 
 fn assert_bent_endpoints_match_native(wire: &Handle<ShapeExtendWireData>, face: &Face) {
@@ -366,4 +493,23 @@ fn edge_without_vertices(face: &Face) -> Edge {
         .unwrap();
     builder.range_on_face(&edge, face, 0., 0.001).unwrap();
     edge
+}
+
+fn expected_long_flag(label: &str) -> bool {
+    expected_long_value(label) == "1"
+}
+
+fn expected_long_number(label: &str) -> f64 {
+    expected_long_value(label).parse().unwrap()
+}
+
+fn expected_long_value(label: &str) -> &'static str {
+    let row = EXPECTED_LONG.lines().next().unwrap();
+    let mut fields = row.split_whitespace();
+    while fields.next() != Some(label) {}
+    fields.next().unwrap()
+}
+
+fn assert_close(actual: f64, expected: f64) {
+    assert!((actual - expected).abs() < 1e-14, "{actual} != {expected}");
 }
