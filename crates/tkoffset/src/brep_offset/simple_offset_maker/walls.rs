@@ -68,7 +68,7 @@ fn fix_wall_edge_parameters(
     reshape: &Handle<ShapeBuildReShape>,
 ) -> Result<(), Failure> {
     let shape = walls.clone().into_shape();
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     fixer.set_context(reshape);
     for edge in Explorer::new(&shape, ShapeEnum::Edge, ShapeEnum::Shape)? {
         fixer.fix_same_parameter(&Edge::unchecked(edge), 0.0)?;

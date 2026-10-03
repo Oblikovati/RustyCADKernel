@@ -21,7 +21,7 @@ fn cylinder_projection_and_face_overload_match_native() {
     BRepBuilder::default()
         .make_face_on_surface(&mut face, &surface, 1e-7)
         .unwrap();
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer.fix_add_pcurve(&edge, &face, false, 1e-7).unwrap();
     assert_case(
         "cylinder-project",
@@ -37,7 +37,7 @@ fn cylinder_projection_and_face_overload_match_native() {
 fn seam_adds_translated_second_cylinder_pcurve() {
     let (edge, surface) = cylinder_edge(1.);
     add_line_pcurve(&edge, &surface, Point2::new(0., 0.));
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer
         .fix_add_pcurve_on_surface(&edge, &surface, &Location::default(), true, 1e-7)
         .unwrap();
@@ -55,7 +55,7 @@ fn seam_adds_translated_second_cylinder_pcurve() {
 fn plane_short_circuits_and_missing_curve_sets_fail1() {
     let (edge, _) = cylinder_edge(1.);
     let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer
         .fix_add_pcurve_on_surface(&edge, &plane, &Location::default(), false, 1e-7)
         .unwrap();
@@ -71,7 +71,7 @@ fn plane_short_circuits_and_missing_curve_sets_fail1() {
     let mut missing = Edge::default();
     BRepBuilder::default().make_edge(&mut missing).unwrap();
     let (_, cylinder) = cylinder_edge(1.);
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer
         .fix_add_pcurve_on_surface(&missing, &cylinder, &Location::default(), false, 1e-7)
         .unwrap();
@@ -91,7 +91,7 @@ fn located_surface_projects_world_space_curve() {
     transform.set_translation(Vector3::new(3., 0., 0.));
     let location = Location::new(transform);
     let (edge, surface) = cylinder_edge(4.);
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer
         .fix_add_pcurve_on_surface(&edge, &surface, &location, false, 1e-7)
         .unwrap();
@@ -119,7 +119,7 @@ fn torus_double_periodic_line_and_spline_use_native_translation() {
 }
 
 fn assert_torus_seam(name: &str, edge: &Edge, surface: &Handle<dyn GeomSurface>) {
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer
         .fix_add_pcurve_on_surface(edge, surface, &Location::default(), true, 1e-7)
         .unwrap();
