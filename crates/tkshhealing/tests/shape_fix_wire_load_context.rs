@@ -5,7 +5,7 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
 use rustycad_tkshhealing::shape_extend::ShapeExtendWireData;
-use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixWire};
+use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixRoot, ShapeFixWire};
 
 const NATIVE_RESULT: &str = include_str!("../../../tools/oracle/tkshhealing_wire_load.expected");
 
@@ -44,6 +44,17 @@ fn wire_data_load_splices_context_edges_into_the_shared_sequence() {
             .lines()
             .any(|line| line == "data_count=2 data_first=1 data_second=1")
     );
+}
+
+#[test]
+fn wire_uses_and_shares_shape_fix_root_state() {
+    let fixer = Handle::new(ShapeFixWire::new());
+    let root = fixer.cast::<ShapeFixRoot>();
+    assert!(!root.is_null());
+    root.set_precision(2.5e-4);
+    assert_eq!(fixer.precision(), 2.5e-4);
+    assert_eq!(root.precision(), 2.5e-4);
+    assert!(fixer.fix_root_data().with(|fields| fields.shape.is_null()));
 }
 
 fn context_replacement() -> (Wire, Edge, Edge, Edge, Handle<ShapeBuildReShape>) {

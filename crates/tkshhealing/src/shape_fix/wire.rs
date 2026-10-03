@@ -7,7 +7,7 @@ mod wire_degenerated;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
 
-use super::{FixRoot, FixRootData};
+use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
 use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus, ShapeExtendWireData};
@@ -17,7 +17,7 @@ use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Edge, Face, Shape, Vertex, Wire};
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::Point2;
@@ -37,18 +37,16 @@ struct WireFixState {
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
 pub struct ShapeFixWire {
-    parent: StandardTransient,
-    root: FixRootData,
+    parent: ShapeFixRoot,
     state: SharedState<WireFixState>,
 }
 
-impl_transient!(ShapeFixWire, "ShapeFix_Wire", StandardTransient, parent, interfaces: [dyn FixRoot]);
+impl_transient!(ShapeFixWire, "ShapeFix_Wire", ShapeFixRoot, parent, interfaces: [dyn FixRoot]);
 
 impl Default for ShapeFixWire {
     fn default() -> Self {
         Self {
-            parent: StandardTransient::default(),
-            root: FixRootData::default(),
+            parent: ShapeFixRoot::new(),
             state: SharedState::new(WireFixState {
                 analyzer: Handle::new(ShapeAnalysisWire::new()),
                 reorder_status: 0,
@@ -71,9 +69,10 @@ impl ShapeFixWire {
 
     /// `Init(analyzer)`: share an existing ShapeAnalysis_Wire instance.
     pub fn init(&self, analyzer: &Handle<ShapeAnalysisWire>) {
-        self.state.write().analyzer = analyzer.clone();
         self.clear_statuses();
-        self.root.with_mut(|fields| fields.shape = Shape::default());
+        self.state.write().analyzer = analyzer.clone();
+        self.fix_root_data()
+            .with_mut(|fields| fields.shape = Shape::default());
     }
 
     /// `Load(wire)`: replace the analyzer edge list and clear prior statuses.
@@ -82,7 +81,7 @@ impl ShapeFixWire {
         let working_wire = self.context_wire(wire)?;
         let analyzer = self.ensure_analyzer();
         analyzer.load_wire(&working_wire)?;
-        self.root
+        self.fix_root_data()
             .with_mut(|fields| fields.shape = wire.clone().into_shape());
         Ok(())
     }
@@ -92,8 +91,10 @@ impl ShapeFixWire {
     pub fn load_wire_data(&self, wire_data: &Handle<ShapeExtendWireData>) -> Result<(), Failure> {
         self.clear_statuses();
         self.ensure_analyzer().load_wire_data(wire_data);
-        self.root.with_mut(|fields| fields.shape = Shape::default());
-        self.update_wire()
+        self.update_wire()?;
+        self.fix_root_data()
+            .with_mut(|fields| fields.shape = Shape::default());
+        Ok(())
     }
 
     /// Applies the current reshape context to every working edge, splicing replacement edges.
@@ -647,7 +648,7 @@ fn reset_replacement_tolerances(vertex: &Vertex, edge: &Edge) -> Result<(), Fail
 
 impl FixRoot for ShapeFixWire {
     fn fix_root_data(&self) -> &FixRootData {
-        &self.root
+        self.parent.fix_root_data()
     }
 }
 
