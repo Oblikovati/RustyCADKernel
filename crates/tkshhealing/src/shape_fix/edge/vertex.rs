@@ -9,25 +9,17 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 
 impl ShapeFixEdge {
     /// Repair tolerances against all stored curves; `tool.fix_vertex_tolerance(&edge)?`.
-    pub fn fix_vertex_tolerance(&mut self, edge: &Edge) -> Result<bool, Failure> {
+    pub fn fix_vertex_tolerance(&self, edge: &Edge) -> Result<bool, Failure> {
         self.repair_vertex_tolerances(edge, None)
     }
 
     /// Repair tolerances using one face; `tool.fix_vertex_tolerance_on_face(&edge, &face)?`.
-    pub fn fix_vertex_tolerance_on_face(
-        &mut self,
-        edge: &Edge,
-        face: &Face,
-    ) -> Result<bool, Failure> {
+    pub fn fix_vertex_tolerance_on_face(&self, edge: &Edge, face: &Face) -> Result<bool, Failure> {
         self.repair_vertex_tolerances(edge, Some(face))
     }
 
-    fn repair_vertex_tolerances(
-        &mut self,
-        edge: &Edge,
-        face: Option<&Face>,
-    ) -> Result<bool, Failure> {
-        self.status = 0;
+    fn repair_vertex_tolerances(&self, edge: &Edge, face: Option<&Face>) -> Result<bool, Failure> {
+        self.reset_status();
         let Some(edge) = self.context_edge(edge)? else {
             return Ok(false);
         };
@@ -45,17 +37,18 @@ impl ShapeFixEdge {
         Ok(true)
     }
 
-    fn vertex_status(&mut self, analyzer: &ShapeAnalysisEdge) {
+    fn vertex_status(&self, analyzer: &ShapeAnalysisEdge) {
         for flag in [ShapeExtendStatus::Done1, ShapeExtendStatus::Done2] {
             if analyzer.status_flag(flag) {
                 // Native assignment lets DONE2 replace DONE1 when both vertices need repair.
-                self.status = ShapeExtend::encode_status(flag);
+                self.set_status(ShapeExtend::encode_status(flag));
             }
         }
     }
 
     fn context_edge(&self, edge: &Edge) -> Result<Option<Edge>, Failure> {
-        let Some(context) = self.context.get() else {
+        let context_handle = self.context();
+        let Some(context) = context_handle.get() else {
             return Ok(Some(edge.clone()));
         };
         let applied = context.apply(edge, ShapeEnum::Shape)?;
@@ -66,7 +59,8 @@ impl ShapeFixEdge {
     }
 
     fn update_vertex(&self, vertex: &Vertex, tolerance: f64) -> Result<(), Failure> {
-        if let Some(context) = self.context.get() {
+        let context_handle = self.context();
+        if let Some(context) = context_handle.get() {
             context.copy_vertex(vertex, tolerance)?;
             return Ok(());
         }

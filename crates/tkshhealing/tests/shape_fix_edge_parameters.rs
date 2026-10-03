@@ -23,7 +23,7 @@ fn same_parameter_repairs_match_native_status_and_tolerances() {
         ("repair-gap", false, 0.2),
     ] {
         let (edge, _) = edge_with_pcurve(same, z);
-        let mut fixer = ShapeFixEdge::new();
+        let fixer = ShapeFixEdge::new();
         let changed = fixer.fix_same_parameter(&edge, 0.).unwrap();
         assert_fixture(name, &fixer, &edge, changed);
     }
@@ -33,7 +33,7 @@ fn same_parameter_repairs_match_native_status_and_tolerances() {
 fn degenerated_edge_only_restores_parameter_flag() {
     let (edge, _) = edge_with_pcurve(false, 0.2);
     BRepBuilder::default().degenerated(&edge, true).unwrap();
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     let changed = fixer.fix_same_parameter(&edge, 0.).unwrap();
     assert_fixture("degenerated", &fixer, &edge, changed);
 }
@@ -42,7 +42,7 @@ fn degenerated_edge_only_restores_parameter_flag() {
 fn vertex_repair_context_preserves_source_and_replaces_result_vertices() {
     for with_context in [false, true] {
         let (edge, _) = edge_with_pcurve(true, 0.2);
-        let mut fixer = ShapeFixEdge::new();
+        let fixer = ShapeFixEdge::new();
         assert!(fixer.context().is_null());
         let context = Handle::new(ShapeBuildReShape::new());
         if with_context {
@@ -122,7 +122,7 @@ fn same_range_repair_uses_parameter_confusion() {
     builder
         .range_on_surface(&edge, &surface, &Location::default(), 2e-8, 1. + 2e-8)
         .unwrap();
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     assert!(!fixer.fix_same_parameter(&edge, 0.).unwrap());
     assert!(fixer.status_flag(ShapeExtendStatus::Ok));
     assert!(BRepTool::same_range(&edge).unwrap());
@@ -143,7 +143,7 @@ fn vertex_repair_on_face_and_removed_context_match_native_paths() {
     BRepBuilder::default()
         .make_face_on_surface(&mut face, &surface, 1e-7)
         .unwrap();
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     assert!(fixer.fix_vertex_tolerance_on_face(&edge, &face).unwrap());
     assert!(fixer.status_flag(ShapeExtendStatus::Done2));
     assert!(!fixer.fix_vertex_tolerance_on_face(&edge, &face).unwrap());

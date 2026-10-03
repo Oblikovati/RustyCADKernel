@@ -56,13 +56,13 @@ fn vertex_tolerance(vertex: Vertex) -> Result<(Vertex, f64), Failure> {
 
 impl ShapeFixEdge {
     /// Use OCCT's default zero tolerance for `FixSameParameter(edge, tolerance=0)`: `tool.fix_same_parameter_default(&edge)?`.
-    pub fn fix_same_parameter_default(&mut self, edge: &Edge) -> Result<bool, Failure> {
+    pub fn fix_same_parameter_default(&self, edge: &Edge) -> Result<bool, Failure> {
         self.fix_same_parameter(edge, 0.0)
     }
 
     /// Use the default zero tolerance with a selected face; `tool.fix_same_parameter_on_face_default(&edge, &face)?`.
     pub fn fix_same_parameter_on_face_default(
-        &mut self,
+        &self,
         edge: &Edge,
         face: &Face,
     ) -> Result<bool, Failure> {
@@ -70,19 +70,19 @@ impl ShapeFixEdge {
     }
 
     /// Choose native repair or deviation-only tolerance growth; `tool.fix_same_parameter(&edge, 0.0)?`.
-    pub fn fix_same_parameter(&mut self, edge: &Edge, tolerance: f64) -> Result<bool, Failure> {
+    pub fn fix_same_parameter(&self, edge: &Edge, tolerance: f64) -> Result<bool, Failure> {
         self.fix_same_parameter_on_face(edge, &Face::default(), tolerance)
     }
 
     /// Limit deviation checks to one face when already same-parameter;
     /// `tool.fix_same_parameter_on_face(&edge, &face, 0.0)?`.
     pub fn fix_same_parameter_on_face(
-        &mut self,
+        &self,
         edge: &Edge,
         face: &Face,
         tolerance: f64,
     ) -> Result<bool, Failure> {
-        self.status = 0;
+        self.reset_status();
         if BRepTool::degenerated(edge)? {
             return repair_degenerated(edge);
         }
@@ -103,7 +103,7 @@ impl ShapeFixEdge {
     }
 
     fn try_parameter_copy(
-        &mut self,
+        &self,
         edge: &Edge,
         tolerance: f64,
         original: &OriginalEdgeTolerances,
@@ -117,14 +117,14 @@ impl ShapeFixEdge {
         }
     }
 
-    fn record_analysis_failure(&mut self, analyzer: &ShapeAnalysisEdge) {
+    fn record_analysis_failure(&self, analyzer: &ShapeAnalysisEdge) {
         if analyzer.status_flag(ShapeExtendStatus::Fail2) {
             self.add_status(ShapeExtendStatus::Fail1);
         }
     }
 
     fn choose_parameter_copy(
-        &mut self,
+        &self,
         edge: &Edge,
         repaired: &Option<Edge>,
         analyzer: &mut ShapeAnalysisEdge,
@@ -148,7 +148,7 @@ impl ShapeFixEdge {
     }
 
     fn finish_parameter_repair(
-        &mut self,
+        &self,
         edge: &Edge,
         original: &OriginalEdgeTolerances,
         repaired: bool,

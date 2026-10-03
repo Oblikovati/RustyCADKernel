@@ -60,7 +60,7 @@ fn periodic_first_seam_curve_shifts_second_curve_source_range() {
 }
 
 fn repair_range(edge: &Edge) {
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     assert!(!fixer.fix_same_parameter(edge, 0.0).unwrap());
     assert!(BRepTool::same_range(edge).unwrap());
     assert!(BRepTool::same_parameter(edge).unwrap());

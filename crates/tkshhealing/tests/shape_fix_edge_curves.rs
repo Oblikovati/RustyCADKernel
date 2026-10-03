@@ -23,7 +23,7 @@ fn projector_is_shared_and_initialized() {
 #[test]
 fn removing_inconsistent_curves_keeps_native_ok_status() {
     let (edge, face) = cylinder_fixture(false);
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     assert!(!fixer.fix_remove_pcurve(&edge, &face).unwrap());
     assert!(!fixer.fix_remove_curve_3d(&edge).unwrap());
     let vertex = ShapeAnalysisEdge::new().first_vertex(&edge);
@@ -45,7 +45,7 @@ fn removing_inconsistent_curves_keeps_native_ok_status() {
 #[test]
 fn rebuilding_missing_curve_sets_done_or_fail() {
     let (edge, face) = cylinder_fixture(false);
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     assert!(!fixer.fix_add_curve_3d(&edge).unwrap());
     ShapeBuildEdge.remove_curve_3d(&edge).unwrap();
     assert!(fixer.fix_add_curve_3d(&edge).unwrap());
@@ -59,10 +59,21 @@ fn rebuilding_missing_curve_sets_done_or_fail() {
 }
 
 #[test]
+fn cloned_handle_observes_shared_status_after_curve_repair() {
+    let (edge, _) = cylinder_fixture(false);
+    ShapeBuildEdge.remove_curve_3d(&edge).unwrap();
+    let fixer = Handle::new(ShapeFixEdge::new());
+    let alias = fixer.clone();
+
+    assert!(fixer.get().unwrap().fix_add_curve_3d(&edge).unwrap());
+    assert!(alias.get().unwrap().status_flag(ShapeExtendStatus::Done1));
+}
+
+#[test]
 fn reversed_cylinder_pcurve_is_mutated_in_place_and_clears_range_flags() {
     let (edge, face) = cylinder_fixture(true);
     let curve = BRepTool::curve_on_face(&edge, &face).unwrap().pcurve;
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     assert!(fixer.fix_reversed_2d(&edge, &face).unwrap());
     assert!(fixer.status_flag(ShapeExtendStatus::Done1));
     let repaired = BRepTool::curve_on_face(&edge, &face).unwrap();
@@ -78,7 +89,7 @@ fn reversed_cylinder_pcurve_is_mutated_in_place_and_clears_range_flags() {
 fn missing_pcurve_reports_native_reversal_failure() {
     let (edge, face) = cylinder_fixture(false);
     ShapeBuildEdge.remove_pcurve_on_face(&edge, &face).unwrap();
-    let mut fixer = ShapeFixEdge::new();
+    let fixer = ShapeFixEdge::new();
     assert!(!fixer.fix_reversed_2d(&edge, &face).unwrap());
     assert!(fixer.status_flag(ShapeExtendStatus::Fail1));
 }

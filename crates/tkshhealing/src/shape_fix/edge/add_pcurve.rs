@@ -23,7 +23,7 @@ struct PCurveRepair<'a> {
 impl ShapeFixEdge {
     /// Project missing p-curves on a face; `tool.fix_add_pcurve(&edge, &face, false, 0.0)?`.
     pub fn fix_add_pcurve(
-        &mut self,
+        &self,
         edge: &Edge,
         face: &Face,
         seam: bool,
@@ -35,7 +35,7 @@ impl ShapeFixEdge {
 
     /// Project on a located surface; `tool.fix_add_pcurve_on_surface(&edge, &surface, &location, false, 0.0)?`.
     pub fn fix_add_pcurve_on_surface(
-        &mut self,
+        &self,
         edge: &Edge,
         surface: &Handle<dyn GeomSurface>,
         location: &Location,
@@ -53,7 +53,7 @@ impl ShapeFixEdge {
 
     /// Reuse a caller's surface analysis; `tool.fix_add_pcurve_on_face_with_analysis(&edge, &face, false, &analysis, 0.0)?`.
     pub fn fix_add_pcurve_on_face_with_analysis(
-        &mut self,
+        &self,
         edge: &Edge,
         face: &Face,
         seam: bool,
@@ -67,7 +67,7 @@ impl ShapeFixEdge {
     /// Use explicit placement and surface analysis;
     /// `tool.fix_add_pcurve_with_analysis(&edge, &surface, &location, false, &analysis, 0.0)?`.
     pub fn fix_add_pcurve_with_analysis(
-        &mut self,
+        &self,
         edge: &Edge,
         surface: &Handle<dyn GeomSurface>,
         location: &Location,
@@ -75,7 +75,7 @@ impl ShapeFixEdge {
         analysis: &Handle<ShapeAnalysisSurface>,
         precision: f64,
     ) -> Result<bool, Failure> {
-        self.status = 0;
+        self.reset_status();
         let repair = PCurveRepair {
             edge,
             surface,
@@ -96,7 +96,7 @@ impl ShapeFixEdge {
         Ok(true)
     }
 
-    fn project_missing_pcurve(&mut self, repair: &PCurveRepair<'_>) -> Result<bool, Failure> {
+    fn project_missing_pcurve(&self, repair: &PCurveRepair<'_>) -> Result<bool, Failure> {
         let precision = if repair.precision > 0.0 {
             repair.precision
         } else {
@@ -122,7 +122,7 @@ impl ShapeFixEdge {
     }
 
     fn project_or_reuse(
-        &mut self,
+        &self,
         repair: &PCurveRepair<'_>,
         curve: &Handle<dyn GeomCurve>,
         range: (f64, f64),
