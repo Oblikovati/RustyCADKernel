@@ -1,4 +1,6 @@
+use super::assemble::append_leftover_roots;
 use super::make_faces_on_patch;
+use super::roots::manifold_wire;
 use crate::shape_build::ShapeBuildReShape;
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topods::{Builder, Edge, Face, Shape, ShapeIterator, Wire};
@@ -71,6 +73,33 @@ fn contained_pcurve_loop_is_assigned_as_a_hole() {
     .unwrap();
     assert_eq!(faces.len(), 1);
     assert_eq!(count_wires(&faces[0]), 2);
+}
+
+#[test]
+fn leftover_manifold_wire_is_promoted_to_a_root_and_cleared() {
+    let mut loops = Sequence::default();
+    loops.append(square_wire().into_shape());
+    let mut roots = Vec::new();
+
+    append_leftover_roots(&mut loops, &mut roots).unwrap();
+
+    assert_eq!(roots.len(), 1);
+    assert_eq!(loops.len(), 0);
+}
+
+#[test]
+fn manifold_wire_with_only_internal_edges_is_skipped() {
+    let mut edge =
+        BRepBuilderAPIMakeEdge::from_points(Point3::default(), Point3::new(1.0, 0.0, 0.0))
+            .unwrap()
+            .edge()
+            .unwrap();
+    edge.set_orientation(rustycad_tkg3d::top_abs::Orientation::Internal);
+    let mut wire = Wire::default();
+    Builder.make_wire(&mut wire);
+    Builder.add(&mut wire, &edge.into_shape()).unwrap();
+
+    assert!(manifold_wire(&wire.into_shape()).unwrap().is_none());
 }
 
 fn plane_surface() -> Handle<dyn GeomSurface> {
