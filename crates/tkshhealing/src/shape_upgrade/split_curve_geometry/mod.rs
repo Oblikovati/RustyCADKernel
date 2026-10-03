@@ -104,6 +104,9 @@ impl<G: CurveGeometry + 'static> CurveSplitKernel<G> {
         SplitCurve::init(self, first, last);
         Ok(())
     }
+    pub(super) fn source_curve(&self) -> Handle<G::Curve> {
+        self.state.read().curve.clone()
+    }
     pub(super) fn curves(&self) -> CurveArray<G> {
         self.state.read().result.clone()
     }
