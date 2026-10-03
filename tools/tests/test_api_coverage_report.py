@@ -1,10 +1,13 @@
 """Focused invariants for the no-fuzzy API crosswalk."""
 
+import json
 import unittest
+from pathlib import Path
 from api_inventory.inputs import JSONObject
 
 from api_coverage_report import cpp_candidates, report_document
 from api_coverage_report import declaration_toolkits, rust_inventory_gaps
+from api_crosswalk import rust_candidates, rust_crates
 from api_identity import parse_upstream_id
 
 HEADER_PATH = "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_Surface.hxx"
@@ -123,7 +126,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
             [public, hidden],
             cpp_manifest(),
             source_headers(),
-            rust_inventory(["crate::geom_abs::convert"]),
+            rust_inventory(["rustycad_tkmath::geom_abs::convert"]),
             parity,
         )
         self.assertEqual(report["crosswalk_rows"][0]["cpp_status"], "unique")
@@ -136,7 +139,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
             [hidden],
             cpp_manifest(),
             source_headers(),
-            rust_inventory(["crate::geom_abs::convert"]),
+            rust_inventory(["rustycad_tkmath::geom_abs::convert"]),
             {
                 "api": [
                     api_row(
@@ -149,7 +152,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
         self.assertEqual(report["crosswalk_rows"][0]["resolution"], "missing_cpp")
 
     def test_rust_target_without_pinned_source_cannot_receive_credit(self) -> None:
-        rust = rust_inventory(["crate::geom_abs::convert"])
+        rust = rust_inventory(["rustycad_tkmath::geom_abs::convert"])
         item = rust["crates"][0]["declarations"][0]
         item["source_status"] = "source_file_missing"
         item["source_sha256"] = None
@@ -173,6 +176,18 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
         self.assertEqual(
             report["crosswalk_rows"][0]["resolution"], "unverifiable_rust_source"
         )
+
+    def test_real_normalized_inventory_path_is_found_with_source_evidence(self) -> None:
+        fixture_path = (
+            Path(__file__).parent / "fixtures/rust-api-inventory-cmath-asinh.json"
+        )
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        rust = rust_crates({"crates": [fixture]})
+
+        status, candidates = rust_candidates("rustycad_cmath::asinh", rust)
+
+        self.assertEqual(status, "unique")
+        self.assertEqual(candidates[0]["source_file"], "crates/cmath/src/lib.rs")
 
     def test_template_commas_and_operator_names_parse_without_guessing(self) -> None:
         template = parse_upstream_id(
@@ -203,7 +218,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
             [declaration],
             cpp_manifest(),
             source_headers(),
-            rust_inventory(["crate::geom_abs::unrelated"]),
+            rust_inventory(["rustycad_tkmath::geom_abs::unrelated"]),
             parity,
         )
         states = {
@@ -236,7 +251,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
             [declaration],
             cpp_manifest(),
             source_headers(),
-            rust_inventory(["crate::geom_abs::convert"]),
+            rust_inventory(["rustycad_tkmath::geom_abs::convert"]),
             parity,
         )
         states = {
@@ -258,7 +273,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
             [declaration],
             cpp_manifest(False),
             source_headers(),
-            rust_inventory(["crate::geom_abs::convert"]),
+            rust_inventory(["rustycad_tkmath::geom_abs::convert"]),
             parity,
         )
         self.assertFalse(report["configuration_matrix_complete"])
@@ -269,7 +284,7 @@ class ApiCoverageCrosswalkTest(unittest.TestCase):
     def test_unclassified_rust_items_and_cpp_unsupported_records_are_gaps(self) -> None:
         declaration = cpp_decl("d1", "GeomAbs::Convert", ["int"])
         manifest = {**cpp_manifest(), "unsupported_records": 2}
-        rust = rust_inventory(["crate::geom_abs::convert"])
+        rust = rust_inventory(["rustycad_tkmath::geom_abs::convert"])
         rust["crates"][0]["unclassified_kinds"] = {"counts": {"new_kind": 1}}
         report = report_document(
             [declaration],
