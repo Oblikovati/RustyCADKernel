@@ -1,10 +1,13 @@
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepBuilderAPI_MakeWire.hxx>
+#include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRep_Tool.hxx>
+#include <BRepCheck_Analyzer.hxx>
 #include <ShapeUpgrade_UnifySameDomain.hxx>
 #include <TopExp.hxx>
 #include <TopExp_Explorer.hxx>
 #include <TopoDS.hxx>
+#include <TopoDS_Face.hxx>
 #include <TopoDS_Wire.hxx>
 #include <gp_Pnt.hxx>
 
@@ -76,6 +79,24 @@ static void runCase(const char* name, const TopoDS_Wire& wire, bool unifyEdges) 
   }
 }
 
+static void runPlanarFaceCase() {
+  BRepBuilderAPI_MakeWire wireBuilder;
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(1, 0, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(1, 0, 0), gp_Pnt(2, 0, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 0, 0), gp_Pnt(2, 2, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 2, 0), gp_Pnt(0, 2, 0)));
+  wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 2, 0), gp_Pnt(0, 0, 0)));
+  TopoDS_Face face = BRepBuilderAPI_MakeFace(wireBuilder.Wire(), true);
+  ShapeUpgrade_UnifySameDomain unifier(face, true, false, false);
+  unifier.Build();
+  const TopoDS_Shape result = unifier.Shape();
+  int faceCount = 0, edgeCount = 0;
+  for (TopExp_Explorer explorer(result, TopAbs_FACE); explorer.More(); explorer.Next()) ++faceCount;
+  for (TopExp_Explorer explorer(result, TopAbs_EDGE); explorer.More(); explorer.Next()) ++edgeCount;
+  std::cout << "planar_face faces " << faceCount << " edges " << edgeCount << " valid "
+            << BRepCheck_Analyzer(result, true).IsValid() << '\n';
+}
+
 int main() {
   runCase("linear", makeWire(gp_Pnt(2, 0, 0)), true);
   runCase("linear_three", makeThreeLineWire(), true);
@@ -83,4 +104,5 @@ int main() {
   runCase("reversed_occurrences", makeReversedOccurrencesWire(), true);
   runCase("disabled", makeWire(gp_Pnt(2, 0, 0)), false);
   runCase("perpendicular", makeWire(gp_Pnt(1, 1, 0)), true);
+  runPlanarFaceCase();
 }
