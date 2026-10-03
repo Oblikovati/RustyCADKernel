@@ -17,6 +17,7 @@ mod curve_gaps;
 mod degenerated;
 mod edge_curves;
 mod gaps;
+mod intersections;
 mod lacking;
 mod order;
 mod seam;
