@@ -5,7 +5,7 @@
 mod context;
 #[path = "wire_lacking_types.rs"]
 mod types;
-mod wire_lacking_bending;
+pub(super) mod wire_lacking_bending;
 
 use super::{FixRoot, ShapeFixWire};
 use crate::shape_analysis::ShapeAnalysisWire;
@@ -25,7 +25,7 @@ use types::{
 impl ShapeFixWire {
     /// `FixLacking(num, force)`: repair one analyzed p-curve gap.
     /// Example: `let repaired = fixer.fix_lacking_at(2, false)?;`.
-    /// The bend branch still lacks OCCT's self/intersection follow-up repairs.
+    /// A successful bend runs both self-edge checks and the adjacent-edge repair.
     pub fn fix_lacking_at(&self, index: i32, force: bool) -> Result<bool, Failure> {
         self.set_last_fix_status(ShapeExtendStatus::Ok);
         let analyzer = self.analyzer()?;
@@ -43,7 +43,7 @@ impl ShapeFixWire {
 
     /// `FixLacking(force)`: process all eligible adjacent edge pairs.
     /// Example: `let changed = fixer.fix_lacking(false)?;`.
-    /// The bend branch still lacks OCCT's self/intersection follow-up repairs.
+    /// The bend branch includes OCCT's self-edge and adjacent-edge follow-ups.
     pub fn fix_lacking(&self, force: bool) -> Result<bool, Failure> {
         self.state.write().lacking_status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
         let analyzer = self.analyzer()?;
@@ -68,11 +68,16 @@ impl ShapeFixWire {
     ) -> Result<bool, Failure> {
         let pair = LackingPair::load(analyzer, index, first, last)?;
         let needed = analyzer.max_distance_3d();
+        let initial_tolerance = pair.vertex_tolerance()?;
         let candidates =
             self.bending_candidates(&pair.previous, &pair.current, &pair.face, first, last)?;
         if self.bend_is_preferred(&pair, candidates.as_ref(), needed)? {
             let (left, right) = candidates.as_ref().expect("preferred bend has candidates");
-            return self.apply_bent_pcurves(&pair.previous, &pair.current, &pair.face, left, right);
+            self.apply_lacking_bend(&pair, left, right)?;
+            if self.bend_keeps_later_tolerance_increase(initial_tolerance, left, right, needed)? {
+                self.increase_lacking_tolerance(&pair.first_vertex, &pair.last_vertex, needed)?;
+            }
+            return Ok(true);
         }
         self.repair_pair_without_bend(&pair, analyzer, candidates.as_ref(), needed)
     }
@@ -93,6 +98,20 @@ impl ShapeFixWire {
             return Ok(true);
         }
         Ok(needed < self.precision() && left.tolerance < needed && right.tolerance < needed)
+    }
+
+    fn apply_lacking_bend(
+        &self,
+        pair: &LackingPair,
+        left: &wire_lacking_bending::BentPCurve,
+        right: &wire_lacking_bending::BentPCurve,
+    ) -> Result<bool, Failure> {
+        self.apply_bent_pcurves(&pair.previous, &pair.current, &pair.face, left, right)?;
+        self.fix_self_intersecting_edge(pair.previous_index)?;
+        self.fix_self_intersecting_edge(pair.current_index)?;
+        self.fix_intersecting_edges_at(pair.current_index)?;
+        self.or_last_fix_status(ShapeExtendStatus::Done5);
+        Ok(true)
     }
 
     fn bent_curves_improve_pair(
@@ -139,7 +158,7 @@ impl ShapeFixWire {
             && left.tolerance < needed
             && right.tolerance < needed
         {
-            return self.apply_bent_pcurves(&pair.previous, &pair.current, &pair.face, left, right);
+            return self.apply_lacking_bend(pair, left, right);
         }
         self.increase_lacking_tolerance(&pair.first_vertex, &pair.last_vertex, needed)
     }
@@ -391,6 +410,18 @@ impl ShapeFixWire {
         rustycad_tkbrep::topods::edge(&shape)
     }
 
+    fn bend_keeps_later_tolerance_increase(
+        &self,
+        tolerance: f64,
+        left: &wire_lacking_bending::BentPCurve,
+        right: &wire_lacking_bending::BentPCurve,
+        needed: f64,
+    ) -> Result<bool, Failure> {
+        Ok(needed > tolerance
+            && needed < self.max_tolerance()
+            && !(left.tolerance < needed && right.tolerance < needed))
+    }
+
     fn increase_lacking_tolerance(
         &self,
         first: &Vertex,
@@ -400,7 +431,7 @@ impl ShapeFixWire {
         let builder = BRepBuilder::default();
         builder.update_vertex_tolerance(first, 1.001 * needed)?;
         builder.update_vertex_tolerance(last, 1.001 * needed)?;
-        self.set_last_fix_status(ShapeExtendStatus::Done1);
+        self.or_last_fix_status(ShapeExtendStatus::Done1);
         Ok(true)
     }
 

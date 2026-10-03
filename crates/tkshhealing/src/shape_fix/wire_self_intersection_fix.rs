@@ -18,23 +18,133 @@ struct SelfIntersectionRepair {
 }
 
 impl ShapeFixWire {
-    /// `FixSelfIntersectingEdge(num)`: raise a vertex tolerance to cover crossings.
+    /// `FixSelfIntersectingEdge(num)`: remove a detected p-curve loop or raise its
+    /// endpoint tolerance; mode one inserts a midpoint vertex and splits the edge.
     /// Example: `let fixed = fixer.fix_self_intersecting_edge(1)?;`.
-    /// Geometric loop removal and the mode-1 split branch remain unsupported.
     pub(super) fn fix_self_intersecting_edge(&self, index: i32) -> Result<bool, Failure> {
         self.set_last_fix_status(ShapeExtendStatus::Ok);
         let analyzer = self.analyzer()?;
         if !analyzer.is_ready() {
             return Ok(false);
         }
-        let (_points_2d, points_3d) = self.analyze_self_intersections(&analyzer, index)?;
+        let (points_2d, points_3d) = self.analyze_self_intersections(&analyzer, index)?;
         self.transfer_self_intersection_failure(&analyzer);
         if !analyzer.last_check_status(ShapeExtendStatus::Done) {
             return Ok(false);
         }
         let mut repair = SelfIntersectionRepair::load(&analyzer, index)?;
-        self.raise_intersection_tolerances(&mut repair, &points_3d)?;
+        if self.remove_loop_mode() == 1 {
+            return self.split_self_intersection(&analyzer, index, &points_2d);
+        }
+        self.repair_intersections(&analyzer, index, &mut repair, points_2d, points_3d)?;
         Ok(self.last_fix_status(ShapeExtendStatus::Done))
+    }
+
+    fn repair_intersections(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        index: i32,
+        repair: &mut SelfIntersectionRepair,
+        mut points_2d: Sequence<IntersectionPoint>,
+        mut points_3d: Sequence<Point3>,
+    ) -> Result<(), Failure> {
+        self.repeat_loop_removal(analyzer, index, repair, &mut points_2d, &mut points_3d)
+    }
+
+    fn repeat_loop_removal(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        index: i32,
+        repair: &mut SelfIntersectionRepair,
+        points_2d: &mut Sequence<IntersectionPoint>,
+        points_3d: &mut Sequence<Point3>,
+    ) -> Result<(), Failure> {
+        if self.remove_loop_mode() >= 1 {
+            return self.raise_intersection_tolerances(repair, points_3d);
+        }
+        for _ in 0..30 {
+            if !self.repair_intersection_pass(analyzer, index, repair, points_2d, points_3d)? {
+                break;
+            }
+            if !self.refresh_intersections(analyzer, index, points_2d, points_3d)? {
+                break;
+            }
+        }
+        Ok(())
+    }
+
+    fn repair_intersection_pass(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        index: i32,
+        repair: &mut SelfIntersectionRepair,
+        points_2d: &mut Sequence<IntersectionPoint>,
+        points_3d: &mut Sequence<Point3>,
+    ) -> Result<bool, Failure> {
+        let edge_index = SelfIntersectionRepair::edge_index(analyzer, index)?;
+        let edge = analyzer.wire_data().edge(edge_index)?;
+        let face = analyzer.face();
+        let mut removed = false;
+        let mut previous = (0.0, 0.0);
+        for point_index in 1..=points_2d.len() {
+            let point_2d = *points_2d.value(point_index)?;
+            let point_3d = *points_3d.value(point_index)?;
+            if self.try_remove_intersection(&edge, &face, &point_2d, point_3d, repair, previous)? {
+                previous = (point_2d.param_on_first(), point_2d.param_on_second());
+                removed = true;
+                continue;
+            }
+            self.raise_nearest_vertex_tolerance(repair, point_3d)?;
+        }
+        Ok(removed)
+    }
+
+    fn try_remove_intersection(
+        &self,
+        edge: &rustycad_tkbrep::topods::Edge,
+        face: &rustycad_tkbrep::topods::Face,
+        intersection: &IntersectionPoint,
+        point: Point3,
+        repair: &SelfIntersectionRepair,
+        previous: (f64, f64),
+    ) -> Result<bool, Failure> {
+        if !self.geometry_mode()
+            || SelfIntersectionGap::measure(repair, point).already_covered(repair)
+        {
+            return Ok(false);
+        }
+        let current = (
+            intersection.param_on_first(),
+            intersection.param_on_second(),
+        );
+        if current.0 > previous.0 && current.1 < previous.1 {
+            return Ok(false);
+        }
+        let tolerance = SelfIntersectionGap::measure(repair, point)
+            .required_tolerance()
+            .max(self.precision())
+            .min(self.max_tolerance());
+        self.try_remove_loop(
+            edge,
+            face,
+            intersection,
+            0.1,
+            tolerance,
+            self.remove_loop_mode() == 0,
+        )
+    }
+
+    fn refresh_intersections(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        index: i32,
+        points_2d: &mut Sequence<IntersectionPoint>,
+        points_3d: &mut Sequence<Point3>,
+    ) -> Result<bool, Failure> {
+        points_2d.clear(None);
+        points_3d.clear(None);
+        analyzer.check_self_intersecting_edge_into(index, points_2d, points_3d)?;
+        Ok(analyzer.last_check_status(ShapeExtendStatus::Done))
     }
 
     fn analyze_self_intersections(
@@ -86,9 +196,14 @@ impl ShapeFixWire {
 }
 
 impl SelfIntersectionRepair {
+    fn edge_index(analyzer: &ShapeAnalysisWire, index: i32) -> Result<i32, Failure> {
+        let wire: Handle<ShapeExtendWireData> = analyzer.wire_data();
+        Ok(if index > 0 { index } else { wire.nb_edges() })
+    }
+
     fn load(analyzer: &ShapeAnalysisWire, index: i32) -> Result<Self, Failure> {
         let wire: Handle<ShapeExtendWireData> = analyzer.wire_data();
-        let edge_index = if index > 0 { index } else { wire.nb_edges() };
+        let edge_index = Self::edge_index(analyzer, index)?;
         let edge = wire.edge(edge_index)?;
         let analysis = ShapeAnalysisEdge::new();
         let (first_vertex, last_vertex) =
@@ -143,105 +258,5 @@ impl SelfIntersectionGap {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::shape_analysis::ShapeAnalysisWire;
-    use crate::shape_extend::{ShapeExtendStatus, ShapeExtendWireData};
-    use rustycad_tkbrep::topods::{Builder, Edge, Face, Vertex};
-    use rustycad_tkernel::ncollection::Array1;
-    use rustycad_tkg2d::geom2d::{Geom2dBezierCurve, Geom2dCurve};
-    use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
-    use rustycad_tkg3d::top_abs::Orientation;
-    use rustycad_tkmath::gp::{Axis3, Point2, Point3};
-
-    const EXPECTED: &str =
-        include_str!("../../../../tools/oracle/tkshhealing_wire_self_intersection.expected");
-
-    #[test]
-    fn tolerance_repair_matches_native_after_geometry_removal_is_disabled() {
-        let (analyzer, first, last) = loop_fixture();
-        let fixer = ShapeFixWire::new();
-        fixer.init(&analyzer);
-        fixer.set_geometry_mode(false);
-        fixer.set_max_tolerance(2.0);
-        assert!(fixer.fix_self_intersecting_edge(1).unwrap());
-        assert!(fixer.last_fix_status(ShapeExtendStatus::Done1));
-        assert!(!fixer.last_fix_status(ShapeExtendStatus::Fail2));
-        assert_close(
-            BRepTool::vertex_tolerance(&first).unwrap(),
-            expected("tol1"),
-        );
-        assert_close(BRepTool::vertex_tolerance(&last).unwrap(), expected("tol2"));
-    }
-
-    fn loop_fixture() -> (Handle<ShapeAnalysisWire>, Vertex, Vertex) {
-        let face = planar_face();
-        let (first, last) = loop_vertices();
-        let edge = loop_edge(&face, &first, &last);
-        let wire = Handle::new(ShapeExtendWireData::new());
-        wire.add_edge(&edge, 0).unwrap();
-        let analyzer = ShapeAnalysisWire::from_wire_data(&wire, &face, 1e-7).unwrap();
-        (Handle::new(analyzer), first, last)
-    }
-
-    fn loop_vertices() -> (Vertex, Vertex) {
-        let builder = BRepBuilder::default();
-        let mut first = Vertex::default();
-        let mut last = Vertex::default();
-        builder
-            .make_vertex_at(&mut first, Point3::default(), 1e-7)
-            .unwrap();
-        builder
-            .make_vertex_at(&mut last, Point3::new(1.0, 0.0, 0.0), 1e-7)
-            .unwrap();
-        (first, last)
-    }
-
-    fn planar_face() -> Face {
-        let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
-        let mut face = Face::default();
-        BRepBuilder::default()
-            .make_face_on_surface(&mut face, &surface, 1e-7)
-            .unwrap();
-        face
-    }
-
-    fn loop_edge(face: &Face, first: &Vertex, last: &Vertex) -> Edge {
-        let builder = BRepBuilder::default();
-        let mut edge = Edge::default();
-        builder.make_edge(&mut edge).unwrap();
-        Builder
-            .add(&mut edge, &first.oriented(Orientation::Forward))
-            .unwrap();
-        Builder
-            .add(&mut edge, &last.oriented(Orientation::Reversed))
-            .unwrap();
-        let poles = [
-            Point2::new(0.0, 0.0),
-            Point2::new(3.0, 3.0),
-            Point2::new(-3.0, 3.0),
-            Point2::new(1.0, 0.0),
-        ];
-        let curve: Handle<dyn Geom2dCurve> =
-            Handle::new(Geom2dBezierCurve::new(&Array1::from_shared(&poles, 1)).unwrap()).cast();
-        builder
-            .update_edge_pcurve_on_face(&edge, &curve, face, 1e-7)
-            .unwrap();
-        builder.range_on_face(&edge, face, 0.0, 1.0).unwrap();
-        edge
-    }
-
-    fn expected(label: &str) -> f64 {
-        let row = EXPECTED
-            .lines()
-            .find(|line| line.starts_with("fix "))
-            .unwrap();
-        let mut values = row.split_whitespace();
-        while values.next() != Some(label) {}
-        values.next().unwrap().parse().unwrap()
-    }
-
-    fn assert_close(actual: f64, expected: f64) {
-        assert!((actual - expected).abs() < 1e-14, "{actual} != {expected}");
-    }
-}
+#[path = "wire_self_intersection_fix_tests.rs"]
+mod tests;
