@@ -679,7 +679,7 @@
       "upstream_id": "MathPoly::PolyResult::operator[](size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
-      "rust_item": "<rustycad_tkmath::math_poly::PolyResult as Index<usize>>::index",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::<core::ops::index::Index>::index",
       "status": "implemented",
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
@@ -12255,7 +12255,7 @@
       "upstream_id": "gp_XY::Divide(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xy as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12263,7 +12263,7 @@
       "upstream_id": "gp_XY::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xy as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12271,7 +12271,7 @@
       "upstream_id": "gp_XY::Divided(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xy as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12279,7 +12279,7 @@
       "upstream_id": "gp_XY::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xy as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12711,7 +12711,7 @@
       "upstream_id": "gp_Mat2d::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Matrix2 as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12727,7 +12727,7 @@
       "upstream_id": "gp_Mat2d::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Matrix2 as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12807,7 +12807,7 @@
       "upstream_id": "gp_Mat2d::operator*=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Matrix2 as MulAssign<f64>>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13855,7 +13855,7 @@
       "upstream_id": "gp_Vec2d::Divide",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector2 as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13863,7 +13863,7 @@
       "upstream_id": "gp_Vec2d::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector2 as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13871,7 +13871,7 @@
       "upstream_id": "gp_Vec2d::Divided",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector2 as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13879,7 +13879,7 @@
       "upstream_id": "gp_Vec2d::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector2 as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13911,7 +13911,7 @@
       "upstream_id": "gp_Vec2d::Multiply",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector2 as MulAssign<f64>>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13919,7 +13919,7 @@
       "upstream_id": "gp_Vec2d::operator*=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector2 as MulAssign<f64>>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -16951,7 +16951,7 @@
       "upstream_id": "gp_XYZ::Divide(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xyz as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -16959,7 +16959,7 @@
       "upstream_id": "gp_XYZ::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xyz as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -16967,7 +16967,7 @@
       "upstream_id": "gp_XYZ::Divided(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xyz as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -16975,7 +16975,7 @@
       "upstream_id": "gp_XYZ::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Xyz as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -21335,7 +21335,7 @@
       "upstream_id": "gp_Vec::Multiply",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector3 as MulAssign<f64>>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -21343,7 +21343,7 @@
       "upstream_id": "gp_Vec::operator*=",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector3 as MulAssign<f64>>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -21367,7 +21367,7 @@
       "upstream_id": "gp_Vec::Divide",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector3 as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -21375,7 +21375,7 @@
       "upstream_id": "gp_Vec::operator/=",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector3 as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -21383,7 +21383,7 @@
       "upstream_id": "gp_Vec::Divided",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector3 as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -21391,7 +21391,7 @@
       "upstream_id": "gp_Vec::operator/",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Vector3 as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -31727,7 +31727,7 @@
       "upstream_id": "MathUtils::PolyResult::operator[](size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::PolyResult as Index<usize>>::index",
+      "rust_item": "rustycad_tkmath::math_utils::PolyResult::<core::ops::index::Index>::index",
       "status": "implemented",
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
@@ -34743,7 +34743,7 @@
       "upstream_id": "MathRoot::MultipleResult::operator[](size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<rustycad_tkmath::math_root::MultipleResult as Index<usize>>::index",
+      "rust_item": "rustycad_tkmath::math_root::MultipleResult::<core::ops::index::Index>::index",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -41455,7 +41455,7 @@
       "upstream_id": "math_DoubleTab::operator()(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
-      "rust_item": "<rustycad_tkmath::math::DoubleTab as Index<(i32, i32)>>::index",
+      "rust_item": "rustycad_tkmath::math::DoubleTab::<core::ops::index::Index>::index",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
@@ -42847,7 +42847,7 @@
       "upstream_id": "math_Matrix::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<rustycad_tkmath::math::Matrix as DivAssign<f64>>::div_assign",
+      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
@@ -42879,7 +42879,7 @@
       "upstream_id": "math_Matrix::operator+=(const math_Matrix&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<rustycad_tkmath::math::Matrix as AddAssign<&Matrix>>::add_assign",
+      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::arith::AddAssign>::add_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
@@ -42919,7 +42919,7 @@
       "upstream_id": "math_Matrix::operator-=(const math_Matrix&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<rustycad_tkmath::math::Matrix as SubAssign<&Matrix>>::sub_assign",
+      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::arith::SubAssign>::sub_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
@@ -43079,7 +43079,7 @@
       "upstream_id": "math_Matrix::operator()(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<rustycad_tkmath::math::Matrix as Index<(i32, i32)>>::index",
+      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::index::Index>::index",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
@@ -44351,7 +44351,7 @@
       "upstream_id": "math_VectorBase::operator*=(TheItemType)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<rustycad_tkmath::math::VectorBase as MulAssign<T>>::mul_assign",
+      "rust_item": "rustycad_tkmath::math::VectorBase::<core::ops::arith::MulAssign>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
@@ -44391,7 +44391,7 @@
       "upstream_id": "math_VectorBase::operator/=(TheItemType)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<rustycad_tkmath::math::VectorBase as DivAssign<T>>::div_assign",
+      "rust_item": "rustycad_tkmath::math::VectorBase::<core::ops::arith::DivAssign>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
@@ -44511,7 +44511,7 @@
       "upstream_id": "math_VectorBase::operator()(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<rustycad_tkmath::math::VectorBase as Index<i32>>::index",
+      "rust_item": "rustycad_tkmath::math::VectorBase::<core::ops::index::Index>::index",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
