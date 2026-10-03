@@ -15,6 +15,7 @@ from api_inventory.inputs import (
     text_field,
     verify_sources,
 )
+from api_inventory.dependencies import header_tree_fingerprint
 from api_inventory.merge import (
     InventoryRecords,
     consume_capture,
@@ -55,6 +56,7 @@ def inventory_tables(
         "diagnostics": records.diagnostics,
         "unsupported": records.unsupported,
         "skipped-ranges": records.skipped_ranges,
+        "compiler-summaries": records.summaries,
         "included-files": included_file_hashes(records, source),
     }
 
@@ -81,6 +83,20 @@ def export_inventory(
     )
 
 
+def verify_recorded_sdks(inputs: JSONObject) -> None:
+    """Reject changed native SDK files; e.g. `verify_recorded_sdks(inputs)`."""
+    for category in ("sdk_headers", "external_headers"):
+        for row in object_rows(inputs.get(category), category):
+            actual = header_tree_fingerprint(pathlib.Path(text_field(row, "root")))
+            if row != actual:
+                raise ValueError(
+                    f"{category} {row!r}: expected unchanged SDK tree, got {actual!r}"
+                )
+    for library in object_rows(inputs.get("compiler_libraries"), "compiler libraries"):
+        if digest(pathlib.Path(text_field(library, "path"))) != library.get("sha256"):
+            raise ValueError(f"compiler library {library!r}: expected recorded SHA256")
+
+
 def verify_capture_inputs(inputs: JSONObject) -> pathlib.Path:
     """Reject stale recorded files and source revision; e.g. `verify_capture_inputs(inputs)`."""
     paths = inputs.get("file_inputs")
@@ -91,19 +107,25 @@ def verify_capture_inputs(inputs: JSONObject) -> pathlib.Path:
             f"{key}_sha256"
         ):
             raise ValueError(f"{key} input {value!r}: expected recorded SHA256")
+    verify_recorded_sdks(inputs)
     source = pathlib.Path(text_field(inputs, "source"))
     verify_sources(source, read_object(pathlib.Path(text_field(paths, "manifest"))))
     return source
 
 
-def main() -> None:
-    """Merge one immutable capture; e.g. `merge_occt_inventory.py --capture target/api-proof/occt-inventory`."""
+def arguments() -> argparse.Namespace:
+    """Read merger paths; e.g. `merge_occt_inventory.py --help`."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--capture", type=pathlib.Path, required=True)
     parser.add_argument(
         "--output", type=pathlib.Path, default=ROOT / "porting/api-inventory"
     )
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def main() -> None:
+    """Merge immutable evidence; e.g. `merge_occt_inventory.py --capture target/api-proof/occt-inventory`."""
+    args = arguments()
     capture = read_object(args.capture / "capture-manifest.json")
     inputs = capture["inputs"]
     if not isinstance(inputs, dict) or not isinstance(inputs.get("source"), str):

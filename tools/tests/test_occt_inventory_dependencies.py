@@ -11,7 +11,6 @@ from api_inventory.dependencies import (
     compiler_library_fingerprints,
     external_include_fingerprints,
     header_tree_fingerprint,
-    sdk_fingerprints,
 )
 from api_inventory.inputs import digest, toolkit_commands
 

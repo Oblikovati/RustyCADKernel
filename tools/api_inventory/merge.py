@@ -181,6 +181,22 @@ def verify_capture_summary(
         )
 
 
+def preserve_failed_capture(
+    records: InventoryRecords,
+    artifact: pathlib.Path,
+    result: JSONObject,
+    source: pathlib.Path,
+) -> None:
+    """Keep failed-parse diagnostics without granting its partial AST API credit."""
+    capture_diagnostic(records, result, "parse_failed")
+    for event in json_lines(artifact):
+        if event.get("event") in {"diagnostic", "summary"}:
+            normalize_locations(event, source, records.source_aliases)
+            records.diagnostics.append(
+                {**event, "observed_in": result["path"], "failed_parse": True}
+            )
+
+
 def consume_capture(
     records: InventoryRecords,
     result: JSONObject,
@@ -194,7 +210,7 @@ def consume_capture(
             f'{artifact}: expected captured hash {result.get("output_sha256")}'
         )
     if result.get("status") != "parsed":
-        capture_diagnostic(records, result, "parse_failed")
+        preserve_failed_capture(records, artifact, result, source)
         return
     summary_count = len(records.summaries)
     for event in json_lines(artifact):

@@ -1,4 +1,5 @@
 """Exact parsing helpers for the hand-authored C++ API ID format."""
+
 from __future__ import annotations
 
 import re
@@ -56,7 +57,11 @@ def parse_upstream_id(identity: str) -> tuple[str, list[str] | None, str] | None
     closing = matching_paren(text, opening)
     if closing < 0:
         return None
-    return text[:opening].strip(), split_parameters(text[opening + 1:closing]), norm_cpp(text[closing + 1:])
+    return (
+        text[:opening].strip(),
+        split_parameters(text[opening + 1 : closing]),
+        norm_cpp(text[closing + 1 :]),
+    )
 
 
 def leaf_name(qualified_name: str) -> str:

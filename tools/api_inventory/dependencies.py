@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import pathlib
 
-from .inputs import JSONObject, digest
+from .inputs import JSONObject, digest, toolkit_commands
 
 
 def header_tree_fingerprint(root: pathlib.Path) -> JSONObject:
@@ -45,8 +45,6 @@ def external_include_fingerprints(
     database: pathlib.Path, source: pathlib.Path
 ) -> list[JSONObject]:
     """Hash explicit SDK includes beyond system roots, preserving optional dependencies."""
-    from .inputs import toolkit_commands
-
     roots: set[pathlib.Path] = set()
     for _, flags in toolkit_commands(database, source).values():
         for flag in flags:
