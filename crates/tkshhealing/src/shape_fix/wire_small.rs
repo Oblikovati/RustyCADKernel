@@ -101,7 +101,7 @@ impl ShapeFixWire {
     ) -> Result<bool, Failure> {
         let done2 = analyzer.last_check_status(ShapeExtendStatus::Done2);
         if done2 && (lock_vertex || !self.topology_mode()) {
-            self.set_last_fix_status(ShapeExtendStatus::Fail2);
+            self.or_last_fix_status(ShapeExtendStatus::Fail2);
             return Ok(false);
         }
         let wire_data = analyzer.wire_data();
@@ -109,7 +109,7 @@ impl ShapeFixWire {
         self.remove_edge_from_context(&edge)?;
         self.warn_small_edge(&edge);
         wire_data.remove(index)?;
-        self.set_last_fix_status(if done2 {
+        self.or_last_fix_status(if done2 {
             ShapeExtendStatus::Done2
         } else {
             ShapeExtendStatus::Done1
@@ -248,30 +248,69 @@ impl ShapeFixWire {
         pair: ConnectedPair<'_>,
         vertex: &Vertex,
     ) -> Result<(), Failure> {
-        let confused = analyzer.last_check_status(ShapeExtendStatus::Done1);
-        let same_current_endpoints = same_edge_vertices(pair.current);
+        if pair.wire_data.nb_edges() < 2 {
+            return self.rebuild_single_edge(pair, vertex);
+        }
         if self.topology_mode() && is_free(pair.previous) && is_free(pair.current) {
-            edit_edge_vertex(
+            return self.edit_connected_edges(analyzer, pair, vertex);
+        }
+        self.copy_connected_edges(analyzer, pair, vertex)
+    }
+
+    fn rebuild_single_edge(&self, pair: ConnectedPair<'_>, vertex: &Vertex) -> Result<(), Failure> {
+        if self.topology_mode() && is_free(pair.current) {
+            remove_edge_vertices(pair.current)?;
+            add_edge_vertex(
                 pair.current,
-                &ShapeAnalysisEdge::new().first_vertex(pair.current),
                 vertex,
                 rustycad_tkg3d::top_abs::Orientation::Forward,
             )?;
-            if pair.wire_data.nb_edges() < 2 || !confused || same_current_endpoints {
-                edit_edge_vertex(
-                    pair.previous,
-                    &ShapeAnalysisEdge::new().last_vertex(pair.previous),
-                    vertex,
-                    rustycad_tkg3d::top_abs::Orientation::Reversed,
-                )?;
-            }
-            return Ok(());
+            return add_edge_vertex(
+                pair.current,
+                vertex,
+                rustycad_tkg3d::top_abs::Orientation::Reversed,
+            );
         }
-        let previous_copy = if !confused || same_current_endpoints {
-            Some(self.copy_with_replacement(pair.previous, &Vertex::default(), vertex)?)
-        } else {
-            None
-        };
+        let replacement = self.copy_with_replacement(pair.current, vertex, vertex)?;
+        self.store_connected_edge(
+            pair.wire_data,
+            pair.current,
+            &replacement,
+            pair.current_index,
+        )
+    }
+
+    fn edit_connected_edges(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        pair: ConnectedPair<'_>,
+        vertex: &Vertex,
+    ) -> Result<(), Failure> {
+        let edge_analysis = ShapeAnalysisEdge::new();
+        edit_edge_vertex(
+            pair.current,
+            &edge_analysis.first_vertex(pair.current),
+            vertex,
+            rustycad_tkg3d::top_abs::Orientation::Forward,
+        )?;
+        let same_endpoints = same_edge_vertices(pair.current);
+        if should_replace_previous(analyzer, same_endpoints) {
+            edit_edge_vertex(
+                pair.previous,
+                &edge_analysis.last_vertex(pair.previous),
+                vertex,
+                rustycad_tkg3d::top_abs::Orientation::Reversed,
+            )?;
+        }
+        Ok(())
+    }
+
+    fn copy_connected_edges(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        pair: ConnectedPair<'_>,
+        vertex: &Vertex,
+    ) -> Result<(), Failure> {
         let current_copy = self.copy_with_replacement(pair.current, vertex, &Vertex::default())?;
         self.store_connected_edge(
             pair.wire_data,
@@ -279,8 +318,15 @@ impl ShapeFixWire {
             &current_copy,
             pair.current_index,
         )?;
-        if let Some(copy) = previous_copy {
-            self.store_connected_edge(pair.wire_data, pair.previous, &copy, pair.previous_index)?;
+        if should_replace_previous(analyzer, same_edge_vertices(pair.current)) {
+            let previous_copy =
+                self.copy_with_replacement(pair.previous, &Vertex::default(), vertex)?;
+            self.store_connected_edge(
+                pair.wire_data,
+                pair.previous,
+                &previous_copy,
+                pair.previous_index,
+            )?;
         }
         Ok(())
     }
@@ -311,6 +357,29 @@ impl ShapeFixWire {
         }
         Ok(())
     }
+}
+
+fn should_replace_previous(analyzer: &ShapeAnalysisWire, same_endpoints: bool) -> bool {
+    !analyzer.last_check_status(ShapeExtendStatus::Done1) || same_endpoints
+}
+
+fn remove_edge_vertices(edge: &Edge) -> Result<(), Failure> {
+    let analysis = ShapeAnalysisEdge::new();
+    let mut shape = edge.clone().into_shape();
+    Builder.remove(&mut shape, &analysis.first_vertex(edge).into_shape())?;
+    Builder.remove(&mut shape, &analysis.last_vertex(edge).into_shape())
+}
+
+fn add_edge_vertex(
+    edge: &Edge,
+    vertex: &Vertex,
+    orientation: rustycad_tkg3d::top_abs::Orientation,
+) -> Result<(), Failure> {
+    let mut shape = edge.clone().into_shape();
+    Builder.add(
+        &mut shape,
+        &vertex.clone().into_shape().oriented(orientation),
+    )
 }
 
 fn same_edge_vertices(edge: &Edge) -> bool {
