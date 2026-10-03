@@ -10,11 +10,18 @@ use rustycad_tkbrep::topods::{Edge, Face};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkg3d::geom::GeomSurface;
-use rustycad_tkmath::gp::{Transform2, Vector2};
+use rustycad_tkmath::gp::{Point2, Point3, Transform2, Vector2};
 #[path = "wire_shifted_meridian.rs"]
 mod meridian;
 #[path = "wire_shifted_periodic.rs"]
 mod periodic;
+
+struct ShiftedTraversal {
+    stop_index: usize,
+    degenerate_stop: bool,
+    first_singularity: Option<(usize, Point3)>,
+    initial_bounds: periodic::UVBounds,
+}
 
 impl ShapeFixWire {
     /// `FixShifted()`: align p-curves on a closed periodic surface before degenerated repair.
@@ -27,7 +34,8 @@ impl ShapeFixWire {
         }
         let surface_analysis = analyzer.surface();
         let surface_handle = surface_analysis.surface();
-        let surface_data = periodic::shifted_surface_data(&surface_analysis, &surface_handle)?;
+        let surface_data =
+            periodic::shifted_surface_data(&surface_analysis, &surface_handle, self.precision())?;
         let (closed, periods, bounds) = (
             surface_data.closure,
             surface_data.periods,
@@ -37,8 +45,8 @@ impl ShapeFixWire {
             return Ok(false);
         }
         let edges = periodic::shifted_edges(&analyzer)?;
-        self.shift_adjacent_period_gaps(&analyzer, &edges, closed, periods)?;
-        self.recenter_periodic_wire(&analyzer, &edges, closed, periods, bounds)
+        let initial_bounds = self.shift_adjacent_period_gaps(&analyzer, &edges, closed, periods)?;
+        self.recenter_periodic_wire(&analyzer, &edges, initial_bounds, closed, periods, bounds)
     }
 
     fn analyzer_for_shifted(
@@ -59,40 +67,120 @@ impl ShapeFixWire {
         edges: &[rustycad_tkbrep::topods::Edge],
         closed: (bool, bool),
         periods: (f64, f64),
+    ) -> Result<Option<(f64, f64, f64, f64)>, Failure> {
+        if edges.is_empty() {
+            return Ok(None);
+        }
+        let mut traversal = ShiftedTraversal {
+            stop_index: edges.len() - 1,
+            degenerate_stop: false,
+            first_singularity: None,
+            initial_bounds: periodic::UVBounds::default(),
+        };
+        self.run_shifted_traversal(analyzer, edges, closed, periods, &mut traversal)?;
+        Ok(traversal.initial_bounds.finish())
+    }
+
+    fn run_shifted_traversal(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        edges: &[Edge],
+        closed: (bool, bool),
+        periods: (f64, f64),
+        traversal: &mut ShiftedTraversal,
     ) -> Result<(), Failure> {
-        let mut first_singularity = None;
-        for index in 0..edges.len() {
-            let current = &edges[index];
-            if BRepTool::degenerated(current)? {
-                continue;
+        let mut index = 0;
+        loop {
+            let stop = index == traversal.stop_index;
+            self.shift_traversal_pair(analyzer, edges, index, closed, periods, traversal)?;
+            if stop {
+                return Ok(());
             }
-            let vertex = ShapeAnalysisEdge::new().first_vertex(current);
-            if vertex.is_null() {
-                continue;
-            }
-            let point = BRepTool::pnt(&vertex)?;
-            let axis = self.singular_axis_for_edge(current)?;
-            if axis != 0 {
-                match first_singularity {
-                    None => first_singularity = Some((index, point)),
-                    Some((_, previous))
-                        if previous.distance(&point) < rustycad_tkernel::precision::confusion() =>
-                    {
-                        first_singularity = Some((index, point));
-                    }
-                    Some((start, _)) => {
-                        match self.shift_bimeridian_range(edges, start, index, closed, periods)? {
-                            None | Some(true) => continue,
-                            Some(false) => {}
-                        }
-                    }
-                }
-                self.shift_one_period_gap(analyzer, edges, index, closed, periods)?;
-                continue;
-            }
-            self.shift_one_period_gap(analyzer, edges, index, closed, periods)?;
+            index = (index + 1) % edges.len();
+        }
+    }
+
+    fn shift_traversal_pair(
+        &self,
+        analyzer: &ShapeAnalysisWire,
+        edges: &[Edge],
+        index: usize,
+        closed: (bool, bool),
+        periods: (f64, f64),
+        traversal: &mut ShiftedTraversal,
+    ) -> Result<(), Failure> {
+        let current = &edges[index];
+        if self.period_pair_is_degenerate(edges, index, traversal)? {
+            return Ok(());
+        }
+        let Some((point, axis)) = self.period_pair_singularity(current)? else {
+            return Ok(());
+        };
+        if axis != 0
+            && self.try_singular_bimeridian(edges, index, point, closed, periods, traversal)?
+        {
+            return Ok(());
+        }
+        let shift = self.shift_one_period_gap(analyzer, edges, index, closed, periods)?;
+        let Some((endpoint, moderate_gap)) = shift else {
+            return Ok(());
+        };
+        traversal.initial_bounds.add(endpoint);
+        if moderate_gap && traversal.stop_index == edges.len() - 1 {
+            traversal.stop_index = index;
         }
         Ok(())
+    }
+
+    fn period_pair_is_degenerate(
+        &self,
+        edges: &[Edge],
+        index: usize,
+        traversal: &mut ShiftedTraversal,
+    ) -> Result<bool, Failure> {
+        let previous = &edges[(index + edges.len() - 1) % edges.len()];
+        let current = &edges[index];
+        if !BRepTool::degenerated(previous)? && !BRepTool::degenerated(current)? {
+            return Ok(false);
+        }
+        if !traversal.degenerate_stop {
+            traversal.stop_index = index;
+            traversal.degenerate_stop = true;
+        }
+        Ok(true)
+    }
+
+    fn period_pair_singularity(&self, edge: &Edge) -> Result<Option<(Point3, i32)>, Failure> {
+        let vertex = ShapeAnalysisEdge::new().first_vertex(edge);
+        if vertex.is_null() {
+            return Ok(None);
+        }
+        let point = BRepTool::pnt(&vertex)?;
+        let axis = self.singular_axis_for_edge(edge)?;
+        Ok(Some((point, axis)))
+    }
+
+    fn try_singular_bimeridian(
+        &self,
+        edges: &[Edge],
+        index: usize,
+        point: Point3,
+        closed: (bool, bool),
+        periods: (f64, f64),
+        traversal: &mut ShiftedTraversal,
+    ) -> Result<bool, Failure> {
+        let Some((start, previous)) = traversal.first_singularity else {
+            traversal.first_singularity = Some((index, point));
+            return Ok(false);
+        };
+        if previous.distance(&point) < self.precision() {
+            traversal.first_singularity = Some((index, point));
+            return Ok(false);
+        }
+        match self.shift_bimeridian_range(edges, start, index, closed, periods)? {
+            None | Some(true) => Ok(true),
+            Some(false) => Ok(false),
+        }
     }
 
     fn shift_bimeridian_range(
@@ -161,14 +249,14 @@ impl ShapeFixWire {
         index: usize,
         closed: (bool, bool),
         periods: (f64, f64),
-    ) -> Result<(), Failure> {
+    ) -> Result<Option<(Point2, bool)>, Failure> {
         let count = edges.len();
         let previous = edges[(index + count - 1) % count].clone();
         let current = edges[index].clone();
         if rustycad_tkbrep::brep::BRepTool::degenerated(&previous)?
             || rustycad_tkbrep::brep::BRepTool::degenerated(&current)?
         {
-            return Ok(());
+            return Ok(None);
         }
         let face = analyzer.face();
         let edge_analysis = ShapeAnalysisEdge::new();
@@ -193,23 +281,21 @@ impl ShapeFixWire {
         ),
         closed: (bool, bool),
         periods: (f64, f64),
-    ) -> Result<(), Failure> {
+    ) -> Result<Option<(Point2, bool)>, Failure> {
         let (previous_curve, previous_first, previous_last) = previous;
         let (current_curve, current_first, current_last) = current;
         let (Some(previous), Some(current)) = (previous_curve.get(), current_curve.get()) else {
             self.or_last_fix_status(ShapeExtendStatus::Fail1);
-            return Ok(());
+            return Ok(None);
         };
         let previous_end = previous.value(previous_last)?;
         let current_start = current.value(current_first)?;
-        let singular_axis = self
-            .singular_axis_for_edge(edge)?
-            .max(self.near_degenerate_axis(
-                &previous_curve,
-                previous_first,
-                previous_last,
-                closed,
-            )?);
+        let singular_axis = self.singular_axis_for_edge(edge)?;
+        let singular_axis = if singular_axis == 0 {
+            self.near_degenerate_axis(&previous_curve, previous_first, previous_last, closed)?
+        } else {
+            singular_axis
+        };
         let shift = periodic::periodic_gap_translation(
             previous_end,
             current_start,
@@ -217,9 +303,12 @@ impl ShapeFixWire {
             periods,
             singular_axis,
         );
+        let moderate_gap =
+            periodic::is_moderate_gap(previous_end, current_start, closed, periods, singular_axis);
         if shift == Vector2::default() {
-            return Ok(());
+            return Ok(Some((previous_end, moderate_gap)));
         }
+        self.or_last_fix_status(ShapeExtendStatus::Done1);
         let (replacement, _, _) = ShapeBuildEdge.transform_pcurve(
             &current_curve,
             Transform2::translation_vector(shift),
@@ -229,8 +318,7 @@ impl ShapeFixWire {
         )?;
         ShapeBuildEdge.replace_pcurve(edge, &replacement, face)?;
         self.update_edge_uv_points(edge, face)?;
-        self.or_last_fix_status(ShapeExtendStatus::Done1);
-        Ok(())
+        Ok(Some((previous_end, false)))
     }
 
     fn singular_axis_for_edge(&self, edge: &Edge) -> Result<i32, Failure> {
@@ -239,8 +327,7 @@ impl ShapeFixWire {
             return Ok(0);
         }
         let point = BRepTool::pnt(&vertex)?;
-        let tolerance =
-            BRepTool::vertex_tolerance(&vertex)?.max(rustycad_tkernel::precision::confusion());
+        let tolerance = BRepTool::vertex_tolerance(&vertex)?.max(self.precision());
         let analysis = self.analyzer_for_shifted()?.surface();
         let Some(singularity) = analysis.degenerated_values(point, tolerance, true)? else {
             return Ok(0);
@@ -320,14 +407,15 @@ impl ShapeFixWire {
         &self,
         analyzer: &ShapeAnalysisWire,
         edges: &[Edge],
+        initial_bounds: Option<(f64, f64, f64, f64)>,
         closed: (bool, bool),
         periods: (f64, f64),
         bounds: (f64, f64, f64, f64),
     ) -> Result<bool, Failure> {
-        let Some(initial_bounds) = periodic::initial_wire_uv_bounds(analyzer, edges)? else {
+        let Some(initial_bounds) = initial_bounds else {
             return Ok(false);
         };
-        if periodic::is_centered(initial_bounds, bounds)
+        if periodic::is_centered(initial_bounds, bounds, periods)
             && !self.last_fix_status(ShapeExtendStatus::Done)
         {
             return Ok(false);
@@ -340,8 +428,8 @@ impl ShapeFixWire {
         if shift == Vector2::default() {
             return Ok(true);
         }
-        self.shift_all_pcurves(analyzer, shift)?;
         self.or_last_fix_status(ShapeExtendStatus::Done2);
+        self.shift_all_pcurves(analyzer, shift)?;
         Ok(true)
     }
 
