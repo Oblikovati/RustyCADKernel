@@ -87,10 +87,34 @@ fn two_collinear_edges_on_a_wire_merge_to_one_native_line() {
 
     unifier.build().unwrap();
 
-    assert_native_line_merge(&input, &unifier.shape());
+    assert_native_line_merge(&input, &unifier.shape(), "linear");
 }
 
-fn assert_native_line_merge(input: &Shape, result: &Shape) {
+#[test]
+fn three_collinear_edges_merge_as_one_native_chain() {
+    let input = line_chain(&[0., 1., 2., 3.]);
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+    unifier.build().unwrap();
+    assert_native_line_merge(&input, &unifier.shape(), "linear_three");
+}
+
+#[test]
+fn reverse_insertion_order_uses_native_wire_chain_order() {
+    let input = reverse_order_wire();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+    unifier.build().unwrap();
+    assert_native_line_merge(&input, &unifier.shape(), "reverse_order");
+}
+
+#[test]
+fn reversed_edge_occurrences_follow_native_wire_orientation() {
+    let input = reversed_occurrences_wire();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+    unifier.build().unwrap();
+    assert_native_line_merge(&input, &unifier.shape(), "reversed_occurrences");
+}
+
+fn assert_native_line_merge(input: &Shape, result: &Shape, case: &str) {
     assert!(
         BRepCheckAnalyzer::new(result, true, false, false)
             .unwrap()
@@ -99,15 +123,20 @@ fn assert_native_line_merge(input: &Shape, result: &Shape) {
     );
     let source_edges = edge_shapes(input);
     let result_edges = edge_shapes(result);
-    assert_eq!(result_edges.len(), native_edge_count("linear"));
-    let source_start = edge_endpoints(&source_edges[0]).0;
-    let source_end = edge_endpoints(source_edges.last().unwrap()).1;
+    assert_eq!(result_edges.len(), native_edge_count(case));
+    let source_vertices = source_edges
+        .iter()
+        .flat_map(|edge| {
+            let (first, last) = edge_endpoints(edge);
+            [first, last]
+        })
+        .collect::<Vec<_>>();
     let (result_start, result_end) = edge_endpoints(&result_edges[0]);
-    assert!(source_start.is_same(&result_start));
-    assert!(source_end.is_same(&result_end));
+    assert!(source_vertices.iter().any(|v| v.is_same(&result_start)));
+    assert!(source_vertices.iter().any(|v| v.is_same(&result_end)));
     assert_eq!(
         endpoint_coordinates(result_start, result_end),
-        native_endpoints("linear")
+        native_endpoints(case)
     );
 }
 
@@ -178,9 +207,34 @@ fn disabled_edge_unification_keeps_both_native_edges() {
 }
 
 fn collinear_wire() -> Shape {
+    line_chain(&[0., 1., 2.])
+}
+
+fn reverse_order_wire() -> Shape {
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    for pair in [(2., 3.), (1., 2.), (0., 1.)] {
+        wire.add_edge(&line_edge(pair.0, pair.1)).unwrap();
+    }
+    wire.wire().unwrap().into_shape()
+}
+
+fn reversed_occurrences_wire() -> Shape {
     let mut wire = BRepBuilderAPIMakeWire::new();
     wire.add_edge(&line_edge(0., 1.)).unwrap();
-    wire.add_edge(&line_edge(1., 2.)).unwrap();
+    let mut second = line_edge(2., 1.);
+    second.reverse();
+    wire.add_edge(&second).unwrap();
+    let mut third = line_edge(3., 2.);
+    third.reverse();
+    wire.add_edge(&third).unwrap();
+    wire.wire().unwrap().into_shape()
+}
+
+fn line_chain(points: &[f64]) -> Shape {
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    for pair in points.windows(2) {
+        wire.add_edge(&line_edge(pair[0], pair[1])).unwrap();
+    }
     wire.wire().unwrap().into_shape()
 }
 
