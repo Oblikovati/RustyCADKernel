@@ -21,7 +21,7 @@ pub(super) fn run(tool: &ShapeUpgradeShapeConvertToBezier) -> Result<(), Failure
 fn process_face(tool: &ShapeUpgradeShapeConvertToBezier, source: &Shape) -> Result<(), Failure> {
     let mut face = topods::face(source)?;
     face.set_orientation(Orientation::Forward);
-    let mut wires = Explorer::new(&face, ShapeEnum::Wire, ShapeEnum::Face)?;
+    let mut wires = Explorer::new(&face, ShapeEnum::Wire, ShapeEnum::Shape)?;
     while wires.more() {
         let wire = topods::wire(wires.current())?;
         process_wire(tool, &wire, &face)?;

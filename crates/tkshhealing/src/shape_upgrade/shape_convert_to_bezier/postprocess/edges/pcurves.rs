@@ -220,7 +220,7 @@ mod tests {
             "/../../tools/oracle/shape_upgrade_shape_convert_to_bezier.expected"
         ))
         .lines()
-        .last()
+        .find(|line| line.starts_with("reverse_line_unit_range "))
         .unwrap()
     }
 }
