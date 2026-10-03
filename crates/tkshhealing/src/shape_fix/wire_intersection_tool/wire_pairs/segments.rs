@@ -8,6 +8,14 @@ use crate::shape_fix::wire::wire_intersection_tool::point_on_edge;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{self, Face};
 use rustycad_tkernel::standard::Failure;
+
+#[derive(Clone, Copy)]
+enum OverlapCut {
+    NoCandidate,
+    Applied,
+    Rejected,
+}
+
 #[allow(clippy::too_many_arguments)]
 pub(super) fn repair_cross_wire_segment(
     tool: &ShapeFixIntersectionTool,
@@ -35,6 +43,10 @@ pub(super) fn repair_cross_wire_segment(
         &samples.first,
         *max_tolerance,
     )?;
+    if matches!(first_cut, OverlapCut::Rejected) {
+        // OCCT's first-edge failure continues the pair loop before edge two is visited.
+        return Ok(PairEffect::None);
+    }
     let second_cut = cut_overlap_endpoint(
         tool,
         face,
@@ -44,7 +56,10 @@ pub(super) fn repair_cross_wire_segment(
         &samples.second,
         *max_tolerance,
     )?;
-    if first_cut || second_cut {
+    if matches!(second_cut, OverlapCut::Rejected) {
+        return Ok(PairEffect::None);
+    }
+    if matches!(first_cut, OverlapCut::Applied) || matches!(second_cut, OverlapCut::Applied) {
         return Ok(PairEffect::None);
     }
     split_short_overlap(
@@ -70,7 +85,7 @@ fn cut_overlap_endpoint(
     parameters: (f64, f64),
     overlap_points: &[rustycad_tkmath::gp::Point3; 2],
     max_tolerance: f64,
-) -> Result<bool, Failure> {
+) -> Result<OverlapCut, Failure> {
     let selected =
         segment::select_existing_endpoint(edge, range, parameters, overlap_points, max_tolerance)?;
     cut_selected_overlap_endpoint(tool, face, edge, range, parameters, selected)
@@ -83,22 +98,22 @@ fn cut_selected_overlap_endpoint(
     range: (f64, f64),
     parameters: (f64, f64),
     selected: SelectedEndpoint,
-) -> Result<bool, Failure> {
+) -> Result<OverlapCut, Failure> {
     if !selected.found {
-        return Ok(false);
+        return Ok(OverlapCut::NoCandidate);
     }
     let endpoint = farther_overlap_range(range, parameters);
     let cut = farther_overlap_point(endpoint, parameters);
     let mut cut_line = false;
     if !tool.cut_edge(edge, endpoint, cut, face, &mut cut_line)? {
-        return Ok(false);
+        return Ok(OverlapCut::Rejected);
     }
     let old_tolerance = BRepTool::vertex_tolerance(&selected.vertex)?;
     if selected.tolerance > old_tolerance {
         BRepBuilder::default()
             .update_vertex_tolerance(&selected.vertex, selected.tolerance * 1.00001)?;
     }
-    Ok(true)
+    Ok(OverlapCut::Applied)
 }
 
 fn farther_overlap_range(range: (f64, f64), overlap: (f64, f64)) -> f64 {

@@ -258,23 +258,29 @@ fn assert_full_long_overlap_replacement(second_start: f64, second_direction: f64
 
 #[test]
 fn two_sided_endpoint_cut_trims_long_edge_without_replacing_face() {
-    assert_endpoint_cut(0.5, (1.5, 1000.0), false);
+    assert_endpoint_cut(0.5, (1.5, 1000.0), false, true);
 }
 
 #[test]
 fn far_endpoint_cut_trims_long_edge_without_replacing_face() {
-    assert_endpoint_cut(999.0, (0.0, 999.0), true);
+    assert_endpoint_cut(999.0, (0.0, 999.0), true, true);
+}
+
+#[test]
+fn failed_short_edge_cut_skips_long_edge_when_short_is_first() {
+    assert_endpoint_cut(0.0, (0.0, 1000.0), false, false);
 }
 
 #[test]
 fn one_sided_endpoint_cut_trims_edge_without_replacing_face() {
-    assert_endpoint_cut(0.0, (1.0, 1000.0), false);
+    assert_endpoint_cut(0.0, (1.0, 1000.0), false, true);
 }
 
 fn assert_endpoint_cut(
     second_start: f64,
     expected_long_range: (f64, f64),
     use_last_vertex_tolerance: bool,
+    long_edge_first: bool,
 ) {
     let mut face = planar_face();
     let long_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 1000.0);
@@ -287,21 +293,14 @@ fn assert_endpoint_cut(
     BRepBuilder::default()
         .update_vertex_tolerance(&endpoint, 2.0)
         .unwrap();
-    let first = Handle::new(ShapeExtendWireData::new());
-    first.add_edge(&long_edge, 0).unwrap();
-    first
-        .add_edge(&line_edge(&face, 3000.0, 3000.0, 1.0, 0.0), 0)
-        .unwrap();
-    let second = Handle::new(ShapeExtendWireData::new());
-    second
-        .add_edge(
-            &line_edge_range(&face, second_start, 0.0, 0.0, 1.0, 0.0, 1.0),
-            0,
-        )
-        .unwrap();
-    second
-        .add_edge(&line_edge(&face, -3000.0, -3000.0, 0.0, 1.0), 0)
-        .unwrap();
+    let short_edge = line_edge_range(&face, second_start, 0.0, 0.0, 1.0, 0.0, 1.0);
+    let (first_edge, second_edge) = if long_edge_first {
+        (&long_edge, &short_edge)
+    } else {
+        (&short_edge, &long_edge)
+    };
+    let first = endpoint_cut_wire(&face, first_edge, (3000.0, 3000.0, 1.0, 0.0));
+    let second = endpoint_cut_wire(&face, second_edge, (-3000.0, -3000.0, 0.0, 1.0));
     add_wires(&mut face, &first, &second);
     let context = Handle::new(ShapeBuildReShape::new());
     let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
@@ -315,15 +314,40 @@ fn assert_endpoint_cut(
             .iter()
             .flat_map(|wire| direct_edge_ranges(wire, &face))
             .collect::<Vec<_>>(),
-        [
-            expected_long_range.0,
-            expected_long_range.1,
-            0.0,
-            2.0,
-            0.0,
-            1.0,
-            0.0,
-            2.0,
-        ]
+        if long_edge_first {
+            [
+                expected_long_range.0,
+                expected_long_range.1,
+                0.0,
+                2.0,
+                0.0,
+                1.0,
+                0.0,
+                2.0,
+            ]
+        } else {
+            [
+                0.0,
+                1.0,
+                0.0,
+                2.0,
+                expected_long_range.0,
+                expected_long_range.1,
+                0.0,
+                2.0,
+            ]
+        }
     );
+}
+
+fn endpoint_cut_wire(
+    face: &Face,
+    edge: &rustycad_tkbrep::topods::Edge,
+    far: (f64, f64, f64, f64),
+) -> Handle<ShapeExtendWireData> {
+    let wire = Handle::new(ShapeExtendWireData::new());
+    wire.add_edge(edge, 0).unwrap();
+    wire.add_edge(&line_edge(face, far.0, far.1, far.2, far.3), 0)
+        .unwrap();
+    wire
 }
