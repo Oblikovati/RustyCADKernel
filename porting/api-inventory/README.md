@@ -66,8 +66,8 @@ content hashes and source-relative declaration paths are the portable identity.
 ## Legacy test obligations
 
 `legacy-test-summary.json` and `legacy-tests.jsonl.gz` independently account for
-all 8,648 GoogleTest declaration candidates: 7,397 have exact Rust mappings and
-1,251 remain unmapped. There are no duplicate or unknown mappings in this
+all 8,648 GoogleTest declaration candidates: 7,398 have exact Rust mappings and
+1,250 remain unmapped. There are no duplicate or unknown mappings in this
 snapshot. All 16,698 DRAW candidates and 18,309 regression/support files are
 listed as discovered obligations.
 
@@ -91,3 +91,25 @@ checkout. Aggregate reports remain `aggregate_only` even when their inputs match
 individual declaration results require an explicit runtime-instance join. The
 assessor never grants runtime proof. New TKernel reports also fingerprint the
 verifier's local helper modules.
+
+## Paired runtime evidence
+
+`tkernel-runtime-report.json.gz` retains the complete verifier report and its input
+hashes at Rust revision `219c48d7`. `tkernel-runtime-declarations.json.gz` records
+the exact declaration/instance join: 1,315 declarations passed, one declaration
+was an approved upstream skip, and 7,332 were unverified by this TKernel run.
+There were zero unmapped runtime cases or mapping anomalies. The run executed
+1,521 passing native instances and 201,890 differential cases. These counts do
+not prove toolkit or global completion. Later source changes require a rerun.
+
+The verifier now compares input fingerprints before and after execution and
+rechecks the pinned OCCT checkout. To regenerate the paired evidence:
+
+```sh
+python3 tools/verify_tkernel.py --source /path/to/OCCT --jobs 2
+python3 tools/join_legacy_runtime_evidence.py target/oracle-tkernel/report.json \
+  --occt-source /path/to/OCCT --output target/api-proof/tkernel-joined-runtime.json
+```
+
+The current API crosswalk resolves 16,304 implemented declaration claims; 10,673
+ledger rows remain unresolved. It is not a behavioral coverage percentage.
