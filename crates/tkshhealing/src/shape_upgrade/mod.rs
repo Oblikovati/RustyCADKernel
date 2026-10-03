@@ -97,3 +97,5 @@ mod shape_divide_closed_edges;
 pub use shape_divide_closed_edges::ShapeUpgradeShapeDivideClosedEdges;
 mod shape_divide_closed;
 pub use shape_divide_closed::ShapeUpgradeShapeDivideClosed;
+mod shape_divide_area;
+pub use shape_divide_area::ShapeUpgradeShapeDivideArea;
