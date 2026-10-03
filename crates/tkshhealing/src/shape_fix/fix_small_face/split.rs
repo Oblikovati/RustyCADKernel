@@ -1,3 +1,8 @@
+#[path = "split_geometry.rs"]
+mod geometry;
+#[path = "split_wire_faces.rs"]
+mod wire_faces;
+
 use super::ShapeFixFixSmallFace;
 use crate::shape_analysis::{SplittingVertexEdges, SplittingVertexParameters};
 use crate::shape_build::ShapeBuildReShape;
@@ -31,27 +36,75 @@ pub(super) fn fix_split_face(fixer: &ShapeFixFixSmallFace) -> Result<Shape, Fail
 pub(super) fn split_one_face(
     fixer: &ShapeFixFixSmallFace,
     face: &mut Face,
-    _split_faces: &mut Compound,
+    split_faces: &mut Compound,
 ) -> Result<bool, Failure> {
     let applied = apply_context(fixer, &face.clone().into_shape())?;
     *face = topods::face(&applied)?;
-    let mut edge_map = SplittingVertexEdges::default();
-    let mut parameter_map = SplittingVertexParameters::default();
-    let mut all_vertices = Compound::default();
-    Builder.make_compound(&mut all_vertices);
+    let Some(vertex) = find_split_vertex(fixer, face)? else {
+        return Ok(false);
+    };
+    let Some(boundary) = geometry::find_and_split_boundary(fixer, face, &vertex)? else {
+        return Ok(false);
+    };
+    complete_recursive_split(fixer, face, boundary, split_faces)
+}
+
+fn complete_recursive_split(
+    fixer: &ShapeFixFixSmallFace,
+    face: &Face,
+    boundary: geometry::SplitBoundary,
+    split_faces: &mut Compound,
+) -> Result<bool, Failure> {
+    let Some((first, second)) = wire_faces::split_face_wires(face, &boundary)? else {
+        return Ok(false);
+    };
+    append_recursive_split(fixer, first, split_faces)?;
+    append_recursive_split(fixer, second, split_faces)?;
+    Ok(true)
+}
+
+fn find_split_vertex(
+    fixer: &ShapeFixFixSmallFace,
+    face: &Face,
+) -> Result<Option<rustycad_tkbrep::topods::Vertex>, Failure> {
+    let (found, all_vertices) = detect_split_vertices(fixer, face)?;
+    if found == 0 {
+        return Ok(None);
+    }
+    let vertices = Explorer::new(
+        &all_vertices.into_shape(),
+        ShapeEnum::Vertex,
+        ShapeEnum::Shape,
+    )?;
+    Ok(Some(topods::vertex(vertices.current())?))
+}
+
+fn detect_split_vertices(
+    fixer: &ShapeFixFixSmallFace,
+    face: &Face,
+) -> Result<(i32, Compound), Failure> {
+    let mut edges = SplittingVertexEdges::default();
+    let mut parameters = SplittingVertexParameters::default();
+    let mut vertices = Compound::default();
+    Builder.make_compound(&mut vertices);
     let found = fixer.analyzer.write().check_splitting_vertices(
         face,
-        &mut edge_map,
-        &mut parameter_map,
-        &mut all_vertices,
+        &mut edges,
+        &mut parameters,
+        &mut vertices,
     )?;
-    if found == 0 {
-        return Ok(false);
+    Ok((found, vertices))
+}
+
+fn append_recursive_split(
+    fixer: &ShapeFixFixSmallFace,
+    mut face: Face,
+    output: &mut Compound,
+) -> Result<(), Failure> {
+    if !split_one_face(fixer, &mut face, output)? {
+        Builder.add(&mut output.clone().into_shape(), &face.into_shape())?;
     }
-    Err(Failure::with_message(
-        "Standard_NotImplemented",
-        "ShapeFix_FixSmallFace::SplitOneFace found splitting vertices; recursive split construction is not ported",
-    ))
+    Ok(())
 }
 
 fn split_container_supported(shape: &Shape) -> Result<bool, Failure> {
@@ -70,20 +123,25 @@ fn scan_split_faces(fixer: &ShapeFixFixSmallFace, shape: &Shape) -> Result<bool,
     let mut faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?;
     let mut done = false;
     while faces.more() {
-        let mut face = topods::face(faces.current())?;
-        let mut split_faces = Compound::default();
-        Builder.make_compound(&mut split_faces);
-        if split_one_face(fixer, &mut face, &mut split_faces)? {
-            ReShape::replace(
-                context.get().unwrap(),
-                &face.clone().into_shape(),
-                &split_faces.into_shape(),
-            )?;
-            done = true;
-        }
+        done |= split_candidate_face(fixer, context.get().unwrap(), faces.current())?;
         faces.next()?;
     }
     Ok(done)
+}
+
+fn split_candidate_face(
+    fixer: &ShapeFixFixSmallFace,
+    context: &ShapeBuildReShape,
+    source: &Shape,
+) -> Result<bool, Failure> {
+    let mut face = topods::face(source)?;
+    let mut output = Compound::default();
+    Builder.make_compound(&mut output);
+    if !split_one_face(fixer, &mut face, &mut output)? {
+        return Ok(false);
+    }
+    ReShape::replace(context, &face.clone().into_shape(), &output.into_shape())?;
+    Ok(true)
 }
 
 fn apply_context(fixer: &ShapeFixFixSmallFace, shape: &Shape) -> Result<Shape, Failure> {
@@ -99,4 +157,152 @@ fn context(fixer: &ShapeFixFixSmallFace) -> Result<Handle<ShapeBuildReShape>, Fa
     Err(Failure::new(
         "ShapeFix_FixSmallFace requires Init(shape) before splitting",
     ))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rustycad_tkbrep::brep::BRepBuilder;
+    use rustycad_tkbrep::topexp::Explorer;
+    use rustycad_tkbrep::topods::{Builder, Edge};
+    use rustycad_tkg3d::top_abs::ShapeEnum;
+    use rustycad_tkmath::gp::{Plane3, Point3};
+    use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
+
+    #[test]
+    fn initialized_splitter_matches_native_two_face_result() {
+        assert_native_split_output();
+        let face = fixture_face();
+        assert_detector_output(&face);
+        assert_direct_split_output(face.clone());
+        assert_aggregate_split_output(face);
+    }
+
+    fn assert_native_split_output() {
+        let fixture =
+            include_str!("../../../../../tools/oracle/tkshhealing_fix_small_face_split.expected");
+        let rows = fixture.lines().collect::<Vec<_>>();
+        assert_eq!(rows, ["detected 2 1", "1 2 6 12", "aggregate 2 0 4 6 12"]);
+    }
+
+    fn assert_detector_output(face: &Face) {
+        let fixer = ShapeFixFixSmallFace::new(face.clone().into_shape());
+        fixer.analyzer.write().set_tolerance(1.0e-4);
+        let (mut edges, mut parameters, mut vertices) = split_outputs();
+        let found = fixer
+            .analyzer
+            .write()
+            .check_splitting_vertices(face, &mut edges, &mut parameters, &mut vertices)
+            .unwrap();
+        assert_eq!((found, edges.len(), parameters.len()), (2, 1, 1));
+    }
+
+    fn assert_direct_split_output(mut face: Face) {
+        let fixer = ShapeFixFixSmallFace::new(face.clone().into_shape());
+        fixer.analyzer.write().set_tolerance(1.0e-4);
+        let mut output = Compound::default();
+        Builder.make_compound(&mut output);
+        assert!(fixer.split_one_face(&mut face, &mut output).unwrap());
+        let shape = output.into_shape();
+        assert_eq!(count_faces(&shape).unwrap(), 2);
+        assert_eq!(shape_counts(&shape).unwrap(), (6, 12));
+    }
+
+    fn assert_aggregate_split_output(face: Face) {
+        let fixer = ShapeFixFixSmallFace::new(face.clone().into_shape());
+        fixer.analyzer.write().set_tolerance(1.0e-4);
+        let result = fixer.fix_split_face(&face.clone().into_shape()).unwrap();
+        assert_eq!(result.shape_type().unwrap(), ShapeEnum::Compound);
+        assert_eq!(count_faces(&result).unwrap(), 2);
+        assert_eq!(shape_counts(&result).unwrap(), (6, 12));
+        assert!(fixer.status(ShapeExtendStatus::Done3));
+    }
+
+    fn split_outputs() -> (SplittingVertexEdges, SplittingVertexParameters, Compound) {
+        let mut vertices = Compound::default();
+        Builder.make_compound(&mut vertices);
+        (
+            SplittingVertexEdges::default(),
+            SplittingVertexParameters::default(),
+            vertices,
+        )
+    }
+
+    fn fixture_face() -> Face {
+        let vertices = boundary_vertices();
+        let edges = [
+            make_edge(&vertices[0], &vertices[1]),
+            make_edge(&vertices[1], &vertices[2]),
+            make_edge(&vertices[2], &vertices[0]),
+        ];
+        face_from_edges(edges)
+    }
+
+    fn boundary_vertices() -> [rustycad_tkbrep::topods::Vertex; 3] {
+        let builder = BRepBuilder::default();
+        let mut vertices = [
+            rustycad_tkbrep::topods::Vertex::default(),
+            rustycad_tkbrep::topods::Vertex::default(),
+            rustycad_tkbrep::topods::Vertex::default(),
+        ];
+        let points = [
+            Point3::new(0.0, 0.0, 0.0),
+            Point3::new(1.0, 0.0, 0.0),
+            Point3::new(0.5, 1.0e-5, 0.0),
+        ];
+        for (vertex, point) in vertices.iter_mut().zip(points) {
+            builder.make_vertex_at(vertex, point, 1.0e-4).unwrap();
+        }
+        vertices
+    }
+
+    fn make_edge(
+        first: &rustycad_tkbrep::topods::Vertex,
+        last: &rustycad_tkbrep::topods::Vertex,
+    ) -> Edge {
+        BRepBuilderAPIMakeEdge::from_vertices(first, last)
+            .unwrap()
+            .edge()
+            .unwrap()
+    }
+
+    fn face_from_edges(edges: [Edge; 3]) -> Face {
+        let mut wire = rustycad_tkbrep::topods::Wire::default();
+        Builder.make_wire(&mut wire);
+        let mut shape = wire.into_shape();
+        for edge in edges {
+            Builder.add(&mut shape, &edge.into_shape()).unwrap();
+        }
+        let wire = rustycad_tkbrep::topods::wire(&shape).unwrap();
+        BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &wire, true)
+            .unwrap()
+            .face()
+            .unwrap()
+    }
+
+    fn count_faces(shape: &Shape) -> Result<usize, Failure> {
+        let mut explorer = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?;
+        let mut count = 0;
+        while explorer.more() {
+            count += 1;
+            explorer.next()?;
+        }
+        Ok(count)
+    }
+
+    fn shape_counts(shape: &Shape) -> Result<(usize, usize), Failure> {
+        let edges = count_shapes(shape, ShapeEnum::Edge)?;
+        let vertices = count_shapes(shape, ShapeEnum::Vertex)?;
+        Ok((edges, vertices))
+    }
+
+    fn count_shapes(shape: &Shape, kind: ShapeEnum) -> Result<usize, Failure> {
+        let mut explorer = Explorer::new(shape, kind, ShapeEnum::Shape)?;
+        let mut count = 0;
+        while explorer.more() {
+            count += 1;
+            explorer.next()?;
+        }
+        Ok(count)
+    }
 }
