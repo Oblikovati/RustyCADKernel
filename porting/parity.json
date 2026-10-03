@@ -220487,6 +220487,54 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWireVertex::position",
       "status": "implemented",
       "notes": "Pinned OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871; tools/oracle/tkshhealing_wire_vertex.cxx and shape_analysis_wire_vertex Rust tests preserve native precision, SetStart parameter-slot, criterion and shared-array quirks. Finite line cases are not exhaustive behavioral proof."
+    },
+    {
+      "upstream_id": "ShapeFix_FreeBounds::GetShape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FreeBounds.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFreeBounds::shape",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_fix_free_bounds.cxx; Rust shape_fix_free_bounds tests preserve null outputs, topology counts, and native frozen-edge exception. Underlying sewing coverage remains separate."
+    },
+    {
+      "upstream_id": "ShapeFix_FreeBounds::GetClosedWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FreeBounds.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFreeBounds::closed_wires",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_fix_free_bounds.cxx; Rust shape_fix_free_bounds tests preserve null outputs, topology counts, and native frozen-edge exception. Underlying sewing coverage remains separate."
+    },
+    {
+      "upstream_id": "ShapeFix_FreeBounds::ShapeFix_FreeBounds(const TopoDS_Shape &,const double,const double,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FreeBounds.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFreeBounds::forecast",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_fix_free_bounds.cxx; Rust shape_fix_free_bounds tests preserve null outputs, topology counts, and native frozen-edge exception. Underlying sewing coverage remains separate."
+    },
+    {
+      "upstream_id": "ShapeFix_FreeBounds::ShapeFix_FreeBounds(const TopoDS_Shape &,const double,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FreeBounds.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFreeBounds::from_shape",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_fix_free_bounds.cxx; Rust shape_fix_free_bounds tests preserve null outputs, topology counts, and native frozen-edge exception. Underlying sewing coverage remains separate."
+    },
+    {
+      "upstream_id": "ShapeFix_FreeBounds::GetOpenWires()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FreeBounds.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFreeBounds::open_wires",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_fix_free_bounds.cxx; Rust shape_fix_free_bounds tests preserve null outputs, topology counts, and native frozen-edge exception. Underlying sewing coverage remains separate."
+    },
+    {
+      "upstream_id": "ShapeFix_FreeBounds::ShapeFix_FreeBounds()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FreeBounds.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFreeBounds::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_fix_free_bounds.cxx; Rust shape_fix_free_bounds tests preserve null outputs, topology counts, and native frozen-edge exception. Underlying sewing coverage remains separate."
     }
   ],
   "tests": [

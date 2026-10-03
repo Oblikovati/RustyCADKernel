@@ -27,3 +27,6 @@ pub use wire::ShapeFixWire;
 
 mod wire_segment;
 pub use wire_segment::{ShapeFixWireSegment, WirePatchIndex};
+
+mod free_bounds;
+pub use free_bounds::ShapeFixFreeBounds;
