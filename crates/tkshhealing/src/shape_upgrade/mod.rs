@@ -79,3 +79,6 @@ mod fix_small_bezier_curves;
 pub use fix_small_bezier_curves::ShapeUpgradeFixSmallBezierCurves;
 mod split_surface_continuity;
 pub use split_surface_continuity::ShapeUpgradeSplitSurfaceContinuity;
+
+mod remove_internal_wires;
+pub use remove_internal_wires::ShapeUpgradeRemoveInternalWires;
