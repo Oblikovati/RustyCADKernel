@@ -20,3 +20,8 @@ Expected output is pinned in `shape_fix_wire_edge_curves.expected`.
 The `sphere-pole` case uses an explicit reshaper context and a circular 3D edge
 whose interior crosses the spherical north pole. OCCT splits it at the projected
 singularity; the recorded edge ranges and DONE3/FAIL3 bits are checked in Rust.
+
+Additional rows bind the ten mode defaults, the no-op behavior of p-curve and
+3D-curve removal when their endpoint checks pass, and the plane-projection
+no-op. The sphere-pole fixture also checks that both the edge and p-curve
+ranges are restricted to each resulting segment.
