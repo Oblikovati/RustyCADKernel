@@ -73,6 +73,12 @@ impl ShapeFixWire {
         Ok(())
     }
 
+    /// Loads shared wire data without rebuilding its edge order; `fixer.load_wire_data(&data)`.
+    pub fn load_wire_data(&self, wire: &Handle<ShapeExtendWireData>) {
+        self.ensure_analyzer().load_wire_data(wire);
+        self.clear_statuses();
+    }
+
     /// `SetFace(face)`: update the shared analyzer support face.
     pub fn set_face(&self, face: &Face) -> Result<(), Failure> {
         self.ensure_analyzer().set_face(face)
@@ -176,7 +182,8 @@ impl ShapeFixWire {
         Ok(analyzer)
     }
 
-    fn wire_data(&self) -> Result<Handle<ShapeExtendWireData>, Failure> {
+    /// Returns the loaded mutable wire data; `let data = fixer.wire_data()?`.
+    pub fn wire_data(&self) -> Result<Handle<ShapeExtendWireData>, Failure> {
         Ok(self.analyzer()?.wire_data())
     }
 
