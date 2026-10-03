@@ -16,6 +16,7 @@ from api_inventory.inputs import (
     verify_sources,
 )
 from api_inventory.dependencies import header_tree_fingerprint
+from api_inventory.context_retries import merge_context_retries
 from api_inventory.merge import (
     InventoryRecords,
     consume_capture,
@@ -57,6 +58,7 @@ def inventory_tables(
         "unsupported": records.unsupported,
         "skipped-ranges": records.skipped_ranges,
         "compiler-summaries": records.summaries,
+        "context-retries": records.context_retries,
         "included-files": included_file_hashes(records, source),
     }
 
@@ -117,6 +119,7 @@ def arguments() -> argparse.Namespace:
     """Read merger paths; e.g. `merge_occt_inventory.py --help`."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--capture", type=pathlib.Path, required=True)
+    parser.add_argument("--context-retries", type=pathlib.Path)
     parser.add_argument(
         "--output", type=pathlib.Path, default=ROOT / "porting/api-inventory"
     )
@@ -140,6 +143,14 @@ def main() -> None:
     )
     for result in object_rows(capture["results"], "capture results"):
         consume_capture(records, result, args.capture, source)
+    if args.context_retries:
+        merge_context_retries(
+            records,
+            capture,
+            args.capture / "capture-manifest.json",
+            args.context_retries,
+            source,
+        )
     export_inventory(capture, records, source, args.output)
 
 

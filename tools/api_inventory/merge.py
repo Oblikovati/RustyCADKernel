@@ -9,7 +9,7 @@ import pathlib
 from collections import Counter
 from dataclasses import dataclass, field
 from functools import lru_cache
-from typing import Iterator
+from typing import Iterator, cast
 
 from .inputs import JSONObject, JSONValue, digest, object_rows, text_field
 
@@ -17,6 +17,7 @@ from .inputs import JSONObject, JSONValue, digest, object_rows, text_field
 @dataclass
 class InventoryRecords:
     source_aliases: dict[str, str] = field(default_factory=dict)
+    site_keys: dict[str, set[str]] = field(default_factory=dict)
     declarations: dict[str, JSONObject] = field(default_factory=dict)
     macros: dict[str, JSONObject] = field(default_factory=dict)
     includes: set[str] = field(default_factory=set)
@@ -24,6 +25,7 @@ class InventoryRecords:
     diagnostics: list[JSONObject] = field(default_factory=list)
     unsupported: list[JSONObject] = field(default_factory=list)
     summaries: list[JSONObject] = field(default_factory=list)
+    context_retries: list[JSONObject] = field(default_factory=list)
 
 
 def json_lines(path: pathlib.Path) -> Iterator[JSONObject]:
@@ -55,6 +57,9 @@ def declaration_identity(row: JSONObject) -> str:
         components = [
             row.get("source"),
             row.get("expansion_location"),
+            row.get("spelling_location"),
+            row.get("parent_usr"),
+            row.get("signature"),
             row.get("qualified_name"),
             row.get("kind"),
         ]
@@ -97,15 +102,18 @@ def merge_declaration(records: InventoryRecords, row: JSONObject, header: str) -
     """Merge redeclarations without losing conflicting signatures or visibility."""
     identifier = declaration_identity(row)
     site = declaration_site(row, header)
+    site_key = json.dumps(site, sort_keys=True)
     if identifier not in records.declarations:
+        records.site_keys[identifier] = {site_key}
         row.update(
             {"id": identifier, "sites": [site], "stable_identity": bool(row.get("usr"))}
         )
         records.declarations[identifier] = row
         return
     existing = records.declarations[identifier]
-    sites = object_rows(existing["sites"], "declaration sites")
-    if site not in sites:
+    sites = cast(list[JSONObject], existing["sites"])
+    if site_key not in records.site_keys[identifier]:
+        records.site_keys[identifier].add(site_key)
         sites.append(site)
     compare_declarations(records, existing, row, header)
 
@@ -233,6 +241,8 @@ def coverage_rows(capture: JSONObject, records: InventoryRecords) -> list[JSONOb
         path = text_field(row, "path")
         if path in results:
             row["status"] = results[path]["status"]
+            if "original_status" in results[path]:
+                row["original_status"] = results[path]["original_status"]
         elif row["status"] == "fragment_pending" and path in records.includes:
             row["status"] = "included_fragment"
     return rows
@@ -259,7 +269,10 @@ def declaration_counts(records: InventoryRecords) -> JSONObject:
     return {
         "declarations": len(records.declarations),
         "api_declarations": len(public),
-        "macro_candidates": len(records.macros),
+        "macro_definitions": len(records.macros),
+        "macro_candidates": sum(
+            row.get("api_candidate") is True for row in records.macros.values()
+        ),
         "declarations_by_kind": dict(Counter(str(row.get("kind")) for row in public)),
     }
 
@@ -273,6 +286,7 @@ def inventory_summary(
         "schema": "occt-declaration-inventory-v1",
         "inputs": capture["inputs"],
         "capture_fingerprint": capture["fingerprint"],
+        "context_retry_sha256": capture.get("context_retry_sha256"),
         "expected_headers": len(headers),
         "headers_by_status": dict(statuses),
         **declaration_counts(records),
