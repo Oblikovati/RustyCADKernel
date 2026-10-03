@@ -223704,6 +223704,132 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeConvertToBezier::new",
       "status": "implemented",
       "notes": "Native Bezier conversion fixtures cover policy configuration, plane/cylinder conversion and mixed non-unit seam postprocessing. Child conversion limits remain; conic combinations and nested/reentrant Perform are not fully validated. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::ShapeFix_FixSmallFace()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::default",
+      "status": "partial",
+      "notes": "Constructor and default precision match the native declaration; shape-specific Init behavior is separate."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::Init(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::init",
+      "status": "partial",
+      "notes": "Partial: stores the input and initializes a reshape context; native also applies the context to the initial shape. Retained-context side effects need broader differential coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::Perform()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::perform",
+      "status": "partial",
+      "notes": "Runs spot then strip phases in native order. Regular box Perform output is pinned; broad geometry behavior remains partial and FixSplitFace/SplitOneFace are not ported."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::FixSpotFace()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::fix_spot_face",
+      "status": "partial",
+      "notes": "Native regular-box no-op and compound tiny-face removal fixtures pass; other spot geometries remain unverified."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::ReplaceVerticesInCaseOfSpot(TopoDS_Face&,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::replace_vertices_in_case_of_spot",
+      "status": "partial",
+      "notes": "Used by the passing tiny-face regression; additional tolerance and malformed-face domains remain unverified."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::RemoveFacesInCaseOfSpot(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::remove_faces_in_case_of_spot",
+      "status": "partial",
+      "notes": "Exercised through the native-backed tiny-face compound regression; independent context/warning cases remain unverified."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::FixStripFace(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::fix_strip_face",
+      "status": "partial",
+      "notes": "Native thin-box topology and exact vertex bounds pass. Other strip configurations and the default-argument call form are not yet covered."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::ReplaceInCaseOfStrip(TopoDS_Face&,TopoDS_Edge&,TopoDS_Edge&,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::replace_in_case_of_strip",
+      "status": "partial",
+      "notes": "Partial: thin-box orchestration validates edge replacement. Independent orientation, p-curve and absent-adjacency domains need additional fixtures."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::RemoveFacesInCaseOfStrip(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::remove_faces_in_case_of_strip",
+      "status": "partial",
+      "notes": "Context removal and warning path are present but have no independent native differential fixture yet."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::ComputeSharedEdgeForStripFace(const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Face&,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::compute_shared_edge_for_strip_face",
+      "status": "partial",
+      "notes": "Partial: exercised by thin-box strip repair; independent p-curve, location and orientation combinations remain unverified."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::FixFace(const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::fix_face",
+      "status": "partial",
+      "notes": "Partial face repair delegation; no independent native differential fixture yet."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::FixShape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::fix_shape",
+      "status": "partial",
+      "notes": "Partial: regular and thin-box paths exercise it indirectly; complete shape-repair inputs are not covered."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::Shape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::shape",
+      "status": "partial",
+      "notes": "Returns the current myShape state; verified after spot, strip and Perform fixtures."
+    },
+    {
+      "upstream_id": "ShapeFix_FixSmallFace::FixPinFace(TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallFace.hxx",
+      "source_sha256": "7cb657fb933992d82fba7f6e9a2f739e995356356a2eb243f6b8a27bdb7b6088",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::fix_pin_face",
+      "status": "partial",
+      "notes": "Native is a no-op returning true; Rust preserves the face and returns true on the regular-box test."
     }
   ],
   "tests": [
