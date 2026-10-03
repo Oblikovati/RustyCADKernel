@@ -1,5 +1,6 @@
 #include <Geom_BezierCurve.hxx>
 #include <Geom_Circle.hxx>
+#include <Geom_Ellipse.hxx>
 #include <Geom_Line.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <Geom2d_BezierCurve.hxx>
@@ -12,6 +13,7 @@
 #include <ShapeUpgrade_ConvertCurve3dToBezier.hxx>
 #include <gp_Ax1.hxx>
 #include <gp_Ax2.hxx>
+#include <gp_Elips.hxx>
 #include <gp_Ax22d.hxx>
 #include <gp_Dir.hxx>
 #include <gp_Dir2d.hxx>
@@ -73,6 +75,9 @@ int main() {
   print3("bezier-trim", new Geom_BezierCurve(poles3), 0.2, 0.8);
   print3("circle-mode-off", new Geom_Circle(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 2.), 0, 1, true, false);
   print3("circle-arcs", new Geom_Circle(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 2.), 0, 1);
+  occ::handle<Geom_Curve> ellipse = new Geom_Ellipse(gp_Elips(gp_Ax2(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)), 3., 2.));
+  print3("ellipse-conic-mode-off", ellipse, 0, 1, true, true, false);
+  print3("ellipse-conic-mode-on", ellipse, 0, 1, true, true, true);
   NCollection_Array1<gp_Pnt2d> poles2(1, 3);
   poles2(1) = gp_Pnt2d(0, 0); poles2(2) = gp_Pnt2d(1, 2); poles2(3) = gp_Pnt2d(2, 0);
   NCollection_Array1<gp_Pnt2d> linear2(1, 3);
