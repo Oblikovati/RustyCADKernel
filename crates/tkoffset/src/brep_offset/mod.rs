@@ -1,5 +1,6 @@
 //! BRep offset geometry helpers.
 mod collapse_singularities;
+mod simple_offset_angle;
 mod simple_offset_edge;
 mod simple_offset_vertex;
 mod simple_offset_vertex_map;
@@ -7,6 +8,9 @@ mod surface;
 mod surface_analytic;
 
 pub use collapse_singularities::collapse_singularities;
+pub use simple_offset_angle::{
+    compute_simple_offset_max_angle, compute_simple_offset_safe_distance,
+};
 pub use simple_offset_edge::{OffsetEdgeGeometry, OffsetFaceSurface, build_simple_offset_edge};
 pub use simple_offset_vertex::{
     OffsetVertexGeometry, OffsetVertexIncidentEdge, build_simple_offset_vertex,
