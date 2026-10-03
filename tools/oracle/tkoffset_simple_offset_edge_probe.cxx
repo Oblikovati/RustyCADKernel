@@ -1,4 +1,4 @@
-// Oracle for BRepOffset_SimpleOffset::FillEdgeData's curve/location/tolerance outputs.
+// Oracle for BRepOffset_SimpleOffset edge-curve and vertex-map outputs.
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <BRep_Builder.hxx>
 #include <BRepOffset_SimpleOffset.hxx>
@@ -10,6 +10,7 @@
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Compound.hxx>
+#include <TopoDS_Vertex.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Trsf.hxx>
@@ -36,12 +37,25 @@ void print_edge(const TopoDS_Edge& edge, BRepOffset_SimpleOffset& offset)
   std::cout << '\n';
 }
 
+void print_vertex(const TopoDS_Vertex& vertex, BRepOffset_SimpleOffset& offset)
+{
+  gp_Pnt point;
+  double tolerance = 0.0;
+  const bool found = offset.NewPoint(vertex, point, tolerance);
+  std::cout << found << ' ' << tolerance << ' ' << point.X() << ' ' << point.Y() << ' '
+            << point.Z() << '\n';
+}
+
 void run_shape(const TopoDS_Shape& shape)
 {
   BRepOffset_SimpleOffset offset(shape, 10.0, 1.e-7);
   for (TopExp_Explorer explorer(shape, TopAbs_EDGE); explorer.More(); explorer.Next())
   {
     print_edge(TopoDS::Edge(explorer.Current()), offset);
+  }
+  for (TopExp_Explorer explorer(shape, TopAbs_VERTEX); explorer.More(); explorer.Next())
+  {
+    print_vertex(TopoDS::Vertex(explorer.Current()), offset);
   }
 }
 
