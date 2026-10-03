@@ -225087,6 +225087,24 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_by_ranges",
       "status": "implemented",
       "notes": "Native default false and mutable bool mode exposed through getter/set_fix_gaps_by_ranges. Native range-mode fixtures verify 3D dispatch; 2D range repair remains explicitly unsupported and is not included in this scalar accessor claim."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixGap2d(const int, const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gap_2d",
+      "status": "partial",
+      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. Nonzero 2D range repair remains explicitly unported; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixGaps2d()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_2d",
+      "status": "partial",
+      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. Nonzero 2D range repair remains explicitly unported; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
     }
   ],
   "tests": [

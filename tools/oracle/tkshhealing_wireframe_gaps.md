@@ -26,3 +26,14 @@ closure. Curved projection/extrema and exceptional trimming still need native fi
 These fixtures add no legacy-test mapping and do not prove full wireframe parity.
 
 Run `cargo test -p rustycad-tkshhealing --test shape_fix_wireframe_gaps`.
+
+## 2D conversion extension
+
+Five additional direct FixGap2d conversion rows compare shortened planar line
+pcurves, both shortened ends, a repeated-vertex single line, a half-circle conic approximation, and an unchanged
+junction. Observations include ranges, endpoint/midpoint coordinates, spline
+degree and SameRange. Generic conversion now replaces the old periodic shortcut;
+see `tkshhealing_wire_cone_gap.md` for its exact native regression. Preliminary
+2D range adjustment remains explicitly unsupported for nonzero gaps. Native
+conic approximation, trim/offset extraction, seam and exceptional domains still
+need broader differential coverage.

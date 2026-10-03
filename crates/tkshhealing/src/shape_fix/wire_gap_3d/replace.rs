@@ -1,14 +1,12 @@
+use super::super::wire_gap_topology::{copy_gap_vertex, preserve_gap_nonmanifold};
 use super::{
     Failure, FixRoot, GapCurve, GapPair, GeomBSplineCurve, GeomCurve, Handle, ShapeFixWire, Vertex,
 };
-use crate::{
-    shape_analysis::ShapeAnalysisTransferParametersProj, shape_build::ShapeBuildEdge,
-    shape_fix::ShapeFixShapeTolerance,
-};
+use crate::{shape_build::ShapeBuildEdge, shape_fix::ShapeFixShapeTolerance};
 use rustycad_tkbrep::{
     brep::BRepBuilder,
     brep_tools::ReShape,
-    topods::{self, Edge, ShapeIterator},
+    topods::{self},
 };
 use rustycad_tkernel::precision;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
@@ -49,12 +47,6 @@ pub(super) fn replace_gap_curves(
     }
     Ok(())
 }
-fn copy_gap_vertex(tool: &ShapeFixWire, vertex: &Vertex) -> Result<Vertex, Failure> {
-    let copy = topods::vertex(&vertex.empty_copied()?)?;
-    ShapeFixShapeTolerance.set_tolerance(&copy, precision::confusion(), ShapeEnum::Shape)?;
-    ReShape::replace(&*tool.context(), vertex, &copy)?;
-    Ok(copy)
-}
 fn replace_gap_curve(
     tool: &ShapeFixWire,
     entry: &GapCurve,
@@ -72,24 +64,4 @@ fn replace_gap_curve(
     preserve_gap_nonmanifold(tool, &entry.edge, &mut replacement)?;
     ReShape::replace(&*tool.context(), &entry.edge, &replacement)?;
     tool.wire_data()?.set(&replacement, entry.index)
-}
-fn preserve_gap_nonmanifold(
-    tool: &ShapeFixWire,
-    source: &Edge,
-    target: &mut Edge,
-) -> Result<(), Failure> {
-    for shape in ShapeIterator::new(source, false, true) {
-        if !matches!(
-            shape.orientation(),
-            Orientation::Internal | Orientation::External
-        ) {
-            continue;
-        }
-        let vertex = topods::vertex(&shape)?;
-        let copy =
-            ShapeAnalysisTransferParametersProj::copy_nm_vertex_edge(&vertex, target, source)?;
-        BRepBuilder::default().add(target, &copy)?;
-        ReShape::replace(&*tool.context(), &vertex, &copy)?;
-    }
-    Ok(())
 }

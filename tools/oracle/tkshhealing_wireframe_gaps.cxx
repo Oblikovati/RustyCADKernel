@@ -7,6 +7,8 @@
 #include <Geom_Plane.hxx>
 #include <Geom_Curve.hxx>
 #include <Geom_Circle.hxx>
+#include <Geom2d_Curve.hxx>
+#include <Geom2d_BSplineCurve.hxx>
 #include <Geom_BSplineCurve.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Compound.hxx>
@@ -47,4 +49,10 @@ void run_ranges(const char* name,int mode){
  bool changed=tool.FixGaps3d();std::cout<<name<<' '<<changed<<' '<<tool.StatusGaps3d(ShapeExtend_DONE)<<' '<<tool.StatusGaps3d(ShapeExtend_FAIL)<<' '<<tool.FixGapsByRangesMode();print_curves(tool.Wire());std::cout<<'\n';
 }
 void closed_circle(){auto shape=fixture(12);ShapeFix_Wire tool;tool.Load(TopoDS::Wire(shape));bool changed=tool.FixGap3d(1,false);std::cout<<"ranges_circle "<<changed;print_curves(tool.Wire());std::cout<<'\n';}
-int main(){closed_circle();run_ranges("ranges_closed",0);run_ranges("ranges_shortened",1);run_ranges("ranges_reversed",6);run_ranges("ranges_both_ends",7);run_ranges("ranges_closed_line",10);repeat();run("closed_edge_first_vertex",10);run("closed_edge_last_vertex",11);run("reversed_gap",6);run("both_ends",7);run("gap_then_closed",8);run("closed_then_gap",9);run("closed",0);run("trimmed_gap",1);run("face",2);run("empty_wire",3);run("null",4);run("repeated_child",5);}
+void gap2d(const char* name,int mode){
+ BRep_Builder builder;auto shape=fixture(mode);TopoDS_Face face;builder.MakeFace(face,new Geom_Plane(gp_Pln()),1e-7);builder.Add(face,shape);
+ ShapeFix_Wire tool;tool.Load(TopoDS::Wire(shape));tool.SetFace(face);bool changed=tool.FixGap2d(mode>=10?1:2,true);std::cout<<name<<' '<<changed;
+ for(TopExp_Explorer exp(tool.Wire(),TopAbs_EDGE);exp.More();exp.Next()){auto edge=TopoDS::Edge(exp.Current());double first,last;auto pc=BRep_Tool::CurveOnSurface(edge,face,first,last);auto a=pc->Value(first),b=pc->Value(last),m=pc->Value((first+last)*.5);auto spline=Handle(Geom2d_BSplineCurve)::DownCast(pc);std::cout<<' '<<std::setprecision(17)<<first<<' '<<last<<' '<<a.X()<<' '<<a.Y()<<' '<<b.X()<<' '<<b.Y()<<' '<<m.X()<<' '<<m.Y()<<' '<<(spline.IsNull()?0:spline->Degree())<<' '<<BRep_Tool::SameRange(edge);}
+ std::cout<<'\n';
+}
+int main(){gap2d("pcurve_closed_circle",12);gap2d("pcurve_shortened",1);gap2d("pcurve_both",7);gap2d("pcurve_closed_line",10);gap2d("pcurve_unchanged",0);closed_circle();run_ranges("ranges_closed",0);run_ranges("ranges_shortened",1);run_ranges("ranges_reversed",6);run_ranges("ranges_both_ends",7);run_ranges("ranges_closed_line",10);repeat();run("closed_edge_first_vertex",10);run("closed_edge_last_vertex",11);run("reversed_gap",6);run("both_ends",7);run("gap_then_closed",8);run("closed_then_gap",9);run("closed",0);run("trimmed_gap",1);run("face",2);run("empty_wire",3);run("null",4);run("repeated_child",5);}

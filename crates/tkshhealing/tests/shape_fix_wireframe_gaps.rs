@@ -279,3 +279,54 @@ fn native_range_only_closes_single_circle() {
     actual.extend(curve_observations(&tool.wire().unwrap()));
     compare("ranges_circle", &actual);
 }
+
+#[test]
+fn native_pcurve_conversion_repairs_junctions_and_closed_line() {
+    for (name, mode) in [
+        ("pcurve_closed_circle", 12),
+        ("pcurve_shortened", 1),
+        ("pcurve_both", 7),
+        ("pcurve_closed_line", 10),
+        ("pcurve_unchanged", 0),
+    ] {
+        let shape = fixture(mode);
+        let mut face = Face::default();
+        let builder = BRepBuilder::default();
+        let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+        builder
+            .make_face_on_surface(&mut face, &surface, 1e-7)
+            .unwrap();
+        builder.add(&mut face, &shape).unwrap();
+        let tool = rustycad_tkshhealing::shape_fix::ShapeFixWire::new();
+        tool.load(&topods::wire(&shape).unwrap()).unwrap();
+        tool.set_face(&face).unwrap();
+        let changed = tool
+            .fix_gap_2d(if mode >= 10 { 1 } else { 2 }, true)
+            .unwrap();
+        let mut actual = vec![f64::from(changed)];
+        for edge in Explorer::new(&tool.wire().unwrap(), ShapeEnum::Edge, ShapeEnum::Shape).unwrap()
+        {
+            let edge = topods::edge(&edge).unwrap();
+            let pc = BRepTool::curve_on_face(&edge, &face).unwrap();
+            let a = pc.pcurve.value(pc.first).unwrap();
+            let b = pc.pcurve.value(pc.last).unwrap();
+            let m = pc.pcurve.value((pc.first + pc.last) * 0.5).unwrap();
+            let spline = pc
+                .pcurve
+                .cast::<rustycad_tkg2d::geom2d::Geom2dBSplineCurve>();
+            actual.extend([
+                pc.first,
+                pc.last,
+                a.x(),
+                a.y(),
+                b.x(),
+                b.y(),
+                m.x(),
+                m.y(),
+                spline.get().map_or(0., |s| f64::from(s.degree())),
+                f64::from(BRepTool::same_range(&edge).unwrap()),
+            ]);
+        }
+        compare(name, &actual);
+    }
+}

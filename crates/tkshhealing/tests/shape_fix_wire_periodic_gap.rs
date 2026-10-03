@@ -133,7 +133,10 @@ fn assert_native_gap_result(
 
 fn assert_closed_native_pcurve(edge: &rustycad_tkbrep::topods::Edge, face: &Face) {
     let pcurve = BRepTool::curve_on_face(edge, face).unwrap();
-    let expected = Point2::new(0.0, 0.5);
+    // Pinned native FixGap2d uses the oriented second endpoint when the same-edge
+    // branch has no second spline; this reversed ring closes at U=2*pi.
+    let native = native_cone_gap();
+    let expected = Point2::new(native[4], native[5]);
     assert!(
         pcurve
             .pcurve
@@ -148,8 +151,8 @@ fn assert_closed_native_pcurve(edge: &rustycad_tkbrep::topods::Edge, face: &Face
         (0.0, 1.0497704792601261)
     );
     let (first, last) = rustycad_tkbrep::topexp::vertices(edge, false);
-    assert!(first.is_same(&last));
-    assert_eq!(BRepTool::vertex_tolerance(&last).unwrap(), 1e-7);
+    assert_eq!(f64::from(first.is_same(&last)), native[8]);
+    assert!((BRepTool::vertex_tolerance(&last).unwrap() - native[9]).abs() < 1e-9);
 }
 
 fn assert_context_replacement(
@@ -171,6 +174,16 @@ fn assert_context_replacement(
             .unwrap(),
     )
     .unwrap();
-    assert!(actual.is_same(expected));
-    assert!(!actual.is_same(old_edge));
+    let native = native_cone_gap();
+    assert_eq!(f64::from(actual.is_same(expected)), native[10]);
+    assert_eq!(f64::from(actual.is_same(old_edge)), native[11]);
+    let (first, last) = rustycad_tkbrep::topexp::vertices(&actual, false);
+    assert_eq!(f64::from(first.is_same(&last)), native[12]);
+}
+
+fn native_cone_gap() -> Vec<f64> {
+    include_str!("../../../tools/oracle/tkshhealing_wire_cone_gap.expected")
+        .split_whitespace()
+        .map(|value| value.parse().unwrap())
+        .collect()
 }
