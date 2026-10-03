@@ -69,14 +69,16 @@ impl ShapeFixWire {
         if self.context().is_null() {
             self.set_context(&Handle::new(ShapeBuildReShape::new()));
         }
-        let Some(pair) = GapPair::load(self, index)? else {
+        let Some((first, second)) = GapCurve::load_pair(self, index)? else {
             self.set_last_fix_status(ShapeExtendStatus::Fail1);
             return Ok(false);
         };
+        // Native exits a closed range-only junction before inspecting endpoint vertices.
+        if !convert && first.point.distance(&second.point) <= self.precision() {
+            return Ok(false);
+        }
+        let pair = GapPair::from_curves(first, second)?;
         if !convert {
-            if pair.first.point.distance(&pair.second.point) <= self.precision() {
-                return Ok(false);
-            }
             return ranges::repair(self, &pair);
         }
         self.convert_gap_pair(pair)
@@ -131,15 +133,7 @@ impl ShapeFixWire {
     }
 }
 impl GapPair {
-    fn load(tool: &ShapeFixWire, index: i32) -> Result<Option<Self>, Failure> {
-        let count = tool.wire_data()?.nb_edges();
-        let second = if index > 0 { index } else { count };
-        let first = if second > 1 { second - 1 } else { count };
-        let first = GapCurve::load(tool, first, true)?;
-        let second = GapCurve::load(tool, second, false)?;
-        let (Some(first), Some(second)) = (first, second) else {
-            return Ok(None);
-        };
+    fn from_curves(first: GapCurve, second: GapCurve) -> Result<Self, Failure> {
         let analysis = ShapeAnalysisEdge::new();
         let vertices = (
             analysis.last_vertex(&first.edge),
@@ -156,15 +150,27 @@ impl GapPair {
                 (a.z() + b.z()) * 0.5,
             )
         };
-        Ok(Some(Self {
+        Ok(Self {
             first,
             second,
             vertices,
             target,
-        }))
+        })
     }
 }
 impl GapCurve {
+    fn load_pair(tool: &ShapeFixWire, index: i32) -> Result<Option<(Self, Self)>, Failure> {
+        let count = tool.wire_data()?.nb_edges();
+        let second = if index > 0 { index } else { count };
+        let first = if second > 1 { second - 1 } else { count };
+        let first = GapCurve::load(tool, first, true)?;
+        let second = GapCurve::load(tool, second, false)?;
+        let (Some(first), Some(second)) = (first, second) else {
+            return Ok(None);
+        };
+        Ok(Some((first, second)))
+    }
+
     fn load(tool: &ShapeFixWire, index: i32, last_end: bool) -> Result<Option<Self>, Failure> {
         let edge = tool.wire_data()?.edge(index)?;
         let edge = topods::edge(&ReShape::apply(

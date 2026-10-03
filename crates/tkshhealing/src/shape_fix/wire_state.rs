@@ -83,7 +83,8 @@ impl ShapeFixWire {
         self.state.read().preference_pcurve_mode
     }
 
-    /// Selects aggregate 3D gap repair; `fixer.set_fix_gaps_3d_mode(0)` disables dispatch.
+    /// Stores the native 3D gap mode; `fixer.set_fix_gaps_3d_mode(0)`.
+    /// The pinned native implementation stores this flag without reading it in repair dispatch.
     pub fn set_fix_gaps_3d_mode(&self, mode: i32) {
         self.state.write().fix_gaps_3d_mode = mode;
     }
@@ -93,7 +94,8 @@ impl ShapeFixWire {
         self.state.read().fix_gaps_3d_mode
     }
 
-    /// Selects aggregate 2D gap repair; `fixer.set_fix_gaps_2d_mode(0)` disables dispatch.
+    /// Stores the native 2D gap mode; `fixer.set_fix_gaps_2d_mode(0)`.
+    /// The pinned native implementation stores this flag without reading it in repair dispatch.
     pub fn set_fix_gaps_2d_mode(&self, mode: i32) {
         self.state.write().fix_gaps_2d_mode = mode;
     }

@@ -225105,6 +225105,51 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_2d",
       "status": "partial",
       "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. Nonzero 2D range repair remains explicitly unported; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::ClearModes()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::clear_modes",
+      "status": "implemented",
+      "notes": "Source-derived native state/default/status behavior; all-mode reset oracle preserves prior DONE until ClearStatuses. ClearStatuses retains StatusRemovedSegment (true state source-audited, not yet dynamically exercised). Pinned preference and 3D/2D gap mode flags are stored without being read by native repair dispatch; no extra dispatch is invented."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::ClearStatuses()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::clear_statuses",
+      "status": "implemented",
+      "notes": "Source-derived native state/default/status behavior; all-mode reset oracle preserves prior DONE until ClearStatuses. ClearStatuses retains StatusRemovedSegment (true state source-audited, not yet dynamically exercised). Pinned preference and 3D/2D gap mode flags are stored without being read by native repair dispatch; no extra dispatch is invented."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::PreferencePCurveMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::preference_pcurve_mode",
+      "status": "implemented",
+      "notes": "Source-derived native state/default/status behavior; all-mode reset oracle preserves prior DONE until ClearStatuses. ClearStatuses retains StatusRemovedSegment (true state source-audited, not yet dynamically exercised). Pinned preference and 3D/2D gap mode flags are stored without being read by native repair dispatch; no extra dispatch is invented."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixGaps3dMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_3d_mode",
+      "status": "implemented",
+      "notes": "Source-derived native state/default/status behavior; all-mode reset oracle preserves prior DONE until ClearStatuses. ClearStatuses retains StatusRemovedSegment (true state source-audited, not yet dynamically exercised). Pinned preference and 3D/2D gap mode flags are stored without being read by native repair dispatch; no extra dispatch is invented."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixGaps2dMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_2d_mode",
+      "status": "implemented",
+      "notes": "Source-derived native state/default/status behavior; all-mode reset oracle preserves prior DONE until ClearStatuses. ClearStatuses retains StatusRemovedSegment (true state source-audited, not yet dynamically exercised). Pinned preference and 3D/2D gap mode flags are stored without being read by native repair dispatch; no extra dispatch is invented."
     }
   ],
   "tests": [

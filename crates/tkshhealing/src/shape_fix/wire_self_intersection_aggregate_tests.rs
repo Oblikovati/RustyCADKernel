@@ -75,7 +75,7 @@ fn set_nondefault_modes(fixer: &ShapeFixWire) {
     fixer.set_geometry_mode(false);
     fixer.set_closed_mode(false);
     fixer.set_preference_pcurve_mode(false);
-    fixer.state.write().fix_gaps_by_ranges = true;
+    fixer.set_fix_gaps_by_ranges(true);
     set_nondefault_edge_modes(fixer);
     set_nondefault_aggregate_modes(fixer);
 }
@@ -122,7 +122,7 @@ fn geometry_mode_values(fixer: &ShapeFixWire) -> Vec<f64> {
         f64::from(fixer.geometry_mode()),
         f64::from(fixer.closed_mode()),
         f64::from(fixer.preference_pcurve_mode()),
-        f64::from(fixer.state.read().fix_gaps_by_ranges),
+        f64::from(fixer.fix_gaps_by_ranges()),
         f64::from(fixer.remove_loop_mode()),
         f64::from(fixer.fix_reversed_2d_mode()),
         f64::from(fixer.fix_remove_pcurve_mode()),

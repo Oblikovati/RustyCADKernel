@@ -37,3 +37,6 @@ see `tkshhealing_wire_cone_gap.md` for its exact native regression. Preliminary
 2D range adjustment remains explicitly unsupported for nonzero gaps. Native
 conic approximation, trim/offset extraction, seam and exceptional domains still
 need broader differential coverage.
+
+A vertexless zero-range 3D edge verifies that convert=false returns before reading
+vertices when the curve junction already closes. OCCT still creates its context.

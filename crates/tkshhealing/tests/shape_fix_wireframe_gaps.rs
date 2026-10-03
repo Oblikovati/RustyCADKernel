@@ -330,3 +330,33 @@ fn native_pcurve_conversion_repairs_junctions_and_closed_line() {
         compare(name, &actual);
     }
 }
+
+#[test]
+fn range_only_closed_junction_does_not_read_missing_vertices() {
+    let source = topods::wire(&fixture(0)).unwrap();
+    let mut wire = rustycad_tkbrep::topods::Wire::default();
+    let builder = BRepBuilder::default();
+    let edge = topods::edge(
+        &Explorer::new(&source, ShapeEnum::Edge, ShapeEnum::Shape)
+            .unwrap()
+            .current()
+            .empty_copied()
+            .unwrap(),
+    )
+    .unwrap();
+    builder.range(&edge, 0., 0., true).unwrap();
+    builder.make_wire(&mut wire);
+    builder.add(&mut wire, &edge).unwrap();
+    let tool = rustycad_tkshhealing::shape_fix::ShapeFixWire::new();
+    tool.load(&wire).unwrap();
+    let actual = [
+        f64::from(tool.fix_gap_3d(1, false).unwrap()),
+        f64::from(tool.context().is_null()),
+    ];
+    compare("vertexless_closed", &actual);
+}
+
+#[test]
+fn native_single_circle_3d_conic_approximation_matches() {
+    run("closed_circle", 12);
+}
