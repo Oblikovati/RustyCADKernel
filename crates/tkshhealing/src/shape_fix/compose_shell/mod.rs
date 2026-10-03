@@ -8,13 +8,15 @@ mod init;
 mod load_wires;
 mod split_by_grid;
 mod split_by_line;
+mod split_line_sequence;
 mod split_wire;
 
 use crate::shape_analysis::{ShapeAnalysisTransferParametersProj, TransferParameters};
 use crate::shape_extend::{ShapeExtend, ShapeExtendCompositeSurface};
-use crate::shape_fix::{FixRoot, FixRootData, ShapeFixRoot};
+use crate::shape_fix::{FixRoot, FixRootData, ShapeFixRoot, ShapeFixWireSegment};
 use rustycad_tkbrep::topods::{Face, Shape};
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::ncollection::Sequence;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::toploc::Location;
@@ -201,6 +203,18 @@ impl ShapeFixComposeShell {
         self.fields.write().status = 0;
         let mut segments = self.load_wires()?;
         split_by_grid::split_by_grid(self, &mut segments)
+    }
+
+    /// Split all segments and create the interior joint edges between their intersections.
+    /// Example: `composer.split_segments_by_line(&mut segments, line, true, 1)?`.
+    pub fn split_segments_by_line(
+        &self,
+        segments: &mut Sequence<ShapeFixWireSegment>,
+        line: rustycad_tkmath::gp::Line2,
+        along_u: bool,
+        index: i32,
+    ) -> Result<(), Failure> {
+        split_line_sequence::split_sequence(self, segments, line, along_u, index)
     }
 
     /// Greedily joins split wire segments into patch-local loops; `composer.collect_wires(&mut loops, &mut segments)?`.

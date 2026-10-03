@@ -5,7 +5,7 @@ use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisSurface};
 use crate::shape_extend::ShapeExtendWireData;
 use crate::shape_fix::{FixRoot, ShapeFixWireSegment};
 mod closed_mode;
-mod helpers;
+pub(super) mod helpers;
 mod pcurve_scan;
 use helpers::{
     ITP_TANG, JunctionState, SplitArguments, TOLINT, edge_end_parameter, edge_start_parameter,

@@ -2,13 +2,13 @@ use super::SplitIntersection;
 use rustycad_tkbrep::topods::Edge;
 use rustycad_tkernel::standard::Failure;
 
-pub(super) const IOR_BOTH: i32 = 3;
-pub(super) const ITP_INTER: i32 = 8;
-pub(super) const ITP_BEGSEG: i32 = 16;
-pub(super) const ITP_ENDSEG: i32 = 32;
-pub(super) const ITP_TANG: i32 = 64;
-pub(super) const IOR_POS: i32 = 4;
-pub(super) const TOLINT: f64 = 1.0e-10;
+pub(in crate::shape_fix::compose_shell) const IOR_BOTH: i32 = 3;
+pub(in crate::shape_fix::compose_shell) const ITP_INTER: i32 = 8;
+pub(in crate::shape_fix::compose_shell) const ITP_BEGSEG: i32 = 16;
+pub(in crate::shape_fix::compose_shell) const ITP_ENDSEG: i32 = 32;
+pub(in crate::shape_fix::compose_shell) const ITP_TANG: i32 = 64;
+pub(in crate::shape_fix::compose_shell) const IOR_POS: i32 = 4;
+pub(in crate::shape_fix::compose_shell) const TOLINT: f64 = 1.0e-10;
 
 #[derive(Default)]
 pub(super) struct JunctionState {
