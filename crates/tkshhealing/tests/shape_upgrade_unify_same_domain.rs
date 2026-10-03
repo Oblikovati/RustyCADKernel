@@ -206,6 +206,54 @@ fn disabled_edge_unification_keeps_both_native_edges() {
     assert_eq!(count, native_edge_count("disabled"));
 }
 
+#[test]
+fn planar_face_boundary_line_chain_is_rebuilt_like_native() {
+    let input = face_with_split_boundary();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+    unifier.build().unwrap();
+    let result = unifier.shape();
+    let expected = native_face_summary();
+    assert_eq!(face_count(&result), expected.0);
+    assert_eq!(edge_shapes(&result).len(), expected.1);
+    assert!(
+        BRepCheckAnalyzer::new(&result, true, false, false)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
+}
+
+fn face_with_split_boundary() -> Shape {
+    let points = [
+        Point3::new(0., 0., 0.),
+        Point3::new(1., 0., 0.),
+        Point3::new(2., 0., 0.),
+        Point3::new(2., 2., 0.),
+        Point3::new(0., 2., 0.),
+        Point3::new(0., 0., 0.),
+    ];
+    let wire = wire_from_points(&points);
+    BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &wire, true)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape()
+}
+
+fn wire_from_points(points: &[Point3]) -> Wire {
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    for pair in points.windows(2) {
+        wire.add_edge(
+            &BRepBuilderAPIMakeEdge::from_points(pair[0], pair[1])
+                .unwrap()
+                .edge()
+                .unwrap(),
+        )
+        .unwrap();
+    }
+    wire.wire().unwrap()
+}
+
 fn collinear_wire() -> Shape {
     line_chain(&[0., 1., 2.])
 }
@@ -259,6 +307,15 @@ fn native_endpoints(case: &str) -> Vec<f64> {
         .skip(2)
         .map(|value| value.parse().unwrap())
         .collect()
+}
+
+fn native_face_summary() -> (usize, usize) {
+    let row = include_str!("../../../tools/oracle/tkshhealing_unify_collinear_wire.expected")
+        .lines()
+        .find(|line| line.starts_with("planar_face"))
+        .unwrap();
+    let values = row.split_whitespace().collect::<Vec<_>>();
+    (values[2].parse().unwrap(), values[4].parse().unwrap())
 }
 
 fn line_edge(first_x: f64, last_x: f64) -> rustycad_tkbrep::topods::Edge {
