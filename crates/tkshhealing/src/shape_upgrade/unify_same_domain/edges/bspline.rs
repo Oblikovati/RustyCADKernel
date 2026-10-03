@@ -3,6 +3,7 @@ use crate::shape_build::ShapeBuildReShape;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
 use rustycad_tkbrep::brep_tools::ReShape;
+use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Edge, Shape, Vertex};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -26,6 +27,13 @@ pub(super) fn merge_first_pair(
     };
     let curve = concatenate_curves(&first, &second)?;
     replace_pair(shape, &first, &second, &start, &end, curve).map(Some)
+}
+
+pub(super) fn has_candidate(shape: &Shape, tolerance: f64) -> Result<bool, Failure> {
+    let edges = Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)?
+        .map(|edge| rustycad_tkbrep::topods::edge(&edge))
+        .collect::<Result<Vec<_>, _>>()?;
+    Ok(first_pair(&edges, tolerance)?.is_some())
 }
 
 fn first_pair(
