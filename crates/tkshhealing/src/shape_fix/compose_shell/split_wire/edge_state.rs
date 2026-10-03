@@ -1,5 +1,5 @@
 use super::super::{ComposeShellFields, ShapeFixComposeShell};
-use crate::shape_analysis::ShapeAnalysisEdge;
+use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisSurface};
 use rustycad_tkbrep::{
     brep::BRepTool,
     topods::{Edge, Shape, Vertex},
@@ -38,6 +38,7 @@ impl EdgeSplitState {
     pub(super) fn new(
         composer: &ShapeFixComposeShell,
         fields: &ComposeShellFields,
+        surface_tool: &ShapeAnalysisSurface,
         edge: &Edge,
     ) -> Result<Self, Failure> {
         let analysis = ShapeAnalysisEdge::new();
@@ -46,6 +47,7 @@ impl EdgeSplitState {
             analysis.pcurve_on_face(edge, &fields.face, true)?;
         if pcurve.is_null() {
             super::edge_projection::mark_fail2(composer);
+            // The pinned native code dereferences this missing curve after setting Fail2.
             return Err(super::null_pcurve());
         }
         let first_vertex = analysis.first_vertex(edge);
@@ -53,19 +55,18 @@ impl EdgeSplitState {
         let inverse = fields.location.inverted()?.transformation();
         let first_point = BRepTool::pnt(&first_vertex)?.transformed(inverse);
         let last_point = BRepTool::pnt(&last_vertex)?.transformed(inverse);
-        let first_uv = pcurve.value(first_parameter)?;
-        let last_uv = pcurve.value(last_parameter)?;
-        let previous_grid_point = fields.grid.value_at(first_uv)?;
-        let last_grid_point = fields.grid.value_at(last_uv)?;
         let non_manifold_vertices = super::edge_projection::non_manifold_vertices(edge);
         let non_manifold_parameters = super::edge_projection::non_manifold_parameters(
             &non_manifold_vertices,
             &curve_3d,
             &pcurve,
-            &fields.face,
-            (first_3d_parameter, last_3d_parameter),
-            (first_parameter, last_parameter),
+            surface_tool,
+            first_parameter,
         )?;
+        let first_uv = pcurve.value(first_parameter)?;
+        let last_uv = pcurve.value(last_parameter)?;
+        let previous_grid_point = fields.grid.value_at(first_uv)?;
+        let last_grid_point = fields.grid.value_at(last_uv)?;
         let (first_vertex_tolerance, last_vertex_tolerance) =
             super::edge_projection::vertex_tolerances(composer, &first_vertex, &last_vertex)?;
         Ok(Self {
@@ -93,7 +94,16 @@ impl EdgeSplitState {
             non_manifold_vertices,
             non_manifold_parameters,
             periodic: pcurve.is_periodic(),
-            period: pcurve.period().unwrap_or(0.0),
+            period: periodic_curve_period(&pcurve)?,
         })
     }
+}
+
+fn periodic_curve_period(
+    pcurve: &Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve>,
+) -> Result<f64, Failure> {
+    if !pcurve.is_periodic() {
+        return Ok(0.0);
+    }
+    pcurve.period()
 }

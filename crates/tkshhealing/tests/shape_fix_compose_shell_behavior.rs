@@ -1,11 +1,15 @@
 //! Native constructor and public mutable-option parity for ShapeFix_ComposeShell.
-use rustycad_tkbrep::{brep::BRepTool, brep_tools::ReShape, topods::Builder};
+use rustycad_tkbrep::{
+    brep::{BRepBuilder, BRepTool},
+    brep_tools::ReShape,
+    topods::{self, Builder},
+};
 use rustycad_tkernel::{
     ncollection::{HArray1, HArray2, Sequence},
     standard::Handle,
 };
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
-use rustycad_tkmath::gp::{Axis3, Point3};
+use rustycad_tkmath::gp::{Axis3, Direction2, Line2, Point2, Point3};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisTransferParameters,
@@ -243,6 +247,199 @@ fn split_wire_rectangular_loop_matches_native_patch_and_vertex_counts() {
     );
 }
 
+#[test]
+fn split_by_line_rectangular_loop_matches_native_intersections_and_codes() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    let composer = initialized_composer(&face_fixture(), &Handle::new(ShapeBuildReShape::new()));
+    let segments = composer.load_wires().unwrap();
+    let mut wire = segments.value(1).unwrap().clone();
+    let line = Line2::new(Point2::new(1.0, 0.0), Direction2::new(0.0, 1.0).unwrap());
+    let mut parameters = Sequence::default();
+    let mut codes = Sequence::default();
+    let mut vertices = Sequence::default();
+    let done = composer
+        .split_by_line(
+            &mut wire,
+            line,
+            true,
+            1,
+            &mut parameters,
+            &mut codes,
+            &mut vertices,
+        )
+        .unwrap();
+    assert!(done);
+    assert_eq!(
+        split_by_line_summary(&wire, &parameters, &codes, &vertices),
+        native_row(expected, "split_by_line ")
+    );
+}
+
+#[test]
+fn split_by_line_vertex_segment_matches_native_projection_and_replacement() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    assert_eq!(
+        split_vertex_segment_summary(),
+        native_row(expected, "split_by_line_vertex ")
+    );
+}
+
+fn split_vertex_segment_summary() -> String {
+    let face = bounded_plane_face();
+    let composer = initialized_composer(&face, &Handle::new(ShapeBuildReShape::new()));
+    let mut segment = ShapeFixWireSegment::new();
+    let vertex = BRepBuilderAPIMakeVertex::new(Point3::new(1.0, 1.0, 0.0))
+        .unwrap()
+        .vertex()
+        .unwrap();
+    segment.set_vertex(&vertex);
+    let mut parameters = Sequence::default();
+    let mut codes = Sequence::default();
+    let mut vertices = Sequence::default();
+    let line = Line2::new(Point2::new(1.0, 0.0), Direction2::new(0.0, 1.0).unwrap());
+    let done = composer
+        .split_by_line(
+            &mut segment,
+            line,
+            true,
+            1,
+            &mut parameters,
+            &mut codes,
+            &mut vertices,
+        )
+        .unwrap();
+    let point = BRepTool::pnt(&topods::vertex(vertices.value(1).unwrap()).unwrap()).unwrap();
+    format!(
+        "split_by_line_vertex {} {} {} {} {}:{}",
+        done as u8,
+        segment.is_vertex() as u8,
+        parameters.length(),
+        codes.value(1).unwrap(),
+        point.x(),
+        point.y()
+    )
+}
+
+#[test]
+fn split_wire_projects_and_preserves_an_internal_edge_vertex() {
+    let expected = include_str!("../../../tools/oracle/tkshhealing_compose_shell.expected");
+    assert_eq!(
+        split_internal_vertex_summary(),
+        native_row(expected, "split_wire_internal ")
+    );
+}
+
+fn split_internal_vertex_summary() -> String {
+    let (face, edge) = internal_edge_fixture();
+    let mut wire = ShapeFixWireSegment::new();
+    wire.add_edge(0, &edge).unwrap();
+    let composer = initialized_composer(&face, &Handle::new(ShapeBuildReShape::new()));
+    let mut indices = sequence(&[1]);
+    let values = sequence(&[1.0]);
+    let codes = sequence(&[2]);
+    let mut vertices = Sequence::default();
+    let split = composer
+        .split_wire(
+            &mut wire,
+            &mut indices,
+            &values,
+            &mut vertices,
+            &codes,
+            true,
+            1,
+        )
+        .unwrap();
+    internal_vertex_result(&split, vertices.length())
+}
+
+fn internal_edge_fixture() -> (rustycad_tkbrep::topods::Face, rustycad_tkbrep::topods::Edge) {
+    let points = [
+        Point3::new(0.0, 0.0, 0.0),
+        Point3::new(2.0, 0.0, 0.0),
+        Point3::new(2.0, 2.0, 0.0),
+        Point3::new(0.0, 2.0, 0.0),
+    ];
+    let edges: Vec<_> = (0..4)
+        .map(|index| {
+            BRepBuilderAPIMakeEdge::from_points(points[index], points[(index + 1) % 4])
+                .unwrap()
+                .edge()
+                .unwrap()
+        })
+        .collect();
+    let edge = edge_with_internal_vertex(edges[0].clone());
+    let mut wire_builder = BRepBuilderAPIMakeWire::new();
+    wire_builder.add_edge(&edge).unwrap();
+    for other in edges.iter().skip(1) {
+        wire_builder.add_edge(other).unwrap();
+    }
+    let wire = wire_builder.wire().unwrap();
+    let face = BRepBuilderAPIMakeFace::from_plane_wire(
+        rustycad_tkmath::gp::Plane3::default(),
+        &wire,
+        true,
+    )
+    .unwrap()
+    .face()
+    .unwrap();
+    (face, edge)
+}
+
+fn bounded_plane_face() -> rustycad_tkbrep::topods::Face {
+    BRepBuilderAPIMakeFace::from_plane_bounds(
+        rustycad_tkmath::gp::Plane3::default(),
+        (0.0, 2.0, 0.0, 2.0),
+    )
+    .unwrap()
+    .face()
+    .unwrap()
+}
+
+fn edge_with_internal_vertex(
+    mut edge: rustycad_tkbrep::topods::Edge,
+) -> rustycad_tkbrep::topods::Edge {
+    let mut internal = BRepBuilderAPIMakeVertex::new(Point3::new(0.5, 0.0, 0.0))
+        .unwrap()
+        .vertex()
+        .unwrap();
+    internal.set_orientation(rustycad_tkg3d::top_abs::Orientation::Internal);
+    let mut edge_shape = edge.clone().into_shape();
+    BRepBuilder::default()
+        .add(&mut edge_shape, &internal.into_shape())
+        .unwrap();
+    edge = topods::edge(&edge_shape).unwrap();
+    edge
+}
+
+fn internal_vertex_result(segment: &ShapeFixWireSegment, vertex_count: i32) -> String {
+    let counts: Vec<usize> = (1..=segment.nb_edges())
+        .map(|index| internal_vertices(&segment.edge(index).unwrap()))
+        .collect();
+    format!(
+        "split_wire_internal {} {vertex_count} {}",
+        segment.nb_edges(),
+        counts
+            .iter()
+            .map(usize::to_string)
+            .collect::<Vec<_>>()
+            .join(" ")
+    )
+}
+
+fn internal_vertices(edge: &rustycad_tkbrep::topods::Edge) -> usize {
+    let shape = edge.clone().into_shape();
+    let mut iterator = rustycad_tkbrep::topods::ShapeIterator::new(&shape, false, true);
+    let mut count = 0;
+    while iterator.more() {
+        count += usize::from(
+            iterator.value().unwrap().orientation()
+                == rustycad_tkg3d::top_abs::Orientation::Internal,
+        );
+        iterator.next();
+    }
+    count
+}
+
 fn sequence<T: Clone>(values: &[T]) -> Sequence<T> {
     let mut sequence = Sequence::default();
     for value in values {
@@ -288,6 +485,34 @@ fn split_wire_summary(segment: &ShapeFixWireSegment, vertex_count: i32) -> Strin
             patch.v_max,
             BRepTool::range(&segment.edge(edge).unwrap()).unwrap().0,
             BRepTool::range(&segment.edge(edge).unwrap()).unwrap().1
+        ));
+    }
+    summary
+}
+
+fn split_by_line_summary(
+    wire: &ShapeFixWireSegment,
+    parameters: &Sequence<f64>,
+    codes: &Sequence<i32>,
+    vertices: &Sequence<rustycad_tkbrep::topods::Shape>,
+) -> String {
+    let mut summary = format!(
+        "split_by_line 1 {} {} {} {}",
+        wire.nb_edges(),
+        parameters.length(),
+        codes.length(),
+        vertices.length()
+    );
+    for index in 1..=parameters.length() {
+        let vertex =
+            rustycad_tkbrep::topods::vertex(vertices.value(index as usize).unwrap()).unwrap();
+        let point = BRepTool::pnt(&vertex).unwrap();
+        summary.push_str(&format!(
+            " {}:{}:{}:{}",
+            parameters.value(index as usize).unwrap(),
+            codes.value(index as usize).unwrap(),
+            point.x(),
+            point.y()
         ));
     }
     summary

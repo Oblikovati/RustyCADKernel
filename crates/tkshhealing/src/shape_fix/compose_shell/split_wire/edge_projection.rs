@@ -54,14 +54,13 @@ pub(super) fn non_manifold_parameters(
     vertices: &[Shape],
     curve_3d: &Handle<dyn rustycad_tkg3d::geom::GeomCurve>,
     pcurve: &Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve>,
-    face: &rustycad_tkbrep::topods::Face,
-    range_3d: (f64, f64),
-    range_2d: (f64, f64),
+    surface: &ShapeAnalysisSurface,
+    first_parameter: f64,
 ) -> Result<Vec<f64>, Failure> {
     vertices
         .iter()
         .map(|vertex| {
-            projected_vertex_parameter(vertex, curve_3d, pcurve, face, range_3d, range_2d)
+            projected_vertex_parameter(vertex, curve_3d, pcurve, surface, first_parameter)
         })
         .collect()
 }
@@ -70,40 +69,36 @@ fn projected_vertex_parameter(
     vertex: &Shape,
     curve_3d: &Handle<dyn rustycad_tkg3d::geom::GeomCurve>,
     pcurve: &Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve>,
-    face: &rustycad_tkbrep::topods::Face,
-    range_3d: (f64, f64),
-    range_2d: (f64, f64),
+    surface: &ShapeAnalysisSurface,
+    first_parameter: f64,
 ) -> Result<f64, Failure> {
     let point = BRepTool::pnt(&topods::vertex(vertex)?)?;
     if !curve_3d.is_null() {
-        return project_on_curve_3d(curve_3d, point, range_3d);
+        return project_on_curve_3d(curve_3d, point);
     }
-    project_on_pcurve(face, pcurve, point, range_2d)
+    project_on_pcurve(surface, pcurve, point, first_parameter)
 }
 
 fn project_on_curve_3d(
     curve: &Handle<dyn rustycad_tkg3d::geom::GeomCurve>,
     point: Point3,
-    range: (f64, f64),
 ) -> Result<f64, Failure> {
-    let projection =
-        ShapeAnalysisCurve.project(curve, point, precision::confusion(), range, false)?;
+    let projection = ShapeAnalysisCurve.project_full(curve, point, precision::confusion(), true)?;
     Ok(projection.2)
 }
 
 fn project_on_pcurve(
-    face: &rustycad_tkbrep::topods::Face,
+    surface: &ShapeAnalysisSurface,
     pcurve: &Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve>,
     point: Point3,
-    range: (f64, f64),
+    initial_parameter: f64,
 ) -> Result<f64, Failure> {
-    let surface = ShapeAnalysisSurface::new(&BRepTool::surface(face)?)?;
     let uv = surface.value_of_uv(point, precision::confusion())?;
-    let mut extrema = ExtremaCurve::from_geom_range(pcurve, range.0, range.1)?;
+    let mut extrema = ExtremaCurve::from_geom(pcurve)?;
     let computed = extrema.perform(uv, precision::confusion(), SearchMode::MinMax)?;
     let index = computed.min_index();
     if index == ExtremaResult::INVALID_INDEX {
-        return Ok(range.0);
+        return Ok(initial_parameter);
     }
     Ok(computed.extrema[index].parameter)
 }
