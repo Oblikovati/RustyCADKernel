@@ -45,7 +45,9 @@ pub(super) fn convert_gap_curve(
     // The native generic conversion branch catches Standard_Failure and retains a null result.
     Ok(trim_and_convert(&curve, entry.first, entry.last).unwrap_or_default())
 }
-fn basic_gap_curve(source: &Handle<dyn GeomCurve>) -> Result<Handle<dyn GeomCurve>, Failure> {
+pub(super) fn basic_gap_curve(
+    source: &Handle<dyn GeomCurve>,
+) -> Result<Handle<dyn GeomCurve>, Failure> {
     let mut curve = source.clone();
     let mut offset = Xyz::new(0., 0., 0.);
     let mut has_offset = false;

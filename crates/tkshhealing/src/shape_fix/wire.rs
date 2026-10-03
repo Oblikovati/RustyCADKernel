@@ -113,6 +113,7 @@ struct WireFixState {
     max_tail_angle_sine: f64,
     max_tail_width: f64,
     removed_segment: bool,
+    fix_gaps_by_ranges: bool,
 }
 
 /// The implemented `ShapeFix_Wire` reorder, no-gap and periodic-cone p-curve paths.
@@ -171,6 +172,7 @@ impl Default for ShapeFixWire {
                 max_tail_angle_sine: 0.0,
                 max_tail_width: -1.0,
                 removed_segment: false,
+                fix_gaps_by_ranges: false,
             }),
             edge_fixer: Handle::new(ShapeFixEdge::new()),
         }
@@ -313,20 +315,14 @@ impl ShapeFixWire {
         Ok(true)
     }
 
-    /// Repair 3D junctions by native spline conversion; `tool.fix_gaps_3d()?`.
-    pub fn fix_gaps_3d(&self) -> Result<bool, Failure> {
-        self.state.write().gaps_3d_status = 0;
-        let start = if self.closed_mode() { 1 } else { 2 };
-        for index in start..=self.nb_edges() {
-            self.fix_gap_3d(index, true)?;
-            let last = self.state.read().last_fix_status;
-            self.state.write().gaps_3d_status |= last;
-        }
-        Ok(self.status_gaps_3d(ShapeExtendStatus::Done))
-    }
-
     /// `FixGaps2d()`: analyze adjacent p-curves and repair the pinned closed periodic gap.
     pub fn fix_gaps_2d(&self) -> Result<bool, Failure> {
+        if self.fix_gaps_by_ranges() {
+            return Err(Failure::with_message(
+                "Standard_NotImplemented",
+                "FixGaps2d: FixGapsByRanges=true requires the unported 2D range repair",
+            ));
+        }
         self.set_gap_status(false, ShapeExtendStatus::Ok);
         self.fix_gap_pass(false)
     }

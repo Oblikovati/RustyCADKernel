@@ -27,7 +27,7 @@ fn fixture(mode: i32) -> Shape {
     .unwrap()
     .wire()
     .unwrap();
-    if mode == 10 || mode == 11 {
+    if mode == 10 || mode == 11 || mode == 12 {
         let source = topods::edge(
             Explorer::new(&wire, ShapeEnum::Edge, ShapeEnum::Shape)
                 .unwrap()
@@ -53,6 +53,17 @@ fn fixture(mode: i32) -> Shape {
                 &vertex.oriented(rustycad_tkg3d::top_abs::Orientation::Reversed),
             )
             .unwrap();
+        if mode == 12 {
+            let circle: Handle<dyn rustycad_tkg3d::geom::GeomCurve> = Handle::new(
+                rustycad_tkg3d::geom::GeomCircle::new(rustycad_tkmath::gp::Axis2::default(), 1.)
+                    .unwrap(),
+            )
+            .cast();
+            builder.update_edge_curve(&edge, &circle, 1e-7).unwrap();
+            builder
+                .range(&edge, 0., std::f64::consts::PI, true)
+                .unwrap();
+        }
         builder.make_wire(&mut wire);
         builder.add(&mut wire, &edge).unwrap();
     }
@@ -129,6 +140,12 @@ fn observe(tool: &ShapeFixWireframe, input: &Shape, changed: bool) -> Vec<f64> {
         f64::from(tool.context().is_null()),
         edges.len() as f64,
     ]);
+    values.extend(curve_observations(&result));
+    values
+}
+fn curve_observations(result: &Shape) -> Vec<f64> {
+    let edges = Explorer::new(result, ShapeEnum::Edge, ShapeEnum::Shape).unwrap();
+    let mut values = Vec::new();
     for edge in edges {
         let (curve, first, last) = BRepTool::curve(&topods::edge(&edge).unwrap()).unwrap();
         let p = curve.value(first).unwrap();
@@ -149,6 +166,9 @@ fn run(name: &str, mode: i32) {
     let tool = ShapeFixWireframe::from_shape(&shape);
     let changed = tool.fix_wire_gaps().unwrap();
     let actual = observe(&tool, &shape, changed);
+    compare(name, &actual);
+}
+fn compare(name: &str, actual: &[f64]) {
     let expected: Vec<f64> =
         include_str!("../../../tools/oracle/tkshhealing_wireframe_gaps.expected")
             .lines()
@@ -223,4 +243,39 @@ fn repeated_wire_gap_pass_resets_previous_done_status() {
             .map(|v| v.parse().unwrap())
             .collect();
     assert_eq!(actual.as_slice(), expected.as_slice());
+}
+
+#[test]
+fn native_range_mode_preserves_lines_and_falls_back_for_closed_line() {
+    for (name, mode) in [
+        ("ranges_closed", 0),
+        ("ranges_shortened", 1),
+        ("ranges_reversed", 6),
+        ("ranges_both_ends", 7),
+        ("ranges_closed_line", 10),
+    ] {
+        let tool = rustycad_tkshhealing::shape_fix::ShapeFixWire::new();
+        assert!(!tool.fix_gaps_by_ranges());
+        tool.load(&topods::wire(&fixture(mode)).unwrap()).unwrap();
+        tool.fix_reorder().unwrap();
+        tool.set_fix_gaps_by_ranges(true);
+        let changed = tool.fix_gaps_3d().unwrap();
+        let mut actual = vec![
+            f64::from(changed),
+            f64::from(tool.status_gaps_3d(ShapeExtendStatus::Done)),
+            f64::from(tool.status_gaps_3d(ShapeExtendStatus::Fail)),
+            f64::from(tool.fix_gaps_by_ranges()),
+        ];
+        actual.extend(curve_observations(&tool.wire().unwrap()));
+        compare(name, &actual);
+    }
+}
+
+#[test]
+fn native_range_only_closes_single_circle() {
+    let tool = rustycad_tkshhealing::shape_fix::ShapeFixWire::new();
+    tool.load(&topods::wire(&fixture(12)).unwrap()).unwrap();
+    let mut actual = vec![f64::from(tool.fix_gap_3d(1, false).unwrap())];
+    actual.extend(curve_observations(&tool.wire().unwrap()));
+    compare("ranges_circle", &actual);
 }

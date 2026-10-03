@@ -12,11 +12,28 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkernel::precision;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+pub(super) struct CurveRepair {
+    pub curve: Handle<dyn GeomCurve>,
+    pub first: f64,
+    pub last: f64,
+}
+impl CurveRepair {
+    pub fn spline(curve: &Handle<GeomBSplineCurve>) -> Option<Self> {
+        if curve.is_null() {
+            return None;
+        }
+        Some(Self {
+            curve: curve.cast(),
+            first: curve.first_parameter(),
+            last: curve.last_parameter(),
+        })
+    }
+}
 pub(super) fn replace_gap_curves(
     tool: &ShapeFixWire,
     pair: &GapPair,
-    first: &Handle<GeomBSplineCurve>,
-    second: &Handle<GeomBSplineCurve>,
+    first: Option<&CurveRepair>,
+    second: Option<&CurveRepair>,
 ) -> Result<(), Failure> {
     let last = copy_gap_vertex(tool, &pair.vertices.1)?;
     let before = if pair.vertices.0.is_same(&pair.vertices.1) {
@@ -24,10 +41,10 @@ pub(super) fn replace_gap_curves(
     } else {
         copy_gap_vertex(tool, &pair.vertices.0)?
     };
-    if !first.is_null() {
+    if let Some(first) = first {
         replace_gap_curve(tool, &pair.first, first, &Vertex::default(), &before)?;
     }
-    if !second.is_null() {
+    if let Some(second) = second {
         replace_gap_curve(tool, &pair.second, second, &last, &Vertex::default())?;
     }
     Ok(())
@@ -41,15 +58,15 @@ fn copy_gap_vertex(tool: &ShapeFixWire, vertex: &Vertex) -> Result<Vertex, Failu
 fn replace_gap_curve(
     tool: &ShapeFixWire,
     entry: &GapCurve,
-    curve: &Handle<GeomBSplineCurve>,
+    curve: &CurveRepair,
     first: &Vertex,
     last: &Vertex,
 ) -> Result<(), Failure> {
     let mut replacement = ShapeBuildEdge.copy_replace_vertices(&entry.edge, first, last)?;
     let forward = topods::edge(&replacement.oriented(Orientation::Forward))?;
     let builder = BRepBuilder::default();
-    builder.update_edge_curve(&forward, &curve.cast::<dyn GeomCurve>(), 0.)?;
-    ShapeBuildEdge.set_range_3d(&forward, curve.first_parameter(), curve.last_parameter())?;
+    builder.update_edge_curve(&forward, &curve.curve, 0.)?;
+    ShapeBuildEdge.set_range_3d(&forward, curve.first, curve.last)?;
     ShapeFixShapeTolerance.set_tolerance(&replacement, precision::confusion(), ShapeEnum::Edge)?;
     builder.same_range(&replacement, false)?;
     preserve_gap_nonmanifold(tool, &entry.edge, &mut replacement)?;

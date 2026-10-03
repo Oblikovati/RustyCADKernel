@@ -224740,7 +224740,7 @@
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::perform",
       "status": "partial",
-      "notes": "Native aggregate stages with FixWireMode=0; sixteen differential rows cover planar splitting/hole orientation, removed/non-face context and periodic cone combinations. Missing-seam bounds now use native BRepTools fallback. Default wire-enabled orchestration and progress overload remain incomplete; small-area aggregate combinations need more evidence."
+      "notes": "Native wire-enabled and disabled orchestration, progress overload, two wire passes, splitting, context and result mutations translated. Native bowtie and planar/periodic fixtures match. Broader geometry and cancellation paths remain partial; no blanket behavior or legacy parity claim."
     },
     {
       "upstream_id": "ShapeFix_FixSmallFace::ShapeFix_FixSmallFace()",
@@ -225068,7 +225068,7 @@
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_3d",
       "status": "partial",
-      "notes": "Default conversion pass now repairs actual gaps and resets prior DONE flags; native differential fixtures. Optional ranges mode is not yet exposed; conic/offset/spline domains need more coverage. No legacy mapping increase."
+      "notes": "Native conversion plus optional range-repair pass: projection, periodic parameters, extrema selection, closed-conic ranges, and context mutations. Native fixtures cover line extension/reversal, conversion fallback, and single-circle closure. Curved/extrema/located/nonmanifold and exceptional paths require broader evidence; partial, no legacy mapping increase."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixGap3d(const int, const bool)",
@@ -225077,7 +225077,16 @@
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gap_3d",
       "status": "partial",
-      "notes": "Native conversion branch and vertex/edge context mutations. Nonzero range-only repair remains explicitly unported; curved/located/nonmanifold conversions require broader oracle coverage. No legacy mapping increase."
+      "notes": "Native conversion plus optional range-repair pass: projection, periodic parameters, extrema selection, closed-conic ranges, and context mutations. Native fixtures cover line extension/reversal, conversion fallback, and single-circle closure. Curved/extrema/located/nonmanifold and exceptional paths require broader evidence; partial, no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeFix_Wire::FixGapsByRangesMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+      "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_by_ranges",
+      "status": "implemented",
+      "notes": "Native default false and mutable bool mode exposed through getter/set_fix_gaps_by_ranges. Native range-mode fixtures verify 3D dispatch; 2D range repair remains explicitly unsupported and is not included in this scalar accessor claim."
     }
   ],
   "tests": [

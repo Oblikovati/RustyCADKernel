@@ -18,8 +18,11 @@ though the result shape changes. The port preserves these behaviors.
 
 The conversion path also translates spline segmentation, conic approximation,
 trim/offset extraction and nonmanifold-vertex copying, but these domains still
-need broader native fixture coverage. Nonzero range-only FixGap3d is explicitly
-unported. Full 2D gap repair and broader self-intersection cleanup remain partial.
+need broader native fixture coverage. Range-only FixGap3d now translates projection, periodic parameter adjustment,
+intersection/extrema selection, trimming, and closed circle/ellipse ranges.
+Six additional rows compare line range extension, reversed orientation, both-end
+conversion fallback, unchanged geometry, closed-line fallback and direct single-circle
+closure. Curved projection/extrema and exceptional trimming still need native fixtures. Full 2D gap repair and broader self-intersection cleanup remain partial.
 These fixtures add no legacy-test mapping and do not prove full wireframe parity.
 
 Run `cargo test -p rustycad-tkshhealing --test shape_fix_wireframe_gaps`.

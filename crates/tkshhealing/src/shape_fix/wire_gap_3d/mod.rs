@@ -1,5 +1,6 @@
-//! Native conversion branch of ShapeFix_Wire_1.cxx::FixGap3d.
+//! Native range and conversion branches of ShapeFix_Wire_1.cxx::FixGap3d.
 mod convert;
+mod ranges;
 mod replace;
 use super::{FixRoot, ShapeFixWire};
 use crate::{
@@ -33,8 +34,36 @@ struct GapPair {
     target: Point3,
 }
 impl ShapeFixWire {
+    /// Repair 3D junctions by range adjustment and spline conversion; `tool.fix_gaps_3d()?`.
+    pub fn fix_gaps_3d(&self) -> Result<bool, Failure> {
+        self.state.write().gaps_3d_status = 0;
+        let start = if self.closed_mode() { 1 } else { 2 };
+        if self.fix_gaps_by_ranges() {
+            self.fix_gap_3d_pass(start, false)?;
+        }
+        self.fix_gap_3d_pass(start, true)?;
+        Ok(self.status_gaps_3d(ShapeExtendStatus::Done))
+    }
+
+    fn fix_gap_3d_pass(&self, start: i32, convert: bool) -> Result<(), Failure> {
+        for index in start..=self.nb_edges() {
+            self.fix_gap_3d(index, convert)?;
+            let last = self.state.read().last_fix_status;
+            self.state.write().gaps_3d_status |= last;
+        }
+        Ok(())
+    }
+    /// Read the preliminary range-repair mode; `tool.fix_gaps_by_ranges()`.
+    pub fn fix_gaps_by_ranges(&self) -> bool {
+        self.state.read().fix_gaps_by_ranges
+    }
+    /// Enable preliminary range repair; `tool.set_fix_gaps_by_ranges(true)`.
+    pub fn set_fix_gaps_by_ranges(&self, enabled: bool) {
+        self.state.write().fix_gaps_by_ranges = enabled;
+    }
+
     /// Repair one 3D curve junction; `tool.fix_gap_3d(2,true)?` uses native spline conversion.
-    /// Range-only repair of an actual gap remains unported.
+    /// With conversion disabled, adjust ranges using projections and extrema.
     pub fn fix_gap_3d(&self, index: i32, convert: bool) -> Result<bool, Failure> {
         self.set_last_fix_status(ShapeExtendStatus::Ok);
         if self.context().is_null() {
@@ -48,10 +77,7 @@ impl ShapeFixWire {
             if pair.first.point.distance(&pair.second.point) <= self.precision() {
                 return Ok(false);
             }
-            return Err(Failure::with_message(
-                "Standard_NotImplemented",
-                &format!("FixGap3d({index}, false): nonzero gap requires unported range repair"),
-            ));
+            return ranges::repair(self, &pair);
         }
         self.convert_gap_pair(pair)
     }
@@ -94,7 +120,12 @@ impl ShapeFixWire {
             self.set_last_fix_status(ShapeExtendStatus::Fail2);
             return Ok(false);
         }
-        replace::replace_gap_curves(self, &pair, &first, &second)?;
+        replace::replace_gap_curves(
+            self,
+            &pair,
+            replace::CurveRepair::spline(&first).as_ref(),
+            replace::CurveRepair::spline(&second).as_ref(),
+        )?;
         self.set_last_fix_status(ShapeExtendStatus::Done1);
         Ok(true)
     }
