@@ -1,9 +1,14 @@
 //! Native-backed endpoint projection cases for ShapeFix_EdgeProjAux.
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
-use rustycad_tkbrep::topods::{Edge, Face};
+use rustycad_tkbrep::topods::{Edge, Face, Vertex};
+use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve};
+use rustycad_tkg2d::geom2d::{
+    Geom2dBSplineCurve, Geom2dCircle, Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve,
+};
 use rustycad_tkg3d::geom::{GeomCircle, GeomCylindricalSurface, GeomPlane, GeomSurface};
+use rustycad_tkg3d::top_abs::Orientation;
+use rustycad_tkmath::gp::Axis2d;
 use rustycad_tkmath::gp::{Axis2, Axis3, Circle3, Direction2, Point2, Point3};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux;
@@ -96,7 +101,10 @@ fn assert_result(
 }
 
 fn expected_row(name: &str) -> [f64; 4] {
-    let row = ORACLE.lines().find(|line| line.starts_with(name)).unwrap();
+    let row = ORACLE
+        .lines()
+        .find(|line| line.split_whitespace().next() == Some(name))
+        .unwrap();
     let values = row
         .split_whitespace()
         .skip(1)
@@ -187,6 +195,44 @@ fn exposed_init_2d_matches_protected_occt_operation()
 }
 
 #[test]
+fn init_2d_reversed_edge_uses_unoriented_first_and_last_vertices()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let (face, surface) = plane_face()?;
+    let edge = straight_edge(Point3::default(), Point3::new(1.0, 0.0, 0.0))?;
+    set_pcurve(
+        &edge,
+        &surface,
+        &line(Point2::default(), Direction2::new(1.0, 0.0)?),
+    )?;
+    let reversed_shape = edge.reversed();
+    let reversed = rustycad_tkbrep::topods::edge(&reversed_shape)?;
+    let projection = ShapeFixEdgeProjAux::with_face_edge(&face, &reversed);
+    projection.init_2d(1.0e-7)?;
+    assert_row_matches_projection("init-2d-reversed-edge", &projection);
+    Ok(())
+}
+
+#[test]
+fn init_2d_null_pcurve_preserves_parameters_but_clears_done_flags()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let (face, surface) = plane_face()?;
+    let edge = straight_edge(Point3::default(), Point3::new(1.0, 0.0, 0.0))?;
+    set_pcurve(
+        &edge,
+        &surface,
+        &line(Point2::default(), Direction2::new(1.0, 0.0)?),
+    )?;
+    let projection = ShapeFixEdgeProjAux::with_face_edge(&face, &edge);
+    projection.compute(1.0e-7)?;
+    remove_edge_curves(&edge, &surface)?;
+    projection.init_2d(1.0e-7)?;
+    assert!(!projection.is_first_done() && !projection.is_last_done());
+    assert_close(projection.first_param(), 0.0);
+    assert_close(projection.last_param(), 1.0);
+    Ok(())
+}
+
+#[test]
 fn exposed_init_3d_matches_protected_occt_operation()
 -> Result<(), rustycad_tkernel::standard::Failure> {
     let (face, surface) = plane_face()?;
@@ -199,6 +245,188 @@ fn exposed_init_3d_matches_protected_occt_operation()
     projection.init_3d(1.0e-7)?;
     assert_row_matches_projection("direct-init-3d", &projection);
     Ok(())
+}
+
+#[test]
+fn init_3d_ignores_reversed_edge_orientation_for_endpoint_selection()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let (face, surface) = plane_face()?;
+    let edge = edge_with_bounded_line(&surface, Point3::default(), Point3::new(1.0, 0.0, 0.0))?;
+    let reversed_shape = edge.reversed();
+    let reversed = rustycad_tkbrep::topods::edge(&reversed_shape)?;
+    let projection = ShapeFixEdgeProjAux::with_face_edge(&face, &reversed);
+    projection.init_3d(1.0e-7)?;
+    assert_row_matches_projection("init-3d-reversed-edge", &projection);
+    Ok(())
+}
+
+#[test]
+fn init_3d_marks_done_when_extrema_throws() -> Result<(), rustycad_tkernel::standard::Failure> {
+    let (face, surface) = plane_face()?;
+    let edge = edge_with_bounded_line(
+        &surface,
+        Point3::new(2.0, 0.0, 0.0),
+        Point3::new(3.0, 0.0, 0.0),
+    )?;
+    let projection = ShapeFixEdgeProjAux::with_face_edge(&face, &edge);
+    projection.init_3d(-1.0)?;
+    assert_row_matches_projection("init-3d-extrema-failure", &projection);
+    Ok(())
+}
+
+#[test]
+fn init_3d_matches_native_periodic_curve_without_endpoint_minima()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let (face, surface) = plane_face()?;
+    let edge = degenerate_center_edge(&surface)?;
+    let projection = ShapeFixEdgeProjAux::with_face_edge(&face, &edge);
+    projection.init_3d(1.0e-7)?;
+    assert_row_matches_projection("init-3d-no-minimum", &projection);
+    Ok(())
+}
+
+#[test]
+fn init_3d_keeps_native_done_flags_when_extrema_is_not_done()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let (face, surface) = plane_face()?;
+    let edge = edge_with_bounded_line(
+        &surface,
+        Point3::new(2.0, 0.0, 0.0),
+        Point3::new(3.0, 0.0, 0.0),
+    )?;
+    let projection = ShapeFixEdgeProjAux::with_face_edge(&face, &edge);
+    projection.init_3d(1.0e-7)?;
+    assert_row_matches_projection("init-3d-no-extrema-fallback", &projection);
+    Ok(())
+}
+
+#[test]
+fn update_param_2d_recognizes_periodic_basis_through_trim()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let projection = ShapeFixEdgeProjAux::new();
+    let circle: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dCircle::from_axis(Axis2d::default(), 1.0, true)?).cast();
+    let trimmed: Handle<dyn Geom2dCurve> = Handle::new(Geom2dTrimmedCurve::new(
+        &circle,
+        0.0,
+        std::f64::consts::TAU,
+        true,
+        true,
+    )?)
+    .cast();
+    projection.update_param_2d(&trimmed)?;
+    let expected = expected_row("direct-update-periodic-trimmed-circle");
+    assert_close(projection.first_param(), expected[0]);
+    assert_close(projection.last_param(), expected[1]);
+    assert_close(trimmed.value(0.0)?.x(), expected[2]);
+    assert_close(trimmed.value(std::f64::consts::TAU)?.x(), expected[3]);
+    Ok(())
+}
+
+#[test]
+fn update_param_2d_does_not_reverse_nonclosed_bspline()
+-> Result<(), rustycad_tkernel::standard::Failure> {
+    let projection = ShapeFixEdgeProjAux::new();
+    let spline = nonclosed_bspline()?;
+    projection.update_param_2d(&spline)?;
+    assert_bspline_row(&projection, &spline);
+    Ok(())
+}
+
+fn remove_edge_curves(
+    edge: &Edge,
+    surface: &Handle<dyn GeomSurface>,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    let builder = BRepBuilder::default();
+    builder.update_edge_pcurve(
+        edge,
+        &Handle::default(),
+        surface,
+        &Location::default(),
+        1.0e-7,
+        None,
+    )?;
+    builder.update_edge_curve(edge, &Handle::default(), 1.0e-7)
+}
+
+fn nonclosed_bspline() -> Result<Handle<dyn Geom2dCurve>, rustycad_tkernel::standard::Failure> {
+    let mut poles = Array1::<Point2>::with_bounds(1, 2).unwrap();
+    poles[1] = Point2::new(0.0, 0.0);
+    poles[2] = Point2::new(1.0, 0.0);
+    let mut knots = Array1::<f64>::with_bounds(1, 2).unwrap();
+    knots[1] = 0.0;
+    knots[2] = 1.0;
+    let mut multiplicities = Array1::<i32>::with_bounds(1, 2).unwrap();
+    multiplicities[1] = 2;
+    multiplicities[2] = 2;
+    Ok(Handle::new(Geom2dBSplineCurve::new(
+        &poles,
+        &knots,
+        &multiplicities,
+        1,
+        false,
+    )?)
+    .cast())
+}
+
+fn assert_bspline_row(projection: &ShapeFixEdgeProjAux, spline: &Handle<dyn Geom2dCurve>) {
+    let expected = expected_row("direct-update-nonclosed-bspline");
+    assert_close(projection.first_param(), expected[0]);
+    assert_close(projection.last_param(), expected[1]);
+    assert_close(
+        spline.value(spline.first_parameter()).unwrap().x(),
+        expected[2],
+    );
+    assert_close(
+        spline.value(spline.last_parameter()).unwrap().x(),
+        expected[3],
+    );
+}
+
+fn edge_with_bounded_line(
+    surface: &Handle<dyn GeomSurface>,
+    first: Point3,
+    last: Point3,
+) -> Result<Edge, rustycad_tkernel::standard::Failure> {
+    let edge = straight_edge(first, last)?;
+    let basis = line(Point2::default(), Direction2::new(1.0, 0.0)?);
+    let bounded: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dTrimmedCurve::new(&basis, 0.0, 1.0, true, true)?).cast();
+    set_pcurve(&edge, surface, &bounded)?;
+    Ok(edge)
+}
+
+fn degenerate_center_edge(
+    surface: &Handle<dyn GeomSurface>,
+) -> Result<Edge, rustycad_tkernel::standard::Failure> {
+    let builder = BRepBuilder::default();
+    let mut edge = Edge::default();
+    builder.make_edge(&mut edge)?;
+    add_coincident_vertices(&builder, &mut edge)?;
+    builder.degenerated(&edge, true)?;
+    set_pcurve(&edge, surface, &circle())?;
+    builder.range_on_surface(
+        &edge,
+        surface,
+        &Location::default(),
+        0.0,
+        std::f64::consts::TAU,
+    )?;
+    Ok(edge)
+}
+
+fn add_coincident_vertices(
+    builder: &BRepBuilder,
+    edge: &mut Edge,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    let mut vertex = Vertex::default();
+    builder.make_vertex_at(&mut vertex, Point3::default(), 1.0e-7)?;
+    builder.add(edge, &vertex.oriented(Orientation::Forward))?;
+    builder.add(edge, &vertex.oriented(Orientation::Reversed))
+}
+
+fn circle() -> Handle<dyn Geom2dCurve> {
+    Handle::new(Geom2dCircle::from_axis(Axis2d::default(), 1.0, true).unwrap()).cast()
 }
 
 #[test]

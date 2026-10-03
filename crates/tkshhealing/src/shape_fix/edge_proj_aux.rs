@@ -69,11 +69,12 @@ impl ShapeFixEdgeProjAux {
 
     /// Recompute the p-curve range from 3D endpoints; `tool.compute(1e-7)?`.
     pub fn compute(&self, precision: f64) -> Result<(), rustycad_tkernel::standard::Failure> {
-        let mut state = self.state.write();
-        reset_projection(&mut state);
-        init_2d::initialize(&mut state, precision)?;
-        finish_computation(&mut state);
-        Ok(())
+        modify_projection_state(&self.state, |state| {
+            reset_projection(state);
+            init_2d::initialize(state, precision)?;
+            finish_computation(state);
+            Ok(())
+        })
     }
 
     /// Initialize projected endpoints from the edge's 3D vertices and face p-curve.
@@ -86,9 +87,7 @@ impl ShapeFixEdgeProjAux {
     /// let _ = projection.init_2d(1.0e-7);
     /// ```
     pub fn init_2d(&self, precision: f64) -> Result<(), rustycad_tkernel::standard::Failure> {
-        let mut state = self.state.write();
-        reset_projection(&mut state);
-        init_2d::initialize(&mut state, precision)
+        modify_projection_state(&self.state, |state| init_2d::initialize(state, precision))
     }
 
     /// Initialize the range from a bounded p-curve or nearest endpoint extrema.
@@ -101,7 +100,7 @@ impl ShapeFixEdgeProjAux {
     /// let _ = projection.init_3d(1.0e-7);
     /// ```
     pub fn init_3d(&self, precision: f64) -> Result<(), rustycad_tkernel::standard::Failure> {
-        init_3d::initialize(&mut self.state.write(), precision)
+        modify_projection_state(&self.state, |state| init_3d::initialize(state, precision))
     }
 
     /// Adjust an endpoint parameter pair to the supplied p-curve's orientation and period.
@@ -122,7 +121,9 @@ impl ShapeFixEdgeProjAux {
         &self,
         curve: &rustycad_tkernel::standard::Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve>,
     ) -> Result<(), rustycad_tkernel::standard::Failure> {
-        parameter_update::update_parameters(&mut self.state.write(), curve)
+        modify_projection_state(&self.state, |state| {
+            parameter_update::update_parameters(state, curve)
+        })
     }
 
     /// Whether the first endpoint was projected; `tool.is_first_done()`.
@@ -146,6 +147,16 @@ impl ShapeFixEdgeProjAux {
     }
 
     /// Report whether `curve` is an ISO; the current OCCT implementation always returns false.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::Handle;
+    /// use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+    /// use rustycad_tkmath::gp::{Direction2, Point2};
+    /// use rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux;
+    /// let curve: Handle<dyn Geom2dCurve> =
+    ///     Handle::new(Geom2dLine::from_point(Point2::default(), Direction2::new(1.0, 0.0).unwrap())).cast();
+    /// assert!(!ShapeFixEdgeProjAux::new().is_iso(&curve));
+    /// ```
     pub fn is_iso(
         &self,
         _curve: &rustycad_tkernel::standard::Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve>,
@@ -159,6 +170,16 @@ fn reset_projection(state: &mut EdgeProjAuxState) {
     state.last_done = false;
     state.first_param = 0.0;
     state.last_param = 0.0;
+}
+
+fn modify_projection_state<T>(
+    shared: &SharedState<EdgeProjAuxState>,
+    operation: impl FnOnce(&mut EdgeProjAuxState) -> Result<T, rustycad_tkernel::standard::Failure>,
+) -> Result<T, rustycad_tkernel::standard::Failure> {
+    let mut local = shared.read().clone();
+    let result = operation(&mut local);
+    *shared.write() = local;
+    result
 }
 
 fn finish_computation(state: &mut EdgeProjAuxState) {

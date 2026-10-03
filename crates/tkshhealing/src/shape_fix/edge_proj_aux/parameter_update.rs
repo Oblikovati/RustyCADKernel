@@ -1,4 +1,5 @@
 use super::EdgeProjAuxState;
+use crate::shape_analysis::ShapeAnalysisCurve;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dBoundedCurve, Geom2dCurve};
@@ -13,7 +14,7 @@ pub(super) fn update_parameters(
     }
     let curve = require_curve(handle)?;
     let range = (curve.first_parameter(), curve.last_parameter());
-    if require_curve(handle)?.is_periodic() {
+    if ShapeAnalysisCurve::is_periodic_2d(handle)? {
         update_periodic_range(state, range);
         return Ok(());
     }
@@ -45,20 +46,28 @@ fn update_nonperiodic_range(
     curve: &dyn Geom2dCurve,
     range: (f64, f64),
 ) -> Result<(), Failure> {
-    if curve.is_closed()? || bspline_is_file_closed(handle)? {
+    if curve.is_closed()? {
         update_closed_range(state, range);
+        return Ok(());
+    }
+    if let Some(is_file_closed) = bspline_is_file_closed(handle)? {
+        if is_file_closed {
+            update_closed_range(state, range);
+        }
         return Ok(());
     }
     reverse_parameters(state, curve)?;
     curve.reverse()
 }
 
-fn bspline_is_file_closed(handle: &Handle<dyn Geom2dCurve>) -> Result<bool, Failure> {
+fn bspline_is_file_closed(handle: &Handle<dyn Geom2dCurve>) -> Result<Option<bool>, Failure> {
     let bspline = handle.cast::<Geom2dBSplineCurve>();
     let Some(curve) = bspline.get() else {
-        return Ok(false);
+        return Ok(None);
     };
-    Ok(curve.start_point()?.distance(curve.end_point()?) <= precision::p_confusion())
+    Ok(Some(
+        curve.start_point()?.distance(curve.end_point()?) <= precision::p_confusion(),
+    ))
 }
 
 fn update_closed_range(state: &mut EdgeProjAuxState, range: (f64, f64)) {
