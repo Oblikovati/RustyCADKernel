@@ -1,5 +1,5 @@
 use super::super::ShapeFixFace;
-use super::plan::analyze;
+use super::plan::analyze_with_closure;
 use super::prepare::prepare;
 use crate::shape_analysis::ShapeAnalysisSurface;
 use crate::shape_build::ShapeBuildReShape;
@@ -19,11 +19,13 @@ pub(in crate::shape_fix::face) fn fix(fixer: &ShapeFixFace) -> Result<bool, Fail
     let Some(surface) = surface_handle.get() else {
         return Ok(false);
     };
-    if !surface_is_closed(surface)? {
+    let closure = surface_closure(surface)?;
+    if !closure.0 && !closure.1 {
         return Ok(false);
     }
     let (face, context) = apply_current_face(fixer)?;
-    let Some(mut plan) = analyze(&face, &surface.surface())? else {
+    let surface_handle = surface.surface();
+    let Some(mut plan) = analyze_with_closure(&face, &surface_handle, closure)? else {
         return Ok(false);
     };
     let Some(prepared) = prepare(&mut plan, fixer.precision())? else {
@@ -46,12 +48,12 @@ fn compose_and_cleanup(
     cleanup_composed_result(fixer, &live_context)
 }
 
-fn surface_is_closed(surface: &ShapeAnalysisSurface) -> Result<bool, Failure> {
+fn surface_closure(surface: &ShapeAnalysisSurface) -> Result<(bool, bool), Failure> {
     let live = surface.surface();
     let live = live.get().ok_or_else(null_surface)?;
     let u_closed = live.is_u_closed()?;
     let v_closed = live.is_v_closed()?;
-    Ok(u_closed || v_closed)
+    Ok((u_closed, v_closed))
 }
 
 fn apply_current_face(fixer: &ShapeFixFace) -> Result<(Face, Handle<ShapeBuildReShape>), Failure> {
