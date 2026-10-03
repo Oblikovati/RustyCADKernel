@@ -8,10 +8,12 @@ mod tests {
     use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
     use rustycad_tkbrep::topods::{Edge, Face};
     use rustycad_tkernel::standard::Handle;
-    use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-    use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane};
+    use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve, Geom2dLine};
+    use rustycad_tkg3d::geom::{GeomCircle, GeomCurve, GeomLine, GeomPlane};
     use rustycad_tkg3d::top_abs::Orientation;
-    use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
+    use rustycad_tkmath::gp::{
+        Axis1, Axis2, Axis2d, Axis3, Axis22d, Direction2, Direction3, Point2, Point3,
+    };
     use rustycad_tkmath::toploc::Location;
 
     const EXPECTED: &str = include_str!(
@@ -170,6 +172,73 @@ mod tests {
     }
 
     #[test]
+    fn two_point_intersections_are_repaired_in_native_selection_order() {
+        let mut face = plane();
+        let wire = Handle::new(ShapeExtendWireData::new());
+        wire.add_edge(&circle_edge(&face), 0).unwrap();
+        wire.add_edge(
+            &line_edge(
+                &face,
+                Point3::new(3.0, 3.0, 0.0),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+                Point2::new(3.0, 3.0),
+                Direction2::new(1.0, 0.0).unwrap(),
+            ),
+            0,
+        )
+        .unwrap();
+        wire.add_edge(
+            &line_edge_with_range(
+                &face,
+                Point3::new(-2.0, 0.5, 0.0),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+                Point2::new(-2.0, 0.5),
+                Direction2::new(1.0, 0.0).unwrap(),
+                4.0,
+                1.0e-7,
+            ),
+            0,
+        )
+        .unwrap();
+        wire.add_edge(
+            &line_edge(
+                &face,
+                Point3::new(-4.0, -4.0, 0.0),
+                Direction3::new(0.0, 1.0, 0.0).unwrap(),
+                Point2::new(-4.0, -4.0),
+                Direction2::new(0.0, 1.0).unwrap(),
+            ),
+            0,
+        )
+        .unwrap();
+        BRepBuilder::default()
+            .add(&mut face, &wire.wire().unwrap().into_shape())
+            .unwrap();
+        let context = Handle::new(ShapeBuildReShape::new());
+        let tool = ShapeFixIntersectionTool::new(&context, 1.0e-7);
+        let (mut split, mut cut, mut removed) = (91, 92, 93);
+        let done = tool
+            .fix_self_intersect_wire(&wire, &face, &mut split, &mut cut, &mut removed)
+            .unwrap();
+        let mut observed = vec![
+            f64::from(done),
+            f64::from(split),
+            f64::from(cut),
+            f64::from(removed),
+            f64::from(wire.nb_edges()),
+        ];
+        append_ranges(&wire, &face, &mut observed);
+        let expected = EXPECTED
+            .lines()
+            .nth(4)
+            .unwrap()
+            .split_whitespace()
+            .map(|value| value.parse().unwrap())
+            .collect::<Vec<f64>>();
+        assert_eq!(observed, expected);
+    }
+
+    #[test]
     fn long_overlap_triple_split_removes_overlapped_pieces() {
         let mut face = plane();
         let wire = Handle::new(ShapeExtendWireData::new());
@@ -196,7 +265,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(4)
+            .nth(5)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -230,7 +299,7 @@ mod tests {
         append_ranges(&wire, &face, &mut observed);
         let expected = EXPECTED
             .lines()
-            .nth(5)
+            .nth(6)
             .unwrap()
             .split_whitespace()
             .map(|value| value.parse().unwrap())
@@ -418,6 +487,33 @@ mod tests {
             .update_edge_pcurve_on_face(&edge, &pcurve, face, 1.0e-7)
             .unwrap();
         builder.range_on_face(&edge, face, 0.0, last).unwrap();
+        builder.same_range(&edge, true).unwrap();
+        builder.same_parameter(&edge, true).unwrap();
+        edge
+    }
+
+    fn circle_edge(face: &Face) -> Edge {
+        let curve: Handle<dyn GeomCurve> =
+            Handle::new(GeomCircle::new(Axis2::default(), 1.0).unwrap()).cast();
+        let mut edge = Edge::default();
+        ShapeBuildEdge
+            .make_edge_on_curve_range(
+                &mut edge,
+                &curve,
+                &Location::default(),
+                0.0,
+                std::f64::consts::TAU,
+            )
+            .unwrap();
+        let pcurve: Handle<dyn Geom2dCurve> =
+            Handle::new(Geom2dCircle::new(Axis22d::default(), 1.0).unwrap()).cast();
+        let builder = BRepBuilder::default();
+        builder
+            .update_edge_pcurve_on_face(&edge, &pcurve, face, 1.0e-7)
+            .unwrap();
+        builder
+            .range_on_face(&edge, face, 0.0, std::f64::consts::TAU)
+            .unwrap();
         builder.same_range(&edge, true).unwrap();
         builder.same_parameter(&edge, true).unwrap();
         edge
