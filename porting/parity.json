@@ -221966,6 +221966,33 @@
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_adjacent_intersections_into",
       "status": "implemented",
       "notes": "Native adjacent/closure intersection ordering, point/segment filtering, tight edge/vertex tolerances, UV lacking guard and outer-endpoint suppression. Ten pinned native rows compare exact parameters, points, errors and failure/output-clear states. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::Perform()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::perform",
+      "status": "implemented",
+      "notes": "Native eight-check Perform sequence and self/adjacent/nonadjacent intersection aggregate, including bounding boxes, repeated CheckClosed side effects and native FAIL1-only nonadjacent aggregation. Five polygonal native rows compare full status state; six self-edge rows cover local success/fail filtering. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::CheckSelfIntersection()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::check_self_intersection",
+      "status": "implemented",
+      "notes": "Native eight-check Perform sequence and self/adjacent/nonadjacent intersection aggregate, including bounding boxes, repeated CheckClosed side effects and native FAIL1-only nonadjacent aggregation. Five polygonal native rows compare full status state; six self-edge rows cover local success/fail filtering. Does not establish full wire/toolkit parity."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_Wire::StatusSelfIntersection(ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_Wire.hxx",
+      "source_sha256": "ec6b74933e93550008e13b48ec25b07ed123959321a808cf8d086fef02150252",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire::status_self_intersection",
+      "status": "implemented",
+      "notes": "Native eight-check Perform sequence and self/adjacent/nonadjacent intersection aggregate, including bounding boxes, repeated CheckClosed side effects and native FAIL1-only nonadjacent aggregation. Five polygonal native rows compare full status state; six self-edge rows cover local success/fail filtering. Does not establish full wire/toolkit parity."
     }
   ],
   "tests": [

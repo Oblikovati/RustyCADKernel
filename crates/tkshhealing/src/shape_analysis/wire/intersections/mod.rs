@@ -1,6 +1,7 @@
 //! Native wire intersection output and geometry evaluation conventions.
 // ShapeAnalysis_Wire.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 mod adjacent;
+mod aggregate;
 mod pair;
 mod self_edge;
 use super::*;

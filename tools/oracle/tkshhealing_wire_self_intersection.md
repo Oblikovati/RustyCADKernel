@@ -9,7 +9,8 @@ native check clears them before readiness and geometry checks. Rust compares
 all fields exactly, including both curve parameters and the spatial crossing.
 
 Rows: `found DONE1 FAIL1 FAIL2 count2d count3d [parameter1 parameter2 x y z]*
-wrapper_found`.
+wrapper_found aggregate_found aggregate_DONE1 aggregate_DONE2 aggregate_DONE3
+aggregate_FAIL1 aggregate_FAIL2 aggregate_FAIL3`.
 
 Build with the command in [the curve-gap fixture](tkshhealing_wire_curve_gaps.md),
 substituting `tkshhealing_wire_self_intersection.cxx`, output name

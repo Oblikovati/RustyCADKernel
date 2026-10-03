@@ -45,7 +45,10 @@ static void inspect(const char* name, bool vertices, double tolerance, bool pcur
             << " " << uv.Length() << " " << xyz.Length();
   for (int i=1;i<=uv.Length();++i) std::cout << " " << uv(i).ParamOnFirst() << " " << uv(i).ParamOnSecond()
             << " " << xyz(i).X() << " " << xyz(i).Y() << " " << xyz(i).Z();
-  std::cout << " " << analysis.CheckSelfIntersectingEdge(0) << '\n';
+  std::cout << " " << analysis.CheckSelfIntersectingEdge(0) << " " << analysis.CheckSelfIntersection();
+  for(ShapeExtend_Status flag : {ShapeExtend_DONE1,ShapeExtend_DONE2,ShapeExtend_DONE3,ShapeExtend_FAIL1,ShapeExtend_FAIL2,ShapeExtend_FAIL3})
+    std::cout << " " << analysis.StatusSelfIntersection(flag);
+  std::cout << '\n';
 }
 int main() {
   std::cout << std::setprecision(17);

@@ -82,6 +82,17 @@ fn intersection_observation(analyzer: &ShapeAnalysisWire) -> Vec<f64> {
         ]);
     }
     observed.push(f64::from(analyzer.check_self_intersecting_edge(0).unwrap()));
+    observed.push(f64::from(analyzer.check_self_intersection().unwrap()));
+    for flag in [
+        ShapeExtendStatus::Done1,
+        ShapeExtendStatus::Done2,
+        ShapeExtendStatus::Done3,
+        ShapeExtendStatus::Fail1,
+        ShapeExtendStatus::Fail2,
+        ShapeExtendStatus::Fail3,
+    ] {
+        observed.push(f64::from(analyzer.status_self_intersection(flag)));
+    }
     observed
 }
 
