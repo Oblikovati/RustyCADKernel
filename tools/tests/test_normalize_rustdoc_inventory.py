@@ -73,7 +73,42 @@ def fixture_paths() -> dict[str, JSONValue]:
             for item_id, path in paths}
 
 
+def rustdoc_date_period_fixture() -> dict[str, JSONValue]:
+    fixture_path = Path(__file__).parent / "fixtures/rustdoc-date-period-foreign-trait-impls.json"
+    return json.loads(fixture_path.read_text(encoding="utf-8"))
+
+
 class RustdocReachabilityTests(unittest.TestCase):
+    def test_trait_impls_follow_the_rustdoc_self_type(self: RustdocReachabilityTests) -> None:
+        document = rustdoc_date_period_fixture()
+        with tempfile.TemporaryDirectory() as directory:
+            result = make_reachable_inventory(document, Path(directory), "rustycad_tkernel")
+        paths = {entry["path"] for entry in result["declarations"]}
+        self.assertIn(
+            "rustycad_tkernel::quantity::Date::<core::ops::arith::Add>::add", paths
+        )
+        self.assertNotIn(
+            "rustycad_tkernel::quantity::Period::<core::ops::arith::Add>::add", paths
+        )
+        self.assertEqual(result["unresolved_links"], [])
+
+    def test_unknown_trait_impl_self_type_is_reported_not_attached(
+        self: RustdocReachabilityTests,
+    ) -> None:
+        document = rustdoc_date_period_fixture()
+        implementation = document["index"]["176"]
+        implementation["inner"]["impl"]["for"] = {
+            "borrowed_ref": {
+                "lifetime": None,
+                "type": {"resolved_path": {"path": "Date", "id": 174, "args": None}},
+            }
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            result = make_reachable_inventory(document, Path(directory), "rustycad_tkernel")
+        paths = {entry["path"] for entry in result["declarations"]}
+        self.assertFalse(any(path.endswith("arith::Add>::add") for path in paths))
+        self.assertIn("impl:176:unknown-self-type", result["unresolved_links"])
+
     def test_public_reexports_members_and_signatures_are_normalized(
             self: RustdocReachabilityTests) -> None:
         with tempfile.TemporaryDirectory() as directory:

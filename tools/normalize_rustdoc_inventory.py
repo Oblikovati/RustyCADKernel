@@ -208,19 +208,48 @@ def inherent_members(item: Mapping[str, JSONValue], path: str, items: Mapping[st
                      paths: Mapping[str, JSONValue], source_root: pathlib.Path,
                      unresolved: list[str]) -> list[dict[str, JSONValue]]:
     _, body = item_inner(item)
-    impl_ids = body.get("impls", [])
-    output = []
-    for impl_id in array_value(impl_ids, "impls"):
-        impl = items.get(str(impl_id))
-        if impl is None:
-            continue
-        impl_kind, impl_body = item_inner(impl)
-        if impl_kind != "impl" or impl_body.get("is_synthetic") is True:
-            continue
-        if impl_body.get("blanket_impl") is not None:
-            continue
-        output.extend(visible_impl_items(impl_body, path, items, paths, source_root, unresolved))
-    return output
+    owner_id = str(integer_value(item.get("id"), "impl owner id"))
+    return [
+        entry
+        for impl_id in array_value(body.get("impls", []), "impls")
+        for entry in linked_impl_entries(
+            impl_id, owner_id, path, items, paths, source_root, unresolved
+        )
+    ]
+
+
+def linked_impl_entries(impl_id: JSONValue, owner_id: str, path: str,
+                        items: Mapping[str, dict[str, JSONValue]], paths: Mapping[str, JSONValue],
+                        source_root: pathlib.Path, unresolved: list[str]) -> list[dict[str, JSONValue]]:
+    impl = items.get(str(impl_id))
+    if impl is None:
+        return []
+    impl_kind, impl_body = item_inner(impl)
+    if impl_kind != "impl" or impl_body.get("is_synthetic") is True:
+        return []
+    if impl_body.get("blanket_impl") is not None:
+        return []
+    impl_owner = impl_self_type_id(impl_body)
+    if impl_owner is None:
+        unresolved.append(f"impl:{impl_id}:unknown-self-type")
+        return []
+    # Rustdoc also links an impl from types used only in its trait arguments.
+    if impl_owner != owner_id:
+        return []
+    return visible_impl_items(impl_body, path, items, paths, source_root, unresolved)
+
+
+def impl_self_type_id(impl: Mapping[str, JSONValue]) -> str | None:
+    self_type = impl.get("for")
+    if not isinstance(self_type, dict) or len(self_type) != 1:
+        return None
+    kind, value = next(iter(self_type.items()))
+    if kind != "resolved_path" or not isinstance(value, dict):
+        return None
+    identifier = value.get("id")
+    if isinstance(identifier, (int, str)) and not isinstance(identifier, bool):
+        return str(identifier)
+    return None
 
 
 def visible_impl_items(impl: Mapping[str, JSONValue], path: str, items: Mapping[str, dict[str, JSONValue]],

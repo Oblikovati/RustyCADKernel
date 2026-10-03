@@ -1,0 +1,622 @@
+{
+  "index": {
+    "116": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": "A period represented by signed 32-bit seconds and normalized microseconds.",
+      "id": 116,
+      "inner": {
+        "struct": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "impls": [
+            176,
+            179
+          ],
+          "kind": {
+            "plain": {
+              "fields": [],
+              "has_stripped_fields": true
+            }
+          }
+        }
+      },
+      "links": {},
+      "name": "Period",
+      "span": {
+        "begin": [
+          6,
+          1
+        ],
+        "end": [
+          9,
+          2
+        ],
+        "filename": "crates/tkernel/src/quantity/period.rs"
+      },
+      "stability": null,
+      "visibility": "public"
+    },
+    "15545": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": "Rust implementation of OCCT TKernel foundation APIs.",
+      "id": 15545,
+      "inner": {
+        "module": {
+          "is_crate": true,
+          "is_stripped": false,
+          "items": [
+            997
+          ]
+        }
+      },
+      "links": {},
+      "name": "rustycad_tkernel",
+      "span": {
+        "begin": [
+          1,
+          1
+        ],
+        "end": [
+          22,
+          23
+        ],
+        "filename": "crates/tkernel/src/lib.rs"
+      },
+      "stability": null,
+      "visibility": "public"
+    },
+    "173": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": null,
+      "id": 173,
+      "inner": {
+        "assoc_type": {
+          "bounds": [],
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "type": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "id": 174,
+                          "path": "Date"
+                        }
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "id": 75,
+                          "path": "Error"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 42,
+              "path": "Result"
+            }
+          }
+        }
+      },
+      "links": {},
+      "name": "Output",
+      "span": {
+        "begin": [
+          218,
+          5
+        ],
+        "end": [
+          218,
+          39
+        ],
+        "filename": "crates/tkernel/src/quantity/date.rs"
+      },
+      "stability": null,
+      "visibility": "default"
+    },
+    "174": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": "A date in the defined signed 32-bit seconds range of OCCT `Quantity_Date`.",
+      "id": 174,
+      "inner": {
+        "struct": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "impls": [
+            176,
+            179
+          ],
+          "kind": {
+            "plain": {
+              "fields": [],
+              "has_stripped_fields": true
+            }
+          }
+        }
+      },
+      "links": {},
+      "name": "Date",
+      "span": {
+        "begin": [
+          9,
+          1
+        ],
+        "end": [
+          12,
+          2
+        ],
+        "filename": "crates/tkernel/src/quantity/date.rs"
+      },
+      "stability": null,
+      "visibility": "public"
+    },
+    "175": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": null,
+      "id": 175,
+      "inner": {
+        "function": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "generic": "Self"
+                }
+              ],
+              [
+                "rhs",
+                {
+                  "resolved_path": {
+                    "args": null,
+                    "id": 116,
+                    "path": "Period"
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "qualified_path": {
+                "args": null,
+                "name": "Output",
+                "self_type": {
+                  "generic": "Self"
+                },
+                "trait": {
+                  "args": null,
+                  "id": 167,
+                  "path": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "links": {},
+      "name": "add",
+      "span": {
+        "begin": [
+          219,
+          5
+        ],
+        "end": [
+          221,
+          6
+        ],
+        "filename": "crates/tkernel/src/quantity/date.rs"
+      },
+      "stability": null,
+      "visibility": "default"
+    },
+    "176": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": null,
+      "id": 176,
+      "inner": {
+        "impl": {
+          "blanket_impl": null,
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 174,
+              "path": "Date"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "is_negative": false,
+          "is_synthetic": false,
+          "is_unsafe": false,
+          "items": [
+            173,
+            175
+          ],
+          "provided_trait_methods": [],
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "id": 116,
+                        "path": "Period"
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 167,
+            "path": "Add"
+          }
+        }
+      },
+      "links": {},
+      "name": null,
+      "span": {
+        "begin": [
+          217,
+          1
+        ],
+        "end": [
+          222,
+          2
+        ],
+        "filename": "crates/tkernel/src/quantity/date.rs"
+      },
+      "stability": null,
+      "visibility": "default"
+    },
+    "177": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": null,
+      "id": 177,
+      "inner": {
+        "assoc_type": {
+          "bounds": [],
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "type": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "id": 174,
+                          "path": "Date"
+                        }
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "id": 75,
+                          "path": "Error"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 42,
+              "path": "Result"
+            }
+          }
+        }
+      },
+      "links": {},
+      "name": "Output",
+      "span": {
+        "begin": [
+          225,
+          5
+        ],
+        "end": [
+          225,
+          39
+        ],
+        "filename": "crates/tkernel/src/quantity/date.rs"
+      },
+      "stability": null,
+      "visibility": "default"
+    },
+    "178": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": null,
+      "id": 178,
+      "inner": {
+        "function": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "generic": "Self"
+                }
+              ],
+              [
+                "rhs",
+                {
+                  "resolved_path": {
+                    "args": null,
+                    "id": 116,
+                    "path": "Period"
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "qualified_path": {
+                "args": null,
+                "name": "Output",
+                "self_type": {
+                  "generic": "Self"
+                },
+                "trait": {
+                  "args": null,
+                  "id": 171,
+                  "path": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "links": {},
+      "name": "sub",
+      "span": {
+        "begin": [
+          226,
+          5
+        ],
+        "end": [
+          228,
+          6
+        ],
+        "filename": "crates/tkernel/src/quantity/date.rs"
+      },
+      "stability": null,
+      "visibility": "default"
+    },
+    "179": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": null,
+      "id": 179,
+      "inner": {
+        "impl": {
+          "blanket_impl": null,
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 174,
+              "path": "Date"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "is_negative": false,
+          "is_synthetic": false,
+          "is_unsafe": false,
+          "items": [
+            177,
+            178
+          ],
+          "provided_trait_methods": [],
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "id": 116,
+                        "path": "Period"
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 171,
+            "path": "Sub"
+          }
+        }
+      },
+      "links": {},
+      "name": null,
+      "span": {
+        "begin": [
+          224,
+          1
+        ],
+        "end": [
+          229,
+          2
+        ],
+        "filename": "crates/tkernel/src/quantity/date.rs"
+      },
+      "stability": null,
+      "visibility": "default"
+    },
+    "997": {
+      "attrs": [],
+      "const_stability": null,
+      "crate_id": 0,
+      "deprecation": null,
+      "docs": "Units and quantities from OCCT's Quantity package.",
+      "id": 997,
+      "inner": {
+        "module": {
+          "is_crate": false,
+          "is_stripped": false,
+          "items": [
+            116,
+            174
+          ]
+        }
+      },
+      "links": {},
+      "name": "quantity",
+      "span": {
+        "begin": [
+          1,
+          1
+        ],
+        "end": [
+          16,
+          31
+        ],
+        "filename": "crates/tkernel/src/quantity/mod.rs"
+      },
+      "stability": null,
+      "visibility": "public"
+    }
+  },
+  "paths": {
+    "116": {
+      "crate_id": 0,
+      "kind": "struct",
+      "path": [
+        "rustycad_tkernel",
+        "quantity",
+        "period",
+        "Period"
+      ]
+    },
+    "167": {
+      "crate_id": 2,
+      "kind": "trait",
+      "path": [
+        "core",
+        "ops",
+        "arith",
+        "Add"
+      ]
+    },
+    "171": {
+      "crate_id": 2,
+      "kind": "trait",
+      "path": [
+        "core",
+        "ops",
+        "arith",
+        "Sub"
+      ]
+    },
+    "174": {
+      "crate_id": 0,
+      "kind": "struct",
+      "path": [
+        "rustycad_tkernel",
+        "quantity",
+        "date",
+        "Date"
+      ]
+    },
+    "42": {
+      "crate_id": 2,
+      "kind": "enum",
+      "path": [
+        "core",
+        "result",
+        "Result"
+      ]
+    },
+    "75": {
+      "crate_id": 0,
+      "kind": "struct",
+      "path": [
+        "rustycad_tkernel",
+        "error",
+        "Error"
+      ]
+    }
+  },
+  "root": 15545
+}
