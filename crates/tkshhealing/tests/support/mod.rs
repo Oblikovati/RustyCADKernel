@@ -1,12 +1,11 @@
 //! Shapes built with BRep_Builder for the behavior tests: the vertices and edges of a
 //! unit square (no geometry is needed by the list operations under test) and wires of them.
 #![allow(dead_code)]
-mod surfaces;
+pub mod surfaces;
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topods::{Edge, Shape, Vertex, Wire};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::Point3;
-pub use surfaces::{cylindrical_face, planar_face};
 
 /// A vertex at `(x, y, 0)`.
 pub fn vertex(x: f64, y: f64) -> Vertex {

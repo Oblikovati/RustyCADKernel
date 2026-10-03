@@ -100,8 +100,8 @@ fn append_snapshot(
 fn fixture_analyzer(mode: usize) -> ShapeAnalysisWire {
     let face = match mode {
         7 => Face::default(),
-        4 | 6 | 11 => support::cylindrical_face(0.25),
-        _ => support::planar_face(),
+        4 | 6 | 11 => support::surfaces::cylindrical_face(0.25),
+        _ => support::surfaces::planar_face(),
     };
     let gap = match mode {
         0 => 0.,

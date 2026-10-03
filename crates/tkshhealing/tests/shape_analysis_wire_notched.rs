@@ -40,7 +40,7 @@ fn notched_edges_match_pinned_native_geometry_and_outputs() {
 }
 
 fn fixture_analyzer(mode: usize) -> ShapeAnalysisWire {
-    let face = support::cylindrical_face(1.);
+    let face = support::surfaces::cylindrical_face(1.);
     let wire = Handle::new(ShapeExtendWireData::new());
     if mode != 12 {
         let mut first = fixture_edge(&face, 0., 1., 2., mode, true);

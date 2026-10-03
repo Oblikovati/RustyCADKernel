@@ -2,7 +2,7 @@
 mod support;
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
-    topods::{Edge, Face},
+    topods::Edge,
 };
 use rustycad_tkernel::{ncollection::Array1, standard::Handle};
 use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve, GeomLine};
@@ -77,7 +77,7 @@ fn append_part_vertices(observed: &mut Vec<f64>, part: &Edge) {
 }
 
 fn fixture_analyzer(mode: usize) -> (ShapeAnalysisWire, Edge, Edge) {
-    let face = support::planar_face();
+    let face = support::surfaces::planar_face();
     let (first, second) = fixture_pair(mode);
     let wire = Handle::new(ShapeExtendWireData::new());
     if mode != 10 {
