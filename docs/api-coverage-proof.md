@@ -146,3 +146,39 @@ templates/macros/overloads/re-exports, then run the extractor over all 6,316
 installed source headers and account for every declaration kind. The gate must
 also bind output to the OCCT SHA, header hashes, tool versions, CMake config, and
 Rust crate sources so source or configuration changes invalidate the result.
+
+## Conservative declaration crosswalk
+
+`tools/api_coverage_report.py` joins the C++ declaration stream, normalized Rust
+public paths, and `parity.json`. It resolves a row only when the parsed upstream
+qualified name and parameter types select exactly one C++ declaration, and its
+Rust target path selects exactly one public Rust item. Bare names are accepted
+only when they identify one declaration in the row's toolkit. No substring,
+similarity, or guessed overload matches are used.
+
+The report distinguishes implemented, excluded, partial, and upstream-unimplemented
+rows from missing or ambiguous C++/Rust targets. It lists unclaimed C++ API
+declarations separately and carries per-toolkit totals plus all crosswalk rows.
+Any missing header/configuration, unsupported inventory item, unresolved row,
+duplicate claim, partial mapping, or unclaimed declaration keeps the declaration
+crosswalk proof false. The report always sets `behavioral_equivalence_proven` to
+false: declaration identity does not establish 1:1 behavior or test parity.
+The report also treats Clang `unsupported_records` and rustdoc
+`unclassified_kinds.counts` as explicit proof gaps, alongside unresolved links.
+
+With the generated artifacts in place, run:
+
+```sh
+python3 tools/api_coverage_report.py \
+  --cpp porting/api-inventory/occt-declarations.jsonl.gz \
+  --cpp-manifest porting/api-inventory/occt-manifest.json \
+  --rust target/api-proof/rust-api-inventory.json \
+  --output target/api-proof/api-coverage-report.json
+```
+
+The C++ declaration IDs are compiler-generated identities; the parity strings
+remain manual aliases. A report row retains both IDs and the exact matched Rust
+path so alias corrections can be reviewed. Macro candidates are not C++ API
+declarations and are not counted as matches. If an excluded parity row has no
+declaration candidate, it stays unresolved until the source can be identified
+without treating a macro definition elsewhere as evidence for that invocation.
