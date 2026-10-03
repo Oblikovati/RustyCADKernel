@@ -107,6 +107,9 @@ fn measure_pair_normals(
     is_seam: bool,
     maximum: &mut f64,
 ) -> Result<(), Failure> {
+    if !pcurves_exist_on_ancestors(edge, first, second)? {
+        return Ok(());
+    }
     let Some((curve_first, curve_second)) = pcurve_adaptors(edge, first, second, is_seam)? else {
         return Ok(());
     };
@@ -121,6 +124,13 @@ fn measure_pair_normals(
         &second_surface,
         maximum,
     )
+}
+
+fn pcurves_exist_on_ancestors(edge: &Edge, first: &Face, second: &Face) -> Result<bool, Failure> {
+    if BRepTool::curve_on_face(edge, first)?.pcurve.is_null() {
+        return Ok(false);
+    }
+    Ok(!BRepTool::curve_on_face(edge, second)?.pcurve.is_null())
 }
 
 fn pcurve_adaptors(
@@ -172,9 +182,12 @@ fn sample_normal_pairs(
     maximum: &mut f64,
 ) -> Result<(), Failure> {
     let (range_start, range_end) = BRepTool::range(edge)?;
-    let interval = (range_end - range_start) / EDGE_SAMPLE_COUNT as f64;
+    let trim = (range_end - range_start) / 100.0;
+    let sample_start = range_start + trim;
+    let sample_end = range_end - trim;
     for sample in 0..=EDGE_SAMPLE_COUNT {
-        let parameter = range_start + interval * sample as f64;
+        let parameter =
+            sample_start + (sample_end - sample_start) * sample as f64 / EDGE_SAMPLE_COUNT as f64;
         sample_edge_normal_pair(
             parameter,
             first,
@@ -200,10 +213,12 @@ fn sample_edge_normal_pair(
     surface_second: &BRepAdaptorSurface,
     maximum: &mut f64,
 ) -> Result<(), Failure> {
-    let (Some(normal_first), Some(normal_second)) = (
-        sample_face_normal(parameter, first, curve_first, surface_first)?,
-        sample_face_normal(parameter, second, curve_second, surface_second)?,
-    ) else {
+    let Some(normal_first) = sample_face_normal(parameter, first, curve_first, surface_first)?
+    else {
+        return Ok(());
+    };
+    let Some(normal_second) = sample_face_normal(parameter, second, curve_second, surface_second)?
+    else {
         return Ok(());
     };
     let angle = normal_first.angle(normal_second)?;
@@ -223,7 +238,7 @@ fn sample_face_normal(
     let derivatives = surface.d1(uv.x(), uv.y())?;
     let mut normal = derivatives.d1u.crossed(derivatives.d1v);
     let magnitude = normal.magnitude();
-    if magnitude <= NORMAL_EPSILON {
+    if !normal_magnitude_is_usable(magnitude) {
         return Ok(None);
     }
     normal /= magnitude;
@@ -231,4 +246,20 @@ fn sample_face_normal(
         normal.reverse();
     }
     Ok(Some(normal))
+}
+
+fn normal_magnitude_is_usable(magnitude: f64) -> bool {
+    magnitude > NORMAL_EPSILON
+}
+
+#[cfg(test)]
+mod tests {
+    use super::normal_magnitude_is_usable;
+
+    #[test]
+    fn non_finite_normal_magnitudes_follow_native_greater_than_check() {
+        assert!(!normal_magnitude_is_usable(f64::NAN));
+        assert!(!normal_magnitude_is_usable(1.0e-12));
+        assert!(normal_magnitude_is_usable(f64::INFINITY));
+    }
 }
