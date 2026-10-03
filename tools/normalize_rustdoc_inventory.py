@@ -22,6 +22,7 @@ from api_inventory_json import read_json, sha256_bytes, string_value
 from api_inventory_reexports import resolve_cross_crate_reexports, source_hashes
 from api_tool_hashes import stage_hashes
 from rustdoc_impl_ownership import inherent_members, unresolved_impl_owner_links
+from rustdoc_trait_paths import resolve_public_trait_paths
 from rustdoc_declarations import (
     file_hash,
     item_index,
@@ -344,6 +345,7 @@ def normalized_manifest(
         for name in sorted(records)
     ]
     resolve_cross_crate_reexports(crates)
+    resolve_public_trait_paths(crates)
     return {
         "schema_version": 1,
         "inventory_kind": "reachable-rust-public-surface",

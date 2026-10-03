@@ -37,7 +37,13 @@ silently exclude them. A glob re-export exposes members in the importing
 namespace: `pub use hidden::*` does not expose a `hidden` module. Rustdoc
 canonical defining paths are used inside signatures, but do not grant public
 reachability through private modules. A checked-in nightly format-61 compiler
-fixture covers nested and crate-root glob exports.
+fixture covers nested and crate-root glob exports. Trait implementation selectors
+use reachable trait names, including renamed and cross-crate re-exports; the
+canonical compiler trait path stays in `impl_context`. Implementations whose
+trait belongs to a captured crate but has no reachable export are withheld with
+an explicit `unreachable-trait` gap. External uncaptured traits retain their
+rustdoc identity and remain subject to the external dependency boundary. A
+second compiler fixture covers private defining modules and public trait aliases.
 
 Capture provenance includes the workspace revision, tool versions, input and
 artifact hashes, selected feature policy, and each crate's feature selection.
