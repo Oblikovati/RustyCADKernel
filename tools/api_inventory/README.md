@@ -130,3 +130,33 @@ preprocessor branch, platform-specific toolkit, macro mapping, or behavioral
 obligation. Therefore `coverage_proof` and `declaration_inventory_complete`
 remain false. A ledger mapping alone is not compiler correspondence or test
 parity evidence.
+
+## Auditing capture gaps
+
+`retry_occt_header_context.py` retries parse failures inside real CMake source
+translation units. It follows source-header includes up to three levels and
+accepts a header only when the extractor reports that target header as seen.
+The retry table preserves compiler flags, source hashes, and probe artifacts:
+
+```sh
+python3 tools/retry_occt_header_context.py \
+  --source /path/to/OCCT \
+  --database /path/to/configured/compile_commands.json \
+  --extractor target/api_inventory/occt-api-extract \
+  --capture target/api-proof/occt-inventory/capture-manifest.json \
+  --output target/api-proof/occt-context-retries
+```
+
+`gap_audit.py` records unresolved platform/configuration gaps and validates the
+retry artifacts without changing original capture evidence. Its report keeps
+direct and transitive retry counts separate and always sets `coverage_proof`
+to false:
+
+```sh
+PYTHONPATH=. python3 -m tools.api_inventory.gap_audit \
+  --capture target/api-proof/occt-inventory/capture-manifest.json \
+  --retries /path/to/context-retry-manifest.json \
+  --merged-manifest porting/api-inventory/occt-manifest.json \
+  --source /path/to/OCCT \
+  --output porting/api-inventory/occt-capture-gap-audit.json
+```
