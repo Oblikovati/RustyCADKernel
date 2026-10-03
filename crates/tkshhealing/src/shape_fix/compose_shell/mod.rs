@@ -8,10 +8,10 @@ mod load_wires;
 
 use crate::shape_analysis::{ShapeAnalysisTransferParametersProj, TransferParameters};
 use crate::shape_extend::{ShapeExtend, ShapeExtendCompositeSurface};
-use crate::shape_fix::{FixRoot, FixRootData};
+use crate::shape_fix::{FixRoot, FixRootData, ShapeFixRoot};
 use rustycad_tkbrep::topods::{Face, Shape};
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::toploc::Location;
 
@@ -61,15 +61,14 @@ impl Default for ComposeShellFields {
 /// Splits a face's wires on a composite surface and builds patch faces.
 /// `let compose = ShapeFixComposeShell::new();`
 pub struct ShapeFixComposeShell {
-    parent: StandardTransient,
-    root: FixRootData,
+    parent: ShapeFixRoot,
     fields: SharedState<ComposeShellFields>,
 }
 
 impl_transient!(
     ShapeFixComposeShell,
     "ShapeFix_ComposeShell",
-    StandardTransient,
+    ShapeFixRoot,
     parent,
     interfaces: [dyn FixRoot]
 );
@@ -77,8 +76,7 @@ impl_transient!(
 impl Default for ShapeFixComposeShell {
     fn default() -> Self {
         Self {
-            parent: StandardTransient::default(),
-            root: FixRootData::default(),
+            parent: ShapeFixRoot::default(),
             fields: SharedState::new(ComposeShellFields::default()),
         }
     }
@@ -86,7 +84,7 @@ impl Default for ShapeFixComposeShell {
 
 impl FixRoot for ShapeFixComposeShell {
     fn fix_root_data(&self) -> &FixRootData {
-        &self.root
+        self.parent.fix_root_data()
     }
 }
 

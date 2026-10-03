@@ -6,7 +6,7 @@ use rustycad_tkmath::toploc::Location;
 use rustycad_tkshhealing::{
     shape_analysis::ShapeAnalysisTransferParameters,
     shape_extend::{ShapeExtendCompositeSurface, ShapeExtendParametrisation, ShapeExtendStatus},
-    shape_fix::ShapeFixComposeShell,
+    shape_fix::{FixRoot, ShapeFixComposeShell, ShapeFixRoot},
 };
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeWire,
@@ -100,4 +100,14 @@ fn face_fixture() -> rustycad_tkbrep::topods::Face {
     .unwrap()
     .face()
     .unwrap()
+}
+
+#[test]
+fn root_base_cast_shares_compose_shell_fix_state() {
+    let composer = Handle::new(ShapeFixComposeShell::new());
+    let root = composer.cast::<ShapeFixRoot>();
+    assert!(!root.is_null());
+    root.get().unwrap().set_precision(0.125);
+    assert_eq!(composer.precision(), 0.125);
+    assert_eq!(root.get().unwrap().precision(), 0.125);
 }
