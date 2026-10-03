@@ -113,3 +113,23 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkernel/report.json 
 
 The current API crosswalk resolves 16,304 implemented declaration claims; 10,673
 ledger rows remain unresolved. It is not a behavioral coverage percentage.
+
+### TKMath paired run
+
+`tkmath-runtime-report.json.gz` and `tkmath-runtime-declarations.json.gz` retain
+execution evidence from clean Rust revision `9ba5c46c`: all 2,023 mapped native
+cases and their 2,023 Rust counterparts passed, with no native skips. The
+report pins execution-time Git identity, source hashes, the native executable,
+CMake configuration, and 20 resolved OCCT/GoogleTest shared libraries. The
+join records execution and join revisions separately. Other declarations
+remain unverified by this run; full API and toolkit completion remain false.
+
+```sh
+python3 tools/verify_tkmath_legacy.py --source /path/to/OCCT \
+  --build-dir /path/to/occt-modeling-full --jobs 2
+python3 tools/join_legacy_runtime_evidence.py target/oracle-tkmath-legacy/report.json \
+  --occt-source /path/to/OCCT --output target/api-proof/tkmath-joined-runtime.json
+```
+
+The older TKernel receipt above predates execution-time Git provenance fields.
+It is historical evidence; the current joiner requires a fresh verifier run.

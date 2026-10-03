@@ -220535,6 +220535,78 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFreeBounds::new",
       "status": "implemented",
       "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_fix_free_bounds.cxx; Rust shape_fix_free_bounds tests preserve null outputs, topology counts, and native frozen-edge exception. Underlying sewing coverage remains separate."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::ShapeFix_WireVertex()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::new",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::Analyzer()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::analyzer",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::Init(const ShapeAnalysis_WireVertex &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::init_from_analyzer",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::Wire()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::wire",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::Init(const occ::handle<ShapeExtend_WireData> &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::init_wire_data",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::FixSame()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::fix_same",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::Fix()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::fix",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::Init(const TopoDS_Wire &,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::init",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_WireVertex::WireData()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_WireVertex.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::wire_data",
+      "status": "implemented",
+      "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
     }
   ],
   "tests": [
