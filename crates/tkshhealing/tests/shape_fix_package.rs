@@ -84,5 +84,8 @@ fn encode_regularity_preserves_native_cylinder_edge_observations() {
 
 fn box_shape() -> Shape {
     BRepPrimAPIMakeBox::from_sizes(2., 3., 4.)
-        .unwrap().shape().unwrap().clone()
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone()
 }
