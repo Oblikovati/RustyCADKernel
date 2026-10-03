@@ -5,7 +5,7 @@ use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::ShapeAnalysisCheckSmallFace;
 use crate::shape_build::ShapeBuildReShape;
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
-use rustycad_tkbrep::topods::Shape;
+use rustycad_tkbrep::topods::{Face, Shape};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 
@@ -70,6 +70,35 @@ impl ShapeFixFixSmallFace {
     /// Example: `let result = fixer.fix_spot_face()?`.
     pub fn fix_spot_face(&self) -> Result<Shape, Failure> {
         spot::fix_spot_face(self)
+    }
+
+    /// Replaces every face vertex by the native mean-point vertex; `fixer.replace_vertices_in_case_of_spot(&mut face, -1.0)?`.
+    pub fn replace_vertices_in_case_of_spot(
+        &self,
+        face: &mut Face,
+        tolerance: f64,
+    ) -> Result<bool, Failure> {
+        spot::replace_vertices_in_case_of_spot(self, face, tolerance)
+    }
+
+    /// Removes the face and all its edges from the context; `fixer.remove_faces_in_case_of_spot(&face)?`.
+    pub fn remove_faces_in_case_of_spot(&self, face: &Face) -> Result<bool, Failure> {
+        spot::remove_faces_in_case_of_spot(self, face)
+    }
+
+    /// Applies `FixFace` to each face in the initialized shape; `let repaired = fixer.fix_shape()?`.
+    pub fn fix_shape(&self) -> Result<Shape, Failure> {
+        spot::fix_shape(self)
+    }
+
+    /// Copies and repairs one face; `let repaired = fixer.fix_face(&face)?`.
+    pub fn fix_face(&self, face: &Face) -> Result<Face, Failure> {
+        spot::fix_face(self, face)
+    }
+
+    /// Native `FixPinFace` is currently a no-op returning true; `assert!(fixer.fix_pin_face(&mut face))`.
+    pub fn fix_pin_face(&self, _face: &mut Face) -> bool {
+        true
     }
 
     fn ensure_context(&self) {
