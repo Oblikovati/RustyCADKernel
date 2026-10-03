@@ -1,5 +1,6 @@
 //! Native wire intersection output and geometry evaluation conventions.
 // ShapeAnalysis_Wire.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+mod pair;
 mod self_edge;
 use super::*;
 use rustycad_tkbrep::topods::Edge;
@@ -56,4 +57,31 @@ impl ShapeAnalysisWire {
         use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
         self.surface().adaptor3d().value(uv.x(), uv.y())
     }
+}
+
+fn intersection_candidate(
+    intersections: &GInter,
+    count: i32,
+    index: i32,
+) -> Result<Option<IntersectionPoint>, Failure> {
+    let point = if index <= count {
+        intersections.point(index)?
+    } else {
+        let segment = intersections.segment(index - count)?;
+        if !segment.has_first_point() || !segment.has_last_point() {
+            return Ok(None);
+        }
+        let first = segment.first_point()?;
+        if has_middle_transition(&first) {
+            segment.last_point()?
+        } else {
+            first
+        }
+    };
+    Ok(has_middle_transition(&point).then_some(point))
+}
+
+fn intersection_midpoint(first: Point3, second: Point3) -> Point3 {
+    let midpoint = (first.xyz() + second.xyz()) * 0.5;
+    Point3::new(midpoint.x(), midpoint.y(), midpoint.z())
 }
