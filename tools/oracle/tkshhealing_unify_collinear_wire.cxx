@@ -195,31 +195,46 @@ static void runPlanarFaceCase() {
             << BRepCheck_Analyzer(result, true).IsValid() << '\n';
 }
 
-static void runBezierFaceCase() {
+static TopoDS_Face makeBezierFace() {
   BRepBuilderAPI_MakeWire wireBuilder;
   wireBuilder.Add(makeBezierSegment(gp_Pnt(0, 0, 0), gp_Pnt(0.5, 0, 0), gp_Pnt(1, 1, 0)));
   wireBuilder.Add(makeBezierSegment(gp_Pnt(1, 1, 0), gp_Pnt(1.5, 2, 0), gp_Pnt(2, 4, 0)));
   wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(2, 4, 0), gp_Pnt(0, 4, 0)));
   wireBuilder.Add(BRepBuilderAPI_MakeEdge(gp_Pnt(0, 4, 0), gp_Pnt(0, 0, 0)));
-  TopoDS_Face face = BRepBuilderAPI_MakeFace(gp_Pln(gp_Ax3()), wireBuilder.Wire(), true);
-  ShapeUpgrade_UnifySameDomain unifier(face, true, false, true);
-  unifier.Build();
-  const TopoDS_Shape result = unifier.Shape();
+  return BRepBuilderAPI_MakeFace(gp_Pln(gp_Ax3()), wireBuilder.Wire(), true);
+}
+
+static void emitBezierFaceSummary(const TopoDS_Shape& result) {
   int edgeCount = 0;
   for (TopExp_Explorer edge(result, TopAbs_EDGE); edge.More(); edge.Next()) ++edgeCount;
   std::cout << "bezier_face edges " << edgeCount << " valid "
             << BRepCheck_Analyzer(result, true).IsValid() << '\n';
+}
+
+static void printBezierFacePCurve(const TopoDS_Edge& edge, const TopoDS_Face& face) {
+  double first = 0., last = 0.;
+  BRep_Tool::CurveOnSurface(edge, face, first, last);
+  const BRepAdaptor_Curve2d adaptor(edge, face);
+  const gp_Pnt2d midpoint = adaptor.Value((first + last) / 2.);
+  std::cout << std::setprecision(17) << "bezier_face pcurve " << adaptor.GetType() << ' '
+            << first << ' ' << last << ' ' << midpoint.X() << ' ' << midpoint.Y() << '\n';
+}
+
+static void emitBezierFacePCurve(const TopoDS_Shape& result, const TopoDS_Face& face) {
   for (TopExp_Explorer edge(result, TopAbs_EDGE); edge.More(); edge.Next()) {
     const TopoDS_Edge current = TopoDS::Edge(edge.Current());
-    const BRepAdaptor_Curve curve(current);
-    if (curve.GetType() != GeomAbs_BSplineCurve) continue;
-    double first = 0., last = 0.;
-    const Handle(Geom2d_Curve) pcurve = BRep_Tool::CurveOnSurface(current, face, first, last);
-    const BRepAdaptor_Curve2d adaptor(current, face);
-    const gp_Pnt2d midpoint = adaptor.Value((first + last) / 2.);
-    std::cout << std::setprecision(17) << "bezier_face pcurve " << adaptor.GetType() << ' '
-              << first << ' ' << last << ' ' << midpoint.X() << ' ' << midpoint.Y() << '\n';
+    if (BRepAdaptor_Curve(current).GetType() != GeomAbs_BSplineCurve) continue;
+    printBezierFacePCurve(current, face);
   }
+}
+
+static void runBezierFaceCase() {
+  const TopoDS_Face face = makeBezierFace();
+  ShapeUpgrade_UnifySameDomain unifier(face, true, false, true);
+  unifier.Build();
+  const TopoDS_Shape result = unifier.Shape();
+  emitBezierFaceSummary(result);
+  emitBezierFacePCurve(result, face);
 }
 
 int main() {
