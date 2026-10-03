@@ -140,6 +140,38 @@ class CaptureTests(InventoryFixture):
 
 
 class MergeTests(InventoryFixture):
+    def test_noncallable_signature_variance_conflicts_under_one_usr(self) -> None:
+        records = InventoryRecords()
+        first = self.declaration("c:@T@math_Vector")
+        first["kind"] = "TypedefName"
+        first["signature"] = "class math_Vector"
+        first["identity_signature"] = "math_Vector"
+        second = dict(first)
+        second["signature"] = "math_Vector"
+        second["identity_signature"] = "math_Vector"
+        consume_event(records, first, "a.hxx", self.root)
+        consume_event(records, second, "b.hxx", self.root)
+        merged = next(iter(records.declarations.values()))
+        self.assertEqual(len(records.declarations), 1)
+        self.assertTrue(merged["inventory_conflict"])
+        self.assertEqual(len(records.unsupported), 1)
+
+    def test_template_defaults_merge_identity_but_preserve_both_spellings(self) -> None:
+        records = InventoryRecords()
+        for template_signature in (
+            "template <typename __template_param_0 = int>",
+            "template <typename __template_param_0>",
+        ):
+            row = self.declaration("c:@FT@defaulted#t0.0#")
+            row["kind"] = "FunctionTemplate"
+            row["identity_signature"] = "void (type-parameter-0-0)"
+            row["template_signature"] = template_signature
+            consume_event(records, row, "a.hxx", self.root)
+        merged = next(iter(records.declarations.values()))
+        self.assertEqual(len(records.declarations), 1)
+        self.assertEqual(len(merged["template_signature_variants"]), 2)
+        self.assertFalse(records.unsupported)
+
     def test_default_arguments_merge_as_observations_not_identity(self) -> None:
         records = InventoryRecords()
         for source, default in (("a.hxx", "7"), ("a.cxx", "")):
