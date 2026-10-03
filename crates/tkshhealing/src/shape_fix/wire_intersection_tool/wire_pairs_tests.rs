@@ -247,6 +247,32 @@ fn contained_first_long_overlap_is_inserted_into_the_second_wire() {
 
 #[test]
 fn partial_long_overlap_inserts_the_source_middle_and_keeps_target_tail() {
+    assert_partial_long_overlap(
+        -2.0,
+        1,
+        2,
+        [0.0, 8.0, 8.0, 10.0, 0.0, 2.0, 0.0, 2.0, 0.0, 8.0, 0.0, 2.0],
+    );
+}
+
+#[test]
+fn partial_long_overlap_keeps_source_head_and_inserts_target_middle() {
+    assert_partial_long_overlap(
+        2.0,
+        2,
+        1,
+        [
+            0.0, 2.0, 2.0, 10.0, 0.0, 2.0, 2.0, 10.0, 8.0, 10.0, 0.0, 2.0,
+        ],
+    );
+}
+
+fn assert_partial_long_overlap(
+    second_start: f64,
+    source_middle_index: i32,
+    target_middle_index: i32,
+    expected_ranges: [f64; 12],
+) {
     let mut face = planar_face();
     let first = Handle::new(ShapeExtendWireData::new());
     first
@@ -255,7 +281,7 @@ fn partial_long_overlap_inserts_the_source_middle_and_keeps_target_tail() {
     first
         .add_edge(&line_edge(&face, 30.0, 30.0, 1.0, 0.0), 0)
         .unwrap();
-    let second_edge = line_edge_range(&face, 2.0, 0.0, 0.0, 1.0, 0.0, 10.0);
+    let second_edge = line_edge_range(&face, second_start, 0.0, 0.0, 1.0, 0.0, 10.0);
     let endpoint = ShapeAnalysisEdge::new().first_vertex(&second_edge);
     BRepBuilder::default()
         .update_vertex_tolerance(&endpoint, 1.0e-5)
@@ -279,9 +305,7 @@ fn partial_long_overlap_inserts_the_source_middle_and_keeps_target_tail() {
             .iter()
             .flat_map(|wire| direct_edge_ranges(wire, &face))
             .collect::<Vec<_>>(),
-        [
-            0.0, 2.0, 2.0, 10.0, 0.0, 2.0, 2.0, 10.0, 8.0, 10.0, 0.0, 2.0
-        ]
+        expected_ranges
     );
     let first_data = ShapeExtendWireData::from_wire(
         &rustycad_tkbrep::topods::wire(&wires[0]).unwrap(),
@@ -297,9 +321,9 @@ fn partial_long_overlap_inserts_the_source_middle_and_keeps_target_tail() {
     .unwrap();
     assert!(
         first_data
-            .edge(2)
+            .edge(source_middle_index)
             .unwrap()
-            .is_same(&second_data.edge(1).unwrap())
+            .is_same(&second_data.edge(target_middle_index).unwrap())
     );
     let applied = context
         .apply(&old_face, rustycad_tkg3d::top_abs::ShapeEnum::Shape)
@@ -370,7 +394,16 @@ fn assert_full_long_overlap_replacement(second_start: f64, second_direction: f64
 }
 
 #[test]
+fn two_sided_endpoint_cut_trims_long_edge_without_replacing_face() {
+    assert_endpoint_cut(0.5, 1.5);
+}
+
+#[test]
 fn one_sided_endpoint_cut_trims_edge_without_replacing_face() {
+    assert_endpoint_cut(0.0, 1.0);
+}
+
+fn assert_endpoint_cut(second_start: f64, expected_start: f64) {
     let mut face = planar_face();
     let long_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 1000.0);
     let endpoint = ShapeAnalysisEdge::new().first_vertex(&long_edge);
@@ -384,7 +417,10 @@ fn one_sided_endpoint_cut_trims_edge_without_replacing_face() {
         .unwrap();
     let second = Handle::new(ShapeExtendWireData::new());
     second
-        .add_edge(&line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0), 0)
+        .add_edge(
+            &line_edge_range(&face, second_start, 0.0, 0.0, 1.0, 0.0, 1.0),
+            0,
+        )
         .unwrap();
     second
         .add_edge(&line_edge(&face, -3000.0, -3000.0, 0.0, 1.0), 0)
@@ -402,7 +438,7 @@ fn one_sided_endpoint_cut_trims_edge_without_replacing_face() {
             .iter()
             .flat_map(|wire| direct_edge_ranges(wire, &face))
             .collect::<Vec<_>>(),
-        [1.0, 1000.0, 0.0, 2.0, 0.0, 1.0, 0.0, 2.0]
+        [expected_start, 1000.0, 0.0, 2.0, 0.0, 1.0, 0.0, 2.0]
     );
 }
 

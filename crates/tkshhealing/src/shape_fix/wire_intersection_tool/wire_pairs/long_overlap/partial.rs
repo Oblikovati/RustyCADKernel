@@ -158,6 +158,22 @@ fn replace_partial_target(
     source_boxes: &[EdgeBox],
 ) -> Result<bool, Failure> {
     replace_matching_target_vertices(tool, wire, index, source, points, vertices)?;
+    let Some(start_index) =
+        edge_containing_parameter(&wire.data, face, points.second_parameters.0)?
+    else {
+        return Ok(false);
+    };
+    if !split_boundary(
+        tool,
+        face,
+        wire,
+        start_index,
+        points.second_parameters.0,
+        &vertices.start,
+        &points.second[0],
+    )? {
+        return Ok(false);
+    }
     let Some(split_index) =
         edge_containing_parameter(&wire.data, face, points.second_parameters.1)?
     else {
