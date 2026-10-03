@@ -224228,6 +224228,290 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::fix_intersecting_wires",
       "status": "partial",
       "notes": "Direct-wire traversal, point intersections, endpoint reuse/union and short overlap splits are compared with native output including split ranges. Long-overlap and remaining endpoint-cut branches are still being ported. This row records an incomplete implementation, not class or legacy-test parity."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::ShapeFix_Shape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::empty",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::ShapeFix_Shape(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::new",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::Init(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::init",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::Perform(const Message_ProgressRange &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::perform_with_progress",
+      "status": "partial",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::Shape() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::shape",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::Status(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::status",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::SameParameter(const TopoDS_Shape &,const bool,const Message_ProgressRange &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::same_parameter",
+      "status": "partial",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixSolidTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_solid_tool",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixShellTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_shell_tool",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixFaceTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_face_tool",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixWireTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_wire_tool",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixEdgeTool() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_edge_tool",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixSolidMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_solid_mode",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_solid_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_solid_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixFreeShellMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_shell_mode",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_shell_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_free_shell_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixFreeFaceMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_face_mode",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_face_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_free_face_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixFreeWireMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_wire_mode",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_free_wire_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_free_wire_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixSameParameterMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_same_parameter_mode",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_same_parameter_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_same_parameter_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixVertexPositionMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_position_mode",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_position_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_vertex_position_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::FixVertexTolMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_tol_mode",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::fix_vertex_tol_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_fix_vertex_tol_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::SetPrecision(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_precision",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::SetMinTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_min_tolerance",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Shape::SetMaxTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
+      "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::set_max_tolerance",
+      "status": "implemented",
+      "notes": "Sixteen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire aggregate dispatch and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixWireTool()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_wire_tool",
+      "status": "implemented",
+      "notes": "Shared native wire tool and paired small-area mode access; configuration propagation is tested through ShapeFixShape. Face Perform remains partial and does not yet cover all mode-controlled branches."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixSmallAreaWireMode()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_small_area_wire_mode",
+      "status": "implemented",
+      "notes": "Shared native wire tool and paired small-area mode access; configuration propagation is tested through ShapeFixShape. Face Perform remains partial and does not yet cover all mode-controlled branches.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_small_area_wire_mode",
+        "rustycad_tkshhealing::shape_fix::ShapeFixFace::set_fix_small_area_wire_mode"
+      ]
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckTwisted(const TopoDS_Face &,double &,double &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_twisted",
+      "status": "partial",
+      "notes": "Pinned fixtures cover flat/folded Bezier surfaces and elementary fast return, plus projected splitting vertex outputs and statuses. General geometry and unset native precision domains remain incomplete; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusTwisted(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_twisted",
+      "status": "implemented",
+      "notes": "Pinned fixtures cover flat/folded Bezier surfaces and elementary fast return, plus projected splitting vertex outputs and statuses. General geometry and unset native precision domains remain incomplete; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusSplitVert(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_split_vert",
+      "status": "implemented",
+      "notes": "Pinned fixtures cover flat/folded Bezier surfaces and elementary fast return, plus projected splitting vertex outputs and statuses. General geometry and unset native precision domains remain incomplete; no legacy mapping increase."
+    },
+    {
+      "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckSplittingVertices(const TopoDS_Face &,NCollection_DataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher> &,NCollection_DataMap<TopoDS_Shape,NCollection_List<double>,TopTools_ShapeMapHasher> &,TopoDS_Compound &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
+      "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
+      "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_splitting_vertices",
+      "status": "partial",
+      "notes": "Pinned fixtures cover flat/folded Bezier surfaces and elementary fast return, plus projected splitting vertex outputs and statuses. General geometry and unset native precision domains remain incomplete; no legacy mapping increase."
     }
   ],
   "tests": [

@@ -2,6 +2,7 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Context preservation and apex-edge repair for periodic loops on conical faces.
+mod configuration;
 pub(crate) mod make_faces_on_patch;
 mod missing_seam;
 mod natural_bound;
@@ -38,6 +39,7 @@ pub struct ShapeFixFace {
     modes: SharedState<FaceFixModes>,
     analysis_surface: SharedState<Handle<ShapeAnalysisSurface>>,
     forward: SharedState<bool>,
+    wire_tool: Handle<super::ShapeFixWire>,
 }
 
 impl_transient!(ShapeFixFace, "ShapeFix_Face", ShapeFixRoot, parent, interfaces: [dyn FixRoot]);
@@ -52,6 +54,7 @@ impl Default for ShapeFixFace {
             modes: SharedState::new(FaceFixModes::default()),
             analysis_surface: SharedState::new(Handle::default()),
             forward: SharedState::new(true),
+            wire_tool: Handle::new(super::ShapeFixWire::new()),
         }
     }
 }
@@ -64,6 +67,7 @@ pub type ShapeFixFaceWireMap =
 struct FaceFixModes {
     orientation: i32,
     add_natural_bound: i32,
+    small_area_wire: i32,
 }
 
 impl Default for FaceFixModes {
@@ -71,6 +75,7 @@ impl Default for FaceFixModes {
         Self {
             orientation: -1,
             add_natural_bound: -1,
+            small_area_wire: -1,
         }
     }
 }
@@ -226,12 +231,6 @@ impl ShapeFixFace {
     /// `Status(status)`: decode a flag from the last `Perform()`.
     pub fn status(&self, status: ShapeExtendStatus) -> bool {
         ShapeExtend::decode_status(*self.status.read(), status)
-    }
-}
-
-impl FixRoot for ShapeFixFace {
-    fn fix_root_data(&self) -> &FixRootData {
-        self.parent.fix_root_data()
     }
 }
 

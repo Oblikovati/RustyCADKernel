@@ -15,7 +15,6 @@ mod intersection;
 mod root;
 mod shape;
 mod shape_tolerance;
-mod shell_orientation;
 mod split_common_vertex;
 mod wire;
 mod wire_vertex;
