@@ -69,3 +69,6 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     # TransferParametersProj: projection, per-representation ranges and non-manifold copies.
     __import__('tkshhealing_corpus_transfer_proj').append_transfer_projection_requests(requests)
     __import__('tkshhealing_corpus_wire_divide').append_wire_divide_requests(requests)
+
+    # Native crash inputs remain in the dedicated wire-segment accounting gate.
+    requests.extend(__import__('tkshhealing_wire_segment_crashes').wire_segment_partition()[0])
