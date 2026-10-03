@@ -60,7 +60,8 @@ pub(super) fn repair_cross_wire_segment(
         return Ok(PairEffect::None);
     }
     if matches!(first_cut, OverlapCut::Applied) || matches!(second_cut, OverlapCut::Applied) {
-        return Ok(PairEffect::None);
+        // OCCT retries this edge pair after successful range cuts.
+        return Ok(PairEffect::RetrySecond(0));
     }
     split_short_overlap(
         tool,
