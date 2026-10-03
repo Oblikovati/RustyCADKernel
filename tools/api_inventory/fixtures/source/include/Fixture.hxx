@@ -44,6 +44,31 @@ template <typename T, unsigned N = 2> struct Box {
 
 template <typename T> T identity(T value);
 
+using CountAlias = unsigned long;
+void redeclared_value(const CountAlias original_count);
+void redeclared_value(unsigned long renamed_count) {}
+void redeclared_default(const int original_value = 7);
+void redeclared_default(const int renamed_value) {}
+
+struct BaseDefaults { void inherited_default(int value = 11); };
+struct DerivedDefaults : BaseDefaults {
+  using BaseDefaults::inherited_default;
+};
+
+template <typename FirstProvider>
+auto named_template(FirstProvider first) -> decltype(first.Size());
+template <typename SecondProvider>
+auto named_template(SecondProvider second) -> decltype(second.Size()) {
+  return second.Size();
+}
+
+template <class FirstProvider>
+auto class_template_parameter(FirstProvider first) -> decltype(first.Size());
+template <typename SecondProvider>
+auto class_template_parameter(SecondProvider second) -> decltype(second.Size()) {
+  return second.Size();
+}
+
 struct ProviderValue { static constexpr int inherited_value = 1; };
 template <typename T> struct DependentValueBase : T {
   using T::inherited_value;

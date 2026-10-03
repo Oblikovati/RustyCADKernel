@@ -170,6 +170,13 @@ def cpp_candidates(
         for row in candidates
         if row.get("api_visible") is True and toolkit in row.get("_toolkits", set())
     ]
+    unresolved = [
+        row
+        for row in candidates
+        if row.get("api_resolution") == "unresolved_using_value_target"
+    ]
+    if unresolved:
+        return "unresolved_member_target", unresolved
     if params is not None:
         candidates = [row for row in candidates if parameter_match(params, row)]
     candidates = [row for row in candidates if suffix_matches(suffix, row)]
@@ -264,6 +271,8 @@ def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) 
         return "unmatched_exclusion" if source_known else "stale_exclusion"
     if cpp == "conflicting_inventory":
         return "conflicting_cpp_inventory"
+    if cpp == "unresolved_member_target":
+        return "unresolved_cpp_member_target"
     if cpp == "ambiguous":
         return "ambiguous_cpp"
     if cpp != "unique":
