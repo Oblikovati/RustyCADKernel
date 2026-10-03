@@ -141,6 +141,7 @@ fn configuration_defaults_and_validation() {
 fn domains_preserve_unchecked_arithmetic_and_checked_containment() {
     let a: Domain1D = Domain1D::new(-1.0, 3.0);
     assert!(a.is_valid());
+    assert_eq!((a.min, a.max), (-1.0, 3.0));
     assert_eq!(a.length(), 4.0);
     assert_eq!(a.mid(), 1.0);
     assert!(a.contains(3.1, 0.2));
@@ -159,6 +160,7 @@ fn domains_preserve_unchecked_arithmetic_and_checked_containment() {
     assert_eq!(b.normalize(0.0), 0.5);
     let d: Domain2D = Domain2D::from_domains(a, Domain1D::new(2.0, 6.0));
     assert!(d.is_valid());
+    assert_eq!((d.u_min, d.u_max, d.v_min, d.v_max), (-1.0, 3.0, 2.0, 6.0));
     assert_eq!(d.u_length(), 4.0);
     assert_eq!(d.v_length(), 4.0);
     assert_eq!(d.u_mid(), 1.0);
