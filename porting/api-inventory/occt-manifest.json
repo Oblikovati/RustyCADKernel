@@ -1,0 +1,144 @@
+{
+  "schema": "occt-declaration-inventory-v1",
+  "inputs": {
+    "manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "database_sha256": "6429a7389b6747066c80eaabcb2c6cfe340dc8dfcb958218c0545df5a9e0a9a8",
+    "extractor_sha256": "fe344f205fb6a0f634fe5fc60247907475726fc0bdd22c219175004b71d4de8d",
+    "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
+    "cmake_cache_sha256": "df4501d40b90bbc2cb8543658820157dddfe1e5a9f9fc1efc55a03d21325979b",
+    "generated_version_sha256": "49100a529ae6ba88686552213d31e86beea5dec7e00b96dcda2b571292bf4f86",
+    "file_inputs": {
+      "manifest": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace-RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/porting/api-header-manifest.json",
+      "database": "/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/compile_commands.json",
+      "extractor": "/tmp/rustycad-api-clang-extractor/target/api_inventory/occt-api-extract",
+      "toolchain_config": "/tmp/claude-1000/-home-vmiguel-git-oblikovati-workspace-RustyCADKernel/e74234dc-84a9-43c8-96ac-967004af0f78/scratchpad/wt-tkgeomalgo/porting/api-proof-toolchain.json",
+      "cmake_cache": "/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/CMakeCache.txt",
+      "generated_version": "/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/include/opencascade/Standard_Version.hxx"
+    },
+    "source": "/home/vmiguel/git/oblikovati-workspace/OCCT",
+    "generated_version_path": "/tmp/rustycad-api-proof-bootstrap/target/api-proof/occt-build/include/opencascade/Standard_Version.hxx",
+    "sdk_headers": [
+      {
+        "root": "/usr/include",
+        "files": 4282,
+        "sha256": "880afe0f69e79cd9e787b2b1b4c9f0a720cab1d9e65e19938f8fd3100312b849"
+      },
+      {
+        "root": "/usr/local/include",
+        "files": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "root": "/home/vmiguel/.cache/rustycad-api-proof/llvm-23.1.2/lib/clang/23/include",
+        "files": 327,
+        "sha256": "6995ecc0260d2eee4fc7909689ca3a0eff2d36df04fb6f46621f662239b0d960"
+      }
+    ],
+    "compiler_libraries": [
+      {
+        "path": "/home/vmiguel/.cache/rustycad-api-proof/llvm-23.1.2/lib/libclang-cpp.so.23.1",
+        "sha256": "255add214d5aea3a28c8ba9dc5caf0b3e5a480bfc720ffe672597766b1340120"
+      }
+    ],
+    "external_headers": [
+      {
+        "root": "/home/vmiguel/.cache/rustycad-api-proof/deps/rapidjson-1.1.0/usr/include",
+        "files": 35,
+        "sha256": "474d444e61549f1cbec51ced309d260caf9e75ba51b0a490cb75131bb42e7655"
+      }
+    ],
+    "collector_sha256": "4eccf6f56194eeaac436e4dc77b96d8ed2dabfaf3db9e902daf17c9d0c3a4b0c"
+  },
+  "capture_fingerprint": "89cd16fc749b1d37d680bbe65e6effef791e5c8f31d1b5216ff95464ccd90c28",
+  "context_retry_sha256": "beb67de2a6f4a5f3b67e11140f2f80b4651f9f7ae48bd836a0a21b1f3bcc8701",
+  "expected_headers": 6317,
+  "headers_by_status": {
+    "parsed": 5633,
+    "included_fragment": 384,
+    "parsed_with_context": 260,
+    "parse_failed": 12,
+    "missing_compile_configuration": 28
+  },
+  "declarations": 271488,
+  "api_declarations": 110270,
+  "macro_definitions": 12379,
+  "macro_candidates": 6526,
+  "declarations_by_kind": {
+    "Namespace": 53,
+    "Function": 1024,
+    "FunctionTemplate": 593,
+    "TemplateTypeParm": 1509,
+    "CXXRecord": 5762,
+    "CXXMethod": 73620,
+    "ClassTemplateSpecialization": 128,
+    "NonTypeTemplateParm": 269,
+    "CXXConstructor": 7990,
+    "Typedef": 5907,
+    "Enum": 630,
+    "EnumConstant": 4662,
+    "Field": 5541,
+    "CXXConversion": 173,
+    "CXXDestructor": 500,
+    "ClassTemplate": 226,
+    "Var": 233,
+    "TypeAlias": 573,
+    "ClassTemplatePartialSpecialization": 39,
+    "TemplateTemplateParm": 1,
+    "UsingDirective": 29,
+    "Using": 806,
+    "TypeAliasTemplate": 2
+  },
+  "unsupported_records": 2651,
+  "diagnostics": 7813,
+  "skipped_ranges": 1094,
+  "configuration_matrix_complete": false,
+  "declaration_inventory_complete": false,
+  "coverage_proof": false,
+  "artifacts": {
+    "declarations": {
+      "path": "occt-declarations.jsonl.gz",
+      "sha256": "4a2de56e7fa0dc2abf580b1fc820aac578c92417c1177e1968645e47a7c27b8e",
+      "rows": 271488
+    },
+    "macros": {
+      "path": "occt-macros.jsonl.gz",
+      "sha256": "90830de296ca4481be21b2afb785339cd2e891bbc71496a030d633b18d59371b",
+      "rows": 12379
+    },
+    "headers": {
+      "path": "occt-headers.jsonl.gz",
+      "sha256": "26629958573461b4ff1640f6e4e18a1f115edc5f32d83ef5e74a1816e8850236",
+      "rows": 6317
+    },
+    "diagnostics": {
+      "path": "occt-diagnostics.jsonl.gz",
+      "sha256": "f6681b36c0feaefd436ce9fa9d2ce33a953c8745eb2875631bf1acd6e8302ce0",
+      "rows": 7813
+    },
+    "unsupported": {
+      "path": "occt-unsupported.jsonl.gz",
+      "sha256": "b48b5fd40b776a4f84ebb68212a3fb870172534e1efb63bfb93af7c39bae8323",
+      "rows": 2651
+    },
+    "skipped-ranges": {
+      "path": "occt-skipped-ranges.jsonl.gz",
+      "sha256": "f7fff78b64dd38eddf43e646d85b67b86050a08ecad8603d87ca0ecc9c86484b",
+      "rows": 1094
+    },
+    "compiler-summaries": {
+      "path": "occt-compiler-summaries.jsonl.gz",
+      "sha256": "e51dbd0214c629ab49c5faf456fcdc5f62b0313810f5e99e1934be60e3161d8b",
+      "rows": 5893
+    },
+    "context-retries": {
+      "path": "occt-context-retries.jsonl.gz",
+      "sha256": "4f501a95730991e5fe73f4b0a9d1c25a60d636147e38fcae39119cd54e163808",
+      "rows": 272
+    },
+    "included-files": {
+      "path": "occt-included-files.jsonl.gz",
+      "sha256": "78e3f2d5009f4a981c618e60da614bc2acd50b8ab0d3d8dcd4283e0f47fbd9cc",
+      "rows": 10617
+    }
+  }
+}

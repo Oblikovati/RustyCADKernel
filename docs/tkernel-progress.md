@@ -225,9 +225,10 @@ ownership restriction replaces upstream's caller-enforced lifetime requirement.
 Rust allocation failure handling, allocator statistics, native raw-pointer
 adoption, and runtime type information are not yet fully mapped APIs.
 
-Character classification currently implements the recorded C locale; changing
-the process locale is not yet supported. Test completion for these source files
-does not imply API completion for their packages.
+Character classification on Unix now delegates to the active C locale. The
+German ISO-8859-1 regression verifies non-ASCII classification and case conversion
+in an isolated process. Non-Unix locale behavior remains unverified. Test
+completion for these source files does not imply API completion for their packages.
 
 Sequence preserves one-based access and stable per-element allocations, with
 bidirectional borrowed iterators and detached cursors. Its ordering table uses
@@ -1173,9 +1174,11 @@ Standard_ArrayStreamBuffer, Standard_Dump and Plugin.hxx have 89 rows (80 implem
   which replaces the error-handler callback. `StandardCondition` is the manual-reset
   event; `Wait(int)` is `wait_timeout`, and a zero or negative limit only tests the flag.
   Thread scripts are compared token by token.
-- **Standard_CLocaleSentry.** Rust formatting never reads a process locale, so the
-  sentry has nothing to switch or restore; it stays a scope marker, and `get_c_locale`
-  returns one static `CLocale` (radix '.', empty group separator).
+- **Standard_CLocaleSentry.** On POSIX, the sentry activates one cached C locale
+  and restores the previous thread locale on drop, including nested scopes and
+  unwinding. It preserves native null/query and ignored restoration-error behavior.
+  Android retains OCCT's no-op behavior; other platform switching remains a gap.
+  `get_c_locale` returns one static descriptive `CLocale` (radix '.').
 - **Standard_ReadBuffer / Standard_ReadLineBuffer.** Both take any `io::Read` for the
   `std::istream` and `FILE*` overloads, with the native block-read semantics. Quirks
   kept: lengths truncate with C++ `%`; a partial last chunk keeps stale cache bytes;

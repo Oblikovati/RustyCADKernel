@@ -1,9 +1,41 @@
 # OCCT API coverage proof
 
-`porting/parity.json` is a manually curated mapping ledger. Its 27,034 API rows are
+`porting/parity.json` is a manually curated mapping ledger. Its 27,139 API rows are
 useful work records, but they are not an authoritative upstream symbol inventory.
 `api_inventory_complete` must remain `false` until an independent inventory is
 generated from both projects and the comparison gate passes.
+
+## Current compiler inventory
+
+The configured scan observes **110,270 public/protected C++ declaration
+candidates**, plus 6,526 macro candidates tracked separately. It accounts for
+all 6,316 source-header paths and the generated version header:
+
+| Header disposition | Count |
+| --- | ---: |
+| Standalone parse succeeded | 5,633 |
+| Parsed in a real OCCT translation-unit context | 260 |
+| Included fragments observed | 384 |
+| Parsing/context gaps | 12 |
+| No configured owning toolkit | 28 |
+
+All 384 `.lxx` fragments are observed. Context successes retain their original
+standalone failure, source translation unit, flags, and hashes. Six toolkit
+configurations remain absent; OpenGL/GLES share physical headers, so per-toolkit
+ownership totals overlap and do not prove the absent GLES configuration.
+There are 2,651 conflicting-declaration observations and 1,094 skipped preprocessor
+ranges retained for review. The observed declaration count is a lower bound on
+the cross-platform surface, not a denominator for a full-port percentage.
+
+The legacy-test snapshot separately accounts for 8,648 GoogleTest declarations:
+7,393 exact Rust mappings and 1,255 unmapped, with zero unknown or duplicate
+mappings. Its runtime status remains unverified until verifier evidence is
+joined; DRAW candidates are also explicit unverified obligations.
+
+See the [snapshot summary](../porting/api-inventory/completeness.json) for
+compiler-checked mapping counts, per-toolkit gaps, input hashes, and the exact
+Rust capture provenance. Test-declaration mappings remain a separate ledger;
+API correspondence does not establish matching runtime behavior.
 
 ## Source boundary prototype
 
@@ -124,25 +156,21 @@ normalize signatures, account for each independent feature combination or
 target platform, or crosswalk Rust items to OCCT declarations. Its manifest
 keeps `normalized_public_inventory` false.
 
-The Rust normalization stage is now available in
-[`rust-api-inventory.md`](rust-api-inventory.md). It normalizes public
-reachable surfaces with a versioned policy that includes `doc(hidden)` items.
-The existing fixture capture normalizes to 43,371 declarations across 17
-crates. Cross-crate re-exports are now expanded from the matching artifact
-set, yielding 50,410 path entries with no unresolved links or unclassified
-rustdoc item kinds. Its 124 MiB JSON output is generated under `target/` and is
-not checked in. It was produced at revision
-`4fa164336ea50d8a4c1db914321590135b7ce5bf`; the integrated workspace has since
-advanced, so a fresh capture is required before using it as the current Rust
-surface. The output still makes no OCCT parity claim.
+The Rust normalization stage is documented in
+[`rust-api-inventory.md`](rust-api-inventory.md). It expands public re-exports
+across the matching captured crates and keeps `doc(hidden)` public items.
+The current compressed snapshot and its capture revision are published under
+[`porting/api-inventory`](../porting/api-inventory/README.md), alongside the
+C++ declarations, crosswalk, hashes, and unresolved obligations. Earlier raw
+rustdoc and smoke AST counts above are bootstrap measurements, not current
+completeness figures.
 
 ## Completeness limitations
 
 The bootstrap currently provides Clang and a pinned nightly rustdoc compiler,
-but its Linux CMake configuration does not cover every manifest toolkit. A
-normalized Rust inventory exists for the prior capture revision, but there is
-no complete C++ inventory or Rust-to-OCCT crosswalk. Therefore the proof cannot
-currently validate 100% API coverage. The existing
+but its Linux CMake configuration does not cover every manifest toolkit. Compiler inventories and a conservative crosswalk now exist, with explicit
+configuration, parsing, identity, and mapping gaps. They cannot currently
+validate 100% API coverage. The existing
 `tools/audit_api_rows.py` is explicitly heuristic and cannot substitute for the
 compiler-backed stage.
 
