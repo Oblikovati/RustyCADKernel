@@ -14,6 +14,7 @@ pub struct ShapeAnalysisCheckSmallFace {
     pub(super) strip_status: i32,
     pub(super) pin_status: i32,
     pub(super) split_vertex_status: i32,
+    pub(super) twisted_status: i32,
     pub(super) tolerance: Option<f64>,
 }
 
@@ -58,6 +59,11 @@ impl ShapeAnalysisCheckSmallFace {
     /// Decodes the last `CheckSplittingVertices` scan; `analyzer.status_split_vert(ShapeExtendStatus::Done)`.
     pub fn status_split_vert(&self, status: ShapeExtendStatus) -> bool {
         ShapeExtend::decode_status(self.split_vertex_status, status)
+    }
+
+    /// Decodes the last `CheckTwisted` scan; `analyzer.status_twisted(ShapeExtendStatus::Done)`.
+    pub fn status_twisted(&self, status: ShapeExtendStatus) -> bool {
+        ShapeExtend::decode_status(self.twisted_status, status)
     }
 
     /// Sets the separate checker precision field; `analyzer.set_tolerance(0.01)`.
