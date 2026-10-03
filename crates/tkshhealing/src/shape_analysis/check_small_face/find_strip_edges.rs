@@ -45,18 +45,27 @@ fn collect_strip_edges(
     )?;
     while edges.more() {
         let current = edge(edges.current())?;
-        if !is_repeated_seam(found, &current, first_edge)
-            && !is_null_length_edge(&current, tolerance)?
-        {
-            found += 1;
-            assign_candidate(found, &current, first_edge, second_edge);
-            if found > 2 {
-                return Ok(found);
-            }
+        if inspect_candidate(&mut found, &current, tolerance, first_edge, second_edge)? {
+            return Ok(found);
         }
         edges.next()?;
     }
     Ok(found)
+}
+
+fn inspect_candidate(
+    found: &mut i32,
+    current: &Edge,
+    tolerance: f64,
+    first_edge: &mut Edge,
+    second_edge: &mut Edge,
+) -> Result<bool, Failure> {
+    if is_repeated_seam(*found, current, first_edge) || is_null_length_edge(current, tolerance)? {
+        return Ok(false);
+    }
+    *found += 1;
+    assign_candidate(*found, current, first_edge, second_edge);
+    Ok(*found > 2)
 }
 
 fn is_repeated_seam(found: i32, current: &Edge, first_edge: &Edge) -> bool {
@@ -76,10 +85,17 @@ fn is_null_length_edge(edge: &Edge, tolerance: f64) -> Result<bool, Failure> {
     let Some(curve) = edge_curve(edge)? else {
         return Ok(endpoint_distance <= local_tolerance);
     };
+    midpoint_is_collapsed(&curve, start_point, end_point, local_tolerance)
+}
+
+fn midpoint_is_collapsed(
+    curve: &rustycad_tkernel::standard::Handle<dyn GeomCurve>,
+    start: rustycad_tkmath::gp::Point3,
+    end: rustycad_tkmath::gp::Point3,
+    tolerance: f64,
+) -> Result<bool, Failure> {
     let midpoint = curve.value((curve.first_parameter() + curve.last_parameter()) / 2.0)?;
-    if midpoint.distance(&start_point) < local_tolerance
-        && midpoint.distance(&end_point) < local_tolerance
-    {
+    if midpoint.distance(&start) < tolerance && midpoint.distance(&end) < tolerance {
         return Ok(true);
     }
     Ok(false)
