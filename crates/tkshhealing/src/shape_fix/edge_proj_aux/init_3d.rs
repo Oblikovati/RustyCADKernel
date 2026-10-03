@@ -1,5 +1,3 @@
-#![allow(dead_code)] // OCCT exposes Init3d only to subclasses; public Compute uses Init2d.
-
 use super::EdgeProjAuxState;
 use super::projection;
 use rustycad_tkbrep::brep::BRepTool;
@@ -19,8 +17,8 @@ pub(super) fn initialize(state: &mut EdgeProjAuxState, tolerance: f64) -> Result
         return Ok(());
     }
     let vertices = (
-        topexp::first_vertex(&state.edge, true),
-        topexp::last_vertex(&state.edge, true),
+        topexp::first_vertex(&state.edge, false),
+        topexp::last_vertex(&state.edge, false),
     );
     let points = (BRepTool::pnt(&vertices.0)?, BRepTool::pnt(&vertices.1)?);
     let range = (
@@ -60,20 +58,56 @@ fn project_extrema(
     tolerance: f64,
 ) -> Result<(), Failure> {
     let continuity = pcurve.get().ok_or_else(null_pcurve)?.continuity();
-    let finite = !precision::is_infinite(range.0) && !precision::is_infinite(range.1);
-    if finite && continuity != Shape::C0 {
-        let Some(first) = extrema_parameter(points.0, adaptor, range, tolerance)? else {
-            return Ok(());
-        };
-        let Some(last) = extrema_parameter(points.1, adaptor, range, tolerance)? else {
-            return Ok(());
-        };
-        state.first_param = first;
-        state.last_param = last;
-        super::parameter_update::update_parameters(state, pcurve)?;
+    let initial_parameters = (adaptor.first_parameter()?, adaptor.last_parameter()?);
+    if extrema_are_applicable(continuity, initial_parameters) {
+        update_extrema_range(
+            state,
+            pcurve,
+            adaptor,
+            points,
+            range,
+            initial_parameters,
+            tolerance,
+        )?;
     }
     finish_both(state);
     Ok(())
+}
+
+fn extrema_are_applicable(continuity: Shape, range: (f64, f64)) -> bool {
+    !precision::is_infinite(range.0) && !precision::is_infinite(range.1) && continuity != Shape::C0
+}
+
+fn update_extrema_range(
+    state: &mut EdgeProjAuxState,
+    pcurve: &rustycad_tkernel::standard::Handle<dyn rustycad_tkg2d::geom2d::Geom2dCurve>,
+    adaptor: &impl Adaptor3dCurve,
+    points: (Point3, Point3),
+    search_range: (f64, f64),
+    initial_parameters: (f64, f64),
+    tolerance: f64,
+) -> Result<(), Failure> {
+    let Some(first) = extrema_parameter(
+        points.0,
+        adaptor,
+        search_range,
+        tolerance,
+        initial_parameters.0,
+    ) else {
+        return Ok(());
+    };
+    let Some(last) = extrema_parameter(
+        points.1,
+        adaptor,
+        search_range,
+        tolerance,
+        initial_parameters.1,
+    ) else {
+        return Ok(());
+    };
+    state.first_param = first;
+    state.last_param = last;
+    super::parameter_update::update_parameters(state, pcurve)
 }
 
 fn extrema_parameter(
@@ -81,21 +115,19 @@ fn extrema_parameter(
     adaptor: &impl Adaptor3dCurve,
     range: (f64, f64),
     tolerance: f64,
-) -> Result<Option<f64>, Failure> {
-    let extrema = match ExtPC::with_range(point, adaptor, range.0, range.1, tolerance) {
-        Ok(result) => result,
-        Err(_) => return Ok(None),
-    };
+    fallback: f64,
+) -> Option<f64> {
+    let extrema = ExtPC::with_range(point, adaptor, range.0, range.1, tolerance).ok()?;
     if !extrema.is_done() {
-        return Ok(None);
+        return None;
     }
-    let mut parameter = range.0;
-    for index in 1..=extrema.nb_ext()? {
-        if extrema.is_min(index)? {
-            parameter = extrema.point(index)?.parameter();
+    let mut parameter = fallback;
+    for index in 1..=extrema.nb_ext().ok()? {
+        if extrema.is_min(index).ok()? {
+            parameter = extrema.point(index).ok()?.parameter();
         }
     }
-    Ok(Some(parameter))
+    Some(parameter)
 }
 
 fn finish_both(state: &mut EdgeProjAuxState) {

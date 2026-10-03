@@ -15,6 +15,9 @@ use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::geom_abs::{CurveType, SurfaceType};
 use rustycad_tkmath::gp::{Point2, Point3};
 
+#[cfg(test)]
+mod tests;
+
 #[derive(Clone, Copy)]
 struct ProjectionRange {
     first: f64,
@@ -29,11 +32,15 @@ type CurveAndRange = (Handle<dyn GeomCurve>, (f64, f64));
 type EndpointGeometry = (EndpointPoints, Option<CurveAndRange>);
 
 pub(super) fn initialize(state: &mut EdgeProjAuxState, tolerance: f64) -> Result<(), Failure> {
+    state.first_done = false;
+    state.last_done = false;
     let (surface, curve) = input_geometry(state)?;
     if curve.is_null() {
         return Ok(());
     }
-    let vertices = topexp::vertices(&state.edge, true);
+    state.first_param = 0.0;
+    state.last_param = 0.0;
+    let vertices = topexp::vertices(&state.edge, false);
     let (points, curve3d) = endpoint_points(state, &vertices)?;
     if degenerate_endpoints(state, &surface, &curve, points.0, &vertices, tolerance)? {
         return Ok(());
@@ -103,18 +110,16 @@ fn accept_degenerate_line(
         return Ok(false);
     }
     let geometry = curve.get().ok_or_else(null_curve)?;
-    if geometry
+    let first_distance = geometry
         .value(singularity.first_parameter)?
-        .distance(singularity.first_uv)
-        > tolerance
-    {
+        .distance(singularity.first_uv);
+    if !distance_is_within(first_distance, tolerance) {
         return Ok(false);
     }
-    if geometry
+    let last_distance = geometry
         .value(singularity.last_parameter)?
-        .distance(singularity.last_uv)
-        > tolerance
-    {
+        .distance(singularity.last_uv);
+    if !distance_is_within(last_distance, tolerance) {
         return Ok(false);
     }
     state.first_param = singularity.first_parameter;
@@ -157,8 +162,7 @@ fn project_endpoints(
     }
     state.last_param = last.1;
     state.last_done = true;
-    adjust_periodic_endpoints(state, &curve, &surface, curve3d, range, tolerance)?;
-    update_parameters(state, &curve)
+    adjust_periodic_endpoints(state, &curve, &surface, curve3d, range, tolerance)
 }
 
 fn clipped_curve(
@@ -246,12 +250,12 @@ fn hyperbolic_bounds(
     let adapted = GeomAdaptorSurface::with_surface(surface)?;
     let kind = adapted.get_type()?;
     if kind == SurfaceType::SurfaceOfExtrusion && basis_is_hyperbola(&adapted)? {
-        *u_first = (*u_first).max(-23.0);
-        *u_last = (*u_last).min(23.0);
+        *u_first = native_max(*u_first, -23.0);
+        *u_last = native_min(*u_last, 23.0);
     }
     if kind == SurfaceType::SurfaceOfRevolution && basis_is_hyperbola(&adapted)? {
-        *v_first = (*v_first).max(-23.0);
-        *v_last = (*v_last).min(23.0);
+        *v_first = native_max(*v_first, -23.0);
+        *v_last = native_min(*v_last, 23.0);
     }
     Ok(())
 }
@@ -263,6 +267,21 @@ fn basis_is_hyperbola(surface: &GeomAdaptorSurface) -> Result<bool, Failure> {
             .get_type()
             .is_ok_and(|kind| kind == CurveType::Hyperbola)
     }))
+}
+
+fn native_max(first: f64, second: f64) -> f64 {
+    if first < second { second } else { first }
+}
+
+fn native_min(first: f64, second: f64) -> f64 {
+    if second < first { second } else { first }
+}
+
+fn distance_is_within(distance: f64, tolerance: f64) -> bool {
+    matches!(
+        distance.partial_cmp(&tolerance),
+        Some(std::cmp::Ordering::Less | std::cmp::Ordering::Equal)
+    )
 }
 
 fn clip_finite_line(line: &Geom2dLine, range: &mut ProjectionRange, bounds: (f64, f64, f64, f64)) {
@@ -368,11 +387,11 @@ fn adjust_periodic_endpoints(
     {
         return Ok(());
     }
-    let adaptor = projection::adapt_geometry(curve, surface, (range.first, range.last))?;
-    repair_closed_surface_endpoints(state, &adaptor, range);
     if reverse_pcurve_for_endpoint_order(state, curve, range)? {
         return Ok(());
     }
+    let adaptor = projection::adapt_geometry(curve, surface, (range.first, range.last))?;
+    repair_closed_surface_endpoints(state, &adaptor, range)?;
     if !(range.periodic_u || range.periodic_v) {
         return update_parameters(state, curve);
     }
@@ -383,13 +402,12 @@ fn repair_closed_surface_endpoints(
     state: &mut EdgeProjAuxState,
     adaptor: &impl Adaptor3dCurve,
     range: ProjectionRange,
-) {
-    let is_closed = match (adaptor.value(range.first), adaptor.value(range.last)) {
-        (Ok(first), Ok(last)) => first.distance(&last) < precision::confusion(),
-        _ => false,
-    };
+) -> Result<(), Failure> {
+    let first = adaptor.value(range.first)?;
+    let last = adaptor.value(range.last)?;
+    let is_closed = first.distance(&last) < precision::confusion();
     if !is_closed {
-        return;
+        return Ok(());
     }
     let tolerance = precision::p_confusion();
     if (state.first_param - range.first).abs() < tolerance
@@ -401,6 +419,7 @@ fn repair_closed_surface_endpoints(
     {
         state.first_param = range.first;
     }
+    Ok(())
 }
 
 fn reverse_pcurve_for_endpoint_order(
@@ -443,6 +462,7 @@ fn adjust_periodic_line(
     let middle = projection::midpoint(&curve3d, curve_range)?;
     let (_, middle_parameter) =
         project_pcurve(curve, surface, (range.first, range.last), middle, tolerance)?;
+    let middle_parameter = middle_parameter + adjust_to_period(middle_parameter, 0.0, period);
     choose_periodic_span(state, middle_parameter, period, curve)
 }
 
@@ -456,14 +476,16 @@ fn choose_periodic_span(
         if state.last_param > middle {
             state.first_param -= period;
         } else if state.first_param > middle {
-            return update_parameters(state, curve);
+            update_parameters(state, curve)?;
         } else {
             state.last_param += period;
         }
     } else if state.first_param > middle {
         state.last_param -= period;
+        update_parameters(state, curve)?;
     } else if state.last_param < middle {
         state.first_param += period;
+        update_parameters(state, curve)?;
     }
     update_parameters(state, curve)
 }
