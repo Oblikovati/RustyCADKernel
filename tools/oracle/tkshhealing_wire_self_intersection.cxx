@@ -4,8 +4,10 @@
 #include <Geom2d_BezierCurve.hxx>
 #include <ShapeAnalysis_Wire.hxx>
 #include <ShapeExtend_WireData.hxx>
+#include <ShapeFix_Wire.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Vertex.hxx>
+#include <TopExp.hxx>
 #include <gp_Ax3.hxx>
 #include <iomanip>
 #include <iostream>
@@ -55,4 +57,22 @@ int main() {
   inspect("no_pcurve",true,1.e-7,false,1.,true);
   inspect("zero_range",false,1.e-7,true,0.,true);
   inspect("unloaded",true,1.e-7,true,1.,false);
+  BRep_Builder builder;
+  TopoDS_Face face;
+  builder.MakeFace(face,new Geom_Plane(gp_Ax3()),1.e-7);
+  Handle(ShapeExtend_WireData) wire = new ShapeExtend_WireData;
+  wire->Add(loopEdge(face,true,1.e-7,true,1.));
+  Handle(ShapeAnalysis_Wire) analyzer = new ShapeAnalysis_Wire(wire,face,1.e-7);
+  ShapeFix_Wire fixer;
+  fixer.Init(analyzer);
+  fixer.ModifyGeometryMode() = false;
+  fixer.SetMaxTolerance(2.);
+  const bool fixed=fixer.FixSelfIntersection();
+  const TopoDS_Edge edge=wire->Edge(1);
+  const TopoDS_Vertex first=TopExp::FirstVertex(edge), last=TopExp::LastVertex(edge);
+  std::cout << std::setprecision(17) << "fix " << fixed
+            << " done1 " << fixer.LastFixStatus(ShapeExtend_DONE1)
+            << " fail2 " << fixer.LastFixStatus(ShapeExtend_FAIL2)
+            << " tol1 " << BRep_Tool::Tolerance(first)
+            << " tol2 " << BRep_Tool::Tolerance(last) << '\n';
 }

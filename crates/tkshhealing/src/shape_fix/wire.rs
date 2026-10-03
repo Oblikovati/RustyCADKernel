@@ -6,6 +6,8 @@
 mod wire_degenerated;
 #[path = "wire_lacking.rs"]
 mod wire_lacking;
+#[path = "wire_self_intersection_fix.rs"]
+mod wire_self_intersection_fix;
 #[path = "wire_shifted.rs"]
 mod wire_shifted;
 
