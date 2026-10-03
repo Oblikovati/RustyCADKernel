@@ -337,7 +337,7 @@ impl ShapeFixWire {
         Ok(())
     }
 
-    fn transfer_intersection_failure(&self, analyzer: &ShapeAnalysisWire) {
+    pub(super) fn transfer_intersection_failure(&self, analyzer: &ShapeAnalysisWire) {
         if analyzer.last_check_status(ShapeExtendStatus::Fail) {
             self.or_last_fix_status(ShapeExtendStatus::Fail1);
         }

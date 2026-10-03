@@ -18,6 +18,10 @@ mod wire_intersection_geometry;
 mod wire_lacking;
 #[path = "wire_seam.rs"]
 mod wire_seam;
+#[path = "wire_nonadjacent_intersection_fix.rs"]
+// OCCT keeps this explicit pair overload private and currently has no call sites.
+#[allow(dead_code)]
+mod wire_nonadjacent_intersection_fix;
 #[path = "wire_self_intersection_fix.rs"]
 mod wire_self_intersection_fix;
 #[path = "wire_self_intersection_remove.rs"]
