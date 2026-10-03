@@ -1,4 +1,6 @@
 //! Native parity for focused `ShapeUpgrade_UnifySameDomain::Build` paths.
+#[path = "shape_upgrade_unify_same_domain/circles.rs"]
+mod circles;
 mod common;
 use common::{face_count, rectangle_wire};
 use rustycad_tkbrep::brep::BRepBuilder;

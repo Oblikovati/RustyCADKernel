@@ -104,7 +104,7 @@ impl ShapeUpgradeUnifySameDomain {
             result = merge_coplanar_faces(&result, &fields)?;
         }
         if fields.unify_edges {
-            result = edges::merge_line_wire_chain(self, &result)?;
+            result = edges::merge_wire_edge_chains(self, &result)?;
         }
         let face_candidate = fields.unify_faces && first_coplanar_pair(&result, &fields)?.is_some();
         let edge_candidate =
