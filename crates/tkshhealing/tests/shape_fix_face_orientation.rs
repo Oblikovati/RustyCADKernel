@@ -3,10 +3,13 @@ use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::{Builder, Face, ShapeIterator, Wire};
 use rustycad_tkernel::standard::{Handle, RuntimeTyped, Transient};
-use rustycad_tkg3d::geom::{GeomCylindricalSurface, GeomPlane, GeomSphericalSurface, GeomSurface};
+use rustycad_tkg3d::geom::{
+    GeomCylindricalSurface, GeomPlane, GeomSphericalSurface, GeomSurface, GeomToroidalSurface,
+};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::gp::Line3;
 use rustycad_tkmath::gp::{Axis3, Direction3, Point2, Point3};
+use rustycad_tkshhealing::shape_analysis::ShapeAnalysis;
 use rustycad_tkshhealing::shape_analysis::ShapeAnalysisSurface;
 use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
 use rustycad_tkshhealing::shape_extend::{BasicMsgRegistrator, ShapeExtendMsgRegistrator};
@@ -175,6 +178,127 @@ fn sphere_natural_bound_mode_suppresses_single_wire_reversal() {
         wire_orientations(&fixer.face().unwrap()),
         [Orientation::Reversed]
     );
+}
+
+#[test]
+fn add_natural_bound_builds_a_finite_empty_sphere_face() {
+    let sphere = Handle::new(GeomSphericalSurface::new(Axis3::default(), 2.0).unwrap())
+        .cast::<dyn GeomSurface>();
+    let fixer = ShapeFixFace::default();
+    fixer.init_surface(&sphere, 1e-7, true).unwrap();
+    fixer.set_fix_add_natural_bound_mode(0);
+
+    assert!(fixer.fix_add_natural_bound().unwrap());
+    let face = fixer.face().unwrap();
+    assert_eq!(count_wires(&face), 1);
+    assert_eq!(wire_orientations(&face), [Orientation::Forward]);
+}
+
+#[test]
+fn empty_cylinder_skips_natural_bound_because_one_uv_range_is_infinite() {
+    let cylinder = Handle::new(
+        GeomCylindricalSurface::new(
+            Axis3::new(
+                Point3::default(),
+                Direction3::new(0.0, 0.0, 1.0).unwrap(),
+                Direction3::new(1.0, 0.0, 0.0).unwrap(),
+            )
+            .unwrap(),
+            1.0,
+        )
+        .unwrap(),
+    )
+    .cast::<dyn GeomSurface>();
+    let fixer = ShapeFixFace::default();
+    fixer.init_surface(&cylinder, 1e-7, true).unwrap();
+
+    assert!(!fixer.fix_add_natural_bound().unwrap());
+    assert_eq!(count_wires(&fixer.face().unwrap()), 0);
+}
+
+#[test]
+fn uninitialized_face_has_no_natural_boundary_to_add() {
+    assert!(!ShapeFixFace::default().fix_add_natural_bound().unwrap());
+}
+
+#[test]
+fn native_sphere_wire_natural_bound_stays_unchanged_for_an_outer_wire() {
+    let sphere = Handle::new(GeomSphericalSurface::new(Axis3::default(), 2.0).unwrap())
+        .cast::<dyn GeomSurface>();
+    let wire = patch_wire(&sphere, (0.2, 1.0, 0.1, 0.5));
+    let fixer = ShapeFixFace::default();
+    fixer.init_surface(&sphere, 1e-7, true).unwrap();
+    fixer.add_wire(&wire).unwrap();
+
+    assert!(!fixer.fix_add_natural_bound().unwrap());
+    assert_eq!(count_wires(&fixer.face().unwrap()), 1);
+}
+
+#[test]
+fn reversed_torus_wire_gets_a_natural_boundary_and_periodic_shift() {
+    let torus = Handle::new(GeomToroidalSurface::new(Axis3::default(), 5.0, 1.0).unwrap())
+        .cast::<dyn GeomSurface>();
+    let mut reversed = patch_wire(&torus, (0.2, 1.0, 0.2, 1.0)).into_shape();
+    reversed.reverse();
+    let mut face = Face::default();
+    BRepBuilder::default()
+        .make_face_on_surface(&mut face, &torus, 1e-7)
+        .unwrap();
+    Builder.add(&mut face, &reversed).unwrap();
+    let fixer = ShapeFixFace::new(face.into_shape());
+    fixer.set_fix_add_natural_bound_mode(1);
+    assert!(!ShapeAnalysis::is_outer_bound(&fixer.face().unwrap()).unwrap());
+
+    assert!(fixer.fix_add_natural_bound().unwrap());
+    let face = fixer.face().unwrap();
+    let wires = wire_shapes(&face);
+    assert_eq!(wires.len(), 2);
+    assert_pcurves_rebuild_the_same_3d_edges(&face, &wires);
+    assert_uv_close(
+        first_pcurve_midpoint(&face, &wires[0]),
+        (6.483_185_307_179_586, 6.883_185_307_179_586),
+    );
+    assert_uv_close(
+        first_pcurve_midpoint(&face, &wires[1]),
+        (3.641_592_653_589_793, 6.783_185_307_179_586),
+    );
+}
+
+fn assert_uv_close(point: Point2, expected: (f64, f64)) {
+    assert!(
+        (point.x() - expected.0).abs() < 1e-7,
+        "unexpected U: {}",
+        point.x()
+    );
+    assert!(
+        (point.y() - expected.1).abs() < 1e-7,
+        "unexpected V: {}",
+        point.y()
+    );
+}
+
+fn assert_pcurves_rebuild_the_same_3d_edges(face: &Face, wires: &[Wire]) {
+    let (surface, _) = BRepTool::surface_with_location(face).unwrap();
+    let surface = surface.get().unwrap();
+    for wire in wires {
+        for edge_shape in ShapeIterator::new(&wire.clone().into_shape(), false, true) {
+            let edge = rustycad_tkbrep::topods::edge(&edge_shape).unwrap();
+            let pcurve = BRepTool::curve_on_face(&edge, face).unwrap();
+            let pcurve_mid = pcurve
+                .pcurve
+                .value((pcurve.first + pcurve.last) * 0.5)
+                .unwrap();
+            let expected = surface.value(pcurve_mid.x(), pcurve_mid.y()).unwrap();
+            let (curve, first, last) = BRepTool::curve(&edge).unwrap();
+            let actual = curve.value((first + last) * 0.5).unwrap();
+            assert!(
+                actual.distance(&expected) < 1e-5,
+                "edge {:?} gap {}",
+                edge.orientation(),
+                actual.distance(&expected)
+            );
+        }
+    }
 }
 
 #[test]

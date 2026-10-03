@@ -1,9 +1,10 @@
-# `ShapeFix_Face::FixOrientation` oracle
+# `ShapeFix_Face` orientation and natural-bound oracle
 
 This probe is built against the pinned OCCT source revision
 `3d097a0328e71b826377d4814ab05ec3c3d23871`. It records orientation, child
 preservation, return values, and `MapWires` sizes for single, nested, disjoint,
-reversed-face, tiny-wire, non-orientable-child, periodic-cylinder, and sphere-natural-bound inputs. The
+reversed-face, tiny-wire, non-orientable-child, periodic-cylinder, and sphere-natural-bound inputs. It
+also records finite-empty and periodic-wire `FixAddNaturalBound` behavior. The
 periodic fixture records classifiers on the shifted wire and the `MSG5`/`MSG11`
 warning pair, including the native post-conflict wire-state handling.
 
@@ -38,6 +39,12 @@ periodic_reverse_states infinite=1 5.8,2.5=1 6.1,1=1 6.4,2.5=1 6.1,4=1
 periodic_messages Unknown message invoked with the keyword FixAdvFace.FixOrientation.MSG11:L=1:R=0 Unknown message invoked with the keyword FixAdvFace.FixOrientation.MSG5:L=0:R=0
 periodic_shift changed=1 pcurve_mid_before=0.1 pcurve_mid_after=6.38319 map=0 forward=2 reversed=0 warning_shapes=2 edge_forward=4 edge_reversed=4
 shared_seam_reversal changed=1 p=6.28319 p=6.28319
+empty_sphere_natural_bound changed=1 wires=1 orientation=0
+empty_cylinder_natural_bound changed=0 wires=0
+uninitialized_natural_bound changed=0
+sphere_wire_natural_bound changed=0 wires=1
+ torus_p=6.48319,6.88319 torus_p=3.64159,6.78319
+torus_reversed_wire_natural_bound changed=1 wires=2
 context changed=1 result_matches_context=1 result_forward=1
 sphere_natural_bound changed=0 wire_orientation=1
 ```
@@ -62,3 +69,14 @@ the first wire before classifying the second; the resulting shared pcurve midpoi
 `2π` on both rebuilt wires. Rust now classifies and applies each first-pass result in
 source order before proceeding to the next wire, then performs the separate nested-wire
 pass.
+
+`empty_sphere_natural_bound` calls `FixAddNaturalBound` on a newly initialized empty
+sphere face. OCCT creates one forward natural-bound wire and reports a change.
+`empty_cylinder_natural_bound` confirms the no-wire branch declines an unbounded
+cylindrical surface.
+`uninitialized_natural_bound` records the null-support early return.
+`sphere_wire_natural_bound` starts with one small spherical patch wire; the existing
+outer-bound test keeps `FixAddNaturalBound` unchanged.
+`torus_reversed_wire_natural_bound` uses a reversed wire on a doubly periodic torus.
+The fixture checks the original wire's `+2π` p-curve translation and the new natural
+boundary's selected UV interval shift.
