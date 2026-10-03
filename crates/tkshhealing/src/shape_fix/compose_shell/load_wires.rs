@@ -68,7 +68,7 @@ fn load_wire(
     if nonmanifold.nb_edges() > 0 {
         append_wire_data(segments, &nonmanifold, Orientation::Internal)?;
     }
-    append_manifold_wire(segments, face, &manifold)?;
+    append_manifold_wire(segments, face, wire, &manifold)?;
     Ok(())
 }
 
@@ -117,6 +117,7 @@ fn append_wire_data(
 fn append_manifold_wire(
     segments: &mut Sequence<ShapeFixWireSegment>,
     face: &Face,
+    source_wire: &topods::Wire,
     wire_data: &Handle<ShapeExtendWireData>,
 ) -> Result<(), Failure> {
     if wire_data.nb_edges() == 0 {
@@ -136,7 +137,8 @@ fn append_manifold_wire(
     if fixer.status_reorder(crate::shape_extend::ShapeExtendStatus::Done3) {
         orient = -1;
     }
-    reverse_for_outer_bound(orient, face, wire_data)?;
+    // OCCT compares the original wire, including its nonmanifold edges, with this manifold part.
+    reverse_for_outer_bound(orient, face, source_wire, wire_data)?;
     append_wire_data(segments, wire_data, Orientation::Reversed)
 }
 
@@ -164,12 +166,13 @@ fn to_xy(point: rustycad_tkmath::gp::Point2) -> Xy {
 fn reverse_for_outer_bound(
     orientation: i32,
     face: &Face,
+    source_wire: &topods::Wire,
     wire_data: &Handle<ShapeExtendWireData>,
 ) -> Result<(), Failure> {
     if orientation >= 0 {
         return Ok(());
     }
-    let before = outer_bound_for_wire(face, wire_data)?;
+    let before = outer_bound_for_source_wire(face, source_wire)?;
     let wire = wire_data.wire()?;
     let mut copied_face = topods::face(&face.clone().into_shape().empty_copied()?)?;
     Builder.add(&mut copied_face, &wire.clone().into_shape())?;
@@ -180,10 +183,9 @@ fn reverse_for_outer_bound(
     Ok(())
 }
 
-fn outer_bound_for_wire(face: &Face, wire_data: &ShapeExtendWireData) -> Result<bool, Failure> {
+fn outer_bound_for_source_wire(face: &Face, wire: &topods::Wire) -> Result<bool, Failure> {
     let mut copied_face = topods::face(&face.clone().into_shape().empty_copied()?)?;
-    let wire = wire_data.wire()?;
-    Builder.add(&mut copied_face, &wire.into_shape())?;
+    Builder.add(&mut copied_face, &wire.clone().into_shape())?;
     ShapeAnalysis::is_outer_bound(&copied_face)
 }
 
@@ -257,14 +259,14 @@ mod tests {
             wire,
             line,
             (0.25, 0.75),
-            expected.lines().nth(5).unwrap(),
+            expected.lines().nth(6).unwrap(),
         );
         assert_native_code(
             &composer,
             wire,
             line,
             (1.25, 1.75),
-            expected.lines().nth(6).unwrap(),
+            expected.lines().nth(7).unwrap(),
         );
         let tangent = rustycad_tkmath::gp::Line2::new(
             rustycad_tkmath::gp::Point2::new(0.0, 0.0),
@@ -275,7 +277,29 @@ mod tests {
             wire,
             tangent,
             (0.25, 0.75),
-            expected.lines().nth(7).unwrap(),
+            expected.lines().nth(8).unwrap(),
+        );
+    }
+
+    #[test]
+    fn mixed_wire_partitions_internal_edges_before_manifold_edges() {
+        let expected =
+            include_str!("../../../../../tools/oracle/tkshhealing_compose_shell.expected");
+        let composer = ShapeFixComposeShell::new();
+        let context = Handle::new(ShapeBuildReShape::new());
+        composer.set_context(&context);
+        composer
+            .init(
+                &one_patch_grid(),
+                &Location::default(),
+                &square_face_with_internal_edge(),
+                1.0e-7,
+            )
+            .unwrap();
+        let segments = load_wires(&composer).unwrap();
+        assert_eq!(
+            mixed_segment_summary(&segments),
+            expected.lines().nth(5).unwrap()
         );
     }
 
@@ -307,6 +331,27 @@ mod tests {
         )
     }
 
+    fn mixed_segment_summary(segments: &Sequence<ShapeFixWireSegment>) -> String {
+        let first = segments.value(1).unwrap();
+        let last = segments.value(2).unwrap();
+        format!(
+            "load_wires_mixed {} {} {} {} {}",
+            segments.length(),
+            first.nb_edges(),
+            orientation_name(first.orientation()),
+            last.nb_edges(),
+            orientation_name(last.orientation())
+        )
+    }
+
+    fn orientation_name(orientation: Orientation) -> &'static str {
+        match orientation {
+            Orientation::Internal => "internal",
+            Orientation::Reversed => "reversed",
+            _ => "other",
+        }
+    }
+
     fn one_patch_grid() -> Handle<ShapeExtendCompositeSurface> {
         let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
         let cells = HArray2::with_value(1, 1, 1, 1, Handle::<dyn GeomSurface>::default()).unwrap();
@@ -319,6 +364,14 @@ mod tests {
     }
 
     fn square_face() -> Face {
+        square_face_with_edge_mode(false)
+    }
+
+    fn square_face_with_internal_edge() -> Face {
+        square_face_with_edge_mode(true)
+    }
+
+    fn square_face_with_edge_mode(internal_first_edge: bool) -> Face {
         let points = [
             Point3::new(0.0, 0.0, 0.0),
             Point3::new(2.0, 0.0, 0.0),
@@ -327,7 +380,12 @@ mod tests {
         ];
         let mut wire = BRepBuilderAPIMakeWire::new();
         for index in 0..points.len() {
-            add_square_edge(&mut wire, points[index], points[(index + 1) % 4]);
+            add_square_edge(
+                &mut wire,
+                points[index],
+                points[(index + 1) % 4],
+                internal_first_edge && index == 0,
+            );
         }
         BRepBuilderAPIMakeFace::from_plane_wire(Plane3::default(), &wire.wire().unwrap(), true)
             .unwrap()
@@ -335,11 +393,19 @@ mod tests {
             .unwrap()
     }
 
-    fn add_square_edge(wire: &mut BRepBuilderAPIMakeWire, start: Point3, end: Point3) {
-        let edge = BRepBuilderAPIMakeEdge::from_points(start, end)
+    fn add_square_edge(
+        wire: &mut BRepBuilderAPIMakeWire,
+        start: Point3,
+        end: Point3,
+        internal: bool,
+    ) {
+        let mut edge = BRepBuilderAPIMakeEdge::from_points(start, end)
             .unwrap()
             .edge()
             .unwrap();
+        if internal {
+            edge.set_orientation(Orientation::Internal);
+        }
         wire.add_edge(&edge).unwrap();
     }
 }
