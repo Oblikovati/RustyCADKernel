@@ -1,0 +1,173 @@
+use super::*;
+
+use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire};
+use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
+use crate::shape_extend::{ShapeExtendStatus, ShapeExtendWireData};
+use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
+use rustycad_tkbrep::brep_tools::ReShape;
+use rustycad_tkbrep::topexp::Explorer;
+use rustycad_tkbrep::topods::{Edge, Face};
+use rustycad_tkernel::standard::Handle;
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane};
+use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
+use rustycad_tkmath::toploc::Location;
+
+const NATIVE: &str =
+    include_str!("../../../../tools/oracle/tkshhealing_wire_self_intersection_aggregate.expected");
+
+#[test]
+fn nonadjacent_aggregate_matches_native_status_ranges_and_explicit_context() {
+    let face = plane();
+    let data = crossing_wire_data(&face);
+    let original = data.wire().unwrap();
+    let analyzer = Handle::new(ShapeAnalysisWire::from_wire_data(&data, &face, 1.0e-7).unwrap());
+    let fixer = ShapeFixWire::new();
+    fixer.init(&analyzer);
+    fixer.set_context(&Handle::new(ShapeBuildReShape::new()));
+    fixer.set_fix_self_intersecting_edge_mode(0);
+    fixer.set_fix_intersecting_edges_mode(0);
+    fixer.set_fix_nonadjacent_intersecting_edges_mode(1);
+
+    let changed = fixer.fix_self_intersection().unwrap();
+    let observed = aggregate_observation(&fixer, &original, changed).unwrap();
+    let expected = NATIVE
+        .split_whitespace()
+        .map(parse_number)
+        .collect::<Vec<_>>();
+    assert_eq!(observed, expected);
+}
+
+fn aggregate_observation(
+    fixer: &ShapeFixWire,
+    original: &rustycad_tkbrep::topods::Wire,
+    changed: bool,
+) -> Result<Vec<f64>, rustycad_tkernel::standard::Failure> {
+    let data = fixer.wire_data()?;
+    let face = fixer.face();
+    let mut observed = aggregate_status_values(fixer, &data.nb_edges(), changed);
+    append_face_ranges(&data, &face, &mut observed)?;
+    observed.push(applied_edge_count(fixer, original)?);
+    Ok(observed)
+}
+
+fn aggregate_status_values(fixer: &ShapeFixWire, edge_count: &i32, changed: bool) -> Vec<f64> {
+    let mut observed = vec![
+        f64::from(changed),
+        f64::from(*edge_count),
+        f64::from(fixer.status_removed_segment()),
+    ];
+    observed.extend(
+        ShapeExtendStatus::ALL.map(|status| f64::from(fixer.status_self_intersection(status))),
+    );
+    observed
+}
+
+fn append_face_ranges(
+    data: &Handle<ShapeExtendWireData>,
+    face: &Face,
+    observed: &mut Vec<f64>,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    for index in 1..=data.nb_edges() {
+        let edge = data.edge(index)?;
+        let (first, last) = BRepTool::range_on_face(&edge, face)?;
+        observed.extend([first, last]);
+    }
+    Ok(())
+}
+
+fn applied_edge_count(
+    fixer: &ShapeFixWire,
+    original: &rustycad_tkbrep::topods::Wire,
+) -> Result<f64, rustycad_tkernel::standard::Failure> {
+    let context = fixer.context();
+    let applied = context.apply(&original.clone().into_shape(), ShapeEnum::Shape)?;
+    let edge_count = Explorer::new(&applied, ShapeEnum::Edge, ShapeEnum::Shape)?.count();
+    Ok(edge_count as f64)
+}
+
+fn crossing_wire_data(face: &Face) -> Handle<ShapeExtendWireData> {
+    let data = Handle::new(ShapeExtendWireData::new());
+    for (start, direction) in [
+        (
+            Point3::new(-1.0, 0.0, 0.0),
+            Direction3::new(1.0, 0.0, 0.0).unwrap(),
+        ),
+        (
+            Point3::new(3.0, 3.0, 0.0),
+            Direction3::new(1.0, 0.0, 0.0).unwrap(),
+        ),
+        (
+            Point3::new(0.0, -1.0, 0.0),
+            Direction3::new(0.0, 1.0, 0.0).unwrap(),
+        ),
+        (
+            Point3::new(-4.0, -4.0, 0.0),
+            Direction3::new(0.0, 1.0, 0.0).unwrap(),
+        ),
+    ] {
+        let uv = Point2::new(start.x(), start.y());
+        let uv_direction = Direction2::new(direction.x(), direction.y()).unwrap();
+        data.add_edge(&line_edge(face, start, direction, uv, uv_direction), 0)
+            .unwrap();
+    }
+    data
+}
+
+fn line_edge(
+    face: &Face,
+    start: Point3,
+    direction: Direction3,
+    uv: Point2,
+    uv_direction: Direction2,
+) -> Edge {
+    let edge = edge_with_3d_line(start, direction);
+    set_line_pcurve(face, &edge, uv, uv_direction);
+    edge
+}
+
+fn edge_with_3d_line(start: Point3, direction: Direction3) -> Edge {
+    let curve: Handle<dyn GeomCurve> =
+        Handle::new(GeomLine::new(Axis1::new(start, direction))).cast();
+    let mut edge = Edge::default();
+    ShapeBuildEdge
+        .make_edge_on_curve_range(&mut edge, &curve, &Location::default(), 0.0, 2.0)
+        .unwrap();
+    update_endpoint_tolerances(&edge);
+    edge
+}
+
+fn update_endpoint_tolerances(edge: &Edge) {
+    let analysis = ShapeAnalysisEdge::new();
+    let builder = BRepBuilder::default();
+    let first = analysis.first_vertex(edge);
+    let last = analysis.last_vertex(edge);
+    builder.update_vertex_tolerance(&first, 1.0e-7).unwrap();
+    builder.update_vertex_tolerance(&last, 1.0e-7).unwrap();
+}
+
+fn set_line_pcurve(face: &Face, edge: &Edge, uv: Point2, direction: Direction2) {
+    let pcurve: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dLine::new(Axis2d::new(uv, direction))).cast();
+    let builder = BRepBuilder::default();
+    builder
+        .update_edge_pcurve_on_face(edge, &pcurve, face, 1.0e-7)
+        .unwrap();
+    builder.range_on_face(edge, face, 0.0, 2.0).unwrap();
+    builder.same_range(edge, true).unwrap();
+    builder.same_parameter(edge, true).unwrap();
+}
+
+fn plane() -> Face {
+    let surface = Handle::new(GeomPlane::new(Axis3::default()));
+    let mut face = Face::default();
+    BRepBuilder::default()
+        .make_face_on_surface(&mut face, &surface.cast(), 1.0e-7)
+        .unwrap();
+    face
+}
+
+fn parse_number(value: &str) -> f64 {
+    value.parse().unwrap()
+}
