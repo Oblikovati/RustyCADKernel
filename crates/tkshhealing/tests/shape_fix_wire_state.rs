@@ -1,6 +1,5 @@
 //! Native working-analyzer ownership and state delegation.
-#[path = "support/surfaces.rs"]
-mod surfaces;
+mod support;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
     topods::{Builder, Face, Wire},
@@ -16,6 +15,7 @@ use rustycad_tkshhealing::{
     shape_fix::{FixRoot, ShapeFixWire},
 };
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
+use support::surfaces;
 
 fn state_wire() -> Wire {
     let mut wire = Wire::default();

@@ -26,10 +26,10 @@ mod wire_self_intersection_split;
 mod wire_shifted;
 #[path = "wire_small.rs"]
 mod wire_small;
-#[path = "wire_state.rs"]
-mod wire_state;
 #[path = "wire_split_tool.rs"]
 mod wire_split_tool;
+#[path = "wire_state.rs"]
+mod wire_state;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};

@@ -1,6 +1,5 @@
 //! Native closure orchestration and status lifetime.
-#[path = "support/surfaces.rs"]
-mod surfaces;
+mod support;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
     topods::{Builder, Wire},
@@ -8,6 +7,7 @@ use rustycad_tkbrep::{
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkshhealing::{shape_extend::ShapeExtendStatus, shape_fix::ShapeFixWire};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
+use support::surfaces;
 
 fn closure_wire(gap: f64) -> Wire {
     let mut wire = Wire::default();

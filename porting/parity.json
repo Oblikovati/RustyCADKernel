@@ -222407,6 +222407,42 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::FaceDivider::wire_divide_tool",
       "status": "implemented",
       "notes": "Surface-then-wire subdivision with virtual policy dispatch, native context/status lifetime and protected vertex copies. Nine native oracle cases plus both translated legacy safety regressions pass. Advanced operations inherit remaining ComposeShell/configured-policy limitations and are retained as partial; no complete face/toolkit parity claim."
+    },
+    {
+      "upstream_id": "ShapeFix_ComposeShell::Perform()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_ComposeShell.hxx",
+      "source_sha256": "b84f0f66b54f0ddca4766732c3dda173feb9db3c35ecbffcb04ecafc1eddf025",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixComposeShell::perform",
+      "status": "partial",
+      "notes": "Full load/split/collect/dispatch/assembly pipeline matches planar, split-plane, nested-hole, open/closed cylinder and periodic multi-patch native fixtures. Inherits explicit empty/null reshape replacement limitations and is not claimed complete."
+    },
+    {
+      "upstream_id": "ShapeFix_ComposeShell::SplitByLine(NCollection_Sequence<ShapeFix_WireSegment>&,const gp_Lin2d&,bool,int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_ComposeShell.hxx",
+      "source_sha256": "b84f0f66b54f0ddca4766732c3dda173feb9db3c35ecbffcb04ecafc1eddf025",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixComposeShell::split_segments_by_line",
+      "status": "partial",
+      "notes": "Combined wire events, crossing/tangency parity and interior seams match seven native cases plus event-order tests. Empty replacement cannot advance natively and returns NotImplemented in Rust; null replacement also remains an unapproved exceptional-path difference."
+    },
+    {
+      "upstream_id": "ShapeFix_ComposeShell::CollectWires(NCollection_Sequence<ShapeFix_WireSegment>&,NCollection_Sequence<ShapeFix_WireSegment>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_ComposeShell.hxx",
+      "source_sha256": "b84f0f66b54f0ddca4766732c3dda173feb9db3c35ecbffcb04ecafc1eddf025",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixComposeShell::collect_wires",
+      "status": "implemented",
+      "notes": "Native greedy collector, signed-angle selection, periodic patch arithmetic and retained endpoint/tolerance state; standalone and full composition oracle fixtures. This declaration claim does not prove whole shell parity."
+    },
+    {
+      "upstream_id": "ShapeFix_Face::FixMissingSeam()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
+      "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_missing_seam",
+      "status": "partial",
+      "notes": "Direct periodic seam repair now matches native sphere and two-wire cylinder results and context lifetime. Torus, periodic B-spline and broader multiwire paths still require source audit and native end-to-end validation; Face Perform remains separate and partial."
     }
   ],
   "tests": [

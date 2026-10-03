@@ -1,6 +1,5 @@
 //! Native face, context, root, and result effects of removing small contours.
-#[path = "support/surfaces.rs"]
-mod surfaces;
+mod support;
 use rustycad_tkbrep::{
     brep_tools::ReShape,
     topods::{Builder, Face, ShapeIterator, Wire},
@@ -13,6 +12,7 @@ use rustycad_tkshhealing::{
     shape_fix::{FixRoot, ShapeFixFace},
 };
 use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeWire};
+use support::surfaces;
 
 fn square(side: f64, offset: f64) -> Wire {
     let points = [
