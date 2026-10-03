@@ -258,42 +258,42 @@ fn assert_full_long_overlap_replacement(second_start: f64, second_direction: f64
 
 #[test]
 fn two_sided_endpoint_cut_trims_long_edge_without_replacing_face() {
-    assert_endpoint_cut(0.5, (1.5, 1000.0), false, true);
+    assert_endpoint_cut(0.5, (1.5, 1000.0), Some(false), false, true);
 }
 
 #[test]
 fn far_endpoint_cut_trims_long_edge_without_replacing_face() {
-    assert_endpoint_cut(999.0, (0.0, 999.0), true, true);
+    assert_endpoint_cut(999.0, (0.0, 999.0), Some(true), false, true);
 }
 
 #[test]
 fn failed_short_edge_cut_skips_long_edge_when_short_is_first() {
-    assert_endpoint_cut(0.0, (0.0, 1000.0), false, false);
+    assert_endpoint_cut(0.0, (0.0, 1000.0), Some(false), false, false);
+}
+
+#[test]
+fn failed_short_endpoint_cut_leaves_long_edge_unchanged_when_short_is_second() {
+    assert_endpoint_cut(500.0, (0.0, 1000.0), None, true, true);
 }
 
 #[test]
 fn one_sided_endpoint_cut_trims_edge_without_replacing_face() {
-    assert_endpoint_cut(0.0, (1.0, 1000.0), false, true);
+    assert_endpoint_cut(0.0, (1.0, 1000.0), Some(false), false, true);
 }
 
 fn assert_endpoint_cut(
     second_start: f64,
     expected_long_range: (f64, f64),
-    use_last_vertex_tolerance: bool,
+    long_vertex_tolerance: Option<bool>,
+    short_vertex_tolerance: bool,
     long_edge_first: bool,
 ) {
     let mut face = planar_face();
     let long_edge = line_edge_range(&face, 0.0, 0.0, 0.0, 1.0, 0.0, 1000.0);
     let analysis = ShapeAnalysisEdge::new();
-    let endpoint = if use_last_vertex_tolerance {
-        analysis.last_vertex(&long_edge)
-    } else {
-        analysis.first_vertex(&long_edge)
-    };
-    BRepBuilder::default()
-        .update_vertex_tolerance(&endpoint, 2.0)
-        .unwrap();
+    update_long_endpoint_tolerance(&long_edge, long_vertex_tolerance, &analysis);
     let short_edge = line_edge_range(&face, second_start, 0.0, 0.0, 1.0, 0.0, 1.0);
+    update_short_endpoint_tolerance(&short_edge, short_vertex_tolerance, &analysis);
     let (first_edge, second_edge) = if long_edge_first {
         (&long_edge, &short_edge)
     } else {
@@ -338,6 +338,38 @@ fn assert_endpoint_cut(
             ]
         }
     );
+}
+
+fn update_long_endpoint_tolerance(
+    edge: &rustycad_tkbrep::topods::Edge,
+    tolerance_at_last: Option<bool>,
+    analysis: &ShapeAnalysisEdge,
+) {
+    let Some(tolerance_at_last) = tolerance_at_last else {
+        return;
+    };
+    let endpoint = if tolerance_at_last {
+        analysis.last_vertex(edge)
+    } else {
+        analysis.first_vertex(edge)
+    };
+    BRepBuilder::default()
+        .update_vertex_tolerance(&endpoint, 2.0)
+        .unwrap();
+}
+
+fn update_short_endpoint_tolerance(
+    edge: &rustycad_tkbrep::topods::Edge,
+    should_update: bool,
+    analysis: &ShapeAnalysisEdge,
+) {
+    if !should_update {
+        return;
+    }
+    let endpoint = analysis.first_vertex(edge);
+    BRepBuilder::default()
+        .update_vertex_tolerance(&endpoint, 2.0)
+        .unwrap();
 }
 
 fn endpoint_cut_wire(
