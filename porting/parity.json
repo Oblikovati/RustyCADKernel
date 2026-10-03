@@ -225033,7 +225033,7 @@
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_self_intersection",
       "status": "partial",
-      "notes": "Native aggregate pass ordering, component modes, unready status and a simple planar wire are differentially checked. Complex topology cuts, loop removals and removed-segment cases remain unverified."
+      "notes": "Native aggregate pass ordering, component modes, unready status, adjacent tolerance repair and adjacent topology-mode cutting are differentially checked. Per-edge loop removal and nonadjacent wire removal cases remain unverified."
     },
     {
       "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange&)",

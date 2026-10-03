@@ -45,6 +45,25 @@ fn adjacent_crossing_tolerance_matches_native_non_topological_repair() {
 }
 
 #[test]
+fn self_intersection_aggregate_runs_the_adjacent_tolerance_pass() {
+    let (analyzer, first_end, second_start) = adjacent_fixture();
+    let fixer = ShapeFixWire::new();
+    fixer.init(&analyzer);
+    fixer.set_max_tolerance(2.0);
+    fixer.set_fix_intersecting_edges_mode(1);
+    assert!(fixer.fix_self_intersection().unwrap());
+    assert!(fixer.status_self_intersection(ShapeExtendStatus::Done1));
+    assert_close(
+        BRepTool::vertex_tolerance(&first_end).unwrap(),
+        expected("first_tol"),
+    );
+    assert_close(
+        BRepTool::vertex_tolerance(&second_start).unwrap(),
+        expected("second_tol"),
+    );
+}
+
+#[test]
 fn adjacent_crossing_topology_mode_cuts_edge_ranges() {
     let (analyzer, _, _) = adjacent_fixture();
     let fixer = ShapeFixWire::new();
@@ -62,6 +81,19 @@ fn adjacent_crossing_topology_mode_cuts_edge_ranges() {
         BRepTool::range_on_face(&wire.edge(2).unwrap(), &analyzer.face()).unwrap(),
         (expected_field("range2", 0), expected_field("range2", 1)),
     );
+}
+
+#[test]
+fn self_intersection_aggregate_runs_the_adjacent_topology_pass() {
+    let (analyzer, _, _) = adjacent_fixture();
+    let fixer = ShapeFixWire::new();
+    fixer.init(&analyzer);
+    fixer.set_topology_mode(true);
+    fixer.set_fix_intersecting_edges_mode(1);
+    assert!(fixer.fix_self_intersection().unwrap());
+    assert!(fixer.status_self_intersection(ShapeExtendStatus::Done2));
+    assert!(!fixer.status_self_intersection(ShapeExtendStatus::Done1));
+    assert_eq!(fixer.wire_data().unwrap().nb_edges(), 2);
 }
 
 #[test]
