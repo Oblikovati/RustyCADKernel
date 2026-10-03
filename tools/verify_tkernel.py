@@ -12,6 +12,7 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 
+from legacy_runtime_evidence import runtime_input_hashes, require_unchanged_runtime_inputs
 from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, runtime_case_results, verified_native_skips
 from tkernel_native_baseline import compile_sources
@@ -100,6 +101,7 @@ def main():
     report_path.unlink(missing_ok=True)  # Never retain a success report after a failed rerun.
     source = args.source.resolve()
     inventory = snapshot(source)  # Checks exact revision, cleanliness and complete toolkit accounting.
+    initial_hashes = runtime_input_hashes(ROOT)
     ledger = json.loads((ROOT / "porting/parity.json").read_text())
     mappings = ledger["tests"]
     mappings = [m for m in mappings if m["toolkit"] == "TKernel"]
@@ -217,14 +219,8 @@ def main():
     if any(m["rust_target"] == "standard_dump" for m in mappings):
         run([sys.executable, ROOT/"tools/verify_geometry.py", "--source", source], output/"geometry-verification.log", env=env)
         geometry_report = json.loads((output/"geometry/report.json").read_text())
-    files = sorted(set([p for p in (ROOT/"crates").rglob("*") if p.is_file()] + list((ROOT/"tools/oracle").glob("*.cxx")) + [ROOT/"Cargo.toml", ROOT/"tools/verify_geometry.py", ROOT/"tools/verify_units.py", ROOT/"tools/generate_units_data.py", ROOT/"tools/generate_quantity_color_table.py", ROOT/"tools/generate_resource_tables.py", ROOT/"porting/units-data.json", ROOT/"tools/verify_kdtree.py", ROOT/"crates/tkernel/Cargo.toml", ROOT/"porting/parity.json", Path(__file__).resolve(), ROOT/"tools/oracle/tkernel_probe.cxx", ROOT/"tools/oracle/strtod_probe.cxx", ROOT/"tools/verify_strtod.py", ROOT/"tools/tkernel_mapping.py", ROOT/"tools/verify_ascii_string.py", ROOT/"tools/oracle/ascii_string_probe.cxx", ROOT/"tools/verify_extended_string.py", ROOT/"tools/oracle/extended_string_probe.cxx", ROOT/"tools/verify_tkernel_api.py", *(ROOT/"tools").glob("tkernel_*_corpus.py"), *(ROOT/"tools/oracle").glob("*.hxx"), ROOT/"Cargo.lock", ROOT/"rust-toolchain.toml"]))
-    files.extend((ROOT/"tools/api_inventory").glob("*.py"))
-    files.extend(ROOT / path for path in (
-        "porting/baseline.json", "tools/api_inventory_status.py", "tools/api_tool_hashes.py",
-        "tools/capture_rustdoc_json.py", "tools/native_build.py", "tools/porting.py",
-        "tools/tkernel_native_baseline.py",
-    ))
-    files = sorted(set(files))
+    require_unchanged_runtime_inputs(initial_hashes, runtime_input_hashes(ROOT))
+    snapshot(source)  # Reject upstream edits made while native tests were running.
     report = {"schema_version":1,"profile":"linux-gcc-c-locale","revision":inventory['revision'],
               "platform":platform.platform(),"python":platform.python_version(),
               "cmake_definitions":flags,
@@ -247,7 +243,7 @@ def main():
               "api_report":api_report,
               "input_sha256":hashlib.sha256(requests.encode()).hexdigest(),
               "output_sha256":hashlib.sha256(oracle.encode()).hexdigest(),
-              "source_hashes":{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
+              "source_hashes":initial_hashes,
               "toolkit_complete":False,"scope":"Mapped suites only; full TKernel and DRAW acceptance pending"}
     report_path.write_text(json.dumps(report,indent=2)+'\n')
     print(f"PASS: {len(mappings)} mapped declarations ({len(native_skips)} upstream skips with separate compatibility regressions) and {report['differential_cases_passed']} differential cases; report: {report_path.relative_to(ROOT)}")

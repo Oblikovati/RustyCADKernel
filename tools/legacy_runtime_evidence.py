@@ -19,6 +19,7 @@ DIRECT_HELPERS = (
     "tools/porting.py",
     "tools/tkernel_native_baseline.py",
     "tools/tkernel_mapping.py",
+    "tools/legacy_runtime_evidence.py",
 )
 TRANSITIVE_HELPERS = (
     "tools/api_tool_hashes.py",
@@ -85,6 +86,29 @@ def file_digest(path: pathlib.Path) -> str:
     content = path.read_bytes()
     digest = hashlib.sha256(content).hexdigest()
     return digest
+
+
+def runtime_input_hashes(root: pathlib.Path) -> dict[str, str]:
+    """Capture verifier inputs before execution; e.g. `runtime_input_hashes(root)`."""
+    return {
+        relative: file_digest(root / relative)
+        for relative in sorted(tracked_runtime_inputs(root))
+    }
+
+
+def require_unchanged_runtime_inputs(
+    before: dict[str, str], after: dict[str, str]
+) -> None:
+    """Reject edits during an oracle run; e.g. `require_unchanged_runtime_inputs(a, b)`."""
+    changed = sorted(
+        relative
+        for relative in before.keys() | after.keys()
+        if before.get(relative) != after.get(relative)
+    )
+    if changed:
+        raise ValueError(
+            f"runtime inputs changed: {changed!r}; expected identical pre/post hashes"
+        )
 
 
 def git_output(source: pathlib.Path, *arguments: str) -> str:
