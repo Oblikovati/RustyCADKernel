@@ -117,6 +117,13 @@ fn convergence_uses_finite_absolute_and_relative_tests() {
 }
 #[test]
 fn configuration_defaults_and_validation() {
+    config_defaults_match_native();
+    bounded_config_defaults_match_native();
+    ndim_config_defaults_match_native();
+    integration_config_defaults_match_native();
+    linear_config_defaults_match_native();
+}
+fn config_defaults_match_native() {
     let defaults: Config = Config::default();
     assert_eq!(
         (
@@ -134,6 +141,8 @@ fn configuration_defaults_and_validation() {
     assert_eq!(c.step_min, f64::EPSILON);
     assert!(!Config::new(-1.0, 7).is_valid());
     assert!(!Config::new(1e-8, 0).is_valid());
+}
+fn bounded_config_defaults_match_native() {
     assert!(BoundedConfig::default().is_valid());
     assert_eq!(
         (
@@ -143,9 +152,13 @@ fn configuration_defaults_and_validation() {
         (-2e100, 2e100)
     );
     assert!(!BoundedConfig::new(2.0, 1.0, 1e-8, 7).is_valid());
+}
+fn ndim_config_defaults_match_native() {
     assert!(NDimConfig::default().is_valid());
     assert!(NDimConfig::new(1e-8, 7, true).use_bounds);
     assert!(!NDimConfig::default().use_bounds);
+}
+fn integration_config_defaults_match_native() {
     assert!(IntegConfig::default().is_valid());
     assert_eq!(
         (
@@ -157,6 +170,8 @@ fn configuration_defaults_and_validation() {
         (15, 61, 100, 1e-10)
     );
     assert!(!IntegConfig::new(f64::INFINITY, 7).is_valid());
+}
+fn linear_config_defaults_match_native() {
     assert!(LinConfig::default().is_valid());
     assert_eq!(
         (
