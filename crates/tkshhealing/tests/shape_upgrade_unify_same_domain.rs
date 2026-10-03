@@ -2,6 +2,7 @@
 mod common;
 use common::{face_count, rectangle_wire};
 use rustycad_tkbrep::brep::BRepBuilder;
+use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{Shape, Shell, Wire};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
@@ -77,6 +78,140 @@ fn closed_internal_wire_keeps_nonnull_result() {
     unifier.build().unwrap();
 
     assert!(!unifier.shape().is_null());
+}
+
+#[test]
+fn two_collinear_edges_on_a_wire_merge_to_one_native_line() {
+    let input = collinear_wire();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+
+    unifier.build().unwrap();
+
+    assert_native_line_merge(&input, &unifier.shape());
+}
+
+fn assert_native_line_merge(input: &Shape, result: &Shape) {
+    assert!(
+        BRepCheckAnalyzer::new(result, true, false, false)
+            .unwrap()
+            .is_valid()
+            .unwrap()
+    );
+    let source_edges = edge_shapes(input);
+    let result_edges = edge_shapes(result);
+    assert_eq!(result_edges.len(), native_edge_count("linear"));
+    let source_start = edge_endpoints(&source_edges[0]).0;
+    let source_end = edge_endpoints(source_edges.last().unwrap()).1;
+    let (result_start, result_end) = edge_endpoints(&result_edges[0]);
+    assert!(source_start.is_same(&result_start));
+    assert!(source_end.is_same(&result_end));
+    assert_eq!(
+        endpoint_coordinates(result_start, result_end),
+        native_endpoints("linear")
+    );
+}
+
+fn edge_shapes(shape: &Shape) -> Vec<rustycad_tkbrep::topods::Edge> {
+    Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Shape)
+        .unwrap()
+        .map(|edge| rustycad_tkbrep::topods::edge(&edge).unwrap())
+        .collect()
+}
+
+fn edge_endpoints(
+    edge: &rustycad_tkbrep::topods::Edge,
+) -> (
+    rustycad_tkbrep::topods::Vertex,
+    rustycad_tkbrep::topods::Vertex,
+) {
+    (
+        rustycad_tkbrep::topexp::first_vertex(edge, true),
+        rustycad_tkbrep::topexp::last_vertex(edge, true),
+    )
+}
+
+fn endpoint_coordinates(
+    first: rustycad_tkbrep::topods::Vertex,
+    last: rustycad_tkbrep::topods::Vertex,
+) -> Vec<f64> {
+    let first = rustycad_tkbrep::brep::BRepTool::pnt(&first).unwrap();
+    let last = rustycad_tkbrep::brep::BRepTool::pnt(&last).unwrap();
+    vec![
+        first.x(),
+        first.y(),
+        first.z(),
+        last.x(),
+        last.y(),
+        last.z(),
+    ]
+}
+
+#[test]
+fn non_collinear_edges_remain_separate_like_native() {
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    wire.add_edge(&line_edge(0., 1.)).unwrap();
+    let second =
+        BRepBuilderAPIMakeEdge::from_points(Point3::new(1., 0., 0.), Point3::new(1., 1., 0.))
+            .unwrap()
+            .edge()
+            .unwrap();
+    wire.add_edge(&second).unwrap();
+    let input = wire.wire().unwrap().into_shape();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
+    unifier.build().unwrap();
+    let count = Explorer::new(&unifier.shape(), ShapeEnum::Edge, ShapeEnum::Shape)
+        .unwrap()
+        .count();
+    assert_eq!(count, native_edge_count("perpendicular"));
+}
+
+#[test]
+fn disabled_edge_unification_keeps_both_native_edges() {
+    let input = collinear_wire();
+    let unifier = ShapeUpgradeUnifySameDomain::new(&input, false, false, false);
+    unifier.build().unwrap();
+    let result = unifier.shape();
+    let count = Explorer::new(&result, ShapeEnum::Edge, ShapeEnum::Shape)
+        .unwrap()
+        .count();
+    assert_eq!(count, native_edge_count("disabled"));
+}
+
+fn collinear_wire() -> Shape {
+    let mut wire = BRepBuilderAPIMakeWire::new();
+    wire.add_edge(&line_edge(0., 1.)).unwrap();
+    wire.add_edge(&line_edge(1., 2.)).unwrap();
+    wire.wire().unwrap().into_shape()
+}
+
+fn native_edge_count(case: &str) -> usize {
+    include_str!("../../../tools/oracle/tkshhealing_unify_collinear_wire.expected")
+        .lines()
+        .find(|line| line.starts_with(case))
+        .unwrap()
+        .split_whitespace()
+        .last()
+        .unwrap()
+        .parse()
+        .unwrap()
+}
+
+fn native_endpoints(case: &str) -> Vec<f64> {
+    include_str!("../../../tools/oracle/tkshhealing_unify_collinear_wire.expected")
+        .lines()
+        .find(|line| line.starts_with(&format!("{case} endpoints")))
+        .unwrap()
+        .split_whitespace()
+        .skip(2)
+        .map(|value| value.parse().unwrap())
+        .collect()
+}
+
+fn line_edge(first_x: f64, last_x: f64) -> rustycad_tkbrep::topods::Edge {
+    BRepBuilderAPIMakeEdge::from_points(Point3::new(first_x, 0., 0.), Point3::new(last_x, 0., 0.))
+        .unwrap()
+        .edge()
+        .unwrap()
 }
 
 fn shell_with_internal_path(points: &[Point3], closed: bool) -> Shape {
