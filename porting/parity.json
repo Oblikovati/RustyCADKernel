@@ -55,7 +55,7 @@
       "upstream_id": "Quantity_Period::Add",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Period::add / std::ops::Add",
+      "rust_item": "rustycad_tkernel::quantity::Period::add",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -63,7 +63,7 @@
       "upstream_id": "Quantity_Period::Subtract",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Period::subtract / std::ops::Sub",
+      "rust_item": "rustycad_tkernel::quantity::Period::subtract",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -71,7 +71,7 @@
       "upstream_id": "Quantity_Period::IsEqual",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Period::is_equal / PartialEq",
+      "rust_item": "rustycad_tkernel::quantity::Period::is_equal",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -79,7 +79,7 @@
       "upstream_id": "Quantity_Period::IsShorter",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Period::is_shorter / PartialOrd",
+      "rust_item": "rustycad_tkernel::quantity::Period::is_shorter",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -87,7 +87,7 @@
       "upstream_id": "Quantity_Period::IsLonger",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Period::is_longer / PartialOrd",
+      "rust_item": "rustycad_tkernel::quantity::Period::is_longer",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -151,7 +151,7 @@
       "upstream_id": "Quantity_Date::Add",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Date::add / std::ops::Add",
+      "rust_item": "rustycad_tkernel::quantity::Date::add",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -159,7 +159,7 @@
       "upstream_id": "Quantity_Date::Subtract",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Date::subtract / std::ops::Sub",
+      "rust_item": "rustycad_tkernel::quantity::Date::subtract",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -231,7 +231,7 @@
       "upstream_id": "Quantity_Date::IsEqual",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Date::is_equal / PartialEq",
+      "rust_item": "rustycad_tkernel::quantity::Date::is_equal",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -239,7 +239,7 @@
       "upstream_id": "Quantity_Date::IsEarlier",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Date::is_earlier / PartialOrd",
+      "rust_item": "rustycad_tkernel::quantity::Date::is_earlier",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -247,7 +247,7 @@
       "upstream_id": "Quantity_Date::IsLater",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Date::is_later / PartialOrd",
+      "rust_item": "rustycad_tkernel::quantity::Date::is_later",
       "status": "implemented",
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
@@ -88407,7 +88407,7 @@
       "upstream_id": "Quantity_Date::operator-(const Quantity_Period&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Date as std::ops::Sub<Period>>::sub",
+      "rust_item": "rustycad_tkernel::quantity::Date::<core::ops::arith::Sub>::sub",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Subtract."
     },
@@ -88415,7 +88415,7 @@
       "upstream_id": "Quantity_Date::operator+(const Quantity_Period&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Date as std::ops::Add<Period>>::add",
+      "rust_item": "rustycad_tkernel::quantity::Date::<core::ops::arith::Add>::add",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Add."
     },
@@ -88463,7 +88463,7 @@
       "upstream_id": "Quantity_Period::operator-(const Quantity_Period&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Period as std::ops::Sub>::sub",
+      "rust_item": "rustycad_tkernel::quantity::Period::<core::ops::arith::Sub>::sub",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Subtract."
     },
@@ -88471,7 +88471,7 @@
       "upstream_id": "Quantity_Period::operator+(const Quantity_Period&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Period as std::ops::Add>::add",
+      "rust_item": "rustycad_tkernel::quantity::Period::<core::ops::arith::Add>::add",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Add."
     },
