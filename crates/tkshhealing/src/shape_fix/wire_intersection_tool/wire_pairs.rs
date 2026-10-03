@@ -1,6 +1,8 @@
 //! Cross-wire intersections from `ShapeFix_IntersectionTool::FixIntersectingWires`.
 use super::ShapeFixIntersectionTool;
 use super::aggregate::points;
+#[path = "wire_pairs/long_overlap.rs"]
+mod long_overlap;
 #[path = "wire_pairs/segments.rs"]
 mod segments;
 use super::boxes::{self, EdgeBox};

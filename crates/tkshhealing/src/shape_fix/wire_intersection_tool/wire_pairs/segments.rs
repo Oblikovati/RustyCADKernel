@@ -26,7 +26,7 @@ pub(super) fn repair_cross_wire_segment(
     if segment::separated_overlap(&samples, *max_tolerance) {
         return Ok(PairEffect::None);
     }
-    let (first_cut, first_vertex) = cut_overlap_endpoint(
+    let first_cut = cut_overlap_endpoint(
         tool,
         face,
         edge1,
@@ -35,7 +35,7 @@ pub(super) fn repair_cross_wire_segment(
         &samples.first,
         *max_tolerance,
     )?;
-    let (second_cut, second_vertex) = cut_overlap_endpoint(
+    let second_cut = cut_overlap_endpoint(
         tool,
         face,
         edge2,
@@ -44,30 +44,8 @@ pub(super) fn repair_cross_wire_segment(
         &samples.second,
         *max_tolerance,
     )?;
-    if first_cut && !second_cut {
-        return split_overlap_in_wire(
-            tool,
-            face,
-            second,
-            second_index,
-            samples.second_parameters,
-            &first_vertex,
-            false,
-        );
-    }
-    if second_cut && !first_cut {
-        return split_overlap_in_wire(
-            tool,
-            face,
-            first,
-            first_index,
-            samples.first_parameters,
-            &second_vertex,
-            true,
-        );
-    }
     if first_cut || second_cut {
-        return Ok(PairEffect::Replaced);
+        return Ok(PairEffect::None);
     }
     split_short_overlap(
         tool,
@@ -92,7 +70,7 @@ fn cut_overlap_endpoint(
     parameters: (f64, f64),
     overlap_points: &[rustycad_tkmath::gp::Point3; 2],
     max_tolerance: f64,
-) -> Result<(bool, SelectedEndpoint), Failure> {
+) -> Result<bool, Failure> {
     let selected =
         segment::select_existing_endpoint(edge, range, parameters, overlap_points, max_tolerance)?;
     cut_selected_overlap_endpoint(tool, face, edge, range, parameters, selected)
@@ -105,22 +83,22 @@ fn cut_selected_overlap_endpoint(
     range: (f64, f64),
     parameters: (f64, f64),
     selected: SelectedEndpoint,
-) -> Result<(bool, SelectedEndpoint), Failure> {
+) -> Result<bool, Failure> {
     if !selected.found {
-        return Ok((false, selected));
+        return Ok(false);
     }
     let endpoint = farther_overlap_range(range, parameters);
     let cut = farther_overlap_point(endpoint, parameters);
     let mut cut_line = false;
     if !tool.cut_edge(edge, endpoint, cut, face, &mut cut_line)? {
-        return Ok((false, selected));
+        return Ok(false);
     }
     let old_tolerance = BRepTool::vertex_tolerance(&selected.vertex)?;
     if selected.tolerance > old_tolerance {
         BRepBuilder::default()
             .update_vertex_tolerance(&selected.vertex, selected.tolerance * 1.00001)?;
     }
-    Ok((true, selected))
+    Ok(true)
 }
 
 fn farther_overlap_range(range: (f64, f64), overlap: (f64, f64)) -> f64 {
@@ -141,37 +119,6 @@ fn farther_overlap_point(endpoint: f64, overlap: (f64, f64)) -> f64 {
     }
 }
 
-fn split_overlap_in_wire(
-    tool: &ShapeFixIntersectionTool,
-    face: &Face,
-    wire: &mut WireRecord,
-    index: i32,
-    parameters: (f64, f64),
-    endpoint: &SelectedEndpoint,
-    retry_first: bool,
-) -> Result<PairEffect, Failure> {
-    if !endpoint.found {
-        return Ok(PairEffect::Replaced);
-    }
-    let split = tool.split_edge2(
-        &wire.data,
-        face,
-        index,
-        parameters,
-        &endpoint.vertex,
-        endpoint.tolerance,
-        &mut wire.boxes,
-    )?;
-    if !split {
-        return Ok(PairEffect::Replaced);
-    }
-    Ok(if retry_first {
-        PairEffect::RetryFirst(1)
-    } else {
-        PairEffect::RetrySecond(1)
-    })
-}
-
 #[allow(clippy::too_many_arguments)]
 fn split_short_overlap(
     tool: &ShapeFixIntersectionTool,
@@ -188,9 +135,24 @@ fn split_short_overlap(
 ) -> Result<PairEffect, Failure> {
     let first_span = (points.first_parameters.1 - points.first_parameters.0).abs();
     let second_span = (points.second_parameters.1 - points.second_parameters.0).abs();
-    if first_span > (curves.ranges[0].1 - curves.ranges[0].0).abs() * 0.5
-        || second_span > (curves.ranges[1].1 - curves.ranges[1].0).abs() * 0.5
-    {
+    let first_range = BRepTool::range_on_face(edge1, face)?;
+    let second_range = BRepTool::range_on_face(edge2, face)?;
+    let first_is_long = first_span > (first_range.1 - first_range.0).abs() * 0.5;
+    let second_is_long = second_span > (second_range.1 - second_range.0).abs() * 0.5;
+    if first_is_long && second_is_long {
+        return super::long_overlap::replace_full_second_overlap(
+            tool,
+            face,
+            first,
+            second,
+            first_index,
+            second_index,
+            edge2,
+            points,
+            max_tolerance,
+        );
+    }
+    if first_is_long || second_is_long {
         return Ok(PairEffect::None);
     }
     let first_middle = point_on_edge(
