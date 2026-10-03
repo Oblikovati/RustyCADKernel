@@ -5,7 +5,8 @@
 //! Rust's number formatting and parsing never consult a process locale, but OCCT also
 //! exposes this sentry to code that calls locale-sensitive C routines. POSIX targets
 //! switch only the calling thread to `C` and restore its previous thread locale on drop.
-//! Other targets retain the descriptive scope API; their locale switching is not ported.
+//! Android keeps OCCT's native no-op behavior. Other targets retain the descriptive scope API;
+//! their platform-specific locale switching is not ported.
 
 #[cfg(all(unix, not(target_os = "android")))]
 #[path = "c_locale_sentry/locale_posix.rs"]
