@@ -7,7 +7,7 @@ impl ShapeUpgradeSplitSurfaceContinuity {
     pub(super) fn compute_continuity(&self, segment: bool) -> Result<(), Failure> {
         let surface = self.surface();
         if !segment {
-            self.extend_split_bounds(&surface);
+            self.extend_split_bounds(&surface)?;
         }
         let values = self.split_bounds()?;
         let settings = *self.settings.read();
@@ -27,13 +27,14 @@ impl ShapeUpgradeSplitSurfaceContinuity {
         let (v_first, v_last) = surface_endpoints(&self.v_split_values())?;
         Ok((u_first, u_last, v_first, v_last))
     }
-    fn extend_split_bounds(&self, surface: &Handle<dyn GeomSurface>) {
+    fn extend_split_bounds(&self, surface: &Handle<dyn GeomSurface>) -> Result<(), Failure> {
         let Some(surface) = surface.get() else {
-            return;
+            return Ok(());
         };
         let (uf, ul, vf, vl) = surface.bounds();
-        update_endpoints(&self.u_split_values(), (uf, ul));
-        update_endpoints(&self.v_split_values(), (vf, vl));
+        update_endpoints(&self.u_split_values(), (uf, ul))?;
+        update_endpoints(&self.v_split_values(), (vf, vl))?;
+        Ok(())
     }
     fn initialize_status(&self, surface: &Handle<dyn GeomSurface>, criterion: Shape) {
         let Some(surface) = surface.get() else {
@@ -74,14 +75,15 @@ impl ShapeUpgradeSplitSurfaceContinuity {
         criterion: Shape,
     ) -> Result<Option<Handle<GeomBSplineSurface>>, Failure> {
         let original = surface.get().ok_or_else(null_surface)?;
-        if original.continuity() >= criterion {
-            return Ok(None);
-        }
         let spline = surface.cast::<GeomBSplineSurface>();
         if spline.is_null() {
             return Ok(None);
         }
-        Ok(Some(spline.copy()?.cast()))
+        let copied = spline.copy()?.cast();
+        if original.continuity() >= criterion {
+            return Ok(None);
+        }
+        Ok(Some(copied))
     }
     fn set_status(&self, status: ShapeExtendStatus) {
         let encoded = ShapeExtend::encode_status(status);
@@ -93,15 +95,16 @@ impl ShapeUpgradeSplitSurfaceContinuity {
 fn surface_endpoints(values: &SurfaceSplitValues) -> Result<(f64, f64), Failure> {
     values.sequence(|seq| Ok((*seq.value(1)?, *seq.value(seq.len())?)))
 }
-fn update_endpoints(values: &SurfaceSplitValues, bounds: (f64, f64)) {
-    values.change_sequence(|seq| {
+fn update_endpoints(values: &SurfaceSplitValues, bounds: (f64, f64)) -> Result<(), Failure> {
+    values.change_sequence(|seq| -> Result<(), Failure> {
         if !precision::is_infinite(bounds.0) {
-            let _ = seq.set_value(1, bounds.0);
+            seq.set_value(1, bounds.0)?;
         }
         if !precision::is_infinite(bounds.1) {
-            let _ = seq.set_value(seq.len(), bounds.1);
+            seq.set_value(seq.len(), bounds.1)?;
         }
-    });
+        Ok(())
+    })
 }
 fn null_surface() -> Failure {
     Failure::with_type(

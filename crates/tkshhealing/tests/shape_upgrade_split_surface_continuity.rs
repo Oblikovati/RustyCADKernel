@@ -70,6 +70,18 @@ fn native_existing_ranges_and_segment_false_bounds_match() {
 }
 
 #[test]
+fn extending_bounds_propagates_cleared_shared_sequence_range_failure() {
+    let surface = corner_surface(false, false);
+    let splitter = initialized_splitter(&surface, None);
+    splitter
+        .u_split_values()
+        .change_sequence(|sequence| sequence.clear(None));
+
+    let failure = splitter.compute(false).unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_OutOfRange");
+}
+
+#[test]
 fn native_trimmed_wrapper_recurses_over_clipped_basis_bounds() {
     let corner = corner_surface(true, true);
     let trimmed = Handle::new(
