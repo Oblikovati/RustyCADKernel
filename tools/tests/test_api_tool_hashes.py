@@ -13,7 +13,7 @@ from api_tool_hashes import (
     stage_hashes,
 )
 from api_coverage_report import report_tool_hashes
-from normalize_rustdoc_inventory import normalized_manifest, package_digest
+from normalize_rustdoc_inventory import ROOT, normalized_manifest, package_digest
 
 
 class ToolHashFixture:
@@ -63,10 +63,15 @@ class ToolImplementationHashTests(unittest.TestCase):
     def test_report_requires_fresh_normalizer_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             fixture = ToolHashFixture(Path(directory))
-            rust = {"tool_implementation_sha256": {
-                "rust_normalizer": stage_hashes(fixture.root, "rust_normalizer")
-            }}
-            self.assertEqual(report_tool_hashes(fixture.root, rust), implementation_hashes(fixture.root))
+            rust = {
+                "tool_implementation_sha256": {
+                    "rust_normalizer": stage_hashes(fixture.root, "rust_normalizer")
+                }
+            }
+            self.assertEqual(
+                report_tool_hashes(fixture.root, rust),
+                implementation_hashes(fixture.root),
+            )
             rust.pop("tool_implementation_sha256")
             with self.assertRaisesRegex(ValueError, "missing or stale"):
                 report_tool_hashes(fixture.root, rust)
@@ -78,7 +83,11 @@ class ToolImplementationHashTests(unittest.TestCase):
             result = normalized_manifest(capture, fixture.root)
             self.assertEqual(
                 result["tool_implementation_sha256"],
-                {"rust_normalizer": stage_hashes(fixture.root, "rust_normalizer")},
+                {"rust_normalizer": stage_hashes(ROOT, "rust_normalizer")},
+            )
+            self.assertNotEqual(
+                result["tool_implementation_sha256"]["rust_normalizer"],
+                stage_hashes(fixture.root, "rust_normalizer"),
             )
 
 
@@ -100,8 +109,14 @@ def minimal_rustdoc_document() -> dict[str, JSONValue]:
     return {
         "format_version": 61,
         "root": 0,
-        "index": {"0": {"id": 0, "name": "demo", "visibility": "public",
-                          "inner": {"module": {"is_crate": True, "items": []}}}},
+        "index": {
+            "0": {
+                "id": 0,
+                "name": "demo",
+                "visibility": "public",
+                "inner": {"module": {"is_crate": True, "items": []}},
+            }
+        },
         "paths": {},
     }
 

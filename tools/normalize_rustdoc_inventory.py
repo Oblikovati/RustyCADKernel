@@ -353,7 +353,7 @@ def normalized_manifest(
         "capture_manifest_sha256": sha256_bytes(manifest_path.read_bytes()),
         "capture_workspace_revision": capture_revision(manifest),
         "tool_implementation_sha256": {
-            "rust_normalizer": stage_hashes(workspace, "rust_normalizer")
+            "rust_normalizer": stage_hashes(ROOT, "rust_normalizer")
         },
         "capture_feature_policy": manifest.get("feature_policy"),
         "cargo_arguments": manifest.get("cargo_arguments"),
