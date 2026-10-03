@@ -95,7 +95,7 @@ verifier's local helper modules.
 ## Paired runtime evidence
 
 `tkernel-runtime-report.json.gz` retains the complete verifier report and its input
-hashes at Rust revision `432e74bc`. `tkernel-runtime-declarations.json.gz` records
+hashes at clean execution-time Rust revision `f8e39c45`. `tkernel-runtime-declarations.json.gz` records
 the exact declaration/instance join: 1,315 declarations passed, one declaration
 was an approved upstream skip, and 7,332 were unverified by this TKernel run.
 There were zero unmapped runtime cases or mapping anomalies. The run executed
@@ -131,5 +131,5 @@ python3 tools/join_legacy_runtime_evidence.py target/oracle-tkmath-legacy/report
   --occt-source /path/to/OCCT --output target/api-proof/tkmath-joined-runtime.json
 ```
 
-The older TKernel receipt above predates execution-time Git provenance fields.
-It is historical evidence; the current joiner requires a fresh verifier run.
+Both retained receipts now record execution-time Git provenance. They remain
+historical receipts after later source changes; rerun the verifier to assess those changes.
