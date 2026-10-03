@@ -1,5 +1,6 @@
 //! Face size checks used by the small-face healing pipeline.
 mod check_single_strip;
+mod check_strip_face;
 mod find_strip_edges;
 mod spot;
 mod strip;
