@@ -11,7 +11,7 @@ struct AggregateWireState {
 }
 
 impl ShapeFixWire {
-    /// Runs aggregate free-wire repairs in native order; `fixer.perform()?`.
+    /// Runs aggregate wire repairs in native order; `fixer.perform()?`.
     pub fn perform(&self) -> Result<bool, Failure> {
         self.perform_with_progress(&ProgressRange::default())
     }
@@ -24,7 +24,6 @@ impl ShapeFixWire {
             return Ok(false);
         }
         self.share_context_with_edge_tool();
-        self.ensure_free_wire_path()?;
         self.perform_free_wire_stages(progress)
     }
 
@@ -33,17 +32,6 @@ impl ShapeFixWire {
         if !context.is_null() {
             self.edge_fixer.set_context(&context);
         }
-    }
-
-    fn ensure_free_wire_path(&self) -> Result<(), Failure> {
-        if self.is_ready() {
-            return Err(Failure::with_type(
-                "Standard_NotImplemented",
-                "ShapeFix_Wire::Perform face path requires aggregate notched, tail, and intersection repairs",
-                "",
-            ));
-        }
-        Ok(())
     }
 
     fn perform_free_wire_stages(&self, progress: &ProgressRange<'_>) -> Result<bool, Failure> {
@@ -75,17 +63,17 @@ impl ShapeFixWire {
         if progress.user_break() {
             return Ok(false);
         }
-        self.run_no_face_notches(state)?;
+        self.run_notched_edges(state)?;
         if progress.user_break() {
             return Ok(false);
         }
         if self.state.read().fix_tail_mode != 0 {
-            self.run_no_face_tails()?;
+            self.run_tails(state)?;
         }
         if progress.user_break() {
             return Ok(false);
         }
-        self.fix_no_face_intersections(state)?;
+        self.fix_self_intersections(state)?;
         if progress.user_break() {
             return Ok(false);
         }
@@ -96,13 +84,11 @@ impl ShapeFixWire {
         self.finish_vertex_tolerances(progress, state)
     }
 
-    fn run_no_face_notches(&self, state: &mut AggregateWireState) -> Result<(), Failure> {
+    fn run_notched_edges(&self, state: &mut AggregateWireState) -> Result<(), Failure> {
         let should_fix = self.state.read().fix_tail_mode <= 0
             && needs_fix(self.state.read().fix_notched_edges_mode, state.reorder_ok);
         if should_fix {
-            self.set_last_fix_status(ShapeExtendStatus::Ok);
-            let status = self.state.read().last_fix_status;
-            self.state.write().notches_status = status;
+            state.fixed |= self.fix_notched_edges()?;
             if state.fixed {
                 let _ = self.fix_shifted()?;
             }
@@ -110,12 +96,15 @@ impl ShapeFixWire {
         Ok(())
     }
 
-    fn run_no_face_tails(&self) -> Result<(), Failure> {
-        // Native FixTails returns before changing status when no face is loaded.
+    fn run_tails(&self, state: &mut AggregateWireState) -> Result<(), Failure> {
+        if self.fix_tails()? {
+            state.fixed = true;
+            let _ = self.fix_shifted()?;
+        }
         Ok(())
     }
 
-    fn fix_no_face_intersections(&self, state: &mut AggregateWireState) -> Result<(), Failure> {
+    fn fix_self_intersections(&self, state: &mut AggregateWireState) -> Result<(), Failure> {
         if needs_fix(
             self.state.read().fix_self_intersection_mode,
             self.closed_mode(),
@@ -225,7 +214,7 @@ impl AggregateWireState {
             fixer.state.read().fix_self_intersection_mode,
             fixer.closed_mode(),
         ) {
-            self.fixed |= fixer.fix_line_self_intersections()?;
+            self.fixed |= fixer.perform_self_intersection_stage(self.reorder_ok)?;
         }
         Ok(())
     }

@@ -28,6 +28,8 @@ mod wire_notched;
 mod wire_perform;
 #[path = "wire_seam.rs"]
 mod wire_seam;
+#[path = "wire_self_intersection_aggregate.rs"]
+mod wire_self_intersection_aggregate;
 #[path = "wire_self_intersection_fix.rs"]
 mod wire_self_intersection_fix;
 #[path = "wire_self_intersection_remove.rs"]
@@ -100,6 +102,9 @@ struct WireFixState {
     fix_notched_edges_mode: i32,
     fix_tail_mode: i32,
     fix_self_intersection_mode: i32,
+    fix_self_intersecting_edge_mode: i32,
+    fix_intersecting_edges_mode: i32,
+    fix_nonadjacent_intersecting_edges_mode: i32,
     fix_lacking_mode: i32,
     notches_status: i32,
     tails_status: i32,
@@ -155,6 +160,9 @@ impl Default for ShapeFixWire {
                 fix_notched_edges_mode: -1,
                 fix_tail_mode: 0,
                 fix_self_intersection_mode: -1,
+                fix_self_intersecting_edge_mode: -1,
+                fix_intersecting_edges_mode: -1,
+                fix_nonadjacent_intersecting_edges_mode: -1,
                 fix_lacking_mode: -1,
                 notches_status: 0,
                 tails_status: 0,

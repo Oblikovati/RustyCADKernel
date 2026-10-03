@@ -1,118 +1,113 @@
-//! End-to-end native parity for the pinned ShapeFix_Wire bowtie self-intersection fixture.
-use rustycad_tkbrep::brep::BRepTool;
-use rustycad_tkbrep::brep_tools::ReShape;
-use rustycad_tkbrep::topods::{Edge, ShapeIterator, Wire};
+//! Native `ShapeFix_Wire::FixSelfIntersection` aggregate control flow.
+use rustycad_tkbrep::brep::BRepBuilder;
+use rustycad_tkbrep::topods::Face;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkmath::gp::Point3;
-use rustycad_tkshhealing::shape_analysis::ShapeAnalysisWire;
-use rustycad_tkshhealing::shape_extend::ShapeExtendStatus;
-use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixWire};
-use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeFace, BRepBuilderAPIMakePolygon};
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};
+use rustycad_tkmath::gp::{Axis2d, Axis3, Direction2, Point2};
+use rustycad_tkshhealing::{shape_extend::ShapeExtendStatus, shape_fix::ShapeFixWire};
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeWire};
+
+const NATIVE: &str =
+    include_str!("../../../tools/oracle/tkshhealing_fix_wire_self_intersection.expected");
 
 #[test]
-fn bowtie_wire_splits_both_diagonals_at_one_shared_vertex() {
-    let wire = bowtie_wire();
-    let face = BRepBuilderAPIMakeFace::from_wire(&wire, true)
-        .unwrap()
-        .face()
-        .unwrap();
-    let face_wire = rustycad_tkbrep::topods::wire(
-        ShapeIterator::new(&face.clone().into_shape(), false, true)
-            .value()
-            .unwrap(),
-    )
-    .unwrap();
-    let analyzer = Handle::new(ShapeAnalysisWire::from_wire(&face_wire, &face, 1e-7).unwrap());
-    let source_edges = ShapeIterator::new(&face_wire.clone().into_shape(), false, true)
-        .map(|shape| rustycad_tkbrep::topods::edge(&shape).unwrap())
-        .collect::<Vec<Edge>>();
+fn simple_wire_and_unready_statuses_match_native_aggregate() {
+    compare_row("simple", observe_simple_wire());
+    compare_row("unready", observe_unready_wire());
+    compare_row("modes", observe_modes());
+}
+
+fn observe_modes() -> Vec<i32> {
     let fixer = ShapeFixWire::new();
-    fixer.init(&analyzer);
-
-    assert!(fixer.fix_line_self_intersections().unwrap());
-    assert_eq!(analyzer.wire_data().nb_edges(), 6);
-    assert!(fixer.status_self_intersection(ShapeExtendStatus::Done1));
-    assert!(fixer.status_self_intersection(ShapeExtendStatus::Done5));
-    assert_native_order_and_shared_vertex(&analyzer.wire_data().wire().unwrap(), &face);
-    let context = fixer.context();
-    let context = context.get().unwrap();
-    assert_eq!(
-        source_edges
-            .iter()
-            .filter(|edge| context.is_recorded(&(*edge).clone().into_shape()))
-            .count(),
-        2
-    );
+    fixer.set_fix_self_intersecting_edge_mode(1);
+    fixer.set_fix_intersecting_edges_mode(0);
+    fixer.set_fix_nonadjacent_intersecting_edges_mode(-1);
+    vec![
+        fixer.fix_self_intersecting_edge_mode(),
+        fixer.fix_intersecting_edges_mode(),
+        fixer.fix_nonadjacent_intersecting_edges_mode(),
+    ]
 }
 
-fn bowtie_wire() -> Wire {
-    let mut polygon = BRepBuilderAPIMakePolygon::new();
-    polygon.add_point(Point3::new(0.0, 0.0, 0.0)).unwrap();
-    polygon.add_point(Point3::new(1.0, 1.0, 0.0)).unwrap();
-    polygon.add_point(Point3::new(1.0, 0.0, 0.0)).unwrap();
-    polygon.add_point(Point3::new(0.0, 1.0, 0.0)).unwrap();
-    polygon.close().unwrap();
-    polygon.wire().unwrap()
+fn observe_simple_wire() -> Vec<i32> {
+    let (wire, face) = simple_wire();
+    let fixer = ShapeFixWire::from_wire_face(&wire, &face, 1e-7).unwrap();
+    let fixed = fixer.fix_self_intersection().unwrap();
+    vec![
+        i32::from(fixed),
+        fixer.nb_edges(),
+        i32::from(fixer.status_self_intersection(ShapeExtendStatus::Done)),
+        i32::from(fixer.status_self_intersection(ShapeExtendStatus::Fail)),
+        i32::from(fixer.status_removed_segment()),
+    ]
 }
 
-fn assert_native_order_and_shared_vertex(wire: &Wire, face: &rustycad_tkbrep::topods::Face) {
-    let mut crossing = Vec::new();
-    let mut endpoints = Vec::new();
-    for edge_shape in ShapeIterator::new(wire, false, true) {
-        let edge = rustycad_tkbrep::topods::edge(&edge_shape).unwrap();
-        let (first, last) = rustycad_tkbrep::topexp::vertices(&edge, false);
-        let pc = BRepTool::curve_on_face(&edge, face).unwrap();
-        endpoints.push((
-            pc.pcurve.value(pc.first).unwrap(),
-            pc.pcurve.value(pc.last).unwrap(),
-            (pc.first, pc.last),
-        ));
-        for vertex in [first, last] {
-            if BRepTool::pnt(&vertex)
-                .is_ok_and(|point| point.distance(&Point3::new(0.5, 0.5, 0.0)) < 1e-7)
-            {
-                crossing.push(vertex);
-            }
-        }
-    }
-    assert_eq!(crossing.len(), 4);
-    assert!(crossing.iter().all(|vertex| vertex.is_same(&crossing[0])));
-    assert!(
-        (BRepTool::vertex_tolerance(&crossing[0]).unwrap()
-            - rustycad_tkernel::precision::confusion())
-        .abs()
-            < 1e-12
+fn observe_unready_wire() -> Vec<i32> {
+    let fixer = ShapeFixWire::new();
+    let fixed = fixer.fix_self_intersection().unwrap();
+    vec![
+        i32::from(fixed),
+        i32::from(fixer.status_self_intersection(ShapeExtendStatus::Done)),
+        i32::from(fixer.status_self_intersection(ShapeExtendStatus::Fail)),
+    ]
+}
+
+fn simple_wire() -> (rustycad_tkbrep::topods::Wire, Face) {
+    let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(Axis3::default())).cast();
+    let mut face = Face::default();
+    BRepBuilder::default()
+        .make_face_on_surface(&mut face, &surface, 1e-7)
+        .unwrap();
+    let first = edge(
+        &surface,
+        Point2::new(0., 0.),
+        Direction2::new(1., 0.).unwrap(),
+        2.,
     );
-    let expected = [
-        ((0.5, 0.5), (0.5, -0.5), (0.0, 1.0)),
-        (
-            (0.0, 0.0),
-            (0.5, 0.5),
-            (2.0_f64.sqrt() / 2.0, 2.0_f64.sqrt()),
-        ),
-        ((-0.5, -0.5), (0.0, 0.0), (0.0, 2.0_f64.sqrt() / 2.0)),
-        ((-0.5, 0.5), (-0.5, -0.5), (0.0, 1.0)),
-        (
-            (0.0, 0.0),
-            (-0.5, 0.5),
-            (2.0_f64.sqrt() / 2.0, 2.0_f64.sqrt()),
-        ),
-        ((0.5, -0.5), (0.0, 0.0), (0.0, 2.0_f64.sqrt() / 2.0)),
-    ];
-    for (actual, (first, last, range)) in endpoints.into_iter().zip(expected) {
-        assert!(
-            actual
-                .0
-                .distance(rustycad_tkmath::gp::Point2::new(first.0, first.1))
-                < 1e-7
-        );
-        assert!(
-            actual
-                .1
-                .distance(rustycad_tkmath::gp::Point2::new(last.0, last.1))
-                < 1e-7
-        );
-        assert!((actual.2.0 - range.0).abs() < 1e-7);
-        assert!((actual.2.1 - range.1).abs() < 1e-7);
-    }
+    let second = edge(
+        &surface,
+        Point2::new(2., 0.),
+        Direction2::new(0., 1.).unwrap(),
+        2.,
+    );
+    let third = edge(
+        &surface,
+        Point2::new(0., 2.),
+        Direction2::new(1., -1.).unwrap(),
+        2.8284271247461903,
+    );
+    let wire = BRepBuilderAPIMakeWire::from_three_edges(&first, &second, &third)
+        .unwrap()
+        .wire()
+        .unwrap();
+    (wire, face)
+}
+
+fn edge(
+    surface: &Handle<dyn GeomSurface>,
+    origin: Point2,
+    direction: Direction2,
+    length: f64,
+) -> rustycad_tkbrep::topods::Edge {
+    let curve: Handle<dyn Geom2dCurve> =
+        Handle::new(Geom2dLine::new(Axis2d::new(origin, direction))).cast();
+    BRepBuilderAPIMakeEdge::from_pcurve_params(&curve, surface, 0., length)
+        .unwrap()
+        .edge()
+        .unwrap()
+}
+
+fn compare_row(name: &str, actual: Vec<i32>) {
+    let row = NATIVE
+        .lines()
+        .find(|line| line.starts_with(&format!("{name} ")))
+        .expect("native aggregate row");
+    let expected: Vec<i32> = row
+        .split_whitespace()
+        .skip(2)
+        .step_by(2)
+        .map(|value| value.parse().unwrap())
+        .collect();
+    assert_eq!(actual, expected, "native FixSelfIntersection case {name}");
 }
