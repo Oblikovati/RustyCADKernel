@@ -4,10 +4,11 @@ use super::{ShapeFixComposeShell, geometry};
 use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisSurface};
 use crate::shape_extend::ShapeExtendWireData;
 use crate::shape_fix::{FixRoot, ShapeFixWireSegment};
+mod closed_mode;
 mod helpers;
 use helpers::{
-    IOR_BOTH, ITP_TANG, JunctionState, SplitArguments, edge_end_parameter, edge_start_parameter,
-    not_implemented, null_context, null_pcurve, null_wire, point_code, shared_tangential_point,
+    ITP_TANG, JunctionState, SplitArguments, edge_end_parameter, edge_start_parameter,
+    null_context, null_pcurve, null_wire,
 };
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::ReShape;
@@ -39,10 +40,10 @@ struct SplitByLineState<'a> {
 }
 
 #[derive(Clone, Copy)]
-struct SplitIntersection {
-    edge_index: i32,
-    edge_parameter: f64,
-    line_parameter: f64,
+pub(super) struct SplitIntersection {
+    pub(super) edge_index: i32,
+    pub(super) edge_parameter: f64,
+    pub(super) line_parameter: f64,
 }
 
 pub(super) fn split_by_line(
@@ -77,20 +78,27 @@ impl<'a> SplitByLineState<'a> {
         if self.input.wire.is_vertex() {
             return self.split_vertex();
         }
-        if self.composer.closed_mode() {
-            return Err(not_implemented("closed-mode line intersection"));
+        if closed_mode::periodic_cut_direction(self.composer, self.input.line) {
+            return Err(Failure::with_message(
+                "Standard_NotImplemented",
+                "ShapeFix_ComposeShell::SplitByLine: periodic line wrapping is not implemented",
+            ));
         }
         self.collect_intersections()?;
         if self.intersections.is_empty() {
             return Ok(false);
         }
         self.sort_intersections();
+        closed_mode::remove_duplicates(self.composer, self.input.wire, &mut self.intersections)?;
+        if self.intersections.is_empty() {
+            return Ok(false);
+        }
         let segment_codes = self.merge_tangential_segments()?;
         if self.intersections.is_empty() {
             return Ok(false);
         }
-        let point_codes = self.classify_points(&segment_codes);
-        self.split_and_append(&segment_codes, &point_codes)?;
+        let (point_codes, split_codes) = self.classify_output(&segment_codes);
+        self.split_and_append(&split_codes, &point_codes)?;
         Ok(true)
     }
 
@@ -304,7 +312,11 @@ impl<'a> SplitByLineState<'a> {
         ) {
             return Ok(codes);
         }
-        while let Some(index) = shared_tangential_point(&codes) {
+        while let Some(index) = closed_mode::mergeable_tangential_point(
+            self.composer.closed_mode(),
+            &self.intersections,
+            &codes,
+        ) {
             self.intersections.remove(index);
             if self.intersections.is_empty() {
                 return Ok(Vec::new());
@@ -329,16 +341,13 @@ impl<'a> SplitByLineState<'a> {
         )
     }
 
-    fn classify_points(&self, segment_codes: &[i32]) -> Vec<i32> {
-        if self.input.wire.orientation() == rustycad_tkg3d::top_abs::Orientation::External {
-            return vec![ITP_TANG | IOR_BOTH; segment_codes.len()];
-        }
-        let is_internal =
-            self.input.wire.orientation() == rustycad_tkg3d::top_abs::Orientation::Internal;
-        let count = segment_codes.len();
-        (0..count)
-            .map(|index| point_code(index, segment_codes, &self.intersections, is_internal))
-            .collect()
+    fn classify_output(&self, segment_codes: &[i32]) -> (Vec<i32>, Vec<i32>) {
+        closed_mode::classify_output(
+            self.composer,
+            self.input.wire.orientation(),
+            segment_codes,
+            &self.intersections,
+        )
     }
 
     fn split_and_append(&mut self, codes: &[i32], point_codes: &[i32]) -> Result<(), Failure> {

@@ -12,6 +12,8 @@ use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkgeombase::extrema_pc2d::{Curve as ExtremaCurve, ExtremaResult, SearchMode};
 use rustycad_tkmath::gp::Point3;
 
+const EXTREMA_PARAMETER_TOLERANCE: f64 = 1.0e-10;
+
 pub(super) fn make_cut_vertex(point: Point3, tolerance: f64) -> Result<Vertex, Failure> {
     let mut vertex = Vertex::default();
     BRepBuilder::default().make_vertex_at(&mut vertex, point, tolerance)?;
@@ -95,7 +97,7 @@ fn project_on_pcurve(
 ) -> Result<f64, Failure> {
     let uv = surface.value_of_uv(point, precision::confusion())?;
     let mut extrema = ExtremaCurve::from_geom(pcurve)?;
-    let computed = extrema.perform(uv, precision::confusion(), SearchMode::MinMax)?;
+    let computed = extrema.perform(uv, EXTREMA_PARAMETER_TOLERANCE, SearchMode::MinMax)?;
     let index = computed.min_index();
     if index == ExtremaResult::INVALID_INDEX {
         return Ok(initial_parameter);

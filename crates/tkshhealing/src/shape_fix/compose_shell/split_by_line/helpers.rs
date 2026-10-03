@@ -7,6 +7,7 @@ pub(super) const ITP_INTER: i32 = 8;
 pub(super) const ITP_BEGSEG: i32 = 16;
 pub(super) const ITP_ENDSEG: i32 = 32;
 pub(super) const ITP_TANG: i32 = 64;
+pub(super) const IOR_POS: i32 = 4;
 
 #[derive(Default)]
 pub(super) struct JunctionState {
@@ -36,6 +37,14 @@ pub(super) fn edge_end_parameter(edge: &Edge, first: f64, last: f64) -> f64 {
         first
     } else {
         last
+    }
+}
+
+pub(super) fn oriented_range_endpoint(edge: &Edge, range: (f64, f64), start: bool) -> f64 {
+    match (edge.orientation(), start) {
+        (rustycad_tkg3d::top_abs::Orientation::Forward, true)
+        | (rustycad_tkg3d::top_abs::Orientation::Reversed, false) => range.0,
+        _ => range.1,
     }
 }
 
@@ -128,12 +137,5 @@ pub(super) fn null_pcurve() -> Failure {
     Failure::with_message(
         "Standard_NullObject",
         "ShapeFix_ComposeShell::SplitByLine: null p-curve",
-    )
-}
-
-pub(super) fn not_implemented(detail: &str) -> Failure {
-    Failure::with_message(
-        "Standard_NotImplemented",
-        &format!("ShapeFix_ComposeShell::SplitByLine: {detail}"),
     )
 }
