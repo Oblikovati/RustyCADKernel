@@ -50,3 +50,6 @@ pub use shell::ShapeFixShell;
 
 mod solid;
 pub use solid::ShapeFixSolid;
+
+mod wireframe;
+pub use wireframe::{ShapeFixWireframe, ShapeFixWireframeShapeLists};

@@ -224867,6 +224867,109 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallFace::fix_pin_face",
       "status": "partial",
       "notes": "Native is a no-op returning true; Rust preserves the face and returns true on the regular-box test."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::ShapeFix_Wireframe()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::new",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::ShapeFix_Wireframe(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::from_shape",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::ClearStatuses()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::clear_statuses",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::Load(const TopoDS_Shape &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::load",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::Shape()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::shape",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::StatusWireGaps(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::status_wire_gaps",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::StatusSmallEdges(const ShapeExtend_Status) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::status_small_edges",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::ModeDropSmallEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::mode_drop_small_edges",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::mode_drop_small_edges",
+        "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::set_mode_drop_small_edges"
+      ]
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::SetLimitAngle(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::set_limit_angle",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::LimitAngle() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::limit_angle",
+      "status": "implemented",
+      "notes": "Native constructor/Load/ClearStatuses configuration rows and small-edge query fixtures; state API only, not proof of remaining gap/merge algorithms."
+    },
+    {
+      "upstream_id": "ShapeFix_Wireframe::CheckSmallEdges(NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
+      "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::check_small_edges",
+      "status": "partial",
+      "notes": "Ten native rows compare free/face/shared/reversed-face incidence, repeated/seam edges, standalone edges, empty wires and caller-preloaded maps. Curved/located/degenerate geometry and exceptional mutations still need differential evidence; no legacy mapping increase."
     }
   ],
   "tests": [
