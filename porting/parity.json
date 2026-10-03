@@ -495,7 +495,7 @@
       "upstream_id": "Bnd_Range::operator==(const Bnd_Range&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
-      "rust_item": "rustycad_tkmath::bnd::Range1::eq",
+      "rust_item": "rustycad_tkmath::bnd::Range1::<core::cmp::PartialEq>::eq",
       "status": "implemented",
       "notes": "Explicit overload mapping; native periodic integer conversions outside int range have undefined C++ behavior. API inventory completeness remains pending."
     },
@@ -847,7 +847,7 @@
       "upstream_id": "CSLib_NormalPolyDef::Value(double,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
-      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::value",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -855,7 +855,7 @@
       "upstream_id": "CSLib_NormalPolyDef::Derivative(double,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
-      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::derivative",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::<rustycad_tkmath::math::FunctionWithDerivative>::derivative",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -863,7 +863,7 @@
       "upstream_id": "CSLib_NormalPolyDef::Values(double,double&,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
-      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::values",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1671,7 +1671,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Lin&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Line3)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1679,7 +1679,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Circ&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Circle3)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1687,7 +1687,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Elips&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Ellipse3)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1695,7 +1695,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Hypr&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Hyperbola3)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1703,7 +1703,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Parab&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Parabola3)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1711,7 +1711,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Lin&,gp_Pnt&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Line3)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1719,7 +1719,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Circ&,gp_Pnt&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Circle3)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1727,7 +1727,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Elips&,gp_Pnt&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Ellipse3)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1735,7 +1735,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Hypr&,gp_Pnt&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Hyperbola3)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1743,7 +1743,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Parab&,gp_Pnt&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Parabola3)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1751,7 +1751,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Circ&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Circle3)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1759,7 +1759,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Elips&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Ellipse3)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1767,7 +1767,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Hypr&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Hyperbola3)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1775,7 +1775,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Parab&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Parabola3)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1783,7 +1783,7 @@
       "upstream_id": "ElCLib::D3(double,const gp_Circ&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d3 (impl for Circle3)",
+      "rust_item": "rustycad_tkmath::elclib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1791,7 +1791,7 @@
       "upstream_id": "ElCLib::D3(double,const gp_Elips&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d3 (impl for Ellipse3)",
+      "rust_item": "rustycad_tkmath::elclib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1799,7 +1799,7 @@
       "upstream_id": "ElCLib::D3(double,const gp_Hypr&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d3 (impl for Hyperbola3)",
+      "rust_item": "rustycad_tkmath::elclib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1807,7 +1807,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Lin&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Line3)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1815,7 +1815,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Circ&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Circle3)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1823,7 +1823,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Elips&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Ellipse3)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1831,7 +1831,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Hypr&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Hyperbola3)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1839,7 +1839,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Parab&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Parabola3)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1847,7 +1847,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Lin2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Line2)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1855,7 +1855,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Circ2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Circle2)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1863,7 +1863,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Elips2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Ellipse2)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1871,7 +1871,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Hypr2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Hyperbola2)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1879,7 +1879,7 @@
       "upstream_id": "ElCLib::Value(double,const gp_Parab2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::value (impl for Parabola2)",
+      "rust_item": "rustycad_tkmath::elclib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1887,7 +1887,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Lin2d&,gp_Pnt2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Line2)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1895,7 +1895,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Circ2d&,gp_Pnt2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Circle2)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1903,7 +1903,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Elips2d&,gp_Pnt2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Ellipse2)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1911,7 +1911,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Hypr2d&,gp_Pnt2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Hyperbola2)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1919,7 +1919,7 @@
       "upstream_id": "ElCLib::D1(double,const gp_Parab2d&,gp_Pnt2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d1 (impl for Parabola2)",
+      "rust_item": "rustycad_tkmath::elclib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1927,7 +1927,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Circ2d&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Circle2)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1935,7 +1935,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Elips2d&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Ellipse2)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1943,7 +1943,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Hypr2d&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Hyperbola2)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1951,7 +1951,7 @@
       "upstream_id": "ElCLib::D2(double,const gp_Parab2d&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d2 (impl for Parabola2)",
+      "rust_item": "rustycad_tkmath::elclib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1959,7 +1959,7 @@
       "upstream_id": "ElCLib::D3(double,const gp_Circ2d&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d3 (impl for Circle2)",
+      "rust_item": "rustycad_tkmath::elclib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1967,7 +1967,7 @@
       "upstream_id": "ElCLib::D3(double,const gp_Elips2d&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d3 (impl for Ellipse2)",
+      "rust_item": "rustycad_tkmath::elclib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1975,7 +1975,7 @@
       "upstream_id": "ElCLib::D3(double,const gp_Hypr2d&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::d3 (impl for Hyperbola2)",
+      "rust_item": "rustycad_tkmath::elclib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1983,7 +1983,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Lin2d&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Line2)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1991,7 +1991,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Circ2d&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Circle2)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -1999,7 +1999,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Elips2d&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Ellipse2)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2007,7 +2007,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Hypr2d&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Hyperbola2)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2015,7 +2015,7 @@
       "upstream_id": "ElCLib::DN(double,const gp_Parab2d&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::dn (impl for Parabola2)",
+      "rust_item": "rustycad_tkmath::elclib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2375,7 +2375,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Lin&,const gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Line3)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2383,7 +2383,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Lin2d&,const gp_Pnt2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Line2)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2391,7 +2391,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Circ&,const gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Circle3)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2399,7 +2399,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Circ2d&,const gp_Pnt2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Circle2)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2407,7 +2407,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Elips&,const gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Ellipse3)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2415,7 +2415,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Elips2d&,const gp_Pnt2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Ellipse2)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2423,7 +2423,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Hypr&,const gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Hyperbola3)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2431,7 +2431,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Hypr2d&,const gp_Pnt2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Hyperbola2)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2439,7 +2439,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Parab&,const gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Parabola3)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2447,7 +2447,7 @@
       "upstream_id": "ElCLib::Parameter(const gp_Parab2d&,const gp_Pnt2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
-      "rust_item": "rustycad_tkmath::elclib::parameter (impl for Parabola2)",
+      "rust_item": "rustycad_tkmath::elclib::parameter",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2615,7 +2615,7 @@
       "upstream_id": "ElSLib::Value(double,double,const gp_Pln&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::value (impl for Plane3)",
+      "rust_item": "rustycad_tkmath::elslib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2623,7 +2623,7 @@
       "upstream_id": "ElSLib::Value(double,double,const gp_Cone&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::value (impl for Cone3)",
+      "rust_item": "rustycad_tkmath::elslib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2631,7 +2631,7 @@
       "upstream_id": "ElSLib::Value(double,double,const gp_Cylinder&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::value (impl for Cylinder3)",
+      "rust_item": "rustycad_tkmath::elslib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2639,7 +2639,7 @@
       "upstream_id": "ElSLib::Value(double,double,const gp_Sphere&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::value (impl for Sphere3)",
+      "rust_item": "rustycad_tkmath::elslib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2647,7 +2647,7 @@
       "upstream_id": "ElSLib::Value(double,double,const gp_Torus&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::value (impl for Torus3)",
+      "rust_item": "rustycad_tkmath::elslib::value",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2655,7 +2655,7 @@
       "upstream_id": "ElSLib::DN(double,double,const gp_Pln&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::dn (impl for Plane3)",
+      "rust_item": "rustycad_tkmath::elslib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2663,7 +2663,7 @@
       "upstream_id": "ElSLib::DN(double,double,const gp_Cone&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::dn (impl for Cone3)",
+      "rust_item": "rustycad_tkmath::elslib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2671,7 +2671,7 @@
       "upstream_id": "ElSLib::DN(double,double,const gp_Cylinder&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::dn (impl for Cylinder3)",
+      "rust_item": "rustycad_tkmath::elslib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2679,7 +2679,7 @@
       "upstream_id": "ElSLib::DN(double,double,const gp_Sphere&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::dn (impl for Sphere3)",
+      "rust_item": "rustycad_tkmath::elslib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2687,7 +2687,7 @@
       "upstream_id": "ElSLib::DN(double,double,const gp_Torus&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::dn (impl for Torus3)",
+      "rust_item": "rustycad_tkmath::elslib::dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2695,7 +2695,7 @@
       "upstream_id": "ElSLib::D0(double,double,const gp_Pln&,gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d0 (impl for Plane3)",
+      "rust_item": "rustycad_tkmath::elslib::d0",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2703,7 +2703,7 @@
       "upstream_id": "ElSLib::D0(double,double,const gp_Cone&,gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d0 (impl for Cone3)",
+      "rust_item": "rustycad_tkmath::elslib::d0",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2711,7 +2711,7 @@
       "upstream_id": "ElSLib::D0(double,double,const gp_Cylinder&,gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d0 (impl for Cylinder3)",
+      "rust_item": "rustycad_tkmath::elslib::d0",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2719,7 +2719,7 @@
       "upstream_id": "ElSLib::D0(double,double,const gp_Sphere&,gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d0 (impl for Sphere3)",
+      "rust_item": "rustycad_tkmath::elslib::d0",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2727,7 +2727,7 @@
       "upstream_id": "ElSLib::D0(double,double,const gp_Torus&,gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d0 (impl for Torus3)",
+      "rust_item": "rustycad_tkmath::elslib::d0",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2735,7 +2735,7 @@
       "upstream_id": "ElSLib::D1(double,double,const gp_Pln&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d1 (impl for Plane3)",
+      "rust_item": "rustycad_tkmath::elslib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2743,7 +2743,7 @@
       "upstream_id": "ElSLib::D1(double,double,const gp_Cone&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d1 (impl for Cone3)",
+      "rust_item": "rustycad_tkmath::elslib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2751,7 +2751,7 @@
       "upstream_id": "ElSLib::D1(double,double,const gp_Cylinder&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d1 (impl for Cylinder3)",
+      "rust_item": "rustycad_tkmath::elslib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2759,7 +2759,7 @@
       "upstream_id": "ElSLib::D1(double,double,const gp_Sphere&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d1 (impl for Sphere3)",
+      "rust_item": "rustycad_tkmath::elslib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2767,7 +2767,7 @@
       "upstream_id": "ElSLib::D1(double,double,const gp_Torus&,gp_Pnt&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d1 (impl for Torus3)",
+      "rust_item": "rustycad_tkmath::elslib::d1",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2775,7 +2775,7 @@
       "upstream_id": "ElSLib::D2(double,double,const gp_Cone&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d2 (impl for Cone3)",
+      "rust_item": "rustycad_tkmath::elslib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2783,7 +2783,7 @@
       "upstream_id": "ElSLib::D2(double,double,const gp_Cylinder&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d2 (impl for Cylinder3)",
+      "rust_item": "rustycad_tkmath::elslib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2791,7 +2791,7 @@
       "upstream_id": "ElSLib::D2(double,double,const gp_Sphere&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d2 (impl for Sphere3)",
+      "rust_item": "rustycad_tkmath::elslib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2799,7 +2799,7 @@
       "upstream_id": "ElSLib::D2(double,double,const gp_Torus&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d2 (impl for Torus3)",
+      "rust_item": "rustycad_tkmath::elslib::d2",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2807,7 +2807,7 @@
       "upstream_id": "ElSLib::D3(double,double,const gp_Cone&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d3 (impl for Cone3)",
+      "rust_item": "rustycad_tkmath::elslib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2815,7 +2815,7 @@
       "upstream_id": "ElSLib::D3(double,double,const gp_Cylinder&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d3 (impl for Cylinder3)",
+      "rust_item": "rustycad_tkmath::elslib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2823,7 +2823,7 @@
       "upstream_id": "ElSLib::D3(double,double,const gp_Sphere&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d3 (impl for Sphere3)",
+      "rust_item": "rustycad_tkmath::elslib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -2831,7 +2831,7 @@
       "upstream_id": "ElSLib::D3(double,double,const gp_Torus&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::d3 (impl for Torus3)",
+      "rust_item": "rustycad_tkmath::elslib::d3",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -3063,7 +3063,7 @@
       "upstream_id": "ElSLib::Parameters(const gp_Pln&,const gp_Pnt&,double&,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::parameters (impl for Plane3)",
+      "rust_item": "rustycad_tkmath::elslib::parameters",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -3071,7 +3071,7 @@
       "upstream_id": "ElSLib::Parameters(const gp_Cylinder&,const gp_Pnt&,double&,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::parameters (impl for Cylinder3)",
+      "rust_item": "rustycad_tkmath::elslib::parameters",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -3079,7 +3079,7 @@
       "upstream_id": "ElSLib::Parameters(const gp_Cone&,const gp_Pnt&,double&,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::parameters (impl for Cone3)",
+      "rust_item": "rustycad_tkmath::elslib::parameters",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -3087,7 +3087,7 @@
       "upstream_id": "ElSLib::Parameters(const gp_Sphere&,const gp_Pnt&,double&,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::parameters (impl for Sphere3)",
+      "rust_item": "rustycad_tkmath::elslib::parameters",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -3095,7 +3095,7 @@
       "upstream_id": "ElSLib::Parameters(const gp_Torus&,const gp_Pnt&,double&,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
-      "rust_item": "rustycad_tkmath::elslib::parameters (impl for Torus3)",
+      "rust_item": "rustycad_tkmath::elslib::parameters",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -8791,7 +8791,7 @@
       "upstream_id": "BVH_Triangulation::Size() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::size",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::size",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -8799,7 +8799,7 @@
       "upstream_id": "BVH_Triangulation::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -8807,7 +8807,7 @@
       "upstream_id": "BVH_Triangulation::Center(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::center",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::center",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -8815,7 +8815,7 @@
       "upstream_id": "BVH_Triangulation::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9791,7 +9791,7 @@
       "upstream_id": "BVH_BoxSet::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9799,7 +9799,7 @@
       "upstream_id": "BVH_BoxSet::Center(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::center",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::center",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9807,7 +9807,7 @@
       "upstream_id": "BVH_BoxSet::Size() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::size",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::size",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9815,7 +9815,7 @@
       "upstream_id": "BVH_BoxSet::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9855,7 +9855,7 @@
       "upstream_id": "BVH_IndexedBoxSet::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<rustycad_tkmath::bvh::BvhSet>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9863,7 +9863,7 @@
       "upstream_id": "BVH_IndexedBoxSet::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<rustycad_tkmath::bvh::BvhSet>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9919,7 +9919,7 @@
       "upstream_id": "BVH_ObjectSet::Size() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::size",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::size",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9927,7 +9927,7 @@
       "upstream_id": "BVH_ObjectSet::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9935,7 +9935,7 @@
       "upstream_id": "BVH_ObjectSet::Center(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::center",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::center",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9943,7 +9943,7 @@
       "upstream_id": "BVH_ObjectSet::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10151,7 +10151,7 @@
       "upstream_id": "BVH::PointTriangulationSquareDistance::Accept(int,const T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhPointTriangulationSquareDistance::accept",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointTriangulationSquareDistance::<rustycad_tkmath::bvh::BvhTraverse>::accept",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10175,7 +10175,7 @@
       "upstream_id": "BVH::PointGeometrySquareDistance::Accept(int,const T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhPointGeometrySquareDistance::accept",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointGeometrySquareDistance::<rustycad_tkmath::bvh::BvhTraverse>::accept",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -28455,7 +28455,7 @@
       "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T,N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter::perform",
+      "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -28463,7 +28463,7 @@
       "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T,N>*,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter::perform_range",
+      "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter::<rustycad_tkmath::bvh::BvhSorter>::perform_range",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -28487,7 +28487,7 @@
       "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T,N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::perform",
+      "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -28495,7 +28495,7 @@
       "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T,N>*,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::perform_range",
+      "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::<rustycad_tkmath::bvh::BvhSorter>::perform_range",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -28583,7 +28583,7 @@
       "upstream_id": "BVH_BinnedBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBinnedBuilder::build_node",
+      "rust_item": "rustycad_tkmath::bvh::BvhBinnedBuilder::<rustycad_tkmath::bvh::BvhQueueBuilder>::build_node",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -28631,7 +28631,7 @@
       "upstream_id": "BVH_LinearBuilder::Build(BVH_Set<T,N>*,BVH_Tree<T,N>*,const BVH_Box<T,N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::build",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::<rustycad_tkmath::bvh::BvhBuilder>::build",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -28679,7 +28679,7 @@
       "upstream_id": "BVH_SweepPlaneBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder::build_node",
+      "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder::<rustycad_tkmath::bvh::BvhQueueBuilder>::build_node",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -93585,7 +93585,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -93617,7 +93617,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -216222,7 +216222,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
