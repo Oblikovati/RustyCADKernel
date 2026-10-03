@@ -1,3 +1,4 @@
+// OCCT exposes Init3d only to subclasses; public Compute uses Init2d.
 use super::EdgeProjAuxState;
 use super::projection;
 use rustycad_tkbrep::brep::BRepTool;

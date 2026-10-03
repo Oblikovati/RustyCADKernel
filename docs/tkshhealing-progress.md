@@ -995,3 +995,20 @@ remain separate obligations.
 Reproduce the new fixtures with the `tools/oracle/tkshhealing_*.md` instructions and
 run the Rust suite with `cargo test -p rustycad-tkshhealing`. Generated native fixtures
 supplement the legacy declaration inventory; they do not replace unmapped legacy tests.
+
+## Current low-level healing follow-up
+
+`ShapeFixWireVertex` now follows oriented curve ranges and native endpoint
+orientation assignments, including its no-positive-status early return. Its nine
+explicit methods have ledger mappings; six native-backed Rust regressions pass.
+`ShapeFixEdgeProjAux` has twelve explicit method mappings and seventeen passing
+regressions covering protected entry points, reversed edges, missing p-curves,
+periodic basis handling and extrema failures. Its protected fields remain separate
+API obligations, and the done-with-zero-extrema branch lacks a direct native fixture.
+
+`ShapeUpgradeSplitCurve3dContinuity` implements the five explicit methods and
+inherits initialization/build behavior through the existing splitter state. Thirteen
+native oracle cases and three Rust tests cover private geometry, knot mutation,
+status overwrites, copied wrapper recursion, handle identity and virtual dispatch.
+Additional periodic fixtures are in progress. These generated probes do not replace
+legacy test declarations, and none of these entries asserts toolkit completion.

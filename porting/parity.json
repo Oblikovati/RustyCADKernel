@@ -220607,6 +220607,142 @@
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireVertex::wire_data",
       "status": "implemented",
       "notes": "Pinned OCCT native fixture tools/oracle/tkshhealing_shape_fix_wire_vertex.cxx; Rust shape_fix_wire_vertex tests cover status transitions, shared analyzer state, reversed edges and native early-return/orientation quirks. Declaration correspondence does not imply exhaustive behavior coverage."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::IsIso(const occ::handle<Geom2d_Curve> &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::is_iso",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::LastParam()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::last_param",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::UpdateParam2d(const occ::handle<Geom2d_Curve> &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::update_param_2d",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3dContinuity::GetCurve()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::curve",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::Init2d(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::init_2d",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3dContinuity::Compute()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::compute",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::Init(const TopoDS_Face &,const TopoDS_Edge &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::init",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::Compute(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::compute",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3dContinuity::SetCriterion(const GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::set_criterion",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3dContinuity::SetTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::set_tolerance",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::Init3d(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::init_3d",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::FirstParam()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::first_param",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::ShapeFix_EdgeProjAux()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::new",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::ShapeFix_EdgeProjAux(const TopoDS_Face &,const TopoDS_Edge &)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::with_face_edge",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::IsFirstDone()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::is_first_done",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeFix_EdgeProjAux::IsLastDone()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_EdgeProjAux.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixEdgeProjAux::is_last_done",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/shape_fix_edge_proj_aux.cxx; reviewed parameter, orientation, periodic and failure control flow with 17 Rust regressions. Protected fields remain separate unmapped obligations. Native done-with-zero-extrema fallback lacks a direct fixture; no exhaustive behavior claim."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_SplitCurve3dContinuity::ShapeUpgrade_SplitCurve3dContinuity()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3dContinuity.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3dContinuity::new",
+      "status": "implemented",
+      "notes": "Pinned native tools/oracle/tkshhealing_split_curve3d_continuity.cxx; 13 generated cases cover status overwrites, knot removal/splitting, wrapper recursion and sequence identity. Generated probes are separate from legacy test obligations; periodic follow-up coverage remains in progress."
     }
   ],
   "tests": [

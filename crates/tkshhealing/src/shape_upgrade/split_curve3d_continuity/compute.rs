@@ -12,6 +12,15 @@ impl ShapeUpgradeSplitCurve3dContinuity {
             self.replace_status(ShapeExtendStatus::Done2);
         }
         self.mark_existing_splits();
+        self.compute_geometry(&curve, first, last, settings)
+    }
+    fn compute_geometry(
+        &self,
+        curve: &Handle<dyn GeomCurve>,
+        first: f64,
+        last: f64,
+        settings: ContinuitySettings,
+    ) -> Result<(), Failure> {
         if let Some(trimmed) = curve.cast::<GeomTrimmedCurve>().get() {
             return self.compute_basis(&trimmed.basis_curve(), first, last, settings);
         }
@@ -113,18 +122,12 @@ impl ShapeUpgradeSplitCurve3dContinuity {
             return Ok(false);
         }
         let multiplicity = (spline.degree() - settings.order).max(0);
-        let mut corrected = spline
-            .remove_knot(knot, multiplicity, settings.tolerance)
-            .unwrap_or(false);
-        if corrected && multiplicity > 0 {
-            corrected = spline.degree() - spline.multiplicity(knot)? >= settings.order;
-        }
-        if corrected {
+        if remove_for_continuity(spline, knot, multiplicity, settings)? {
             self.add_status(ShapeExtendStatus::Done3);
             return Ok(multiplicity == 0);
         }
         self.split_values()
-            .change_sequence(|s| s.insert_before(*interval, spline.knot(knot)?))?;
+            .change_sequence(|s| s.insert_before(*interval, spline.knot(knot)?).map(|_| ()))?;
         *interval += 1;
         self.split_curve_data().with_mut(|f| f.nb_curves += 1);
         Ok(false)
@@ -136,4 +139,19 @@ fn offset_criterion(criterion: Shape) -> Shape {
         Shape::C3 | Shape::CN => Shape::CN,
         _ => Shape::C2,
     }
+}
+
+fn remove_for_continuity(
+    spline: &GeomBSplineCurve,
+    knot: i32,
+    multiplicity: i32,
+    settings: ContinuitySettings,
+) -> Result<bool, Failure> {
+    let corrected = spline
+        .remove_knot(knot, multiplicity, settings.tolerance)
+        .unwrap_or(false);
+    if corrected && multiplicity > 0 {
+        return Ok(spline.degree() - spline.multiplicity(knot)? >= settings.order);
+    }
+    Ok(corrected)
 }

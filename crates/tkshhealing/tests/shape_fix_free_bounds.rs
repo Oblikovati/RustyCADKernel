@@ -1,9 +1,9 @@
 //! Native free-boundary repair cases, including the frozen-edge failure.
 use rustycad_tkbrep::{
     brep::BRepBuilder,
-    toptools::IndexedMapOfShape,
     topexp::{self, Explorer},
     topods::{Compound, Face, Shape, Wire},
+    toptools::IndexedMapOfShape,
 };
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::{
