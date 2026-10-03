@@ -20,6 +20,7 @@ mod gaps;
 mod intersections;
 mod lacking;
 mod loops;
+mod notched;
 mod order;
 mod seam;
 mod shape_connect;

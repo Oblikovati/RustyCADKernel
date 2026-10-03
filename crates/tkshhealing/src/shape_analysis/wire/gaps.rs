@@ -142,10 +142,15 @@ impl ShapeAnalysisWire {
         self.fields.read().max_2d
     }
 
-    pub(super) fn gap_pair(&self, index: i32) -> Result<(Edge, Edge), Failure> {
+    pub(super) fn gap_indices(&self, index: i32) -> [i32; 2] {
         let count = self.nb_edges();
         let current = if index > 0 { index } else { count };
         let previous = if current > 1 { current - 1 } else { count };
+        [previous, current]
+    }
+
+    pub(super) fn gap_pair(&self, index: i32) -> Result<(Edge, Edge), Failure> {
+        let [previous, current] = self.gap_indices(index);
         let wire = self.wire_data();
         Ok((wire.edge(previous)?, wire.edge(current)?))
     }
