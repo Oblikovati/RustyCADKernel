@@ -4,7 +4,8 @@ Pinned OCCT: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 
 These direct native `FixSelfIntersectWire` observations place two intersecting
 nonadjacent line edges among two remote edges. They cover an interior point
-crossing, a middle-to-endpoint hit that reuses the endpoint vertex, an
+crossing, a near-endpoint point hit that cuts one edge and splits the other, a
+middle-to-endpoint hit that reuses the endpoint vertex, an
 endpoint-to-endpoint hit that unions a shared endpoint, a long common segment
 that is split and removed, a reversed edge crossing, two point hits between a
 circle and line repaired through the repeated scan, endpoint reuse while
