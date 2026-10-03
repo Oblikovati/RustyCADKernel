@@ -8,6 +8,106 @@ use rustycad_tkg3d::geom::GeomSurface;
 use rustycad_tkmath::toploc::Location;
 
 impl ShapeFixWire {
+    /// Sets whether high-level `Perform` invokes `FixEdgeCurves`; `fixer.set_fix_edge_curves_mode(0)`.
+    pub fn set_fix_edge_curves_mode(&self, mode: i32) {
+        self.state.write().edge_curves_mode = mode;
+    }
+
+    /// Reads the high-level `FixEdgeCurves` mode; `assert_eq!(fixer.fix_edge_curves_mode(), -1)`.
+    pub fn fix_edge_curves_mode(&self) -> i32 {
+        self.state.read().edge_curves_mode
+    }
+
+    /// Sets whether reversed p-curves are repaired; `fixer.set_fix_reversed_2d_mode(1)`.
+    pub fn set_fix_reversed_2d_mode(&self, mode: i32) {
+        self.state.write().reversed_2d_mode = mode;
+    }
+
+    /// Reads the reversed p-curve repair mode; `fixer.fix_reversed_2d_mode()`.
+    pub fn fix_reversed_2d_mode(&self) -> i32 {
+        self.state.read().reversed_2d_mode
+    }
+
+    /// Sets whether invalid face p-curves may be removed; `fixer.set_fix_remove_pcurve_mode(1)`.
+    pub fn set_fix_remove_pcurve_mode(&self, mode: i32) {
+        self.state.write().remove_pcurve_mode = mode;
+    }
+
+    /// Reads the p-curve removal mode; `fixer.fix_remove_pcurve_mode()`.
+    pub fn fix_remove_pcurve_mode(&self) -> i32 {
+        self.state.read().remove_pcurve_mode
+    }
+
+    /// Sets whether missing p-curves are projected; `fixer.set_fix_add_pcurve_mode(1)`.
+    pub fn set_fix_add_pcurve_mode(&self, mode: i32) {
+        self.state.write().add_pcurve_mode = mode;
+    }
+
+    /// Reads the p-curve creation mode; `fixer.fix_add_pcurve_mode()`.
+    pub fn fix_add_pcurve_mode(&self) -> i32 {
+        self.state.read().add_pcurve_mode
+    }
+
+    /// Sets whether invalid 3D curves may be removed; `fixer.set_fix_remove_curve_3d_mode(1)`.
+    pub fn set_fix_remove_curve_3d_mode(&self, mode: i32) {
+        self.state.write().remove_curve_3d_mode = mode;
+    }
+
+    /// Reads the 3D curve removal mode; `fixer.fix_remove_curve_3d_mode()`.
+    pub fn fix_remove_curve_3d_mode(&self) -> i32 {
+        self.state.read().remove_curve_3d_mode
+    }
+
+    /// Sets whether missing 3D curves are built; `fixer.set_fix_add_curve_3d_mode(1)`.
+    pub fn set_fix_add_curve_3d_mode(&self, mode: i32) {
+        self.state.write().add_curve_3d_mode = mode;
+    }
+
+    /// Reads the 3D curve creation mode; `fixer.fix_add_curve_3d_mode()`.
+    pub fn fix_add_curve_3d_mode(&self) -> i32 {
+        self.state.read().add_curve_3d_mode
+    }
+
+    /// Sets whether seam p-curves are repaired; `fixer.set_fix_seam_mode(1)`.
+    pub fn set_fix_seam_mode(&self, mode: i32) {
+        self.state.write().seam_mode = mode;
+    }
+
+    /// Reads the seam repair mode; `fixer.fix_seam_mode()`.
+    pub fn fix_seam_mode(&self) -> i32 {
+        self.state.read().seam_mode
+    }
+
+    /// Sets whether periodic p-curves are shifted; `fixer.set_fix_shifted_mode(0)`.
+    pub fn set_fix_shifted_mode(&self, mode: i32) {
+        self.state.write().shifted_mode = mode;
+    }
+
+    /// Reads the shifted p-curve mode; `fixer.fix_shifted_mode()`.
+    pub fn fix_shifted_mode(&self) -> i32 {
+        self.state.read().shifted_mode
+    }
+
+    /// Sets whether 2D/3D parameterization is repaired; `fixer.set_fix_same_parameter_mode(1)`.
+    pub fn set_fix_same_parameter_mode(&self, mode: i32) {
+        self.state.write().same_parameter_mode = mode;
+    }
+
+    /// Reads the same-parameter mode; `fixer.fix_same_parameter_mode()`.
+    pub fn fix_same_parameter_mode(&self) -> i32 {
+        self.state.read().same_parameter_mode
+    }
+
+    /// Sets whether vertex tolerances are recomputed; `fixer.set_fix_vertex_tolerance_mode(0)`.
+    pub fn set_fix_vertex_tolerance_mode(&self, mode: i32) {
+        self.state.write().vertex_tolerance_mode = mode;
+    }
+
+    /// Reads the vertex-tolerance mode; `fixer.fix_vertex_tolerance_mode()`.
+    pub fn fix_vertex_tolerance_mode(&self) -> i32 {
+        self.state.read().vertex_tolerance_mode
+    }
+
     /// Loads a wire, supporting face, and both root/analyzer precision in native order.
     /// Example: `fixer.init_wire_face(&wire, &face, 1e-6)?`.
     pub fn init_wire_face(&self, wire: &Wire, face: &Face, precision: f64) -> Result<(), Failure> {
